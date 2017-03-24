@@ -1,0 +1,156 @@
+#ifndef MAINFORM_H
+#define MAINFORM_H
+
+#include <QWidget>
+#include <QStackedWidget>
+#include <QComboBox>
+#include <QtSql>
+#include <windows.h>
+#include <QVariant>
+#include <QWidget>
+#include <QDesktopWidget>
+#include <QCoreApplication>
+#include <mainform.h>
+#include "loginform.h"
+#include "clockoutform.h"
+namespace Ui {
+class MainForm;
+}
+
+class MainForm : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit MainForm(QWidget *parent = 0);
+    ~MainForm();
+    void Connect();
+    void Disconnect();
+    void establishConnections();
+    bool fileExists(QString path);
+    void showtheThings();
+    void hidetheThings();
+    void loginInitialize();
+    void mainInitialize();
+    void basicInitialize();
+    void advInitialize();
+
+    //EmployeeTab
+    void EmployeeTab();
+    QSqlQueryModel * EmployeeModel();
+    void refreshEmployeeTab();
+
+    void ShiftTab();
+    QSqlQueryModel * ShiftModel();
+    void refreshShiftTab();
+
+
+    void ProjectTab();
+    QSqlQueryModel * ProjectModel();
+    void refreshProjectTab();
+
+    void ItemTab();
+    QSqlQueryModel * ItemModel();
+    void refreshItemTab();
+
+    QSqlDatabase getEmployeeDataBase() const;
+
+    QSqlDatabase getProjectDataBase() const;
+
+    QSqlDatabase getData() const;
+
+public slots:
+    void enter();
+    void reenter();
+    QDateTime format_datetimes(QDateTime z);
+    void on_basicPageClockIn_clicked();
+    void on_basicPageClockOut_clicked();
+    void on_basicPageAdvanced_clicked();
+    void on_mainFinish_clicked();
+private slots:
+    void on_EmployeeName_clicked();
+    void on_EmployeePin_clicked();
+    void on_EmployeeAdminStatus_clicked();
+
+    void on_EmployeeShiftCount_clicked();
+    void on_EmployeeActive_clicked();
+    void on_EmployeeId_clicked();
+    void on_EmployeeCurrent_clicked();
+
+    void on_EmployeeAdd_clicked();
+    void on_EmployeeDelete_clicked();
+    void on_EmployeeArchive_clicked();
+
+    void on_AllRadio_toggled(bool checked);
+    void on_CurrentRadio_toggled(bool checked);
+    void on_PastRadio_toggled(bool checked);
+
+
+    void on_ShiftEmployeeRadio_toggled(bool checked);
+
+    void on_ShiftItemRadio_toggled(bool checked);
+
+    void on_ShiftProjectRadio_toggled(bool checked);
+
+    void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
+
+    void on_ShiftProjectCombo_currentTextChanged(const QString &arg1);
+
+    void on_ShiftItemCombo_currentTextChanged(const QString &arg1);
+
+    void on_ProjectAdd_clicked();
+
+    void on_ProjectDelete_clicked();
+
+    void on_ProjectArchive_clicked();
+
+    void on_ProjectName_clicked();
+
+    void on_ProjectId_clicked();
+
+    void on_ProjectCurrent_clicked();
+
+    void on_ProjectAllRadio_toggled(bool checked);
+
+    void on_ProjectCurrentRadio_toggled(bool checked);
+
+    void on_ProjectPastRadio_toggled(bool checked);
+
+    void on_ItemAdd_clicked();
+
+    void on_ItemDelete_clicked();
+
+    void on_ItemName_clicked();
+
+    void on_ItemId_clicked();
+
+    void on_ItemCategory_clicked();
+
+    void on_ItemSub_clicked();
+
+    void on_ItemDimension_clicked();
+
+
+
+private:
+    Ui::MainForm *ui;
+    LoginForm *loginForm;
+    ClockoutForm *clockoutForm;
+    QSqlDatabase employeeDataBase;
+    QSqlDatabase projectDataBase;
+    QSqlDatabase data;
+
+    QString id;
+    bool admin;
+};
+
+#endif // MAINFORM_H
+
+
+
+
+
+
+
+
+
