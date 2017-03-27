@@ -10,8 +10,14 @@
     <height>341</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Calibri</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Time-Track</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

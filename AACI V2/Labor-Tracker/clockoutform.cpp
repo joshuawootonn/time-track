@@ -119,7 +119,7 @@ void ClockoutForm::ClockoutInitialize(QString i){
 void ClockoutForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from projectlist");
+    qry->prepare("select DISTINCT name from projectlist where id>0");
     qry->exec();
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
@@ -143,6 +143,7 @@ void ClockoutForm::ItemInitialize(){
            }
     }
     QSqlQuery* qry2=new QSqlQuery(data);
+    id = "Project"+id;
     qry2->prepare("select DISTINCT name from '"+id+"'");
     qry2->exec();
     modal2->setQuery(*qry2);

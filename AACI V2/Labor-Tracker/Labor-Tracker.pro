@@ -11,18 +11,24 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Labor-Tracker
 TEMPLATE = app
 
+win32: RC_ICONS = icon.ico
 
 SOURCES += main.cpp \
     mainform.cpp \
     loginform.cpp \
-    clockoutform.cpp
+    clockoutform.cpp \
+    shifteditform.cpp
 
 HEADERS  += \
     mainform.h \
     loginform.h \
-    clockoutform.h
+    clockoutform.h \
+    shifteditform.h
 
 FORMS    += \
     mainform.ui \
     loginform.ui \
-    clockoutform.ui
+    clockoutform.ui \
+    shifteditform.ui
+
+RESOURCES +=

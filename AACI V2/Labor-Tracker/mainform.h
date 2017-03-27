@@ -13,6 +13,7 @@
 #include <mainform.h>
 #include "loginform.h"
 #include "clockoutform.h"
+#include "shifteditform.h"
 namespace Ui {
 class MainForm;
 }
@@ -41,13 +42,18 @@ public:
     void refreshEmployeeTab();
 
     void ShiftTab();
-    QSqlQueryModel * ShiftModel();
-    void refreshShiftTab();
+
+    QSqlQueryModel* ShiftModel();
+    //void refreshShiftTab();
 
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
+    QSqlQueryModel * ProjectItemModel();
+    QSqlQueryModel * ProjectItemModel(QString id);
     void refreshProjectTab();
+    void refreshProjectItemTab();
+    void refreshProjectItemCombo();
 
     void ItemTab();
     QSqlQueryModel * ItemModel();
@@ -86,17 +92,14 @@ private slots:
     void on_PastRadio_toggled(bool checked);
 
 
-    void on_ShiftEmployeeRadio_toggled(bool checked);
-
-    void on_ShiftItemRadio_toggled(bool checked);
-
-    void on_ShiftProjectRadio_toggled(bool checked);
 
     void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
 
     void on_ShiftProjectCombo_currentTextChanged(const QString &arg1);
 
     void on_ShiftItemCombo_currentTextChanged(const QString &arg1);
+
+    void on_ProjectView_clicked(const QModelIndex &index);
 
     void on_ProjectAdd_clicked();
 
@@ -130,12 +133,36 @@ private slots:
 
     void on_ItemDimension_clicked();
 
+    void refreshShiftTab();
 
+
+
+    void on_ProjectItemName_clicked();
+
+    void on_ProjectItemId_clicked();
+
+    void on_ProjectItemAdd_clicked();
+    
+    void on_ProjectItemRemove_clicked();
+    
+    void on_HeaderTabs_currentChanged(int index);
+
+    void on_ShiftDate1_dateChanged(const QDate &date);
+
+    void on_ShiftDate2_dateChanged(const QDate &date);
+
+
+    void on_ShiftAdd_clicked();
+
+    void on_ShiftEdit_clicked();
+
+    void on_ShiftDelete_clicked();
 
 private:
     Ui::MainForm *ui;
     LoginForm *loginForm;
     ClockoutForm *clockoutForm;
+    ShiftEditForm * shifteditform;
     QSqlDatabase employeeDataBase;
     QSqlDatabase projectDataBase;
     QSqlDatabase data;
@@ -145,6 +172,8 @@ private:
 };
 
 #endif // MAINFORM_H
+
+
 
 
 

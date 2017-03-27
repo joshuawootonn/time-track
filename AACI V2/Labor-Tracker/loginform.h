@@ -28,13 +28,15 @@ public:
 
     QString id;
     bool admin;
-
+    void reset();
 
 signals:
     void logged();
 public slots:
-    void on_passEdit_editingFinished();
-    void LoginInitialize();
+
+
+    void on_passEdit_returnPressed();
+
 private:
     Ui::LoginForm *ui;
 

@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/mainform.o
+./debug/loginform.o
+./debug/clockoutform.o
+./debug/shifteditform.o
+./debug/qrc_myresources.o
+./debug/moc_mainform.o
+./debug/moc_loginform.o
+./debug/moc_clockoutform.o
+./debug/moc_shifteditform.o
+);

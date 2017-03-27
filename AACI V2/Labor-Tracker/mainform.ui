@@ -13,11 +13,11 @@
   <property name="font">
    <font>
     <family>Calibri</family>
-    <pointsize>11</pointsize>
+    <pointsize>12</pointsize>
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Time-Track</string>
   </property>
   <layout class="QGridLayout" name="_2">
    <item row="0" column="1">
@@ -59,8 +59,8 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="1">
-        <spacer name="verticalSpacer">
+       <item row="2" column="1">
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -72,8 +72,8 @@
          </property>
         </spacer>
        </item>
-       <item row="2" column="1">
-        <spacer name="verticalSpacer_2">
+       <item row="0" column="1">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -117,13 +117,13 @@
        <bool>false</bool>
       </property>
       <layout class="QGridLayout" name="gridLayout_7">
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="EmployeeTab">
           <attribute name="title">
@@ -157,15 +157,11 @@
               </widget>
              </item>
              <item>
-              <layout class="QGridLayout" name="gridLayout_11">
-               <item row="0" column="0">
-                <widget class="QTableView" name="ProjectView1">
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <widget class="QTableView" name="ProjectItemView">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -203,27 +199,6 @@
           </layout>
          </widget>
         </widget>
-       </item>
-       <item row="2" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="text">
-            <string>Confirm</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="text">
-            <string>Cancel</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit"/>
-         </item>
-        </layout>
        </item>
        <item row="1" column="0">
         <widget class="QTabWidget" name="HeaderTabs">
@@ -275,7 +250,7 @@
                <number>10</number>
               </property>
               <property name="bottomMargin">
-               <number>0</number>
+               <number>4</number>
               </property>
               <item>
                <widget class="QPushButton" name="EmployeeAdd">
@@ -307,8 +282,14 @@
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
               <property name="topMargin">
                <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
               </property>
               <property name="bottomMargin">
                <number>4</number>
@@ -378,16 +359,16 @@
                <number>2</number>
               </property>
               <property name="leftMargin">
-               <number>6</number>
+               <number>10</number>
               </property>
               <property name="topMargin">
                <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>6</number>
+               <number>10</number>
               </property>
               <property name="bottomMargin">
-               <number>6</number>
+               <number>4</number>
               </property>
               <item>
                <widget class="QRadioButton" name="AllRadio">
@@ -442,17 +423,20 @@
            <item>
             <widget class="QGroupBox" name="groupBox_6">
              <property name="title">
-              <string>Options</string>
+              <string>Project Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
               <property name="spacing">
                <number>2</number>
               </property>
               <property name="leftMargin">
-               <number>9</number>
+               <number>10</number>
               </property>
               <property name="topMargin">
                <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
               </property>
               <property name="bottomMargin">
                <number>4</number>
@@ -484,11 +468,17 @@
            <item>
             <widget class="QGroupBox" name="groupBox_8">
              <property name="title">
-              <string>Table</string>
+              <string>Project Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_9">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
               <property name="topMargin">
                <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
               </property>
               <property name="bottomMargin">
                <number>4</number>
@@ -529,8 +519,14 @@
               <property name="spacing">
                <number>2</number>
               </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
               <property name="topMargin">
                <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
               </property>
               <property name="bottomMargin">
                <number>4</number>
@@ -572,6 +568,79 @@
              </property>
             </spacer>
            </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_11">
+             <property name="title">
+              <string>Item Options</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="ProjectItemAdd">
+                <property name="text">
+                 <string>Add</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="ProjectItemRemove">
+                <property name="text">
+                 <string>Remove</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QComboBox" name="ProjectItemCombo"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_12">
+             <property name="title">
+              <string>Item Table</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_11">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="ProjectItemName">
+                <property name="text">
+                 <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="ProjectItemId">
+                <property name="text">
+                 <string>Id</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="ItemsSettings">
@@ -591,6 +660,18 @@
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
               <item>
                <widget class="QPushButton" name="ItemAdd">
                 <property name="text">
@@ -614,6 +695,18 @@
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
               <item row="0" column="0">
                <widget class="QCheckBox" name="ItemName">
                 <property name="text">
@@ -684,6 +777,18 @@
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
               <item>
                <widget class="QPushButton" name="ShiftAdd">
                 <property name="text">
@@ -715,24 +820,41 @@
              </property>
              <layout class="QGridLayout" name="gridLayout">
               <property name="leftMargin">
-               <number>6</number>
+               <number>10</number>
               </property>
               <property name="topMargin">
                <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>6</number>
+               <number>10</number>
               </property>
               <property name="bottomMargin">
-               <number>6</number>
+               <number>4</number>
               </property>
               <property name="spacing">
                <number>2</number>
               </property>
-              <item row="2" column="0">
-               <widget class="QRadioButton" name="ShiftProjectRadio">
-                <property name="text">
-                 <string>Item</string>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="ShiftEmployeeCombo">
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToContents</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="ShiftProjectCombo">
+                <property name="font">
+                 <font>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToContents</enum>
                 </property>
                </widget>
               </item>
@@ -749,40 +871,64 @@
                </widget>
               </item>
               <item row="0" column="0">
-               <widget class="QRadioButton" name="ShiftEmployeeRadio">
+               <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Employee</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="ShiftEmployeeCombo">
-                <property name="font">
-                 <font>
-                  <pointsize>9</pointsize>
-                 </font>
-                </property>
-                <property name="sizeAdjustPolicy">
-                 <enum>QComboBox::AdjustToContents</enum>
+                 <string>Employee:</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QRadioButton" name="ShiftItemRadio">
+               <widget class="QLabel" name="label_2">
                 <property name="text">
-                 <string>Project</string>
+                 <string>Project:</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="ShiftProjectCombo">
-                <property name="font">
-                 <font>
-                  <pointsize>9</pointsize>
-                 </font>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Item:</string>
                 </property>
-                <property name="sizeAdjustPolicy">
-                 <enum>QComboBox::AdjustToContents</enum>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_13">
+             <property name="title">
+              <string>Time</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_13">
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
+              <item row="0" column="1">
+               <widget class="QDateEdit" name="ShiftDate1"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDateEdit" name="ShiftDate2"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>To:</string>
                 </property>
                </widget>
               </item>

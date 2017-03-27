@@ -3,11 +3,11 @@
 #include "ui_loginform.h"
 
 LoginForm::LoginForm(QWidget *parent) :
-    QDialog(parent),
+    QDialog(parent,Qt::CustomizeWindowHint  ),
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::FramelessWindowHint);
+
     employeeDataBase = ((MainForm*)parentWidget())->getEmployeeDataBase();
 
     projectDataBase = ((MainForm*)parentWidget())->getProjectDataBase();
@@ -29,18 +29,14 @@ LoginForm::~LoginForm()
 {
     delete ui;
 }
-void LoginForm::LoginInitialize(){
-    this->showNormal();
 
-
-
-
-    ui->passEdit->setText("");
+void LoginForm::reset(){
+    ui->passEdit->clear();
 }
-void LoginForm::on_passEdit_editingFinished()
+
+
+void LoginForm::on_passEdit_returnPressed()
 {
-
-
     pin= ui->passEdit->text();
 
     QSqlQuery qry1(data),qry2(data);
@@ -79,55 +75,4 @@ void LoginForm::on_passEdit_editingFinished()
         else
             ui->passLabel->setText("");
     }
-
 }
-
-
-
-
-
-
-//void LoginForm::on_passEdit_editingFinished()
-//{
-
-
-//    pin= ui->passEdit->text();
-
-//    QSqlQuery qry1(employeeDataBase),qry2(employeeDataBase);
-
-
-//    qry1.prepare("SELECT * FROM employeelist where pin = '"+pin+"'");
-//    if (qry1.exec())
-//    {
-//        int count=0;
-//        while(qry1.next())
-//        {
-//           count++;
-//        }
-//        if(count == 1)
-//        {
-
-//            qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
-//            if(qry2.exec()){
-//                while(qry2.next()){
-//                    QString x= qry2.value(0).toString();
-//                    if(x=="1")
-//                        admin=true;
-//                    else
-//                        admin=false;
-//                    id = qry2.value(1).toString();
-//                }
-//            }
-
-//            this->hide();
-//            emit logged();
-//        }
-//        if(count < 1){
-//            if(ui->passEdit->text()!="")
-//                ui->passLabel->setText("Invalid");
-//        }
-//        else
-//            ui->passLabel->setText("");
-//    }
-
-//}

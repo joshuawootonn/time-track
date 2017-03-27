@@ -7,12 +7,16 @@ MainForm::MainForm(QWidget *parent) :
 {
     Connect();
     ui->setupUi(this);
-    hidetheThings();
-    loginForm = new LoginForm(this);
+
+
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
     ui->mainStack->setCurrentIndex(0);
+    loginForm = new LoginForm(this);
+    loginForm->hide();
     loginInitialize();
+    shifteditform = new ShiftEditForm(this);
+    shifteditform->hide();
 
 
     establishConnections();
@@ -30,41 +34,37 @@ void MainForm::Connect()
     data = employeeDataBase = QSqlDatabase::addDatabase("QSQLITE","data");
 //    QString u = "C:/Users/jose5/Dropbox/Work/SQLite/AACILaborTracking.db";
 //    QString i = "C:/Users/jose5/Dropbox/Work/SQLite/AACIProjectList.db";
+//                 C:\Git\AACI-Time-Tracking\SQLite
 //    employeeDataBase.setDatabaseName(u);
 //    projectDataBase.setDatabaseName(i);
 //    employeeDataBase.open();
 //    projectDataBase.open();
 
-    QString x = "//SERVER-JOSH/AACI Labor Tracking/Data/AACILaborTracking.db";
-    QString y = "//SERVER-JOSH/AACI Labor Tracking/Data/AACIProjectList.db";
 
     QString employeepath="/SQLite/AACILaborTracking.db";
     QString projectpath="/SQLite/AACIProjectList.db";
     QString datapath = "/SQLite/AACIData.sqlite";
     QString path = QDir::currentPath();
-    QString a = path+"/AACILaborTracking.db";
-    QString b = path+"/AACIProjectList.db";
-    QString serverpath = path.split("/")[0]+"/"+path.split("/")[1]+"/"+path.split("/")[2]+"/"+path.split("/")[3]+"/"+path.split("/")[4];
+    QString serverpath = path.split("/")[0]+"/"+path.split("/")[1]+"/"+path.split("/")[2];
+    qDebug()<<serverpath<<datapath;
+    QString x = "//SERVER-JOSH/AACI Labor Tracking/Data/AACILaborTracking.db";
+    QString y = "//SERVER-JOSH/AACI Labor Tracking/Data/AACIProjectList.db";
+    QString z = "//SERVER-JOSH/AACI Labor Tracking/Data/AACIData.sqlite";
 
     if(fileExists(serverpath+employeepath)){
         employeeDataBase.setDatabaseName(serverpath+employeepath);
         projectDataBase.setDatabaseName(serverpath+projectpath);
         data.setDatabaseName(serverpath+datapath);
-        //qDebug()<<serverpath+projectpath;
-        qDebug()<<"2";
+        qDebug()<<"Connected to local database";
     }
     else if(fileExists(x)&&fileExists(y))
     {
         employeeDataBase.setDatabaseName(x);
         projectDataBase.setDatabaseName(y);
-        qDebug()<<"0";
+        data.setDatabaseName(z);
+        qDebug()<<"Connected to network database...";
     }
-    else if(fileExists(a)&&fileExists(b))
-    {
-        employeeDataBase.setDatabaseName(a);
-        projectDataBase.setDatabaseName(b);
-        qDebug()<<"1";
-    }
+
 
     employeeDataBase.open();
     projectDataBase.open();
@@ -80,6 +80,7 @@ void MainForm::Disconnect(){
 void MainForm::establishConnections(){
     QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
+    QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
 
 }
 bool MainForm::fileExists(QString path) {
@@ -92,6 +93,7 @@ void MainForm::enter(){
     mainInitialize();
 }
 void MainForm::reenter(){
+    qDebug()<<"herer";
     showtheThings();
     basicInitialize();
 }
@@ -107,13 +109,19 @@ void MainForm::showtheThings(){
     ui->basicPageClockOut->show();
 
 }
+void MainForm::on_HeaderTabs_currentChanged(int index)
+{
+    if(index ==1){
+        refreshProjectItemCombo();
+    }
+}
 
 void MainForm::loginInitialize(){
     basicInitialize();
     hidetheThings();
-    loginForm->setWindowFlags(Qt::CustomizeWindowHint);
 
-    loginForm->LoginInitialize();
+    loginForm->reset();
+    loginForm->showNormal();
 
 }
 void MainForm::mainInitialize(){
@@ -141,6 +149,7 @@ void MainForm::basicInitialize()
             active = qry.value(0).toString();
         }
     }
+    qDebug()<<active;
     if(active == "1")
     {
        ui->basicPageClockIn->hide();
@@ -276,6 +285,9 @@ void MainForm::on_basicPageClockIn_clicked()
 }
 void MainForm::on_basicPageClockOut_clicked()
 {
+
+    clockoutForm = new ClockoutForm(this);
+    establishConnections();
     clockoutForm->ClockoutInitialize(id);
 }
 void MainForm::on_basicPageAdvanced_clicked()
@@ -295,6 +307,9 @@ void MainForm::on_mainFinish_clicked()
 }
 
 
+
+
+
 //Employee Stuff
 void MainForm::EmployeeTab()
 {
@@ -303,7 +318,7 @@ void MainForm::EmployeeTab()
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
     ui->EmployeeView->resizeColumnsToContents();
-
+    ui->EmployeeView->hideRow(0);
     ui->EmployeeName->setChecked(true);
     ui->EmployeeView->showColumn(0);
     ui->EmployeeId->setChecked(false);
@@ -474,7 +489,7 @@ void MainForm::on_AllRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             ui->EmployeeView->showRow(i);
         }
@@ -486,7 +501,7 @@ void MainForm::on_CurrentRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(6).toInt();
             if(current == 1)
@@ -501,7 +516,7 @@ void MainForm::on_PastRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(6).toInt();
             if(current == 1)
@@ -517,11 +532,28 @@ void MainForm::ProjectTab(){
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
     ui->ProjectView->resizeColumnsToContents();
+    ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
     ui->ProjectAllRadio->setChecked(true);
+
+
+    ui->ProjectItemName->setChecked(true);
+    
+    refreshProjectItemCombo();
+
+
 }
+void MainForm::refreshProjectItemCombo(){
+    QSqlQueryModel * a = new QSqlQueryModel();
+    QSqlQuery * A = new QSqlQuery(data);
+    A->prepare("Select name from itemlist");
+    A->exec();
+    a->setQuery(*A);
+    ui->ProjectItemCombo->setModel(a);
+}
+
 QSqlQueryModel * MainForm::ProjectModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
     model->setTable("projectlist");
@@ -535,6 +567,34 @@ QSqlQueryModel * MainForm::ProjectModel(){
 
     return model;
 
+}
+QSqlQueryModel * MainForm::ProjectItemModel(){
+    QSqlTableModel * model = new QSqlTableModel(0,data);
+
+    QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
+    QSqlQueryModel * x = ProjectModel();
+    QModelIndex index = list.at(0);
+    int idInt = x->record(index.row()).value(1).toInt();
+    QString id = QString::number(idInt);
+
+    model->setTable("Project"+id);
+
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->select();
+    qDebug()<< model->lastError();
+    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    
+    return model;
+}
+
+void MainForm::on_ProjectView_clicked(const QModelIndex &index)
+{
+
+    QSqlQueryModel * x = ProjectItemModel();
+    ui->ProjectItemView->setModel(x);
+    ui->ProjectView->resizeColumnsToContents();
+    refreshProjectItemTab();
 }
 void MainForm::refreshProjectTab(){
     ui->MainTabs->setCurrentIndex(1);
@@ -563,6 +623,25 @@ void MainForm::refreshProjectTab(){
 
 
 }
+void MainForm::refreshProjectItemTab(){
+    ui->MainTabs->setCurrentIndex(1);
+
+    QSqlQueryModel * x = ProjectItemModel();
+    ui->ProjectItemView->setModel(x);
+
+
+
+    if(ui->ProjectItemName->isChecked())
+        ui->ProjectItemView->showColumn(0);
+    else
+        ui->ProjectItemView->hideColumn(0);
+
+    if(ui->ProjectItemId->isChecked())
+        ui->ProjectItemView->showColumn(1);
+    else
+        ui->ProjectItemView->hideColumn(1);
+    ui->ProjectItemView->resizeColumnsToContents();
+}
 
 void MainForm::on_ProjectAdd_clicked()
 {
@@ -577,9 +656,9 @@ void MainForm::on_ProjectAdd_clicked()
 
     int idInt = x->record(x->rowCount()-1).value(1).toInt();
     idInt++;
-    QString id = QString::number(idInt);
+    QString id = "Project"+QString::number(idInt);
     qry->prepare("CREATE TABLE '"+id+"'"
-               "(id integer, name VARCHAR)");
+               "(name VARCHAR,id integer)");
     qry->exec();
     refreshProjectTab();
 }
@@ -593,7 +672,7 @@ void MainForm::on_ProjectDelete_clicked()
     {
         QModelIndex index =list.at(i);
         int idInt = x->record(index.row()).value(1).toInt();
-        QString id = QString::number(idInt);
+        QString id = "Project"+QString::number(idInt);
 
         qry->clear();
         qry->prepare("DROP TABLE '"+id+"'");
@@ -647,7 +726,7 @@ void MainForm::on_ProjectAllRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             ui->ProjectView->showRow(i);
         }
@@ -657,7 +736,7 @@ void MainForm::on_ProjectCurrentRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(2).toInt();
             if(current == 1)
@@ -671,7 +750,7 @@ void MainForm::on_ProjectPastRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
+        for(int i=1; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(2).toInt();
             if(current == 1)
@@ -682,18 +761,67 @@ void MainForm::on_ProjectPastRadio_toggled(bool checked)
     }
 }
 
+void MainForm::on_ProjectItemName_clicked()
+{
+    refreshProjectItemTab();
+}
+void MainForm::on_ProjectItemId_clicked()
+{
+    refreshProjectItemTab();
+}
 
 
+void MainForm::on_ProjectItemAdd_clicked()
+{
+    QString itemName = ui->ProjectItemCombo->currentText();
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("select id from itemlist where name='"+itemName+"'");
+    QString itemId;
+    if(qry->exec()){
+        while(qry->next())
+            itemId = qry->value(0).toString();
+    }
+
+
+
+    qry->clear();
+    
+    QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
+    QString table = model->tableName();
+    qry->prepare("insert into'"+table+"'(name,id) values('"+itemName+"','"+itemId+"')");
+    qry->exec();
+    refreshProjectItemTab();
+            
+}
+void MainForm::on_ProjectItemRemove_clicked()
+{
+    QSqlQuery * qry = new QSqlQuery(data);
+    QModelIndexList list = ui->ProjectItemView->selectionModel()->selection().indexes();
+    QSqlQueryModel * model = ProjectItemModel();
+    QSqlTableModel * tablemodel = (QSqlTableModel*)ui->ProjectItemView->model();
+    QString table = tablemodel->tableName();
+    for(int i=0; i< list.count(); i++)
+    {
+        QModelIndex index =list.at(i);
+        QString id = model->record(index.row()).value(1).toString();
+
+        qry->clear();
+        qry->prepare("DELETE from '"+table+"' where id='"+id+"'");
+        qry->exec();
+    }
+    refreshProjectItemTab();
+}
 
 void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
+    ui->ItemView->hideRow(0);
     ui->ItemView->resizeColumnsToContents();
-    ui->ItemView->hideColumn(4);
-    ui->ItemView->hideColumn(3);
-    ui->ItemView->hideColumn(2);
     ui->ItemName->setChecked(true);
     ui->ItemId->setChecked(true);
+    ui->ItemCategory->setChecked(true);
+    ui->ItemSub->setChecked(true);
+    ui->ItemDimension->setChecked(true);
 }
 QSqlQueryModel * MainForm::ItemModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -703,8 +831,8 @@ QSqlQueryModel * MainForm::ItemModel(){
     model->setHeaderData(0,Qt::Horizontal,tr("Name"));
     model->setHeaderData(1,Qt::Horizontal,tr("Id"));
     model->setHeaderData(2,Qt::Horizontal,tr("Category"));
-    model->setHeaderData(4,Qt::Horizontal,tr("Sub-Catergory"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Dimension"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Sub-Catergory"));
+    model->setHeaderData(4,Qt::Horizontal,tr("Dimension"));
 
     return model;
 
@@ -798,7 +926,7 @@ void MainForm::on_ItemDimension_clicked()
 
 void MainForm::ShiftTab(){
 
-    ui->ShiftEmployeeRadio->setChecked(true);
+
 
     QSqlQueryModel * a = new QSqlQueryModel();
     QSqlQuery * A = new QSqlQuery(data);
@@ -825,8 +953,18 @@ void MainForm::ShiftTab(){
     QSqlQueryModel * x=ShiftModel();
 
     ui->ShiftView->setModel(x);
+    ui->ShiftView->setSortingEnabled(true);
+    ui->ShiftDate1->setDate(QDate(2000,1,1));
+    ui->ShiftDate2->setDate(QDate::currentDate());
+    ui->ShiftView->hideColumn(0);
+    ui->ShiftView->hideColumn(1);
+    ui->ShiftView->hideColumn(2);
+    ui->ShiftView->hideColumn(3);
+    ui->ShiftView->hideColumn(13);
 
+    refreshShiftTab();
 }
+
 QSqlQueryModel * MainForm::ShiftModel(){
 
     QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -837,7 +975,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Employee Id"));
     model->setHeaderData(2,Qt::Horizontal,tr("Project Id"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Item Dd"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Item Id"));
     model->setHeaderData(4,Qt::Horizontal,tr("Employee Name"));
     model->setHeaderData(5,Qt::Horizontal,tr("Project Name"));
     model->setHeaderData(6,Qt::Horizontal,tr("Item Name"));
@@ -854,118 +992,129 @@ QSqlQueryModel * MainForm::ShiftModel(){
 }
 void MainForm::refreshShiftTab(){
     ui->MainTabs->setCurrentIndex(3);
+    QSqlQueryModel * x = ShiftModel();
 
-    QSqlQueryModel * x=ShiftModel();
+    for(int i=0; i< x->rowCount(); i++)
+    {
+
+        ui->ShiftView->showRow(i);
+//        if(x->record(i).value(3).toString()==""){
+//            qDebug()<<x->record(i).value(3).toString();
+//            ui->ShiftView->hideRow(i);
+//        }
+    }
+
+    if(ui->ShiftEmployeeCombo->currentText()!="All Employees")
+    {
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            QString data = x->record(i).value(4).toString();
+            if(data != ui->ShiftEmployeeCombo->currentText())
+               ui->ShiftView->hideRow(i);
+        }
+    }
+    if(ui->ShiftProjectCombo->currentText()!="All Projects")
+    {
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            QString data = x->record(i).value(5).toString();
+            if(data != ui->ShiftProjectCombo->currentText())
+               ui->ShiftView->hideRow(i);
+        }
+    }
+    if(ui->ShiftItemCombo->currentText()!="All Items")
+    {
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            QString data = x->record(i).value(6).toString();
+            if(data != ui->ShiftItemCombo->currentText())
+               ui->ShiftView->hideRow(i);
+        }
+    }
+    for(int i=0; i< x->rowCount(); i++)
+    {
+        QString a = x->record(i).value(9).toString();
+        QDate in= QDate(a.split("-")[0].toInt(),a.split("-")[1].toInt(),a.split("-")[2].toInt());
+        if(in<ui->ShiftDate1->date())
+            ui->ShiftView->hideRow(i);
+        else if(in>ui->ShiftDate2->date())
+            ui->ShiftView->hideRow(i);
+    }
+
+
+
+
+
     ui->ShiftView->setModel(x);
 
-
-
 }
 
-void MainForm::on_ShiftEmployeeRadio_toggled(bool checked)
+void MainForm::on_ShiftDate1_dateChanged(const QDate &date)
 {
-    if(checked){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString name = x->record(i).value(4).toString();
-            qDebug()<<name;
-            if(name == ui->ShiftEmployeeCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-
-    }
+    refreshShiftTab();
 }
-void MainForm::on_ShiftProjectRadio_toggled(bool checked)
+void MainForm::on_ShiftDate2_dateChanged(const QDate &date)
 {
-    if(checked){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString project = x->record(i).value(5).toString();
-            qDebug()<<project;
-            if(project == ui->ShiftProjectCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-
-    }
-}
-void MainForm::on_ShiftItemRadio_toggled(bool checked)
-{
-    if(checked){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString item = x->record(i).value(6).toString();
-            if(item == ui->ShiftItemCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-
-    }
+    refreshShiftTab();
 }
 
 void MainForm::on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1)
 {
-    if(ui->ShiftEmployeeRadio->isChecked()){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString name = x->record(i).value(4).toString();
-            qDebug()<<name;
-            if(name == ui->ShiftEmployeeCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-
-    }
+    refreshShiftTab();
 }
 void MainForm::on_ShiftProjectCombo_currentTextChanged(const QString &arg1)
 {
-    if(ui->ShiftProjectRadio->isChecked()){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString project = x->record(i).value(5).toString();
-            qDebug()<<project;
-            if(project == ui->ShiftProjectCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-    }
+    refreshShiftTab();
 }
 void MainForm::on_ShiftItemCombo_currentTextChanged(const QString &arg1)
 {
-    if(ui->ShiftItemRadio->isChecked()){
-        QSqlQueryModel * x = ShiftModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            QString item = x->record(i).value(6).toString();
-            if(item == ui->ShiftItemCombo->currentText())
-               ui->ShiftView->showRow(i);
-            else
-                ui->ShiftView->hideRow(i);
-        }
-    }
+    refreshShiftTab();
 }
 
 
+void MainForm::on_ShiftAdd_clicked()
+{
+    shifteditform = new ShiftEditForm(this);
+    establishConnections();
+    shifteditform->ShiftEditInitialize();
+    refreshShiftTab();
+}
+void MainForm::on_ShiftEdit_clicked()
+{
+    shifteditform = new ShiftEditForm(this);
+    establishConnections();
+    QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
+
+    if(list!= *(new QModelIndexList()))
+    {
+        QModelIndex index =list.at(0);
+        QSqlQueryModel * x = ShiftModel();
+        int idInt = x->record(index.row()).value(13).toInt();
+        QString id = QString::number(idInt);
+
+        shifteditform->ShiftEditInitialize(id);
+        refreshShiftTab();
+    }
+}
+void MainForm::on_ShiftDelete_clicked()
+{
+    QSqlQuery * qry = new QSqlQuery(data);
+    QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
+    QSqlQueryModel * x = ShiftModel();
+
+    for(int i=0; i< list.count(); i++)
+    {
+        QModelIndex index =list.at(i);
+        int idInt = x->record(index.row()).value(13).toInt();
+        QString id = QString::number(idInt);
 
 
-
-
-
-
-
-
-
+        qry->clear();
+        qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
+        qry->exec();
+    }
+    refreshShiftTab();
+}
 
 
 
