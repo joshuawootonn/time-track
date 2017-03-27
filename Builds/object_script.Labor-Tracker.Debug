@@ -4,7 +4,7 @@ INPUT(
 ./debug/loginform.o
 ./debug/clockoutform.o
 ./debug/shifteditform.o
-./debug/qrc_myresources.o
+./debug/qrc_resources.o
 ./debug/moc_mainform.o
 ./debug/moc_loginform.o
 ./debug/moc_clockoutform.o

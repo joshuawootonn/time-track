@@ -4,7 +4,7 @@ INPUT(
 ./release/loginform.o
 ./release/clockoutform.o
 ./release/shifteditform.o
-./release/qrc_myresources.o
+./release/qrc_resources.o
 ./release/moc_mainform.o
 ./release/moc_loginform.o
 ./release/moc_clockoutform.o

@@ -1,0 +1,2 @@
+Hi my name is Joshua Wootonn. You have by some divine reason happened upon a program I have been developing for All American Concrete Inc. in West Liberty Iowa.
+ It is a work in progress as is this readme which I will update later :)
