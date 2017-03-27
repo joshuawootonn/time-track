@@ -402,6 +402,8 @@ void MainForm::on_EmployeeAdd_clicked()
     qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','~','~','1','0','1')");
     qry->exec();
     refreshEmployeeTab();
+    refreshShiftEmployee();
+    ui->MainTabs->setCurrentIndex(0);
 }
 void MainForm::on_EmployeeArchive_clicked()
 {
@@ -446,6 +448,8 @@ void MainForm::on_EmployeeDelete_clicked()
         qry->exec();
     }
     refreshEmployeeTab();
+    refreshShiftEmployee();
+    ui->MainTabs->setCurrentIndex(0);
 
 }
 //Employee Menu 2
@@ -542,7 +546,7 @@ void MainForm::ProjectTab(){
 void MainForm::refreshProjectItemCombo(){
     QSqlQueryModel * a = new QSqlQueryModel();
     QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from itemlist");
+    A->prepare("Select name from itemlist where id>0");
     A->exec();
     a->setQuery(*A);
     ui->ProjectItemCombo->setModel(a);
@@ -655,6 +659,9 @@ void MainForm::on_ProjectAdd_clicked()
                "(name VARCHAR,id integer)");
     qry->exec();
     refreshProjectTab();
+    refreshShiftProject();
+    ui->MainTabs->setCurrentIndex(1);
+
 }
 void MainForm::on_ProjectDelete_clicked()
 {
@@ -676,6 +683,8 @@ void MainForm::on_ProjectDelete_clicked()
         qry->exec();
     }
     refreshProjectTab();
+    refreshShiftProject();
+    ui->MainTabs->setCurrentIndex(1);
 }
 void MainForm::on_ProjectArchive_clicked()
 {
@@ -874,6 +883,9 @@ void MainForm::on_ItemAdd_clicked()
     qry->prepare("insert into itemlist(name,category,subcategory,dimension)  values('~','~','~','~')");
     qry->exec();
     refreshItemTab();
+    refreshProjectItemCombo();
+    refreshShiftItem();
+    ui->MainTabs->setCurrentIndex(2);
 }
 void MainForm::on_ItemDelete_clicked()
 {
@@ -893,6 +905,9 @@ void MainForm::on_ItemDelete_clicked()
         qry->exec();
     }
     refreshItemTab();
+    refreshProjectItemCombo();
+    refreshShiftItem();
+    ui->MainTabs->setCurrentIndex(2);
 }
 
 void MainForm::on_ItemName_clicked()
@@ -920,30 +935,9 @@ void MainForm::on_ItemDimension_clicked()
 
 void MainForm::ShiftTab(){
 
-
-
-    QSqlQueryModel * a = new QSqlQueryModel();
-    QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from employeelist");
-    A->exec();
-    a->setQuery(*A);
-    ui->ShiftEmployeeCombo->setModel(a);
-
-    QSqlQueryModel * b = new QSqlQueryModel();
-    QSqlQuery * B = new QSqlQuery(data);
-    B->prepare("Select name from projectlist");
-    B->exec();
-    b->setQuery(*B);
-    ui->ShiftProjectCombo->setModel(b);
-
-    QSqlQueryModel * c = new QSqlQueryModel();
-    QSqlQuery * C = new QSqlQuery(data);
-    C->prepare("Select name from itemlist");
-    C->exec();
-    c->setQuery(*C);
-    ui->ShiftItemCombo->setModel(c);
-
-
+    refreshShiftEmployee();
+    refreshShiftProject();
+    refreshShiftItem();
     QSqlQueryModel * x=ShiftModel();
 
     ui->ShiftView->setModel(x);
@@ -957,6 +951,31 @@ void MainForm::ShiftTab(){
     ui->ShiftView->hideColumn(13);
 
     refreshShiftTab();
+}
+void MainForm::refreshShiftEmployee(){
+    QSqlQueryModel * a = new QSqlQueryModel();
+    QSqlQuery * A = new QSqlQuery(data);
+    A->prepare("Select name from employeelist");
+    A->exec();
+    a->setQuery(*A);
+    ui->ShiftEmployeeCombo->setModel(a);
+
+}
+void MainForm::refreshShiftProject(){
+    QSqlQueryModel * b = new QSqlQueryModel();
+    QSqlQuery * B = new QSqlQuery(data);
+    B->prepare("Select name from projectlist");
+    B->exec();
+    b->setQuery(*B);
+    ui->ShiftProjectCombo->setModel(b);
+}
+void MainForm::refreshShiftItem(){
+    QSqlQueryModel * c = new QSqlQueryModel();
+    QSqlQuery * C = new QSqlQuery(data);
+    C->prepare("Select name from itemlist");
+    C->exec();
+    c->setQuery(*C);
+    ui->ShiftItemCombo->setModel(c);
 }
 
 QSqlQueryModel * MainForm::ShiftModel(){

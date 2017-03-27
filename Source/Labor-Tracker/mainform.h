@@ -45,7 +45,9 @@ public:
 
     QSqlQueryModel* ShiftModel();
     //void refreshShiftTab();
-
+    void refreshShiftEmployee();
+    void refreshShiftProject();
+    void refreshShiftItem();
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();

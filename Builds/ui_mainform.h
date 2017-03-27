@@ -704,7 +704,7 @@ public:
 
         mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainForm);
