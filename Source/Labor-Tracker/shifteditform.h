@@ -28,6 +28,7 @@ public:
 
     void ShiftEditInitialize();
     void ShiftEditInitialize(QString Shiftid);
+    void ShiftEditInitialize(QString Shiftid,QString id);
     void EmployeeInitialize();
     void ProjectInitialize();
     void ItemInitialize();
@@ -42,7 +43,6 @@ private slots:
 
     void on_Add_clicked();
 
-    void on_Edit_clicked();
 
     void on_Delete_clicked();
 
@@ -64,7 +64,7 @@ signals:
 private:
     Ui::ShiftEditForm *ui;
 
-
+    QString shiftId;
     QSqlDatabase data;
 
     int selectedRow;

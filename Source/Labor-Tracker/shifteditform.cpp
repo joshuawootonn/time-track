@@ -116,8 +116,7 @@ void ShiftEditForm::ShiftEditInitialize(){
 }
 void ShiftEditForm::ShiftEditInitialize(QString shiftid){
     this->showNormal();
-
-
+    shiftId = shiftid;
     EmployeeInitialize();
     ProjectInitialize();
     ItemInitialize();
@@ -178,9 +177,57 @@ void ShiftEditForm::ShiftEditInitialize(QString shiftid){
     ui->FinishedButton->setEnabled(true);
 
 
-    qry->clear();
-    qry->prepare("delete from shiftlist where shiftid='"+shiftid+"'");
-    qry->exec();
+
+
+
+}
+void ShiftEditForm::ShiftEditInitialize(QString shiftid,QString id){
+    this->showNormal();
+
+    shiftId= shiftid;
+    EmployeeInitialize();
+    ProjectInitialize();
+    ItemInitialize();
+    LunchInitialize();
+    TimeLeft();
+    TimesInitialize();
+
+    ui->DateTime1->setDateTime(format_datetimes(QDateTime::currentDateTime()));
+    ui->DateTime2->setDateTime(format_datetimes(QDateTime::currentDateTime()));
+
+    QSqlQuery* qry=new QSqlQuery(data);
+    QString employeename,timein,datein;
+    qry->prepare("select employeename,timein,datein from shiftlist where id='"+id+"'");
+    if(qry->exec())
+    {
+        while(qry->next())
+        {
+            employeename = qry->value(0).toString();
+            timein = qry->value(1).toString();
+            datein = qry->value(2).toString();
+        }
+    }
+
+
+
+
+    ui->Name->setCurrentIndex(ui->Name->findText(employeename));
+
+    ui->DateTime1->setTime(QTime::fromString(timein,"HH:mm:ss"));
+
+    ui->DateTime1->setDate(QDate::fromString(datein,"yyyy-MM-dd"));
+
+
+    ui->Sections->setRowCount(0);
+    ui->Sections->setColumnCount(3);
+    ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Project"));
+    ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
+    ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
+
+
+
+    ui->FinishedButton->setEnabled(false);
+
 
 
 }
@@ -315,8 +362,18 @@ void ShiftEditForm::TimeLeft(){
 
 void ShiftEditForm::on_FinishedButton_clicked()
 {
+
+
+
     QSqlQuery* qry=new QSqlQuery(data);
     QString employeeid,employeename;
+
+
+    qry->clear();
+    qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+    qry->exec();
+
+
     employeename = ui->Name->currentText();
     qry->prepare("select id from employeelist where name='"+employeename+"'");
     if(qry->exec()){
@@ -378,6 +435,11 @@ void ShiftEditForm::on_FinishedButton_clicked()
     }
 
 
+
+    qry->clear();
+    qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+    qry->exec();
+
     this->hide();
 
     emit finished();
@@ -399,14 +461,6 @@ void ShiftEditForm::on_Add_clicked()
     ui->Sections->resizeRowsToContents();
 }
 
-void ShiftEditForm::on_Edit_clicked()
-{
-    ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(ui->Items->currentText()));
-    ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Times->currentText()));
-    ui->Sections->resizeRowsToContents();
-
-}
 
 void ShiftEditForm::on_Delete_clicked()
 {

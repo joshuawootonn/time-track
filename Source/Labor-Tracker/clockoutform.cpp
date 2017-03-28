@@ -298,6 +298,9 @@ void ClockoutForm::on_FinishedButton_clicked()
             itemid=qry->value(0).toString();}}
     qry->clear();
 
+
+
+
     hours=ui->Sections->item(0,2)->text();
     lunch=ui->Lunch->currentText();
 
@@ -324,10 +327,17 @@ void ClockoutForm::on_FinishedButton_clicked()
                     itemid=qry->value(0).toString();}}
             qry->clear();
 
+            QString shiftid;
+            qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+            if(qry->exec()){
+                while(qry->next()){
+                    shiftid=qry->value(0).toString();}}
+
+            qry->clear();
             hours=ui->Sections->item(i,2)->text();
             lunch=ui->Lunch->currentText();
             qry->clear();
-            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time) values('"+employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"')");
+            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"+employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
 
 
             qry->exec();
@@ -365,34 +375,8 @@ void ClockoutForm::on_Add_clicked()
     ui->Sections->resizeRowsToContents();
 }
 
-void ClockoutForm::on_Edit_clicked()
-{
-    ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(ui->Items->currentText()));
-    ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Times->currentText()));
-    ui->Sections->resizeRowsToContents();
-
-}
-
 void ClockoutForm::on_Delete_clicked()
 {
-    /*QString time = ui->timeLeft->text();
-    //qDebug()<<item;
-
-    int hours=time.split(":")[0].toInt();
-    int minutes=time.split(":")[1].toInt();
-
-    minutes=minutes+hours*60;
-
-    QString time2 = ui->Sections->item(selectedRow,2)->text();
-    minutes-= time2.split(":")[0].toInt()*60;
-    minutes-= time2.split(":")[1].toInt();
-
-    hours=minutes/60;
-    minutes=minutes%60;
-    ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes));
-
-*/
     ui->Sections->removeRow(selectedRow);
     TimeLeft();
 

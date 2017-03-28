@@ -66,7 +66,7 @@ void MainForm::enter(){
     mainInitialize();
 }
 void MainForm::reenter(){
-    qDebug()<<"herer";
+
     showtheThings();
     basicInitialize();
 }
@@ -149,7 +149,7 @@ void MainForm::basicInitialize()
             active = qry.value(0).toString();
         }
     }
-    qDebug()<<active;
+
     if(active == "1")
     {
        ui->basicPageClockIn->hide();
@@ -252,11 +252,18 @@ void MainForm::on_basicPageClockIn_clicked()
         }
     }
 
-
+    QString shiftid;
+    qry1.prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+    if(qry1.exec()){
+        while(qry1.next()){
+            shiftid=qry1.value(0).toString();}}
+    int id1 = shiftid.toInt();
+    id1++;
+    shiftid = QString::number(id1);
 
 
     // Inserting clockin time and shiftnumber into pin.
-    qry4.prepare("insert into shiftlist (employeeid,employeename,timein,datein) values('"+employeeid+"','"+employeename+"','"+timein+"','"+datein+"')");
+    qry4.prepare("insert into shiftlist (employeeid,employeename,timein,datein,shiftid) values('"+employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
     if (qry4.exec())
     {
         // Setting active.
@@ -536,9 +543,7 @@ void MainForm::on_PastRadio_toggled(bool checked)
 void MainForm::ProjectTab(){
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
-
-
-    QSqlQueryModel * y = ProjectItemModel();
+    QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
     ui->ProjectView->resizeColumnsToContents();
     ui->ProjectView->hideRow(0);
@@ -549,7 +554,7 @@ void MainForm::ProjectTab(){
 
 
     ui->ProjectItemName->setChecked(true);
-    
+    ui->ProjectItemView->hideColumn(1);
     refreshProjectItemCombo();
 
 
@@ -561,6 +566,17 @@ void MainForm::refreshProjectItemCombo(){
     A->exec();
     a->setQuery(*A);
     ui->ProjectItemCombo->setModel(a);
+}
+void MainForm::refreshProjectItemComboSpecific(){
+
+    QSqlQueryModel * a = new QSqlQueryModel();
+    QSqlQuery * A = new QSqlQuery(data);
+    A->prepare("Select name from itemlist where id>0");
+    A->exec();
+    a->setQuery(*A);
+    ui->ProjectItemCombo->setModel(a);
+
+
 }
 
 QSqlQueryModel * MainForm::ProjectModel(){
@@ -577,22 +593,31 @@ QSqlQueryModel * MainForm::ProjectModel(){
     return model;
 
 }
+QSqlQueryModel * MainForm::ProjectItemModelFirst(){
+    QSqlTableModel * model = new QSqlTableModel(0,data);
+    QSqlQueryModel * x = ProjectModel();
+    int idInt= x->record(1).value(1).toInt();
+    QString id = QString::number(idInt);
+
+    model->setTable("Project"+id);
+
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    model->select();
+    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+
+    return model;
+}
 QSqlQueryModel * MainForm::ProjectItemModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
     QSqlQueryModel * x = ProjectModel();
 
 
-    int idInt;
-    QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
-    if(list.isEmpty())
-    {
-        idInt = x->record(1).value(1).toInt();
 
-    }
-    else {
-        QModelIndex index = list.at(0);
-        idInt = x->record(index.row()).value(1).toInt();
-    }
+    QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
+
+    QModelIndex index = list.at(0);
+    int idInt = x->record(index.row()).value(1).toInt();
 
     QString id = QString::number(idInt);
 
@@ -617,13 +642,17 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
     QSqlQueryModel * x = ProjectItemModel();
     ui->ProjectItemView->setModel(x);
 
+    refreshProjectItemComboSpecific();
+
+
 }
 void MainForm::refreshProjectTab(){
     ui->MainTabs->setCurrentIndex(1);
 
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
-
+    QSqlQueryModel * y = ProjectItemModelFirst();
+    ui->ProjectItemView->setModel(y);
     ui->ProjectView->resizeColumnsToContents();
 
 
@@ -1135,12 +1164,25 @@ void MainForm::on_ShiftEdit_clicked()
 
     if(list!= *(new QModelIndexList()))
     {
+
         QModelIndex index =list.at(0);
         QSqlQueryModel * x = ShiftModel();
-        int idInt = x->record(index.row()).value(13).toInt();
-        QString id = QString::number(idInt);
 
-        shifteditform->ShiftEditInitialize(id);
+
+        if(x->record(index.row()).value(2).toString()=="")
+        {
+            int idInt = x->record(index.row()).value(0).toInt();
+            QString id = QString::number(idInt);
+            idInt = x->record(index.row()).value(13).toInt();
+            QString shiftid = QString::number(idInt);
+            shifteditform->ShiftEditInitialize(shiftid,id);
+        }
+        else{
+            int idInt = x->record(index.row()).value(13).toInt();
+            QString id = QString::number(idInt);
+            shifteditform->ShiftEditInitialize(id);
+        }
+
         refreshShiftTab();
     }
 }

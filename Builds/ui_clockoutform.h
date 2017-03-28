@@ -37,7 +37,6 @@ public:
     QComboBox *Times;
     QComboBox *Lunch;
     QPushButton *Add;
-    QPushButton *Edit;
     QPushButton *Delete;
     QTableWidget *Sections;
     QHBoxLayout *horizontalLayout_2;
@@ -95,12 +94,6 @@ public:
 
         verticalLayout->addWidget(Add);
 
-        Edit = new QPushButton(ClockoutForm);
-        Edit->setObjectName(QStringLiteral("Edit"));
-        Edit->setMaximumSize(QSize(250, 16777215));
-
-        verticalLayout->addWidget(Edit);
-
         Delete = new QPushButton(ClockoutForm);
         Delete->setObjectName(QStringLiteral("Delete"));
         Delete->setMaximumSize(QSize(250, 16777215));
@@ -157,7 +150,6 @@ public:
     {
         ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", 0));
         Add->setText(QApplication::translate("ClockoutForm", "Add", 0));
-        Edit->setText(QApplication::translate("ClockoutForm", "Edit", 0));
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", 0));
         label->setText(QApplication::translate("ClockoutForm", "Time left:", 0));
         timeLeft->setText(QString());

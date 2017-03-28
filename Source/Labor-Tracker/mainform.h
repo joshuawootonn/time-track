@@ -52,12 +52,14 @@ public:
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
+    QSqlQueryModel * ProjectItemModelFirst();
     QSqlQueryModel * ProjectItemModel();
-    QSqlQueryModel * ProjectItemModel(QString id);
+
     QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectTab();
     void refreshProjectItemTab();
     void refreshProjectItemCombo();
+    void refreshProjectItemComboSpecific();
 
     void ItemTab();
     QSqlQueryModel * ItemModel();
