@@ -142,7 +142,6 @@ private slots:
     void refreshShiftTab();
 
 
-
     void on_ProjectItemName_clicked();
 
     void on_ProjectItemId_clicked();
@@ -171,6 +170,8 @@ private slots:
 
     void on_DataBaseClear_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainForm *ui;
     LoginForm *loginForm;
@@ -186,7 +187,6 @@ private:
 };
 
 #endif // MAINFORM_H
-
 
 
 

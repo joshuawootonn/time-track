@@ -32,7 +32,7 @@ MainForm::~MainForm()
 void MainForm::Connect()
 {
     data= QSqlDatabase::addDatabase("QSQLITE","data");
-
+    qDebug()<<localPath<<serverPath;
     if(fileExists(serverPath))
     {
         data.setDatabaseName(serverPath);
@@ -43,6 +43,7 @@ void MainForm::Connect()
         data.setDatabaseName(localPath);
         qDebug()<<"Connected to local database";
     }
+
     data.open();
 
 }
@@ -109,6 +110,9 @@ void MainForm::connectToServer(){
             serverPath = qry->value(0).toString();
         }
     }
+
+
+
     Disconnect();
     Connect();
 
@@ -1070,24 +1074,22 @@ QSqlQueryModel * MainForm::ShiftModel(){
 void MainForm::refreshShiftTab(){
     ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
-
     for(int i=0; i< x->rowCount(); i++)
     {
 
         ui->ShiftView->showRow(i);
-//        if(x->record(i).value(3).toString()==""){
-//            qDebug()<<x->record(i).value(3).toString();
-//            ui->ShiftView->hideRow(i);
-//        }
-    }
 
+    }
     if(ui->ShiftEmployeeCombo->currentText()!="All Employees")
     {
         for(int i=0; i< x->rowCount(); i++)
         {
             QString data = x->record(i).value(4).toString();
-            if(data != ui->ShiftEmployeeCombo->currentText())
+            if(data != ui->ShiftEmployeeCombo->currentText()){
+
                ui->ShiftView->hideRow(i);
+
+            }
         }
     }
     if(ui->ShiftProjectCombo->currentText()!="All Projects")
@@ -1095,8 +1097,11 @@ void MainForm::refreshShiftTab(){
         for(int i=0; i< x->rowCount(); i++)
         {
             QString data = x->record(i).value(5).toString();
-            if(data != ui->ShiftProjectCombo->currentText())
-               ui->ShiftView->hideRow(i);
+            if(data != ui->ShiftProjectCombo->currentText()){
+                ui->ShiftView->hideRow(i);
+
+            }
+
         }
     }
     if(ui->ShiftItemCombo->currentText()!="All Items")
@@ -1105,7 +1110,10 @@ void MainForm::refreshShiftTab(){
         {
             QString data = x->record(i).value(6).toString();
             if(data != ui->ShiftItemCombo->currentText())
-               ui->ShiftView->hideRow(i);
+            {
+                ui->ShiftView->hideRow(i);
+
+            }
         }
     }
     for(int i=0; i< x->rowCount(); i++)
@@ -1113,11 +1121,40 @@ void MainForm::refreshShiftTab(){
         QString a = x->record(i).value(9).toString();
         QDate in= QDate(a.split("-")[0].toInt(),a.split("-")[1].toInt(),a.split("-")[2].toInt());
         if(in<ui->ShiftDate1->date())
+        {
             ui->ShiftView->hideRow(i);
+        }
         else if(in>ui->ShiftDate2->date())
+        {
             ui->ShiftView->hideRow(i);
+        }
     }
 
+
+    int ihours = 0;
+    int iminutes = 0;
+    for(int i=0; i< x->rowCount(); i++)
+    {
+        QString a = x->record(i).value(12).toString();
+
+        if(!ui->ShiftView->isRowHidden(i))
+        {
+            QString hours = a.split(":")[0];
+            QString minutes = a.split(":")[1];
+            ihours += hours.toInt();
+            iminutes += minutes.toInt();
+        }
+
+    }
+    ihours+= iminutes/60;
+    iminutes = iminutes%60;
+
+    QString hours = QString::number(ihours);
+    QString minutes = QString::number(iminutes);
+    if (minutes == "0")
+        minutes ="00";
+
+    ui->ShiftTotalTime->setText(hours+":"+minutes);
 
 
 
@@ -1125,6 +1162,7 @@ void MainForm::refreshShiftTab(){
     ui->ShiftView->setModel(x);
 
 }
+
 
 void MainForm::on_ShiftDate1_dateChanged(const QDate &date)
 {
@@ -1218,7 +1256,12 @@ void MainForm::on_DataBaseConnect_clicked()
     connectToServer();
 
 }
-
+void MainForm::on_pushButton_clicked()
+{
+    serverPath = "";
+    Disconnect();
+    Connect();
+}
 void MainForm::on_DataBaseClear_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);

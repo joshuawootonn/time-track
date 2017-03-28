@@ -20,6 +20,18 @@
    <string>Time-Track</string>
   </property>
   <layout class="QGridLayout" name="_2">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="1">
     <widget class="QStackedWidget" name="mainStack">
      <property name="frameShape">
@@ -117,19 +129,43 @@
        <bool>false</bool>
       </property>
       <layout class="QGridLayout" name="gridLayout_7">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="tabPosition">
           <enum>QTabWidget::South</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="EmployeeTab">
           <attribute name="title">
            <string>Employees</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
             <widget class="QTableView" name="EmployeeView">
              <property name="frameShape">
@@ -147,6 +183,18 @@
            <string>Projects</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_5">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_11">
              <item>
@@ -172,6 +220,18 @@
            <string>Sub-Projects</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_6">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
             <widget class="QTableView" name="ItemView">
              <property name="frameShape">
@@ -188,6 +248,18 @@
           <layout class="QGridLayout" name="gridLayout_3">
            <property name="sizeConstraint">
             <enum>QLayout::SetMinimumSize</enum>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
            </property>
            <item row="0" column="0">
             <widget class="QTableView" name="ShiftView">
@@ -211,6 +283,15 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
+         <property name="documentMode">
+          <bool>false</bool>
+         </property>
+         <property name="tabsClosable">
+          <bool>false</bool>
+         </property>
+         <property name="movable">
+          <bool>false</bool>
+         </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
          </property>
@@ -219,8 +300,14 @@
            <string>Employees</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
            <property name="topMargin">
             <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
            </property>
            <property name="bottomMargin">
             <number>2</number>
@@ -417,8 +504,14 @@
            <string>Projects</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
            <property name="topMargin">
             <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
            </property>
            <property name="bottomMargin">
             <number>2</number>
@@ -657,8 +750,14 @@
            <string>Sub-Projects</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
            <property name="topMargin">
             <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
            </property>
            <property name="bottomMargin">
             <number>2</number>
@@ -774,8 +873,14 @@
            <string>Shifts</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
            <property name="topMargin">
             <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
            </property>
            <property name="bottomMargin">
             <number>2</number>
@@ -957,6 +1062,28 @@
              </property>
             </spacer>
            </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_15">
+             <property name="title">
+              <string>Total Time:</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_15">
+              <item row="0" column="0">
+               <widget class="QLabel" name="ShiftTotalTime">
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="text">
+                 <string>0:00</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="DataBaseSettings">
@@ -967,6 +1094,18 @@
            <string>DataBase</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>2</number>
+           </property>
            <item>
             <widget class="QGroupBox" name="groupBox_14">
              <property name="title">
@@ -979,9 +1118,6 @@
               <property name="bottomMargin">
                <number>2</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QLineEdit" name="DataBaseEdit"/>
-              </item>
               <item row="0" column="1">
                <widget class="QPushButton" name="DataBaseConnect">
                 <property name="text">
@@ -989,10 +1125,20 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="2">
+              <item row="0" column="3">
                <widget class="QPushButton" name="DataBaseClear">
                 <property name="text">
                  <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLineEdit" name="DataBaseEdit"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="pushButton">
+                <property name="text">
+                 <string>Disconnect</string>
                 </property>
                </widget>
               </item>
