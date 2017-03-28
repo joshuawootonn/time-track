@@ -171,17 +171,13 @@ public:
         if (MainForm->objectName().isEmpty())
             MainForm->setObjectName(QStringLiteral("MainForm"));
         MainForm->resize(1162, 744);
-        QFont font;
-        font.setFamily(QStringLiteral("Calibri"));
-        font.setPointSize(12);
-        MainForm->setFont(font);
+        MainForm->setStyleSheet(QLatin1String("font: 12pt \"Calibri\";\n"
+"\n"
+"background-color:#44337B;"));
         _2 = new QGridLayout(MainForm);
         _2->setObjectName(QStringLiteral("_2"));
-        _2->setContentsMargins(0, 0, 0, 0);
         mainStack = new QStackedWidget(MainForm);
         mainStack->setObjectName(QStringLiteral("mainStack"));
-        mainStack->setFrameShape(QFrame::NoFrame);
-        mainStack->setFrameShadow(QFrame::Plain);
         basicPage = new QWidget();
         basicPage->setObjectName(QStringLiteral("basicPage"));
         gridLayout_2 = new QGridLayout(basicPage);
@@ -225,10 +221,8 @@ public:
         mainStack->addWidget(basicPage);
         advPage = new QWidget();
         advPage->setObjectName(QStringLiteral("advPage"));
-        advPage->setAcceptDrops(false);
         gridLayout_7 = new QGridLayout(advPage);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
-        gridLayout_7->setContentsMargins(0, 0, 0, 0);
         MainTabs = new QTabWidget(advPage);
         MainTabs->setObjectName(QStringLiteral("MainTabs"));
         MainTabs->setTabPosition(QTabWidget::South);
@@ -307,14 +301,16 @@ public:
         EmployeeSettings->setObjectName(QStringLiteral("EmployeeSettings"));
         horizontalLayout_2 = new QHBoxLayout(EmployeeSettings);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 2, 0, 2);
         groupBox = new QGroupBox(EmployeeSettings);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setMinimumSize(QSize(200, 0));
         groupBox->setMaximumSize(QSize(200, 16777215));
+        groupBox->setStyleSheet(QLatin1String("\n"
+" \n"
+"    border-radius: 5px;\n"
+"    margin-top: 1ex;"));
         horizontalLayout_5 = new QHBoxLayout(groupBox);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(10, 0, 10, 4);
         EmployeeAdd = new QPushButton(groupBox);
         EmployeeAdd->setObjectName(QStringLiteral("EmployeeAdd"));
 
@@ -336,9 +332,7 @@ public:
         groupBox_2 = new QGroupBox(EmployeeSettings);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout_8 = new QGridLayout(groupBox_2);
-        gridLayout_8->setSpacing(2);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-        gridLayout_8->setContentsMargins(10, 0, 10, 4);
         EmployeeName = new QCheckBox(groupBox_2);
         EmployeeName->setObjectName(QStringLiteral("EmployeeName"));
 
@@ -380,9 +374,7 @@ public:
         groupBox_3 = new QGroupBox(EmployeeSettings);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         verticalLayout_2 = new QVBoxLayout(groupBox_3);
-        verticalLayout_2->setSpacing(2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(10, 0, 10, 4);
         AllRadio = new QRadioButton(groupBox_3);
         AllRadio->setObjectName(QStringLiteral("AllRadio"));
 
@@ -410,13 +402,10 @@ public:
         ProjectsSettings->setObjectName(QStringLiteral("ProjectsSettings"));
         horizontalLayout_7 = new QHBoxLayout(ProjectsSettings);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        horizontalLayout_7->setContentsMargins(0, 2, 0, 2);
         groupBox_6 = new QGroupBox(ProjectsSettings);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
         horizontalLayout_9 = new QHBoxLayout(groupBox_6);
-        horizontalLayout_9->setSpacing(2);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        horizontalLayout_9->setContentsMargins(10, 0, 10, 4);
         ProjectAdd = new QPushButton(groupBox_6);
         ProjectAdd->setObjectName(QStringLiteral("ProjectAdd"));
 
@@ -438,9 +427,7 @@ public:
         groupBox_8 = new QGroupBox(ProjectsSettings);
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
         gridLayout_9 = new QGridLayout(groupBox_8);
-        gridLayout_9->setSpacing(2);
         gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
-        gridLayout_9->setContentsMargins(10, 0, 10, 4);
         ProjectName = new QCheckBox(groupBox_8);
         ProjectName->setObjectName(QStringLiteral("ProjectName"));
 
@@ -462,9 +449,7 @@ public:
         groupBox_9 = new QGroupBox(ProjectsSettings);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         verticalLayout_3 = new QVBoxLayout(groupBox_9);
-        verticalLayout_3->setSpacing(2);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(10, 0, 10, 4);
         ProjectAllRadio = new QRadioButton(groupBox_9);
         ProjectAllRadio->setObjectName(QStringLiteral("ProjectAllRadio"));
 
@@ -491,7 +476,6 @@ public:
         groupBox_11->setObjectName(QStringLiteral("groupBox_11"));
         gridLayout_12 = new QGridLayout(groupBox_11);
         gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        gridLayout_12->setContentsMargins(10, 0, 10, 4);
         ProjectItemAdd = new QPushButton(groupBox_11);
         ProjectItemAdd->setObjectName(QStringLiteral("ProjectItemAdd"));
 
@@ -504,9 +488,13 @@ public:
 
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
-        QFont font1;
-        font1.setPointSize(10);
-        ProjectItemCombo->setFont(font1);
+        QFont font;
+        font.setFamily(QStringLiteral("Calibri"));
+        font.setPointSize(12);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(50);
+        ProjectItemCombo->setFont(font);
 
         gridLayout_12->addWidget(ProjectItemCombo, 1, 0, 1, 2);
 
@@ -517,7 +505,6 @@ public:
         groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
         gridLayout_11 = new QGridLayout(groupBox_12);
         gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
-        gridLayout_11->setContentsMargins(10, 0, 10, 4);
         ProjectItemName = new QCheckBox(groupBox_12);
         ProjectItemName->setObjectName(QStringLiteral("ProjectItemName"));
 
@@ -536,12 +523,10 @@ public:
         ItemsSettings->setObjectName(QStringLiteral("ItemsSettings"));
         horizontalLayout_8 = new QHBoxLayout(ItemsSettings);
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        horizontalLayout_8->setContentsMargins(0, 2, 0, 2);
         groupBox_7 = new QGroupBox(ItemsSettings);
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
         horizontalLayout_10 = new QHBoxLayout(groupBox_7);
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        horizontalLayout_10->setContentsMargins(10, 0, 10, 4);
         ItemAdd = new QPushButton(groupBox_7);
         ItemAdd->setObjectName(QStringLiteral("ItemAdd"));
 
@@ -559,7 +544,6 @@ public:
         groupBox_10->setObjectName(QStringLiteral("groupBox_10"));
         gridLayout_10 = new QGridLayout(groupBox_10);
         gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
-        gridLayout_10->setContentsMargins(10, 0, 10, 4);
         ItemName = new QCheckBox(groupBox_10);
         ItemName->setObjectName(QStringLiteral("ItemName"));
 
@@ -597,12 +581,10 @@ public:
         ShiftSettings->setObjectName(QStringLiteral("ShiftSettings"));
         horizontalLayout_3 = new QHBoxLayout(ShiftSettings);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(0, 2, 0, 2);
         groupBox_4 = new QGroupBox(ShiftSettings);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         horizontalLayout_6 = new QHBoxLayout(groupBox_4);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        horizontalLayout_6->setContentsMargins(10, 0, 10, 4);
         ShiftAdd = new QPushButton(groupBox_4);
         ShiftAdd->setObjectName(QStringLiteral("ShiftAdd"));
 
@@ -626,26 +608,23 @@ public:
         gridLayout = new QGridLayout(groupBox_5);
         gridLayout->setSpacing(2);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(10, 0, 10, 4);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        QFont font2;
-        font2.setPointSize(8);
-        ShiftEmployeeCombo->setFont(font2);
+        ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftEmployeeCombo, 0, 1, 1, 1);
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font2);
+        ShiftProjectCombo->setFont(font);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftProjectCombo, 1, 1, 1, 1);
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font2);
+        ShiftItemCombo->setFont(font);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftItemCombo, 2, 1, 1, 1);
@@ -672,7 +651,6 @@ public:
         groupBox_13->setObjectName(QStringLiteral("groupBox_13"));
         gridLayout_13 = new QGridLayout(groupBox_13);
         gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
-        gridLayout_13->setContentsMargins(10, 0, 10, 4);
         ShiftDate1 = new QDateEdit(groupBox_13);
         ShiftDate1->setObjectName(QStringLiteral("ShiftDate1"));
 
@@ -719,12 +697,10 @@ public:
         DataBaseSettings->setObjectName(QStringLiteral("DataBaseSettings"));
         horizontalLayout_4 = new QHBoxLayout(DataBaseSettings);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 2, 0, 2);
         groupBox_14 = new QGroupBox(DataBaseSettings);
         groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
         gridLayout_14 = new QGridLayout(groupBox_14);
         gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
-        gridLayout_14->setContentsMargins(-1, 2, -1, 2);
         DataBaseConnect = new QPushButton(groupBox_14);
         DataBaseConnect->setObjectName(QStringLiteral("DataBaseConnect"));
 
@@ -757,7 +733,6 @@ public:
         _2->addWidget(mainStack, 0, 1, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetMinimumSize);
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -853,9 +828,6 @@ public:
         groupBox_15->setTitle(QApplication::translate("MainForm", "Total Time:", 0));
         ShiftTotalTime->setText(QApplication::translate("MainForm", "0:00", 0));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", 0));
-#ifndef QT_NO_ACCESSIBILITY
-        DataBaseSettings->setAccessibleName(QApplication::translate("MainForm", "Database", 0));
-#endif // QT_NO_ACCESSIBILITY
         groupBox_14->setTitle(QApplication::translate("MainForm", "Server Database", 0));
         DataBaseConnect->setText(QApplication::translate("MainForm", "Connect", 0));
         DataBaseClear->setText(QApplication::translate("MainForm", "Clear", 0));

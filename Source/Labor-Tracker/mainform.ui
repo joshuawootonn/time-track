@@ -10,35 +10,17 @@
     <height>744</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Calibri</family>
-    <pointsize>12</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Time-Track</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="_2">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
    <item row="0" column="1">
     <widget class="QStackedWidget" name="mainStack">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="currentIndex">
       <number>1</number>
@@ -125,22 +107,7 @@
       </layout>
      </widget>
      <widget class="QWidget" name="advPage">
-      <property name="acceptDrops">
-       <bool>false</bool>
-      </property>
       <layout class="QGridLayout" name="gridLayout_7">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="tabPosition">
@@ -280,8 +247,11 @@
            <height>110</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="documentMode">
           <bool>false</bool>
@@ -300,18 +270,6 @@
            <string>Employees</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
            <item>
             <widget class="QGroupBox" name="groupBox">
              <property name="minimumSize">
@@ -326,26 +284,20 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <property name="title">
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QPushButton" name="EmployeeAdd">
                 <property name="text">
                  <string>Add</string>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -372,21 +324,6 @@
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
-              <property name="spacing">
-               <number>2</number>
-              </property>
               <item row="0" column="0">
                <widget class="QCheckBox" name="EmployeeName">
                 <property name="text">
@@ -445,21 +382,6 @@
               <string>Show</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_2">
-              <property name="spacing">
-               <number>2</number>
-              </property>
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QRadioButton" name="AllRadio">
                 <property name="text">
@@ -504,39 +426,12 @@
            <string>Projects</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
            <item>
             <widget class="QGroupBox" name="groupBox_6">
              <property name="title">
               <string>Project Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <property name="spacing">
-               <number>2</number>
-              </property>
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QPushButton" name="ProjectAdd">
                 <property name="text">
@@ -567,21 +462,6 @@
               <string>Project Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_9">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
-              <property name="spacing">
-               <number>2</number>
-              </property>
               <item row="0" column="0">
                <widget class="QCheckBox" name="ProjectName">
                 <property name="text">
@@ -612,21 +492,6 @@
               <string>Show</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3">
-              <property name="spacing">
-               <number>2</number>
-              </property>
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QRadioButton" name="ProjectAllRadio">
                 <property name="text">
@@ -670,18 +535,6 @@
               <string>Item Options</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="ProjectItemAdd">
                 <property name="text">
@@ -714,18 +567,6 @@
               <string>Item Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item row="0" column="0">
                <widget class="QCheckBox" name="ProjectItemName">
                 <property name="text">
@@ -750,36 +591,12 @@
            <string>Sub-Projects</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
            <item>
             <widget class="QGroupBox" name="groupBox_7">
              <property name="title">
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QPushButton" name="ItemAdd">
                 <property name="text">
@@ -803,18 +620,6 @@
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item row="0" column="0">
                <widget class="QCheckBox" name="ItemName">
                 <property name="text">
@@ -873,36 +678,12 @@
            <string>Shifts</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
            <item>
             <widget class="QGroupBox" name="groupBox_4">
              <property name="title">
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item>
                <widget class="QPushButton" name="ShiftAdd">
                 <property name="text">
@@ -933,18 +714,6 @@
               <string>Display By</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <property name="spacing">
                <number>2</number>
               </property>
@@ -1014,18 +783,6 @@
               <string>Time</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_13">
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>10</number>
-              </property>
-              <property name="bottomMargin">
-               <number>4</number>
-              </property>
               <item row="0" column="1">
                <widget class="QDateEdit" name="ShiftDate1"/>
               </item>
@@ -1087,37 +844,16 @@
           </layout>
          </widget>
          <widget class="QWidget" name="DataBaseSettings">
-          <property name="accessibleName">
-           <string>Database</string>
-          </property>
           <attribute name="title">
            <string>DataBase</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
            <item>
             <widget class="QGroupBox" name="groupBox_14">
              <property name="title">
               <string>Server Database</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_14">
-              <property name="topMargin">
-               <number>2</number>
-              </property>
-              <property name="bottomMargin">
-               <number>2</number>
-              </property>
               <item row="0" column="1">
                <widget class="QPushButton" name="DataBaseConnect">
                 <property name="text">
@@ -1155,9 +891,6 @@
    </item>
    <item row="1" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMinimumSize</enum>
      </property>
