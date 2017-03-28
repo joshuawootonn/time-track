@@ -5,7 +5,10 @@ MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainForm)
 {
+    localPath = "../SQLite/data.sqlite";
     Connect();
+    connectToServer();
+
     ui->setupUi(this);
 
 
@@ -28,48 +31,24 @@ MainForm::~MainForm()
 }
 void MainForm::Connect()
 {
+    data= QSqlDatabase::addDatabase("QSQLITE","data");
 
-    projectDataBase = QSqlDatabase::addDatabase("QSQLITE","projectDataBase");
-    employeeDataBase = QSqlDatabase::addDatabase("QSQLITE","employeeDataBase");
-    data = employeeDataBase = QSqlDatabase::addDatabase("QSQLITE","data");
-
-
-
-    QString employeepath="/SQLite/AACILaborTracking.db";
-    QString projectpath="/SQLite/AACIProjectList.db";
-    QString datapath = "/SQLite/AACIData.sqlite";
-    QString path = QDir::currentPath();
-    QString serverpath = path.split("/")[0]+"/"+path.split("/")[1]+"/"+path.split("/")[2];
-    qDebug()<<serverpath<<datapath;
-    QString x = "//SERVER-JOSH/AACI Labor Tracking/Data/AACILaborTracking.db";
-    QString y = "//SERVER-JOSH/AACI Labor Tracking/Data/AACIProjectList.db";
-    QString z = "//SERVER-JOSH/AACI Labor Tracking/Data/AACIData.sqlite";
-
-    QString database = ":/database/data.sqlite";
-    if(fileExists(x)&&fileExists(y))
+    if(fileExists(serverPath))
     {
-        employeeDataBase.setDatabaseName(x);
-        projectDataBase.setDatabaseName(y);
-        data.setDatabaseName(z);
+        data.setDatabaseName(serverPath);
         qDebug()<<"Connected to network database...";
     }
-    else if(fileExists("../SQLite/data.sqlite")){
-        employeeDataBase.setDatabaseName(serverpath+employeepath);
-        projectDataBase.setDatabaseName(serverpath+projectpath);
-        data.setDatabaseName("../SQLite/data.sqlite");
+    else if(fileExists(localPath))
+    {
+        data.setDatabaseName(localPath);
         qDebug()<<"Connected to local database";
     }
-
-    employeeDataBase.open();
-    projectDataBase.open();
     data.open();
 
 }
 void MainForm::Disconnect(){
-    employeeDataBase.close();
-    employeeDataBase.removeDatabase("employeeDataBase");
-    projectDataBase.close();
-    projectDataBase.removeDatabase("projectDataBase");
+    data.close();
+    data.removeDatabase("data");
 }
 void MainForm::establishConnections(){
     QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
@@ -105,9 +84,36 @@ void MainForm::showtheThings(){
 }
 void MainForm::on_HeaderTabs_currentChanged(int index)
 {
-    if(index ==1){
-        refreshProjectItemCombo();
+    if(index ==0){
+        refreshEmployeeTab();
     }
+    else if(index ==1){
+        refreshProjectItemCombo();
+        refreshProjectTab();
+    }
+    else if(index ==2){
+        refreshItemTab();
+    }
+    else if(index ==3){
+        refreshShiftTab();
+    }
+}
+void MainForm::connectToServer(){
+
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("select path from databaselist where name='server'");
+    if(qry->exec())
+    {
+        while(qry->next())
+        {
+            serverPath = qry->value(0).toString();
+        }
+    }
+    Disconnect();
+    Connect();
+
+
+
 }
 
 void MainForm::loginInitialize(){
@@ -291,6 +297,7 @@ void MainForm::on_basicPageAdvanced_clicked()
     ShiftTab();
     ProjectTab();
     ItemTab();
+    DatabaseTab();
     ui->MainTabs->setCurrentIndex(0);
     ui->HeaderTabs->setCurrentIndex(0);
 }
@@ -529,6 +536,10 @@ void MainForm::on_PastRadio_toggled(bool checked)
 void MainForm::ProjectTab(){
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
+
+
+    QSqlQueryModel * y = ProjectItemModel();
+    ui->ProjectItemView->setModel(y);
     ui->ProjectView->resizeColumnsToContents();
     ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
@@ -568,21 +579,35 @@ QSqlQueryModel * MainForm::ProjectModel(){
 }
 QSqlQueryModel * MainForm::ProjectItemModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
-
-    QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
     QSqlQueryModel * x = ProjectModel();
-    QModelIndex index = list.at(0);
-    int idInt = x->record(index.row()).value(1).toInt();
+
+
+    int idInt;
+    QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
+    if(list.isEmpty())
+    {
+        idInt = x->record(1).value(1).toInt();
+
+    }
+    else {
+        QModelIndex index = list.at(0);
+        idInt = x->record(index.row()).value(1).toInt();
+    }
+
     QString id = QString::number(idInt);
 
     model->setTable("Project"+id);
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    qDebug()<< model->lastError();
     model->setHeaderData(0,Qt::Horizontal,tr("Name"));
     model->setHeaderData(1,Qt::Horizontal,tr("Id"));
     
+    return model;
+}
+QSqlQueryModel * MainForm::ProjectItemModelRefresh(){
+    QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
+    model->select();
     return model;
 }
 
@@ -591,8 +616,7 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 
     QSqlQueryModel * x = ProjectItemModel();
     ui->ProjectItemView->setModel(x);
-    ui->ProjectView->resizeColumnsToContents();
-    refreshProjectItemTab();
+
 }
 void MainForm::refreshProjectTab(){
     ui->MainTabs->setCurrentIndex(1);
@@ -624,10 +648,10 @@ void MainForm::refreshProjectTab(){
 void MainForm::refreshProjectItemTab(){
     ui->MainTabs->setCurrentIndex(1);
 
-    QSqlQueryModel * x = ProjectItemModel();
+    QSqlQueryModel * x = ProjectItemModelRefresh();
     ui->ProjectItemView->setModel(x);
 
-
+    ui->ProjectItemView->resizeColumnsToContents();
 
     if(ui->ProjectItemName->isChecked())
         ui->ProjectItemView->showColumn(0);
@@ -673,13 +697,16 @@ void MainForm::on_ProjectDelete_clicked()
     {
         QModelIndex index =list.at(i);
         int idInt = x->record(index.row()).value(1).toInt();
+
+
+
         QString id = "Project"+QString::number(idInt);
 
         qry->clear();
         qry->prepare("DROP TABLE '"+id+"'");
         qry->exec();
         qry->clear();
-        qry->prepare("DELETE from projectlist where id='"+id+"'");
+        qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
         qry->exec();
     }
     refreshProjectTab();
@@ -793,26 +820,34 @@ void MainForm::on_ProjectItemAdd_clicked()
     QString table = model->tableName();
     qry->prepare("insert into'"+table+"'(name,id) values('"+itemName+"','"+itemId+"')");
     qry->exec();
-    refreshProjectItemTab();
+
+    model->select();
+    ui->ProjectItemView->setModel(model);
+
             
 }
 void MainForm::on_ProjectItemRemove_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ProjectItemView->selectionModel()->selection().indexes();
-    QSqlQueryModel * model = ProjectItemModel();
+
     QSqlTableModel * tablemodel = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = tablemodel->tableName();
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        QString id = model->record(index.row()).value(1).toString();
+        QString id = tablemodel->record(index.row()).value(1).toString();
 
         qry->clear();
         qry->prepare("DELETE from '"+table+"' where id='"+id+"'");
         qry->exec();
     }
-    refreshProjectItemTab();
+    tablemodel->select();
+    ui->ProjectItemView->setModel(tablemodel);
+
+
+
+
 }
 
 void MainForm::ItemTab(){
@@ -1129,18 +1164,32 @@ void MainForm::on_ShiftDelete_clicked()
     refreshShiftTab();
 }
 
-
-
-QSqlDatabase MainForm::getProjectDataBase() const
-{
-    return projectDataBase;
+void MainForm::DatabaseTab(){
+    ui->DataBaseEdit->setText(serverPath);
 }
-QSqlDatabase MainForm::getEmployeeDataBase() const
+void MainForm::on_DataBaseConnect_clicked()
 {
-    return employeeDataBase;
+
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("update databaselist set path='"+ui->DataBaseEdit->text()+"' where name='server'");
+    qry->exec();
+    connectToServer();
+
 }
+
+void MainForm::on_DataBaseClear_clicked()
+{
+    QSqlQuery * qry = new QSqlQuery(data);
+    ui->DataBaseEdit->setText("");
+    qry->prepare("update databaselist set path='"+ui->DataBaseEdit->text()+"' where name='server'");
+    qry->exec();
+    connectToServer();
+}
+
 QSqlDatabase MainForm::getData() const
 {
     return data;
 }
+
+
 

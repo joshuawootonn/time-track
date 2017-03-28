@@ -25,6 +25,7 @@ class MainForm : public QWidget
 public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
+    void connectToServer();
     void Connect();
     void Disconnect();
     void establishConnections();
@@ -53,6 +54,7 @@ public:
     QSqlQueryModel * ProjectModel();
     QSqlQueryModel * ProjectItemModel();
     QSqlQueryModel * ProjectItemModel(QString id);
+    QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectTab();
     void refreshProjectItemTab();
     void refreshProjectItemCombo();
@@ -160,14 +162,22 @@ private slots:
 
     void on_ShiftDelete_clicked();
 
+
+
+    void DatabaseTab();
+    void on_DataBaseConnect_clicked();
+
+    void on_DataBaseClear_clicked();
+
 private:
     Ui::MainForm *ui;
     LoginForm *loginForm;
     ClockoutForm *clockoutForm;
     ShiftEditForm * shifteditform;
-    QSqlDatabase employeeDataBase;
-    QSqlDatabase projectDataBase;
     QSqlDatabase data;
+    QString serverPath;
+    QString localPath;
+
 
     QString id;
     bool admin;

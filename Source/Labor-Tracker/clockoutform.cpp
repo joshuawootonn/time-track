@@ -7,10 +7,6 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
     ui(new Ui::ClockoutForm)
 {
     ui->setupUi(this);
-    employeeDataBase = ((MainForm*)parentWidget())->getEmployeeDataBase();
-
-    projectDataBase = ((MainForm*)parentWidget())->getProjectDataBase();
-
     data = ((MainForm*)parentWidget())->getData();
     this->setGeometry(
         QStyle::alignedRect(

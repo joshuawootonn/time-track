@@ -169,7 +169,7 @@
          </widget>
          <widget class="QWidget" name="ItemTab">
           <attribute name="title">
-           <string>Items</string>
+           <string>Sub-Projects</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_6">
            <item row="0" column="0">
@@ -209,7 +209,10 @@
           </size>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
+         </property>
+         <property name="tabBarAutoHide">
+          <bool>false</bool>
          </property>
          <widget class="QWidget" name="EmployeeSettings">
           <attribute name="title">
@@ -601,7 +604,13 @@
                </widget>
               </item>
               <item row="1" column="0" colspan="2">
-               <widget class="QComboBox" name="ProjectItemCombo"/>
+               <widget class="QComboBox" name="ProjectItemCombo">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -645,7 +654,7 @@
          </widget>
          <widget class="QWidget" name="ItemsSettings">
           <attribute name="title">
-           <string>Items</string>
+           <string>Sub-Projects</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <property name="topMargin">
@@ -838,7 +847,7 @@
                <widget class="QComboBox" name="ShiftEmployeeCombo">
                 <property name="font">
                  <font>
-                  <pointsize>9</pointsize>
+                  <pointsize>8</pointsize>
                  </font>
                 </property>
                 <property name="sizeAdjustPolicy">
@@ -850,7 +859,7 @@
                <widget class="QComboBox" name="ShiftProjectCombo">
                 <property name="font">
                  <font>
-                  <pointsize>9</pointsize>
+                  <pointsize>8</pointsize>
                  </font>
                 </property>
                 <property name="sizeAdjustPolicy">
@@ -862,7 +871,7 @@
                <widget class="QComboBox" name="ShiftItemCombo">
                 <property name="font">
                  <font>
-                  <pointsize>9</pointsize>
+                  <pointsize>8</pointsize>
                  </font>
                 </property>
                 <property name="sizeAdjustPolicy">
@@ -947,6 +956,48 @@
               </size>
              </property>
             </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="DataBaseSettings">
+          <property name="accessibleName">
+           <string>Database</string>
+          </property>
+          <attribute name="title">
+           <string>DataBase</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="groupBox_14">
+             <property name="title">
+              <string>Server Database</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_14">
+              <property name="topMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>2</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLineEdit" name="DataBaseEdit"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="DataBaseConnect">
+                <property name="text">
+                 <string>Connect</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="DataBaseClear">
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>

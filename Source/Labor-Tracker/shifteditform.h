@@ -64,8 +64,7 @@ signals:
 private:
     Ui::ShiftEditForm *ui;
 
-    QSqlDatabase employeeDataBase;
-    QSqlDatabase projectDataBase;
+
     QSqlDatabase data;
 
     int selectedRow;

@@ -21,6 +21,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
@@ -150,6 +151,13 @@ public:
     QLabel *label_4;
     QLabel *label_5;
     QSpacerItem *horizontalSpacer_5;
+    QWidget *DataBaseSettings;
+    QHBoxLayout *horizontalLayout_4;
+    QGroupBox *groupBox_14;
+    QGridLayout *gridLayout_14;
+    QLineEdit *DataBaseEdit;
+    QPushButton *DataBaseConnect;
+    QPushButton *DataBaseClear;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *mainFinish;
@@ -281,6 +289,7 @@ public:
         HeaderTabs = new QTabWidget(advPage);
         HeaderTabs->setObjectName(QStringLiteral("HeaderTabs"));
         HeaderTabs->setMaximumSize(QSize(16777215, 110));
+        HeaderTabs->setTabBarAutoHide(false);
         EmployeeSettings = new QWidget();
         EmployeeSettings->setObjectName(QStringLiteral("EmployeeSettings"));
         horizontalLayout_2 = new QHBoxLayout(EmployeeSettings);
@@ -482,6 +491,9 @@ public:
 
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
+        QFont font1;
+        font1.setPointSize(10);
+        ProjectItemCombo->setFont(font1);
 
         gridLayout_12->addWidget(ProjectItemCombo, 1, 0, 1, 2);
 
@@ -604,23 +616,23 @@ public:
         gridLayout->setContentsMargins(10, 0, 10, 4);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        QFont font1;
-        font1.setPointSize(9);
-        ShiftEmployeeCombo->setFont(font1);
+        QFont font2;
+        font2.setPointSize(8);
+        ShiftEmployeeCombo->setFont(font2);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftEmployeeCombo, 0, 1, 1, 1);
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font1);
+        ShiftProjectCombo->setFont(font2);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftProjectCombo, 1, 1, 1, 1);
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font1);
+        ShiftItemCombo->setFont(font2);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftItemCombo, 2, 1, 1, 1);
@@ -676,6 +688,34 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_5);
 
         HeaderTabs->addTab(ShiftSettings, QString());
+        DataBaseSettings = new QWidget();
+        DataBaseSettings->setObjectName(QStringLiteral("DataBaseSettings"));
+        horizontalLayout_4 = new QHBoxLayout(DataBaseSettings);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        groupBox_14 = new QGroupBox(DataBaseSettings);
+        groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
+        gridLayout_14 = new QGridLayout(groupBox_14);
+        gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
+        gridLayout_14->setContentsMargins(-1, 2, -1, 2);
+        DataBaseEdit = new QLineEdit(groupBox_14);
+        DataBaseEdit->setObjectName(QStringLiteral("DataBaseEdit"));
+
+        gridLayout_14->addWidget(DataBaseEdit, 0, 0, 1, 1);
+
+        DataBaseConnect = new QPushButton(groupBox_14);
+        DataBaseConnect->setObjectName(QStringLiteral("DataBaseConnect"));
+
+        gridLayout_14->addWidget(DataBaseConnect, 0, 1, 1, 1);
+
+        DataBaseClear = new QPushButton(groupBox_14);
+        DataBaseClear->setObjectName(QStringLiteral("DataBaseClear"));
+
+        gridLayout_14->addWidget(DataBaseClear, 0, 2, 1, 1);
+
+
+        horizontalLayout_4->addWidget(groupBox_14);
+
+        HeaderTabs->addTab(DataBaseSettings, QString());
 
         gridLayout_7->addWidget(HeaderTabs, 1, 0, 1, 1);
 
@@ -704,7 +744,7 @@ public:
 
         mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainForm);
@@ -718,7 +758,7 @@ public:
         basicPageAdvanced->setText(QApplication::translate("MainForm", "Advanced", 0));
         MainTabs->setTabText(MainTabs->indexOf(EmployeeTab), QApplication::translate("MainForm", "Employees", 0));
         MainTabs->setTabText(MainTabs->indexOf(ProjectTab), QApplication::translate("MainForm", "Projects", 0));
-        MainTabs->setTabText(MainTabs->indexOf(ItemTab), QApplication::translate("MainForm", "Items", 0));
+        MainTabs->setTabText(MainTabs->indexOf(ItemTab), QApplication::translate("MainForm", "Sub-Projects", 0));
         MainTabs->setTabText(MainTabs->indexOf(ShiftTab), QApplication::translate("MainForm", "Shifts", 0));
         groupBox->setTitle(QApplication::translate("MainForm", "Options", 0));
         EmployeeAdd->setText(QApplication::translate("MainForm", "Add", 0));
@@ -765,7 +805,7 @@ public:
         ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", 0));
         ItemCategory->setText(QApplication::translate("MainForm", "Category", 0));
         ItemDimension->setText(QApplication::translate("MainForm", "Dimension", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Items", 0));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Projects", 0));
         groupBox_4->setTitle(QApplication::translate("MainForm", "Options", 0));
         ShiftAdd->setText(QApplication::translate("MainForm", "Add", 0));
         ShiftEdit->setText(QApplication::translate("MainForm", "Edit", 0));
@@ -778,6 +818,13 @@ public:
         label_4->setText(QApplication::translate("MainForm", "From:", 0));
         label_5->setText(QApplication::translate("MainForm", "To:", 0));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", 0));
+#ifndef QT_NO_ACCESSIBILITY
+        DataBaseSettings->setAccessibleName(QApplication::translate("MainForm", "Database", 0));
+#endif // QT_NO_ACCESSIBILITY
+        groupBox_14->setTitle(QApplication::translate("MainForm", "Server Database", 0));
+        DataBaseConnect->setText(QApplication::translate("MainForm", "Connect", 0));
+        DataBaseClear->setText(QApplication::translate("MainForm", "Clear", 0));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", 0));
         mainFinish->setText(QApplication::translate("MainForm", "Finish", 0));
     } // retranslateUi
 

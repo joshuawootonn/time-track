@@ -8,10 +8,6 @@ LoginForm::LoginForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    employeeDataBase = ((MainForm*)parentWidget())->getEmployeeDataBase();
-
-    projectDataBase = ((MainForm*)parentWidget())->getProjectDataBase();
-
     data = ((MainForm*)parentWidget())->getData();
 
     this->setGeometry(

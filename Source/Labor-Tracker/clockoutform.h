@@ -55,8 +55,6 @@ signals:
 private:
     Ui::ClockoutForm *ui;
 
-    QSqlDatabase employeeDataBase;
-    QSqlDatabase projectDataBase;
     QSqlDatabase data;
     QString id;
     int selectedRow;

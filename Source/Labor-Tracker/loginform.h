@@ -40,8 +40,6 @@ public slots:
 private:
     Ui::LoginForm *ui;
 
-    QSqlDatabase employeeDataBase;
-    QSqlDatabase projectDataBase;
     QSqlDatabase data;
 
     QString pin;
