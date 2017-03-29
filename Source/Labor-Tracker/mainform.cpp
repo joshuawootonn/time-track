@@ -6,6 +6,7 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     localPath = "../SQLite/data.sqlite";
+
     Connect();
     connectToServer();
 

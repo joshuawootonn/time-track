@@ -32,3 +32,6 @@ FORMS    += \
     shifteditform.ui
 
 RESOURCES +=
+
+DISTFILES += \
+    ../../Qss/default.qss
