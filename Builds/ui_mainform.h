@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -162,6 +162,10 @@ public:
     QPushButton *DataBaseClear;
     QLineEdit *DataBaseEdit;
     QPushButton *pushButton;
+    QGroupBox *groupBox_16;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *DataBaseLabel1;
+    QLabel *DataBaseLabel2;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *mainFinish;
@@ -171,13 +175,12 @@ public:
         if (MainForm->objectName().isEmpty())
             MainForm->setObjectName(QStringLiteral("MainForm"));
         MainForm->resize(1162, 744);
-        MainForm->setStyleSheet(QLatin1String("font: 12pt \"Calibri\";\n"
-"\n"
-"background-color:#44337B;"));
+        MainForm->setStyleSheet(QStringLiteral(""));
         _2 = new QGridLayout(MainForm);
         _2->setObjectName(QStringLiteral("_2"));
         mainStack = new QStackedWidget(MainForm);
         mainStack->setObjectName(QStringLiteral("mainStack"));
+        mainStack->setStyleSheet(QStringLiteral(""));
         basicPage = new QWidget();
         basicPage->setObjectName(QStringLiteral("basicPage"));
         gridLayout_2 = new QGridLayout(basicPage);
@@ -293,6 +296,7 @@ public:
         HeaderTabs = new QTabWidget(advPage);
         HeaderTabs->setObjectName(QStringLiteral("HeaderTabs"));
         HeaderTabs->setMaximumSize(QSize(16777215, 110));
+        HeaderTabs->setStyleSheet(QStringLiteral(""));
         HeaderTabs->setDocumentMode(false);
         HeaderTabs->setTabsClosable(false);
         HeaderTabs->setMovable(false);
@@ -305,10 +309,7 @@ public:
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setMinimumSize(QSize(200, 0));
         groupBox->setMaximumSize(QSize(200, 16777215));
-        groupBox->setStyleSheet(QLatin1String("\n"
-" \n"
-"    border-radius: 5px;\n"
-"    margin-top: 1ex;"));
+        groupBox->setStyleSheet(QStringLiteral(""));
         horizontalLayout_5 = new QHBoxLayout(groupBox);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         EmployeeAdd = new QPushButton(groupBox);
@@ -489,11 +490,7 @@ public:
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
         QFont font;
-        font.setFamily(QStringLiteral("Calibri"));
-        font.setPointSize(12);
-        font.setBold(false);
-        font.setItalic(false);
-        font.setWeight(50);
+        font.setPointSize(10);
         ProjectItemCombo->setFont(font);
 
         gridLayout_12->addWidget(ProjectItemCombo, 1, 0, 1, 2);
@@ -610,21 +607,23 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        ShiftEmployeeCombo->setFont(font);
+        QFont font1;
+        font1.setPointSize(8);
+        ShiftEmployeeCombo->setFont(font1);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftEmployeeCombo, 0, 1, 1, 1);
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font);
+        ShiftProjectCombo->setFont(font1);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftProjectCombo, 1, 1, 1, 1);
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font);
+        ShiftItemCombo->setFont(font1);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftItemCombo, 2, 1, 1, 1);
@@ -724,6 +723,23 @@ public:
 
         horizontalLayout_4->addWidget(groupBox_14);
 
+        groupBox_16 = new QGroupBox(DataBaseSettings);
+        groupBox_16->setObjectName(QStringLiteral("groupBox_16"));
+        horizontalLayout_12 = new QHBoxLayout(groupBox_16);
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        DataBaseLabel1 = new QLabel(groupBox_16);
+        DataBaseLabel1->setObjectName(QStringLiteral("DataBaseLabel1"));
+
+        horizontalLayout_12->addWidget(DataBaseLabel1);
+
+        DataBaseLabel2 = new QLabel(groupBox_16);
+        DataBaseLabel2->setObjectName(QStringLiteral("DataBaseLabel2"));
+
+        horizontalLayout_12->addWidget(DataBaseLabel2);
+
+
+        horizontalLayout_4->addWidget(groupBox_16);
+
         HeaderTabs->addTab(DataBaseSettings, QString());
 
         gridLayout_7->addWidget(HeaderTabs, 1, 0, 1, 1);
@@ -753,6 +769,7 @@ public:
         mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(3);
         HeaderTabs->setCurrentIndex(0);
+        EmployeeAdd->setDefault(false);
 
 
         QMetaObject::connectSlotsByName(MainForm);
@@ -760,80 +777,83 @@ public:
 
     void retranslateUi(QWidget *MainForm)
     {
-        MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", 0));
-        basicPageClockIn->setText(QApplication::translate("MainForm", "Clock In", 0));
-        basicPageClockOut->setText(QApplication::translate("MainForm", "Clock out", 0));
-        basicPageAdvanced->setText(QApplication::translate("MainForm", "Advanced", 0));
-        MainTabs->setTabText(MainTabs->indexOf(EmployeeTab), QApplication::translate("MainForm", "Employees", 0));
-        MainTabs->setTabText(MainTabs->indexOf(ProjectTab), QApplication::translate("MainForm", "Projects", 0));
-        MainTabs->setTabText(MainTabs->indexOf(ItemTab), QApplication::translate("MainForm", "Sub-Projects", 0));
-        MainTabs->setTabText(MainTabs->indexOf(ShiftTab), QApplication::translate("MainForm", "Shifts", 0));
-        groupBox->setTitle(QApplication::translate("MainForm", "Options", 0));
-        EmployeeAdd->setText(QApplication::translate("MainForm", "Add", 0));
-        EmployeeArchive->setText(QApplication::translate("MainForm", "Archive", 0));
-        EmployeeDelete->setText(QApplication::translate("MainForm", "Delete", 0));
-        groupBox_2->setTitle(QApplication::translate("MainForm", "Table", 0));
-        EmployeeName->setText(QApplication::translate("MainForm", "Name", 0));
-        EmployeeActive->setText(QApplication::translate("MainForm", "Active", 0));
-        EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", 0));
-        EmployeeAdminStatus->setText(QApplication::translate("MainForm", "AdminStatus", 0));
-        EmployeePin->setText(QApplication::translate("MainForm", "Pin", 0));
-        EmployeeId->setText(QApplication::translate("MainForm", "Id", 0));
-        EmployeeCurrent->setText(QApplication::translate("MainForm", "Current", 0));
-        groupBox_3->setTitle(QApplication::translate("MainForm", "Show", 0));
-        AllRadio->setText(QApplication::translate("MainForm", "All Employees", 0));
-        CurrentRadio->setText(QApplication::translate("MainForm", "Current Employees", 0));
-        PastRadio->setText(QApplication::translate("MainForm", "Past Employees", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(EmployeeSettings), QApplication::translate("MainForm", "Employees", 0));
-        groupBox_6->setTitle(QApplication::translate("MainForm", "Project Options", 0));
-        ProjectAdd->setText(QApplication::translate("MainForm", "Create New", 0));
-        ProjectDelete->setText(QApplication::translate("MainForm", "Delete", 0));
-        ProjectArchive->setText(QApplication::translate("MainForm", "Archive", 0));
-        groupBox_8->setTitle(QApplication::translate("MainForm", "Project Table", 0));
-        ProjectName->setText(QApplication::translate("MainForm", "Name", 0));
-        ProjectId->setText(QApplication::translate("MainForm", "Id", 0));
-        ProjectCurrent->setText(QApplication::translate("MainForm", "Current", 0));
-        groupBox_9->setTitle(QApplication::translate("MainForm", "Show", 0));
-        ProjectAllRadio->setText(QApplication::translate("MainForm", "All Projects", 0));
-        ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", 0));
-        ProjectPastRadio->setText(QApplication::translate("MainForm", "Past Projects", 0));
-        groupBox_11->setTitle(QApplication::translate("MainForm", "Item Options", 0));
-        ProjectItemAdd->setText(QApplication::translate("MainForm", "Add", 0));
-        ProjectItemRemove->setText(QApplication::translate("MainForm", "Remove", 0));
-        groupBox_12->setTitle(QApplication::translate("MainForm", "Item Table", 0));
-        ProjectItemName->setText(QApplication::translate("MainForm", "Name", 0));
-        ProjectItemId->setText(QApplication::translate("MainForm", "Id", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Projects", 0));
-        groupBox_7->setTitle(QApplication::translate("MainForm", "Options", 0));
-        ItemAdd->setText(QApplication::translate("MainForm", "Create New", 0));
-        ItemDelete->setText(QApplication::translate("MainForm", "Delete", 0));
-        groupBox_10->setTitle(QApplication::translate("MainForm", "Table", 0));
-        ItemName->setText(QApplication::translate("MainForm", "Name", 0));
-        ItemId->setText(QApplication::translate("MainForm", "Id", 0));
-        ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", 0));
-        ItemCategory->setText(QApplication::translate("MainForm", "Category", 0));
-        ItemDimension->setText(QApplication::translate("MainForm", "Dimension", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Projects", 0));
-        groupBox_4->setTitle(QApplication::translate("MainForm", "Options", 0));
-        ShiftAdd->setText(QApplication::translate("MainForm", "Add", 0));
-        ShiftEdit->setText(QApplication::translate("MainForm", "Edit", 0));
-        ShiftDelete->setText(QApplication::translate("MainForm", "Delete", 0));
-        groupBox_5->setTitle(QApplication::translate("MainForm", "Display By", 0));
-        label->setText(QApplication::translate("MainForm", "Employee:", 0));
-        label_2->setText(QApplication::translate("MainForm", "Project:", 0));
-        label_3->setText(QApplication::translate("MainForm", "Item:", 0));
-        groupBox_13->setTitle(QApplication::translate("MainForm", "Time", 0));
-        label_4->setText(QApplication::translate("MainForm", "From:", 0));
-        label_5->setText(QApplication::translate("MainForm", "To:", 0));
-        groupBox_15->setTitle(QApplication::translate("MainForm", "Total Time:", 0));
-        ShiftTotalTime->setText(QApplication::translate("MainForm", "0:00", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", 0));
-        groupBox_14->setTitle(QApplication::translate("MainForm", "Server Database", 0));
-        DataBaseConnect->setText(QApplication::translate("MainForm", "Connect", 0));
-        DataBaseClear->setText(QApplication::translate("MainForm", "Clear", 0));
-        pushButton->setText(QApplication::translate("MainForm", "Disconnect", 0));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", 0));
-        mainFinish->setText(QApplication::translate("MainForm", "Finish", 0));
+        MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", Q_NULLPTR));
+        basicPageClockIn->setText(QApplication::translate("MainForm", "Clock In", Q_NULLPTR));
+        basicPageClockOut->setText(QApplication::translate("MainForm", "Clock out", Q_NULLPTR));
+        basicPageAdvanced->setText(QApplication::translate("MainForm", "Advanced", Q_NULLPTR));
+        MainTabs->setTabText(MainTabs->indexOf(EmployeeTab), QApplication::translate("MainForm", "Employees", Q_NULLPTR));
+        MainTabs->setTabText(MainTabs->indexOf(ProjectTab), QApplication::translate("MainForm", "Projects", Q_NULLPTR));
+        MainTabs->setTabText(MainTabs->indexOf(ItemTab), QApplication::translate("MainForm", "Sub-Projects", Q_NULLPTR));
+        MainTabs->setTabText(MainTabs->indexOf(ShiftTab), QApplication::translate("MainForm", "Shifts", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
+        EmployeeAdd->setText(QApplication::translate("MainForm", "Add", Q_NULLPTR));
+        EmployeeArchive->setText(QApplication::translate("MainForm", "Archive", Q_NULLPTR));
+        EmployeeDelete->setText(QApplication::translate("MainForm", "Delete", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
+        EmployeeName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
+        EmployeeActive->setText(QApplication::translate("MainForm", "Active", Q_NULLPTR));
+        EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", Q_NULLPTR));
+        EmployeeAdminStatus->setText(QApplication::translate("MainForm", "AdminStatus", Q_NULLPTR));
+        EmployeePin->setText(QApplication::translate("MainForm", "Pin", Q_NULLPTR));
+        EmployeeId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        EmployeeCurrent->setText(QApplication::translate("MainForm", "Current", Q_NULLPTR));
+        groupBox_3->setTitle(QApplication::translate("MainForm", "Show", Q_NULLPTR));
+        AllRadio->setText(QApplication::translate("MainForm", "All Employees", Q_NULLPTR));
+        CurrentRadio->setText(QApplication::translate("MainForm", "Current Employees", Q_NULLPTR));
+        PastRadio->setText(QApplication::translate("MainForm", "Past Employees", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(EmployeeSettings), QApplication::translate("MainForm", "Employees", Q_NULLPTR));
+        groupBox_6->setTitle(QApplication::translate("MainForm", "Project Options", Q_NULLPTR));
+        ProjectAdd->setText(QApplication::translate("MainForm", "Create New", Q_NULLPTR));
+        ProjectDelete->setText(QApplication::translate("MainForm", "Delete", Q_NULLPTR));
+        ProjectArchive->setText(QApplication::translate("MainForm", "Archive", Q_NULLPTR));
+        groupBox_8->setTitle(QApplication::translate("MainForm", "Project Table", Q_NULLPTR));
+        ProjectName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
+        ProjectId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        ProjectCurrent->setText(QApplication::translate("MainForm", "Current", Q_NULLPTR));
+        groupBox_9->setTitle(QApplication::translate("MainForm", "Show", Q_NULLPTR));
+        ProjectAllRadio->setText(QApplication::translate("MainForm", "All Projects", Q_NULLPTR));
+        ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", Q_NULLPTR));
+        ProjectPastRadio->setText(QApplication::translate("MainForm", "Past Projects", Q_NULLPTR));
+        groupBox_11->setTitle(QApplication::translate("MainForm", "Item Options", Q_NULLPTR));
+        ProjectItemAdd->setText(QApplication::translate("MainForm", "Add", Q_NULLPTR));
+        ProjectItemRemove->setText(QApplication::translate("MainForm", "Remove", Q_NULLPTR));
+        groupBox_12->setTitle(QApplication::translate("MainForm", "Item Table", Q_NULLPTR));
+        ProjectItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
+        ProjectItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Projects", Q_NULLPTR));
+        groupBox_7->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
+        ItemAdd->setText(QApplication::translate("MainForm", "Create New", Q_NULLPTR));
+        ItemDelete->setText(QApplication::translate("MainForm", "Delete", Q_NULLPTR));
+        groupBox_10->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
+        ItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
+        ItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", Q_NULLPTR));
+        ItemCategory->setText(QApplication::translate("MainForm", "Category", Q_NULLPTR));
+        ItemDimension->setText(QApplication::translate("MainForm", "Dimension", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Projects", Q_NULLPTR));
+        groupBox_4->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
+        ShiftAdd->setText(QApplication::translate("MainForm", "Add", Q_NULLPTR));
+        ShiftEdit->setText(QApplication::translate("MainForm", "Edit", Q_NULLPTR));
+        ShiftDelete->setText(QApplication::translate("MainForm", "Delete", Q_NULLPTR));
+        groupBox_5->setTitle(QApplication::translate("MainForm", "Display By", Q_NULLPTR));
+        label->setText(QApplication::translate("MainForm", "Employee:", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainForm", "Project:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainForm", "Item:", Q_NULLPTR));
+        groupBox_13->setTitle(QApplication::translate("MainForm", "Time", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainForm", "From:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainForm", "To:", Q_NULLPTR));
+        groupBox_15->setTitle(QApplication::translate("MainForm", "Total Time:", Q_NULLPTR));
+        ShiftTotalTime->setText(QApplication::translate("MainForm", "0:00", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", Q_NULLPTR));
+        groupBox_14->setTitle(QApplication::translate("MainForm", "Server Database", Q_NULLPTR));
+        DataBaseConnect->setText(QApplication::translate("MainForm", "Connect", Q_NULLPTR));
+        DataBaseClear->setText(QApplication::translate("MainForm", "Clear", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainForm", "Disconnect", Q_NULLPTR));
+        groupBox_16->setTitle(QString());
+        DataBaseLabel1->setText(QApplication::translate("MainForm", "Current Connection:", Q_NULLPTR));
+        DataBaseLabel2->setText(QString());
+        HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", Q_NULLPTR));
+        mainFinish->setText(QApplication::translate("MainForm", "Finish", Q_NULLPTR));
     } // retranslateUi
 
 };

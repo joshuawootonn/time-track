@@ -6,11 +6,11 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     localPath = "../SQLite/data.sqlite";
-
+    ui->setupUi(this);
     Connect();
     connectToServer();
 
-    ui->setupUi(this);
+
 
 
     clockoutForm = new ClockoutForm(this);
@@ -38,11 +38,13 @@ void MainForm::Connect()
     {
         data.setDatabaseName(serverPath);
         qDebug()<<"Connected to network database...";
+        ui->DataBaseLabel2->setText(" Network");
     }
     else if(fileExists(localPath))
     {
         data.setDatabaseName(localPath);
         qDebug()<<"Connected to local database";
+        ui->DataBaseLabel2->setText(" Local");
     }
 
     data.open();
