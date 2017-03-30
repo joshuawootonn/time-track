@@ -280,7 +280,7 @@ void ShiftEditForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>'"+a+"'and time <='"+b+"'");
+    qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
     if(qry1->exec())
     {
            while(qry1->next())

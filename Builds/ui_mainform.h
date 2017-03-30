@@ -175,7 +175,33 @@ public:
         if (MainForm->objectName().isEmpty())
             MainForm->setObjectName(QStringLiteral("MainForm"));
         MainForm->resize(1162, 744);
-        MainForm->setStyleSheet(QStringLiteral(""));
+        MainForm->setStyleSheet(QLatin1String("*{\n"
+"font-family:\"Calibri\";\n"
+"font-size: 12px;\n"
+"\n"
+"}\n"
+"QTabWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"border-top: 15px solid #D3D3D3;\n"
+"\n"
+"}\n"
+"QStackedWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"}\n"
+"QWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"padding:3px;\n"
+"}\n"
+"QRadioButton{\n"
+"padding:0px;\n"
+"margin:0px;\n"
+"}"));
         _2 = new QGridLayout(MainForm);
         _2->setObjectName(QStringLiteral("_2"));
         mainStack = new QStackedWidget(MainForm);
@@ -307,7 +333,7 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         groupBox = new QGroupBox(EmployeeSettings);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setMinimumSize(QSize(200, 0));
+        groupBox->setMinimumSize(QSize(0, 0));
         groupBox->setMaximumSize(QSize(200, 16777215));
         groupBox->setStyleSheet(QStringLiteral(""));
         horizontalLayout_5 = new QHBoxLayout(groupBox);
@@ -374,8 +400,12 @@ public:
 
         groupBox_3 = new QGroupBox(EmployeeSettings);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setFlat(false);
+        groupBox_3->setCheckable(false);
         verticalLayout_2 = new QVBoxLayout(groupBox_3);
+        verticalLayout_2->setSpacing(2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(9, -1, -1, -1);
         AllRadio = new QRadioButton(groupBox_3);
         AllRadio->setObjectName(QStringLiteral("AllRadio"));
 
@@ -450,6 +480,7 @@ public:
         groupBox_9 = new QGroupBox(ProjectsSettings);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         verticalLayout_3 = new QVBoxLayout(groupBox_9);
+        verticalLayout_3->setSpacing(2);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         ProjectAllRadio = new QRadioButton(groupBox_9);
         ProjectAllRadio->setObjectName(QStringLiteral("ProjectAllRadio"));
@@ -490,7 +521,7 @@ public:
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
         QFont font;
-        font.setPointSize(10);
+        font.setFamily(QStringLiteral("Calibri"));
         ProjectItemCombo->setFont(font);
 
         gridLayout_12->addWidget(ProjectItemCombo, 1, 0, 1, 2);
@@ -607,23 +638,21 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        QFont font1;
-        font1.setPointSize(8);
-        ShiftEmployeeCombo->setFont(font1);
+        ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftEmployeeCombo, 0, 1, 1, 1);
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font1);
+        ShiftProjectCombo->setFont(font);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftProjectCombo, 1, 1, 1, 1);
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font1);
+        ShiftItemCombo->setFont(font);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         gridLayout->addWidget(ShiftItemCombo, 2, 1, 1, 1);
@@ -767,8 +796,8 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(1);
-        MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(0);
+        MainTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);
 
 

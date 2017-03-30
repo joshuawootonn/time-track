@@ -251,10 +251,8 @@ void MainForm::on_basicPageClockIn_clicked()
 
     if(qry1.exec())
     {
-
         while(qry1.next())
         {
-
             employeename = qry1.value(1).toString();
         }
     }
@@ -276,19 +274,7 @@ void MainForm::on_basicPageClockIn_clicked()
         // Setting active.
         qry2.prepare("update employeelist set active=1 where id = '"+id+"'");
         qry2.exec();
-        // Setting employeelist shiftcount.
-        QString shiftcount;
-        qry1.clear();
-        qry1.prepare("select id from shiftlist where employeename ='"+employeename+"' and timein='"+timein+"'");
-        if(qry1.exec())
-        {
-            while(qry1.next())
-            {
-                shiftcount = qry1.value(0).toString();
-            }
-        }
-
-        qry3.prepare("update employeelist set shiftcount = '"+shiftcount+"' where id = '"+id+"'");
+        qry3.prepare("update employeelist set shiftcount = '"+shiftid+"' where id = '"+id+"'");
         qry3.exec();
     }
 
@@ -332,7 +318,7 @@ void MainForm::EmployeeTab()
 
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
-    ui->EmployeeView->resizeColumnsToContents();
+    //ui->EmployeeView->resizeColumnsToContents();
     ui->EmployeeView->hideRow(0);
     ui->EmployeeName->setChecked(true);
     ui->EmployeeView->showColumn(0);
@@ -361,7 +347,7 @@ void MainForm::refreshEmployeeTab(){
     ui->EmployeeView->setModel(x);
     
 
-    ui->EmployeeView->resizeColumnsToContents();
+    //ui->EmployeeView->resizeColumnsToContents();
 
     if(ui->EmployeeName->isChecked())
         ui->EmployeeView->showColumn(0);
@@ -552,7 +538,7 @@ void MainForm::ProjectTab(){
     ui->ProjectView->setModel(x);
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
-    ui->ProjectView->resizeColumnsToContents();
+    //ui->ProjectView->resizeColumnsToContents();
     ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
@@ -660,7 +646,7 @@ void MainForm::refreshProjectTab(){
     ui->ProjectView->setModel(x);
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
-    ui->ProjectView->resizeColumnsToContents();
+    //ui->ProjectView->resizeColumnsToContents();
 
 
     if(ui->ProjectName->isChecked())
@@ -687,7 +673,7 @@ void MainForm::refreshProjectItemTab(){
     QSqlQueryModel * x = ProjectItemModelRefresh();
     ui->ProjectItemView->setModel(x);
 
-    ui->ProjectItemView->resizeColumnsToContents();
+   // ui->ProjectItemView->resizeColumnsToContents();
 
     if(ui->ProjectItemName->isChecked())
         ui->ProjectItemView->showColumn(0);
@@ -698,7 +684,7 @@ void MainForm::refreshProjectItemTab(){
         ui->ProjectItemView->showColumn(1);
     else
         ui->ProjectItemView->hideColumn(1);
-    ui->ProjectItemView->resizeColumnsToContents();
+  //  ui->ProjectItemView->resizeColumnsToContents();
 }
 
 void MainForm::on_ProjectAdd_clicked()
@@ -890,7 +876,7 @@ void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
     ui->ItemView->hideRow(0);
-    ui->ItemView->resizeColumnsToContents();
+   // ui->ItemView->resizeColumnsToContents();
     ui->ItemName->setChecked(true);
     ui->ItemId->setChecked(true);
     ui->ItemCategory->setChecked(true);
@@ -917,7 +903,7 @@ void MainForm::refreshItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
 
-    ui->ItemView->resizeColumnsToContents();
+   // ui->ItemView->resizeColumnsToContents();
 
     if(ui->ItemCategory->isChecked())
         ui->ItemView->showColumn(2);
@@ -1005,16 +991,16 @@ void MainForm::on_ItemDimension_clicked()
 
 
 void MainForm::ShiftTab(){
-
+    ui->ShiftDate1->setDate(QDate(2000,1,1));
+    ui->ShiftDate2->setDate(QDate::currentDate());
     refreshShiftEmployee();
     refreshShiftProject();
     refreshShiftItem();
     QSqlQueryModel * x=ShiftModel();
 
     ui->ShiftView->setModel(x);
-    ui->ShiftView->setSortingEnabled(true);
-    ui->ShiftDate1->setDate(QDate(2000,1,1));
-    ui->ShiftDate2->setDate(QDate::currentDate());
+
+
     ui->ShiftView->hideColumn(0);
     ui->ShiftView->hideColumn(1);
     ui->ShiftView->hideColumn(2);
@@ -1123,11 +1109,13 @@ void MainForm::refreshShiftTab(){
     {
         QString a = x->record(i).value(9).toString();
         QDate in= QDate(a.split("-")[0].toInt(),a.split("-")[1].toInt(),a.split("-")[2].toInt());
+        qDebug()<<ui->ShiftDate1->date()<<ui->ShiftDate2->date();
+
         if(in<ui->ShiftDate1->date())
         {
             ui->ShiftView->hideRow(i);
         }
-        else if(in>ui->ShiftDate2->date())
+        if(in>ui->ShiftDate2->date())
         {
             ui->ShiftView->hideRow(i);
         }
@@ -1140,7 +1128,7 @@ void MainForm::refreshShiftTab(){
     {
         QString a = x->record(i).value(12).toString();
 
-        if(!ui->ShiftView->isRowHidden(i))
+        if(!ui->ShiftView->isRowHidden(i)&&x->record(i).value(12).toString()!="")
         {
             QString hours = a.split(":")[0];
             QString minutes = a.split(":")[1];
@@ -1158,8 +1146,6 @@ void MainForm::refreshShiftTab(){
         minutes ="00";
 
     ui->ShiftTotalTime->setText(hours+":"+minutes);
-
-
 
 
     ui->ShiftView->setModel(x);

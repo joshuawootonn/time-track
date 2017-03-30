@@ -150,13 +150,13 @@ void ClockoutForm::TimesInitialize(){
     QSqlQuery* qry1 = new QSqlQuery(data);
     QString a = "0:00";
     QString b = ui->timeLeft->text();
-    qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>'"+a+"'and time <='"+b+"'");
+    //qDebug()<<ui->timeLeft->text();
+    qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
     if(qry1->exec())
     {
            while(qry1->next())
            {
-               qDebug()<< qry1->value(0).toString();
+               //qDebug()<< qry1->value(0).toString();
            }
     }
 
@@ -206,7 +206,7 @@ void ClockoutForm::TimeLeft(){
     }
 
     qry.clear();
-    qry.prepare("select timein,datein from shiftlist where id='"+shiftcount+"'");
+    qry.prepare("select timein,datein from shiftlist where shiftid='"+shiftcount+"'");
     \
     if(qry.exec())
     {
@@ -260,15 +260,14 @@ void ClockoutForm::TimeLeft(){
 void ClockoutForm::on_FinishedButton_clicked()
 {
     QSqlQuery* qry=new QSqlQuery(data);
-    QSqlQuery* qry2=new QSqlQuery(data);
-    QString shiftcount,employeeid,employeename,timein,datein;
+    QString shiftId,employeeid,employeename,timein,datein;
     qry->prepare("SELECT shiftcount FROM employeelist WHERE id = '"+id+"'");
     if(qry->exec()){
         while(qry->next()){
-            shiftcount = qry->value(0).toString();}}
+            shiftId = qry->value(0).toString();}}
 
     qry->clear();
-    qry->prepare("select employeeid,employeename,timein,datein from shiftlist where id = '"+shiftcount+"'");
+    qry->prepare("select employeeid,employeename,timein,datein from shiftlist where shiftid = '"+shiftId+"'");
 
     if(qry->exec()){
         while(qry->next()){
@@ -278,72 +277,115 @@ void ClockoutForm::on_FinishedButton_clicked()
             datein=qry->value(3).toString();
         }
     }
-
+    qDebug()<<"id"<<employeeid<<"name"<<employeename<<"timein"<<timein<<"datein"<<datein;
     QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
     QString timeout = clockout.toString("HH:mm:ss");
     QString dateout = clockout.toString("yyyy-MM-dd");
 
 
-    QString projectname,itemname, projectid,itemid,hours,lunch;
-    projectname = ui->Sections->item(0,0)->text();
-    qry->prepare("select id from projectlist where name='"+projectname+"'");
-    if(qry->exec()){
-        while(qry->next()){
-            projectid=qry->value(0).toString();}}
-    qry->clear();
-    itemname=ui->Sections->item(0,1)->text();
-    qry->prepare("select id from itemlist where name='"+itemname+"'");
-    if(qry->exec()){
-        while(qry->next()){
-            itemid=qry->value(0).toString();}}
-    qry->clear();
 
 
 
-
-    hours=ui->Sections->item(0,2)->text();
-    lunch=ui->Lunch->currentText();
 
 
     qry->clear();
-    qry->prepare("update shiftlist set employeeid = '"+employeeid+"',projectid='"+projectid+"',itemid='"+itemid+"', employeename= '"+employeename+"',projectname = '"+projectname+"',itemname = '"+itemname+"',timein = '"+timein+"',timeout = '"+timeout+"'"
-       ",datein = '"+datein+"',dateout = '"+dateout+"',timelunch = '"+lunch+"',time = '"+hours+"'  where id = '"+shiftcount+"'");
+    qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
     qry->exec();
-    if(ui->Sections->rowCount()>1)
-    {
-        for(int i =1; i<ui->Sections->rowCount();i++){
 
 
-            projectname = ui->Sections->item(i,0)->text();
-            qry->prepare("select id from projectlist where name='"+projectname+"'");
-            if(qry->exec()){
-                while(qry->next()){
-                    projectid=qry->value(0).toString();}}
-            qry->clear();
-            itemname=ui->Sections->item(i,1)->text();
-            qry->prepare("select id from itemlist where name='"+itemname+"'");
-            if(qry->exec()){
-                while(qry->next()){
-                    itemid=qry->value(0).toString();}}
-            qry->clear();
 
-            QString shiftid;
-            qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
-            if(qry->exec()){
-                while(qry->next()){
-                    shiftid=qry->value(0).toString();}}
-
-            qry->clear();
-            hours=ui->Sections->item(i,2)->text();
-            lunch=ui->Lunch->currentText();
-            qry->clear();
-            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"+employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
+    QString projectname,itemname, projectid,itemid,hours,lunch;
 
 
-            qry->exec();
+    for(int i =0; i<ui->Sections->rowCount();i++){
 
-        }
+
+        projectname = ui->Sections->item(i,0)->text();
+        qry->prepare("select id from projectlist where name='"+projectname+"'");
+        if(qry->exec()){
+            while(qry->next()){
+                projectid=qry->value(0).toString();}}
+        qry->clear();
+        itemname=ui->Sections->item(i,1)->text();
+        qry->prepare("select id from itemlist where name='"+itemname+"'");
+        if(qry->exec()){
+            while(qry->next()){
+                itemid=qry->value(0).toString();}}
+
+
+
+        hours=ui->Sections->item(i,2)->text();
+        lunch=ui->Lunch->currentText();
+        qry->clear();
+        qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+                     +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"')");
+
+
+        qry->exec();
+        qDebug()<<employeeid<<projectid<<itemid<<employeename<<projectname<<itemname<<timein<<timeout<<datein<<dateout<<lunch<<hours<<shiftId;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    hours=ui->Sections->item(0,2)->text();
+//    lunch=ui->Lunch->currentText();
+
+
+//    qry->clear();
+//    qry->prepare("update shiftlist set employeeid = '"+employeeid+"',projectid='"+projectid+"',itemid='"+itemid+"', employeename= '"+employeename+"',projectname = '"+projectname+"',itemname = '"+itemname+"',timein = '"+timein+"',timeout = '"+timeout+"'"
+//       ",datein = '"+datein+"',dateout = '"+dateout+"',timelunch = '"+lunch+"',time = '"+hours+"'  where id = '"+shiftcount+"'");
+//    qry->exec();
+//    if(ui->Sections->rowCount()>1)
+//    {
+//        for(int i =1; i<ui->Sections->rowCount();i++){
+
+
+//            projectname = ui->Sections->item(i,0)->text();
+//            qry->prepare("select id from projectlist where name='"+projectname+"'");
+//            if(qry->exec()){
+//                while(qry->next()){
+//                    projectid=qry->value(0).toString();}}
+//            qry->clear();
+//            itemname=ui->Sections->item(i,1)->text();
+//            qry->prepare("select id from itemlist where name='"+itemname+"'");
+//            if(qry->exec()){
+//                while(qry->next()){
+//                    itemid=qry->value(0).toString();}}
+//            qry->clear();
+
+//            QString shiftid;
+//            qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+//            if(qry->exec()){
+//                while(qry->next()){
+//                    shiftid=qry->value(0).toString();}}
+
+//            qry->clear();
+//            hours=ui->Sections->item(i,2)->text();
+//            lunch=ui->Lunch->currentText();
+//            qry->clear();
+//            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"+employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
+
+
+//            qry->exec();
+
+//        }
+//    }
 
 
 
