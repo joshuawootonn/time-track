@@ -115,7 +115,7 @@ void ClockoutForm::ClockoutInitialize(QString i){
 void ClockoutForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from projectlist where id>0");
+    qry->prepare("select DISTINCT name from projectlist where id>'0' and current = '1'");
     qry->exec();
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
@@ -151,7 +151,7 @@ void ClockoutForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     //qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
+    qry1->prepare("select time from timelist where time>='"+a+"'");
     if(qry1->exec())
     {
            while(qry1->next())

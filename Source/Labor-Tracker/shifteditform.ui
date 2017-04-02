@@ -30,10 +30,18 @@
           <enum>QLayout::SetMinimumSize</enum>
          </property>
          <item>
-          <widget class="QDateTimeEdit" name="DateTime1"/>
+          <widget class="QDateTimeEdit" name="DateTime1">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QDateTimeEdit" name="DateTime2"/>
+          <widget class="QDateTimeEdit" name="DateTime2">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QComboBox" name="Name"/>

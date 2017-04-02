@@ -234,7 +234,7 @@ void ShiftEditForm::ShiftEditInitialize(QString shiftid,QString id){
 void ShiftEditForm::EmployeeInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from employeelist where id>0");
+    qry->prepare("select DISTINCT name from employeelist where id>'0' and current='1'");
     qry->exec();
     modal->setQuery(*qry);
     ui->Name->setModel(modal);
@@ -244,7 +244,7 @@ void ShiftEditForm::EmployeeInitialize(){
 void ShiftEditForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from projectlist where id>0");
+    qry->prepare("select DISTINCT name from projectlist where id>'0' and current = '1'");
     qry->exec();
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
@@ -280,7 +280,7 @@ void ShiftEditForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
+    qry1->prepare("select time from timelist where time>='"+a+"'");
     if(qry1->exec())
     {
            while(qry1->next())

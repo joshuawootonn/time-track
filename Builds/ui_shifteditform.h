@@ -69,11 +69,13 @@ public:
         verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
         DateTime1 = new QDateTimeEdit(ShiftEditForm);
         DateTime1->setObjectName(QStringLiteral("DateTime1"));
+        DateTime1->setCalendarPopup(true);
 
         verticalLayout->addWidget(DateTime1);
 
         DateTime2 = new QDateTimeEdit(ShiftEditForm);
         DateTime2->setObjectName(QStringLiteral("DateTime2"));
+        DateTime2->setCalendarPopup(true);
 
         verticalLayout->addWidget(DateTime2);
 

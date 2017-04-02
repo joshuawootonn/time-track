@@ -25,10 +25,15 @@ class MainForm : public QWidget
 public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
-    void connectToServer();
-    void Connect();
-    void Disconnect();
+    void SetupStuff();
+    void ConnectSetup();
+    void DisconnectSetup();
+    void checkIfFileNameIsValid(QString x);
+    QString getCorrectFileName();
+    void ConnectServer();
+    void DisconnectServer();
     void establishConnections();
+    bool validData(QString path);
     bool fileExists(QString path);
     void showtheThings();
     void hidetheThings();
@@ -40,15 +45,13 @@ public:
     //EmployeeTab
     void EmployeeTab();
     QSqlQueryModel * EmployeeModel();
-    void refreshEmployeeTab();
+
 
     void ShiftTab();
 
     QSqlQueryModel* ShiftModel();
     //void refreshShiftTab();
-    void refreshShiftEmployee();
-    void refreshShiftProject();
-    void refreshShiftItem();
+
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
@@ -56,14 +59,12 @@ public:
     QSqlQueryModel * ProjectItemModel();
 
     QSqlQueryModel * ProjectItemModelRefresh();
-    void refreshProjectTab();
     void refreshProjectItemTab();
     void refreshProjectItemCombo();
     void refreshProjectItemComboSpecific();
 
     void ItemTab();
     QSqlQueryModel * ItemModel();
-    void refreshItemTab();
 
     QSqlDatabase getEmployeeDataBase() const;
 
@@ -79,6 +80,10 @@ public slots:
     void on_basicPageClockOut_clicked();
     void on_basicPageAdvanced_clicked();
     void on_mainFinish_clicked();
+
+    void refreshShiftEmployee();
+    void refreshShiftProject();
+    void refreshShiftItem();
 private slots:
     void on_EmployeeName_clicked();
     void on_EmployeePin_clicked();
@@ -90,6 +95,7 @@ private slots:
     void on_EmployeeCurrent_clicked();
 
     void on_EmployeeAdd_clicked();
+    int generateRandom();
     void on_EmployeeDelete_clicked();
     void on_EmployeeArchive_clicked();
 
@@ -97,7 +103,9 @@ private slots:
     void on_CurrentRadio_toggled(bool checked);
     void on_PastRadio_toggled(bool checked);
 
-
+    void refreshEmployeeTab();
+    void refreshProjectTab();
+    void refreshItemTab();
 
     void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
 
@@ -168,9 +176,11 @@ private slots:
     void DatabaseTab();
     void on_DataBaseConnect_clicked();
 
-    void on_DataBaseClear_clicked();
 
-    void on_pushButton_clicked();
+
+
+
+    void on_ProjectDate_clicked();
 
 private:
     Ui::MainForm *ui;
@@ -178,6 +188,7 @@ private:
     ClockoutForm *clockoutForm;
     ShiftEditForm * shifteditform;
     QSqlDatabase data;
+    QSqlDatabase setup;
     QString serverPath;
     QString localPath;
 
@@ -187,6 +198,7 @@ private:
 };
 
 #endif // MAINFORM_H
+
 
 
 

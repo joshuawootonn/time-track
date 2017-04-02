@@ -1,17 +1,15 @@
 #include "mainform.h"
 #include "ui_mainform.h"
-
+#include <QFileDialog>
 MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainForm)
 {
-    localPath = "../SQLite/data.sqlite";
+
     ui->setupUi(this);
-    Connect();
-    connectToServer();
 
 
-
+    ConnectSetup();
 
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
@@ -22,6 +20,12 @@ MainForm::MainForm(QWidget *parent) :
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
 
+    EmployeeTab();
+    ShiftTab();
+    ProjectTab();
+    ItemTab();
+    DatabaseTab();
+
 
     establishConnections();
 }
@@ -30,36 +34,124 @@ MainForm::~MainForm()
 {
     delete ui;
 }
-void MainForm::Connect()
-{
-    data= QSqlDatabase::addDatabase("QSQLITE","data");
-    qDebug()<<localPath<<serverPath;
-    if(fileExists(serverPath))
+
+
+
+void MainForm::ConnectSetup(){
+
+    setup = QSqlDatabase::addDatabase("QSQLITE","setup");
+    QString setupPath = "../SQLite/setup.sqlite";
+    setup.setDatabaseName(setupPath);
+    setup.open();
+
+    QSqlQuery * qry = new QSqlQuery(setup);
+
+    qry->prepare("select path,id from databaselist");
+    if(qry->exec())
     {
-        data.setDatabaseName(serverPath);
-        qDebug()<<"Connected to network database...";
-        ui->DataBaseLabel2->setText(" Network");
-    }
-    else if(fileExists(localPath))
-    {
-        data.setDatabaseName(localPath);
-        qDebug()<<"Connected to local database";
-        ui->DataBaseLabel2->setText(" Local");
+        while(qry->next())
+        {
+            serverPath = qry->value(0).toString();
+            qDebug()<<serverPath;
+        }
     }
 
+    checkIfFileNameIsValid(serverPath);
+
+
+}
+void MainForm::checkIfFileNameIsValid(QString x){
+    if(validData(x))
+    {
+        QSqlQuery * qry = new QSqlQuery(setup);
+        qry->prepare("update databaselist set path='"+x+"' where id = '1'");
+        qry->exec();
+        serverPath=x;
+        qDebug()<<serverPath;
+        ConnectServer();
+    }
+    else
+    {
+        serverPath = getCorrectFileName();
+        checkIfFileNameIsValid(serverPath);
+
+    }
+}
+
+QString MainForm::getCorrectFileName(){
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+    if(fileExists(filename))
+        return filename;
+    else
+        return getCorrectFileName();
+
+
+}
+void MainForm::DisconnectSetup(){
+    setup.close();
+    setup.removeDatabase("setup");
+}
+void MainForm::DatabaseTab(){
+    ui->DataBaseLabel->setText(serverPath);
+}
+void MainForm::on_DataBaseConnect_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+    DisconnectServer();
+    checkIfFileNameIsValid(filename);
+    on_basicPageAdvanced_clicked();
+
+
+}
+void MainForm::ConnectServer()
+{
+    data= QSqlDatabase::addDatabase("QSQLITE","data");
+    data.setDatabaseName(serverPath);
     data.open();
 
 }
-void MainForm::Disconnect(){
-    data.close();
-    data.removeDatabase("data");
+void MainForm::DisconnectServer(){
+
+    QString connection;
+    connection = data.connectionName();
+    ui->EmployeeView->setModel(new QSqlQueryModel());
+    ui->ProjectView->setModel(new QSqlQueryModel());
+    ui->ProjectItemView->setModel(new QSqlQueryModel());
+    ui->ItemView->setModel(new QSqlQueryModel());
+    ui->ShiftView->setModel(new QSqlQueryModel());
+    ui->ShiftEmployeeCombo->setModel(new QSqlQueryModel());
+    ui->ShiftProjectCombo->setModel(new QSqlQueryModel());
+    ui->ShiftItemCombo->setModel(new QSqlQueryModel());
+    ui->ProjectItemCombo->setModel(new QSqlQueryModel());
+    data = QSqlDatabase::database();
+    data.removeDatabase(connection);
 }
+
+
 void MainForm::establishConnections(){
     QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
 
+    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftProject()));
+    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftItem()));
+    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftEmployee()));
+
+
+    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
+    QObject::connect(ui->ItemView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshItemTab()));
+    QObject::connect(ui->EmployeeView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshEmployeeTab()));
 }
+bool MainForm::validData(QString path){
+    QStringList pieces = path.split("/");
+    QString needed = pieces.value(pieces.length()-1);
+    qDebug()<<needed;
+    if(needed == "data.sqlite")
+        return true;
+    else
+        return false;
+}
+
 bool MainForm::fileExists(QString path) {
     QFileInfo check_file(path);
 
@@ -102,33 +194,13 @@ void MainForm::on_HeaderTabs_currentChanged(int index)
         refreshShiftTab();
     }
 }
-void MainForm::connectToServer(){
-
-    QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("select path from databaselist where name='server'");
-    if(qry->exec())
-    {
-        while(qry->next())
-        {
-            serverPath = qry->value(0).toString();
-        }
-    }
-
-
-
-    Disconnect();
-    Connect();
-
-
-
-}
 
 void MainForm::loginInitialize(){
     basicInitialize();
     hidetheThings();
 
     loginForm->reset();
-    loginForm->showNormal();
+    loginForm->show();
 
 }
 void MainForm::mainInitialize(){
@@ -318,6 +390,7 @@ void MainForm::EmployeeTab()
 
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
+    establishConnections();
     //ui->EmployeeView->resizeColumnsToContents();
     ui->EmployeeView->hideRow(0);
     ui->EmployeeName->setChecked(true);
@@ -345,7 +418,7 @@ void MainForm::refreshEmployeeTab(){
 
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
-    
+    establishConnections();
 
     //ui->EmployeeView->resizeColumnsToContents();
 
@@ -406,12 +479,27 @@ void MainForm::on_EmployeeAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QSqlQueryModel * x = EmployeeModel();
-    qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','~','~','1','0','1')");
+    qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','"+QString::number(generateRandom())+"','~','1','0','1')");
     qry->exec();
     refreshEmployeeTab();
     refreshShiftEmployee();
     ui->MainTabs->setCurrentIndex(0);
 }
+int MainForm::generateRandom(){
+    int x = rand()%9000+1000;
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("select pin from employeelist");
+    if(qry->exec())
+    {
+        while(qry->next())
+        {
+            if(qry->value(0).toInt()==x)
+                return generateRandom();
+        }
+    }
+    return x;
+}
+
 void MainForm::on_EmployeeArchive_clicked()
 {
 
@@ -536,14 +624,17 @@ void MainForm::on_PastRadio_toggled(bool checked)
 void MainForm::ProjectTab(){
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
+    establishConnections();
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
     //ui->ProjectView->resizeColumnsToContents();
+    ui->ProjectView->setSortingEnabled(true);
     ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
     ui->ProjectAllRadio->setChecked(true);
+    ui->ProjectDate->setChecked(true);
 
 
     ui->ProjectItemName->setChecked(true);
@@ -644,10 +735,22 @@ void MainForm::refreshProjectTab(){
 
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
+    establishConnections();
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
-    //ui->ProjectView->resizeColumnsToContents();
 
+    for(int i=0; i< x->rowCount(); i++)
+    {
+
+        ui->ProjectView->showRow(i);
+        QString data = x->record(i).value(0).toString();
+        qDebug()<<data;
+        if(data=="All Projects")
+        {
+            qDebug()<<data;
+            ui->ProjectView->hideRow(i);
+        }
+    }
 
     if(ui->ProjectName->isChecked())
         ui->ProjectView->showColumn(0);
@@ -663,6 +766,12 @@ void MainForm::refreshProjectTab(){
         ui->ProjectView->showColumn(2);
     else
         ui->ProjectView->hideColumn(2);
+    if(ui->ProjectDate->isChecked())
+        ui->ProjectView->showColumn(3);
+    else
+        ui->ProjectView->hideColumn(3);
+
+
 
 
 
@@ -694,7 +803,7 @@ void MainForm::on_ProjectAdd_clicked()
     QSqlQueryModel * x = ProjectModel();
 
 
-    qry->prepare("insert into projectlist(name,current)  values('~','1')");
+    qry->prepare("insert into projectlist(name,current,date)  values('~','1','1/1/"+QString::number(QDate::currentDate().year())+"')");
     qry->exec();
     qry->clear();
 
@@ -746,7 +855,7 @@ void MainForm::on_ProjectArchive_clicked()
         QModelIndex index =list.at(i);
         int idInt = x->record(index.row()).value(1).toInt();
         QString id = QString::number(idInt);
-        qDebug()<<id;
+        //qDebug()<<id;
         qry->clear();
         if(x->record(index.row()).value(2).toInt()==1)
         {
@@ -770,6 +879,10 @@ void MainForm::on_ProjectId_clicked()
     refreshProjectTab();
 }
 void MainForm::on_ProjectCurrent_clicked()
+{
+    refreshProjectTab();
+}
+void MainForm::on_ProjectDate_clicked()
 {
     refreshProjectTab();
 }
@@ -875,10 +988,12 @@ void MainForm::on_ProjectItemRemove_clicked()
 void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
+    establishConnections();
     ui->ItemView->hideRow(0);
+    ui->ItemView->hideColumn(1);
    // ui->ItemView->resizeColumnsToContents();
     ui->ItemName->setChecked(true);
-    ui->ItemId->setChecked(true);
+    ui->ItemId->setChecked(false);
     ui->ItemCategory->setChecked(true);
     ui->ItemSub->setChecked(true);
     ui->ItemDimension->setChecked(true);
@@ -902,6 +1017,7 @@ void MainForm::refreshItemTab(){
 
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
+    establishConnections();
 
    // ui->ItemView->resizeColumnsToContents();
 
@@ -991,7 +1107,7 @@ void MainForm::on_ItemDimension_clicked()
 
 
 void MainForm::ShiftTab(){
-    ui->ShiftDate1->setDate(QDate(2000,1,1));
+    ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),1,1));
     ui->ShiftDate2->setDate(QDate::currentDate());
     refreshShiftEmployee();
     refreshShiftProject();
@@ -1109,7 +1225,7 @@ void MainForm::refreshShiftTab(){
     {
         QString a = x->record(i).value(9).toString();
         QDate in= QDate(a.split("-")[0].toInt(),a.split("-")[1].toInt(),a.split("-")[2].toInt());
-        qDebug()<<ui->ShiftDate1->date()<<ui->ShiftDate2->date();
+        //qDebug()<<ui->ShiftDate1->date()<<ui->ShiftDate2->date();
 
         if(in<ui->ShiftDate1->date())
         {
@@ -1229,36 +1345,20 @@ void MainForm::on_ShiftDelete_clicked()
         qry->clear();
         qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
         qry->exec();
+
+        if(x->record(index.row()).value(2).toString()=="")
+        {
+            qry->clear();
+            qry->prepare("update employeelist set active='0' where name='"+x->record(index.row()).value(4).toString()+"'");
+            qry->exec();
+        }
+
     }
     refreshShiftTab();
 }
 
-void MainForm::DatabaseTab(){
-    ui->DataBaseEdit->setText(serverPath);
-}
-void MainForm::on_DataBaseConnect_clicked()
-{
 
-    QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("update databaselist set path='"+ui->DataBaseEdit->text()+"' where name='server'");
-    qry->exec();
-    connectToServer();
 
-}
-void MainForm::on_pushButton_clicked()
-{
-    serverPath = "";
-    Disconnect();
-    Connect();
-}
-void MainForm::on_DataBaseClear_clicked()
-{
-    QSqlQuery * qry = new QSqlQuery(data);
-    ui->DataBaseEdit->setText("");
-    qry->prepare("update databaselist set path='"+ui->DataBaseEdit->text()+"' where name='server'");
-    qry->exec();
-    connectToServer();
-}
 
 QSqlDatabase MainForm::getData() const
 {

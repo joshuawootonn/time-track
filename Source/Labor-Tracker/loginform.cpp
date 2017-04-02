@@ -3,7 +3,7 @@
 #include "ui_loginform.h"
 
 LoginForm::LoginForm(QWidget *parent) :
-    QDialog(parent,Qt::CustomizeWindowHint  ),
+    QDialog(parent,Qt::CustomizeWindowHint),
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
