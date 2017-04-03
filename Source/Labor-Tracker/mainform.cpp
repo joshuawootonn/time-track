@@ -36,7 +36,12 @@ MainForm::~MainForm()
 }
 
 
-
+/* These are the database connections that this database uses.
+ * The first is called setup. It's purpose is to store the
+ * location of data which is the database that can be placed
+ * anywhere on your computer or server and holds the actual
+ * information about employees and such
+*/
 void MainForm::ConnectSetup(){
 
     setup = QSqlDatabase::addDatabase("QSQLITE","setup");
@@ -60,48 +65,9 @@ void MainForm::ConnectSetup(){
 
 
 }
-void MainForm::checkIfFileNameIsValid(QString x){
-    if(validData(x))
-    {
-        QSqlQuery * qry = new QSqlQuery(setup);
-        qry->prepare("update databaselist set path='"+x+"' where id = '1'");
-        qry->exec();
-        serverPath=x;
-        qDebug()<<serverPath;
-        ConnectServer();
-    }
-    else
-    {
-        serverPath = getCorrectFileName();
-        checkIfFileNameIsValid(serverPath);
-
-    }
-}
-
-QString MainForm::getCorrectFileName(){
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    if(fileExists(filename))
-        return filename;
-    else
-        return getCorrectFileName();
-
-
-}
 void MainForm::DisconnectSetup(){
     setup.close();
     setup.removeDatabase("setup");
-}
-void MainForm::DatabaseTab(){
-    ui->DataBaseLabel->setText(serverPath);
-}
-void MainForm::on_DataBaseConnect_clicked()
-{
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    DisconnectServer();
-    checkIfFileNameIsValid(filename);
-    on_basicPageAdvanced_clicked();
-
-
 }
 void MainForm::ConnectServer()
 {
@@ -127,20 +93,36 @@ void MainForm::DisconnectServer(){
     data.removeDatabase(connection);
 }
 
+/* These classes deal with file connections.
+ * 'CheckIfFileNameIsValid' checks checks if a filepath is
+ * 'validData' and if it isnt 'getsCorrectFileName.'
+ * 'fileexists' is used throughout to see if a file exists lol.
+*/
+void MainForm::checkIfFileNameIsValid(QString x){
+    if(validData(x))
+    {
+        QSqlQuery * qry = new QSqlQuery(setup);
+        qry->prepare("update databaselist set path='"+x+"' where id = '1'");
+        qry->exec();
+        serverPath=x;
+        qDebug()<<serverPath;
+        ConnectServer();
+    }
+    else
+    {
+        serverPath = getCorrectFileName();
+        checkIfFileNameIsValid(serverPath);
 
-void MainForm::establishConnections(){
-    QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
-    QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
-    QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
+    }
+}
+QString MainForm::getCorrectFileName(){
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+    if(fileExists(filename))
+        return filename;
+    else
+        return getCorrectFileName();
 
-    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftProject()));
-    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftItem()));
-    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftEmployee()));
 
-
-    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
-    QObject::connect(ui->ItemView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshItemTab()));
-    QObject::connect(ui->EmployeeView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshEmployeeTab()));
 }
 bool MainForm::validData(QString path){
     QStringList pieces = path.split("/");
@@ -151,11 +133,28 @@ bool MainForm::validData(QString path){
     else
         return false;
 }
-
 bool MainForm::fileExists(QString path) {
     QFileInfo check_file(path);
 
     return check_file.exists() && check_file.isFile();
+}
+
+/* These classes connect the different forms through
+ * signals and slots
+*/
+void MainForm::establishConnections(){
+    QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
+    QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
+    QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
+
+    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftProject()));
+    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftItem()));
+    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftEmployee()));
+
+
+//    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
+//    QObject::connect(ui->ItemView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshItemTab()));
+//    QObject::connect(ui->EmployeeView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshEmployeeTab()));
 }
 void MainForm::enter(){
     showtheThings();
@@ -166,35 +165,8 @@ void MainForm::reenter(){
     showtheThings();
     basicInitialize();
 }
-void MainForm::hidetheThings(){
-    ui->basicPageAdvanced->hide();
-    ui->basicPageClockIn->hide();
-    ui->basicPageClockOut->hide();
 
-}
-void MainForm::showtheThings(){
-    ui->basicPageAdvanced->show();
-    ui->basicPageClockIn->show();
-    ui->basicPageClockOut->show();
-
-}
-void MainForm::on_HeaderTabs_currentChanged(int index)
-{
-    if(index ==0){
-        refreshEmployeeTab();
-    }
-    else if(index ==1){
-        refreshProjectItemCombo();
-        refreshProjectTab();
-    }
-    else if(index ==2){
-        refreshItemTab();
-    }
-    else if(index ==3){
-        refreshShiftTab();
-    }
-}
-
+/* Initialization of the different pages of mainform*/
 void MainForm::loginInitialize(){
     basicInitialize();
     hidetheThings();
@@ -244,69 +216,37 @@ void MainForm::advInitialize(){
     ui->mainStack->setCurrentIndex(1);
 
 }
-QDateTime MainForm::format_datetimes(QDateTime z)
-{
-    int minTime = z.time().minute();
-    int hourTime =z.time().hour();
-    int dayOfMonth = z.date().daysInMonth();
-    int dayOfYear = z.date().dayOfYear();
-    if(minTime<7&&minTime>=0)
-    {
-        QTime x(z.time().hour(),0,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=7&&minTime<23)
-    {
-        QTime x(z.time().hour(),15,0);
-        QDate y(z.date());
-        QDateTime n(y,x);
-        z=n;
-    }
-    else if(minTime>=23&&minTime<37)
-    {
-        QTime x(z.time().hour(),30,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=37&&minTime<53)
-    {
-        QTime x(z.time().hour(),45,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=53 && hourTime==23 && z.date().day()==dayOfMonth&& z.date().daysInYear()==dayOfYear)
-    {
-        z.date().addYears(1);
-        z.date().addDays(1);
-        z.date().addMonths(1);
-        QTime x(z.time().hour()+1,0,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=53 && hourTime==23 && z.date().day()==dayOfMonth)
-    {
-        z.date().addDays(1);
-        z.date().addMonths(1);
-        QTime x(z.time().hour()+1,0,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=53 && hourTime==23)
-    {
-        z.date().addDays(1);
-        QTime x(z.time().hour()+1,0,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    else if(minTime>=53)
-    {
-        QTime x(z.time().hour()+1,0,0);
-        QDateTime n(z.date(),x);
-        z=n;
-    }
-    return z;
 
+/* Deal with the signals and slots of the mainForm that
+ * change what menu you are at
+*/
+void MainForm::hidetheThings(){
+    ui->basicPageAdvanced->hide();
+    ui->basicPageClockIn->hide();
+    ui->basicPageClockOut->hide();
+
+}
+void MainForm::showtheThings(){
+    ui->basicPageAdvanced->show();
+    ui->basicPageClockIn->show();
+    ui->basicPageClockOut->show();
+
+}
+void MainForm::on_HeaderTabs_currentChanged(int index)
+{
+    if(index ==0){
+        refreshEmployeeTab();
+    }
+    else if(index ==1){
+        refreshProjectItemCombo();
+        refreshProjectTab();
+    }
+    else if(index ==2){
+        refreshItemTab();
+    }
+    else if(index ==3){
+        refreshShiftTab();
+    }
 }
 void MainForm::on_basicPageClockIn_clicked()
 {
@@ -379,11 +319,96 @@ void MainForm::on_mainFinish_clicked()
     loginInitialize();
 }
 
+/* Formatting of qdatetimes in order to only have times
+ * that are in quarters
+*/
+QDateTime MainForm::format_datetimes(QDateTime z)
+{
+    int minTime = z.time().minute();
+    int hourTime =z.time().hour();
+    int dayOfMonth = z.date().daysInMonth();
+    int dayOfYear = z.date().dayOfYear();
+    if(minTime<7&&minTime>=0)
+    {
+        QTime x(z.time().hour(),0,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=7&&minTime<23)
+    {
+        QTime x(z.time().hour(),15,0);
+        QDate y(z.date());
+        QDateTime n(y,x);
+        z=n;
+    }
+    else if(minTime>=23&&minTime<37)
+    {
+        QTime x(z.time().hour(),30,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=37&&minTime<53)
+    {
+        QTime x(z.time().hour(),45,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=53 && hourTime==23 && z.date().day()==dayOfMonth&& z.date().daysInYear()==dayOfYear)
+    {
+        z.date().addYears(1);
+        z.date().addDays(1);
+        z.date().addMonths(1);
+        QTime x(z.time().hour()+1,0,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=53 && hourTime==23 && z.date().day()==dayOfMonth)
+    {
+        z.date().addDays(1);
+        z.date().addMonths(1);
+        QTime x(z.time().hour()+1,0,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=53 && hourTime==23)
+    {
+        z.date().addDays(1);
+        QTime x(z.time().hour()+1,0,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    else if(minTime>=53)
+    {
+        QTime x(z.time().hour()+1,0,0);
+        QDateTime n(z.date(),x);
+        z=n;
+    }
+    return z;
+
+}
+
+/* Initialization of Database section of 'sections'
+ * and the signal and slot for resetting the data-
+ * base connection.
+*/
+void MainForm::DatabaseTab(){
+    ui->DataBaseLabel->setText(serverPath);
+}
+void MainForm::on_DataBaseConnect_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+    DisconnectServer();
+    checkIfFileNameIsValid(filename);
+    on_basicPageAdvanced_clicked();
 
 
+}
 
+// Employee Section!
 
-//Employee Stuff
+/* Initialization and refreshing of the 'employeetab' in
+ * 'sections'  along with the model for 'employeeView'.
+*/
 void MainForm::EmployeeTab()
 {
     ui->MainTabs->setCurrentIndex(0);
@@ -457,7 +482,17 @@ void MainForm::refreshEmployeeTab(){
     else
         ui->EmployeeView->hideColumn(6);
 
-    
+    for(int i=1; i< x->rowCount(); i++)
+    {
+        ui->EmployeeView->showRow(i);
+    }
+
+    if(ui->CurrentRadio->isChecked())
+        on_CurrentRadio_toggled(true);
+    if(ui->PastRadio->isChecked())
+        on_PastRadio_toggled(true);
+
+
 }
 QSqlQueryModel * MainForm::EmployeeModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -474,7 +509,7 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     return model;
 
 }
-//Employee Menu 1
+/* Option menu 1 for EmployeeTab*/
 void MainForm::on_EmployeeAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -499,7 +534,6 @@ int MainForm::generateRandom(){
     }
     return x;
 }
-
 void MainForm::on_EmployeeArchive_clicked()
 {
 
@@ -547,7 +581,7 @@ void MainForm::on_EmployeeDelete_clicked()
     ui->MainTabs->setCurrentIndex(0);
 
 }
-//Employee Menu 2
+/* Option menu 2 for EmployeeTab*/
 void MainForm::on_EmployeeName_clicked()
 {
     refreshEmployeeTab();
@@ -576,7 +610,7 @@ void MainForm::on_EmployeeCurrent_clicked()
 {
     refreshEmployeeTab();
 }
-//Employee Menu 3
+/* Option menu 3 for EmployeeTab*/
 void MainForm::on_AllRadio_toggled(bool checked)
 {
     if(checked)
@@ -620,7 +654,15 @@ void MainForm::on_PastRadio_toggled(bool checked)
     }
 }
 
+// Project Section!
 
+/* Initialization and refreshing of the projecttab in
+ * 'sections' along wiht the themodel. This section is
+ * particular in the way it has two tables. That is the
+ * for the three models for the 2nd table. 'ProjectItemModelFirst'
+ * is for just after initialization the the others are for
+ * general use after that special case.
+*/
 void MainForm::ProjectTab(){
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
@@ -628,7 +670,7 @@ void MainForm::ProjectTab(){
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
     //ui->ProjectView->resizeColumnsToContents();
-    ui->ProjectView->setSortingEnabled(true);
+    //ui->ProjectView->setSortingEnabled(true);
     ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
@@ -662,7 +704,89 @@ void MainForm::refreshProjectItemComboSpecific(){
 
 
 }
+void MainForm::on_ProjectView_clicked(const QModelIndex &index)
+{
 
+    QSqlQueryModel * x = ProjectItemModel();
+    ui->ProjectItemView->setModel(x);
+
+    refreshProjectItemComboSpecific();
+
+
+}
+void MainForm::refreshProjectTab(){
+    ui->MainTabs->setCurrentIndex(1);
+
+    QSqlQueryModel * x=ProjectModel();
+    ui->ProjectView->setModel(x);
+    establishConnections();
+    QSqlQueryModel * y = ProjectItemModelFirst();
+    ui->ProjectItemView->setModel(y);
+
+//    for(int i=0; i< x->rowCount(); i++)
+//    {
+
+//        ui->ProjectView->showRow(i);
+//        QString data = x->record(i).value(0).toString();
+//        qDebug()<<data;
+//        if(data=="All Projects")
+//        {
+//            qDebug()<<data;
+//            ui->ProjectView->hideRow(i);
+//        }
+//    }
+
+    if(ui->ProjectName->isChecked())
+        ui->ProjectView->showColumn(0);
+    else
+        ui->ProjectView->hideColumn(0);
+
+    if(ui->ProjectId->isChecked())
+        ui->ProjectView->showColumn(1);
+    else
+        ui->ProjectView->hideColumn(1);
+
+    if(ui->ProjectCurrent->isChecked())
+        ui->ProjectView->showColumn(2);
+    else
+        ui->ProjectView->hideColumn(2);
+    if(ui->ProjectDate->isChecked())
+        ui->ProjectView->showColumn(3);
+    else
+        ui->ProjectView->hideColumn(3);
+
+
+
+    for(int i=1; i< x->rowCount(); i++)
+    {
+        ui->ProjectView->showRow(i);
+    }
+
+    if(ui->ProjectCurrentRadio->isChecked())
+        on_ProjectCurrentRadio_toggled(true);
+    if(ui->ProjectPastRadio->isChecked())
+        on_ProjectPastRadio_toggled(true);
+
+}
+void MainForm::refreshProjectItemTab(){
+    ui->MainTabs->setCurrentIndex(1);
+
+    QSqlQueryModel * x = ProjectItemModelRefresh();
+    ui->ProjectItemView->setModel(x);
+
+   // ui->ProjectItemView->resizeColumnsToContents();
+
+    if(ui->ProjectItemName->isChecked())
+        ui->ProjectItemView->showColumn(0);
+    else
+        ui->ProjectItemView->hideColumn(0);
+
+    if(ui->ProjectItemId->isChecked())
+        ui->ProjectItemView->showColumn(1);
+    else
+        ui->ProjectItemView->hideColumn(1);
+  //  ui->ProjectItemView->resizeColumnsToContents();
+}
 QSqlQueryModel * MainForm::ProjectModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
     model->setTable("projectlist");
@@ -719,83 +843,7 @@ QSqlQueryModel * MainForm::ProjectItemModelRefresh(){
     model->select();
     return model;
 }
-
-void MainForm::on_ProjectView_clicked(const QModelIndex &index)
-{
-
-    QSqlQueryModel * x = ProjectItemModel();
-    ui->ProjectItemView->setModel(x);
-
-    refreshProjectItemComboSpecific();
-
-
-}
-void MainForm::refreshProjectTab(){
-    ui->MainTabs->setCurrentIndex(1);
-
-    QSqlQueryModel * x=ProjectModel();
-    ui->ProjectView->setModel(x);
-    establishConnections();
-    QSqlQueryModel * y = ProjectItemModelFirst();
-    ui->ProjectItemView->setModel(y);
-
-    for(int i=0; i< x->rowCount(); i++)
-    {
-
-        ui->ProjectView->showRow(i);
-        QString data = x->record(i).value(0).toString();
-        qDebug()<<data;
-        if(data=="All Projects")
-        {
-            qDebug()<<data;
-            ui->ProjectView->hideRow(i);
-        }
-    }
-
-    if(ui->ProjectName->isChecked())
-        ui->ProjectView->showColumn(0);
-    else
-        ui->ProjectView->hideColumn(0);
-
-    if(ui->ProjectId->isChecked())
-        ui->ProjectView->showColumn(1);
-    else
-        ui->ProjectView->hideColumn(1);
-
-    if(ui->ProjectCurrent->isChecked())
-        ui->ProjectView->showColumn(2);
-    else
-        ui->ProjectView->hideColumn(2);
-    if(ui->ProjectDate->isChecked())
-        ui->ProjectView->showColumn(3);
-    else
-        ui->ProjectView->hideColumn(3);
-
-
-
-
-
-}
-void MainForm::refreshProjectItemTab(){
-    ui->MainTabs->setCurrentIndex(1);
-
-    QSqlQueryModel * x = ProjectItemModelRefresh();
-    ui->ProjectItemView->setModel(x);
-
-   // ui->ProjectItemView->resizeColumnsToContents();
-
-    if(ui->ProjectItemName->isChecked())
-        ui->ProjectItemView->showColumn(0);
-    else
-        ui->ProjectItemView->hideColumn(0);
-
-    if(ui->ProjectItemId->isChecked())
-        ui->ProjectItemView->showColumn(1);
-    else
-        ui->ProjectItemView->hideColumn(1);
-  //  ui->ProjectItemView->resizeColumnsToContents();
-}
-
+/* Option menu 1 for ProjectTab*/
 void MainForm::on_ProjectAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -869,7 +917,7 @@ void MainForm::on_ProjectArchive_clicked()
     }
     refreshProjectTab();
 }
-
+/* Option menu 2 for ProjectTab*/
 void MainForm::on_ProjectName_clicked()
 {
     refreshProjectTab();
@@ -886,7 +934,7 @@ void MainForm::on_ProjectDate_clicked()
 {
     refreshProjectTab();
 }
-
+/* Option menu 3 for ProjectTab*/
 void MainForm::on_ProjectAllRadio_toggled(bool checked)
 {
     if(checked){
@@ -925,7 +973,7 @@ void MainForm::on_ProjectPastRadio_toggled(bool checked)
         }
     }
 }
-
+/* Option menu 4 for ProjectTab*/
 void MainForm::on_ProjectItemName_clicked()
 {
     refreshProjectItemTab();
@@ -934,8 +982,7 @@ void MainForm::on_ProjectItemId_clicked()
 {
     refreshProjectItemTab();
 }
-
-
+/* Option menu 5 for ProjectTab*/
 void MainForm::on_ProjectItemAdd_clicked()
 {
     QString itemName = ui->ProjectItemCombo->currentText();
@@ -985,6 +1032,11 @@ void MainForm::on_ProjectItemRemove_clicked()
 
 }
 
+// Item Section!
+
+/* Initialization,model,and refreshing for the
+ * 'itemtab' in 'sections'
+ */
 void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
@@ -1048,7 +1100,7 @@ void MainForm::refreshItemTab(){
 
 
 }
-
+/* Option menu 1 for ItemTab*/
 void MainForm::on_ItemAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -1082,7 +1134,7 @@ void MainForm::on_ItemDelete_clicked()
     refreshShiftItem();
     ui->MainTabs->setCurrentIndex(2);
 }
-
+/* Option menu 2 for ItemTab*/
 void MainForm::on_ItemName_clicked()
 {
     refreshItemTab();
@@ -1104,8 +1156,11 @@ void MainForm::on_ItemDimension_clicked()
     refreshItemTab();
 }
 
+// Shift Section!
 
-
+/* Initialization,three combobox refreshers,model,
+ * and main refresher for the 'shiftTab' within 'sections'
+*/
 void MainForm::ShiftTab(){
     ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),1,1));
     ui->ShiftDate2->setDate(QDate::currentDate());
@@ -1150,7 +1205,6 @@ void MainForm::refreshShiftItem(){
     c->setQuery(*C);
     ui->ShiftItemCombo->setModel(c);
 }
-
 QSqlQueryModel * MainForm::ShiftModel(){
 
     QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -1262,13 +1316,10 @@ void MainForm::refreshShiftTab(){
         minutes ="00";
 
     ui->ShiftTotalTime->setText(hours+":"+minutes);
-
-
     ui->ShiftView->setModel(x);
 
 }
-
-
+/* Option menu 1 for shiftTab*/
 void MainForm::on_ShiftDate1_dateChanged(const QDate &date)
 {
     refreshShiftTab();
@@ -1277,7 +1328,7 @@ void MainForm::on_ShiftDate2_dateChanged(const QDate &date)
 {
     refreshShiftTab();
 }
-
+/* Option menu 2 for shiftTab*/
 void MainForm::on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1)
 {
     refreshShiftTab();
@@ -1290,13 +1341,12 @@ void MainForm::on_ShiftItemCombo_currentTextChanged(const QString &arg1)
 {
     refreshShiftTab();
 }
-
-
+/* Option menu 3 for shiftTab*/
 void MainForm::on_ShiftAdd_clicked()
 {
     shifteditform = new ShiftEditForm(this);
     establishConnections();
-    shifteditform->ShiftEditInitialize();
+    shifteditform->AddShift();
     refreshShiftTab();
 }
 void MainForm::on_ShiftEdit_clicked()
@@ -1318,12 +1368,12 @@ void MainForm::on_ShiftEdit_clicked()
             QString id = QString::number(idInt);
             idInt = x->record(index.row()).value(13).toInt();
             QString shiftid = QString::number(idInt);
-            shifteditform->ShiftEditInitialize(shiftid,id);
+            shifteditform->EditWorkingShift(shiftid,id);
         }
         else{
             int idInt = x->record(index.row()).value(13).toInt();
             QString id = QString::number(idInt);
-            shifteditform->ShiftEditInitialize(id);
+            shifteditform->EditFinishedShift(id);
         }
 
         refreshShiftTab();
@@ -1359,7 +1409,9 @@ void MainForm::on_ShiftDelete_clicked()
 
 
 
-
+/* This is the method used for sending the data
+ * database to sub-form.
+ */
 QSqlDatabase MainForm::getData() const
 {
     return data;

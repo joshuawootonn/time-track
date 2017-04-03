@@ -24,7 +24,6 @@ ShiftEditForm::~ShiftEditForm()
     delete ui;
 }
 
-
 QDateTime ShiftEditForm::format_datetimes(QDateTime z)
 {
     int minTime = z.time().minute();
@@ -90,7 +89,12 @@ QDateTime ShiftEditForm::format_datetimes(QDateTime z)
 
 }
 
-void ShiftEditForm::ShiftEditInitialize(){
+
+/* These next three functions are for ininializing this
+ * dialog according to its purpose. The first for adding
+ * a new shift the second for editing a existing shift.
+ * The third for editing a working shift. */
+void ShiftEditForm::AddShift(){
     this->showNormal();
 
 
@@ -114,7 +118,7 @@ void ShiftEditForm::ShiftEditInitialize(){
     ui->Sections->clearContents();
 
 }
-void ShiftEditForm::ShiftEditInitialize(QString shiftid){
+void ShiftEditForm::EditFinishedShift(QString shiftid){
     this->showNormal();
     shiftId = shiftid;
     EmployeeInitialize();
@@ -181,7 +185,7 @@ void ShiftEditForm::ShiftEditInitialize(QString shiftid){
 
 
 }
-void ShiftEditForm::ShiftEditInitialize(QString shiftid,QString id){
+void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     this->showNormal();
 
     shiftId= shiftid;
@@ -231,6 +235,10 @@ void ShiftEditForm::ShiftEditInitialize(QString shiftid,QString id){
 
 
 }
+
+
+/* These next six functions are used to initialize the
+ * comboboxes with there appropriate model's. */
 void ShiftEditForm::EmployeeInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
@@ -240,7 +248,6 @@ void ShiftEditForm::EmployeeInitialize(){
     ui->Name->setModel(modal);
 
 }
-
 void ShiftEditForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
@@ -249,10 +256,6 @@ void ShiftEditForm::ProjectInitialize(){
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
 
-}
-void ShiftEditForm::on_Projects_currentIndexChanged()
-{
-    ItemInitialize();
 }
 void ShiftEditForm::ItemInitialize(){
     QString id;
@@ -295,12 +298,8 @@ void ShiftEditForm::TimesInitialize(){
 void ShiftEditForm::LunchInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry1 = new QSqlQuery(data);
-    QString a = "0:00";
 
-    QString b = "1:00";
-
-   qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
-
+   qry1->prepare("select time from timelist where rowid<6");
 
    if(qry1->exec())
     {
@@ -313,7 +312,6 @@ void ShiftEditForm::LunchInitialize(){
     modal->setQuery(*qry1);
     ui->Lunch->setModel(modal);
 }
-
 void ShiftEditForm::TimeLeft(){
     QDateTime indt,outdt;
     QString timein,timeout,datein,dateout;
@@ -359,7 +357,90 @@ void ShiftEditForm::TimeLeft(){
 }
 
 
+/*These classes are used to update the table and
+ * comboboxs when triggers are hit*/
+void ShiftEditForm::on_Projects_currentIndexChanged()
+{
+    ItemInitialize();
+}
+void ShiftEditForm::on_Add_clicked()
+{
+    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
+    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
+    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
+    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
 
+    ui->Sections->resizeRowsToContents();
+}
+void ShiftEditForm::on_Delete_clicked()
+{
+    /*QString time = ui->timeLeft->text();
+    //qDebug()<<item;
+
+    int hours=time.split(":")[0].toInt();
+    int minutes=time.split(":")[1].toInt();
+
+    minutes=minutes+hours*60;
+
+    QString time2 = ui->Sections->item(selectedRow,2)->text();
+    minutes-= time2.split(":")[0].toInt()*60;
+    minutes-= time2.split(":")[1].toInt();
+
+    hours=minutes/60;
+    minutes=minutes%60;
+    ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes));
+
+*/
+    ui->Sections->removeRow(selectedRow);
+    TimeLeft();
+
+}
+void ShiftEditForm::on_Sections_cellClicked(int row, int column)
+{
+    selectedRow=row;
+    column++;
+    QString project = ui->Sections->item(row,0)->text();
+    QString item = ui->Sections->item(row,1)->text();
+    QString time = ui->Sections->item(row,2)->text();
+
+
+    int index = ui->Projects->findText(project);
+    if ( index != -1 ) { // -1 for not found
+       ui->Projects->setCurrentIndex(index);
+    }
+
+    index = ui->Items->findText(item);
+    if ( index != -1 ) { // -1 for not found
+       ui->Items->setCurrentIndex(index);
+    }
+
+    index = ui->Times->findText(time);
+    if ( index != -1 ) { // -1 for not found
+       ui->Times->setCurrentIndex(index);
+    }
+
+
+}
+void ShiftEditForm::on_Sections_cellChanged()
+{
+    TimeLeft();
+}
+void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
+{
+    TimeLeft();
+}
+void ShiftEditForm::on_DateTime1_dateTimeChanged(const QDateTime &dateTime)
+{
+    TimeLeft();
+}
+void ShiftEditForm::on_DateTime2_dateTimeChanged(const QDateTime &dateTime)
+{
+    TimeLeft();
+}
+
+
+/*These two classes are used to finish or cancel the
+ * changes that the user was trying to implement.*/
 void ShiftEditForm::on_FinishedButton_clicked()
 {
 
@@ -450,87 +531,3 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
-
-void ShiftEditForm::on_Add_clicked()
-{
-    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
-
-    ui->Sections->resizeRowsToContents();
-}
-
-
-void ShiftEditForm::on_Delete_clicked()
-{
-    /*QString time = ui->timeLeft->text();
-    //qDebug()<<item;
-
-    int hours=time.split(":")[0].toInt();
-    int minutes=time.split(":")[1].toInt();
-
-    minutes=minutes+hours*60;
-
-    QString time2 = ui->Sections->item(selectedRow,2)->text();
-    minutes-= time2.split(":")[0].toInt()*60;
-    minutes-= time2.split(":")[1].toInt();
-
-    hours=minutes/60;
-    minutes=minutes%60;
-    ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes));
-
-*/
-    ui->Sections->removeRow(selectedRow);
-    TimeLeft();
-
-}
-
-void ShiftEditForm::on_Sections_cellClicked(int row, int column)
-{
-    selectedRow=row;
-    column++;
-    QString project = ui->Sections->item(row,0)->text();
-    QString item = ui->Sections->item(row,1)->text();
-    QString time = ui->Sections->item(row,2)->text();
-
-
-    int index = ui->Projects->findText(project);
-    if ( index != -1 ) { // -1 for not found
-       ui->Projects->setCurrentIndex(index);
-    }
-
-    index = ui->Items->findText(item);
-    if ( index != -1 ) { // -1 for not found
-       ui->Items->setCurrentIndex(index);
-    }
-
-    index = ui->Times->findText(time);
-    if ( index != -1 ) { // -1 for not found
-       ui->Times->setCurrentIndex(index);
-    }
-
-
-}
-
-void ShiftEditForm::on_Sections_cellChanged()
-{
-    TimeLeft();
-}
-
-
-void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
-{
-    TimeLeft();
-}
-
-void ShiftEditForm::on_DateTime1_dateTimeChanged(const QDateTime &dateTime)
-{
-    TimeLeft();
-}
-
-void ShiftEditForm::on_DateTime2_dateTimeChanged(const QDateTime &dateTime)
-{
-    TimeLeft();
-}
-

@@ -25,35 +25,29 @@ public:
     explicit ClockoutForm(QWidget *parent = 0);
     ~ClockoutForm();
     void ClockoutInitialize(QString i);
+
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
     void TimeLeft();
     void LunchInitialize();
 
-private slots:
-    void on_FinishedButton_clicked();
+private slots:    
     void on_Projects_currentIndexChanged();
-
     void on_Add_clicked();
-
-
     void on_Delete_clicked();
-
     void on_Sections_cellClicked(int row, int column);
-
     void on_Sections_cellChanged();
-
-    void on_CancelButton_clicked();
-
-
     void on_Lunch_currentTextChanged(const QString &arg1);
+
+    void on_FinishedButton_clicked();
+    void on_CancelButton_clicked();
 
 signals:
     void finished();
+
 private:
     Ui::ClockoutForm *ui;
-
     QSqlDatabase data;
     QString id;
     int selectedRow;

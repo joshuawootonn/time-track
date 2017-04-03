@@ -26,9 +26,9 @@ public:
     explicit ShiftEditForm(QWidget *parent = 0);
     ~ShiftEditForm();
 
-    void ShiftEditInitialize();
-    void ShiftEditInitialize(QString Shiftid);
-    void ShiftEditInitialize(QString Shiftid,QString id);
+    void AddShift();
+    void EditFinishedShift(QString shiftid);
+    void EditWorkingShift(QString Shiftid,QString id);
     void EmployeeInitialize();
     void ProjectInitialize();
     void ItemInitialize();
@@ -37,36 +37,24 @@ public:
     void LunchInitialize();
 
 
-private slots:
-    void on_FinishedButton_clicked();
+private slots:    
     void on_Projects_currentIndexChanged();
-
     void on_Add_clicked();
-
-
     void on_Delete_clicked();
-
     void on_Sections_cellClicked(int row, int column);
-
     void on_Sections_cellChanged();
-
-    void on_CancelButton_clicked();
-
-
     void on_Lunch_currentTextChanged(const QString &arg1);
-
-
     void on_DateTime1_dateTimeChanged(const QDateTime &dateTime);
     void on_DateTime2_dateTimeChanged(const QDateTime &dateTime);
 
+    void on_FinishedButton_clicked();
+    void on_CancelButton_clicked();
 signals:
     void finished();
 private:
     Ui::ShiftEditForm *ui;
-
     QString shiftId;
     QSqlDatabase data;
-
     int selectedRow;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);

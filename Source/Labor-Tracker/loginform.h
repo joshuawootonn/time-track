@@ -25,7 +25,6 @@ class LoginForm : public QDialog
 public:
     explicit LoginForm(QWidget *parent = 0);
     ~LoginForm();
-
     QString id;
     bool admin;
     void reset();
@@ -33,15 +32,11 @@ public:
 signals:
     void logged();
 public slots:
-
-
-    void on_passEdit_returnPressed();
+   void on_passEdit_returnPressed();
 
 private:
     Ui::LoginForm *ui;
-
     QSqlDatabase data;
-
     QString pin;
 
 

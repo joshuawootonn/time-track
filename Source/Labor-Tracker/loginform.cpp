@@ -29,8 +29,7 @@ LoginForm::~LoginForm()
 void LoginForm::reset(){
     ui->passEdit->clear();
 }
-
-
+/*This function logs the user into the corresponding menu*/
 void LoginForm::on_passEdit_returnPressed()
 {
     pin= ui->passEdit->text();

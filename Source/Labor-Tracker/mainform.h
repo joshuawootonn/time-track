@@ -25,16 +25,19 @@ class MainForm : public QWidget
 public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
-    void SetupStuff();
+
     void ConnectSetup();
     void DisconnectSetup();
-    void checkIfFileNameIsValid(QString x);
-    QString getCorrectFileName();
     void ConnectServer();
     void DisconnectServer();
-    void establishConnections();
+
+    void checkIfFileNameIsValid(QString x);
+    QString getCorrectFileName();
     bool validData(QString path);
     bool fileExists(QString path);
+
+    QDateTime format_datetimes(QDateTime z);
+
     void showtheThings();
     void hidetheThings();
     void loginInitialize();
@@ -42,16 +45,10 @@ public:
     void basicInitialize();
     void advInitialize();
 
-    //EmployeeTab
+    void establishConnections();
+
     void EmployeeTab();
     QSqlQueryModel * EmployeeModel();
-
-
-    void ShiftTab();
-
-    QSqlQueryModel* ShiftModel();
-    //void refreshShiftTab();
-
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
@@ -66,16 +63,20 @@ public:
     void ItemTab();
     QSqlQueryModel * ItemModel();
 
-    QSqlDatabase getEmployeeDataBase() const;
-
-    QSqlDatabase getProjectDataBase() const;
+    void ShiftTab();
+    QSqlQueryModel* ShiftModel();
 
     QSqlDatabase getData() const;
 
+    /* Not going to lie there isn't a bunch of though
+     * put into this file, and I dont want to think of
+     * it right now xd
+     */
 public slots:
+
     void enter();
     void reenter();
-    QDateTime format_datetimes(QDateTime z);
+
     void on_basicPageClockIn_clicked();
     void on_basicPageClockOut_clicked();
     void on_basicPageAdvanced_clicked();
@@ -84,103 +85,76 @@ public slots:
     void refreshShiftEmployee();
     void refreshShiftProject();
     void refreshShiftItem();
+
 private slots:
+
+    void on_HeaderTabs_currentChanged(int index);
+
+    //Employee Tab!
+
+    void refreshEmployeeTab();
     void on_EmployeeName_clicked();
     void on_EmployeePin_clicked();
     void on_EmployeeAdminStatus_clicked();
-
     void on_EmployeeShiftCount_clicked();
     void on_EmployeeActive_clicked();
     void on_EmployeeId_clicked();
     void on_EmployeeCurrent_clicked();
-
     void on_EmployeeAdd_clicked();
     int generateRandom();
     void on_EmployeeDelete_clicked();
     void on_EmployeeArchive_clicked();
-
     void on_AllRadio_toggled(bool checked);
     void on_CurrentRadio_toggled(bool checked);
     void on_PastRadio_toggled(bool checked);
 
-    void refreshEmployeeTab();
+    //Project Tab!
+
     void refreshProjectTab();
-    void refreshItemTab();
-
-    void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
-
-    void on_ShiftProjectCombo_currentTextChanged(const QString &arg1);
-
-    void on_ShiftItemCombo_currentTextChanged(const QString &arg1);
-
     void on_ProjectView_clicked(const QModelIndex &index);
-
     void on_ProjectAdd_clicked();
-
     void on_ProjectDelete_clicked();
-
     void on_ProjectArchive_clicked();
-
     void on_ProjectName_clicked();
-
     void on_ProjectId_clicked();
-
     void on_ProjectCurrent_clicked();
-
     void on_ProjectAllRadio_toggled(bool checked);
-
     void on_ProjectCurrentRadio_toggled(bool checked);
-
     void on_ProjectPastRadio_toggled(bool checked);
+    void on_ProjectItemName_clicked();
+    void on_ProjectItemId_clicked();
+    void on_ProjectItemAdd_clicked();
+    void on_ProjectItemRemove_clicked();
+    void on_ProjectDate_clicked();
 
+    //Item Tab!
+
+    void refreshItemTab();
     void on_ItemAdd_clicked();
-
     void on_ItemDelete_clicked();
-
     void on_ItemName_clicked();
-
     void on_ItemId_clicked();
-
     void on_ItemCategory_clicked();
-
     void on_ItemSub_clicked();
-
     void on_ItemDimension_clicked();
 
+    //Shift Tab!
+
     void refreshShiftTab();
-
-
-    void on_ProjectItemName_clicked();
-
-    void on_ProjectItemId_clicked();
-
-    void on_ProjectItemAdd_clicked();
-    
-    void on_ProjectItemRemove_clicked();
-    
-    void on_HeaderTabs_currentChanged(int index);
-
+    void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
+    void on_ShiftProjectCombo_currentTextChanged(const QString &arg1);
+    void on_ShiftItemCombo_currentTextChanged(const QString &arg1);
     void on_ShiftDate1_dateChanged(const QDate &date);
-
     void on_ShiftDate2_dateChanged(const QDate &date);
-
-
     void on_ShiftAdd_clicked();
-
     void on_ShiftEdit_clicked();
-
     void on_ShiftDelete_clicked();
 
-
+    //Datebase Tab!
 
     void DatabaseTab();
     void on_DataBaseConnect_clicked();
 
-
-
-
-
-    void on_ProjectDate_clicked();
 
 private:
     Ui::MainForm *ui;

@@ -89,6 +89,7 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 
 }
 
+/* This function is for ininializing this dialog  */
 void ClockoutForm::ClockoutInitialize(QString i){
     this->showNormal();
 
@@ -112,6 +113,10 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ui->Sections->clearContents();
 
 }
+
+
+/* These next six functions are used to initialize the
+ * comboboxes with there appropriate model's. */
 void ClockoutForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
@@ -170,7 +175,8 @@ void ClockoutForm::LunchInitialize(){
 
     QString b = "1:00";
 
-   qry1->prepare("select time from timelist where time>='"+a+"'and time <='"+b+"'");
+   qry1->prepare("select time from timelist where rowid<6");
+
 
 
    if(qry1->exec())
@@ -184,7 +190,6 @@ void ClockoutForm::LunchInitialize(){
     modal->setQuery(*qry1);
     ui->Lunch->setModel(modal);
 }
-
 void ClockoutForm::TimeLeft(){
     QDateTime indt,outdt;
     QSqlQuery qry(data);
@@ -256,7 +261,61 @@ void ClockoutForm::TimeLeft(){
 }
 
 
+/*These classes are used to update the table and
+ * comboboxs when triggers are hit*/
+void ClockoutForm::on_Add_clicked()
+{
+    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
+    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
+    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
+    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
 
+    ui->Sections->resizeRowsToContents();
+}
+void ClockoutForm::on_Delete_clicked()
+{
+    ui->Sections->removeRow(selectedRow);
+    TimeLeft();
+
+}
+void ClockoutForm::on_Sections_cellClicked(int row, int column)
+{
+    selectedRow=row;
+    column++;
+    QString project = ui->Sections->item(row,0)->text();
+    QString item = ui->Sections->item(row,1)->text();
+    QString time = ui->Sections->item(row,2)->text();
+
+
+    int index = ui->Projects->findText(project);
+    if ( index != -1 ) { // -1 for not found
+       ui->Projects->setCurrentIndex(index);
+    }
+
+    index = ui->Items->findText(item);
+    if ( index != -1 ) { // -1 for not found
+       ui->Items->setCurrentIndex(index);
+    }
+
+    index = ui->Times->findText(time);
+    if ( index != -1 ) { // -1 for not found
+       ui->Times->setCurrentIndex(index);
+    }
+
+
+}
+void ClockoutForm::on_Sections_cellChanged()
+{
+    TimeLeft();
+}
+void ClockoutForm::on_Lunch_currentTextChanged(const QString &arg1)
+{
+    TimeLeft();
+}
+
+
+/*These two classes are used to finish or cancel the
+ * changes that the user was trying to implement.*/
 void ClockoutForm::on_FinishedButton_clicked()
 {
     QSqlQuery* qry=new QSqlQuery(data);
@@ -405,59 +464,4 @@ void ClockoutForm::on_CancelButton_clicked()
 
     this->hide();
     emit finished();
-}
-
-void ClockoutForm::on_Add_clicked()
-{
-    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
-
-    ui->Sections->resizeRowsToContents();
-}
-
-void ClockoutForm::on_Delete_clicked()
-{
-    ui->Sections->removeRow(selectedRow);
-    TimeLeft();
-
-}
-
-void ClockoutForm::on_Sections_cellClicked(int row, int column)
-{
-    selectedRow=row;
-    column++;
-    QString project = ui->Sections->item(row,0)->text();
-    QString item = ui->Sections->item(row,1)->text();
-    QString time = ui->Sections->item(row,2)->text();
-
-
-    int index = ui->Projects->findText(project);
-    if ( index != -1 ) { // -1 for not found
-       ui->Projects->setCurrentIndex(index);
-    }
-
-    index = ui->Items->findText(item);
-    if ( index != -1 ) { // -1 for not found
-       ui->Items->setCurrentIndex(index);
-    }
-
-    index = ui->Times->findText(time);
-    if ( index != -1 ) { // -1 for not found
-       ui->Times->setCurrentIndex(index);
-    }
-
-
-}
-
-void ClockoutForm::on_Sections_cellChanged()
-{
-    TimeLeft();
-}
-
-
-void ClockoutForm::on_Lunch_currentTextChanged(const QString &arg1)
-{
-    TimeLeft();
 }
