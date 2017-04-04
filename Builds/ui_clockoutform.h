@@ -52,8 +52,41 @@ public:
         ClockoutForm->resize(611, 341);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
-        font.setPointSize(12);
         ClockoutForm->setFont(font);
+        ClockoutForm->setStyleSheet(QLatin1String("*{\n"
+"font-family:\"Calibri\";\n"
+"font-size: 14px;\n"
+"\n"
+"}\n"
+"QTabWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"border-top: 15px solid #D3D3D3;\n"
+"\n"
+"}\n"
+"QStackedWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"}\n"
+"QWidget{\n"
+"margin:0px;\n"
+"padding:0px;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"padding:3px;\n"
+"}\n"
+"QRadioButton{\n"
+"padding:0px;\n"
+"margin:0px;\n"
+"}\n"
+"\n"
+"QTabWidget{\n"
+"\n"
+"}\n"
+"QGroupBox { \n"
+"   \n"
+" } "));
         gridLayout = new QGridLayout(ClockoutForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         verticalLayout_2 = new QVBoxLayout();
@@ -153,7 +186,7 @@ public:
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", 0));
         label->setText(QApplication::translate("ClockoutForm", "Time left:", 0));
         timeLeft->setText(QString());
-        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finished", 0));
+        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", 0));
         CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", 0));
     } // retranslateUi
 

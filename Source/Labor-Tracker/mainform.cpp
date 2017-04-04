@@ -147,9 +147,9 @@ void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
 
-    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftProject()));
-    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftItem()));
-    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshShiftEmployee()));
+    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshProjectTab()));
+    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemTab()));
+    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeTab()));
 
 
 //    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
@@ -1407,7 +1407,18 @@ void MainForm::on_ShiftDelete_clicked()
     refreshShiftTab();
 }
 
-
+//Settings Sections!
+/* Quickly made this section so that I could maximize
+ * and fullscreen the program easily plan on making
+ * this cleaner later.*/
+void MainForm::on_SettingsMaximized_clicked()
+{
+    this->showMaximized();
+}
+void MainForm::on_SettngsFullScreen_clicked()
+{
+    this->showFullScreen();
+}
 
 /* This is the method used for sending the data
  * database to sub-form.
@@ -1416,6 +1427,8 @@ QSqlDatabase MainForm::getData() const
 {
     return data;
 }
+
+
 
 
 

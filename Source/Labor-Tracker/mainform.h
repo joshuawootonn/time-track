@@ -155,6 +155,10 @@ private slots:
     void DatabaseTab();
     void on_DataBaseConnect_clicked();
 
+    //Settings Tab!
+
+    void on_SettingsMaximized_clicked();
+    void on_SettngsFullScreen_clicked();
 
 private:
     Ui::MainForm *ui;

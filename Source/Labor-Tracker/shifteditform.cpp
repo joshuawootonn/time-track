@@ -353,7 +353,7 @@ void ShiftEditForm::TimeLeft(){
         ui->FinishedButton->setEnabled(true);
     else
         ui->FinishedButton->setEnabled(false);
-    TimesInitialize();
+
 }
 
 

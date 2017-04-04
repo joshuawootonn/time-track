@@ -13,11 +13,47 @@
   <property name="font">
    <font>
     <family>Calibri</family>
-    <pointsize>12</pointsize>
+    <pointsize>-1</pointsize>
    </font>
   </property>
   <property name="windowTitle">
    <string>Time-Track</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-family:&quot;Calibri&quot;;
+font-size: 14px;
+
+}
+QTabWidget{
+margin:0px;
+padding:0px;
+border-top: 15px solid #D3D3D3;
+
+}
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+QWidget{
+margin:0px;
+padding:0px;
+}
+
+QPushButton{
+padding:3px;
+}
+QRadioButton{
+padding:0px;
+margin:0px;
+}
+
+QTabWidget{
+
+}
+QGroupBox { 
+   
+ } </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -144,7 +180,7 @@
        <item>
         <widget class="QPushButton" name="FinishedButton">
          <property name="text">
-          <string>Finished</string>
+          <string>Finish</string>
          </property>
         </widget>
        </item>

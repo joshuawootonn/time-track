@@ -1,7 +1,8 @@
 Hi, Joshua here!
 
-If you want to run this program all you have to do is open the "Deployment" folder and click the ".exe" file. 
-From there you can add employees,projects,items, and shifts all you want.
+Assuming you just downloaded Time Track you are on your way to *insert unrealistic expectations here*. 
+In all seriousness though thanks for trying out my program
+
 
 Cheers!
 Joshua Wootonn
