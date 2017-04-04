@@ -45,7 +45,7 @@ MainForm::~MainForm()
 void MainForm::ConnectSetup(){
 
     setup = QSqlDatabase::addDatabase("QSQLITE","setup");
-    QString setupPath = "../SQLite/setup.sqlite";
+    QString setupPath = "../SQLite/setup/setup.sqlite";
     setup.setDatabaseName(setupPath);
     setup.open();
 
