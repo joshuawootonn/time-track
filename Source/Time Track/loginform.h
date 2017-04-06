@@ -28,6 +28,7 @@ public:
     QString id;
     bool admin;
     void reset();
+    void positionDialog();
 
 signals:
     void logged();

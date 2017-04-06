@@ -12,7 +12,7 @@ MainForm::MainForm(QWidget *parent) :
     clockoutForm->hide();
     ui->mainStack->setCurrentIndex(0);
     loginForm = new LoginForm(this);
-    loginForm->hide();
+
     loginInitialize();
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();

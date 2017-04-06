@@ -19,6 +19,10 @@ LoginForm::LoginForm(QWidget *parent) :
         )
     );
 
+
+
+
+
 }
 
 LoginForm::~LoginForm()
@@ -29,7 +33,16 @@ LoginForm::~LoginForm()
 void LoginForm::reset(){
     data = ((MainForm*)parentWidget())->getData();
     ui->passEdit->clear();
+    positionDialog();
 }
+void LoginForm::positionDialog(){
+    //this->move((((MainForm*)parentWidget())->window()->frameGeometry().topLeft()) + (((MainForm*)parentWidget())->window()->rect().center()) - (this->rect().center()));
+
+
+    //this->move((((MainForm*)parentWidget())->window()->frameGeometry().topLeft()) + (((MainForm*)parentWidget())->window()->frameGeometry().center()) - (this->rect().center()));
+
+}
+
 /*This function logs the user into the corresponding menu*/
 void LoginForm::on_passEdit_returnPressed()
 {

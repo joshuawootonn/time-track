@@ -939,7 +939,9 @@ release/mainform.o: ../Source/Time\ Track/mainform.cpp ../Source/Time\ Track/mai
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QFileDialog \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qfiledialog.h \
 		../../../Qt/5.7/mingw53_32/include/QtCore/qdir.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qfileinfo.h
+		../../../Qt/5.7/mingw53_32/include/QtCore/qfileinfo.h \
+		../../../Qt/5.7/mingw53_32/include/QtWidgets/QMessageBox \
+		../../../Qt/5.7/mingw53_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/mainform.o "../Source/Time Track/mainform.cpp"
 
 release/loginform.o: ../Source/Time\ Track/loginform.cpp ../Source/Time\ Track/loginform.h \

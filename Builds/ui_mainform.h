@@ -176,7 +176,7 @@ public:
     {
         if (MainForm->objectName().isEmpty())
             MainForm->setObjectName(QStringLiteral("MainForm"));
-        MainForm->resize(1162, 744);
+        MainForm->resize(1280, 720);
         MainForm->setStyleSheet(QLatin1String("*{\n"
 "font-family:\"Calibri\";\n"
 "font-size: 14px;\n"
