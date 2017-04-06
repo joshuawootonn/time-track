@@ -164,8 +164,6 @@ private slots:
     void on_SettngsFullScreen_clicked();
 
 
-
-
 private:
     Ui::MainForm *ui;
     LoginForm *loginForm;
@@ -175,8 +173,6 @@ private:
     QSqlDatabase setup;
     QString serverPath;
     QString localPath;
-
-
     QString id;
     bool admin;
 };

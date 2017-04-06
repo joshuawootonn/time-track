@@ -6,17 +6,8 @@ MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainForm)
 {
-
     ui->setupUi(this);
-
-
-
-
-
-
-
     ConnectSetup();
-
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
     ui->mainStack->setCurrentIndex(0);
@@ -25,10 +16,7 @@ MainForm::MainForm(QWidget *parent) :
     loginInitialize();
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
-
     establishConnections();
-
-
 }
 
 MainForm::~MainForm()
@@ -452,6 +440,7 @@ void MainForm::on_DataBaseDisconnect_clicked()
     ConnectServer();
     on_basicPageAdvanced_clicked();
 }
+
 // Employee Section!
 
 /* Initialization and refreshing of the 'employeetab' in

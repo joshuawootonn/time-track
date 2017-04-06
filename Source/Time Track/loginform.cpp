@@ -34,10 +34,7 @@ void LoginForm::reset(){
 void LoginForm::on_passEdit_returnPressed()
 {
     pin= ui->passEdit->text();
-
     QSqlQuery qry1(data),qry2(data);
-
-
     qry1.prepare("SELECT * FROM employeelist where pin = '"+pin+"'");
     if (qry1.exec())
     {
@@ -48,7 +45,6 @@ void LoginForm::on_passEdit_returnPressed()
         }
         if(count == 1)
         {
-
             qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
             if(qry2.exec()){
                 while(qry2.next()){
