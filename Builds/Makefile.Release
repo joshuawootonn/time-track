@@ -936,45 +936,6 @@ release/mainform.o: ../Source/Time\ Track/mainform.cpp ../Source/Time\ Track/mai
 		../Source/Time\ Track/clockoutform.h \
 		../Source/Time\ Track/shifteditform.h \
 		ui_mainform.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QAction \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qaction.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QApplication \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QCheckBox \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qcheckbox.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QDateEdit \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qdatetimeedit.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qdatetime.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGroupBox \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgroupbox.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QLabel \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlabel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QPushButton \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qpushbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QRadioButton \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qradiobutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QSpacerItem \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QTabWidget \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QTableView \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qtableview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QVBoxLayout \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QFileDialog \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qfiledialog.h \
 		../../../Qt/5.7/mingw53_32/include/QtCore/qdir.h \
@@ -1110,35 +1071,7 @@ release/loginform.o: ../Source/Time\ Track/loginform.cpp ../Source/Time\ Track/l
 		../Source/Time\ Track/mainform.h \
 		../Source/Time\ Track/clockoutform.h \
 		../Source/Time\ Track/shifteditform.h \
-		ui_loginform.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QAction \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qaction.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QApplication \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QLabel \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlabel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QLineEdit \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlineedit.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qtextcursor.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qtextformat.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qpen.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qtextoption.h
+		ui_loginform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/loginform.o "../Source/Time Track/loginform.cpp"
 
 release/clockoutform.o: ../Source/Time\ Track/clockoutform.cpp ../Source/Time\ Track/clockoutform.h \
@@ -1270,36 +1203,7 @@ release/clockoutform.o: ../Source/Time\ Track/clockoutform.cpp ../Source/Time\ T
 		../Source/Time\ Track/mainform.h \
 		../Source/Time\ Track/loginform.h \
 		../Source/Time\ Track/shifteditform.h \
-		ui_clockoutform.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QAction \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qaction.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QApplication \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QLabel \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlabel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QPushButton \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qpushbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QTableWidget \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qtablewidget.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qtableview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QVBoxLayout
+		ui_clockoutform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/clockoutform.o "../Source/Time Track/clockoutform.cpp"
 
 release/shifteditform.o: ../Source/Time\ Track/shifteditform.cpp ../Source/Time\ Track/shifteditform.h \
@@ -1429,38 +1333,6 @@ release/shifteditform.o: ../Source/Time\ Track/shifteditform.cpp ../Source/Time\
 		../../../Qt/5.7/mingw53_32/include/QtCore/qeventloop.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QStyle \
 		ui_shifteditform.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QAction \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qaction.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QApplication \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QDateTimeEdit \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qdatetimeedit.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qdatetime.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/5.7/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QLabel \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlabel.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QPushButton \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qpushbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractbutton.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QTableWidget \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qtablewidget.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qtableview.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QVBoxLayout \
 		../Source/Time\ Track/mainform.h \
 		../Source/Time\ Track/loginform.h \
 		../Source/Time\ Track/clockoutform.h

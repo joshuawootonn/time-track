@@ -27,6 +27,7 @@ LoginForm::~LoginForm()
 }
 
 void LoginForm::reset(){
+    data = ((MainForm*)parentWidget())->getData();
     ui->passEdit->clear();
 }
 /*This function logs the user into the corresponding menu*/

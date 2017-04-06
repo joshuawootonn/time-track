@@ -68,7 +68,7 @@ QGroupBox {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="basicPage">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -137,6 +137,13 @@ QGroupBox {
           <widget class="QPushButton" name="basicPageClockOut">
            <property name="text">
             <string>Clock out</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="basicPageConnect">
+           <property name="text">
+            <string>Connect</string>
            </property>
           </widget>
          </item>
@@ -326,7 +333,7 @@ QGroupBox {
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>5</number>
+          <number>4</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1074,12 +1081,25 @@ QGroupBox {
                <widget class="QLabel" name="label_6">
                 <property name="maximumSize">
                  <size>
-                  <width>110</width>
+                  <width>115</width>
                   <height>16777215</height>
                  </size>
                 </property>
                 <property name="text">
                  <string>Current Connection:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="DataBaseDisconnect">
+                <property name="maximumSize">
+                 <size>
+                  <width>120</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Disconnect</string>
                 </property>
                </widget>
               </item>

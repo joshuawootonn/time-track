@@ -46,6 +46,7 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *basicPageClockIn;
     QPushButton *basicPageClockOut;
+    QPushButton *basicPageConnect;
     QPushButton *basicPageAdvanced;
     QWidget *advPage;
     QGridLayout *gridLayout_7;
@@ -161,6 +162,7 @@ public:
     QPushButton *DataBaseConnect;
     QLabel *DataBaseLabel;
     QLabel *label_6;
+    QPushButton *DataBaseDisconnect;
     QWidget *Settings;
     QHBoxLayout *horizontalLayout_12;
     QPushButton *SettngsFullScreen;
@@ -246,6 +248,11 @@ public:
         basicPageClockOut->setObjectName(QStringLiteral("basicPageClockOut"));
 
         verticalLayout->addWidget(basicPageClockOut);
+
+        basicPageConnect = new QPushButton(basicPage);
+        basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
+
+        verticalLayout->addWidget(basicPageConnect);
 
         basicPageAdvanced = new QPushButton(basicPage);
         basicPageAdvanced->setObjectName(QStringLiteral("basicPageAdvanced"));
@@ -777,9 +784,15 @@ public:
 
         label_6 = new QLabel(groupBox_14);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setMaximumSize(QSize(110, 16777215));
+        label_6->setMaximumSize(QSize(115, 16777215));
 
         gridLayout_14->addWidget(label_6, 0, 0, 1, 1);
+
+        DataBaseDisconnect = new QPushButton(groupBox_14);
+        DataBaseDisconnect->setObjectName(QStringLiteral("DataBaseDisconnect"));
+        DataBaseDisconnect->setMaximumSize(QSize(120, 16777215));
+
+        gridLayout_14->addWidget(DataBaseDisconnect, 0, 3, 1, 1);
 
 
         horizontalLayout_4->addWidget(groupBox_14);
@@ -830,9 +843,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(1);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(2);
-        HeaderTabs->setCurrentIndex(5);
+        HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);
 
 
@@ -844,6 +857,7 @@ public:
         MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", 0));
         basicPageClockIn->setText(QApplication::translate("MainForm", "Clock In", 0));
         basicPageClockOut->setText(QApplication::translate("MainForm", "Clock out", 0));
+        basicPageConnect->setText(QApplication::translate("MainForm", "Connect", 0));
         basicPageAdvanced->setText(QApplication::translate("MainForm", "Advanced", 0));
         MainTabs->setTabText(MainTabs->indexOf(EmployeeTab), QApplication::translate("MainForm", "Employees", 0));
         MainTabs->setTabText(MainTabs->indexOf(ProjectTab), QApplication::translate("MainForm", "Projects", 0));
@@ -914,6 +928,7 @@ public:
         DataBaseConnect->setText(QApplication::translate("MainForm", "Connect", 0));
         DataBaseLabel->setText(QString());
         label_6->setText(QApplication::translate("MainForm", "Current Connection:", 0));
+        DataBaseDisconnect->setText(QApplication::translate("MainForm", "Disconnect", 0));
         HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", 0));
         SettngsFullScreen->setText(QApplication::translate("MainForm", "Full Screen", 0));
         SettingsMaximized->setText(QApplication::translate("MainForm", "Maximized", 0));

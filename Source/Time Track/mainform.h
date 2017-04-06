@@ -40,6 +40,7 @@ public:
 
     void showtheThings();
     void hidetheThings();
+    void isConnected();
     void loginInitialize();
     void mainInitialize();
     void basicInitialize();
@@ -79,6 +80,7 @@ public slots:
 
     void on_basicPageClockIn_clicked();
     void on_basicPageClockOut_clicked();
+    void on_basicPageConnect_clicked();
     void on_basicPageAdvanced_clicked();
     void on_mainFinish_clicked();
 
@@ -153,12 +155,16 @@ private slots:
     //Datebase Tab!
 
     void DatabaseTab();
-    void on_DataBaseConnect_clicked();
+    void on_DataBaseConnect_clicked();    
+    void on_DataBaseDisconnect_clicked();
 
     //Settings Tab!
 
     void on_SettingsMaximized_clicked();
     void on_SettngsFullScreen_clicked();
+
+
+
 
 private:
     Ui::MainForm *ui;

@@ -1,12 +1,18 @@
 #include "mainform.h"
 #include "ui_mainform.h"
 #include <QFileDialog>
+#include <QMessageBox>
 MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainForm)
 {
 
     ui->setupUi(this);
+
+
+
+
+
 
 
     ConnectSetup();
@@ -20,14 +26,9 @@ MainForm::MainForm(QWidget *parent) :
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
 
-    EmployeeTab();
-    ShiftTab();
-    ProjectTab();
-    ItemTab();
-    DatabaseTab();
-
-
     establishConnections();
+
+
 }
 
 MainForm::~MainForm()
@@ -57,11 +58,18 @@ void MainForm::ConnectSetup(){
         while(qry->next())
         {
             serverPath = qry->value(0).toString();
-            qDebug()<<serverPath;
+            //qDebug()<<serverPath;
         }
     }
+    if(validData(serverPath)&&fileExists(serverPath))
+    {
+        qry->clear();
+        qry->prepare("update databaselist set path='"+serverPath+"' where id = '1'");
+        qry->exec();
+        ConnectServer();
+    }
 
-    checkIfFileNameIsValid(serverPath);
+
 
 
 }
@@ -99,25 +107,33 @@ void MainForm::DisconnectServer(){
  * 'fileexists' is used throughout to see if a file exists lol.
 */
 void MainForm::checkIfFileNameIsValid(QString x){
-    if(validData(x))
+    qDebug()<<"1";
+    if(validData(x)&&fileExists(x))
     {
         QSqlQuery * qry = new QSqlQuery(setup);
         qry->prepare("update databaselist set path='"+x+"' where id = '1'");
         qry->exec();
         serverPath=x;
-        qDebug()<<serverPath;
         ConnectServer();
+        qDebug()<<data.isOpen();
     }
     else
     {
-        serverPath = getCorrectFileName();
+        x = getCorrectFileName();
         checkIfFileNameIsValid(serverPath);
 
     }
 }
 QString MainForm::getCorrectFileName(){
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    if(fileExists(filename))
+    QString filename = QFileDialog::getOpenFileName(this,tr("Please select a valid path.."),"../","All files(*.sqlite)");
+    qDebug()<<filename;
+
+    if(filename == "")
+    {
+        qDebug()<<"IM here dumbass";
+        QApplication::quit();
+    }
+    else if(fileExists(filename)&&validData(filename))
         return filename;
     else
         return getCorrectFileName();
@@ -127,7 +143,7 @@ QString MainForm::getCorrectFileName(){
 bool MainForm::validData(QString path){
     QStringList pieces = path.split("/");
     QString needed = pieces.value(pieces.length()-1);
-    qDebug()<<needed;
+
     if(needed == "data.sqlite")
         return true;
     else
@@ -171,9 +187,22 @@ void MainForm::loginInitialize(){
     basicInitialize();
     hidetheThings();
 
-    loginForm->reset();
-    loginForm->show();
+    isConnected();
 
+
+}
+void MainForm::isConnected(){
+    if(data.isOpen())
+    {
+        ui->basicPageConnect->hide();
+        loginForm->reset();
+        loginForm->show();
+    }
+    else
+    {
+        ui->basicPageConnect->show();
+        loginForm->hide();
+    }
 }
 void MainForm::mainInitialize(){
     id=loginForm->id;
@@ -224,13 +253,15 @@ void MainForm::hidetheThings(){
     ui->basicPageAdvanced->hide();
     ui->basicPageClockIn->hide();
     ui->basicPageClockOut->hide();
+    ui->mainFinish->hide();
 
 }
 void MainForm::showtheThings(){
+
     ui->basicPageAdvanced->show();
     ui->basicPageClockIn->show();
     ui->basicPageClockOut->show();
-
+    ui->mainFinish->show();
 }
 void MainForm::on_HeaderTabs_currentChanged(int index)
 {
@@ -301,6 +332,15 @@ void MainForm::on_basicPageClockOut_clicked()
     clockoutForm = new ClockoutForm(this);
     establishConnections();
     clockoutForm->ClockoutInitialize(id);
+}
+void MainForm::on_basicPageConnect_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+    DisconnectServer();
+
+    checkIfFileNameIsValid(filename);
+
+    loginInitialize();
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {
@@ -400,10 +440,18 @@ void MainForm::on_DataBaseConnect_clicked()
     DisconnectServer();
     checkIfFileNameIsValid(filename);
     on_basicPageAdvanced_clicked();
-
-
 }
-
+void MainForm::on_DataBaseDisconnect_clicked()
+{
+    QString x = "/";
+    QSqlQuery * qry = new QSqlQuery(setup);
+    qry->prepare("update databaselist set path='"+x+"' where id = '1'");
+    qry->exec();
+    serverPath=x;
+    DisconnectServer();
+    ConnectServer();
+    on_basicPageAdvanced_clicked();
+}
 // Employee Section!
 
 /* Initialization and refreshing of the 'employeetab' in
@@ -1408,6 +1456,7 @@ void MainForm::on_ShiftDelete_clicked()
 }
 
 //Settings Sections!
+
 /* Quickly made this section so that I could maximize
  * and fullscreen the program easily plan on making
  * this cleaner later.*/
@@ -1427,6 +1476,8 @@ QSqlDatabase MainForm::getData() const
 {
     return data;
 }
+
+
 
 
 
