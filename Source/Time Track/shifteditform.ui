@@ -178,6 +178,13 @@ QGroupBox {
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="RefreshButton">
+         <property name="text">
+          <string>Refresh</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="FinishedButton">
          <property name="text">
           <string>Finish</string>

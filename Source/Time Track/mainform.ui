@@ -68,7 +68,7 @@ QGroupBox {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="basicPage">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -333,7 +333,7 @@ QGroupBox {
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>

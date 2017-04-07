@@ -843,9 +843,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(2);
-        HeaderTabs->setCurrentIndex(4);
+        HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
 

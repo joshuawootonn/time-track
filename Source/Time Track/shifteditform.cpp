@@ -105,8 +105,8 @@ void ShiftEditForm::AddShift(){
     TimeLeft();
     TimesInitialize();
 
-    ui->DateTime1->setDateTime(format_datetimes(QDateTime::currentDateTime()));
-    ui->DateTime2->setDateTime(format_datetimes(QDateTime::currentDateTime()));
+    ui->DateTime1->setDateTime(QDateTime(QDate::currentDate(),QTime(6,30,0)));
+    ui->DateTime2->setDateTime(QDateTime(QDate::currentDate(),QTime(18,30,0)));
 
 
     ui->FinishedButton->setEnabled(false);
@@ -240,6 +240,7 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
 /* These next six functions are used to initialize the
  * comboboxes with there appropriate model's. */
 void ShiftEditForm::EmployeeInitialize(){
+
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
     qry->prepare("select DISTINCT name from employeelist where id>'0' and current='1'");
@@ -249,6 +250,7 @@ void ShiftEditForm::EmployeeInitialize(){
 
 }
 void ShiftEditForm::ProjectInitialize(){
+
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
     qry->prepare("select DISTINCT name from projectlist where id>'0' and current = '1'");
@@ -258,6 +260,7 @@ void ShiftEditForm::ProjectInitialize(){
 
 }
 void ShiftEditForm::ItemInitialize(){
+
     QString id;
     QString x = ui->Projects->currentText();
     QSqlQueryModel * modal2=new QSqlQueryModel();
@@ -282,7 +285,7 @@ void ShiftEditForm::TimesInitialize(){
     QSqlQuery* qry1 = new QSqlQuery(data);
     QString a = "0:00";
     QString b = ui->timeLeft->text();
-    qDebug()<<ui->timeLeft->text();
+    //qDebug()<<ui->timeLeft->text();
     qry1->prepare("select time from timelist where time>='"+a+"'");
     if(qry1->exec())
     {
@@ -322,6 +325,10 @@ void ShiftEditForm::TimeLeft(){
 
     indt = QDateTime(QDate::fromString(datein,"yyyy-MM-dd"),QTime::fromString(timein,"HH:mm:ss"));
     outdt = QDateTime(QDate::fromString(dateout,"yyyy-MM-dd"),QTime::fromString(timeout,"HH:mm:ss"));
+
+    indt = format_datetimes(indt);
+    outdt = format_datetimes(outdt);
+
     int secs = indt.secsTo(outdt);
     int minutes = secs/60;
 
@@ -441,6 +448,13 @@ void ShiftEditForm::on_DateTime2_dateTimeChanged(const QDateTime &dateTime)
 
 /*These two classes are used to finish or cancel the
  * changes that the user was trying to implement.*/
+void ShiftEditForm::on_RefreshButton_clicked()
+{
+    data = ((MainForm*)parentWidget())->getData();
+    EmployeeInitialize();
+    ProjectInitialize();
+    ItemInitialize();
+}
 void ShiftEditForm::on_FinishedButton_clicked()
 {
 
@@ -484,7 +498,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     id++;
     shiftid = QString::number(id);
     qry->clear();
-    qDebug()<<shiftid;
+    //qDebug()<<shiftid;
 
 
     for(int i =0; i<ui->Sections->rowCount();i++){
@@ -512,7 +526,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
 
 
         qry->exec();
-        qDebug()<<employeeid<<projectid<<itemid<<employeename<<projectname<<itemname<<timein<<timeout<<datein<<dateout<<lunch<<hours<<shiftid;
+        //qDebug()<<employeeid<<projectid<<itemid<<employeename<<projectname<<itemname<<timein<<timeout<<datein<<dateout<<lunch<<hours<<shiftid;
     }
 
 
@@ -531,3 +545,5 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+

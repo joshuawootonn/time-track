@@ -46,6 +46,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *timeLeft;
+    QPushButton *RefreshButton;
     QPushButton *FinishedButton;
     QPushButton *CancelButton;
 
@@ -178,6 +179,11 @@ public:
 
         horizontalLayout_2->addWidget(timeLeft);
 
+        RefreshButton = new QPushButton(ShiftEditForm);
+        RefreshButton->setObjectName(QStringLiteral("RefreshButton"));
+
+        horizontalLayout_2->addWidget(RefreshButton);
+
         FinishedButton = new QPushButton(ShiftEditForm);
         FinishedButton->setObjectName(QStringLiteral("FinishedButton"));
 
@@ -207,6 +213,7 @@ public:
         Delete->setText(QApplication::translate("ShiftEditForm", "Delete", 0));
         label->setText(QApplication::translate("ShiftEditForm", "Time left:", 0));
         timeLeft->setText(QString());
+        RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", 0));
         FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", 0));
         CancelButton->setText(QApplication::translate("ShiftEditForm", "Cancel", 0));
     } // retranslateUi

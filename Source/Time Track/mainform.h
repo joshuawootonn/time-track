@@ -94,6 +94,7 @@ private slots:
 
     //Employee Tab!
 
+    void refreshEmployeeStuff();
     void refreshEmployeeTab();
     void on_EmployeeName_clicked();
     void on_EmployeePin_clicked();
@@ -112,6 +113,7 @@ private slots:
 
     //Project Tab!
 
+    void refreshProjectStuff();
     void refreshProjectTab();
     void on_ProjectView_clicked(const QModelIndex &index);
     void on_ProjectAdd_clicked();
@@ -131,6 +133,7 @@ private slots:
 
     //Item Tab!
 
+    void refreshItemStuff();
     void refreshItemTab();
     void on_ItemAdd_clicked();
     void on_ItemDelete_clicked();

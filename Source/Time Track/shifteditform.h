@@ -49,6 +49,8 @@ private slots:
 
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
+    void on_RefreshButton_clicked();
+
 signals:
     void finished();
 private:

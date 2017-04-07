@@ -95,7 +95,7 @@ void MainForm::DisconnectServer(){
  * 'fileexists' is used throughout to see if a file exists lol.
 */
 void MainForm::checkIfFileNameIsValid(QString x){
-    qDebug()<<"1";
+    //qDebug()<<"1";
     if(validData(x)&&fileExists(x))
     {
         QSqlQuery * qry = new QSqlQuery(setup);
@@ -103,7 +103,7 @@ void MainForm::checkIfFileNameIsValid(QString x){
         qry->exec();
         serverPath=x;
         ConnectServer();
-        qDebug()<<data.isOpen();
+        //qDebug()<<data.isOpen();
     }
     else
     {
@@ -114,11 +114,11 @@ void MainForm::checkIfFileNameIsValid(QString x){
 }
 QString MainForm::getCorrectFileName(){
     QString filename = QFileDialog::getOpenFileName(this,tr("Please select a valid path.."),"../","All files(*.sqlite)");
-    qDebug()<<filename;
+   // qDebug()<<filename;
 
     if(filename == "")
     {
-        qDebug()<<"IM here dumbass";
+        //qDebug()<<"IM here dumbass";
         QApplication::quit();
     }
     else if(fileExists(filename)&&validData(filename))
@@ -151,9 +151,10 @@ void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
 
-    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshProjectTab()));
-    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemTab()));
-    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeTab()));
+    QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshProjectStuff()));
+    QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
+    QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
+    QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
 
 
 //    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
@@ -475,6 +476,11 @@ void MainForm::EmployeeTab()
 
 
 }
+void MainForm::refreshEmployeeStuff(){
+    refreshEmployeeTab();
+    shifteditform->EmployeeInitialize();
+
+}
 void MainForm::refreshEmployeeTab(){
     ui->MainTabs->setCurrentIndex(0);
 
@@ -707,7 +713,8 @@ void MainForm::ProjectTab(){
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
     //ui->ProjectView->resizeColumnsToContents();
-    //ui->ProjectView->setSortingEnabled(true);
+    ui->ProjectView->setSortingEnabled(true);
+    ui->ProjectItemView->setSortingEnabled(true);
     ui->ProjectView->hideRow(0);
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
@@ -750,6 +757,12 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
     refreshProjectItemComboSpecific();
 
 
+}
+void MainForm::refreshProjectStuff(){
+
+    refreshProjectTab();
+    shifteditform->ProjectInitialize();
+    clockoutForm->ProjectInitialize();
 }
 void MainForm::refreshProjectTab(){
     ui->MainTabs->setCurrentIndex(1);
@@ -1137,6 +1150,12 @@ void MainForm::refreshItemTab(){
 
 
 }
+void MainForm::refreshItemStuff(){
+    refreshItemTab();
+    shifteditform->ItemInitialize();
+    clockoutForm->ItemInitialize();
+}
+
 /* Option menu 1 for ItemTab*/
 void MainForm::on_ItemAdd_clicked()
 {
@@ -1199,14 +1218,17 @@ void MainForm::on_ItemDimension_clicked()
  * and main refresher for the 'shiftTab' within 'sections'
 */
 void MainForm::ShiftTab(){
-    ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),1,1));
-    ui->ShiftDate2->setDate(QDate::currentDate());
+    int day = QDate::currentDate().dayOfWeek();
+    ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()-day));
+
+    ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
     refreshShiftEmployee();
     refreshShiftProject();
     refreshShiftItem();
     QSqlQueryModel * x=ShiftModel();
 
     ui->ShiftView->setModel(x);
+
 
 
     ui->ShiftView->hideColumn(0);
@@ -1223,6 +1245,9 @@ void MainForm::refreshShiftEmployee(){
     A->prepare("Select name from employeelist");
     A->exec();
     a->setQuery(*A);
+    QModelIndex x;
+    x.data("All Employees");
+    a->insertRow(0,x)
     ui->ShiftEmployeeCombo->setModel(a);
 
 }
