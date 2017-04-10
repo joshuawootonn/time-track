@@ -156,6 +156,8 @@ void MainForm::establishConnections(){
     QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
 
+    //QObject::connect(ui->ShiftView->horizontalHeader(),SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),this,SLOT(refreshShiftTab()));
+
 
 //    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
 //    QObject::connect(ui->ItemView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshItemTab()));
@@ -454,8 +456,8 @@ void MainForm::EmployeeTab()
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
     establishConnections();
-    //ui->EmployeeView->resizeColumnsToContents();
-    ui->EmployeeView->hideRow(0);
+    ui->EmployeeView->setSortingEnabled(true);
+
     ui->EmployeeName->setChecked(true);
     ui->EmployeeView->showColumn(0);
     ui->EmployeeId->setChecked(false);
@@ -712,10 +714,9 @@ void MainForm::ProjectTab(){
     establishConnections();
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
-    //ui->ProjectView->resizeColumnsToContents();
     ui->ProjectView->setSortingEnabled(true);
     ui->ProjectItemView->setSortingEnabled(true);
-    ui->ProjectView->hideRow(0);
+
     ui->ProjectView->hideColumn(1);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
@@ -726,6 +727,7 @@ void MainForm::ProjectTab(){
     ui->ProjectItemName->setChecked(true);
     ui->ProjectItemView->hideColumn(1);
     refreshProjectItemCombo();
+    ui->ProjectItemView->setSortingEnabled(true);
 
 
 }
@@ -1091,9 +1093,9 @@ void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
     establishConnections();
-    ui->ItemView->hideRow(0);
+
     ui->ItemView->hideColumn(1);
-   // ui->ItemView->resizeColumnsToContents();
+    ui->ItemView->setSortingEnabled(true);
     ui->ItemName->setChecked(true);
     ui->ItemId->setChecked(false);
     ui->ItemCategory->setChecked(true);
@@ -1220,17 +1222,13 @@ void MainForm::on_ItemDimension_clicked()
 void MainForm::ShiftTab(){
     int day = QDate::currentDate().dayOfWeek();
     ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()-day));
-
+    ui->ShiftView->setSortingEnabled(true);
     ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
     refreshShiftEmployee();
     refreshShiftProject();
     refreshShiftItem();
     QSqlQueryModel * x=ShiftModel();
-
     ui->ShiftView->setModel(x);
-
-
-
     ui->ShiftView->hideColumn(0);
     ui->ShiftView->hideColumn(1);
     ui->ShiftView->hideColumn(2);
@@ -1245,9 +1243,7 @@ void MainForm::refreshShiftEmployee(){
     A->prepare("Select name from employeelist");
     A->exec();
     a->setQuery(*A);
-    QModelIndex x;
-    x.data("All Employees");
-    a->insertRow(0,x)
+
     ui->ShiftEmployeeCombo->setModel(a);
 
 }
@@ -1293,6 +1289,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
 
 }
 void MainForm::refreshShiftTab(){
+    qDebug()<<"here";
     ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
     for(int i=0; i< x->rowCount(); i++)

@@ -11,6 +11,6 @@ int main(int argc, char *argv[])
     QString style(styleFile.readAll());
     a.setStyleSheet(style);
     MainForm *w= new MainForm;
-    w->show();
+    w->showMaximized();
     return a.exec();
 }
