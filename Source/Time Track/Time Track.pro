@@ -15,19 +15,16 @@ win32: RC_ICONS = icon.ico
 
 SOURCES += main.cpp \
     mainform.cpp \
-    loginform.cpp \
     clockoutform.cpp \
     shifteditform.cpp
 
 HEADERS  += \
     mainform.h \
-    loginform.h \
     clockoutform.h \
     shifteditform.h
 
 FORMS    += \
     mainform.ui \
-    loginform.ui \
     clockoutform.ui \
     shifteditform.ui
 

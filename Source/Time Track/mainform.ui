@@ -14,42 +14,106 @@
    <string>Time-Track</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">*{
+   <string notr="true">QWidget#MainForm{
+
+background-color:#E5EAE7;
+}
+*{
 font-family:&quot;Calibri&quot;;
 font-size: 14px;
 
 }
+
+
 QTabWidget{
 margin:0px;
 padding:0px;
-border-top: 15px solid #D3D3D3;
+border:none;
+
+background-color:#F1F4F5;
 
 }
+
+QTabBar{
+background-color:#F1F4F5;
+border:none;
+}
+QTabBar::tab:selected,QTabBar::tab:hover{
+
+color:#444946;
+}
+
+
+
+
 QStackedWidget{
 margin:0px;
 padding:0px;
 }
+
+
 QWidget{
 margin:0px;
 padding:0px;
 }
 
+
+
 QPushButton{
 padding:3px;
+border:none;
+background-color:#F1F4F5;
 }
+QPushButton:hover,QPushButton:hover{
+background-color:#E4E9EB;
+}
+
+
+QComboBox{
+border:none;
+background-color:#F1F4F5;
+}
+QComboBox:hover {
+background-color:#E4E9EB;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
 QRadioButton{
 padding:0px;
 margin:0px;
-}
-
-QTabWidget{
 
 }
-QGroupBox { 
-   
- } </string>
+
+QDateEdit{
+border:none;
+background-color:#F1F4F5;
+}
+QDateEdit:hover{
+background-color:#E4E9EB;
+}
+QDateEdit:drop-down{
+border:none;
+}
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+
+</string>
   </property>
-  <layout class="QGridLayout" name="_2">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -60,20 +124,82 @@ QGroupBox {
     <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>4</number>
    </property>
-   <item row="0" column="1">
+   <item>
     <widget class="QStackedWidget" name="mainStack">
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="basicPage">
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_3">
+     <widget class="QWidget" name="loginPage">
+      <property name="styleSheet">
+       <string notr="true">
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#E5EAE7;
+}
+QPushButton:hover,QPushButton:hover{
+background-color:#ECEFED;
+}
+</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_16">
+       <item row="3" column="1" rowspan="2" colspan="2">
+        <widget class="QLabel" name="passLabel">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMinimumSize</enum>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="passEdit">
+           <property name="maximumSize">
+            <size>
+             <width>45</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Calibri</family>
+             <pointsize>-1</pointsize>
+            </font>
+           </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_9">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -85,8 +211,61 @@ QGroupBox {
          </property>
         </spacer>
        </item>
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_2">
+       <item row="0" column="1">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="1">
+        <widget class="QPushButton" name="basicPageConnect">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="basicPage">
+      <property name="styleSheet">
+       <string notr="true">
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#E5EAE7;
+}
+QPushButton:hover,QPushButton:hover{
+background-color:#ECEFED;
+}
+</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -111,6 +290,19 @@ QGroupBox {
          </property>
         </spacer>
        </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="0" column="1">
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -125,32 +317,25 @@ QGroupBox {
         </spacer>
        </item>
        <item row="1" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
          <item>
           <widget class="QPushButton" name="basicPageClockIn">
            <property name="text">
-            <string>Clock In</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="basicPageClockOut">
            <property name="text">
-            <string>Clock out</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="basicPageConnect">
-           <property name="text">
-            <string>Connect</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="basicPageAdvanced">
            <property name="text">
-            <string>Advanced</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -174,11 +359,14 @@ QGroupBox {
        </property>
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
-         <property name="tabPosition">
-          <enum>QTabWidget::South</enum>
-         </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
+         </property>
+         <property name="tabsClosable">
+          <bool>false</bool>
+         </property>
+         <property name="tabBarAutoHide">
+          <bool>false</bool>
          </property>
          <widget class="QWidget" name="EmployeeTab">
           <attribute name="title">
@@ -333,7 +521,7 @@ QGroupBox {
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -351,6 +539,20 @@ QGroupBox {
           <bool>false</bool>
          </property>
          <widget class="QWidget" name="EmployeeSettings">
+          <property name="styleSheet">
+           <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#FE938C;
+
+}
+</string>
+          </property>
           <attribute name="title">
            <string>Employees</string>
           </attribute>
@@ -394,7 +596,7 @@ QGroupBox {
               <item>
                <widget class="QPushButton" name="EmployeeAdd">
                 <property name="text">
-                 <string>Add</string>
+                 <string/>
                 </property>
                 <property name="default">
                  <bool>false</bool>
@@ -404,14 +606,14 @@ QGroupBox {
               <item>
                <widget class="QPushButton" name="EmployeeArchive">
                 <property name="text">
-                 <string>Archive</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="EmployeeDelete">
                 <property name="text">
-                 <string>Delete</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -534,6 +736,20 @@ QGroupBox {
           </layout>
          </widget>
          <widget class="QWidget" name="ProjectsSettings">
+          <property name="styleSheet">
+           <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#B19994;
+
+}
+</string>
+          </property>
           <attribute name="title">
            <string>Projects</string>
           </attribute>
@@ -556,27 +772,27 @@ QGroupBox {
            <item>
             <widget class="QGroupBox" name="groupBox_6">
              <property name="title">
-              <string>Project Options</string>
+              <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
               <item>
                <widget class="QPushButton" name="ProjectAdd">
                 <property name="text">
-                 <string>Create New</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="ProjectDelete">
-                <property name="text">
-                 <string>Delete</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="ProjectArchive">
                 <property name="text">
-                 <string>Archive</string>
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ProjectDelete">
+                <property name="text">
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -675,24 +891,24 @@ QGroupBox {
            <item>
             <widget class="QGroupBox" name="groupBox_11">
              <property name="title">
-              <string>Item Options</string>
+              <string>Options</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
-              <item row="0" column="0">
+              <item row="0" column="1">
                <widget class="QPushButton" name="ProjectItemAdd">
                 <property name="text">
-                 <string>Add</string>
+                 <string/>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="0" column="2">
                <widget class="QPushButton" name="ProjectItemRemove">
                 <property name="text">
-                 <string>Remove</string>
+                 <string/>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0" colspan="2">
+              <item row="0" column="0">
                <widget class="QComboBox" name="ProjectItemCombo">
                 <property name="font">
                  <font>
@@ -707,8 +923,22 @@ QGroupBox {
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_12">
+             <property name="styleSheet">
+              <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#837F9A;
+
+}
+</string>
+             </property>
              <property name="title">
-              <string>Item Table</string>
+              <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
               <item row="0" column="0">
@@ -731,6 +961,19 @@ QGroupBox {
           </layout>
          </widget>
          <widget class="QWidget" name="ItemsSettings">
+          <property name="styleSheet">
+           <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#837F9A;
+
+}</string>
+          </property>
           <attribute name="title">
            <string>Sub-Projects</string>
           </attribute>
@@ -759,14 +1002,14 @@ QGroupBox {
               <item>
                <widget class="QPushButton" name="ItemAdd">
                 <property name="text">
-                 <string>Create New</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="ItemDelete">
                 <property name="text">
-                 <string>Delete</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -834,7 +1077,17 @@ QGroupBox {
          </widget>
          <widget class="QWidget" name="ShiftSettings">
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#8DAA91;
+
+}</string>
           </property>
           <attribute name="title">
            <string>Shifts</string>
@@ -864,21 +1117,21 @@ QGroupBox {
               <item>
                <widget class="QPushButton" name="ShiftAdd">
                 <property name="text">
-                 <string>Add</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="ShiftEdit">
                 <property name="text">
-                 <string>Edit</string>
+                 <string/>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="ShiftDelete">
                 <property name="text">
-                 <string>Delete</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -894,7 +1147,7 @@ QGroupBox {
               <property name="spacing">
                <number>2</number>
               </property>
-              <item row="0" column="1">
+              <item row="0" column="2">
                <widget class="QComboBox" name="ShiftEmployeeCombo">
                 <property name="font">
                  <font>
@@ -907,7 +1160,7 @@ QGroupBox {
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="1" column="2">
                <widget class="QComboBox" name="ShiftProjectCombo">
                 <property name="font">
                  <font>
@@ -920,7 +1173,14 @@ QGroupBox {
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label2323">
+                <property name="text">
+                 <string>Employee:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
                <widget class="QComboBox" name="ShiftItemCombo">
                 <property name="font">
                  <font>
@@ -933,10 +1193,10 @@ QGroupBox {
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label">
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_3">
                 <property name="text">
-                 <string>Employee:</string>
+                 <string>Item:</string>
                 </property>
                </widget>
               </item>
@@ -947,10 +1207,24 @@ QGroupBox {
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_3">
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="ShiftEmployeeBox">
                 <property name="text">
-                 <string>Item:</string>
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="ShiftProjectBox">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="ShiftItemBox">
+                <property name="text">
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -1010,7 +1284,7 @@ QGroupBox {
            <item>
             <widget class="QGroupBox" name="groupBox_15">
              <property name="title">
-              <string>Total</string>
+              <string/>
              </property>
              <layout class="QGridLayout" name="gridLayout_15">
               <item row="0" column="0">
@@ -1053,25 +1327,54 @@ QGroupBox {
            </property>
            <item>
             <widget class="QGroupBox" name="groupBox_14">
+             <property name="styleSheet">
+              <string notr="true">
+
+QPushButton{
+padding:3px;
+border:none;
+background-color: none;
+
+}
+QPushButton#DataBaseConnect{
+border-image: url(../Icons/connect.png); }
+ QPushButton#DataBaseConnect::hover { 
+border-image: url(..Icons/connect_hover.png); }
+
+
+QPushButton#DataBaseDisconnect{
+border-image: url(../Icons/disconnect.png); }
+QPushButton#DataBaseDisconnect::hover { 
+border-image: url(..Icons/connect.png); }
+
+
+</string>
+             </property>
              <property name="title">
               <string>Server Database</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_14">
-              <item row="0" column="2">
+              <item row="0" column="3">
                <widget class="QPushButton" name="DataBaseConnect">
                 <property name="maximumSize">
                  <size>
-                  <width>120</width>
-                  <height>16777215</height>
+                  <width>50</width>
+                  <height>50</height>
                  </size>
                 </property>
                 <property name="text">
-                 <string>Connect</string>
+                 <string/>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="DataBaseLabel">
+              <item row="0" column="4">
+               <widget class="QPushButton" name="DataBaseDisconnect">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -1090,16 +1393,10 @@ QGroupBox {
                 </property>
                </widget>
               </item>
-              <item row="0" column="3">
-               <widget class="QPushButton" name="DataBaseDisconnect">
-                <property name="maximumSize">
-                 <size>
-                  <width>120</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
+              <item row="0" column="2">
+               <widget class="QLabel" name="DataBaseLabel">
                 <property name="text">
-                 <string>Disconnect</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -1148,16 +1445,19 @@ QGroupBox {
      </widget>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetMinimumSize</enum>
      </property>
      <property name="rightMargin">
-      <number>9</number>
+      <number>4</number>
      </property>
      <property name="bottomMargin">
-      <number>9</number>
+      <number>0</number>
      </property>
      <item>
       <spacer name="horizontalSpacer">

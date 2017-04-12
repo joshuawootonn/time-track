@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
-    <height>369</height>
+    <width>607</width>
+    <height>383</height>
    </rect>
   </property>
   <property name="font">
@@ -20,40 +20,84 @@
    <string>Time-Track</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">*{
+   <string notr="true">QWidget#MainForm{
+
+background-color:#BAC7BE;
+}
+*{
 font-family:&quot;Calibri&quot;;
 font-size: 14px;
 
 }
+
+
 QTabWidget{
 margin:0px;
 padding:0px;
 border-top: 15px solid #D3D3D3;
 
+background-color:#F1F4F5;
+
 }
+QTabWidget#EmployeeSettings{
+background-color:#F1F4F5;
+}
+
+
 QStackedWidget{
 margin:0px;
 padding:0px;
 }
+
+
 QWidget{
 margin:0px;
 padding:0px;
 }
 
+
+
 QPushButton{
 padding:3px;
+border:none;
+background-color:#F1F4F5;
 }
+QPushButton:hover:!pressed{
+background-color:#E4E9EB;
+}
+
+
+QComboBox{
+border:none;
+background-color:#F1F4F5;
+}
+QComboBox:hover {
+background-color:#E4E9EB;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
 QRadioButton{
 padding:0px;
 margin:0px;
 }
 
-QTabWidget{
 
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
 }
-QGroupBox { 
-   
- } </string>
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -153,11 +197,25 @@ QGroupBox {
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="Sections">
-         <attribute name="verticalHeaderMinimumSectionSize">
-          <number>30</number>
-         </attribute>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QTableWidget" name="Sections">
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="Description">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>26</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>

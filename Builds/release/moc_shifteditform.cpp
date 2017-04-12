@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ShiftEditForm_t {
-    QByteArrayData data[18];
-    char stringdata0[323];
+    QByteArrayData data[19];
+    char stringdata0[350];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,9 +44,10 @@ QT_MOC_LITERAL(11, 176, 4), // "arg1"
 QT_MOC_LITERAL(12, 181, 28), // "on_DateTime1_dateTimeChanged"
 QT_MOC_LITERAL(13, 210, 8), // "dateTime"
 QT_MOC_LITERAL(14, 219, 28), // "on_DateTime2_dateTimeChanged"
-QT_MOC_LITERAL(15, 248, 25), // "on_FinishedButton_clicked"
-QT_MOC_LITERAL(16, 274, 23), // "on_CancelButton_clicked"
-QT_MOC_LITERAL(17, 298, 24) // "on_RefreshButton_clicked"
+QT_MOC_LITERAL(15, 248, 26), // "on_Description_textChanged"
+QT_MOC_LITERAL(16, 275, 25), // "on_FinishedButton_clicked"
+QT_MOC_LITERAL(17, 301, 23), // "on_CancelButton_clicked"
+QT_MOC_LITERAL(18, 325, 24) // "on_RefreshButton_clicked"
 
     },
     "ShiftEditForm\0finished\0\0"
@@ -57,6 +58,7 @@ QT_MOC_LITERAL(17, 298, 24) // "on_RefreshButton_clicked"
     "on_Lunch_currentTextChanged\0arg1\0"
     "on_DateTime1_dateTimeChanged\0dateTime\0"
     "on_DateTime2_dateTimeChanged\0"
+    "on_Description_textChanged\0"
     "on_FinishedButton_clicked\0"
     "on_CancelButton_clicked\0"
     "on_RefreshButton_clicked"
@@ -69,7 +71,7 @@ static const uint qt_meta_data_ShiftEditForm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,20 +79,21 @@ static const uint qt_meta_data_ShiftEditForm[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   74,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   75,    2, 0x08 /* Private */,
-       4,    0,   76,    2, 0x08 /* Private */,
-       5,    0,   77,    2, 0x08 /* Private */,
-       6,    2,   78,    2, 0x08 /* Private */,
-       9,    0,   83,    2, 0x08 /* Private */,
-      10,    1,   84,    2, 0x08 /* Private */,
-      12,    1,   87,    2, 0x08 /* Private */,
-      14,    1,   90,    2, 0x08 /* Private */,
-      15,    0,   93,    2, 0x08 /* Private */,
-      16,    0,   94,    2, 0x08 /* Private */,
-      17,    0,   95,    2, 0x08 /* Private */,
+       3,    0,   80,    2, 0x08 /* Private */,
+       4,    0,   81,    2, 0x08 /* Private */,
+       5,    0,   82,    2, 0x08 /* Private */,
+       6,    2,   83,    2, 0x08 /* Private */,
+       9,    0,   88,    2, 0x08 /* Private */,
+      10,    1,   89,    2, 0x08 /* Private */,
+      12,    1,   92,    2, 0x08 /* Private */,
+      14,    1,   95,    2, 0x08 /* Private */,
+      15,    0,   98,    2, 0x08 /* Private */,
+      16,    0,   99,    2, 0x08 /* Private */,
+      17,    0,  100,    2, 0x08 /* Private */,
+      18,    0,  101,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -104,6 +107,7 @@ static const uint qt_meta_data_ShiftEditForm[] = {
     QMetaType::Void, QMetaType::QString,   11,
     QMetaType::Void, QMetaType::QDateTime,   13,
     QMetaType::Void, QMetaType::QDateTime,   13,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -126,9 +130,10 @@ void ShiftEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 6: _t->on_Lunch_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->on_DateTime1_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
         case 8: _t->on_DateTime2_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
-        case 9: _t->on_FinishedButton_clicked(); break;
-        case 10: _t->on_CancelButton_clicked(); break;
-        case 11: _t->on_RefreshButton_clicked(); break;
+        case 9: _t->on_Description_textChanged(); break;
+        case 10: _t->on_FinishedButton_clicked(); break;
+        case 11: _t->on_CancelButton_clicked(); break;
+        case 12: _t->on_RefreshButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -169,13 +174,13 @@ int ShiftEditForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

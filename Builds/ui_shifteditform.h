@@ -21,6 +21,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -42,7 +43,9 @@ public:
     QComboBox *Lunch;
     QPushButton *Add;
     QPushButton *Delete;
+    QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
+    QTextEdit *Description;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *timeLeft;
@@ -54,44 +57,89 @@ public:
     {
         if (ShiftEditForm->objectName().isEmpty())
             ShiftEditForm->setObjectName(QStringLiteral("ShiftEditForm"));
-        ShiftEditForm->resize(572, 369);
+        ShiftEditForm->resize(607, 383);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         ShiftEditForm->setFont(font);
-        ShiftEditForm->setStyleSheet(QLatin1String("*{\n"
+        ShiftEditForm->setStyleSheet(QLatin1String("QWidget#MainForm{\n"
+"\n"
+"background-color:#BAC7BE;\n"
+"}\n"
+"*{\n"
 "font-family:\"Calibri\";\n"
 "font-size: 14px;\n"
 "\n"
 "}\n"
+"\n"
+"\n"
 "QTabWidget{\n"
 "margin:0px;\n"
 "padding:0px;\n"
 "border-top: 15px solid #D3D3D3;\n"
 "\n"
+"background-color:#F1F4F5;\n"
+"\n"
 "}\n"
+"QTabWidget#EmployeeSettings{\n"
+"background-color:#F1F4F5;\n"
+"}\n"
+"\n"
+"\n"
 "QStackedWidget{\n"
 "margin:0px;\n"
 "padding:0px;\n"
 "}\n"
+"\n"
+"\n"
 "QWidget{\n"
 "margin:0px;\n"
 "padding:0px;\n"
 "}\n"
 "\n"
+"\n"
+"\n"
 "QPushButton{\n"
 "padding:3px;\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
 "}\n"
+"QPushButton:hover:!pressed{\n"
+"background-color:#E4E9EB;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"}\n"
+"QComboBox:hover {\n"
+"background-color:#E4E9EB;\n"
+"}\n"
+"QComboBox:drop-down{\n"
+"border:none;\n"
+"}\n"
+"\n"
+"\n"
 "QRadioButton{\n"
 "padding:0px;\n"
 "margin:0px;\n"
 "}\n"
 "\n"
-"QTabWidget{\n"
 "\n"
+"QGroupBox {\n"
+"    border: 0px solid gray;\n"
+"	\n"
+"    margin-top: 0.5em;\n"
+"	margin-right:0px;\n"
+"	margin-left:0px;\n"
+""
+                        "}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    left: 10px;\n"
+"    padding: 0 3px 0 3px;\n"
 "}\n"
-"QGroupBox { \n"
-"   \n"
-" } "));
+""));
         gridLayout = new QGridLayout(ShiftEditForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         verticalLayout_2 = new QVBoxLayout();
@@ -158,11 +206,22 @@ public:
 
         horizontalLayout->addLayout(verticalLayout);
 
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         Sections = new QTableWidget(ShiftEditForm);
         Sections->setObjectName(QStringLiteral("Sections"));
         Sections->verticalHeader()->setMinimumSectionSize(30);
 
-        horizontalLayout->addWidget(Sections);
+        verticalLayout_3->addWidget(Sections);
+
+        Description = new QTextEdit(ShiftEditForm);
+        Description->setObjectName(QStringLiteral("Description"));
+        Description->setMaximumSize(QSize(16777215, 26));
+
+        verticalLayout_3->addWidget(Description);
+
+
+        horizontalLayout->addLayout(verticalLayout_3);
 
 
         verticalLayout_2->addLayout(horizontalLayout);

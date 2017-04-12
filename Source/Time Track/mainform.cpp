@@ -10,13 +10,14 @@ MainForm::MainForm(QWidget *parent) :
     ConnectSetup();
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
-    ui->mainStack->setCurrentIndex(0);
-    loginForm = new LoginForm(this);
-
-    loginInitialize();
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
+
+    loginInitialize();
+
     establishConnections();
+
+    setIcons();
 }
 
 MainForm::~MainForm()
@@ -74,6 +75,7 @@ void MainForm::ConnectServer()
 }
 void MainForm::DisconnectServer(){
 
+     qDebug()<<"open at disconnect"<<data.isOpen();
     QString connection;
     connection = data.connectionName();
     ui->EmployeeView->setModel(new QSqlQueryModel());
@@ -87,6 +89,9 @@ void MainForm::DisconnectServer(){
     ui->ProjectItemCombo->setModel(new QSqlQueryModel());
     data = QSqlDatabase::database();
     data.removeDatabase(connection);
+
+
+    qDebug()<<"open at disconnect"<<data.isOpen();
 }
 
 /* These classes deal with file connections.
@@ -103,7 +108,8 @@ void MainForm::checkIfFileNameIsValid(QString x){
         qry->exec();
         serverPath=x;
         ConnectServer();
-        //qDebug()<<data.isOpen();
+
+        qDebug()<<"open at check"<<data.isOpen();
     }
     else
     {
@@ -147,7 +153,6 @@ bool MainForm::fileExists(QString path) {
  * signals and slots
 */
 void MainForm::establishConnections(){
-    QObject::connect(loginForm,SIGNAL(logged()),this,SLOT(enter()));
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
 
@@ -156,16 +161,7 @@ void MainForm::establishConnections(){
     QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
 
-    //QObject::connect(ui->ShiftView->horizontalHeader(),SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),this,SLOT(refreshShiftTab()));
 
-
-//    QObject::connect(ui->ProjectView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshProjectTab()));
-//    QObject::connect(ui->ItemView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshItemTab()));
-//    QObject::connect(ui->EmployeeView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshEmployeeTab()));
-}
-void MainForm::enter(){
-    showtheThings();
-    mainInitialize();
 }
 void MainForm::reenter(){
 
@@ -174,36 +170,134 @@ void MainForm::reenter(){
 }
 
 /* Initialization of the different pages of mainform*/
+void MainForm::setIcons(){
+    QPixmap pixmap("../Icons/checked.png");
+    QIcon ButtonIcon(pixmap);
+    ui->basicPageClockIn->setIcon(ButtonIcon);
+    ui->basicPageClockIn->setIconSize(QSize(256,256));
+
+    pixmap = * new QPixmap("../Icons/unchecked.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->basicPageClockOut->setIcon(ButtonIcon);
+    ui->basicPageClockOut->setIconSize(QSize(256,256));
+
+    pixmap = * new QPixmap("../Icons/bars.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->basicPageAdvanced->setIcon(ButtonIcon);
+    ui->basicPageAdvanced->setIconSize(QSize(256,256));
+
+
+    pixmap = * new QPixmap("../Icons/connected.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->basicPageConnect->setIcon(ButtonIcon);
+    ui->basicPageConnect->setIconSize(QSize(256,256));
+
+//    pixmap = * new QPixmap("../Icons/connect.png");
+//    ButtonIcon =  * new QIcon(pixmap);
+//    ui->DataBaseConnect->setIcon(ButtonIcon);
+//    ui->DataBaseConnect->setIconSize(QSize(50,50));
+//    pixmap = * new QPixmap("../Icons/disconnect.png");
+//    ButtonIcon =  * new QIcon(pixmap);
+//    ui->DataBaseDisconnect->setIcon(ButtonIcon);
+//    ui->DataBaseDisconnect->setIconSize(QSize(50,50));
+
+
+    pixmap = * new QPixmap("../Icons/EmployeeAdd.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->EmployeeAdd->setIcon(ButtonIcon);
+    ui->EmployeeAdd->setIconSize(QSize(34,50));
+
+    pixmap = * new QPixmap("../Icons/EmployeeArchive.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->EmployeeArchive->setIcon(ButtonIcon);
+    ui->EmployeeArchive->setIconSize(QSize(34,50));
+
+
+    pixmap = * new QPixmap("../Icons/EmployeeDelete.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->EmployeeDelete->setIcon(ButtonIcon);
+    ui->EmployeeDelete->setIconSize(QSize(34,50));
+
+
+
+
+    pixmap = * new QPixmap("../Icons/ProjectAdd.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ProjectAdd->setIcon(ButtonIcon);
+    ui->ProjectAdd->setIconSize(QSize(34,50));
+
+    pixmap = * new QPixmap("../Icons/ProjectArchive.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ProjectArchive->setIcon(ButtonIcon);
+    ui->ProjectArchive->setIconSize(QSize(34,50));
+
+    pixmap = * new QPixmap("../Icons/ProjectDelete.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ProjectDelete->setIcon(ButtonIcon);
+    ui->ProjectDelete->setIconSize(QSize(34,50));
+
+
+
+    pixmap = * new QPixmap("../Icons/SubProjectAdd.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ItemAdd->setIcon(ButtonIcon);
+    ui->ItemAdd->setIconSize(QSize(34,50));
+    ui->ProjectItemAdd->setIcon(ButtonIcon);
+    ui->ProjectItemAdd->setIconSize(QSize(34,50));
+    pixmap = * new QPixmap("../Icons/SubProjectDelete.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ItemDelete->setIcon(ButtonIcon);
+    ui->ItemDelete->setIconSize(QSize(34,50));
+    ui->ProjectItemRemove->setIcon(ButtonIcon);
+    ui->ProjectItemRemove->setIconSize(QSize(34,50));
+
+
+
+
+    pixmap = * new QPixmap("../Icons/ShiftAdd.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ShiftAdd->setIcon(ButtonIcon);
+    ui->ShiftAdd->setIconSize(QSize(34,50));
+
+    pixmap = * new QPixmap("../Icons/ShiftEdit.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ShiftEdit->setIcon(ButtonIcon);
+    ui->ShiftEdit->setIconSize(QSize(34,50));
+
+    pixmap = * new QPixmap("../Icons/ShiftDelete.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ShiftDelete->setIcon(ButtonIcon);
+    ui->ShiftDelete->setIconSize(QSize(34,50));
+
+}
+
 void MainForm::loginInitialize(){
-    basicInitialize();
-    hidetheThings();
+    ui->mainStack->setCurrentIndex(0);
+    admin=false;
 
     isConnected();
-
+    ui->mainFinish->hide();
 
 }
 void MainForm::isConnected(){
+    ui->passEdit->setText("");
+    ui->passLabel->setText("");
     if(data.isOpen())
     {
-        ui->basicPageConnect->hide();
-        loginForm->reset();
-        loginForm->show();
+        ui->passEdit->show();
+        ui->passEdit->show();
+        ui->basicPageConnect->hide();        
     }
     else
     {
-        ui->basicPageConnect->show();
-        loginForm->hide();
+        ui->passEdit->hide();
+        ui->passEdit->hide();
+        ui->basicPageConnect->show();        
     }
-}
-void MainForm::mainInitialize(){
-    id=loginForm->id;
-    admin=loginForm->admin;
-
-    basicInitialize();
 }
 void MainForm::basicInitialize()
 {
-    ui->mainStack->setCurrentIndex(0);
+    ui->mainStack->setCurrentIndex(1);
     if(admin==true)
         ui->basicPageAdvanced->show();
     else
@@ -231,9 +325,11 @@ void MainForm::basicInitialize()
         ui->basicPageClockIn->show();
         ui->basicPageClockOut->hide();
     }
+    ui->mainFinish->show();
 }
 void MainForm::advInitialize(){
-    ui->mainStack->setCurrentIndex(1);
+    ui->mainStack->setCurrentIndex(2);
+    ui->MainTabs->tabBar()->hide();
 
 }
 
@@ -335,7 +431,9 @@ void MainForm::on_basicPageConnect_clicked()
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {
+    qDebug()<<"open at advanced"<<data.isOpen();
     advInitialize();
+    qDebug()<<"open at advanced 2"<<data.isOpen();
     EmployeeTab();
     ShiftTab();
     ProjectTab();
@@ -418,6 +516,46 @@ QDateTime MainForm::format_datetimes(QDateTime z)
 
 }
 
+//Login Section!
+
+void MainForm::on_passEdit_returnPressed()
+{
+    pin= ui->passEdit->text();
+    QSqlQuery qry1(data),qry2(data);
+    qry1.prepare("SELECT * FROM employeelist where pin = '"+pin+"'");
+    if (qry1.exec())
+    {
+        int count=0;
+        while(qry1.next())
+        {
+           count++;
+        }
+        if(count == 1)
+        {
+            qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
+            if(qry2.exec()){
+                while(qry2.next()){
+                    QString x= qry2.value(0).toString();
+                    if(x=="1")
+                        admin=true;
+                    else
+                        admin=false;
+                    id = qry2.value(1).toString();
+                }
+            }
+
+            basicInitialize();
+        }
+        if(count < 1){
+            if(ui->passEdit->text()!="")
+                ui->passLabel->setText("Invalid");
+
+        }
+        else
+            ui->passLabel->setText("");
+    }
+}
+
 /* Initialization of Database section of 'sections'
  * and the signal and slot for resetting the data-
  * base connection.
@@ -431,6 +569,7 @@ void MainForm::on_DataBaseConnect_clicked()
     DisconnectServer();
     checkIfFileNameIsValid(filename);
     on_basicPageAdvanced_clicked();
+    qDebug()<<"open at advanced 2"<<data.isOpen();
 }
 void MainForm::on_DataBaseDisconnect_clicked()
 {
@@ -442,6 +581,7 @@ void MainForm::on_DataBaseDisconnect_clicked()
     DisconnectServer();
     ConnectServer();
     on_basicPageAdvanced_clicked();
+    QApplication::quit();
 }
 
 // Employee Section!
@@ -563,6 +703,7 @@ void MainForm::on_EmployeeAdd_clicked()
     qry->exec();
     refreshEmployeeTab();
     refreshShiftEmployee();
+    shifteditform->updateShiftEdit();
     ui->MainTabs->setCurrentIndex(0);
 }
 int MainForm::generateRandom(){
@@ -604,6 +745,7 @@ void MainForm::on_EmployeeArchive_clicked()
         qry->exec();
     }
     refreshEmployeeTab();
+    shifteditform->updateShiftEdit();
 }
 void MainForm::on_EmployeeDelete_clicked()
 {
@@ -624,7 +766,7 @@ void MainForm::on_EmployeeDelete_clicked()
     refreshEmployeeTab();
     refreshShiftEmployee();
     ui->MainTabs->setCurrentIndex(0);
-
+    shifteditform->updateShiftEdit();
 }
 /* Option menu 2 for EmployeeTab*/
 void MainForm::on_EmployeeName_clicked()
@@ -734,21 +876,11 @@ void MainForm::ProjectTab(){
 void MainForm::refreshProjectItemCombo(){
     QSqlQueryModel * a = new QSqlQueryModel();
     QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from itemlist where id>0");
+    A->prepare("Select name from itemlist where id>0 ORDER BY name ASC");
     A->exec();
     a->setQuery(*A);
     ui->ProjectItemCombo->setModel(a);
-}
-void MainForm::refreshProjectItemComboSpecific(){
-
-    QSqlQueryModel * a = new QSqlQueryModel();
-    QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from itemlist where id>0");
-    A->exec();
-    a->setQuery(*A);
-    ui->ProjectItemCombo->setModel(a);
-
-
+    ui->ProjectItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 }
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
@@ -756,7 +888,7 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
     QSqlQueryModel * x = ProjectItemModel();
     ui->ProjectItemView->setModel(x);
 
-    refreshProjectItemComboSpecific();
+    refreshProjectItemCombo();
 
 
 }
@@ -916,6 +1048,7 @@ void MainForm::on_ProjectAdd_clicked()
     refreshProjectTab();
     refreshShiftProject();
     ui->MainTabs->setCurrentIndex(1);
+    shifteditform->updateShiftEdit();
 
 }
 void MainForm::on_ProjectDelete_clicked()
@@ -943,6 +1076,7 @@ void MainForm::on_ProjectDelete_clicked()
     refreshProjectTab();
     refreshShiftProject();
     ui->MainTabs->setCurrentIndex(1);
+    shifteditform->updateShiftEdit();
 }
 void MainForm::on_ProjectArchive_clicked()
 {
@@ -968,6 +1102,7 @@ void MainForm::on_ProjectArchive_clicked()
         qry->exec();
     }
     refreshProjectTab();
+    shifteditform->updateShiftEdit();
 }
 /* Option menu 2 for ProjectTab*/
 void MainForm::on_ProjectName_clicked()
@@ -1045,10 +1180,7 @@ void MainForm::on_ProjectItemAdd_clicked()
         while(qry->next())
             itemId = qry->value(0).toString();
     }
-
-
-
-    qry->clear();
+     qry->clear();
     
     QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = model->tableName();
@@ -1057,7 +1189,7 @@ void MainForm::on_ProjectItemAdd_clicked()
 
     model->select();
     ui->ProjectItemView->setModel(model);
-
+    shifteditform->updateShiftEdit();
             
 }
 void MainForm::on_ProjectItemRemove_clicked()
@@ -1078,10 +1210,7 @@ void MainForm::on_ProjectItemRemove_clicked()
     }
     tablemodel->select();
     ui->ProjectItemView->setModel(tablemodel);
-
-
-
-
+    shifteditform->updateShiftEdit();
 }
 
 // Item Section!
@@ -1224,9 +1353,10 @@ void MainForm::ShiftTab(){
     ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()-day));
     ui->ShiftView->setSortingEnabled(true);
     ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
-    refreshShiftEmployee();
+
     refreshShiftProject();
     refreshShiftItem();
+    refreshShiftEmployee();
     QSqlQueryModel * x=ShiftModel();
     ui->ShiftView->setModel(x);
     ui->ShiftView->hideColumn(0);
@@ -1235,33 +1365,39 @@ void MainForm::ShiftTab(){
     ui->ShiftView->hideColumn(3);
     ui->ShiftView->hideColumn(13);
 
+    ui->ShiftEmployeeCombo->setEnabled(false);
+    ui->ShiftProjectCombo->setEnabled(false);
+    ui->ShiftItemCombo->setEnabled(false);
+
     refreshShiftTab();
 }
 void MainForm::refreshShiftEmployee(){
     QSqlQueryModel * a = new QSqlQueryModel();
     QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from employeelist");
+    A->prepare("Select name from employeelist ORDER BY name ASC");
     A->exec();
     a->setQuery(*A);
 
     ui->ShiftEmployeeCombo->setModel(a);
-
+    ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 }
 void MainForm::refreshShiftProject(){
     QSqlQueryModel * b = new QSqlQueryModel();
     QSqlQuery * B = new QSqlQuery(data);
-    B->prepare("Select name from projectlist");
+    B->prepare("Select name from projectlist ORDER BY name ASC");
     B->exec();
     b->setQuery(*B);
     ui->ShiftProjectCombo->setModel(b);
+    ui->ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 }
 void MainForm::refreshShiftItem(){
     QSqlQueryModel * c = new QSqlQueryModel();
     QSqlQuery * C = new QSqlQuery(data);
-    C->prepare("Select name from itemlist");
+    C->prepare("Select name from itemlist ORDER BY name ASC");
     C->exec();
     c->setQuery(*C);
     ui->ShiftItemCombo->setModel(c);
+    ui->ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 }
 QSqlQueryModel * MainForm::ShiftModel(){
 
@@ -1283,13 +1419,15 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(10,Qt::Horizontal,tr("Date out"));
     model->setHeaderData(11,Qt::Horizontal,tr("Lunch Time"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
+    model->setHeaderData(14,Qt::Horizontal,tr("Description"));
+
 
 
     return model;
 
 }
 void MainForm::refreshShiftTab(){
-    qDebug()<<"here";
+    //qDebug()<<"here";
     ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
     for(int i=0; i< x->rowCount(); i++)
@@ -1298,7 +1436,7 @@ void MainForm::refreshShiftTab(){
         ui->ShiftView->showRow(i);
 
     }
-    if(ui->ShiftEmployeeCombo->currentText()!="All Employees")
+    if(ui->ShiftEmployeeBox->isChecked())
     {
         for(int i=0; i< x->rowCount(); i++)
         {
@@ -1310,7 +1448,7 @@ void MainForm::refreshShiftTab(){
             }
         }
     }
-    if(ui->ShiftProjectCombo->currentText()!="All Projects")
+    if(ui->ShiftProjectBox->isChecked())
     {
         for(int i=0; i< x->rowCount(); i++)
         {
@@ -1322,7 +1460,7 @@ void MainForm::refreshShiftTab(){
 
         }
     }
-    if(ui->ShiftItemCombo->currentText()!="All Items")
+    if(ui->ShiftItemBox->isChecked())
     {
         for(int i=0; i< x->rowCount(); i++)
         {
@@ -1388,6 +1526,30 @@ void MainForm::on_ShiftDate2_dateChanged(const QDate &date)
     refreshShiftTab();
 }
 /* Option menu 2 for shiftTab*/
+void MainForm::on_ShiftEmployeeBox_clicked()
+{
+    refreshShiftTab();
+    if(ui->ShiftEmployeeBox->isChecked())
+        ui->ShiftEmployeeCombo->setEnabled(true);
+    else
+        ui->ShiftEmployeeCombo->setEnabled(false);
+}
+void MainForm::on_ShiftProjectBox_clicked()
+{
+    refreshShiftTab();
+    if(ui->ShiftProjectBox->isChecked())
+        ui->ShiftProjectCombo->setEnabled(true);
+    else
+        ui->ShiftProjectCombo->setEnabled(false);
+}
+void MainForm::on_ShiftItemBox_clicked()
+{
+    refreshShiftTab();
+    if(ui->ShiftItemBox->isChecked())
+        ui->ShiftItemCombo->setEnabled(true);
+    else
+        ui->ShiftItemCombo->setEnabled(false);
+}
 void MainForm::on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1)
 {
     refreshShiftTab();
@@ -1466,7 +1628,7 @@ void MainForm::on_ShiftDelete_clicked()
     refreshShiftTab();
 }
 
-//Settings Sections!
+//Settings Section!
 
 /* Quickly made this section so that I could maximize
  * and fullscreen the program easily plan on making
@@ -1480,6 +1642,7 @@ void MainForm::on_SettngsFullScreen_clicked()
     this->showFullScreen();
 }
 
+
 /* This is the method used for sending the data
  * database to sub-form.
  */
@@ -1487,6 +1650,7 @@ QSqlDatabase MainForm::getData() const
 {
     return data;
 }
+
 
 
 

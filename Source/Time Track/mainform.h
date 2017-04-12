@@ -11,7 +11,6 @@
 #include <QDesktopWidget>
 #include <QCoreApplication>
 #include <mainform.h>
-#include "loginform.h"
 #include "clockoutform.h"
 #include "shifteditform.h"
 namespace Ui {
@@ -41,8 +40,9 @@ public:
     void showtheThings();
     void hidetheThings();
     void isConnected();
+
+    void setIcons();
     void loginInitialize();
-    void mainInitialize();
     void basicInitialize();
     void advInitialize();
 
@@ -59,7 +59,6 @@ public:
     QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectItemTab();
     void refreshProjectItemCombo();
-    void refreshProjectItemComboSpecific();
 
     void ItemTab();
     QSqlQueryModel * ItemModel();
@@ -75,7 +74,6 @@ public:
      */
 public slots:
 
-    void enter();
     void reenter();
 
     void on_basicPageClockIn_clicked();
@@ -146,6 +144,9 @@ private slots:
     //Shift Tab!
 
     void refreshShiftTab();
+    void on_ShiftEmployeeBox_clicked();
+    void on_ShiftProjectBox_clicked();
+    void on_ShiftItemBox_clicked();
     void on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1);
     void on_ShiftProjectCombo_currentTextChanged(const QString &arg1);
     void on_ShiftItemCombo_currentTextChanged(const QString &arg1);
@@ -167,9 +168,12 @@ private slots:
     void on_SettngsFullScreen_clicked();
 
 
+
+
+    void on_passEdit_returnPressed();
+
 private:
     Ui::MainForm *ui;
-    LoginForm *loginForm;
     ClockoutForm *clockoutForm;
     ShiftEditForm * shifteditform;
     QSqlDatabase data;
@@ -178,9 +182,11 @@ private:
     QString localPath;
     QString id;
     bool admin;
+    QString pin;
 };
 
 #endif // MAINFORM_H
+
 
 
 

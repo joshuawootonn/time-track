@@ -105,6 +105,9 @@ void ShiftEditForm::AddShift(){
     TimeLeft();
     TimesInitialize();
 
+    ui->Description->setVisible(false);
+
+
     ui->DateTime1->setDateTime(QDateTime(QDate::currentDate(),QTime(6,30,0)));
     ui->DateTime2->setDateTime(QDateTime(QDate::currentDate(),QTime(18,30,0)));
 
@@ -132,8 +135,8 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     ui->DateTime2->setDateTime(format_datetimes(QDateTime::currentDateTime()));
 
     QSqlQuery* qry=new QSqlQuery(data);
-    QString employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch;
-    qry->prepare("select employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch from shiftlist where shiftid='"+shiftid+"'");
+    QString employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,description;
+    qry->prepare("select employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,description from shiftlist where shiftid='"+shiftid+"'");
     if(qry->exec())
     {
         while(qry->next())
@@ -146,7 +149,7 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
             datein = qry->value(5).toString();
             dateout = qry->value(6).toString();
             timelunch = qry->value(7).toString();
-
+            description = qry->value(8).toString();
         }
     }
 
@@ -163,6 +166,13 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Project"));
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
+    if(description=="")
+        ui->Description->setVisible(false);
+    else{
+        ui->Description->setVisible(true);
+        ui->Description->setText(description);
+    }
+
     qry->clear();
     qry->prepare("select time,projectname,itemname from shiftlist where shiftid='"+shiftid+"'");
     if(qry->exec())
@@ -213,6 +223,7 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     }
 
 
+    ui->Description->setVisible(false);
 
 
     ui->Name->setCurrentIndex(ui->Name->findText(employeename));
@@ -235,7 +246,11 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
 
 
 }
-
+void ShiftEditForm::updateShiftEdit(){
+    EmployeeInitialize();
+    ProjectInitialize();
+    ItemInitialize();
+}
 
 /* These next six functions are used to initialize the
  * comboboxes with there appropriate model's. */
@@ -243,7 +258,7 @@ void ShiftEditForm::EmployeeInitialize(){
 
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from employeelist where id>'0' and current='1'");
+    qry->prepare("select DISTINCT name from employeelist where current='1'  ORDER BY name ASC");
     qry->exec();
     modal->setQuery(*qry);
     ui->Name->setModel(modal);
@@ -253,7 +268,7 @@ void ShiftEditForm::ProjectInitialize(){
 
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from projectlist where id>'0' and current = '1'");
+    qry->prepare("select DISTINCT name from projectlist where current = '1' ORDER BY name ASC");
     qry->exec();
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
@@ -275,7 +290,7 @@ void ShiftEditForm::ItemInitialize(){
     }
     QSqlQuery* qry2=new QSqlQuery(data);
     id = "Project"+id;
-    qry2->prepare("select DISTINCT name from '"+id+"'");
+    qry2->prepare("select DISTINCT name from '"+id+"' ORDER BY name ASC");
     qry2->exec();
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
@@ -291,7 +306,7 @@ void ShiftEditForm::TimesInitialize(){
     {
            while(qry1->next())
            {
-               qDebug()<< qry1->value(0).toString();
+               //qDebug()<< qry1->value(0).toString();
            }
     }
 
@@ -319,7 +334,7 @@ void ShiftEditForm::TimeLeft(){
     QDateTime indt,outdt;
     QString timein,timeout,datein,dateout;
     timein = ui->DateTime1->time().toString("HH:mm:ss");
-    datein = ui->DateTime2->date().toString("yyyy-MM-dd");
+    datein = ui->DateTime1->date().toString("yyyy-MM-dd");
     timeout = ui->DateTime2->time().toString("HH:mm:ss");
     dateout = ui->DateTime2->date().toString("yyyy-MM-dd");
 
@@ -328,6 +343,8 @@ void ShiftEditForm::TimeLeft(){
 
     indt = format_datetimes(indt);
     outdt = format_datetimes(outdt);
+
+
 
     int secs = indt.secsTo(outdt);
     int minutes = secs/60;
@@ -347,20 +364,33 @@ void ShiftEditForm::TimeLeft(){
     minutes-=lunch.split(":")[1].toInt();
     int hours = minutes/60;
     minutes=minutes%60;
+    QString j;
     if(minutes==0){
-        ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes)+"0");
+        j = QString::number(hours)+":"+QString::number(minutes)+"0";
 
     }
     else
-        ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes));
+        j =QString::number(hours)+":"+QString::number(minutes);
 
+    ui->timeLeft->setText(j);
 
-    //qDebug()<<hours<<minutes;
     if(ui->timeLeft->text()=="0:00")
-        ui->FinishedButton->setEnabled(true);
+    {
+        if(ui->Description->isVisible()&&ui->Description->toPlainText()!=""){
+
+            ui->FinishedButton->setEnabled(true);
+        }
+        else if(!ui->Description->isVisible()&&ui->Sections->rowCount()>0){
+            ui->FinishedButton->setEnabled(true);
+        }
+        else{
+            ui->FinishedButton->setEnabled(false);
+        }
+        qDebug()<<"lul"<<ui->Description->toPlainText();
+
+    }
     else
         ui->FinishedButton->setEnabled(false);
-
 }
 
 
@@ -376,28 +406,20 @@ void ShiftEditForm::on_Add_clicked()
     ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
     ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
     ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
+    if(ui->Items->currentText()=="Other")
+    {
+        ui->Description->setVisible(true);
+    }
 
     ui->Sections->resizeRowsToContents();
+    TimeLeft();
 }
 void ShiftEditForm::on_Delete_clicked()
 {
-    /*QString time = ui->timeLeft->text();
-    //qDebug()<<item;
-
-    int hours=time.split(":")[0].toInt();
-    int minutes=time.split(":")[1].toInt();
-
-    minutes=minutes+hours*60;
-
-    QString time2 = ui->Sections->item(selectedRow,2)->text();
-    minutes-= time2.split(":")[0].toInt()*60;
-    minutes-= time2.split(":")[1].toInt();
-
-    hours=minutes/60;
-    minutes=minutes%60;
-    ui->timeLeft->setText(QString::number(hours)+":"+QString::number(minutes));
-
-*/
+    if(ui->Sections->item(selectedRow,1)->text()=="Other"){
+        ui->Description->setText("");
+        ui->Description->setVisible(false);
+    }
     ui->Sections->removeRow(selectedRow);
     TimeLeft();
 
@@ -441,6 +463,10 @@ void ShiftEditForm::on_DateTime1_dateTimeChanged(const QDateTime &dateTime)
     TimeLeft();
 }
 void ShiftEditForm::on_DateTime2_dateTimeChanged(const QDateTime &dateTime)
+{
+    TimeLeft();
+}
+void ShiftEditForm::on_Description_textChanged()
 {
     TimeLeft();
 }
@@ -488,7 +514,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     QString dateout = clockout.toString("yyyy-MM-dd");
 
 
-    QString projectname,itemname, projectid,itemid,hours,lunch,shiftid;
+    QString projectname,itemname, projectid,itemid,hours,lunch,shiftid,description;
     qry->clear();
     qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
     if(qry->exec()){
@@ -499,7 +525,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     shiftid = QString::number(id);
     qry->clear();
     //qDebug()<<shiftid;
-
+    description=ui->Description->toPlainText();
 
     for(int i =0; i<ui->Sections->rowCount();i++){
 
@@ -521,12 +547,16 @@ void ShiftEditForm::on_FinishedButton_clicked()
         hours=ui->Sections->item(i,2)->text();
         lunch=ui->Lunch->currentText();
         qry->clear();
-        qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+        if(itemname=="Other")
+            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
+                     +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"','"+description+"')");
+        else
+            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
                      +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
 
 
         qry->exec();
-        //qDebug()<<employeeid<<projectid<<itemid<<employeename<<projectname<<itemname<<timein<<timeout<<datein<<dateout<<lunch<<hours<<shiftid;
+
     }
 
 
@@ -545,5 +575,6 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
 
 
