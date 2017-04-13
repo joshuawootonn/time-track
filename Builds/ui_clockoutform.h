@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -28,6 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_ClockoutForm
 {
 public:
+    QGridLayout *gridLayout;
     QWidget *bigwidger;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -151,9 +153,10 @@ public:
 "    padding: 0 3px 0 3px;\n"
 "}\n"
 ""));
+        gridLayout = new QGridLayout(ClockoutForm);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         bigwidger = new QWidget(ClockoutForm);
         bigwidger->setObjectName(QStringLiteral("bigwidger"));
-        bigwidger->setGeometry(QRect(9, 9, 536, 277));
         verticalLayout_2 = new QVBoxLayout(bigwidger);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         horizontalLayout = new QHBoxLayout();
@@ -259,6 +262,9 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
+
+
+        gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
 
         retranslateUi(ClockoutForm);

@@ -258,6 +258,10 @@ public:
 "background-color:#E4E9EB;\n"
 "}\n"
 "\n"
+"QPushButton#basicPageConnect:hover{\n"
+"border-radius:15px;\n"
+"\n"
+"}\n"
 "\n"
 "QComboBox{\n"
 "border:none;\n"
@@ -273,14 +277,14 @@ public:
 "\n"
 "QRadioButton{\n"
 "padding:0px;\n"
-"margin:0px;\n"
+"m"
+                        "argin:0px;\n"
 "\n"
 "}\n"
 "\n"
 "QDateEdit{\n"
 "border:none;\n"
-"background-c"
-                        "olor:#F1F4F5;\n"
+"background-color:#F1F4F5;\n"
 "}\n"
 "QDateEdit:hover{\n"
 "background-color:#E4E9EB;\n"
@@ -1161,9 +1165,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(1);
-        HeaderTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
 
 

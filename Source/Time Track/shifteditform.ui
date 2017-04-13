@@ -72,13 +72,14 @@ QDateTimeEdit{
 border:none;
 background-color:#F1F4F5;
 }
-QDateEditTime:hover{
+QDateTimeEdit:hover{
 border:none;
 background-color:#E4E9EB;
 }
-QDateEditTime::drop-down{
+QDateTimeEdit::drop-down{
 border:none;
 }
+
 
 
 QComboBox{

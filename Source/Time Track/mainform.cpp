@@ -424,11 +424,12 @@ void MainForm::on_basicPageClockOut_clicked()
 void MainForm::on_basicPageConnect_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    DisconnectServer();
+    if(filename!=""){
+        DisconnectServer();
+        checkIfFileNameIsValid(filename);
+        loginInitialize();
+    }
 
-    checkIfFileNameIsValid(filename);
-
-    loginInitialize();
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {

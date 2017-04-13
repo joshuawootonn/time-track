@@ -239,7 +239,7 @@ release/moc_mainform.cpp: ../../../Qt/5.7/mingw53_32/include/QtWidgets/QWidget \
 		../Source/Time\ Track/shifteditform.h \
 		../Source/Time\ Track/mainform.h \
 		../../../Qt/5.7/mingw53_32/bin/moc.exe
-	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time-Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/mainform.h" -o release/moc_mainform.cpp
+	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/mainform.h" -o release/moc_mainform.cpp
 
 release/moc_clockoutform.cpp: ../../../Qt/5.7/mingw53_32/include/QtWidgets/QDialog \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qdialog.h \
@@ -368,7 +368,7 @@ release/moc_clockoutform.cpp: ../../../Qt/5.7/mingw53_32/include/QtWidgets/QDial
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time\ Track/clockoutform.h \
 		../../../Qt/5.7/mingw53_32/bin/moc.exe
-	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time-Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/clockoutform.h" -o release/moc_clockoutform.cpp
+	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/clockoutform.h" -o release/moc_clockoutform.cpp
 
 release/moc_shifteditform.cpp: ../../../Qt/5.7/mingw53_32/include/QtWidgets/QDialog \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qdialog.h \
@@ -497,7 +497,7 @@ release/moc_shifteditform.cpp: ../../../Qt/5.7/mingw53_32/include/QtWidgets/QDia
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time\ Track/shifteditform.h \
 		../../../Qt/5.7/mingw53_32/bin/moc.exe
-	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time-Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/shifteditform.h" -o release/moc_shifteditform.cpp
+	'C:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -I'C:/Git/Time Track/Source/Time Track' -IC:/Qt/5.7/mingw53_32/include -IC:/Qt/5.7/mingw53_32/include/QtWidgets -IC:/Qt/5.7/mingw53_32/include/QtGui -IC:/Qt/5.7/mingw53_32/include/QtANGLE -IC:/Qt/5.7/mingw53_32/include/QtSql -IC:/Qt/5.7/mingw53_32/include/QtCore -I. "../Source/Time Track/shifteditform.h" -o release/moc_shifteditform.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -985,12 +985,11 @@ release/clockoutform.o: ../Source/Time\ Track/clockoutform.cpp ../Source/Time\ T
 		../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
+		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
+		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
+		../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
 		../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \

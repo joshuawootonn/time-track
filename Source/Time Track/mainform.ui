@@ -68,6 +68,10 @@ QPushButton:hover,QPushButton:hover{
 background-color:#E4E9EB;
 }
 
+QPushButton#basicPageConnect:hover{
+border-radius:15px;
+
+}
 
 QComboBox{
 border:none;
@@ -132,7 +136,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -611,7 +615,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
