@@ -40,14 +40,28 @@ public:
     QStackedWidget *mainStack;
     QWidget *loginPage;
     QGridLayout *gridLayout_16;
-    QLabel *passLabel;
-    QSpacerItem *verticalSpacer_4;
     QHBoxLayout *horizontalLayout_13;
     QLineEdit *passEdit;
-    QSpacerItem *horizontalSpacer_9;
     QSpacerItem *verticalSpacer_3;
+    QSpacerItem *horizontalSpacer_9;
+    QSpacerItem *verticalSpacer_4;
     QSpacerItem *horizontalSpacer_10;
     QPushButton *basicPageConnect;
+    QLabel *passLabel;
+    QWidget *loginNumPad;
+    QGridLayout *gridLayout_17;
+    QPushButton *Login7;
+    QPushButton *Login8;
+    QPushButton *Login1;
+    QPushButton *Login4;
+    QPushButton *Login5;
+    QPushButton *Login2;
+    QPushButton *Login9;
+    QPushButton *Login6;
+    QPushButton *Login3;
+    QPushButton *Login0;
+    QPushButton *LoginBack;
+    QPushButton *LoginGo;
     QWidget *basicPage;
     QGridLayout *gridLayout_2;
     QSpacerItem *horizontalSpacer_3;
@@ -310,15 +324,6 @@ public:
 ""));
         gridLayout_16 = new QGridLayout(loginPage);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
-        passLabel = new QLabel(loginPage);
-        passLabel->setObjectName(QStringLiteral("passLabel"));
-
-        gridLayout_16->addWidget(passLabel, 3, 1, 2, 2);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_16->addItem(verticalSpacer_4, 6, 1, 1, 1);
-
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         horizontalLayout_13->setSizeConstraint(QLayout::SetMinimumSize);
@@ -336,13 +341,17 @@ public:
 
         gridLayout_16->addLayout(horizontalLayout_13, 1, 1, 1, 1);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
+
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
+        gridLayout_16->addItem(verticalSpacer_4, 7, 1, 1, 1);
 
         horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -351,7 +360,79 @@ public:
         basicPageConnect = new QPushButton(loginPage);
         basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
 
-        gridLayout_16->addWidget(basicPageConnect, 5, 1, 1, 1);
+        gridLayout_16->addWidget(basicPageConnect, 6, 1, 1, 1);
+
+        passLabel = new QLabel(loginPage);
+        passLabel->setObjectName(QStringLiteral("passLabel"));
+
+        gridLayout_16->addWidget(passLabel, 3, 1, 1, 1);
+
+        loginNumPad = new QWidget(loginPage);
+        loginNumPad->setObjectName(QStringLiteral("loginNumPad"));
+        gridLayout_17 = new QGridLayout(loginNumPad);
+        gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
+        Login7 = new QPushButton(loginNumPad);
+        Login7->setObjectName(QStringLiteral("Login7"));
+
+        gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
+
+        Login8 = new QPushButton(loginNumPad);
+        Login8->setObjectName(QStringLiteral("Login8"));
+
+        gridLayout_17->addWidget(Login8, 0, 1, 1, 1);
+
+        Login1 = new QPushButton(loginNumPad);
+        Login1->setObjectName(QStringLiteral("Login1"));
+
+        gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
+
+        Login4 = new QPushButton(loginNumPad);
+        Login4->setObjectName(QStringLiteral("Login4"));
+
+        gridLayout_17->addWidget(Login4, 1, 0, 1, 1);
+
+        Login5 = new QPushButton(loginNumPad);
+        Login5->setObjectName(QStringLiteral("Login5"));
+
+        gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
+
+        Login2 = new QPushButton(loginNumPad);
+        Login2->setObjectName(QStringLiteral("Login2"));
+
+        gridLayout_17->addWidget(Login2, 3, 1, 1, 1);
+
+        Login9 = new QPushButton(loginNumPad);
+        Login9->setObjectName(QStringLiteral("Login9"));
+
+        gridLayout_17->addWidget(Login9, 0, 2, 1, 1);
+
+        Login6 = new QPushButton(loginNumPad);
+        Login6->setObjectName(QStringLiteral("Login6"));
+
+        gridLayout_17->addWidget(Login6, 1, 2, 1, 1);
+
+        Login3 = new QPushButton(loginNumPad);
+        Login3->setObjectName(QStringLiteral("Login3"));
+
+        gridLayout_17->addWidget(Login3, 3, 2, 1, 1);
+
+        Login0 = new QPushButton(loginNumPad);
+        Login0->setObjectName(QStringLiteral("Login0"));
+
+        gridLayout_17->addWidget(Login0, 4, 0, 1, 1);
+
+        LoginBack = new QPushButton(loginNumPad);
+        LoginBack->setObjectName(QStringLiteral("LoginBack"));
+
+        gridLayout_17->addWidget(LoginBack, 4, 1, 1, 1);
+
+        LoginGo = new QPushButton(loginNumPad);
+        LoginGo->setObjectName(QStringLiteral("LoginGo"));
+
+        gridLayout_17->addWidget(LoginGo, 4, 2, 1, 1);
+
+
+        gridLayout_16->addWidget(loginNumPad, 2, 1, 1, 1);
 
         mainStack->addWidget(loginPage);
         basicPage = new QWidget();
@@ -1080,9 +1161,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(1);
-        HeaderTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
 
@@ -1092,8 +1173,20 @@ public:
     void retranslateUi(QWidget *MainForm)
     {
         MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", 0));
-        passLabel->setText(QString());
         basicPageConnect->setText(QString());
+        passLabel->setText(QString());
+        Login7->setText(QApplication::translate("MainForm", "7", 0));
+        Login8->setText(QApplication::translate("MainForm", "8", 0));
+        Login1->setText(QApplication::translate("MainForm", "1", 0));
+        Login4->setText(QApplication::translate("MainForm", "4", 0));
+        Login5->setText(QApplication::translate("MainForm", "5", 0));
+        Login2->setText(QApplication::translate("MainForm", "2", 0));
+        Login9->setText(QApplication::translate("MainForm", "9", 0));
+        Login6->setText(QApplication::translate("MainForm", "6", 0));
+        Login3->setText(QApplication::translate("MainForm", "3", 0));
+        Login0->setText(QApplication::translate("MainForm", "0", 0));
+        LoginBack->setText(QApplication::translate("MainForm", "<", 0));
+        LoginGo->setText(QApplication::translate("MainForm", "Go", 0));
         basicPageClockIn->setText(QString());
         basicPageClockOut->setText(QString());
         basicPageAdvanced->setText(QString());

@@ -90,6 +90,10 @@ private slots:
 
     void on_HeaderTabs_currentChanged(int index);
 
+    //Login Tab!
+
+    void on_passEdit_returnPressed();
+
     //Employee Tab!
 
     void refreshEmployeeStuff();
@@ -169,8 +173,6 @@ private slots:
 
 
 
-
-    void on_passEdit_returnPressed();
 
 private:
     Ui::MainForm *ui;

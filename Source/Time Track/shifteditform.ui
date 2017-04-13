@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>607</width>
+    <width>644</width>
     <height>383</height>
    </rect>
   </property>
@@ -20,9 +20,9 @@
    <string>Time-Track</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#MainForm{
+   <string notr="true">QWidget#ShiftEditForm{
 
-background-color:#BAC7BE;
+background-color:#E5EAE7;
 }
 *{
 font-family:&quot;Calibri&quot;;
@@ -30,18 +30,6 @@ font-size: 14px;
 
 }
 
-
-QTabWidget{
-margin:0px;
-padding:0px;
-border-top: 15px solid #D3D3D3;
-
-background-color:#F1F4F5;
-
-}
-QTabWidget#EmployeeSettings{
-background-color:#F1F4F5;
-}
 
 
 QStackedWidget{
@@ -51,10 +39,23 @@ padding:0px;
 
 
 QWidget{
+
 margin:0px;
 padding:0px;
 }
+QWidget#bigwidger{
+background-color:#FFFFFF;
+border:none;
+}
 
+
+
+QTableWidget{
+border:none;
+}
+QTextEdit{
+border:none;
+}
 
 
 QPushButton{
@@ -64,6 +65,19 @@ background-color:#F1F4F5;
 }
 QPushButton:hover:!pressed{
 background-color:#E4E9EB;
+}
+
+
+QDateTimeEdit{
+border:none;
+background-color:#F1F4F5;
+}
+QDateEditTime:hover{
+border:none;
+background-color:#E4E9EB;
+}
+QDateEditTime::drop-down{
+border:none;
 }
 
 
@@ -101,164 +115,203 @@ QGroupBox::title {
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
-         </property>
-         <item>
-          <widget class="QDateTimeEdit" name="DateTime1">
-           <property name="calendarPopup">
-            <bool>true</bool>
+    <widget class="QWidget" name="bigwidger" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QWidget" name="left" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
            </property>
-          </widget>
-         </item>
+           <item>
+            <widget class="QDateTimeEdit" name="DateTime1">
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateTimeEdit" name="DateTime2">
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="Name"/>
+           </item>
+           <item>
+            <widget class="QComboBox" name="Projects">
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::AdjustToContents</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="Items">
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="Times">
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="Lunch"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Add">
+             <property name="minimumSize">
+              <size>
+               <width>250</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Delete">
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="right" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTableWidget" name="Sections">
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>30</number>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="DescriptionWidget" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>35</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>26</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Notes:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="Description">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>26</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QWidget" name="bottom" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QDateTimeEdit" name="DateTime2">
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Name"/>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Projects">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContents</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Items">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Times">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Lunch"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Add">
-           <property name="minimumSize">
-            <size>
-             <width>250</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>16777215</height>
-            </size>
-           </property>
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Add</string>
+            <string>Time left:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="Delete">
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>16777215</height>
-            </size>
-           </property>
+          <widget class="QLabel" name="timeLeft">
            <property name="text">
-            <string>Delete</string>
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="RefreshButton">
+           <property name="text">
+            <string>Refresh</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="FinishedButton">
+           <property name="text">
+            <string>Finish</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="CancelButton">
+           <property name="text">
+            <string>Cancel</string>
            </property>
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QTableWidget" name="Sections">
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
-           </attribute>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTextEdit" name="Description">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>26</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Time left:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="timeLeft">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="RefreshButton">
-         <property name="text">
-          <string>Refresh</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="FinishedButton">
-         <property name="text">
-          <string>Finish</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="CancelButton">
-         <property name="text">
-          <string>Cancel</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

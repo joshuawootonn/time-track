@@ -18,6 +18,7 @@ MainForm::MainForm(QWidget *parent) :
     establishConnections();
 
     setIcons();
+    ui->loginNumPad->hide();
 }
 
 MainForm::~MainForm()
@@ -566,10 +567,12 @@ void MainForm::DatabaseTab(){
 void MainForm::on_DataBaseConnect_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    DisconnectServer();
-    checkIfFileNameIsValid(filename);
-    on_basicPageAdvanced_clicked();
-    qDebug()<<"open at advanced 2"<<data.isOpen();
+    if(filename!=""){
+        DisconnectServer();
+        checkIfFileNameIsValid(filename);
+        on_basicPageAdvanced_clicked();
+    }
+
 }
 void MainForm::on_DataBaseDisconnect_clicked()
 {
@@ -1364,6 +1367,7 @@ void MainForm::ShiftTab(){
     ui->ShiftView->hideColumn(2);
     ui->ShiftView->hideColumn(3);
     ui->ShiftView->hideColumn(13);
+    ui->ShiftView->horizontalHeader()->setStretchLastSection(true);
 
     ui->ShiftEmployeeCombo->setEnabled(false);
     ui->ShiftProjectCombo->setEnabled(false);

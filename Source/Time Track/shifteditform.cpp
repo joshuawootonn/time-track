@@ -105,7 +105,7 @@ void ShiftEditForm::AddShift(){
     TimeLeft();
     TimesInitialize();
 
-    ui->Description->setVisible(false);
+    ui->DescriptionWidget->setVisible(false);
 
 
     ui->DateTime1->setDateTime(QDateTime(QDate::currentDate(),QTime(6,30,0)));
@@ -167,9 +167,9 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
     if(description=="")
-        ui->Description->setVisible(false);
+        ui->DescriptionWidget->setVisible(false);
     else{
-        ui->Description->setVisible(true);
+        ui->DescriptionWidget->setVisible(true);
         ui->Description->setText(description);
     }
 
@@ -223,7 +223,7 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     }
 
 
-    ui->Description->setVisible(false);
+    ui->DescriptionWidget->setVisible(false);
 
 
     ui->Name->setCurrentIndex(ui->Name->findText(employeename));
@@ -408,7 +408,7 @@ void ShiftEditForm::on_Add_clicked()
     ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
     if(ui->Items->currentText()=="Other")
     {
-        ui->Description->setVisible(true);
+        ui->DescriptionWidget->setVisible(true);
     }
 
     ui->Sections->resizeRowsToContents();
