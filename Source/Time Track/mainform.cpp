@@ -354,17 +354,21 @@ void MainForm::showtheThings(){
 void MainForm::on_HeaderTabs_currentChanged(int index)
 {
     if(index ==0){
+        ui->MainTabs->setCurrentIndex(0);
         refreshEmployeeTab();
     }
     else if(index ==1){
         refreshProjectItemCombo();
         refreshProjectTab();
+        ui->MainTabs->setCurrentIndex(1);
     }
     else if(index ==2){
         refreshItemTab();
+        ui->MainTabs->setCurrentIndex(2);
     }
     else if(index ==3){
         refreshShiftTab();
+        ui->MainTabs->setCurrentIndex(3);
     }
 }
 void MainForm::on_basicPageClockIn_clicked()
@@ -625,10 +629,11 @@ void MainForm::EmployeeTab()
 void MainForm::refreshEmployeeStuff(){
     refreshEmployeeTab();
     shifteditform->EmployeeInitialize();
+    refreshShiftEmployee();
 
 }
 void MainForm::refreshEmployeeTab(){
-    ui->MainTabs->setCurrentIndex(0);
+    //ui->MainTabs->setCurrentIndex(0);
 
     QSqlQueryModel * x=EmployeeModel();
     ui->EmployeeView->setModel(x);
@@ -899,11 +904,12 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 void MainForm::refreshProjectStuff(){
 
     refreshProjectTab();
+    refreshShiftProject();
     shifteditform->ProjectInitialize();
     clockoutForm->ProjectInitialize();
 }
 void MainForm::refreshProjectTab(){
-    ui->MainTabs->setCurrentIndex(1);
+    //ui->MainTabs->setCurrentIndex(1);
 
     QSqlQueryModel * x=ProjectModel();
     ui->ProjectView->setModel(x);
@@ -957,7 +963,7 @@ void MainForm::refreshProjectTab(){
 
 }
 void MainForm::refreshProjectItemTab(){
-    ui->MainTabs->setCurrentIndex(1);
+    //ui->MainTabs->setCurrentIndex(1);
 
     QSqlQueryModel * x = ProjectItemModelRefresh();
     ui->ProjectItemView->setModel(x);
@@ -1250,7 +1256,7 @@ QSqlQueryModel * MainForm::ItemModel(){
 
 }
 void MainForm::refreshItemTab(){
-    ui->MainTabs->setCurrentIndex(2);
+    //ui->MainTabs->setCurrentIndex(2);
 
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
@@ -1287,6 +1293,7 @@ void MainForm::refreshItemTab(){
 }
 void MainForm::refreshItemStuff(){
     refreshItemTab();
+    refreshShiftItem();
     shifteditform->ItemInitialize();
     clockoutForm->ItemInitialize();
 }
@@ -1433,7 +1440,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
 }
 void MainForm::refreshShiftTab(){
     //qDebug()<<"here";
-    ui->MainTabs->setCurrentIndex(3);
+    //ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
     for(int i=0; i< x->rowCount(); i++)
     {
