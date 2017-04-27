@@ -9,12 +9,13 @@ MainForm::MainForm(QWidget *parent) :
     ui->setupUi(this);
     //ConnectSetup();
     data = QSqlDatabase::addDatabase("QMYSQL");
-    //data.setHostName("192.168.0.10");
-    data.setHostName("192.168.41.187");
+    data.setHostName("192.168.0.56");
+    //data.setHostName("192.168.41.187");
     data.setPort(3306);
     data.setPassword("aaci1234");
     data.setDatabaseName("aacidatabase");
     data.setUserName("client");
+
 
     if(data.open())
     {
