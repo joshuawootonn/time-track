@@ -40,14 +40,6 @@ public:
     QStackedWidget *mainStack;
     QWidget *loginPage;
     QGridLayout *gridLayout_16;
-    QHBoxLayout *horizontalLayout_13;
-    QLineEdit *passEdit;
-    QSpacerItem *verticalSpacer_3;
-    QSpacerItem *horizontalSpacer_9;
-    QSpacerItem *verticalSpacer_4;
-    QSpacerItem *horizontalSpacer_10;
-    QPushButton *basicPageConnect;
-    QLabel *passLabel;
     QWidget *loginNumPad;
     QGridLayout *gridLayout_17;
     QPushButton *Login7;
@@ -62,6 +54,15 @@ public:
     QPushButton *Login0;
     QPushButton *LoginBack;
     QPushButton *LoginGo;
+    QSpacerItem *horizontalSpacer_10;
+    QSpacerItem *verticalSpacer_3;
+    QSpacerItem *horizontalSpacer_9;
+    QHBoxLayout *horizontalLayout_13;
+    QLineEdit *passEdit;
+    QSpacerItem *verticalSpacer_4;
+    QLabel *passLabel;
+    QPushButton *basicPageConnect;
+    QLabel *connectionlabel;
     QWidget *basicPage;
     QGridLayout *gridLayout_2;
     QSpacerItem *horizontalSpacer_3;
@@ -328,49 +329,6 @@ public:
 ""));
         gridLayout_16 = new QGridLayout(loginPage);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
-        horizontalLayout_13 = new QHBoxLayout();
-        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
-        horizontalLayout_13->setSizeConstraint(QLayout::SetMinimumSize);
-        passEdit = new QLineEdit(loginPage);
-        passEdit->setObjectName(QStringLiteral("passEdit"));
-        passEdit->setMaximumSize(QSize(45, 16777215));
-        QFont font;
-        font.setFamily(QStringLiteral("Calibri"));
-        passEdit->setFont(font);
-        passEdit->setMaxLength(4);
-        passEdit->setEchoMode(QLineEdit::Password);
-
-        horizontalLayout_13->addWidget(passEdit);
-
-
-        gridLayout_16->addLayout(horizontalLayout_13, 1, 1, 1, 1);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
-
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_16->addItem(verticalSpacer_4, 7, 1, 1, 1);
-
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_16->addItem(horizontalSpacer_10, 1, 3, 1, 1);
-
-        basicPageConnect = new QPushButton(loginPage);
-        basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
-
-        gridLayout_16->addWidget(basicPageConnect, 6, 1, 1, 1);
-
-        passLabel = new QLabel(loginPage);
-        passLabel->setObjectName(QStringLiteral("passLabel"));
-
-        gridLayout_16->addWidget(passLabel, 3, 1, 1, 1);
-
         loginNumPad = new QWidget(loginPage);
         loginNumPad->setObjectName(QStringLiteral("loginNumPad"));
         gridLayout_17 = new QGridLayout(loginNumPad);
@@ -437,6 +395,54 @@ public:
 
 
         gridLayout_16->addWidget(loginNumPad, 2, 1, 1, 1);
+
+        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_10, 1, 3, 1, 1);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
+
+        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        horizontalLayout_13->setSizeConstraint(QLayout::SetMinimumSize);
+        passEdit = new QLineEdit(loginPage);
+        passEdit->setObjectName(QStringLiteral("passEdit"));
+        passEdit->setMaximumSize(QSize(45, 16777215));
+        QFont font;
+        font.setFamily(QStringLiteral("Calibri"));
+        passEdit->setFont(font);
+        passEdit->setMaxLength(4);
+        passEdit->setEchoMode(QLineEdit::Password);
+
+        horizontalLayout_13->addWidget(passEdit);
+
+
+        gridLayout_16->addLayout(horizontalLayout_13, 1, 1, 1, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_16->addItem(verticalSpacer_4, 8, 1, 1, 1);
+
+        passLabel = new QLabel(loginPage);
+        passLabel->setObjectName(QStringLiteral("passLabel"));
+
+        gridLayout_16->addWidget(passLabel, 4, 1, 1, 1);
+
+        basicPageConnect = new QPushButton(loginPage);
+        basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
+
+        gridLayout_16->addWidget(basicPageConnect, 7, 1, 1, 1);
+
+        connectionlabel = new QLabel(loginPage);
+        connectionlabel->setObjectName(QStringLiteral("connectionlabel"));
+
+        gridLayout_16->addWidget(connectionlabel, 3, 1, 1, 1);
 
         mainStack->addWidget(loginPage);
         basicPage = new QWidget();
@@ -1165,7 +1171,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(1);
         HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
@@ -1177,8 +1183,6 @@ public:
     void retranslateUi(QWidget *MainForm)
     {
         MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", 0));
-        basicPageConnect->setText(QString());
-        passLabel->setText(QString());
         Login7->setText(QApplication::translate("MainForm", "7", 0));
         Login8->setText(QApplication::translate("MainForm", "8", 0));
         Login1->setText(QApplication::translate("MainForm", "1", 0));
@@ -1191,6 +1195,9 @@ public:
         Login0->setText(QApplication::translate("MainForm", "0", 0));
         LoginBack->setText(QApplication::translate("MainForm", "<", 0));
         LoginGo->setText(QApplication::translate("MainForm", "Go", 0));
+        passLabel->setText(QString());
+        basicPageConnect->setText(QString());
+        connectionlabel->setText(QString());
         basicPageClockIn->setText(QString());
         basicPageClockOut->setText(QString());
         basicPageAdvanced->setText(QString());

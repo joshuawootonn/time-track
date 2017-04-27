@@ -9,10 +9,12 @@ MainForm::MainForm(QWidget *parent) :
     ui->setupUi(this);
     //ConnectSetup();
     data = QSqlDatabase::addDatabase("QMYSQL");
-    data.setHostName("localhost");
-    data.setDatabaseName("aacidatabase");
-    data.setUserName("root");
+    data.setHostName("192.168.0.10");
+    //data.setHostName("192.168.41.187");
+    data.setPort(3306);
     data.setPassword("aaci1234");
+    data.setDatabaseName("aacidatabase");
+    data.setUserName("client");
 
     if(data.open())
     {
@@ -22,6 +24,7 @@ MainForm::MainForm(QWidget *parent) :
     else
     {
         qDebug()<<data.lastError();
+        ui->connectionlabel->setText(data.lastError().text());
     }
 
     clockoutForm = new ClockoutForm(this);

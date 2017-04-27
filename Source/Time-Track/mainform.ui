@@ -136,7 +136,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -153,101 +153,6 @@ background-color:#ECEFED;
 </string>
       </property>
       <layout class="QGridLayout" name="gridLayout_16">
-       <item row="1" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_13">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
-         </property>
-         <item>
-          <widget class="QLineEdit" name="passEdit">
-           <property name="maximumSize">
-            <size>
-             <width>45</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Calibri</family>
-             <pointsize>-1</pointsize>
-            </font>
-           </property>
-           <property name="maxLength">
-            <number>4</number>
-           </property>
-           <property name="echoMode">
-            <enum>QLineEdit::Password</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="1">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_9">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="7" column="1">
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="3">
-        <spacer name="horizontalSpacer_10">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="6" column="1">
-        <widget class="QPushButton" name="basicPageConnect">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="passLabel">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="1">
         <widget class="QWidget" name="loginNumPad" native="true">
          <layout class="QGridLayout" name="gridLayout_17">
@@ -336,6 +241,108 @@ background-color:#ECEFED;
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMinimumSize</enum>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="passEdit">
+           <property name="maximumSize">
+            <size>
+             <width>45</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Calibri</family>
+             <pointsize>-1</pointsize>
+            </font>
+           </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="8" column="1">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="passLabel">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="basicPageConnect">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="connectionlabel">
+         <property name="text">
+          <string/>
+         </property>
         </widget>
        </item>
       </layout>
