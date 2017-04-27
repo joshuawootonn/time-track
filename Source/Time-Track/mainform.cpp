@@ -8,8 +8,9 @@ MainForm::MainForm(QWidget *parent) :
 {
     ui->setupUi(this);
     //ConnectSetup();
+    //qDebug()<<"The driver is available:" +data.isDriverAvailable();
     data = QSqlDatabase::addDatabase("QMYSQL");
-    data.setHostName("192.168.0.56");
+    data.setHostName("192.168.0.10");
     //data.setHostName("192.168.41.187");
     data.setPort(3306);
     data.setPassword("aaci1234");

@@ -32,3 +32,8 @@ RESOURCES +=
 
 DISTFILES += \
     ../../Qss/default.qss
+
+win32: LIBS += -L$$PWD/../lib/ -llibmysql
+
+INCLUDEPATH += $$PWD/../
+DEPENDPATH += $$PWD/../
