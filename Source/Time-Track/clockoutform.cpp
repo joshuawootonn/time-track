@@ -127,7 +127,7 @@ void ClockoutForm::ProjectInitialize(){
     ui->Projects->setModel(modal);
 
 }
-void ClockoutForm::on_Projects_currentIndexChanged()
+void ClockoutForm::on_Projects_currentIndexChanged(const QString &arg1)
 {
     ItemInitialize();
 }
@@ -157,7 +157,7 @@ void ClockoutForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     //qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>='"+a+"'");
+    qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where time>='"+a+"'");
     if(qry1->exec())
     {
            while(qry1->next())
@@ -176,7 +176,7 @@ void ClockoutForm::LunchInitialize(){
 
     QString b = "1:00";
 
-   qry1->prepare("select time from timelist where rowid<6");
+   qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where rowid<6");
 
 
 

@@ -288,10 +288,12 @@ void ShiftEditForm::ItemInitialize(){
                id = qry->value(0).toString();
            }
     }
+
     QSqlQuery* qry2=new QSqlQuery(data);
     id = "Project"+id;
-    qry2->prepare("select DISTINCT name from '"+id+"' ORDER BY name ASC");
+    qry2->prepare("select DISTINCT name from "+id+" ORDER BY name ASC");
     qry2->exec();
+
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
 }
@@ -301,7 +303,7 @@ void ShiftEditForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     //qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select time from timelist where time>='"+a+"'");
+    qry1->prepare("SELECT TIME_FORMAT(time,'%H:%i') from timelist");
     if(qry1->exec())
     {
            while(qry1->next())
@@ -309,6 +311,7 @@ void ShiftEditForm::TimesInitialize(){
                //qDebug()<< qry1->value(0).toString();
            }
     }
+    qDebug()<<"time: "<<qry1->lastError();
 
     modal->setQuery(*qry1);
     ui->Times->setModel(modal);
@@ -317,7 +320,7 @@ void ShiftEditForm::LunchInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry1 = new QSqlQuery(data);
 
-   qry1->prepare("select time from timelist where rowid<6");
+   qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where id<6");
 
    if(qry1->exec())
     {
@@ -326,7 +329,6 @@ void ShiftEditForm::LunchInitialize(){
               // qDebug()<< qry1->value(0).toString();
            }
     }
-
     modal->setQuery(*qry1);
     ui->Lunch->setModel(modal);
 }
@@ -386,7 +388,6 @@ void ShiftEditForm::TimeLeft(){
         else{
             ui->FinishedButton->setEnabled(false);
         }
-        qDebug()<<"lul"<<ui->Description->toPlainText();
 
     }
     else
@@ -396,9 +397,10 @@ void ShiftEditForm::TimeLeft(){
 
 /*These classes are used to update the table and
  * comboboxs when triggers are hit*/
-void ShiftEditForm::on_Projects_currentIndexChanged()
+
+void ShiftEditForm::on_Projects_currentIndexChanged(const QString &arg1)
 {
-    ItemInitialize();
+     ItemInitialize();
 }
 void ShiftEditForm::on_Add_clicked()
 {
@@ -493,7 +495,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
     qry->exec();
-
+    qDebug()<<"delete from shiftlist"<<qry->lastError();
 
     employeename = ui->Name->currentText();
     qry->prepare("select id from employeelist where name='"+employeename+"'");
@@ -501,7 +503,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
         while(qry->next())
             employeeid = qry->value(0).toString();
     }
-
+    qDebug()<<"select id from"<<qry->lastError();
 
 
     QDateTime clockin = ui->DateTime1->dateTime();
@@ -520,6 +522,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     if(qry->exec()){
         while(qry->next()){
             shiftid=qry->value(0).toString();}}
+    qDebug()<<"select Max"<<qry->lastError();
     int id = shiftid.toInt();
     id++;
     shiftid = QString::number(id);
@@ -535,13 +538,14 @@ void ShiftEditForm::on_FinishedButton_clicked()
         if(qry->exec()){
             while(qry->next()){
                 projectid=qry->value(0).toString();}}
+        qDebug()<<"select id from project"<<qry->lastError();
         qry->clear();
         itemname=ui->Sections->item(i,1)->text();
         qry->prepare("select id from itemlist where name='"+itemname+"'");
         if(qry->exec()){
             while(qry->next()){
                 itemid=qry->value(0).toString();}}
-
+        qDebug()<<"select id from item"<<qry->lastError();
 
 
         hours=ui->Sections->item(i,2)->text();
@@ -556,7 +560,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
 
 
         qry->exec();
-
+        qDebug()<<"insert into shiftlist"<<qry->lastError();
     }
 
 
@@ -564,7 +568,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
     qry->exec();
-
+     qDebug()<<"update employeelist"<<qry->lastError();
     this->hide();
 
     emit finished();
@@ -575,6 +579,8 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+
 
 
 

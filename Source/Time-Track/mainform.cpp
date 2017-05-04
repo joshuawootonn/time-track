@@ -36,7 +36,7 @@ MainForm::MainForm(QWidget *parent) :
 
     loginInitialize();
 
-    establishConnections();
+
 
     setIcons();
     ui->loginNumPad->hide();
@@ -146,7 +146,7 @@ QString MainForm::getCorrectFileName(){
 
     if(filename == "")
     {
-        //qDebug()<<"IM here dumbass";
+
         QApplication::quit();
     }
     else if(fileExists(filename)&&validData(filename))
@@ -182,7 +182,7 @@ void MainForm::establishConnections(){
     QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
     QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
-
+    QObject::connect(ui->ShiftView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshShiftTab()));
 
 }
 void MainForm::reenter(){
@@ -352,7 +352,7 @@ void MainForm::basicInitialize()
 void MainForm::advInitialize(){
     ui->mainStack->setCurrentIndex(2);
     ui->MainTabs->tabBar()->hide();
-
+    establishConnections();
 }
 
 /* Deal with the signals and slots of the mainForm that
@@ -896,8 +896,10 @@ void MainForm::ProjectTab(){
 
 
     ui->ProjectItemName->setChecked(true);
+    ui->ProjectItemId->setChecked(false);
     ui->ProjectItemView->hideColumn(0);
     refreshProjectItemCombo();
+
     ui->ProjectItemView->setSortingEnabled(true);
 
 
@@ -916,7 +918,7 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 
     QSqlQueryModel * x = ProjectItemModel();
     ui->ProjectItemView->setModel(x);
-
+    refreshProjectItemTab();
     refreshProjectItemCombo();
 
 
@@ -936,19 +938,6 @@ void MainForm::refreshProjectTab(){
     establishConnections();
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
-
-//    for(int i=0; i< x->rowCount(); i++)
-//    {
-
-//        ui->ProjectView->showRow(i);
-//        QString data = x->record(i).value(0).toString();
-//        qDebug()<<data;
-//        if(data=="All Projects")
-//        {
-//            qDebug()<<data;
-//            ui->ProjectView->hideRow(i);
-//        }
-//    }
 
     if(ui->ProjectId->isChecked())
         ui->ProjectView->showColumn(0);
@@ -1072,8 +1061,18 @@ void MainForm::on_ProjectAdd_clicked()
 
     int idInt = x->record(x->rowCount()-1).value(0).toInt();
     idInt++;
-    QString id = "Project"+QString::number(idInt);
-    qry->prepare("CREATE TABLE "+id+" (id int, name varchar(45))");
+    QString id;// = "Project"+QString::number(idInt);
+    qry->prepare("select id from projectlist where id=(select max(id) from projectlist)");
+    if(qry->exec())
+    {
+        while(qry->next())
+        {
+            id = qry->value(0).toString();
+        }
+    }
+    qDebug()<<qry->lastError();
+    qry->clear();
+    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45))");
     qry->exec();
     qDebug()<<qry->lastError();
     refreshProjectTab();
@@ -1460,7 +1459,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
 
 }
 void MainForm::refreshShiftTab(){
-    //qDebug()<<"here";
+    qDebug()<<"refresh Shift Tab";
     //ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
     for(int i=0; i< x->rowCount(); i++)
@@ -1683,6 +1682,7 @@ QSqlDatabase MainForm::getData() const
 {
     return data;
 }
+
 
 
 

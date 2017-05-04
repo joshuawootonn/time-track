@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Source/Time Track/shifteditform.h"
+#include "../../Source/Time-Track/shifteditform.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -33,14 +33,14 @@ QT_MOC_LITERAL(0, 0, 13), // "ShiftEditForm"
 QT_MOC_LITERAL(1, 14, 8), // "finished"
 QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 31), // "on_Projects_currentIndexChanged"
-QT_MOC_LITERAL(4, 56, 14), // "on_Add_clicked"
-QT_MOC_LITERAL(5, 71, 17), // "on_Delete_clicked"
-QT_MOC_LITERAL(6, 89, 23), // "on_Sections_cellClicked"
-QT_MOC_LITERAL(7, 113, 3), // "row"
-QT_MOC_LITERAL(8, 117, 6), // "column"
-QT_MOC_LITERAL(9, 124, 23), // "on_Sections_cellChanged"
-QT_MOC_LITERAL(10, 148, 27), // "on_Lunch_currentTextChanged"
-QT_MOC_LITERAL(11, 176, 4), // "arg1"
+QT_MOC_LITERAL(4, 56, 4), // "arg1"
+QT_MOC_LITERAL(5, 61, 14), // "on_Add_clicked"
+QT_MOC_LITERAL(6, 76, 17), // "on_Delete_clicked"
+QT_MOC_LITERAL(7, 94, 23), // "on_Sections_cellClicked"
+QT_MOC_LITERAL(8, 118, 3), // "row"
+QT_MOC_LITERAL(9, 122, 6), // "column"
+QT_MOC_LITERAL(10, 129, 23), // "on_Sections_cellChanged"
+QT_MOC_LITERAL(11, 153, 27), // "on_Lunch_currentTextChanged"
 QT_MOC_LITERAL(12, 181, 28), // "on_DateTime1_dateTimeChanged"
 QT_MOC_LITERAL(13, 210, 8), // "dateTime"
 QT_MOC_LITERAL(14, 219, 28), // "on_DateTime2_dateTimeChanged"
@@ -51,11 +51,11 @@ QT_MOC_LITERAL(18, 325, 24) // "on_RefreshButton_clicked"
 
     },
     "ShiftEditForm\0finished\0\0"
-    "on_Projects_currentIndexChanged\0"
+    "on_Projects_currentIndexChanged\0arg1\0"
     "on_Add_clicked\0on_Delete_clicked\0"
     "on_Sections_cellClicked\0row\0column\0"
     "on_Sections_cellChanged\0"
-    "on_Lunch_currentTextChanged\0arg1\0"
+    "on_Lunch_currentTextChanged\0"
     "on_DateTime1_dateTimeChanged\0dateTime\0"
     "on_DateTime2_dateTimeChanged\0"
     "on_Description_textChanged\0"
@@ -82,29 +82,29 @@ static const uint qt_meta_data_ShiftEditForm[] = {
        1,    0,   79,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   80,    2, 0x08 /* Private */,
-       4,    0,   81,    2, 0x08 /* Private */,
-       5,    0,   82,    2, 0x08 /* Private */,
-       6,    2,   83,    2, 0x08 /* Private */,
-       9,    0,   88,    2, 0x08 /* Private */,
-      10,    1,   89,    2, 0x08 /* Private */,
-      12,    1,   92,    2, 0x08 /* Private */,
-      14,    1,   95,    2, 0x08 /* Private */,
-      15,    0,   98,    2, 0x08 /* Private */,
-      16,    0,   99,    2, 0x08 /* Private */,
-      17,    0,  100,    2, 0x08 /* Private */,
-      18,    0,  101,    2, 0x08 /* Private */,
+       3,    1,   80,    2, 0x08 /* Private */,
+       5,    0,   83,    2, 0x08 /* Private */,
+       6,    0,   84,    2, 0x08 /* Private */,
+       7,    2,   85,    2, 0x08 /* Private */,
+      10,    0,   90,    2, 0x08 /* Private */,
+      11,    1,   91,    2, 0x08 /* Private */,
+      12,    1,   94,    2, 0x08 /* Private */,
+      14,    1,   97,    2, 0x08 /* Private */,
+      15,    0,  100,    2, 0x08 /* Private */,
+      16,    0,  101,    2, 0x08 /* Private */,
+      17,    0,  102,    2, 0x08 /* Private */,
+      18,    0,  103,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void, QMetaType::QDateTime,   13,
     QMetaType::Void, QMetaType::QDateTime,   13,
     QMetaType::Void,
@@ -122,7 +122,7 @@ void ShiftEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->finished(); break;
-        case 1: _t->on_Projects_currentIndexChanged(); break;
+        case 1: _t->on_Projects_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->on_Add_clicked(); break;
         case 3: _t->on_Delete_clicked(); break;
         case 4: _t->on_Sections_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;

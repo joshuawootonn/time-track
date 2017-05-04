@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Source/Time Track/clockoutform.h"
+#include "../../Source/Time-Track/clockoutform.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ClockoutForm_t {
-    QByteArrayData data[15];
-    char stringdata0[257];
+    QByteArrayData data[16];
+    char stringdata0[261];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,21 +33,22 @@ QT_MOC_LITERAL(0, 0, 12), // "ClockoutForm"
 QT_MOC_LITERAL(1, 13, 8), // "finished"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 31), // "on_Projects_currentIndexChanged"
-QT_MOC_LITERAL(4, 55, 14), // "on_Add_clicked"
-QT_MOC_LITERAL(5, 70, 17), // "on_Delete_clicked"
-QT_MOC_LITERAL(6, 88, 23), // "on_Sections_cellClicked"
-QT_MOC_LITERAL(7, 112, 3), // "row"
-QT_MOC_LITERAL(8, 116, 6), // "column"
-QT_MOC_LITERAL(9, 123, 23), // "on_Sections_cellChanged"
-QT_MOC_LITERAL(10, 147, 27), // "on_Lunch_currentTextChanged"
-QT_MOC_LITERAL(11, 175, 4), // "arg1"
-QT_MOC_LITERAL(12, 180, 26), // "on_Description_textChanged"
-QT_MOC_LITERAL(13, 207, 25), // "on_FinishedButton_clicked"
-QT_MOC_LITERAL(14, 233, 23) // "on_CancelButton_clicked"
+QT_MOC_LITERAL(4, 55, 3), // "arg"
+QT_MOC_LITERAL(5, 59, 14), // "on_Add_clicked"
+QT_MOC_LITERAL(6, 74, 17), // "on_Delete_clicked"
+QT_MOC_LITERAL(7, 92, 23), // "on_Sections_cellClicked"
+QT_MOC_LITERAL(8, 116, 3), // "row"
+QT_MOC_LITERAL(9, 120, 6), // "column"
+QT_MOC_LITERAL(10, 127, 23), // "on_Sections_cellChanged"
+QT_MOC_LITERAL(11, 151, 27), // "on_Lunch_currentTextChanged"
+QT_MOC_LITERAL(12, 179, 4), // "arg1"
+QT_MOC_LITERAL(13, 184, 26), // "on_Description_textChanged"
+QT_MOC_LITERAL(14, 211, 25), // "on_FinishedButton_clicked"
+QT_MOC_LITERAL(15, 237, 23) // "on_CancelButton_clicked"
 
     },
     "ClockoutForm\0finished\0\0"
-    "on_Projects_currentIndexChanged\0"
+    "on_Projects_currentIndexChanged\0arg\0"
     "on_Add_clicked\0on_Delete_clicked\0"
     "on_Sections_cellClicked\0row\0column\0"
     "on_Sections_cellChanged\0"
@@ -75,26 +76,26 @@ static const uint qt_meta_data_ClockoutForm[] = {
        1,    0,   64,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   65,    2, 0x08 /* Private */,
-       4,    0,   66,    2, 0x08 /* Private */,
-       5,    0,   67,    2, 0x08 /* Private */,
-       6,    2,   68,    2, 0x08 /* Private */,
-       9,    0,   73,    2, 0x08 /* Private */,
-      10,    1,   74,    2, 0x08 /* Private */,
-      12,    0,   77,    2, 0x08 /* Private */,
-      13,    0,   78,    2, 0x08 /* Private */,
-      14,    0,   79,    2, 0x08 /* Private */,
+       3,    1,   65,    2, 0x08 /* Private */,
+       5,    0,   68,    2, 0x08 /* Private */,
+       6,    0,   69,    2, 0x08 /* Private */,
+       7,    2,   70,    2, 0x08 /* Private */,
+      10,    0,   75,    2, 0x08 /* Private */,
+      11,    1,   76,    2, 0x08 /* Private */,
+      13,    0,   79,    2, 0x08 /* Private */,
+      14,    0,   80,    2, 0x08 /* Private */,
+      15,    0,   81,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void, QMetaType::QString,   12,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -109,7 +110,7 @@ void ClockoutForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->finished(); break;
-        case 1: _t->on_Projects_currentIndexChanged(); break;
+        case 1: _t->on_Projects_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->on_Add_clicked(); break;
         case 3: _t->on_Delete_clicked(); break;
         case 4: _t->on_Sections_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;

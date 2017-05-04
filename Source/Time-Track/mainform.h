@@ -172,8 +172,6 @@ private slots:
     void on_SettngsFullScreen_clicked();
 
 
-
-
 private:
     Ui::MainForm *ui;
     ClockoutForm *clockoutForm;

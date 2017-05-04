@@ -40,7 +40,7 @@ public:
 
 
 private slots:    
-    void on_Projects_currentIndexChanged();
+    void on_Projects_currentIndexChanged(const QString &arg1);
     void on_Add_clicked();
     void on_Delete_clicked();
     void on_Sections_cellClicked(int row, int column);
@@ -53,6 +53,8 @@ private slots:
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
     void on_RefreshButton_clicked();
+
+
 
 
 
