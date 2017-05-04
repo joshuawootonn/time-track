@@ -100,13 +100,13 @@ public:
     QPushButton *EmployeeDelete;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_8;
-    QCheckBox *EmployeeName;
-    QCheckBox *EmployeeActive;
     QCheckBox *EmployeeShiftCount;
     QCheckBox *EmployeeAdminStatus;
+    QCheckBox *EmployeeActive;
     QCheckBox *EmployeePin;
-    QCheckBox *EmployeeId;
     QCheckBox *EmployeeCurrent;
+    QCheckBox *EmployeeId;
+    QCheckBox *EmployeeName;
     QGroupBox *groupBox_3;
     QVBoxLayout *verticalLayout_2;
     QRadioButton *AllRadio;
@@ -122,10 +122,10 @@ public:
     QPushButton *ProjectDelete;
     QGroupBox *groupBox_8;
     QGridLayout *gridLayout_9;
+    QCheckBox *ProjectDate;
+    QCheckBox *ProjectCurrent;
     QCheckBox *ProjectName;
     QCheckBox *ProjectId;
-    QCheckBox *ProjectCurrent;
-    QCheckBox *ProjectDate;
     QGroupBox *groupBox_9;
     QVBoxLayout *verticalLayout_3;
     QRadioButton *ProjectAllRadio;
@@ -149,11 +149,11 @@ public:
     QPushButton *ItemDelete;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_10;
-    QCheckBox *ItemName;
-    QCheckBox *ItemId;
-    QCheckBox *ItemSub;
     QCheckBox *ItemCategory;
     QCheckBox *ItemDimension;
+    QCheckBox *ItemSub;
+    QCheckBox *ItemName;
+    QCheckBox *ItemId;
     QSpacerItem *horizontalSpacer_7;
     QWidget *ShiftSettings;
     QHBoxLayout *horizontalLayout_3;
@@ -633,16 +633,6 @@ public:
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout_8 = new QGridLayout(groupBox_2);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-        EmployeeName = new QCheckBox(groupBox_2);
-        EmployeeName->setObjectName(QStringLiteral("EmployeeName"));
-
-        gridLayout_8->addWidget(EmployeeName, 0, 0, 1, 1);
-
-        EmployeeActive = new QCheckBox(groupBox_2);
-        EmployeeActive->setObjectName(QStringLiteral("EmployeeActive"));
-
-        gridLayout_8->addWidget(EmployeeActive, 1, 2, 1, 1);
-
         EmployeeShiftCount = new QCheckBox(groupBox_2);
         EmployeeShiftCount->setObjectName(QStringLiteral("EmployeeShiftCount"));
 
@@ -653,20 +643,30 @@ public:
 
         gridLayout_8->addWidget(EmployeeAdminStatus, 1, 1, 1, 1);
 
+        EmployeeActive = new QCheckBox(groupBox_2);
+        EmployeeActive->setObjectName(QStringLiteral("EmployeeActive"));
+
+        gridLayout_8->addWidget(EmployeeActive, 1, 2, 1, 1);
+
         EmployeePin = new QCheckBox(groupBox_2);
         EmployeePin->setObjectName(QStringLiteral("EmployeePin"));
 
         gridLayout_8->addWidget(EmployeePin, 0, 1, 1, 1);
 
-        EmployeeId = new QCheckBox(groupBox_2);
-        EmployeeId->setObjectName(QStringLiteral("EmployeeId"));
-
-        gridLayout_8->addWidget(EmployeeId, 1, 0, 1, 1);
-
         EmployeeCurrent = new QCheckBox(groupBox_2);
         EmployeeCurrent->setObjectName(QStringLiteral("EmployeeCurrent"));
 
         gridLayout_8->addWidget(EmployeeCurrent, 0, 3, 1, 1);
+
+        EmployeeId = new QCheckBox(groupBox_2);
+        EmployeeId->setObjectName(QStringLiteral("EmployeeId"));
+
+        gridLayout_8->addWidget(EmployeeId, 0, 0, 1, 1);
+
+        EmployeeName = new QCheckBox(groupBox_2);
+        EmployeeName->setObjectName(QStringLiteral("EmployeeName"));
+
+        gridLayout_8->addWidget(EmployeeName, 1, 0, 1, 1);
 
 
         horizontalLayout_2->addWidget(groupBox_2);
@@ -746,25 +746,25 @@ public:
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
         gridLayout_9 = new QGridLayout(groupBox_8);
         gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
-        ProjectName = new QCheckBox(groupBox_8);
-        ProjectName->setObjectName(QStringLiteral("ProjectName"));
+        ProjectDate = new QCheckBox(groupBox_8);
+        ProjectDate->setObjectName(QStringLiteral("ProjectDate"));
 
-        gridLayout_9->addWidget(ProjectName, 0, 0, 1, 1);
-
-        ProjectId = new QCheckBox(groupBox_8);
-        ProjectId->setObjectName(QStringLiteral("ProjectId"));
-
-        gridLayout_9->addWidget(ProjectId, 1, 0, 1, 1);
+        gridLayout_9->addWidget(ProjectDate, 2, 1, 1, 1);
 
         ProjectCurrent = new QCheckBox(groupBox_8);
         ProjectCurrent->setObjectName(QStringLiteral("ProjectCurrent"));
 
         gridLayout_9->addWidget(ProjectCurrent, 0, 1, 1, 1);
 
-        ProjectDate = new QCheckBox(groupBox_8);
-        ProjectDate->setObjectName(QStringLiteral("ProjectDate"));
+        ProjectName = new QCheckBox(groupBox_8);
+        ProjectName->setObjectName(QStringLiteral("ProjectName"));
 
-        gridLayout_9->addWidget(ProjectDate, 1, 1, 1, 1);
+        gridLayout_9->addWidget(ProjectName, 2, 0, 1, 1);
+
+        ProjectId = new QCheckBox(groupBox_8);
+        ProjectId->setObjectName(QStringLiteral("ProjectId"));
+
+        gridLayout_9->addWidget(ProjectId, 0, 0, 1, 1);
 
 
         horizontalLayout_7->addWidget(groupBox_8);
@@ -839,12 +839,12 @@ public:
         ProjectItemName = new QCheckBox(groupBox_12);
         ProjectItemName->setObjectName(QStringLiteral("ProjectItemName"));
 
-        gridLayout_11->addWidget(ProjectItemName, 0, 0, 1, 1);
+        gridLayout_11->addWidget(ProjectItemName, 1, 0, 1, 1);
 
         ProjectItemId = new QCheckBox(groupBox_12);
         ProjectItemId->setObjectName(QStringLiteral("ProjectItemId"));
 
-        gridLayout_11->addWidget(ProjectItemId, 1, 0, 1, 1);
+        gridLayout_11->addWidget(ProjectItemId, 0, 0, 1, 1);
 
 
         horizontalLayout_7->addWidget(groupBox_12);
@@ -888,21 +888,6 @@ public:
         groupBox_10->setObjectName(QStringLiteral("groupBox_10"));
         gridLayout_10 = new QGridLayout(groupBox_10);
         gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
-        ItemName = new QCheckBox(groupBox_10);
-        ItemName->setObjectName(QStringLiteral("ItemName"));
-
-        gridLayout_10->addWidget(ItemName, 0, 0, 1, 1);
-
-        ItemId = new QCheckBox(groupBox_10);
-        ItemId->setObjectName(QStringLiteral("ItemId"));
-
-        gridLayout_10->addWidget(ItemId, 1, 0, 1, 1);
-
-        ItemSub = new QCheckBox(groupBox_10);
-        ItemSub->setObjectName(QStringLiteral("ItemSub"));
-
-        gridLayout_10->addWidget(ItemSub, 1, 1, 1, 1);
-
         ItemCategory = new QCheckBox(groupBox_10);
         ItemCategory->setObjectName(QStringLiteral("ItemCategory"));
 
@@ -912,6 +897,21 @@ public:
         ItemDimension->setObjectName(QStringLiteral("ItemDimension"));
 
         gridLayout_10->addWidget(ItemDimension, 0, 2, 1, 1);
+
+        ItemSub = new QCheckBox(groupBox_10);
+        ItemSub->setObjectName(QStringLiteral("ItemSub"));
+
+        gridLayout_10->addWidget(ItemSub, 1, 1, 1, 1);
+
+        ItemName = new QCheckBox(groupBox_10);
+        ItemName->setObjectName(QStringLiteral("ItemName"));
+
+        gridLayout_10->addWidget(ItemName, 1, 0, 1, 1);
+
+        ItemId = new QCheckBox(groupBox_10);
+        ItemId->setObjectName(QStringLiteral("ItemId"));
+
+        gridLayout_10->addWidget(ItemId, 0, 0, 1, 1);
 
 
         horizontalLayout_8->addWidget(groupBox_10);
@@ -1171,9 +1171,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(1);
-        HeaderTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 
@@ -1210,13 +1210,13 @@ public:
         EmployeeArchive->setText(QString());
         EmployeeDelete->setText(QString());
         groupBox_2->setTitle(QApplication::translate("MainForm", "Table", 0));
-        EmployeeName->setText(QApplication::translate("MainForm", "Name", 0));
-        EmployeeActive->setText(QApplication::translate("MainForm", "Active", 0));
         EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", 0));
         EmployeeAdminStatus->setText(QApplication::translate("MainForm", "AdminStatus", 0));
+        EmployeeActive->setText(QApplication::translate("MainForm", "Active", 0));
         EmployeePin->setText(QApplication::translate("MainForm", "Pin", 0));
-        EmployeeId->setText(QApplication::translate("MainForm", "Id", 0));
         EmployeeCurrent->setText(QApplication::translate("MainForm", "Current", 0));
+        EmployeeId->setText(QApplication::translate("MainForm", "Id", 0));
+        EmployeeName->setText(QApplication::translate("MainForm", "Name", 0));
         groupBox_3->setTitle(QApplication::translate("MainForm", "Show", 0));
         AllRadio->setText(QApplication::translate("MainForm", "All Employees", 0));
         CurrentRadio->setText(QApplication::translate("MainForm", "Current Employees", 0));
@@ -1227,10 +1227,10 @@ public:
         ProjectArchive->setText(QString());
         ProjectDelete->setText(QString());
         groupBox_8->setTitle(QApplication::translate("MainForm", "Project Table", 0));
+        ProjectDate->setText(QApplication::translate("MainForm", "Date", 0));
+        ProjectCurrent->setText(QApplication::translate("MainForm", "Current", 0));
         ProjectName->setText(QApplication::translate("MainForm", "Name", 0));
         ProjectId->setText(QApplication::translate("MainForm", "Id", 0));
-        ProjectCurrent->setText(QApplication::translate("MainForm", "Current", 0));
-        ProjectDate->setText(QApplication::translate("MainForm", "Date", 0));
         groupBox_9->setTitle(QApplication::translate("MainForm", "Show", 0));
         ProjectAllRadio->setText(QApplication::translate("MainForm", "All Projects", 0));
         ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", 0));
@@ -1246,11 +1246,11 @@ public:
         ItemAdd->setText(QString());
         ItemDelete->setText(QString());
         groupBox_10->setTitle(QApplication::translate("MainForm", "Table", 0));
-        ItemName->setText(QApplication::translate("MainForm", "Name", 0));
-        ItemId->setText(QApplication::translate("MainForm", "Id", 0));
-        ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", 0));
         ItemCategory->setText(QApplication::translate("MainForm", "Category", 0));
         ItemDimension->setText(QApplication::translate("MainForm", "Dimension", 0));
+        ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", 0));
+        ItemName->setText(QApplication::translate("MainForm", "Name", 0));
+        ItemId->setText(QApplication::translate("MainForm", "Id", 0));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Projects", 0));
         groupBox_4->setTitle(QApplication::translate("MainForm", "Options", 0));
         ShiftAdd->setText(QString());

@@ -136,7 +136,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -622,7 +622,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -727,20 +727,6 @@ background-color:#FE938C;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="EmployeeName">
-                <property name="text">
-                 <string>Name</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="EmployeeActive">
-                <property name="text">
-                 <string>Active</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="2">
                <widget class="QCheckBox" name="EmployeeShiftCount">
                 <property name="text">
@@ -755,6 +741,13 @@ background-color:#FE938C;
                 </property>
                </widget>
               </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="EmployeeActive">
+                <property name="text">
+                 <string>Active</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="1">
                <widget class="QCheckBox" name="EmployeePin">
                 <property name="text">
@@ -762,17 +755,24 @@ background-color:#FE938C;
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="0" column="3">
+               <widget class="QCheckBox" name="EmployeeCurrent">
+                <property name="text">
+                 <string>Current</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
                <widget class="QCheckBox" name="EmployeeId">
                 <property name="text">
                  <string>Id</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="EmployeeCurrent">
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="EmployeeName">
                 <property name="text">
-                 <string>Current</string>
+                 <string>Name</string>
                 </property>
                </widget>
               </item>
@@ -906,17 +906,10 @@ background-color:#B19994;
               <string>Project Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_9">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="ProjectName">
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="ProjectDate">
                 <property name="text">
-                 <string>Name</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="ProjectId">
-                <property name="text">
-                 <string>Id</string>
+                 <string>Date</string>
                 </property>
                </widget>
               </item>
@@ -927,10 +920,17 @@ background-color:#B19994;
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="ProjectDate">
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="ProjectName">
                 <property name="text">
-                 <string>Date</string>
+                 <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="ProjectId">
+                <property name="text">
+                 <string>Id</string>
                 </property>
                </widget>
               </item>
@@ -1042,14 +1042,14 @@ background-color:#837F9A;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
-              <item row="0" column="0">
+              <item row="1" column="0">
                <widget class="QCheckBox" name="ProjectItemName">
                 <property name="text">
                  <string>Name</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="0" column="0">
                <widget class="QCheckBox" name="ProjectItemId">
                 <property name="text">
                  <string>Id</string>
@@ -1123,27 +1123,6 @@ background-color:#837F9A;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="ItemName">
-                <property name="text">
-                 <string>Name</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="ItemId">
-                <property name="text">
-                 <string>Id</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="ItemSub">
-                <property name="text">
-                 <string>Sub-Category</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="1">
                <widget class="QCheckBox" name="ItemCategory">
                 <property name="text">
@@ -1155,6 +1134,27 @@ background-color:#837F9A;
                <widget class="QCheckBox" name="ItemDimension">
                 <property name="text">
                  <string>Dimension</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="ItemSub">
+                <property name="text">
+                 <string>Sub-Category</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="ItemName">
+                <property name="text">
+                 <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="ItemId">
+                <property name="text">
+                 <string>Id</string>
                 </property>
                </widget>
               </item>

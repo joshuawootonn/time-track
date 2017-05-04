@@ -627,10 +627,11 @@ void MainForm::EmployeeTab()
     establishConnections();
     ui->EmployeeView->setSortingEnabled(true);
 
-    ui->EmployeeName->setChecked(true);
-    ui->EmployeeView->showColumn(0);
+
     ui->EmployeeId->setChecked(false);
-    ui->EmployeeView->hideColumn(1);
+    ui->EmployeeView->hideColumn(0);
+    ui->EmployeeName->setChecked(true);
+    ui->EmployeeView->showColumn(1);
     ui->EmployeePin->setChecked(true);
     ui->EmployeeView->showColumn(2);
     ui->EmployeeAdminStatus->setChecked(true);
@@ -661,17 +662,14 @@ void MainForm::refreshEmployeeTab(){
     establishConnections();
 
     //ui->EmployeeView->resizeColumnsToContents();
-
-    if(ui->EmployeeName->isChecked())
+    if(ui->EmployeeId->isChecked())
         ui->EmployeeView->showColumn(0);
     else
         ui->EmployeeView->hideColumn(0);
-
-    if(ui->EmployeeId->isChecked())
+    if(ui->EmployeeName->isChecked())
         ui->EmployeeView->showColumn(1);
     else
         ui->EmployeeView->hideColumn(1);
-
     if(ui->EmployeePin->isChecked())
         ui->EmployeeView->showColumn(2);
     else
@@ -714,8 +712,8 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     model->setTable("employeelist");
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Pin"));
     model->setHeaderData(3,Qt::Horizontal,tr("Adminstatus"));
     model->setHeaderData(4,Qt::Horizontal,tr("Shiftcount"));
@@ -729,8 +727,9 @@ void MainForm::on_EmployeeAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QSqlQueryModel * x = EmployeeModel();
-    qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','"+QString::number(generateRandom())+"','~','1','0','1')");
+    qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','"+QString::number(generateRandom())+"','0','1','0','1')");
     qry->exec();
+
     refreshEmployeeTab();
     refreshShiftEmployee();
     shifteditform->updateShiftEdit();
@@ -760,7 +759,7 @@ void MainForm::on_EmployeeArchive_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        int idInt = x->record(index.row()).value(1).toInt();
+        int idInt = x->record(index.row()).value(0).toInt();
         QString id = QString::number(idInt);
 
         qry->clear();
@@ -786,7 +785,7 @@ void MainForm::on_EmployeeDelete_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        int idInt = x->record(index.row()).value(1).toInt();
+        int idInt = x->record(index.row()).value(0).toInt();
         QString id = QString::number(idInt);
 
         qry->clear();
@@ -833,7 +832,7 @@ void MainForm::on_AllRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             ui->EmployeeView->showRow(i);
         }
@@ -845,7 +844,7 @@ void MainForm::on_CurrentRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(6).toInt();
             if(current == 1)
@@ -860,7 +859,7 @@ void MainForm::on_PastRadio_toggled(bool checked)
     if(checked)
     {
         QSqlQueryModel * x = EmployeeModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(6).toInt();
             if(current == 1)
@@ -889,7 +888,7 @@ void MainForm::ProjectTab(){
     ui->ProjectView->setSortingEnabled(true);
     ui->ProjectItemView->setSortingEnabled(true);
 
-    ui->ProjectView->hideColumn(1);
+    ui->ProjectView->hideColumn(0);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
     ui->ProjectAllRadio->setChecked(true);
@@ -897,7 +896,7 @@ void MainForm::ProjectTab(){
 
 
     ui->ProjectItemName->setChecked(true);
-    ui->ProjectItemView->hideColumn(1);
+    ui->ProjectItemView->hideColumn(0);
     refreshProjectItemCombo();
     ui->ProjectItemView->setSortingEnabled(true);
 
@@ -951,12 +950,12 @@ void MainForm::refreshProjectTab(){
 //        }
 //    }
 
-    if(ui->ProjectName->isChecked())
+    if(ui->ProjectId->isChecked())
         ui->ProjectView->showColumn(0);
     else
         ui->ProjectView->hideColumn(0);
 
-    if(ui->ProjectId->isChecked())
+    if(ui->ProjectName->isChecked())
         ui->ProjectView->showColumn(1);
     else
         ui->ProjectView->hideColumn(1);
@@ -992,14 +991,14 @@ void MainForm::refreshProjectItemTab(){
    // ui->ProjectItemView->resizeColumnsToContents();
 
     if(ui->ProjectItemName->isChecked())
-        ui->ProjectItemView->showColumn(0);
-    else
-        ui->ProjectItemView->hideColumn(0);
-
-    if(ui->ProjectItemId->isChecked())
         ui->ProjectItemView->showColumn(1);
     else
         ui->ProjectItemView->hideColumn(1);
+
+    if(ui->ProjectItemId->isChecked())
+        ui->ProjectItemView->showColumn(0);
+    else
+        ui->ProjectItemView->hideColumn(0);
   //  ui->ProjectItemView->resizeColumnsToContents();
 }
 QSqlQueryModel * MainForm::ProjectModel(){
@@ -1008,8 +1007,9 @@ QSqlQueryModel * MainForm::ProjectModel(){
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
 
-    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+
+    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Current"));
 
 
@@ -1019,15 +1019,15 @@ QSqlQueryModel * MainForm::ProjectModel(){
 QSqlQueryModel * MainForm::ProjectItemModelFirst(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
     QSqlQueryModel * x = ProjectModel();
-    int idInt= x->record(1).value(1).toInt();
+    int idInt= x->record(0).value(1).toInt();
     QString id = QString::number(idInt);
 
     model->setTable("Project"+id);
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
 
     return model;
 }
@@ -1040,7 +1040,7 @@ QSqlQueryModel * MainForm::ProjectItemModel(){
     QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
 
     QModelIndex index = list.at(0);
-    int idInt = x->record(index.row()).value(1).toInt();
+    int idInt = x->record(index.row()).value(0).toInt();
 
     QString id = QString::number(idInt);
 
@@ -1048,8 +1048,8 @@ QSqlQueryModel * MainForm::ProjectItemModel(){
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     
     return model;
 }
@@ -1066,16 +1066,16 @@ void MainForm::on_ProjectAdd_clicked()
     QSqlQueryModel * x = ProjectModel();
 
 
-    qry->prepare("insert into projectlist(name,current,date)  values('~','1','1/1/"+QString::number(QDate::currentDate().year())+"')");
+    qry->prepare("insert into projectlist(name,current,date)  values('~','1','"+QString::number(QDate::currentDate().month())+"/1/"+QString::number(QDate::currentDate().year())+"')");
     qry->exec();
     qry->clear();
 
-    int idInt = x->record(x->rowCount()-1).value(1).toInt();
+    int idInt = x->record(x->rowCount()-1).value(0).toInt();
     idInt++;
     QString id = "Project"+QString::number(idInt);
-    qry->prepare("CREATE TABLE '"+id+"'"
-               "(name VARCHAR,id integer)");
+    qry->prepare("CREATE TABLE "+id+" (id int, name varchar(45))");
     qry->exec();
+    qDebug()<<qry->lastError();
     refreshProjectTab();
     refreshShiftProject();
     ui->MainTabs->setCurrentIndex(1);
@@ -1091,14 +1091,14 @@ void MainForm::on_ProjectDelete_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        int idInt = x->record(index.row()).value(1).toInt();
+        int idInt = x->record(index.row()).value(0).toInt();
 
 
 
         QString id = "Project"+QString::number(idInt);
 
         qry->clear();
-        qry->prepare("DROP TABLE '"+id+"'");
+        qry->prepare("DROP TABLE "+id+"");
         qry->exec();
         qry->clear();
         qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
@@ -1118,7 +1118,7 @@ void MainForm::on_ProjectArchive_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        int idInt = x->record(index.row()).value(1).toInt();
+        int idInt = x->record(index.row()).value(0).toInt();
         QString id = QString::number(idInt);
         //qDebug()<<id;
         qry->clear();
@@ -1157,7 +1157,7 @@ void MainForm::on_ProjectAllRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             ui->ProjectView->showRow(i);
         }
@@ -1167,7 +1167,7 @@ void MainForm::on_ProjectCurrentRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(2).toInt();
             if(current == 1)
@@ -1181,7 +1181,7 @@ void MainForm::on_ProjectPastRadio_toggled(bool checked)
 {
     if(checked){
         QSqlQueryModel * x = ProjectModel();
-        for(int i=1; i< x->rowCount(); i++)
+        for(int i=0; i< x->rowCount(); i++)
         {
             int current = x->record(i).value(2).toInt();
             if(current == 1)
@@ -1211,11 +1211,11 @@ void MainForm::on_ProjectItemAdd_clicked()
         while(qry->next())
             itemId = qry->value(0).toString();
     }
-     qry->clear();
-    
+    qry->clear();
     QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = model->tableName();
-    qry->prepare("insert into'"+table+"'(name,id) values('"+itemName+"','"+itemId+"')");
+
+    qry->prepare("insert into "+table+"(id, name) values('"+itemId+"','"+itemName+"')");
     qry->exec();
 
     model->select();
@@ -1233,10 +1233,10 @@ void MainForm::on_ProjectItemRemove_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        QString id = tablemodel->record(index.row()).value(1).toString();
+        QString id = tablemodel->record(index.row()).value(0).toString();
 
         qry->clear();
-        qry->prepare("DELETE from '"+table+"' where id='"+id+"'");
+        qry->prepare("DELETE from "+table+" where id='"+id+"'");
         qry->exec();
     }
     tablemodel->select();
@@ -1267,8 +1267,8 @@ QSqlQueryModel * MainForm::ItemModel(){
     model->setTable("itemlist");
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Category"));
     model->setHeaderData(3,Qt::Horizontal,tr("Sub-Catergory"));
     model->setHeaderData(4,Qt::Horizontal,tr("Dimension"));
@@ -1301,14 +1301,14 @@ void MainForm::refreshItemTab(){
         ui->ItemView->hideColumn(4);
 
     if(ui->ItemId->isChecked())
-        ui->ItemView->showColumn(1);
-    else
-        ui->ItemView->hideColumn(1);
-
-    if(ui->ItemName->isChecked())
         ui->ItemView->showColumn(0);
     else
         ui->ItemView->hideColumn(0);
+
+    if(ui->ItemName->isChecked())
+        ui->ItemView->showColumn(1);
+    else
+        ui->ItemView->hideColumn(1);
 
 
 }
@@ -1340,7 +1340,7 @@ void MainForm::on_ItemDelete_clicked()
     for(int i=0; i< list.count(); i++)
     {
         QModelIndex index =list.at(i);
-        int idInt = x->record(index.row()).value(1).toInt();
+        int idInt = x->record(index.row()).value(0).toInt();
         QString id = QString::number(idInt);
 
 
