@@ -390,7 +390,7 @@ void ClockoutForm::on_FinishedButton_clicked()
 
 
     QString projectname,itemname, projectid,itemid,hours,lunch,description;
-    description=ui->Description->toPlainText();
+    description=ui->Description->toPlainText().simplified();
 
     for(int i =0; i<ui->Sections->rowCount();i++){
 

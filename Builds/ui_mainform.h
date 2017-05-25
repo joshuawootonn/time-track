@@ -1186,7 +1186,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(0);
         HeaderTabs->setCurrentIndex(2);
         EmployeeAdd->setDefault(false);

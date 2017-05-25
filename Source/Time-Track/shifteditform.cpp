@@ -527,7 +527,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     shiftid = QString::number(id);
     qry->clear();
     //qDebug()<<shiftid;
-    description=ui->Description->toPlainText();
+    description=ui->Description->toPlainText().simplified();
 
     for(int i =0; i<ui->Sections->rowCount();i++){
 
