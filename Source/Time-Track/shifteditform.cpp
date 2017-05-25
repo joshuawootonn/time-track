@@ -205,7 +205,6 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     LunchInitialize();
     TimeLeft();
     TimesInitialize();
-
     ui->DateTime1->setDateTime(format_datetimes(QDateTime::currentDateTime()));
     ui->DateTime2->setDateTime(format_datetimes(QDateTime::currentDateTime()));
 
@@ -311,7 +310,7 @@ void ShiftEditForm::TimesInitialize(){
                //qDebug()<< qry1->value(0).toString();
            }
     }
-    qDebug()<<"time: "<<qry1->lastError();
+    //qDebug()<<"time: "<<qry1->lastError();
 
     modal->setQuery(*qry1);
     ui->Times->setModel(modal);

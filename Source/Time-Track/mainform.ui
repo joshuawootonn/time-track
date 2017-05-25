@@ -34,14 +34,29 @@ background-color:#F1F4F5;
 
 }
 
+
 QTabBar{
 background-color:#F1F4F5;
 border:none;
+padding:10px;
 }
 QTabBar::tab:selected,QTabBar::tab:hover{
 
 color:#444946;
 }
+QTabBar::tab{
+background-color:#E5EAE7;
+
+color:black;
+}
+QTabBar::tab:hover{
+background-color:#f3f0f2;
+
+}
+QTabBar::tab:selected{
+background-color:#fcfbfb;
+}
+
 
 
 
@@ -461,7 +476,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -622,7 +637,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>

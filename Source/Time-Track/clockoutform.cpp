@@ -93,7 +93,6 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 void ClockoutForm::ClockoutInitialize(QString i){
     this->showNormal();
 
-
     id=i;
     ProjectInitialize();
     ItemInitialize();
@@ -101,9 +100,11 @@ void ClockoutForm::ClockoutInitialize(QString i){
     TimeLeft();
     TimesInitialize();
 
-    ui->DescriptionWidget->setVisible(false);
-    ui->Description->setText("");
 
+    ui->DescriptionWidget->setVisible(false);
+    ui->Description->clear();
+    //ui->DescriptionWidget->setVisible(false);
+    //ui->Description->setText("");
 
     ui->FinishedButton->setEnabled(false);
     ui->Sections->setRowCount(0);
@@ -112,6 +113,7 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
     ui->Sections->clearContents();
+
 
 }
 
@@ -144,12 +146,16 @@ void ClockoutForm::ItemInitialize(){
                id = qry->value(0).toString();
            }
     }
+
     QSqlQuery* qry2=new QSqlQuery(data);
     id = "Project"+id;
-    qry2->prepare("select DISTINCT name from '"+id+"' ORDER BY name ASC");
+    qry2->prepare("select DISTINCT name from "+id+" ORDER BY name ASC");
     qry2->exec();
+
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
+
+
 }
 void ClockoutForm::TimesInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
@@ -157,7 +163,7 @@ void ClockoutForm::TimesInitialize(){
     QString a = "0:00";
     QString b = ui->timeLeft->text();
     //qDebug()<<ui->timeLeft->text();
-    qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where time>='"+a+"'");
+    qry1->prepare("SELECT TIME_FORMAT(time,'%H:%i') from timelist");
     if(qry1->exec())
     {
            while(qry1->next())
@@ -165,6 +171,7 @@ void ClockoutForm::TimesInitialize(){
                //qDebug()<< qry1->value(0).toString();
            }
     }
+    //qDebug()<<"time: "<<qry1->lastError();
 
     modal->setQuery(*qry1);
     ui->Times->setModel(modal);
@@ -172,13 +179,8 @@ void ClockoutForm::TimesInitialize(){
 void ClockoutForm::LunchInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry1 = new QSqlQuery(data);
-    QString a = "0:00";
 
-    QString b = "1:00";
-
-   qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where rowid<6");
-
-
+   qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where id<6");
 
    if(qry1->exec())
     {
@@ -187,11 +189,18 @@ void ClockoutForm::LunchInitialize(){
               // qDebug()<< qry1->value(0).toString();
            }
     }
-
     modal->setQuery(*qry1);
     ui->Lunch->setModel(modal);
 }
 void ClockoutForm::TimeLeft(){
+
+
+
+
+
+
+
+
     QDateTime indt,outdt;
     QSqlQuery qry(data);
 
@@ -235,8 +244,9 @@ void ClockoutForm::TimeLeft(){
 
     for(int i =0;i < ui->Sections->rowCount(); i++){
 
+
         QString item = ui->Sections->item(i,2)->text();
-        //qDebug()<<item;
+
 
         minutes-=(item.split(":")[0].toInt()*60);
         minutes-=item.split(":")[1].toInt();

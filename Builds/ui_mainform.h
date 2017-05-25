@@ -225,14 +225,29 @@ public:
 "\n"
 "}\n"
 "\n"
+"\n"
 "QTabBar{\n"
 "background-color:#F1F4F5;\n"
 "border:none;\n"
+"padding:10px;\n"
 "}\n"
 "QTabBar::tab:selected,QTabBar::tab:hover{\n"
 "\n"
 "color:#444946;\n"
 "}\n"
+"QTabBar::tab{\n"
+"background-color:#E5EAE7;\n"
+"\n"
+"color:black;\n"
+"}\n"
+"QTabBar::tab:hover{\n"
+"background-color:#f3f0f2;\n"
+"\n"
+"}\n"
+"QTabBar::tab:selected{\n"
+"background-color:#fcfbfb;\n"
+"}\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -262,7 +277,8 @@ public:
 "QPushButton#basicPageConnect:hover{\n"
 "border-radius:15px;\n"
 "\n"
-"}\n"
+""
+                        "}\n"
 "\n"
 "QComboBox{\n"
 "border:none;\n"
@@ -278,8 +294,7 @@ public:
 "\n"
 "QRadioButton{\n"
 "padding:0px;\n"
-"m"
-                        "argin:0px;\n"
+"margin:0px;\n"
 "\n"
 "}\n"
 "\n"
@@ -1172,8 +1187,8 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(2);
-        MainTabs->setCurrentIndex(1);
-        HeaderTabs->setCurrentIndex(3);
+        MainTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(2);
         EmployeeAdd->setDefault(false);
 
 

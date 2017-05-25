@@ -146,7 +146,7 @@ debug\Time_resource.res: Time_resource.rc
 	rc -D_DEBUG $(DEFINES) -fo debug\Time_resource.res Time_resource.rc
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" -o Makefile.Debug "..\Source\Time-Track\Time Track.pro"
+	@$(QMAKE) -spec win32-msvc2015 -o Makefile.Debug "..\Source\Time-Track\Time Track.pro"
 
 qmake_all: FORCE
 

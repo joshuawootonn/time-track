@@ -7,11 +7,9 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     ui->setupUi(this);
-    //ConnectSetup();
-    //qDebug()<<"The driver is available:" +data.isDriverAvailable();
     data = QSqlDatabase::addDatabase("QMYSQL");
     data.setHostName("192.168.0.10");
-    //data.setHostName("192.168.41.187");
+
     data.setPort(3306);
     data.setPassword("aaci1234");
     data.setDatabaseName("aacidatabase");
@@ -21,12 +19,17 @@ MainForm::MainForm(QWidget *parent) :
     if(data.open())
     {
         qDebug()<<"Connected!";
-
     }
     else
     {
-        qDebug()<<data.lastError();
-        ui->connectionlabel->setText(data.lastError().text());
+        data.setHostName("192.168.41.187");
+        if(data.open())
+            qDebug()<<"Connected!";
+        else
+        {
+            qDebug()<<data.lastError();
+            ui->connectionlabel->setText(data.lastError().text());
+        }
     }
 
     clockoutForm = new ClockoutForm(this);
@@ -97,7 +100,6 @@ void MainForm::ConnectServer()
 }
 void MainForm::DisconnectServer(){
 
-     qDebug()<<"open at disconnect"<<data.isOpen();
     QString connection;
     connection = data.connectionName();
     ui->EmployeeView->setModel(new QSqlQueryModel());
@@ -113,7 +115,6 @@ void MainForm::DisconnectServer(){
     data.removeDatabase(connection);
 
 
-    qDebug()<<"open at disconnect"<<data.isOpen();
 }
 
 /* These classes deal with file connections.
@@ -418,6 +419,7 @@ void MainForm::on_basicPageClockIn_clicked()
     if(qry1.exec()){
         while(qry1.next()){
             shiftid=qry1.value(0).toString();}}
+    qDebug()<<"The max shiftid is shown to be" +shiftid;
     int id1 = shiftid.toInt();
     id1++;
     shiftid = QString::number(id1);
@@ -458,9 +460,7 @@ void MainForm::on_basicPageConnect_clicked()
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {
-    qDebug()<<"open at advanced"<<data.isOpen();
     advInitialize();
-    qDebug()<<"open at advanced 2"<<data.isOpen();
     EmployeeTab();
     ShiftTab();
     ProjectTab();
@@ -1072,7 +1072,7 @@ void MainForm::on_ProjectAdd_clicked()
     }
     qDebug()<<qry->lastError();
     qry->clear();
-    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45))");
+    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45), PRIMARY KEY(id))");
     qry->exec();
     qDebug()<<qry->lastError();
     refreshProjectTab();
@@ -1214,7 +1214,9 @@ void MainForm::on_ProjectItemAdd_clicked()
     QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = model->tableName();
 
-    qry->prepare("insert into "+table+"(id, name) values('"+itemId+"','"+itemName+"')");
+    qry->prepare("insert into "+table+"(id, name) "
+                      "values('"+itemId+"','"+itemName+"') "
+                             "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
     qry->exec();
 
     model->select();
@@ -1382,9 +1384,7 @@ void MainForm::on_ItemDimension_clicked()
 void MainForm::ShiftTab(){
     int day = QDate::currentDate().dayOfWeek();
     ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()-day));
-    ui->ShiftView->setSortingEnabled(true);
     ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
-
     refreshShiftProject();
     refreshShiftItem();
     refreshShiftEmployee();
@@ -1396,7 +1396,6 @@ void MainForm::ShiftTab(){
     ui->ShiftView->hideColumn(3);
     ui->ShiftView->hideColumn(13);
     ui->ShiftView->horizontalHeader()->setStretchLastSection(true);
-
     ui->ShiftEmployeeCombo->setEnabled(false);
     ui->ShiftProjectCombo->setEnabled(false);
     ui->ShiftItemCombo->setEnabled(false);
@@ -1459,7 +1458,6 @@ QSqlQueryModel * MainForm::ShiftModel(){
 
 }
 void MainForm::refreshShiftTab(){
-    qDebug()<<"refresh Shift Tab";
     //ui->MainTabs->setCurrentIndex(3);
     QSqlQueryModel * x = ShiftModel();
     for(int i=0; i< x->rowCount(); i++)
@@ -1607,7 +1605,6 @@ void MainForm::on_ShiftEdit_clicked()
     shifteditform = new ShiftEditForm(this);
     establishConnections();
     QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
-
     if(list!= *(new QModelIndexList()))
     {
 
@@ -1615,13 +1612,15 @@ void MainForm::on_ShiftEdit_clicked()
         QSqlQueryModel * x = ShiftModel();
 
 
-        if(x->record(index.row()).value(2).toString()=="")
+        if(x->record(index.row()).value(2).toString()=="0")
         {
+
             int idInt = x->record(index.row()).value(0).toInt();
             QString id = QString::number(idInt);
             idInt = x->record(index.row()).value(13).toInt();
             QString shiftid = QString::number(idInt);
             shifteditform->EditWorkingShift(shiftid,id);
+
         }
         else{
             int idInt = x->record(index.row()).value(13).toInt();
@@ -1649,7 +1648,7 @@ void MainForm::on_ShiftDelete_clicked()
         qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
         qry->exec();
 
-        if(x->record(index.row()).value(2).toString()=="")
+        if(x->record(index.row()).value(2).toString()=="0")
         {
             qry->clear();
             qry->prepare("update employeelist set active='0' where name='"+x->record(index.row()).value(4).toString()+"'");
