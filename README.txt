@@ -20,34 +20,22 @@ Answer: Well with all that data available at our fingertips we will be able to e
 Question: How do I get started?
 
 Answer: Unless you work for All American Concrete Inc. You probably don't have access to our local network. 
-	In that case what you are going to do is open up the folder called /Deployment. In there you will see
-	Time Track.exe with the Time Track Logo. If you are connected to the local network above Time Track will 
-	connect automatically. Otherwise a file selector will come up and you can select data.sqlite within
-	/SQLite/clean or /SQLite/working. At this point you are connected!
+	Unfortunately getting on this network is required to use Time Track. This is because the MySql data-
+	base is hosted on my workstation. Hopefully in the future there will be web hosting! But assuming you
+	are connected all you have to do is double click the .exe file in the Deployment folder.
 
 
 Question: How do I log in?
 
-Answer: If you connected to the 
-	*	/clean version you have two employees preset 'admin' and 'employee.'
-		Log into these accounts with '1111' and '2222' respectively.
-	* 	/working version you have many employees but I would recomment 
-		logging in as 'joshua wootonn' by entering '5656'.
+Answer: You can log in by entering in your pin number and depending on your privilege a menu will show up.
+	If you are by chance an admin you can press the right hand button(the one with the graph) and it will
+	take you to the analysis page.
 
-
-Question: What if I want to change my connection?
-	
-Answer: Now that you are connected you can login to any admin level account and from there click the advanced
-	button. This is where most of the analysis will take place. Click on 'Database' tab and from there click 
-	the 'connect' button. That will open a file selection dialog. At this point you have a couple of options. 
-	you can copy the /clean/data.sqlite or the /working/data.sqlite file to somewhere on your network or
-	computer and then select it from this dialog, or you can simply leave it where it is and just switch the 
-	between the working copy and clean copy versions. Whatever you do dont move the /setup folder. 
 
 From there you can fill out the program with employees you have and progects you want completed. 
 
-From there is a video detailing how to use the program on my website(joshuawootonn.com) you will find this 
+There is a video detailing how to use the program on my website(joshuawootonn.com) you will find this 
 project under projects and c++. Also feel free to contact me at joshuawootonn@gmail.com
 
 Cheers!
-Joshua Wootonn
+Josh
