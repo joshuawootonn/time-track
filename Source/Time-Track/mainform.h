@@ -13,6 +13,7 @@
 #include <mainform.h>
 #include "clockoutform.h"
 #include "shifteditform.h"
+#include "connectionform.h"
 namespace Ui {
 class MainForm;
 }
@@ -29,6 +30,7 @@ public:
     void DisconnectSetup();
     void ConnectServer();
     void DisconnectServer();
+    bool SetHostName(QString x);
 
     void checkIfFileNameIsValid(QString x);
     QString getCorrectFileName();
@@ -42,7 +44,6 @@ public:
     void isConnected();
 
     void setIcons();
-    void loginInitialize();
     void basicInitialize();
     void advInitialize();
 
@@ -76,6 +77,7 @@ public slots:
 
     void reenter();
 
+    void loginInitialize();
     void on_basicPageClockIn_clicked();
     void on_basicPageClockOut_clicked();
     void on_basicPageConnect_clicked();
@@ -171,11 +173,14 @@ private slots:
     void on_SettingsMaximized_clicked();
     void on_SettngsFullScreen_clicked();
 
+    void connectionFinished();
+    void on_SettingsConnections_clicked();
 
 private:
     Ui::MainForm *ui;
     ClockoutForm *clockoutForm;
     ShiftEditForm * shifteditform;
+    ConnectionForm * connectionForm;
     QSqlDatabase data;
     QSqlDatabase setup;
     QString serverPath;

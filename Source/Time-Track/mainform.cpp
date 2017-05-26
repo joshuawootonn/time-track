@@ -8,7 +8,6 @@ MainForm::MainForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = QSqlDatabase::addDatabase("QMYSQL");
-    data.setHostName("192.168.0.10");
 
     data.setPort(3306);
     data.setPassword("aaci1234");
@@ -16,27 +15,21 @@ MainForm::MainForm(QWidget *parent) :
     data.setUserName("client");
 
 
-    if(data.open())
+    if(SetHostName("192.168.41.187"))
     {
         qDebug()<<"Connected!";
     }
     else
     {
-        data.setHostName("192.168.41.187");
-        if(data.open())
-            qDebug()<<"Connected!";
-        else
-        {
-            qDebug()<<data.lastError();
-            ui->connectionlabel->setText(data.lastError().text());
-        }
+        SetHostName("192.168.0.10");
     }
+
 
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
-
+    //connectionForm = new ConnectionForm(this);
     loginInitialize();
 
 
@@ -115,6 +108,10 @@ void MainForm::DisconnectServer(){
     data.removeDatabase(connection);
 
 
+}
+bool MainForm::SetHostName(QString x){
+    data.setHostName(x);
+    return data.open();
 }
 
 /* These classes deal with file connections.
@@ -295,6 +292,7 @@ void MainForm::setIcons(){
 }
 
 void MainForm::loginInitialize(){
+
     ui->mainStack->setCurrentIndex(0);
     admin=false;
 
@@ -450,13 +448,9 @@ void MainForm::on_basicPageClockOut_clicked()
 }
 void MainForm::on_basicPageConnect_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    if(filename!=""){
-        DisconnectServer();
-        checkIfFileNameIsValid(filename);
-        loginInitialize();
-    }
-
+    connectionForm = new ConnectionForm(this);
+    QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(loginInitialize()));
+    connectionForm->show();
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {
@@ -592,12 +586,12 @@ void MainForm::DatabaseTab(){
 }
 void MainForm::on_DataBaseConnect_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-    if(filename!=""){
-        DisconnectServer();
-        checkIfFileNameIsValid(filename);
-        on_basicPageAdvanced_clicked();
-    }
+//    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
+//    if(filename!=""){
+//        DisconnectServer();
+//        checkIfFileNameIsValid(filename);
+//        on_basicPageAdvanced_clicked();
+//    }
 
 }
 void MainForm::on_DataBaseDisconnect_clicked()
@@ -1671,6 +1665,26 @@ void MainForm::on_SettingsMaximized_clicked()
 void MainForm::on_SettngsFullScreen_clicked()
 {
     this->showFullScreen();
+}
+
+
+void MainForm::on_SettingsConnections_clicked()
+{
+   data.close();
+   connectionForm = new ConnectionForm(this);
+   QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(connectionFinished()));
+   connectionForm->show();
+}
+
+void MainForm::connectionFinished(){
+    if (SetHostName(connectionForm->getConnectionName()))
+    {
+        qDebug()<<"Connection to: "+connectionForm->getConnectionName();
+        loginInitialize();
+       }
+    else
+        on_SettingsConnections_clicked();
+
 }
 
 

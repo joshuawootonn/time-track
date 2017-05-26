@@ -1,4 +1,3 @@
-#include "admin.h"
 #include "mainform.h"
 #include <QApplication>
 
