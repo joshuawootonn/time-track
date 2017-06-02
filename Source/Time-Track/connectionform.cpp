@@ -1,12 +1,13 @@
 #include "connectionform.h"
 #include "ui_connectionform.h"
+#include "mainform.h"
 
 ConnectionForm::ConnectionForm(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectionForm)
 {
     ui->setupUi(this);
-    ui->Conn->addItem("192.168.0.10");
+    ui->Conn->addItem("192.168.0.11");
     ui->Conn->addItem("192.168.41.187");
 
 }
@@ -21,11 +22,12 @@ QString ConnectionForm::getConnectionName(){
 
 void ConnectionForm::on_buttonBox_accepted()
 {
-    emit finished();
-    this->close();
+    //((MainForm*)parentWidget())->SetHostName(ui->Conn->currentText());
+    //emit finished();
+    this->hide();
 }
 
 void ConnectionForm::on_buttonBox_rejected()
 {
-    this->close();
+    this->hide();
 }

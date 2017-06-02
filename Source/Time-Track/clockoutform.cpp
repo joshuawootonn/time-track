@@ -269,7 +269,7 @@ void ClockoutForm::TimeLeft(){
     if(ui->timeLeft->text()=="0:00")
     {
         if(ui->DescriptionWidget->isVisible()&&ui->Description->toPlainText()!=""){
-            qDebug()<<"1";
+
             ui->FinishedButton->setEnabled(true);
         }
         else if(!ui->DescriptionWidget->isVisible()&&ui->Sections->rowCount()>0){

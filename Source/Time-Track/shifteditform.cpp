@@ -494,7 +494,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
     qry->exec();
-    qDebug()<<"delete from shiftlist"<<qry->lastError();
+//    qDebug()<<"delete from shiftlist"<<qry->lastError();
 
     employeename = ui->Name->currentText();
     qry->prepare("select id from employeelist where name='"+employeename+"'");
@@ -502,7 +502,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
         while(qry->next())
             employeeid = qry->value(0).toString();
     }
-    qDebug()<<"select id from"<<qry->lastError();
+    //qDebug()<<"select id from"<<qry->lastError();
 
 
     QDateTime clockin = ui->DateTime1->dateTime();
@@ -521,7 +521,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     if(qry->exec()){
         while(qry->next()){
             shiftid=qry->value(0).toString();}}
-    qDebug()<<"select Max"<<qry->lastError();
+    //qDebug()<<"select Max"<<qry->lastError();
     int id = shiftid.toInt();
     id++;
     shiftid = QString::number(id);
@@ -537,14 +537,14 @@ void ShiftEditForm::on_FinishedButton_clicked()
         if(qry->exec()){
             while(qry->next()){
                 projectid=qry->value(0).toString();}}
-        qDebug()<<"select id from project"<<qry->lastError();
+        //qDebug()<<"select id from project"<<qry->lastError();
         qry->clear();
         itemname=ui->Sections->item(i,1)->text();
         qry->prepare("select id from itemlist where name='"+itemname+"'");
         if(qry->exec()){
             while(qry->next()){
                 itemid=qry->value(0).toString();}}
-        qDebug()<<"select id from item"<<qry->lastError();
+        //qDebug()<<"select id from item"<<qry->lastError();
 
 
         hours=ui->Sections->item(i,2)->text();
@@ -559,7 +559,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
 
 
         qry->exec();
-        qDebug()<<"insert into shiftlist"<<qry->lastError();
+       // qDebug()<<"insert into shiftlist"<<qry->lastError();
     }
 
 
@@ -567,7 +567,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
     qry->exec();
-     qDebug()<<"update employeelist"<<qry->lastError();
+     //qDebug()<<"update employeelist"<<qry->lastError();
     this->hide();
 
     emit finished();

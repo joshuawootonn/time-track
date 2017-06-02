@@ -17,19 +17,22 @@ SOURCES += main.cpp \
     mainform.cpp \
     clockoutform.cpp \
     shifteditform.cpp \
-    connectionform.cpp
+    connectionform.cpp \
+    exportform.cpp
 
 HEADERS  += \
     mainform.h \
     clockoutform.h \
     shifteditform.h \
-    connectionform.h
+    connectionform.h \
+    exportform.h
 
 FORMS    += \
     mainform.ui \
     clockoutform.ui \
     shifteditform.ui \
-    connectionform.ui
+    connectionform.ui \
+    exportform.ui
 
 RESOURCES +=
 
@@ -40,3 +43,5 @@ win32: LIBS += -L$$PWD/../lib/ -llibmysql
 
 INCLUDEPATH += $$PWD/../
 DEPENDPATH += $$PWD/../
+
+include(excel_stuff/qtxlsx.pri)

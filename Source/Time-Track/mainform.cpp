@@ -7,33 +7,28 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     ui->setupUi(this);
-    data = QSqlDatabase::addDatabase("QMYSQL");
-
-    data.setPort(3306);
-    data.setPassword("aaci1234");
-    data.setDatabaseName("aacidatabase");
-    data.setUserName("client");
+    ui->HeaderTabs->removeTab(4);
 
 
-    if(SetHostName("192.168.41.187"))
-    {
-        qDebug()<<"Connected!";
-    }
+    if (Connect("192.168.41.187"))
+        qDebug()<<"Connected to 187!";
+    else if (Connect("192.168.0.10"))
+        qDebug()<<"Connected to 10!";
     else
-    {
-        SetHostName("192.168.0.10");
-    }
-
+        qDebug()<<"Unable to connect!";
+    //qDebug()<<Connection("192.168.0.10");
+    //qDebug()<<isValidConnection("192.168.41.187");
 
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
     shifteditform = new ShiftEditForm(this);
     shifteditform->hide();
     //connectionForm = new ConnectionForm(this);
+    exportForm = new ExportForm(this);
+
+
     loginInitialize();
-
-
-
+    isConnected();
     setIcons();
     ui->loginNumPad->hide();
 }
@@ -109,10 +104,39 @@ void MainForm::DisconnectServer(){
 
 
 }
-bool MainForm::SetHostName(QString x){
-    data.setHostName(x);
-    return data.open();
+
+bool MainForm::Connect(QString ip){
+
+    data = QSqlDatabase::addDatabase("QMYSQL");
+    data.setPort(3306);
+    data.setPassword("aaci1234");
+    data.setDatabaseName("aacidatabase");
+    data.setUserName("client");
+    data.setHostName(ip);
+    data.open();
+    ui->ConnectionLabel->setText(data.lastError().text());
+    if(data.isOpen())
+        return true;
+     else
+        return false;
 }
+
+bool MainForm::isValidConnection(QString ip){
+    QSqlDatabase temp;
+    temp = QSqlDatabase::addDatabase("QMYSQL");
+    temp.setPort(3306);
+    temp.setPassword("aaci1234");
+    temp.setDatabaseName("aacidatabase");
+    temp.setUserName("client");
+    temp.setHostName(ip);
+    temp.open();
+    //qDebug()<<temp.lastError();
+    if(temp.isOpen())
+        return true;
+     else
+        return false;
+}
+
 
 /* These classes deal with file connections.
  * 'CheckIfFileNameIsValid' checks checks if a filepath is
@@ -129,7 +153,7 @@ void MainForm::checkIfFileNameIsValid(QString x){
         serverPath=x;
         ConnectServer();
 
-        qDebug()<<"open at check"<<data.isOpen();
+       // qDebug()<<"open at check"<<data.isOpen();
     }
     else
     {
@@ -175,6 +199,7 @@ bool MainForm::fileExists(QString path) {
 void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
+    QObject::connect(exportForm,SIGNAL(excel()),this,SLOT(exportToExcel()));
 
     QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshProjectStuff()));
     QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
@@ -289,6 +314,37 @@ void MainForm::setIcons(){
     ui->ShiftDelete->setIcon(ButtonIcon);
     ui->ShiftDelete->setIconSize(QSize(34,50));
 
+
+
+    pixmap = * new QPixmap("../Icons/min.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsMax->setIcon(ButtonIcon);
+    ui->SettingsMax->setIconSize(QSize(50,50));
+
+    pixmap = * new QPixmap("../Icons/max.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsFull->setIcon(ButtonIcon);
+    ui->SettingsFull->setIconSize(QSize(50,50));
+
+    pixmap = * new QPixmap("../Icons/export.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsExport->setIcon(ButtonIcon);
+    ui->SettingsExport->setIconSize(QSize(50,50));
+
+
+    pixmap = * new QPixmap("../Icons/print.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsPrint->setIcon(ButtonIcon);
+    ui->SettingsPrint->setIconSize(QSize(50,50));
+
+    pixmap = * new QPixmap("../Icons/Settings.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsAll->setIcon(ButtonIcon);
+    ui->SettingsAll->setIconSize(QSize(50,50));
+
+
+
+
 }
 
 void MainForm::loginInitialize(){
@@ -303,17 +359,20 @@ void MainForm::loginInitialize(){
 void MainForm::isConnected(){
     ui->passEdit->setText("");
     ui->passLabel->setText("");
+    //qDebug()<<data.isOpen();
     if(data.isOpen())
     {
         ui->passEdit->show();
         ui->passEdit->show();
-        ui->basicPageConnect->hide();        
+        ui->basicPageConnect->hide();
+        ui->ConnectionLabel->hide();
     }
     else
     {
         ui->passEdit->hide();
         ui->passEdit->hide();
-        ui->basicPageConnect->show();        
+        ui->basicPageConnect->show();
+        ui->ConnectionLabel->show();
     }
 }
 void MainForm::basicInitialize()
@@ -351,6 +410,7 @@ void MainForm::basicInitialize()
 void MainForm::advInitialize(){
     ui->mainStack->setCurrentIndex(2);
     ui->MainTabs->tabBar()->hide();
+
     establishConnections();
 }
 
@@ -417,7 +477,7 @@ void MainForm::on_basicPageClockIn_clicked()
     if(qry1.exec()){
         while(qry1.next()){
             shiftid=qry1.value(0).toString();}}
-    qDebug()<<"The max shiftid is shown to be" +shiftid;
+    //qDebug()<<"The max shiftid is shown to be" +shiftid;
     int id1 = shiftid.toInt();
     id1++;
     shiftid = QString::number(id1);
@@ -448,6 +508,7 @@ void MainForm::on_basicPageClockOut_clicked()
 }
 void MainForm::on_basicPageConnect_clicked()
 {
+    data.close();
     connectionForm = new ConnectionForm(this);
     QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(loginInitialize()));
     connectionForm->show();
@@ -460,6 +521,7 @@ void MainForm::on_basicPageAdvanced_clicked()
     ProjectTab();
     ItemTab();
     DatabaseTab();
+    SettingsTab();
     ui->MainTabs->setCurrentIndex(0);
     ui->HeaderTabs->setCurrentIndex(0);
 }
@@ -914,8 +976,6 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
     ui->ProjectItemView->setModel(x);
     refreshProjectItemTab();
     refreshProjectItemCombo();
-
-
 }
 void MainForm::refreshProjectStuff(){
 
@@ -1024,6 +1084,7 @@ QSqlQueryModel * MainForm::ProjectItemModel(){
 
     QModelIndex index = list.at(0);
     int idInt = x->record(index.row()).value(0).toInt();
+    currentProject = x->record(index.row()).value(1).toString();
 
     QString id = QString::number(idInt);
 
@@ -1064,11 +1125,11 @@ void MainForm::on_ProjectAdd_clicked()
             id = qry->value(0).toString();
         }
     }
-    qDebug()<<qry->lastError();
+    //qDebug()<<qry->lastError();
     qry->clear();
     qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45), PRIMARY KEY(id))");
     qry->exec();
-    qDebug()<<qry->lastError();
+   // qDebug()<<qry->lastError();
     refreshProjectTab();
     refreshShiftProject();
     ui->MainTabs->setCurrentIndex(1);
@@ -1377,8 +1438,11 @@ void MainForm::on_ItemDimension_clicked()
 */
 void MainForm::ShiftTab(){
     int day = QDate::currentDate().dayOfWeek();
-    ui->ShiftDate1->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()-day));
-    ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
+
+    ui->ShiftDate1->setDate(QDate::currentDate().addDays(-day));
+    ui->ShiftDate2->setDate(QDate::currentDate().addDays(6-day));
+    //ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
+
     refreshShiftProject();
     refreshShiftItem();
     refreshShiftEmployee();
@@ -1459,6 +1523,7 @@ void MainForm::refreshShiftTab(){
 
         ui->ShiftView->showRow(i);
 
+
     }
     if(ui->ShiftEmployeeBox->isChecked())
     {
@@ -1468,6 +1533,7 @@ void MainForm::refreshShiftTab(){
             if(data != ui->ShiftEmployeeCombo->currentText()){
 
                ui->ShiftView->hideRow(i);
+
 
             }
         }
@@ -1658,32 +1724,264 @@ void MainForm::on_ShiftDelete_clicked()
 /* Quickly made this section so that I could maximize
  * and fullscreen the program easily plan on making
  * this cleaner later.*/
-void MainForm::on_SettingsMaximized_clicked()
-{
-    this->showMaximized();
-}
-void MainForm::on_SettngsFullScreen_clicked()
-{
-    this->showFullScreen();
+void MainForm::SettingsTab(){
+    ui->SettingsConnectionGroup->hide();
+    QSqlQueryModel * x = ProjectModel();
+    currentProject = x->record(1).value(1).toString();
 }
 
 
-void MainForm::on_SettingsConnections_clicked()
+
+void MainForm::on_SettingsMax_clicked()
 {
-   data.close();
-   connectionForm = new ConnectionForm(this);
-   QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(connectionFinished()));
-   connectionForm->show();
+    this->setWindowState(Qt::WindowMaximized);
+}
+void MainForm::on_SettingsFull_clicked()
+{
+
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
-void MainForm::connectionFinished(){
-    if (SetHostName(connectionForm->getConnectionName()))
+
+void MainForm::on_SettingsExport_clicked()
+{
+    exportForm =  new ExportForm(this);
+    establishConnections();
+    exportForm->show();
+
+}
+void MainForm::exportToExcel(){
+
+    QString FileToExport = exportForm->Location;
+    QString TabletoExport = exportForm->Table;
+    QXlsx::Document doc;
+
+    if(TabletoExport == "Employees")
     {
-        qDebug()<<"Connection to: "+connectionForm->getConnectionName();
-        loginInitialize();
-       }
-    else
-        on_SettingsConnections_clicked();
+        QSqlQueryModel * model = (QSqlQueryModel *)ui->EmployeeView->model();
+        QXlsx::Format title;
+        title.setFontBold(true);
+        title.setFontSize(20);
+        doc.setRowFormat(1,1,title);
+
+        doc.write(1,1,"AACI");
+        if(ui->AllRadio->isChecked())
+            doc.write(2,1,"Employee(s): All");
+        else if(ui->CurrentRadio->isChecked())
+            doc.write(2,1,"Employee(s): Current");
+        else if(ui->PastRadio->isChecked())
+            doc.write(2,1,"Employee(s): Past");
+
+        QXlsx::Format label;
+        label.setFontBold(true);
+        label.setFontSize(15);
+        doc.setRowFormat(4,4,label);
+
+        qDebug()<<"here";
+        doc.write(4,1,"Name");
+        doc.write(4,2,"Pin");
+        doc.write(4,3,"Admin Status");
+
+        for(int i = 0; i < model->rowCount(); i++){
+            for(int j = 0; j < model->columnCount(); j++){
+                if(!ui->EmployeeView->isRowHidden(i))
+                {
+                    if(j == 1 || j == 2 || j == 3)
+                        doc.write(i+5,j, model->record(i).value(j).toString());
+                }
+            }
+        }
+    }
+    if(TabletoExport == "Projects")
+    {
+        QSqlQueryModel * model = (QSqlQueryModel *)ui->ProjectView->model();
+        QXlsx::Format title;
+        title.setFontBold(true);
+        title.setFontSize(20);
+
+        doc.setRowFormat(1,1,title);
+
+        doc.write(1,1,"AACI");
+        if(ui->ProjectAllRadio->isChecked())
+            doc.write(2,1,"Project(s): All");
+        else if(ui->ProjectCurrentRadio->isChecked())
+            doc.write(2,1,"Project(s): Current");
+        else if(ui->ProjectPastRadio->isChecked())
+            doc.write(2,1,"Project(s): Past");
+
+
+        QXlsx::Format label;
+        label.setFontBold(true);
+        label.setFontSize(15);
+        doc.setRowFormat(4,4,label);
+
+
+        doc.write(4,1,"Name");
+        doc.write(4,2,"Date");
+
+        for(int i = 0; i < model->rowCount(); i++){
+            for(int j = 0; j < model->columnCount(); j++){
+                if(!ui->ProjectView->isRowHidden(i))
+                {
+                    if(j == 1)
+                        doc.write(i+5,j, model->record(i).value(j).toString());
+                    else if(j == 3)
+                        doc.write(i+5,j-1, model->record(i).value(j).toString());
+                }
+            }
+        }
+    }
+    if(TabletoExport == "Items")
+    {
+        QSqlQueryModel * model = (QSqlQueryModel *)ui->ItemView->model();
+
+
+        QXlsx::Format title;
+        title.setFontBold(true);
+        title.setFontSize(20);
+
+        doc.setRowFormat(1,1,title);
+
+        doc.write(1,1,"AACI");
+
+        doc.write(2,1,"Items(s): ALL");
+
+
+        QXlsx::Format label;
+        label.setFontBold(true);
+        label.setFontSize(15);
+        doc.setRowFormat(4,4,label);
+
+
+        doc.write(4,1,"Name");
+        doc.write(4,2,"Category");
+        doc.write(4,3,"Sub-Catergory");
+        doc.write(4,4,"Dimension");
+
+        for(int i = 0; i < model->rowCount(); i++){
+            for(int j = 0; j < model->columnCount(); j++){
+                if(!ui->ShiftView->isRowHidden(i))
+                {
+                    if(j == 1 || j == 2 || j == 3 || j == 4)
+                        doc.write(i+5,j, model->record(i).value(j).toString());
+                }
+            }
+        }
+    }
+    if(TabletoExport == "Project's Items")
+    {
+        QSqlQuery * qry = new QSqlQuery(data);
+        QSqlTableModel * model = new QSqlTableModel(0,data);
+        qry->prepare("select id from projectlist where name='"+currentProject+"'");
+        QString currentId;
+        if(qry->exec())
+        {
+            while(qry->next())
+            {
+                currentId = qry->value(0).toString();
+            }
+        }
+
+        doc.write(1,1,"AACI");
+        doc.write(2,1,"Project: " + currentProject);
+        doc.write(4,1,"Items");
+
+        QXlsx::Format title;
+        title.setFontBold(true);
+        title.setFontSize(20);
+        doc.setRowFormat(1,1,title);
+
+        QXlsx::Format label;
+        label.setFontBold(true);
+        label.setFontSize(15);
+        doc.setRowFormat(4,4,label);
+
+        qry->clear();
+        QString table = "project"+currentId;
+        qry->prepare("select name from "+table+"");
+        if(qry->exec())
+        {
+            int i =0;
+            while(qry->next())
+            {
+                doc.write(i+5,1, qry->value(0).toString());
+                i++;
+            }
+        }else
+        {
+            doc.write(5,1,"No project selected in the project tab. Please do so, and try again.");
+        }
+
+
+    }
+    if(TabletoExport == "Shifts"){
+        QSqlQueryModel * model = (QSqlQueryModel *)ui->ShiftView->model();
+
+        QXlsx::Format title;
+        title.setFontBold(true);
+        title.setFontSize(20);
+        doc.setRowFormat(1,1,title);
+
+        doc.write(1,1,"AACI");
+        if(ui->ShiftEmployeeCombo->isEnabled())
+            doc.write(2,1,"Employee(s): "+ui->ShiftEmployeeCombo->currentText());
+        else
+            doc.write(2,1,"Employee(s): All");
+        if(ui->ShiftProjectCombo->isEnabled())
+            doc.write(3,1,"Project(s): "+ui->ShiftProjectCombo->currentText());
+        else
+            doc.write(3,1,"Project(s): All");
+        if(ui->ShiftProjectCombo->isEnabled())
+            doc.write(4,1,"Item(s): "+ui->ShiftItemCombo->currentText());
+        else
+            doc.write(4,1,"Item(s): All");
+
+        QXlsx::Format label;
+        label.setFontBold(true);
+        label.setFontSize(15);
+        doc.setRowFormat(6,6,label);
+
+
+        doc.write(6,1,"Name");
+        doc.write(6,2,"Project");
+        doc.write(6,3,"Item");
+        doc.write(6,4,"Clock In");
+        doc.write(6,5,"Clock out");
+        doc.write(6,6,"Lunch");
+        doc.write(6,7,"Time");
+        doc.write(6,8,"Notes");
+        for(int i = 0; i < model->rowCount(); i++){
+            for(int j = 0; j < model->columnCount(); j++){
+
+                if(!ui->ShiftView->isRowHidden(i))
+                {
+
+                    if(j == 4 || j == 5 || j == 6)
+                        doc.write(i+7,j-3, model->record(i).value(j).toString());
+                    else if( j == 7 || j == 8)
+                        doc.write(i+7,j-3, (model->record(i).value(j).toString() + " " + model->record(i).value(j+2).toString()));
+                    else if( j == 11 || j == 12)
+                        doc.write(i+7,j-5, model->record(i).value(j).toString());
+                    else if(j == 14)
+                        doc.write(i+7,j-6, model->record(i).value(j).toString());
+
+                }
+                //doc.write(i+1,j+1, model->record(i).value(j).toString());
+
+            }
+        }
+
+    }
+    doc.saveAs(FileToExport);
+
+
+}
+void MainForm::on_SettingsPrint_clicked()
+{
+
+}
+void MainForm::on_SettingsAll_clicked()
+{
 
 }
 

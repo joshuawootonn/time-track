@@ -14,6 +14,11 @@
 #include "clockoutform.h"
 #include "shifteditform.h"
 #include "connectionform.h"
+#include "exportform.h"
+#include "xlsxdocument.h"
+#include "xlsxrichstring.h"
+#include "xlsxworkbook.h"
+#include "xlsxformat.h"
 namespace Ui {
 class MainForm;
 }
@@ -30,7 +35,10 @@ public:
     void DisconnectSetup();
     void ConnectServer();
     void DisconnectServer();
-    bool SetHostName(QString x);
+
+    bool Connect(QString ip);
+    bool isValidConnection(QString ip);
+
 
     void checkIfFileNameIsValid(QString x);
     QString getCorrectFileName();
@@ -73,6 +81,8 @@ public:
      * put into this file, and I dont want to think of
      * it right now xd
      */
+
+
 public slots:
 
     void reenter();
@@ -170,17 +180,23 @@ private slots:
 
     //Settings Tab!
 
-    void on_SettingsMaximized_clicked();
-    void on_SettngsFullScreen_clicked();
-
-    void connectionFinished();
-    void on_SettingsConnections_clicked();
+    void SettingsTab();
+    void on_SettingsMax_clicked();
+    void on_SettingsFull_clicked();
+    void on_SettingsExport_clicked();
+    void exportToExcel();
+    void on_SettingsPrint_clicked();
+    void on_SettingsAll_clicked();
+public:
+    Ui::MainForm *ui;
 
 private:
-    Ui::MainForm *ui;
+
     ClockoutForm *clockoutForm;
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;
+    ExportForm * exportForm;
+    QString currentProject;
     QSqlDatabase data;
     QSqlDatabase setup;
     QString serverPath;

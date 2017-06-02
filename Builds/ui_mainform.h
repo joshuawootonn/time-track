@@ -56,13 +56,14 @@ public:
     QPushButton *LoginGo;
     QSpacerItem *horizontalSpacer_10;
     QSpacerItem *verticalSpacer_3;
-    QSpacerItem *horizontalSpacer_9;
+    QLabel *passLabel;
     QHBoxLayout *horizontalLayout_13;
     QLineEdit *passEdit;
     QSpacerItem *verticalSpacer_4;
-    QLabel *passLabel;
     QPushButton *basicPageConnect;
     QLabel *connectionlabel;
+    QSpacerItem *horizontalSpacer_9;
+    QLabel *ConnectionLabel;
     QWidget *basicPage;
     QGridLayout *gridLayout_2;
     QSpacerItem *horizontalSpacer_3;
@@ -195,17 +196,21 @@ public:
     QHBoxLayout *horizontalLayout_12;
     QGroupBox *groupBox_16;
     QGridLayout *gridLayout_18;
-    QPushButton *SettingsMaximized;
-    QPushButton *SettngsFullScreen;
-    QPushButton *pushButton_2;
-    QGroupBox *groupBox_17;
+    QPushButton *SettingsMax;
+    QPushButton *SettingsFull;
+    QGroupBox *SettingsConnectionGroup;
     QGridLayout *gridLayout_19;
     QPushButton *SettingsConnections;
     QGroupBox *groupBox_18;
     QGridLayout *gridLayout_20;
-    QPushButton *pushButton_3;
+    QPushButton *SettingsExport;
     QGroupBox *groupBox_19;
+    QGridLayout *gridLayout_21;
+    QPushButton *SettingsPrint;
     QGroupBox *groupBox_20;
+    QGridLayout *gridLayout_22;
+    QPushButton *SettingsAll;
+    QSpacerItem *horizontalSpacer_8;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *mainFinish;
@@ -429,9 +434,10 @@ public:
 
         gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
 
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        passLabel = new QLabel(loginPage);
+        passLabel->setObjectName(QStringLiteral("passLabel"));
 
-        gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
+        gridLayout_16->addWidget(passLabel, 4, 1, 1, 1);
 
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
@@ -452,12 +458,7 @@ public:
 
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_16->addItem(verticalSpacer_4, 8, 1, 1, 1);
-
-        passLabel = new QLabel(loginPage);
-        passLabel->setObjectName(QStringLiteral("passLabel"));
-
-        gridLayout_16->addWidget(passLabel, 4, 1, 1, 1);
+        gridLayout_16->addItem(verticalSpacer_4, 9, 1, 1, 1);
 
         basicPageConnect = new QPushButton(loginPage);
         basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
@@ -468,6 +469,15 @@ public:
         connectionlabel->setObjectName(QStringLiteral("connectionlabel"));
 
         gridLayout_16->addWidget(connectionlabel, 3, 1, 1, 1);
+
+        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
+
+        ConnectionLabel = new QLabel(loginPage);
+        ConnectionLabel->setObjectName(QStringLiteral("ConnectionLabel"));
+
+        gridLayout_16->addWidget(ConnectionLabel, 8, 1, 1, 1);
 
         mainStack->addWidget(loginPage);
         basicPage = new QWidget();
@@ -1094,6 +1104,7 @@ public:
         HeaderTabs->addTab(ShiftSettings, QString());
         DataBaseSettings = new QWidget();
         DataBaseSettings->setObjectName(QStringLiteral("DataBaseSettings"));
+        DataBaseSettings->setEnabled(true);
         horizontalLayout_4 = new QHBoxLayout(DataBaseSettings);
         horizontalLayout_4->setSpacing(1);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -1153,62 +1164,77 @@ public:
         Settings = new QWidget();
         Settings->setObjectName(QStringLiteral("Settings"));
         horizontalLayout_12 = new QHBoxLayout(Settings);
+        horizontalLayout_12->setSpacing(1);
         horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        horizontalLayout_12->setContentsMargins(2, 2, 2, 2);
         groupBox_16 = new QGroupBox(Settings);
         groupBox_16->setObjectName(QStringLiteral("groupBox_16"));
         gridLayout_18 = new QGridLayout(groupBox_16);
         gridLayout_18->setObjectName(QStringLiteral("gridLayout_18"));
-        SettingsMaximized = new QPushButton(groupBox_16);
-        SettingsMaximized->setObjectName(QStringLiteral("SettingsMaximized"));
+        SettingsMax = new QPushButton(groupBox_16);
+        SettingsMax->setObjectName(QStringLiteral("SettingsMax"));
 
-        gridLayout_18->addWidget(SettingsMaximized, 0, 0, 1, 1);
+        gridLayout_18->addWidget(SettingsMax, 0, 0, 1, 1);
 
-        SettngsFullScreen = new QPushButton(groupBox_16);
-        SettngsFullScreen->setObjectName(QStringLiteral("SettngsFullScreen"));
+        SettingsFull = new QPushButton(groupBox_16);
+        SettingsFull->setObjectName(QStringLiteral("SettingsFull"));
 
-        gridLayout_18->addWidget(SettngsFullScreen, 0, 1, 1, 1);
-
-        pushButton_2 = new QPushButton(groupBox_16);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-
-        gridLayout_18->addWidget(pushButton_2, 0, 2, 1, 1);
+        gridLayout_18->addWidget(SettingsFull, 0, 1, 1, 1);
 
 
         horizontalLayout_12->addWidget(groupBox_16);
 
-        groupBox_17 = new QGroupBox(Settings);
-        groupBox_17->setObjectName(QStringLiteral("groupBox_17"));
-        gridLayout_19 = new QGridLayout(groupBox_17);
+        SettingsConnectionGroup = new QGroupBox(Settings);
+        SettingsConnectionGroup->setObjectName(QStringLiteral("SettingsConnectionGroup"));
+        gridLayout_19 = new QGridLayout(SettingsConnectionGroup);
         gridLayout_19->setObjectName(QStringLiteral("gridLayout_19"));
-        SettingsConnections = new QPushButton(groupBox_17);
+        SettingsConnections = new QPushButton(SettingsConnectionGroup);
         SettingsConnections->setObjectName(QStringLiteral("SettingsConnections"));
 
         gridLayout_19->addWidget(SettingsConnections, 0, 0, 1, 1);
 
 
-        horizontalLayout_12->addWidget(groupBox_17);
+        horizontalLayout_12->addWidget(SettingsConnectionGroup);
 
         groupBox_18 = new QGroupBox(Settings);
         groupBox_18->setObjectName(QStringLiteral("groupBox_18"));
         gridLayout_20 = new QGridLayout(groupBox_18);
         gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
-        pushButton_3 = new QPushButton(groupBox_18);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        SettingsExport = new QPushButton(groupBox_18);
+        SettingsExport->setObjectName(QStringLiteral("SettingsExport"));
 
-        gridLayout_20->addWidget(pushButton_3, 0, 0, 1, 1);
+        gridLayout_20->addWidget(SettingsExport, 0, 0, 1, 1);
 
 
         horizontalLayout_12->addWidget(groupBox_18);
 
         groupBox_19 = new QGroupBox(Settings);
         groupBox_19->setObjectName(QStringLiteral("groupBox_19"));
+        gridLayout_21 = new QGridLayout(groupBox_19);
+        gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
+        SettingsPrint = new QPushButton(groupBox_19);
+        SettingsPrint->setObjectName(QStringLiteral("SettingsPrint"));
+
+        gridLayout_21->addWidget(SettingsPrint, 0, 0, 1, 1);
+
 
         horizontalLayout_12->addWidget(groupBox_19);
 
         groupBox_20 = new QGroupBox(Settings);
         groupBox_20->setObjectName(QStringLiteral("groupBox_20"));
+        gridLayout_22 = new QGridLayout(groupBox_20);
+        gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
+        SettingsAll = new QPushButton(groupBox_20);
+        SettingsAll->setObjectName(QStringLiteral("SettingsAll"));
+
+        gridLayout_22->addWidget(SettingsAll, 0, 0, 1, 1);
+
 
         horizontalLayout_12->addWidget(groupBox_20);
+
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer_8);
 
         HeaderTabs->addTab(Settings, QString());
 
@@ -1238,9 +1264,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
-        MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(5);
+        mainStack->setCurrentIndex(2);
+        MainTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
 
 
@@ -1265,6 +1291,7 @@ public:
         passLabel->setText(QString());
         basicPageConnect->setText(QString());
         connectionlabel->setText(QString());
+        ConnectionLabel->setText(QString());
         basicPageClockIn->setText(QString());
         basicPageClockOut->setText(QString());
         basicPageAdvanced->setText(QString());
@@ -1343,15 +1370,16 @@ public:
         DataBaseLabel->setText(QString());
         HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", 0));
         groupBox_16->setTitle(QApplication::translate("MainForm", "Display", 0));
-        SettingsMaximized->setText(QApplication::translate("MainForm", "Maximized", 0));
-        SettngsFullScreen->setText(QApplication::translate("MainForm", "Full Screen", 0));
-        pushButton_2->setText(QApplication::translate("MainForm", "The Real Button we will use", 0));
-        groupBox_17->setTitle(QApplication::translate("MainForm", "Connections", 0));
+        SettingsMax->setText(QString());
+        SettingsFull->setText(QString());
+        SettingsConnectionGroup->setTitle(QApplication::translate("MainForm", "Connections", 0));
         SettingsConnections->setText(QApplication::translate("MainForm", "PushButton", 0));
         groupBox_18->setTitle(QApplication::translate("MainForm", "Export", 0));
-        pushButton_3->setText(QApplication::translate("MainForm", "PushButton", 0));
+        SettingsExport->setText(QString());
         groupBox_19->setTitle(QApplication::translate("MainForm", "Printing", 0));
-        groupBox_20->setTitle(QApplication::translate("MainForm", "Error Reporting", 0));
+        SettingsPrint->setText(QString());
+        groupBox_20->setTitle(QApplication::translate("MainForm", "All Settings", 0));
+        SettingsAll->setText(QString());
         HeaderTabs->setTabText(HeaderTabs->indexOf(Settings), QApplication::translate("MainForm", "Settings", 0));
         mainFinish->setText(QApplication::translate("MainForm", "Finish", 0));
     } // retranslateUi

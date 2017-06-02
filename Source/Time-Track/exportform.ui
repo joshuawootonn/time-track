@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExportForm</class>
+ <widget class="QDialog" name="ExportForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>515</width>
+    <height>124</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#MainForm{
+
+background-color:#E5EAE7;
+}
+*{
+font-family:&quot;Calibri&quot;;
+font-size: 14px;
+
+}
+
+
+QTabWidget{
+margin:0px;
+padding:0px;
+border:none;
+
+background-color:#F1F4F5;
+
+}
+
+
+QTabBar{
+background-color:#F1F4F5;
+border:none;
+padding:10px;
+}
+QTabBar::tab:selected,QTabBar::tab:hover{
+
+color:#444946;
+}
+QTabBar::tab{
+background-color:#E5EAE7;
+
+color:black;
+}
+QTabBar::tab:hover{
+background-color:#f3f0f2;
+
+}
+QTabBar::tab:selected{
+background-color:#fcfbfb;
+}
+
+
+
+
+
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+
+
+QWidget{
+margin:0px;
+padding:0px;
+}
+
+
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#F1F4F5;
+}
+QPushButton:hover,QPushButton:hover{
+background-color:#E4E9EB;
+}
+
+QPushButton#basicPageConnect:hover{
+border-radius:15px;
+
+}
+
+QComboBox{
+border:none;
+background-color:#F1F4F5;
+}
+QComboBox:hover {
+background-color:#E4E9EB;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
+QRadioButton{
+padding:0px;
+margin:0px;
+
+}
+
+QDateEdit{
+border:none;
+background-color:#F1F4F5;
+}
+QDateEdit:hover{
+background-color:#E4E9EB;
+}
+QDateEdit:drop-down{
+border:none;
+}
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#8DAA91;
+
+}
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QWidget" name="ExcelWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>File Location:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="ExcelLocation"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="ExcelLocationChange">
+        <property name="text">
+         <string>+</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="ExcelTableChange"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Table to Export:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ExportForm</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ExportForm</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
