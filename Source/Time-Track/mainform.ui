@@ -133,18 +133,6 @@ QGroupBox::title {
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>4</number>
-   </property>
    <item>
     <widget class="QStackedWidget" name="mainStack">
      <property name="styleSheet">
@@ -483,7 +471,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>3</number>
+          <number>1</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -644,7 +632,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1012,34 +1000,72 @@ background-color:#B19994;
             </spacer>
            </item>
            <item>
+            <spacer name="horizontalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QGroupBox" name="groupBox_11">
              <property name="title">
               <string>Options</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
-              <item row="0" column="1">
-               <widget class="QPushButton" name="ProjectItemAdd">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="ProjectItemRemove">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QComboBox" name="ProjectItemCombo">
-                <property name="font">
-                 <font>
-                  <family>Calibri</family>
-                  <pointsize>-1</pointsize>
-                 </font>
-                </property>
-               </widget>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <item>
+                 <layout class="QGridLayout" name="gridLayout_23">
+                  <item row="0" column="0">
+                   <widget class="QComboBox" name="ProjectItemCombo">
+                    <property name="font">
+                     <font>
+                      <family>Calibri</family>
+                      <pointsize>-1</pointsize>
+                     </font>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <item>
+                     <widget class="QSpinBox" name="ProjectItemQuantity">
+                      <property name="maximum">
+                       <number>100000</number>
+                      </property>
+                      <property name="singleStep">
+                       <number>1</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="ProjectItemDimension"/>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="ProjectItemAdd">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="ProjectItemRemove">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
@@ -1697,6 +1723,89 @@ border-image: url(..Icons/connect.png); }
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>EmployeeAdd</tabstop>
+  <tabstop>EmployeeArchive</tabstop>
+  <tabstop>EmployeeDelete</tabstop>
+  <tabstop>EmployeeId</tabstop>
+  <tabstop>EmployeeName</tabstop>
+  <tabstop>EmployeePin</tabstop>
+  <tabstop>EmployeeAdminStatus</tabstop>
+  <tabstop>EmployeeShiftCount</tabstop>
+  <tabstop>EmployeeActive</tabstop>
+  <tabstop>EmployeeCurrent</tabstop>
+  <tabstop>PastRadio</tabstop>
+  <tabstop>AllRadio</tabstop>
+  <tabstop>CurrentRadio</tabstop>
+  <tabstop>MainTabs</tabstop>
+  <tabstop>EmployeeView</tabstop>
+  <tabstop>ProjectAdd</tabstop>
+  <tabstop>ProjectArchive</tabstop>
+  <tabstop>ProjectDelete</tabstop>
+  <tabstop>ProjectId</tabstop>
+  <tabstop>ProjectName</tabstop>
+  <tabstop>ProjectCurrent</tabstop>
+  <tabstop>ProjectDate</tabstop>
+  <tabstop>ProjectAllRadio</tabstop>
+  <tabstop>ProjectCurrentRadio</tabstop>
+  <tabstop>ProjectPastRadio</tabstop>
+  <tabstop>ProjectItemCombo</tabstop>
+  <tabstop>ProjectItemQuantity</tabstop>
+  <tabstop>ProjectItemDimension</tabstop>
+  <tabstop>ProjectItemAdd</tabstop>
+  <tabstop>ProjectItemRemove</tabstop>
+  <tabstop>ProjectItemId</tabstop>
+  <tabstop>ProjectItemName</tabstop>
+  <tabstop>ProjectView</tabstop>
+  <tabstop>Login3</tabstop>
+  <tabstop>LoginGo</tabstop>
+  <tabstop>passEdit</tabstop>
+  <tabstop>basicPageConnect</tabstop>
+  <tabstop>basicPageClockOut</tabstop>
+  <tabstop>basicPageAdvanced</tabstop>
+  <tabstop>basicPageClockIn</tabstop>
+  <tabstop>ItemView</tabstop>
+  <tabstop>ProjectItemView</tabstop>
+  <tabstop>Login6</tabstop>
+  <tabstop>Login7</tabstop>
+  <tabstop>Login8</tabstop>
+  <tabstop>HeaderTabs</tabstop>
+  <tabstop>Login5</tabstop>
+  <tabstop>Login2</tabstop>
+  <tabstop>Login9</tabstop>
+  <tabstop>ShiftView</tabstop>
+  <tabstop>Login4</tabstop>
+  <tabstop>Login0</tabstop>
+  <tabstop>LoginBack</tabstop>
+  <tabstop>Login1</tabstop>
+  <tabstop>ItemAdd</tabstop>
+  <tabstop>ItemDelete</tabstop>
+  <tabstop>ItemCategory</tabstop>
+  <tabstop>ItemDimension</tabstop>
+  <tabstop>ItemSub</tabstop>
+  <tabstop>ItemName</tabstop>
+  <tabstop>ItemId</tabstop>
+  <tabstop>ShiftAdd</tabstop>
+  <tabstop>ShiftEdit</tabstop>
+  <tabstop>ShiftDelete</tabstop>
+  <tabstop>ShiftEmployeeCombo</tabstop>
+  <tabstop>ShiftProjectCombo</tabstop>
+  <tabstop>ShiftItemCombo</tabstop>
+  <tabstop>ShiftEmployeeBox</tabstop>
+  <tabstop>ShiftProjectBox</tabstop>
+  <tabstop>ShiftItemBox</tabstop>
+  <tabstop>ShiftDate1</tabstop>
+  <tabstop>ShiftDate2</tabstop>
+  <tabstop>DataBaseConnect</tabstop>
+  <tabstop>DataBaseDisconnect</tabstop>
+  <tabstop>SettingsMax</tabstop>
+  <tabstop>SettingsFull</tabstop>
+  <tabstop>SettingsConnections</tabstop>
+  <tabstop>SettingsExport</tabstop>
+  <tabstop>SettingsPrint</tabstop>
+  <tabstop>SettingsAll</tabstop>
+  <tabstop>mainFinish</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

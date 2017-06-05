@@ -25,6 +25,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -133,11 +134,17 @@ public:
     QRadioButton *ProjectCurrentRadio;
     QRadioButton *ProjectPastRadio;
     QSpacerItem *horizontalSpacer_6;
+    QSpacerItem *horizontalSpacer_11;
     QGroupBox *groupBox_11;
     QGridLayout *gridLayout_12;
+    QHBoxLayout *horizontalLayout_14;
+    QGridLayout *gridLayout_23;
+    QComboBox *ProjectItemCombo;
+    QHBoxLayout *horizontalLayout_16;
+    QSpinBox *ProjectItemQuantity;
+    QComboBox *ProjectItemDimension;
     QPushButton *ProjectItemAdd;
     QPushButton *ProjectItemRemove;
-    QComboBox *ProjectItemCombo;
     QGroupBox *groupBox_12;
     QGridLayout *gridLayout_11;
     QCheckBox *ProjectItemName;
@@ -340,7 +347,6 @@ public:
 ""));
         verticalLayout_4 = new QVBoxLayout(MainForm);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 4);
         mainStack = new QStackedWidget(MainForm);
         mainStack->setObjectName(QStringLiteral("mainStack"));
         mainStack->setStyleSheet(QStringLiteral(""));
@@ -832,25 +838,56 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_6);
 
+        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_7->addItem(horizontalSpacer_11);
+
         groupBox_11 = new QGroupBox(ProjectsSettings);
         groupBox_11->setObjectName(QStringLiteral("groupBox_11"));
         gridLayout_12 = new QGridLayout(groupBox_11);
         gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        ProjectItemAdd = new QPushButton(groupBox_11);
-        ProjectItemAdd->setObjectName(QStringLiteral("ProjectItemAdd"));
-
-        gridLayout_12->addWidget(ProjectItemAdd, 0, 1, 1, 1);
-
-        ProjectItemRemove = new QPushButton(groupBox_11);
-        ProjectItemRemove->setObjectName(QStringLiteral("ProjectItemRemove"));
-
-        gridLayout_12->addWidget(ProjectItemRemove, 0, 2, 1, 1);
-
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
+        gridLayout_23 = new QGridLayout();
+        gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
         ProjectItemCombo->setFont(font);
 
-        gridLayout_12->addWidget(ProjectItemCombo, 0, 0, 1, 1);
+        gridLayout_23->addWidget(ProjectItemCombo, 0, 0, 1, 1);
+
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
+        ProjectItemQuantity = new QSpinBox(groupBox_11);
+        ProjectItemQuantity->setObjectName(QStringLiteral("ProjectItemQuantity"));
+        ProjectItemQuantity->setMaximum(100000);
+        ProjectItemQuantity->setSingleStep(100);
+
+        horizontalLayout_16->addWidget(ProjectItemQuantity);
+
+        ProjectItemDimension = new QComboBox(groupBox_11);
+        ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
+
+        horizontalLayout_16->addWidget(ProjectItemDimension);
+
+
+        gridLayout_23->addLayout(horizontalLayout_16, 1, 0, 1, 1);
+
+
+        horizontalLayout_14->addLayout(gridLayout_23);
+
+        ProjectItemAdd = new QPushButton(groupBox_11);
+        ProjectItemAdd->setObjectName(QStringLiteral("ProjectItemAdd"));
+
+        horizontalLayout_14->addWidget(ProjectItemAdd);
+
+        ProjectItemRemove = new QPushButton(groupBox_11);
+        ProjectItemRemove->setObjectName(QStringLiteral("ProjectItemRemove"));
+
+        horizontalLayout_14->addWidget(ProjectItemRemove);
+
+
+        gridLayout_12->addLayout(horizontalLayout_14, 1, 1, 1, 1);
 
 
         horizontalLayout_7->addWidget(groupBox_11);
@@ -1266,7 +1303,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 

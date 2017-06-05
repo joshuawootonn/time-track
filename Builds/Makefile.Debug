@@ -318,7 +318,7 @@ debug\Time_resource.res: Time_resource.rc
 	rc -D_DEBUG $(DEFINES) -fo debug\Time_resource.res Time_resource.rc
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" -o Makefile.Debug "..\Source\Time-Track\Time Track.pro"
+	@$(QMAKE) -spec win32-msvc2015 -o Makefile.Debug "..\Source\Time-Track\Time Track.pro"
 
 qmake_all: FORCE
 
@@ -1412,6 +1412,51 @@ debug\mainform.obj: ..\Source\Time-Track\mainform.cpp ../Source/Time-Track/mainf
 		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\QImage \
 		ui_mainform.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QAction \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QCheckBox \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qcheckbox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDateEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdatetimeedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGroupBox \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLineEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlineedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qpen.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QRadioButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qradiobutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QSpacerItem \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTabWidget \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTableView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtableview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QVBoxLayout \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QFileDialog \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qfiledialog.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qdir.h \
@@ -1573,7 +1618,43 @@ debug\clockoutform.obj: ..\Source\Time-Track\clockoutform.cpp ../Source/Time-Tra
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QSharedDataPointer \
 		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\QImage \
-		ui_clockoutform.h
+		ui_clockoutform.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QAction \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTableWidget \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtablewidget.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtableview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTextEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtextedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextdocument.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qpen.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QVBoxLayout
 
 debug\shifteditform.obj: ..\Source\Time-Track\shifteditform.cpp ../Source/Time-Track/shifteditform.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDialog \
@@ -1702,6 +1783,45 @@ debug\shifteditform.obj: ..\Source\Time-Track\shifteditform.cpp ../Source/Time-T
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qeventloop.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStyle \
 		ui_shifteditform.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QAction \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDateTimeEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdatetimeedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qdatetime.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTableWidget \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtablewidget.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtableview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QTextEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtextedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextdocument.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qpen.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QVBoxLayout \
 		../Source/Time-Track/mainform.h \
 		../Source/Time-Track/clockoutform.h \
 		../Source/Time-Track/connectionform.h \
@@ -1831,11 +1951,20 @@ debug\connectionform.obj: ..\Source\Time-Track\connectionform.cpp ../Source/Time
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtouchdevice.h \
 		ui_connectionform.h \
-		../Source/Time-Track/mainform.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QWidget \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStackedWidget \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstackedwidget.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QVariant \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QAction \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qicon.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qbuttongroup.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QComboBox \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qcombobox.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
@@ -1843,21 +1972,39 @@ debug\connectionform.obj: ..\Source\Time-Track\connectionform.cpp ../Source/Time
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qvalidator.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qregularexpression.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qslider.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractslider.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstyle.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabbar.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qframe.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDialogButtonBox \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHBoxLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		../Source/Time-Track/mainform.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStackedWidget \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstackedwidget.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtSql \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QVariant \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDesktopWidget \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QCoreApplication \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qcoreapplication.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qeventloop.h \
 		../Source/Time-Track/clockoutform.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStyle \
 		../Source/Time-Track/shifteditform.h \
@@ -1988,6 +2135,59 @@ debug\exportform.obj: ..\Source\Time-Track\exportform.cpp ../Source/Time-Track/e
 		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtouchdevice.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtSql \
 		ui_exportform.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QVariant \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QAction \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qaction.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qicon.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qcoreapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qeventloop.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qinputmethod.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QButtonGroup \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QComboBox \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qcombobox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qvalidator.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qregularexpression.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qslider.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstyle.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabbar.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabwidget.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qrubberband.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qframe.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDialogButtonBox \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QGridLayout \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qgridlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlayoutitem.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qboxlayout.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QHeaderView \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qheaderview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLabel \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlabel.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QLineEdit \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qlineedit.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextcursor.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextformat.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qpen.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qtextoption.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QPushButton \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qpushbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QWidget \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QFileDialog \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qfiledialog.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qdir.h \
@@ -2001,7 +2201,6 @@ debug\exportform.obj: ..\Source\Time-Track\exportform.cpp ../Source/Time-Track/e
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QByteArray \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QList \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QExplicitlySharedDataPointer \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QVariant \
 		../Source/Time-Track/excel_stuff/xlsxworksheet.h \
 		../Source/Time-Track/excel_stuff/xlsxabstractsheet.h \
 		../Source/Time-Track/excel_stuff/xlsxabstractooxmlfile.h \
@@ -2014,30 +2213,10 @@ debug\exportform.obj: ..\Source\Time-Track\exportform.cpp ../Source/Time-Track/e
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QPointF \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QObject \
 		../Source/Time-Track/mainform.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QWidget \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStackedWidget \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstackedwidget.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qframe.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QComboBox \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qcombobox.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstyleoption.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qvalidator.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qregularexpression.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtGui\qicon.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qslider.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qabstractslider.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qstyle.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabbar.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qtabwidget.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qrubberband.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qabstractitemmodel.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QDesktopWidget \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\QCoreApplication \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qcoreapplication.h \
-		..\..\..\Qt\5.7\msvc2015_64\include\QtCore\qeventloop.h \
 		../Source/Time-Track/clockoutform.h \
 		..\..\..\Qt\5.7\msvc2015_64\include\QtWidgets\QStyle \
 		../Source/Time-Track/shifteditform.h \

@@ -958,6 +958,14 @@ void MainForm::ProjectTab(){
 
     ui->ProjectItemView->setSortingEnabled(true);
 
+    QSqlQueryModel * a = new QSqlQueryModel();
+    QSqlQuery * A = new QSqlQuery(data);
+    A->prepare("Select name from dimensionlist ORDER BY name ASC");
+    A->exec();
+    a->setQuery(*A);
+
+    ui->ProjectItemDimension->setModel(a);
+    ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
 }
 void MainForm::refreshProjectItemCombo(){
@@ -1069,8 +1077,11 @@ QSqlQueryModel * MainForm::ProjectItemModelFirst(){
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(2,Qt::Horizontal,tr("Quantity"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Dimension"));
+
 
     return model;
 }
@@ -1092,8 +1103,11 @@ QSqlQueryModel * MainForm::ProjectItemModel(){
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(2,Qt::Horizontal,tr("Quantity"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Dimension"));
+
     
     return model;
 }
@@ -1127,7 +1141,7 @@ void MainForm::on_ProjectAdd_clicked()
     }
     //qDebug()<<qry->lastError();
     qry->clear();
-    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45), PRIMARY KEY(id))");
+    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45),quantity varchar(45), dimension varchar(45), PRIMARY KEY(id))");
     qry->exec();
    // qDebug()<<qry->lastError();
     refreshProjectTab();
@@ -1258,6 +1272,9 @@ void MainForm::on_ProjectItemId_clicked()
 void MainForm::on_ProjectItemAdd_clicked()
 {
     QString itemName = ui->ProjectItemCombo->currentText();
+    QString itemQuantity = ui->ProjectItemQuantity->text();
+    QString itemDimension = ui->ProjectItemDimension->currentText();
+
     QSqlQuery * qry = new QSqlQuery(data);
     qry->prepare("select id from itemlist where name='"+itemName+"'");
     QString itemId;
@@ -1269,8 +1286,8 @@ void MainForm::on_ProjectItemAdd_clicked()
     QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = model->tableName();
 
-    qry->prepare("insert into "+table+"(id, name) "
-                      "values('"+itemId+"','"+itemName+"') "
+    qry->prepare("insert into "+table+"(id, name, quantity,dimension) "
+                      "values('"+itemId+"','"+itemName+"','"+itemQuantity+"','"+itemDimension+"') "
                              "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
     qry->exec();
 
@@ -1931,7 +1948,7 @@ void MainForm::exportToExcel(){
             doc.write(3,1,"Project(s): "+ui->ShiftProjectCombo->currentText());
         else
             doc.write(3,1,"Project(s): All");
-        if(ui->ShiftProjectCombo->isEnabled())
+        if(ui->ShiftItemCombo->isEnabled())
             doc.write(4,1,"Item(s): "+ui->ShiftItemCombo->currentText());
         else
             doc.write(4,1,"Item(s): All");
