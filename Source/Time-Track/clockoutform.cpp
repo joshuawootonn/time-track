@@ -16,6 +16,7 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
             qApp->desktop()->availableGeometry()
         )
     );
+
 }
 
 
@@ -96,9 +97,9 @@ void ClockoutForm::ClockoutInitialize(QString i){
     id=i;
     ProjectInitialize();
     ItemInitialize();
-    LunchInitialize();
+    //LunchInitialize();
     TimeLeft();
-    TimesInitialize();
+    //TimesInitialize();
 
 
     ui->DescriptionWidget->setVisible(false);
@@ -157,7 +158,7 @@ void ClockoutForm::ItemInitialize(){
 
 
 }
-void ClockoutForm::TimesInitialize(){
+/*void ClockoutForm::TimesInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry1 = new QSqlQuery(data);
     QString a = "0:00";
@@ -191,7 +192,7 @@ void ClockoutForm::LunchInitialize(){
     }
     modal->setQuery(*qry1);
     ui->Lunch->setModel(modal);
-}
+}*/
 void ClockoutForm::TimeLeft(){
 
 
@@ -251,9 +252,11 @@ void ClockoutForm::TimeLeft(){
         minutes-=(item.split(":")[0].toInt()*60);
         minutes-=item.split(":")[1].toInt();
     }
-    QString lunch = ui->Lunch->currentText();
-    minutes-=(lunch.split(":")[0].toInt()*60);
-    minutes-=lunch.split(":")[1].toInt();
+//    QString lunch = ui->Lunch->currentText();
+//    minutes-=(lunch.split(":")[0].toInt()*60);
+//    minutes-=lunch.split(":")[1].toInt();
+    minutes-=ui->Lunch->time().hour()*60;
+    minutes-=ui->Lunch->time().minute();
     int hours = minutes/60;
     minutes=minutes%60;
 
@@ -290,7 +293,10 @@ void ClockoutForm::TimeLeft(){
 void ClockoutForm::on_Add_clicked()
 {
     ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Times->currentText()));
+    if (QString::number(ui->Times->time().minute()) == "0")
+        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())+"0"));
+    else
+        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())));
     ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
     ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
     if(ui->Items->currentText()=="Other")
@@ -329,9 +335,10 @@ void ClockoutForm::on_Sections_cellClicked(int row, int column)
        ui->Items->setCurrentIndex(index);
     }
 
-    index = ui->Times->findText(time);
-    if ( index != -1 ) { // -1 for not found
-       ui->Times->setCurrentIndex(index);
+    QTime t(time.split(":")[0].toInt(),time.split(":")[1].toInt());
+    if ( time != "" ) { // -1 for not found
+       ui->Times->setTime(t);
+
     }
 
 
@@ -341,6 +348,10 @@ void ClockoutForm::on_Sections_cellChanged()
     TimeLeft();
 }
 void ClockoutForm::on_Lunch_currentTextChanged(const QString &arg1)
+{
+    TimeLeft();
+}
+void ClockoutForm::on_Lunch_timeChanged(const QTime &time)
 {
     TimeLeft();
 }
@@ -410,7 +421,7 @@ void ClockoutForm::on_FinishedButton_clicked()
 
 
         hours=ui->Sections->item(i,2)->text();
-        lunch=ui->Lunch->currentText();
+        lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
         qry->clear();
 
 
@@ -441,4 +452,6 @@ void ClockoutForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+
 

@@ -11,6 +11,7 @@
 #include <QDesktopWidget>
 #include <QCoreApplication>
 #include <QStyle>
+#include <QStringList>
 #include <QDesktopWidget>
 
 

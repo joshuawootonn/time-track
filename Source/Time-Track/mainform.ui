@@ -471,7 +471,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -503,6 +503,21 @@ background-color:#ECEFED;
             <widget class="QTableView" name="EmployeeView">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::DragDrop</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::ContiguousSelection</enum>
              </property>
              <property name="gridStyle">
               <enum>Qt::SolidLine</enum>
@@ -538,12 +553,18 @@ background-color:#ECEFED;
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
               <widget class="QTableView" name="ProjectItemView">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -575,6 +596,9 @@ background-color:#ECEFED;
             <widget class="QTableView" name="ItemView">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -608,6 +632,9 @@ background-color:#ECEFED;
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
           </layout>
@@ -632,7 +659,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -729,6 +756,13 @@ background-color:#FE938C;
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="EmployeeRefresh">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -1030,6 +1064,12 @@ background-color:#B19994;
                       <pointsize>-1</pointsize>
                      </font>
                     </property>
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="frame">
+                     <bool>true</bool>
+                    </property>
                    </widget>
                   </item>
                   <item row="1" column="0">
@@ -1304,6 +1344,9 @@ background-color:#8DAA91;
                   <pointsize>-1</pointsize>
                  </font>
                 </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToContents</enum>
                 </property>
@@ -1316,6 +1359,9 @@ background-color:#8DAA91;
                   <family>Calibri</family>
                   <pointsize>-1</pointsize>
                  </font>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
                 </property>
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToContents</enum>
@@ -1336,6 +1382,9 @@ background-color:#8DAA91;
                   <family>Calibri</family>
                   <pointsize>-1</pointsize>
                  </font>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
                 </property>
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToContents</enum>

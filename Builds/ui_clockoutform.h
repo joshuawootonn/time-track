@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'clockoutform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -19,8 +19,10 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,12 +36,21 @@ public:
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_3;
     QComboBox *Projects;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_4;
     QComboBox *Items;
-    QComboBox *Times;
-    QComboBox *Lunch;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_5;
+    QTimeEdit *Times;
+    QHBoxLayout *horizontalLayout_8;
     QPushButton *Add;
     QPushButton *Delete;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_6;
+    QTimeEdit *Lunch;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
     QWidget *DescriptionWidget;
@@ -49,6 +60,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *timeLeft;
+    QSpacerItem *horizontalSpacer;
     QPushButton *FinishedButton;
     QPushButton *CancelButton;
 
@@ -56,7 +68,7 @@ public:
     {
         if (ClockoutForm->objectName().isEmpty())
             ClockoutForm->setObjectName(QStringLiteral("ClockoutForm"));
-        ClockoutForm->resize(611, 341);
+        ClockoutForm->resize(672, 370);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         ClockoutForm->setFont(font);
@@ -84,7 +96,7 @@ public:
 "padding:0px;\n"
 "}\n"
 "QWidget#bigwidger{\n"
-"background-color:#FFFFFF;\n"
+"background-color:#E5EAE7;\n"
 "border:none;\n"
 "}\n"
 "\n"
@@ -101,7 +113,7 @@ public:
 "QPushButton{\n"
 "padding:3px;\n"
 "border:none;\n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFFFFF;\n"
 "}\n"
 "QPushButton:hover:!pressed{\n"
 "background-color:#E4E9EB;\n"
@@ -110,7 +122,7 @@ public:
 "\n"
 "QDateTimeEdit{\n"
 "border:none;\n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFFFFF;\n"
 "}\n"
 "QDateEditTime:hover{\n"
 "border:none;\n"
@@ -123,7 +135,7 @@ public:
 "\n"
 "QComboBox{\n"
 "border:none;\n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFFFFF;\n"
 "}\n"
 "QComboBox:hover {\n"
 "background-color:#E4E9EB;\n"
@@ -164,42 +176,103 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        label_3 = new QLabel(bigwidger);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
+        label_3->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_4->addWidget(label_3);
+
         Projects = new QComboBox(bigwidger);
         Projects->setObjectName(QStringLiteral("Projects"));
-        Projects->setMaximumSize(QSize(250, 16777215));
+        Projects->setMinimumSize(QSize(200, 0));
+        Projects->setMaximumSize(QSize(200, 16777215));
         Projects->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-        verticalLayout->addWidget(Projects);
+        horizontalLayout_4->addWidget(Projects);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_4 = new QLabel(bigwidger);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_5->addWidget(label_4);
 
         Items = new QComboBox(bigwidger);
         Items->setObjectName(QStringLiteral("Items"));
-        Items->setMaximumSize(QSize(250, 16777215));
+        Items->setMinimumSize(QSize(200, 0));
+        Items->setMaximumSize(QSize(200, 16777215));
 
-        verticalLayout->addWidget(Items);
+        horizontalLayout_5->addWidget(Items);
 
-        Times = new QComboBox(bigwidger);
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_5 = new QLabel(bigwidger);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_6->addWidget(label_5);
+
+        Times = new QTimeEdit(bigwidger);
         Times->setObjectName(QStringLiteral("Times"));
-        Times->setMaximumSize(QSize(250, 16777215));
+        Times->setMinimumSize(QSize(200, 0));
+        Times->setMaximumSize(QSize(200, 16777215));
+        Times->setCurrentSection(QDateTimeEdit::HourSection);
 
-        verticalLayout->addWidget(Times);
+        horizontalLayout_6->addWidget(Times);
 
-        Lunch = new QComboBox(bigwidger);
-        Lunch->setObjectName(QStringLiteral("Lunch"));
 
-        verticalLayout->addWidget(Lunch);
+        verticalLayout->addLayout(horizontalLayout_6);
 
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         Add = new QPushButton(bigwidger);
         Add->setObjectName(QStringLiteral("Add"));
-        Add->setMinimumSize(QSize(250, 0));
+        Add->setMinimumSize(QSize(100, 0));
         Add->setMaximumSize(QSize(250, 16777215));
 
-        verticalLayout->addWidget(Add);
+        horizontalLayout_8->addWidget(Add);
 
         Delete = new QPushButton(bigwidger);
         Delete->setObjectName(QStringLiteral("Delete"));
+        Delete->setMinimumSize(QSize(100, 0));
         Delete->setMaximumSize(QSize(250, 16777215));
 
-        verticalLayout->addWidget(Delete);
+        horizontalLayout_8->addWidget(Delete);
+
+
+        verticalLayout->addLayout(horizontalLayout_8);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        label_6 = new QLabel(bigwidger);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_7->addWidget(label_6);
+
+        Lunch = new QTimeEdit(bigwidger);
+        Lunch->setObjectName(QStringLiteral("Lunch"));
+        Lunch->setMinimumSize(QSize(200, 0));
+        Lunch->setMaximumSize(QSize(200, 16777215));
+
+        horizontalLayout_7->addWidget(Lunch);
+
+
+        verticalLayout->addLayout(horizontalLayout_7);
 
 
         horizontalLayout->addLayout(verticalLayout);
@@ -208,6 +281,7 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         Sections = new QTableWidget(bigwidger);
         Sections->setObjectName(QStringLiteral("Sections"));
+        Sections->setMinimumSize(QSize(316, 0));
         Sections->verticalHeader()->setMinimumSectionSize(30);
 
         verticalLayout_3->addWidget(Sections);
@@ -250,13 +324,19 @@ public:
 
         horizontalLayout_2->addWidget(timeLeft);
 
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
         FinishedButton = new QPushButton(bigwidger);
         FinishedButton->setObjectName(QStringLiteral("FinishedButton"));
+        FinishedButton->setMinimumSize(QSize(100, 0));
 
         horizontalLayout_2->addWidget(FinishedButton);
 
         CancelButton = new QPushButton(bigwidger);
         CancelButton->setObjectName(QStringLiteral("CancelButton"));
+        CancelButton->setMinimumSize(QSize(100, 0));
 
         horizontalLayout_2->addWidget(CancelButton);
 
@@ -274,14 +354,20 @@ public:
 
     void retranslateUi(QWidget *ClockoutForm)
     {
-        ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", 0));
-        Add->setText(QApplication::translate("ClockoutForm", "Add", 0));
-        Delete->setText(QApplication::translate("ClockoutForm", "Delete", 0));
-        label_2->setText(QApplication::translate("ClockoutForm", "Notes:", 0));
-        label->setText(QApplication::translate("ClockoutForm", "Time left:", 0));
+        ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ClockoutForm", "Project:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ClockoutForm", "Sub-Project:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("ClockoutForm", "Time Worked:", Q_NULLPTR));
+        Times->setDisplayFormat(QApplication::translate("ClockoutForm", "hh:mm", Q_NULLPTR));
+        Add->setText(QApplication::translate("ClockoutForm", "Add", Q_NULLPTR));
+        Delete->setText(QApplication::translate("ClockoutForm", "Delete", Q_NULLPTR));
+        label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
+        Lunch->setDisplayFormat(QApplication::translate("ClockoutForm", "hh:mm", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ClockoutForm", "Notes:", Q_NULLPTR));
+        label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());
-        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", 0));
-        CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", 0));
+        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", Q_NULLPTR));
+        CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

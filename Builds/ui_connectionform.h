@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'connectionform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -80,9 +80,9 @@ public:
 
     void retranslateUi(QDialog *ConnectionForm)
     {
-        ConnectionForm->setWindowTitle(QApplication::translate("ConnectionForm", "Connections", 0));
-        label->setText(QApplication::translate("ConnectionForm", "Which ip address do you want to connect to?", 0));
-        Add->setText(QApplication::translate("ConnectionForm", "Add", 0));
+        ConnectionForm->setWindowTitle(QApplication::translate("ConnectionForm", "Connections", Q_NULLPTR));
+        label->setText(QApplication::translate("ConnectionForm", "Which ip address do you want to connect to?", Q_NULLPTR));
+        Add->setText(QApplication::translate("ConnectionForm", "Add", Q_NULLPTR));
     } // retranslateUi
 
 };

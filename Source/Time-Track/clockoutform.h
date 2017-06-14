@@ -46,6 +46,8 @@ private slots:
 
 
 
+    void on_Lunch_timeChanged(const QTime &time);
+
 signals:
     void finished();
 
@@ -53,6 +55,7 @@ private:
     Ui::ClockoutForm *ui;
     QSqlDatabase data;
     QString id;
+
     int selectedRow;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);

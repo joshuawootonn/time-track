@@ -19,6 +19,10 @@
 #include "xlsxrichstring.h"
 #include "xlsxworkbook.h"
 #include "xlsxformat.h"
+#include <QCompleter>
+
+
+
 namespace Ui {
 class MainForm;
 }
@@ -187,6 +191,9 @@ private slots:
     void exportToExcel();
     void on_SettingsPrint_clicked();
     void on_SettingsAll_clicked();
+    void on_EmployeeRefresh_clicked();
+
+
 public:
     Ui::MainForm *ui;
 
@@ -207,9 +214,6 @@ private:
 };
 
 #endif // MAINFORM_H
-
-
-
 
 
 

@@ -1,10 +1,6 @@
-# if defined(UNDER_CE)
-#  include <winbase.h>
-# else
-#  include <windows.h>
-# endif
+#include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\Git_\\Time-Track\\Source\\Time-Track\\icon.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\Joshua\\Dropbox\\Joshua's Tasks\\Time-Track\\Source\\Time-Track\\icon.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 0,0,0,0

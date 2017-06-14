@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'exportform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.0
+** Created by: Qt User Interface Compiler version 5.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -223,10 +223,10 @@ public:
 
     void retranslateUi(QDialog *ExportForm)
     {
-        ExportForm->setWindowTitle(QApplication::translate("ExportForm", "Dialog", 0));
-        label->setText(QApplication::translate("ExportForm", "File Location:", 0));
-        ExcelLocationChange->setText(QApplication::translate("ExportForm", "+", 0));
-        label_2->setText(QApplication::translate("ExportForm", "Table to Export:", 0));
+        ExportForm->setWindowTitle(QApplication::translate("ExportForm", "Dialog", Q_NULLPTR));
+        label->setText(QApplication::translate("ExportForm", "File Location:", Q_NULLPTR));
+        ExcelLocationChange->setText(QApplication::translate("ExportForm", "+", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ExportForm", "Table to Export:", Q_NULLPTR));
     } // retranslateUi
 
 };

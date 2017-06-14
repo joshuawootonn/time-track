@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>341</height>
+    <width>672</width>
+    <height>370</height>
    </rect>
   </property>
   <property name="font">
@@ -44,7 +44,7 @@ margin:0px;
 padding:0px;
 }
 QWidget#bigwidger{
-background-color:#FFFFFF;
+background-color:#E5EAE7;
 border:none;
 }
 
@@ -61,7 +61,7 @@ border:none;
 QPushButton{
 padding:3px;
 border:none;
-background-color:#F1F4F5;
+background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
 background-color:#E4E9EB;
@@ -70,7 +70,7 @@ background-color:#E4E9EB;
 
 QDateTimeEdit{
 border:none;
-background-color:#F1F4F5;
+background-color:#FFFFFF;
 }
 QDateEditTime:hover{
 border:none;
@@ -83,7 +83,7 @@ border:none;
 
 QComboBox{
 border:none;
-background-color:#F1F4F5;
+background-color:#FFFFFF;
 }
 QComboBox:hover {
 background-color:#E4E9EB;
@@ -125,72 +125,196 @@ QGroupBox::title {
            <enum>QLayout::SetMinimumSize</enum>
           </property>
           <item>
-           <widget class="QComboBox" name="Projects">
-            <property name="maximumSize">
-             <size>
-              <width>250</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToContents</enum>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Project:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="Projects">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContents</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QComboBox" name="Items">
-            <property name="maximumSize">
-             <size>
-              <width>250</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Sub-Project:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="Items">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QComboBox" name="Times">
-            <property name="maximumSize">
-             <size>
-              <width>250</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Time Worked:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="Times">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="currentSection">
+               <enum>QDateTimeEdit::HourSection</enum>
+              </property>
+              <property name="displayFormat">
+               <string>hh:mm</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QComboBox" name="Lunch"/>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QPushButton" name="Add">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Add</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="Delete">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Delete</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="Add">
-            <property name="minimumSize">
-             <size>
-              <width>250</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>250</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Add</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="Delete">
-            <property name="maximumSize">
-             <size>
-              <width>250</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Delete</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Lunch Taken:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="Lunch">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="displayFormat">
+               <string>hh:mm</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -198,6 +322,12 @@ QGroupBox::title {
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QTableWidget" name="Sections">
+            <property name="minimumSize">
+             <size>
+              <width>316</width>
+              <height>0</height>
+             </size>
+            </property>
             <attribute name="verticalHeaderMinimumSectionSize">
              <number>30</number>
             </attribute>
@@ -247,7 +377,7 @@ QGroupBox::title {
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Time left:</string>
+           <string>Time Left:</string>
           </property>
          </widget>
         </item>
@@ -259,7 +389,26 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QPushButton" name="FinishedButton">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Finish</string>
           </property>
@@ -267,6 +416,12 @@ QGroupBox::title {
         </item>
         <item>
          <widget class="QPushButton" name="CancelButton">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Cancel</string>
           </property>

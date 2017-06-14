@@ -10,14 +10,14 @@ MainForm::MainForm(QWidget *parent) :
     ui->HeaderTabs->removeTab(4);
 
 
+
+
     if (Connect("192.168.41.187"))
         qDebug()<<"Connected to 187!";
     else if (Connect("192.168.0.10"))
         qDebug()<<"Connected to 10!";
     else
         qDebug()<<"Unable to connect!";
-    //qDebug()<<Connection("192.168.0.10");
-    //qDebug()<<isValidConnection("192.168.41.187");
 
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
@@ -109,8 +109,8 @@ bool MainForm::Connect(QString ip){
 
     data = QSqlDatabase::addDatabase("QMYSQL");
     data.setPort(3306);
-    data.setPassword("aaci1234");
     data.setDatabaseName("aacidatabase");
+    data.setPassword("aaci1234");
     data.setUserName("client");
     data.setHostName(ip);
     data.open();
@@ -122,6 +122,8 @@ bool MainForm::Connect(QString ip){
 }
 
 bool MainForm::isValidConnection(QString ip){
+
+
     QSqlDatabase temp;
     temp = QSqlDatabase::addDatabase("QMYSQL");
     temp.setPort(3306);
@@ -205,7 +207,6 @@ void MainForm::establishConnections(){
     QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
     QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
-    QObject::connect(ui->ShiftView->horizontalHeader(),SIGNAL(sectionPressed(int)),this,SLOT(refreshShiftTab()));
 
 }
 void MainForm::reenter(){
@@ -527,7 +528,6 @@ void MainForm::on_basicPageAdvanced_clicked()
 }
 void MainForm::on_mainFinish_clicked()
 {
-
     loginInitialize();
 }
 
@@ -637,6 +637,10 @@ void MainForm::on_passEdit_returnPressed()
         else
             ui->passLabel->setText("");
     }
+    else
+    {
+        qDebug()<<qry1.lastError();
+    }
 }
 
 /* Initialization of Database section of 'sections'
@@ -701,11 +705,11 @@ void MainForm::EmployeeTab()
 
 
     ui->AllRadio->setChecked(true);
-
+    refreshEmployeeTab();
 
 }
 void MainForm::refreshEmployeeStuff(){
-    refreshEmployeeTab();
+
     shifteditform->EmployeeInitialize();
     refreshShiftEmployee();
 
@@ -717,7 +721,6 @@ void MainForm::refreshEmployeeTab(){
     ui->EmployeeView->setModel(x);
     establishConnections();
 
-    //ui->EmployeeView->resizeColumnsToContents();
     if(ui->EmployeeId->isChecked())
         ui->EmployeeView->showColumn(0);
     else
@@ -766,8 +769,8 @@ void MainForm::refreshEmployeeTab(){
 QSqlQueryModel * MainForm::EmployeeModel(){
     QSqlTableModel * model = new QSqlTableModel(0,data);
     model->setTable("employeelist");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
+    model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Pin"));
@@ -852,6 +855,10 @@ void MainForm::on_EmployeeDelete_clicked()
     refreshShiftEmployee();
     ui->MainTabs->setCurrentIndex(0);
     shifteditform->updateShiftEdit();
+}
+void MainForm::on_EmployeeRefresh_clicked()
+{
+    ui->EmployeeView->model()->submit();
 }
 /* Option menu 2 for EmployeeTab*/
 void MainForm::on_EmployeeName_clicked()
@@ -941,8 +948,13 @@ void MainForm::ProjectTab(){
     establishConnections();
     QSqlQueryModel * y = ProjectItemModelFirst();
     ui->ProjectItemView->setModel(y);
+
     ui->ProjectView->setSortingEnabled(true);
     ui->ProjectItemView->setSortingEnabled(true);
+
+    ui->ProjectView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->ProjectItemView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
 
     ui->ProjectView->hideColumn(0);
     ui->ProjectView->hideColumn(2);
@@ -956,13 +968,15 @@ void MainForm::ProjectTab(){
     ui->ProjectItemView->hideColumn(0);
     refreshProjectItemCombo();
 
-    ui->ProjectItemView->setSortingEnabled(true);
-
     QSqlQueryModel * a = new QSqlQueryModel();
     QSqlQuery * A = new QSqlQuery(data);
     A->prepare("Select name from dimensionlist ORDER BY name ASC");
     A->exec();
     a->setQuery(*A);
+
+
+
+
 
     ui->ProjectItemDimension->setModel(a);
     ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -976,6 +990,15 @@ void MainForm::refreshProjectItemCombo(){
     a->setQuery(*A);
     ui->ProjectItemCombo->setModel(a);
     ui->ProjectItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+
+
+    QCompleter * comp = new QCompleter(this);
+    comp->setModel(a);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    ui->ProjectItemCombo->setCompleter(comp);
+    ui->ProjectItemCombo->setCurrentText("");
 }
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
@@ -987,7 +1010,7 @@ void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 }
 void MainForm::refreshProjectStuff(){
 
-    refreshProjectTab();
+
     refreshShiftProject();
     shifteditform->ProjectInitialize();
     clockoutForm->ProjectInitialize();
@@ -1040,16 +1063,16 @@ void MainForm::refreshProjectItemTab(){
     ui->ProjectItemView->setModel(x);
 
    // ui->ProjectItemView->resizeColumnsToContents();
-
+    ui->ProjectItemView->hideColumn(0);
     if(ui->ProjectItemName->isChecked())
+        ui->ProjectItemView->showColumn(2);
+    else
+        ui->ProjectItemView->hideColumn(2);
+
+    if(ui->ProjectItemId->isChecked())
         ui->ProjectItemView->showColumn(1);
     else
         ui->ProjectItemView->hideColumn(1);
-
-    if(ui->ProjectItemId->isChecked())
-        ui->ProjectItemView->showColumn(0);
-    else
-        ui->ProjectItemView->hideColumn(0);
   //  ui->ProjectItemView->resizeColumnsToContents();
 }
 QSqlQueryModel * MainForm::ProjectModel(){
@@ -1103,10 +1126,10 @@ QSqlQueryModel * MainForm::ProjectItemModel(){
 
     model->setEditStrategy(QSqlTableModel::OnFieldChange);
     model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(2,Qt::Horizontal,tr("Quantity"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Dimension"));
+    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
+    model->setHeaderData(2,Qt::Horizontal,tr("Name"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Quantity"));
+    model->setHeaderData(4,Qt::Horizontal,tr("Dimension"));
 
     
     return model;
@@ -1141,7 +1164,7 @@ void MainForm::on_ProjectAdd_clicked()
     }
     //qDebug()<<qry->lastError();
     qry->clear();
-    qry->prepare("CREATE TABLE Project"+id+" (id int, name varchar(45),quantity varchar(45), dimension varchar(45), PRIMARY KEY(id))");
+    qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45))");
     qry->exec();
    // qDebug()<<qry->lastError();
     refreshProjectTab();
@@ -1286,7 +1309,7 @@ void MainForm::on_ProjectItemAdd_clicked()
     QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
     QString table = model->tableName();
 
-    qry->prepare("insert into "+table+"(id, name, quantity,dimension) "
+    qry->prepare("insert into "+table+"(itemid, name, quantity, dimension) "
                       "values('"+itemId+"','"+itemName+"','"+itemQuantity+"','"+itemDimension+"') "
                              "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
     qry->exec();
@@ -1326,6 +1349,9 @@ void MainForm::ItemTab(){
     QSqlQueryModel * x=ItemModel();
     ui->ItemView->setModel(x);
     establishConnections();
+
+    ui->ItemView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
 
     ui->ItemView->hideColumn(1);
     ui->ItemView->setSortingEnabled(true);
@@ -1386,7 +1412,7 @@ void MainForm::refreshItemTab(){
 
 }
 void MainForm::refreshItemStuff(){
-    refreshItemTab();
+
     refreshShiftItem();
     shifteditform->ItemInitialize();
     clockoutForm->ItemInitialize();
@@ -1458,7 +1484,6 @@ void MainForm::ShiftTab(){
 
     ui->ShiftDate1->setDate(QDate::currentDate().addDays(-day));
     ui->ShiftDate2->setDate(QDate::currentDate().addDays(6-day));
-    //ui->ShiftDate2->setDate(QDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day()+6-day));
 
     refreshShiftProject();
     refreshShiftItem();
@@ -1486,6 +1511,13 @@ void MainForm::refreshShiftEmployee(){
 
     ui->ShiftEmployeeCombo->setModel(a);
     ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    QCompleter * comp = new QCompleter(this);
+    comp->setModel(a);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    ui->ShiftEmployeeCombo->setCompleter(comp);
+    ui->ShiftEmployeeCombo->setCurrentText("");
 }
 void MainForm::refreshShiftProject(){
     QSqlQueryModel * b = new QSqlQueryModel();
@@ -1495,6 +1527,13 @@ void MainForm::refreshShiftProject(){
     b->setQuery(*B);
     ui->ShiftProjectCombo->setModel(b);
     ui->ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    QCompleter * comp = new QCompleter(this);
+    comp->setModel(b);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    ui->ShiftProjectCombo->setCompleter(comp);
+    ui->ShiftProjectCombo->setCurrentText("");
 }
 void MainForm::refreshShiftItem(){
     QSqlQueryModel * c = new QSqlQueryModel();
@@ -1504,6 +1543,13 @@ void MainForm::refreshShiftItem(){
     c->setQuery(*C);
     ui->ShiftItemCombo->setModel(c);
     ui->ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    QCompleter * comp = new QCompleter(this);
+    comp->setModel(c);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    ui->ShiftItemCombo->setCompleter(comp);
+    ui->ShiftItemCombo->setCurrentText("");
 }
 QSqlQueryModel * MainForm::ShiftModel(){
 
@@ -2010,7 +2056,6 @@ QSqlDatabase MainForm::getData() const
 {
     return data;
 }
-
 
 
 
