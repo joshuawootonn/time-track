@@ -16,7 +16,7 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
             qApp->desktop()->availableGeometry()
         )
     );
-
+    clicked = false;
 }
 
 
@@ -308,18 +308,24 @@ void ClockoutForm::on_Add_clicked()
 }
 void ClockoutForm::on_Delete_clicked()
 {
-    if(ui->Sections->item(selectedRow,1)->text()=="Other"){
-        ui->Description->setText("");
-        ui->DescriptionWidget->setVisible(false);
+    if (clicked)
+    {
+        if(ui->Sections->item(selectedRow,1)->text()=="Other"){
+            ui->Description->setText("");
+            ui->DescriptionWidget->setVisible(false);
+        }
+        ui->Sections->removeRow(selectedRow);
+        TimeLeft();
+        clicked = false;
     }
-    ui->Sections->removeRow(selectedRow);
-    TimeLeft();
+
 
 }
 void ClockoutForm::on_Sections_cellClicked(int row, int column)
 {
     selectedRow=row;
     column++;
+    clicked = true;
     QString project = ui->Sections->item(row,0)->text();
     QString item = ui->Sections->item(row,1)->text();
     QString time = ui->Sections->item(row,2)->text();

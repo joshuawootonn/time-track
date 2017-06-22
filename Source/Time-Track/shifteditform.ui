@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
+    <width>807</width>
     <height>424</height>
    </rect>
   </property>
@@ -164,13 +164,13 @@ QGroupBox::title {
               <widget class="QComboBox" name="Name">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -206,13 +206,13 @@ QGroupBox::title {
               <widget class="QComboBox" name="Projects">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -251,13 +251,13 @@ QGroupBox::title {
               <widget class="QComboBox" name="Items">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -291,12 +291,11 @@ QGroupBox::title {
              </item>
              <item>
               <widget class="QTimeEdit" name="Times">
-               <property name="maximumTime">
-                <time>
-                 <hour>16</hour>
-                 <minute>8</minute>
-                 <second>59</second>
-                </time>
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="displayFormat">
                 <string>hh:mm</string>
@@ -309,6 +308,9 @@ QGroupBox::title {
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <widget class="QPushButton" name="Add">
+               <property name="focusPolicy">
+                <enum>Qt::StrongFocus</enum>
+               </property>
                <property name="text">
                 <string>Add</string>
                </property>
@@ -321,6 +323,9 @@ QGroupBox::title {
                  <width>250</width>
                  <height>16777215</height>
                 </size>
+               </property>
+               <property name="focusPolicy">
+                <enum>Qt::StrongFocus</enum>
                </property>
                <property name="text">
                 <string>Delete</string>
@@ -354,15 +359,19 @@ QGroupBox::title {
               <widget class="QTimeEdit" name="Lunch">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
+                 <width>300</width>
                  <height>0</height>
                 </size>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>200</width>
-                 <height>16777215</height>
-                </size>
+               <property name="maximumTime">
+                <time>
+                 <hour>1</hour>
+                 <minute>0</minute>
+                 <second>0</second>
+                </time>
+               </property>
+               <property name="currentSection">
+                <enum>QDateTimeEdit::HourSection</enum>
                </property>
                <property name="displayFormat">
                 <string>hh:mm</string>
@@ -419,6 +428,16 @@ QGroupBox::title {
                   <width>16777215</width>
                   <height>26</height>
                  </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="Description_Check">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="tristate">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -493,8 +512,17 @@ QGroupBox::title {
              <height>16777215</height>
             </size>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="text">
             <string>Finish</string>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -512,6 +540,9 @@ QGroupBox::title {
              <height>16777215</height>
             </size>
            </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="text">
             <string>Cancel</string>
            </property>
@@ -525,6 +556,23 @@ QGroupBox::title {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>DateTime1</tabstop>
+  <tabstop>DateTime2</tabstop>
+  <tabstop>Name</tabstop>
+  <tabstop>Projects</tabstop>
+  <tabstop>Items</tabstop>
+  <tabstop>Times</tabstop>
+  <tabstop>Add</tabstop>
+  <tabstop>Delete</tabstop>
+  <tabstop>Lunch</tabstop>
+  <tabstop>RefreshButton</tabstop>
+  <tabstop>FinishedButton</tabstop>
+  <tabstop>CancelButton</tabstop>
+  <tabstop>Description</tabstop>
+  <tabstop>Sections</tabstop>
+  <tabstop>Description_Check</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

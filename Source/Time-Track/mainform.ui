@@ -471,7 +471,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -659,7 +659,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -756,13 +756,6 @@ background-color:#FE938C;
                </widget>
               </item>
              </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="EmployeeRefresh">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
             </widget>
            </item>
            <item>
@@ -1773,11 +1766,11 @@ border-image: url(..Icons/connect.png); }
   </layout>
  </widget>
  <tabstops>
-  <tabstop>EmployeeAdd</tabstop>
-  <tabstop>EmployeeArchive</tabstop>
-  <tabstop>EmployeeDelete</tabstop>
-  <tabstop>EmployeeId</tabstop>
-  <tabstop>EmployeeName</tabstop>
+  <tabstop>ProjectItemCombo</tabstop>
+  <tabstop>ProjectItemQuantity</tabstop>
+  <tabstop>ProjectItemDimension</tabstop>
+  <tabstop>ProjectItemAdd</tabstop>
+  <tabstop>ProjectItemRemove</tabstop>
   <tabstop>EmployeePin</tabstop>
   <tabstop>EmployeeAdminStatus</tabstop>
   <tabstop>EmployeeShiftCount</tabstop>
@@ -1798,11 +1791,11 @@ border-image: url(..Icons/connect.png); }
   <tabstop>ProjectAllRadio</tabstop>
   <tabstop>ProjectCurrentRadio</tabstop>
   <tabstop>ProjectPastRadio</tabstop>
-  <tabstop>ProjectItemCombo</tabstop>
-  <tabstop>ProjectItemQuantity</tabstop>
-  <tabstop>ProjectItemDimension</tabstop>
-  <tabstop>ProjectItemAdd</tabstop>
-  <tabstop>ProjectItemRemove</tabstop>
+  <tabstop>EmployeeAdd</tabstop>
+  <tabstop>EmployeeArchive</tabstop>
+  <tabstop>EmployeeDelete</tabstop>
+  <tabstop>EmployeeId</tabstop>
+  <tabstop>EmployeeName</tabstop>
   <tabstop>ProjectItemId</tabstop>
   <tabstop>ProjectItemName</tabstop>
   <tabstop>ProjectView</tabstop>

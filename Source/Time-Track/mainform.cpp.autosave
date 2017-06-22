@@ -683,8 +683,9 @@ void MainForm::EmployeeTab()
 {
     ui->MainTabs->setCurrentIndex(0);
 
-    QSqlQueryModel * x=EmployeeModel();
-    ui->EmployeeView->setModel(x);
+    employeemodel=EmployeeModel();
+    employeefiltermodel = EmployeeFilterModel();
+    ui->EmployeeView->setModel(employeefiltermodel);
     establishConnections();
     ui->EmployeeView->setSortingEnabled(true);
 
@@ -718,8 +719,9 @@ void MainForm::refreshEmployeeStuff(){
 void MainForm::refreshEmployeeTab(){
     //ui->MainTabs->setCurrentIndex(0);
 
-    QSqlQueryModel * x=EmployeeModel();
-    ui->EmployeeView->setModel(x);
+    employeemodel=EmployeeModel();
+    employeefiltermodel = EmployeeFilterModel();
+    ui->EmployeeView->setModel(employeefiltermodel);
     establishConnections();
 
     if(ui->EmployeeId->isChecked())
@@ -781,6 +783,12 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     model->setHeaderData(6,Qt::Horizontal,tr("Current"));
     return model;
 
+}
+QSortFilterProxyModel * MainForm::EmployeeFilterModel(){
+    QSortFilterProxyModel * m = new QSortFilterProxyModel(this);
+    m->setDynamicSortFilter(true);
+    m->setSourceModel(employeemodel);
+    return m;
 }
 /* Option menu 1 for EmployeeTab*/
 void MainForm::on_EmployeeAdd_clicked()
@@ -847,15 +855,16 @@ void MainForm::on_EmployeeDelete_clicked()
 
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    QSqlQueryModel * x = EmployeeModel();
+    
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+ x->record(list.at(0).row()).value(1).toString()+" records?",
+    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+ employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()+" records?",
                                     QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
 
         for(int i=0; i< list.count(); i++)
         {
             QModelIndex index =list.at(i);
+            employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(1).toString()
             int idInt = x->record(index.row()).value(0).toInt();
             QString id = QString::number(idInt);
 

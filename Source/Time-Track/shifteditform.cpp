@@ -17,6 +17,15 @@ ShiftEditForm::ShiftEditForm(QWidget *parent) :
             qApp->desktop()->availableGeometry()
         )
     );
+    clicked = false;
+    ui->RefreshButton->hide();
+    ui->Add->setDefault(false);
+    ui->Delete->setDefault(false);
+    ui->FinishedButton->setDefault(false);
+    ui->RefreshButton->setDefault(false);
+    ui->CancelButton->setDefault(false);
+    ui->Description_Check->setChecked(true);
+
     //ui->Times->setMaximumTime(QTime(48,0,0));
 }
 
@@ -162,6 +171,7 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     ui->DateTime1->setDate(QDate::fromString(datein,"yyyy-MM-dd"));
     ui->DateTime2->setDate(QDate::fromString(dateout,"yyyy-MM-dd"));
     //ui->Lunch->setCurrentIndex(ui->Lunch->findText(timelunch));
+    ui->Lunch->setTime(QTime(timelunch.split(":")[0].toInt(),timelunch.split(":")[1].toInt()));
     ui->Sections->setRowCount(0);
     ui->Sections->setColumnCount(3);
     ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Project"));
@@ -262,12 +272,19 @@ void ShiftEditForm::EmployeeInitialize(){
     qry->exec();
     modal->setQuery(*qry);
     ui->Name->setModel(modal);
+    /*
     QCompleter * comp = new QCompleter(this);
     comp->setModel(modal);
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     comp->setCompletionMode(QCompleter::PopupCompletion);
     ui->Name->setCompleter(comp);
+    ui->Name->setCurrentText("");*/
+    QCompleter * comp = new QCompleter(this);
+    comp->setWidget(ui->Name);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Name->setCurrentText("");
+
 
 }
 void ShiftEditForm::ProjectInitialize(){
@@ -278,12 +295,17 @@ void ShiftEditForm::ProjectInitialize(){
     qry->exec();
     modal->setQuery(*qry);
     ui->Projects->setModel(modal);
+//    QCompleter * comp = new QCompleter(this);
+//    comp->setModel(modal);
+//    comp->setCaseSensitivity(Qt::CaseInsensitive);
+//    comp->setCompletionMode(QCompleter::PopupCompletion);
+//    //comp->popup()->setCurrentIndex(comp->completionModel()->index(0,0));
+//    ui->Projects->setCompleter(comp);
+
     QCompleter * comp = new QCompleter(this);
-    comp->setModel(modal);
-    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setWidget(ui->Projects);
     comp->setCompletionMode(QCompleter::PopupCompletion);
-    //comp->popup()->setCurrentIndex(comp->completionModel()->index(0,0));
-    ui->Projects->setCompleter(comp);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Projects->setCurrentText("");
 
 
@@ -310,11 +332,15 @@ void ShiftEditForm::ItemInitialize(){
 
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
+//    QCompleter * comp = new QCompleter(this);
+//    comp->setModel(modal2);
+//    comp->setCaseSensitivity(Qt::CaseInsensitive);
+//    comp->setCompletionMode(QCompleter::PopupCompletion);
+//    ui->Items->setCompleter(comp);
     QCompleter * comp = new QCompleter(this);
-    comp->setModel(modal2);
-    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    comp->setWidget(ui->Items);
     comp->setCompletionMode(QCompleter::PopupCompletion);
-    ui->Items->setCompleter(comp);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Items->setCurrentText("");
 }
 /*
@@ -404,10 +430,17 @@ void ShiftEditForm::TimeLeft(){
         if(ui->Description->isVisible()&&ui->Description->toPlainText()!=""){
 
             ui->FinishedButton->setEnabled(true);
+            qDebug()<<"111111111111111111111111111111111";
+        }else if (ui->Description_Check->isChecked()){
+            ui->FinishedButton->setEnabled(true);
+
+            qDebug()<<"22222222222222222222222222222222222";
         }
         else if(!ui->Description->isVisible()&&ui->Sections->rowCount()>0){
             ui->FinishedButton->setEnabled(true);
-        }
+
+            qDebug()<<"333333333333333333333333333333333333";
+        }        
         else{
             ui->FinishedButton->setEnabled(false);
         }
@@ -427,34 +460,51 @@ void ShiftEditForm::on_Projects_currentIndexChanged(const QString &arg1)
 }
 void ShiftEditForm::on_Add_clicked()
 {
-    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-    if (QString::number(ui->Times->time().minute()) == "0")
-        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())+"0"));
-    else
-        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
-    if(ui->Items->currentText()=="Other")
+    if(ui->Projects->currentText() != "" && ui->Items->currentText() != "")
     {
-        ui->DescriptionWidget->setVisible(true);
+        ui->Sections->setRowCount(ui->Sections->rowCount()+1);
+        if (QString::number(ui->Times->time().minute()) == "0")
+            ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())+"0"));
+        else
+            ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
+        if(ui->Items->currentText()=="Other")
+        {
+            ui->DescriptionWidget->setVisible(true);
+        }
+
+        ui->Sections->resizeRowsToContents();
+        TimeLeft();
+        ui->Items->clearEditText();
+        ui->Projects->clearEditText();
+        if(ui->timeLeft->text() == "0:00")
+            ui->FinishedButton->setFocus();
+        else
+            ui->Projects->setFocus();
     }
 
-    ui->Sections->resizeRowsToContents();
-    TimeLeft();
 }
 void ShiftEditForm::on_Delete_clicked()
 {
-    if(ui->Sections->item(selectedRow,1)->text()=="Other"){
-        ui->Description->setText("");
-        ui->Description->setVisible(false);
+    if (clicked)
+    {
+        if(ui->Sections->item(selectedRow,1)->text()=="Other"){
+            ui->Description->setText("");
+            ui->DescriptionWidget->setVisible(false);
+        }
+
+        ui->Sections->removeRow(selectedRow);
+        TimeLeft();
+        clicked = false;
     }
-    ui->Sections->removeRow(selectedRow);
-    TimeLeft();
+
 
 }
 void ShiftEditForm::on_Sections_cellClicked(int row, int column)
 {
     selectedRow=row;
+    clicked = true;
     column++;
     QString project = ui->Sections->item(row,0)->text();
     QString item = ui->Sections->item(row,1)->text();
@@ -487,6 +537,11 @@ void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
 {
     TimeLeft();
 }
+void ShiftEditForm::on_Lunch_timeChanged(const QTime &time)
+{
+    TimeLeft();
+
+}
 void ShiftEditForm::on_DateTime1_dateTimeChanged(const QDateTime &dateTime)
 {
     TimeLeft();
@@ -499,17 +554,27 @@ void ShiftEditForm::on_Description_textChanged()
 {
     TimeLeft();
 }
-
+void ShiftEditForm::on_Description_Check_clicked()
+{
+    TimeLeft();
+}
 
 /*These two classes are used to finish or cancel the
  * changes that the user was trying to implement.*/
 void ShiftEditForm::on_RefreshButton_clicked()
 {
-    data = ((MainForm*)parentWidget())->getData();
-    EmployeeInitialize();
-    ProjectInitialize();
-    ItemInitialize();
+//    data = ((MainForm*)parentWidget())->getData();
+//    EmployeeInitialize();
+//    ProjectInitialize();
+//    ItemInitialize();
 }
+
+bool ShiftEditForm::getSuccess() const
+{
+    return success;
+}
+
+
 void ShiftEditForm::on_FinishedButton_clicked()
 {
 
@@ -591,7 +656,10 @@ void ShiftEditForm::on_FinishedButton_clicked()
                      +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
 
 
-        qry->exec();
+        if (qry->exec())
+            success = true;
+        else
+            success = false;
         qDebug()<<"insert into shiftlist"<<qry->lastError();
     }
 
@@ -611,6 +679,11 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+
+
+
+
 
 
 

@@ -100,7 +100,6 @@ public:
     QPushButton *EmployeeAdd;
     QPushButton *EmployeeArchive;
     QPushButton *EmployeeDelete;
-    QPushButton *EmployeeRefresh;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_8;
     QCheckBox *EmployeeShiftCount;
@@ -679,11 +678,6 @@ public:
 
 
         horizontalLayout_2->addWidget(groupBox);
-
-        EmployeeRefresh = new QPushButton(EmployeeSettings);
-        EmployeeRefresh->setObjectName(QStringLiteral("EmployeeRefresh"));
-
-        horizontalLayout_2->addWidget(EmployeeRefresh);
 
         groupBox_2 = new QGroupBox(EmployeeSettings);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
@@ -1318,11 +1312,11 @@ public:
 
         verticalLayout_4->addLayout(horizontalLayout);
 
-        QWidget::setTabOrder(EmployeeAdd, EmployeeArchive);
-        QWidget::setTabOrder(EmployeeArchive, EmployeeDelete);
-        QWidget::setTabOrder(EmployeeDelete, EmployeeId);
-        QWidget::setTabOrder(EmployeeId, EmployeeName);
-        QWidget::setTabOrder(EmployeeName, EmployeePin);
+        QWidget::setTabOrder(ProjectItemCombo, ProjectItemQuantity);
+        QWidget::setTabOrder(ProjectItemQuantity, ProjectItemDimension);
+        QWidget::setTabOrder(ProjectItemDimension, ProjectItemAdd);
+        QWidget::setTabOrder(ProjectItemAdd, ProjectItemRemove);
+        QWidget::setTabOrder(ProjectItemRemove, EmployeePin);
         QWidget::setTabOrder(EmployeePin, EmployeeAdminStatus);
         QWidget::setTabOrder(EmployeeAdminStatus, EmployeeShiftCount);
         QWidget::setTabOrder(EmployeeShiftCount, EmployeeActive);
@@ -1342,12 +1336,12 @@ public:
         QWidget::setTabOrder(ProjectDate, ProjectAllRadio);
         QWidget::setTabOrder(ProjectAllRadio, ProjectCurrentRadio);
         QWidget::setTabOrder(ProjectCurrentRadio, ProjectPastRadio);
-        QWidget::setTabOrder(ProjectPastRadio, ProjectItemCombo);
-        QWidget::setTabOrder(ProjectItemCombo, ProjectItemQuantity);
-        QWidget::setTabOrder(ProjectItemQuantity, ProjectItemDimension);
-        QWidget::setTabOrder(ProjectItemDimension, ProjectItemAdd);
-        QWidget::setTabOrder(ProjectItemAdd, ProjectItemRemove);
-        QWidget::setTabOrder(ProjectItemRemove, ProjectItemId);
+        QWidget::setTabOrder(ProjectPastRadio, EmployeeAdd);
+        QWidget::setTabOrder(EmployeeAdd, EmployeeArchive);
+        QWidget::setTabOrder(EmployeeArchive, EmployeeDelete);
+        QWidget::setTabOrder(EmployeeDelete, EmployeeId);
+        QWidget::setTabOrder(EmployeeId, EmployeeName);
+        QWidget::setTabOrder(EmployeeName, ProjectItemId);
         QWidget::setTabOrder(ProjectItemId, ProjectItemName);
         QWidget::setTabOrder(ProjectItemName, ProjectView);
         QWidget::setTabOrder(ProjectView, Login3);
@@ -1402,8 +1396,8 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(2);
-        MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(3);
+        MainTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 
@@ -1440,7 +1434,6 @@ public:
         EmployeeAdd->setText(QString());
         EmployeeArchive->setText(QString());
         EmployeeDelete->setText(QString());
-        EmployeeRefresh->setText(QApplication::translate("MainForm", "PushButton", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", Q_NULLPTR));
         EmployeeAdminStatus->setText(QApplication::translate("MainForm", "AdminStatus", Q_NULLPTR));

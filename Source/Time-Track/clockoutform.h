@@ -55,7 +55,7 @@ private:
     Ui::ClockoutForm *ui;
     QSqlDatabase data;
     QString id;
-
+    bool clicked;
     int selectedRow;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);

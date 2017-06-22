@@ -13,6 +13,7 @@
 #include <QStyle>
 #include <QStringList>
 #include <QDesktopWidget>
+#include <QTimeEdit>
 
 
 namespace Ui {
@@ -38,9 +39,9 @@ public:
     void TimesInitialize();
     void TimeLeft();
     void LunchInitialize();
+    bool getSuccess() const;
 
-
-private slots:    
+private slots:
     void on_Projects_currentIndexChanged(const QString &arg1);
     void on_Add_clicked();
     void on_Delete_clicked();
@@ -59,6 +60,11 @@ private slots:
 
 
 
+    void on_Lunch_timeChanged(const QTime &time);
+
+    void on_Description_Check_clicked();
+
+
 signals:
     void finished();
 private:
@@ -66,7 +72,27 @@ private:
     QString shiftId;
     QSqlDatabase data;
     int selectedRow;
+    bool clicked;
+    bool success;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
+};
+
+
+
+class myTime : public QTimeEdit
+{
+    Q_OBJECT
+    public:
+    virtual void stepBy(int steps)
+    {
+        if (this->time().minute()==59 && steps>0){
+            setTime(QTime(time().hour()+1,0,time().second(),time().msec()));
+        }else if(this->time().minute()==00 && steps<0){
+            setTime(QTime(time().hour()-1,59,time().second(),time().msec()));
+        }else{
+            QTimeEdit::stepBy(steps);
+        }
+    }
 };
 #endif // SHIFTEDITFORM_H

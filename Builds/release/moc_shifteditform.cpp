@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ShiftEditForm_t {
-    QByteArrayData data[19];
-    char stringdata0[350];
+    QByteArrayData data[22];
+    char stringdata0[405];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,7 +49,10 @@ QT_MOC_LITERAL(14, 219, 28), // "on_DateTime2_dateTimeChanged"
 QT_MOC_LITERAL(15, 248, 26), // "on_Description_textChanged"
 QT_MOC_LITERAL(16, 275, 25), // "on_FinishedButton_clicked"
 QT_MOC_LITERAL(17, 301, 23), // "on_CancelButton_clicked"
-QT_MOC_LITERAL(18, 325, 24) // "on_RefreshButton_clicked"
+QT_MOC_LITERAL(18, 325, 24), // "on_RefreshButton_clicked"
+QT_MOC_LITERAL(19, 350, 20), // "on_Lunch_timeChanged"
+QT_MOC_LITERAL(20, 371, 4), // "time"
+QT_MOC_LITERAL(21, 376, 28) // "on_Description_Check_clicked"
 
     },
     "ShiftEditForm\0finished\0\0"
@@ -63,7 +66,8 @@ QT_MOC_LITERAL(18, 325, 24) // "on_RefreshButton_clicked"
     "on_Description_textChanged\0"
     "on_FinishedButton_clicked\0"
     "on_CancelButton_clicked\0"
-    "on_RefreshButton_clicked"
+    "on_RefreshButton_clicked\0on_Lunch_timeChanged\0"
+    "time\0on_Description_Check_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +77,7 @@ static const uint qt_meta_data_ShiftEditForm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,21 +85,23 @@ static const uint qt_meta_data_ShiftEditForm[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x06 /* Public */,
+       1,    0,   89,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   80,    2, 0x08 /* Private */,
-       5,    0,   83,    2, 0x08 /* Private */,
-       6,    0,   84,    2, 0x08 /* Private */,
-       7,    2,   85,    2, 0x08 /* Private */,
-      10,    0,   90,    2, 0x08 /* Private */,
-      11,    1,   91,    2, 0x08 /* Private */,
-      12,    1,   94,    2, 0x08 /* Private */,
-      14,    1,   97,    2, 0x08 /* Private */,
-      15,    0,  100,    2, 0x08 /* Private */,
-      16,    0,  101,    2, 0x08 /* Private */,
-      17,    0,  102,    2, 0x08 /* Private */,
-      18,    0,  103,    2, 0x08 /* Private */,
+       3,    1,   90,    2, 0x08 /* Private */,
+       5,    0,   93,    2, 0x08 /* Private */,
+       6,    0,   94,    2, 0x08 /* Private */,
+       7,    2,   95,    2, 0x08 /* Private */,
+      10,    0,  100,    2, 0x08 /* Private */,
+      11,    1,  101,    2, 0x08 /* Private */,
+      12,    1,  104,    2, 0x08 /* Private */,
+      14,    1,  107,    2, 0x08 /* Private */,
+      15,    0,  110,    2, 0x08 /* Private */,
+      16,    0,  111,    2, 0x08 /* Private */,
+      17,    0,  112,    2, 0x08 /* Private */,
+      18,    0,  113,    2, 0x08 /* Private */,
+      19,    1,  114,    2, 0x08 /* Private */,
+      21,    0,  117,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -112,6 +118,8 @@ static const uint qt_meta_data_ShiftEditForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QTime,   20,
     QMetaType::Void,
 
        0        // eod
@@ -136,6 +144,8 @@ void ShiftEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 10: _t->on_FinishedButton_clicked(); break;
         case 11: _t->on_CancelButton_clicked(); break;
         case 12: _t->on_RefreshButton_clicked(); break;
+        case 13: _t->on_Lunch_timeChanged((*reinterpret_cast< const QTime(*)>(_a[1]))); break;
+        case 14: _t->on_Description_Check_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -176,13 +186,13 @@ int ShiftEditForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 15;
     }
     return _id;
 }
@@ -191,6 +201,72 @@ int ShiftEditForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 void ShiftEditForm::finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+struct qt_meta_stringdata_myTime_t {
+    QByteArrayData data[1];
+    char stringdata0[7];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_myTime_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_myTime_t qt_meta_stringdata_myTime = {
+    {
+QT_MOC_LITERAL(0, 0, 6) // "myTime"
+
+    },
+    "myTime"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_myTime[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void myTime::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+const QMetaObject myTime::staticMetaObject = {
+    { &QTimeEdit::staticMetaObject, qt_meta_stringdata_myTime.data,
+      qt_meta_data_myTime,  qt_static_metacall, nullptr, nullptr}
+};
+
+
+const QMetaObject *myTime::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *myTime::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_myTime.stringdata0))
+        return static_cast<void*>(const_cast< myTime*>(this));
+    return QTimeEdit::qt_metacast(_clname);
+}
+
+int myTime::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QTimeEdit::qt_metacall(_c, _id, _a);
+    return _id;
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

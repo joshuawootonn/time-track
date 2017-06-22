@@ -532,6 +532,8 @@ release/moc_mainform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/connectionform.h \
 		../Source/Time-Track/exportform.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
@@ -558,6 +560,8 @@ release/moc_mainform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../Source/Time-Track/mainform.h \
 		release/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
@@ -1084,6 +1088,8 @@ release/moc_shifteditform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/shifteditform.h \
 		release/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
@@ -1853,6 +1859,8 @@ release/main.o: ../Source/Time-Track/main.cpp ../Source/Time-Track/mainform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/connectionform.h \
 		../Source/Time-Track/exportform.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
@@ -1879,6 +1887,8 @@ release/main.o: ../Source/Time-Track/main.cpp ../Source/Time-Track/mainform.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
@@ -2146,6 +2156,8 @@ release/mainform.o: ../Source/Time-Track/mainform.cpp ../Source/Time-Track/mainf
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/connectionform.h \
 		../Source/Time-Track/exportform.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
@@ -2172,11 +2184,11 @@ release/mainform.o: ../Source/Time-Track/mainform.cpp ../Source/Time-Track/mainf
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
 		ui_mainform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QFileDialog \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qfiledialog.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainform.o ..\Source\Time-Track\mainform.cpp
 
 release/clockoutform.o: ../Source/Time-Track/clockoutform.cpp ../Source/Time-Track/clockoutform.h \
@@ -2440,6 +2452,8 @@ release/clockoutform.o: ../Source/Time-Track/clockoutform.cpp ../Source/Time-Tra
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/mainform.h \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/connectionform.h \
 		../Source/Time-Track/exportform.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
@@ -2466,6 +2480,8 @@ release/clockoutform.o: ../Source/Time-Track/clockoutform.cpp ../Source/Time-Tra
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
 		ui_clockoutform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\clockoutform.o ..\Source\Time-Track\clockoutform.cpp
 
@@ -2728,6 +2744,8 @@ release/shifteditform.o: ../Source/Time-Track/shifteditform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		ui_shifteditform.h \
 		../Source/Time-Track/mainform.h \
 		../Source/Time-Track/clockoutform.h \
@@ -2756,7 +2774,9 @@ release/shifteditform.o: ../Source/Time-Track/shifteditform.cpp ../Source/Time-T
 		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\shifteditform.o ..\Source\Time-Track\shifteditform.cpp
 
 release/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-Track/connectionform.h \
@@ -3022,6 +3042,8 @@ release/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time
 		../Source/Time-Track/clockoutform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/exportform.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
 		../Source/Time-Track/excel_stuff/xlsxglobal.h \
@@ -3046,7 +3068,9 @@ release/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time
 		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\connectionform.o ..\Source\Time-Track\connectionform.cpp
 
 release/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exportform.h \
@@ -3332,13 +3356,17 @@ release/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/e
 		../Source/Time-Track/clockoutform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
 		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		../Source/Time-Track/connectionform.h \
 		../Source/Time-Track/excel_stuff/xlsxrichstring.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QSharedDataPointer \
 		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\exportform.o ..\Source\Time-Track\exportform.cpp
 
 release/xlsxdocpropscore.o: ../Source/Time-Track/excel_stuff/xlsxdocpropscore.cpp ../Source/Time-Track/excel_stuff/xlsxdocpropscore_p.h \
