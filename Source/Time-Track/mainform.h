@@ -201,10 +201,6 @@ private slots:
     void on_EmployeeRefresh_clicked();
 
 
-
-
-    void on_ShiftView_clicked(const QModelIndex &index);
-
 public:
     Ui::MainForm *ui;
 

@@ -403,8 +403,6 @@ void ShiftEditForm::TimeLeft(){
     for(int i =0;i < ui->Sections->rowCount(); i++){
 
         QString item = ui->Sections->item(i,2)->text();
-        //qDebug()<<item;
-
         minutes-=(item.split(":")[0].toInt()*60);
         minutes-=item.split(":")[1].toInt();
     }
@@ -428,18 +426,13 @@ void ShiftEditForm::TimeLeft(){
     if(ui->timeLeft->text()=="0:00")
     {
         if(ui->Description->isVisible()&&ui->Description->toPlainText()!=""){
-
             ui->FinishedButton->setEnabled(true);
-            qDebug()<<"111111111111111111111111111111111";
         }else if (ui->Description_Check->isChecked()){
             ui->FinishedButton->setEnabled(true);
-
-            qDebug()<<"22222222222222222222222222222222222";
         }
         else if(!ui->Description->isVisible()&&ui->Sections->rowCount()>0){
             ui->FinishedButton->setEnabled(true);
 
-            qDebug()<<"333333333333333333333333333333333333";
         }        
         else{
             ui->FinishedButton->setEnabled(false);
@@ -587,7 +580,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
     qry->exec();
-    qDebug()<<"delete from shiftlist"<<qry->lastError();
 
     employeename = ui->Name->currentText();
     qry->prepare("select id from employeelist where name='"+employeename+"'");
@@ -595,7 +587,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
         while(qry->next())
             employeeid = qry->value(0).toString();
     }
-    qDebug()<<"select id from"<<qry->lastError();
 
 
     QDateTime clockin = ui->DateTime1->dateTime();
@@ -614,12 +605,10 @@ void ShiftEditForm::on_FinishedButton_clicked()
     if(qry->exec()){
         while(qry->next()){
             shiftid=qry->value(0).toString();}}
-    qDebug()<<"select Max"<<qry->lastError();
     int id = shiftid.toInt();
     id++;
     shiftid = QString::number(id);
     qry->clear();
-    qDebug()<<shiftid;
     description=ui->Description->toPlainText().simplified();
 
     for(int i =0; i<ui->Sections->rowCount();i++){
@@ -630,18 +619,14 @@ void ShiftEditForm::on_FinishedButton_clicked()
         if(qry->exec()){
             while(qry->next()){
                 projectid=qry->value(0).toString();}}
-        qDebug()<<"select id from project"<<qry->lastError();
         qry->clear();
         itemname=ui->Sections->item(i,1)->text();
-        //itemname.replace("\"","");
-
         qry->prepare("select id from itemlist where name='"+itemname+"'");
         if(qry->exec()){
             while(qry->next()){
                 itemid=qry->value(0).toString();
             }
         }
-        qDebug()<<"select id from item"<<qry->lastError()<< itemname<< itemid;
 
 
 
@@ -660,7 +645,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
             success = true;
         else
             success = false;
-        qDebug()<<"insert into shiftlist"<<qry->lastError();
     }
 
 
@@ -668,7 +652,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
     qry->clear();
     qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
     qry->exec();
-     qDebug()<<"update employeelist"<<qry->lastError();
     this->hide();
 
     emit finished();
