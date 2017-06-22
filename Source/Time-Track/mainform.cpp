@@ -811,46 +811,52 @@ void MainForm::on_EmployeeArchive_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive "+
-                                  employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                  + "'s records?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        for(int i=0; i< list.count(); i++)
-        {
-            QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-            qry->clear();
-            if(employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==1)
-                qry->prepare("update employeelist set current=0 where id = '"+id+"'");
-            else if (employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==0)
-                qry->prepare("update employeelist set current=1 where id = '"+id+"'");
-            qry->exec();
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive "+
+                                      employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            for(int i=0; i< list.count(); i++)
+            {
+                QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                qry->clear();
+                if(employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==1)
+                    qry->prepare("update employeelist set current=0 where id = '"+id+"'");
+                else if (employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==0)
+                    qry->prepare("update employeelist set current=1 where id = '"+id+"'");
+                qry->exec();
+            }
+            refreshEmployeeTab();
+            shifteditform->updateShiftEdit();
         }
-        refreshEmployeeTab();
-        shifteditform->updateShiftEdit();
     }
 }
 void MainForm::on_EmployeeDelete_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+
-                                  employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                  + "'s records?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+
+                                      employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
 
-        for(int i=0; i< list.count(); i++)
-        {
-            QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-            qry->clear();
-            qry->prepare("DELETE from employeelist where id='"+id+"'");
-            qry->exec();
+            for(int i=0; i< list.count(); i++)
+            {
+                QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                qry->clear();
+                qry->prepare("DELETE from employeelist where id='"+id+"'");
+                qry->exec();
+            }
+            refreshEmployeeTab();
+            refreshShiftEmployee();
+            ui->MainTabs->setCurrentIndex(0);
+            shifteditform->updateShiftEdit();
         }
-        refreshEmployeeTab();
-        refreshShiftEmployee();
-        ui->MainTabs->setCurrentIndex(0);
-        shifteditform->updateShiftEdit();
     }
 }
 void MainForm::on_EmployeeRefresh_clicked()
@@ -1130,52 +1136,58 @@ void MainForm::on_ProjectDelete_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track", "Are you sure you want to delete the " +
-                                  projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                  + "'s records?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        for(int i=0; i< list.count(); i++)
-        {
-            QModelIndex index =list.at(i);
-            int idInt = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toInt();
-            QString id = "Project"+QString::number(idInt);
-            qDebug()<<id;
-            qry->clear();
-            qry->prepare("DROP TABLE "+id+"");
-            qry->exec();
-            qry->clear();
-            qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
-            qry->exec();
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track", "Are you sure you want to delete the " +
+                                      projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            for(int i=0; i< list.count(); i++)
+            {
+                QModelIndex index =list.at(i);
+                int idInt = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toInt();
+                QString id = "Project"+QString::number(idInt);
+                qDebug()<<id;
+                qry->clear();
+                qry->prepare("DROP TABLE "+id+"");
+                qry->exec();
+                qry->clear();
+                qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
+                qry->exec();
+            }
         }
+        refreshProjectTab();
+        refreshShiftProject();
+        ui->MainTabs->setCurrentIndex(1);
+        shifteditform->updateShiftEdit();
     }
-    refreshProjectTab();
-    refreshShiftProject();
-    ui->MainTabs->setCurrentIndex(1);
-    shifteditform->updateShiftEdit();
 }
 void MainForm::on_ProjectArchive_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive the " +
-                                  projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                  + "'s records?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive the " +
+                                      projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
 
-        for(int i=0; i< list.count(); i++)
-        {           
-            QString id = projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-            qry->clear();
-            if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 1)
-                qry->prepare("update projectlist set current=0 where id = '"+id+"'");
-            else if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 0)
-                qry->prepare("update projectlist set current=1 where id = '"+id+"'");
-            qry->exec();
+            for(int i=0; i< list.count(); i++)
+            {
+                QString id = projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                qry->clear();
+                if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 1)
+                    qry->prepare("update projectlist set current=0 where id = '"+id+"'");
+                else if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 0)
+                    qry->prepare("update projectlist set current=1 where id = '"+id+"'");
+                qry->exec();
+            }
+            refreshProjectTab();
+            shifteditform->updateShiftEdit();
         }
-        refreshProjectTab();
-        shifteditform->updateShiftEdit();
     }
 }
 /* Option menu 2 for ProjectTab*/
@@ -1249,52 +1261,54 @@ void MainForm::on_ProjectItemAdd_clicked()
     QString itemName = ui->ProjectItemCombo->currentText();
     QString itemQuantity = ui->ProjectItemQuantity->text();
     QString itemDimension = ui->ProjectItemDimension->currentText();
+    if( itemName != "")
+    {
+        QSqlQuery * qry = new QSqlQuery(data);
+        qry->prepare("select id from itemlist where name='"+itemName+"'");
+        QString itemId;
+        if(qry->exec()){
+            while(qry->next())
+                itemId = qry->value(0).toString();
+        }
+        qry->clear();
+        QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
+        QString table = model->tableName();
 
-    QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("select id from itemlist where name='"+itemName+"'");
-    QString itemId;
-    if(qry->exec()){
-        while(qry->next())
-            itemId = qry->value(0).toString();
+        qry->prepare("insert into "+table+"(itemid, name, quantity, dimension) "
+                          "values('"+itemId+"','"+itemName+"','"+itemQuantity+"','"+itemDimension+"') "
+                                 "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
+        qry->exec();
+        model->select();
+        ui->ProjectItemView->setModel(model);
+        shifteditform->updateShiftEdit();
     }
-    qry->clear();
-    QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
-    QString table = model->tableName();
-
-    qry->prepare("insert into "+table+"(itemid, name, quantity, dimension) "
-                      "values('"+itemId+"','"+itemName+"','"+itemQuantity+"','"+itemDimension+"') "
-                             "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
-    qry->exec();
-
-    model->select();
-    ui->ProjectItemView->setModel(model);
-    shifteditform->updateShiftEdit();
-            
 }
 void MainForm::on_ProjectItemRemove_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ProjectItemView->selectionModel()->selection().indexes();
+    if(list != QModelIndexList())
+    {
+        QSqlTableModel * tablemodel = (QSqlTableModel*)ui->ProjectItemView->model();
+        QString table = tablemodel->tableName();
 
-    QSqlTableModel * tablemodel = (QSqlTableModel*)ui->ProjectItemView->model();
-    QString table = tablemodel->tableName();
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to remove the "+ tablemodel->record(list.at(0).row()).value(2).toString()+" item from this project?",
+                                        QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            for(int i=0; i< list.count(); i++)
+            {
+                QModelIndex index =list.at(i);
+                QString id = tablemodel->record(index.row()).value(0).toString();
 
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to remove the "+ tablemodel->record(list.at(0).row()).value(2).toString()+" item from this project?",
-                                    QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        for(int i=0; i< list.count(); i++)
-        {
-            QModelIndex index =list.at(i);
-            QString id = tablemodel->record(index.row()).value(0).toString();
-
-            qry->clear();
-            qry->prepare("DELETE from "+table+" where id='"+id+"'");
-            qry->exec();
+                qry->clear();
+                qry->prepare("DELETE from "+table+" where id='"+id+"'");
+                qry->exec();
+            }
+            tablemodel->select();
+            ui->ProjectItemView->setModel(tablemodel);
+            shifteditform->updateShiftEdit();
         }
-        tablemodel->select();
-        ui->ProjectItemView->setModel(tablemodel);
-        shifteditform->updateShiftEdit();
     }
 }
 
@@ -1384,22 +1398,25 @@ void MainForm::on_ItemDelete_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ItemView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the " +
-                                  itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                  + " item from this project?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        for(int i=0; i< list.count(); i++)
-        {
-            QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-            qry->clear();
-            qry->prepare("DELETE from itemlist where id='"+id+"'");
-            qry->exec();
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the " +
+                                      itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                      + " item from this project?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            for(int i=0; i< list.count(); i++)
+            {
+                QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                qry->clear();
+                qry->prepare("DELETE from itemlist where id='"+id+"'");
+                qry->exec();
+            }
+            refreshItemTab();
+            refreshProjectItemCombo();
+            refreshShiftItem();
+            ui->MainTabs->setCurrentIndex(2);
         }
-        refreshItemTab();
-        refreshProjectItemCombo();
-        refreshShiftItem();
-        ui->MainTabs->setCurrentIndex(2);
     }
 }
 /* Option menu 2 for ItemTab*/
@@ -1660,7 +1677,7 @@ void MainForm::on_ShiftEdit_clicked()
     shifteditform = new ShiftEditForm(this);
     establishConnections();
     QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
-    if(list!= *(new QModelIndexList()))
+    if(list!= QModelIndexList())
     {
         QModelIndex index =list.at(0);
         QSqlRecord rec = shiftmodel->record(shiftfiltermodel->mapToSource(index).row());
@@ -1675,27 +1692,30 @@ void MainForm::on_ShiftDelete_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete " +
-                                  shiftmodel->record(shiftfiltermodel->mapToSource(list.at(0)).row()).value(4).toString()
-                                  + "'s shift?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
+    if(list != QModelIndexList())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete " +
+                                      shiftmodel->record(shiftfiltermodel->mapToSource(list.at(0)).row()).value(4).toString()
+                                      + "'s shift?", QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
 
-        for(int i=0; i< list.count(); i++)
-        {
-            QString id = shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(13).toString();
-            qry->clear();
-            qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
-            qry->exec();
-            if(shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(2).toString()=="0")
+            for(int i=0; i< list.count(); i++)
             {
+                QString id = shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(13).toString();
                 qry->clear();
-                qry->prepare("update employeelist set active='0' where name='"+shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(4).toString()+"'");
+                qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
                 qry->exec();
+                if(shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(2).toString()=="0")
+                {
+                    qry->clear();
+                    qry->prepare("update employeelist set active='0' where name='"+shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(4).toString()+"'");
+                    qry->exec();
+                }
             }
         }
+        refreshShiftTab();
     }
-    refreshShiftTab();
 }
 
 //Settings Section!
