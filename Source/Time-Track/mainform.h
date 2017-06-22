@@ -65,6 +65,7 @@ public:
 
     void EmployeeTab();
     QSqlQueryModel * EmployeeModel();
+    QSortFilterProxyModel * EmployeeFilterModel();
 
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
@@ -78,6 +79,7 @@ public:
 
     void ItemTab();
     QSqlQueryModel * ItemModel();
+    QSortFilterProxyModel * ItemFilterModel();
 
     void ShiftTab();
     QSqlQueryModel* ShiftModel();
@@ -207,14 +209,19 @@ public:
     Ui::MainForm *ui;
 
 private:
+    QSortFilterProxyModel * employeefiltermodel;
+    QSqlQueryModel * employeemodel;
 
-    QSortFilterProxyModel *projectfiltermodel;
+    QSortFilterProxyModel * projectfiltermodel;
     QSqlQueryModel * projectmodel;
 
-    QSortFilterProxyModel *shiftfiltermodel;
+    QSortFilterProxyModel * itemfiltermodel;
+    QSqlQueryModel * itemmodel;
+
+    QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
 
-    ClockoutForm *clockoutForm;
+    ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;
     ExportForm * exportForm;

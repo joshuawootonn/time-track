@@ -683,8 +683,9 @@ void MainForm::EmployeeTab()
 {
     ui->MainTabs->setCurrentIndex(0);
 
-    QSqlQueryModel * x=EmployeeModel();
-    ui->EmployeeView->setModel(x);
+    employeemodel=EmployeeModel();
+    employeefiltermodel = EmployeeFilterModel();
+    ui->EmployeeView->setModel(employeefiltermodel);
     establishConnections();
     ui->EmployeeView->setSortingEnabled(true);
 
@@ -718,8 +719,9 @@ void MainForm::refreshEmployeeStuff(){
 void MainForm::refreshEmployeeTab(){
     //ui->MainTabs->setCurrentIndex(0);
 
-    QSqlQueryModel * x=EmployeeModel();
-    ui->EmployeeView->setModel(x);
+    employeemodel=EmployeeModel();
+    employeefiltermodel = EmployeeFilterModel();
+    ui->EmployeeView->setModel(employeefiltermodel);
     establishConnections();
 
     if(ui->EmployeeId->isChecked())
@@ -755,7 +757,7 @@ void MainForm::refreshEmployeeTab(){
     else
         ui->EmployeeView->hideColumn(6);
 
-    for(int i=1; i< x->rowCount(); i++)
+    for(int i=1; i< employeefiltermodel->rowCount(); i++)
     {
         ui->EmployeeView->showRow(i);
     }
@@ -781,6 +783,12 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     model->setHeaderData(6,Qt::Horizontal,tr("Current"));
     return model;
 
+}
+QSortFilterProxyModel * MainForm::EmployeeFilterModel(){
+    QSortFilterProxyModel * m = new QSortFilterProxyModel(this);
+    m->setDynamicSortFilter(true);
+    m->setSourceModel(employeemodel);
+    return m;
 }
 /* Option menu 1 for EmployeeTab*/
 void MainForm::on_EmployeeAdd_clicked()
@@ -814,23 +822,23 @@ void MainForm::on_EmployeeArchive_clicked()
 
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    QSqlQueryModel * x = EmployeeModel();
+
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive "+ x->record(list.at(0).row()).value(1).toString()+" records?",
-                                    QMessageBox::Yes|QMessageBox::No);
+    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive "+ employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()+" records?",
+                         QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
         for(int i=0; i< list.count(); i++)
         {
-            QModelIndex index =list.at(i);
-            int idInt = x->record(index.row()).value(0).toInt();
-            QString id = QString::number(idInt);
+
+            QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
 
             qry->clear();
-            if(x->record(index.row()).value(6).toInt()==1)
+
+            if(employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==1)
             {
                 qry->prepare("update employeelist set current=0 where id = '"+id+"'");
             }
-            else if (x->record(index.row()).value(6).toInt()==0)
+            else if (employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==0)
             {
                 qry->prepare("update employeelist set current=1 where id = '"+id+"'");
             }
@@ -847,18 +855,15 @@ void MainForm::on_EmployeeDelete_clicked()
 
     QSqlQuery * qry = new QSqlQuery(data);
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    QSqlQueryModel * x = EmployeeModel();
+
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+ x->record(list.at(0).row()).value(1).toString()+" records?",
+    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+ employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()+" records?",
                                     QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
 
         for(int i=0; i< list.count(); i++)
         {
-            QModelIndex index =list.at(i);
-            int idInt = x->record(index.row()).value(0).toInt();
-            QString id = QString::number(idInt);
-
+            QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
             qry->clear();
             qry->prepare("DELETE from employeelist where id='"+id+"'");
             qry->exec();
@@ -1379,8 +1384,9 @@ void MainForm::on_ProjectItemRemove_clicked()
  * 'itemtab' in 'sections'
  */
 void MainForm::ItemTab(){
-    QSqlQueryModel * x=ItemModel();
-    ui->ItemView->setModel(x);
+    itemmodel= ItemModel();
+    itemfiltermodel = ItemFilterModel();
+    ui->ItemView->setModel(itemfiltermodel);
     establishConnections();
 
     ui->ItemView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -1408,11 +1414,18 @@ QSqlQueryModel * MainForm::ItemModel(){
     return model;
 
 }
+QSortFilterProxyModel * MainForm::ItemFilterModel(){
+    QSortFilterProxyModel * m = new QSortFilterProxyModel(this);
+    m->setDynamicSortFilter(true);
+    m->setSourceModel(itemmodel);
+    return m;
+}
 void MainForm::refreshItemTab(){
     //ui->MainTabs->setCurrentIndex(2);
 
-    QSqlQueryModel * x=ItemModel();
-    ui->ItemView->setModel(x);
+    itemmodel= ItemModel();
+    itemfiltermodel = ItemFilterModel();
+    ui->ItemView->setModel(itemfiltermodel);
     establishConnections();
 
    // ui->ItemView->resizeColumnsToContents();
@@ -1470,16 +1483,13 @@ void MainForm::on_ItemDelete_clicked()
     QSqlQueryModel * x = ItemModel();
 
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the "+ x->record(list.at(0).row()).value(1).toString()+" item from this project?",
+    reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the "+ itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()+" item from this project?",
                                     QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
         for(int i=0; i< list.count(); i++)
         {
-            QModelIndex index =list.at(i);
-            int idInt = x->record(index.row()).value(0).toInt();
-            QString id = QString::number(idInt);
 
-
+            QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
             qry->clear();
             qry->prepare("DELETE from itemlist where id='"+id+"'");
             qry->exec();
