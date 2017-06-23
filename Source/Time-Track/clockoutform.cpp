@@ -9,6 +9,8 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
 
+
+
     clicked = false;
 }
 
@@ -148,19 +150,28 @@ void ClockoutForm::ItemInitialize(){
 void ClockoutForm::TimesInitialize(){
 
     QSqlQuery* qry = new QSqlQuery(data);
-
     qry->prepare("Select time from timelist where idtimelist < 5 ORDER BY time");
     if(qry->exec())
     {
            while(qry->next())
            {
                ui->Minutes->addItem(qry->value(0).toString());
+
+
+           }
+    }    
+    qry->clear();
+    qry->prepare("Select time from timelist where idtimelist < 5 AND idtimelist <> 3 ORDER BY time");
+    if(qry->exec())
+    {
+           while(qry->next())
+           {
+
                ui->Lunch->addItem("00:"+qry->value(0).toString());
 
            }
     }
     ui->Lunch->addItem("01:00");
-    qDebug()<<"1";
     qry->clear();
     qry->prepare("Select time from timelist where idtimelist >= 4 ORDER BY time");
     if(qry->exec())
@@ -170,9 +181,14 @@ void ClockoutForm::TimesInitialize(){
                ui->Hours->addItem(qry->value(0).toString());
            }
     }
-    qDebug()<<"2";
 
-
+//    for (int i = 0 ; i < ui->Hours->count() ; ++i) {
+//        ui->Hours->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+//    }
+//    for (int i = 0 ; i < ui->Minutes->count() ; ++i) {
+//        ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+//        ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+//    }
 
 
 }

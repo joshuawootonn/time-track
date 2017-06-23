@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
-    <height>500</height>
+    <width>1136</width>
+    <height>541</height>
    </rect>
   </property>
   <property name="font">
@@ -84,7 +84,9 @@ border:none;
 QComboBox{
 border:none;
 background-color:#FFFFFF;
+
 }
+
 QComboBox:hover {
 background-color:#E4E9EB;
 }
@@ -149,6 +151,19 @@ QGroupBox::title {
       <size>
        <width>40</width>
        <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
     </spacer>
@@ -219,7 +234,7 @@ QGroupBox::title {
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>0</height>
+            <height>50</height>
            </size>
           </property>
           <property name="text">
@@ -232,7 +247,7 @@ QGroupBox::title {
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>0</height>
+            <height>50</height>
            </size>
           </property>
           <property name="text">
@@ -353,7 +368,7 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
               <property name="sizeAdjustPolicy">
@@ -370,7 +385,7 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
              </widget>
@@ -384,8 +399,30 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>100</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="minimumSize">
+               <size>
+                <width>8</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>8</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>:</string>
               </property>
              </widget>
             </item>
@@ -394,8 +431,11 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>0</height>
+                <height>50</height>
                </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -408,7 +448,7 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
               <property name="text">
@@ -421,7 +461,7 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>0</height>
+                <height>50</height>
                </size>
               </property>
               <property name="text">
@@ -441,8 +481,11 @@ QGroupBox::title {
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>0</height>
+                <height>50</height>
                </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -454,19 +497,6 @@ QGroupBox::title {
       </item>
      </layout>
     </widget>
-   </item>
-   <item row="2" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

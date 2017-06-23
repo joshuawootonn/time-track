@@ -141,7 +141,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -201,6 +201,18 @@ width: 120px;/for example/
 }</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_17">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item row="0" column="1">
               <widget class="QPushButton" name="Login8">
                <property name="minimumSize">
@@ -211,32 +223,6 @@ width: 120px;/for example/
                </property>
                <property name="text">
                 <string>8</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QPushButton" name="Login7">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>7</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="Login4">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>4</string>
                </property>
               </widget>
              </item>
@@ -253,8 +239,8 @@ width: 120px;/for example/
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QPushButton" name="Login1">
+             <item row="1" column="0">
+              <widget class="QPushButton" name="Login4">
                <property name="minimumSize">
                 <size>
                  <width>50</width>
@@ -262,12 +248,12 @@ width: 120px;/for example/
                 </size>
                </property>
                <property name="text">
-                <string>1</string>
+                <string>4</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QPushButton" name="Login5">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="Login7">
                <property name="minimumSize">
                 <size>
                  <width>50</width>
@@ -275,26 +261,7 @@ width: 120px;/for example/
                 </size>
                </property>
                <property name="text">
-                <string>5</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QPushButton" name="Login9">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Calibri</family>
-                 <pointsize>-1</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>9</string>
+                <string>7</string>
                </property>
               </widget>
              </item>
@@ -317,8 +284,34 @@ width: 120px;/for example/
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
-              <widget class="QPushButton" name="Login3">
+             <item row="1" column="1">
+              <widget class="QPushButton" name="Login5">
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>5</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QPushButton" name="Login1">
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="Login9">
                <property name="minimumSize">
                 <size>
                  <width>50</width>
@@ -332,7 +325,7 @@ width: 120px;/for example/
                 </font>
                </property>
                <property name="text">
-                <string>3</string>
+                <string>9</string>
                </property>
               </widget>
              </item>
@@ -359,6 +352,25 @@ width: 120px;/for example/
                </property>
                <property name="text">
                 <string>&lt;</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QPushButton" name="Login3">
+               <property name="minimumSize">
+                <size>
+                 <width>50</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Calibri</family>
+                 <pointsize>-1</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>3</string>
                </property>
               </widget>
              </item>
@@ -400,12 +412,6 @@ width: 120px;/for example/
                <size>
                 <width>0</width>
                 <height>45</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -823,7 +829,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>5</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>

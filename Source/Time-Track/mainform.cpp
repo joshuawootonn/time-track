@@ -11,7 +11,6 @@ MainForm::MainForm(QWidget *parent) :
 
 
 
-
     if (Connect(router))
         this->showMaximized();
     else if (Connect(extender))
@@ -26,6 +25,8 @@ MainForm::MainForm(QWidget *parent) :
     //connectionForm = new ConnectionForm(this);
     exportForm = new ExportForm(this);
 
+    ui->ShiftEmployeeCombo->setEditable(true);
+    ui->ShiftEmployeeCombo->lineEdit()->setAlignment(Qt::AlignCenter);
 
     loginInitialize();
     isConnected();
@@ -352,6 +353,8 @@ void MainForm::loginInitialize(){
 
     ui->mainStack->setCurrentIndex(0);
     admin=false;
+    ui->passEdit->setAlignment(Qt::AlignCenter);
+    ui->passLabel->setAlignment(Qt::AlignCenter);
 
     isConnected();
     ui->mainFinish->hide();

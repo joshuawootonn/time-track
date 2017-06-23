@@ -46,16 +46,16 @@ public:
     QWidget *loginNumPad;
     QGridLayout *gridLayout_17;
     QPushButton *Login8;
-    QPushButton *Login7;
-    QPushButton *Login4;
     QPushButton *Login2;
-    QPushButton *Login1;
-    QPushButton *Login5;
-    QPushButton *Login9;
+    QPushButton *Login4;
+    QPushButton *Login7;
     QPushButton *Login6;
-    QPushButton *Login3;
+    QPushButton *Login5;
+    QPushButton *Login1;
+    QPushButton *Login9;
     QPushButton *Login0;
     QPushButton *LoginBack;
+    QPushButton *Login3;
     QPushButton *LoginGo;
     QPushButton *basicPageConnect;
     QLabel *connectionlabel;
@@ -411,23 +411,12 @@ public:
 "}"));
         gridLayout_17 = new QGridLayout(loginNumPad);
         gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
+        gridLayout_17->setContentsMargins(0, 0, 0, 0);
         Login8 = new QPushButton(loginNumPad);
         Login8->setObjectName(QStringLiteral("Login8"));
         Login8->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(Login8, 0, 1, 1, 1);
-
-        Login7 = new QPushButton(loginNumPad);
-        Login7->setObjectName(QStringLiteral("Login7"));
-        Login7->setMinimumSize(QSize(50, 50));
-
-        gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
-
-        Login4 = new QPushButton(loginNumPad);
-        Login4->setObjectName(QStringLiteral("Login4"));
-        Login4->setMinimumSize(QSize(50, 50));
-
-        gridLayout_17->addWidget(Login4, 1, 0, 1, 1);
 
         Login2 = new QPushButton(loginNumPad);
         Login2->setObjectName(QStringLiteral("Login2"));
@@ -435,24 +424,17 @@ public:
 
         gridLayout_17->addWidget(Login2, 3, 1, 1, 1);
 
-        Login1 = new QPushButton(loginNumPad);
-        Login1->setObjectName(QStringLiteral("Login1"));
-        Login1->setMinimumSize(QSize(50, 50));
+        Login4 = new QPushButton(loginNumPad);
+        Login4->setObjectName(QStringLiteral("Login4"));
+        Login4->setMinimumSize(QSize(50, 50));
 
-        gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
+        gridLayout_17->addWidget(Login4, 1, 0, 1, 1);
 
-        Login5 = new QPushButton(loginNumPad);
-        Login5->setObjectName(QStringLiteral("Login5"));
-        Login5->setMinimumSize(QSize(50, 50));
+        Login7 = new QPushButton(loginNumPad);
+        Login7->setObjectName(QStringLiteral("Login7"));
+        Login7->setMinimumSize(QSize(50, 50));
 
-        gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
-
-        Login9 = new QPushButton(loginNumPad);
-        Login9->setObjectName(QStringLiteral("Login9"));
-        Login9->setMinimumSize(QSize(50, 50));
-        Login9->setFont(font);
-
-        gridLayout_17->addWidget(Login9, 0, 2, 1, 1);
+        gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
 
         Login6 = new QPushButton(loginNumPad);
         Login6->setObjectName(QStringLiteral("Login6"));
@@ -461,12 +443,24 @@ public:
 
         gridLayout_17->addWidget(Login6, 1, 2, 1, 1);
 
-        Login3 = new QPushButton(loginNumPad);
-        Login3->setObjectName(QStringLiteral("Login3"));
-        Login3->setMinimumSize(QSize(50, 50));
-        Login3->setFont(font);
+        Login5 = new QPushButton(loginNumPad);
+        Login5->setObjectName(QStringLiteral("Login5"));
+        Login5->setMinimumSize(QSize(50, 50));
 
-        gridLayout_17->addWidget(Login3, 3, 2, 1, 1);
+        gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
+
+        Login1 = new QPushButton(loginNumPad);
+        Login1->setObjectName(QStringLiteral("Login1"));
+        Login1->setMinimumSize(QSize(50, 50));
+
+        gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
+
+        Login9 = new QPushButton(loginNumPad);
+        Login9->setObjectName(QStringLiteral("Login9"));
+        Login9->setMinimumSize(QSize(50, 50));
+        Login9->setFont(font);
+
+        gridLayout_17->addWidget(Login9, 0, 2, 1, 1);
 
         Login0 = new QPushButton(loginNumPad);
         Login0->setObjectName(QStringLiteral("Login0"));
@@ -479,6 +473,13 @@ public:
         LoginBack->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(LoginBack, 4, 1, 1, 1);
+
+        Login3 = new QPushButton(loginNumPad);
+        Login3->setObjectName(QStringLiteral("Login3"));
+        Login3->setMinimumSize(QSize(50, 50));
+        Login3->setFont(font);
+
+        gridLayout_17->addWidget(Login3, 3, 2, 1, 1);
 
         LoginGo = new QPushButton(loginNumPad);
         LoginGo->setObjectName(QStringLiteral("LoginGo"));
@@ -504,7 +505,6 @@ public:
         passEdit = new QLineEdit(loginWidget);
         passEdit->setObjectName(QStringLiteral("passEdit"));
         passEdit->setMinimumSize(QSize(0, 45));
-        passEdit->setMaximumSize(QSize(80, 16777215));
         passEdit->setFont(font);
         passEdit->setMaxLength(4);
         passEdit->setEchoMode(QLineEdit::Password);
@@ -1476,9 +1476,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(5);
+        HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
 
@@ -1489,16 +1489,16 @@ public:
     {
         MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", Q_NULLPTR));
         Login8->setText(QApplication::translate("MainForm", "8", Q_NULLPTR));
-        Login7->setText(QApplication::translate("MainForm", "7", Q_NULLPTR));
-        Login4->setText(QApplication::translate("MainForm", "4", Q_NULLPTR));
         Login2->setText(QApplication::translate("MainForm", "2", Q_NULLPTR));
-        Login1->setText(QApplication::translate("MainForm", "1", Q_NULLPTR));
-        Login5->setText(QApplication::translate("MainForm", "5", Q_NULLPTR));
-        Login9->setText(QApplication::translate("MainForm", "9", Q_NULLPTR));
+        Login4->setText(QApplication::translate("MainForm", "4", Q_NULLPTR));
+        Login7->setText(QApplication::translate("MainForm", "7", Q_NULLPTR));
         Login6->setText(QApplication::translate("MainForm", "6", Q_NULLPTR));
-        Login3->setText(QApplication::translate("MainForm", "3", Q_NULLPTR));
+        Login5->setText(QApplication::translate("MainForm", "5", Q_NULLPTR));
+        Login1->setText(QApplication::translate("MainForm", "1", Q_NULLPTR));
+        Login9->setText(QApplication::translate("MainForm", "9", Q_NULLPTR));
         Login0->setText(QApplication::translate("MainForm", "0", Q_NULLPTR));
         LoginBack->setText(QApplication::translate("MainForm", "<", Q_NULLPTR));
+        Login3->setText(QApplication::translate("MainForm", "3", Q_NULLPTR));
         LoginGo->setText(QApplication::translate("MainForm", "Go", Q_NULLPTR));
         basicPageConnect->setText(QString());
         connectionlabel->setText(QString());

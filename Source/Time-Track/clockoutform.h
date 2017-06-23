@@ -12,6 +12,10 @@
 #include <QCoreApplication>
 #include <QStyle>
 #include <QDesktopWidget>
+#include <QCompleter>
+#include <QMainWindow>
+#include <QLineEdit>
+
 
 namespace Ui {
 class ClockoutForm;
