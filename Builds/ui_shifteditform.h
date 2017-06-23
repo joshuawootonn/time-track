@@ -80,7 +80,7 @@ public:
     {
         if (ShiftEditForm->objectName().isEmpty())
             ShiftEditForm->setObjectName(QStringLiteral("ShiftEditForm"));
-        ShiftEditForm->resize(807, 424);
+        ShiftEditForm->resize(853, 454);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         ShiftEditForm->setFont(font);
@@ -90,8 +90,8 @@ public:
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 14px;\n"
-"\n"
+"font-size: 16px;\n"
+"color:#263544;\n"
 "}\n"
 "\n"
 "\n"
@@ -156,9 +156,9 @@ public:
 "border:none;\n"
 "}\n"
 "\n"
-"\n"
-"QRadioB"
-                        "utton{\n"
+""
+                        "\n"
+"QRadioButton{\n"
 "padding:0px;\n"
 "margin:0px;\n"
 "}\n"

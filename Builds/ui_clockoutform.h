@@ -31,26 +31,12 @@ class Ui_ClockoutForm
 {
 public:
     QGridLayout *gridLayout;
+    QSpacerItem *horizontalSpacer_3;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *horizontalSpacer_2;
     QWidget *bigwidger;
-    QVBoxLayout *verticalLayout_2;
+    QGridLayout *gridLayout_2;
     QHBoxLayout *horizontalLayout;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_3;
-    QComboBox *Projects;
-    QHBoxLayout *horizontalLayout_5;
-    QLabel *label_4;
-    QComboBox *Items;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *label_5;
-    QComboBox *Hours;
-    QComboBox *Minutes;
-    QHBoxLayout *horizontalLayout_8;
-    QPushButton *Add;
-    QPushButton *Delete;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *label_6;
-    QComboBox *Lunch;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
     QWidget *DescriptionWidget;
@@ -58,17 +44,39 @@ public:
     QLabel *label_2;
     QTextEdit *Description;
     QHBoxLayout *horizontalLayout_2;
+    QPushButton *FinishedButton;
+    QPushButton *CancelButton;
+    QHBoxLayout *horizontalLayout_10;
     QLabel *label;
     QLabel *timeLeft;
     QSpacerItem *horizontalSpacer;
-    QPushButton *FinishedButton;
-    QPushButton *CancelButton;
+    QHBoxLayout *horizontalLayout_4;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_5;
+    QLabel *label_7;
+    QLabel *label_6;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_9;
+    QComboBox *Projects;
+    QHBoxLayout *horizontalLayout_5;
+    QComboBox *Items;
+    QHBoxLayout *horizontalLayout_6;
+    QComboBox *Hours;
+    QComboBox *Minutes;
+    QHBoxLayout *horizontalLayout_8;
+    QPushButton *Add;
+    QPushButton *Delete;
+    QHBoxLayout *horizontalLayout_7;
+    QComboBox *Lunch;
+    QSpacerItem *verticalSpacer_2;
 
     void setupUi(QWidget *ClockoutForm)
     {
         if (ClockoutForm->objectName().isEmpty())
             ClockoutForm->setObjectName(QStringLiteral("ClockoutForm"));
-        ClockoutForm->resize(672, 370);
+        ClockoutForm->resize(811, 500);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         ClockoutForm->setFont(font);
@@ -78,7 +86,7 @@ public:
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 14px;\n"
+"font-size: 20px;\n"
 "\n"
 "}\n"
 "\n"
@@ -167,127 +175,29 @@ public:
 ""));
         gridLayout = new QGridLayout(ClockoutForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 0, 1, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
+
         bigwidger = new QWidget(ClockoutForm);
         bigwidger->setObjectName(QStringLiteral("bigwidger"));
-        verticalLayout_2 = new QVBoxLayout(bigwidger);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        gridLayout_2 = new QGridLayout(bigwidger);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        label_3 = new QLabel(bigwidger);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy);
-        label_3->setMinimumSize(QSize(100, 0));
-
-        horizontalLayout_4->addWidget(label_3);
-
-        Projects = new QComboBox(bigwidger);
-        Projects->setObjectName(QStringLiteral("Projects"));
-        Projects->setMinimumSize(QSize(200, 0));
-        Projects->setMaximumSize(QSize(200, 16777215));
-        Projects->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
-        horizontalLayout_4->addWidget(Projects);
-
-
-        verticalLayout->addLayout(horizontalLayout_4);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        label_4 = new QLabel(bigwidger);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setMinimumSize(QSize(100, 0));
-
-        horizontalLayout_5->addWidget(label_4);
-
-        Items = new QComboBox(bigwidger);
-        Items->setObjectName(QStringLiteral("Items"));
-        Items->setMinimumSize(QSize(200, 0));
-        Items->setMaximumSize(QSize(200, 16777215));
-
-        horizontalLayout_5->addWidget(Items);
-
-
-        verticalLayout->addLayout(horizontalLayout_5);
-
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        label_5 = new QLabel(bigwidger);
-        label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setMinimumSize(QSize(100, 0));
-
-        horizontalLayout_6->addWidget(label_5);
-
-        Hours = new QComboBox(bigwidger);
-        Hours->setObjectName(QStringLiteral("Hours"));
-        Hours->setMinimumSize(QSize(100, 0));
-        Hours->setMaximumSize(QSize(100, 16777215));
-
-        horizontalLayout_6->addWidget(Hours);
-
-        Minutes = new QComboBox(bigwidger);
-        Minutes->setObjectName(QStringLiteral("Minutes"));
-        Minutes->setMinimumSize(QSize(100, 0));
-        Minutes->setMaximumSize(QSize(100, 16777215));
-
-        horizontalLayout_6->addWidget(Minutes);
-
-
-        verticalLayout->addLayout(horizontalLayout_6);
-
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        Add = new QPushButton(bigwidger);
-        Add->setObjectName(QStringLiteral("Add"));
-        Add->setMinimumSize(QSize(100, 0));
-        Add->setMaximumSize(QSize(250, 16777215));
-
-        horizontalLayout_8->addWidget(Add);
-
-        Delete = new QPushButton(bigwidger);
-        Delete->setObjectName(QStringLiteral("Delete"));
-        Delete->setMinimumSize(QSize(100, 0));
-        Delete->setMaximumSize(QSize(250, 16777215));
-
-        horizontalLayout_8->addWidget(Delete);
-
-
-        verticalLayout->addLayout(horizontalLayout_8);
-
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        label_6 = new QLabel(bigwidger);
-        label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setMinimumSize(QSize(100, 0));
-
-        horizontalLayout_7->addWidget(label_6);
-
-        Lunch = new QComboBox(bigwidger);
-        Lunch->setObjectName(QStringLiteral("Lunch"));
-        Lunch->setMinimumSize(QSize(200, 0));
-        Lunch->setMaximumSize(QSize(200, 16777215));
-
-        horizontalLayout_7->addWidget(Lunch);
-
-
-        verticalLayout->addLayout(horizontalLayout_7);
-
-
-        horizontalLayout->addLayout(verticalLayout);
-
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         Sections = new QTableWidget(bigwidger);
         Sections->setObjectName(QStringLiteral("Sections"));
-        Sections->setMinimumSize(QSize(316, 0));
+        Sections->setMinimumSize(QSize(500, 0));
         Sections->verticalHeader()->setMinimumSectionSize(30);
 
         verticalLayout_3->addWidget(Sections);
@@ -316,24 +226,10 @@ public:
         horizontalLayout->addLayout(verticalLayout_3);
 
 
-        verticalLayout_2->addLayout(horizontalLayout);
+        gridLayout_2->addLayout(horizontalLayout, 0, 2, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label = new QLabel(bigwidger);
-        label->setObjectName(QStringLiteral("label"));
-
-        horizontalLayout_2->addWidget(label);
-
-        timeLeft = new QLabel(bigwidger);
-        timeLeft->setObjectName(QStringLiteral("timeLeft"));
-
-        horizontalLayout_2->addWidget(timeLeft);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
         FinishedButton = new QPushButton(bigwidger);
         FinishedButton->setObjectName(QStringLiteral("FinishedButton"));
         FinishedButton->setMinimumSize(QSize(100, 0));
@@ -347,10 +243,151 @@ public:
         horizontalLayout_2->addWidget(CancelButton);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        gridLayout_2->addLayout(horizontalLayout_2, 2, 2, 1, 1);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        label = new QLabel(bigwidger);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_10->addWidget(label);
+
+        timeLeft = new QLabel(bigwidger);
+        timeLeft->setObjectName(QStringLiteral("timeLeft"));
+
+        horizontalLayout_10->addWidget(timeLeft);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer);
 
 
-        gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
+        gridLayout_2->addLayout(horizontalLayout_10, 2, 1, 1, 1);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        label_3 = new QLabel(bigwidger);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
+        label_3->setMinimumSize(QSize(100, 0));
+
+        verticalLayout_2->addWidget(label_3);
+
+        label_4 = new QLabel(bigwidger);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setMinimumSize(QSize(100, 0));
+
+        verticalLayout_2->addWidget(label_4);
+
+        label_5 = new QLabel(bigwidger);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setMinimumSize(QSize(120, 0));
+
+        verticalLayout_2->addWidget(label_5);
+
+        label_7 = new QLabel(bigwidger);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        verticalLayout_2->addWidget(label_7);
+
+        label_6 = new QLabel(bigwidger);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setMinimumSize(QSize(100, 0));
+
+        verticalLayout_2->addWidget(label_6);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_2);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        Projects = new QComboBox(bigwidger);
+        Projects->setObjectName(QStringLiteral("Projects"));
+        Projects->setMinimumSize(QSize(200, 0));
+        Projects->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+        horizontalLayout_9->addWidget(Projects);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_9);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        Items = new QComboBox(bigwidger);
+        Items->setObjectName(QStringLiteral("Items"));
+        Items->setMinimumSize(QSize(200, 0));
+
+        horizontalLayout_5->addWidget(Items);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        Hours = new QComboBox(bigwidger);
+        Hours->setObjectName(QStringLiteral("Hours"));
+        Hours->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_6->addWidget(Hours);
+
+        Minutes = new QComboBox(bigwidger);
+        Minutes->setObjectName(QStringLiteral("Minutes"));
+        Minutes->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_6->addWidget(Minutes);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_6);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        Add = new QPushButton(bigwidger);
+        Add->setObjectName(QStringLiteral("Add"));
+        Add->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_8->addWidget(Add);
+
+        Delete = new QPushButton(bigwidger);
+        Delete->setObjectName(QStringLiteral("Delete"));
+        Delete->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_8->addWidget(Delete);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_8);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        horizontalLayout_7->setSizeConstraint(QLayout::SetDefaultConstraint);
+        Lunch = new QComboBox(bigwidger);
+        Lunch->setObjectName(QStringLiteral("Lunch"));
+        Lunch->setMinimumSize(QSize(200, 0));
+
+        horizontalLayout_7->addWidget(Lunch);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_7);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_4);
+
+
+        gridLayout_2->addLayout(horizontalLayout_4, 0, 1, 1, 1);
+
+
+        gridLayout->addWidget(bigwidger, 1, 1, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
 
         retranslateUi(ClockoutForm);
@@ -361,17 +398,18 @@ public:
     void retranslateUi(QWidget *ClockoutForm)
     {
         ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ClockoutForm", "Notes:", Q_NULLPTR));
+        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", Q_NULLPTR));
+        CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", Q_NULLPTR));
+        label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
+        timeLeft->setText(QString());
         label_3->setText(QApplication::translate("ClockoutForm", "Project:", Q_NULLPTR));
         label_4->setText(QApplication::translate("ClockoutForm", "Sub-Project:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ClockoutForm", "Time Worked:", Q_NULLPTR));
+        label_7->setText(QString());
+        label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
         Add->setText(QApplication::translate("ClockoutForm", "Add", Q_NULLPTR));
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", Q_NULLPTR));
-        label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("ClockoutForm", "Notes:", Q_NULLPTR));
-        label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
-        timeLeft->setText(QString());
-        FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", Q_NULLPTR));
-        CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

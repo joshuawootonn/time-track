@@ -237,7 +237,8 @@ public:
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 14px;\n"
+"font-size: 16px;\n"
+"color:#263544;\n"
 "\n"
 "}\n"
 "\n"
@@ -302,9 +303,9 @@ public:
 "}\n"
 "\n"
 "QPushButton#basicPageConnect:hover{\n"
-"border-radius:15px;\n"
-""
-                        "\n"
+"bord"
+                        "er-radius:15px;\n"
+"\n"
 "}\n"
 "\n"
 "QComboBox{\n"
@@ -366,7 +367,14 @@ public:
 "}\n"
 "QLineEdit{ \n"
 "background-color:#F1F4F5;\n"
+" border: 0px solid 263544;	\n"
+"font-size: 32px;\n"
 "}\n"
+"QLineEdit:hover{ \n"
+"background-color:#F1F4F5;\n"
+" border: 1px solid 263544;	\n"
+"}\n"
+"\n"
 "QPushButton:hover,QPushButton:hover{\n"
 "background-color:#ECEFED;\n"
 "}\n"
@@ -375,11 +383,13 @@ public:
 "#E5EAE7\n"
 "*/\n"
 "*{\n"
-"font-family:\"Roboto\";\n"
+"font-family:\"Calibri\";\n"
 "font-size: 19px;\n"
 "color:#263544;\n"
 "\n"
-"}"));
+"}\n"
+"\n"
+""));
         gridLayout_16 = new QGridLayout(loginPage);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
         loginWidget = new QWidget(loginPage);
@@ -389,7 +399,7 @@ public:
         loginNumPad = new QWidget(loginWidget);
         loginNumPad->setObjectName(QStringLiteral("loginNumPad"));
         QFont font;
-        font.setFamily(QStringLiteral("Roboto"));
+        font.setFamily(QStringLiteral("Calibri"));
         loginNumPad->setFont(font);
         loginNumPad->setStyleSheet(QLatin1String("QPushButton\n"
 "{\n"
@@ -717,6 +727,7 @@ public:
         groupBox->setStyleSheet(QStringLiteral(""));
         horizontalLayout_5 = new QHBoxLayout(groupBox);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(-1, 7, -1, 7);
         EmployeeAdd = new QPushButton(groupBox);
         EmployeeAdd->setObjectName(QStringLiteral("EmployeeAdd"));
 
@@ -739,6 +750,7 @@ public:
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout_8 = new QGridLayout(groupBox_2);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
+        gridLayout_8->setContentsMargins(-1, 7, -1, 7);
         EmployeeShiftCount = new QCheckBox(groupBox_2);
         EmployeeShiftCount->setObjectName(QStringLiteral("EmployeeShiftCount"));
 
@@ -784,7 +796,7 @@ public:
         verticalLayout_2 = new QVBoxLayout(groupBox_3);
         verticalLayout_2->setSpacing(2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(9, -1, -1, -1);
+        verticalLayout_2->setContentsMargins(9, 7, -1, 7);
         AllRadio = new QRadioButton(groupBox_3);
         AllRadio->setObjectName(QStringLiteral("AllRadio"));
 
@@ -830,6 +842,7 @@ public:
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
         horizontalLayout_9 = new QHBoxLayout(groupBox_6);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        horizontalLayout_9->setContentsMargins(-1, 7, -1, 7);
         ProjectAdd = new QPushButton(groupBox_6);
         ProjectAdd->setObjectName(QStringLiteral("ProjectAdd"));
 
@@ -852,6 +865,7 @@ public:
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
         gridLayout_9 = new QGridLayout(groupBox_8);
         gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
+        gridLayout_9->setContentsMargins(-1, 7, -1, 7);
         ProjectDate = new QCheckBox(groupBox_8);
         ProjectDate->setObjectName(QStringLiteral("ProjectDate"));
 
@@ -877,12 +891,11 @@ public:
 
         groupBox_9 = new QGroupBox(ProjectsSettings);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
-        QFont font1;
-        font1.setFamily(QStringLiteral("Calibri"));
-        groupBox_9->setFont(font1);
+        groupBox_9->setFont(font);
         verticalLayout_3 = new QVBoxLayout(groupBox_9);
         verticalLayout_3->setSpacing(2);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(-1, 7, -1, 7);
         ProjectAllRadio = new QRadioButton(groupBox_9);
         ProjectAllRadio->setObjectName(QStringLiteral("ProjectAllRadio"));
 
@@ -913,13 +926,14 @@ public:
         groupBox_11->setObjectName(QStringLiteral("groupBox_11"));
         gridLayout_12 = new QGridLayout(groupBox_11);
         gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
+        gridLayout_12->setContentsMargins(-1, 7, -1, 7);
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         gridLayout_23 = new QGridLayout();
         gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
-        ProjectItemCombo->setFont(font1);
+        ProjectItemCombo->setFont(font);
         ProjectItemCombo->setEditable(true);
         ProjectItemCombo->setFrame(true);
 
@@ -977,6 +991,7 @@ public:
 ""));
         gridLayout_11 = new QGridLayout(groupBox_12);
         gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        gridLayout_11->setContentsMargins(-1, 7, -1, 7);
         ProjectItemName = new QCheckBox(groupBox_12);
         ProjectItemName->setObjectName(QStringLiteral("ProjectItemName"));
 
@@ -1012,6 +1027,7 @@ public:
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
         horizontalLayout_10 = new QHBoxLayout(groupBox_7);
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        horizontalLayout_10->setContentsMargins(-1, 7, -1, 7);
         ItemAdd = new QPushButton(groupBox_7);
         ItemAdd->setObjectName(QStringLiteral("ItemAdd"));
 
@@ -1029,6 +1045,7 @@ public:
         groupBox_10->setObjectName(QStringLiteral("groupBox_10"));
         gridLayout_10 = new QGridLayout(groupBox_10);
         gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
+        gridLayout_10->setContentsMargins(-1, 7, -1, 7);
         ItemCategory = new QCheckBox(groupBox_10);
         ItemCategory->setObjectName(QStringLiteral("ItemCategory"));
 
@@ -1083,6 +1100,7 @@ public:
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         horizontalLayout_6 = new QHBoxLayout(groupBox_4);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout_6->setContentsMargins(-1, 7, -1, 7);
         ShiftAdd = new QPushButton(groupBox_4);
         ShiftAdd->setObjectName(QStringLiteral("ShiftAdd"));
 
@@ -1106,9 +1124,10 @@ public:
         gridLayout = new QGridLayout(groupBox_5);
         gridLayout->setSpacing(2);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(-1, 7, -1, 7);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        ShiftEmployeeCombo->setFont(font1);
+        ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setEditable(true);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1116,7 +1135,7 @@ public:
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font1);
+        ShiftProjectCombo->setFont(font);
         ShiftProjectCombo->setEditable(true);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1129,7 +1148,7 @@ public:
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font1);
+        ShiftItemCombo->setFont(font);
         ShiftItemCombo->setEditable(true);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1167,6 +1186,7 @@ public:
         groupBox_13->setObjectName(QStringLiteral("groupBox_13"));
         gridLayout_13 = new QGridLayout(groupBox_13);
         gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
+        gridLayout_13->setContentsMargins(-1, 7, -1, 7);
         ShiftDate1 = new QDateEdit(groupBox_13);
         ShiftDate1->setObjectName(QStringLiteral("ShiftDate1"));
         ShiftDate1->setCalendarPopup(true);
@@ -1297,6 +1317,7 @@ public:
         SettingsConnectionGroup->setObjectName(QStringLiteral("SettingsConnectionGroup"));
         gridLayout_19 = new QGridLayout(SettingsConnectionGroup);
         gridLayout_19->setObjectName(QStringLiteral("gridLayout_19"));
+        gridLayout_19->setContentsMargins(-1, 7, -1, 7);
         SettingsConnections = new QPushButton(SettingsConnectionGroup);
         SettingsConnections->setObjectName(QStringLiteral("SettingsConnections"));
 
@@ -1309,6 +1330,7 @@ public:
         groupBox_18->setObjectName(QStringLiteral("groupBox_18"));
         gridLayout_20 = new QGridLayout(groupBox_18);
         gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
+        gridLayout_20->setContentsMargins(-1, 7, -1, 7);
         SettingsExport = new QPushButton(groupBox_18);
         SettingsExport->setObjectName(QStringLiteral("SettingsExport"));
 
@@ -1321,6 +1343,7 @@ public:
         groupBox_19->setObjectName(QStringLiteral("groupBox_19"));
         gridLayout_21 = new QGridLayout(groupBox_19);
         gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
+        gridLayout_21->setContentsMargins(-1, 7, -1, 7);
         SettingsPrint = new QPushButton(groupBox_19);
         SettingsPrint->setObjectName(QStringLiteral("SettingsPrint"));
 
@@ -1333,6 +1356,7 @@ public:
         groupBox_20->setObjectName(QStringLiteral("groupBox_20"));
         gridLayout_22 = new QGridLayout(groupBox_20);
         gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
+        gridLayout_22->setContentsMargins(-1, 7, -1, 7);
         SettingsAll = new QPushButton(groupBox_20);
         SettingsAll->setObjectName(QStringLiteral("SettingsAll"));
 
@@ -1454,7 +1478,7 @@ public:
 
         mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(5);
         EmployeeAdd->setDefault(false);
 
 

@@ -243,6 +243,10 @@ private:
     QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
 
+
+    QString router = "192.168.41.187";
+    QString extender = "192.168.0.10";
+
     ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;

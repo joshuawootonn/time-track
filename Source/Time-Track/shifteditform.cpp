@@ -108,6 +108,7 @@ QDateTime ShiftEditForm::format_datetimes(QDateTime z)
  * The third for editing a working shift. */
 void ShiftEditForm::AddShift(){
     this->showNormal();
+    deactivate = false;
 
 
     EmployeeInitialize();
@@ -134,6 +135,7 @@ void ShiftEditForm::AddShift(){
 
 }
 void ShiftEditForm::EditFinishedShift(QString shiftid){
+    deactivate = false;
     this->showNormal();
     shiftId = shiftid;
     EmployeeInitialize();
@@ -210,7 +212,7 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
 }
 void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     this->showNormal();
-
+    deactivate = true;
     shiftId= shiftid;
     EmployeeInitialize();
     ProjectInitialize();
@@ -572,9 +574,6 @@ bool ShiftEditForm::getSuccess() const
 
 void ShiftEditForm::on_FinishedButton_clicked()
 {
-
-
-
     QSqlQuery* qry=new QSqlQuery(data);
     QString employeeid,employeename;
 
@@ -650,10 +649,12 @@ void ShiftEditForm::on_FinishedButton_clicked()
     }
 
 
+    if(deactivate){
+        qry->clear();
+        qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+        qry->exec();
+    }
 
-    qry->clear();
-    qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
-    qry->exec();
     this->hide();
 
     emit finished();

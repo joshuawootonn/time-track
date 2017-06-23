@@ -25,7 +25,6 @@ public:
     explicit ClockoutForm(QWidget *parent = 0);
     ~ClockoutForm();
     void ClockoutInitialize(QString i);
-
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
@@ -39,11 +38,8 @@ private slots:
     void on_Sections_cellChanged();
     void on_Lunch_currentTextChanged(const QString &arg1);
     void on_Description_textChanged();
-
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
-
-
 
 signals:
     void finished();

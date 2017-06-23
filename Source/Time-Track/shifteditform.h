@@ -68,6 +68,7 @@ private slots:
 signals:
     void finished();
 private:
+    bool deactivate;
     Ui::ShiftEditForm *ui;
     QString shiftId;
     QSqlDatabase data;

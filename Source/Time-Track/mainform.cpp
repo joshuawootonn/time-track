@@ -12,10 +12,10 @@ MainForm::MainForm(QWidget *parent) :
 
 
 
-    if (Connect("192.168.41.187"))
-        qDebug()<<"Connected to 187!";
-    else if (Connect("192.168.0.10"))
-        qDebug()<<"Connected to 10!";
+    if (Connect(router))
+        this->showMaximized();
+    else if (Connect(extender))
+        this->showFullScreen();
     else
         qDebug()<<"Unable to connect!";
 
@@ -427,43 +427,34 @@ void MainForm::on_Login0_clicked()
     ui->passEdit->setText(ui->passEdit->text()+"0");
 
 }
-
-
 void MainForm::on_Login1_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"1");
 }
-
 void MainForm::on_Login2_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"2");
 }
-
 void MainForm::on_Login3_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"3");
 }
-
 void MainForm::on_Login4_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"4");
 }
-
 void MainForm::on_Login5_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"5");
 }
-
 void MainForm::on_Login6_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"6");
 }
-
 void MainForm::on_Login7_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"7");
 }
-
 void MainForm::on_Login8_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"8");
@@ -472,7 +463,6 @@ void MainForm::on_Login9_clicked()
 {
     ui->passEdit->setText(ui->passEdit->text()+"9");
 }
-
 void MainForm::on_LoginBack_clicked()
 {
     ui->passEdit->setText("");
@@ -582,7 +572,12 @@ void MainForm::on_basicPageClockOut_clicked()
 
     clockoutForm = new ClockoutForm(this);
     establishConnections();
+    if(data.hostName() == router)
+        clockoutForm->showMaximized();
+    else
+        clockoutForm->showFullScreen();
     clockoutForm->ClockoutInitialize(id);
+
 }
 void MainForm::on_basicPageConnect_clicked()
 {

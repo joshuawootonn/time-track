@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>807</width>
-    <height>424</height>
+    <width>853</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="font">
@@ -26,8 +26,8 @@ background-color:#E5EAE7;
 }
 *{
 font-family:&quot;Calibri&quot;;
-font-size: 14px;
-
+font-size: 16px;
+color:#263544;
 }
 
 

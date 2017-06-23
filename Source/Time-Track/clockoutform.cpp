@@ -85,7 +85,7 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 
 /* This function is for ininializing this dialog  */
 void ClockoutForm::ClockoutInitialize(QString i){
-    this->showNormal();
+
     id=i;
     ProjectInitialize();
     ItemInitialize();
@@ -162,7 +162,7 @@ void ClockoutForm::TimesInitialize(){
     ui->Lunch->addItem("01:00");
     qDebug()<<"1";
     qry->clear();
-    qry->prepare("Select time from timelist where idtimelist >= 5 ORDER BY time");
+    qry->prepare("Select time from timelist where idtimelist >= 4 ORDER BY time");
     if(qry->exec())
     {
            while(qry->next())
@@ -341,7 +341,6 @@ void ClockoutForm::on_Lunch_currentTextChanged(const QString &arg1)
 {
     TimeLeft();
 }
-
 void ClockoutForm::on_Description_textChanged()
 {
     TimeLeft();

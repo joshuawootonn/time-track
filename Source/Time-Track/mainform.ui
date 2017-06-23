@@ -20,7 +20,8 @@ background-color:#E5EAE7;
 }
 *{
 font-family:&quot;Calibri&quot;;
-font-size: 14px;
+font-size: 16px;
+color:#263544;
 
 }
 
@@ -153,7 +154,14 @@ background-color:#F1F4F5;
 }
 QLineEdit{ 
 background-color:#F1F4F5;
+ border: 0px solid 263544;	
+font-size: 32px;
 }
+QLineEdit:hover{ 
+background-color:#F1F4F5;
+ border: 1px solid 263544;	
+}
+
 QPushButton:hover,QPushButton:hover{
 background-color:#ECEFED;
 }
@@ -162,11 +170,13 @@ background-color:#ECEFED;
 #E5EAE7
 */
 *{
-font-family:&quot;Roboto&quot;;
+font-family:&quot;Calibri&quot;;
 font-size: 19px;
 color:#263544;
 
-}</string>
+}
+
+</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_16">
        <item row="1" column="2">
@@ -176,7 +186,7 @@ color:#263544;
            <widget class="QWidget" name="loginNumPad" native="true">
             <property name="font">
              <font>
-              <family>Roboto</family>
+              <family>Calibri</family>
               <pointsize>-1</pointsize>
              </font>
             </property>
@@ -279,7 +289,7 @@ width: 120px;/for example/
                </property>
                <property name="font">
                 <font>
-                 <family>Roboto</family>
+                 <family>Calibri</family>
                  <pointsize>-1</pointsize>
                 </font>
                </property>
@@ -298,7 +308,7 @@ width: 120px;/for example/
                </property>
                <property name="font">
                 <font>
-                 <family>Roboto</family>
+                 <family>Calibri</family>
                  <pointsize>-1</pointsize>
                 </font>
                </property>
@@ -317,7 +327,7 @@ width: 120px;/for example/
                </property>
                <property name="font">
                 <font>
-                 <family>Roboto</family>
+                 <family>Calibri</family>
                  <pointsize>-1</pointsize>
                 </font>
                </property>
@@ -400,7 +410,7 @@ width: 120px;/for example/
               </property>
               <property name="font">
                <font>
-                <family>Roboto</family>
+                <family>Calibri</family>
                 <pointsize>-1</pointsize>
                </font>
               </property>
@@ -813,7 +823,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>5</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -885,6 +895,12 @@ background-color:#FE938C;
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item>
                <widget class="QPushButton" name="EmployeeAdd">
                 <property name="text">
@@ -918,6 +934,12 @@ background-color:#FE938C;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="2">
                <widget class="QCheckBox" name="EmployeeShiftCount">
                 <property name="text">
@@ -987,6 +1009,12 @@ background-color:#FE938C;
               </property>
               <property name="leftMargin">
                <number>9</number>
+              </property>
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
               </property>
               <item>
                <widget class="QRadioButton" name="AllRadio">
@@ -1067,6 +1095,12 @@ background-color:#B19994;
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item>
                <widget class="QPushButton" name="ProjectAdd">
                 <property name="text">
@@ -1097,6 +1131,12 @@ background-color:#B19994;
               <string>Project Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_9">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="2" column="1">
                <widget class="QCheckBox" name="ProjectDate">
                 <property name="text">
@@ -1142,6 +1182,12 @@ background-color:#B19994;
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <property name="spacing">
                <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
               </property>
               <item>
                <widget class="QRadioButton" name="ProjectAllRadio">
@@ -1199,6 +1245,12 @@ background-color:#B19994;
               <string>Options</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_12">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="1" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_14">
                 <item>
@@ -1277,6 +1329,12 @@ background-color:#837F9A;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="1" column="0">
                <widget class="QCheckBox" name="ProjectItemName">
                 <property name="text">
@@ -1335,6 +1393,12 @@ background-color:#837F9A;
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item>
                <widget class="QPushButton" name="ItemAdd">
                 <property name="text">
@@ -1358,6 +1422,12 @@ background-color:#837F9A;
               <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_10">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="1">
                <widget class="QCheckBox" name="ItemCategory">
                 <property name="text">
@@ -1450,6 +1520,12 @@ background-color:#8DAA91;
               <string>Options</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item>
                <widget class="QPushButton" name="ShiftAdd">
                 <property name="text">
@@ -1480,6 +1556,12 @@ background-color:#8DAA91;
               <string>Display By</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <property name="spacing">
                <number>2</number>
               </property>
@@ -1582,6 +1664,12 @@ background-color:#8DAA91;
               <string>Time</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_13">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="1">
                <widget class="QDateEdit" name="ShiftDate1">
                 <property name="calendarPopup">
@@ -1802,6 +1890,12 @@ border-image: url(..Icons/connect.png); }
               <string>Connections</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_19">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsConnections">
                 <property name="text">
@@ -1818,6 +1912,12 @@ border-image: url(..Icons/connect.png); }
               <string>Export</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_20">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsExport">
                 <property name="text">
@@ -1834,6 +1934,12 @@ border-image: url(..Icons/connect.png); }
               <string>Printing</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_21">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsPrint">
                 <property name="text">
@@ -1850,6 +1956,12 @@ border-image: url(..Icons/connect.png); }
               <string>All Settings</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_22">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsAll">
                 <property name="text">
