@@ -22,7 +22,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
-#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -44,13 +43,14 @@ public:
     QComboBox *Items;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_5;
-    QTimeEdit *Times;
+    QComboBox *Hours;
+    QComboBox *Minutes;
     QHBoxLayout *horizontalLayout_8;
     QPushButton *Add;
     QPushButton *Delete;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_6;
-    QTimeEdit *Lunch;
+    QComboBox *Lunch;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
     QWidget *DescriptionWidget;
@@ -226,13 +226,19 @@ public:
 
         horizontalLayout_6->addWidget(label_5);
 
-        Times = new QTimeEdit(bigwidger);
-        Times->setObjectName(QStringLiteral("Times"));
-        Times->setMinimumSize(QSize(200, 0));
-        Times->setMaximumSize(QSize(200, 16777215));
-        Times->setCurrentSection(QDateTimeEdit::HourSection);
+        Hours = new QComboBox(bigwidger);
+        Hours->setObjectName(QStringLiteral("Hours"));
+        Hours->setMinimumSize(QSize(100, 0));
+        Hours->setMaximumSize(QSize(100, 16777215));
 
-        horizontalLayout_6->addWidget(Times);
+        horizontalLayout_6->addWidget(Hours);
+
+        Minutes = new QComboBox(bigwidger);
+        Minutes->setObjectName(QStringLiteral("Minutes"));
+        Minutes->setMinimumSize(QSize(100, 0));
+        Minutes->setMaximumSize(QSize(100, 16777215));
+
+        horizontalLayout_6->addWidget(Minutes);
 
 
         verticalLayout->addLayout(horizontalLayout_6);
@@ -264,7 +270,7 @@ public:
 
         horizontalLayout_7->addWidget(label_6);
 
-        Lunch = new QTimeEdit(bigwidger);
+        Lunch = new QComboBox(bigwidger);
         Lunch->setObjectName(QStringLiteral("Lunch"));
         Lunch->setMinimumSize(QSize(200, 0));
         Lunch->setMaximumSize(QSize(200, 16777215));
@@ -358,11 +364,9 @@ public:
         label_3->setText(QApplication::translate("ClockoutForm", "Project:", Q_NULLPTR));
         label_4->setText(QApplication::translate("ClockoutForm", "Sub-Project:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ClockoutForm", "Time Worked:", Q_NULLPTR));
-        Times->setDisplayFormat(QApplication::translate("ClockoutForm", "hh:mm", Q_NULLPTR));
         Add->setText(QApplication::translate("ClockoutForm", "Add", Q_NULLPTR));
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", Q_NULLPTR));
         label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
-        Lunch->setDisplayFormat(QApplication::translate("ClockoutForm", "hh:mm", Q_NULLPTR));
         label_2->setText(QApplication::translate("ClockoutForm", "Notes:", Q_NULLPTR));
         label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());

@@ -30,7 +30,6 @@ public:
     void ItemInitialize();
     void TimesInitialize();
     void TimeLeft();
-    void LunchInitialize();
 
 private slots:    
     void on_Projects_currentIndexChanged(const QString &arg);
@@ -45,8 +44,6 @@ private slots:
     void on_CancelButton_clicked();
 
 
-
-    void on_Lunch_timeChanged(const QTime &time);
 
 signals:
     void finished();

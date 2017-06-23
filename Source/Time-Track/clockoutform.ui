@@ -215,24 +215,34 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QTimeEdit" name="Times">
+             <widget class="QComboBox" name="Hours">
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>100</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>200</width>
+                <width>100</width>
                 <height>16777215</height>
                </size>
               </property>
-              <property name="currentSection">
-               <enum>QDateTimeEdit::HourSection</enum>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="Minutes">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
               </property>
-              <property name="displayFormat">
-               <string>hh:mm</string>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -296,7 +306,7 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QTimeEdit" name="Lunch">
+             <widget class="QComboBox" name="Lunch">
               <property name="minimumSize">
                <size>
                 <width>200</width>
@@ -308,9 +318,6 @@ QGroupBox::title {
                 <width>200</width>
                 <height>16777215</height>
                </size>
-              </property>
-              <property name="displayFormat">
-               <string>hh:mm</string>
               </property>
              </widget>
             </item>
