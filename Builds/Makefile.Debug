@@ -17,7 +17,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -pipe -g -std=gnu++11 -Wextra -Wall -
 INCPATH       = -I..\Source\Time-Track -I. -I..\Source -I..\Source\Time-Track\excel_stuff -IC:\Qt\5.9\mingw53_32\include -IC:\Qt\5.9\mingw53_32\include\QtWidgets -IC:\Qt\5.9\mingw53_32\include\QtGui\5.9.0 -IC:\Qt\5.9\mingw53_32\include\QtGui\5.9.0\QtGui -IC:\Qt\5.9\mingw53_32\include\QtGui -IC:\Qt\5.9\mingw53_32\include\QtANGLE -IC:\Qt\5.9\mingw53_32\include\QtSql -IC:\Qt\5.9\mingw53_32\include\QtCore\5.9.0 -IC:\Qt\5.9\mingw53_32\include\QtCore\5.9.0\QtCore -IC:\Qt\5.9\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\5.9\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LC:\Qt\5.9\mingw53_32\lib C:\Qt\5.9\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 -L"C:\Users\Joshua\Dropbox\Joshua's Tasks\Time-Track\Source\lib" -llibmysql C:\Qt\5.9\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.9\mingw53_32\lib\libQt5Guid.a C:\Qt\5.9\mingw53_32\lib\libQt5Sqld.a C:\Qt\5.9\mingw53_32\lib\libQt5Cored.a debug\Time_resource_res.o 
+LIBS        =        -lmingw32 -LC:\Qt\5.9\mingw53_32\lib C:\Qt\5.9\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 -LC:\Users\Joshua\Dropbox\Joshua\Time-Track\Source\lib -llibmysql C:\Qt\5.9\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.9\mingw53_32\lib\libQt5Guid.a C:\Qt\5.9\mingw53_32\lib\libQt5Sqld.a C:\Qt\5.9\mingw53_32\lib\libQt5Cored.a debug\Time_resource_res.o 
 QMAKE         = C:\Qt\5.9\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -46,12 +46,12 @@ OBJECTS_DIR   = debug
 
 ####### Files
 
-SOURCES       = ..\Source\Time-Track\main.cpp \
-		..\Source\Time-Track\mainform.cpp \
+SOURCES       = ..\Source\Time-Track\mainform.cpp \
 		..\Source\Time-Track\clockoutform.cpp \
 		..\Source\Time-Track\shifteditform.cpp \
 		..\Source\Time-Track\connectionform.cpp \
 		..\Source\Time-Track\exportform.cpp \
+		..\Source\Time-Track\main.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxdocpropscore.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxdocpropsapp.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxrelationships.cpp \
@@ -82,18 +82,19 @@ SOURCES       = ..\Source\Time-Track\main.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxchart.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile.cpp \
-		..\Source\Time-Track\excel_stuff\xlsxcellformula.cpp debug\moc_mainform.cpp \
+		..\Source\Time-Track\excel_stuff\xlsxcellformula.cpp debug\qrc_fonts.cpp \
+		debug\moc_mainform.cpp \
 		debug\moc_clockoutform.cpp \
 		debug\moc_shifteditform.cpp \
 		debug\moc_connectionform.cpp \
 		debug\moc_exportform.cpp \
 		debug\moc_xlsxdocument.cpp
-OBJECTS       = debug/main.o \
-		debug/mainform.o \
+OBJECTS       = debug/mainform.o \
 		debug/clockoutform.o \
 		debug/shifteditform.o \
 		debug/connectionform.o \
 		debug/exportform.o \
+		debug/main.o \
 		debug/xlsxdocpropscore.o \
 		debug/xlsxdocpropsapp.o \
 		debug/xlsxrelationships.o \
@@ -125,6 +126,7 @@ OBJECTS       = debug/main.o \
 		debug/xlsxchart.o \
 		debug/xlsxsimpleooxmlfile.o \
 		debug/xlsxcellformula.o \
+		debug/qrc_fonts.o \
 		debug/moc_mainform.o \
 		debug/moc_clockoutform.o \
 		debug/moc_shifteditform.o \
@@ -181,12 +183,12 @@ DIST          = ../../Qss/default.qss ..\Source\Time-Track\mainform.h \
 		..\Source\Time-Track\excel_stuff\xlsxchart_p.h \
 		..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile_p.h \
 		..\Source\Time-Track\excel_stuff\xlsxcellformula.h \
-		..\Source\Time-Track\excel_stuff\xlsxcellformula_p.h ..\Source\Time-Track\main.cpp \
-		..\Source\Time-Track\mainform.cpp \
+		..\Source\Time-Track\excel_stuff\xlsxcellformula_p.h ..\Source\Time-Track\mainform.cpp \
 		..\Source\Time-Track\clockoutform.cpp \
 		..\Source\Time-Track\shifteditform.cpp \
 		..\Source\Time-Track\connectionform.cpp \
 		..\Source\Time-Track\exportform.cpp \
+		..\Source\Time-Track\main.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxdocpropscore.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxdocpropsapp.cpp \
 		..\Source\Time-Track\excel_stuff\xlsxrelationships.cpp \
@@ -240,10 +242,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Time Track.zip $(SOURCES) $(DIST) "..\Source\Time-Track\Time Track.pro" C:\Qt\5.9\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.9\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.9\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.9\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.9\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.9\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.9\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.9\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.9\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.9\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.9\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.9\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.9\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.9\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\default_pre.prf ..\Source\Time-Track\excel_stuff\qtxlsx.pri C:\Qt\5.9\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.9\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.9\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.9\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.9\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.9\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.9\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.9\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.9\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.9\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.9\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.9\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.9\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.9\mingw53_32\mkspecs\features\lex.prf "..\Source\Time-Track\Time Track.pro" C:\Qt\5.9\mingw53_32\lib\qtmaind.prl C:\Qt\5.9\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.9\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.9\mingw53_32\lib\Qt5Sqld.prl C:\Qt\5.9\mingw53_32\lib\Qt5Cored.prl    C:\Qt\5.9\mingw53_32\mkspecs\features\data\dummy.cpp ..\Source\Time-Track\mainform.h ..\Source\Time-Track\clockoutform.h ..\Source\Time-Track\shifteditform.h ..\Source\Time-Track\connectionform.h ..\Source\Time-Track\exportform.h ..\Source\Time-Track\excel_stuff\xlsxdocpropscore_p.h ..\Source\Time-Track\excel_stuff\xlsxdocpropsapp_p.h ..\Source\Time-Track\excel_stuff\xlsxrelationships_p.h ..\Source\Time-Track\excel_stuff\xlsxutility_p.h ..\Source\Time-Track\excel_stuff\xlsxsharedstrings_p.h ..\Source\Time-Track\excel_stuff\xlsxcontenttypes_p.h ..\Source\Time-Track\excel_stuff\xlsxtheme_p.h ..\Source\Time-Track\excel_stuff\xlsxformat.h ..\Source\Time-Track\excel_stuff\xlsxworkbook.h ..\Source\Time-Track\excel_stuff\xlsxstyles_p.h ..\Source\Time-Track\excel_stuff\xlsxabstractsheet.h ..\Source\Time-Track\excel_stuff\xlsxabstractsheet_p.h ..\Source\Time-Track\excel_stuff\xlsxworksheet.h ..\Source\Time-Track\excel_stuff\xlsxworksheet_p.h ..\Source\Time-Track\excel_stuff\xlsxchartsheet.h ..\Source\Time-Track\excel_stuff\xlsxchartsheet_p.h ..\Source\Time-Track\excel_stuff\xlsxzipwriter_p.h ..\Source\Time-Track\excel_stuff\xlsxworkbook_p.h ..\Source\Time-Track\excel_stuff\xlsxformat_p.h ..\Source\Time-Track\excel_stuff\xlsxglobal.h ..\Source\Time-Track\excel_stuff\xlsxdrawing_p.h ..\Source\Time-Track\excel_stuff\xlsxzipreader_p.h ..\Source\Time-Track\excel_stuff\xlsxdocument.h ..\Source\Time-Track\excel_stuff\xlsxdocument_p.h ..\Source\Time-Track\excel_stuff\xlsxcell.h ..\Source\Time-Track\excel_stuff\xlsxcell_p.h ..\Source\Time-Track\excel_stuff\xlsxdatavalidation.h ..\Source\Time-Track\excel_stuff\xlsxdatavalidation_p.h ..\Source\Time-Track\excel_stuff\xlsxcellreference.h ..\Source\Time-Track\excel_stuff\xlsxcellrange.h ..\Source\Time-Track\excel_stuff\xlsxrichstring_p.h ..\Source\Time-Track\excel_stuff\xlsxrichstring.h ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting.h ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting_p.h ..\Source\Time-Track\excel_stuff\xlsxcolor_p.h ..\Source\Time-Track\excel_stuff\xlsxnumformatparser_p.h ..\Source\Time-Track\excel_stuff\xlsxdrawinganchor_p.h ..\Source\Time-Track\excel_stuff\xlsxmediafile_p.h ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile.h ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile_p.h ..\Source\Time-Track\excel_stuff\xlsxchart.h ..\Source\Time-Track\excel_stuff\xlsxchart_p.h ..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile_p.h ..\Source\Time-Track\excel_stuff\xlsxcellformula.h ..\Source\Time-Track\excel_stuff\xlsxcellformula_p.h ..\Source\Time-Track\main.cpp ..\Source\Time-Track\mainform.cpp ..\Source\Time-Track\clockoutform.cpp ..\Source\Time-Track\shifteditform.cpp ..\Source\Time-Track\connectionform.cpp ..\Source\Time-Track\exportform.cpp ..\Source\Time-Track\excel_stuff\xlsxdocpropscore.cpp ..\Source\Time-Track\excel_stuff\xlsxdocpropsapp.cpp ..\Source\Time-Track\excel_stuff\xlsxrelationships.cpp ..\Source\Time-Track\excel_stuff\xlsxutility.cpp ..\Source\Time-Track\excel_stuff\xlsxsharedstrings.cpp ..\Source\Time-Track\excel_stuff\xlsxcontenttypes.cpp ..\Source\Time-Track\excel_stuff\xlsxtheme.cpp ..\Source\Time-Track\excel_stuff\xlsxformat.cpp ..\Source\Time-Track\excel_stuff\xlsxstyles.cpp ..\Source\Time-Track\excel_stuff\xlsxworkbook.cpp ..\Source\Time-Track\excel_stuff\xlsxabstractsheet.cpp ..\Source\Time-Track\excel_stuff\xlsxworksheet.cpp ..\Source\Time-Track\excel_stuff\xlsxchartsheet.cpp ..\Source\Time-Track\excel_stuff\xlsxzipwriter.cpp ..\Source\Time-Track\excel_stuff\xlsxdrawing.cpp ..\Source\Time-Track\excel_stuff\xlsxzipreader.cpp ..\Source\Time-Track\excel_stuff\xlsxdocument.cpp ..\Source\Time-Track\excel_stuff\xlsxcell.cpp ..\Source\Time-Track\excel_stuff\xlsxdatavalidation.cpp ..\Source\Time-Track\excel_stuff\xlsxcellreference.cpp ..\Source\Time-Track\excel_stuff\xlsxcellrange.cpp ..\Source\Time-Track\excel_stuff\xlsxrichstring.cpp ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting.cpp ..\Source\Time-Track\excel_stuff\xlsxcolor.cpp ..\Source\Time-Track\excel_stuff\xlsxnumformatparser.cpp ..\Source\Time-Track\excel_stuff\xlsxdrawinganchor.cpp ..\Source\Time-Track\excel_stuff\xlsxmediafile.cpp ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile.cpp ..\Source\Time-Track\excel_stuff\xlsxchart.cpp ..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile.cpp ..\Source\Time-Track\excel_stuff\xlsxcellformula.cpp ..\Source\Time-Track\mainform.ui ..\Source\Time-Track\clockoutform.ui ..\Source\Time-Track\shifteditform.ui ..\Source\Time-Track\connectionform.ui ..\Source\Time-Track\exportform.ui    
+	$(ZIP) Time Track.zip $(SOURCES) $(DIST) "..\Source\Source\Time-Track\Time Track.pro" C:\Qt\5.9\mingw53_32\mkspecs\features\spec_pre.prf C:\Qt\5.9\mingw53_32\mkspecs\qdevice.pri C:\Qt\5.9\mingw53_32\mkspecs\features\device_config.prf C:\Qt\5.9\mingw53_32\mkspecs\common\g++-base.conf C:\Qt\5.9\mingw53_32\mkspecs\common\angle.conf C:\Qt\5.9\mingw53_32\mkspecs\common\sanitize.conf C:\Qt\5.9\mingw53_32\mkspecs\common\gcc-base.conf C:\Qt\5.9\mingw53_32\mkspecs\qconfig.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_charts.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_location.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_repparser.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scxml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.9\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.9\mingw53_32\mkspecs\features\qt_functions.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qt_config.prf C:\Qt\5.9\mingw53_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.9\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\5.9\mingw53_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.9\mingw53_32\mkspecs\features\toolchain.prf C:\Qt\5.9\mingw53_32\mkspecs\features\default_pre.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\default_pre.prf ..\Source\Time-Track\excel_stuff\qtxlsx.pri C:\Qt\5.9\mingw53_32\mkspecs\features\resolve_config.prf C:\Qt\5.9\mingw53_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.9\mingw53_32\mkspecs\features\default_post.prf C:\Qt\5.9\mingw53_32\mkspecs\features\build_pass.prf C:\Qt\5.9\mingw53_32\mkspecs\features\precompile_header.prf C:\Qt\5.9\mingw53_32\mkspecs\features\warn_on.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qt.prf C:\Qt\5.9\mingw53_32\mkspecs\features\resources.prf C:\Qt\5.9\mingw53_32\mkspecs\features\moc.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\opengl.prf C:\Qt\5.9\mingw53_32\mkspecs\features\uic.prf C:\Qt\5.9\mingw53_32\mkspecs\features\qmake_use.prf C:\Qt\5.9\mingw53_32\mkspecs\features\file_copies.prf C:\Qt\5.9\mingw53_32\mkspecs\features\win32\windows.prf C:\Qt\5.9\mingw53_32\mkspecs\features\testcase_targets.prf C:\Qt\5.9\mingw53_32\mkspecs\features\exceptions.prf C:\Qt\5.9\mingw53_32\mkspecs\features\yacc.prf C:\Qt\5.9\mingw53_32\mkspecs\features\lex.prf "..\Source\Time-Track\Time Track.pro" ..\Source\Time-Track\fonts.qrc C:\Qt\5.9\mingw53_32\lib\qtmaind.prl C:\Qt\5.9\mingw53_32\lib\Qt5Widgetsd.prl C:\Qt\5.9\mingw53_32\lib\Qt5Guid.prl C:\Qt\5.9\mingw53_32\lib\Qt5Sqld.prl C:\Qt\5.9\mingw53_32\lib\Qt5Cored.prl   ..\Source\Time-Track\fonts.qrc C:\Qt\5.9\mingw53_32\mkspecs\features\data\dummy.cpp ..\Source\Time-Track\mainform.h ..\Source\Time-Track\clockoutform.h ..\Source\Time-Track\shifteditform.h ..\Source\Time-Track\connectionform.h ..\Source\Time-Track\exportform.h ..\Source\Time-Track\excel_stuff\xlsxdocpropscore_p.h ..\Source\Time-Track\excel_stuff\xlsxdocpropsapp_p.h ..\Source\Time-Track\excel_stuff\xlsxrelationships_p.h ..\Source\Time-Track\excel_stuff\xlsxutility_p.h ..\Source\Time-Track\excel_stuff\xlsxsharedstrings_p.h ..\Source\Time-Track\excel_stuff\xlsxcontenttypes_p.h ..\Source\Time-Track\excel_stuff\xlsxtheme_p.h ..\Source\Time-Track\excel_stuff\xlsxformat.h ..\Source\Time-Track\excel_stuff\xlsxworkbook.h ..\Source\Time-Track\excel_stuff\xlsxstyles_p.h ..\Source\Time-Track\excel_stuff\xlsxabstractsheet.h ..\Source\Time-Track\excel_stuff\xlsxabstractsheet_p.h ..\Source\Time-Track\excel_stuff\xlsxworksheet.h ..\Source\Time-Track\excel_stuff\xlsxworksheet_p.h ..\Source\Time-Track\excel_stuff\xlsxchartsheet.h ..\Source\Time-Track\excel_stuff\xlsxchartsheet_p.h ..\Source\Time-Track\excel_stuff\xlsxzipwriter_p.h ..\Source\Time-Track\excel_stuff\xlsxworkbook_p.h ..\Source\Time-Track\excel_stuff\xlsxformat_p.h ..\Source\Time-Track\excel_stuff\xlsxglobal.h ..\Source\Time-Track\excel_stuff\xlsxdrawing_p.h ..\Source\Time-Track\excel_stuff\xlsxzipreader_p.h ..\Source\Time-Track\excel_stuff\xlsxdocument.h ..\Source\Time-Track\excel_stuff\xlsxdocument_p.h ..\Source\Time-Track\excel_stuff\xlsxcell.h ..\Source\Time-Track\excel_stuff\xlsxcell_p.h ..\Source\Time-Track\excel_stuff\xlsxdatavalidation.h ..\Source\Time-Track\excel_stuff\xlsxdatavalidation_p.h ..\Source\Time-Track\excel_stuff\xlsxcellreference.h ..\Source\Time-Track\excel_stuff\xlsxcellrange.h ..\Source\Time-Track\excel_stuff\xlsxrichstring_p.h ..\Source\Time-Track\excel_stuff\xlsxrichstring.h ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting.h ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting_p.h ..\Source\Time-Track\excel_stuff\xlsxcolor_p.h ..\Source\Time-Track\excel_stuff\xlsxnumformatparser_p.h ..\Source\Time-Track\excel_stuff\xlsxdrawinganchor_p.h ..\Source\Time-Track\excel_stuff\xlsxmediafile_p.h ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile.h ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile_p.h ..\Source\Time-Track\excel_stuff\xlsxchart.h ..\Source\Time-Track\excel_stuff\xlsxchart_p.h ..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile_p.h ..\Source\Time-Track\excel_stuff\xlsxcellformula.h ..\Source\Time-Track\excel_stuff\xlsxcellformula_p.h ..\Source\Time-Track\mainform.cpp ..\Source\Time-Track\clockoutform.cpp ..\Source\Time-Track\shifteditform.cpp ..\Source\Time-Track\connectionform.cpp ..\Source\Time-Track\exportform.cpp ..\Source\Time-Track\main.cpp ..\Source\Time-Track\excel_stuff\xlsxdocpropscore.cpp ..\Source\Time-Track\excel_stuff\xlsxdocpropsapp.cpp ..\Source\Time-Track\excel_stuff\xlsxrelationships.cpp ..\Source\Time-Track\excel_stuff\xlsxutility.cpp ..\Source\Time-Track\excel_stuff\xlsxsharedstrings.cpp ..\Source\Time-Track\excel_stuff\xlsxcontenttypes.cpp ..\Source\Time-Track\excel_stuff\xlsxtheme.cpp ..\Source\Time-Track\excel_stuff\xlsxformat.cpp ..\Source\Time-Track\excel_stuff\xlsxstyles.cpp ..\Source\Time-Track\excel_stuff\xlsxworkbook.cpp ..\Source\Time-Track\excel_stuff\xlsxabstractsheet.cpp ..\Source\Time-Track\excel_stuff\xlsxworksheet.cpp ..\Source\Time-Track\excel_stuff\xlsxchartsheet.cpp ..\Source\Time-Track\excel_stuff\xlsxzipwriter.cpp ..\Source\Time-Track\excel_stuff\xlsxdrawing.cpp ..\Source\Time-Track\excel_stuff\xlsxzipreader.cpp ..\Source\Time-Track\excel_stuff\xlsxdocument.cpp ..\Source\Time-Track\excel_stuff\xlsxcell.cpp ..\Source\Time-Track\excel_stuff\xlsxdatavalidation.cpp ..\Source\Time-Track\excel_stuff\xlsxcellreference.cpp ..\Source\Time-Track\excel_stuff\xlsxcellrange.cpp ..\Source\Time-Track\excel_stuff\xlsxrichstring.cpp ..\Source\Time-Track\excel_stuff\xlsxconditionalformatting.cpp ..\Source\Time-Track\excel_stuff\xlsxcolor.cpp ..\Source\Time-Track\excel_stuff\xlsxnumformatparser.cpp ..\Source\Time-Track\excel_stuff\xlsxdrawinganchor.cpp ..\Source\Time-Track\excel_stuff\xlsxmediafile.cpp ..\Source\Time-Track\excel_stuff\xlsxabstractooxmlfile.cpp ..\Source\Time-Track\excel_stuff\xlsxchart.cpp ..\Source\Time-Track\excel_stuff\xlsxsimpleooxmlfile.cpp ..\Source\Time-Track\excel_stuff\xlsxcellformula.cpp ..\Source\Time-Track\mainform.ui ..\Source\Time-Track\clockoutform.ui ..\Source\Time-Track\shifteditform.ui ..\Source\Time-Track\connectionform.ui ..\Source\Time-Track\exportform.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o debug\mainform.o debug\clockoutform.o debug\shifteditform.o debug\connectionform.o debug\exportform.o debug\xlsxdocpropscore.o debug\xlsxdocpropsapp.o debug\xlsxrelationships.o debug\xlsxutility.o debug\xlsxsharedstrings.o debug\xlsxcontenttypes.o debug\xlsxtheme.o debug\xlsxformat.o debug\xlsxstyles.o debug\xlsxworkbook.o debug\xlsxabstractsheet.o debug\xlsxworksheet.o debug\xlsxchartsheet.o debug\xlsxzipwriter.o debug\xlsxdrawing.o debug\xlsxzipreader.o debug\xlsxdocument.o debug\xlsxcell.o debug\xlsxdatavalidation.o debug\xlsxcellreference.o debug\xlsxcellrange.o debug\xlsxrichstring.o debug\xlsxconditionalformatting.o debug\xlsxcolor.o debug\xlsxnumformatparser.o debug\xlsxdrawinganchor.o debug\xlsxmediafile.o debug\xlsxabstractooxmlfile.o debug\xlsxchart.o debug\xlsxsimpleooxmlfile.o debug\xlsxcellformula.o debug\moc_mainform.o debug\moc_clockoutform.o debug\moc_shifteditform.o debug\moc_connectionform.o debug\moc_exportform.o debug\moc_xlsxdocument.o
+	-$(DEL_FILE) debug\mainform.o debug\clockoutform.o debug\shifteditform.o debug\connectionform.o debug\exportform.o debug\main.o debug\xlsxdocpropscore.o debug\xlsxdocpropsapp.o debug\xlsxrelationships.o debug\xlsxutility.o debug\xlsxsharedstrings.o debug\xlsxcontenttypes.o debug\xlsxtheme.o debug\xlsxformat.o debug\xlsxstyles.o debug\xlsxworkbook.o debug\xlsxabstractsheet.o debug\xlsxworksheet.o debug\xlsxchartsheet.o debug\xlsxzipwriter.o debug\xlsxdrawing.o debug\xlsxzipreader.o debug\xlsxdocument.o debug\xlsxcell.o debug\xlsxdatavalidation.o debug\xlsxcellreference.o debug\xlsxcellrange.o debug\xlsxrichstring.o debug\xlsxconditionalformatting.o debug\xlsxcolor.o debug\xlsxnumformatparser.o debug\xlsxdrawinganchor.o debug\xlsxmediafile.o debug\xlsxabstractooxmlfile.o debug\xlsxchart.o debug\xlsxsimpleooxmlfile.o debug\xlsxcellformula.o debug\qrc_fonts.o debug\moc_mainform.o debug\moc_clockoutform.o debug\moc_shifteditform.o debug\moc_connectionform.o debug\moc_exportform.o debug\moc_xlsxdocument.o
 	-$(DEL_FILE) debug\Time_resource_res.o
 
 distclean: clean 
@@ -261,8 +263,14 @@ benchmark: first
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all:
+compiler_rcc_make_all: debug/qrc_fonts.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) debug\qrc_fonts.cpp
+debug/qrc_fonts.cpp: ../Source/Time-Track/fonts.qrc \
+		C:/Qt/5.9/mingw53_32/bin/rcc.exe \
+		../Source/Time-Track/fonts/Roboto-Regular.ttf
+	C:\Qt\5.9\mingw53_32\bin\rcc.exe -name fonts ..\Source\Time-Track\fonts.qrc -o debug\qrc_fonts.cpp
+
 compiler_moc_predefs_make_all: debug/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) debug\moc_predefs.h
@@ -562,10 +570,12 @@ debug/moc_mainform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h \
 		../Source/Time-Track/mainform.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\mainform.h -o debug\moc_mainform.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\mainform.h -o debug\moc_mainform.cpp
 
 debug/moc_clockoutform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
@@ -828,7 +838,7 @@ debug/moc_clockoutform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		../Source/Time-Track/clockoutform.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\clockoutform.h -o debug\moc_clockoutform.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\clockoutform.h -o debug\moc_clockoutform.cpp
 
 debug/moc_shifteditform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
@@ -1093,7 +1103,7 @@ debug/moc_shifteditform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		../Source/Time-Track/shifteditform.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\shifteditform.h -o debug\moc_shifteditform.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\shifteditform.h -o debug\moc_shifteditform.cpp
 
 debug/moc_connectionform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
@@ -1199,7 +1209,7 @@ debug/moc_connectionform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		../Source/Time-Track/connectionform.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\connectionform.h -o debug\moc_connectionform.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\connectionform.h -o debug\moc_connectionform.cpp
 
 debug/moc_exportform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
@@ -1453,7 +1463,7 @@ debug/moc_exportform.cpp: C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
 		../Source/Time-Track/exportform.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\exportform.h -o debug\moc_exportform.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\exportform.h -o debug\moc_exportform.cpp
 
 debug/moc_xlsxdocument.cpp: ../Source/Time-Track/excel_stuff/xlsxglobal.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QtGlobal \
@@ -1559,7 +1569,7 @@ debug/moc_xlsxdocument.cpp: ../Source/Time-Track/excel_stuff/xlsxglobal.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source" -I"C:/Users/Joshua/Dropbox/Joshua's Tasks/Time-Track/Source/Time-Track/excel_stuff" -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\excel_stuff\xlsxdocument.h -o debug\moc_xlsxdocument.cpp
+	C:\Qt\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.9/mingw53_32/mkspecs/win32-g++ -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source -IC:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/excel_stuff -IC:/Qt/5.9/mingw53_32/include -IC:/Qt/5.9/mingw53_32/include/QtWidgets -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtGui/5.9.0/QtGui -IC:/Qt/5.9/mingw53_32/include/QtGui -IC:/Qt/5.9/mingw53_32/include/QtANGLE -IC:/Qt/5.9/mingw53_32/include/QtSql -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0 -IC:/Qt/5.9/mingw53_32/include/QtCore/5.9.0/QtCore -IC:/Qt/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Source\Time-Track\excel_stuff\xlsxdocument.h -o debug\moc_xlsxdocument.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1592,308 +1602,11 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 
 
 ####### Compile
-
-debug/main.o: ../Source/Time-Track/main.cpp ../Source/Time-Track/mainform.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qtguiglobal.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qglobal.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qconfig.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtcore-config.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsystemdetection.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qprocessordetection.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcompilerdetection.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtypeinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsysinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlogging.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qflags.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbasicatomic.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_bootstrap.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qgenericatomic.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_cxx11.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_msvc.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qglobalstatic.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmutex.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qnumeric.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qversiontagging.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qtgui-config.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qwindowdefs.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectdefs.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qnamespace.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectdefs_impl.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qobject.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstring.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qchar.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearray.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qrefcount.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydata.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstringbuilder.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlist.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qalgorithms.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qiterator.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qhashfunctions.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpair.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearraylist.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstringlist.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qregexp.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstringmatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreevent.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qscopedpointer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmetatype.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qvarlengtharray.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcontainerfwd.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qobject_impl.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmargins.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpaintdevice.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qrect.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsize.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpoint.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpalette.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qcolor.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qrgb.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qrgba64.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qbrush.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qvector.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qmatrix.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpolygon.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qregion.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdatastream.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qiodevice.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qline.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qtransform.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpainterpath.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qimage.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpixelformat.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qpixmap.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedpointer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qshareddata.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qhash.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qfont.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qfontmetrics.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qfontinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qsizepolicy.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qcursor.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qkeysequence.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qevent.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qvariant.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmap.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdebug.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtextstream.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlocale.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qset.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcontiguouscache.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qurl.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qurlquery.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfile.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfiledevice.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qvector2d.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qtouchdevice.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStackedWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstackedwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qframe.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QComboBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcombobox.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qicon.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/QtSql \
-		C:/Qt/5.9/mingw53_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QtCore \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QtCoreDepends \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractanimation.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstracteventdispatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qeventloop.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractnativeeventfilter.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractproxymodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractstate.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qabstracttransition.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qanimationgroup.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydataops.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydatapointer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbasictimer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbitarray.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbuffer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearraymatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcache.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcollator.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineoption.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineparser.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcryptographichash.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdatetime.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qelapsedtimer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdir.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfileinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qdiriterator.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qendian.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qeventtransition.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qexception.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfactoryinterface.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfileselector.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QObject \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QStringList \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfilesystemwatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfinalstate.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfuture.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfutureinterface.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qrunnable.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qresultstore.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfuturesynchronizer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qfuturewatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qhistorystate.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qidentityproxymodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qisenum.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonarray.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonvalue.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qjsondocument.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonobject.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlibrary.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlibraryinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qversionnumber.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlinkedlist.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qlockfile.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qloggingcategory.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmath.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmessageauthenticationcode.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmetaobject.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmimedata.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmimedatabase.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qmimetype.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectcleanuphandler.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qoperatingsystemversion.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qparallelanimationgroup.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpauseanimation.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qplugin.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpointer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpluginloader.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qprocess.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qqueue.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qreadwritelock.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qresource.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsavefile.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qscopedvaluerollback.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsemaphore.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsequentialanimationgroup.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsettings.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedmemory.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsignalmapper.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsignaltransition.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsocketnotifier.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsortfilterproxymodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstack.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstandardpaths.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstate.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstatemachine.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstorageinfo.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qstringlistmodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qsystemsemaphore.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtemporarydir.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QScopedPointer \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtemporaryfile.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtextboundaryfinder.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtextcodec.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qthread.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qthreadpool.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qthreadstorage.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtimeline.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtimer.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtimezone.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtranslator.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtypetraits.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/quuid.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qwaitcondition.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qwineventnotifier.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qxmlstream.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qtcoreversion.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlglobal.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldatabase.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldriver.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldriverplugin.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlerror.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlfield.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlindex.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrecord.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlquery.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlquerymodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaldelegate.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qitemdelegate.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlistview.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqltablemodel.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlversion.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDesktopWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
-		../Source/Time-Track/clockoutform.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
-		../Source/Time-Track/shifteditform.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
-		../Source/Time-Track/connectionform.h \
-		../Source/Time-Track/exportform.h \
-		../Source/Time-Track/excel_stuff/xlsxdocument.h \
-		../Source/Time-Track/excel_stuff/xlsxglobal.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QtGlobal \
-		../Source/Time-Track/excel_stuff/xlsxformat.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/QFont \
-		C:/Qt/5.9/mingw53_32/include/QtGui/QColor \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QByteArray \
-		C:/Qt/5.9/mingw53_32/include/QtGui/QList \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QExplicitlySharedDataPointer \
-		../Source/Time-Track/excel_stuff/xlsxworksheet.h \
-		../Source/Time-Track/excel_stuff/xlsxabstractsheet.h \
-		../Source/Time-Track/excel_stuff/xlsxabstractooxmlfile.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QSharedPointer \
-		../Source/Time-Track/excel_stuff/xlsxcell.h \
-		../Source/Time-Track/excel_stuff/xlsxcellrange.h \
-		../Source/Time-Track/excel_stuff/xlsxcellreference.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QMap \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QPointF \
-		../Source/Time-Track/excel_stuff/xlsxrichstring.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QSharedDataPointer \
-		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Source\Time-Track\main.cpp
 
 debug/mainform.o: ../Source/Time-Track/mainform.cpp ../Source/Time-Track/mainform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
@@ -2186,7 +1899,51 @@ debug/mainform.o: ../Source/Time-Track/mainform.cpp ../Source/Time-Track/mainfor
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h \
 		ui_mainform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCheckBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDateEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGridLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGroupBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgroupbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLineEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QRadioButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qradiobutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QSpacerItem \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QSpinBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qspinbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTabWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTableView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QVBoxLayout \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QFileDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainform.o ..\Source\Time-Track\mainform.cpp
@@ -2482,7 +2239,43 @@ debug/clockoutform.o: ../Source/Time-Track/clockoutform.cpp ../Source/Time-Track
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
-		ui_clockoutform.h
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h \
+		ui_clockoutform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGridLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QSpacerItem \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTableWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtablewidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTextEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\clockoutform.o ..\Source\Time-Track\clockoutform.cpp
 
 debug/shifteditform.o: ../Source/Time-Track/shifteditform.cpp ../Source/Time-Track/shifteditform.h \
@@ -2747,6 +2540,43 @@ debug/shifteditform.o: ../Source/Time-Track/shifteditform.cpp ../Source/Time-Tra
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
 		ui_shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCheckBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDateTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGridLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QSpacerItem \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTableWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtablewidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTextEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextdocument.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QVBoxLayout \
 		../Source/Time-Track/mainform.h \
 		../Source/Time-Track/clockoutform.h \
 		../Source/Time-Track/connectionform.h \
@@ -2776,7 +2606,9 @@ debug/shifteditform.o: ../Source/Time-Track/shifteditform.cpp ../Source/Time-Tra
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\shifteditform.o ..\Source\Time-Track\shifteditform.cpp
 
 debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-Track/connectionform.h \
@@ -2882,11 +2714,20 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtGui/qvector2d.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/qtouchdevice.h \
 		ui_connectionform.h \
-		../Source/Time-Track/mainform.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStackedWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstackedwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qicon.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qeventloop.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QComboBox \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcombobox.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
@@ -2894,21 +2735,42 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/5.9/mingw53_32/include/QtGui/qvalidator.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/5.9/mingw53_32/include/QtGui/qicon.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qslider.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractslider.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstyle.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qrubberband.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qframe.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialogbuttonbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGridLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../Source/Time-Track/mainform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstackedwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/QtSql \
 		C:/Qt/5.9/mingw53_32/include/QtSql/QtSqlDepends \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QtCore \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QtCoreDepends \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstracteventdispatcher.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qeventloop.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractnativeeventfilter.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractproxymodel.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractstate.h \
@@ -2924,7 +2786,6 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtCore/qcollator.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineoption.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineparser.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qcryptographichash.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qdatetime.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qdeadlinetimer.h \
@@ -2951,7 +2812,6 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtCore/qhistorystate.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qidentityproxymodel.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qisenum.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonarray.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonvalue.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/qjsondocument.h \
@@ -3029,15 +2889,11 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlistview.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlresult.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlversion.h \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDesktopWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
 		../Source/Time-Track/clockoutform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
@@ -3070,7 +2926,9 @@ debug/connectionform.o: ../Source/Time-Track/connectionform.cpp ../Source/Time-T
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\connectionform.o ..\Source\Time-Track\connectionform.cpp
 
 debug/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exportform.h \
@@ -3324,6 +3182,39 @@ debug/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exp
 		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlresult.h \
 		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlversion.h \
 		ui_exportform.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialogbuttonbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QGridLayout \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QLineEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QFileDialog \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qfiledialog.h \
 		../Source/Time-Track/excel_stuff/xlsxdocument.h \
@@ -3335,7 +3226,6 @@ debug/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exp
 		C:/Qt/5.9/mingw53_32/include/QtCore/QByteArray \
 		C:/Qt/5.9/mingw53_32/include/QtGui/QList \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QExplicitlySharedDataPointer \
-		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
 		../Source/Time-Track/excel_stuff/xlsxworksheet.h \
 		../Source/Time-Track/excel_stuff/xlsxabstractsheet.h \
 		../Source/Time-Track/excel_stuff/xlsxabstractooxmlfile.h \
@@ -3346,12 +3236,9 @@ debug/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exp
 		C:/Qt/5.9/mingw53_32/include/QtCore/QMap \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QPointF \
 		../Source/Time-Track/mainform.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstackedwidget.h \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/QComboBox \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDesktopWidget \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
 		../Source/Time-Track/clockoutform.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
@@ -3366,8 +3253,309 @@ debug/exportform.o: ../Source/Time-Track/exportform.cpp ../Source/Time-Track/exp
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
 		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\exportform.o ..\Source\Time-Track\exportform.cpp
+
+debug/main.o: ../Source/Time-Track/main.cpp ../Source/Time-Track/mainform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtguiglobal.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qglobal.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qconfig.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtcore-config.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsysinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlogging.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qflags.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmutex.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qnumeric.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qversiontagging.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtgui-config.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qnamespace.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qobject.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstring.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qchar.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearray.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qrefcount.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydata.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlist.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qalgorithms.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qiterator.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qhashfunctions.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpair.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstringlist.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qregexp.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreevent.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmetatype.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qobject_impl.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qrect.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsize.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpoint.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpalette.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qcolor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qrgb.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qvector.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qmatrix.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpolygon.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qregion.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdatastream.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qiodevice.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qline.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtransform.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpainterpath.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qimage.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpixelformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qpixmap.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qshareddata.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qhash.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfont.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qkeysequence.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qevent.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qvariant.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmap.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdebug.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtextstream.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlocale.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qset.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qurl.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qurlquery.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfile.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfiledevice.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qvector2d.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstackedwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcombobox.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstyleoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qvalidator.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qregularexpression.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qicon.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qslider.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractslider.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qstyle.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qtabwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qrubberband.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/QtSql \
+		C:/Qt/5.9/mingw53_32/include/QtSql/QtSqlDepends \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QtCore \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QtCoreDepends \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractanimation.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstracteventdispatcher.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qeventloop.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractnativeeventfilter.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractproxymodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstractstate.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qabstracttransition.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qanimationgroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydataops.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qarraydatapointer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbasictimer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbitarray.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbuffer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qbytearraymatcher.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcache.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcollator.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineoption.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcommandlineparser.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qcryptographichash.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdatetime.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qelapsedtimer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdir.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfileinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qdiriterator.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qendian.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qeventtransition.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qexception.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfactoryinterface.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfileselector.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QObject \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QStringList \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfilesystemwatcher.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfinalstate.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfuture.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfutureinterface.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qrunnable.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qresultstore.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfuturesynchronizer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qfuturewatcher.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qhistorystate.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qidentityproxymodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qisenum.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonarray.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonvalue.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qjsondocument.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qjsonobject.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlibrary.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlibraryinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qversionnumber.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlinkedlist.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qlockfile.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qloggingcategory.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmath.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmessageauthenticationcode.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmetaobject.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmimedata.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmimedatabase.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qmimetype.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qobjectcleanuphandler.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qoperatingsystemversion.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qparallelanimationgroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpauseanimation.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qplugin.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpointer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpluginloader.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qprocess.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qqueue.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qreadwritelock.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qresource.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsavefile.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qscopedvaluerollback.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsemaphore.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsequentialanimationgroup.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsettings.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsharedmemory.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsignalmapper.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsignaltransition.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsocketnotifier.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsortfilterproxymodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstack.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstandardpaths.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstate.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstatemachine.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstorageinfo.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qstringlistmodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qsystemsemaphore.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtemporarydir.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QScopedPointer \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtemporaryfile.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtextboundaryfinder.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtextcodec.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qthread.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qthreadpool.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qthreadstorage.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtimeline.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtimer.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtimezone.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtranslator.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtypetraits.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/quuid.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qwaitcondition.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qwineventnotifier.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qxmlstream.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/qtcoreversion.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlglobal.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldriver.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqldriverplugin.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlerror.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlfield.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlindex.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrecord.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlquery.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaldelegate.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qitemdelegate.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qlistview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlrelationaltablemodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qsqlresult.h \
+		C:/Qt/5.9/mingw53_32/include/QtSql/qtsqlversion.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QVariant \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDesktopWidget \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QCoreApplication \
+		../Source/Time-Track/clockoutform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QDialog \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QStyle \
+		../Source/Time-Track/shifteditform.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QTimeEdit \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qdatetimeedit.h \
+		../Source/Time-Track/connectionform.h \
+		../Source/Time-Track/exportform.h \
+		../Source/Time-Track/excel_stuff/xlsxdocument.h \
+		../Source/Time-Track/excel_stuff/xlsxglobal.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QtGlobal \
+		../Source/Time-Track/excel_stuff/xlsxformat.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFont \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QColor \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QByteArray \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QList \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QExplicitlySharedDataPointer \
+		../Source/Time-Track/excel_stuff/xlsxworksheet.h \
+		../Source/Time-Track/excel_stuff/xlsxabstractsheet.h \
+		../Source/Time-Track/excel_stuff/xlsxabstractooxmlfile.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QSharedPointer \
+		../Source/Time-Track/excel_stuff/xlsxcell.h \
+		../Source/Time-Track/excel_stuff/xlsxcellrange.h \
+		../Source/Time-Track/excel_stuff/xlsxcellreference.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QMap \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QPointF \
+		../Source/Time-Track/excel_stuff/xlsxrichstring.h \
+		C:/Qt/5.9/mingw53_32/include/QtCore/QSharedDataPointer \
+		../Source/Time-Track/excel_stuff/xlsxworkbook.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QImage \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QCompleter \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qcompleter.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/QFontDatabase \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qfontdatabase.h \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.9/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qguiapplication.h \
+		C:/Qt/5.9/mingw53_32/include/QtGui/qinputmethod.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Source\Time-Track\main.cpp
 
 debug/xlsxdocpropscore.o: ../Source/Time-Track/excel_stuff/xlsxdocpropscore.cpp ../Source/Time-Track/excel_stuff/xlsxdocpropscore_p.h \
 		../Source/Time-Track/excel_stuff/xlsxglobal.h \
@@ -6298,6 +6486,9 @@ debug/xlsxcellformula.o: ../Source/Time-Track/excel_stuff/xlsxcellformula.cpp ..
 		C:/Qt/5.9/mingw53_32/include/QtCore/qpoint.h \
 		C:/Qt/5.9/mingw53_32/include/QtCore/QXmlStreamWriter
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\xlsxcellformula.o ..\Source\Time-Track\excel_stuff\xlsxcellformula.cpp
+
+debug/qrc_fonts.o: debug/qrc_fonts.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\qrc_fonts.o debug\qrc_fonts.cpp
 
 debug/moc_mainform.o: debug/moc_mainform.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_mainform.o debug\moc_mainform.cpp

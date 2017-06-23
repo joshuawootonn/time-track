@@ -13,12 +13,14 @@ TEMPLATE = app
 
 win32: RC_ICONS = icon.ico
 
-SOURCES += main.cpp \
+SOURCES += \
     mainform.cpp \
     clockoutform.cpp \
     shifteditform.cpp \
     connectionform.cpp \
-    exportform.cpp
+    exportform.cpp \    
+    main.cpp
+
 
 HEADERS  += \
     mainform.h \
@@ -27,6 +29,7 @@ HEADERS  += \
     connectionform.h \
     exportform.h
 
+
 FORMS    += \
     mainform.ui \
     clockoutform.ui \
@@ -34,7 +37,8 @@ FORMS    += \
     connectionform.ui \
     exportform.ui
 
-RESOURCES +=
+RESOURCES += \
+    fonts.qrc
 
 DISTFILES += \
     ../../Qss/default.qss

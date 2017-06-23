@@ -30,7 +30,7 @@ MainForm::MainForm(QWidget *parent) :
     loginInitialize();
     isConnected();
     setIcons();
-    ui->loginNumPad->hide();
+    //ui->loginNumPad->hide();
 }
 
 MainForm::~MainForm()
@@ -348,7 +348,6 @@ void MainForm::setIcons(){
 
 
 }
-
 void MainForm::loginInitialize(){
 
     ui->mainStack->setCurrentIndex(0);
@@ -356,6 +355,9 @@ void MainForm::loginInitialize(){
 
     isConnected();
     ui->mainFinish->hide();
+    ui->basicPageConnect->hide();
+    ui->connectionlabel->hide();
+    ui->ConnectionLabel->hide();
 
 }
 void MainForm::isConnected(){
@@ -415,6 +417,80 @@ void MainForm::advInitialize(){
 
     establishConnections();
 }
+
+
+
+void MainForm::on_Login0_clicked()
+{
+
+
+    ui->passEdit->setText(ui->passEdit->text()+"0");
+
+}
+
+
+void MainForm::on_Login1_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"1");
+}
+
+void MainForm::on_Login2_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"2");
+}
+
+void MainForm::on_Login3_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"3");
+}
+
+void MainForm::on_Login4_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"4");
+}
+
+void MainForm::on_Login5_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"5");
+}
+
+void MainForm::on_Login6_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"6");
+}
+
+void MainForm::on_Login7_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"7");
+}
+
+void MainForm::on_Login8_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"8");
+}
+void MainForm::on_Login9_clicked()
+{
+    ui->passEdit->setText(ui->passEdit->text()+"9");
+}
+
+void MainForm::on_LoginBack_clicked()
+{
+    ui->passEdit->setText("");
+}
+void MainForm::on_LoginGo_clicked()
+{
+    on_passEdit_returnPressed();
+}
+
+
+
+
+
+
+
+
+
+
 
 /* Deal with the signals and slots of the mainForm that
  * change what menu you are at

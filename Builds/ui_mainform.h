@@ -41,30 +41,34 @@ public:
     QStackedWidget *mainStack;
     QWidget *loginPage;
     QGridLayout *gridLayout_16;
+    QWidget *loginWidget;
+    QGridLayout *gridLayout_24;
     QWidget *loginNumPad;
     QGridLayout *gridLayout_17;
-    QPushButton *Login7;
     QPushButton *Login8;
-    QPushButton *Login1;
+    QPushButton *Login7;
     QPushButton *Login4;
-    QPushButton *Login5;
     QPushButton *Login2;
+    QPushButton *Login1;
+    QPushButton *Login5;
     QPushButton *Login9;
     QPushButton *Login6;
     QPushButton *Login3;
     QPushButton *Login0;
     QPushButton *LoginBack;
     QPushButton *LoginGo;
-    QSpacerItem *horizontalSpacer_10;
-    QSpacerItem *verticalSpacer_3;
-    QLabel *passLabel;
-    QHBoxLayout *horizontalLayout_13;
-    QLineEdit *passEdit;
-    QSpacerItem *verticalSpacer_4;
     QPushButton *basicPageConnect;
     QLabel *connectionlabel;
-    QSpacerItem *horizontalSpacer_9;
+    QHBoxLayout *horizontalLayout_13;
+    QLineEdit *passEdit;
     QLabel *ConnectionLabel;
+    QLabel *passLabel;
+    QSpacerItem *verticalSpacer_3;
+    QSpacerItem *horizontalSpacer_10;
+    QSpacerItem *horizontalSpacer_9;
+    QSpacerItem *verticalSpacer_4;
+    QSpacerItem *horizontalSpacer_12;
+    QSpacerItem *horizontalSpacer_13;
     QWidget *basicPage;
     QGridLayout *gridLayout_2;
     QSpacerItem *horizontalSpacer_3;
@@ -279,11 +283,12 @@ public:
 "padding:0px;\n"
 "}\n"
 "\n"
-"\n"
 "QWidget{\n"
 "margin:0px;\n"
 "padding:0px;\n"
+"\n"
 "}\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -298,9 +303,9 @@ public:
 "\n"
 "QPushButton#basicPageConnect:hover{\n"
 "border-radius:15px;\n"
-"\n"
 ""
-                        "}\n"
+                        "\n"
+"}\n"
 "\n"
 "QComboBox{\n"
 "border:none;\n"
@@ -357,102 +362,139 @@ public:
 "QPushButton{\n"
 "padding:3px;\n"
 "border:none;\n"
-"background-color:#E5EAE7;\n"
+"background-color:#F1F4F5;\n"
+"}\n"
+"QLineEdit{ \n"
+"background-color:#F1F4F5;\n"
 "}\n"
 "QPushButton:hover,QPushButton:hover{\n"
 "background-color:#ECEFED;\n"
 "}\n"
-""));
+"/*\n"
+"\n"
+"#E5EAE7\n"
+"*/\n"
+"*{\n"
+"font-family:\"Roboto\";\n"
+"font-size: 19px;\n"
+"color:#263544;\n"
+"\n"
+"}"));
         gridLayout_16 = new QGridLayout(loginPage);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
-        loginNumPad = new QWidget(loginPage);
+        loginWidget = new QWidget(loginPage);
+        loginWidget->setObjectName(QStringLiteral("loginWidget"));
+        gridLayout_24 = new QGridLayout(loginWidget);
+        gridLayout_24->setObjectName(QStringLiteral("gridLayout_24"));
+        loginNumPad = new QWidget(loginWidget);
         loginNumPad->setObjectName(QStringLiteral("loginNumPad"));
+        QFont font;
+        font.setFamily(QStringLiteral("Roboto"));
+        loginNumPad->setFont(font);
+        loginNumPad->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"font: bold;/or italic/\n"
+"background-color: red;\n"
+"font-size: 36px;/for example/\n"
+"height: 48px;/for example/\n"
+"width: 120px;/for example/\n"
+"}"));
         gridLayout_17 = new QGridLayout(loginNumPad);
         gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
-        Login7 = new QPushButton(loginNumPad);
-        Login7->setObjectName(QStringLiteral("Login7"));
-
-        gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
-
         Login8 = new QPushButton(loginNumPad);
         Login8->setObjectName(QStringLiteral("Login8"));
+        Login8->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(Login8, 0, 1, 1, 1);
 
-        Login1 = new QPushButton(loginNumPad);
-        Login1->setObjectName(QStringLiteral("Login1"));
+        Login7 = new QPushButton(loginNumPad);
+        Login7->setObjectName(QStringLiteral("Login7"));
+        Login7->setMinimumSize(QSize(50, 50));
 
-        gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
+        gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
 
         Login4 = new QPushButton(loginNumPad);
         Login4->setObjectName(QStringLiteral("Login4"));
+        Login4->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(Login4, 1, 0, 1, 1);
 
-        Login5 = new QPushButton(loginNumPad);
-        Login5->setObjectName(QStringLiteral("Login5"));
-
-        gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
-
         Login2 = new QPushButton(loginNumPad);
         Login2->setObjectName(QStringLiteral("Login2"));
+        Login2->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(Login2, 3, 1, 1, 1);
 
+        Login1 = new QPushButton(loginNumPad);
+        Login1->setObjectName(QStringLiteral("Login1"));
+        Login1->setMinimumSize(QSize(50, 50));
+
+        gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
+
+        Login5 = new QPushButton(loginNumPad);
+        Login5->setObjectName(QStringLiteral("Login5"));
+        Login5->setMinimumSize(QSize(50, 50));
+
+        gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
+
         Login9 = new QPushButton(loginNumPad);
         Login9->setObjectName(QStringLiteral("Login9"));
+        Login9->setMinimumSize(QSize(50, 50));
+        Login9->setFont(font);
 
         gridLayout_17->addWidget(Login9, 0, 2, 1, 1);
 
         Login6 = new QPushButton(loginNumPad);
         Login6->setObjectName(QStringLiteral("Login6"));
+        Login6->setMinimumSize(QSize(50, 50));
+        Login6->setFont(font);
 
         gridLayout_17->addWidget(Login6, 1, 2, 1, 1);
 
         Login3 = new QPushButton(loginNumPad);
         Login3->setObjectName(QStringLiteral("Login3"));
+        Login3->setMinimumSize(QSize(50, 50));
+        Login3->setFont(font);
 
         gridLayout_17->addWidget(Login3, 3, 2, 1, 1);
 
         Login0 = new QPushButton(loginNumPad);
         Login0->setObjectName(QStringLiteral("Login0"));
+        Login0->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(Login0, 4, 0, 1, 1);
 
         LoginBack = new QPushButton(loginNumPad);
         LoginBack->setObjectName(QStringLiteral("LoginBack"));
+        LoginBack->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(LoginBack, 4, 1, 1, 1);
 
         LoginGo = new QPushButton(loginNumPad);
         LoginGo->setObjectName(QStringLiteral("LoginGo"));
+        LoginGo->setMinimumSize(QSize(50, 50));
 
         gridLayout_17->addWidget(LoginGo, 4, 2, 1, 1);
 
 
-        gridLayout_16->addWidget(loginNumPad, 2, 1, 1, 1);
+        gridLayout_24->addWidget(loginNumPad, 1, 0, 1, 1);
 
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        basicPageConnect = new QPushButton(loginWidget);
+        basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
 
-        gridLayout_16->addItem(horizontalSpacer_10, 1, 3, 1, 1);
+        gridLayout_24->addWidget(basicPageConnect, 5, 0, 1, 1);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        connectionlabel = new QLabel(loginWidget);
+        connectionlabel->setObjectName(QStringLiteral("connectionlabel"));
 
-        gridLayout_16->addItem(verticalSpacer_3, 0, 1, 1, 1);
-
-        passLabel = new QLabel(loginPage);
-        passLabel->setObjectName(QStringLiteral("passLabel"));
-
-        gridLayout_16->addWidget(passLabel, 4, 1, 1, 1);
+        gridLayout_24->addWidget(connectionlabel, 2, 0, 1, 1);
 
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
-        horizontalLayout_13->setSizeConstraint(QLayout::SetMinimumSize);
-        passEdit = new QLineEdit(loginPage);
+        passEdit = new QLineEdit(loginWidget);
         passEdit->setObjectName(QStringLiteral("passEdit"));
-        passEdit->setMaximumSize(QSize(45, 16777215));
-        QFont font;
-        font.setFamily(QStringLiteral("Calibri"));
+        passEdit->setMinimumSize(QSize(0, 45));
+        passEdit->setMaximumSize(QSize(80, 16777215));
         passEdit->setFont(font);
         passEdit->setMaxLength(4);
         passEdit->setEchoMode(QLineEdit::Password);
@@ -460,30 +502,44 @@ public:
         horizontalLayout_13->addWidget(passEdit);
 
 
-        gridLayout_16->addLayout(horizontalLayout_13, 1, 1, 1, 1);
+        gridLayout_24->addLayout(horizontalLayout_13, 0, 0, 1, 1);
 
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        ConnectionLabel = new QLabel(loginWidget);
+        ConnectionLabel->setObjectName(QStringLiteral("ConnectionLabel"));
 
-        gridLayout_16->addItem(verticalSpacer_4, 9, 1, 1, 1);
+        gridLayout_24->addWidget(ConnectionLabel, 3, 0, 1, 1);
 
-        basicPageConnect = new QPushButton(loginPage);
-        basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
+        passLabel = new QLabel(loginWidget);
+        passLabel->setObjectName(QStringLiteral("passLabel"));
 
-        gridLayout_16->addWidget(basicPageConnect, 7, 1, 1, 1);
+        gridLayout_24->addWidget(passLabel, 4, 0, 1, 1);
 
-        connectionlabel = new QLabel(loginPage);
-        connectionlabel->setObjectName(QStringLiteral("connectionlabel"));
 
-        gridLayout_16->addWidget(connectionlabel, 3, 1, 1, 1);
+        gridLayout_16->addWidget(loginWidget, 1, 2, 1, 1);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_16->addItem(verticalSpacer_3, 0, 2, 1, 1);
+
+        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_10, 1, 4, 1, 1);
 
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_16->addItem(horizontalSpacer_9, 1, 0, 1, 1);
 
-        ConnectionLabel = new QLabel(loginPage);
-        ConnectionLabel->setObjectName(QStringLiteral("ConnectionLabel"));
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_16->addWidget(ConnectionLabel, 8, 1, 1, 1);
+        gridLayout_16->addItem(verticalSpacer_4, 6, 2, 1, 1);
+
+        horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_12, 1, 1, 1, 1);
+
+        horizontalSpacer_13 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_16->addItem(horizontalSpacer_13, 1, 3, 1, 1);
 
         mainStack->addWidget(loginPage);
         basicPage = new QWidget();
@@ -821,7 +877,9 @@ public:
 
         groupBox_9 = new QGroupBox(ProjectsSettings);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
-        groupBox_9->setFont(font);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Calibri"));
+        groupBox_9->setFont(font1);
         verticalLayout_3 = new QVBoxLayout(groupBox_9);
         verticalLayout_3->setSpacing(2);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
@@ -861,7 +919,7 @@ public:
         gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
         ProjectItemCombo = new QComboBox(groupBox_11);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
-        ProjectItemCombo->setFont(font);
+        ProjectItemCombo->setFont(font1);
         ProjectItemCombo->setEditable(true);
         ProjectItemCombo->setFrame(true);
 
@@ -1050,7 +1108,7 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        ShiftEmployeeCombo->setFont(font);
+        ShiftEmployeeCombo->setFont(font1);
         ShiftEmployeeCombo->setEditable(true);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1058,7 +1116,7 @@ public:
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
-        ShiftProjectCombo->setFont(font);
+        ShiftProjectCombo->setFont(font1);
         ShiftProjectCombo->setEditable(true);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1071,7 +1129,7 @@ public:
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
-        ShiftItemCombo->setFont(font);
+        ShiftItemCombo->setFont(font1);
         ShiftItemCombo->setEditable(true);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -1347,8 +1405,7 @@ public:
         QWidget::setTabOrder(ProjectView, Login3);
         QWidget::setTabOrder(Login3, LoginGo);
         QWidget::setTabOrder(LoginGo, passEdit);
-        QWidget::setTabOrder(passEdit, basicPageConnect);
-        QWidget::setTabOrder(basicPageConnect, basicPageClockOut);
+        QWidget::setTabOrder(passEdit, basicPageClockOut);
         QWidget::setTabOrder(basicPageClockOut, basicPageAdvanced);
         QWidget::setTabOrder(basicPageAdvanced, basicPageClockIn);
         QWidget::setTabOrder(basicPageClockIn, ItemView);
@@ -1395,7 +1452,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(3);
         HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
@@ -1407,22 +1464,22 @@ public:
     void retranslateUi(QWidget *MainForm)
     {
         MainForm->setWindowTitle(QApplication::translate("MainForm", "Time-Track", Q_NULLPTR));
-        Login7->setText(QApplication::translate("MainForm", "7", Q_NULLPTR));
         Login8->setText(QApplication::translate("MainForm", "8", Q_NULLPTR));
-        Login1->setText(QApplication::translate("MainForm", "1", Q_NULLPTR));
+        Login7->setText(QApplication::translate("MainForm", "7", Q_NULLPTR));
         Login4->setText(QApplication::translate("MainForm", "4", Q_NULLPTR));
-        Login5->setText(QApplication::translate("MainForm", "5", Q_NULLPTR));
         Login2->setText(QApplication::translate("MainForm", "2", Q_NULLPTR));
+        Login1->setText(QApplication::translate("MainForm", "1", Q_NULLPTR));
+        Login5->setText(QApplication::translate("MainForm", "5", Q_NULLPTR));
         Login9->setText(QApplication::translate("MainForm", "9", Q_NULLPTR));
         Login6->setText(QApplication::translate("MainForm", "6", Q_NULLPTR));
         Login3->setText(QApplication::translate("MainForm", "3", Q_NULLPTR));
         Login0->setText(QApplication::translate("MainForm", "0", Q_NULLPTR));
         LoginBack->setText(QApplication::translate("MainForm", "<", Q_NULLPTR));
         LoginGo->setText(QApplication::translate("MainForm", "Go", Q_NULLPTR));
-        passLabel->setText(QString());
         basicPageConnect->setText(QString());
         connectionlabel->setText(QString());
         ConnectionLabel->setText(QString());
+        passLabel->setText(QString());
         basicPageClockIn->setText(QString());
         basicPageClockOut->setText(QString());
         basicPageAdvanced->setText(QString());

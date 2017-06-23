@@ -1,10 +1,10 @@
 INPUT(
-./release\main.o
 ./release\mainform.o
 ./release\clockoutform.o
 ./release\shifteditform.o
 ./release\connectionform.o
 ./release\exportform.o
+./release\main.o
 ./release\xlsxdocpropscore.o
 ./release\xlsxdocpropsapp.o
 ./release\xlsxrelationships.o
@@ -36,6 +36,7 @@ INPUT(
 ./release\xlsxchart.o
 ./release\xlsxsimpleooxmlfile.o
 ./release\xlsxcellformula.o
+./release\qrc_fonts.o
 ./release\moc_mainform.o
 ./release\moc_clockoutform.o
 ./release\moc_shifteditform.o

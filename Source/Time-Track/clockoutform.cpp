@@ -8,14 +8,14 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
-    this->setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            this->size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );
+//    this->setGeometry(
+//        QStyle::alignedRect(
+//            Qt::LeftToRight,
+//            Qt::AlignCenter,
+//            this->size(),
+//            qApp->desktop()->availableGeometry()
+//        )
+//    );
     clicked = false;
 }
 

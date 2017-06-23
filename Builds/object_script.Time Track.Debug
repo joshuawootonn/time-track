@@ -1,10 +1,10 @@
 INPUT(
-./debug\main.o
 ./debug\mainform.o
 ./debug\clockoutform.o
 ./debug\shifteditform.o
 ./debug\connectionform.o
 ./debug\exportform.o
+./debug\main.o
 ./debug\xlsxdocpropscore.o
 ./debug\xlsxdocpropsapp.o
 ./debug\xlsxrelationships.o
@@ -36,6 +36,7 @@ INPUT(
 ./debug\xlsxchart.o
 ./debug\xlsxsimpleooxmlfile.o
 ./debug\xlsxcellformula.o
+./debug\qrc_fonts.o
 ./debug\moc_mainform.o
 ./debug\moc_clockoutform.o
 ./debug\moc_shifteditform.o

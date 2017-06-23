@@ -21,6 +21,7 @@
 #include "xlsxformat.h"
 #include <QCompleter>
 #include <QMessageBox>
+#include <QFontDatabase>
 
 
 
@@ -58,6 +59,7 @@ public:
     void isConnected();
 
     void setIcons();
+
     void basicInitialize();
     void advInitialize();
 
@@ -201,6 +203,30 @@ private slots:
     void on_EmployeeRefresh_clicked();
 
 
+    void on_Login0_clicked();
+
+    void on_Login9_clicked();
+
+    void on_Login1_clicked();
+
+    void on_Login2_clicked();
+
+    void on_Login3_clicked();
+
+    void on_Login4_clicked();
+
+    void on_Login5_clicked();
+
+    void on_Login6_clicked();
+
+    void on_Login7_clicked();
+
+    void on_Login8_clicked();
+
+    void on_LoginBack_clicked();
+
+    void on_LoginGo_clicked();
+
 public:
     Ui::MainForm *ui;
 
@@ -232,6 +258,7 @@ private:
 };
 
 #endif // MAINFORM_H
+
 
 
 
