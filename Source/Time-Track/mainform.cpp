@@ -25,8 +25,7 @@ MainForm::MainForm(QWidget *parent) :
     //connectionForm = new ConnectionForm(this);
     exportForm = new ExportForm(this);
 
-    ui->ShiftEmployeeCombo->setEditable(true);
-    ui->ShiftEmployeeCombo->lineEdit()->setAlignment(Qt::AlignCenter);
+
 
     loginInitialize();
     isConnected();
@@ -1532,6 +1531,9 @@ void MainForm::ShiftTab(){
     refreshShiftProject();
     refreshShiftItem();
     refreshShiftEmployee();
+
+
+
     ui->ShiftView->hideColumn(0);
     ui->ShiftView->hideColumn(1);
     ui->ShiftView->hideColumn(2);

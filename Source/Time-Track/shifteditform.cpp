@@ -477,6 +477,8 @@ void ShiftEditForm::on_Add_clicked()
         ui->Projects->clearEditText();
         if(ui->timeLeft->text() == "0:00")
             ui->FinishedButton->setFocus();
+        else if (ui->timeLeft->text().split(":")[0] == "0")
+            ui->Lunch->setFocus();
         else
             ui->Projects->setFocus();
     }
@@ -565,13 +567,10 @@ void ShiftEditForm::on_RefreshButton_clicked()
 //    ProjectInitialize();
 //    ItemInitialize();
 }
-
 bool ShiftEditForm::getSuccess() const
 {
     return success;
 }
-
-
 void ShiftEditForm::on_FinishedButton_clicked()
 {
     QSqlQuery* qry=new QSqlQuery(data);

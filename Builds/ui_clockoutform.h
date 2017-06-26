@@ -87,7 +87,7 @@ public:
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 20px;\n"
+"font-size: 26px;\n"
 "\n"
 "}\n"
 "\n"
@@ -216,13 +216,13 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_2 = new QLabel(DescriptionWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMaximumSize(QSize(16777215, 26));
+        label_2->setMaximumSize(QSize(16777215, 35));
 
         horizontalLayout_3->addWidget(label_2);
 
         Description = new QTextEdit(DescriptionWidget);
         Description->setObjectName(QStringLiteral("Description"));
-        Description->setMaximumSize(QSize(16777215, 26));
+        Description->setMaximumSize(QSize(16777215, 35));
 
         horizontalLayout_3->addWidget(Description);
 
