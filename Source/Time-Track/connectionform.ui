@@ -6,64 +6,131 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>309</width>
-    <height>143</height>
+    <width>447</width>
+    <height>192</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Connections</string>
+   <string>Time Track</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#ClockoutForm{
+
+background-color:#E5EAE7;
+}
+*{
+font-family:&quot;Calibri&quot;;
+font-size: 26px;
+
+}
+
+
+
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+
+
+QWidget{
+
+margin:0px;
+padding:0px;
+}
+QWidget#bigwidger{
+background-color:#E5EAE7;
+border:none;
+}
+
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#FFFFFF;
+}
+QPushButton:hover:!pressed{
+background-color:#E4E9EB;
+}
+
+
+
+
+
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#F1F4F5;
+}
+QLineEdit{ 
+background-color:#F1F4F5;
+ border: 0px solid 263544;	
+
+}
+QLineEdit:hover{ 
+background-color:#F1F4F5;
+ border: 1px solid 263544;	
+}
+
+QPushButton:hover,QPushButton:hover{
+background-color:#ECEFED;
+}
+/*
+
+#E5EAE7
+*/
+*{
+font-family:&quot;Calibri&quot;;
+font-size: 19px;
+color:#263544;
+
+}
+
+
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>30</height>
-      </size>
-     </property>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="connect">
      <property name="text">
-      <string>Which ip address do you want to connect to?</string>
+      <string>Connect</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>6</number>
+   <item row="5" column="0" colspan="4">
+    <widget class="QProgressBar" name="progress">
+     <property name="value">
+      <number>0</number>
      </property>
-     <item>
-      <widget class="QComboBox" name="Conn">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>23</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Add">
-       <property name="maximumSize">
-        <size>
-         <width>23</width>
-         <height>23</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+     <property name="format">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="edit"/>
+   </item>
+   <item row="1" column="4">
+    <widget class="QCheckBox" name="save">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="5">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Shop typical: 192.168.0.10 
+Office typical: 192.168.41.187</string>
      </property>
     </widget>
    </item>

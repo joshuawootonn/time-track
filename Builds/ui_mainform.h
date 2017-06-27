@@ -195,14 +195,6 @@ public:
     QGroupBox *groupBox_15;
     QGridLayout *gridLayout_15;
     QLabel *ShiftTotalTime;
-    QWidget *DataBaseSettings;
-    QHBoxLayout *horizontalLayout_4;
-    QGroupBox *groupBox_14;
-    QGridLayout *gridLayout_14;
-    QPushButton *DataBaseConnect;
-    QPushButton *DataBaseDisconnect;
-    QLabel *label_6;
-    QLabel *DataBaseLabel;
     QWidget *Settings;
     QHBoxLayout *horizontalLayout_12;
     QGroupBox *groupBox_16;
@@ -239,6 +231,7 @@ public:
 "font-family:\"Calibri\";\n"
 "font-size: 16px;\n"
 "color:#263544;\n"
+"\n"
 "\n"
 "}\n"
 "\n"
@@ -303,8 +296,8 @@ public:
 "}\n"
 "\n"
 "QPushButton#basicPageConnect:hover{\n"
-"bord"
-                        "er-radius:15px;\n"
+""
+                        "border-radius:15px;\n"
 "\n"
 "}\n"
 "\n"
@@ -340,7 +333,7 @@ public:
 "    border: 0px solid gray;\n"
 "	\n"
 "    margin-top: 0.5em;\n"
-"	margin-right:0px;\n"
+"	margin-right:10px;\n"
 "	margin-left:0px;\n"
 "}\n"
 "QGroupBox::title {\n"
@@ -401,14 +394,7 @@ public:
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         loginNumPad->setFont(font);
-        loginNumPad->setStyleSheet(QLatin1String("QPushButton\n"
-"{\n"
-"font: bold;/or italic/\n"
-"background-color: red;\n"
-"font-size: 36px;/for example/\n"
-"height: 48px;/for example/\n"
-"width: 120px;/for example/\n"
-"}"));
+        loginNumPad->setStyleSheet(QStringLiteral(""));
         gridLayout_17 = new QGridLayout(loginNumPad);
         gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
         gridLayout_17->setContentsMargins(0, 0, 0, 0);
@@ -1231,65 +1217,6 @@ public:
         horizontalLayout_3->addWidget(groupBox_15);
 
         HeaderTabs->addTab(ShiftSettings, QString());
-        DataBaseSettings = new QWidget();
-        DataBaseSettings->setObjectName(QStringLiteral("DataBaseSettings"));
-        DataBaseSettings->setEnabled(true);
-        horizontalLayout_4 = new QHBoxLayout(DataBaseSettings);
-        horizontalLayout_4->setSpacing(1);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(2, 2, 2, 2);
-        groupBox_14 = new QGroupBox(DataBaseSettings);
-        groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
-        groupBox_14->setStyleSheet(QLatin1String("\n"
-"\n"
-"QPushButton{\n"
-"padding:3px;\n"
-"border:none;\n"
-"background-color: none;\n"
-"\n"
-"}\n"
-"QPushButton#DataBaseConnect{\n"
-"border-image: url(../Icons/connect.png); }\n"
-" QPushButton#DataBaseConnect::hover { \n"
-"border-image: url(..Icons/connect_hover.png); }\n"
-"\n"
-"\n"
-"QPushButton#DataBaseDisconnect{\n"
-"border-image: url(../Icons/disconnect.png); }\n"
-"QPushButton#DataBaseDisconnect::hover { \n"
-"border-image: url(..Icons/connect.png); }\n"
-"\n"
-"\n"
-""));
-        gridLayout_14 = new QGridLayout(groupBox_14);
-        gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
-        DataBaseConnect = new QPushButton(groupBox_14);
-        DataBaseConnect->setObjectName(QStringLiteral("DataBaseConnect"));
-        DataBaseConnect->setMaximumSize(QSize(50, 50));
-
-        gridLayout_14->addWidget(DataBaseConnect, 0, 3, 1, 1);
-
-        DataBaseDisconnect = new QPushButton(groupBox_14);
-        DataBaseDisconnect->setObjectName(QStringLiteral("DataBaseDisconnect"));
-        DataBaseDisconnect->setMaximumSize(QSize(50, 50));
-
-        gridLayout_14->addWidget(DataBaseDisconnect, 0, 4, 1, 1);
-
-        label_6 = new QLabel(groupBox_14);
-        label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setMaximumSize(QSize(115, 16777215));
-
-        gridLayout_14->addWidget(label_6, 0, 0, 1, 1);
-
-        DataBaseLabel = new QLabel(groupBox_14);
-        DataBaseLabel->setObjectName(QStringLiteral("DataBaseLabel"));
-
-        gridLayout_14->addWidget(DataBaseLabel, 0, 2, 1, 1);
-
-
-        horizontalLayout_4->addWidget(groupBox_14);
-
-        HeaderTabs->addTab(DataBaseSettings, QString());
         Settings = new QWidget();
         Settings->setObjectName(QStringLiteral("Settings"));
         horizontalLayout_12 = new QHBoxLayout(Settings);
@@ -1464,9 +1391,7 @@ public:
         QWidget::setTabOrder(ShiftProjectBox, ShiftItemBox);
         QWidget::setTabOrder(ShiftItemBox, ShiftDate1);
         QWidget::setTabOrder(ShiftDate1, ShiftDate2);
-        QWidget::setTabOrder(ShiftDate2, DataBaseConnect);
-        QWidget::setTabOrder(DataBaseConnect, DataBaseDisconnect);
-        QWidget::setTabOrder(DataBaseDisconnect, SettingsMax);
+        QWidget::setTabOrder(ShiftDate2, SettingsMax);
         QWidget::setTabOrder(SettingsMax, SettingsFull);
         QWidget::setTabOrder(SettingsFull, SettingsConnections);
         QWidget::setTabOrder(SettingsConnections, SettingsExport);
@@ -1477,8 +1402,8 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(2);
-        MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(3);
+        MainTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);
 
 
@@ -1575,17 +1500,11 @@ public:
         groupBox_15->setTitle(QString());
         ShiftTotalTime->setText(QApplication::translate("MainForm", "0:00", Q_NULLPTR));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", Q_NULLPTR));
-        groupBox_14->setTitle(QApplication::translate("MainForm", "Server Database", Q_NULLPTR));
-        DataBaseConnect->setText(QString());
-        DataBaseDisconnect->setText(QString());
-        label_6->setText(QApplication::translate("MainForm", "Current Connection:", Q_NULLPTR));
-        DataBaseLabel->setText(QString());
-        HeaderTabs->setTabText(HeaderTabs->indexOf(DataBaseSettings), QApplication::translate("MainForm", "DataBase", Q_NULLPTR));
         groupBox_16->setTitle(QApplication::translate("MainForm", "Display", Q_NULLPTR));
         SettingsMax->setText(QString());
         SettingsFull->setText(QString());
-        SettingsConnectionGroup->setTitle(QApplication::translate("MainForm", "Connections", Q_NULLPTR));
-        SettingsConnections->setText(QApplication::translate("MainForm", "PushButton", Q_NULLPTR));
+        SettingsConnectionGroup->setTitle(QApplication::translate("MainForm", "Connection", Q_NULLPTR));
+        SettingsConnections->setText(QString());
         groupBox_18->setTitle(QApplication::translate("MainForm", "Export", Q_NULLPTR));
         SettingsExport->setText(QString());
         groupBox_19->setTitle(QApplication::translate("MainForm", "Printing", Q_NULLPTR));

@@ -296,7 +296,7 @@ void ClockoutForm::on_Add_clicked()
     {
         ui->DescriptionWidget->setVisible(true);
     }
-    ui->Sections->resizeRowsToContents();
+    ui->Sections->resizeColumnsToContents();
     TimeLeft();
 }
 void ClockoutForm::on_Delete_clicked()

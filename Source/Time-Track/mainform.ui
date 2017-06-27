@@ -23,6 +23,7 @@ font-family:&quot;Calibri&quot;;
 font-size: 16px;
 color:#263544;
 
+
 }
 
 
@@ -122,7 +123,7 @@ QGroupBox {
     border: 0px solid gray;
 	
     margin-top: 0.5em;
-	margin-right:0px;
+	margin-right:10px;
 	margin-left:0px;
 }
 QGroupBox::title {
@@ -191,14 +192,7 @@ color:#263544;
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton
-{
-font: bold;/or italic/
-background-color: red;
-font-size: 36px;/for example/
-height: 48px;/for example/
-width: 120px;/for example/
-}</string>
+             <string notr="true"/>
             </property>
             <layout class="QGridLayout" name="gridLayout_17">
              <property name="leftMargin">
@@ -641,7 +635,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -829,7 +823,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>4</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1744,109 +1738,6 @@ background-color:#8DAA91;
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="DataBaseSettings">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <attribute name="title">
-           <string>DataBase</string>
-          </attribute>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <property name="spacing">
-            <number>1</number>
-           </property>
-           <property name="leftMargin">
-            <number>2</number>
-           </property>
-           <property name="topMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>2</number>
-           </property>
-           <property name="bottomMargin">
-            <number>2</number>
-           </property>
-           <item>
-            <widget class="QGroupBox" name="groupBox_14">
-             <property name="styleSheet">
-              <string notr="true">
-
-QPushButton{
-padding:3px;
-border:none;
-background-color: none;
-
-}
-QPushButton#DataBaseConnect{
-border-image: url(../Icons/connect.png); }
- QPushButton#DataBaseConnect::hover { 
-border-image: url(..Icons/connect_hover.png); }
-
-
-QPushButton#DataBaseDisconnect{
-border-image: url(../Icons/disconnect.png); }
-QPushButton#DataBaseDisconnect::hover { 
-border-image: url(..Icons/connect.png); }
-
-
-</string>
-             </property>
-             <property name="title">
-              <string>Server Database</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_14">
-              <item row="0" column="3">
-               <widget class="QPushButton" name="DataBaseConnect">
-                <property name="maximumSize">
-                 <size>
-                  <width>50</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QPushButton" name="DataBaseDisconnect">
-                <property name="maximumSize">
-                 <size>
-                  <width>50</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_6">
-                <property name="maximumSize">
-                 <size>
-                  <width>115</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Current Connection:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="DataBaseLabel">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
          <widget class="QWidget" name="Settings">
           <attribute name="title">
            <string>Settings</string>
@@ -1893,7 +1784,7 @@ border-image: url(..Icons/connect.png); }
            <item>
             <widget class="QGroupBox" name="SettingsConnectionGroup">
              <property name="title">
-              <string>Connections</string>
+              <string>Connection</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_19">
               <property name="topMargin">
@@ -1905,7 +1796,7 @@ border-image: url(..Icons/connect.png); }
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsConnections">
                 <property name="text">
-                 <string>PushButton</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -2109,8 +2000,6 @@ border-image: url(..Icons/connect.png); }
   <tabstop>ShiftItemBox</tabstop>
   <tabstop>ShiftDate1</tabstop>
   <tabstop>ShiftDate2</tabstop>
-  <tabstop>DataBaseConnect</tabstop>
-  <tabstop>DataBaseDisconnect</tabstop>
   <tabstop>SettingsMax</tabstop>
   <tabstop>SettingsFull</tabstop>
   <tabstop>SettingsConnections</tabstop>

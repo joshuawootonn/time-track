@@ -88,7 +88,7 @@ public:
 "*{\n"
 "font-family:\"Calibri\";\n"
 "font-size: 26px;\n"
-"\n"
+"color:#263544;\n"
 "}\n"
 "\n"
 "\n"
@@ -153,11 +153,11 @@ public:
 "}\n"
 "QComboBox:drop-down{\n"
 "border:none;\n"
-"}\n"
-"\n"
-"\n"
 ""
-                        "QRadioButton{\n"
+                        "}\n"
+"\n"
+"\n"
+"QRadioButton{\n"
 "padding:0px;\n"
 "margin:0px;\n"
 "}\n"
@@ -178,19 +178,19 @@ public:
 ""));
         gridLayout = new QGridLayout(ClockoutForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
         gridLayout->addItem(verticalSpacer, 0, 1, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
         gridLayout->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
@@ -205,24 +205,26 @@ public:
         Sections = new QTableWidget(bigwidger);
         Sections->setObjectName(QStringLiteral("Sections"));
         Sections->setMinimumSize(QSize(500, 0));
+        Sections->setAlternatingRowColors(true);
+        Sections->setGridStyle(Qt::SolidLine);
         Sections->verticalHeader()->setMinimumSectionSize(30);
 
         verticalLayout_3->addWidget(Sections);
 
         DescriptionWidget = new QWidget(bigwidger);
         DescriptionWidget->setObjectName(QStringLiteral("DescriptionWidget"));
-        DescriptionWidget->setMaximumSize(QSize(16777215, 35));
+        DescriptionWidget->setMaximumSize(QSize(16777215, 55));
         horizontalLayout_3 = new QHBoxLayout(DescriptionWidget);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_2 = new QLabel(DescriptionWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMaximumSize(QSize(16777215, 35));
+        label_2->setMaximumSize(QSize(16777215, 45));
 
         horizontalLayout_3->addWidget(label_2);
 
         Description = new QTextEdit(DescriptionWidget);
         Description->setObjectName(QStringLiteral("Description"));
-        Description->setMaximumSize(QSize(16777215, 35));
+        Description->setMaximumSize(QSize(16777215, 45));
 
         horizontalLayout_3->addWidget(Description);
 

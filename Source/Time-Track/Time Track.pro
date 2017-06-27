@@ -19,7 +19,8 @@ SOURCES += \
     shifteditform.cpp \
     connectionform.cpp \
     exportform.cpp \    
-    main.cpp
+    main.cpp \
+    work.cpp
 
 
 HEADERS  += \
@@ -27,7 +28,8 @@ HEADERS  += \
     clockoutform.h \
     shifteditform.h \
     connectionform.h \
-    exportform.h
+    exportform.h \
+    work.h
 
 
 FORMS    += \

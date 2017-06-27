@@ -7,16 +7,27 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     ui->setupUi(this);
-    ui->HeaderTabs->removeTab(4);
+    this->hide();
+    connectionForm = new ConnectionForm(this);
 
+    QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
+    connectionForm->auto_connect();
+}
 
-    if (Connect(router))
-        this->showMaximized();
-    else if (Connect(extender))
+MainForm::~MainForm()
+{
+    delete ui;
+}
+
+void MainForm::start(){
+    address = connectionForm->getConnectionName();
+    Connect(address);
+    if (address.split(".")[3] =="010")
         this->showFullScreen();
     else
-        qDebug()<<"Unable to connect!";
+        this->showMaximized();
+    qDebug()<<"from start";
 
     clockoutForm = new ClockoutForm(this);
     clockoutForm->hide();
@@ -30,14 +41,7 @@ MainForm::MainForm(QWidget *parent) :
     loginInitialize();
     isConnected();
     setIcons();
-    //ui->loginNumPad->hide();
 }
-
-MainForm::~MainForm()
-{
-    delete ui;
-}
-
 
 /* These are the database connections that this database uses.
  * The first is called setup. It's purpose is to store the
@@ -45,65 +49,7 @@ MainForm::~MainForm()
  * anywhere on your computer or server and holds the actual
  * information about employees and such
 */
-void MainForm::ConnectSetup(){
 
-    setup = QSqlDatabase::addDatabase("QSQLITE","setup");
-    QString setupPath = "../SQLite/setup/setup.sqlite";
-    setup.setDatabaseName(setupPath);
-    setup.open();
-
-    QSqlQuery * qry = new QSqlQuery(setup);
-
-    qry->prepare("select path,id from databaselist");
-    if(qry->exec())
-    {
-        while(qry->next())
-        {
-            serverPath = qry->value(0).toString();
-            //qDebug()<<serverPath;
-        }
-    }
-    if(validData(serverPath)&&fileExists(serverPath))
-    {
-        qry->clear();
-        qry->prepare("update databaselist set path='"+serverPath+"' where id = '1'");
-        qry->exec();
-        ConnectServer();
-    }
-
-
-
-
-}
-void MainForm::DisconnectSetup(){
-    setup.close();
-    setup.removeDatabase("setup");
-}
-void MainForm::ConnectServer()
-{
-    data= QSqlDatabase::addDatabase("QSQLITE","data");
-    data.setDatabaseName(serverPath);
-    data.open();
-
-}
-void MainForm::DisconnectServer(){
-
-    QString connection;
-    connection = data.connectionName();
-    ui->EmployeeView->setModel(new QSqlQueryModel());
-    ui->ProjectView->setModel(new QSqlQueryModel());
-    ui->ProjectItemView->setModel(new QSqlQueryModel());
-    ui->ItemView->setModel(new QSqlQueryModel());
-    ui->ShiftView->setModel(new QSqlQueryModel());
-    ui->ShiftEmployeeCombo->setModel(new QSqlQueryModel());
-    ui->ShiftProjectCombo->setModel(new QSqlQueryModel());
-    ui->ShiftItemCombo->setModel(new QSqlQueryModel());
-    ui->ProjectItemCombo->setModel(new QSqlQueryModel());
-    data = QSqlDatabase::database();
-    data.removeDatabase(connection);
-
-
-}
 
 bool MainForm::Connect(QString ip){
 
@@ -140,60 +86,6 @@ bool MainForm::isValidConnection(QString ip){
 }
 
 
-/* These classes deal with file connections.
- * 'CheckIfFileNameIsValid' checks checks if a filepath is
- * 'validData' and if it isnt 'getsCorrectFileName.'
- * 'fileexists' is used throughout to see if a file exists lol.
-*/
-void MainForm::checkIfFileNameIsValid(QString x){
-    //qDebug()<<"1";
-    if(validData(x)&&fileExists(x))
-    {
-        QSqlQuery * qry = new QSqlQuery(setup);
-        qry->prepare("update databaselist set path='"+x+"' where id = '1'");
-        qry->exec();
-        serverPath=x;
-        ConnectServer();
-
-       // qDebug()<<"open at check"<<data.isOpen();
-    }
-    else
-    {
-        x = getCorrectFileName();
-        checkIfFileNameIsValid(serverPath);
-
-    }
-}
-QString MainForm::getCorrectFileName(){
-    QString filename = QFileDialog::getOpenFileName(this,tr("Please select a valid path.."),"../","All files(*.sqlite)");
-   // qDebug()<<filename;
-
-    if(filename == "")
-    {
-
-        QApplication::quit();
-    }
-    else if(fileExists(filename)&&validData(filename))
-        return filename;
-    else
-        return getCorrectFileName();
-
-
-}
-bool MainForm::validData(QString path){
-    QStringList pieces = path.split("/");
-    QString needed = pieces.value(pieces.length()-1);
-
-    if(needed == "data.sqlite")
-        return true;
-    else
-        return false;
-}
-bool MainForm::fileExists(QString path) {
-    QFileInfo check_file(path);
-
-    return check_file.exists() && check_file.isFile();
-}
 
 /* These classes connect the different forms through
  * signals and slots
@@ -333,6 +225,10 @@ void MainForm::setIcons(){
     ui->SettingsExport->setIcon(ButtonIcon);
     ui->SettingsExport->setIconSize(QSize(50,50));
 
+    pixmap = * new QPixmap("../Icons/connected2.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->SettingsConnections->setIcon(ButtonIcon);
+    ui->SettingsConnections->setIconSize(QSize(50,50));
 
     pixmap = * new QPixmap("../Icons/print.png");
     ButtonIcon =  * new QIcon(pixmap);
@@ -574,10 +470,11 @@ void MainForm::on_basicPageClockOut_clicked()
 
     clockoutForm = new ClockoutForm(this);
     establishConnections();
-    if(data.hostName() == router)
-        clockoutForm->showMaximized();
-    else
+    if (address.split(".")[3] =="010")
         clockoutForm->showFullScreen();
+    else
+        clockoutForm->showMaximized();
+
     clockoutForm->ClockoutInitialize(id);
 
 }
@@ -595,7 +492,6 @@ void MainForm::on_basicPageAdvanced_clicked()
     ShiftTab();
     ProjectTab();
     ItemTab();
-    DatabaseTab();
     SettingsTab();
     ui->MainTabs->setCurrentIndex(0);
     ui->HeaderTabs->setCurrentIndex(0);
@@ -717,35 +613,7 @@ void MainForm::on_passEdit_returnPressed()
     }
 }
 
-/* Initialization of Database section of 'sections'
- * and the signal and slot for resetting the data-
- * base connection.
-*/
-void MainForm::DatabaseTab(){
-    ui->DataBaseLabel->setText(serverPath);
-}
-void MainForm::on_DataBaseConnect_clicked()
-{
-//    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),"../","All files(*.sqlite)");
-//    if(filename!=""){
-//        DisconnectServer();
-//        checkIfFileNameIsValid(filename);
-//        on_basicPageAdvanced_clicked();
-//    }
 
-}
-void MainForm::on_DataBaseDisconnect_clicked()
-{
-    QString x = "/";
-    QSqlQuery * qry = new QSqlQuery(setup);
-    qry->prepare("update databaselist set path='"+x+"' where id = '1'");
-    qry->exec();
-    serverPath=x;
-    DisconnectServer();
-    ConnectServer();
-    on_basicPageAdvanced_clicked();
-    QApplication::quit();
-}
 
 // Employee Section!
 
@@ -757,6 +625,7 @@ void MainForm::EmployeeTab()
     employeemodel=EmployeeModel();
     employeefiltermodel = EmployeeFilterModel();
     ui->EmployeeView->setModel(employeefiltermodel);
+     ui->EmployeeView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     establishConnections();
     ui->EmployeeView->setSortingEnabled(true);
@@ -1800,7 +1669,7 @@ void MainForm::on_ShiftDelete_clicked()
  * and fullscreen the program easily plan on making
  * this cleaner later.*/
 void MainForm::SettingsTab(){
-    ui->SettingsConnectionGroup->hide();
+
     QSqlQueryModel * x = ProjectModel();
     currentProject = x->record(1).value(1).toString();
 }
@@ -2054,7 +1923,14 @@ void MainForm::on_SettingsAll_clicked()
 {
 
 }
+void MainForm::on_SettingsConnections_clicked()
+{
+    this->hide();
+    connectionForm = new ConnectionForm(this);
+    connectionForm->show();
+    QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
+}
 /* This is the method used for sending the data
  * database to sub-form.
  */

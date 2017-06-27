@@ -38,19 +38,9 @@ public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
 
-    void ConnectSetup();
-    void DisconnectSetup();
-    void ConnectServer();
-    void DisconnectServer();
 
     bool Connect(QString ip);
     bool isValidConnection(QString ip);
-
-
-    void checkIfFileNameIsValid(QString x);
-    QString getCorrectFileName();
-    bool validData(QString path);
-    bool fileExists(QString path);
 
     QDateTime format_datetimes(QDateTime z);
 
@@ -98,6 +88,7 @@ public:
 public slots:
 
     void reenter();
+    void start();
 
     void loginInitialize();
     void on_basicPageClockIn_clicked();
@@ -198,12 +189,6 @@ private slots:
     void on_ShiftEdit_clicked();
     void on_ShiftDelete_clicked();
 
-    //Datebase Tab!
-
-    void DatabaseTab();
-    void on_DataBaseConnect_clicked();    
-    void on_DataBaseDisconnect_clicked();
-
     //Settings Tab!
 
     void SettingsTab();
@@ -215,6 +200,8 @@ private slots:
     void on_SettingsAll_clicked();
     void on_EmployeeRefresh_clicked();
 
+
+    void on_SettingsConnections_clicked();
 
 public:
     Ui::MainForm *ui;
@@ -232,9 +219,7 @@ private:
     QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
 
-
-    QString router = "192.168.41.187";
-    QString extender = "192.168.0.10";
+    QString address;
 
     ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;
@@ -251,6 +236,7 @@ private:
 };
 
 #endif // MAINFORM_H
+
 
 
 

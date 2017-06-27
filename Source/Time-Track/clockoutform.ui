@@ -27,7 +27,7 @@ background-color:#E5EAE7;
 *{
 font-family:&quot;Calibri&quot;;
 font-size: 26px;
-
+color:#263544;
 }
 
 
@@ -121,6 +121,9 @@ QGroupBox::title {
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>40</width>
@@ -133,6 +136,9 @@ QGroupBox::title {
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -147,6 +153,9 @@ QGroupBox::title {
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>40</width>
@@ -159,6 +168,9 @@ QGroupBox::title {
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -183,6 +195,12 @@ QGroupBox::title {
               <height>0</height>
              </size>
             </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="gridStyle">
+             <enum>Qt::SolidLine</enum>
+            </property>
             <attribute name="verticalHeaderMinimumSectionSize">
              <number>30</number>
             </attribute>
@@ -193,7 +211,7 @@ QGroupBox::title {
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>35</height>
+              <height>55</height>
              </size>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -202,7 +220,7 @@ QGroupBox::title {
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>35</height>
+                 <height>45</height>
                 </size>
                </property>
                <property name="text">
@@ -215,7 +233,7 @@ QGroupBox::title {
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
-                 <height>35</height>
+                 <height>45</height>
                 </size>
                </property>
               </widget>

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainForm_t {
-    QByteArrayData data[96];
-    char stringdata0[2097];
+    QByteArrayData data[95];
+    char stringdata0[2065];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,102 +34,101 @@ static const qt_meta_stringdata_MainForm_t qt_meta_stringdata_MainForm = {
 QT_MOC_LITERAL(0, 0, 8), // "MainForm"
 QT_MOC_LITERAL(1, 9, 7), // "reenter"
 QT_MOC_LITERAL(2, 17, 0), // ""
-QT_MOC_LITERAL(3, 18, 15), // "loginInitialize"
-QT_MOC_LITERAL(4, 34, 27), // "on_basicPageClockIn_clicked"
-QT_MOC_LITERAL(5, 62, 28), // "on_basicPageClockOut_clicked"
-QT_MOC_LITERAL(6, 91, 27), // "on_basicPageConnect_clicked"
-QT_MOC_LITERAL(7, 119, 28), // "on_basicPageAdvanced_clicked"
-QT_MOC_LITERAL(8, 148, 21), // "on_mainFinish_clicked"
-QT_MOC_LITERAL(9, 170, 20), // "refreshShiftEmployee"
-QT_MOC_LITERAL(10, 191, 19), // "refreshShiftProject"
-QT_MOC_LITERAL(11, 211, 16), // "refreshShiftItem"
-QT_MOC_LITERAL(12, 228, 28), // "on_HeaderTabs_currentChanged"
-QT_MOC_LITERAL(13, 257, 5), // "index"
-QT_MOC_LITERAL(14, 263, 25), // "on_passEdit_returnPressed"
-QT_MOC_LITERAL(15, 289, 17), // "on_Login0_clicked"
-QT_MOC_LITERAL(16, 307, 17), // "on_Login9_clicked"
-QT_MOC_LITERAL(17, 325, 17), // "on_Login1_clicked"
-QT_MOC_LITERAL(18, 343, 17), // "on_Login2_clicked"
-QT_MOC_LITERAL(19, 361, 17), // "on_Login3_clicked"
-QT_MOC_LITERAL(20, 379, 17), // "on_Login4_clicked"
-QT_MOC_LITERAL(21, 397, 17), // "on_Login5_clicked"
-QT_MOC_LITERAL(22, 415, 17), // "on_Login6_clicked"
-QT_MOC_LITERAL(23, 433, 17), // "on_Login7_clicked"
-QT_MOC_LITERAL(24, 451, 17), // "on_Login8_clicked"
-QT_MOC_LITERAL(25, 469, 20), // "on_LoginBack_clicked"
-QT_MOC_LITERAL(26, 490, 18), // "on_LoginGo_clicked"
-QT_MOC_LITERAL(27, 509, 20), // "refreshEmployeeStuff"
-QT_MOC_LITERAL(28, 530, 18), // "refreshEmployeeTab"
-QT_MOC_LITERAL(29, 549, 23), // "on_EmployeeName_clicked"
-QT_MOC_LITERAL(30, 573, 22), // "on_EmployeePin_clicked"
-QT_MOC_LITERAL(31, 596, 30), // "on_EmployeeAdminStatus_clicked"
-QT_MOC_LITERAL(32, 627, 29), // "on_EmployeeShiftCount_clicked"
-QT_MOC_LITERAL(33, 657, 25), // "on_EmployeeActive_clicked"
-QT_MOC_LITERAL(34, 683, 21), // "on_EmployeeId_clicked"
-QT_MOC_LITERAL(35, 705, 26), // "on_EmployeeCurrent_clicked"
-QT_MOC_LITERAL(36, 732, 22), // "on_EmployeeAdd_clicked"
-QT_MOC_LITERAL(37, 755, 14), // "generateRandom"
-QT_MOC_LITERAL(38, 770, 25), // "on_EmployeeDelete_clicked"
-QT_MOC_LITERAL(39, 796, 26), // "on_EmployeeArchive_clicked"
-QT_MOC_LITERAL(40, 823, 19), // "on_AllRadio_toggled"
-QT_MOC_LITERAL(41, 843, 7), // "checked"
-QT_MOC_LITERAL(42, 851, 23), // "on_CurrentRadio_toggled"
-QT_MOC_LITERAL(43, 875, 20), // "on_PastRadio_toggled"
-QT_MOC_LITERAL(44, 896, 19), // "refreshProjectStuff"
-QT_MOC_LITERAL(45, 916, 17), // "refreshProjectTab"
-QT_MOC_LITERAL(46, 934, 22), // "on_ProjectView_clicked"
-QT_MOC_LITERAL(47, 957, 21), // "on_ProjectAdd_clicked"
-QT_MOC_LITERAL(48, 979, 24), // "on_ProjectDelete_clicked"
-QT_MOC_LITERAL(49, 1004, 25), // "on_ProjectArchive_clicked"
-QT_MOC_LITERAL(50, 1030, 22), // "on_ProjectName_clicked"
-QT_MOC_LITERAL(51, 1053, 20), // "on_ProjectId_clicked"
-QT_MOC_LITERAL(52, 1074, 25), // "on_ProjectCurrent_clicked"
-QT_MOC_LITERAL(53, 1100, 26), // "on_ProjectAllRadio_toggled"
-QT_MOC_LITERAL(54, 1127, 30), // "on_ProjectCurrentRadio_toggled"
-QT_MOC_LITERAL(55, 1158, 27), // "on_ProjectPastRadio_toggled"
-QT_MOC_LITERAL(56, 1186, 26), // "on_ProjectItemName_clicked"
-QT_MOC_LITERAL(57, 1213, 24), // "on_ProjectItemId_clicked"
-QT_MOC_LITERAL(58, 1238, 25), // "on_ProjectItemAdd_clicked"
-QT_MOC_LITERAL(59, 1264, 28), // "on_ProjectItemRemove_clicked"
-QT_MOC_LITERAL(60, 1293, 22), // "on_ProjectDate_clicked"
-QT_MOC_LITERAL(61, 1316, 16), // "refreshItemStuff"
-QT_MOC_LITERAL(62, 1333, 14), // "refreshItemTab"
-QT_MOC_LITERAL(63, 1348, 18), // "on_ItemAdd_clicked"
-QT_MOC_LITERAL(64, 1367, 21), // "on_ItemDelete_clicked"
-QT_MOC_LITERAL(65, 1389, 19), // "on_ItemName_clicked"
-QT_MOC_LITERAL(66, 1409, 17), // "on_ItemId_clicked"
-QT_MOC_LITERAL(67, 1427, 23), // "on_ItemCategory_clicked"
-QT_MOC_LITERAL(68, 1451, 18), // "on_ItemSub_clicked"
-QT_MOC_LITERAL(69, 1470, 24), // "on_ItemDimension_clicked"
-QT_MOC_LITERAL(70, 1495, 15), // "refreshShiftTab"
-QT_MOC_LITERAL(71, 1511, 19), // "displayShiftSuccess"
-QT_MOC_LITERAL(72, 1531, 27), // "on_ShiftEmployeeBox_clicked"
-QT_MOC_LITERAL(73, 1559, 26), // "on_ShiftProjectBox_clicked"
-QT_MOC_LITERAL(74, 1586, 23), // "on_ShiftItemBox_clicked"
-QT_MOC_LITERAL(75, 1610, 40), // "on_ShiftEmployeeCombo_current..."
-QT_MOC_LITERAL(76, 1651, 4), // "arg1"
-QT_MOC_LITERAL(77, 1656, 39), // "on_ShiftProjectCombo_currentT..."
-QT_MOC_LITERAL(78, 1696, 36), // "on_ShiftItemCombo_currentText..."
-QT_MOC_LITERAL(79, 1733, 25), // "on_ShiftDate1_dateChanged"
-QT_MOC_LITERAL(80, 1759, 4), // "date"
-QT_MOC_LITERAL(81, 1764, 25), // "on_ShiftDate2_dateChanged"
-QT_MOC_LITERAL(82, 1790, 19), // "on_ShiftAdd_clicked"
-QT_MOC_LITERAL(83, 1810, 20), // "on_ShiftEdit_clicked"
-QT_MOC_LITERAL(84, 1831, 22), // "on_ShiftDelete_clicked"
-QT_MOC_LITERAL(85, 1854, 11), // "DatabaseTab"
-QT_MOC_LITERAL(86, 1866, 26), // "on_DataBaseConnect_clicked"
-QT_MOC_LITERAL(87, 1893, 29), // "on_DataBaseDisconnect_clicked"
-QT_MOC_LITERAL(88, 1923, 11), // "SettingsTab"
-QT_MOC_LITERAL(89, 1935, 22), // "on_SettingsMax_clicked"
-QT_MOC_LITERAL(90, 1958, 23), // "on_SettingsFull_clicked"
-QT_MOC_LITERAL(91, 1982, 25), // "on_SettingsExport_clicked"
-QT_MOC_LITERAL(92, 2008, 13), // "exportToExcel"
-QT_MOC_LITERAL(93, 2022, 24), // "on_SettingsPrint_clicked"
-QT_MOC_LITERAL(94, 2047, 22), // "on_SettingsAll_clicked"
-QT_MOC_LITERAL(95, 2070, 26) // "on_EmployeeRefresh_clicked"
+QT_MOC_LITERAL(3, 18, 5), // "start"
+QT_MOC_LITERAL(4, 24, 15), // "loginInitialize"
+QT_MOC_LITERAL(5, 40, 27), // "on_basicPageClockIn_clicked"
+QT_MOC_LITERAL(6, 68, 28), // "on_basicPageClockOut_clicked"
+QT_MOC_LITERAL(7, 97, 27), // "on_basicPageConnect_clicked"
+QT_MOC_LITERAL(8, 125, 28), // "on_basicPageAdvanced_clicked"
+QT_MOC_LITERAL(9, 154, 21), // "on_mainFinish_clicked"
+QT_MOC_LITERAL(10, 176, 20), // "refreshShiftEmployee"
+QT_MOC_LITERAL(11, 197, 19), // "refreshShiftProject"
+QT_MOC_LITERAL(12, 217, 16), // "refreshShiftItem"
+QT_MOC_LITERAL(13, 234, 28), // "on_HeaderTabs_currentChanged"
+QT_MOC_LITERAL(14, 263, 5), // "index"
+QT_MOC_LITERAL(15, 269, 25), // "on_passEdit_returnPressed"
+QT_MOC_LITERAL(16, 295, 17), // "on_Login0_clicked"
+QT_MOC_LITERAL(17, 313, 17), // "on_Login9_clicked"
+QT_MOC_LITERAL(18, 331, 17), // "on_Login1_clicked"
+QT_MOC_LITERAL(19, 349, 17), // "on_Login2_clicked"
+QT_MOC_LITERAL(20, 367, 17), // "on_Login3_clicked"
+QT_MOC_LITERAL(21, 385, 17), // "on_Login4_clicked"
+QT_MOC_LITERAL(22, 403, 17), // "on_Login5_clicked"
+QT_MOC_LITERAL(23, 421, 17), // "on_Login6_clicked"
+QT_MOC_LITERAL(24, 439, 17), // "on_Login7_clicked"
+QT_MOC_LITERAL(25, 457, 17), // "on_Login8_clicked"
+QT_MOC_LITERAL(26, 475, 20), // "on_LoginBack_clicked"
+QT_MOC_LITERAL(27, 496, 18), // "on_LoginGo_clicked"
+QT_MOC_LITERAL(28, 515, 20), // "refreshEmployeeStuff"
+QT_MOC_LITERAL(29, 536, 18), // "refreshEmployeeTab"
+QT_MOC_LITERAL(30, 555, 23), // "on_EmployeeName_clicked"
+QT_MOC_LITERAL(31, 579, 22), // "on_EmployeePin_clicked"
+QT_MOC_LITERAL(32, 602, 30), // "on_EmployeeAdminStatus_clicked"
+QT_MOC_LITERAL(33, 633, 29), // "on_EmployeeShiftCount_clicked"
+QT_MOC_LITERAL(34, 663, 25), // "on_EmployeeActive_clicked"
+QT_MOC_LITERAL(35, 689, 21), // "on_EmployeeId_clicked"
+QT_MOC_LITERAL(36, 711, 26), // "on_EmployeeCurrent_clicked"
+QT_MOC_LITERAL(37, 738, 22), // "on_EmployeeAdd_clicked"
+QT_MOC_LITERAL(38, 761, 14), // "generateRandom"
+QT_MOC_LITERAL(39, 776, 25), // "on_EmployeeDelete_clicked"
+QT_MOC_LITERAL(40, 802, 26), // "on_EmployeeArchive_clicked"
+QT_MOC_LITERAL(41, 829, 19), // "on_AllRadio_toggled"
+QT_MOC_LITERAL(42, 849, 7), // "checked"
+QT_MOC_LITERAL(43, 857, 23), // "on_CurrentRadio_toggled"
+QT_MOC_LITERAL(44, 881, 20), // "on_PastRadio_toggled"
+QT_MOC_LITERAL(45, 902, 19), // "refreshProjectStuff"
+QT_MOC_LITERAL(46, 922, 17), // "refreshProjectTab"
+QT_MOC_LITERAL(47, 940, 22), // "on_ProjectView_clicked"
+QT_MOC_LITERAL(48, 963, 21), // "on_ProjectAdd_clicked"
+QT_MOC_LITERAL(49, 985, 24), // "on_ProjectDelete_clicked"
+QT_MOC_LITERAL(50, 1010, 25), // "on_ProjectArchive_clicked"
+QT_MOC_LITERAL(51, 1036, 22), // "on_ProjectName_clicked"
+QT_MOC_LITERAL(52, 1059, 20), // "on_ProjectId_clicked"
+QT_MOC_LITERAL(53, 1080, 25), // "on_ProjectCurrent_clicked"
+QT_MOC_LITERAL(54, 1106, 26), // "on_ProjectAllRadio_toggled"
+QT_MOC_LITERAL(55, 1133, 30), // "on_ProjectCurrentRadio_toggled"
+QT_MOC_LITERAL(56, 1164, 27), // "on_ProjectPastRadio_toggled"
+QT_MOC_LITERAL(57, 1192, 26), // "on_ProjectItemName_clicked"
+QT_MOC_LITERAL(58, 1219, 24), // "on_ProjectItemId_clicked"
+QT_MOC_LITERAL(59, 1244, 25), // "on_ProjectItemAdd_clicked"
+QT_MOC_LITERAL(60, 1270, 28), // "on_ProjectItemRemove_clicked"
+QT_MOC_LITERAL(61, 1299, 22), // "on_ProjectDate_clicked"
+QT_MOC_LITERAL(62, 1322, 16), // "refreshItemStuff"
+QT_MOC_LITERAL(63, 1339, 14), // "refreshItemTab"
+QT_MOC_LITERAL(64, 1354, 18), // "on_ItemAdd_clicked"
+QT_MOC_LITERAL(65, 1373, 21), // "on_ItemDelete_clicked"
+QT_MOC_LITERAL(66, 1395, 19), // "on_ItemName_clicked"
+QT_MOC_LITERAL(67, 1415, 17), // "on_ItemId_clicked"
+QT_MOC_LITERAL(68, 1433, 23), // "on_ItemCategory_clicked"
+QT_MOC_LITERAL(69, 1457, 18), // "on_ItemSub_clicked"
+QT_MOC_LITERAL(70, 1476, 24), // "on_ItemDimension_clicked"
+QT_MOC_LITERAL(71, 1501, 15), // "refreshShiftTab"
+QT_MOC_LITERAL(72, 1517, 19), // "displayShiftSuccess"
+QT_MOC_LITERAL(73, 1537, 27), // "on_ShiftEmployeeBox_clicked"
+QT_MOC_LITERAL(74, 1565, 26), // "on_ShiftProjectBox_clicked"
+QT_MOC_LITERAL(75, 1592, 23), // "on_ShiftItemBox_clicked"
+QT_MOC_LITERAL(76, 1616, 40), // "on_ShiftEmployeeCombo_current..."
+QT_MOC_LITERAL(77, 1657, 4), // "arg1"
+QT_MOC_LITERAL(78, 1662, 39), // "on_ShiftProjectCombo_currentT..."
+QT_MOC_LITERAL(79, 1702, 36), // "on_ShiftItemCombo_currentText..."
+QT_MOC_LITERAL(80, 1739, 25), // "on_ShiftDate1_dateChanged"
+QT_MOC_LITERAL(81, 1765, 4), // "date"
+QT_MOC_LITERAL(82, 1770, 25), // "on_ShiftDate2_dateChanged"
+QT_MOC_LITERAL(83, 1796, 19), // "on_ShiftAdd_clicked"
+QT_MOC_LITERAL(84, 1816, 20), // "on_ShiftEdit_clicked"
+QT_MOC_LITERAL(85, 1837, 22), // "on_ShiftDelete_clicked"
+QT_MOC_LITERAL(86, 1860, 11), // "SettingsTab"
+QT_MOC_LITERAL(87, 1872, 22), // "on_SettingsMax_clicked"
+QT_MOC_LITERAL(88, 1895, 23), // "on_SettingsFull_clicked"
+QT_MOC_LITERAL(89, 1919, 25), // "on_SettingsExport_clicked"
+QT_MOC_LITERAL(90, 1945, 13), // "exportToExcel"
+QT_MOC_LITERAL(91, 1959, 24), // "on_SettingsPrint_clicked"
+QT_MOC_LITERAL(92, 1984, 22), // "on_SettingsAll_clicked"
+QT_MOC_LITERAL(93, 2007, 26), // "on_EmployeeRefresh_clicked"
+QT_MOC_LITERAL(94, 2034, 30) // "on_SettingsConnections_clicked"
 
     },
-    "MainForm\0reenter\0\0loginInitialize\0"
+    "MainForm\0reenter\0\0start\0loginInitialize\0"
     "on_basicPageClockIn_clicked\0"
     "on_basicPageClockOut_clicked\0"
     "on_basicPageConnect_clicked\0"
@@ -183,13 +182,13 @@ QT_MOC_LITERAL(95, 2070, 26) // "on_EmployeeRefresh_clicked"
     "on_ShiftDate1_dateChanged\0date\0"
     "on_ShiftDate2_dateChanged\0on_ShiftAdd_clicked\0"
     "on_ShiftEdit_clicked\0on_ShiftDelete_clicked\0"
-    "DatabaseTab\0on_DataBaseConnect_clicked\0"
-    "on_DataBaseDisconnect_clicked\0SettingsTab\0"
-    "on_SettingsMax_clicked\0on_SettingsFull_clicked\0"
+    "SettingsTab\0on_SettingsMax_clicked\0"
+    "on_SettingsFull_clicked\0"
     "on_SettingsExport_clicked\0exportToExcel\0"
     "on_SettingsPrint_clicked\0"
     "on_SettingsAll_clicked\0"
-    "on_EmployeeRefresh_clicked"
+    "on_EmployeeRefresh_clicked\0"
+    "on_SettingsConnections_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -199,7 +198,7 @@ static const uint qt_meta_data_MainForm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      90,   14, // methods
+      89,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -207,96 +206,95 @@ static const uint qt_meta_data_MainForm[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  464,    2, 0x0a /* Public */,
-       3,    0,  465,    2, 0x0a /* Public */,
-       4,    0,  466,    2, 0x0a /* Public */,
-       5,    0,  467,    2, 0x0a /* Public */,
-       6,    0,  468,    2, 0x0a /* Public */,
-       7,    0,  469,    2, 0x0a /* Public */,
-       8,    0,  470,    2, 0x0a /* Public */,
-       9,    0,  471,    2, 0x0a /* Public */,
-      10,    0,  472,    2, 0x0a /* Public */,
-      11,    0,  473,    2, 0x0a /* Public */,
-      12,    1,  474,    2, 0x08 /* Private */,
-      14,    0,  477,    2, 0x08 /* Private */,
-      15,    0,  478,    2, 0x08 /* Private */,
-      16,    0,  479,    2, 0x08 /* Private */,
-      17,    0,  480,    2, 0x08 /* Private */,
-      18,    0,  481,    2, 0x08 /* Private */,
-      19,    0,  482,    2, 0x08 /* Private */,
-      20,    0,  483,    2, 0x08 /* Private */,
-      21,    0,  484,    2, 0x08 /* Private */,
-      22,    0,  485,    2, 0x08 /* Private */,
-      23,    0,  486,    2, 0x08 /* Private */,
-      24,    0,  487,    2, 0x08 /* Private */,
-      25,    0,  488,    2, 0x08 /* Private */,
-      26,    0,  489,    2, 0x08 /* Private */,
-      27,    0,  490,    2, 0x08 /* Private */,
-      28,    0,  491,    2, 0x08 /* Private */,
-      29,    0,  492,    2, 0x08 /* Private */,
-      30,    0,  493,    2, 0x08 /* Private */,
-      31,    0,  494,    2, 0x08 /* Private */,
-      32,    0,  495,    2, 0x08 /* Private */,
-      33,    0,  496,    2, 0x08 /* Private */,
-      34,    0,  497,    2, 0x08 /* Private */,
-      35,    0,  498,    2, 0x08 /* Private */,
-      36,    0,  499,    2, 0x08 /* Private */,
-      37,    0,  500,    2, 0x08 /* Private */,
-      38,    0,  501,    2, 0x08 /* Private */,
-      39,    0,  502,    2, 0x08 /* Private */,
-      40,    1,  503,    2, 0x08 /* Private */,
-      42,    1,  506,    2, 0x08 /* Private */,
-      43,    1,  509,    2, 0x08 /* Private */,
-      44,    0,  512,    2, 0x08 /* Private */,
-      45,    0,  513,    2, 0x08 /* Private */,
-      46,    1,  514,    2, 0x08 /* Private */,
-      47,    0,  517,    2, 0x08 /* Private */,
-      48,    0,  518,    2, 0x08 /* Private */,
-      49,    0,  519,    2, 0x08 /* Private */,
-      50,    0,  520,    2, 0x08 /* Private */,
-      51,    0,  521,    2, 0x08 /* Private */,
-      52,    0,  522,    2, 0x08 /* Private */,
-      53,    1,  523,    2, 0x08 /* Private */,
-      54,    1,  526,    2, 0x08 /* Private */,
-      55,    1,  529,    2, 0x08 /* Private */,
-      56,    0,  532,    2, 0x08 /* Private */,
-      57,    0,  533,    2, 0x08 /* Private */,
-      58,    0,  534,    2, 0x08 /* Private */,
-      59,    0,  535,    2, 0x08 /* Private */,
-      60,    0,  536,    2, 0x08 /* Private */,
-      61,    0,  537,    2, 0x08 /* Private */,
-      62,    0,  538,    2, 0x08 /* Private */,
-      63,    0,  539,    2, 0x08 /* Private */,
-      64,    0,  540,    2, 0x08 /* Private */,
-      65,    0,  541,    2, 0x08 /* Private */,
-      66,    0,  542,    2, 0x08 /* Private */,
-      67,    0,  543,    2, 0x08 /* Private */,
-      68,    0,  544,    2, 0x08 /* Private */,
-      69,    0,  545,    2, 0x08 /* Private */,
-      70,    0,  546,    2, 0x08 /* Private */,
-      71,    0,  547,    2, 0x08 /* Private */,
-      72,    0,  548,    2, 0x08 /* Private */,
-      73,    0,  549,    2, 0x08 /* Private */,
-      74,    0,  550,    2, 0x08 /* Private */,
-      75,    1,  551,    2, 0x08 /* Private */,
-      77,    1,  554,    2, 0x08 /* Private */,
-      78,    1,  557,    2, 0x08 /* Private */,
-      79,    1,  560,    2, 0x08 /* Private */,
-      81,    1,  563,    2, 0x08 /* Private */,
-      82,    0,  566,    2, 0x08 /* Private */,
-      83,    0,  567,    2, 0x08 /* Private */,
-      84,    0,  568,    2, 0x08 /* Private */,
-      85,    0,  569,    2, 0x08 /* Private */,
-      86,    0,  570,    2, 0x08 /* Private */,
-      87,    0,  571,    2, 0x08 /* Private */,
-      88,    0,  572,    2, 0x08 /* Private */,
-      89,    0,  573,    2, 0x08 /* Private */,
-      90,    0,  574,    2, 0x08 /* Private */,
-      91,    0,  575,    2, 0x08 /* Private */,
-      92,    0,  576,    2, 0x08 /* Private */,
-      93,    0,  577,    2, 0x08 /* Private */,
-      94,    0,  578,    2, 0x08 /* Private */,
-      95,    0,  579,    2, 0x08 /* Private */,
+       1,    0,  459,    2, 0x0a /* Public */,
+       3,    0,  460,    2, 0x0a /* Public */,
+       4,    0,  461,    2, 0x0a /* Public */,
+       5,    0,  462,    2, 0x0a /* Public */,
+       6,    0,  463,    2, 0x0a /* Public */,
+       7,    0,  464,    2, 0x0a /* Public */,
+       8,    0,  465,    2, 0x0a /* Public */,
+       9,    0,  466,    2, 0x0a /* Public */,
+      10,    0,  467,    2, 0x0a /* Public */,
+      11,    0,  468,    2, 0x0a /* Public */,
+      12,    0,  469,    2, 0x0a /* Public */,
+      13,    1,  470,    2, 0x08 /* Private */,
+      15,    0,  473,    2, 0x08 /* Private */,
+      16,    0,  474,    2, 0x08 /* Private */,
+      17,    0,  475,    2, 0x08 /* Private */,
+      18,    0,  476,    2, 0x08 /* Private */,
+      19,    0,  477,    2, 0x08 /* Private */,
+      20,    0,  478,    2, 0x08 /* Private */,
+      21,    0,  479,    2, 0x08 /* Private */,
+      22,    0,  480,    2, 0x08 /* Private */,
+      23,    0,  481,    2, 0x08 /* Private */,
+      24,    0,  482,    2, 0x08 /* Private */,
+      25,    0,  483,    2, 0x08 /* Private */,
+      26,    0,  484,    2, 0x08 /* Private */,
+      27,    0,  485,    2, 0x08 /* Private */,
+      28,    0,  486,    2, 0x08 /* Private */,
+      29,    0,  487,    2, 0x08 /* Private */,
+      30,    0,  488,    2, 0x08 /* Private */,
+      31,    0,  489,    2, 0x08 /* Private */,
+      32,    0,  490,    2, 0x08 /* Private */,
+      33,    0,  491,    2, 0x08 /* Private */,
+      34,    0,  492,    2, 0x08 /* Private */,
+      35,    0,  493,    2, 0x08 /* Private */,
+      36,    0,  494,    2, 0x08 /* Private */,
+      37,    0,  495,    2, 0x08 /* Private */,
+      38,    0,  496,    2, 0x08 /* Private */,
+      39,    0,  497,    2, 0x08 /* Private */,
+      40,    0,  498,    2, 0x08 /* Private */,
+      41,    1,  499,    2, 0x08 /* Private */,
+      43,    1,  502,    2, 0x08 /* Private */,
+      44,    1,  505,    2, 0x08 /* Private */,
+      45,    0,  508,    2, 0x08 /* Private */,
+      46,    0,  509,    2, 0x08 /* Private */,
+      47,    1,  510,    2, 0x08 /* Private */,
+      48,    0,  513,    2, 0x08 /* Private */,
+      49,    0,  514,    2, 0x08 /* Private */,
+      50,    0,  515,    2, 0x08 /* Private */,
+      51,    0,  516,    2, 0x08 /* Private */,
+      52,    0,  517,    2, 0x08 /* Private */,
+      53,    0,  518,    2, 0x08 /* Private */,
+      54,    1,  519,    2, 0x08 /* Private */,
+      55,    1,  522,    2, 0x08 /* Private */,
+      56,    1,  525,    2, 0x08 /* Private */,
+      57,    0,  528,    2, 0x08 /* Private */,
+      58,    0,  529,    2, 0x08 /* Private */,
+      59,    0,  530,    2, 0x08 /* Private */,
+      60,    0,  531,    2, 0x08 /* Private */,
+      61,    0,  532,    2, 0x08 /* Private */,
+      62,    0,  533,    2, 0x08 /* Private */,
+      63,    0,  534,    2, 0x08 /* Private */,
+      64,    0,  535,    2, 0x08 /* Private */,
+      65,    0,  536,    2, 0x08 /* Private */,
+      66,    0,  537,    2, 0x08 /* Private */,
+      67,    0,  538,    2, 0x08 /* Private */,
+      68,    0,  539,    2, 0x08 /* Private */,
+      69,    0,  540,    2, 0x08 /* Private */,
+      70,    0,  541,    2, 0x08 /* Private */,
+      71,    0,  542,    2, 0x08 /* Private */,
+      72,    0,  543,    2, 0x08 /* Private */,
+      73,    0,  544,    2, 0x08 /* Private */,
+      74,    0,  545,    2, 0x08 /* Private */,
+      75,    0,  546,    2, 0x08 /* Private */,
+      76,    1,  547,    2, 0x08 /* Private */,
+      78,    1,  550,    2, 0x08 /* Private */,
+      79,    1,  553,    2, 0x08 /* Private */,
+      80,    1,  556,    2, 0x08 /* Private */,
+      82,    1,  559,    2, 0x08 /* Private */,
+      83,    0,  562,    2, 0x08 /* Private */,
+      84,    0,  563,    2, 0x08 /* Private */,
+      85,    0,  564,    2, 0x08 /* Private */,
+      86,    0,  565,    2, 0x08 /* Private */,
+      87,    0,  566,    2, 0x08 /* Private */,
+      88,    0,  567,    2, 0x08 /* Private */,
+      89,    0,  568,    2, 0x08 /* Private */,
+      90,    0,  569,    2, 0x08 /* Private */,
+      91,    0,  570,    2, 0x08 /* Private */,
+      92,    0,  571,    2, 0x08 /* Private */,
+      93,    0,  572,    2, 0x08 /* Private */,
+      94,    0,  573,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -309,7 +307,8 @@ static const uint qt_meta_data_MainForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   14,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -336,24 +335,21 @@ static const uint qt_meta_data_MainForm[] = {
     QMetaType::Int,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   41,
-    QMetaType::Void, QMetaType::Bool,   41,
-    QMetaType::Void, QMetaType::Bool,   41,
+    QMetaType::Void, QMetaType::Bool,   42,
+    QMetaType::Void, QMetaType::Bool,   42,
+    QMetaType::Void, QMetaType::Bool,   42,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QModelIndex,   13,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QModelIndex,   14,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   41,
-    QMetaType::Void, QMetaType::Bool,   41,
-    QMetaType::Void, QMetaType::Bool,   41,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,   42,
+    QMetaType::Void, QMetaType::Bool,   42,
+    QMetaType::Void, QMetaType::Bool,   42,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -370,13 +366,14 @@ static const uint qt_meta_data_MainForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   76,
-    QMetaType::Void, QMetaType::QString,   76,
-    QMetaType::Void, QMetaType::QString,   76,
-    QMetaType::Void, QMetaType::QDate,   80,
-    QMetaType::Void, QMetaType::QDate,   80,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   77,
+    QMetaType::Void, QMetaType::QString,   77,
+    QMetaType::Void, QMetaType::QString,   77,
+    QMetaType::Void, QMetaType::QDate,   81,
+    QMetaType::Void, QMetaType::QDate,   81,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -400,96 +397,95 @@ void MainForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->reenter(); break;
-        case 1: _t->loginInitialize(); break;
-        case 2: _t->on_basicPageClockIn_clicked(); break;
-        case 3: _t->on_basicPageClockOut_clicked(); break;
-        case 4: _t->on_basicPageConnect_clicked(); break;
-        case 5: _t->on_basicPageAdvanced_clicked(); break;
-        case 6: _t->on_mainFinish_clicked(); break;
-        case 7: _t->refreshShiftEmployee(); break;
-        case 8: _t->refreshShiftProject(); break;
-        case 9: _t->refreshShiftItem(); break;
-        case 10: _t->on_HeaderTabs_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->on_passEdit_returnPressed(); break;
-        case 12: _t->on_Login0_clicked(); break;
-        case 13: _t->on_Login9_clicked(); break;
-        case 14: _t->on_Login1_clicked(); break;
-        case 15: _t->on_Login2_clicked(); break;
-        case 16: _t->on_Login3_clicked(); break;
-        case 17: _t->on_Login4_clicked(); break;
-        case 18: _t->on_Login5_clicked(); break;
-        case 19: _t->on_Login6_clicked(); break;
-        case 20: _t->on_Login7_clicked(); break;
-        case 21: _t->on_Login8_clicked(); break;
-        case 22: _t->on_LoginBack_clicked(); break;
-        case 23: _t->on_LoginGo_clicked(); break;
-        case 24: _t->refreshEmployeeStuff(); break;
-        case 25: _t->refreshEmployeeTab(); break;
-        case 26: _t->on_EmployeeName_clicked(); break;
-        case 27: _t->on_EmployeePin_clicked(); break;
-        case 28: _t->on_EmployeeAdminStatus_clicked(); break;
-        case 29: _t->on_EmployeeShiftCount_clicked(); break;
-        case 30: _t->on_EmployeeActive_clicked(); break;
-        case 31: _t->on_EmployeeId_clicked(); break;
-        case 32: _t->on_EmployeeCurrent_clicked(); break;
-        case 33: _t->on_EmployeeAdd_clicked(); break;
-        case 34: { int _r = _t->generateRandom();
+        case 1: _t->start(); break;
+        case 2: _t->loginInitialize(); break;
+        case 3: _t->on_basicPageClockIn_clicked(); break;
+        case 4: _t->on_basicPageClockOut_clicked(); break;
+        case 5: _t->on_basicPageConnect_clicked(); break;
+        case 6: _t->on_basicPageAdvanced_clicked(); break;
+        case 7: _t->on_mainFinish_clicked(); break;
+        case 8: _t->refreshShiftEmployee(); break;
+        case 9: _t->refreshShiftProject(); break;
+        case 10: _t->refreshShiftItem(); break;
+        case 11: _t->on_HeaderTabs_currentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->on_passEdit_returnPressed(); break;
+        case 13: _t->on_Login0_clicked(); break;
+        case 14: _t->on_Login9_clicked(); break;
+        case 15: _t->on_Login1_clicked(); break;
+        case 16: _t->on_Login2_clicked(); break;
+        case 17: _t->on_Login3_clicked(); break;
+        case 18: _t->on_Login4_clicked(); break;
+        case 19: _t->on_Login5_clicked(); break;
+        case 20: _t->on_Login6_clicked(); break;
+        case 21: _t->on_Login7_clicked(); break;
+        case 22: _t->on_Login8_clicked(); break;
+        case 23: _t->on_LoginBack_clicked(); break;
+        case 24: _t->on_LoginGo_clicked(); break;
+        case 25: _t->refreshEmployeeStuff(); break;
+        case 26: _t->refreshEmployeeTab(); break;
+        case 27: _t->on_EmployeeName_clicked(); break;
+        case 28: _t->on_EmployeePin_clicked(); break;
+        case 29: _t->on_EmployeeAdminStatus_clicked(); break;
+        case 30: _t->on_EmployeeShiftCount_clicked(); break;
+        case 31: _t->on_EmployeeActive_clicked(); break;
+        case 32: _t->on_EmployeeId_clicked(); break;
+        case 33: _t->on_EmployeeCurrent_clicked(); break;
+        case 34: _t->on_EmployeeAdd_clicked(); break;
+        case 35: { int _r = _t->generateRandom();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 35: _t->on_EmployeeDelete_clicked(); break;
-        case 36: _t->on_EmployeeArchive_clicked(); break;
-        case 37: _t->on_AllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 38: _t->on_CurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 39: _t->on_PastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 40: _t->refreshProjectStuff(); break;
-        case 41: _t->refreshProjectTab(); break;
-        case 42: _t->on_ProjectView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
-        case 43: _t->on_ProjectAdd_clicked(); break;
-        case 44: _t->on_ProjectDelete_clicked(); break;
-        case 45: _t->on_ProjectArchive_clicked(); break;
-        case 46: _t->on_ProjectName_clicked(); break;
-        case 47: _t->on_ProjectId_clicked(); break;
-        case 48: _t->on_ProjectCurrent_clicked(); break;
-        case 49: _t->on_ProjectAllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 50: _t->on_ProjectCurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 51: _t->on_ProjectPastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 52: _t->on_ProjectItemName_clicked(); break;
-        case 53: _t->on_ProjectItemId_clicked(); break;
-        case 54: _t->on_ProjectItemAdd_clicked(); break;
-        case 55: _t->on_ProjectItemRemove_clicked(); break;
-        case 56: _t->on_ProjectDate_clicked(); break;
-        case 57: _t->refreshItemStuff(); break;
-        case 58: _t->refreshItemTab(); break;
-        case 59: _t->on_ItemAdd_clicked(); break;
-        case 60: _t->on_ItemDelete_clicked(); break;
-        case 61: _t->on_ItemName_clicked(); break;
-        case 62: _t->on_ItemId_clicked(); break;
-        case 63: _t->on_ItemCategory_clicked(); break;
-        case 64: _t->on_ItemSub_clicked(); break;
-        case 65: _t->on_ItemDimension_clicked(); break;
-        case 66: _t->refreshShiftTab(); break;
-        case 67: _t->displayShiftSuccess(); break;
-        case 68: _t->on_ShiftEmployeeBox_clicked(); break;
-        case 69: _t->on_ShiftProjectBox_clicked(); break;
-        case 70: _t->on_ShiftItemBox_clicked(); break;
-        case 71: _t->on_ShiftEmployeeCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 72: _t->on_ShiftProjectCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 73: _t->on_ShiftItemCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 74: _t->on_ShiftDate1_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
-        case 75: _t->on_ShiftDate2_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
-        case 76: _t->on_ShiftAdd_clicked(); break;
-        case 77: _t->on_ShiftEdit_clicked(); break;
-        case 78: _t->on_ShiftDelete_clicked(); break;
-        case 79: _t->DatabaseTab(); break;
-        case 80: _t->on_DataBaseConnect_clicked(); break;
-        case 81: _t->on_DataBaseDisconnect_clicked(); break;
-        case 82: _t->SettingsTab(); break;
-        case 83: _t->on_SettingsMax_clicked(); break;
-        case 84: _t->on_SettingsFull_clicked(); break;
-        case 85: _t->on_SettingsExport_clicked(); break;
-        case 86: _t->exportToExcel(); break;
-        case 87: _t->on_SettingsPrint_clicked(); break;
-        case 88: _t->on_SettingsAll_clicked(); break;
-        case 89: _t->on_EmployeeRefresh_clicked(); break;
+        case 36: _t->on_EmployeeDelete_clicked(); break;
+        case 37: _t->on_EmployeeArchive_clicked(); break;
+        case 38: _t->on_AllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 39: _t->on_CurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 40: _t->on_PastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 41: _t->refreshProjectStuff(); break;
+        case 42: _t->refreshProjectTab(); break;
+        case 43: _t->on_ProjectView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 44: _t->on_ProjectAdd_clicked(); break;
+        case 45: _t->on_ProjectDelete_clicked(); break;
+        case 46: _t->on_ProjectArchive_clicked(); break;
+        case 47: _t->on_ProjectName_clicked(); break;
+        case 48: _t->on_ProjectId_clicked(); break;
+        case 49: _t->on_ProjectCurrent_clicked(); break;
+        case 50: _t->on_ProjectAllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 51: _t->on_ProjectCurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 52: _t->on_ProjectPastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 53: _t->on_ProjectItemName_clicked(); break;
+        case 54: _t->on_ProjectItemId_clicked(); break;
+        case 55: _t->on_ProjectItemAdd_clicked(); break;
+        case 56: _t->on_ProjectItemRemove_clicked(); break;
+        case 57: _t->on_ProjectDate_clicked(); break;
+        case 58: _t->refreshItemStuff(); break;
+        case 59: _t->refreshItemTab(); break;
+        case 60: _t->on_ItemAdd_clicked(); break;
+        case 61: _t->on_ItemDelete_clicked(); break;
+        case 62: _t->on_ItemName_clicked(); break;
+        case 63: _t->on_ItemId_clicked(); break;
+        case 64: _t->on_ItemCategory_clicked(); break;
+        case 65: _t->on_ItemSub_clicked(); break;
+        case 66: _t->on_ItemDimension_clicked(); break;
+        case 67: _t->refreshShiftTab(); break;
+        case 68: _t->displayShiftSuccess(); break;
+        case 69: _t->on_ShiftEmployeeBox_clicked(); break;
+        case 70: _t->on_ShiftProjectBox_clicked(); break;
+        case 71: _t->on_ShiftItemBox_clicked(); break;
+        case 72: _t->on_ShiftEmployeeCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 73: _t->on_ShiftProjectCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 74: _t->on_ShiftItemCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 75: _t->on_ShiftDate1_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
+        case 76: _t->on_ShiftDate2_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
+        case 77: _t->on_ShiftAdd_clicked(); break;
+        case 78: _t->on_ShiftEdit_clicked(); break;
+        case 79: _t->on_ShiftDelete_clicked(); break;
+        case 80: _t->SettingsTab(); break;
+        case 81: _t->on_SettingsMax_clicked(); break;
+        case 82: _t->on_SettingsFull_clicked(); break;
+        case 83: _t->on_SettingsExport_clicked(); break;
+        case 84: _t->exportToExcel(); break;
+        case 85: _t->on_SettingsPrint_clicked(); break;
+        case 86: _t->on_SettingsAll_clicked(); break;
+        case 87: _t->on_EmployeeRefresh_clicked(); break;
+        case 88: _t->on_SettingsConnections_clicked(); break;
         default: ;
         }
     }
@@ -520,13 +516,13 @@ int MainForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 90)
+        if (_id < 89)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 90;
+        _id -= 89;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 90)
+        if (_id < 89)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 90;
+        _id -= 89;
     }
     return _id;
 }
