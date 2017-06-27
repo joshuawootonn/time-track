@@ -10,6 +10,11 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     ui(new Ui::ConnectionForm)
 {
     ui->setupUi(this);
+    ui->progress->hide();
+
+    QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
+    if(!dir.exists())
+        dir.mkpath("Time-Track/");
 
     ui->label->hide();
     automatic = false;
@@ -61,9 +66,9 @@ void ConnectionForm::write(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-        //QDir::mkpath(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
-        QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
-        dir.mkpath("Time-Track/");
+        ui->label->show();
+        qDebug()<<"read monkey" << file.fileName();
+        return;
     }
     QTextStream out(&file);
     out<<address<<" ";
@@ -102,10 +107,13 @@ void ConnectionForm::read(){
 }
 void ConnectionForm::on_connect_clicked()
 {
-    address = ui->edit->text();
-    write();
-    emit finished();
-    this->hide();
+    if(ui->edit->text() != "")
+    {
+        address = ui->edit->text();
+        write();
+        emit finished();
+        this->hide();
+    }
 }
 void ConnectionForm::auto_connect(){
     if(automatic){

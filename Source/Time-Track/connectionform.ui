@@ -14,76 +14,32 @@
    <string>Time Track</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#ClockoutForm{
+   <string notr="true">QWidget#ConnectionForm{
 
-background-color:#E5EAE7;
+background-color:#E7EBE9;
 }
-*{
-font-family:&quot;Calibri&quot;;
-font-size: 26px;
-
-}
-
-
-
-QStackedWidget{
-margin:0px;
-padding:0px;
-}
-
-
-QWidget{
-
-margin:0px;
-padding:0px;
-}
-QWidget#bigwidger{
-background-color:#E5EAE7;
-border:none;
-}
-
-
-QPushButton{
-padding:3px;
-border:none;
-background-color:#FFFFFF;
-}
-QPushButton:hover:!pressed{
-background-color:#E4E9EB;
-}
-
-
-
-
-
-
-QPushButton{
-padding:3px;
-border:none;
-background-color:#F1F4F5;
-}
-QLineEdit{ 
-background-color:#F1F4F5;
- border: 0px solid 263544;	
-
-}
-QLineEdit:hover{ 
-background-color:#F1F4F5;
- border: 1px solid 263544;	
-}
-
-QPushButton:hover,QPushButton:hover{
-background-color:#ECEFED;
-}
-/*
-
-#E5EAE7
-*/
 *{
 font-family:&quot;Calibri&quot;;
 font-size: 19px;
 color:#263544;
 
+}
+QPushButton{
+padding:3px;
+border:none;
+background-color:#F1F4F5;
+}
+QPushButton:hover,QPushButton:hover{
+background-color:#E4E9EB;
+}
+QLineEdit{ 
+background-color:#F1F4F5;
+border: 0px solid 263544; 
+
+}
+QLineEdit:hover{ 
+background-color:#F1F4F5;
+border: 1px solid 263544; 
 }
 
 
@@ -94,22 +50,6 @@ color:#263544;
     <widget class="QPushButton" name="connect">
      <property name="text">
       <string>Connect</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="4">
-    <widget class="QProgressBar" name="progress">
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="invertedAppearance">
-      <bool>false</bool>
-     </property>
-     <property name="format">
-      <string/>
      </property>
     </widget>
    </item>
@@ -126,11 +66,28 @@ color:#263544;
      </property>
     </widget>
    </item>
-   <item row="6" column="0" colspan="5">
+   <item row="0" column="1" colspan="4">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Shop typical: 192.168.0.10 
-Office typical: 192.168.41.187</string>
+      <string>Please enter the ip you want to connect to above.
+Shop ip: 192.168.0.10 
+Office ip: 192.168.41.187</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="5">
+    <widget class="QProgressBar" name="progress">
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+     <property name="format">
+      <string/>
      </property>
     </widget>
    </item>

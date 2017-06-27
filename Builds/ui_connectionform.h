@@ -29,86 +29,42 @@ class Ui_ConnectionForm
 public:
     QGridLayout *gridLayout;
     QPushButton *connect;
-    QProgressBar *progress;
     QLineEdit *edit;
     QCheckBox *save;
     QLabel *label;
+    QProgressBar *progress;
 
     void setupUi(QDialog *ConnectionForm)
     {
         if (ConnectionForm->objectName().isEmpty())
             ConnectionForm->setObjectName(QStringLiteral("ConnectionForm"));
         ConnectionForm->resize(447, 192);
-        ConnectionForm->setStyleSheet(QLatin1String("QWidget#ClockoutForm{\n"
+        ConnectionForm->setStyleSheet(QLatin1String("QWidget#ConnectionForm{\n"
 "\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E7EBE9;\n"
 "}\n"
-"*{\n"
-"font-family:\"Calibri\";\n"
-"font-size: 26px;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"QStackedWidget{\n"
-"margin:0px;\n"
-"padding:0px;\n"
-"}\n"
-"\n"
-"\n"
-"QWidget{\n"
-"\n"
-"margin:0px;\n"
-"padding:0px;\n"
-"}\n"
-"QWidget#bigwidger{\n"
-"background-color:#E5EAE7;\n"
-"border:none;\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton{\n"
-"padding:3px;\n"
-"border:none;\n"
-"background-color:#FFFFFF;\n"
-"}\n"
-"QPushButton:hover:!pressed{\n"
-"background-color:#E4E9EB;\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"QPushButton{\n"
-"padding:3px;\n"
-"border:none;\n"
-"background-color:#F1F4F5;\n"
-"}\n"
-"QLineEdit{ \n"
-"background-color:#F1F4F5;\n"
-" border: 0px solid 263544;	\n"
-"\n"
-"}\n"
-"QLineEdit:hover{ \n"
-"background-color:#F1F4F5;\n"
-" border: 1px solid 263544;	\n"
-"}\n"
-"\n"
-"QPushButton:hover,QPushButton:hover{\n"
-"background-color:#ECEFED;\n"
-"}\n"
-"/*\n"
-"\n"
-"#E5EAE7\n"
-"*/\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
 "font-size: 19px;\n"
 "color:#263544;\n"
 "\n"
+"}\n"
+"QPushButton{\n"
+"padding:3px;\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"}\n"
+"QPushButton:hover,QPushButton:hover{\n"
+"background-color:#E4E9EB;\n"
+"}\n"
+"QLineEdit{ \n"
+"background-color:#F1F4F5;\n"
+"border: 0px solid 263544; \n"
+"\n"
+"}\n"
+"QLineEdit:hover{ \n"
+"background-color:#F1F4F5;\n"
+"border: 1px solid 263544; \n"
 "}\n"
 "\n"
 "\n"
@@ -119,14 +75,6 @@ public:
         connect->setObjectName(QStringLiteral("connect"));
 
         gridLayout->addWidget(connect, 1, 3, 1, 1);
-
-        progress = new QProgressBar(ConnectionForm);
-        progress->setObjectName(QStringLiteral("progress"));
-        progress->setValue(0);
-        progress->setOrientation(Qt::Horizontal);
-        progress->setInvertedAppearance(false);
-
-        gridLayout->addWidget(progress, 5, 0, 1, 4);
 
         edit = new QLineEdit(ConnectionForm);
         edit->setObjectName(QStringLiteral("edit"));
@@ -142,7 +90,15 @@ public:
         label = new QLabel(ConnectionForm);
         label->setObjectName(QStringLiteral("label"));
 
-        gridLayout->addWidget(label, 6, 0, 1, 5);
+        gridLayout->addWidget(label, 0, 1, 1, 4);
+
+        progress = new QProgressBar(ConnectionForm);
+        progress->setObjectName(QStringLiteral("progress"));
+        progress->setValue(0);
+        progress->setOrientation(Qt::Horizontal);
+        progress->setInvertedAppearance(false);
+
+        gridLayout->addWidget(progress, 5, 0, 1, 5);
 
 
         retranslateUi(ConnectionForm);
@@ -154,10 +110,11 @@ public:
     {
         ConnectionForm->setWindowTitle(QApplication::translate("ConnectionForm", "Time Track", Q_NULLPTR));
         connect->setText(QApplication::translate("ConnectionForm", "Connect", Q_NULLPTR));
-        progress->setFormat(QString());
         save->setText(QString());
-        label->setText(QApplication::translate("ConnectionForm", "Shop typical: 192.168.0.10 \n"
-"Office typical: 192.168.41.187", Q_NULLPTR));
+        label->setText(QApplication::translate("ConnectionForm", "Please enter the ip you want to connect to above.\n"
+"Shop ip: 192.168.0.10 \n"
+"Office ip: 192.168.41.187", Q_NULLPTR));
+        progress->setFormat(QString());
     } // retranslateUi
 
 };
