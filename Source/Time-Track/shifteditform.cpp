@@ -328,11 +328,12 @@ void ShiftEditForm::ItemInitialize(){
                id = qry->value(0).toString();
            }
     }
-
+    qDebug()<<id;
     QSqlQuery* qry2=new QSqlQuery(data);
     id = "Project"+id;
     qry2->prepare("select DISTINCT name from "+id+" ORDER BY name ASC");
     qry2->exec();
+    qDebug()<<"qry2:"<<qry2->lastError();
 
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
@@ -454,6 +455,10 @@ void ShiftEditForm::TimeLeft(){
 void ShiftEditForm::on_Projects_currentIndexChanged(const QString &arg1)
 {
      ItemInitialize();
+}
+void ShiftEditForm::on_Projects_currentTextChanged(const QString &arg1)
+{
+    ItemInitialize();
 }
 void ShiftEditForm::on_Add_clicked()
 {
@@ -664,6 +669,8 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+
 
 
 

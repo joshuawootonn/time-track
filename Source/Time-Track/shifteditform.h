@@ -65,6 +65,8 @@ private slots:
     void on_Description_Check_clicked();
 
 
+    void on_Projects_currentTextChanged(const QString &arg1);
+
 signals:
     void finished();
 private:
