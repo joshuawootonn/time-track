@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ConnectionForm_t {
     QByteArrayData data[14];
-    char stringdata0[235];
+    char stringdata0[237];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,7 +44,7 @@ QT_MOC_LITERAL(9, 109, 23), // "on_portEdit_textChanged"
 QT_MOC_LITERAL(10, 133, 27), // "on_usernameEdit_textChanged"
 QT_MOC_LITERAL(11, 161, 27), // "on_passwordEdit_textChanged"
 QT_MOC_LITERAL(12, 189, 21), // "on_ipEdit_textChanged"
-QT_MOC_LITERAL(13, 211, 23) // "on_ipEdit_returnPressed"
+QT_MOC_LITERAL(13, 211, 25) // "on_testConnection_clicked"
 
     },
     "ConnectionForm\0finished\0\0loadConnection\0"
@@ -53,7 +53,7 @@ QT_MOC_LITERAL(13, 211, 23) // "on_ipEdit_returnPressed"
     "on_portEdit_textChanged\0"
     "on_usernameEdit_textChanged\0"
     "on_passwordEdit_textChanged\0"
-    "on_ipEdit_textChanged\0on_ipEdit_returnPressed"
+    "on_ipEdit_textChanged\0on_testConnection_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -116,7 +116,7 @@ void ConnectionForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 6: _t->on_usernameEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->on_passwordEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 8: _t->on_ipEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 9: _t->on_ipEdit_returnPressed(); break;
+        case 9: _t->on_testConnection_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

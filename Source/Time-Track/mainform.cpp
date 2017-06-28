@@ -27,6 +27,7 @@ void MainForm::start(){
 
     //Connect("aacidatabase","3306","user","aaci1234","192.168.41.187");
     if(Connect(connectionForm->getDatabase(),connectionForm->getPort(),connectionForm->getUsername(),connectionForm->getPassword(),connectionForm->getIp())){
+        connectionForm->hide();
         if (ip.split(".")[3] =="010")
             this->showFullScreen();
         else
@@ -50,8 +51,9 @@ void MainForm::start(){
     else
     {
         this->hide();
-        connectionForm = new ConnectionForm(this);
-        connectionForm->show();
+//        connectionForm->hide();
+//        connectionForm = new ConnectionForm(this);
+//        connectionForm->show();
         QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
         connectionForm->setError("Invalid Connection");
     }

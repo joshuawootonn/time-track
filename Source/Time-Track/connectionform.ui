@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>588</width>
-    <height>389</height>
+    <width>395</width>
+    <height>261</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,61 +47,42 @@ border: 1px solid 263544;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="4" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Password:</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="usernameEdit"/>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="passwordEdit">
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
+   <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
       <string>Username:</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="portEdit"/>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Database:</string>
+     </property>
+    </widget>
    </item>
-   <item row="5" column="0">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Port:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>IP:</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="4">
-    <widget class="QCheckBox" name="save">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="ipEdit"/>
-   </item>
-   <item row="5" column="3">
-    <widget class="QPushButton" name="connect">
-     <property name="text">
-      <string>Connect</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0" colspan="5">
+   <item row="12" column="0" colspan="3">
     <widget class="QProgressBar" name="progress">
      <property name="value">
       <number>0</number>
@@ -117,45 +98,82 @@ border: 1px solid 263544;
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="0" column="1">
     <widget class="QLineEdit" name="databaseEdit"/>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Database:</string>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="passwordEdit">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Port:</string>
-     </property>
-    </widget>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="usernameEdit"/>
    </item>
-   <item row="0" column="0" colspan="5">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>As first time user you must set your connection options.
-Database: aacidatabase
-Port:3306
-Username:user
-Password: Same as wifi
-IP: 192.168.47.187(for office) and 192.168.0.10(for shop)</string>
-     </property>
-    </widget>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="ipEdit"/>
    </item>
-   <item row="6" column="1">
-    <widget class="QLabel" name="error">
-     <property name="maximumSize">
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="portEdit"/>
+   </item>
+   <item row="5" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
       <size>
-       <width>16777215</width>
-       <height>25</height>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
+    </spacer>
+   </item>
+   <item row="7" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <item>
+      <widget class="QLabel" name="error">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="connect">
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="2">
+    <widget class="QPushButton" name="testConnection">
      <property name="text">
-      <string/>
+      <string>?</string>
      </property>
     </widget>
    </item>
@@ -167,8 +185,6 @@ IP: 192.168.47.187(for office) and 192.168.0.10(for shop)</string>
   <tabstop>usernameEdit</tabstop>
   <tabstop>passwordEdit</tabstop>
   <tabstop>ipEdit</tabstop>
-  <tabstop>connect</tabstop>
-  <tabstop>save</tabstop>
  </tabstops>
  <resources/>
  <connections/>

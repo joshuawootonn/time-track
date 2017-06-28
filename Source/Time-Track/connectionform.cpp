@@ -9,13 +9,13 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectionForm)
 {
+
     ui->setupUi(this);
-    ui->progress->hide();
     ui->databaseEdit->setText("aacidatabase");
     ui->usernameEdit->setText("user");
     ui->portEdit->setText("3306");
     ui->ipEdit->setText("192.168.41.187");
-
+    ui->error->hide();
 
     QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
     if(dir.exists())
@@ -23,12 +23,11 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
         dir.mkpath("Time-Track/");
     }
 
-    ui->label->hide();
+
     automatic = false;
     read();
     ui->connect->setEnabled(false);
     pingConnection();
-    qDebug()<<"here";
 
 }
 
@@ -38,13 +37,14 @@ ConnectionForm::~ConnectionForm()
 }
 
 void ConnectionForm::loadConnection(bool s){
-    if(s)
+    if(s){
+        setError("Valid");
         ui->connect->setEnabled(true);
-    else
+    }
+    else{
+        setError("Invalid");
         ui->connect->setEnabled(false);
-
-
-
+    }
 }
 
 void ConnectionForm::pingConnection(){
@@ -53,7 +53,7 @@ void ConnectionForm::pingConnection(){
 
     QThread* thread = new QThread(this);
     Work* worker = new Work;
-
+    worker->connection = ui->ipEdit->text();
     worker->moveToThread(thread);
 
     connect(thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
@@ -72,16 +72,14 @@ void ConnectionForm::write(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-        ui->label->show();
-        qDebug()<<"read monkey" << file.fileName();
+
+        qDebug()<<"write monkey" << file.fileName();
         return;
     }
     QTextStream out(&file);
     out<<database<<" "<<port<<" "<<username<<" "<<password<<" "<<ip<<" ";
-    if(ui->save->isChecked())
-    {
-        out<<"1 ";
-    }
+    out<<"1 ";
+
 
     file.flush();
     file.close();
@@ -90,7 +88,6 @@ void ConnectionForm::read(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        ui->label->show();
         qDebug()<<"read monkey" << file.fileName();
         return;
     }
@@ -145,20 +142,20 @@ QString ConnectionForm::getDatabase() const
 void ConnectionForm::on_connect_clicked()
 {
     if(ui->databaseEdit->text() == "")
-        ui->error->setText("Please enter a database");
+        setError("Please enter a database");
     else if(ui->portEdit->text() == "")
-        ui->error->setText("Please enter a port");
+        setError("Please enter a port");
     else if(ui->usernameEdit->text() == "")
-        ui->error->setText("Please enter a username");
+        setError("Please enter a username");
     else if(ui->passwordEdit->text() == "")
-        ui->error->setText("Please enter a password");
+        setError("Please enter a password");
     else if(ui->ipEdit->text() == "")
-        ui->error->setText("Please enter a IP");
+        setError("Please enter a IP");
     else
     {
         write();
         emit finished();
-        this->hide();
+
     }
 }
 void ConnectionForm::auto_connect(){
@@ -168,6 +165,7 @@ void ConnectionForm::auto_connect(){
     }
     else
         this->show();
+    qDebug()<<automatic;
 
 }
 
@@ -192,10 +190,13 @@ void ConnectionForm::on_ipEdit_textChanged(const QString &arg1)
 {
     ip = arg1;
 }
-void ConnectionForm::on_ipEdit_returnPressed()
-{
-     pingConnection();
-}
+
 void ConnectionForm::setError(QString x){
+    ui->error->show();
     ui->error->setText(x);
+}
+
+void ConnectionForm::on_testConnection_clicked()
+{
+    pingConnection();
 }

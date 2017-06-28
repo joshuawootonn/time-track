@@ -35,8 +35,11 @@ private slots:
     void on_usernameEdit_textChanged(const QString &arg1);
     void on_passwordEdit_textChanged(const QString &arg1);
     void on_ipEdit_textChanged(const QString &arg1);
-    void on_ipEdit_returnPressed();
 
+
+
+
+    void on_testConnection_clicked();
 
 signals:
     void finished();

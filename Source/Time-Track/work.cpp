@@ -11,12 +11,11 @@ Work::~Work()
 }
 
 void Work::ping(){
-        emit progress(10);
-        QString o = "192.168.41.187";
+        emit progress(25);
         int exitCode = QProcess::execute("ping", QStringList()
                                              << "-n" << "1"
-                                             << o);
-        emit progress(30);
+                                             << connection);
+        emit progress(60);
         bool valid;
         if (exitCode==0) {
             valid = true;

@@ -10,7 +10,7 @@ class Work : public QObject
 public:
     explicit Work(QObject *parent = nullptr);
     virtual ~Work();
-
+    QString connection;
 
 signals:
     void progress(int);
