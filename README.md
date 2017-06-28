@@ -31,7 +31,7 @@ money is being wasted, and cut back.
 And you are in BINGO :)
 
 ### Help
-For more usage help try [my website](http://joshuawootonn.com), or [my email](joshuawootonn@gmail.com)!
+For more usage help try [my website](http://joshuawootonn.com), or my email(joshuawootonn@gmail.com)!
 
 Cheers!
 Josh
