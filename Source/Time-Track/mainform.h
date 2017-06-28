@@ -39,7 +39,7 @@ public:
     ~MainForm();
 
 
-    bool Connect(QString ip);
+    bool Connect(QString database,QString port,QString username,QString password,QString ip);
     bool isValidConnection(QString ip);
 
     QDateTime format_datetimes(QDateTime z);
@@ -219,7 +219,7 @@ private:
     QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
 
-    QString address;
+    QString ip;
 
     ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;

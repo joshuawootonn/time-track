@@ -17,14 +17,26 @@ public:
     ~ConnectionForm();
     void auto_connect();
 
-    QString getConnectionName();
+    QString getDatabase() const;
+    QString getPort() const;
+    QString getUsername() const;
+    QString getPassword() const;
+    QString getIp() const;
+    void setError(QString x);
 
 private slots:
     void loadConnection(bool s);
     void pingConnection();
     void on_connect_clicked();
 
-    void on_edit_returnPressed();
+
+    void on_databaseEdit_textChanged(const QString &arg1);
+    void on_portEdit_textChanged(const QString &arg1);
+    void on_usernameEdit_textChanged(const QString &arg1);
+    void on_passwordEdit_textChanged(const QString &arg1);
+    void on_ipEdit_textChanged(const QString &arg1);
+    void on_ipEdit_returnPressed();
+
 
 signals:
     void finished();
@@ -35,7 +47,12 @@ private:
     void read();
 
     Ui::ConnectionForm *ui;
-    QString address;
+    QString database;
+    QString port;
+    QString username;
+    QString password;
+    QString ip;
+
     bool automatic;
 
 };

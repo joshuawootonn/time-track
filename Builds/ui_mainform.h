@@ -478,6 +478,7 @@ public:
 
         basicPageConnect = new QPushButton(loginWidget);
         basicPageConnect->setObjectName(QStringLiteral("basicPageConnect"));
+        basicPageConnect->setMaximumSize(QSize(256, 16777215));
 
         gridLayout_24->addWidget(basicPageConnect, 5, 0, 1, 1);
 

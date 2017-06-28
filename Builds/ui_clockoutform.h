@@ -178,7 +178,7 @@ public:
 ""));
         gridLayout = new QGridLayout(ClockoutForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
 
@@ -186,7 +186,7 @@ public:
 
         gridLayout->addItem(verticalSpacer, 0, 1, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
@@ -204,7 +204,7 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         Sections = new QTableWidget(bigwidger);
         Sections->setObjectName(QStringLiteral("Sections"));
-        Sections->setMinimumSize(QSize(500, 0));
+        Sections->setMinimumSize(QSize(700, 0));
         Sections->setAlternatingRowColors(true);
         Sections->setGridStyle(Qt::SolidLine);
         Sections->verticalHeader()->setMinimumSectionSize(30);

@@ -11,16 +11,24 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->progress->hide();
+    ui->databaseEdit->setText("aacidatabase");
+    ui->usernameEdit->setText("user");
+    ui->portEdit->setText("3306");
+    ui->ipEdit->setText("192.168.41.187");
+
 
     QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
-    if(!dir.exists())
+    if(dir.exists())
+    {
         dir.mkpath("Time-Track/");
+    }
 
     ui->label->hide();
     automatic = false;
     read();
     ui->connect->setEnabled(false);
     pingConnection();
+    qDebug()<<"here";
 
 }
 
@@ -28,9 +36,7 @@ ConnectionForm::~ConnectionForm()
 {
     delete ui;
 }
-QString ConnectionForm::getConnectionName(){
-    return address;
-}
+
 void ConnectionForm::loadConnection(bool s){
     if(s)
         ui->connect->setEnabled(true);
@@ -71,7 +77,7 @@ void ConnectionForm::write(){
         return;
     }
     QTextStream out(&file);
-    out<<address<<" ";
+    out<<database<<" "<<port<<" "<<username<<" "<<password<<" "<<ip<<" ";
     if(ui->save->isChecked())
     {
         out<<"1 ";
@@ -91,25 +97,65 @@ void ConnectionForm::read(){
 
     QTextStream in(&file);
     QString text = in.readAll();
-    if( text.split(" ").length() == 2)
+    qDebug()<<text.split(" ").length();
+    if( text.split(" ").length() == 6)
     {
-        ui->edit->setText(text.split(" ")[0]);
+        ip =text.split(" ")[4];
+        ui->databaseEdit->setText(text.split(" ")[0]);
+        ui->portEdit->setText(text.split(" ")[1]);
+        ui->usernameEdit->setText(text.split(" ")[2]);
+        ui->passwordEdit->setText(text.split(" ")[3]);
+        ui->ipEdit->setText(text.split(" ")[4]);
     }
-    if( text.split(" ").length() == 3)
+    if( text.split(" ").length() == 7)
     {
-        address = text.split(" ")[0];
-        ui->edit->setText(address);
-        automatic = text.split(" ")[1].toInt();
-        qDebug()<<ui->edit->text()<<automatic;
+         ip =text.split(" ")[4];
+        ui->databaseEdit->setText(text.split(" ")[0]);
+        ui->portEdit->setText(text.split(" ")[1]);
+        ui->usernameEdit->setText(text.split(" ")[2]);
+        ui->passwordEdit->setText(text.split(" ")[3]);
+        ui->ipEdit->setText(text.split(" ")[4]);
+        automatic = text.split(" ")[5].toInt();
+        qDebug()<<ui->ipEdit->text()<<automatic;
     }
 
     file.close();
 }
+
+QString ConnectionForm::getIp() const
+{
+    return ip;
+}
+QString ConnectionForm::getPassword() const
+{
+    return password;
+}
+QString ConnectionForm::getUsername() const
+{
+    return username;
+}
+QString ConnectionForm::getPort() const
+{
+    return port;
+}
+QString ConnectionForm::getDatabase() const
+{
+    return database;
+}
 void ConnectionForm::on_connect_clicked()
 {
-    if(ui->edit->text() != "")
+    if(ui->databaseEdit->text() == "")
+        ui->error->setText("Please enter a database");
+    else if(ui->portEdit->text() == "")
+        ui->error->setText("Please enter a port");
+    else if(ui->usernameEdit->text() == "")
+        ui->error->setText("Please enter a username");
+    else if(ui->passwordEdit->text() == "")
+        ui->error->setText("Please enter a password");
+    else if(ui->ipEdit->text() == "")
+        ui->error->setText("Please enter a IP");
+    else
     {
-        address = ui->edit->text();
         write();
         emit finished();
         this->hide();
@@ -117,7 +163,6 @@ void ConnectionForm::on_connect_clicked()
 }
 void ConnectionForm::auto_connect(){
     if(automatic){
-        address = ui->edit->text();
         emit finished();
         this->hide();
     }
@@ -125,7 +170,32 @@ void ConnectionForm::auto_connect(){
         this->show();
 
 }
-void ConnectionForm::on_edit_returnPressed()
+
+
+void ConnectionForm::on_databaseEdit_textChanged(const QString &arg1)
 {
-    pingConnection();
+    database = arg1;
+}
+void ConnectionForm::on_portEdit_textChanged(const QString &arg1)
+{
+    port = arg1;
+}
+void ConnectionForm::on_usernameEdit_textChanged(const QString &arg1)
+{
+    username = arg1;
+}
+void ConnectionForm::on_passwordEdit_textChanged(const QString &arg1)
+{
+    password = arg1;
+}
+void ConnectionForm::on_ipEdit_textChanged(const QString &arg1)
+{
+    ip = arg1;
+}
+void ConnectionForm::on_ipEdit_returnPressed()
+{
+     pingConnection();
+}
+void ConnectionForm::setError(QString x){
+    ui->error->setText(x);
 }

@@ -7,12 +7,14 @@ MainForm::MainForm(QWidget *parent) :
     ui(new Ui::MainForm)
 {
     ui->setupUi(this);
+
     this->hide();
     connectionForm = new ConnectionForm(this);
 
     QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
     connectionForm->auto_connect();
+
 }
 
 MainForm::~MainForm()
@@ -21,26 +23,38 @@ MainForm::~MainForm()
 }
 
 void MainForm::start(){
-    address = connectionForm->getConnectionName();
-    Connect(address);
-    if (address.split(".")[3] =="010")
-        this->showFullScreen();
+    ip = connectionForm->getIp();
+
+    //Connect("aacidatabase","3306","user","aaci1234","192.168.41.187");
+    if(Connect(connectionForm->getDatabase(),connectionForm->getPort(),connectionForm->getUsername(),connectionForm->getPassword(),connectionForm->getIp())){
+        if (ip.split(".")[3] =="010")
+            this->showFullScreen();
+        else
+            this->showMaximized();
+
+        qDebug()<<"from start";
+
+        clockoutForm = new ClockoutForm(this);
+        clockoutForm->hide();
+        shifteditform = new ShiftEditForm(this);
+        shifteditform->hide();
+        //connectionForm = new ConnectionForm(this);
+        exportForm = new ExportForm(this);
+
+
+
+        loginInitialize();
+        isConnected();
+        setIcons();
+    }
     else
-        this->showMaximized();
-    qDebug()<<"from start";
-
-    clockoutForm = new ClockoutForm(this);
-    clockoutForm->hide();
-    shifteditform = new ShiftEditForm(this);
-    shifteditform->hide();
-    //connectionForm = new ConnectionForm(this);
-    exportForm = new ExportForm(this);
-
-
-
-    loginInitialize();
-    isConnected();
-    setIcons();
+    {
+        this->hide();
+        connectionForm = new ConnectionForm(this);
+        connectionForm->show();
+        QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
+        connectionForm->setError("Invalid Connection");
+    }
 }
 
 /* These are the database connections that this database uses.
@@ -51,20 +65,24 @@ void MainForm::start(){
 */
 
 
-bool MainForm::Connect(QString ip){
-
+bool MainForm::Connect(QString database,QString port,QString username,QString password,QString ip){
+    qDebug()<<database<<port<<username<<password<<ip;
     data = QSqlDatabase::addDatabase("QMYSQL");
-    data.setPort(3306);
-    data.setDatabaseName("aacidatabase");
-    data.setPassword("aaci1234");
-    data.setUserName("client");
+    data.setPort(port.toInt());
+    data.setDatabaseName(database);
+    data.setPassword(password);
+    data.setUserName(username);
     data.setHostName(ip);
     data.open();
     ui->ConnectionLabel->setText(data.lastError().text());
     if(data.isOpen())
         return true;
      else
+    {
+        QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/");
+        dir.removeRecursively();
         return false;
+    }
 }
 
 bool MainForm::isValidConnection(QString ip){
@@ -266,6 +284,7 @@ void MainForm::isConnected(){
     {
         ui->passEdit->show();
         ui->passEdit->show();
+        ui->loginNumPad->show();
         ui->basicPageConnect->hide();
         ui->ConnectionLabel->hide();
     }
@@ -273,6 +292,7 @@ void MainForm::isConnected(){
     {
         ui->passEdit->hide();
         ui->passEdit->hide();
+        ui->loginNumPad->hide();
         ui->basicPageConnect->show();
         ui->ConnectionLabel->show();
     }
@@ -470,7 +490,7 @@ void MainForm::on_basicPageClockOut_clicked()
 
     clockoutForm = new ClockoutForm(this);
     establishConnections();
-    if (address.split(".")[3] =="010")
+    if (ip.split(".")[3] =="010")
         clockoutForm->showFullScreen();
     else
         clockoutForm->showMaximized();

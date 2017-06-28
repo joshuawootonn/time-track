@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>192</height>
+    <width>588</width>
+    <height>389</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Time Track</string>
+   <string>Connection Setup</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget#ConnectionForm{
@@ -20,7 +20,7 @@ background-color:#E7EBE9;
 }
 *{
 font-family:&quot;Calibri&quot;;
-font-size: 19px;
+font-size: 16px;
 color:#263544;
 
 }
@@ -35,6 +35,7 @@ background-color:#E4E9EB;
 QLineEdit{ 
 background-color:#F1F4F5;
 border: 0px solid 263544; 
+margin: 4px;
 
 }
 QLineEdit:hover{ 
@@ -46,17 +47,41 @@ border: 1px solid 263544;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="3">
-    <widget class="QPushButton" name="connect">
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Connect</string>
+      <string>Password:</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="edit"/>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="usernameEdit"/>
    </item>
-   <item row="1" column="4">
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="passwordEdit">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Username:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="portEdit"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>IP:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4">
     <widget class="QCheckBox" name="save">
      <property name="text">
       <string/>
@@ -66,16 +91,17 @@ border: 1px solid 263544;
      </property>
     </widget>
    </item>
-   <item row="0" column="1" colspan="4">
-    <widget class="QLabel" name="label">
+   <item row="5" column="1">
+    <widget class="QLineEdit" name="ipEdit"/>
+   </item>
+   <item row="5" column="3">
+    <widget class="QPushButton" name="connect">
      <property name="text">
-      <string>Please enter the ip you want to connect to above.
-Shop ip: 192.168.0.10 
-Office ip: 192.168.41.187</string>
+      <string>Connect</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="0" colspan="5">
+   <item row="9" column="0" colspan="5">
     <widget class="QProgressBar" name="progress">
      <property name="value">
       <number>0</number>
@@ -91,8 +117,59 @@ Office ip: 192.168.41.187</string>
      </property>
     </widget>
    </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="databaseEdit"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Database:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Port:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="5">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>As first time user you must set your connection options.
+Database: aacidatabase
+Port:3306
+Username:user
+Password: Same as wifi
+IP: 192.168.47.187(for office) and 192.168.0.10(for shop)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="error">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>databaseEdit</tabstop>
+  <tabstop>portEdit</tabstop>
+  <tabstop>usernameEdit</tabstop>
+  <tabstop>passwordEdit</tabstop>
+  <tabstop>ipEdit</tabstop>
+  <tabstop>connect</tabstop>
+  <tabstop>save</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
