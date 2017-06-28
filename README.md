@@ -15,13 +15,15 @@ money is being wasted, and cut back.
 1. Download the zip
 2. Extract it
 3. Click on `Time-Track-master/Deployment/Time.exe`.
-  * At this point you can connect to my dummy server by entering.⋅⋅
-    * Database: time-track-database
-    * Port: 3306
-    * Username:webuser
-    * Password:webpass
-    * IP:192.168.41.187
-  * Or you can get the `Time-Track-master/Database/clean_database.sql` and import it to your own Mysql database.⋅⋅
+
+   At this point you can connect to my dummy server by entering.
+  * Database: time-track-database
+  * Port: 3306
+  * Username:webuser
+  * Password:webpass
+  * IP:192.168.41.187
+  
+   Or you can get the `Time-Track-master/Database/clean_database.sql` and import it to your own Mysql database
 4. Now you are at the login screen
 5. Enter 1111 
 
