@@ -29,23 +29,24 @@ class Ui_ConnectionForm
 {
 public:
     QGridLayout *gridLayout;
-    QLabel *label_3;
-    QLabel *label_4;
     QLabel *label_5;
-    QLabel *label_6;
-    QLabel *label_2;
-    QProgressBar *progress;
     QLineEdit *databaseEdit;
+    QLabel *label_6;
+    QProgressBar *progress;
     QLineEdit *passwordEdit;
-    QLineEdit *usernameEdit;
-    QLineEdit *ipEdit;
-    QLineEdit *portEdit;
     QSpacerItem *verticalSpacer;
+    QLabel *label_3;
+    QLineEdit *usernameEdit;
+    QLabel *label_4;
+    QLineEdit *portEdit;
+    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *ipEdit;
+    QPushButton *testConnection;
+    QLabel *label_2;
     QHBoxLayout *horizontalLayout;
     QLabel *error;
     QSpacerItem *horizontalSpacer;
     QPushButton *connect;
-    QPushButton *testConnection;
 
     void setupUi(QDialog *ConnectionForm)
     {
@@ -85,30 +86,20 @@ public:
 ""));
         gridLayout = new QGridLayout(ConnectionForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        label_3 = new QLabel(ConnectionForm);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        gridLayout->addWidget(label_3, 3, 0, 1, 1);
-
-        label_4 = new QLabel(ConnectionForm);
-        label_4->setObjectName(QStringLiteral("label_4"));
-
-        gridLayout->addWidget(label_4, 2, 0, 1, 1);
-
         label_5 = new QLabel(ConnectionForm);
         label_5->setObjectName(QStringLiteral("label_5"));
 
-        gridLayout->addWidget(label_5, 0, 0, 1, 1);
+        gridLayout->addWidget(label_5, 0, 0, 1, 2);
+
+        databaseEdit = new QLineEdit(ConnectionForm);
+        databaseEdit->setObjectName(QStringLiteral("databaseEdit"));
+
+        gridLayout->addWidget(databaseEdit, 0, 2, 1, 2);
 
         label_6 = new QLabel(ConnectionForm);
         label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout->addWidget(label_6, 1, 0, 1, 1);
-
-        label_2 = new QLabel(ConnectionForm);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout->addWidget(label_2, 4, 0, 1, 1);
 
         progress = new QProgressBar(ConnectionForm);
         progress->setObjectName(QStringLiteral("progress"));
@@ -116,37 +107,57 @@ public:
         progress->setOrientation(Qt::Horizontal);
         progress->setInvertedAppearance(false);
 
-        gridLayout->addWidget(progress, 12, 0, 1, 3);
-
-        databaseEdit = new QLineEdit(ConnectionForm);
-        databaseEdit->setObjectName(QStringLiteral("databaseEdit"));
-
-        gridLayout->addWidget(databaseEdit, 0, 1, 1, 1);
+        gridLayout->addWidget(progress, 10, 0, 1, 3);
 
         passwordEdit = new QLineEdit(ConnectionForm);
         passwordEdit->setObjectName(QStringLiteral("passwordEdit"));
         passwordEdit->setEchoMode(QLineEdit::Password);
 
-        gridLayout->addWidget(passwordEdit, 3, 1, 1, 1);
+        gridLayout->addWidget(passwordEdit, 3, 2, 1, 2);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 6, 2, 1, 2);
+
+        label_3 = new QLabel(ConnectionForm);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 3, 0, 1, 2);
 
         usernameEdit = new QLineEdit(ConnectionForm);
         usernameEdit->setObjectName(QStringLiteral("usernameEdit"));
 
-        gridLayout->addWidget(usernameEdit, 2, 1, 1, 1);
+        gridLayout->addWidget(usernameEdit, 2, 2, 1, 2);
 
-        ipEdit = new QLineEdit(ConnectionForm);
-        ipEdit->setObjectName(QStringLiteral("ipEdit"));
+        label_4 = new QLabel(ConnectionForm);
+        label_4->setObjectName(QStringLiteral("label_4"));
 
-        gridLayout->addWidget(ipEdit, 4, 1, 1, 1);
+        gridLayout->addWidget(label_4, 2, 0, 1, 2);
 
         portEdit = new QLineEdit(ConnectionForm);
         portEdit->setObjectName(QStringLiteral("portEdit"));
 
-        gridLayout->addWidget(portEdit, 1, 1, 1, 1);
+        gridLayout->addWidget(portEdit, 1, 2, 1, 2);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        ipEdit = new QLineEdit(ConnectionForm);
+        ipEdit->setObjectName(QStringLiteral("ipEdit"));
 
-        gridLayout->addItem(verticalSpacer, 5, 1, 1, 1);
+        horizontalLayout_2->addWidget(ipEdit);
+
+        testConnection = new QPushButton(ConnectionForm);
+        testConnection->setObjectName(QStringLiteral("testConnection"));
+
+        horizontalLayout_2->addWidget(testConnection);
+
+
+        gridLayout->addLayout(horizontalLayout_2, 4, 2, 1, 1);
+
+        label_2 = new QLabel(ConnectionForm);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout->addWidget(label_2, 4, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -167,12 +178,7 @@ public:
         horizontalLayout->addWidget(connect);
 
 
-        gridLayout->addLayout(horizontalLayout, 7, 0, 1, 2);
-
-        testConnection = new QPushButton(ConnectionForm);
-        testConnection->setObjectName(QStringLiteral("testConnection"));
-
-        gridLayout->addWidget(testConnection, 4, 2, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 9, 0, 1, 3);
 
         QWidget::setTabOrder(databaseEdit, portEdit);
         QWidget::setTabOrder(portEdit, usernameEdit);
@@ -187,15 +193,15 @@ public:
     void retranslateUi(QDialog *ConnectionForm)
     {
         ConnectionForm->setWindowTitle(QApplication::translate("ConnectionForm", "Connection Setup", Q_NULLPTR));
-        label_3->setText(QApplication::translate("ConnectionForm", "Password:", Q_NULLPTR));
-        label_4->setText(QApplication::translate("ConnectionForm", "Username:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ConnectionForm", "Database:", Q_NULLPTR));
         label_6->setText(QApplication::translate("ConnectionForm", "Port:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("ConnectionForm", "IP:", Q_NULLPTR));
         progress->setFormat(QString());
+        label_3->setText(QApplication::translate("ConnectionForm", "Password:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ConnectionForm", "Username:", Q_NULLPTR));
+        testConnection->setText(QApplication::translate("ConnectionForm", "?", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ConnectionForm", "IP:", Q_NULLPTR));
         error->setText(QString());
         connect->setText(QApplication::translate("ConnectionForm", "Connect", Q_NULLPTR));
-        testConnection->setText(QApplication::translate("ConnectionForm", "?", Q_NULLPTR));
     } // retranslateUi
 
 };

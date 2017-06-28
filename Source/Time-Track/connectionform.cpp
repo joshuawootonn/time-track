@@ -189,6 +189,7 @@ void ConnectionForm::on_passwordEdit_textChanged(const QString &arg1)
 void ConnectionForm::on_ipEdit_textChanged(const QString &arg1)
 {
     ip = arg1;
+    ui->connect->setEnabled(false);
 }
 
 void ConnectionForm::setError(QString x){
