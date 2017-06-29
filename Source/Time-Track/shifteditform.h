@@ -32,7 +32,6 @@ public:
     void EditFinishedShift(QString shiftid);
     void EditWorkingShift(QString Shiftid,QString id);
     void updateShiftEdit();
-
     void EmployeeInitialize();
     void ProjectInitialize();
     void ItemInitialize();
@@ -43,32 +42,24 @@ public:
 
 private slots:
     void on_Projects_currentIndexChanged(const QString &arg1);
+    void on_Projects_currentTextChanged(const QString &arg1);
     void on_Add_clicked();
     void on_Delete_clicked();
     void on_Sections_cellClicked(int row, int column);
     void on_Sections_cellChanged();
     void on_Lunch_currentTextChanged(const QString &arg1);
+    void on_Lunch_timeChanged(const QTime &time);
     void on_DateTime1_dateTimeChanged(const QDateTime &dateTime);
     void on_DateTime2_dateTimeChanged(const QDateTime &dateTime);
     void on_Description_textChanged();
-
+    void on_Description_Check_clicked();
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
     void on_RefreshButton_clicked();
 
-
-
-
-
-    void on_Lunch_timeChanged(const QTime &time);
-
-    void on_Description_Check_clicked();
-
-
-    void on_Projects_currentTextChanged(const QString &arg1);
-
 signals:
     void finished();
+
 private:
     bool deactivate;
     Ui::ShiftEditForm *ui;

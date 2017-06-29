@@ -189,7 +189,7 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     }
 
     qry->clear();
-    qry->prepare("select time,projectname,itemname from shiftlist where shiftid='"+shiftid+"'");
+    qry->prepare("select time,projectname,itemname,description from shiftlist where shiftid='"+shiftid+"'");
     if(qry->exec())
     {
         while(qry->next())
@@ -198,7 +198,11 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
             ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(qry->value(0).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(qry->value(1).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(qry->value(2).toString()));
-
+            if(qry->value(2).toString() =="Other")
+            {
+                ui->DescriptionWidget->show();
+                ui->Description->setText(qry->value(3).toString());
+            }
         }
     }
     ui->Sections->resizeRowsToContents();
@@ -636,7 +640,11 @@ void ShiftEditForm::on_FinishedButton_clicked()
 
 
         hours=ui->Sections->item(i,2)->text();
-        lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+
+        if(ui->Lunch->time().minute() == 0)
+            lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute())+"0";
+        else
+            lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
         qry->clear();
         if(itemname=="Other")
             qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"

@@ -36,40 +36,41 @@ QT_MOC_LITERAL(1, 14, 8), // "finished"
 QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 31), // "on_Projects_currentIndexChanged"
 QT_MOC_LITERAL(4, 56, 4), // "arg1"
-QT_MOC_LITERAL(5, 61, 14), // "on_Add_clicked"
-QT_MOC_LITERAL(6, 76, 17), // "on_Delete_clicked"
-QT_MOC_LITERAL(7, 94, 23), // "on_Sections_cellClicked"
-QT_MOC_LITERAL(8, 118, 3), // "row"
-QT_MOC_LITERAL(9, 122, 6), // "column"
-QT_MOC_LITERAL(10, 129, 23), // "on_Sections_cellChanged"
-QT_MOC_LITERAL(11, 153, 27), // "on_Lunch_currentTextChanged"
-QT_MOC_LITERAL(12, 181, 28), // "on_DateTime1_dateTimeChanged"
-QT_MOC_LITERAL(13, 210, 8), // "dateTime"
-QT_MOC_LITERAL(14, 219, 28), // "on_DateTime2_dateTimeChanged"
-QT_MOC_LITERAL(15, 248, 26), // "on_Description_textChanged"
-QT_MOC_LITERAL(16, 275, 25), // "on_FinishedButton_clicked"
-QT_MOC_LITERAL(17, 301, 23), // "on_CancelButton_clicked"
-QT_MOC_LITERAL(18, 325, 24), // "on_RefreshButton_clicked"
-QT_MOC_LITERAL(19, 350, 20), // "on_Lunch_timeChanged"
-QT_MOC_LITERAL(20, 371, 4), // "time"
-QT_MOC_LITERAL(21, 376, 28), // "on_Description_Check_clicked"
-QT_MOC_LITERAL(22, 405, 30) // "on_Projects_currentTextChanged"
+QT_MOC_LITERAL(5, 61, 30), // "on_Projects_currentTextChanged"
+QT_MOC_LITERAL(6, 92, 14), // "on_Add_clicked"
+QT_MOC_LITERAL(7, 107, 17), // "on_Delete_clicked"
+QT_MOC_LITERAL(8, 125, 23), // "on_Sections_cellClicked"
+QT_MOC_LITERAL(9, 149, 3), // "row"
+QT_MOC_LITERAL(10, 153, 6), // "column"
+QT_MOC_LITERAL(11, 160, 23), // "on_Sections_cellChanged"
+QT_MOC_LITERAL(12, 184, 27), // "on_Lunch_currentTextChanged"
+QT_MOC_LITERAL(13, 212, 20), // "on_Lunch_timeChanged"
+QT_MOC_LITERAL(14, 233, 4), // "time"
+QT_MOC_LITERAL(15, 238, 28), // "on_DateTime1_dateTimeChanged"
+QT_MOC_LITERAL(16, 267, 8), // "dateTime"
+QT_MOC_LITERAL(17, 276, 28), // "on_DateTime2_dateTimeChanged"
+QT_MOC_LITERAL(18, 305, 26), // "on_Description_textChanged"
+QT_MOC_LITERAL(19, 332, 28), // "on_Description_Check_clicked"
+QT_MOC_LITERAL(20, 361, 25), // "on_FinishedButton_clicked"
+QT_MOC_LITERAL(21, 387, 23), // "on_CancelButton_clicked"
+QT_MOC_LITERAL(22, 411, 24) // "on_RefreshButton_clicked"
 
     },
     "ShiftEditForm\0finished\0\0"
     "on_Projects_currentIndexChanged\0arg1\0"
+    "on_Projects_currentTextChanged\0"
     "on_Add_clicked\0on_Delete_clicked\0"
     "on_Sections_cellClicked\0row\0column\0"
     "on_Sections_cellChanged\0"
     "on_Lunch_currentTextChanged\0"
+    "on_Lunch_timeChanged\0time\0"
     "on_DateTime1_dateTimeChanged\0dateTime\0"
     "on_DateTime2_dateTimeChanged\0"
     "on_Description_textChanged\0"
+    "on_Description_Check_clicked\0"
     "on_FinishedButton_clicked\0"
     "on_CancelButton_clicked\0"
-    "on_RefreshButton_clicked\0on_Lunch_timeChanged\0"
-    "time\0on_Description_Check_clicked\0"
-    "on_Projects_currentTextChanged"
+    "on_RefreshButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -91,40 +92,40 @@ static const uint qt_meta_data_ShiftEditForm[] = {
 
  // slots: name, argc, parameters, tag, flags
        3,    1,   95,    2, 0x08 /* Private */,
-       5,    0,   98,    2, 0x08 /* Private */,
-       6,    0,   99,    2, 0x08 /* Private */,
-       7,    2,  100,    2, 0x08 /* Private */,
-      10,    0,  105,    2, 0x08 /* Private */,
-      11,    1,  106,    2, 0x08 /* Private */,
+       5,    1,   98,    2, 0x08 /* Private */,
+       6,    0,  101,    2, 0x08 /* Private */,
+       7,    0,  102,    2, 0x08 /* Private */,
+       8,    2,  103,    2, 0x08 /* Private */,
+      11,    0,  108,    2, 0x08 /* Private */,
       12,    1,  109,    2, 0x08 /* Private */,
-      14,    1,  112,    2, 0x08 /* Private */,
-      15,    0,  115,    2, 0x08 /* Private */,
-      16,    0,  116,    2, 0x08 /* Private */,
-      17,    0,  117,    2, 0x08 /* Private */,
-      18,    0,  118,    2, 0x08 /* Private */,
-      19,    1,  119,    2, 0x08 /* Private */,
-      21,    0,  122,    2, 0x08 /* Private */,
-      22,    1,  123,    2, 0x08 /* Private */,
+      13,    1,  112,    2, 0x08 /* Private */,
+      15,    1,  115,    2, 0x08 /* Private */,
+      17,    1,  118,    2, 0x08 /* Private */,
+      18,    0,  121,    2, 0x08 /* Private */,
+      19,    0,  122,    2, 0x08 /* Private */,
+      20,    0,  123,    2, 0x08 /* Private */,
+      21,    0,  124,    2, 0x08 /* Private */,
+      22,    0,  125,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    4,
+    QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    4,
-    QMetaType::Void, QMetaType::QDateTime,   13,
-    QMetaType::Void, QMetaType::QDateTime,   13,
+    QMetaType::Void, QMetaType::QTime,   14,
+    QMetaType::Void, QMetaType::QDateTime,   16,
+    QMetaType::Void, QMetaType::QDateTime,   16,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QTime,   20,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    4,
 
        0        // eod
 };
@@ -137,20 +138,20 @@ void ShiftEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->finished(); break;
         case 1: _t->on_Projects_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->on_Add_clicked(); break;
-        case 3: _t->on_Delete_clicked(); break;
-        case 4: _t->on_Sections_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 5: _t->on_Sections_cellChanged(); break;
-        case 6: _t->on_Lunch_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 7: _t->on_DateTime1_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
-        case 8: _t->on_DateTime2_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
-        case 9: _t->on_Description_textChanged(); break;
-        case 10: _t->on_FinishedButton_clicked(); break;
-        case 11: _t->on_CancelButton_clicked(); break;
-        case 12: _t->on_RefreshButton_clicked(); break;
-        case 13: _t->on_Lunch_timeChanged((*reinterpret_cast< const QTime(*)>(_a[1]))); break;
-        case 14: _t->on_Description_Check_clicked(); break;
-        case 15: _t->on_Projects_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->on_Projects_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: _t->on_Add_clicked(); break;
+        case 4: _t->on_Delete_clicked(); break;
+        case 5: _t->on_Sections_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 6: _t->on_Sections_cellChanged(); break;
+        case 7: _t->on_Lunch_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 8: _t->on_Lunch_timeChanged((*reinterpret_cast< const QTime(*)>(_a[1]))); break;
+        case 9: _t->on_DateTime1_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
+        case 10: _t->on_DateTime2_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
+        case 11: _t->on_Description_textChanged(); break;
+        case 12: _t->on_Description_Check_clicked(); break;
+        case 13: _t->on_FinishedButton_clicked(); break;
+        case 14: _t->on_CancelButton_clicked(); break;
+        case 15: _t->on_RefreshButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

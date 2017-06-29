@@ -40,63 +40,45 @@ public:
 
 
     bool Connect(QString database,QString port,QString username,QString password,QString ip);
+    void establishConnections();
     bool isValidConnection(QString ip);
-
     QDateTime format_datetimes(QDateTime z);
-
     void showtheThings();
     void hidetheThings();
     void isConnected();
-
     void setIcons();
-
     void basicInitialize();
     void advInitialize();
-
-    void establishConnections();
 
     void EmployeeTab();
     QSqlQueryModel * EmployeeModel();
     QSortFilterProxyModel * EmployeeFilterModel();
-
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
     QSortFilterProxyModel * ProjectFilterModel();
     QSqlQueryModel * ProjectItemModelFirst();
     QSqlQueryModel * ProjectItemModel();
-
     QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectItemTab();
     void refreshProjectItemCombo();
-
     void ItemTab();
     QSqlQueryModel * ItemModel();
     QSortFilterProxyModel * ItemFilterModel();
-
     void ShiftTab();
     QSqlQueryModel* ShiftModel();
     QSortFilterProxyModel* ShiftFilterModel();
-
     QSqlDatabase getData() const;
-
-    /* Not going to lie there isn't a bunch of though
-     * put into this file, and I dont want to think of
-     * it right now xd
-     */
-
 
 public slots:
 
     void reenter();
     void start();
-
     void loginInitialize();
     void on_basicPageClockIn_clicked();
     void on_basicPageClockOut_clicked();
     void on_basicPageConnect_clicked();
     void on_basicPageAdvanced_clicked();
     void on_mainFinish_clicked();
-
     void refreshShiftEmployee();
     void refreshShiftProject();
     void refreshShiftItem();
@@ -120,7 +102,6 @@ private slots:
     void on_Login8_clicked();
     void on_LoginBack_clicked();
     void on_LoginGo_clicked();
-
 
     //Employee Tab!
 
@@ -199,8 +180,6 @@ private slots:
     void on_SettingsPrint_clicked();
     void on_SettingsAll_clicked();
     void on_EmployeeRefresh_clicked();
-
-
     void on_SettingsConnections_clicked();
 
 public:
@@ -209,18 +188,12 @@ public:
 private:
     QSortFilterProxyModel * employeefiltermodel;
     QSqlQueryModel * employeemodel;
-
     QSortFilterProxyModel * projectfiltermodel;
     QSqlQueryModel * projectmodel;
-
     QSortFilterProxyModel * itemfiltermodel;
     QSqlQueryModel * itemmodel;
-
     QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
-
-    QString ip;
-
     ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;
@@ -233,6 +206,7 @@ private:
     QString id;
     bool admin;
     QString pin;
+    QString ip;
 };
 
 #endif // MAINFORM_H

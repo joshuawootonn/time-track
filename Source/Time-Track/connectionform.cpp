@@ -45,8 +45,9 @@ void ConnectionForm::loadConnection(bool s){
         setError("Invalid");
         ui->connect->setEnabled(false);
     }
+    qDebug()<<"here";
 }
-
+/* Threaded ping operation to test the validity of an ip  */
 void ConnectionForm::pingConnection(){
 
     ui->connect->setEnabled(false);
@@ -68,6 +69,7 @@ void ConnectionForm::pingConnection(){
     thread->setPriority(QThread::HighestPriority);
 
 }
+/* Exporting the saved data */
 void ConnectionForm::write(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text))
@@ -84,6 +86,7 @@ void ConnectionForm::write(){
     file.flush();
     file.close();
 }
+/* Importing the saved data */
 void ConnectionForm::read(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::ReadOnly | QFile::Text))
@@ -118,7 +121,20 @@ void ConnectionForm::read(){
 
     file.close();
 }
+void ConnectionForm::auto_connect(){
+    if(automatic){
+        emit finished();
+        this->hide();
+    }
+    else
+        this->show();
+}
+void ConnectionForm::setError(QString x){
+    ui->error->show();
+    ui->error->setText(x);
+}
 
+/* Getter methods for the five elements of a connection */
 QString ConnectionForm::getIp() const
 {
     return ip;
@@ -139,36 +155,6 @@ QString ConnectionForm::getDatabase() const
 {
     return database;
 }
-void ConnectionForm::on_connect_clicked()
-{
-    if(ui->databaseEdit->text() == "")
-        setError("Please enter a database");
-    else if(ui->portEdit->text() == "")
-        setError("Please enter a port");
-    else if(ui->usernameEdit->text() == "")
-        setError("Please enter a username");
-    else if(ui->passwordEdit->text() == "")
-        setError("Please enter a password");
-    else if(ui->ipEdit->text() == "")
-        setError("Please enter a IP");
-    else
-    {
-        write();
-        emit finished();
-
-    }
-}
-void ConnectionForm::auto_connect(){
-    if(automatic){
-        emit finished();
-        this->hide();
-    }
-    else
-        this->show();
-    qDebug()<<automatic;
-
-}
-
 
 void ConnectionForm::on_databaseEdit_textChanged(const QString &arg1)
 {
@@ -190,14 +176,28 @@ void ConnectionForm::on_ipEdit_textChanged(const QString &arg1)
 {
     ip = arg1;
     ui->connect->setEnabled(false);
+    setError("Press ? to validate");
 }
-
-void ConnectionForm::setError(QString x){
-    ui->error->show();
-    ui->error->setText(x);
-}
-
 void ConnectionForm::on_testConnection_clicked()
 {
     pingConnection();
+}
+void ConnectionForm::on_connect_clicked()
+{
+    if(ui->databaseEdit->text() == "")
+        setError("Please enter a database");
+    else if(ui->portEdit->text() == "")
+        setError("Please enter a port");
+    else if(ui->usernameEdit->text() == "")
+        setError("Please enter a username");
+    else if(ui->passwordEdit->text() == "")
+        setError("Please enter a password");
+    else if(ui->ipEdit->text() == "")
+        setError("Please enter a IP");
+    else
+    {
+        write();
+        emit finished();
+
+    }
 }

@@ -24,30 +24,23 @@ public:
     QString getIp() const;
     void setError(QString x);
 
-private slots:
-    void loadConnection(bool s);
-    void pingConnection();
+private slots:    
     void on_connect_clicked();
-
-
     void on_databaseEdit_textChanged(const QString &arg1);
     void on_portEdit_textChanged(const QString &arg1);
     void on_usernameEdit_textChanged(const QString &arg1);
     void on_passwordEdit_textChanged(const QString &arg1);
     void on_ipEdit_textChanged(const QString &arg1);
-
-
-
-
     void on_testConnection_clicked();
+    void loadConnection(bool s);
 
 signals:
     void finished();
 
-
 private:
     void write();
-    void read();
+    void read();    
+    void pingConnection();
 
     Ui::ConnectionForm *ui;
     QString database;
@@ -55,7 +48,6 @@ private:
     QString username;
     QString password;
     QString ip;
-
     bool automatic;
 
 };

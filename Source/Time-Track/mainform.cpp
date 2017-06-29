@@ -338,8 +338,6 @@ void MainForm::advInitialize(){
     establishConnections();
 }
 
-
-
 void MainForm::on_Login0_clicked()
 {
 
@@ -391,16 +389,6 @@ void MainForm::on_LoginGo_clicked()
 {
     on_passEdit_returnPressed();
 }
-
-
-
-
-
-
-
-
-
-
 
 /* Deal with the signals and slots of the mainForm that
  * change what menu you are at
@@ -634,7 +622,6 @@ void MainForm::on_passEdit_returnPressed()
         qDebug()<<qry1.lastError();
     }
 }
-
 
 
 // Employee Section!
@@ -1430,6 +1417,8 @@ void MainForm::ShiftTab(){
     ui->ShiftView->hideColumn(2);
     ui->ShiftView->hideColumn(3);
     ui->ShiftView->hideColumn(13);
+
+    ui->ShiftView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->ShiftView->horizontalHeader()->setStretchLastSection(true);
     ui->ShiftEmployeeCombo->setEnabled(false);
     ui->ShiftProjectCombo->setEnabled(false);
@@ -1498,7 +1487,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(8,Qt::Horizontal,tr("Date In"));
     model->setHeaderData(9,Qt::Horizontal,tr("Time Out"));
     model->setHeaderData(10,Qt::Horizontal,tr("Date out"));
-    model->setHeaderData(11,Qt::Horizontal,tr("Lunch Time"));
+    model->setHeaderData(11,Qt::Horizontal,tr("Lunch"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
     model->setHeaderData(14,Qt::Horizontal,tr("Description"));
     return model;
