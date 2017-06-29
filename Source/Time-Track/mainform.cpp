@@ -1694,6 +1694,10 @@ void MainForm::SettingsTab(){
 
     QSqlQueryModel * x = ProjectModel();
     currentProject = x->record(1).value(1).toString();
+    ui->groupBox_18->hide();
+    ui->groupBox_19->hide();
+    ui->groupBox_20->hide();
+
 }
 void MainForm::on_SettingsMax_clicked()
 {

@@ -142,7 +142,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -862,7 +862,7 @@ background-color:#FE938C;
 </string>
           </property>
           <attribute name="title">
-           <string>Employees</string>
+           <string>Employee</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <property name="spacing">
@@ -1077,7 +1077,7 @@ background-color:#B19994;
 </string>
           </property>
           <attribute name="title">
-           <string>Projects</string>
+           <string>Project</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <property name="spacing">
@@ -1375,7 +1375,7 @@ background-color:#837F9A;
 }</string>
           </property>
           <attribute name="title">
-           <string>Sub-Projects</string>
+           <string>Sub-Project</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <property name="spacing">
@@ -1502,7 +1502,7 @@ background-color:#8DAA91;
 }</string>
           </property>
           <attribute name="title">
-           <string>Shifts</string>
+           <string>Shift</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <property name="spacing">

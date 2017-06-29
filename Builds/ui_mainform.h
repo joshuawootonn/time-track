@@ -1402,7 +1402,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
         HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);
@@ -1453,7 +1453,7 @@ public:
         AllRadio->setText(QApplication::translate("MainForm", "All Employees", Q_NULLPTR));
         CurrentRadio->setText(QApplication::translate("MainForm", "Current Employees", Q_NULLPTR));
         PastRadio->setText(QApplication::translate("MainForm", "Past Employees", Q_NULLPTR));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(EmployeeSettings), QApplication::translate("MainForm", "Employees", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(EmployeeSettings), QApplication::translate("MainForm", "Employee", Q_NULLPTR));
         groupBox_6->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ProjectAdd->setText(QString());
         ProjectArchive->setText(QString());
@@ -1473,7 +1473,7 @@ public:
         groupBox_12->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         ProjectItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         ProjectItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Projects", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Project", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ItemAdd->setText(QString());
         ItemDelete->setText(QString());
@@ -1483,7 +1483,7 @@ public:
         ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", Q_NULLPTR));
         ItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         ItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Projects", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Project", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ShiftAdd->setText(QString());
         ShiftEdit->setText(QString());
@@ -1500,7 +1500,7 @@ public:
         label_5->setText(QApplication::translate("MainForm", "To:", Q_NULLPTR));
         groupBox_15->setTitle(QString());
         ShiftTotalTime->setText(QApplication::translate("MainForm", "0:00", Q_NULLPTR));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shifts", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ShiftSettings), QApplication::translate("MainForm", "Shift", Q_NULLPTR));
         groupBox_16->setTitle(QApplication::translate("MainForm", "Display", Q_NULLPTR));
         SettingsMax->setText(QString());
         SettingsFull->setText(QString());
