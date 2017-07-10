@@ -37,6 +37,7 @@ ConnectionForm::~ConnectionForm()
 }
 
 void ConnectionForm::loadConnection(bool s){
+
     if(s){
         setError("Valid");
         ui->connect->setEnabled(true);
