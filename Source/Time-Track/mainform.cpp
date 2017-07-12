@@ -66,7 +66,6 @@ void MainForm::start(){
  * information about employees and such
 */
 
-
 bool MainForm::Connect(QString database,QString port,QString username,QString password,QString ip){
     qDebug()<<database<<port<<username<<password<<ip;
     data = QSqlDatabase::addDatabase("QMYSQL");
@@ -87,29 +86,10 @@ bool MainForm::Connect(QString database,QString port,QString username,QString pa
     }
 }
 
-bool MainForm::isValidConnection(QString ip){
-
-
-    QSqlDatabase temp;
-    temp = QSqlDatabase::addDatabase("QMYSQL");
-    temp.setPort(3306);
-    temp.setPassword("aaci1234");
-    temp.setDatabaseName("aacidatabase");
-    temp.setUserName("client");
-    temp.setHostName(ip);
-    temp.open();
-    //qDebug()<<temp.lastError();
-    if(temp.isOpen())
-        return true;
-     else
-        return false;
-}
-
-
-
 /* These classes connect the different forms through
  * signals and slots
 */
+
 void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
@@ -129,6 +109,7 @@ void MainForm::reenter(){
 }
 
 /* Initialization of the different pages of mainform*/
+
 void MainForm::setIcons(){
     QPixmap pixmap("../Icons/checked.png");
     QIcon ButtonIcon(pixmap);
@@ -393,6 +374,7 @@ void MainForm::on_LoginGo_clicked()
 /* Deal with the signals and slots of the mainForm that
  * change what menu you are at
 */
+
 void MainForm::hidetheThings(){
     ui->basicPageAdvanced->hide();
     ui->basicPageClockIn->hide();
@@ -514,6 +496,7 @@ void MainForm::on_mainFinish_clicked()
 /* Formatting of qdatetimes in order to only have times
  * that are in quarters
 */
+
 QDateTime MainForm::format_datetimes(QDateTime z)
 {
     int minTime = z.time().minute();
@@ -622,6 +605,8 @@ void MainForm::on_passEdit_returnPressed()
         qDebug()<<qry1.lastError();
     }
 }
+
+
 
 
 // Employee Section!
@@ -734,6 +719,7 @@ QSortFilterProxyModel * MainForm::EmployeeFilterModel(){
 }
 
 /* Option menu 1 for EmployeeTab*/
+
 void MainForm::on_EmployeeAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -814,7 +800,9 @@ void MainForm::on_EmployeeRefresh_clicked()
 {
     ui->EmployeeView->model()->submit();
 }
+
 /* Option menu 2 for EmployeeTab*/
+
 void MainForm::on_EmployeeName_clicked()
 {
     refreshEmployeeTab();
@@ -843,7 +831,9 @@ void MainForm::on_EmployeeCurrent_clicked()
 {
     refreshEmployeeTab();
 }
+
 /* Option menu 3 for EmployeeTab*/
+
 void MainForm::on_AllRadio_toggled(bool checked)
 {
     if(checked)
@@ -886,6 +876,9 @@ void MainForm::on_PastRadio_toggled(bool checked)
         }
     }
 }
+
+
+
 
 // Project Section!
 
@@ -1059,6 +1052,7 @@ QSqlQueryModel * MainForm::ProjectItemModelRefresh(){
 }
 
 /* Option menu 1 for ProjectTab*/
+
 void MainForm::on_ProjectAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -1141,7 +1135,9 @@ void MainForm::on_ProjectArchive_clicked()
         }
     }
 }
+
 /* Option menu 2 for ProjectTab*/
+
 void MainForm::on_ProjectName_clicked()
 {
     refreshProjectTab();
@@ -1158,7 +1154,9 @@ void MainForm::on_ProjectDate_clicked()
 {
     refreshProjectTab();
 }
+
 /* Option menu 3 for ProjectTab*/
+
 void MainForm::on_ProjectAllRadio_toggled(bool checked)
 {
     if(checked){
@@ -1197,7 +1195,9 @@ void MainForm::on_ProjectPastRadio_toggled(bool checked)
         }
     }
 }
+
 /* Option menu 4 for ProjectTab*/
+
 void MainForm::on_ProjectItemName_clicked()
 {
     refreshProjectItemTab();
@@ -1206,7 +1206,9 @@ void MainForm::on_ProjectItemId_clicked()
 {
     refreshProjectItemTab();
 }
+
 /* Option menu 5 for ProjectTab*/
+
 void MainForm::on_ProjectItemAdd_clicked()
 {
     QString itemName = ui->ProjectItemCombo->currentText();
@@ -1263,11 +1265,16 @@ void MainForm::on_ProjectItemRemove_clicked()
     }
 }
 
+
+
+
+
 // Item Section!
 
 /* Initialization,model,and refreshing for the
  * 'itemtab' in 'sections'
  */
+
 void MainForm::ItemTab(){
     itemmodel= ItemModel();
     itemfiltermodel = ItemFilterModel();
@@ -1334,6 +1341,7 @@ void MainForm::refreshItemStuff(){
 }
 
 /* Option menu 1 for ItemTab*/
+
 void MainForm::on_ItemAdd_clicked()
 {
     QSqlQuery * qry = new QSqlQuery(data);
@@ -1370,7 +1378,9 @@ void MainForm::on_ItemDelete_clicked()
         }
     }
 }
+
 /* Option menu 2 for ItemTab*/
+
 void MainForm::on_ItemName_clicked()
 {
     refreshItemTab();
@@ -1392,11 +1402,16 @@ void MainForm::on_ItemDimension_clicked()
     refreshItemTab();
 }
 
+
+
+
+
 // Shift Section!
 
 /* Initialization,three combobox refreshers,model,
  * and main refresher for the 'shiftTab' within 'sections'
 */
+
 void MainForm::ShiftTab(){
     shiftmodel = ShiftModel();
     shiftfiltermodel=ShiftFilterModel();
@@ -1575,6 +1590,7 @@ void MainForm::displayShiftSuccess(){
 }
 
 /* Option menu 1 for shiftTab*/
+
 void MainForm::on_ShiftDate1_dateChanged(const QDate &date)
 {
     refreshShiftTab();
@@ -1583,7 +1599,9 @@ void MainForm::on_ShiftDate2_dateChanged(const QDate &date)
 {
     refreshShiftTab();
 }
+
 /* Option menu 2 for shiftTab*/
+
 void MainForm::on_ShiftEmployeeBox_clicked()
 {
     refreshShiftTab();
@@ -1620,7 +1638,9 @@ void MainForm::on_ShiftItemCombo_currentTextChanged(const QString &arg1)
 {
     refreshShiftTab();
 }
+
 /* Option menu 3 for shiftTab*/
+
 void MainForm::on_ShiftAdd_clicked()
 {
     shifteditform = new ShiftEditForm(this);
@@ -1674,11 +1694,16 @@ void MainForm::on_ShiftDelete_clicked()
     }
 }
 
+
+
+
+
 //Settings Section!
 
 /* Quickly made this section so that I could maximize
  * and fullscreen the program easily plan on making
  * this cleaner later.*/
+
 void MainForm::SettingsTab(){
 
     QSqlQueryModel * x = ProjectModel();
@@ -1946,9 +1971,14 @@ void MainForm::on_SettingsConnections_clicked()
     QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
 }
+
+
+
+
 /* This is the method used for sending the data
  * database to sub-form.
  */
+
 QSqlDatabase MainForm::getData() const
 {
     return data;

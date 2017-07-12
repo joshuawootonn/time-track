@@ -86,6 +86,7 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 }
 
 /* This function is for ininializing this dialog  */
+
 void ClockoutForm::ClockoutInitialize(QString i){
 
     id=i;
@@ -110,6 +111,7 @@ void ClockoutForm::ClockoutInitialize(QString i){
 
 /* These next six functions are used to initialize the
  * comboboxes with there appropriate model's. */
+
 void ClockoutForm::ProjectInitialize(){
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
@@ -282,6 +284,7 @@ void ClockoutForm::TimeLeft(){
 
 /*These classes are used to update the table and
  * comboboxs when triggers are hit*/
+
 void ClockoutForm::on_Add_clicked()
 {
     ui->Sections->setRowCount(ui->Sections->rowCount()+1);
@@ -365,6 +368,7 @@ void ClockoutForm::on_Description_textChanged()
 
 /*These two classes are used to finish or cancel the
  * changes that the user was trying to implement.*/
+
 void ClockoutForm::on_FinishedButton_clicked()
 {
     QSqlQuery* qry=new QSqlQuery(data);

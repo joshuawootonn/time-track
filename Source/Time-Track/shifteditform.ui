@@ -423,6 +423,12 @@ QGroupBox::title {
               </item>
               <item>
                <widget class="QTextEdit" name="Description">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>21</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>

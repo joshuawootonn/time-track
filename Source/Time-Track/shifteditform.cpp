@@ -9,15 +9,6 @@ ShiftEditForm::ShiftEditForm(QWidget *parent) :
     ui->setupUi(this);
 
     data = ((MainForm*)parentWidget())->getData();
-//    this->setGeometry(
-//        QStyle::alignedRect(
-//            Qt::LeftToRight,
-//            Qt::AlignCenter,
-//            this->size(),
-//            qApp->desktop()->availableGeometry()
-//        )
-//    );
-
 
     clicked = false;
     ui->RefreshButton->hide();
@@ -27,15 +18,12 @@ ShiftEditForm::ShiftEditForm(QWidget *parent) :
     ui->RefreshButton->setDefault(false);
     ui->CancelButton->setDefault(false);
     ui->Description_Check->setChecked(true);
-
-    //ui->Times->setMaximumTime(QTime(48,0,0));
 }
 
 ShiftEditForm::~ShiftEditForm()
 {
     delete ui;
 }
-
 QDateTime ShiftEditForm::format_datetimes(QDateTime z)
 {
     int minTime = z.time().minute();
@@ -101,11 +89,11 @@ QDateTime ShiftEditForm::format_datetimes(QDateTime z)
 
 }
 
-
 /* These next three functions are for ininializing this
  * dialog according to its purpose. The first for adding
  * a new shift the second for editing a existing shift.
  * The third for editing a working shift. */
+
 void ShiftEditForm::AddShift(){
     this->showNormal();
     deactivate = false;
@@ -272,6 +260,7 @@ void ShiftEditForm::updateShiftEdit(){
 
 /* These next six functions are used to initialize the
  * comboboxes with there appropriate model's. */
+
 void ShiftEditForm::EmployeeInitialize(){
 
     QSqlQueryModel * modal=new QSqlQueryModel();
@@ -569,6 +558,7 @@ void ShiftEditForm::on_Description_Check_clicked()
 
 /*These two classes are used to finish or cancel the
  * changes that the user was trying to implement.*/
+
 void ShiftEditForm::on_RefreshButton_clicked()
 {
 //    data = ((MainForm*)parentWidget())->getData();

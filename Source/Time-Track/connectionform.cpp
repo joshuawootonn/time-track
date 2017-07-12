@@ -35,7 +35,7 @@ ConnectionForm::~ConnectionForm()
 {
     delete ui;
 }
-
+/* Toggle the connection button  */
 void ConnectionForm::loadConnection(bool s){
 
     if(s){
@@ -122,6 +122,9 @@ void ConnectionForm::read(){
 
     file.close();
 }
+/* Toggles whether dialog shows depending on whether settings
+  have been initialized.
+*/
 void ConnectionForm::auto_connect(){
     if(automatic){
         emit finished();
@@ -130,12 +133,14 @@ void ConnectionForm::auto_connect(){
     else
         this->show();
 }
+/* Error outputting  */
 void ConnectionForm::setError(QString x){
     ui->error->show();
     ui->error->setText(x);
 }
 
 /* Getter methods for the five elements of a connection */
+
 QString ConnectionForm::getIp() const
 {
     return ip;

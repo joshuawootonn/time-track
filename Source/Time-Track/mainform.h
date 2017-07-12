@@ -41,7 +41,6 @@ public:
 
     bool Connect(QString database,QString port,QString username,QString password,QString ip);
     void establishConnections();
-    bool isValidConnection(QString ip);
     QDateTime format_datetimes(QDateTime z);
     void showtheThings();
     void hidetheThings();
@@ -186,18 +185,29 @@ public:
     Ui::MainForm *ui;
 
 private:
+    //Employee table model
     QSortFilterProxyModel * employeefiltermodel;
     QSqlQueryModel * employeemodel;
+
+    //Project table model
     QSortFilterProxyModel * projectfiltermodel;
     QSqlQueryModel * projectmodel;
+
+    //Item table model
     QSortFilterProxyModel * itemfiltermodel;
     QSqlQueryModel * itemmodel;
+
+    //Shift table model
     QSortFilterProxyModel * shiftfiltermodel;
     QSqlQueryModel * shiftmodel;
+
+    //Class objects
     ClockoutForm * clockoutForm;
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;
     ExportForm * exportForm;
+
+    //Random variables :)
     QString currentProject;
     QSqlDatabase data;
     QSqlDatabase setup;
