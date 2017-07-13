@@ -142,7 +142,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -811,7 +811,7 @@ background-color:#ECEFED;
          </widget>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="0" column="0">
         <widget class="QTabWidget" name="HeaderTabs">
          <property name="maximumSize">
           <size>
@@ -1979,7 +1979,6 @@ background-color:#8DAA91;
   <tabstop>Login6</tabstop>
   <tabstop>Login7</tabstop>
   <tabstop>Login8</tabstop>
-  <tabstop>HeaderTabs</tabstop>
   <tabstop>Login5</tabstop>
   <tabstop>Login2</tabstop>
   <tabstop>Login9</tabstop>

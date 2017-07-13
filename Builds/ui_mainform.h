@@ -1299,7 +1299,7 @@ public:
 
         HeaderTabs->addTab(Settings, QString());
 
-        gridLayout_7->addWidget(HeaderTabs, 1, 0, 1, 1);
+        gridLayout_7->addWidget(HeaderTabs, 0, 0, 1, 1);
 
         mainStack->addWidget(advPage);
 
@@ -1365,8 +1365,7 @@ public:
         QWidget::setTabOrder(ProjectItemView, Login6);
         QWidget::setTabOrder(Login6, Login7);
         QWidget::setTabOrder(Login7, Login8);
-        QWidget::setTabOrder(Login8, HeaderTabs);
-        QWidget::setTabOrder(HeaderTabs, Login5);
+        QWidget::setTabOrder(Login8, Login5);
         QWidget::setTabOrder(Login5, Login2);
         QWidget::setTabOrder(Login2, Login9);
         QWidget::setTabOrder(Login9, ShiftView);
@@ -1402,7 +1401,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(0);
         HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);

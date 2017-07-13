@@ -105,7 +105,6 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
 
-
 }
 
 
@@ -150,7 +149,6 @@ void ClockoutForm::ItemInitialize(){
 
 }
 void ClockoutForm::TimesInitialize(){
-
     QSqlQuery* qry = new QSqlQuery(data);
     qry->prepare("Select time from timelist where idtimelist < 5 ORDER BY time");
     if(qry->exec())
@@ -161,7 +159,7 @@ void ClockoutForm::TimesInitialize(){
 
 
            }
-    }    
+    }
     qry->clear();
     qry->prepare("Select time from timelist where idtimelist < 5 AND idtimelist <> 3 ORDER BY time");
     if(qry->exec())
@@ -185,12 +183,13 @@ void ClockoutForm::TimesInitialize(){
     }
 
 
-    ui->Hours->lineEdit()->setReadOnly(true);
-    ui->Hours->lineEdit()->setAlignment(Qt::AlignCenter);
-    ui->Minutes->lineEdit()->setReadOnly(true);
-    ui->Minutes->lineEdit()->setAlignment(Qt::AlignCenter);
-    ui->Lunch->lineEdit()->setReadOnly(true);
-    ui->Lunch->lineEdit()->setAlignment(Qt::AlignCenter);
+//    ui->Hours->lineEdit()->setReadOnly(true);
+//    ui->Hours->lineEdit()->setAlignment(Qt::AlignCenter);
+
+//    ui->Minutes->lineEdit()->setReadOnly(true);
+//    ui->Minutes->lineEdit()->setAlignment(Qt::AlignCenter);
+//    ui->Lunch->lineEdit()->setReadOnly(true);
+//    ui->Lunch->lineEdit()->setAlignment(Qt::AlignCenter);
 
     for (int i = 0 ; i < ui->Hours->count() ; ++i) {
         ui->Hours->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
@@ -199,6 +198,7 @@ void ClockoutForm::TimesInitialize(){
         ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
         ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
     }
+
 
 
 }
@@ -273,7 +273,7 @@ void ClockoutForm::TimeLeft(){
     ui->timeLeft->setText(j);
     if(ui->timeLeft->text()=="0:00")
     {
-        if(ui->DescriptionWidget->isVisible()&&ui->Description->toPlainText()!=""){
+        if(ui->DescriptionWidget->isVisible()&&ui->Description->text()!=""){
 
             ui->FinishedButton->setEnabled(true);
         }
@@ -415,7 +415,7 @@ void ClockoutForm::on_FinishedButton_clicked()
 
 
     QString projectname,itemname, projectid,itemid,hours,lunch,description;
-    description=ui->Description->toPlainText().simplified();
+    description=ui->Description->text().simplified();
 
     for(int i =0; i<ui->Sections->rowCount();i++){
 
