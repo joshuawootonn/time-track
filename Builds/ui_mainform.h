@@ -1316,6 +1316,7 @@ public:
 
         mainFinish = new QPushButton(MainForm);
         mainFinish->setObjectName(QStringLiteral("mainFinish"));
+        mainFinish->setMinimumSize(QSize(50, 30));
 
         horizontalLayout->addWidget(mainFinish);
 

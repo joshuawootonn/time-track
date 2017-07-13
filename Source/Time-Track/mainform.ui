@@ -1925,6 +1925,12 @@ background-color:#8DAA91;
      </item>
      <item>
       <widget class="QPushButton" name="mainFinish">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
         <string>Finish</string>
        </property>

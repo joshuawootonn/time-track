@@ -28,7 +28,7 @@ void MainForm::start(){
     //Connect("aacidatabase","3306","user","aaci1234","192.168.41.187");
     if(Connect(connectionForm->getDatabase(),connectionForm->getPort(),connectionForm->getUsername(),connectionForm->getPassword(),connectionForm->getIp())){
         connectionForm->hide();
-        if (ip.split(".")[3] =="010")
+        if (ip.split(".")[3] =="10")
             this->showFullScreen();
         else
             this->showMaximized();
@@ -462,11 +462,11 @@ void MainForm::on_basicPageClockOut_clicked()
 
     clockoutForm = new ClockoutForm(this);
     establishConnections();
-//    if (ip.split(".")[3] =="010")
-//        clockoutForm->showFullScreen();
-//    else
-//        clockoutForm->showMaximized();
-    clockoutForm->showNormal();
+    if (ip.split(".")[3] =="10")
+        clockoutForm->showFullScreen();
+    else
+        clockoutForm->showMaximized();
+
 
     clockoutForm->ClockoutInitialize(id);
 
