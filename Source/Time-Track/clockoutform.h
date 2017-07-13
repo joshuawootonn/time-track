@@ -16,7 +16,6 @@
 #include <QMainWindow>
 #include <QLineEdit>
 
-
 namespace Ui {
 class ClockoutForm;
 }
@@ -57,5 +56,7 @@ private:
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
 };
+
+
 
 #endif // CLOCKOUTFORM_H

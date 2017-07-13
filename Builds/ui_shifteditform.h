@@ -350,6 +350,7 @@ public:
 
         Description = new QTextEdit(DescriptionWidget);
         Description->setObjectName(QStringLiteral("Description"));
+        Description->setMinimumSize(QSize(0, 21));
         Description->setMaximumSize(QSize(16777215, 26));
 
         horizontalLayout_3->addWidget(Description);

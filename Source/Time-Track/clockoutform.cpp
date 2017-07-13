@@ -184,13 +184,21 @@ void ClockoutForm::TimesInitialize(){
            }
     }
 
-//    for (int i = 0 ; i < ui->Hours->count() ; ++i) {
-//        ui->Hours->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
-//    }
-//    for (int i = 0 ; i < ui->Minutes->count() ; ++i) {
-//        ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
-//        ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
-//    }
+
+    ui->Hours->lineEdit()->setReadOnly(true);
+    ui->Hours->lineEdit()->setAlignment(Qt::AlignCenter);
+    ui->Minutes->lineEdit()->setReadOnly(true);
+    ui->Minutes->lineEdit()->setAlignment(Qt::AlignCenter);
+    ui->Lunch->lineEdit()->setReadOnly(true);
+    ui->Lunch->lineEdit()->setAlignment(Qt::AlignCenter);
+
+    for (int i = 0 ; i < ui->Hours->count() ; ++i) {
+        ui->Hours->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+    }
+    for (int i = 0 ; i < ui->Minutes->count() ; ++i) {
+        ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+        ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+    }
 
 
 }

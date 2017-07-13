@@ -462,10 +462,11 @@ void MainForm::on_basicPageClockOut_clicked()
 
     clockoutForm = new ClockoutForm(this);
     establishConnections();
-    if (ip.split(".")[3] =="010")
-        clockoutForm->showFullScreen();
-    else
-        clockoutForm->showMaximized();
+//    if (ip.split(".")[3] =="010")
+//        clockoutForm->showFullScreen();
+//    else
+//        clockoutForm->showMaximized();
+    clockoutForm->showNormal();
 
     clockoutForm->ClockoutInitialize(id);
 
