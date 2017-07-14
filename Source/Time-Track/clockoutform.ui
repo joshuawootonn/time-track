@@ -92,7 +92,11 @@ border:none;
 QComboBox{
 border:none;
 background-color:#FFFFFF;
+padding-left:20px;
 
+}
+QComboBox#Items,QComboBox#Projects{
+padding-left:2px;
 }
 
 QComboBox:hover {
@@ -240,7 +244,7 @@ QGroupBox::title {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>50</width>
+                    <width>70</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -284,7 +288,7 @@ QGroupBox::title {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>50</width>
+                    <width>70</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -389,7 +393,7 @@ QGroupBox::title {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>80</width>
+                    <width>100</width>
                     <height>16777215</height>
                    </size>
                   </property>

@@ -150,7 +150,11 @@ public:
                         "mboBox{\n"
 "border:none;\n"
 "background-color:#FFFFFF;\n"
+"padding-left:20px;\n"
 "\n"
+"}\n"
+"QComboBox#Items,QComboBox#Projects{\n"
+"padding-left:2px;\n"
 "}\n"
 "\n"
 "QComboBox:hover {\n"
@@ -254,7 +258,7 @@ public:
         Hours = new QComboBox(bigwidger);
         Hours->setObjectName(QStringLiteral("Hours"));
         Hours->setMinimumSize(QSize(50, 50));
-        Hours->setMaximumSize(QSize(50, 16777215));
+        Hours->setMaximumSize(QSize(70, 16777215));
         Hours->setEditable(false);
         Hours->setMaxVisibleItems(13);
 
@@ -270,7 +274,7 @@ public:
         Minutes = new QComboBox(bigwidger);
         Minutes->setObjectName(QStringLiteral("Minutes"));
         Minutes->setMinimumSize(QSize(0, 50));
-        Minutes->setMaximumSize(QSize(50, 16777215));
+        Minutes->setMaximumSize(QSize(70, 16777215));
         Minutes->setEditable(false);
 
         horizontalLayout_6->addWidget(Minutes);
@@ -317,7 +321,7 @@ public:
         Lunch = new QComboBox(bigwidger);
         Lunch->setObjectName(QStringLiteral("Lunch"));
         Lunch->setMinimumSize(QSize(0, 50));
-        Lunch->setMaximumSize(QSize(80, 16777215));
+        Lunch->setMaximumSize(QSize(100, 16777215));
         Lunch->setEditable(false);
 
         horizontalLayout_8->addWidget(Lunch);
