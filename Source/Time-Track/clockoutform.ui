@@ -266,8 +266,8 @@ QGroupBox::title {
               <height>50</height>
              </size>
             </property>
-            <property name="inputMethodHints">
-             <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+            <property name="cursorMoveStyle">
+             <enum>Qt::LogicalMoveStyle</enum>
             </property>
            </widget>
           </item>

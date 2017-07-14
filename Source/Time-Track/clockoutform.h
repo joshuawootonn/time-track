@@ -28,6 +28,7 @@ public:
     explicit ClockoutForm(QWidget *parent = 0);
     ~ClockoutForm();
     void ClockoutInitialize(QString i);
+    bool eventFilter(QObject* object, QEvent* event);
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
@@ -56,6 +57,7 @@ private:
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
 };
+
 
 
 

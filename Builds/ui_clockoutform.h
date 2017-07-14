@@ -264,7 +264,7 @@ public:
         sizePolicy1.setHeightForWidth(Description->sizePolicy().hasHeightForWidth());
         Description->setSizePolicy(sizePolicy1);
         Description->setMinimumSize(QSize(0, 50));
-        Description->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
+        Description->setCursorMoveStyle(Qt::LogicalMoveStyle);
 
         horizontalLayout_6->addWidget(Description);
 

@@ -8,8 +8,7 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
-
-
+    ui->Description->installEventFilter(this);
 
     clicked = false;
 }
@@ -84,7 +83,16 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
     return z;
 
 }
+bool ClockoutForm::eventFilter(QObject* object, QEvent* event)
+{
+    if(object == ui->Description && event->type() == QEvent::MouseButtonPress) {
+        ui->Description->setFocus();
 
+        // bring up your custom edit
+        return false; // lets the event continue to the edit
+    }
+    return false;
+}
 /* This function is for ininializing this dialog  */
 
 void ClockoutForm::ClockoutInitialize(QString i){

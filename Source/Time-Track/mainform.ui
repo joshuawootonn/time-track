@@ -142,7 +142,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -424,7 +424,10 @@ color:#263544;
                <number>4</number>
               </property>
               <property name="echoMode">
-               <enum>QLineEdit::Password</enum>
+               <enum>QLineEdit::Normal</enum>
+              </property>
+              <property name="placeholderText">
+               <string/>
               </property>
              </widget>
             </item>

@@ -494,7 +494,7 @@ public:
         passEdit->setMinimumSize(QSize(0, 45));
         passEdit->setFont(font);
         passEdit->setMaxLength(4);
-        passEdit->setEchoMode(QLineEdit::Password);
+        passEdit->setEchoMode(QLineEdit::Normal);
 
         horizontalLayout_13->addWidget(passEdit);
 
@@ -1402,7 +1402,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(0);
         HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
@@ -1428,6 +1428,7 @@ public:
         LoginGo->setText(QApplication::translate("MainForm", "Go", Q_NULLPTR));
         basicPageConnect->setText(QString());
         connectionlabel->setText(QString());
+        passEdit->setPlaceholderText(QString());
         ConnectionLabel->setText(QString());
         passLabel->setText(QString());
         basicPageClockIn->setText(QString());
