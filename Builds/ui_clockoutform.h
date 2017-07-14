@@ -19,9 +19,11 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -44,6 +46,8 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *DescriptionLabel;
     QLineEdit *Description;
+    QPlainTextEdit *plainTextEdit;
+    QTextEdit *textEdit;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_5;
     QComboBox *Hours;
@@ -264,12 +268,21 @@ public:
         sizePolicy1.setHeightForWidth(Description->sizePolicy().hasHeightForWidth());
         Description->setSizePolicy(sizePolicy1);
         Description->setMinimumSize(QSize(0, 50));
-        Description->setCursorMoveStyle(Qt::LogicalMoveStyle);
 
         horizontalLayout_6->addWidget(Description);
 
 
         verticalLayout_4->addLayout(horizontalLayout_6);
+
+        plainTextEdit = new QPlainTextEdit(bigwidger);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+
+        verticalLayout_4->addWidget(plainTextEdit);
+
+        textEdit = new QTextEdit(bigwidger);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+
+        verticalLayout_4->addWidget(textEdit);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(10);
@@ -398,6 +411,19 @@ public:
 
         gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
+#ifndef QT_NO_SHORTCUT
+        DescriptionLabel->setBuddy(Description);
+#endif // QT_NO_SHORTCUT
+        QWidget::setTabOrder(Projects, Items);
+        QWidget::setTabOrder(Items, Description);
+        QWidget::setTabOrder(Description, Hours);
+        QWidget::setTabOrder(Hours, Minutes);
+        QWidget::setTabOrder(Minutes, Add);
+        QWidget::setTabOrder(Add, Delete);
+        QWidget::setTabOrder(Delete, Lunch);
+        QWidget::setTabOrder(Lunch, FinishedButton);
+        QWidget::setTabOrder(FinishedButton, CancelButton);
+        QWidget::setTabOrder(CancelButton, Sections);
 
         retranslateUi(ClockoutForm);
 

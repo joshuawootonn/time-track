@@ -494,7 +494,7 @@ public:
         passEdit->setMinimumSize(QSize(0, 45));
         passEdit->setFont(font);
         passEdit->setMaxLength(4);
-        passEdit->setEchoMode(QLineEdit::Normal);
+        passEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_13->addWidget(passEdit);
 

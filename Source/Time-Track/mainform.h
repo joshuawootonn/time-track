@@ -181,6 +181,8 @@ private slots:
     void on_EmployeeRefresh_clicked();
     void on_SettingsConnections_clicked();
 
+
+
 public:
     Ui::MainForm *ui;
 

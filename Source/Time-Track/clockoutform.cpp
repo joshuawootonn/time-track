@@ -86,8 +86,7 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 bool ClockoutForm::eventFilter(QObject* object, QEvent* event)
 {
     if(object == ui->Description && event->type() == QEvent::MouseButtonPress) {
-        ui->Description->setFocus();
-
+        qApp->inputMethod()->show();
         // bring up your custom edit
         return false; // lets the event continue to the edit
     }

@@ -250,6 +250,9 @@ QGroupBox::title {
             <property name="text">
              <string>Notes:</string>
             </property>
+            <property name="buddy">
+             <cstring>Description</cstring>
+            </property>
            </widget>
           </item>
           <item>
@@ -266,12 +269,15 @@ QGroupBox::title {
               <height>50</height>
              </size>
             </property>
-            <property name="cursorMoveStyle">
-             <enum>Qt::LogicalMoveStyle</enum>
-            </property>
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit"/>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -533,6 +539,19 @@ QGroupBox::title {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>Projects</tabstop>
+  <tabstop>Items</tabstop>
+  <tabstop>Description</tabstop>
+  <tabstop>Hours</tabstop>
+  <tabstop>Minutes</tabstop>
+  <tabstop>Add</tabstop>
+  <tabstop>Delete</tabstop>
+  <tabstop>Lunch</tabstop>
+  <tabstop>FinishedButton</tabstop>
+  <tabstop>CancelButton</tabstop>
+  <tabstop>Sections</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
