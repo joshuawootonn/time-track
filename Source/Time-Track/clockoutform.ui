@@ -274,12 +274,6 @@ QGroupBox::title {
          </layout>
         </item>
         <item>
-         <widget class="QPlainTextEdit" name="plainTextEdit"/>
-        </item>
-        <item>
-         <widget class="QTextEdit" name="textEdit"/>
-        </item>
-        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <property name="spacing">
            <number>10</number>

@@ -19,11 +19,9 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -46,8 +44,6 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *DescriptionLabel;
     QLineEdit *Description;
-    QPlainTextEdit *plainTextEdit;
-    QTextEdit *textEdit;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_5;
     QComboBox *Hours;
@@ -273,16 +269,6 @@ public:
 
 
         verticalLayout_4->addLayout(horizontalLayout_6);
-
-        plainTextEdit = new QPlainTextEdit(bigwidger);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-
-        verticalLayout_4->addWidget(plainTextEdit);
-
-        textEdit = new QTextEdit(bigwidger);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-
-        verticalLayout_4->addWidget(textEdit);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(10);
