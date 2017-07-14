@@ -55,7 +55,14 @@ border: 1px solid 263544;
     </widget>
    </item>
    <item row="0" column="2" colspan="2">
-    <widget class="QLineEdit" name="databaseEdit"/>
+    <widget class="QLineEdit" name="databaseEdit">
+     <property name="inputMethodHints">
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Normal</enum>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_6">
@@ -108,7 +115,11 @@ border: 1px solid 263544;
     </widget>
    </item>
    <item row="2" column="2" colspan="2">
-    <widget class="QLineEdit" name="usernameEdit"/>
+    <widget class="QLineEdit" name="usernameEdit">
+     <property name="inputMethodHints">
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QLabel" name="label_4">
@@ -118,12 +129,23 @@ border: 1px solid 263544;
     </widget>
    </item>
    <item row="1" column="2" colspan="2">
-    <widget class="QLineEdit" name="portEdit"/>
+    <widget class="QLineEdit" name="portEdit">
+     <property name="inputMethodHints">
+      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Normal</enum>
+     </property>
+    </widget>
    </item>
    <item row="4" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="ipEdit"/>
+      <widget class="QLineEdit" name="ipEdit">
+       <property name="inputMethodHints">
+        <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="testConnection">

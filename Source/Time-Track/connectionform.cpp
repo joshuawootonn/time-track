@@ -29,6 +29,7 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     ui->connect->setEnabled(false);
     pingConnection();
 
+
 }
 
 ConnectionForm::~ConnectionForm()

@@ -93,6 +93,8 @@ public:
 
         databaseEdit = new QLineEdit(ConnectionForm);
         databaseEdit->setObjectName(QStringLiteral("databaseEdit"));
+        databaseEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
+        databaseEdit->setEchoMode(QLineEdit::Normal);
 
         gridLayout->addWidget(databaseEdit, 0, 2, 1, 2);
 
@@ -126,6 +128,7 @@ public:
 
         usernameEdit = new QLineEdit(ConnectionForm);
         usernameEdit->setObjectName(QStringLiteral("usernameEdit"));
+        usernameEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
 
         gridLayout->addWidget(usernameEdit, 2, 2, 1, 2);
 
@@ -136,6 +139,8 @@ public:
 
         portEdit = new QLineEdit(ConnectionForm);
         portEdit->setObjectName(QStringLiteral("portEdit"));
+        portEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
+        portEdit->setEchoMode(QLineEdit::Normal);
 
         gridLayout->addWidget(portEdit, 1, 2, 1, 2);
 
@@ -143,6 +148,7 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         ipEdit = new QLineEdit(ConnectionForm);
         ipEdit->setObjectName(QStringLiteral("ipEdit"));
+        ipEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
 
         horizontalLayout_2->addWidget(ipEdit);
 

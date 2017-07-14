@@ -94,7 +94,8 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ItemInitialize();
     TimesInitialize();
     TimeLeft();
-    ui->DescriptionWidget->setVisible(false);
+    ui->Description->setVisible(false);
+    ui->DescriptionLabel->setVisible(false);
 
 
 
@@ -273,11 +274,11 @@ void ClockoutForm::TimeLeft(){
     ui->timeLeft->setText(j);
     if(ui->timeLeft->text()=="0:00")
     {
-        if(ui->DescriptionWidget->isVisible()&&ui->Description->text()!=""){
+        if(ui->Description->isVisible()&&ui->Description->text()!=""){
 
             ui->FinishedButton->setEnabled(true);
         }
-        else if(!ui->DescriptionWidget->isVisible()&&ui->Sections->rowCount()>0){
+        else if(!ui->Description->isVisible()&&ui->Sections->rowCount()>0){
             ui->FinishedButton->setEnabled(true);
         }
         else{
@@ -305,7 +306,8 @@ void ClockoutForm::on_Add_clicked()
     ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
     if(ui->Items->currentText()=="Other")
     {
-        ui->DescriptionWidget->setVisible(true);
+        ui->Description->setVisible(true);
+        ui->DescriptionLabel->setVisible(true);
     }
     ui->Sections->resizeColumnsToContents();
     TimeLeft();
@@ -316,7 +318,8 @@ void ClockoutForm::on_Delete_clicked()
     {
         if(ui->Sections->item(selectedRow,1)->text()=="Other"){
             ui->Description->setText("");
-            ui->DescriptionWidget->setVisible(false);
+            ui->Description->setVisible(false);
+            ui->DescriptionLabel->setVisible(false);
         }
         ui->Sections->removeRow(selectedRow);
         TimeLeft();

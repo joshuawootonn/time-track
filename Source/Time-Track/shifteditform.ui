@@ -64,7 +64,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
-background-color:#E4E9EB;
+background-color:#F4F9F6;
 }
 
 
@@ -74,7 +74,7 @@ background-color:#FFFFFF;
 }
 QDateEditTime:hover{
 border:none;
-background-color:#E4E9EB;
+background-color:#F4F9F6;
 }
 QDateEditTime::drop-down{
 border:none;
@@ -86,7 +86,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QComboBox:hover {
-background-color:#E4E9EB;
+background-color:#F4F9F6;
 }
 QComboBox:drop-down{
 border:none;
