@@ -32,13 +32,10 @@ void MainForm::start(){
             this->showFullScreen();
         else
             this->showMaximized();
-
-
         clockoutForm = new ClockoutForm(this);
         clockoutForm->hide();
         shifteditform = new ShiftEditForm(this);
         shifteditform->hide();
-        //connectionForm = new ConnectionForm(this);
         exportForm = new ExportForm(this);
 
 
@@ -983,6 +980,7 @@ void MainForm::refreshProjectTab(){
         on_ProjectPastRadio_toggled(true);
 }
 void MainForm::refreshProjectItemTab(){
+    qDebug()<<"refresh item";
     ui->ProjectItemView->setModel(ProjectItemModelRefresh());
     ui->ProjectItemView->hideColumn(0);
     if(ui->ProjectItemName->isChecked())
@@ -1511,20 +1509,17 @@ QSortFilterProxyModel * MainForm::ShiftFilterModel(){
     return m;
 }
 void MainForm::refreshShiftTab(){
-    qDebug()<<"refresh shift";
-    QTime t;
-    t.start();
+
+
     shiftmodel = ShiftModel();
     shiftfiltermodel = ShiftFilterModel();
     ui->ShiftView->setModel(shiftfiltermodel);
-    //qDebug()<<"Setup" +QString::number(t.elapsed());
-    t.restart();
+
     for(int i = 0; i < shiftfiltermodel->rowCount();  i++)
     {
         ui->ShiftView->showRow(i);
     }
-    //qDebug()<<"show" + QString::number(t.elapsed());
-    t.restart();
+
     if(ui->ShiftEmployeeBox->isChecked())
     {
         for(int i = 0; i< shiftfiltermodel->rowCount(); i++)
@@ -1537,8 +1532,7 @@ void MainForm::refreshShiftTab(){
 
         }
     }
-    //qDebug()<<"employee" + QString::number(t.elapsed());
-    t.restart();
+
     if(ui->ShiftProjectBox->isChecked())
     {
         for(int i=0; i< shiftfiltermodel->rowCount(); i++)
@@ -1549,8 +1543,7 @@ void MainForm::refreshShiftTab(){
             }
         }
     }
-    //qDebug()<<"project" + QString::number(t.elapsed());
-    t.restart();
+
     if(ui->ShiftItemBox->isChecked())
     {
         for(int i=0; i< shiftfiltermodel->rowCount(); i++)
@@ -1589,8 +1582,6 @@ void MainForm::refreshShiftTab(){
     if (minutes == "0")
         minutes ="00";
     ui->ShiftTotalTime->setText(hours+":"+minutes);
-    //qDebug()<<"therest" +QString::number(t.elapsed());
-    t.restart();
 }
 void MainForm::displayShiftSuccess(){
     QMessageBox::StandardButton reply;
