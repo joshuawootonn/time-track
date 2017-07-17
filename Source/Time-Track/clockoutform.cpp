@@ -8,7 +8,6 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
-    ui->Description->installEventFilter(this);
 
     clicked = false;
 }
@@ -88,6 +87,7 @@ bool ClockoutForm::eventFilter(QObject* object,QEvent* event)
     if( event->type() == QEvent::MouseButtonPress) {
         qApp->inputMethod()->show();
         ui->Description->setFocus();
+        qDebug()<<"WE ARE ACTUALLY HERE";
         // bring up your custom edit
         return false; // lets the event continue to the edit
     }
@@ -251,7 +251,7 @@ void ClockoutForm::TimeLeft(){
     //qDebug()<<"Id"<<id<<"shiftcount"<<shiftcount<<"timein"<<timein<<"datein"<<datein;
     //qDebug()<<"Seconds:"<<QString::number(secs)<<"indt"<<indt.toString()<<"outdt"<<outdt.toString();
     int minutes = secs/60;
-    qDebug()<<minutes;
+//    qDebug()<<minutes;
 
 
     for(int i =0;i < ui->Sections->rowCount(); i++){
@@ -316,6 +316,7 @@ void ClockoutForm::on_Add_clicked()
     {
         ui->Description->setVisible(true);
         ui->DescriptionLabel->setVisible(true);
+        ui->Description->setFocus();
     }
     ui->Sections->resizeColumnsToContents();
     TimeLeft();

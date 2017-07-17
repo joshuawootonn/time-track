@@ -264,6 +264,7 @@ public:
         sizePolicy1.setHeightForWidth(Description->sizePolicy().hasHeightForWidth());
         Description->setSizePolicy(sizePolicy1);
         Description->setMinimumSize(QSize(0, 50));
+        Description->setEchoMode(QLineEdit::Normal);
 
         horizontalLayout_6->addWidget(Description);
 
@@ -421,7 +422,7 @@ public:
         ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", Q_NULLPTR));
         label_3->setText(QApplication::translate("ClockoutForm", "Project:", Q_NULLPTR));
         label_4->setText(QApplication::translate("ClockoutForm", "Sub-Project:", Q_NULLPTR));
-        DescriptionLabel->setText(QApplication::translate("ClockoutForm", "Notes:", Q_NULLPTR));
+        DescriptionLabel->setText(QApplication::translate("ClockoutForm", "Note:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ClockoutForm", "Time Worked:", Q_NULLPTR));
         Hours->setCurrentText(QString());
         label_8->setText(QApplication::translate("ClockoutForm", ":", Q_NULLPTR));

@@ -248,7 +248,7 @@ QGroupBox::title {
              </size>
             </property>
             <property name="text">
-             <string>Notes:</string>
+             <string>Note:</string>
             </property>
             <property name="buddy">
              <cstring>Description</cstring>
@@ -268,6 +268,9 @@ QGroupBox::title {
               <width>0</width>
               <height>50</height>
              </size>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Normal</enum>
             </property>
            </widget>
           </item>
