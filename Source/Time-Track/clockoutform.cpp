@@ -82,6 +82,8 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
     return z;
 
 }
+/* This event filter is used to detect when a lineedit is clicked
+    and display a virtual keyboard if it is a tablet.*/
 bool ClockoutForm::eventFilter(QObject* object,QEvent* event)
 {
     if(object == ui->Description && event->type() == QEvent::MouseButtonPress) {

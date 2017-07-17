@@ -28,6 +28,10 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     read();
     ui->connect->setEnabled(false);
     pingConnection();
+    ui->databaseEdit->installEventFilter(this);
+    ui->portEdit->installEventFilter(this);
+    ui->usernameEdit->installEventFilter(this);
+    ui->ipEdit->installEventFilter(this);
 
 
 }

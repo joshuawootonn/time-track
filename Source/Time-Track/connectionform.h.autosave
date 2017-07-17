@@ -15,7 +15,7 @@ class ConnectionForm : public QDialog
 public:
     explicit ConnectionForm(QWidget *parent = 0);
     ~ConnectionForm();
-    bool ConnectionForm::eventFilter(QObject* object,QEvent* event)
+    bool eventFilter(QObject* object,QEvent* event);
     void auto_connect();
 
     QString getDatabase() const;
