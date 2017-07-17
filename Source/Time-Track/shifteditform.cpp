@@ -530,10 +530,10 @@ void ShiftEditForm::on_Sections_cellChanged()
 {
     TimeLeft();
 }
-void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
-{
-    TimeLeft();
-}
+//void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
+//{
+//    TimeLeft();
+//}
 void ShiftEditForm::on_Lunch_timeChanged(const QTime &time)
 {
     TimeLeft();

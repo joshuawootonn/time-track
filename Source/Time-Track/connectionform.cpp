@@ -28,6 +28,10 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     read();
     ui->connect->setEnabled(false);
     pingConnection();
+    ui->databaseEdit->installEventFilter(this);
+    ui->portEdit->installEventFilter(this);
+    ui->usernameEdit->installEventFilter(this);
+    ui->ipEdit->installEventFilter(this);
 
 
 }
@@ -36,6 +40,8 @@ ConnectionForm::~ConnectionForm()
 {
     delete ui;
 }
+/* This event filter is used to detect when a lineedit is clicked
+    and display a virtual keyboard if it is a tablet.*/
 bool ConnectionForm::eventFilter(QObject* object,QEvent* event)
 {
     if(object == ui->databaseEdit && event->type() == QEvent::MouseButtonPress) {
@@ -83,7 +89,7 @@ void ConnectionForm::loadConnection(bool s){
         setError("Invalid");
         ui->connect->setEnabled(false);
     }
-    qDebug()<<"here";
+
 }
 /* Threaded ping operation to test the validity of an ip  */
 void ConnectionForm::pingConnection(){
@@ -135,7 +141,6 @@ void ConnectionForm::read(){
 
     QTextStream in(&file);
     QString text = in.readAll();
-    qDebug()<<text.split(" ").length();
     if( text.split(" ").length() == 6)
     {
         ip =text.split(" ")[4];
@@ -154,7 +159,6 @@ void ConnectionForm::read(){
         ui->passwordEdit->setText(text.split(" ")[3]);
         ui->ipEdit->setText(text.split(" ")[4]);
         automatic = text.split(" ")[5].toInt();
-        qDebug()<<ui->ipEdit->text()<<automatic;
     }
 
     file.close();

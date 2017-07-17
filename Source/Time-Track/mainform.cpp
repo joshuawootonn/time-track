@@ -33,7 +33,6 @@ void MainForm::start(){
         else
             this->showMaximized();
 
-        qDebug()<<"from start";
 
         clockoutForm = new ClockoutForm(this);
         clockoutForm->hide();
@@ -67,7 +66,7 @@ void MainForm::start(){
 */
 
 bool MainForm::Connect(QString database,QString port,QString username,QString password,QString ip){
-    qDebug()<<database<<port<<username<<password<<ip;
+
     data = QSqlDatabase::addDatabase("QMYSQL");
     data.setPort(port.toInt());
     data.setDatabaseName(database);
@@ -797,10 +796,7 @@ void MainForm::on_EmployeeDelete_clicked()
         }
     }
 }
-void MainForm::on_EmployeeRefresh_clicked()
-{
-    ui->EmployeeView->model()->submit();
-}
+
 
 /* Option menu 2 for EmployeeTab*/
 
@@ -1094,7 +1090,7 @@ void MainForm::on_ProjectDelete_clicked()
                 QModelIndex index =list.at(i);
                 int idInt = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toInt();
                 QString id = "Project"+QString::number(idInt);
-                qDebug()<<id;
+
                 qry->clear();
                 qry->prepare("DROP TABLE "+id+"");
                 qry->exec();
@@ -1515,14 +1511,20 @@ QSortFilterProxyModel * MainForm::ShiftFilterModel(){
     return m;
 }
 void MainForm::refreshShiftTab(){
+    qDebug()<<"refresh shift";
+    QTime t;
+    t.start();
     shiftmodel = ShiftModel();
     shiftfiltermodel = ShiftFilterModel();
     ui->ShiftView->setModel(shiftfiltermodel);
-
+    //qDebug()<<"Setup" +QString::number(t.elapsed());
+    t.restart();
     for(int i = 0; i < shiftfiltermodel->rowCount();  i++)
     {
         ui->ShiftView->showRow(i);
     }
+    //qDebug()<<"show" + QString::number(t.elapsed());
+    t.restart();
     if(ui->ShiftEmployeeBox->isChecked())
     {
         for(int i = 0; i< shiftfiltermodel->rowCount(); i++)
@@ -1535,6 +1537,8 @@ void MainForm::refreshShiftTab(){
 
         }
     }
+    //qDebug()<<"employee" + QString::number(t.elapsed());
+    t.restart();
     if(ui->ShiftProjectBox->isChecked())
     {
         for(int i=0; i< shiftfiltermodel->rowCount(); i++)
@@ -1545,6 +1549,8 @@ void MainForm::refreshShiftTab(){
             }
         }
     }
+    //qDebug()<<"project" + QString::number(t.elapsed());
+    t.restart();
     if(ui->ShiftItemBox->isChecked())
     {
         for(int i=0; i< shiftfiltermodel->rowCount(); i++)
@@ -1583,6 +1589,8 @@ void MainForm::refreshShiftTab(){
     if (minutes == "0")
         minutes ="00";
     ui->ShiftTotalTime->setText(hours+":"+minutes);
+    //qDebug()<<"therest" +QString::number(t.elapsed());
+    t.restart();
 }
 void MainForm::displayShiftSuccess(){
     QMessageBox::StandardButton reply;
@@ -1757,7 +1765,7 @@ void MainForm::exportToExcel(){
         label.setFontSize(15);
         doc.setRowFormat(4,4,label);
 
-        qDebug()<<"here";
+
         doc.write(4,1,"Name");
         doc.write(4,2,"Pin");
         doc.write(4,3,"Admin Status");

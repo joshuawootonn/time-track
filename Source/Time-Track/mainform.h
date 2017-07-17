@@ -178,7 +178,6 @@ private slots:
     void exportToExcel();
     void on_SettingsPrint_clicked();
     void on_SettingsAll_clicked();
-    void on_EmployeeRefresh_clicked();
     void on_SettingsConnections_clicked();
 
 

@@ -47,7 +47,7 @@ private slots:
     void on_Delete_clicked();
     void on_Sections_cellClicked(int row, int column);
     void on_Sections_cellChanged();
-    void on_Lunch_currentTextChanged(const QString &arg1);
+    //void on_Lunch_currentTextChanged(const QString &arg1);
     void on_Lunch_timeChanged(const QTime &time);
     void on_DateTime1_dateTimeChanged(const QDateTime &dateTime);
     void on_DateTime2_dateTimeChanged(const QDateTime &dateTime);
