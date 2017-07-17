@@ -8,7 +8,7 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
-
+    ui->Description->installEventFilter(this);
     clicked = false;
 }
 
@@ -84,12 +84,15 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
 }
 bool ClockoutForm::eventFilter(QObject* object,QEvent* event)
 {
-    if( event->type() == QEvent::MouseButtonPress) {
-        qApp->inputMethod()->show();
+    if(object == ui->Description && event->type() == QEvent::MouseButtonPress) {
+
         ui->Description->setFocus();
-        qDebug()<<"WE ARE ACTUALLY HERE";
-        // bring up your custom edit
-        return false; // lets the event continue to the edit
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+
+
+        return false;
     }
     return false;
 }
@@ -315,8 +318,7 @@ void ClockoutForm::on_Add_clicked()
     if(ui->Items->currentText()=="Other")
     {
         ui->Description->setVisible(true);
-        ui->DescriptionLabel->setVisible(true);
-        ui->Description->setFocus();
+        ui->DescriptionLabel->setVisible(true);       
     }
     ui->Sections->resizeColumnsToContents();
     TimeLeft();
@@ -478,6 +480,8 @@ void ClockoutForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
+
+
 
 
 

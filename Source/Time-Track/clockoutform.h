@@ -15,6 +15,7 @@
 #include <QCompleter>
 #include <QMainWindow>
 #include <QLineEdit>
+#include <QDesktopServices>
 
 namespace Ui {
 class ClockoutForm;
@@ -50,6 +51,7 @@ private slots:
 
 signals:
     void finished();
+
 
 private:
     Ui::ClockoutForm *ui;
