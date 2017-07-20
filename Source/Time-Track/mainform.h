@@ -182,6 +182,8 @@ private slots:
 
 
 
+    void on_basicPagePower_clicked();
+
 public:
     Ui::MainForm *ui;
 

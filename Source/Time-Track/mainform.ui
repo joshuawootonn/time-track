@@ -142,7 +142,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -623,6 +623,13 @@ background-color:#ECEFED;
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="basicPagePower">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -832,7 +839,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>

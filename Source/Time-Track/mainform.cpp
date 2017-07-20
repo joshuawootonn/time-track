@@ -110,23 +110,28 @@ void MainForm::setIcons(){
     QPixmap pixmap("../Icons/checked.png");
     QIcon ButtonIcon(pixmap);
     ui->basicPageClockIn->setIcon(ButtonIcon);
-    ui->basicPageClockIn->setIconSize(QSize(256,256));
+    ui->basicPageClockIn->setIconSize(QSize(200,200));
 
     pixmap = * new QPixmap("../Icons/unchecked.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->basicPageClockOut->setIcon(ButtonIcon);
-    ui->basicPageClockOut->setIconSize(QSize(256,256));
+    ui->basicPageClockOut->setIconSize(QSize(200,200));
 
     pixmap = * new QPixmap("../Icons/bars.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->basicPageAdvanced->setIcon(ButtonIcon);
-    ui->basicPageAdvanced->setIconSize(QSize(256,256));
+    ui->basicPageAdvanced->setIconSize(QSize(200,200));
+
+    pixmap = * new QPixmap("../Icons/power-button.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->basicPagePower->setIcon(ButtonIcon);
+    ui->basicPagePower->setIconSize(QSize(200,200));
 
 
     pixmap = * new QPixmap("../Icons/connected.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->basicPageConnect->setIcon(ButtonIcon);
-    ui->basicPageConnect->setIconSize(QSize(256,256));
+    ui->basicPageConnect->setIconSize(QSize(200,200));
 
 //    pixmap = * new QPixmap("../Icons/connect.png");
 //    ButtonIcon =  * new QIcon(pixmap);
@@ -272,6 +277,7 @@ void MainForm::isConnected(){
         ui->passEdit->hide();
         ui->passEdit->hide();
         ui->loginNumPad->hide();
+
         ui->basicPageConnect->show();
         ui->ConnectionLabel->show();
     }
@@ -279,10 +285,14 @@ void MainForm::isConnected(){
 void MainForm::basicInitialize()
 {
     ui->mainStack->setCurrentIndex(1);
-    if(admin==true)
+    if(admin==true){
+        ui->basicPagePower->show();
         ui->basicPageAdvanced->show();
-    else
+    }
+    else{
+        ui->basicPagePower->hide();
         ui->basicPageAdvanced->hide();
+    }
 
     QSqlQuery qry(data);
     QString active;
@@ -484,6 +494,10 @@ void MainForm::on_basicPageAdvanced_clicked()
     SettingsTab();
     ui->MainTabs->setCurrentIndex(0);
     ui->HeaderTabs->setCurrentIndex(0);
+}
+void MainForm::on_basicPagePower_clicked()
+{
+    QCoreApplication::quit();
 }
 void MainForm::on_mainFinish_clicked()
 {
@@ -1469,8 +1483,25 @@ void MainForm::refreshShiftProject(){
 void MainForm::refreshShiftItem(){
     QSqlQueryModel * c = new QSqlQueryModel();
     QSqlQuery * C = new QSqlQuery(data);
-    C->prepare("Select name from itemlist ORDER BY name ASC");
+    qDebug()<<"here";
+    if(ui->ShiftProjectBox->isChecked())
+    {
+        QString id;
+        C->prepare("SELECT id FROM projectlist WHERE name='"+ui->ShiftProjectCombo->currentText()+"'");
+        if( C->exec()){
+            while(C->next()){
+                id = C->value(0).toString();}}
+        QString x = "project"+id;
+        qDebug()<<C->lastError().text()<<x;
+        C->clear();
+        C->prepare("SELECT name from project"+id+" ORDER BY name ASC");
+
+    }
+    else{
+        C->prepare("Select name from itemlist ORDER BY name ASC");
+    }
     C->exec();
+    qDebug()<<C->lastError().text();
     c->setQuery(*C);
     ui->ShiftItemCombo->setModel(c);
     ui->ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1482,10 +1513,35 @@ void MainForm::refreshShiftItem(){
     ui->ShiftItemCombo->setCurrentText("");
 }
 QSqlQueryModel * MainForm::ShiftModel(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
-    model->setTable("shiftlist");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->select();
+    //QSqlTableModel * model = new QSqlTableModel(0,data);
+    //model->setTable("shiftlist");
+    QSqlQueryModel * model = new QSqlQueryModel();
+    QSqlQuery * qry = new QSqlQuery(data);
+    QString employee,project,item;
+    QString d1 = ui->ShiftDate1->date().toString("yyyy-M-dd");
+    QString d2 = ui->ShiftDate2->date().toString("yyyy-M-dd");
+    if (ui->ShiftEmployeeBox->isChecked()){
+        employee = ui->ShiftEmployeeCombo->currentText();
+    }else{
+        employee = "%";
+    }
+    if (ui->ShiftProjectBox->isChecked()){
+        project = ui->ShiftProjectCombo->currentText();
+    }else{
+        project = "%";
+    }
+    if (ui->ShiftItemBox->isChecked()){
+        item = ui->ShiftItemCombo->currentText();
+    }else{
+        item = "%";
+    }
+
+    qry->prepare("SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND dateout <'"+d2+"' AND employeename LIKE '"+employee+"' AND projectname LIKE '"+project+"' AND itemname LIKE '"+item+"'");
+    qry->exec();
+    model->setQuery(*qry);
+
+//    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+//    model->select();
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Employee Id"));
     model->setHeaderData(2,Qt::Horizontal,tr("Project Id"));
@@ -1501,6 +1557,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
     model->setHeaderData(14,Qt::Horizontal,tr("Description"));
     return model;
+
 }
 QSortFilterProxyModel * MainForm::ShiftFilterModel(){
     QSortFilterProxyModel * m = new QSortFilterProxyModel(this);
@@ -1515,53 +1572,53 @@ void MainForm::refreshShiftTab(){
     shiftfiltermodel = ShiftFilterModel();
     ui->ShiftView->setModel(shiftfiltermodel);
 
-    for(int i = 0; i < shiftfiltermodel->rowCount();  i++)
-    {
-        ui->ShiftView->showRow(i);
-    }
+//    for(int i = 0; i < shiftfiltermodel->rowCount();  i++)
+//    {
+//        ui->ShiftView->showRow(i);
+//    }
 
-    if(ui->ShiftEmployeeBox->isChecked())
-    {
-        for(int i = 0; i< shiftfiltermodel->rowCount(); i++)
-        {
-            QString name = shiftfiltermodel->data(shiftfiltermodel->index(i,4),Qt::DisplayRole).toString();
-            if(name != ui->ShiftEmployeeCombo->currentText()){
+//    if(ui->ShiftEmployeeBox->isChecked())
+//    {
+//        for(int i = 0; i< shiftfiltermodel->rowCount(); i++)
+//        {
+//            QString name = shiftfiltermodel->data(shiftfiltermodel->index(i,4),Qt::DisplayRole).toString();
+//            if(name != ui->ShiftEmployeeCombo->currentText()){
 
-               ui->ShiftView->hideRow(i);
-            }
+//               ui->ShiftView->hideRow(i);
+//            }
 
-        }
-    }
+//        }
+//    }
 
-    if(ui->ShiftProjectBox->isChecked())
-    {
-        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-        {
-            QString project = shiftfiltermodel->data(shiftfiltermodel->index(i,5),Qt::DisplayRole).toString();
-            if(project != ui->ShiftProjectCombo->currentText()){
-                ui->ShiftView->hideRow(i);
-            }
-        }
-    }
+//    if(ui->ShiftProjectBox->isChecked())
+//    {
+//        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
+//        {
+//            QString project = shiftfiltermodel->data(shiftfiltermodel->index(i,5),Qt::DisplayRole).toString();
+//            if(project != ui->ShiftProjectCombo->currentText()){
+//                ui->ShiftView->hideRow(i);
+//            }
+//        }
+//    }
 
-    if(ui->ShiftItemBox->isChecked())
-    {
-        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-        {
-            QString item = shiftfiltermodel->data(shiftfiltermodel->index(i,6),Qt::DisplayRole).toString();
-            if(item != ui->ShiftItemCombo->currentText())
-            {
-                ui->ShiftView->hideRow(i);
-            }
-        }
-    }
-    for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-    {
-        QString date = shiftfiltermodel->data(shiftfiltermodel->index(i,9),Qt::DisplayRole).toString();
-        QDate in= QDate(date.split("-")[0].toInt(),date.split("-")[1].toInt(),date.split("-")[2].toInt());
-        if(in < ui->ShiftDate1->date() || in > ui->ShiftDate2->date())
-            ui->ShiftView->hideRow(i);
-    }
+//    if(ui->ShiftItemBox->isChecked())
+//    {
+//        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
+//        {
+//            QString item = shiftfiltermodel->data(shiftfiltermodel->index(i,6),Qt::DisplayRole).toString();
+//            if(item != ui->ShiftItemCombo->currentText())
+//            {
+//                ui->ShiftView->hideRow(i);
+//            }
+//        }
+//    }
+//    for(int i=0; i< shiftfiltermodel->rowCount(); i++)
+//    {
+//        QString date = shiftfiltermodel->data(shiftfiltermodel->index(i,9),Qt::DisplayRole).toString();
+//        QDate in= QDate(date.split("-")[0].toInt(),date.split("-")[1].toInt(),date.split("-")[2].toInt());
+//        if(in < ui->ShiftDate1->date() || in > ui->ShiftDate2->date())
+//            ui->ShiftView->hideRow(i);
+//    }
     int h = 0,m = 0;
     for(int i=0; i< shiftfiltermodel->rowCount(); i++)
     {
@@ -1617,6 +1674,8 @@ void MainForm::on_ShiftProjectBox_clicked()
         ui->ShiftProjectCombo->setEnabled(true);
     else
         ui->ShiftProjectCombo->setEnabled(false);
+    refreshShiftItem();
+
 }
 void MainForm::on_ShiftItemBox_clicked()
 {
@@ -1633,6 +1692,7 @@ void MainForm::on_ShiftEmployeeCombo_currentTextChanged(const QString &arg1)
 void MainForm::on_ShiftProjectCombo_currentTextChanged(const QString &arg1)
 {
     refreshShiftTab();
+    refreshShiftItem();
 }
 void MainForm::on_ShiftItemCombo_currentTextChanged(const QString &arg1)
 {
