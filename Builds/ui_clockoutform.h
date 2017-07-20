@@ -183,7 +183,14 @@ public:
 "    left: 10px;\n"
 "    padding: 0 3px 0 3px;\n"
 "}\n"
-""));
+"\n"
+"QScrollBar:vertical {\n"
+"border-radius: 10px;\n"
+"background: black;\n"
+"width: 100px;\n"
+"/ margin sets up how far the handle can travel*/\n"
+"margin: 0px 0px 0px 0px;\n"
+"}"));
         gridLayout = new QGridLayout(ClockoutForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         bigwidger = new QWidget(ClockoutForm);

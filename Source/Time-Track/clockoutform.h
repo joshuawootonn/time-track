@@ -16,7 +16,7 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include <QDesktopServices>
-
+#include <QProxyStyle>
 namespace Ui {
 class ClockoutForm;
 }
@@ -63,7 +63,20 @@ private:
     QDateTime format_datetimes(QDateTime z);
 };
 
+class Style : public QProxyStyle
+{
+public:
+  Style()
+  {
+  }
+  int pixelMetric ( PixelMetric metric, const QStyleOption * option = 0, const QWidget * widget = 0 ) const
+  {
+    if (metric == QStyle::PM_ScrollBarExtent)
+      return 80;
+    return QProxyStyle::pixelMetric(metric, option, widget);
+  }
 
+};
 
 
 #endif // CLOCKOUTFORM_H

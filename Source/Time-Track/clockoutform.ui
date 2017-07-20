@@ -130,7 +130,14 @@ QGroupBox::title {
     left: 10px;
     padding: 0 3px 0 3px;
 }
-</string>
+
+QScrollBar:vertical {
+border-radius: 10px;
+background: black;
+width: 100px;
+/ margin sets up how far the handle can travel*/
+margin: 0px 0px 0px 0px;
+}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

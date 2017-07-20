@@ -10,6 +10,8 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
     data = ((MainForm*)parentWidget())->getData();
     ui->Description->installEventFilter(this);
     clicked = false;
+    ui->Projects->setStyle(new Style());
+    ui->Items->setStyle(new Style());
 }
 
 
