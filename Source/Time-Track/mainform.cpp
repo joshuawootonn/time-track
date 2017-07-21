@@ -37,7 +37,8 @@ void MainForm::start(){
         shifteditform = new ShiftEditForm(this);
         shifteditform->hide();
         exportForm = new ExportForm(this);
-
+        employeeeditform = new EmployeeEditForm(this);
+        employeeeditform->hide();
 
 
         loginInitialize();
@@ -88,6 +89,9 @@ bool MainForm::Connect(QString database,QString port,QString username,QString pa
 
 void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
+
+    QObject::connect(employeeeditform,SIGNAL(finished()),this,SLOT(refreshFromEmployeeEdit()));
+    QObject::connect(employeeeditform,SIGNAL(finished()),this,SLOT(displayEmployeeSuccess()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(displayShiftSuccess()));
     QObject::connect(exportForm,SIGNAL(excel()),this,SLOT(exportToExcel()));
@@ -150,8 +154,8 @@ void MainForm::setIcons(){
 
     pixmap = * new QPixmap("../Icons/EmployeeArchive.png");
     ButtonIcon =  * new QIcon(pixmap);
-    ui->EmployeeArchive->setIcon(ButtonIcon);
-    ui->EmployeeArchive->setIconSize(QSize(34,50));
+    ui->EmployeeEdit->setIcon(ButtonIcon);
+    ui->EmployeeEdit->setIconSize(QSize(34,50));
 
 
     pixmap = * new QPixmap("../Icons/EmployeeDelete.png");
@@ -696,10 +700,7 @@ void MainForm::refreshEmployeeTab(){
         ui->EmployeeView->showColumn(6);
     else
         ui->EmployeeView->hideColumn(6);
-    for(int i=1; i< employeefiltermodel->rowCount(); i++)
-    {
-        ui->EmployeeView->showRow(i);
-    }
+
     if(ui->CurrentRadio->isChecked())
         on_CurrentRadio_toggled(true);
     if(ui->PastRadio->isChecked())
@@ -708,10 +709,21 @@ void MainForm::refreshEmployeeTab(){
 
 }
 QSqlQueryModel * MainForm::EmployeeModel(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
-    model->setTable("employeelist");
-    model->select();
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+//    QSqlTableModel * model = new QSqlTableModel(0,data);
+//    model->setTable("employeelist");
+//    model->select();
+//    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    QString current = "%";
+    if(ui->CurrentRadio->isChecked()){
+        current = "1";
+    }else if( ui->PastRadio->isChecked()){
+        current = "0";
+    }
+    QSqlQueryModel * model = new QSqlQueryModel();
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("SELECT * FROM employeelist WHERE current LIKE '"+current+"'");
+    qry->exec();
+    model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Pin"));
@@ -719,6 +731,8 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     model->setHeaderData(4,Qt::Horizontal,tr("Shiftcount"));
     model->setHeaderData(5,Qt::Horizontal,tr("Active"));
     model->setHeaderData(6,Qt::Horizontal,tr("Current"));
+
+    //qDebug()<<"EMPLOYEE MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
 
 }
@@ -728,18 +742,28 @@ QSortFilterProxyModel * MainForm::EmployeeFilterModel(){
     m->setSourceModel(employeemodel);
     return m;
 }
+void MainForm::displayEmployeeSuccess(){
+    QMessageBox::StandardButton reply;
+    if(!employeeeditform->getSuccess())
+        reply = QMessageBox::information(this, "Time-Track",employeeeditform->getSuccess_msg(),QMessageBox::Ok);
+}
+void MainForm::refreshFromEmployeeEdit(){
+    refreshEmployeeTab();
+//    refreshShiftEmployee();
+//    shifteditform->updateShiftEdit();
 
+}
 /* Option menu 1 for EmployeeTab*/
 
 void MainForm::on_EmployeeAdd_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current)  values('~','"+QString::number(generateRandom())+"','0','1','0','1')");
-    qry->exec();
+
+    employeeeditform = new EmployeeEditForm(this);
+    establishConnections();
+    employeeeditform->AddEmployee();
     refreshEmployeeTab();
-    refreshShiftEmployee();
-    shifteditform->updateShiftEdit();
-    ui->MainTabs->setCurrentIndex(0);
+
+
 }
 int MainForm::generateRandom(){
     int x = rand()%9000+1000;
@@ -755,31 +779,17 @@ int MainForm::generateRandom(){
     }
     return x;
 }
-void MainForm::on_EmployeeArchive_clicked()
+void MainForm::on_EmployeeEdit_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
+    employeeeditform = new EmployeeEditForm(this);
+    establishConnections();
     QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
     if(list != QModelIndexList())
     {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive "+
-                                      employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
-            for(int i=0; i< list.count(); i++)
-            {
-                QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-                qry->clear();
-                if(employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==1)
-                    qry->prepare("update employeelist set current=0 where id = '"+id+"'");
-                else if (employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(6).toInt()==0)
-                    qry->prepare("update employeelist set current=1 where id = '"+id+"'");
-                qry->exec();
-            }
-            refreshEmployeeTab();
-            shifteditform->updateShiftEdit();
-        }
+        QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
+        employeeeditform->EditEmployee(id);
     }
+    refreshEmployeeTab();
 }
 void MainForm::on_EmployeeDelete_clicked()
 {
@@ -898,13 +908,7 @@ void MainForm::on_PastRadio_toggled(bool checked)
  * general use after that special case.
 */
 void MainForm::ProjectTab(){
-    projectfiltermodel = ProjectFilterModel();
-    projectmodel =  ProjectModel();
-    ui->ProjectView->setModel(projectfiltermodel);
 
-    establishConnections();
-    QSqlQueryModel * y = ProjectItemModelFirst();
-    ui->ProjectItemView->setModel(y);
 
     ui->ProjectView->setSortingEnabled(true);
     ui->ProjectItemView->setSortingEnabled(true);
@@ -927,6 +931,14 @@ void MainForm::ProjectTab(){
     a->setQuery(*A);
     ui->ProjectItemDimension->setModel(a);
     ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+
+    projectfiltermodel = ProjectFilterModel();
+    projectmodel =  ProjectModel();
+    ui->ProjectView->setModel(projectfiltermodel);
+
+    establishConnections();
+    QSqlQueryModel * y = ProjectItemModelFirst();
+    ui->ProjectItemView->setModel(y);
 
 }
 void MainForm::refreshProjectItemCombo(){
@@ -1007,17 +1019,26 @@ void MainForm::refreshProjectItemTab(){
         ui->ProjectItemView->hideColumn(1);
 }
 QSqlQueryModel * MainForm::ProjectModel(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
-    model->setTable("projectlist");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->select();
-
-
+//    QSqlTableModel * model = new QSqlTableModel(0,data);
+//    model->setTable("projectlist");
+//    model->setEditStrategy(QSqlTableModel::OnFieldChange);
+//    model->select();
+    QString current = "%";
+    if(ui->ProjectCurrentRadio->isChecked()){
+        current = "1";
+    }else if( ui->ProjectPastRadio->isChecked()){
+        current = "0";
+    }
+    QSqlQueryModel * model = new QSqlQueryModel();
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("SELECT * FROM projectlist WHERE current LIKE '"+current+"'");
+    qry->exec();
+    model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Current"));
 
-
+    //qDebug()<<"PROJECT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
 
 }
@@ -1483,7 +1504,7 @@ void MainForm::refreshShiftProject(){
 void MainForm::refreshShiftItem(){
     QSqlQueryModel * c = new QSqlQueryModel();
     QSqlQuery * C = new QSqlQuery(data);
-    qDebug()<<"here";
+
     if(ui->ShiftProjectBox->isChecked())
     {
         QString id;
@@ -1492,7 +1513,6 @@ void MainForm::refreshShiftItem(){
             while(C->next()){
                 id = C->value(0).toString();}}
         QString x = "project"+id;
-        qDebug()<<C->lastError().text()<<x;
         C->clear();
         C->prepare("SELECT name from project"+id+" ORDER BY name ASC");
 
@@ -1556,6 +1576,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(11,Qt::Horizontal,tr("Lunch"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
     model->setHeaderData(14,Qt::Horizontal,tr("Description"));
+    //qDebug()<<"SHIFT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
 
 }

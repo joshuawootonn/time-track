@@ -20,7 +20,8 @@ SOURCES += \
     connectionform.cpp \
     exportform.cpp \    
     main.cpp \
-    work.cpp
+    work.cpp \
+    employeeeditform.cpp
 
 
 HEADERS  += \
@@ -29,7 +30,8 @@ HEADERS  += \
     shifteditform.h \
     connectionform.h \
     exportform.h \
-    work.h
+    work.h \
+    employeeeditform.h
 
 
 FORMS    += \
@@ -37,7 +39,8 @@ FORMS    += \
     clockoutform.ui \
     shifteditform.ui \
     connectionform.ui \
-    exportform.ui
+    exportform.ui \
+    employeeeditform.ui
 
 RESOURCES += \
     fonts.qrc

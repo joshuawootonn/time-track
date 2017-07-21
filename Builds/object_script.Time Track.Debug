@@ -6,6 +6,7 @@ INPUT(
 ./debug\exportform.o
 ./debug\main.o
 ./debug\work.o
+./debug\employeeeditform.o
 ./debug\xlsxdocpropscore.o
 ./debug\xlsxdocpropsapp.o
 ./debug\xlsxrelationships.o
@@ -44,5 +45,6 @@ INPUT(
 ./debug\moc_connectionform.o
 ./debug\moc_exportform.o
 ./debug\moc_work.o
+./debug\moc_employeeeditform.o
 ./debug\moc_xlsxdocument.o
 );

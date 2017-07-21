@@ -658,7 +658,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
     }
 
     this->hide();
-
     emit finished();
 }
 void ShiftEditForm::on_CancelButton_clicked()

@@ -839,7 +839,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -928,7 +928,7 @@ background-color:#FE938C;
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="EmployeeArchive">
+               <widget class="QPushButton" name="EmployeeEdit">
                 <property name="text">
                  <string/>
                 </property>
@@ -1977,7 +1977,7 @@ background-color:#8DAA91;
   <tabstop>ProjectCurrentRadio</tabstop>
   <tabstop>ProjectPastRadio</tabstop>
   <tabstop>EmployeeAdd</tabstop>
-  <tabstop>EmployeeArchive</tabstop>
+  <tabstop>EmployeeEdit</tabstop>
   <tabstop>EmployeeDelete</tabstop>
   <tabstop>EmployeeId</tabstop>
   <tabstop>EmployeeName</tabstop>

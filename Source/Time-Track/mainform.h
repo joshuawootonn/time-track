@@ -15,6 +15,7 @@
 #include "shifteditform.h"
 #include "connectionform.h"
 #include "exportform.h"
+#include "employeeeditform.h"
 #include "xlsxdocument.h"
 #include "xlsxrichstring.h"
 #include "xlsxworkbook.h"
@@ -106,6 +107,8 @@ private slots:
 
     void refreshEmployeeStuff();
     void refreshEmployeeTab();
+    void displayEmployeeSuccess();
+    void refreshFromEmployeeEdit();
     void on_EmployeeName_clicked();
     void on_EmployeePin_clicked();
     void on_EmployeeAdminStatus_clicked();
@@ -116,7 +119,7 @@ private slots:
     void on_EmployeeAdd_clicked();
     int generateRandom();
     void on_EmployeeDelete_clicked();
-    void on_EmployeeArchive_clicked();
+    void on_EmployeeEdit_clicked();
     void on_AllRadio_toggled(bool checked);
     void on_CurrentRadio_toggled(bool checked);
     void on_PastRadio_toggled(bool checked);
@@ -209,6 +212,7 @@ private:
     ShiftEditForm * shifteditform;
     ConnectionForm * connectionForm;
     ExportForm * exportForm;
+    EmployeeEditForm * employeeeditform;
 
     //Random variables :)
     QString currentProject;

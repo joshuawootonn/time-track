@@ -38,5 +38,4 @@ void ExportForm::on_buttonBox_accepted()
     emit excel();
 
     this->hide();
-
 }

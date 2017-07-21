@@ -103,7 +103,7 @@ public:
     QGroupBox *groupBox;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *EmployeeAdd;
-    QPushButton *EmployeeArchive;
+    QPushButton *EmployeeEdit;
     QPushButton *EmployeeDelete;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_8;
@@ -726,10 +726,10 @@ public:
 
         horizontalLayout_5->addWidget(EmployeeAdd);
 
-        EmployeeArchive = new QPushButton(groupBox);
-        EmployeeArchive->setObjectName(QStringLiteral("EmployeeArchive"));
+        EmployeeEdit = new QPushButton(groupBox);
+        EmployeeEdit->setObjectName(QStringLiteral("EmployeeEdit"));
 
-        horizontalLayout_5->addWidget(EmployeeArchive);
+        horizontalLayout_5->addWidget(EmployeeEdit);
 
         EmployeeDelete = new QPushButton(groupBox);
         EmployeeDelete->setObjectName(QStringLiteral("EmployeeDelete"));
@@ -1354,8 +1354,8 @@ public:
         QWidget::setTabOrder(ProjectAllRadio, ProjectCurrentRadio);
         QWidget::setTabOrder(ProjectCurrentRadio, ProjectPastRadio);
         QWidget::setTabOrder(ProjectPastRadio, EmployeeAdd);
-        QWidget::setTabOrder(EmployeeAdd, EmployeeArchive);
-        QWidget::setTabOrder(EmployeeArchive, EmployeeDelete);
+        QWidget::setTabOrder(EmployeeAdd, EmployeeEdit);
+        QWidget::setTabOrder(EmployeeEdit, EmployeeDelete);
         QWidget::setTabOrder(EmployeeDelete, EmployeeId);
         QWidget::setTabOrder(EmployeeId, EmployeeName);
         QWidget::setTabOrder(EmployeeName, ProjectItemId);
@@ -1410,7 +1410,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
 
 
@@ -1447,7 +1447,7 @@ public:
         MainTabs->setTabText(MainTabs->indexOf(ShiftTab), QApplication::translate("MainForm", "Shifts", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         EmployeeAdd->setText(QString());
-        EmployeeArchive->setText(QString());
+        EmployeeEdit->setText(QString());
         EmployeeDelete->setText(QString());
         groupBox_2->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", Q_NULLPTR));
