@@ -39,7 +39,8 @@ void MainForm::start(){
         exportForm = new ExportForm(this);
         employeeeditform = new EmployeeEditForm(this);
         employeeeditform->hide();
-
+        itemeditform = new ItemEditForm(this);
+        itemeditform->hide();
 
         loginInitialize();
         isConnected();
@@ -90,6 +91,8 @@ bool MainForm::Connect(QString database,QString port,QString username,QString pa
 void MainForm::establishConnections(){
     QObject::connect(clockoutForm,SIGNAL(finished()),this,SLOT(reenter()));
 
+    QObject::connect(itemeditform,SIGNAL(finished()),this,SLOT(refreshFromItemEdit()));
+    QObject::connect(itemeditform,SIGNAL(finished()),this,SLOT(displayItemSuccess()));
     QObject::connect(employeeeditform,SIGNAL(finished()),this,SLOT(refreshFromEmployeeEdit()));
     QObject::connect(employeeeditform,SIGNAL(finished()),this,SLOT(displayEmployeeSuccess()));
     QObject::connect(shifteditform,SIGNAL(finished()),this,SLOT(refreshShiftTab()));
@@ -100,7 +103,6 @@ void MainForm::establishConnections(){
     QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
     QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
-
 }
 void MainForm::reenter(){
 
@@ -745,7 +747,7 @@ QSortFilterProxyModel * MainForm::EmployeeFilterModel(){
 void MainForm::displayEmployeeSuccess(){
     QMessageBox::StandardButton reply;
     if(!employeeeditform->getSuccess())
-        reply = QMessageBox::information(this, "Time-Track",employeeeditform->getSuccess_msg(),QMessageBox::Ok);
+        reply = QMessageBox::information(this, "Time-Track",employeeeditform->getSuccessMsg(),QMessageBox::Ok);
 }
 void MainForm::refreshFromEmployeeEdit(){
     refreshEmployeeTab();
@@ -753,6 +755,7 @@ void MainForm::refreshFromEmployeeEdit(){
 //    shifteditform->updateShiftEdit();
 
 }
+
 /* Option menu 1 for EmployeeTab*/
 
 void MainForm::on_EmployeeAdd_clicked()
@@ -1106,6 +1109,11 @@ void MainForm::on_ProjectAdd_clicked()
     ui->MainTabs->setCurrentIndex(1);
     shifteditform->updateShiftEdit();
 
+
+
+
+
+
 }
 void MainForm::on_ProjectDelete_clicked()
 {
@@ -1369,19 +1377,25 @@ void MainForm::refreshItemStuff(){
     shifteditform->ItemInitialize();
     clockoutForm->ItemInitialize();
 }
+void MainForm::displayItemSuccess(){
+    QMessageBox::StandardButton reply;
+    if(!itemeditform->getSuccess())
+        reply = QMessageBox::information(this, "Time-Track",itemeditform->getSuccessMsg(),QMessageBox::Ok);
+}
+void MainForm::refreshFromItemEdit(){
+    refreshItemTab();
+//    refreshShiftEmployee();
+//    shifteditform->updateShiftEdit();
 
+}
 /* Option menu 1 for ItemTab*/
 
 void MainForm::on_ItemAdd_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QSqlQueryModel * x = ItemModel();
-    qry->prepare("insert into itemlist(name,category,subcategory,dimension)  values('~','~','~','~')");
-    qry->exec();
+    itemeditform = new ItemEditForm(this);
+    establishConnections();
+    itemeditform->AddItem();
     refreshItemTab();
-    refreshProjectItemCombo();
-    refreshShiftItem();
-    ui->MainTabs->setCurrentIndex(2);
 }
 void MainForm::on_ItemDelete_clicked()
 {

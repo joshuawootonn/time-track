@@ -12,6 +12,7 @@ EmployeeEditForm::EmployeeEditForm(QWidget *parent) :
 
 
 }
+// Initializer for when a employee is being created
 void EmployeeEditForm::AddEmployee(){
     this->showNormal();
     task="add";
@@ -21,6 +22,8 @@ void EmployeeEditForm::AddEmployee(){
     ui->active->setChecked(true);
 
 }
+
+// Initializer for when a employee is being edited
 void EmployeeEditForm::EditEmployee(QString x){
     this->showNormal();
     task = "edit";
@@ -53,6 +56,7 @@ EmployeeEditForm::~EmployeeEditForm()
 {
     delete ui;
 }
+// Generates random unique pin
 int EmployeeEditForm::generateRandom(){
     int x = rand()%9000+1000;
     QSqlQuery * qry = new QSqlQuery(data);
@@ -72,18 +76,17 @@ void EmployeeEditForm::on_GenerateButton_clicked()
     ui->pin->setText(QString::number(generateRandom()));
 }
 
-QString EmployeeEditForm::getSuccess_msg() const
+// Getters for the values of the validation methods
+QString EmployeeEditForm::getSuccessMsg() const
 {
-    return success_msg;
+    return successMsg;
 }
-
-
-
 bool EmployeeEditForm::getSuccess() const
 {
     return success;
 }
-QString EmployeeEditForm::valid(){
+// Validation for when a employeee is created
+QString EmployeeEditForm::AddValid(){
     QString error;
     if(ui->name->text().length()<5)
         error = "Invalid name: Minimun length 5";
@@ -95,29 +98,55 @@ QString EmployeeEditForm::valid(){
        error = "Invalid name: Must be Letters only";
     if (!pin_regrex.exactMatch(ui->pin->text()))
        error = "Invalid pin: Must be Numbers only";
-    if(task=="edit"){
-        QSqlQuery * qry = new QSqlQuery(data);
-        qry->prepare("SELECT TOP 1 pin FROM employeelist WHERE pin = '"+ui->pin->text()+"");
-        int x =0;
-        if(qry->exec()){
-            while(qry->next()){
-                x++;
-            }
-        }
-        qDebug()<<qry->lastError().text();
-        if(x>1){
-            error = "Invalid pin: Must be unique";
-        }
-    }
-
-
 
     return error;
 }
+// Validation for when a employee is edited
+QString EmployeeEditForm::EditValid(){
+    QString error = "";
+    QRegExp name_regrex("^[a-zA-Z ]+$");
+    QRegExp pin_regrex("^[0-9]+$");
 
+    if(ui->name->text().length()<5)
+        error = "Invalid name: Minimun length 5";
+    else if(ui->pin->text().length() < 4)
+        error = "Invalid pin: Required length 4";
+    else if (!name_regrex.exactMatch(ui->name->text()))
+       error = "Invalid name: Must be Letters only";
+    else if (!pin_regrex.exactMatch(ui->pin->text()))
+       error = "Invalid pin: Must be Numbers only";
+    else{
+        QSqlQuery * qry = new QSqlQuery(data);
+        QString pin = ui->pin->text();
+        QString currentPin;
+        qry->prepare("SELECT pin FROM employeelist WHERE pin = "+pin+"");
+        int pinCount =0;
+        if(qry->exec()){
+            while(qry->next()){
+                pinCount++;
+            }
+        }
+        qry->clear();
+        qry->prepare("SELECT pin FROM employeelist WHERE id = "+id+"");
+        if(qry->exec()){
+            while(qry->next()){
+                currentPin = qry->value(0).toString();
+            }
+        }
+        if(pin == currentPin && pinCount > 1){
+            error = "Invalid pin: Must be unique";
+        }else if(pinCount>0){
+            error = "Invalid pin: Must be unique";
+        }
+
+        qDebug()<<qry->lastError().text();
+    }
+    return error;
+}
+// Self evident
 void EmployeeEditForm::on_FinishButton_clicked()
 {
-    if(valid() == "" && task=="add")
+    if(AddValid() == "" && task=="add")
     {
         QSqlQuery * qry = new QSqlQuery(data);
         QString admin = QString::number(int(ui->admin->isChecked()));
@@ -128,13 +157,13 @@ void EmployeeEditForm::on_FinishButton_clicked()
             success = true;
         else{
             success = false;
-            success_msg = "Error Creating Employee";
+            successMsg = "Error Creating Employee";
         }
 
         this->hide();
         emit finished();
     }
-    if(valid() == "" && task=="edit")
+    if(EditValid() == "" && task=="edit")
     {
         QSqlQuery * qry = new QSqlQuery(data);
         QString admin = QString::number(int(ui->admin->isChecked()));
@@ -145,7 +174,7 @@ void EmployeeEditForm::on_FinishButton_clicked()
             success = true;
         else{
             success = false;
-            success_msg = "Error Editing Employee";
+            successMsg = "Error Editing Employee";
         }
 
         qry->clear();
@@ -154,17 +183,19 @@ void EmployeeEditForm::on_FinishButton_clicked()
             success = true;
         else{
             success = false;
-            success_msg = "Error Editing Employee";
+            successMsg = "Error Editing Employee";
         }
         this->hide();
         emit finished();
     }
+    else if(task=="edit"){
+        ui->error->setText(EditValid());
+    }
     else{
-        ui->error->setText(valid());
+        ui->error->setText(AddValid());
     }
 
 }
-
 void EmployeeEditForm::on_CancelButton_clicked()
 {
     this->hide();

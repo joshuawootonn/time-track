@@ -27,12 +27,13 @@ public:
     explicit EmployeeEditForm(QWidget *parent = 0);
     ~EmployeeEditForm();
     void AddEmployee();
+    QString AddValid();
     int generateRandom();
     void EditEmployee(QString id);
-    QString valid();
+    QString EditValid();
 
     bool getSuccess() const;
-    QString getSuccess_msg() const;
+    QString getSuccessMsg() const;
 
 private slots:
     void on_FinishButton_clicked();
@@ -47,7 +48,7 @@ private:
     Ui::EmployeeEditForm *ui;
     QSqlDatabase data;
     bool success;
-    QString success_msg;
+    QString successMsg;
     QString task;
     QString id;
 };

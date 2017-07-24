@@ -16,6 +16,8 @@
 #include "connectionform.h"
 #include "exportform.h"
 #include "employeeeditform.h"
+#include "itemeditform.h"
+
 #include "xlsxdocument.h"
 #include "xlsxrichstring.h"
 #include "xlsxworkbook.h"
@@ -148,6 +150,8 @@ private slots:
 
     void refreshItemStuff();
     void refreshItemTab();
+    void displayItemSuccess();
+    void refreshFromItemEdit();
     void on_ItemAdd_clicked();
     void on_ItemDelete_clicked();
     void on_ItemName_clicked();
@@ -213,6 +217,7 @@ private:
     ConnectionForm * connectionForm;
     ExportForm * exportForm;
     EmployeeEditForm * employeeeditform;
+    ItemEditForm * itemeditform;
 
     //Random variables :)
     QString currentProject;

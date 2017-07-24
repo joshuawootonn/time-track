@@ -6,12 +6,106 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>224</width>
+    <width>246</width>
     <height>203</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#ClockoutForm{
+
+background-color:#E5EAE7;
+}
+*{
+font-family:&quot;Calibri&quot;;
+font-size: 16px;
+color:#263544;
+}
+
+
+
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+
+
+QWidget{
+
+margin:0px;
+padding:0px;
+}
+QWidget#bigwidger{
+background-color:#E5EAE7;
+border:none;
+}
+
+
+
+QTableWidget{
+border:none;
+}
+QTextEdit{
+border:none;
+}
+
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#FFFFFF;
+}
+QPushButton:hover:!pressed{
+background-color:#F4F9F6;
+}
+
+
+QDateTimeEdit{
+border:none;
+background-color:#FFFFFF;
+}
+QDateEditTime:hover{
+border:none;
+background-color:#F4F9F6;
+}
+QDateEditTime::drop-down{
+border:none;
+}
+
+
+QComboBox{
+border:none;
+background-color:#FFFFFF;
+}
+QComboBox:hover {
+background-color:#F4F9F6;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
+QRadioButton{
+padding:0px;
+margin:0px;
+}
+
+
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
