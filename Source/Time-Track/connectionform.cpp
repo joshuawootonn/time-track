@@ -14,14 +14,12 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     ui->databaseEdit->setText("aacidatabase");
     ui->usernameEdit->setText("user");
     ui->portEdit->setText("3306");
-    ui->ipEdit->setText("192.168.41.187");
+    ui->ipEdit->addItem("192.168.41.187");
+    ui->ipEdit->addItem("192.168.0.10");
+    ui->ipEdit->addItem("192.168.1.111");
     ui->error->hide();
 
-    QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
-    if(dir.exists())
-    {
-        dir.mkpath("Time-Track/");
-    }
+
 
 
     automatic = false;
@@ -98,7 +96,7 @@ void ConnectionForm::pingConnection(){
 
     QThread* thread = new QThread(this);
     Work* worker = new Work;
-    worker->connection = ui->ipEdit->text();
+    worker->connection = ui->ipEdit->currentText();
     worker->moveToThread(thread);
 
     connect(thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
@@ -115,11 +113,16 @@ void ConnectionForm::pingConnection(){
 }
 /* Exporting the saved data */
 void ConnectionForm::write(){
+    QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
+    if(dir.exists())
+    {
+        dir.mkpath("Time-Track/");
+    }
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
 
-        qDebug()<<"write monkey" << file.fileName();
+        //qDebug()<<"write monkey" << file.fileName();
         return;
     }
     QTextStream out(&file);
@@ -135,7 +138,7 @@ void ConnectionForm::read(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
-        qDebug()<<"read monkey" << file.fileName();
+        //qDebug()<<"read monkey" << file.fileName();
         return;
     }
 
@@ -148,7 +151,7 @@ void ConnectionForm::read(){
         ui->portEdit->setText(text.split(" ")[1]);
         ui->usernameEdit->setText(text.split(" ")[2]);
         ui->passwordEdit->setText(text.split(" ")[3]);
-        ui->ipEdit->setText(text.split(" ")[4]);
+        ui->ipEdit->findText(text.split(" ")[4]);
     }
     if( text.split(" ").length() == 7)
     {
@@ -157,7 +160,7 @@ void ConnectionForm::read(){
         ui->portEdit->setText(text.split(" ")[1]);
         ui->usernameEdit->setText(text.split(" ")[2]);
         ui->passwordEdit->setText(text.split(" ")[3]);
-        ui->ipEdit->setText(text.split(" ")[4]);
+        ui->ipEdit->findText(text.split(" ")[4]);
         automatic = text.split(" ")[5].toInt();
     }
 
@@ -219,7 +222,7 @@ void ConnectionForm::on_passwordEdit_textChanged(const QString &arg1)
 {
     password = arg1;
 }
-void ConnectionForm::on_ipEdit_textChanged(const QString &arg1)
+void ConnectionForm::on_ipEdit_currentTextChanged(const QString &arg1)
 {
     ip = arg1;
     ui->connect->setEnabled(false);
@@ -239,12 +242,11 @@ void ConnectionForm::on_connect_clicked()
         setError("Please enter a username");
     else if(ui->passwordEdit->text() == "")
         setError("Please enter a password");
-    else if(ui->ipEdit->text() == "")
-        setError("Please enter a IP");
     else
     {
         write();
         emit finished();
-
     }
 }
+
+

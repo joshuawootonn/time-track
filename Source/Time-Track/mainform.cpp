@@ -158,7 +158,7 @@ void MainForm::setIcons(){
     ui->EmployeeAdd->setIcon(ButtonIcon);
     ui->EmployeeAdd->setIconSize(QSize(34,50));
 
-    pixmap = * new QPixmap("../Icons/EmployeeArchive.png");
+    pixmap = * new QPixmap("../Icons/EmployeeEdit.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->EmployeeEdit->setIcon(ButtonIcon);
     ui->EmployeeEdit->setIconSize(QSize(34,50));
@@ -177,7 +177,7 @@ void MainForm::setIcons(){
     ui->ProjectAdd->setIcon(ButtonIcon);
     ui->ProjectAdd->setIconSize(QSize(34,50));
 
-    pixmap = * new QPixmap("../Icons/ProjectArchive.png");
+    pixmap = * new QPixmap("../Icons/ProjectEdit.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->ProjectArchive->setIcon(ButtonIcon);
     ui->ProjectArchive->setIconSize(QSize(34,50));
@@ -193,14 +193,14 @@ void MainForm::setIcons(){
     ButtonIcon =  * new QIcon(pixmap);
     ui->ItemAdd->setIcon(ButtonIcon);
     ui->ItemAdd->setIconSize(QSize(34,50));
-    ui->ProjectItemAdd->setIcon(ButtonIcon);
-    ui->ProjectItemAdd->setIconSize(QSize(34,50));
+    pixmap = * new QPixmap("../Icons/SubProjectEdit.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->ItemEdit->setIcon(ButtonIcon);
+    ui->ItemEdit->setIconSize(QSize(34,50));
     pixmap = * new QPixmap("../Icons/SubProjectDelete.png");
     ButtonIcon =  * new QIcon(pixmap);
     ui->ItemDelete->setIcon(ButtonIcon);
     ui->ItemDelete->setIconSize(QSize(34,50));
-    ui->ProjectItemRemove->setIcon(ButtonIcon);
-    ui->ProjectItemRemove->setIconSize(QSize(34,50));
 
 
 
@@ -412,7 +412,6 @@ void MainForm::on_HeaderTabs_currentChanged(int index)
         refreshEmployeeTab();
     }
     else if(index ==1){
-        refreshProjectItemCombo();
         refreshProjectTab();
         ui->MainTabs->setCurrentIndex(1);
     }
@@ -623,7 +622,7 @@ void MainForm::on_passEdit_returnPressed()
     }
     else
     {
-        qDebug()<<qry1.lastError();
+        //qDebug()<<qry1.lastError();
     }
 }
 
@@ -779,8 +778,8 @@ void MainForm::displayEmployeeSuccess(){
 }
 void MainForm::refreshFromEmployeeEdit(){
     refreshEmployeeTab();
-//    refreshShiftEmployee();
-//    shifteditform->updateShiftEdit();
+    refreshShiftEmployee();
+    shifteditform->updateShiftEdit();
 
 }
 
@@ -820,7 +819,7 @@ void MainForm::on_EmployeeEdit_clicked()
         QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
         employeeeditform->EditEmployee(id);
     }
-    refreshEmployeeTab();
+    //refreshEmployeeTab();
 }
 void MainForm::on_EmployeeDelete_clicked()
 {
@@ -920,18 +919,14 @@ void MainForm::ProjectTab(){
     ui->ProjectName->setChecked(true);
     ui->ProjectAllRadio->setChecked(true);
     ui->ProjectDate->setChecked(true);
-    ui->ProjectItemGroup->setVisible(false);
 
     ui->ProjectItemName->setChecked(true);
     ui->ProjectItemId->setChecked(false);
+    ui->ProjectItemDimension->setChecked(true);
+    ui->ProjectItemQuantity->setChecked(true);
     ui->ProjectItemView->hideColumn(0);
-    refreshProjectItemCombo();
-    QSqlQueryModel * a = new QSqlQueryModel();
-    QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from dimensionlist ORDER BY name ASC");
-    A->exec();
-    a->setQuery(*A);
-    ui->ProjectItemDimension->setModel(a);
+
+
     ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     projectfiltermodel = ProjectFilterModel();
@@ -943,30 +938,13 @@ void MainForm::ProjectTab(){
     ui->ProjectItemView->setModel(y);
 
 }
-void MainForm::refreshProjectItemCombo(){
-    QSqlQueryModel * a = new QSqlQueryModel();
-    QSqlQuery * A = new QSqlQuery(data);
-    A->prepare("Select name from itemlist where id>0 ORDER BY name ASC");
-    A->exec();
-    a->setQuery(*A);
-    ui->ProjectItemCombo->setModel(a);
-    ui->ProjectItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    QCompleter * comp = new QCompleter(this);
-    comp->setWidget(ui->ProjectItemCombo);
-    comp->setCompletionMode(QCompleter::PopupCompletion);
-    comp->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->ProjectItemCombo->setCurrentText("");
-
-
-}
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
 
     QSqlQueryModel * x = ProjectItemModel();
     ui->ProjectItemView->setModel(x);
     refreshProjectItemTab();
-    refreshProjectItemCombo();
 }
 void MainForm::refreshProjectStuff(){
     refreshShiftProject();
@@ -1002,13 +980,38 @@ void MainForm::refreshProjectTab(){
     {
         ui->ProjectView->showRow(i);
     }
-    if(ui->ProjectCurrentRadio->isChecked())
-        on_ProjectCurrentRadio_toggled(true);
-    if(ui->ProjectPastRadio->isChecked())
-        on_ProjectPastRadio_toggled(true);
+    if(ui->ProjectAllRadio->isChecked()){
+        QSqlQueryModel * x = ProjectModel();
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            ui->ProjectView->showRow(i);
+        }
+    }
+    if(ui->ProjectCurrentRadio->isChecked()){
+        QSqlQueryModel * x = ProjectModel();
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            int current = x->record(i).value(2).toInt();
+            if(current == 1)
+               ui->ProjectView->showRow(i);
+            else
+                ui->ProjectView->hideRow(i);
+        }
+    }
+    if(ui->ProjectPastRadio->isChecked()){
+        QSqlQueryModel * x = ProjectModel();
+        for(int i=0; i< x->rowCount(); i++)
+        {
+            int current = x->record(i).value(2).toInt();
+            if(current == 1)
+               ui->ProjectView->hideRow(i);
+            else
+                ui->ProjectView->showRow(i);
+        }
+    }
 }
 void MainForm::refreshProjectItemTab(){
-    qDebug()<<"refresh item";
+    //qDebug()<<"refresh item";
     ui->ProjectItemView->setModel(ProjectItemModelRefresh());
     ui->ProjectItemView->hideColumn(0);
     if(ui->ProjectItemName->isChecked())
@@ -1019,6 +1022,14 @@ void MainForm::refreshProjectItemTab(){
         ui->ProjectItemView->showColumn(1);
     else
         ui->ProjectItemView->hideColumn(1);
+    if(ui->ProjectItemQuantity->isChecked())
+        ui->ProjectItemView->showColumn(3);
+    else
+        ui->ProjectItemView->hideColumn(3);
+    if(ui->ProjectItemDimension->isChecked())
+        ui->ProjectItemView->showColumn(4);
+    else
+        ui->ProjectItemView->hideColumn(4);
 }
 QSqlQueryModel * MainForm::ProjectModel(){
 //    QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -1089,8 +1100,8 @@ void MainForm::displayProjectSuccess(){
 }
 void MainForm::refreshFromProjectEdit(){
     refreshProjectTab();
-//    refreshShiftEmployee();
-//    shifteditform->updateShiftEdit();
+    refreshShiftProject();
+    shifteditform->updateShiftEdit();
 
 }
 /* Option menu 1 for ProjectTab*/
@@ -1196,7 +1207,7 @@ void MainForm::on_ProjectArchive_clicked()
         projecteditform->EditProject(id);
     }
 
-    refreshProjectTab();
+    //refreshProjectTab();
 }
 
 /* Option menu 2 for ProjectTab*/
@@ -1222,41 +1233,15 @@ void MainForm::on_ProjectDate_clicked()
 
 void MainForm::on_ProjectAllRadio_toggled(bool checked)
 {
-    if(checked){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            ui->ProjectView->showRow(i);
-        }
-    }
+    refreshProjectTab();
 }
 void MainForm::on_ProjectCurrentRadio_toggled(bool checked)
 {
-    if(checked){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(2).toInt();
-            if(current == 1)
-               ui->ProjectView->showRow(i);
-            else
-                ui->ProjectView->hideRow(i);
-        }
-    }
+    refreshProjectTab();
 }
 void MainForm::on_ProjectPastRadio_toggled(bool checked)
 {
-    if(checked){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(2).toInt();
-            if(current == 1)
-               ui->ProjectView->hideRow(i);
-            else
-                ui->ProjectView->showRow(i);
-        }
-    }
+    refreshProjectTab();
 }
 
 /* Option menu 4 for ProjectTab*/
@@ -1269,63 +1254,13 @@ void MainForm::on_ProjectItemId_clicked()
 {
     refreshProjectItemTab();
 }
-
-/* Option menu 5 for ProjectTab*/
-
-void MainForm::on_ProjectItemAdd_clicked()
+void MainForm::on_ProjectItemQuantity_clicked()
 {
-    QString itemName = ui->ProjectItemCombo->currentText();
-    QString itemQuantity = ui->ProjectItemQuantity->text();
-    QString itemDimension = ui->ProjectItemDimension->currentText();
-    if( itemName != "")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        qry->prepare("select id from itemlist where name='"+itemName+"'");
-        QString itemId;
-        if(qry->exec()){
-            while(qry->next())
-                itemId = qry->value(0).toString();
-        }
-        qry->clear();
-        QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
-        QString table = model->tableName();
-
-        qry->prepare("insert into "+table+"(itemid, name, quantity, dimension) "
-                          "values('"+itemId+"','"+itemName+"','"+itemQuantity+"','"+itemDimension+"') "
-                                 "ON DUPLICATE KEY UPDATE id = '"+itemId+"'");
-        qry->exec();
-        model->select();
-        ui->ProjectItemView->setModel(model);
-        shifteditform->updateShiftEdit();
-    }
+    refreshProjectItemTab();
 }
-void MainForm::on_ProjectItemRemove_clicked()
+void MainForm::on_ProjectItemDimension_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QModelIndexList list = ui->ProjectItemView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QSqlTableModel * tablemodel = (QSqlTableModel*)ui->ProjectItemView->model();
-        QString table = tablemodel->tableName();
-
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to remove the "+ tablemodel->record(list.at(0).row()).value(2).toString()+" item from this project?",
-                                        QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
-            for(int i=0; i< list.count(); i++)
-            {
-                QModelIndex index =list.at(i);
-                QString id = tablemodel->record(index.row()).value(0).toString();
-
-                qry->clear();
-                qry->prepare("DELETE from "+table+" where id='"+id+"'");
-                qry->exec();
-            }
-            tablemodel->select();
-            ui->ProjectItemView->setModel(tablemodel);
-            shifteditform->updateShiftEdit();
-        }
-    }
+    refreshProjectItemTab();
 }
 
 
@@ -1413,8 +1348,8 @@ void MainForm::displayItemSuccess(){
 }
 void MainForm::refreshFromItemEdit(){
     refreshItemTab();
-//    refreshShiftEmployee();
-//    shifteditform->updateShiftEdit();
+    refreshShiftItem();
+    projecteditform->updateProjectEdit();
 
 }
 /* Option menu 1 for ItemTab*/
@@ -1436,7 +1371,7 @@ void MainForm::on_ItemEdit_clicked()
         QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
         itemeditform->EditItem(id);
     }
-    refreshItemTab();
+    //refreshItemTab();
 }
 void MainForm::on_ItemDelete_clicked()
 {
@@ -1457,7 +1392,6 @@ void MainForm::on_ItemDelete_clicked()
                 qry->exec();
             }
             refreshItemTab();
-            refreshProjectItemCombo();
             refreshShiftItem();
             ui->MainTabs->setCurrentIndex(2);
         }
@@ -1576,7 +1510,7 @@ void MainForm::refreshShiftItem(){
         C->prepare("Select name from itemlist ORDER BY name ASC");
     }
     C->exec();
-    qDebug()<<C->lastError().text();
+    //qDebug()<<C->lastError().text();
     c->setQuery(*C);
     ui->ShiftItemCombo->setModel(c);
     ui->ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1802,7 +1736,7 @@ void MainForm::on_ShiftEdit_clicked()
         else
             shifteditform->EditFinishedShift(rec.value(13).toString());
     }
-    refreshShiftTab();
+    //refreshShiftTab();
 }
 void MainForm::on_ShiftDelete_clicked()
 {

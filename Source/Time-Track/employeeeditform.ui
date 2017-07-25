@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>246</width>
-    <height>203</height>
+    <width>326</width>
+    <height>266</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Employee Edit</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#ClockoutForm{
+   <string notr="true">QDialog#EmployeeEditForm{
 
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 }
 *{
 font-family:&quot;Calibri&quot;;
@@ -38,7 +38,7 @@ margin:0px;
 padding:0px;
 }
 QWidget#bigwidger{
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 border:none;
 }
 
@@ -58,7 +58,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 
 
@@ -105,113 +105,190 @@ QGroupBox::title {
     left: 10px;
     padding: 0 3px 0 3px;
 }
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#FFFFFF;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#FE938C;
+
+}
+
+QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ 
+background-color:#FFFFFF;
+ border: 0px solid #D1D1D1;	
+
+}
+QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ 
+background-color:#FFFFFF;
+ border: 1px solid #D1D1D1;	
+}
 </string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Name:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="name"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Pin:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="pin">
-       <property name="maxLength">
-        <number>4</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="GenerateButton">
-       <property name="text">
-        <string>Generate</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="current">
-       <property name="text">
-        <string>Employed</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="admin">
-       <property name="text">
-        <string>Admin</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="active">
-       <property name="text">
-        <string>Clocked In</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="error">
-     <property name="text">
-      <string/>
-     </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QWidget" name="bigwidger" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Name:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="name"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Pin:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="pin">
+           <property name="maxLength">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="GenerateButton">
+           <property name="text">
+            <string>Generate</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="admin">
+           <property name="text">
+            <string>Admin</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="active">
+           <property name="text">
+            <string>Clocked In</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="current">
+           <property name="text">
+            <string>Employed</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="error">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="FinishButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Finish</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="CancelButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="FinishButton">
-       <property name="text">
-        <string>Finish</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="CancelButton">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>pin</tabstop>
+  <tabstop>GenerateButton</tabstop>
+  <tabstop>admin</tabstop>
+  <tabstop>current</tabstop>
+  <tabstop>active</tabstop>
+  <tabstop>FinishButton</tabstop>
+  <tabstop>CancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

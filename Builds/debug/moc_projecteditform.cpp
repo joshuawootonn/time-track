@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ProjectEditForm_t {
-    QByteArrayData data[10];
-    char stringdata0[150];
+    QByteArrayData data[11];
+    char stringdata0[170];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,14 @@ QT_MOC_LITERAL(5, 67, 23), // "on_Sections_cellClicked"
 QT_MOC_LITERAL(6, 91, 3), // "row"
 QT_MOC_LITERAL(7, 95, 6), // "column"
 QT_MOC_LITERAL(8, 102, 23), // "on_FinishButton_clicked"
-QT_MOC_LITERAL(9, 126, 23) // "on_CancelButton_clicked"
+QT_MOC_LITERAL(9, 126, 23), // "on_CancelButton_clicked"
+QT_MOC_LITERAL(10, 150, 19) // "on_EditItem_clicked"
 
     },
     "ProjectEditForm\0finished\0\0on_AddItem_clicked\0"
     "on_DeleteItem_clicked\0on_Sections_cellClicked\0"
     "row\0column\0on_FinishButton_clicked\0"
-    "on_CancelButton_clicked"
+    "on_CancelButton_clicked\0on_EditItem_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +57,7 @@ static const uint qt_meta_data_ProjectEditForm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,14 +65,15 @@ static const uint qt_meta_data_ProjectEditForm[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x06 /* Public */,
+       1,    0,   49,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    0,   46,    2, 0x08 /* Private */,
-       5,    2,   47,    2, 0x08 /* Private */,
-       8,    0,   52,    2, 0x08 /* Private */,
-       9,    0,   53,    2, 0x08 /* Private */,
+       3,    0,   50,    2, 0x08 /* Private */,
+       4,    0,   51,    2, 0x08 /* Private */,
+       5,    2,   52,    2, 0x08 /* Private */,
+       8,    0,   57,    2, 0x08 /* Private */,
+       9,    0,   58,    2, 0x08 /* Private */,
+      10,    0,   59,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -80,6 +82,7 @@ static const uint qt_meta_data_ProjectEditForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -98,6 +101,7 @@ void ProjectEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 3: _t->on_Sections_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 4: _t->on_FinishButton_clicked(); break;
         case 5: _t->on_CancelButton_clicked(); break;
+        case 6: _t->on_EditItem_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -138,13 +142,13 @@ int ProjectEditForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

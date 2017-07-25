@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">QWidget#MainForm{
 
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 }
 *{
 font-family:&quot;Calibri&quot;;
@@ -47,7 +47,7 @@ QTabBar::tab:selected,QTabBar::tab:hover{
 color:#444946;
 }
 QTabBar::tab{
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 
 color:black;
 }
@@ -151,20 +151,20 @@ QGroupBox::title {
 QPushButton{
 padding:3px;
 border:none;
-background-color:#F1F4F5;
+background-color:#FFF;
 }
 QLineEdit{ 
-background-color:#F1F4F5;
+background-color:#FFF;
  border: 0px solid 263544;	
 font-size: 32px;
 }
 QLineEdit:hover{ 
-background-color:#F1F4F5;
+background-color:#FFFFFF;
  border: 1px solid 263544;	
 }
 
 QPushButton:hover,QPushButton:hover{
-background-color:#ECEFED;
+background-color:#D1D1D1;
 }
 /*
 
@@ -839,7 +839,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -864,6 +864,17 @@ background-color:#F1F4F5;
 
 }
 
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+QCheckBox::indicator:hover,QRadioButton::indicator:hover{
+border:none;
+background-color:#E4E9EB;
+
+}
 QCheckBox::indicator:checked,QRadioButton::indicator:checked{
 border:none;
 background-color:#FE938C;
@@ -1079,6 +1090,17 @@ background-color:#F1F4F5;
 
 }
 
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+QCheckBox::indicator:hover,QRadioButton::indicator:hover{
+border:none;
+background-color:#E4E9EB;
+
+}
 QCheckBox::indicator:checked,QRadioButton::indicator:checked{
 border:none;
 background-color:#B19994;
@@ -1256,76 +1278,6 @@ background-color:#B19994;
             </spacer>
            </item>
            <item>
-            <widget class="QGroupBox" name="ProjectItemGroup">
-             <property name="title">
-              <string>Options</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_12">
-              <property name="topMargin">
-               <number>7</number>
-              </property>
-              <property name="bottomMargin">
-               <number>7</number>
-              </property>
-              <item row="1" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_14">
-                <item>
-                 <layout class="QGridLayout" name="gridLayout_23">
-                  <item row="0" column="0">
-                   <widget class="QComboBox" name="ProjectItemCombo">
-                    <property name="font">
-                     <font>
-                      <family>Calibri</family>
-                      <pointsize>-1</pointsize>
-                     </font>
-                    </property>
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <property name="frame">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <layout class="QHBoxLayout" name="horizontalLayout_16">
-                    <item>
-                     <widget class="QSpinBox" name="ProjectItemQuantity">
-                      <property name="maximum">
-                       <number>100000</number>
-                      </property>
-                      <property name="singleStep">
-                       <number>1</number>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QComboBox" name="ProjectItemDimension"/>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="ProjectItemAdd">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="ProjectItemRemove">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <widget class="QGroupBox" name="groupBox_12">
              <property name="styleSheet">
               <string notr="true">QCheckBox::indicator,QRadioButton::indicator{
@@ -1365,6 +1317,20 @@ background-color:#837F9A;
                 </property>
                </widget>
               </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="ProjectItemQuantity">
+                <property name="text">
+                 <string>Quantity</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="ProjectItemDimension">
+                <property name="text">
+                 <string>Dimension</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
@@ -1378,6 +1344,17 @@ background-color:#F1F4F5;
 
 }
 
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+QCheckBox::indicator:hover,QRadioButton::indicator:hover{
+border:none;
+background-color:#E4E9EB;
+
+}
 QCheckBox::indicator:checked,QRadioButton::indicator:checked{
 border:none;
 background-color:#837F9A;
@@ -1425,7 +1402,7 @@ background-color:#837F9A;
               <item>
                <widget class="QPushButton" name="ItemEdit">
                 <property name="text">
-                 <string>itemEdit</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -1512,6 +1489,18 @@ background-color:#F1F4F5;
 
 }
 
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+QCheckBox::indicator:hover,QRadioButton::indicator:hover{
+border:none;
+background-color:#E4E9EB;
+
+}
 QCheckBox::indicator:checked,QRadioButton::indicator:checked{
 border:none;
 background-color:#8DAA91;
@@ -1592,8 +1581,14 @@ background-color:#8DAA91;
                <widget class="QComboBox" name="ShiftEmployeeCombo">
                 <property name="minimumSize">
                  <size>
-                  <width>150</width>
+                  <width>200</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
                  </size>
                 </property>
                 <property name="font">
@@ -1768,6 +1763,19 @@ background-color:#8DAA91;
           </layout>
          </widget>
          <widget class="QWidget" name="Settings">
+          <property name="styleSheet">
+           <string notr="true">
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#F1F4F5;
+
+}
+QCheckBox::indicator:hover,QRadioButton::indicator:hover{
+border:none;
+background-color:#E4E9EB;
+
+}</string>
+          </property>
           <attribute name="title">
            <string>Settings</string>
           </attribute>
@@ -1964,11 +1972,6 @@ background-color:#8DAA91;
   </layout>
  </widget>
  <tabstops>
-  <tabstop>ProjectItemCombo</tabstop>
-  <tabstop>ProjectItemQuantity</tabstop>
-  <tabstop>ProjectItemDimension</tabstop>
-  <tabstop>ProjectItemAdd</tabstop>
-  <tabstop>ProjectItemRemove</tabstop>
   <tabstop>EmployeePin</tabstop>
   <tabstop>EmployeeAdminStatus</tabstop>
   <tabstop>EmployeeShiftCount</tabstop>

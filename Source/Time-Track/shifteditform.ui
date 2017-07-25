@@ -20,7 +20,7 @@
    <string>Time-Track</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#ClockoutForm{
+   <string notr="true">QWidget#ShiftEditForm{
 
 background-color:#E5EAE7;
 }
@@ -64,7 +64,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 
 
@@ -86,7 +86,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QComboBox:hover {
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 QComboBox:drop-down{
 border:none;
@@ -111,6 +111,30 @@ QGroupBox::title {
     left: 10px;
     padding: 0 3px 0 3px;
 }
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#FFFFFF;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#8DAA91;
+
+}
+QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ 
+background-color:#FFFFFF;
+ border: 0px solid #D1D1D1;	
+
+}
+QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ 
+background-color:#FFFFFF;
+ border: 1px solid #D1D1D1;	
+}
+
+
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">

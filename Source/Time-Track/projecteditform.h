@@ -32,6 +32,7 @@ public:
     void DefaultItemInitialize();
     void DateInitialize();
     void SectionInitialize();
+    void updateProjectEdit();
 
     void AddProject();
     QString AddValid();
@@ -53,6 +54,8 @@ private slots:
     void on_FinishButton_clicked();
 
     void on_CancelButton_clicked();
+
+    void on_EditItem_clicked();
 
 private:
     Ui::ProjectEditForm *ui;

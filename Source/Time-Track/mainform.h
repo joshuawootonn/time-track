@@ -63,7 +63,6 @@ public:
     QSqlQueryModel * ProjectItemModel();
     QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectItemTab();
-    void refreshProjectItemCombo();
     void ItemTab();
     QSqlQueryModel * ItemModel();
     QSortFilterProxyModel * ItemFilterModel();
@@ -82,6 +81,7 @@ public slots:
     void on_basicPageConnect_clicked();
     void on_basicPageAdvanced_clicked();
     void on_mainFinish_clicked();
+    void on_basicPagePower_clicked();
     void refreshShiftEmployee();
     void refreshShiftProject();
     void refreshShiftItem();
@@ -144,9 +144,9 @@ private slots:
     void on_ProjectCurrentRadio_toggled(bool checked);
     void on_ProjectPastRadio_toggled(bool checked);
     void on_ProjectItemName_clicked();
-    void on_ProjectItemId_clicked();
-    void on_ProjectItemAdd_clicked();
-    void on_ProjectItemRemove_clicked();
+    void on_ProjectItemId_clicked();    
+    void on_ProjectItemQuantity_clicked();
+    void on_ProjectItemDimension_clicked();
     void on_ProjectDate_clicked();
 
     //Item Tab!
@@ -156,6 +156,7 @@ private slots:
     void displayItemSuccess();
     void refreshFromItemEdit();
     void on_ItemAdd_clicked();
+    void on_ItemEdit_clicked();
     void on_ItemDelete_clicked();
     void on_ItemName_clicked();
     void on_ItemId_clicked();
@@ -192,9 +193,10 @@ private slots:
 
 
 
-    void on_basicPagePower_clicked();
 
-    void on_ItemEdit_clicked();
+
+
+
 
 public:
     Ui::MainForm *ui;
@@ -238,6 +240,7 @@ private:
 };
 
 #endif // MAINFORM_H
+
 
 
 

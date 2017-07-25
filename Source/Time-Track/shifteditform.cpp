@@ -321,12 +321,12 @@ void ShiftEditForm::ItemInitialize(){
                id = qry->value(0).toString();
            }
     }
-    qDebug()<<id;
+    //qDebug()<<id;
     QSqlQuery* qry2=new QSqlQuery(data);
     id = "Project"+id;
     qry2->prepare("select DISTINCT name from "+id+" ORDER BY name ASC");
     qry2->exec();
-    qDebug()<<"qry2:"<<qry2->lastError();
+    //qDebug()<<"qry2:"<<qry2->lastError();
 
     modal2->setQuery(*qry2);
     ui->Items->setModel(modal2);
@@ -341,42 +341,7 @@ void ShiftEditForm::ItemInitialize(){
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Items->setCurrentText("");
 }
-/*
-void ShiftEditForm::TimesInitialize(){
-    QSqlQueryModel * modal=new QSqlQueryModel();
-    QSqlQuery* qry1 = new QSqlQuery(data);
-    QString a = "0:00";
-    QString b = ui->timeLeft->text();
-    //qDebug()<<ui->timeLeft->text();
-    qry1->prepare("SELECT TIME_FORMAT(time,'%H:%i') from timelist");
-    if(qry1->exec())
-    {
-           while(qry1->next())
-           {
-               //qDebug()<< qry1->value(0).toString();
-           }
-    }
-    //qDebug()<<"time: "<<qry1->lastError();
 
-    modal->setQuery(*qry1);
-    ui->Times->setModel(modal);
-}
-void ShiftEditForm::LunchInitialize(){
-    QSqlQueryModel * modal=new QSqlQueryModel();
-    QSqlQuery* qry1 = new QSqlQuery(data);
-
-   qry1->prepare("select TIME_FORMAT(time,'%H:%i') from timelist where id<6");
-
-   if(qry1->exec())
-    {
-           while(qry1->next())
-           {
-              // qDebug()<< qry1->value(0).toString();
-           }
-    }
-    modal->setQuery(*qry1);
-    ui->Lunch->setModel(modal);
-}*/
 void ShiftEditForm::TimeLeft(){
     QDateTime indt,outdt;
     QString timein,timeout,datein,dateout;
@@ -662,7 +627,7 @@ void ShiftEditForm::on_FinishedButton_clicked()
 }
 void ShiftEditForm::on_CancelButton_clicked()
 {
-
+    success = true;
     this->hide();
     emit finished();
 }

@@ -25,7 +25,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -140,20 +139,12 @@ public:
     QRadioButton *ProjectPastRadio;
     QSpacerItem *horizontalSpacer_6;
     QSpacerItem *horizontalSpacer_11;
-    QGroupBox *ProjectItemGroup;
-    QGridLayout *gridLayout_12;
-    QHBoxLayout *horizontalLayout_14;
-    QGridLayout *gridLayout_23;
-    QComboBox *ProjectItemCombo;
-    QHBoxLayout *horizontalLayout_16;
-    QSpinBox *ProjectItemQuantity;
-    QComboBox *ProjectItemDimension;
-    QPushButton *ProjectItemAdd;
-    QPushButton *ProjectItemRemove;
     QGroupBox *groupBox_12;
     QGridLayout *gridLayout_11;
     QCheckBox *ProjectItemName;
     QCheckBox *ProjectItemId;
+    QCheckBox *ProjectItemQuantity;
+    QCheckBox *ProjectItemDimension;
     QWidget *ItemsSettings;
     QHBoxLayout *horizontalLayout_8;
     QGroupBox *groupBox_7;
@@ -227,7 +218,7 @@ public:
         MainForm->resize(1280, 720);
         MainForm->setStyleSheet(QLatin1String("QWidget#MainForm{\n"
 "\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E8E8E8;\n"
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
@@ -258,7 +249,7 @@ public:
 "color:#444946;\n"
 "}\n"
 "QTabBar::tab{\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E8E8E8;\n"
 "\n"
 "color:black;\n"
 "}\n"
@@ -358,20 +349,20 @@ public:
 "QPushButton{\n"
 "padding:3px;\n"
 "border:none;\n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFF;\n"
 "}\n"
 "QLineEdit{ \n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFF;\n"
 " border: 0px solid 263544;	\n"
 "font-size: 32px;\n"
 "}\n"
 "QLineEdit:hover{ \n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFFFFF;\n"
 " border: 1px solid 263544;	\n"
 "}\n"
 "\n"
 "QPushButton:hover,QPushButton:hover{\n"
-"background-color:#ECEFED;\n"
+"background-color:#D1D1D1;\n"
 "}\n"
 "/*\n"
 "\n"
@@ -704,6 +695,17 @@ public:
 "\n"
 "}\n"
 "\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"\n"
+"}\n"
+"QCheckBox::indicator:hover,QRadioButton::indicator:hover{\n"
+"border:none;\n"
+"background-color:#E4E9EB;\n"
+"\n"
+"}\n"
 "QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
 "border:none;\n"
 "background-color:#FE938C;\n"
@@ -822,6 +824,17 @@ public:
 "\n"
 "}\n"
 "\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"\n"
+"}\n"
+"QCheckBox::indicator:hover,QRadioButton::indicator:hover{\n"
+"border:none;\n"
+"background-color:#E4E9EB;\n"
+"\n"
+"}\n"
 "QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
 "border:none;\n"
 "background-color:#B19994;\n"
@@ -916,59 +929,6 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_11);
 
-        ProjectItemGroup = new QGroupBox(ProjectsSettings);
-        ProjectItemGroup->setObjectName(QStringLiteral("ProjectItemGroup"));
-        gridLayout_12 = new QGridLayout(ProjectItemGroup);
-        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        gridLayout_12->setContentsMargins(-1, 7, -1, 7);
-        horizontalLayout_14 = new QHBoxLayout();
-        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
-        gridLayout_23 = new QGridLayout();
-        gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
-        ProjectItemCombo = new QComboBox(ProjectItemGroup);
-        ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
-        ProjectItemCombo->setFont(font);
-        ProjectItemCombo->setEditable(true);
-        ProjectItemCombo->setFrame(true);
-
-        gridLayout_23->addWidget(ProjectItemCombo, 0, 0, 1, 1);
-
-        horizontalLayout_16 = new QHBoxLayout();
-        horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
-        ProjectItemQuantity = new QSpinBox(ProjectItemGroup);
-        ProjectItemQuantity->setObjectName(QStringLiteral("ProjectItemQuantity"));
-        ProjectItemQuantity->setMaximum(100000);
-        ProjectItemQuantity->setSingleStep(1);
-
-        horizontalLayout_16->addWidget(ProjectItemQuantity);
-
-        ProjectItemDimension = new QComboBox(ProjectItemGroup);
-        ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
-
-        horizontalLayout_16->addWidget(ProjectItemDimension);
-
-
-        gridLayout_23->addLayout(horizontalLayout_16, 1, 0, 1, 1);
-
-
-        horizontalLayout_14->addLayout(gridLayout_23);
-
-        ProjectItemAdd = new QPushButton(ProjectItemGroup);
-        ProjectItemAdd->setObjectName(QStringLiteral("ProjectItemAdd"));
-
-        horizontalLayout_14->addWidget(ProjectItemAdd);
-
-        ProjectItemRemove = new QPushButton(ProjectItemGroup);
-        ProjectItemRemove->setObjectName(QStringLiteral("ProjectItemRemove"));
-
-        horizontalLayout_14->addWidget(ProjectItemRemove);
-
-
-        gridLayout_12->addLayout(horizontalLayout_14, 1, 1, 1, 1);
-
-
-        horizontalLayout_7->addWidget(ProjectItemGroup);
-
         groupBox_12 = new QGroupBox(ProjectsSettings);
         groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
         groupBox_12->setStyleSheet(QLatin1String("QCheckBox::indicator,QRadioButton::indicator{\n"
@@ -996,6 +956,16 @@ public:
 
         gridLayout_11->addWidget(ProjectItemId, 0, 0, 1, 1);
 
+        ProjectItemQuantity = new QCheckBox(groupBox_12);
+        ProjectItemQuantity->setObjectName(QStringLiteral("ProjectItemQuantity"));
+
+        gridLayout_11->addWidget(ProjectItemQuantity, 0, 1, 1, 1);
+
+        ProjectItemDimension = new QCheckBox(groupBox_12);
+        ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
+
+        gridLayout_11->addWidget(ProjectItemDimension, 1, 1, 1, 1);
+
 
         horizontalLayout_7->addWidget(groupBox_12);
 
@@ -1008,6 +978,17 @@ public:
 "\n"
 "}\n"
 "\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"\n"
+"}\n"
+"QCheckBox::indicator:hover,QRadioButton::indicator:hover{\n"
+"border:none;\n"
+"background-color:#E4E9EB;\n"
+"\n"
+"}\n"
 "QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
 "border:none;\n"
 "background-color:#837F9A;\n"
@@ -1086,6 +1067,18 @@ public:
 "\n"
 "}\n"
 "\n"
+"\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"\n"
+"}\n"
+"QCheckBox::indicator:hover,QRadioButton::indicator:hover{\n"
+"border:none;\n"
+"background-color:#E4E9EB;\n"
+"\n"
+"}\n"
 "QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
 "border:none;\n"
 "background-color:#8DAA91;\n"
@@ -1126,7 +1119,8 @@ public:
         gridLayout->setContentsMargins(-1, 7, -1, 7);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        ShiftEmployeeCombo->setMinimumSize(QSize(150, 0));
+        ShiftEmployeeCombo->setMinimumSize(QSize(200, 0));
+        ShiftEmployeeCombo->setMaximumSize(QSize(200, 16777215));
         ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setEditable(true);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1233,6 +1227,17 @@ public:
         HeaderTabs->addTab(ShiftSettings, QString());
         Settings = new QWidget();
         Settings->setObjectName(QStringLiteral("Settings"));
+        Settings->setStyleSheet(QLatin1String("\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#F1F4F5;\n"
+"\n"
+"}\n"
+"QCheckBox::indicator:hover,QRadioButton::indicator:hover{\n"
+"border:none;\n"
+"background-color:#E4E9EB;\n"
+"\n"
+"}"));
         horizontalLayout_12 = new QHBoxLayout(Settings);
         horizontalLayout_12->setSpacing(1);
         horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
@@ -1336,11 +1341,6 @@ public:
 
         verticalLayout_4->addLayout(horizontalLayout);
 
-        QWidget::setTabOrder(ProjectItemCombo, ProjectItemQuantity);
-        QWidget::setTabOrder(ProjectItemQuantity, ProjectItemDimension);
-        QWidget::setTabOrder(ProjectItemDimension, ProjectItemAdd);
-        QWidget::setTabOrder(ProjectItemAdd, ProjectItemRemove);
-        QWidget::setTabOrder(ProjectItemRemove, EmployeePin);
         QWidget::setTabOrder(EmployeePin, EmployeeAdminStatus);
         QWidget::setTabOrder(EmployeeAdminStatus, EmployeeShiftCount);
         QWidget::setTabOrder(EmployeeShiftCount, EmployeeActive);
@@ -1417,7 +1417,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
 
@@ -1482,16 +1482,15 @@ public:
         ProjectAllRadio->setText(QApplication::translate("MainForm", "All Projects", Q_NULLPTR));
         ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", Q_NULLPTR));
         ProjectPastRadio->setText(QApplication::translate("MainForm", "Past Projects", Q_NULLPTR));
-        ProjectItemGroup->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
-        ProjectItemAdd->setText(QString());
-        ProjectItemRemove->setText(QString());
         groupBox_12->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         ProjectItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         ProjectItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        ProjectItemQuantity->setText(QApplication::translate("MainForm", "Quantity", Q_NULLPTR));
+        ProjectItemDimension->setText(QApplication::translate("MainForm", "Dimension", Q_NULLPTR));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Project", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ItemAdd->setText(QString());
-        ItemEdit->setText(QApplication::translate("MainForm", "itemEdit", Q_NULLPTR));
+        ItemEdit->setText(QString());
         ItemDelete->setText(QString());
         groupBox_10->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         ItemCategory->setText(QApplication::translate("MainForm", "Category", Q_NULLPTR));

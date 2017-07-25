@@ -6,65 +6,204 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
-    <height>90</height>
+    <width>324</width>
+    <height>111</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Name:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="name"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="error">
-     <property name="text">
-      <string/>
-     </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#ItemEditForm{
+
+background-color:#E8E8E8;
+}
+*{
+font-family:&quot;Calibri&quot;;
+font-size: 16px;
+color:#263544;
+}
+
+
+
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+
+
+QWidget{
+
+margin:0px;
+padding:0px;
+}
+QWidget#bigwidger{
+background-color:#E8E8E8;
+border:none;
+}
+
+
+
+QTableWidget{
+border:none;
+}
+QTextEdit{
+border:none;
+}
+
+
+QPushButton{
+padding:3px;
+border:none;
+background-color:#FFFFFF;
+}
+QPushButton:hover:!pressed{
+background-color:#D1D1D1;
+}
+
+
+QDateTimeEdit{
+border:none;
+background-color:#FFFFFF;
+}
+QDateEditTime:hover{
+border:none;
+background-color:#F4F9F6;
+}
+QDateEditTime::drop-down{
+border:none;
+}
+
+
+QComboBox{
+border:none;
+background-color:#FFFFFF;
+}
+QComboBox:hover {
+background-color:#F4F9F6;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
+QRadioButton{
+padding:0px;
+margin:0px;
+}
+
+
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#FFFFFF;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#837F9A;
+
+}
+QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ 
+background-color:#FFFFFF;
+ border: 0px solid #D1D1D1;	
+
+}
+QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ 
+background-color:#FFFFFF;
+ border: 1px solid #D1D1D1;	
+}
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="bigwidger" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QWidget" name="" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Name:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="name"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="error">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="FinishButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Finish</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="CancelButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="FinishButton">
-       <property name="text">
-        <string>Finish</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="CancelButton">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

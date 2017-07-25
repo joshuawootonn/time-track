@@ -14,9 +14,11 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#ProjectEditForm{
+   <string notr="true">
 
-background-color:#E5EAE7;
+QDialog#ProjectEditForm{
+
+background-color:#E8E8E8;
 }
 *{
 font-family:&quot;Calibri&quot;;
@@ -32,19 +34,13 @@ padding:0px;
 }
 
 
-QDialog{
-
-margin:0px;
-padding:0px;
-}
-
 QWidget{
 
 margin:0px;
 padding:0px;
 }
 QWidget#bigwidger{
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 border:none;
 }
 
@@ -64,7 +60,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 
 
@@ -84,9 +80,11 @@ border:none;
 QComboBox{
 border:none;
 background-color:#FFFFFF;
+
 }
 QComboBox:hover {
-background-color:#F4F9F6;
+background-color:#D1D1D1;
+	
 }
 QComboBox:drop-down{
 border:none;
@@ -111,6 +109,31 @@ QGroupBox::title {
     left: 10px;
     padding: 0 3px 0 3px;
 }
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#FFFFFF;
+
+}
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#B19994;
+
+}
+
+QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ 
+background-color:#FFFFFF;
+ border: 0px solid #D1D1D1;	
+
+}
+QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ 
+background-color:#FFFFFF;
+ border: 1px solid #D1D1D1;	
+}
+
+
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -324,7 +347,7 @@ QGroupBox::title {
                 </size>
                </property>
                <property name="editable">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -336,6 +359,16 @@ QGroupBox::title {
               <widget class="QPushButton" name="AddItem">
                <property name="text">
                 <string>Add</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="EditItem">
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Edit</string>
                </property>
               </widget>
              </item>
@@ -455,6 +488,19 @@ QGroupBox::title {
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>bidDate</tabstop>
+  <tabstop>current</tabstop>
+  <tabstop>Item</tabstop>
+  <tabstop>Quantity</tabstop>
+  <tabstop>Dimension</tabstop>
+  <tabstop>AddItem</tabstop>
+  <tabstop>DeleteItem</tabstop>
+  <tabstop>FinishButton</tabstop>
+  <tabstop>CancelButton</tabstop>
+  <tabstop>Sections</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

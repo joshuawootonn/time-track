@@ -22,7 +22,7 @@
   <property name="styleSheet">
    <string notr="true">QWidget#ClockoutForm{
 
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 }
 *{
 font-family:&quot;Calibri&quot;;
@@ -44,7 +44,7 @@ margin:0px;
 padding:0px;
 }
 QWidget#bigwidger{
-background-color:#E5EAE7;
+background-color:#E8E8E8;
 border:none;
 }
 
@@ -54,7 +54,7 @@ background-color:#FFFFFF;
  border: 0px solid 263544;	
 }
 QLineEdit:hover{ 
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 QLineEdit#Description{
 margin:0;
@@ -76,7 +76,7 @@ border:none;
 background-color:#FFFFFF;
 }
 QPushButton:hover:!pressed{
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 
 
@@ -86,7 +86,7 @@ background-color:#FFFFFF;
 }
 QDateEditTime:hover{
 border:none;
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 QDateEditTime::drop-down{
 border:none;
@@ -100,7 +100,7 @@ padding-left:20px;
 
 }
 QComboBox:hover {
-background-color:#F4F9F6;
+background-color:#D1D1D1;
 }
 QComboBox#Items,QComboBox#Projects{
 padding-left:2px;

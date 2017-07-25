@@ -58,6 +58,7 @@ public:
     QComboBox *Dimension;
     QHBoxLayout *horizontalLayout_9;
     QPushButton *AddItem;
+    QPushButton *EditItem;
     QPushButton *DeleteItem;
     QWidget *right;
     QVBoxLayout *verticalLayout_4;
@@ -74,9 +75,11 @@ public:
         if (ProjectEditForm->objectName().isEmpty())
             ProjectEditForm->setObjectName(QStringLiteral("ProjectEditForm"));
         ProjectEditForm->resize(853, 454);
-        ProjectEditForm->setStyleSheet(QLatin1String("QDialog#ProjectEditForm{\n"
+        ProjectEditForm->setStyleSheet(QLatin1String("\n"
 "\n"
-"background-color:#E5EAE7;\n"
+"QDialog#ProjectEditForm{\n"
+"\n"
+"background-color:#E8E8E8;\n"
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
@@ -92,19 +95,13 @@ public:
 "}\n"
 "\n"
 "\n"
-"QDialog{\n"
-"\n"
-"margin:0px;\n"
-"padding:0px;\n"
-"}\n"
-"\n"
 "QWidget{\n"
 "\n"
 "margin:0px;\n"
 "padding:0px;\n"
 "}\n"
 "QWidget#bigwidger{\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E8E8E8;\n"
 "border:none;\n"
 "}\n"
 "\n"
@@ -124,7 +121,7 @@ public:
 "background-color:#FFFFFF;\n"
 "}\n"
 "QPushButton:hover:!pressed{\n"
-"background-color:#F4F9F6;\n"
+"background-color:#D1D1D1;\n"
 "}\n"
 "\n"
 "\n"
@@ -144,13 +141,15 @@ public:
 "QComboBox{\n"
 "border:none;\n"
 "background-color:#FFFFFF;\n"
+"\n"
 "}\n"
 "QComboBox:hover {\n"
-"background-color:#F4F9"
-                        "F6;\n"
+"background-color:#D1D1D1;\n"
+"	\n"
 "}\n"
 "QComboBox:drop-down{\n"
-"border:none;\n"
+"bo"
+                        "rder:none;\n"
 "}\n"
 "\n"
 "\n"
@@ -172,6 +171,31 @@ public:
 "    left: 10px;\n"
 "    padding: 0 3px 0 3px;\n"
 "}\n"
+"\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#FFFFFF;\n"
+"\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
+"border:none;\n"
+"background-color:#B19994;\n"
+"\n"
+"}\n"
+"\n"
+"QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ \n"
+"background-color:#FFFFFF;\n"
+" border: 0px solid #D1D1D1;	\n"
+"\n"
+"}\n"
+"QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ \n"
+"background-color:#FFFFFF;\n"
+" border: 1px solid #D1D1D1;	\n"
+"}\n"
+"\n"
+"\n"
 ""));
         gridLayout = new QGridLayout(ProjectEditForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
@@ -281,7 +305,7 @@ public:
         Dimension->setObjectName(QStringLiteral("Dimension"));
         Dimension->setMinimumSize(QSize(300, 0));
         Dimension->setMaximumSize(QSize(300, 16777215));
-        Dimension->setEditable(true);
+        Dimension->setEditable(false);
 
         horizontalLayout_8->addWidget(Dimension);
 
@@ -294,6 +318,12 @@ public:
         AddItem->setObjectName(QStringLiteral("AddItem"));
 
         horizontalLayout_9->addWidget(AddItem);
+
+        EditItem = new QPushButton(verticalWidget_2);
+        EditItem->setObjectName(QStringLiteral("EditItem"));
+        EditItem->setStyleSheet(QStringLiteral(""));
+
+        horizontalLayout_9->addWidget(EditItem);
 
         DeleteItem = new QPushButton(verticalWidget_2);
         DeleteItem->setObjectName(QStringLiteral("DeleteItem"));
@@ -356,6 +386,16 @@ public:
 
         gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
+        QWidget::setTabOrder(name, bidDate);
+        QWidget::setTabOrder(bidDate, current);
+        QWidget::setTabOrder(current, Item);
+        QWidget::setTabOrder(Item, Quantity);
+        QWidget::setTabOrder(Quantity, Dimension);
+        QWidget::setTabOrder(Dimension, AddItem);
+        QWidget::setTabOrder(AddItem, DeleteItem);
+        QWidget::setTabOrder(DeleteItem, FinishButton);
+        QWidget::setTabOrder(FinishButton, CancelButton);
+        QWidget::setTabOrder(CancelButton, Sections);
 
         retranslateUi(ProjectEditForm);
 
@@ -372,6 +412,7 @@ public:
         label_4->setText(QApplication::translate("ProjectEditForm", "Quantity:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ProjectEditForm", "Dimension:", Q_NULLPTR));
         AddItem->setText(QApplication::translate("ProjectEditForm", "Add", Q_NULLPTR));
+        EditItem->setText(QApplication::translate("ProjectEditForm", "Edit", Q_NULLPTR));
         DeleteItem->setText(QApplication::translate("ProjectEditForm", "Delete", Q_NULLPTR));
         error->setText(QString());
         FinishButton->setText(QApplication::translate("ProjectEditForm", "Finish", Q_NULLPTR));

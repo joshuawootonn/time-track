@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ConnectionForm_t {
     QByteArrayData data[13];
-    char stringdata0[222];
+    char stringdata0[229];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,10 +40,10 @@ QT_MOC_LITERAL(5, 72, 4), // "arg1"
 QT_MOC_LITERAL(6, 77, 23), // "on_portEdit_textChanged"
 QT_MOC_LITERAL(7, 101, 27), // "on_usernameEdit_textChanged"
 QT_MOC_LITERAL(8, 129, 27), // "on_passwordEdit_textChanged"
-QT_MOC_LITERAL(9, 157, 21), // "on_ipEdit_textChanged"
-QT_MOC_LITERAL(10, 179, 25), // "on_testConnection_clicked"
-QT_MOC_LITERAL(11, 205, 14), // "loadConnection"
-QT_MOC_LITERAL(12, 220, 1) // "s"
+QT_MOC_LITERAL(9, 157, 28), // "on_ipEdit_currentTextChanged"
+QT_MOC_LITERAL(10, 186, 25), // "on_testConnection_clicked"
+QT_MOC_LITERAL(11, 212, 14), // "loadConnection"
+QT_MOC_LITERAL(12, 227, 1) // "s"
 
     },
     "ConnectionForm\0finished\0\0on_connect_clicked\0"
@@ -51,8 +51,9 @@ QT_MOC_LITERAL(12, 220, 1) // "s"
     "on_portEdit_textChanged\0"
     "on_usernameEdit_textChanged\0"
     "on_passwordEdit_textChanged\0"
-    "on_ipEdit_textChanged\0on_testConnection_clicked\0"
-    "loadConnection\0s"
+    "on_ipEdit_currentTextChanged\0"
+    "on_testConnection_clicked\0loadConnection\0"
+    "s"
 };
 #undef QT_MOC_LITERAL
 
@@ -110,7 +111,7 @@ void ConnectionForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 3: _t->on_portEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: _t->on_usernameEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 5: _t->on_passwordEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 6: _t->on_ipEdit_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->on_ipEdit_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 7: _t->on_testConnection_clicked(); break;
         case 8: _t->loadConnection((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;

@@ -37,7 +37,7 @@ QString ItemEditForm::AddValid(){
             error = "Invalid name: Must be unique";
         }
 
-        qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
+       // qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
     }
    return error;
 }

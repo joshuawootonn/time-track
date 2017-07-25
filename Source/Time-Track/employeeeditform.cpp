@@ -19,7 +19,7 @@ void EmployeeEditForm::AddEmployee(){
     ui->name->setText("");
     ui->pin->setText("");
     ui->admin->setChecked(false);
-    ui->active->setChecked(true);
+    ui->active->setChecked(false);
     ui->current->setChecked(true);
 }
 

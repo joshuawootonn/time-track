@@ -16,16 +16,7 @@ ProjectEditForm::~ProjectEditForm()
 {
     delete ui;
 }
-void ProjectEditForm::AddProject(){
-    this->showNormal();
-    task="add";
-    DateInitialize();
-    ItemInitialize();
-    DimensionInitialize();
-    SectionInitialize();
-    ui->current->setChecked(true);
 
-}
 void ProjectEditForm::DateInitialize(){
     ui->bidDate->setDate(QDate::currentDate());
 }
@@ -63,7 +54,20 @@ void ProjectEditForm::DimensionInitialize(){
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Dimension->setCurrentText("");
 }
+void ProjectEditForm::updateProjectEdit(){
+    ItemInitialize();
+}
 
+void ProjectEditForm::AddProject(){
+    this->showNormal();
+    task="add";
+    DateInitialize();
+    ItemInitialize();
+    DimensionInitialize();
+    SectionInitialize();
+    ui->current->setChecked(true);
+
+}
 QString ProjectEditForm::AddValid(){
     QString error = "";
     QRegExp name_regrex("^[a-zA-Z0-9-_\'\" ]+$");
@@ -90,7 +94,7 @@ QString ProjectEditForm::AddValid(){
             error = "Invalid name: Must be unique";
         }
 
-        qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
+        //qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
     }
 
     return error;
@@ -166,7 +170,7 @@ QString ProjectEditForm::EditValid(){
         else if(currentName != name && nameCount>0)
             error = "Invalid name: Must be unique";
 
-        qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
+        //qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
     }
     return error;
 }
@@ -197,6 +201,21 @@ void ProjectEditForm::on_AddItem_clicked()
         ui->error->setText("Invalid addition: Must be unique");
     }
 
+}
+void ProjectEditForm::on_EditItem_clicked()
+{
+    if(clicked && ui->Item->currentText()!="" && ui->Dimension->currentText()!=""&&ui->Quantity->value()!=0){
+
+        ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Item->currentText()));
+        ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
+        ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Dimension->currentText()));
+
+        ui->Sections->resizeRowsToContents();
+        ui->Item->setEditText("");
+        ui->Quantity->setValue(0);
+        ui->Dimension->setEditText("");
+        clicked = false;
+    }
 }
 void ProjectEditForm::on_DeleteItem_clicked()
 {
@@ -314,8 +333,8 @@ void ProjectEditForm::on_FinishButton_clicked()
         if (qry->exec())
             success = true;
         else{
-            qDebug()<<qry->lastError().text();
-            qDebug()<<qry->lastQuery();
+            //qDebug()<<qry->lastError().text();
+            //qDebug()<<qry->lastQuery();
             success = false;
             successMsg = "Error Editing Project(1)";
             this->hide();
@@ -392,3 +411,5 @@ QString ProjectEditForm::getSuccessMsg() const
 {
     return successMsg;
 }
+
+

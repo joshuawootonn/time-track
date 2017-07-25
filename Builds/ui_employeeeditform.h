@@ -23,25 +23,32 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_EmployeeEditForm
 {
 public:
+    QGridLayout *gridLayout_2;
+    QWidget *bigwidger;
     QVBoxLayout *verticalLayout;
+    QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *name;
+    QWidget *widget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QLineEdit *pin;
     QPushButton *GenerateButton;
+    QWidget *widget2;
     QGridLayout *gridLayout;
-    QCheckBox *current;
     QCheckBox *admin;
     QCheckBox *active;
+    QCheckBox *current;
     QLabel *error;
+    QWidget *widget3;
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer;
     QPushButton *FinishButton;
@@ -51,10 +58,10 @@ public:
     {
         if (EmployeeEditForm->objectName().isEmpty())
             EmployeeEditForm->setObjectName(QStringLiteral("EmployeeEditForm"));
-        EmployeeEditForm->resize(246, 203);
-        EmployeeEditForm->setStyleSheet(QLatin1String("QWidget#ClockoutForm{\n"
+        EmployeeEditForm->resize(326, 266);
+        EmployeeEditForm->setStyleSheet(QLatin1String("QDialog#EmployeeEditForm{\n"
 "\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E8E8E8;\n"
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
@@ -76,7 +83,7 @@ public:
 "padding:0px;\n"
 "}\n"
 "QWidget#bigwidger{\n"
-"background-color:#E5EAE7;\n"
+"background-color:#E8E8E8;\n"
 "border:none;\n"
 "}\n"
 "\n"
@@ -96,7 +103,7 @@ public:
 "background-color:#FFFFFF;\n"
 "}\n"
 "QPushButton:hover:!pressed{\n"
-"background-color:#F4F9F6;\n"
+"background-color:#D1D1D1;\n"
 "}\n"
 "\n"
 "\n"
@@ -123,9 +130,9 @@ public:
 "QComboBox:drop-down{\n"
 "border:none;\n"
 "}\n"
-"\n"
 ""
                         "\n"
+"\n"
 "QRadioButton{\n"
 "padding:0px;\n"
 "margin:0px;\n"
@@ -144,89 +151,143 @@ public:
 "    left: 10px;\n"
 "    padding: 0 3px 0 3px;\n"
 "}\n"
+"\n"
+"\n"
+"QCheckBox::indicator,QRadioButton::indicator{\n"
+"border:none;\n"
+"background-color:#FFFFFF;\n"
+"\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked,QRadioButton::indicator:checked{\n"
+"border:none;\n"
+"background-color:#FE938C;\n"
+"\n"
+"}\n"
+"\n"
+"QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ \n"
+"background-color:#FFFFFF;\n"
+" border: 0px solid #D1D1D1;	\n"
+"\n"
+"}\n"
+"QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ \n"
+"background-color:#FFFFFF;\n"
+" border: 1px solid #D1D1D1;	\n"
+"}\n"
 ""));
-        verticalLayout = new QVBoxLayout(EmployeeEditForm);
+        gridLayout_2 = new QGridLayout(EmployeeEditForm);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        bigwidger = new QWidget(EmployeeEditForm);
+        bigwidger->setObjectName(QStringLiteral("bigwidger"));
+        verticalLayout = new QVBoxLayout(bigwidger);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        horizontalLayout = new QHBoxLayout();
+        widget = new QWidget(bigwidger);
+        widget->setObjectName(QStringLiteral("widget"));
+        horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label = new QLabel(EmployeeEditForm);
+        label = new QLabel(widget);
         label->setObjectName(QStringLiteral("label"));
+        label->setMinimumSize(QSize(50, 0));
 
         horizontalLayout->addWidget(label);
 
-        name = new QLineEdit(EmployeeEditForm);
+        name = new QLineEdit(widget);
         name->setObjectName(QStringLiteral("name"));
 
         horizontalLayout->addWidget(name);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->addWidget(widget);
 
-        horizontalLayout_2 = new QHBoxLayout();
+        widget1 = new QWidget(bigwidger);
+        widget1->setObjectName(QStringLiteral("widget1"));
+        horizontalLayout_2 = new QHBoxLayout(widget1);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label_2 = new QLabel(EmployeeEditForm);
+        label_2 = new QLabel(widget1);
         label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMinimumSize(QSize(50, 0));
 
         horizontalLayout_2->addWidget(label_2);
 
-        pin = new QLineEdit(EmployeeEditForm);
+        pin = new QLineEdit(widget1);
         pin->setObjectName(QStringLiteral("pin"));
         pin->setMaxLength(4);
 
         horizontalLayout_2->addWidget(pin);
 
-        GenerateButton = new QPushButton(EmployeeEditForm);
+        GenerateButton = new QPushButton(widget1);
         GenerateButton->setObjectName(QStringLiteral("GenerateButton"));
 
         horizontalLayout_2->addWidget(GenerateButton);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addWidget(widget1);
 
-        gridLayout = new QGridLayout();
+        widget2 = new QWidget(bigwidger);
+        widget2->setObjectName(QStringLiteral("widget2"));
+        gridLayout = new QGridLayout(widget2);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        current = new QCheckBox(EmployeeEditForm);
-        current->setObjectName(QStringLiteral("current"));
-
-        gridLayout->addWidget(current, 2, 0, 1, 1);
-
-        admin = new QCheckBox(EmployeeEditForm);
+        admin = new QCheckBox(widget2);
         admin->setObjectName(QStringLiteral("admin"));
 
         gridLayout->addWidget(admin, 0, 0, 1, 1);
 
-        active = new QCheckBox(EmployeeEditForm);
+        active = new QCheckBox(widget2);
         active->setObjectName(QStringLiteral("active"));
 
         gridLayout->addWidget(active, 1, 0, 1, 1);
 
+        current = new QCheckBox(widget2);
+        current->setObjectName(QStringLiteral("current"));
 
-        verticalLayout->addLayout(gridLayout);
+        gridLayout->addWidget(current, 0, 1, 1, 1);
 
-        error = new QLabel(EmployeeEditForm);
+
+        verticalLayout->addWidget(widget2);
+
+        error = new QLabel(bigwidger);
         error->setObjectName(QStringLiteral("error"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(error->sizePolicy().hasHeightForWidth());
+        error->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(error);
 
-        horizontalLayout_4 = new QHBoxLayout();
+        widget3 = new QWidget(bigwidger);
+        widget3->setObjectName(QStringLiteral("widget3"));
+        horizontalLayout_4 = new QHBoxLayout(widget3);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer);
 
-        FinishButton = new QPushButton(EmployeeEditForm);
+        FinishButton = new QPushButton(widget3);
         FinishButton->setObjectName(QStringLiteral("FinishButton"));
+        FinishButton->setMinimumSize(QSize(100, 0));
 
         horizontalLayout_4->addWidget(FinishButton);
 
-        CancelButton = new QPushButton(EmployeeEditForm);
+        CancelButton = new QPushButton(widget3);
         CancelButton->setObjectName(QStringLiteral("CancelButton"));
+        CancelButton->setMinimumSize(QSize(100, 0));
 
         horizontalLayout_4->addWidget(CancelButton);
 
 
-        verticalLayout->addLayout(horizontalLayout_4);
+        verticalLayout->addWidget(widget3);
 
+
+        gridLayout_2->addWidget(bigwidger, 0, 0, 1, 1);
+
+        QWidget::setTabOrder(name, pin);
+        QWidget::setTabOrder(pin, GenerateButton);
+        QWidget::setTabOrder(GenerateButton, admin);
+        QWidget::setTabOrder(admin, current);
+        QWidget::setTabOrder(current, active);
+        QWidget::setTabOrder(active, FinishButton);
+        QWidget::setTabOrder(FinishButton, CancelButton);
 
         retranslateUi(EmployeeEditForm);
 
@@ -235,13 +296,13 @@ public:
 
     void retranslateUi(QDialog *EmployeeEditForm)
     {
-        EmployeeEditForm->setWindowTitle(QApplication::translate("EmployeeEditForm", "Dialog", Q_NULLPTR));
+        EmployeeEditForm->setWindowTitle(QApplication::translate("EmployeeEditForm", "Employee Edit", Q_NULLPTR));
         label->setText(QApplication::translate("EmployeeEditForm", "Name:", Q_NULLPTR));
         label_2->setText(QApplication::translate("EmployeeEditForm", "Pin:", Q_NULLPTR));
         GenerateButton->setText(QApplication::translate("EmployeeEditForm", "Generate", Q_NULLPTR));
-        current->setText(QApplication::translate("EmployeeEditForm", "Employed", Q_NULLPTR));
         admin->setText(QApplication::translate("EmployeeEditForm", "Admin", Q_NULLPTR));
         active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", Q_NULLPTR));
+        current->setText(QApplication::translate("EmployeeEditForm", "Employed", Q_NULLPTR));
         error->setText(QString());
         FinishButton->setText(QApplication::translate("EmployeeEditForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("EmployeeEditForm", "Cancel", Q_NULLPTR));

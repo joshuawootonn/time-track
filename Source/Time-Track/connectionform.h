@@ -31,9 +31,11 @@ private slots:
     void on_portEdit_textChanged(const QString &arg1);
     void on_usernameEdit_textChanged(const QString &arg1);
     void on_passwordEdit_textChanged(const QString &arg1);
-    void on_ipEdit_textChanged(const QString &arg1);
+    void on_ipEdit_currentTextChanged(const QString &arg1);
     void on_testConnection_clicked();
     void loadConnection(bool s);
+
+
 
 signals:
     void finished();

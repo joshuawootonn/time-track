@@ -6,72 +6,388 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>261</height>
+    <width>341</width>
+    <height>254</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Connection Setup</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#ConnectionForm{
+   <string notr="true">QDialog#ConnectionForm{
 
-background-color:#E7EBE9;
+background-color:#E5EAE7;
 }
 *{
 font-family:&quot;Calibri&quot;;
 font-size: 16px;
 color:#263544;
-
 }
+
+
+
+QStackedWidget{
+margin:0px;
+padding:0px;
+}
+
+
+QWidget{
+
+margin:0px;
+padding:0px;
+}
+QWidget#bigwidger{
+background-color:#E5EAE7;
+border:none;
+}
+
+
+
+QTableWidget{
+border:none;
+}
+QTextEdit{
+border:none;
+}
+
+
 QPushButton{
 padding:3px;
 border:none;
-background-color:#F1F4F5;
+background-color:#FFFFFF;
 }
-QPushButton:hover,QPushButton:hover{
-background-color:#E4E9EB;
+QPushButton:hover:!pressed{
+background-color:#D1D1D1;
 }
-QLineEdit{ 
-background-color:#F1F4F5;
-border: 0px solid 263544; 
-margin: 4px;
+
+
+QDateTimeEdit{
+border:none;
+background-color:#FFFFFF;
+}
+QDateEditTime:hover{
+border:none;
+background-color:#F4F9F6;
+}
+QDateEditTime::drop-down{
+border:none;
+}
+
+
+QComboBox{
+border:none;
+background-color:#FFFFFF;
+}
+QComboBox:hover {
+background-color:#D1D1D1;
+}
+QComboBox:drop-down{
+border:none;
+}
+
+
+QRadioButton{
+padding:0px;
+margin:0px;
+}
+
+
+QGroupBox {
+    border: 0px solid gray;
+	
+    margin-top: 0.5em;
+	margin-right:0px;
+	margin-left:0px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+
+QCheckBox::indicator,QRadioButton::indicator{
+border:none;
+background-color:#FFFFFF;
 
 }
-QLineEdit:hover{ 
-background-color:#F1F4F5;
-border: 1px solid 263544; 
+
+QCheckBox::indicator:checked,QRadioButton::indicator:checked{
+border:none;
+background-color:#8DAA91;
+
+}
+QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ 
+background-color:#FFFFFF;
+ border: 0px solid #D1D1D1;	
+
+}
+QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ 
+background-color:#FFFFFF;
+ border: 1px solid #D1D1D1;	
 }
 
 
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Database:</string>
-     </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="horizontalWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Database:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="databaseEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Normal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="0" column="2" colspan="2">
-    <widget class="QLineEdit" name="databaseEdit">
-     <property name="inputMethodHints">
-      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Normal</enum>
-     </property>
+   <item>
+    <widget class="QWidget" name="horizontalWidget_2" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Port:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="portEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Normal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Port:</string>
-     </property>
+   <item>
+    <widget class="QWidget" name="horizontalWidget_3" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Username:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="usernameEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="10" column="0" colspan="3">
+   <item>
+    <widget class="QWidget" name="horizontalWidget_4" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Password:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="passwordEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="horizontalWidget_5" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>75</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>IP:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="ipEdit">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="testConnection">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>?</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="" native="true">
+     <layout class="QHBoxLayout" name="_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="error">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>29</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="connect">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QProgressBar" name="progress">
      <property name="value">
       <number>0</number>
@@ -87,122 +403,6 @@ border: 1px solid 263544;
      </property>
     </widget>
    </item>
-   <item row="3" column="2" colspan="2">
-    <widget class="QLineEdit" name="passwordEdit">
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2" colspan="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Password:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2" colspan="2">
-    <widget class="QLineEdit" name="usernameEdit">
-     <property name="inputMethodHints">
-      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Username:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2" colspan="2">
-    <widget class="QLineEdit" name="portEdit">
-     <property name="inputMethodHints">
-      <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Normal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="ipEdit">
-       <property name="inputMethodHints">
-        <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="testConnection">
-       <property name="text">
-        <string>?</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>IP:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0" colspan="3">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
-     <item>
-      <widget class="QLabel" name="error">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="connect">
-       <property name="text">
-        <string>Connect</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <tabstops>
@@ -210,7 +410,6 @@ border: 1px solid 263544;
   <tabstop>portEdit</tabstop>
   <tabstop>usernameEdit</tabstop>
   <tabstop>passwordEdit</tabstop>
-  <tabstop>ipEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>
