@@ -17,6 +17,7 @@
 #include "exportform.h"
 #include "employeeeditform.h"
 #include "itemeditform.h"
+#include "projecteditform.h"
 
 #include "xlsxdocument.h"
 #include "xlsxrichstring.h"
@@ -130,6 +131,8 @@ private slots:
 
     void refreshProjectStuff();
     void refreshProjectTab();
+    void displayProjectSuccess();
+    void refreshFromProjectEdit();
     void on_ProjectView_clicked(const QModelIndex &index);
     void on_ProjectAdd_clicked();
     void on_ProjectDelete_clicked();
@@ -191,6 +194,8 @@ private slots:
 
     void on_basicPagePower_clicked();
 
+    void on_ItemEdit_clicked();
+
 public:
     Ui::MainForm *ui;
 
@@ -218,6 +223,7 @@ private:
     ExportForm * exportForm;
     EmployeeEditForm * employeeeditform;
     ItemEditForm * itemeditform;
+    ProjectEditForm * projecteditform;
 
     //Random variables :)
     QString currentProject;

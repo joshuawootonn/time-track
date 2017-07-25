@@ -839,7 +839,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -973,7 +973,7 @@ background-color:#FE938C;
               <item row="1" column="2">
                <widget class="QCheckBox" name="EmployeeActive">
                 <property name="text">
-                 <string>Active</string>
+                 <string>Clocked In</string>
                 </property>
                </widget>
               </item>
@@ -987,7 +987,7 @@ background-color:#FE938C;
               <item row="0" column="3">
                <widget class="QCheckBox" name="EmployeeCurrent">
                 <property name="text">
-                 <string>Current</string>
+                 <string>Employed</string>
                 </property>
                </widget>
               </item>
@@ -1256,7 +1256,7 @@ background-color:#B19994;
             </spacer>
            </item>
            <item>
-            <widget class="QGroupBox" name="groupBox_11">
+            <widget class="QGroupBox" name="ProjectItemGroup">
              <property name="title">
               <string>Options</string>
              </property>
@@ -1423,6 +1423,13 @@ background-color:#837F9A;
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="ItemEdit">
+                <property name="text">
+                 <string>itemEdit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="ItemDelete">
                 <property name="text">
                  <string/>
@@ -1583,6 +1590,12 @@ background-color:#8DAA91;
               </property>
               <item row="0" column="2">
                <widget class="QComboBox" name="ShiftEmployeeCombo">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <family>Calibri</family>

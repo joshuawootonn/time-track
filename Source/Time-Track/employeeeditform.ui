@@ -148,18 +148,25 @@ QGroupBox::title {
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="current">
+       <property name="text">
+        <string>Employed</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
       <widget class="QCheckBox" name="admin">
        <property name="text">
         <string>Admin</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="0">
       <widget class="QCheckBox" name="active">
        <property name="text">
-        <string>Active</string>
+        <string>Clocked In</string>
        </property>
       </widget>
      </item>

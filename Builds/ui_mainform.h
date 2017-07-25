@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.0
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -140,7 +140,7 @@ public:
     QRadioButton *ProjectPastRadio;
     QSpacerItem *horizontalSpacer_6;
     QSpacerItem *horizontalSpacer_11;
-    QGroupBox *groupBox_11;
+    QGroupBox *ProjectItemGroup;
     QGridLayout *gridLayout_12;
     QHBoxLayout *horizontalLayout_14;
     QGridLayout *gridLayout_23;
@@ -159,6 +159,7 @@ public:
     QGroupBox *groupBox_7;
     QHBoxLayout *horizontalLayout_10;
     QPushButton *ItemAdd;
+    QPushButton *ItemEdit;
     QPushButton *ItemDelete;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_10;
@@ -915,16 +916,16 @@ public:
 
         horizontalLayout_7->addItem(horizontalSpacer_11);
 
-        groupBox_11 = new QGroupBox(ProjectsSettings);
-        groupBox_11->setObjectName(QStringLiteral("groupBox_11"));
-        gridLayout_12 = new QGridLayout(groupBox_11);
+        ProjectItemGroup = new QGroupBox(ProjectsSettings);
+        ProjectItemGroup->setObjectName(QStringLiteral("ProjectItemGroup"));
+        gridLayout_12 = new QGridLayout(ProjectItemGroup);
         gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
         gridLayout_12->setContentsMargins(-1, 7, -1, 7);
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         gridLayout_23 = new QGridLayout();
         gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
-        ProjectItemCombo = new QComboBox(groupBox_11);
+        ProjectItemCombo = new QComboBox(ProjectItemGroup);
         ProjectItemCombo->setObjectName(QStringLiteral("ProjectItemCombo"));
         ProjectItemCombo->setFont(font);
         ProjectItemCombo->setEditable(true);
@@ -934,14 +935,14 @@ public:
 
         horizontalLayout_16 = new QHBoxLayout();
         horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
-        ProjectItemQuantity = new QSpinBox(groupBox_11);
+        ProjectItemQuantity = new QSpinBox(ProjectItemGroup);
         ProjectItemQuantity->setObjectName(QStringLiteral("ProjectItemQuantity"));
         ProjectItemQuantity->setMaximum(100000);
         ProjectItemQuantity->setSingleStep(1);
 
         horizontalLayout_16->addWidget(ProjectItemQuantity);
 
-        ProjectItemDimension = new QComboBox(groupBox_11);
+        ProjectItemDimension = new QComboBox(ProjectItemGroup);
         ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
 
         horizontalLayout_16->addWidget(ProjectItemDimension);
@@ -952,12 +953,12 @@ public:
 
         horizontalLayout_14->addLayout(gridLayout_23);
 
-        ProjectItemAdd = new QPushButton(groupBox_11);
+        ProjectItemAdd = new QPushButton(ProjectItemGroup);
         ProjectItemAdd->setObjectName(QStringLiteral("ProjectItemAdd"));
 
         horizontalLayout_14->addWidget(ProjectItemAdd);
 
-        ProjectItemRemove = new QPushButton(groupBox_11);
+        ProjectItemRemove = new QPushButton(ProjectItemGroup);
         ProjectItemRemove->setObjectName(QStringLiteral("ProjectItemRemove"));
 
         horizontalLayout_14->addWidget(ProjectItemRemove);
@@ -966,7 +967,7 @@ public:
         gridLayout_12->addLayout(horizontalLayout_14, 1, 1, 1, 1);
 
 
-        horizontalLayout_7->addWidget(groupBox_11);
+        horizontalLayout_7->addWidget(ProjectItemGroup);
 
         groupBox_12 = new QGroupBox(ProjectsSettings);
         groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
@@ -1025,6 +1026,11 @@ public:
         ItemAdd->setObjectName(QStringLiteral("ItemAdd"));
 
         horizontalLayout_10->addWidget(ItemAdd);
+
+        ItemEdit = new QPushButton(groupBox_7);
+        ItemEdit->setObjectName(QStringLiteral("ItemEdit"));
+
+        horizontalLayout_10->addWidget(ItemEdit);
 
         ItemDelete = new QPushButton(groupBox_7);
         ItemDelete->setObjectName(QStringLiteral("ItemDelete"));
@@ -1120,6 +1126,7 @@ public:
         gridLayout->setContentsMargins(-1, 7, -1, 7);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
+        ShiftEmployeeCombo->setMinimumSize(QSize(150, 0));
         ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setEditable(true);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1410,7 +1417,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 
@@ -1452,9 +1459,9 @@ public:
         groupBox_2->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         EmployeeShiftCount->setText(QApplication::translate("MainForm", "ShiftCount", Q_NULLPTR));
         EmployeeAdminStatus->setText(QApplication::translate("MainForm", "AdminStatus", Q_NULLPTR));
-        EmployeeActive->setText(QApplication::translate("MainForm", "Active", Q_NULLPTR));
+        EmployeeActive->setText(QApplication::translate("MainForm", "Clocked In", Q_NULLPTR));
         EmployeePin->setText(QApplication::translate("MainForm", "Pin", Q_NULLPTR));
-        EmployeeCurrent->setText(QApplication::translate("MainForm", "Current", Q_NULLPTR));
+        EmployeeCurrent->setText(QApplication::translate("MainForm", "Employed", Q_NULLPTR));
         EmployeeId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
         EmployeeName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         groupBox_3->setTitle(QApplication::translate("MainForm", "Show", Q_NULLPTR));
@@ -1475,7 +1482,7 @@ public:
         ProjectAllRadio->setText(QApplication::translate("MainForm", "All Projects", Q_NULLPTR));
         ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", Q_NULLPTR));
         ProjectPastRadio->setText(QApplication::translate("MainForm", "Past Projects", Q_NULLPTR));
-        groupBox_11->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
+        ProjectItemGroup->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ProjectItemAdd->setText(QString());
         ProjectItemRemove->setText(QString());
         groupBox_12->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
@@ -1484,6 +1491,7 @@ public:
         HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Project", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ItemAdd->setText(QString());
+        ItemEdit->setText(QApplication::translate("MainForm", "itemEdit", Q_NULLPTR));
         ItemDelete->setText(QString());
         groupBox_10->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         ItemCategory->setText(QApplication::translate("MainForm", "Category", Q_NULLPTR));

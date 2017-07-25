@@ -22,7 +22,8 @@ SOURCES += \
     main.cpp \
     work.cpp \
     employeeeditform.cpp \
-    itemeditform.cpp
+    itemeditform.cpp \
+    projecteditform.cpp
 
 
 HEADERS  += \
@@ -33,7 +34,8 @@ HEADERS  += \
     exportform.h \
     work.h \
     employeeeditform.h \
-    itemeditform.h
+    itemeditform.h \
+    projecteditform.h
 
 
 FORMS    += \
@@ -43,7 +45,8 @@ FORMS    += \
     connectionform.ui \
     exportform.ui \
     employeeeditform.ui \
-    itemeditform.ui
+    itemeditform.ui \
+    projecteditform.ui
 
 RESOURCES += \
     fonts.qrc

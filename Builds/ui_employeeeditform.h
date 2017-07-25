@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'employeeeditform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.0
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -36,7 +37,8 @@ public:
     QLabel *label_2;
     QLineEdit *pin;
     QPushButton *GenerateButton;
-    QHBoxLayout *horizontalLayout_3;
+    QGridLayout *gridLayout;
+    QCheckBox *current;
     QCheckBox *admin;
     QCheckBox *active;
     QLabel *error;
@@ -181,20 +183,25 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        current = new QCheckBox(EmployeeEditForm);
+        current->setObjectName(QStringLiteral("current"));
+
+        gridLayout->addWidget(current, 2, 0, 1, 1);
+
         admin = new QCheckBox(EmployeeEditForm);
         admin->setObjectName(QStringLiteral("admin"));
 
-        horizontalLayout_3->addWidget(admin);
+        gridLayout->addWidget(admin, 0, 0, 1, 1);
 
         active = new QCheckBox(EmployeeEditForm);
         active->setObjectName(QStringLiteral("active"));
 
-        horizontalLayout_3->addWidget(active);
+        gridLayout->addWidget(active, 1, 0, 1, 1);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        verticalLayout->addLayout(gridLayout);
 
         error = new QLabel(EmployeeEditForm);
         error->setObjectName(QStringLiteral("error"));
@@ -232,8 +239,9 @@ public:
         label->setText(QApplication::translate("EmployeeEditForm", "Name:", Q_NULLPTR));
         label_2->setText(QApplication::translate("EmployeeEditForm", "Pin:", Q_NULLPTR));
         GenerateButton->setText(QApplication::translate("EmployeeEditForm", "Generate", Q_NULLPTR));
+        current->setText(QApplication::translate("EmployeeEditForm", "Employed", Q_NULLPTR));
         admin->setText(QApplication::translate("EmployeeEditForm", "Admin", Q_NULLPTR));
-        active->setText(QApplication::translate("EmployeeEditForm", "Active", Q_NULLPTR));
+        active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", Q_NULLPTR));
         error->setText(QString());
         FinishButton->setText(QApplication::translate("EmployeeEditForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("EmployeeEditForm", "Cancel", Q_NULLPTR));

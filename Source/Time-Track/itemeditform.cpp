@@ -15,14 +15,79 @@ void ItemEditForm::AddItem(){
     ui->name->setText("");
 }
 QString ItemEditForm::AddValid(){
-   return "";
+    QString error;
+    QRegExp name_regrex("^[a-zA-Z0-9\'\" ]+$");
+    if(ui->name->text().length()<4)
+        error = "Invalid name: Minimun length 4";
+    else if (!name_regrex.exactMatch(ui->name->text()))
+       error = "Invalid name: Must contain letters,numbers, and quotes only";
+    else{
+        QSqlQuery * qry = new QSqlQuery(data);
+        QString name = ui->name->text();
+        QString currentName;
+        qry->prepare("SELECT name FROM itemlist where name = '"+name+"'");
+        int nameCount =0;
+        if(qry->exec()){
+            while(qry->next()){
+                nameCount++;
+            }
+        }
+
+        if(nameCount>0){
+            error = "Invalid name: Must be unique";
+        }
+
+        qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
+    }
+   return error;
 }
 
 void ItemEditForm::EditItem(QString x){
+    this->showNormal();
+    task="edit";
     id = x;
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("SELECT name FROM itemlist WHERE id ='"+id+"'");
+    if(qry->exec()){
+        while(qry->next()){
+            ui->name->setText(qry->value(0).toString());
+        }
+    }
 }
 QString ItemEditForm::EditValid(){
-    return "";
+    QString error;
+    QRegExp name_regrex("^[a-zA-Z0-9\'\" ]+$");
+    if(ui->name->text().length()<4)
+        error = "Invalid name: Minimun length 4";
+    else if (!name_regrex.exactMatch(ui->name->text()))
+       error = "Invalid name: Must contain letters,numbers, and quotes only";
+    else{
+        QSqlQuery * qry = new QSqlQuery(data);
+        QString name = ui->name->text();
+        QString currentName;
+        qry->prepare("SELECT name FROM itemlist where name = '"+name+"'");
+        int nameCount =0;
+        if(qry->exec()){
+            while(qry->next()){
+                nameCount++;
+            }
+        }
+        qry->clear();
+        qry->prepare("SELECT name FROM itemlist WHERE id = "+id+"");
+        if(qry->exec()){
+            while(qry->next()){
+                currentName = qry->value(0).toString();
+            }
+        }
+        if(name == currentName && nameCount > 1){
+            error = "Invalid name: Must be unique";
+        }else if(name != currentName && nameCount>0){
+            error = "Invalid name: Must be unique";
+        }
+
+       // qDebug()<<qry->lastError().text()<<"nameCount: "<<nameCount<<"currentName: "<<currentName<<"name: "<<name;
+    }
+    return error;
 }
 
 ItemEditForm::~ItemEditForm()
@@ -79,6 +144,30 @@ void ItemEditForm::on_FinishButton_clicked()
             success = false;
             successMsg = "Error Editing Item";
         }
+
+        qry->clear();
+        qry->prepare("SELECT id FROM projectlist");
+
+        QList<QString> projects;
+        if(qry->exec()){
+            while(qry->next()){
+                projects<<qry->value(0).toString();
+            }
+        }
+        for(int i = 0; i<projects.length();i++)
+        {
+            QString tableName = "project"+projects[i];
+            qry->clear();
+            qry->prepare("UPDATE "+tableName+" set name='"+ui->name->text()+"' where itemid = '"+id+"'");
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Editing Item";
+            }
+        }
+
+
         this->hide();
         emit finished();
     }
@@ -91,5 +180,7 @@ void ItemEditForm::on_FinishButton_clicked()
 }
 void ItemEditForm::on_CancelButton_clicked()
 {
-
+    success=true;
+    this->hide();
+    emit finished();
 }

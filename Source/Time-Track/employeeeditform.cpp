@@ -20,7 +20,7 @@ void EmployeeEditForm::AddEmployee(){
     ui->pin->setText("");
     ui->admin->setChecked(false);
     ui->active->setChecked(true);
-
+    ui->current->setChecked(true);
 }
 
 // Initializer for when a employee is being edited
@@ -29,14 +29,15 @@ void EmployeeEditForm::EditEmployee(QString x){
     task = "edit";
     id=x;
     QSqlQuery * qry = new QSqlQuery(data);
-    QString name,pin,admin,current;
-    qry->prepare("SELECT name,pin,adminstatus,current FROM employeelist WHERE id ='"+id+"'");
+    QString name,pin,admin,current,active;
+    qry->prepare("SELECT name,pin,adminstatus,current,active FROM employeelist WHERE id ='"+id+"'");
     if(qry->exec()){
         while(qry->next()){
             name = qry->value(0).toString();
             pin = qry->value(1).toString();
             admin = qry->value(2).toString();
             current = qry->value(3).toString();
+            active = qry->value(4).toString();
         }
     }
     ui->name->setText(name);
@@ -46,6 +47,11 @@ void EmployeeEditForm::EditEmployee(QString x){
     else
         ui->admin->setChecked(false);
     if(current =="1")
+        ui->current->setChecked(true);
+    else
+        ui->current->setChecked(false);
+
+    if(active =="1")
         ui->active->setChecked(true);
     else
         ui->active->setChecked(false);
@@ -135,11 +141,11 @@ QString EmployeeEditForm::EditValid(){
         }
         if(pin == currentPin && pinCount > 1){
             error = "Invalid pin: Must be unique";
-        }else if(pinCount>0){
+        }else if(pin !=currentPin && pinCount>0){
             error = "Invalid pin: Must be unique";
         }
 
-        qDebug()<<qry->lastError().text();
+       // qDebug()<<qry->lastError().text();
     }
     return error;
 }
@@ -150,9 +156,10 @@ void EmployeeEditForm::on_FinishButton_clicked()
     {
         QSqlQuery * qry = new QSqlQuery(data);
         QString admin = QString::number(int(ui->admin->isChecked()));
-        QString active = QString::number(int(ui->active->isChecked()));
+        QString active = QString::number(int(ui->active->isChecked()));        
+        QString current = QString::number(int(ui->current->isChecked()));
         qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current) "
-                     " values('"+ui->name->text()+"','"+ui->pin->text()+"','"+admin+"','1','0','"+active+"')");
+                     " values('"+ui->name->text()+"','"+ui->pin->text()+"','"+admin+"','1','"+active+"','"+current+"')");
         if (qry->exec())
             success = true;
         else{
@@ -168,7 +175,8 @@ void EmployeeEditForm::on_FinishButton_clicked()
         QSqlQuery * qry = new QSqlQuery(data);
         QString admin = QString::number(int(ui->admin->isChecked()));
         QString active = QString::number(int(ui->active->isChecked()));
-        qry->prepare("update employeelist set name='"+ui->name->text()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+active+"'  where id = '"+id+"'");
+        QString current = QString::number(int(ui->current->isChecked()));
+        qry->prepare("update employeelist set name='"+ui->name->text()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+current+"', active='"+active+"'  where id = '"+id+"'");
 
         if (qry->exec())
             success = true;
@@ -198,6 +206,7 @@ void EmployeeEditForm::on_FinishButton_clicked()
 }
 void EmployeeEditForm::on_CancelButton_clicked()
 {
+    success=true;
     this->hide();
     emit finished();
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainform.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.0)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainform.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.9.0. It"
+#error "This file was generated using the moc from 5.9.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainForm_t {
-    QByteArrayData data[99];
-    char stringdata0[2147];
+    QByteArrayData data[102];
+    char stringdata0[2212];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -80,56 +80,59 @@ QT_MOC_LITERAL(45, 901, 23), // "on_CurrentRadio_toggled"
 QT_MOC_LITERAL(46, 925, 20), // "on_PastRadio_toggled"
 QT_MOC_LITERAL(47, 946, 19), // "refreshProjectStuff"
 QT_MOC_LITERAL(48, 966, 17), // "refreshProjectTab"
-QT_MOC_LITERAL(49, 984, 22), // "on_ProjectView_clicked"
-QT_MOC_LITERAL(50, 1007, 21), // "on_ProjectAdd_clicked"
-QT_MOC_LITERAL(51, 1029, 24), // "on_ProjectDelete_clicked"
-QT_MOC_LITERAL(52, 1054, 25), // "on_ProjectArchive_clicked"
-QT_MOC_LITERAL(53, 1080, 22), // "on_ProjectName_clicked"
-QT_MOC_LITERAL(54, 1103, 20), // "on_ProjectId_clicked"
-QT_MOC_LITERAL(55, 1124, 25), // "on_ProjectCurrent_clicked"
-QT_MOC_LITERAL(56, 1150, 26), // "on_ProjectAllRadio_toggled"
-QT_MOC_LITERAL(57, 1177, 30), // "on_ProjectCurrentRadio_toggled"
-QT_MOC_LITERAL(58, 1208, 27), // "on_ProjectPastRadio_toggled"
-QT_MOC_LITERAL(59, 1236, 26), // "on_ProjectItemName_clicked"
-QT_MOC_LITERAL(60, 1263, 24), // "on_ProjectItemId_clicked"
-QT_MOC_LITERAL(61, 1288, 25), // "on_ProjectItemAdd_clicked"
-QT_MOC_LITERAL(62, 1314, 28), // "on_ProjectItemRemove_clicked"
-QT_MOC_LITERAL(63, 1343, 22), // "on_ProjectDate_clicked"
-QT_MOC_LITERAL(64, 1366, 16), // "refreshItemStuff"
-QT_MOC_LITERAL(65, 1383, 14), // "refreshItemTab"
-QT_MOC_LITERAL(66, 1398, 18), // "displayItemSuccess"
-QT_MOC_LITERAL(67, 1417, 19), // "refreshFromItemEdit"
-QT_MOC_LITERAL(68, 1437, 18), // "on_ItemAdd_clicked"
-QT_MOC_LITERAL(69, 1456, 21), // "on_ItemDelete_clicked"
-QT_MOC_LITERAL(70, 1478, 19), // "on_ItemName_clicked"
-QT_MOC_LITERAL(71, 1498, 17), // "on_ItemId_clicked"
-QT_MOC_LITERAL(72, 1516, 23), // "on_ItemCategory_clicked"
-QT_MOC_LITERAL(73, 1540, 18), // "on_ItemSub_clicked"
-QT_MOC_LITERAL(74, 1559, 24), // "on_ItemDimension_clicked"
-QT_MOC_LITERAL(75, 1584, 15), // "refreshShiftTab"
-QT_MOC_LITERAL(76, 1600, 19), // "displayShiftSuccess"
-QT_MOC_LITERAL(77, 1620, 27), // "on_ShiftEmployeeBox_clicked"
-QT_MOC_LITERAL(78, 1648, 26), // "on_ShiftProjectBox_clicked"
-QT_MOC_LITERAL(79, 1675, 23), // "on_ShiftItemBox_clicked"
-QT_MOC_LITERAL(80, 1699, 40), // "on_ShiftEmployeeCombo_current..."
-QT_MOC_LITERAL(81, 1740, 4), // "arg1"
-QT_MOC_LITERAL(82, 1745, 39), // "on_ShiftProjectCombo_currentT..."
-QT_MOC_LITERAL(83, 1785, 36), // "on_ShiftItemCombo_currentText..."
-QT_MOC_LITERAL(84, 1822, 25), // "on_ShiftDate1_dateChanged"
-QT_MOC_LITERAL(85, 1848, 4), // "date"
-QT_MOC_LITERAL(86, 1853, 25), // "on_ShiftDate2_dateChanged"
-QT_MOC_LITERAL(87, 1879, 19), // "on_ShiftAdd_clicked"
-QT_MOC_LITERAL(88, 1899, 20), // "on_ShiftEdit_clicked"
-QT_MOC_LITERAL(89, 1920, 22), // "on_ShiftDelete_clicked"
-QT_MOC_LITERAL(90, 1943, 11), // "SettingsTab"
-QT_MOC_LITERAL(91, 1955, 22), // "on_SettingsMax_clicked"
-QT_MOC_LITERAL(92, 1978, 23), // "on_SettingsFull_clicked"
-QT_MOC_LITERAL(93, 2002, 25), // "on_SettingsExport_clicked"
-QT_MOC_LITERAL(94, 2028, 13), // "exportToExcel"
-QT_MOC_LITERAL(95, 2042, 24), // "on_SettingsPrint_clicked"
-QT_MOC_LITERAL(96, 2067, 22), // "on_SettingsAll_clicked"
-QT_MOC_LITERAL(97, 2090, 30), // "on_SettingsConnections_clicked"
-QT_MOC_LITERAL(98, 2121, 25) // "on_basicPagePower_clicked"
+QT_MOC_LITERAL(49, 984, 21), // "displayProjectSuccess"
+QT_MOC_LITERAL(50, 1006, 22), // "refreshFromProjectEdit"
+QT_MOC_LITERAL(51, 1029, 22), // "on_ProjectView_clicked"
+QT_MOC_LITERAL(52, 1052, 21), // "on_ProjectAdd_clicked"
+QT_MOC_LITERAL(53, 1074, 24), // "on_ProjectDelete_clicked"
+QT_MOC_LITERAL(54, 1099, 25), // "on_ProjectArchive_clicked"
+QT_MOC_LITERAL(55, 1125, 22), // "on_ProjectName_clicked"
+QT_MOC_LITERAL(56, 1148, 20), // "on_ProjectId_clicked"
+QT_MOC_LITERAL(57, 1169, 25), // "on_ProjectCurrent_clicked"
+QT_MOC_LITERAL(58, 1195, 26), // "on_ProjectAllRadio_toggled"
+QT_MOC_LITERAL(59, 1222, 30), // "on_ProjectCurrentRadio_toggled"
+QT_MOC_LITERAL(60, 1253, 27), // "on_ProjectPastRadio_toggled"
+QT_MOC_LITERAL(61, 1281, 26), // "on_ProjectItemName_clicked"
+QT_MOC_LITERAL(62, 1308, 24), // "on_ProjectItemId_clicked"
+QT_MOC_LITERAL(63, 1333, 25), // "on_ProjectItemAdd_clicked"
+QT_MOC_LITERAL(64, 1359, 28), // "on_ProjectItemRemove_clicked"
+QT_MOC_LITERAL(65, 1388, 22), // "on_ProjectDate_clicked"
+QT_MOC_LITERAL(66, 1411, 16), // "refreshItemStuff"
+QT_MOC_LITERAL(67, 1428, 14), // "refreshItemTab"
+QT_MOC_LITERAL(68, 1443, 18), // "displayItemSuccess"
+QT_MOC_LITERAL(69, 1462, 19), // "refreshFromItemEdit"
+QT_MOC_LITERAL(70, 1482, 18), // "on_ItemAdd_clicked"
+QT_MOC_LITERAL(71, 1501, 21), // "on_ItemDelete_clicked"
+QT_MOC_LITERAL(72, 1523, 19), // "on_ItemName_clicked"
+QT_MOC_LITERAL(73, 1543, 17), // "on_ItemId_clicked"
+QT_MOC_LITERAL(74, 1561, 23), // "on_ItemCategory_clicked"
+QT_MOC_LITERAL(75, 1585, 18), // "on_ItemSub_clicked"
+QT_MOC_LITERAL(76, 1604, 24), // "on_ItemDimension_clicked"
+QT_MOC_LITERAL(77, 1629, 15), // "refreshShiftTab"
+QT_MOC_LITERAL(78, 1645, 19), // "displayShiftSuccess"
+QT_MOC_LITERAL(79, 1665, 27), // "on_ShiftEmployeeBox_clicked"
+QT_MOC_LITERAL(80, 1693, 26), // "on_ShiftProjectBox_clicked"
+QT_MOC_LITERAL(81, 1720, 23), // "on_ShiftItemBox_clicked"
+QT_MOC_LITERAL(82, 1744, 40), // "on_ShiftEmployeeCombo_current..."
+QT_MOC_LITERAL(83, 1785, 4), // "arg1"
+QT_MOC_LITERAL(84, 1790, 39), // "on_ShiftProjectCombo_currentT..."
+QT_MOC_LITERAL(85, 1830, 36), // "on_ShiftItemCombo_currentText..."
+QT_MOC_LITERAL(86, 1867, 25), // "on_ShiftDate1_dateChanged"
+QT_MOC_LITERAL(87, 1893, 4), // "date"
+QT_MOC_LITERAL(88, 1898, 25), // "on_ShiftDate2_dateChanged"
+QT_MOC_LITERAL(89, 1924, 19), // "on_ShiftAdd_clicked"
+QT_MOC_LITERAL(90, 1944, 20), // "on_ShiftEdit_clicked"
+QT_MOC_LITERAL(91, 1965, 22), // "on_ShiftDelete_clicked"
+QT_MOC_LITERAL(92, 1988, 11), // "SettingsTab"
+QT_MOC_LITERAL(93, 2000, 22), // "on_SettingsMax_clicked"
+QT_MOC_LITERAL(94, 2023, 23), // "on_SettingsFull_clicked"
+QT_MOC_LITERAL(95, 2047, 25), // "on_SettingsExport_clicked"
+QT_MOC_LITERAL(96, 2073, 13), // "exportToExcel"
+QT_MOC_LITERAL(97, 2087, 24), // "on_SettingsPrint_clicked"
+QT_MOC_LITERAL(98, 2112, 22), // "on_SettingsAll_clicked"
+QT_MOC_LITERAL(99, 2135, 30), // "on_SettingsConnections_clicked"
+QT_MOC_LITERAL(100, 2166, 25), // "on_basicPagePower_clicked"
+QT_MOC_LITERAL(101, 2192, 19) // "on_ItemEdit_clicked"
 
     },
     "MainForm\0reenter\0\0start\0loginInitialize\0"
@@ -159,7 +162,8 @@ QT_MOC_LITERAL(98, 2121, 25) // "on_basicPagePower_clicked"
     "on_EmployeeEdit_clicked\0on_AllRadio_toggled\0"
     "checked\0on_CurrentRadio_toggled\0"
     "on_PastRadio_toggled\0refreshProjectStuff\0"
-    "refreshProjectTab\0on_ProjectView_clicked\0"
+    "refreshProjectTab\0displayProjectSuccess\0"
+    "refreshFromProjectEdit\0on_ProjectView_clicked\0"
     "on_ProjectAdd_clicked\0on_ProjectDelete_clicked\0"
     "on_ProjectArchive_clicked\0"
     "on_ProjectName_clicked\0on_ProjectId_clicked\0"
@@ -193,7 +197,7 @@ QT_MOC_LITERAL(98, 2121, 25) // "on_basicPagePower_clicked"
     "on_SettingsPrint_clicked\0"
     "on_SettingsAll_clicked\0"
     "on_SettingsConnections_clicked\0"
-    "on_basicPagePower_clicked"
+    "on_basicPagePower_clicked\0on_ItemEdit_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -203,7 +207,7 @@ static const uint qt_meta_data_MainForm[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      93,   14, // methods
+      96,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -211,99 +215,102 @@ static const uint qt_meta_data_MainForm[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  479,    2, 0x0a /* Public */,
-       3,    0,  480,    2, 0x0a /* Public */,
-       4,    0,  481,    2, 0x0a /* Public */,
-       5,    0,  482,    2, 0x0a /* Public */,
-       6,    0,  483,    2, 0x0a /* Public */,
-       7,    0,  484,    2, 0x0a /* Public */,
-       8,    0,  485,    2, 0x0a /* Public */,
-       9,    0,  486,    2, 0x0a /* Public */,
-      10,    0,  487,    2, 0x0a /* Public */,
-      11,    0,  488,    2, 0x0a /* Public */,
-      12,    0,  489,    2, 0x0a /* Public */,
-      13,    1,  490,    2, 0x08 /* Private */,
-      15,    0,  493,    2, 0x08 /* Private */,
-      16,    0,  494,    2, 0x08 /* Private */,
-      17,    0,  495,    2, 0x08 /* Private */,
-      18,    0,  496,    2, 0x08 /* Private */,
-      19,    0,  497,    2, 0x08 /* Private */,
-      20,    0,  498,    2, 0x08 /* Private */,
-      21,    0,  499,    2, 0x08 /* Private */,
-      22,    0,  500,    2, 0x08 /* Private */,
-      23,    0,  501,    2, 0x08 /* Private */,
-      24,    0,  502,    2, 0x08 /* Private */,
-      25,    0,  503,    2, 0x08 /* Private */,
-      26,    0,  504,    2, 0x08 /* Private */,
-      27,    0,  505,    2, 0x08 /* Private */,
-      28,    0,  506,    2, 0x08 /* Private */,
-      29,    0,  507,    2, 0x08 /* Private */,
-      30,    0,  508,    2, 0x08 /* Private */,
-      31,    0,  509,    2, 0x08 /* Private */,
-      32,    0,  510,    2, 0x08 /* Private */,
-      33,    0,  511,    2, 0x08 /* Private */,
-      34,    0,  512,    2, 0x08 /* Private */,
-      35,    0,  513,    2, 0x08 /* Private */,
-      36,    0,  514,    2, 0x08 /* Private */,
-      37,    0,  515,    2, 0x08 /* Private */,
-      38,    0,  516,    2, 0x08 /* Private */,
-      39,    0,  517,    2, 0x08 /* Private */,
-      40,    0,  518,    2, 0x08 /* Private */,
-      41,    0,  519,    2, 0x08 /* Private */,
-      42,    0,  520,    2, 0x08 /* Private */,
-      43,    1,  521,    2, 0x08 /* Private */,
-      45,    1,  524,    2, 0x08 /* Private */,
-      46,    1,  527,    2, 0x08 /* Private */,
-      47,    0,  530,    2, 0x08 /* Private */,
-      48,    0,  531,    2, 0x08 /* Private */,
-      49,    1,  532,    2, 0x08 /* Private */,
-      50,    0,  535,    2, 0x08 /* Private */,
-      51,    0,  536,    2, 0x08 /* Private */,
-      52,    0,  537,    2, 0x08 /* Private */,
-      53,    0,  538,    2, 0x08 /* Private */,
-      54,    0,  539,    2, 0x08 /* Private */,
-      55,    0,  540,    2, 0x08 /* Private */,
-      56,    1,  541,    2, 0x08 /* Private */,
-      57,    1,  544,    2, 0x08 /* Private */,
-      58,    1,  547,    2, 0x08 /* Private */,
-      59,    0,  550,    2, 0x08 /* Private */,
-      60,    0,  551,    2, 0x08 /* Private */,
-      61,    0,  552,    2, 0x08 /* Private */,
-      62,    0,  553,    2, 0x08 /* Private */,
-      63,    0,  554,    2, 0x08 /* Private */,
-      64,    0,  555,    2, 0x08 /* Private */,
-      65,    0,  556,    2, 0x08 /* Private */,
-      66,    0,  557,    2, 0x08 /* Private */,
-      67,    0,  558,    2, 0x08 /* Private */,
-      68,    0,  559,    2, 0x08 /* Private */,
-      69,    0,  560,    2, 0x08 /* Private */,
-      70,    0,  561,    2, 0x08 /* Private */,
-      71,    0,  562,    2, 0x08 /* Private */,
-      72,    0,  563,    2, 0x08 /* Private */,
-      73,    0,  564,    2, 0x08 /* Private */,
-      74,    0,  565,    2, 0x08 /* Private */,
-      75,    0,  566,    2, 0x08 /* Private */,
-      76,    0,  567,    2, 0x08 /* Private */,
-      77,    0,  568,    2, 0x08 /* Private */,
-      78,    0,  569,    2, 0x08 /* Private */,
-      79,    0,  570,    2, 0x08 /* Private */,
-      80,    1,  571,    2, 0x08 /* Private */,
-      82,    1,  574,    2, 0x08 /* Private */,
-      83,    1,  577,    2, 0x08 /* Private */,
-      84,    1,  580,    2, 0x08 /* Private */,
-      86,    1,  583,    2, 0x08 /* Private */,
-      87,    0,  586,    2, 0x08 /* Private */,
-      88,    0,  587,    2, 0x08 /* Private */,
-      89,    0,  588,    2, 0x08 /* Private */,
-      90,    0,  589,    2, 0x08 /* Private */,
-      91,    0,  590,    2, 0x08 /* Private */,
-      92,    0,  591,    2, 0x08 /* Private */,
-      93,    0,  592,    2, 0x08 /* Private */,
-      94,    0,  593,    2, 0x08 /* Private */,
-      95,    0,  594,    2, 0x08 /* Private */,
-      96,    0,  595,    2, 0x08 /* Private */,
-      97,    0,  596,    2, 0x08 /* Private */,
-      98,    0,  597,    2, 0x08 /* Private */,
+       1,    0,  494,    2, 0x0a /* Public */,
+       3,    0,  495,    2, 0x0a /* Public */,
+       4,    0,  496,    2, 0x0a /* Public */,
+       5,    0,  497,    2, 0x0a /* Public */,
+       6,    0,  498,    2, 0x0a /* Public */,
+       7,    0,  499,    2, 0x0a /* Public */,
+       8,    0,  500,    2, 0x0a /* Public */,
+       9,    0,  501,    2, 0x0a /* Public */,
+      10,    0,  502,    2, 0x0a /* Public */,
+      11,    0,  503,    2, 0x0a /* Public */,
+      12,    0,  504,    2, 0x0a /* Public */,
+      13,    1,  505,    2, 0x08 /* Private */,
+      15,    0,  508,    2, 0x08 /* Private */,
+      16,    0,  509,    2, 0x08 /* Private */,
+      17,    0,  510,    2, 0x08 /* Private */,
+      18,    0,  511,    2, 0x08 /* Private */,
+      19,    0,  512,    2, 0x08 /* Private */,
+      20,    0,  513,    2, 0x08 /* Private */,
+      21,    0,  514,    2, 0x08 /* Private */,
+      22,    0,  515,    2, 0x08 /* Private */,
+      23,    0,  516,    2, 0x08 /* Private */,
+      24,    0,  517,    2, 0x08 /* Private */,
+      25,    0,  518,    2, 0x08 /* Private */,
+      26,    0,  519,    2, 0x08 /* Private */,
+      27,    0,  520,    2, 0x08 /* Private */,
+      28,    0,  521,    2, 0x08 /* Private */,
+      29,    0,  522,    2, 0x08 /* Private */,
+      30,    0,  523,    2, 0x08 /* Private */,
+      31,    0,  524,    2, 0x08 /* Private */,
+      32,    0,  525,    2, 0x08 /* Private */,
+      33,    0,  526,    2, 0x08 /* Private */,
+      34,    0,  527,    2, 0x08 /* Private */,
+      35,    0,  528,    2, 0x08 /* Private */,
+      36,    0,  529,    2, 0x08 /* Private */,
+      37,    0,  530,    2, 0x08 /* Private */,
+      38,    0,  531,    2, 0x08 /* Private */,
+      39,    0,  532,    2, 0x08 /* Private */,
+      40,    0,  533,    2, 0x08 /* Private */,
+      41,    0,  534,    2, 0x08 /* Private */,
+      42,    0,  535,    2, 0x08 /* Private */,
+      43,    1,  536,    2, 0x08 /* Private */,
+      45,    1,  539,    2, 0x08 /* Private */,
+      46,    1,  542,    2, 0x08 /* Private */,
+      47,    0,  545,    2, 0x08 /* Private */,
+      48,    0,  546,    2, 0x08 /* Private */,
+      49,    0,  547,    2, 0x08 /* Private */,
+      50,    0,  548,    2, 0x08 /* Private */,
+      51,    1,  549,    2, 0x08 /* Private */,
+      52,    0,  552,    2, 0x08 /* Private */,
+      53,    0,  553,    2, 0x08 /* Private */,
+      54,    0,  554,    2, 0x08 /* Private */,
+      55,    0,  555,    2, 0x08 /* Private */,
+      56,    0,  556,    2, 0x08 /* Private */,
+      57,    0,  557,    2, 0x08 /* Private */,
+      58,    1,  558,    2, 0x08 /* Private */,
+      59,    1,  561,    2, 0x08 /* Private */,
+      60,    1,  564,    2, 0x08 /* Private */,
+      61,    0,  567,    2, 0x08 /* Private */,
+      62,    0,  568,    2, 0x08 /* Private */,
+      63,    0,  569,    2, 0x08 /* Private */,
+      64,    0,  570,    2, 0x08 /* Private */,
+      65,    0,  571,    2, 0x08 /* Private */,
+      66,    0,  572,    2, 0x08 /* Private */,
+      67,    0,  573,    2, 0x08 /* Private */,
+      68,    0,  574,    2, 0x08 /* Private */,
+      69,    0,  575,    2, 0x08 /* Private */,
+      70,    0,  576,    2, 0x08 /* Private */,
+      71,    0,  577,    2, 0x08 /* Private */,
+      72,    0,  578,    2, 0x08 /* Private */,
+      73,    0,  579,    2, 0x08 /* Private */,
+      74,    0,  580,    2, 0x08 /* Private */,
+      75,    0,  581,    2, 0x08 /* Private */,
+      76,    0,  582,    2, 0x08 /* Private */,
+      77,    0,  583,    2, 0x08 /* Private */,
+      78,    0,  584,    2, 0x08 /* Private */,
+      79,    0,  585,    2, 0x08 /* Private */,
+      80,    0,  586,    2, 0x08 /* Private */,
+      81,    0,  587,    2, 0x08 /* Private */,
+      82,    1,  588,    2, 0x08 /* Private */,
+      84,    1,  591,    2, 0x08 /* Private */,
+      85,    1,  594,    2, 0x08 /* Private */,
+      86,    1,  597,    2, 0x08 /* Private */,
+      88,    1,  600,    2, 0x08 /* Private */,
+      89,    0,  603,    2, 0x08 /* Private */,
+      90,    0,  604,    2, 0x08 /* Private */,
+      91,    0,  605,    2, 0x08 /* Private */,
+      92,    0,  606,    2, 0x08 /* Private */,
+      93,    0,  607,    2, 0x08 /* Private */,
+      94,    0,  608,    2, 0x08 /* Private */,
+      95,    0,  609,    2, 0x08 /* Private */,
+      96,    0,  610,    2, 0x08 /* Private */,
+      97,    0,  611,    2, 0x08 /* Private */,
+      98,    0,  612,    2, 0x08 /* Private */,
+      99,    0,  613,    2, 0x08 /* Private */,
+     100,    0,  614,    2, 0x08 /* Private */,
+     101,    0,  615,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -351,6 +358,8 @@ static const uint qt_meta_data_MainForm[] = {
     QMetaType::Void, QMetaType::Bool,   44,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void, QMetaType::QModelIndex,   14,
     QMetaType::Void,
     QMetaType::Void,
@@ -382,11 +391,12 @@ static const uint qt_meta_data_MainForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   81,
-    QMetaType::Void, QMetaType::QString,   81,
-    QMetaType::Void, QMetaType::QString,   81,
-    QMetaType::Void, QMetaType::QDate,   85,
-    QMetaType::Void, QMetaType::QDate,   85,
+    QMetaType::Void, QMetaType::QString,   83,
+    QMetaType::Void, QMetaType::QString,   83,
+    QMetaType::Void, QMetaType::QString,   83,
+    QMetaType::Void, QMetaType::QDate,   87,
+    QMetaType::Void, QMetaType::QDate,   87,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -455,54 +465,57 @@ void MainForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 42: _t->on_PastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 43: _t->refreshProjectStuff(); break;
         case 44: _t->refreshProjectTab(); break;
-        case 45: _t->on_ProjectView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
-        case 46: _t->on_ProjectAdd_clicked(); break;
-        case 47: _t->on_ProjectDelete_clicked(); break;
-        case 48: _t->on_ProjectArchive_clicked(); break;
-        case 49: _t->on_ProjectName_clicked(); break;
-        case 50: _t->on_ProjectId_clicked(); break;
-        case 51: _t->on_ProjectCurrent_clicked(); break;
-        case 52: _t->on_ProjectAllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 53: _t->on_ProjectCurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 54: _t->on_ProjectPastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 55: _t->on_ProjectItemName_clicked(); break;
-        case 56: _t->on_ProjectItemId_clicked(); break;
-        case 57: _t->on_ProjectItemAdd_clicked(); break;
-        case 58: _t->on_ProjectItemRemove_clicked(); break;
-        case 59: _t->on_ProjectDate_clicked(); break;
-        case 60: _t->refreshItemStuff(); break;
-        case 61: _t->refreshItemTab(); break;
-        case 62: _t->displayItemSuccess(); break;
-        case 63: _t->refreshFromItemEdit(); break;
-        case 64: _t->on_ItemAdd_clicked(); break;
-        case 65: _t->on_ItemDelete_clicked(); break;
-        case 66: _t->on_ItemName_clicked(); break;
-        case 67: _t->on_ItemId_clicked(); break;
-        case 68: _t->on_ItemCategory_clicked(); break;
-        case 69: _t->on_ItemSub_clicked(); break;
-        case 70: _t->on_ItemDimension_clicked(); break;
-        case 71: _t->refreshShiftTab(); break;
-        case 72: _t->displayShiftSuccess(); break;
-        case 73: _t->on_ShiftEmployeeBox_clicked(); break;
-        case 74: _t->on_ShiftProjectBox_clicked(); break;
-        case 75: _t->on_ShiftItemBox_clicked(); break;
-        case 76: _t->on_ShiftEmployeeCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 77: _t->on_ShiftProjectCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 78: _t->on_ShiftItemCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 79: _t->on_ShiftDate1_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
-        case 80: _t->on_ShiftDate2_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
-        case 81: _t->on_ShiftAdd_clicked(); break;
-        case 82: _t->on_ShiftEdit_clicked(); break;
-        case 83: _t->on_ShiftDelete_clicked(); break;
-        case 84: _t->SettingsTab(); break;
-        case 85: _t->on_SettingsMax_clicked(); break;
-        case 86: _t->on_SettingsFull_clicked(); break;
-        case 87: _t->on_SettingsExport_clicked(); break;
-        case 88: _t->exportToExcel(); break;
-        case 89: _t->on_SettingsPrint_clicked(); break;
-        case 90: _t->on_SettingsAll_clicked(); break;
-        case 91: _t->on_SettingsConnections_clicked(); break;
-        case 92: _t->on_basicPagePower_clicked(); break;
+        case 45: _t->displayProjectSuccess(); break;
+        case 46: _t->refreshFromProjectEdit(); break;
+        case 47: _t->on_ProjectView_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 48: _t->on_ProjectAdd_clicked(); break;
+        case 49: _t->on_ProjectDelete_clicked(); break;
+        case 50: _t->on_ProjectArchive_clicked(); break;
+        case 51: _t->on_ProjectName_clicked(); break;
+        case 52: _t->on_ProjectId_clicked(); break;
+        case 53: _t->on_ProjectCurrent_clicked(); break;
+        case 54: _t->on_ProjectAllRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 55: _t->on_ProjectCurrentRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 56: _t->on_ProjectPastRadio_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 57: _t->on_ProjectItemName_clicked(); break;
+        case 58: _t->on_ProjectItemId_clicked(); break;
+        case 59: _t->on_ProjectItemAdd_clicked(); break;
+        case 60: _t->on_ProjectItemRemove_clicked(); break;
+        case 61: _t->on_ProjectDate_clicked(); break;
+        case 62: _t->refreshItemStuff(); break;
+        case 63: _t->refreshItemTab(); break;
+        case 64: _t->displayItemSuccess(); break;
+        case 65: _t->refreshFromItemEdit(); break;
+        case 66: _t->on_ItemAdd_clicked(); break;
+        case 67: _t->on_ItemDelete_clicked(); break;
+        case 68: _t->on_ItemName_clicked(); break;
+        case 69: _t->on_ItemId_clicked(); break;
+        case 70: _t->on_ItemCategory_clicked(); break;
+        case 71: _t->on_ItemSub_clicked(); break;
+        case 72: _t->on_ItemDimension_clicked(); break;
+        case 73: _t->refreshShiftTab(); break;
+        case 74: _t->displayShiftSuccess(); break;
+        case 75: _t->on_ShiftEmployeeBox_clicked(); break;
+        case 76: _t->on_ShiftProjectBox_clicked(); break;
+        case 77: _t->on_ShiftItemBox_clicked(); break;
+        case 78: _t->on_ShiftEmployeeCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 79: _t->on_ShiftProjectCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 80: _t->on_ShiftItemCombo_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 81: _t->on_ShiftDate1_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
+        case 82: _t->on_ShiftDate2_dateChanged((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
+        case 83: _t->on_ShiftAdd_clicked(); break;
+        case 84: _t->on_ShiftEdit_clicked(); break;
+        case 85: _t->on_ShiftDelete_clicked(); break;
+        case 86: _t->SettingsTab(); break;
+        case 87: _t->on_SettingsMax_clicked(); break;
+        case 88: _t->on_SettingsFull_clicked(); break;
+        case 89: _t->on_SettingsExport_clicked(); break;
+        case 90: _t->exportToExcel(); break;
+        case 91: _t->on_SettingsPrint_clicked(); break;
+        case 92: _t->on_SettingsAll_clicked(); break;
+        case 93: _t->on_SettingsConnections_clicked(); break;
+        case 94: _t->on_basicPagePower_clicked(); break;
+        case 95: _t->on_ItemEdit_clicked(); break;
         default: ;
         }
     }
@@ -533,13 +546,13 @@ int MainForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 93)
+        if (_id < 96)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 93;
+        _id -= 96;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 93)
+        if (_id < 96)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 93;
+        _id -= 96;
     }
     return _id;
 }

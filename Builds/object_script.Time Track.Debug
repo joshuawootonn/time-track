@@ -8,6 +8,7 @@ INPUT(
 ./debug\work.o
 ./debug\employeeeditform.o
 ./debug\itemeditform.o
+./debug\projecteditform.o
 ./debug\xlsxdocpropscore.o
 ./debug\xlsxdocpropsapp.o
 ./debug\xlsxrelationships.o
@@ -48,5 +49,6 @@ INPUT(
 ./debug\moc_work.o
 ./debug\moc_employeeeditform.o
 ./debug\moc_itemeditform.o
+./debug\moc_projecteditform.o
 ./debug\moc_xlsxdocument.o
 );

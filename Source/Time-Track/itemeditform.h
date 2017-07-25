@@ -14,6 +14,7 @@
 #include <QStringList>
 #include <QDesktopWidget>
 #include <QTimeEdit>
+#include <QList>
 namespace Ui {
 class ItemEditForm;
 
