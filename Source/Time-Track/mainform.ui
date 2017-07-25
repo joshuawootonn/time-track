@@ -1581,13 +1581,13 @@ background-color:#8DAA91;
                <widget class="QComboBox" name="ShiftEmployeeCombo">
                 <property name="minimumSize">
                  <size>
-                  <width>200</width>
+                  <width>400</width>
                   <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>200</width>
+                  <width>400</width>
                   <height>16777215</height>
                  </size>
                 </property>
@@ -1607,6 +1607,18 @@ background-color:#8DAA91;
               </item>
               <item row="1" column="2">
                <widget class="QComboBox" name="ShiftProjectCombo">
+                <property name="minimumSize">
+                 <size>
+                  <width>400</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <family>Calibri</family>
@@ -1630,6 +1642,18 @@ background-color:#8DAA91;
               </item>
               <item row="2" column="2">
                <widget class="QComboBox" name="ShiftItemCombo">
+                <property name="minimumSize">
+                 <size>
+                  <width>400</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <family>Calibri</family>

@@ -1119,8 +1119,8 @@ public:
         gridLayout->setContentsMargins(-1, 7, -1, 7);
         ShiftEmployeeCombo = new QComboBox(groupBox_5);
         ShiftEmployeeCombo->setObjectName(QStringLiteral("ShiftEmployeeCombo"));
-        ShiftEmployeeCombo->setMinimumSize(QSize(200, 0));
-        ShiftEmployeeCombo->setMaximumSize(QSize(200, 16777215));
+        ShiftEmployeeCombo->setMinimumSize(QSize(400, 0));
+        ShiftEmployeeCombo->setMaximumSize(QSize(400, 16777215));
         ShiftEmployeeCombo->setFont(font);
         ShiftEmployeeCombo->setEditable(true);
         ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1129,6 +1129,8 @@ public:
 
         ShiftProjectCombo = new QComboBox(groupBox_5);
         ShiftProjectCombo->setObjectName(QStringLiteral("ShiftProjectCombo"));
+        ShiftProjectCombo->setMinimumSize(QSize(400, 0));
+        ShiftProjectCombo->setMaximumSize(QSize(400, 16777215));
         ShiftProjectCombo->setFont(font);
         ShiftProjectCombo->setEditable(true);
         ShiftProjectCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -1142,6 +1144,8 @@ public:
 
         ShiftItemCombo = new QComboBox(groupBox_5);
         ShiftItemCombo->setObjectName(QStringLiteral("ShiftItemCombo"));
+        ShiftItemCombo->setMinimumSize(QSize(400, 0));
+        ShiftItemCombo->setMaximumSize(QSize(400, 16777215));
         ShiftItemCombo->setFont(font);
         ShiftItemCombo->setEditable(true);
         ShiftItemCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
