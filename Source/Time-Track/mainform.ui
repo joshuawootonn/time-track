@@ -1331,7 +1331,7 @@ background-color:#837F9A;
               <item row="1" column="1">
                <widget class="QCheckBox" name="ProjectItemDimension">
                 <property name="text">
-                 <string>Dimension</string>
+                 <string>Unit</string>
                 </property>
                </widget>
               </item>
@@ -1366,7 +1366,7 @@ background-color:#837F9A;
 }</string>
           </property>
           <attribute name="title">
-           <string>Sub-Project</string>
+           <string>Task</string>
           </attribute>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <property name="spacing">

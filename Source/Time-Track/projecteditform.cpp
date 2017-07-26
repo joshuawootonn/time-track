@@ -22,10 +22,11 @@ void ProjectEditForm::DateInitialize(){
 }
 void ProjectEditForm::SectionInitialize(){
     ui->Sections->setRowCount(0);
-    ui->Sections->setColumnCount(3);
+    ui->Sections->setColumnCount(4);
     ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Item"));
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Quantity"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Dimension"));
+    ui->Sections->setHorizontalHeaderItem(3,new QTableWidgetItem("Estimated Hours"));
     ui->Sections->clearContents();
 }
 void ProjectEditForm::ItemInitialize(){
@@ -72,7 +73,7 @@ QString ProjectEditForm::AddValid(){
     QString error = "";
     QRegExp name_regrex("^[a-zA-Z0-9-_\'\" ]+$");
     if(ui->name->text().length()<6)
-        error = "Invalid name: Minimun length 6";
+        error = "Invalid name: Minimum length 6";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid name: Must contain letters, numbers, dashes, and quotes only";
     else if(ui->Sections->rowCount()<1){
@@ -189,11 +190,13 @@ void ProjectEditForm::on_AddItem_clicked()
             ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Item->currentText()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
             ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Dimension->currentText()));
+            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
 
             ui->Sections->resizeRowsToContents();
             ui->Item->setEditText("");
             ui->Quantity->setValue(0);
             ui->Dimension->setEditText("");
+            ui->Hours->setValue(0);
         }
         ui->error->setText("");
     }
@@ -209,11 +212,13 @@ void ProjectEditForm::on_EditItem_clicked()
         ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Item->currentText()));
         ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
         ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Dimension->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
 
         ui->Sections->resizeRowsToContents();
         ui->Item->setEditText("");
         ui->Quantity->setValue(0);
         ui->Dimension->setEditText("");
+        ui->Hours->setValue(0);
         clicked = false;
     }
 }
@@ -233,7 +238,7 @@ void ProjectEditForm::on_Sections_cellClicked(int row, int column)
     QString item = ui->Sections->item(row,0)->text();
     QString quantity = ui->Sections->item(row,1)->text();
     QString dimension = ui->Sections->item(row,2)->text();
-
+    QString hours = ui->Sections->item(row,3)->text();
 
     int index = ui->Item->findText(item);
     if ( index != -1 ) { // -1 for not found
@@ -247,6 +252,7 @@ void ProjectEditForm::on_Sections_cellClicked(int row, int column)
        ui->Dimension->setCurrentIndex(index);
     }
 
+    ui->Hours->setValue(hours.toInt());
 }
 
 void ProjectEditForm::on_FinishButton_clicked()
@@ -287,7 +293,7 @@ void ProjectEditForm::on_FinishButton_clicked()
             return;
         }
         qry->clear();
-        qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45))");
+        qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45), ehours varchar(45), euhours varchar(45),ahours varchar(45),auhours varchar(45),percent varchar(45))");
         qry->exec();
 
         QString itemId;

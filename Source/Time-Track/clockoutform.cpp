@@ -114,13 +114,12 @@ void ClockoutForm::ClockoutInitialize(QString i){
 
 
 
-    ui->FinishedButton->setEnabled(false);
     ui->Sections->setRowCount(0);
-    ui->Sections->setColumnCount(3);
+    ui->Sections->setColumnCount(4);
     ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Project"));
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
-
+    ui->Sections->setHorizontalHeaderItem(3,new QTableWidgetItem("Notes"));
 }
 
 
@@ -214,6 +213,7 @@ void ClockoutForm::TimesInitialize(){
         ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
         ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
     }
+    ui->Lunch->setCurrentIndex(2);
 
 
 
@@ -287,22 +287,7 @@ void ClockoutForm::TimeLeft(){
         j =QString::number(hours)+":"+QString::number(minutes);
 
     ui->timeLeft->setText(j);
-    if(ui->timeLeft->text()=="0:00")
-    {
-        if(ui->Description->isVisible()&&ui->Description->text()!=""){
 
-            ui->FinishedButton->setEnabled(true);
-        }
-        else if(!ui->Description->isVisible()&&ui->Sections->rowCount()>0){
-            ui->FinishedButton->setEnabled(true);
-        }
-        else{
-            ui->FinishedButton->setEnabled(false);
-        }
-
-    }
-    else
-        ui->FinishedButton->setEnabled(false);
 }
 
 
@@ -311,21 +296,28 @@ void ClockoutForm::TimeLeft(){
 
 void ClockoutForm::on_Add_clicked()
 {
-    ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-//    if (QString::number(ui->Times->time().minute()) == "0")
-//        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())+"0"));
-//    else
-//        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Hours->currentText()+":"+ui->Minutes->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
-    ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
-    if(ui->Items->currentText()=="Other")
-    {
-        ui->Description->setVisible(true);
-        ui->DescriptionLabel->setVisible(true);       
+    if(ui->Items->currentText() == "Other" && ui->Description->text() == ""){
+        ui->error->setText("Invalid: Add Note to the Task");
+    }else{
+        ui->error->setText("");
+        ui->Sections->setRowCount(ui->Sections->rowCount()+1);
+        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Hours->currentText()+":"+ui->Minutes->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Projects->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(ui->Items->currentText()));
+        if(ui->Items->currentText()=="Other"){
+            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(ui->Description->text()));
+            ui->Description->setVisible(false);
+            ui->DescriptionLabel->setVisible(false);
+            ui->Description->setText("");
+            ItemInitialize();
+        }
+        else{
+            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(""));
+        }
+
+        ui->Sections->resizeColumnsToContents();
+        TimeLeft();
     }
-    ui->Sections->resizeColumnsToContents();
-    TimeLeft();
 }
 void ClockoutForm::on_Delete_clicked()
 {
@@ -351,6 +343,7 @@ void ClockoutForm::on_Sections_cellClicked(int row, int column)
     QString project = ui->Sections->item(row,0)->text();
     QString item = ui->Sections->item(row,1)->text();
     QString time = ui->Sections->item(row,2)->text();
+    QString description = ui->Sections->item(row,3)->text();
 
 
     int index = ui->Projects->findText(project);
@@ -375,6 +368,15 @@ void ClockoutForm::on_Sections_cellClicked(int row, int column)
     index = ui->Minutes->findText(time.split(":")[1]);
     if (time != "")
         ui->Minutes->setCurrentIndex(index);
+    if(description != ""){
+        ui->Description->setVisible(true);
+        ui->DescriptionLabel->setVisible(true);
+        ui->Description->setText(description);
+    }
+    else{
+        ui->Description->setVisible(false);
+        ui->DescriptionLabel->setVisible(false);
+    }
 
 
 }
@@ -397,86 +399,93 @@ void ClockoutForm::on_Description_textChanged()
 
 void ClockoutForm::on_FinishedButton_clicked()
 {
-    QSqlQuery* qry=new QSqlQuery(data);
-    QString shiftId,employeeid,employeename,timein,datein;
 
-    qry->prepare("SELECT shiftcount FROM employeelist WHERE id = '"+id+"'");
-    if(qry->exec()){
-        while(qry->next()){
-            shiftId = qry->value(0).toString();}}
-
-    qry->clear();
-    qry->prepare("select employeeid,employeename,timein,datein from shiftlist where shiftid = '"+shiftId+"'");
-
-    if(qry->exec()){
-        while(qry->next()){
-            employeeid=qry->value(0).toString();
-            employeename=qry->value(1).toString();
-            timein=qry->value(2).toString();
-            datein=qry->value(3).toString();
+    if(ui->timeLeft->text()!= "0:00"){
+        if(ui->timeLeft->text().split(":")[0].toInt()>0){
+            ui->error->setText("Invalid: To little time on timesheet");
         }
+        else{
+            ui->error->setText("Invalid: To much time on timesheet");
+        }
+    }else if(ui->Sections->rowCount()<1){
+        ui->error->setText("Invalid: No projects added to timesheet");
     }
-    QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
-    QString timeout = clockout.toString("HH:mm:ss");
-    QString dateout = clockout.toString("yyyy-MM-dd");
+    else{
+        QSqlQuery* qry=new QSqlQuery(data);
+        QString shiftId,employeeid,employeename,timein,datein;
 
-
-
-
-
-
-
-    qry->clear();
-    qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
-    qry->exec();
-
-
-
-    QString projectname,itemname, projectid,itemid,hours,lunch,description;
-    description=ui->Description->text().simplified();
-
-    for(int i =0; i<ui->Sections->rowCount();i++){
-
-
-        projectname = ui->Sections->item(i,0)->text();
-        qry->prepare("select id from projectlist where name='"+projectname+"'");
+        qry->prepare("SELECT shiftcount FROM employeelist WHERE id = '"+id+"'");
         if(qry->exec()){
             while(qry->next()){
-                projectid=qry->value(0).toString();}}
+                shiftId = qry->value(0).toString();}}
+
         qry->clear();
-        itemname=ui->Sections->item(i,1)->text();
-        qry->prepare("select id from itemlist where name='"+itemname+"'");
+        qry->prepare("select employeeid,employeename,timein,datein from shiftlist where shiftid = '"+shiftId+"'");
+
         if(qry->exec()){
             while(qry->next()){
-                itemid=qry->value(0).toString();}}
+                employeeid=qry->value(0).toString();
+                employeename=qry->value(1).toString();
+                timein=qry->value(2).toString();
+                datein=qry->value(3).toString();
+            }
+        }
+        QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
+        QString timeout = clockout.toString("HH:mm:ss");
+        QString dateout = clockout.toString("yyyy-MM-dd");
 
-
-
-        hours=ui->Sections->item(i,2)->text();
-        lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
         qry->clear();
+        qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+        qry->exec();
+        QString projectname,itemname, projectid,itemid,hours,lunch,description;
 
 
-        if(itemname=="Other")
-            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
-                     +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"','"+description+"')");
-        else
-            qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
-                     +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"')");
+        for(int i =0; i<ui->Sections->rowCount();i++){
 
+
+            projectname = ui->Sections->item(i,0)->text();
+            qry->prepare("select id from projectlist where name='"+projectname+"'");
+            if(qry->exec()){
+                while(qry->next()){
+                    projectid=qry->value(0).toString();}}
+            qry->clear();
+            itemname=ui->Sections->item(i,1)->text();
+            qry->prepare("select id from itemlist where name='"+itemname+"'");
+            if(qry->exec()){
+                while(qry->next()){
+                    itemid=qry->value(0).toString();}}
+
+
+
+            hours=ui->Sections->item(i,2)->text();
+            lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+            qry->clear();
+            description = ui->Sections->item(i,3)->text();
+
+            if(description!="")
+                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
+                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"','"+description+"')");
+            else
+                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"')");
+
+            qry->exec();
+            qDebug()<<qry->lastError();
+            qDebug()<<qry->lastQuery();
+
+        }
+
+
+        qry->clear();
+        qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
         qry->exec();
 
+
+        this->hide();
+
+        emit finished();
     }
 
-
-    qry->clear();
-    qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
-    qry->exec();
-
-
-    this->hide();
-
-    emit finished();
 }
 void ClockoutForm::on_CancelButton_clicked()
 {
@@ -485,7 +494,14 @@ void ClockoutForm::on_CancelButton_clicked()
     emit finished();
 }
 
-
-
-
-
+void ClockoutForm::on_Items_currentTextChanged(const QString &arg1)
+{
+    if(arg1 =="Other"){
+        ui->Description->setVisible(true);
+        ui->DescriptionLabel->setVisible(true);
+    }
+    else{
+        ui->Description->setVisible(false);
+        ui->DescriptionLabel->setVisible(false);
+    }
+}

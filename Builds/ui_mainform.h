@@ -1425,7 +1425,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
 
@@ -1506,7 +1506,7 @@ public:
         ItemSub->setText(QApplication::translate("MainForm", "Sub-Category", Q_NULLPTR));
         ItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         ItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
-        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Sub-Project", Q_NULLPTR));
+        HeaderTabs->setTabText(HeaderTabs->indexOf(ItemsSettings), QApplication::translate("MainForm", "Task", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ShiftAdd->setText(QString());
         ShiftEdit->setText(QString());

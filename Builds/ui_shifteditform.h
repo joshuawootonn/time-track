@@ -13,17 +13,16 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -39,7 +38,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QWidget *left;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_3;
     QDateTimeEdit *DateTime1;
+    QHBoxLayout *horizontalLayout_11;
     QDateTimeEdit *DateTime2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_3;
@@ -50,10 +51,14 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_5;
     QComboBox *Items;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *Description_label;
+    QLineEdit *Description;
     QHBoxLayout *horizontalLayout_9;
     QLabel *label_7;
     QTimeEdit *Times;
     QHBoxLayout *horizontalLayout_7;
+    QSpacerItem *horizontalSpacer_2;
     QPushButton *Add;
     QPushButton *Delete;
     QHBoxLayout *horizontalLayout_8;
@@ -62,15 +67,12 @@ public:
     QWidget *right;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
-    QWidget *DescriptionWidget;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *label_2;
-    QTextEdit *Description;
-    QCheckBox *Description_Check;
     QWidget *bottom;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *timeLeft;
+    QSpacerItem *horizontalSpacer_3;
+    QLabel *error;
     QSpacerItem *horizontalSpacer;
     QPushButton *RefreshButton;
     QPushButton *FinishedButton;
@@ -80,7 +82,7 @@ public:
     {
         if (ShiftEditForm->objectName().isEmpty())
             ShiftEditForm->setObjectName(QStringLiteral("ShiftEditForm"));
-        ShiftEditForm->resize(853, 454);
+        ShiftEditForm->resize(1048, 493);
         QFont font;
         font.setFamily(QStringLiteral("Calibri"));
         ShiftEditForm->setFont(font);
@@ -214,17 +216,27 @@ public:
         verticalLayout = new QVBoxLayout(left);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         DateTime1 = new QDateTimeEdit(left);
         DateTime1->setObjectName(QStringLiteral("DateTime1"));
         DateTime1->setCalendarPopup(true);
 
-        verticalLayout->addWidget(DateTime1);
+        horizontalLayout_3->addWidget(DateTime1);
 
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
         DateTime2 = new QDateTimeEdit(left);
         DateTime2->setObjectName(QStringLiteral("DateTime2"));
         DateTime2->setCalendarPopup(true);
 
-        verticalLayout->addWidget(DateTime2);
+        horizontalLayout_11->addWidget(DateTime2);
+
+
+        verticalLayout->addLayout(horizontalLayout_11);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -237,8 +249,8 @@ public:
 
         Name = new QComboBox(left);
         Name->setObjectName(QStringLiteral("Name"));
-        Name->setMinimumSize(QSize(300, 0));
-        Name->setMaximumSize(QSize(300, 16777215));
+        Name->setMinimumSize(QSize(350, 0));
+        Name->setMaximumSize(QSize(350, 16777215));
         Name->setEditable(true);
 
         horizontalLayout_4->addWidget(Name);
@@ -247,6 +259,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_4 = new QLabel(left);
         label_4->setObjectName(QStringLiteral("label_4"));
@@ -257,8 +270,8 @@ public:
 
         Projects = new QComboBox(left);
         Projects->setObjectName(QStringLiteral("Projects"));
-        Projects->setMinimumSize(QSize(300, 0));
-        Projects->setMaximumSize(QSize(300, 16777215));
+        Projects->setMinimumSize(QSize(350, 0));
+        Projects->setMaximumSize(QSize(350, 16777215));
         Projects->setEditable(true);
         Projects->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
@@ -278,14 +291,33 @@ public:
 
         Items = new QComboBox(left);
         Items->setObjectName(QStringLiteral("Items"));
-        Items->setMinimumSize(QSize(300, 0));
-        Items->setMaximumSize(QSize(300, 16777215));
+        Items->setMinimumSize(QSize(350, 0));
+        Items->setMaximumSize(QSize(350, 16777215));
         Items->setEditable(true);
 
         horizontalLayout_6->addWidget(Items);
 
 
         verticalLayout->addLayout(horizontalLayout_6);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        Description_label = new QLabel(left);
+        Description_label->setObjectName(QStringLiteral("Description_label"));
+        Description_label->setMinimumSize(QSize(100, 0));
+        Description_label->setMaximumSize(QSize(100, 16777215));
+
+        horizontalLayout_10->addWidget(Description_label);
+
+        Description = new QLineEdit(left);
+        Description->setObjectName(QStringLiteral("Description"));
+        Description->setMinimumSize(QSize(350, 0));
+        Description->setMaximumSize(QSize(350, 16777215));
+
+        horizontalLayout_10->addWidget(Description);
+
+
+        verticalLayout->addLayout(horizontalLayout_10);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
@@ -298,7 +330,8 @@ public:
 
         Times = new QTimeEdit(left);
         Times->setObjectName(QStringLiteral("Times"));
-        Times->setMinimumSize(QSize(300, 0));
+        Times->setMinimumSize(QSize(350, 0));
+        Times->setMaximumSize(QSize(350, 16777215));
 
         horizontalLayout_9->addWidget(Times);
 
@@ -307,15 +340,23 @@ public:
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(-1, -1, 12, -1);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_7->addItem(horizontalSpacer_2);
+
         Add = new QPushButton(left);
         Add->setObjectName(QStringLiteral("Add"));
+        Add->setMinimumSize(QSize(172, 0));
+        Add->setMaximumSize(QSize(172, 16777215));
         Add->setFocusPolicy(Qt::StrongFocus);
 
         horizontalLayout_7->addWidget(Add);
 
         Delete = new QPushButton(left);
         Delete->setObjectName(QStringLiteral("Delete"));
-        Delete->setMaximumSize(QSize(250, 16777215));
+        Delete->setMinimumSize(QSize(172, 0));
+        Delete->setMaximumSize(QSize(172, 16777215));
         Delete->setFocusPolicy(Qt::StrongFocus);
 
         horizontalLayout_7->addWidget(Delete);
@@ -334,7 +375,8 @@ public:
 
         Lunch = new QTimeEdit(left);
         Lunch->setObjectName(QStringLiteral("Lunch"));
-        Lunch->setMinimumSize(QSize(300, 0));
+        Lunch->setMinimumSize(QSize(350, 0));
+        Lunch->setMaximumSize(QSize(350, 16777215));
         Lunch->setMaximumTime(QTime(1, 0, 0));
         Lunch->setCurrentSection(QDateTimeEdit::HourSection);
 
@@ -356,38 +398,6 @@ public:
 
         verticalLayout_3->addWidget(Sections);
 
-        DescriptionWidget = new QWidget(right);
-        DescriptionWidget->setObjectName(QStringLiteral("DescriptionWidget"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(DescriptionWidget->sizePolicy().hasHeightForWidth());
-        DescriptionWidget->setSizePolicy(sizePolicy);
-        DescriptionWidget->setMaximumSize(QSize(16777215, 35));
-        horizontalLayout_3 = new QHBoxLayout(DescriptionWidget);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label_2 = new QLabel(DescriptionWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMaximumSize(QSize(16777215, 26));
-
-        horizontalLayout_3->addWidget(label_2);
-
-        Description = new QTextEdit(DescriptionWidget);
-        Description->setObjectName(QStringLiteral("Description"));
-        Description->setMinimumSize(QSize(0, 21));
-        Description->setMaximumSize(QSize(16777215, 26));
-
-        horizontalLayout_3->addWidget(Description);
-
-        Description_Check = new QCheckBox(DescriptionWidget);
-        Description_Check->setObjectName(QStringLiteral("Description_Check"));
-        Description_Check->setTristate(false);
-
-        horizontalLayout_3->addWidget(Description_Check);
-
-
-        verticalLayout_3->addWidget(DescriptionWidget);
-
 
         horizontalLayout->addWidget(right);
 
@@ -407,6 +417,15 @@ public:
         timeLeft->setObjectName(QStringLiteral("timeLeft"));
 
         horizontalLayout_2->addWidget(timeLeft);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_3);
+
+        error = new QLabel(bottom);
+        error->setObjectName(QStringLiteral("error"));
+
+        horizontalLayout_2->addWidget(error);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -442,8 +461,6 @@ public:
 
         gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
-        QWidget::setTabOrder(DateTime1, DateTime2);
-        QWidget::setTabOrder(DateTime2, Name);
         QWidget::setTabOrder(Name, Projects);
         QWidget::setTabOrder(Projects, Items);
         QWidget::setTabOrder(Items, Times);
@@ -453,9 +470,7 @@ public:
         QWidget::setTabOrder(Lunch, RefreshButton);
         QWidget::setTabOrder(RefreshButton, FinishedButton);
         QWidget::setTabOrder(FinishedButton, CancelButton);
-        QWidget::setTabOrder(CancelButton, Description);
-        QWidget::setTabOrder(Description, Sections);
-        QWidget::setTabOrder(Sections, Description_Check);
+        QWidget::setTabOrder(CancelButton, Sections);
 
         retranslateUi(ShiftEditForm);
 
@@ -467,20 +482,20 @@ public:
 
     void retranslateUi(QWidget *ShiftEditForm)
     {
-        ShiftEditForm->setWindowTitle(QApplication::translate("ShiftEditForm", "Time-Track", Q_NULLPTR));
+        ShiftEditForm->setWindowTitle(QApplication::translate("ShiftEditForm", "Shift Edit", Q_NULLPTR));
         label_3->setText(QApplication::translate("ShiftEditForm", "Name:", Q_NULLPTR));
         label_4->setText(QApplication::translate("ShiftEditForm", "Project:", Q_NULLPTR));
-        label_5->setText(QApplication::translate("ShiftEditForm", "Sub-Project:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("ShiftEditForm", "Task:", Q_NULLPTR));
+        Description_label->setText(QApplication::translate("ShiftEditForm", "Notes:", Q_NULLPTR));
         label_7->setText(QApplication::translate("ShiftEditForm", "Time Worked:", Q_NULLPTR));
         Times->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
         Add->setText(QApplication::translate("ShiftEditForm", "Add", Q_NULLPTR));
         Delete->setText(QApplication::translate("ShiftEditForm", "Delete", Q_NULLPTR));
         label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", Q_NULLPTR));
         Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
-        label_2->setText(QApplication::translate("ShiftEditForm", "Notes:", Q_NULLPTR));
-        Description_Check->setText(QString());
         label->setText(QApplication::translate("ShiftEditForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());
+        error->setText(QString());
         RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", Q_NULLPTR));
         FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("ShiftEditForm", "Cancel", Q_NULLPTR));

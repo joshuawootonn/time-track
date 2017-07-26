@@ -49,6 +49,9 @@ private slots:
     void on_CancelButton_clicked();
 
 
+
+    void on_Items_currentTextChanged(const QString &arg1);
+
 signals:
     void finished();
 

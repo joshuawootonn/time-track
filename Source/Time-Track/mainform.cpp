@@ -588,37 +588,46 @@ void MainForm::on_passEdit_returnPressed()
 {
     pin= ui->passEdit->text();
     QSqlQuery qry1(data),qry2(data);
-    qry1.prepare("SELECT * FROM employeelist where pin = '"+pin+"'");
+    qry1.prepare("SELECT current FROM employeelist where pin = '"+pin+"'");
     if (qry1.exec())
     {
         int count=0;
+        QString current = "0";
         while(qry1.next())
         {
-           count++;
+            current = qry1.value(0).toString();
+            count++;
         }
-        if(count == 1)
+        if(current =="1")
         {
-            qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
-            if(qry2.exec()){
-                while(qry2.next()){
-                    QString x= qry2.value(0).toString();
-                    if(x=="1")
-                        admin=true;
-                    else
-                        admin=false;
-                    id = qry2.value(1).toString();
+            if(count == 1)
+            {
+                qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
+                if(qry2.exec()){
+                    while(qry2.next()){
+                        QString x= qry2.value(0).toString();
+                        if(x=="1")
+                            admin=true;
+                        else
+                            admin=false;
+                        id = qry2.value(1).toString();
+                    }
                 }
+
+                basicInitialize();
             }
+            if(count < 1){
+                if(ui->passEdit->text()!="")
+                    ui->passLabel->setText("Invalid");
 
-            basicInitialize();
+            }
+            else
+                ui->passLabel->setText("");
         }
-        if(count < 1){
-            if(ui->passEdit->text()!="")
-                ui->passLabel->setText("Invalid");
+        else{
+            ui->passLabel->setText("No Longer Employed");
+        }
 
-        }
-        else
-            ui->passLabel->setText("");
     }
     else
     {
@@ -1050,6 +1059,7 @@ QSqlQueryModel * MainForm::ProjectModel(){
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Current"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Date"));
 
     //qDebug()<<"PROJECT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;

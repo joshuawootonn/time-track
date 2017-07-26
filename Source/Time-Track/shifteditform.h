@@ -52,10 +52,11 @@ private slots:
     void on_DateTime1_dateTimeChanged(const QDateTime &dateTime);
     void on_DateTime2_dateTimeChanged(const QDateTime &dateTime);
     void on_Description_textChanged();
-    void on_Description_Check_clicked();
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
     void on_RefreshButton_clicked();
+
+    void on_Items_currentTextChanged(const QString &arg1);
 
 signals:
     void finished();

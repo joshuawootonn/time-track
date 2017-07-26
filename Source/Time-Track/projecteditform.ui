@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
+    <width>891</width>
     <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Project Edit</string>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -64,17 +64,8 @@ background-color:#D1D1D1;
 }
 
 
-QDateTimeEdit{
-border:none;
-background-color:#FFFFFF;
-}
-QDateEditTime:hover{
-border:none;
-background-color:#F4F9F6;
-}
-QDateEditTime::drop-down{
-border:none;
-}
+
+
 
 
 QComboBox{
@@ -133,6 +124,19 @@ background-color:#FFFFFF;
  border: 1px solid #D1D1D1;	
 }
 
+QDateTimeEdit{
+border:none;
+background-color:#FFFFFF;
+}
+QDateEditTime:hover{
+border:none;
+background-color:#F4F9F6;
+}
+QDateEditTime::drop-down{
+border:none;
+}
+
+
 
 </string>
   </property>
@@ -151,13 +155,13 @@ background-color:#FFFFFF;
               <widget class="QLabel" name="label">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -168,10 +172,10 @@ background-color:#FFFFFF;
              </item>
              <item>
               <widget class="QLineEdit" name="name">
-               <property name="maximumSize">
+               <property name="minimumSize">
                 <size>
                  <width>300</width>
-                 <height>16777215</height>
+                 <height>0</height>
                 </size>
                </property>
               </widget>
@@ -184,13 +188,13 @@ background-color:#FFFFFF;
               <widget class="QLabel" name="label_2">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -200,18 +204,15 @@ background-color:#FFFFFF;
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="bidDate">
+              <widget class="QDateTimeEdit" name="bidDate">
                <property name="minimumSize">
                 <size>
                  <width>225</width>
                  <height>0</height>
                 </size>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>16777215</height>
-                </size>
+               <property name="displayFormat">
+                <string>M/d/yyyy</string>
                </property>
                <property name="calendarPopup">
                 <bool>true</bool>
@@ -239,7 +240,7 @@ background-color:#FFFFFF;
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -256,12 +257,6 @@ background-color:#FFFFFF;
                  <height>0</height>
                 </size>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>16777215</height>
-                </size>
-               </property>
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -275,13 +270,13 @@ background-color:#FFFFFF;
               <widget class="QLabel" name="label_4">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -298,12 +293,6 @@ background-color:#FFFFFF;
                  <height>0</height>
                 </size>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>16777215</height>
-                </size>
-               </property>
                <property name="maximum">
                 <number>1000000</number>
                </property>
@@ -317,18 +306,18 @@ background-color:#FFFFFF;
               <widget class="QLabel" name="label_5">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
                <property name="text">
-                <string>Dimension:</string>
+                <string>Unit:</string>
                </property>
               </widget>
              </item>
@@ -340,14 +329,41 @@ background-color:#FFFFFF;
                  <height>0</height>
                 </size>
                </property>
+               <property name="editable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
-                 <width>300</width>
+                 <width>120</width>
                  <height>16777215</height>
                 </size>
                </property>
-               <property name="editable">
-                <bool>false</bool>
+               <property name="text">
+                <string>Estimated Hours:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="Hours">
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
                </property>
               </widget>
              </item>

@@ -15,7 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QDateEdit>
+#include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -45,7 +45,7 @@ public:
     QLineEdit *name;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
-    QDateEdit *bidDate;
+    QDateTimeEdit *bidDate;
     QCheckBox *current;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_3;
@@ -125,17 +125,8 @@ public:
 "}\n"
 "\n"
 "\n"
-"QDateTimeEdit{\n"
-"border:none;\n"
-"background-color:#FFFFFF;\n"
-"}\n"
-"QDateEditTime:hover{\n"
-"border:none;\n"
-"background-color:#F4F9F6;\n"
-"}\n"
-"QDateEditTime::drop-down{\n"
-"border:none;\n"
-"}\n"
+"\n"
+"\n"
 "\n"
 "\n"
 "QComboBox{\n"
@@ -148,8 +139,7 @@ public:
 "	\n"
 "}\n"
 "QComboBox:drop-down{\n"
-"bo"
-                        "rder:none;\n"
+"border:none;\n"
 "}\n"
 "\n"
 "\n"
@@ -163,7 +153,8 @@ public:
 "    border: 0px solid gray;\n"
 "	\n"
 "    margin-top: 0.5em;\n"
-"	margin-right:0px;\n"
+"	margin-right:"
+                        "0px;\n"
 "	margin-left:0px;\n"
 "}\n"
 "QGroupBox::title {\n"
@@ -195,6 +186,19 @@ public:
 " border: 1px solid #D1D1D1;	\n"
 "}\n"
 "\n"
+"QDateTimeEdit{\n"
+"border:none;\n"
+"background-color:#FFFFFF;\n"
+"}\n"
+"QDateEditTime:hover{\n"
+"border:none;\n"
+"background-color:#F4F9F6;\n"
+"}\n"
+"QDateEditTime::drop-down{\n"
+"border:none;\n"
+"}\n"
+"\n"
+"\n"
 "\n"
 ""));
         gridLayout = new QGridLayout(ProjectEditForm);
@@ -220,7 +224,7 @@ public:
 
         name = new QLineEdit(verticalWidget_2);
         name->setObjectName(QStringLiteral("name"));
-        name->setMaximumSize(QSize(300, 16777215));
+        name->setMinimumSize(QSize(300, 0));
 
         horizontalLayout->addWidget(name);
 
@@ -236,10 +240,9 @@ public:
 
         horizontalLayout_2->addWidget(label_2);
 
-        bidDate = new QDateEdit(verticalWidget_2);
+        bidDate = new QDateTimeEdit(verticalWidget_2);
         bidDate->setObjectName(QStringLiteral("bidDate"));
         bidDate->setMinimumSize(QSize(225, 0));
-        bidDate->setMaximumSize(QSize(300, 16777215));
         bidDate->setCalendarPopup(true);
 
         horizontalLayout_2->addWidget(bidDate);
@@ -264,7 +267,6 @@ public:
         Item = new QComboBox(verticalWidget_2);
         Item->setObjectName(QStringLiteral("Item"));
         Item->setMinimumSize(QSize(300, 0));
-        Item->setMaximumSize(QSize(300, 16777215));
         Item->setEditable(true);
 
         horizontalLayout_6->addWidget(Item);
@@ -284,7 +286,6 @@ public:
         Quantity = new QSpinBox(verticalWidget_2);
         Quantity->setObjectName(QStringLiteral("Quantity"));
         Quantity->setMinimumSize(QSize(300, 0));
-        Quantity->setMaximumSize(QSize(300, 16777215));
         Quantity->setMaximum(1000000);
 
         horizontalLayout_7->addWidget(Quantity);
@@ -304,7 +305,6 @@ public:
         Dimension = new QComboBox(verticalWidget_2);
         Dimension->setObjectName(QStringLiteral("Dimension"));
         Dimension->setMinimumSize(QSize(300, 0));
-        Dimension->setMaximumSize(QSize(300, 16777215));
         Dimension->setEditable(false);
 
         horizontalLayout_8->addWidget(Dimension);
@@ -404,9 +404,10 @@ public:
 
     void retranslateUi(QDialog *ProjectEditForm)
     {
-        ProjectEditForm->setWindowTitle(QApplication::translate("ProjectEditForm", "Dialog", Q_NULLPTR));
+        ProjectEditForm->setWindowTitle(QApplication::translate("ProjectEditForm", "Project Edit", Q_NULLPTR));
         label->setText(QApplication::translate("ProjectEditForm", "Name: ", Q_NULLPTR));
         label_2->setText(QApplication::translate("ProjectEditForm", "Bid Date: ", Q_NULLPTR));
+        bidDate->setDisplayFormat(QApplication::translate("ProjectEditForm", "M/d/yyyy", Q_NULLPTR));
         current->setText(QApplication::translate("ProjectEditForm", "Current", Q_NULLPTR));
         label_3->setText(QApplication::translate("ProjectEditForm", "Item: ", Q_NULLPTR));
         label_4->setText(QApplication::translate("ProjectEditForm", "Quantity:", Q_NULLPTR));

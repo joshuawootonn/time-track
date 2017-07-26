@@ -47,7 +47,7 @@ public:
     {
         if (ItemEditForm->objectName().isEmpty())
             ItemEditForm->setObjectName(QStringLiteral("ItemEditForm"));
-        ItemEditForm->resize(324, 111);
+        ItemEditForm->resize(450, 149);
         ItemEditForm->setStyleSheet(QLatin1String("QDialog#ItemEditForm{\n"
 "\n"
 "background-color:#E8E8E8;\n"
@@ -181,6 +181,7 @@ public:
 
         name = new QLineEdit(widget);
         name->setObjectName(QStringLiteral("name"));
+        name->setMinimumSize(QSize(300, 0));
 
         horizontalLayout->addWidget(name);
 
@@ -226,7 +227,7 @@ public:
 
     void retranslateUi(QDialog *ItemEditForm)
     {
-        ItemEditForm->setWindowTitle(QApplication::translate("ItemEditForm", "Dialog", Q_NULLPTR));
+        ItemEditForm->setWindowTitle(QApplication::translate("ItemEditForm", "Item Edit", Q_NULLPTR));
         label->setText(QApplication::translate("ItemEditForm", "Name:", Q_NULLPTR));
         error->setText(QString());
         FinishButton->setText(QApplication::translate("ItemEditForm", "Finish", Q_NULLPTR));

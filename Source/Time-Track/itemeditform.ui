@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>324</width>
-    <height>111</height>
+    <width>450</width>
+    <height>149</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Item Edit</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog#ItemEditForm{
@@ -135,7 +135,7 @@ background-color:#FFFFFF;
     <widget class="QWidget" name="bigwidger" native="true">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QWidget" name="" native="true">
+       <widget class="QWidget" name="widget" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="label">
@@ -145,7 +145,14 @@ background-color:#FFFFFF;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="name"/>
+          <widget class="QLineEdit" name="name">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -158,7 +165,7 @@ background-color:#FFFFFF;
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="" native="true">
+       <widget class="QWidget" name="widget" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <spacer name="horizontalSpacer">

@@ -58,6 +58,8 @@ public:
     QHBoxLayout *horizontalLayout_10;
     QLabel *label;
     QLabel *timeLeft;
+    QSpacerItem *horizontalSpacer_3;
+    QLabel *error;
     QSpacerItem *horizontalSpacer;
     QLabel *label_6;
     QComboBox *Lunch;
@@ -364,6 +366,15 @@ public:
 
         horizontalLayout_10->addWidget(timeLeft);
 
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer_3);
+
+        error = new QLabel(bigwidger);
+        error->setObjectName(QStringLiteral("error"));
+
+        horizontalLayout_10->addWidget(error);
+
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_10->addItem(horizontalSpacer);
@@ -426,9 +437,9 @@ public:
 
     void retranslateUi(QWidget *ClockoutForm)
     {
-        ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Time-Track", Q_NULLPTR));
+        ClockoutForm->setWindowTitle(QApplication::translate("ClockoutForm", "Clock Out Edit", Q_NULLPTR));
         label_3->setText(QApplication::translate("ClockoutForm", "Project:", Q_NULLPTR));
-        label_4->setText(QApplication::translate("ClockoutForm", "Sub-Project:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ClockoutForm", "Task:", Q_NULLPTR));
         DescriptionLabel->setText(QApplication::translate("ClockoutForm", "Note:", Q_NULLPTR));
         label_5->setText(QApplication::translate("ClockoutForm", "Time Worked:", Q_NULLPTR));
         Hours->setCurrentText(QString());
@@ -437,6 +448,7 @@ public:
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", Q_NULLPTR));
         label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());
+        error->setText(QString());
         label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
         FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", Q_NULLPTR));
