@@ -42,21 +42,25 @@ background-color:#F1F4F5;
 border:none;
 padding:10px;
 }
-QTabBar::tab:selected,QTabBar::tab:hover{
 
-color:#444946;
-}
 QTabBar::tab{
-background-color:#E8E8E8;
+background-color:#f3f0f2;
+
+
 
 color:black;
 }
 QTabBar::tab:hover{
-background-color:#f3f0f2;
+
+background-color:#E5E3E4;
 
 }
+
 QTabBar::tab:selected{
+/*
 background-color:#fcfbfb;
+*/
+background-color:#fff;
 }
 
 
@@ -839,7 +843,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1166,7 +1170,7 @@ background-color:#B19994;
            <item>
             <widget class="QGroupBox" name="groupBox_8">
              <property name="title">
-              <string>Project Table</string>
+              <string>Table</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_9">
               <property name="topMargin">

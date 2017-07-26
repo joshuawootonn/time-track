@@ -244,21 +244,25 @@ public:
 "border:none;\n"
 "padding:10px;\n"
 "}\n"
-"QTabBar::tab:selected,QTabBar::tab:hover{\n"
 "\n"
-"color:#444946;\n"
-"}\n"
 "QTabBar::tab{\n"
-"background-color:#E8E8E8;\n"
+"background-color:#f3f0f2;\n"
+"\n"
+"\n"
 "\n"
 "color:black;\n"
 "}\n"
 "QTabBar::tab:hover{\n"
-"background-color:#f3f0f2;\n"
+"\n"
+"background-color:#E5E3E4;\n"
 "\n"
 "}\n"
+"\n"
 "QTabBar::tab:selected{\n"
+"/*\n"
 "background-color:#fcfbfb;\n"
+"*/\n"
+"background-color:#fff;\n"
 "}\n"
 "\n"
 "\n"
@@ -289,8 +293,8 @@ public:
 "}\n"
 "\n"
 "QPushButton#basicPageConnect:hover{\n"
-""
-                        "border-radius:15px;\n"
+"border-ra"
+                        "dius:15px;\n"
 "\n"
 "}\n"
 "\n"
@@ -1421,7 +1425,7 @@ public:
 
         mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(3);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 
@@ -1477,7 +1481,7 @@ public:
         ProjectAdd->setText(QString());
         ProjectArchive->setText(QString());
         ProjectDelete->setText(QString());
-        groupBox_8->setTitle(QApplication::translate("MainForm", "Project Table", Q_NULLPTR));
+        groupBox_8->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
         ProjectDate->setText(QApplication::translate("MainForm", "Date", Q_NULLPTR));
         ProjectCurrent->setText(QApplication::translate("MainForm", "Current", Q_NULLPTR));
         ProjectName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
