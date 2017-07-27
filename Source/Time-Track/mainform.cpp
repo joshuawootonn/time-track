@@ -105,7 +105,6 @@ void MainForm::establishConnections(){
 
     QObject::connect(ui->ProjectView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshProjectStuff()));
     QObject::connect(ui->ItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshItemStuff()));
-    QObject::connect(ui->ProjectItemView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(refreshItemStuff()));
     QObject::connect(ui->EmployeeView->model(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this, SLOT(refreshEmployeeStuff()));
 }
 void MainForm::reenter(){
@@ -920,20 +919,23 @@ void MainForm::ProjectTab(){
 
 
     ui->ProjectView->setSortingEnabled(true);
-    ui->ProjectItemView->setSortingEnabled(true);
     ui->ProjectView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ui->ProjectItemView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->ProjectView->hideColumn(0);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
     ui->ProjectAllRadio->setChecked(true);
     ui->ProjectDate->setChecked(true);
 
-    ui->ProjectItemName->setChecked(true);
     ui->ProjectItemId->setChecked(false);
+    ui->ProjectItemName->setChecked(true);    
     ui->ProjectItemDimension->setChecked(true);
     ui->ProjectItemQuantity->setChecked(true);
-    ui->ProjectItemView->hideColumn(0);
+    ui->ProjectItemEstHours->setChecked(true);
+    ui->ProjectItemEstHourUnit->setChecked(true);
+    ui->ProjectItemActHours->setChecked(true);
+    ui->ProjectItemActHourUnit->setChecked(true);
+    ui->ProjectItemDifference->setChecked(true);
+
 
 
     ui->ShiftEmployeeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -943,17 +945,17 @@ void MainForm::ProjectTab(){
     ui->ProjectView->setModel(projectfiltermodel);
 
     establishConnections();
-    QSqlQueryModel * y = ProjectItemModelFirst();
-    ui->ProjectItemView->setModel(y);
+
 
 }
 
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
 
-    QSqlQueryModel * x = ProjectItemModel();
-    ui->ProjectItemView->setModel(x);
+
+
     refreshProjectItemTab();
+    refreshProjectItemTable();
 }
 void MainForm::refreshProjectStuff(){
     refreshShiftProject();
@@ -965,7 +967,10 @@ void MainForm::refreshProjectTab(){
     projectfiltermodel = ProjectFilterModel();
     ui->ProjectView->setModel(projectfiltermodel);
     establishConnections();
-    ui->ProjectItemView->setModel(ProjectItemModelFirst());
+
+    ui->ProjectItemWidget->clear();
+    ui->ProjectItemWidget->setRowCount(0);
+    ui->ProjectItemWidget->setColumnCount(0);
 
     if(ui->ProjectId->isChecked())
         ui->ProjectView->showColumn(0);
@@ -1021,24 +1026,43 @@ void MainForm::refreshProjectTab(){
 }
 void MainForm::refreshProjectItemTab(){
     //qDebug()<<"refresh item";
-    ui->ProjectItemView->setModel(ProjectItemModelRefresh());
-    ui->ProjectItemView->hideColumn(0);
-    if(ui->ProjectItemName->isChecked())
-        ui->ProjectItemView->showColumn(2);
-    else
-        ui->ProjectItemView->hideColumn(2);
+
     if(ui->ProjectItemId->isChecked())
-        ui->ProjectItemView->showColumn(1);
+        ui->ProjectItemWidget->showColumn(1);
     else
-        ui->ProjectItemView->hideColumn(1);
+        ui->ProjectItemWidget->hideColumn(1);
+    if(ui->ProjectItemName->isChecked())
+        ui->ProjectItemWidget->showColumn(2);
+    else
+        ui->ProjectItemWidget->hideColumn(2);
     if(ui->ProjectItemQuantity->isChecked())
-        ui->ProjectItemView->showColumn(3);
+        ui->ProjectItemWidget->showColumn(3);
     else
-        ui->ProjectItemView->hideColumn(3);
+        ui->ProjectItemWidget->hideColumn(3);
     if(ui->ProjectItemDimension->isChecked())
-        ui->ProjectItemView->showColumn(4);
+        ui->ProjectItemWidget->showColumn(4);
     else
-        ui->ProjectItemView->hideColumn(4);
+        ui->ProjectItemWidget->hideColumn(4);
+    if(ui->ProjectItemEstHours->isChecked())
+        ui->ProjectItemWidget->showColumn(5);
+    else
+        ui->ProjectItemWidget->hideColumn(5);
+    if(ui->ProjectItemEstHourUnit->isChecked())
+        ui->ProjectItemWidget->showColumn(6);
+    else
+        ui->ProjectItemWidget->hideColumn(6);
+    if(ui->ProjectItemActHours->isChecked())
+        ui->ProjectItemWidget->showColumn(7);
+    else
+        ui->ProjectItemWidget->hideColumn(7);
+    if(ui->ProjectItemActHourUnit->isChecked())
+        ui->ProjectItemWidget->showColumn(8);
+    else
+        ui->ProjectItemWidget->hideColumn(8);
+    if(ui->ProjectItemDifference->isChecked())
+        ui->ProjectItemWidget->showColumn(9);
+    else
+        ui->ProjectItemWidget->hideColumn(9);
 }
 QSqlQueryModel * MainForm::ProjectModel(){
 //    QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -1071,38 +1095,74 @@ QSortFilterProxyModel * MainForm::ProjectFilterModel(){
     m->setSourceModel(ProjectModel());
     return m;
 }
-QSqlQueryModel * MainForm::ProjectItemModelFirst(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
-    QString id = projectfiltermodel->data(projectfiltermodel->index(0,1),Qt::DisplayRole).toString();
-    model->setTable("Project"+id);
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->select();
-    model->setHeaderData(0,Qt::Horizontal,tr("Id"));
-    model->setHeaderData(1,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(2,Qt::Horizontal,tr("Quantity"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Dimension"));
-    return model;
-}
-QSqlQueryModel * MainForm::ProjectItemModel(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
+void MainForm::refreshProjectItemTable(){
     QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
+    ui->ProjectItemWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     QModelIndex index = list.at(0);
     QString id = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toString();
-    currentProject = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(1).toString();
-    model->setTable("Project"+id);
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->select();
-    model->setHeaderData(1,Qt::Horizontal,tr("Id"));
-    model->setHeaderData(2,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Quantity"));
-    model->setHeaderData(4,Qt::Horizontal,tr("Dimension"));    
-    return model;
+    ui->ProjectItemWidget->setRowCount(0);
+    ui->ProjectItemWidget->setColumnCount(10);
+    ui->ProjectItemWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Id"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(1,new QTableWidgetItem("itemId"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(2,new QTableWidgetItem("Name"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(3,new QTableWidgetItem("Quantity"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(4,new QTableWidgetItem("Unit"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(5,new QTableWidgetItem("Est. Hours"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(6,new QTableWidgetItem("Est. Hours/Unit"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(7,new QTableWidgetItem("Act. Hours"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(8,new QTableWidgetItem("Act. Hours/Unit"));
+    ui->ProjectItemWidget->setHorizontalHeaderItem(9,new QTableWidgetItem("Difference(%)"));
+    ui->ProjectItemWidget->hideColumn(0);
+    ui->ProjectItemWidget->hideColumn(1);
+    ui->ProjectItemWidget->clearContents();
+
+
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("SELECT id,itemid,name,quantity,dimension,ehours FROM Project"+id+"");
+    if(qry->exec()){
+        while(qry->next()){
+            ui->ProjectItemWidget->setRowCount(ui->ProjectItemWidget->rowCount()+1);
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,0,new QTableWidgetItem(qry->value(0).toString()));
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,1,new QTableWidgetItem(qry->value(1).toString()));
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,2,new QTableWidgetItem(qry->value(2).toString()));
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,3,new QTableWidgetItem(qry->value(3).toString()));
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,4,new QTableWidgetItem(qry->value(4).toString()));
+            ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,5,new QTableWidgetItem(qry->value(5).toString()));
+        }
+    }
+    for(int i= 0; i<ui->ProjectItemWidget->rowCount();i++){
+        //Est. Hours/Unit
+        QString e = QString::number(((double)ui->ProjectItemWidget->item(i,5)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt());
+        ui->ProjectItemWidget->setItem(i,6,new QTableWidgetItem(e+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
+
+        qry->clear();
+        double ahours = 0.0;
+        qry->prepare("SELECT time FROM shiftlist WHERE projectid='"+id+"' AND itemid='"+ui->ProjectItemWidget->item(i,1)->text()+"'");
+        if(qry->exec()){
+            while(qry->next()){
+
+               QString time = qry->value(0).toString();
+               ahours += time.split(":")[0].toInt();
+               ahours += time.split(":")[1].toDouble()*(100)/60;
+
+            }
+        }
+        qDebug()<<qry->lastQuery();
+        ui->ProjectItemWidget->setItem(i,7,new QTableWidgetItem(QString::number(ahours)));
+
+
+
+        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt());
+        ui->ProjectItemWidget->setItem(i,8,new QTableWidgetItem(a+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
+
+        QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toInt()))/ui->ProjectItemWidget->item(i,5)->text().toInt());
+        ui->ProjectItemWidget->setItem(i,9,new QTableWidgetItem(p+"%"));
+    }
+
+    qDebug()<<qry->lastError();
+    qDebug()<<qry->lastQuery();
 }
-QSqlQueryModel * MainForm::ProjectItemModelRefresh(){
-    QSqlTableModel * model = (QSqlTableModel*)ui->ProjectItemView->model();
-    model->select();
-    return model;
-}
+
 void MainForm::displayProjectSuccess(){
     QMessageBox::StandardButton reply;
     if(!projecteditform->getSuccess())
@@ -1272,6 +1332,29 @@ void MainForm::on_ProjectItemDimension_clicked()
 {
     refreshProjectItemTab();
 }
+void MainForm::on_ProjectItemEstHours_clicked()
+{
+    refreshProjectItemTab();
+}
+void MainForm::on_ProjectItemEstHourUnit_clicked()
+{
+    refreshProjectItemTab();
+}
+void MainForm::on_ProjectItemActHours_clicked()
+{
+    refreshProjectItemTab();
+}
+void MainForm::on_ProjectItemActHourUnit_clicked()
+{
+    refreshProjectItemTab();
+}
+void MainForm::on_ProjectItemDifference_clicked()
+{
+    refreshProjectItemTab();
+}
+
+
+
 
 
 
@@ -1430,8 +1513,6 @@ void MainForm::on_ItemDimension_clicked()
 {
     refreshItemTab();
 }
-
-
 
 
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'projecteditform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -56,6 +56,9 @@ public:
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_5;
     QComboBox *Dimension;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_6;
+    QSpinBox *Hours;
     QHBoxLayout *horizontalLayout_9;
     QPushButton *AddItem;
     QPushButton *EditItem;
@@ -74,7 +77,7 @@ public:
     {
         if (ProjectEditForm->objectName().isEmpty())
             ProjectEditForm->setObjectName(QStringLiteral("ProjectEditForm"));
-        ProjectEditForm->resize(853, 454);
+        ProjectEditForm->resize(931, 454);
         ProjectEditForm->setStyleSheet(QLatin1String("\n"
 "\n"
 "QDialog#ProjectEditForm{\n"
@@ -211,14 +214,15 @@ public:
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         verticalWidget_2 = new QWidget(bigwidger);
         verticalWidget_2->setObjectName(QStringLiteral("verticalWidget_2"));
+        verticalWidget_2->setMaximumSize(QSize(450, 16777215));
         left = new QVBoxLayout(verticalWidget_2);
         left->setObjectName(QStringLiteral("left"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(verticalWidget_2);
         label->setObjectName(QStringLiteral("label"));
-        label->setMinimumSize(QSize(100, 0));
-        label->setMaximumSize(QSize(100, 16777215));
+        label->setMinimumSize(QSize(120, 0));
+        label->setMaximumSize(QSize(120, 16777215));
 
         horizontalLayout->addWidget(label);
 
@@ -235,8 +239,8 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_2 = new QLabel(verticalWidget_2);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMinimumSize(QSize(100, 0));
-        label_2->setMaximumSize(QSize(100, 16777215));
+        label_2->setMinimumSize(QSize(120, 0));
+        label_2->setMaximumSize(QSize(120, 16777215));
 
         horizontalLayout_2->addWidget(label_2);
 
@@ -260,7 +264,7 @@ public:
         label_3 = new QLabel(verticalWidget_2);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setMinimumSize(QSize(100, 0));
-        label_3->setMaximumSize(QSize(100, 16777215));
+        label_3->setMaximumSize(QSize(120, 16777215));
 
         horizontalLayout_6->addWidget(label_3);
 
@@ -278,8 +282,8 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         label_4 = new QLabel(verticalWidget_2);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setMinimumSize(QSize(100, 0));
-        label_4->setMaximumSize(QSize(100, 16777215));
+        label_4->setMinimumSize(QSize(120, 0));
+        label_4->setMaximumSize(QSize(120, 16777215));
 
         horizontalLayout_7->addWidget(label_4);
 
@@ -297,8 +301,8 @@ public:
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         label_5 = new QLabel(verticalWidget_2);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setMinimumSize(QSize(100, 0));
-        label_5->setMaximumSize(QSize(100, 16777215));
+        label_5->setMinimumSize(QSize(120, 0));
+        label_5->setMaximumSize(QSize(120, 16777215));
 
         horizontalLayout_8->addWidget(label_5);
 
@@ -311,6 +315,25 @@ public:
 
 
         left->addLayout(horizontalLayout_8);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        label_6 = new QLabel(verticalWidget_2);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setMinimumSize(QSize(120, 0));
+        label_6->setMaximumSize(QSize(120, 16777215));
+
+        horizontalLayout_3->addWidget(label_6);
+
+        Hours = new QSpinBox(verticalWidget_2);
+        Hours->setObjectName(QStringLiteral("Hours"));
+        Hours->setMinimumSize(QSize(300, 0));
+        Hours->setMaximum(100000);
+
+        horizontalLayout_3->addWidget(Hours);
+
+
+        left->addLayout(horizontalLayout_3);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
@@ -411,7 +434,8 @@ public:
         current->setText(QApplication::translate("ProjectEditForm", "Current", Q_NULLPTR));
         label_3->setText(QApplication::translate("ProjectEditForm", "Item: ", Q_NULLPTR));
         label_4->setText(QApplication::translate("ProjectEditForm", "Quantity:", Q_NULLPTR));
-        label_5->setText(QApplication::translate("ProjectEditForm", "Dimension:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("ProjectEditForm", "Unit:", Q_NULLPTR));
+        label_6->setText(QApplication::translate("ProjectEditForm", "Estimated Hours:", Q_NULLPTR));
         AddItem->setText(QApplication::translate("ProjectEditForm", "Add", Q_NULLPTR));
         EditItem->setText(QApplication::translate("ProjectEditForm", "Edit", Q_NULLPTR));
         DeleteItem->setText(QApplication::translate("ProjectEditForm", "Delete", Q_NULLPTR));

@@ -655,7 +655,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -743,7 +743,7 @@ background-color:#ECEFED;
               </widget>
              </item>
              <item>
-              <widget class="QTableView" name="ProjectItemView">
+              <widget class="QTableWidget" name="ProjectItemWidget">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
@@ -1307,6 +1307,27 @@ background-color:#837F9A;
               <property name="bottomMargin">
                <number>7</number>
               </property>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="ProjectItemEstHours">
+                <property name="text">
+                 <string>Est. Hours</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="ProjectItemEstHourUnit">
+                <property name="text">
+                 <string>Est. Hours/Unit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QCheckBox" name="ProjectItemActHours">
+                <property name="text">
+                 <string>Act. Hours</string>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="0">
                <widget class="QCheckBox" name="ProjectItemName">
                 <property name="text">
@@ -1321,6 +1342,13 @@ background-color:#837F9A;
                 </property>
                </widget>
               </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="ProjectItemDimension">
+                <property name="text">
+                 <string>Unit</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="1">
                <widget class="QCheckBox" name="ProjectItemQuantity">
                 <property name="text">
@@ -1328,10 +1356,17 @@ background-color:#837F9A;
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="ProjectItemDimension">
+              <item row="1" column="3">
+               <widget class="QCheckBox" name="ProjectItemActHourUnit">
                 <property name="text">
-                 <string>Unit</string>
+                 <string>Actual Hours/Unit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QCheckBox" name="ProjectItemDifference">
+                <property name="text">
+                 <string>Difference(%)</string>
                 </property>
                </widget>
               </item>
@@ -2035,7 +2070,6 @@ background-color:#E4E9EB;
   <tabstop>basicPageAdvanced</tabstop>
   <tabstop>basicPageClockIn</tabstop>
   <tabstop>ItemView</tabstop>
-  <tabstop>ProjectItemView</tabstop>
   <tabstop>Login6</tabstop>
   <tabstop>Login7</tabstop>
   <tabstop>Login8</tabstop>

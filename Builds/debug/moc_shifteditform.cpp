@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'shifteditform.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'shifteditform.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.9.1. It"
+#error "This file was generated using the moc from 5.9.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ShiftEditForm_t {
     QByteArrayData data[22];
-    char stringdata0[408];
+    char stringdata0[407];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,10 +49,10 @@ QT_MOC_LITERAL(14, 210, 28), // "on_DateTime1_dateTimeChanged"
 QT_MOC_LITERAL(15, 239, 8), // "dateTime"
 QT_MOC_LITERAL(16, 248, 28), // "on_DateTime2_dateTimeChanged"
 QT_MOC_LITERAL(17, 277, 26), // "on_Description_textChanged"
-QT_MOC_LITERAL(18, 304, 28), // "on_Description_Check_clicked"
-QT_MOC_LITERAL(19, 333, 25), // "on_FinishedButton_clicked"
-QT_MOC_LITERAL(20, 359, 23), // "on_CancelButton_clicked"
-QT_MOC_LITERAL(21, 383, 24) // "on_RefreshButton_clicked"
+QT_MOC_LITERAL(18, 304, 25), // "on_FinishedButton_clicked"
+QT_MOC_LITERAL(19, 330, 23), // "on_CancelButton_clicked"
+QT_MOC_LITERAL(20, 354, 24), // "on_RefreshButton_clicked"
+QT_MOC_LITERAL(21, 379, 27) // "on_Items_currentTextChanged"
 
     },
     "ShiftEditForm\0finished\0\0"
@@ -64,10 +64,10 @@ QT_MOC_LITERAL(21, 383, 24) // "on_RefreshButton_clicked"
     "time\0on_DateTime1_dateTimeChanged\0"
     "dateTime\0on_DateTime2_dateTimeChanged\0"
     "on_Description_textChanged\0"
-    "on_Description_Check_clicked\0"
     "on_FinishedButton_clicked\0"
     "on_CancelButton_clicked\0"
-    "on_RefreshButton_clicked"
+    "on_RefreshButton_clicked\0"
+    "on_Items_currentTextChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -101,7 +101,7 @@ static const uint qt_meta_data_ShiftEditForm[] = {
       18,    0,  114,    2, 0x08 /* Private */,
       19,    0,  115,    2, 0x08 /* Private */,
       20,    0,  116,    2, 0x08 /* Private */,
-      21,    0,  117,    2, 0x08 /* Private */,
+      21,    1,  117,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -120,7 +120,7 @@ static const uint qt_meta_data_ShiftEditForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    4,
 
        0        // eod
 };
@@ -142,10 +142,10 @@ void ShiftEditForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 8: _t->on_DateTime1_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
         case 9: _t->on_DateTime2_dateTimeChanged((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
         case 10: _t->on_Description_textChanged(); break;
-        case 11: _t->on_Description_Check_clicked(); break;
-        case 12: _t->on_FinishedButton_clicked(); break;
-        case 13: _t->on_CancelButton_clicked(); break;
-        case 14: _t->on_RefreshButton_clicked(); break;
+        case 11: _t->on_FinishedButton_clicked(); break;
+        case 12: _t->on_CancelButton_clicked(); break;
+        case 13: _t->on_RefreshButton_clicked(); break;
+        case 14: _t->on_Items_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

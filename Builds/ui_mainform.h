@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.9.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -28,6 +28,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -89,7 +90,7 @@ public:
     QGridLayout *gridLayout_5;
     QHBoxLayout *horizontalLayout_11;
     QTableView *ProjectView;
-    QTableView *ProjectItemView;
+    QTableWidget *ProjectItemWidget;
     QWidget *ItemTab;
     QGridLayout *gridLayout_6;
     QTableView *ItemView;
@@ -141,10 +142,15 @@ public:
     QSpacerItem *horizontalSpacer_11;
     QGroupBox *groupBox_12;
     QGridLayout *gridLayout_11;
+    QCheckBox *ProjectItemEstHours;
+    QCheckBox *ProjectItemEstHourUnit;
+    QCheckBox *ProjectItemActHours;
     QCheckBox *ProjectItemName;
     QCheckBox *ProjectItemId;
-    QCheckBox *ProjectItemQuantity;
     QCheckBox *ProjectItemDimension;
+    QCheckBox *ProjectItemQuantity;
+    QCheckBox *ProjectItemActHourUnit;
+    QCheckBox *ProjectItemDifference;
     QWidget *ItemsSettings;
     QHBoxLayout *horizontalLayout_8;
     QGroupBox *groupBox_7;
@@ -637,12 +643,12 @@ public:
 
         horizontalLayout_11->addWidget(ProjectView);
 
-        ProjectItemView = new QTableView(ProjectTab);
-        ProjectItemView->setObjectName(QStringLiteral("ProjectItemView"));
-        ProjectItemView->setFrameShape(QFrame::NoFrame);
-        ProjectItemView->setAlternatingRowColors(true);
+        ProjectItemWidget = new QTableWidget(ProjectTab);
+        ProjectItemWidget->setObjectName(QStringLiteral("ProjectItemWidget"));
+        ProjectItemWidget->setFrameShape(QFrame::NoFrame);
+        ProjectItemWidget->setAlternatingRowColors(true);
 
-        horizontalLayout_11->addWidget(ProjectItemView);
+        horizontalLayout_11->addWidget(ProjectItemWidget);
 
 
         gridLayout_5->addLayout(horizontalLayout_11, 0, 0, 1, 1);
@@ -950,6 +956,21 @@ public:
         gridLayout_11 = new QGridLayout(groupBox_12);
         gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
         gridLayout_11->setContentsMargins(-1, 7, -1, 7);
+        ProjectItemEstHours = new QCheckBox(groupBox_12);
+        ProjectItemEstHours->setObjectName(QStringLiteral("ProjectItemEstHours"));
+
+        gridLayout_11->addWidget(ProjectItemEstHours, 0, 2, 1, 1);
+
+        ProjectItemEstHourUnit = new QCheckBox(groupBox_12);
+        ProjectItemEstHourUnit->setObjectName(QStringLiteral("ProjectItemEstHourUnit"));
+
+        gridLayout_11->addWidget(ProjectItemEstHourUnit, 1, 2, 1, 1);
+
+        ProjectItemActHours = new QCheckBox(groupBox_12);
+        ProjectItemActHours->setObjectName(QStringLiteral("ProjectItemActHours"));
+
+        gridLayout_11->addWidget(ProjectItemActHours, 0, 3, 1, 1);
+
         ProjectItemName = new QCheckBox(groupBox_12);
         ProjectItemName->setObjectName(QStringLiteral("ProjectItemName"));
 
@@ -960,15 +981,25 @@ public:
 
         gridLayout_11->addWidget(ProjectItemId, 0, 0, 1, 1);
 
+        ProjectItemDimension = new QCheckBox(groupBox_12);
+        ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
+
+        gridLayout_11->addWidget(ProjectItemDimension, 1, 1, 1, 1);
+
         ProjectItemQuantity = new QCheckBox(groupBox_12);
         ProjectItemQuantity->setObjectName(QStringLiteral("ProjectItemQuantity"));
 
         gridLayout_11->addWidget(ProjectItemQuantity, 0, 1, 1, 1);
 
-        ProjectItemDimension = new QCheckBox(groupBox_12);
-        ProjectItemDimension->setObjectName(QStringLiteral("ProjectItemDimension"));
+        ProjectItemActHourUnit = new QCheckBox(groupBox_12);
+        ProjectItemActHourUnit->setObjectName(QStringLiteral("ProjectItemActHourUnit"));
 
-        gridLayout_11->addWidget(ProjectItemDimension, 1, 1, 1, 1);
+        gridLayout_11->addWidget(ProjectItemActHourUnit, 1, 3, 1, 1);
+
+        ProjectItemDifference = new QCheckBox(groupBox_12);
+        ProjectItemDifference->setObjectName(QStringLiteral("ProjectItemDifference"));
+
+        gridLayout_11->addWidget(ProjectItemDifference, 0, 4, 1, 1);
 
 
         horizontalLayout_7->addWidget(groupBox_12);
@@ -1383,8 +1414,7 @@ public:
         QWidget::setTabOrder(basicPageClockOut, basicPageAdvanced);
         QWidget::setTabOrder(basicPageAdvanced, basicPageClockIn);
         QWidget::setTabOrder(basicPageClockIn, ItemView);
-        QWidget::setTabOrder(ItemView, ProjectItemView);
-        QWidget::setTabOrder(ProjectItemView, Login6);
+        QWidget::setTabOrder(ItemView, Login6);
         QWidget::setTabOrder(Login6, Login7);
         QWidget::setTabOrder(Login7, Login8);
         QWidget::setTabOrder(Login8, Login5);
@@ -1424,8 +1454,8 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(2);
-        MainTabs->setCurrentIndex(0);
-        HeaderTabs->setCurrentIndex(3);
+        MainTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 
 
@@ -1491,10 +1521,15 @@ public:
         ProjectCurrentRadio->setText(QApplication::translate("MainForm", "Current Projects", Q_NULLPTR));
         ProjectPastRadio->setText(QApplication::translate("MainForm", "Past Projects", Q_NULLPTR));
         groupBox_12->setTitle(QApplication::translate("MainForm", "Table", Q_NULLPTR));
+        ProjectItemEstHours->setText(QApplication::translate("MainForm", "Est. Hours", Q_NULLPTR));
+        ProjectItemEstHourUnit->setText(QApplication::translate("MainForm", "Est. Hours/Unit", Q_NULLPTR));
+        ProjectItemActHours->setText(QApplication::translate("MainForm", "Act. Hours", Q_NULLPTR));
         ProjectItemName->setText(QApplication::translate("MainForm", "Name", Q_NULLPTR));
         ProjectItemId->setText(QApplication::translate("MainForm", "Id", Q_NULLPTR));
+        ProjectItemDimension->setText(QApplication::translate("MainForm", "Unit", Q_NULLPTR));
         ProjectItemQuantity->setText(QApplication::translate("MainForm", "Quantity", Q_NULLPTR));
-        ProjectItemDimension->setText(QApplication::translate("MainForm", "Dimension", Q_NULLPTR));
+        ProjectItemActHourUnit->setText(QApplication::translate("MainForm", "Actual Hours/Unit", Q_NULLPTR));
+        ProjectItemDifference->setText(QApplication::translate("MainForm", "Difference(%)", Q_NULLPTR));
         HeaderTabs->setTabText(HeaderTabs->indexOf(ProjectsSettings), QApplication::translate("MainForm", "Project", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainForm", "Options", Q_NULLPTR));
         ItemAdd->setText(QString());

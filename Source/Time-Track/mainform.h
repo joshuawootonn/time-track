@@ -59,9 +59,6 @@ public:
     void ProjectTab();
     QSqlQueryModel * ProjectModel();
     QSortFilterProxyModel * ProjectFilterModel();
-    QSqlQueryModel * ProjectItemModelFirst();
-    QSqlQueryModel * ProjectItemModel();
-    QSqlQueryModel * ProjectItemModelRefresh();
     void refreshProjectItemTab();
     void ItemTab();
     QSqlQueryModel * ItemModel();
@@ -198,6 +195,16 @@ private slots:
 
 
 
+    void on_ProjectItemEstHours_clicked();
+
+    void on_ProjectItemEstHourUnit_clicked();
+
+    void on_ProjectItemActHours_clicked();
+
+    void on_ProjectItemActHourUnit_clicked();
+
+    void on_ProjectItemDifference_clicked();
+
 public:
     Ui::MainForm *ui;
 
@@ -209,6 +216,7 @@ private:
     //Project table model
     QSortFilterProxyModel * projectfiltermodel;
     QSqlQueryModel * projectmodel;
+    void refreshProjectItemTable();
 
     //Item table model
     QSortFilterProxyModel * itemfiltermodel;

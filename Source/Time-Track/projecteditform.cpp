@@ -25,8 +25,8 @@ void ProjectEditForm::SectionInitialize(){
     ui->Sections->setColumnCount(4);
     ui->Sections->setHorizontalHeaderItem(0,new QTableWidgetItem("Item"));
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Quantity"));
-    ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Dimension"));
-    ui->Sections->setHorizontalHeaderItem(3,new QTableWidgetItem("Estimated Hours"));
+    ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Unit"));
+    ui->Sections->setHorizontalHeaderItem(3,new QTableWidgetItem("Est. Hours"));
     ui->Sections->clearContents();
 }
 void ProjectEditForm::ItemInitialize(){
@@ -124,7 +124,7 @@ void ProjectEditForm::EditProject(QString x){
     }
 
     qry->clear();
-    qry->prepare("SELECT name,quantity,dimension FROM project"+id+"");
+    qry->prepare("SELECT name,quantity,dimension,ehours FROM project"+id+"");
 
 
     if(qry->exec()){
@@ -134,6 +134,7 @@ void ProjectEditForm::EditProject(QString x){
             ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(qry->value(0).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(qry->value(1).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(qry->value(2).toString()));
+            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(qry->value(3).toString()));
         }
     }
     ui->Sections->resizeRowsToContents();
@@ -194,9 +195,7 @@ void ProjectEditForm::on_AddItem_clicked()
 
             ui->Sections->resizeRowsToContents();
             ui->Item->setEditText("");
-            ui->Quantity->setValue(0);
-            ui->Dimension->setEditText("");
-            ui->Hours->setValue(0);
+
         }
         ui->error->setText("");
     }
@@ -212,7 +211,7 @@ void ProjectEditForm::on_EditItem_clicked()
         ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Item->currentText()));
         ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
         ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Dimension->currentText()));
-        ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
+        ui->Sections->setItem(selectedRow,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
 
         ui->Sections->resizeRowsToContents();
         ui->Item->setEditText("");
@@ -293,7 +292,7 @@ void ProjectEditForm::on_FinishButton_clicked()
             return;
         }
         qry->clear();
-        qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45), ehours varchar(45), euhours varchar(45),ahours varchar(45),auhours varchar(45),percent varchar(45))");
+        qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45), ehours varchar(45))");
         qry->exec();
 
         QString itemId;
@@ -312,8 +311,8 @@ void ProjectEditForm::on_FinishButton_clicked()
                 emit finished();
                 return;
             }
-            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
-                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"')");
+            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
+                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
             if (qry->exec())
                 success = true;
             else{
@@ -366,8 +365,8 @@ void ProjectEditForm::on_FinishButton_clicked()
                 emit finished();
                 return;
             }
-            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
-                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"')");
+            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
+                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
             if (qry->exec())
                 success = true;
             else{
