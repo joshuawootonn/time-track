@@ -665,7 +665,7 @@ void MainForm::EmployeeTab()
     ui->EmployeeView->hideColumn(5);
     ui->EmployeeCurrent->setChecked(false);
     ui->EmployeeView->hideColumn(6);
-    ui->AllRadio->setChecked(true);
+    ui->CurrentRadio->setChecked(true);
     refreshEmployeeTab();
 
 }
@@ -923,7 +923,7 @@ void MainForm::ProjectTab(){
     ui->ProjectView->hideColumn(0);
     ui->ProjectView->hideColumn(2);
     ui->ProjectName->setChecked(true);
-    ui->ProjectAllRadio->setChecked(true);
+    ui->ProjectCurrentRadio->setChecked(true);
     ui->ProjectDate->setChecked(true);
 
     ui->ProjectItemId->setChecked(false);
@@ -1130,37 +1130,58 @@ void MainForm::refreshProjectItemTable(){
             ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,5,new QTableWidgetItem(qry->value(5).toString()));
         }
     }
+
     for(int i= 0; i<ui->ProjectItemWidget->rowCount();i++){
         //Est. Hours/Unit
-        QString e = QString::number(((double)ui->ProjectItemWidget->item(i,5)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt());
+        QString e = QString::number(((double)ui->ProjectItemWidget->item(i,5)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',2);
         ui->ProjectItemWidget->setItem(i,6,new QTableWidgetItem(e+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
 
         qry->clear();
-        double ahours = 0.0;
+        int h =0,m=0;
         qry->prepare("SELECT time FROM shiftlist WHERE projectid='"+id+"' AND itemid='"+ui->ProjectItemWidget->item(i,1)->text()+"'");
         if(qry->exec()){
             while(qry->next()){
 
                QString time = qry->value(0).toString();
-               ahours += time.split(":")[0].toInt();
-               ahours += time.split(":")[1].toDouble()*(100)/60;
-
+               h += time.split(":")[0].toInt();
+               m += time.split(":")[1].toInt();
             }
         }
+        h+=m/60;
+        m = m%60;
+        double ahours = h + (((double)m)/60);
         qDebug()<<qry->lastQuery();
         ui->ProjectItemWidget->setItem(i,7,new QTableWidgetItem(QString::number(ahours)));
 
 
 
-        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt());
+        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',2);
         ui->ProjectItemWidget->setItem(i,8,new QTableWidgetItem(a+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
 
-        QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toInt()))/ui->ProjectItemWidget->item(i,5)->text().toInt());
-        ui->ProjectItemWidget->setItem(i,9,new QTableWidgetItem(p+"%"));
+        QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toInt()))/ui->ProjectItemWidget->item(i,5)->text().toInt(),'f',2);
+        if( ui->ProjectItemWidget->item(i,5)->text().toInt() == 0){
+            ui->ProjectItemWidget->setItem(i,9,new QTableWidgetItem(p));
+        }else{
+            ui->ProjectItemWidget->setItem(i,9,new QTableWidgetItem(p+"%"));
+        }
+
+    }
+    ui->ProjectItemWidget->setRowCount(ui->ProjectItemWidget->rowCount()+2);
+    ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,2,new QTableWidgetItem("Total:"));
+    double etotal=0.0, atotal=0.0;
+    for(int i= 0; i<ui->ProjectItemWidget->rowCount()-2;i++){
+        etotal+=ui->ProjectItemWidget->item(i,5)->text().toDouble();
+        atotal+=ui->ProjectItemWidget->item(i,7)->text().toDouble();
+    }
+    ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,5,new QTableWidgetItem(QString::number(etotal)));
+    ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,7,new QTableWidgetItem(QString::number(atotal)));
+    QString t = QString::number(((100*ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,7)->text().toDouble()))/ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,5)->text().toDouble(),'f',2);
+    if( ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,5)->text().toInt() == 0){
+        ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,9,new QTableWidgetItem(t));
+    }else{
+        ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,9,new QTableWidgetItem(t+"%"));
     }
 
-    qDebug()<<qry->lastError();
-    qDebug()<<qry->lastQuery();
 }
 
 void MainForm::displayProjectSuccess(){

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'projecteditform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.0
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -77,7 +77,7 @@ public:
     {
         if (ProjectEditForm->objectName().isEmpty())
             ProjectEditForm->setObjectName(QStringLiteral("ProjectEditForm"));
-        ProjectEditForm->resize(931, 454);
+        ProjectEditForm->resize(992, 460);
         ProjectEditForm->setStyleSheet(QLatin1String("\n"
 "\n"
 "QDialog#ProjectEditForm{\n"

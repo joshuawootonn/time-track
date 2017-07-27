@@ -51,6 +51,7 @@ public:
     QComboBox *Minutes;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *Add;
+    QPushButton *Edit;
     QPushButton *Delete;
     QHBoxLayout *horizontalLayout_7;
     QTableWidget *Sections;
@@ -325,6 +326,12 @@ public:
 
         horizontalLayout_8->addWidget(Add);
 
+        Edit = new QPushButton(bigwidger);
+        Edit->setObjectName(QStringLiteral("Edit"));
+        Edit->setMinimumSize(QSize(100, 50));
+
+        horizontalLayout_8->addWidget(Edit);
+
         Delete = new QPushButton(bigwidger);
         Delete->setObjectName(QStringLiteral("Delete"));
         Delete->setMinimumSize(QSize(100, 50));
@@ -445,6 +452,7 @@ public:
         Hours->setCurrentText(QString());
         label_8->setText(QApplication::translate("ClockoutForm", ":", Q_NULLPTR));
         Add->setText(QApplication::translate("ClockoutForm", "Add", Q_NULLPTR));
+        Edit->setText(QApplication::translate("ClockoutForm", "Edit", Q_NULLPTR));
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", Q_NULLPTR));
         label->setText(QApplication::translate("ClockoutForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());

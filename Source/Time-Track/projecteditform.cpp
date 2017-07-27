@@ -71,11 +71,11 @@ void ProjectEditForm::AddProject(){
 }
 QString ProjectEditForm::AddValid(){
     QString error = "";
-    QRegExp name_regrex("^[a-zA-Z0-9-_\'\" ]+$");
+    QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<6)
-        error = "Invalid name: Minimum length 6";
+        error = "Invalid Name: Minimum length 6";
     else if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must contain letters, numbers, dashes, and quotes only";
+       error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else if(ui->Sections->rowCount()<1){
         error = "Invalid Project: Must have at least one item";
     }
@@ -141,11 +141,11 @@ void ProjectEditForm::EditProject(QString x){
 }
 QString ProjectEditForm::EditValid(){
     QString error = "";
-    QRegExp name_regrex("^[a-zA-Z0-9-_\'\" ]+$");
+    QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<6)
-        error = "Invalid name: Minimun length 6";
+        error = "Invalid Name: Minimun length 6";
     else if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must contain letters, numbers, dashes, and quotes only";
+       error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else if(ui->Sections->rowCount()<1){
         error = "Invalid Project: Must have at least one item";
     }
@@ -185,29 +185,43 @@ void ProjectEditForm::on_AddItem_clicked()
             count++;
         }
     }
-    if(count == 0){
-        if(ui->Item->currentText()!="" && ui->Dimension->currentText()!=""&&ui->Quantity->value()!=0){
-            ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-            ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Item->currentText()));
-            ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
-            ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Dimension->currentText()));
-            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
+    if(count != 0){
+        ui->error->setText("Invalid Item: Must be Unique");
+    }
+    else if(ui->Item->currentText()==""){
+        ui->error->setText("Invalid Item: Select an Item");
+    }else if( ui->Dimension->currentText()==""){
+        ui->error->setText("Invalid Item: Select a Unit");
+    }else if(ui->Quantity->value()==0){
+        ui->error->setText("Invalid Item: Select a Quantity");
+    }else if(ui->Hours->value()==0){
+        ui->error->setText("Invalid Item: Select a Estimate for Hours");
+    }else{
+        ui->Sections->setRowCount(ui->Sections->rowCount()+1);
+        ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(ui->Item->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(ui->Dimension->currentText()));
+        ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(QString::number(ui->Hours->value())));
 
-            ui->Sections->resizeRowsToContents();
-            ui->Item->setEditText("");
-
-        }
+        ui->Sections->resizeRowsToContents();
+        ui->Item->setEditText("");
         ui->error->setText("");
     }
-    else{
-        ui->error->setText("Invalid addition: Must be unique");
-    }
+
+
 
 }
 void ProjectEditForm::on_EditItem_clicked()
 {
-    if(clicked && ui->Item->currentText()!="" && ui->Dimension->currentText()!=""&&ui->Quantity->value()!=0){
-
+    if(ui->Item->currentText()==""){
+        ui->error->setText("Invalid Item: Select an Item");
+    }else if( ui->Dimension->currentText()==""){
+        ui->error->setText("Invalid Item: Select a Unit");
+    }else if(ui->Quantity->value()==0){
+        ui->error->setText("Invalid Item: Select a Quantity");
+    }else if(ui->Hours->value()==0){
+        ui->error->setText("Invalid Item: Select a Estimate for Hours");
+    }else if(clicked){
         ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Item->currentText()));
         ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(QString::number(ui->Quantity->value())));
         ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Dimension->currentText()));

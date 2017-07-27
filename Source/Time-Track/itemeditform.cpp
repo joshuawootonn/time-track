@@ -16,11 +16,11 @@ void ItemEditForm::AddItem(){
 }
 QString ItemEditForm::AddValid(){
     QString error;
-    QRegExp name_regrex("^[a-zA-Z0-9\'\" ]+$");
+    QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<4)
-        error = "Invalid name: Minimun length 4";
+        error = "Invalid Name: Minimun length 4";
     else if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must contain letters,numbers, and quotes only";
+       error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else{
         QSqlQuery * qry = new QSqlQuery(data);
         QString name = ui->name->text();
@@ -56,11 +56,11 @@ void ItemEditForm::EditItem(QString x){
 }
 QString ItemEditForm::EditValid(){
     QString error;
-    QRegExp name_regrex("^[a-zA-Z0-9\'\" ]+$");
+    QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<4)
-        error = "Invalid name: Minimun length 4";
+        error = "Invalid Name: Minimun length 4";
     else if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must contain letters,numbers, and quotes only";
+       error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else{
         QSqlQuery * qry = new QSqlQuery(data);
         QString name = ui->name->text();

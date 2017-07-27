@@ -319,6 +319,32 @@ void ClockoutForm::on_Add_clicked()
         TimeLeft();
     }
 }
+void ClockoutForm::on_Edit_clicked()
+{
+    if(clicked){
+        ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Hours->currentText()+":"+ui->Minutes->currentText()));
+        ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Projects->currentText()));
+        ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(ui->Items->currentText()));
+        if(ui->Items->currentText()=="Other"){
+            ui->Sections->setItem(selectedRow,3,new QTableWidgetItem(ui->Description->text()));
+            ui->Description->setVisible(false);
+            ui->DescriptionLabel->setVisible(false);
+            ui->Description->setText("");
+            ItemInitialize();
+        }
+        else{
+            ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(""));
+        }
+        clicked=false;
+        ui->Sections->resizeColumnsToContents();
+        TimeLeft();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Invalid: Select an Item");
+    }
+
+}
 void ClockoutForm::on_Delete_clicked()
 {
     if (clicked)
@@ -331,6 +357,10 @@ void ClockoutForm::on_Delete_clicked()
         ui->Sections->removeRow(selectedRow);
         TimeLeft();
         clicked = false;
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Invalid: Select an Item");
     }
 
 
@@ -505,3 +535,4 @@ void ClockoutForm::on_Items_currentTextChanged(const QString &arg1)
         ui->DescriptionLabel->setVisible(false);
     }
 }
+
