@@ -43,6 +43,8 @@ private slots:
 
     void on_GenerateButton_clicked();
 
+    void on_pin_returnPressed();
+
 signals:
     void finished();
 private:

@@ -469,16 +469,20 @@ public:
 
         gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
+        QWidget::setTabOrder(DateTime1, DateTime2);
+        QWidget::setTabOrder(DateTime2, Name);
         QWidget::setTabOrder(Name, Projects);
         QWidget::setTabOrder(Projects, Items);
-        QWidget::setTabOrder(Items, Times);
+        QWidget::setTabOrder(Items, Description);
+        QWidget::setTabOrder(Description, Times);
         QWidget::setTabOrder(Times, Add);
-        QWidget::setTabOrder(Add, Delete);
+        QWidget::setTabOrder(Add, Edit);
+        QWidget::setTabOrder(Edit, Delete);
         QWidget::setTabOrder(Delete, Lunch);
-        QWidget::setTabOrder(Lunch, RefreshButton);
-        QWidget::setTabOrder(RefreshButton, FinishedButton);
+        QWidget::setTabOrder(Lunch, FinishedButton);
         QWidget::setTabOrder(FinishedButton, CancelButton);
-        QWidget::setTabOrder(CancelButton, Sections);
+        QWidget::setTabOrder(CancelButton, RefreshButton);
+        QWidget::setTabOrder(RefreshButton, Sections);
 
         retranslateUi(ShiftEditForm);
 

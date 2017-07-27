@@ -665,16 +665,20 @@ background-color:#FFFFFF;
   </layout>
  </widget>
  <tabstops>
+  <tabstop>DateTime1</tabstop>
+  <tabstop>DateTime2</tabstop>
   <tabstop>Name</tabstop>
   <tabstop>Projects</tabstop>
   <tabstop>Items</tabstop>
+  <tabstop>Description</tabstop>
   <tabstop>Times</tabstop>
   <tabstop>Add</tabstop>
+  <tabstop>Edit</tabstop>
   <tabstop>Delete</tabstop>
   <tabstop>Lunch</tabstop>
-  <tabstop>RefreshButton</tabstop>
   <tabstop>FinishedButton</tabstop>
   <tabstop>CancelButton</tabstop>
+  <tabstop>RefreshButton</tabstop>
   <tabstop>Sections</tabstop>
  </tabstops>
  <resources/>

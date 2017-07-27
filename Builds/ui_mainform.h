@@ -618,6 +618,7 @@ public:
         EmployeeView = new QTableView(EmployeeTab);
         EmployeeView->setObjectName(QStringLiteral("EmployeeView"));
         EmployeeView->setFrameShape(QFrame::NoFrame);
+        EmployeeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         EmployeeView->setDragEnabled(true);
         EmployeeView->setDragDropMode(QAbstractItemView::DragDrop);
         EmployeeView->setDefaultDropAction(Qt::MoveAction);
@@ -639,6 +640,7 @@ public:
         ProjectView = new QTableView(ProjectTab);
         ProjectView->setObjectName(QStringLiteral("ProjectView"));
         ProjectView->setFrameShape(QFrame::NoFrame);
+        ProjectView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ProjectView->setAlternatingRowColors(true);
 
         horizontalLayout_11->addWidget(ProjectView);
@@ -646,6 +648,7 @@ public:
         ProjectItemWidget = new QTableWidget(ProjectTab);
         ProjectItemWidget->setObjectName(QStringLiteral("ProjectItemWidget"));
         ProjectItemWidget->setFrameShape(QFrame::NoFrame);
+        ProjectItemWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ProjectItemWidget->setAlternatingRowColors(true);
 
         horizontalLayout_11->addWidget(ProjectItemWidget);
@@ -663,6 +666,7 @@ public:
         ItemView = new QTableView(ItemTab);
         ItemView->setObjectName(QStringLiteral("ItemView"));
         ItemView->setFrameShape(QFrame::NoFrame);
+        ItemView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ItemView->setAlternatingRowColors(true);
 
         gridLayout_6->addWidget(ItemView, 0, 0, 1, 1);
@@ -678,6 +682,7 @@ public:
         ShiftView = new QTableView(ShiftTab);
         ShiftView->setObjectName(QStringLiteral("ShiftView"));
         ShiftView->setFrameShape(QFrame::NoFrame);
+        ShiftView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ShiftView->setAlternatingRowColors(true);
 
         gridLayout_3->addWidget(ShiftView, 0, 0, 1, 1);
@@ -1453,8 +1458,8 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
-        MainTabs->setCurrentIndex(1);
+        mainStack->setCurrentIndex(2);
+        MainTabs->setCurrentIndex(3);
         HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
 

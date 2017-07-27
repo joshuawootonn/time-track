@@ -282,12 +282,12 @@ background-color:#FFFFFF;
  <tabstops>
   <tabstop>name</tabstop>
   <tabstop>pin</tabstop>
+  <tabstop>FinishButton</tabstop>
+  <tabstop>CancelButton</tabstop>
   <tabstop>GenerateButton</tabstop>
   <tabstop>admin</tabstop>
   <tabstop>current</tabstop>
   <tabstop>active</tabstop>
-  <tabstop>FinishButton</tabstop>
-  <tabstop>CancelButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -100,17 +100,17 @@ bool EmployeeEditForm::getSuccess() const
 // Validation for when a employeee is created
 QString EmployeeEditForm::AddValid(){
     QString error;
-    if(ui->name->text().length()<5)
-        error = "Invalid name: Minimum length 5";
-    if(ui->pin->text().length() < 4)
-        error = "Invalid pin: Minimum length 4";
-    QRegExp name_regrex("^[a-zA-Z ]+$");  // a digit (\d), zero or more times (*)
+    QRegExp name_regrex("^[a-zA-Z ]+$");
     QRegExp pin_regrex("^[0-9]+$");
-    if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must be Letters only";
-    if (!pin_regrex.exactMatch(ui->pin->text()))
-       error = "Invalid pin: Must be Numbers only";
 
+    if(ui->name->text().length()<5)
+        error = "Invalid Name: Minimum length 5";
+    else if (!name_regrex.exactMatch(ui->name->text()))
+       error = "Invalid Name: Must be Letters only";
+    else if(ui->pin->text().length() < 4)
+       error = "Invalid Pin: Minimum length 4";
+    else if(!pin_regrex.exactMatch(ui->pin->text()))
+           error = "Invalid Pin: Must be Numbers only";
     return error;
 }
 // Validation for when a employee is edited
@@ -118,15 +118,14 @@ QString EmployeeEditForm::EditValid(){
     QString error = "";
     QRegExp name_regrex("^[a-zA-Z ]+$");
     QRegExp pin_regrex("^[0-9]+$");
-
     if(ui->name->text().length()<5)
-        error = "Invalid name: Minimum length 5";
-    else if(ui->pin->text().length() < 4)
-        error = "Invalid pin: Minimum length 4";
+        error = "Invalid Name: Minimum length 5";
     else if (!name_regrex.exactMatch(ui->name->text()))
-       error = "Invalid name: Must be Letters only";
-    else if (!pin_regrex.exactMatch(ui->pin->text()))
-       error = "Invalid pin: Must be Numbers only";
+       error = "Invalid Name: Must be Letters only";
+    else if(ui->pin->text().length() < 4)
+       error = "Invalid Pin: Minimum length 4";
+    else if(!pin_regrex.exactMatch(ui->pin->text()))
+           error = "Invalid Pin: Must be Numbers only";
     else{
         QSqlQuery * qry = new QSqlQuery(data);
         QString pin = ui->pin->text();
@@ -219,3 +218,8 @@ void EmployeeEditForm::on_CancelButton_clicked()
 }
 
 
+
+void EmployeeEditForm::on_pin_returnPressed()
+{
+    on_FinishButton_clicked();
+}

@@ -431,7 +431,8 @@ public:
         QWidget::setTabOrder(Description, Hours);
         QWidget::setTabOrder(Hours, Minutes);
         QWidget::setTabOrder(Minutes, Add);
-        QWidget::setTabOrder(Add, Delete);
+        QWidget::setTabOrder(Add, Edit);
+        QWidget::setTabOrder(Edit, Delete);
         QWidget::setTabOrder(Delete, Lunch);
         QWidget::setTabOrder(Lunch, FinishedButton);
         QWidget::setTabOrder(FinishedButton, CancelButton);

@@ -410,15 +410,17 @@ public:
         gridLayout->addWidget(bigwidger, 0, 0, 1, 1);
 
         QWidget::setTabOrder(name, bidDate);
-        QWidget::setTabOrder(bidDate, current);
-        QWidget::setTabOrder(current, Item);
+        QWidget::setTabOrder(bidDate, Item);
         QWidget::setTabOrder(Item, Quantity);
         QWidget::setTabOrder(Quantity, Dimension);
-        QWidget::setTabOrder(Dimension, AddItem);
-        QWidget::setTabOrder(AddItem, DeleteItem);
+        QWidget::setTabOrder(Dimension, Hours);
+        QWidget::setTabOrder(Hours, AddItem);
+        QWidget::setTabOrder(AddItem, EditItem);
+        QWidget::setTabOrder(EditItem, DeleteItem);
         QWidget::setTabOrder(DeleteItem, FinishButton);
         QWidget::setTabOrder(FinishButton, CancelButton);
-        QWidget::setTabOrder(CancelButton, Sections);
+        QWidget::setTabOrder(CancelButton, current);
+        QWidget::setTabOrder(current, Sections);
 
         retranslateUi(ProjectEditForm);
 

@@ -146,7 +146,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -655,7 +655,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -687,6 +687,9 @@ background-color:#ECEFED;
             <widget class="QTableView" name="EmployeeView">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="dragEnabled">
               <bool>true</bool>
@@ -737,6 +740,9 @@ background-color:#ECEFED;
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
                <property name="alternatingRowColors">
                 <bool>true</bool>
                </property>
@@ -746,6 +752,9 @@ background-color:#ECEFED;
               <widget class="QTableWidget" name="ProjectItemWidget">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
                </property>
                <property name="alternatingRowColors">
                 <bool>true</bool>
@@ -781,6 +790,9 @@ background-color:#ECEFED;
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
              </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
              <property name="alternatingRowColors">
               <bool>true</bool>
              </property>
@@ -815,6 +827,9 @@ background-color:#ECEFED;
             <widget class="QTableView" name="ShiftView">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="alternatingRowColors">
               <bool>true</bool>

@@ -282,12 +282,12 @@ public:
         gridLayout_2->addWidget(bigwidger, 0, 0, 1, 1);
 
         QWidget::setTabOrder(name, pin);
-        QWidget::setTabOrder(pin, GenerateButton);
+        QWidget::setTabOrder(pin, FinishButton);
+        QWidget::setTabOrder(FinishButton, CancelButton);
+        QWidget::setTabOrder(CancelButton, GenerateButton);
         QWidget::setTabOrder(GenerateButton, admin);
         QWidget::setTabOrder(admin, current);
         QWidget::setTabOrder(current, active);
-        QWidget::setTabOrder(active, FinishButton);
-        QWidget::setTabOrder(FinishButton, CancelButton);
 
         retranslateUi(EmployeeEditForm);
 

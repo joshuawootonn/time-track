@@ -516,14 +516,16 @@ border:none;
  <tabstops>
   <tabstop>name</tabstop>
   <tabstop>bidDate</tabstop>
-  <tabstop>current</tabstop>
   <tabstop>Item</tabstop>
   <tabstop>Quantity</tabstop>
   <tabstop>Dimension</tabstop>
+  <tabstop>Hours</tabstop>
   <tabstop>AddItem</tabstop>
+  <tabstop>EditItem</tabstop>
   <tabstop>DeleteItem</tabstop>
   <tabstop>FinishButton</tabstop>
   <tabstop>CancelButton</tabstop>
+  <tabstop>current</tabstop>
   <tabstop>Sections</tabstop>
  </tabstops>
  <resources/>

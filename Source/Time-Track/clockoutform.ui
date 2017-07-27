@@ -583,6 +583,7 @@ margin: 0px 0px 0px 0px;
   <tabstop>Hours</tabstop>
   <tabstop>Minutes</tabstop>
   <tabstop>Add</tabstop>
+  <tabstop>Edit</tabstop>
   <tabstop>Delete</tabstop>
   <tabstop>Lunch</tabstop>
   <tabstop>FinishedButton</tabstop>
