@@ -64,7 +64,7 @@ public:
     {
         if (ConnectionForm->objectName().isEmpty())
             ConnectionForm->setObjectName(QStringLiteral("ConnectionForm"));
-        ConnectionForm->resize(341, 254);
+        ConnectionForm->resize(341, 305);
         ConnectionForm->setStyleSheet(QLatin1String("QDialog#ConnectionForm{\n"
 "\n"
 "background-color:#E5EAE7;\n"
@@ -336,6 +336,9 @@ public:
         QWidget::setTabOrder(databaseEdit, portEdit);
         QWidget::setTabOrder(portEdit, usernameEdit);
         QWidget::setTabOrder(usernameEdit, passwordEdit);
+        QWidget::setTabOrder(passwordEdit, ipEdit);
+        QWidget::setTabOrder(ipEdit, connect);
+        QWidget::setTabOrder(connect, testConnection);
 
         retranslateUi(ConnectionForm);
 

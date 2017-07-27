@@ -1131,7 +1131,7 @@ void MainForm::refreshProjectItemTable(){
 
     for(int i= 0; i<ui->ProjectItemWidget->rowCount();i++){
         //Est. Hours/Unit
-        QString e = QString::number(((double)ui->ProjectItemWidget->item(i,5)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',2);
+        QString e = QString::number(((double)ui->ProjectItemWidget->item(i,5)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',3);
         ui->ProjectItemWidget->setItem(i,6,new QTableWidgetItem(e+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
 
         qry->clear();
@@ -1153,10 +1153,10 @@ void MainForm::refreshProjectItemTable(){
 
 
 
-        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',2);
+        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',3);
         ui->ProjectItemWidget->setItem(i,8,new QTableWidgetItem(a+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
 
-        QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toDouble()))/ui->ProjectItemWidget->item(i,5)->text().toDouble(),'f',2);
+        QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toDouble()))/ui->ProjectItemWidget->item(i,5)->text().toDouble(),'f',0);
         if( ui->ProjectItemWidget->item(i,5)->text().toInt() == 0){
             ui->ProjectItemWidget->setItem(i,9,new QTableWidgetItem(p));
         }else{
@@ -1173,7 +1173,7 @@ void MainForm::refreshProjectItemTable(){
     }
     ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,5,new QTableWidgetItem(QString::number(etotal)));
     ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,7,new QTableWidgetItem(QString::number(atotal)));
-    QString t = QString::number(((100*ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,7)->text().toDouble()))/ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,5)->text().toDouble(),'f',2);
+    QString t = QString::number(((100*ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,7)->text().toDouble()))/ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,5)->text().toDouble(),'f',0);
     if( ui->ProjectItemWidget->item(ui->ProjectItemWidget->rowCount()-1,5)->text().toInt() == 0){
         ui->ProjectItemWidget->setItem(ui->ProjectItemWidget->rowCount()-1,9,new QTableWidgetItem(t));
     }else{
