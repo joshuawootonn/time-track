@@ -496,7 +496,7 @@ public:
         passEdit->setObjectName(QStringLiteral("passEdit"));
         passEdit->setMinimumSize(QSize(0, 45));
         passEdit->setFont(font);
-        passEdit->setMaxLength(4);
+        passEdit->setMaxLength(6);
         passEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_13->addWidget(passEdit);
@@ -1453,7 +1453,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(1);
         HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
