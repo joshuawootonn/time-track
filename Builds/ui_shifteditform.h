@@ -60,6 +60,7 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *Add;
+    QPushButton *Edit;
     QPushButton *Delete;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_6;
@@ -347,16 +348,23 @@ public:
 
         Add = new QPushButton(left);
         Add->setObjectName(QStringLiteral("Add"));
-        Add->setMinimumSize(QSize(172, 0));
-        Add->setMaximumSize(QSize(172, 16777215));
+        Add->setMinimumSize(QSize(114, 0));
+        Add->setMaximumSize(QSize(114, 16777215));
         Add->setFocusPolicy(Qt::StrongFocus);
 
         horizontalLayout_7->addWidget(Add);
 
+        Edit = new QPushButton(left);
+        Edit->setObjectName(QStringLiteral("Edit"));
+        Edit->setMinimumSize(QSize(114, 0));
+        Edit->setMaximumSize(QSize(114, 16777215));
+
+        horizontalLayout_7->addWidget(Edit);
+
         Delete = new QPushButton(left);
         Delete->setObjectName(QStringLiteral("Delete"));
-        Delete->setMinimumSize(QSize(172, 0));
-        Delete->setMaximumSize(QSize(172, 16777215));
+        Delete->setMinimumSize(QSize(114, 0));
+        Delete->setMaximumSize(QSize(114, 16777215));
         Delete->setFocusPolicy(Qt::StrongFocus);
 
         horizontalLayout_7->addWidget(Delete);
@@ -490,6 +498,7 @@ public:
         label_7->setText(QApplication::translate("ShiftEditForm", "Time Worked:", Q_NULLPTR));
         Times->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
         Add->setText(QApplication::translate("ShiftEditForm", "Add", Q_NULLPTR));
+        Edit->setText(QApplication::translate("ShiftEditForm", "Edit", Q_NULLPTR));
         Delete->setText(QApplication::translate("ShiftEditForm", "Delete", Q_NULLPTR));
         label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", Q_NULLPTR));
         Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));

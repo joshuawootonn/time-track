@@ -58,6 +58,8 @@ private slots:
 
     void on_Items_currentTextChanged(const QString &arg1);
 
+    void on_Edit_clicked();
+
 signals:
     void finished();
 

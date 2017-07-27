@@ -597,35 +597,33 @@ void MainForm::on_passEdit_returnPressed()
             current = qry1.value(0).toString();
             count++;
         }
-        if(current =="1")
+
+        if(count == 1 && current=="1")
         {
-            if(count == 1)
-            {
-                qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
-                if(qry2.exec()){
-                    while(qry2.next()){
-                        QString x= qry2.value(0).toString();
-                        if(x=="1")
-                            admin=true;
-                        else
-                            admin=false;
-                        id = qry2.value(1).toString();
-                    }
+            qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
+            if(qry2.exec()){
+                while(qry2.next()){
+                    QString x= qry2.value(0).toString();
+                    if(x=="1")
+                        admin=true;
+                    else
+                        admin=false;
+                    id = qry2.value(1).toString();
                 }
-
-                basicInitialize();
             }
-            if(count < 1){
-                if(ui->passEdit->text()!="")
-                    ui->passLabel->setText("Invalid");
 
-            }
-            else
-                ui->passLabel->setText("");
+            basicInitialize();
         }
-        else{
+        else if(count < 1){
+            if(ui->passEdit->text()!="")
+                ui->passLabel->setText("Invalid");
+        }
+        else if(current == "0"){
             ui->passLabel->setText("No Longer Employed");
         }
+        else
+            ui->passLabel->setText("");
+
 
     }
     else

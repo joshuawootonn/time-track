@@ -14,6 +14,7 @@
 #include <QStringList>
 #include <QDesktopWidget>
 #include <QTimeEdit>
+#include <random>
 
 namespace Ui {
 class EmployeeEditForm;

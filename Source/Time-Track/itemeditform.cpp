@@ -18,7 +18,7 @@ QString ItemEditForm::AddValid(){
     QString error;
     QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<4)
-        error = "Invalid Name: Minimun length 4";
+        error = "Invalid Name: Minimum length 4";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else{
@@ -58,7 +58,7 @@ QString ItemEditForm::EditValid(){
     QString error;
     QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<4)
-        error = "Invalid Name: Minimun length 4";
+        error = "Invalid Name: Minimum length 4";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else{

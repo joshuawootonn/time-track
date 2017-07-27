@@ -406,13 +406,13 @@ background-color:#FFFFFF;
               <widget class="QPushButton" name="Add">
                <property name="minimumSize">
                 <size>
-                 <width>172</width>
+                 <width>114</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>172</width>
+                 <width>114</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -425,16 +425,35 @@ background-color:#FFFFFF;
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="Delete">
+              <widget class="QPushButton" name="Edit">
                <property name="minimumSize">
                 <size>
-                 <width>172</width>
+                 <width>114</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>172</width>
+                 <width>114</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Edit</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Delete">
+               <property name="minimumSize">
+                <size>
+                 <width>114</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>114</width>
                  <height>16777215</height>
                 </size>
                </property>

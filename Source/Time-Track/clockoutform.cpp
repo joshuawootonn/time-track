@@ -321,7 +321,9 @@ void ClockoutForm::on_Add_clicked()
 }
 void ClockoutForm::on_Edit_clicked()
 {
-    if(clicked){
+    if(ui->Items->currentText() == "Other" && ui->Description->text() == ""){
+        ui->error->setText("Invalid: Add Note to the Task");
+    }else if(clicked){
         ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(ui->Hours->currentText()+":"+ui->Minutes->currentText()));
         ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Projects->currentText()));
         ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(ui->Items->currentText()));
@@ -432,13 +434,13 @@ void ClockoutForm::on_FinishedButton_clicked()
 
     if(ui->timeLeft->text()!= "0:00"){
         if(ui->timeLeft->text().split(":")[0].toInt()>0){
-            ui->error->setText("Invalid: To little time on timesheet");
+            ui->error->setText("Invalid: Too Little Time on Timesheet");
         }
         else{
-            ui->error->setText("Invalid: To much time on timesheet");
+            ui->error->setText("Invalid: Too Much Time on Timesheet");
         }
     }else if(ui->Sections->rowCount()<1){
-        ui->error->setText("Invalid: No projects added to timesheet");
+        ui->error->setText("Invalid: No Projects Added to Timesheet");
     }
     else{
         QSqlQuery* qry=new QSqlQuery(data);
@@ -529,6 +531,7 @@ void ClockoutForm::on_Items_currentTextChanged(const QString &arg1)
     if(arg1 =="Other"){
         ui->Description->setVisible(true);
         ui->DescriptionLabel->setVisible(true);
+        ui->Description->setText("");
     }
     else{
         ui->Description->setVisible(false);

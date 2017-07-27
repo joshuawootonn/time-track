@@ -143,7 +143,7 @@ QString ProjectEditForm::EditValid(){
     QString error = "";
     QRegExp name_regrex("^[a-zA-Z0-9.-_\" )(/\\&-]+$");
     if(ui->name->text().length()<6)
-        error = "Invalid Name: Minimun length 6";
+        error = "Invalid Name: Minimum length 6";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Special characters other than ( - _ . & \" ) are not allowed";
     else if(ui->Sections->rowCount()<1){

@@ -211,7 +211,7 @@ public:
 
         pin = new QLineEdit(widget1);
         pin->setObjectName(QStringLiteral("pin"));
-        pin->setMaxLength(4);
+        pin->setMaxLength(6);
 
         horizontalLayout_2->addWidget(pin);
 

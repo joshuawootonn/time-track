@@ -393,6 +393,7 @@ void ShiftEditForm::on_Items_currentTextChanged(const QString &arg1)
     if(arg1 =="Other"){
         ui->Description->setVisible(true);
         ui->Description_label->setVisible(true);
+        ui->Description->setText("");
     }else{
         ui->Description->setVisible(false);
         ui->Description_label->setVisible(false);
@@ -405,8 +406,9 @@ void ShiftEditForm::on_Add_clicked()
     }
     else if(ui->Items->currentText() == ""){
         ui->error->setText("Invalid: Select Item");
-    }
-    else
+    }else if(ui->Items->currentText() == "Other" && ui->Description->text() == ""){
+        ui->error->setText("Invalid: Add Note to the Task");
+    }else
     {
         ui->error->setText("");
         ui->Sections->setRowCount(ui->Sections->rowCount()+1);
@@ -436,15 +438,61 @@ void ShiftEditForm::on_Add_clicked()
     }
 
 }
+
+
+
+void ShiftEditForm::on_Edit_clicked()
+{
+    if(ui->Projects->currentText() == ""){
+        ui->error->setText("Invalid: Select Project");
+    }else if(ui->Items->currentText() == ""){
+        ui->error->setText("Invalid: Select Item");
+    }else if(ui->Items->currentText() == "Other" && ui->Description->text() == ""){
+        ui->error->setText("Invalid: Add Note to the Task");
+    }else if(clicked)
+    {
+        ui->error->setText("");
+        if (QString::number(ui->Times->time().minute()) == "0")
+            ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())+"0"));
+        else
+            ui->Sections->setItem(selectedRow,2,new QTableWidgetItem(QString::number(ui->Times->time().hour())+":"+QString::number(ui->Times->time().minute())));
+        ui->Sections->setItem(selectedRow,0,new QTableWidgetItem(ui->Projects->currentText()));
+        ui->Sections->setItem(selectedRow,1,new QTableWidgetItem(ui->Items->currentText()));
+        if(ui->Items->currentText()!="Other"){
+            ui->Sections->setItem(selectedRow,3,new QTableWidgetItem(""));
+        }else{
+            ui->Sections->setItem(selectedRow,3,new QTableWidgetItem(ui->Description->text()));
+        }
+
+        ui->Description->setText("");
+        ui->Sections->resizeRowsToContents();
+        TimeLeft();
+        ui->Items->clearEditText();
+        ui->Projects->clearEditText();
+        if(ui->timeLeft->text() == "0:00")
+            ui->FinishedButton->setFocus();
+        else if (ui->timeLeft->text().split(":")[0] == "0")
+            ui->Lunch->setFocus();
+        else
+            ui->Projects->setFocus();
+
+        clicked = false;
+    }else{
+        ui->error->setText("Invalid: Select an Item");
+    }
+}
+
+
 void ShiftEditForm::on_Delete_clicked()
 {
     if (clicked)
     {
-
-
         ui->Sections->removeRow(selectedRow);
         TimeLeft();
         clicked = false;
+    }
+    else{
+        ui->error->setText("Invalid: Select an Item");
     }
 
 
@@ -528,14 +576,14 @@ void ShiftEditForm::on_FinishedButton_clicked()
     }
     else if(ui->timeLeft->text()!= "0:00"){
         if(ui->timeLeft->text().split(":")[0].toInt()>0){
-            ui->error->setText("Invalid: To little time on timesheet");
+            ui->error->setText("Invalid: Too Little Time on Timesheet");
         }
         else{
-            ui->error->setText("Invalid: To much time on timesheet");
+            ui->error->setText("Invalid: Too Much Time on Timesheet");
         }
     }
     else if(ui->Sections->rowCount()<1){
-        ui->error->setText("Invalid: No projects added to timesheet");
+        ui->error->setText("Invalid: No Projects Added to Timesheet");
     }
     else{
         QSqlQuery* qry=new QSqlQuery(data);
@@ -636,8 +684,6 @@ void ShiftEditForm::on_CancelButton_clicked()
     this->hide();
     emit finished();
 }
-
-
 
 
 

@@ -64,7 +64,13 @@ EmployeeEditForm::~EmployeeEditForm()
 }
 // Generates random unique pin
 int EmployeeEditForm::generateRandom(){
-    int x = rand()%9000+1000;
+    int x = (qrand()%999+100) *1000;
+    int y = qrand()%999+100;
+    x=x+y;
+//    std::random_device rd;
+//    std::mt19937 gen(rd());
+//    std::uniform_real_distribution<> distribution(100000, 999999);
+//    int x = (int)distribution(gen);
     QSqlQuery * qry = new QSqlQuery(data);
     qry->prepare("select pin from employeelist");
     if(qry->exec())
@@ -95,9 +101,9 @@ bool EmployeeEditForm::getSuccess() const
 QString EmployeeEditForm::AddValid(){
     QString error;
     if(ui->name->text().length()<5)
-        error = "Invalid name: Minimun length 5";
+        error = "Invalid name: Minimum length 5";
     if(ui->pin->text().length() < 4)
-        error = "Invalid pin: Required length 4";
+        error = "Invalid pin: Minimum length 4";
     QRegExp name_regrex("^[a-zA-Z ]+$");  // a digit (\d), zero or more times (*)
     QRegExp pin_regrex("^[0-9]+$");
     if (!name_regrex.exactMatch(ui->name->text()))
@@ -114,9 +120,9 @@ QString EmployeeEditForm::EditValid(){
     QRegExp pin_regrex("^[0-9]+$");
 
     if(ui->name->text().length()<5)
-        error = "Invalid name: Minimun length 5";
+        error = "Invalid name: Minimum length 5";
     else if(ui->pin->text().length() < 4)
-        error = "Invalid pin: Required length 4";
+        error = "Invalid pin: Minimum length 4";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid name: Must be Letters only";
     else if (!pin_regrex.exactMatch(ui->pin->text()))
