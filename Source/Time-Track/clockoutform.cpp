@@ -432,90 +432,96 @@ void ClockoutForm::on_Description_textChanged()
 void ClockoutForm::on_FinishedButton_clicked()
 {
 
-    if(ui->timeLeft->text()!= "0:00"){
-        if(ui->timeLeft->text().split(":")[0].toInt()>0){
-            ui->error->setText("Invalid: Too Little Time on Timesheet");
+    if(data.open()){
+        if(ui->timeLeft->text()!= "0:00"){
+            if(ui->timeLeft->text().split(":")[0].toInt()>0){
+                ui->error->setText("Invalid: Too Little Time on Timesheet");
+            }
+            else{
+                ui->error->setText("Invalid: Too Much Time on Timesheet");
+            }
+        }else if(ui->Sections->rowCount()<1){
+            ui->error->setText("Invalid: No Projects Added to Timesheet");
         }
         else{
-            ui->error->setText("Invalid: Too Much Time on Timesheet");
+            QSqlQuery* qry=new QSqlQuery(data);
+            QString shiftId,employeeid,employeename,timein,datein;
+
+            qry->prepare("SELECT shiftcount FROM employeelist WHERE id = '"+id+"'");
+            if(qry->exec()){
+                while(qry->next()){
+                    shiftId = qry->value(0).toString();}}
+
+            qry->clear();
+            qry->prepare("select employeeid,employeename,timein,datein from shiftlist where shiftid = '"+shiftId+"'");
+
+            if(qry->exec()){
+                while(qry->next()){
+                    employeeid=qry->value(0).toString();
+                    employeename=qry->value(1).toString();
+                    timein=qry->value(2).toString();
+                    datein=qry->value(3).toString();
+                }
+            }
+            QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
+            QString timeout = clockout.toString("HH:mm:ss");
+            QString dateout = clockout.toString("yyyy-MM-dd");
+
+            qry->clear();
+            qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+            qry->exec();
+            QString projectname,itemname, projectid,itemid,hours,lunch,description;
+
+
+            for(int i =0; i<ui->Sections->rowCount();i++){
+
+
+                projectname = ui->Sections->item(i,0)->text();
+                qry->prepare("select id from projectlist where name='"+projectname+"'");
+                if(qry->exec()){
+                    while(qry->next()){
+                        projectid=qry->value(0).toString();}}
+                qry->clear();
+                itemname=ui->Sections->item(i,1)->text();
+                qry->prepare("select id from itemlist where name='"+itemname+"'");
+                if(qry->exec()){
+                    while(qry->next()){
+                        itemid=qry->value(0).toString();}}
+
+
+
+                hours=ui->Sections->item(i,2)->text();
+                lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+                qry->clear();
+                description = ui->Sections->item(i,3)->text();
+
+                if(description!="")
+                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
+                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"','"+description+"')");
+                else
+                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"')");
+
+                qry->exec();
+                qDebug()<<qry->lastError();
+                qDebug()<<qry->lastQuery();
+
+            }
+
+
+            qry->clear();
+            qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+            qry->exec();
+
+
+            this->hide();
+
+            emit finished();
         }
-    }else if(ui->Sections->rowCount()<1){
-        ui->error->setText("Invalid: No Projects Added to Timesheet");
+
     }
     else{
-        QSqlQuery* qry=new QSqlQuery(data);
-        QString shiftId,employeeid,employeename,timein,datein;
-
-        qry->prepare("SELECT shiftcount FROM employeelist WHERE id = '"+id+"'");
-        if(qry->exec()){
-            while(qry->next()){
-                shiftId = qry->value(0).toString();}}
-
-        qry->clear();
-        qry->prepare("select employeeid,employeename,timein,datein from shiftlist where shiftid = '"+shiftId+"'");
-
-        if(qry->exec()){
-            while(qry->next()){
-                employeeid=qry->value(0).toString();
-                employeename=qry->value(1).toString();
-                timein=qry->value(2).toString();
-                datein=qry->value(3).toString();
-            }
-        }
-        QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
-        QString timeout = clockout.toString("HH:mm:ss");
-        QString dateout = clockout.toString("yyyy-MM-dd");
-
-        qry->clear();
-        qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
-        qry->exec();
-        QString projectname,itemname, projectid,itemid,hours,lunch,description;
-
-
-        for(int i =0; i<ui->Sections->rowCount();i++){
-
-
-            projectname = ui->Sections->item(i,0)->text();
-            qry->prepare("select id from projectlist where name='"+projectname+"'");
-            if(qry->exec()){
-                while(qry->next()){
-                    projectid=qry->value(0).toString();}}
-            qry->clear();
-            itemname=ui->Sections->item(i,1)->text();
-            qry->prepare("select id from itemlist where name='"+itemname+"'");
-            if(qry->exec()){
-                while(qry->next()){
-                    itemid=qry->value(0).toString();}}
-
-
-
-            hours=ui->Sections->item(i,2)->text();
-            lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
-            qry->clear();
-            description = ui->Sections->item(i,3)->text();
-
-            if(description!="")
-                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
-                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"','"+description+"')");
-            else
-                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
-                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftId+"')");
-
-            qry->exec();
-            qDebug()<<qry->lastError();
-            qDebug()<<qry->lastQuery();
-
-        }
-
-
-        qry->clear();
-        qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
-        qry->exec();
-
-
-        this->hide();
-
-        emit finished();
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 
 }

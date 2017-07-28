@@ -137,6 +137,7 @@ private slots:
     void on_ProjectName_clicked();
     void on_ProjectId_clicked();
     void on_ProjectCurrent_clicked();
+    void on_ProjectDate_clicked();
     void on_ProjectAllRadio_toggled(bool checked);
     void on_ProjectCurrentRadio_toggled(bool checked);
     void on_ProjectPastRadio_toggled(bool checked);
@@ -144,7 +145,12 @@ private slots:
     void on_ProjectItemId_clicked();    
     void on_ProjectItemQuantity_clicked();
     void on_ProjectItemDimension_clicked();
-    void on_ProjectDate_clicked();
+    void on_ProjectItemEstHours_clicked();
+    void on_ProjectItemEstHourUnit_clicked();
+    void on_ProjectItemActHours_clicked();
+    void on_ProjectItemActHourUnit_clicked();
+    void on_ProjectItemDifference_clicked();
+
 
     //Item Tab!
 
@@ -190,20 +196,6 @@ private slots:
 
 
 
-
-
-
-
-
-    void on_ProjectItemEstHours_clicked();
-
-    void on_ProjectItemEstHourUnit_clicked();
-
-    void on_ProjectItemActHours_clicked();
-
-    void on_ProjectItemActHourUnit_clicked();
-
-    void on_ProjectItemDifference_clicked();
 
 public:
     Ui::MainForm *ui;

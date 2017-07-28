@@ -126,6 +126,8 @@ void ConnectionForm::write(){
         return;
     }
     QTextStream out(&file);
+    ip = ui->ipEdit->currentText();
+    qDebug()<<"write"<<ip;
     out<<database<<" "<<port<<" "<<username<<" "<<password<<" "<<ip<<" ";
     out<<"1 ";
 
@@ -151,18 +153,26 @@ void ConnectionForm::read(){
         ui->portEdit->setText(text.split(" ")[1]);
         ui->usernameEdit->setText(text.split(" ")[2]);
         ui->passwordEdit->setText(text.split(" ")[3]);
-        ui->ipEdit->findText(text.split(" ")[4]);
+        int index = ui->ipEdit->findText(text.split(" ")[4]);
+        if ( index != -1 ) { // -1 for not found
+           ui->ipEdit->setCurrentIndex(index);
+        }
     }
     if( text.split(" ").length() == 7)
     {
-         ip =text.split(" ")[4];
+        ip =text.split(" ")[4];
         ui->databaseEdit->setText(text.split(" ")[0]);
         ui->portEdit->setText(text.split(" ")[1]);
         ui->usernameEdit->setText(text.split(" ")[2]);
         ui->passwordEdit->setText(text.split(" ")[3]);
-        ui->ipEdit->findText(text.split(" ")[4]);
+        int index = ui->ipEdit->findText(text.split(" ")[4]);
+        if ( index != -1 ) { // -1 for not found
+           ui->ipEdit->setCurrentIndex(index);
+        }
         automatic = text.split(" ")[5].toInt();
     }
+
+    qDebug()<<"read"<<this->getIp()<<ip<<ui->ipEdit->currentText();
 
     file.close();
 }
@@ -246,6 +256,7 @@ void ConnectionForm::on_connect_clicked()
     {
         write();
         emit finished();
+
     }
 }
 

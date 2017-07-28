@@ -214,6 +214,8 @@ public:
     QPushButton *SettingsAll;
     QSpacerItem *horizontalSpacer_8;
     QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer_14;
+    QLabel *error;
     QSpacerItem *horizontalSpacer;
     QPushButton *mainFinish;
 
@@ -384,6 +386,15 @@ public:
 "color:#263544;\n"
 "\n"
 "}\n"
+"QPushButton#basicPageConnect{\n"
+"padding:3px;\n"
+"border:none;\n"
+"background-color:#E5EAE7;\n"
+"}\n"
+"QPushButton#basicPageConnect:hover,QPushButton#basicPageConnect:hover{\n"
+"background-color:#ECEFED;\n"
+"}\n"
+"\n"
 "\n"
 ""));
         gridLayout_16 = new QGridLayout(loginPage);
@@ -1372,6 +1383,15 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetMinimumSize);
         horizontalLayout->setContentsMargins(-1, -1, 4, 0);
+        horizontalSpacer_14 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_14);
+
+        error = new QLabel(MainForm);
+        error->setObjectName(QStringLiteral("error"));
+
+        horizontalLayout->addWidget(error);
+
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
@@ -1458,7 +1478,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(0);
         MainTabs->setCurrentIndex(3);
         HeaderTabs->setCurrentIndex(1);
         EmployeeAdd->setDefault(false);
@@ -1576,6 +1596,7 @@ public:
         groupBox_20->setTitle(QApplication::translate("MainForm", "All Settings", Q_NULLPTR));
         SettingsAll->setText(QString());
         HeaderTabs->setTabText(HeaderTabs->indexOf(Settings), QApplication::translate("MainForm", "Settings", Q_NULLPTR));
+        error->setText(QString());
         mainFinish->setText(QApplication::translate("MainForm", "Finish", Q_NULLPTR));
     } // retranslateUi
 

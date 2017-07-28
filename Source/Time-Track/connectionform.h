@@ -24,6 +24,7 @@ public:
     QString getPassword() const;
     QString getIp() const;
     void setError(QString x);
+    void read();
 
 private slots:    
     void on_connect_clicked();
@@ -42,7 +43,7 @@ signals:
 
 private:
     void write();
-    void read();    
+
     void pingConnection();
 
     Ui::ConnectionForm *ui;

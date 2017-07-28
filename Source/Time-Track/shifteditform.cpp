@@ -570,111 +570,117 @@ bool ShiftEditForm::getSuccess() const
 }
 void ShiftEditForm::on_FinishedButton_clicked()
 {
-    if(ui->Name->currentText()=="")
-    {
-        ui->error->setText("Invalid: Select Employee");
-    }
-    else if(ui->timeLeft->text()!= "0:00"){
-        if(ui->timeLeft->text().split(":")[0].toInt()>0){
-            ui->error->setText("Invalid: Too Little Time on Timesheet");
+    if(data.open()){
+        if(ui->Name->currentText()=="")
+        {
+            ui->error->setText("Invalid: Select Employee");
+        }
+        else if(ui->timeLeft->text()!= "0:00"){
+            if(ui->timeLeft->text().split(":")[0].toInt()>0){
+                ui->error->setText("Invalid: Too Little Time on Timesheet");
+            }
+            else{
+                ui->error->setText("Invalid: Too Much Time on Timesheet");
+            }
+        }
+        else if(ui->Sections->rowCount()<1){
+            ui->error->setText("Invalid: No Projects Added to Timesheet");
         }
         else{
-            ui->error->setText("Invalid: Too Much Time on Timesheet");
-        }
-    }
-    else if(ui->Sections->rowCount()<1){
-        ui->error->setText("Invalid: No Projects Added to Timesheet");
-    }
-    else{
-        QSqlQuery* qry=new QSqlQuery(data);
-        QString employeeid,employeename;
+            QSqlQuery* qry=new QSqlQuery(data);
+            QString employeeid,employeename;
 
 
-        qry->clear();
-        qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
-        qry->exec();
-
-        employeename = ui->Name->currentText();
-        qry->prepare("select id from employeelist where name='"+employeename+"'");
-        if(qry->exec()){
-            while(qry->next())
-                employeeid = qry->value(0).toString();
-        }
-
-
-        QDateTime clockin = ui->DateTime1->dateTime();
-        QString timein = clockin.toString("HH:mm:ss");
-        QString datein = clockin.toString("yyyy-MM-dd");
-
-
-        QDateTime clockout = ui->DateTime2->dateTime();
-        QString timeout = clockout.toString("HH:mm:ss");
-        QString dateout = clockout.toString("yyyy-MM-dd");
-
-
-        QString projectname,itemname, projectid,itemid,hours,lunch,shiftid,description;
-        qry->clear();
-        qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
-        if(qry->exec()){
-            while(qry->next()){
-                shiftid=qry->value(0).toString();}}
-        int id = shiftid.toInt();
-        id++;
-        shiftid = QString::number(id);
-        qry->clear();
-
-
-        for(int i =0; i<ui->Sections->rowCount();i++){
-
-
-            projectname = ui->Sections->item(i,0)->text();
-            qry->prepare("select id from projectlist where name='"+projectname+"'");
-            if(qry->exec()){
-                while(qry->next()){
-                    projectid=qry->value(0).toString();}}
             qry->clear();
-            itemname=ui->Sections->item(i,1)->text();
-            qry->prepare("select id from itemlist where name='"+itemname+"'");
+            qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+            qry->exec();
+
+            employeename = ui->Name->currentText();
+            qry->prepare("select id from employeelist where name='"+employeename+"'");
             if(qry->exec()){
-                while(qry->next()){
-                    itemid=qry->value(0).toString();
-                }
+                while(qry->next())
+                    employeeid = qry->value(0).toString();
             }
 
 
+            QDateTime clockin = ui->DateTime1->dateTime();
+            QString timein = clockin.toString("HH:mm:ss");
+            QString datein = clockin.toString("yyyy-MM-dd");
 
-            hours=ui->Sections->item(i,2)->text();
 
-            description = ui->Sections->item(i,3)->text();
+            QDateTime clockout = ui->DateTime2->dateTime();
+            QString timeout = clockout.toString("HH:mm:ss");
+            QString dateout = clockout.toString("yyyy-MM-dd");
 
-            if(ui->Lunch->time().minute() == 0)
-                lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute())+"0";
-            else
-                lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+
+            QString projectname,itemname, projectid,itemid,hours,lunch,shiftid,description;
             qry->clear();
-            if(description!="")
-                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
-                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"','"+description+"')");
-            else
-                qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
-                         +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
+            qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+            if(qry->exec()){
+                while(qry->next()){
+                    shiftid=qry->value(0).toString();}}
+            int id = shiftid.toInt();
+            id++;
+            shiftid = QString::number(id);
+            qry->clear();
 
 
-            if (qry->exec())
-                success = true;
-            else
-                success = false;
+            for(int i =0; i<ui->Sections->rowCount();i++){
+
+
+                projectname = ui->Sections->item(i,0)->text();
+                qry->prepare("select id from projectlist where name='"+projectname+"'");
+                if(qry->exec()){
+                    while(qry->next()){
+                        projectid=qry->value(0).toString();}}
+                qry->clear();
+                itemname=ui->Sections->item(i,1)->text();
+                qry->prepare("select id from itemlist where name='"+itemname+"'");
+                if(qry->exec()){
+                    while(qry->next()){
+                        itemid=qry->value(0).toString();
+                    }
+                }
+
+
+
+                hours=ui->Sections->item(i,2)->text();
+
+                description = ui->Sections->item(i,3)->text();
+
+                if(ui->Lunch->time().minute() == 0)
+                    lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute())+"0";
+                else
+                    lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+                qry->clear();
+                if(description!="")
+                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
+                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"','"+description+"')");
+                else
+                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
+
+
+                if (qry->exec())
+                    success = true;
+                else
+                    success = false;
+            }
+
+
+            if(deactivate){
+                qry->clear();
+                qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+                qry->exec();
+            }
+
+            this->hide();
+            emit finished();
         }
 
-
-        if(deactivate){
-            qry->clear();
-            qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
-            qry->exec();
-        }
-
-        this->hide();
-        emit finished();
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 
 }

@@ -107,76 +107,82 @@ bool ItemEditForm::getSuccess() const
 
 void ItemEditForm::on_FinishButton_clicked()
 {
-    if(AddValid() == "" && task=="add")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        qry->prepare("insert into itemlist(name) "
-                     " values('"+ui->name->text()+"')");
-
-
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Creating Item";
-        }
-
-        this->hide();
-        emit finished();
-    }
-    if(EditValid() == "" && task=="edit")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        qry->prepare("update itemlist set name='"+ui->name->text()+"'  where id = '"+id+"'");
-
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Editing Item";
-        }
-
-        qry->clear();
-        qry->prepare("update shiftlist set itemname='"+ui->name->text()+"'  where itemid = '"+id+"'");
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Editing Item";
-        }
-
-        qry->clear();
-        qry->prepare("SELECT id FROM projectlist");
-
-        QList<QString> projects;
-        if(qry->exec()){
-            while(qry->next()){
-                projects<<qry->value(0).toString();
-            }
-        }
-        for(int i = 0; i<projects.length();i++)
+    if(data.open()){
+        if(AddValid() == "" && task=="add")
         {
-            QString tableName = "project"+projects[i];
-            qry->clear();
-            qry->prepare("UPDATE "+tableName+" set name='"+ui->name->text()+"' where itemid = '"+id+"'");
+            QSqlQuery * qry = new QSqlQuery(data);
+            qry->prepare("insert into itemlist(name) "
+                         " values('"+ui->name->text()+"')");
+
+
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Creating Item";
+            }
+
+            this->hide();
+            emit finished();
+        }
+        if(EditValid() == "" && task=="edit")
+        {
+            QSqlQuery * qry = new QSqlQuery(data);
+            qry->prepare("update itemlist set name='"+ui->name->text()+"'  where id = '"+id+"'");
+
             if (qry->exec())
                 success = true;
             else{
                 success = false;
                 successMsg = "Error Editing Item";
             }
+
+            qry->clear();
+            qry->prepare("update shiftlist set itemname='"+ui->name->text()+"'  where itemid = '"+id+"'");
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Editing Item";
+            }
+
+            qry->clear();
+            qry->prepare("SELECT id FROM projectlist");
+
+            QList<QString> projects;
+            if(qry->exec()){
+                while(qry->next()){
+                    projects<<qry->value(0).toString();
+                }
+            }
+            for(int i = 0; i<projects.length();i++)
+            {
+                QString tableName = "project"+projects[i];
+                qry->clear();
+                qry->prepare("UPDATE "+tableName+" set name='"+ui->name->text()+"' where itemid = '"+id+"'");
+                if (qry->exec())
+                    success = true;
+                else{
+                    success = false;
+                    successMsg = "Error Editing Item";
+                }
+            }
+
+
+            this->hide();
+            emit finished();
         }
-
-
-        this->hide();
-        emit finished();
-    }
-    else if(task=="edit"){
-        ui->error->setText(EditValid());
+        else if(task=="edit"){
+            ui->error->setText(EditValid());
+        }
+        else{
+            ui->error->setText(AddValid());
+        }
     }
     else{
-        ui->error->setText(AddValid());
+        ui->error->setText("Disconnected From Database\nVerify Connection and Try Again");
     }
+
 }
 void ItemEditForm::on_CancelButton_clicked()
 {

@@ -157,55 +157,61 @@ QString EmployeeEditForm::EditValid(){
 // Self evident
 void EmployeeEditForm::on_FinishButton_clicked()
 {
-    if(AddValid() == "" && task=="add")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        QString admin = QString::number(int(ui->admin->isChecked()));
-        QString active = QString::number(int(ui->active->isChecked()));        
-        QString current = QString::number(int(ui->current->isChecked()));
-        qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current) "
-                     " values('"+ui->name->text()+"','"+ui->pin->text()+"','"+admin+"','1','"+active+"','"+current+"')");
-        if (qry->exec())
-            success = true;
+    if(data.open()){
+        if(AddValid() == "" && task=="add")
+        {
+            QSqlQuery * qry = new QSqlQuery(data);
+            QString admin = QString::number(int(ui->admin->isChecked()));
+            QString active = QString::number(int(ui->active->isChecked()));
+            QString current = QString::number(int(ui->current->isChecked()));
+            qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current) "
+                         " values('"+ui->name->text()+"','"+ui->pin->text()+"','"+admin+"','1','"+active+"','"+current+"')");
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Creating Employee";
+            }
+
+            this->hide();
+            emit finished();
+        }
+        if(EditValid() == "" && task=="edit")
+        {
+            QSqlQuery * qry = new QSqlQuery(data);
+            QString admin = QString::number(int(ui->admin->isChecked()));
+            QString active = QString::number(int(ui->active->isChecked()));
+            QString current = QString::number(int(ui->current->isChecked()));
+            qry->prepare("update employeelist set name='"+ui->name->text()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+current+"', active='"+active+"'  where id = '"+id+"'");
+
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Editing Employee";
+            }
+
+            qry->clear();
+            qry->prepare("update shiftlist set employeename='"+ui->name->text()+"'  where employeeid = '"+id+"'");
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Editing Employee";
+            }
+            this->hide();
+            emit finished();
+        }
+        else if(task=="edit"){
+            ui->error->setText(EditValid());
+        }
         else{
-            success = false;
-            successMsg = "Error Creating Employee";
+            ui->error->setText(AddValid());
         }
 
-        this->hide();
-        emit finished();
-    }
-    if(EditValid() == "" && task=="edit")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        QString admin = QString::number(int(ui->admin->isChecked()));
-        QString active = QString::number(int(ui->active->isChecked()));
-        QString current = QString::number(int(ui->current->isChecked()));
-        qry->prepare("update employeelist set name='"+ui->name->text()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+current+"', active='"+active+"'  where id = '"+id+"'");
-
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Editing Employee";
-        }
-
-        qry->clear();
-        qry->prepare("update shiftlist set employeename='"+ui->name->text()+"'  where employeeid = '"+id+"'");
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Editing Employee";
-        }
-        this->hide();
-        emit finished();
-    }
-    else if(task=="edit"){
-        ui->error->setText(EditValid());
     }
     else{
-        ui->error->setText(AddValid());
+        ui->error->setText("Disconnected From Database\nVerify Connection and Try Again");
     }
 
 }
@@ -216,8 +222,6 @@ void EmployeeEditForm::on_CancelButton_clicked()
     emit finished();
 
 }
-
-
 
 void EmployeeEditForm::on_pin_returnPressed()
 {

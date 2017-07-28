@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -30,6 +31,12 @@ QT_BEGIN_NAMESPACE
 class Ui_ConnectionForm
 {
 public:
+    QGridLayout *gridLayout;
+    QSpacerItem *horizontalSpacer_3;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *verticalSpacer_2;
+    QWidget *verticalWidget;
     QVBoxLayout *verticalLayout;
     QWidget *horizontalWidget;
     QHBoxLayout *horizontalLayout_3;
@@ -49,7 +56,6 @@ public:
     QLineEdit *passwordEdit;
     QWidget *horizontalWidget_5;
     QHBoxLayout *horizontalLayout_7;
-    QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QComboBox *ipEdit;
     QPushButton *testConnection;
@@ -64,7 +70,7 @@ public:
     {
         if (ConnectionForm->objectName().isEmpty())
             ConnectionForm->setObjectName(QStringLiteral("ConnectionForm"));
-        ConnectionForm->resize(341, 305);
+        ConnectionForm->resize(374, 330);
         ConnectionForm->setStyleSheet(QLatin1String("QDialog#ConnectionForm{\n"
 "\n"
 "background-color:#E5EAE7;\n"
@@ -182,11 +188,31 @@ public:
 "\n"
 "\n"
 ""));
-        verticalLayout = new QVBoxLayout(ConnectionForm);
-        verticalLayout->setSpacing(0);
+        gridLayout = new QGridLayout(ConnectionForm);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_3, 1, 2, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 1, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 2, 1, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_2, 0, 1, 1, 1);
+
+        verticalWidget = new QWidget(ConnectionForm);
+        verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
+        verticalWidget->setMinimumSize(QSize(340, 300));
+        verticalWidget->setMaximumSize(QSize(340, 300));
+        verticalLayout = new QVBoxLayout(verticalWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(9, 9, 9, 9);
-        horizontalWidget = new QWidget(ConnectionForm);
+        horizontalWidget = new QWidget(verticalWidget);
         horizontalWidget->setObjectName(QStringLiteral("horizontalWidget"));
         horizontalLayout_3 = new QHBoxLayout(horizontalWidget);
         horizontalLayout_3->setSpacing(6);
@@ -208,7 +234,7 @@ public:
 
         verticalLayout->addWidget(horizontalWidget);
 
-        horizontalWidget_2 = new QWidget(ConnectionForm);
+        horizontalWidget_2 = new QWidget(verticalWidget);
         horizontalWidget_2->setObjectName(QStringLiteral("horizontalWidget_2"));
         horizontalLayout_4 = new QHBoxLayout(horizontalWidget_2);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -229,7 +255,7 @@ public:
 
         verticalLayout->addWidget(horizontalWidget_2);
 
-        horizontalWidget_3 = new QWidget(ConnectionForm);
+        horizontalWidget_3 = new QWidget(verticalWidget);
         horizontalWidget_3->setObjectName(QStringLiteral("horizontalWidget_3"));
         horizontalLayout_5 = new QHBoxLayout(horizontalWidget_3);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
@@ -249,7 +275,7 @@ public:
 
         verticalLayout->addWidget(horizontalWidget_3);
 
-        horizontalWidget_4 = new QWidget(ConnectionForm);
+        horizontalWidget_4 = new QWidget(verticalWidget);
         horizontalWidget_4->setObjectName(QStringLiteral("horizontalWidget_4"));
         horizontalLayout_6 = new QHBoxLayout(horizontalWidget_4);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
@@ -269,39 +295,35 @@ public:
 
         verticalLayout->addWidget(horizontalWidget_4);
 
-        horizontalWidget_5 = new QWidget(ConnectionForm);
+        horizontalWidget_5 = new QWidget(verticalWidget);
         horizontalWidget_5->setObjectName(QStringLiteral("horizontalWidget_5"));
         horizontalLayout_7 = new QHBoxLayout(horizontalWidget_5);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_2 = new QLabel(horizontalWidget_5);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setMinimumSize(QSize(50, 0));
         label_2->setMaximumSize(QSize(75, 16777215));
 
-        horizontalLayout_2->addWidget(label_2);
+        horizontalLayout_7->addWidget(label_2);
 
         ipEdit = new QComboBox(horizontalWidget_5);
         ipEdit->setObjectName(QStringLiteral("ipEdit"));
         ipEdit->setMinimumSize(QSize(0, 25));
         ipEdit->setEditable(true);
 
-        horizontalLayout_2->addWidget(ipEdit);
+        horizontalLayout_7->addWidget(ipEdit);
 
         testConnection = new QPushButton(horizontalWidget_5);
         testConnection->setObjectName(QStringLiteral("testConnection"));
-        testConnection->setMaximumSize(QSize(25, 25));
+        testConnection->setMinimumSize(QSize(0, 25));
+        testConnection->setMaximumSize(QSize(25, 16777215));
 
-        horizontalLayout_2->addWidget(testConnection);
-
-
-        horizontalLayout_7->addLayout(horizontalLayout_2);
+        horizontalLayout_7->addWidget(testConnection);
 
 
         verticalLayout->addWidget(horizontalWidget_5);
 
-        widget = new QWidget(ConnectionForm);
+        widget = new QWidget(verticalWidget);
         widget->setObjectName(QStringLiteral("widget"));
         _2 = new QHBoxLayout(widget);
         _2->setSpacing(0);
@@ -325,7 +347,7 @@ public:
 
         verticalLayout->addWidget(widget);
 
-        progress = new QProgressBar(ConnectionForm);
+        progress = new QProgressBar(verticalWidget);
         progress->setObjectName(QStringLiteral("progress"));
         progress->setValue(0);
         progress->setOrientation(Qt::Horizontal);
@@ -333,12 +355,13 @@ public:
 
         verticalLayout->addWidget(progress);
 
+
+        gridLayout->addWidget(verticalWidget, 1, 1, 1, 1);
+
         QWidget::setTabOrder(databaseEdit, portEdit);
         QWidget::setTabOrder(portEdit, usernameEdit);
         QWidget::setTabOrder(usernameEdit, passwordEdit);
-        QWidget::setTabOrder(passwordEdit, ipEdit);
-        QWidget::setTabOrder(ipEdit, connect);
-        QWidget::setTabOrder(connect, testConnection);
+        QWidget::setTabOrder(passwordEdit, connect);
 
         retranslateUi(ConnectionForm);
 

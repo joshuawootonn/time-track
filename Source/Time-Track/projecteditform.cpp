@@ -270,149 +270,154 @@ void ProjectEditForm::on_Sections_cellClicked(int row, int column)
 
 void ProjectEditForm::on_FinishButton_clicked()
 {
-    if(AddValid() == "" && task=="add")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        qry->prepare("INSERT into projectlist(name,current,date)  values('"+ui->name->text()+"','1',"
-                                "'"+QString::number(ui->bidDate->date().month())+"/"+QString::number(ui->bidDate->date().day())+"/"+QString::number(ui->bidDate->date().year())+"')");
-        if (qry->exec())
-            success = true;
-        else{
-            success = false;
-            successMsg = "Error Creating Project(1)";
-            this->hide();
-            emit finished();
-            return;
-        }
-
-
-
-        qry->clear();
-        QString id;
-        qry->prepare("SELECT id FROM projectlist WHERE id=(select max(id) FROM projectlist)");
-        if(qry->exec())
+    if(data.open()){
+        if(AddValid() == "" && task=="add")
         {
-            while(qry->next())
+            QSqlQuery * qry = new QSqlQuery(data);
+            qry->prepare("INSERT into projectlist(name,current,date)  values('"+ui->name->text()+"','1',"
+                                    "'"+QString::number(ui->bidDate->date().month())+"/"+QString::number(ui->bidDate->date().day())+"/"+QString::number(ui->bidDate->date().year())+"')");
+            if (qry->exec())
+                success = true;
+            else{
+                success = false;
+                successMsg = "Error Creating Project(1)";
+                this->hide();
+                emit finished();
+                return;
+            }
+
+
+
+            qry->clear();
+            QString id;
+            qry->prepare("SELECT id FROM projectlist WHERE id=(select max(id) FROM projectlist)");
+            if(qry->exec())
             {
-                id = qry->value(0).toString();
-            }
-            success=true;
-        }
-        else{
-            success = false;
-            successMsg = "Error Creating Project(2)";
-            this->hide();
-            emit finished();
-            return;
-        }
-        qry->clear();
-        qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45), ehours varchar(45))");
-        qry->exec();
-
-        QString itemId;
-        for(int i = 0; i<ui->Sections->rowCount();i++){
-            qry->clear();
-            qry->prepare("SELECT id FROM itemlist WHERE name='"+ui->Sections->item(i,0)->text()+"'");
-            if(qry->exec()){
                 while(qry->next())
-                    itemId = qry->value(0).toString();
-                success = true;
+                {
+                    id = qry->value(0).toString();
+                }
+                success=true;
             }
             else{
                 success = false;
-                successMsg = "Error Creating Project(3)";
+                successMsg = "Error Creating Project(2)";
                 this->hide();
                 emit finished();
                 return;
             }
-            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
-                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
+            qry->clear();
+            qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45), ehours varchar(45))");
+            qry->exec();
+
+            QString itemId;
+            for(int i = 0; i<ui->Sections->rowCount();i++){
+                qry->clear();
+                qry->prepare("SELECT id FROM itemlist WHERE name='"+ui->Sections->item(i,0)->text()+"'");
+                if(qry->exec()){
+                    while(qry->next())
+                        itemId = qry->value(0).toString();
+                    success = true;
+                }
+                else{
+                    success = false;
+                    successMsg = "Error Creating Project(3)";
+                    this->hide();
+                    emit finished();
+                    return;
+                }
+                qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
+                             ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
+                if (qry->exec())
+                    success = true;
+                else{
+                    success = false;
+                    successMsg = "Error Creating Project(4)";
+                    this->hide();
+                    emit finished();
+                    return;
+                }
+            }
+
+            this->hide();
+            emit finished();
+        }
+        if(EditValid()=="" && task=="edit")
+        {
+            QSqlQuery * qry = new QSqlQuery(data);
+            QString c = "1";
+            if(!ui->current->isChecked())
+                c = "0";
+            qry->prepare("UPDATE projectlist SET name='"+ui->name->text()+"', current='"+c+"',"
+                                    "date='"+QString::number(ui->bidDate->date().month())+"/"+QString::number(ui->bidDate->date().day())+"/"+QString::number(ui->bidDate->date().year())+"' where id='"+id+"'");
+            if (qry->exec())
+                success = true;
+            else{
+                //qDebug()<<qry->lastError().text();
+                //qDebug()<<qry->lastQuery();
+                success = false;
+                successMsg = "Error Editing Project(1)";
+                this->hide();
+                emit finished();
+                return;
+            }
+            qry->clear();
+            qry->prepare("TRUNCATE TABLE Project"+id);
+            qry->exec();
+            QString itemId;
+            for(int i = 0; i<ui->Sections->rowCount();i++){
+                qry->clear();
+                qry->prepare("SELECT id FROM itemlist WHERE name='"+ui->Sections->item(i,0)->text()+"'");
+                if(qry->exec()){
+                    while(qry->next())
+                        itemId = qry->value(0).toString();
+                    success = true;
+                }
+                else{
+                    success = false;
+                    successMsg = "Error Editing Project(2)";
+                    this->hide();
+                    emit finished();
+                    return;
+                }
+                qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
+                             ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
+                if (qry->exec())
+                    success = true;
+                else{
+                    success = false;
+                    successMsg = "Error Editing Project(3)";
+                    this->hide();
+                    emit finished();
+                    return;
+                }
+            }
+
+
+
+
+            qry->clear();
+            qry->prepare("update shiftlist set projectname='"+ui->name->text()+"'  where projectid = '"+id+"'");
             if (qry->exec())
                 success = true;
             else{
                 success = false;
-                successMsg = "Error Creating Project(4)";
-                this->hide();
-                emit finished();
-                return;
+                successMsg = "Error Editing Project(4)";
             }
-        }
 
-        this->hide();
-        emit finished();
-    }
-    if(EditValid()=="" && task=="edit")
-    {
-        QSqlQuery * qry = new QSqlQuery(data);
-        QString c = "1";
-        if(!ui->current->isChecked())
-            c = "0";
-        qry->prepare("UPDATE projectlist SET name='"+ui->name->text()+"', current='"+c+"',"
-                                "date='"+QString::number(ui->bidDate->date().month())+"/"+QString::number(ui->bidDate->date().day())+"/"+QString::number(ui->bidDate->date().year())+"' where id='"+id+"'");
-        if (qry->exec())
-            success = true;
-        else{
-            //qDebug()<<qry->lastError().text();
-            //qDebug()<<qry->lastQuery();
-            success = false;
-            successMsg = "Error Editing Project(1)";
+
             this->hide();
             emit finished();
-            return;
         }
-        qry->clear();
-        qry->prepare("TRUNCATE TABLE Project"+id);
-        qry->exec();
-        QString itemId;
-        for(int i = 0; i<ui->Sections->rowCount();i++){
-            qry->clear();
-            qry->prepare("SELECT id FROM itemlist WHERE name='"+ui->Sections->item(i,0)->text()+"'");
-            if(qry->exec()){
-                while(qry->next())
-                    itemId = qry->value(0).toString();
-                success = true;
-            }
-            else{
-                success = false;
-                successMsg = "Error Editing Project(2)";
-                this->hide();
-                emit finished();
-                return;
-            }
-            qry->prepare("INSERT into Project"+id+"(itemid,name,quantity,dimension,ehours)  values('"+itemId+"','"+ui->Sections->item(i,0)->text()+"'"
-                         ",'"+ui->Sections->item(i,1)->text()+"','"+ui->Sections->item(i,2)->text()+"','"+ui->Sections->item(i,3)->text()+"')");
-            if (qry->exec())
-                success = true;
-            else{
-                success = false;
-                successMsg = "Error Editing Project(3)";
-                this->hide();
-                emit finished();
-                return;
-            }
+        else if(task=="edit"){
+            ui->error->setText(EditValid());
         }
-
-
-
-
-        qry->clear();
-        qry->prepare("update shiftlist set projectname='"+ui->name->text()+"'  where projectid = '"+id+"'");
-        if (qry->exec())
-            success = true;
         else{
-            success = false;
-            successMsg = "Error Editing Project(4)";
+            ui->error->setText(AddValid());
         }
-
-
-        this->hide();
-        emit finished();
-    }
-    else if(task=="edit"){
-        ui->error->setText(EditValid());
     }
     else{
-        ui->error->setText(AddValid());
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 }
 void ProjectEditForm::on_CancelButton_clicked()

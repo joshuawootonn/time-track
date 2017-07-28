@@ -23,15 +23,18 @@ MainForm::~MainForm()
 }
 
 void MainForm::start(){
-    ip = connectionForm->getIp();
 
-    //Connect("aacidatabase","3306","user","aaci1234","192.168.41.187");
+
+    connectionForm->read();
+    ip = connectionForm->getIp();
     if(Connect(connectionForm->getDatabase(),connectionForm->getPort(),connectionForm->getUsername(),connectionForm->getPassword(),connectionForm->getIp())){
+        ui->error->setText("");
         connectionForm->hide();
         if (ip.split(".")[3] =="10")
             this->showFullScreen();
         else
             this->showMaximized();
+        qDebug()<<"start"<<ip;
         clockoutForm = new ClockoutForm(this);
         clockoutForm->hide();
         shifteditform = new ShiftEditForm(this);
@@ -51,6 +54,7 @@ void MainForm::start(){
     else
     {
         this->hide();
+
 //        connectionForm->hide();
 //        connectionForm = new ConnectionForm(this);
 //        connectionForm->show();
@@ -264,16 +268,12 @@ void MainForm::loginInitialize(){
 
     isConnected();
     ui->mainFinish->hide();
-    ui->basicPageConnect->hide();
-    ui->connectionlabel->hide();
-    ui->ConnectionLabel->hide();
-
 }
 void MainForm::isConnected(){
     ui->passEdit->setText("");
     ui->passLabel->setText("");
-    //qDebug()<<data.isOpen();
-    if(data.isOpen())
+
+    if(data.open())
     {
         ui->passEdit->show();
         ui->passEdit->show();
@@ -425,83 +425,103 @@ void MainForm::on_HeaderTabs_currentChanged(int index)
 }
 void MainForm::on_basicPageClockIn_clicked()
 {
-    QSqlQuery qry1(data),qry2(data),qry3(data),qry4(data);
-    QString employeename, employeeid, timein,datein;
-    QDateTime x = QDateTime::currentDateTime();
-    QDateTime z = format_datetimes(x);
+    if(data.open()){
+        QSqlQuery qry1(data),qry2(data),qry3(data),qry4(data);
+        QString employeename, employeeid, timein,datein;
+        QDateTime x = QDateTime::currentDateTime();
+        QDateTime z = format_datetimes(x);
 
-    employeeid = id;
-    timein = z.toString("HH:mm:ss");
-    datein = z.toString("yyyy-MM-dd");
-    qry1.prepare("SELECT shiftcount,name FROM employeelist WHERE id = '"+id+"'");
+        employeeid = id;
+        timein = z.toString("HH:mm:ss");
+        datein = z.toString("yyyy-MM-dd");
+        qry1.prepare("SELECT shiftcount,name FROM employeelist WHERE id = '"+id+"'");
 
 
-    if(qry1.exec())
-    {
-        while(qry1.next())
+        if(qry1.exec())
         {
-            employeename = qry1.value(1).toString();
+            while(qry1.next())
+            {
+                employeename = qry1.value(1).toString();
+            }
         }
+
+        QString shiftid;
+        qry1.prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+        if(qry1.exec()){
+            while(qry1.next()){
+                shiftid=qry1.value(0).toString();}}
+        //qDebug()<<"The max shiftid is shown to be" +shiftid;
+        int id1 = shiftid.toInt();
+        id1++;
+        shiftid = QString::number(id1);
+
+
+        // Inserting clockin time and shiftnumber into pin.
+        qry4.prepare("insert into shiftlist (employeeid,employeename,timein,datein,shiftid) values('"+employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
+        if (qry4.exec())
+        {
+            // Setting active.
+            qry2.prepare("update employeelist set active=1 where id = '"+id+"'");
+            qry2.exec();
+            qry3.prepare("update employeelist set shiftcount = '"+shiftid+"' where id = '"+id+"'");
+            qry3.exec();
+        }
+
+        ui->basicPageClockIn->hide();
+        ui->basicPageClockOut->show();
+        ui->error->setText("");
+    }else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
     }
 
-    QString shiftid;
-    qry1.prepare("select MAX(shiftid) As maxshiftid from shiftlist");
-    if(qry1.exec()){
-        while(qry1.next()){
-            shiftid=qry1.value(0).toString();}}
-    //qDebug()<<"The max shiftid is shown to be" +shiftid;
-    int id1 = shiftid.toInt();
-    id1++;
-    shiftid = QString::number(id1);
-
-
-    // Inserting clockin time and shiftnumber into pin.
-    qry4.prepare("insert into shiftlist (employeeid,employeename,timein,datein,shiftid) values('"+employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
-    if (qry4.exec())
-    {
-        // Setting active.
-        qry2.prepare("update employeelist set active=1 where id = '"+id+"'");
-        qry2.exec();
-        qry3.prepare("update employeelist set shiftcount = '"+shiftid+"' where id = '"+id+"'");
-        qry3.exec();
-    }
-
-    ui->basicPageClockIn->hide();
-    ui->basicPageClockOut->show();
 
 
 }
 void MainForm::on_basicPageClockOut_clicked()
 {
+    if(data.open()){
 
-    clockoutForm = new ClockoutForm(this);
-    establishConnections();
-    if (ip.split(".")[3] =="10")
-        clockoutForm->showFullScreen();
-    else
-        clockoutForm->showMaximized();
+        clockoutForm = new ClockoutForm(this);
+        establishConnections();
+        if (ip.split(".")[3] =="10")
+            clockoutForm->showFullScreen();
+        else
+            clockoutForm->showMaximized();
 
 
-    clockoutForm->ClockoutInitialize(id);
+        clockoutForm->ClockoutInitialize(id);
+        ui->error->setText("");
+    }else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
 
 }
 void MainForm::on_basicPageConnect_clicked()
 {
-    data.close();
+    this->hide();
     connectionForm = new ConnectionForm(this);
-    QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(loginInitialize()));
-    connectionForm->show();
+    if (connectionForm->getIp().split(".")[3] =="10")
+        connectionForm->showFullScreen();
+    else
+        connectionForm->showNormal();
+
+    QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 }
 void MainForm::on_basicPageAdvanced_clicked()
 {
-    advInitialize();
-    EmployeeTab();
-    ShiftTab();
-    ProjectTab();
-    ItemTab();
-    SettingsTab();
-    ui->MainTabs->setCurrentIndex(0);
-    ui->HeaderTabs->setCurrentIndex(0);
+    if(data.open()){
+        advInitialize();
+        EmployeeTab();
+        ShiftTab();
+        ProjectTab();
+        ItemTab();
+        SettingsTab();
+        ui->MainTabs->setCurrentIndex(0);
+        ui->HeaderTabs->setCurrentIndex(0);
+        ui->error->setText("");
+    }else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
 }
 void MainForm::on_basicPagePower_clicked()
 {
@@ -510,6 +530,7 @@ void MainForm::on_basicPagePower_clicked()
 void MainForm::on_mainFinish_clicked()
 {
     loginInitialize();
+
 }
 
 /* Formatting of qdatetimes in order to only have times
@@ -585,50 +606,49 @@ QDateTime MainForm::format_datetimes(QDateTime z)
 
 void MainForm::on_passEdit_returnPressed()
 {
-    pin= ui->passEdit->text();
-    QSqlQuery qry1(data),qry2(data);
-    qry1.prepare("SELECT current FROM employeelist where pin = '"+pin+"'");
-    if (qry1.exec())
-    {
-        int count=0;
-        QString current = "0";
-        while(qry1.next())
+    if(data.open()){
+        pin= ui->passEdit->text();
+        QSqlQuery qry1(data),qry2(data);
+        qry1.prepare("SELECT current FROM employeelist where pin = '"+pin+"'");
+        if (qry1.exec())
         {
-            current = qry1.value(0).toString();
-            count++;
-        }
-
-        if(count == 1 && current=="1")
-        {
-            qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
-            if(qry2.exec()){
-                while(qry2.next()){
-                    QString x= qry2.value(0).toString();
-                    if(x=="1")
-                        admin=true;
-                    else
-                        admin=false;
-                    id = qry2.value(1).toString();
-                }
+            int count=0;
+            QString current = "0";
+            while(qry1.next())
+            {
+                current = qry1.value(0).toString();
+                count++;
             }
-
-            basicInitialize();
+            if(count == 1 && current=="1")
+            {
+                qry2.prepare("SELECT adminstatus,id FROM employeelist WHERE pin = '"+pin+"'");
+                if(qry2.exec()){
+                    while(qry2.next()){
+                        QString x= qry2.value(0).toString();
+                        if(x=="1")
+                            admin=true;
+                        else
+                            admin=false;
+                        id = qry2.value(1).toString();
+                    }
+                }
+                basicInitialize();
+            }
+            else if(count < 1){
+                if(ui->passEdit->text()!="")
+                    ui->passLabel->setText("Invalid");
+            }
+            else if(current == "0"){
+                ui->passLabel->setText("No Longer Employed");
+            }
+            else
+                ui->passLabel->setText("");
         }
-        else if(count < 1){
-            if(ui->passEdit->text()!="")
-                ui->passLabel->setText("Invalid");
-        }
-        else if(current == "0"){
-            ui->passLabel->setText("No Longer Employed");
-        }
-        else
-            ui->passLabel->setText("");
-
-
     }
-    else
-    {
-        //qDebug()<<qry1.lastError();
+    if(!data.open()){
+
+        isConnected();
+        ui->error->setText("Disconnected From Database");
     }
 }
 
@@ -677,71 +697,76 @@ void MainForm::refreshEmployeeTab(){
     employeemodel=EmployeeModel();
     employeefiltermodel = EmployeeFilterModel();
     ui->EmployeeView->setModel(employeefiltermodel);
-    establishConnections();
+    if(data.open()){
+        ui->error->setText("");
 
-    if(ui->EmployeeId->isChecked())
-        ui->EmployeeView->showColumn(0);
-    else
-        ui->EmployeeView->hideColumn(0);
-    if(ui->EmployeeName->isChecked())
-        ui->EmployeeView->showColumn(1);
-    else
-        ui->EmployeeView->hideColumn(1);
-    if(ui->EmployeePin->isChecked())
-        ui->EmployeeView->showColumn(2);
-    else
-        ui->EmployeeView->hideColumn(2);
+        establishConnections();
 
-    if(ui->EmployeeAdminStatus->isChecked())
-        ui->EmployeeView->showColumn(3);
-    else
-        ui->EmployeeView->hideColumn(3);
+        if(ui->EmployeeId->isChecked())
+            ui->EmployeeView->showColumn(0);
+        else
+            ui->EmployeeView->hideColumn(0);
+        if(ui->EmployeeName->isChecked())
+            ui->EmployeeView->showColumn(1);
+        else
+            ui->EmployeeView->hideColumn(1);
+        if(ui->EmployeePin->isChecked())
+            ui->EmployeeView->showColumn(2);
+        else
+            ui->EmployeeView->hideColumn(2);
 
-    if(ui->EmployeeShiftCount->isChecked())
-        ui->EmployeeView->showColumn(4);
-    else
-        ui->EmployeeView->hideColumn(4);
+        if(ui->EmployeeAdminStatus->isChecked())
+            ui->EmployeeView->showColumn(3);
+        else
+            ui->EmployeeView->hideColumn(3);
 
-    if(ui->EmployeeActive->isChecked())
-        ui->EmployeeView->showColumn(5);
-    else
-        ui->EmployeeView->hideColumn(5);
+        if(ui->EmployeeShiftCount->isChecked())
+            ui->EmployeeView->showColumn(4);
+        else
+            ui->EmployeeView->hideColumn(4);
 
-    if(ui->EmployeeCurrent->isChecked())
-        ui->EmployeeView->showColumn(6);
-    else
-        ui->EmployeeView->hideColumn(6);
-    if(ui->AllRadio->isChecked()){
-        QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            ui->EmployeeView->showRow(i);
-        }
-    }
-    if(ui->CurrentRadio->isChecked()){
-        QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(6).toInt();
-            if(current == 1)
-               ui->EmployeeView->showRow(i);
-            else
-                ui->EmployeeView->hideRow(i);
-        }
-    }
-    if(ui->PastRadio->isChecked()){
-        QSqlQueryModel * x = EmployeeModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(6).toInt();
-            if(current == 1)
-               ui->EmployeeView->hideRow(i);
-            else
+        if(ui->EmployeeActive->isChecked())
+            ui->EmployeeView->showColumn(5);
+        else
+            ui->EmployeeView->hideColumn(5);
+
+        if(ui->EmployeeCurrent->isChecked())
+            ui->EmployeeView->showColumn(6);
+        else
+            ui->EmployeeView->hideColumn(6);
+        if(ui->AllRadio->isChecked()){
+            QSqlQueryModel * x = EmployeeModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
                 ui->EmployeeView->showRow(i);
+            }
+        }
+        if(ui->CurrentRadio->isChecked()){
+            QSqlQueryModel * x = EmployeeModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
+                int current = x->record(i).value(6).toInt();
+                if(current == 1)
+                   ui->EmployeeView->showRow(i);
+                else
+                    ui->EmployeeView->hideRow(i);
+            }
+        }
+        if(ui->PastRadio->isChecked()){
+            QSqlQueryModel * x = EmployeeModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
+                int current = x->record(i).value(6).toInt();
+                if(current == 1)
+                   ui->EmployeeView->hideRow(i);
+                else
+                    ui->EmployeeView->showRow(i);
+            }
         }
     }
-
-
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
 }
 QSqlQueryModel * MainForm::EmployeeModel(){
 //    QSqlTableModel * model = new QSqlTableModel(0,data);
@@ -794,12 +819,15 @@ void MainForm::refreshFromEmployeeEdit(){
 void MainForm::on_EmployeeAdd_clicked()
 {
 
-    employeeeditform = new EmployeeEditForm(this);
-    establishConnections();
-    employeeeditform->AddEmployee();
-    refreshEmployeeTab();
-
-
+    if(data.open()){
+        employeeeditform = new EmployeeEditForm(this);
+        establishConnections();
+        employeeeditform->AddEmployee();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 int MainForm::generateRandom(){
     int x = rand()%9000+1000;
@@ -817,41 +845,55 @@ int MainForm::generateRandom(){
 }
 void MainForm::on_EmployeeEdit_clicked()
 {
-    employeeeditform = new EmployeeEditForm(this);
-    establishConnections();
-    QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
-        employeeeditform->EditEmployee(id);
+
+    if(data.open()){
+        employeeeditform = new EmployeeEditForm(this);
+        establishConnections();
+        QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
+            employeeeditform->EditEmployee(id);
+        }
+        ui->error->setText("");
     }
-    //refreshEmployeeTab();
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
+
 }
 void MainForm::on_EmployeeDelete_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+
-                                      employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
+    if(data.open()){
+        QSqlQuery * qry = new QSqlQuery(data);
+        QModelIndexList list = ui->EmployeeView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to perminantly delete "+
+                                          employeemodel->record(employeefiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                          + "'s records?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
 
-            for(int i=0; i< list.count(); i++)
-            {
-                QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-                qry->clear();
-                qry->prepare("DELETE from employeelist where id='"+id+"'");
-                qry->exec();
+                for(int i=0; i< list.count(); i++)
+                {
+                    QString id = employeemodel->record(employeefiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                    qry->clear();
+                    qry->prepare("DELETE from employeelist where id='"+id+"'");
+                    qry->exec();
+                }
+                refreshEmployeeTab();
+                refreshShiftEmployee();
+                ui->MainTabs->setCurrentIndex(0);
+                shifteditform->updateShiftEdit();
             }
-            refreshEmployeeTab();
-            refreshShiftEmployee();
-            ui->MainTabs->setCurrentIndex(0);
-            shifteditform->updateShiftEdit();
         }
+        ui->error->setText("");
     }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
+
 }
 
 
@@ -964,64 +1006,76 @@ void MainForm::refreshProjectTab(){
     projectmodel = ProjectModel();
     projectfiltermodel = ProjectFilterModel();
     ui->ProjectView->setModel(projectfiltermodel);
-    establishConnections();
+    if(data.open()){
+        ui->error->setText("");
 
-    ui->ProjectItemWidget->clear();
-    ui->ProjectItemWidget->setRowCount(0);
-    ui->ProjectItemWidget->setColumnCount(0);
+        establishConnections();
 
-    if(ui->ProjectId->isChecked())
-        ui->ProjectView->showColumn(0);
-    else
-        ui->ProjectView->hideColumn(0);
+        ui->ProjectItemWidget->clear();
+        ui->ProjectItemWidget->setRowCount(0);
+        ui->ProjectItemWidget->setColumnCount(0);
 
-    if(ui->ProjectName->isChecked())
-        ui->ProjectView->showColumn(1);
-    else
-        ui->ProjectView->hideColumn(1);
+        if(ui->ProjectId->isChecked())
+            ui->ProjectView->showColumn(0);
+        else
+            ui->ProjectView->hideColumn(0);
 
-    if(ui->ProjectCurrent->isChecked())
-        ui->ProjectView->showColumn(2);
-    else
-        ui->ProjectView->hideColumn(2);
-    if(ui->ProjectDate->isChecked())
-        ui->ProjectView->showColumn(3);
-    else
-        ui->ProjectView->hideColumn(3);
-    for(int i=1; i< projectfiltermodel->rowCount(); i++)
-    {
-        ui->ProjectView->showRow(i);
-    }
-    if(ui->ProjectAllRadio->isChecked()){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
+        if(ui->ProjectName->isChecked())
+            ui->ProjectView->showColumn(1);
+        else
+            ui->ProjectView->hideColumn(1);
+
+        if(ui->ProjectCurrent->isChecked())
+            ui->ProjectView->showColumn(2);
+        else
+            ui->ProjectView->hideColumn(2);
+        if(ui->ProjectDate->isChecked())
+            ui->ProjectView->showColumn(3);
+        else
+            ui->ProjectView->hideColumn(3);
+        for(int i=1; i< projectfiltermodel->rowCount(); i++)
         {
             ui->ProjectView->showRow(i);
         }
-    }
-    if(ui->ProjectCurrentRadio->isChecked()){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(2).toInt();
-            if(current == 1)
-               ui->ProjectView->showRow(i);
-            else
-                ui->ProjectView->hideRow(i);
-        }
-    }
-    if(ui->ProjectPastRadio->isChecked()){
-        QSqlQueryModel * x = ProjectModel();
-        for(int i=0; i< x->rowCount(); i++)
-        {
-            int current = x->record(i).value(2).toInt();
-            if(current == 1)
-               ui->ProjectView->hideRow(i);
-            else
+        if(ui->ProjectAllRadio->isChecked()){
+            QSqlQueryModel * x = ProjectModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
                 ui->ProjectView->showRow(i);
+            }
         }
+        if(ui->ProjectCurrentRadio->isChecked()){
+            QSqlQueryModel * x = ProjectModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
+                int current = x->record(i).value(2).toInt();
+                if(current == 1)
+                   ui->ProjectView->showRow(i);
+                else
+                    ui->ProjectView->hideRow(i);
+            }
+        }
+        if(ui->ProjectPastRadio->isChecked()){
+            QSqlQueryModel * x = ProjectModel();
+            for(int i=0; i< x->rowCount(); i++)
+            {
+                int current = x->record(i).value(2).toInt();
+                if(current == 1)
+                   ui->ProjectView->hideRow(i);
+                else
+                    ui->ProjectView->showRow(i);
+            }
+        }
+
     }
-}
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
+
+
+
+
+    }
 void MainForm::refreshProjectItemTab(){
     //qDebug()<<"refresh item";
 
@@ -1197,106 +1251,69 @@ void MainForm::refreshFromProjectEdit(){
 
 void MainForm::on_ProjectAdd_clicked()
 {
-    projecteditform = new ProjectEditForm(this);
-    establishConnections();
-    projecteditform->AddProject();
-    refreshEmployeeTab();
-
-//    QSqlQuery * qry = new QSqlQuery(data);
-//    qry->prepare("insert into projectlist(name,current,date)  values('~','1','"+QString::number(QDate::currentDate().month())+"/1/"+QString::number(QDate::currentDate().year())+"')");
-//    qry->exec();
-//    qry->clear();
-//    QString id;
-//    qry->prepare("select id from projectlist where id=(select max(id) from projectlist)");
-//    if(qry->exec())
-//    {
-//        while(qry->next())
-//        {
-//            id = qry->value(0).toString();
-//        }
-//    }
-//    qry->clear();
-//    qry->prepare("CREATE TABLE Project"+id+" (id int PRIMARY KEY AUTO_INCREMENT, itemid int, name varchar(45),quantity varchar(45), dimension varchar(45))");
-//    qry->exec();
-//    refreshProjectTab();
-//    refreshShiftProject();
-//    ui->MainTabs->setCurrentIndex(1);
-//    shifteditform->updateShiftEdit();
-
-
-
-
-
-
+    if(data.open()){
+        projecteditform = new ProjectEditForm(this);
+        establishConnections();
+        projecteditform->AddProject();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 void MainForm::on_ProjectDelete_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track", "Are you sure you want to delete the " +
-                                      projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
-            for(int i=0; i< list.count(); i++)
-            {
-                QModelIndex index =list.at(i);
-                int idInt = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toInt();
-                QString id = "Project"+QString::number(idInt);
+    if(data.open()){
+        QSqlQuery * qry = new QSqlQuery(data);
+        QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Time-Track", "Are you sure you want to delete the " +
+                                          projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                          + "'s records?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
+                for(int i=0; i< list.count(); i++)
+                {
+                    QModelIndex index =list.at(i);
+                    int idInt = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toInt();
+                    QString id = "Project"+QString::number(idInt);
 
-                qry->clear();
-                qry->prepare("DROP TABLE "+id+"");
-                qry->exec();
-                qry->clear();
-                qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
-                qry->exec();
+                    qry->clear();
+                    qry->prepare("DROP TABLE "+id+"");
+                    qry->exec();
+                    qry->clear();
+                    qry->prepare("DELETE from projectlist where id='"+QString::number(idInt)+"'");
+                    qry->exec();
+                }
             }
+            refreshProjectTab();
+            refreshShiftProject();
+            ui->MainTabs->setCurrentIndex(1);
+            shifteditform->updateShiftEdit();
         }
-        refreshProjectTab();
-        refreshShiftProject();
-        ui->MainTabs->setCurrentIndex(1);
-        shifteditform->updateShiftEdit();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 }
 void MainForm::on_ProjectArchive_clicked()
 {
-//    QSqlQuery * qry = new QSqlQuery(data);
-//    QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
-//    if(list != QModelIndexList())
-//    {
-//        QMessageBox::StandardButton reply;
-//        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to archive the " +
-//                                      projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-//                                      + "'s records?", QMessageBox::Yes|QMessageBox::No);
-//        if (reply == QMessageBox::Yes) {
-
-//            for(int i=0; i< list.count(); i++)
-//            {
-//                QString id = projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-//                qry->clear();
-//                if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 1)
-//                    qry->prepare("update projectlist set current=0 where id = '"+id+"'");
-//                else if (projectmodel->record(projectfiltermodel->mapToSource(list.at(i)).row()).value(2).toInt() == 0)
-//                    qry->prepare("update projectlist set current=1 where id = '"+id+"'");
-//                qry->exec();
-//            }
-//            refreshProjectTab();
-//            shifteditform->updateShiftEdit();
-//        }
-//    }
-
-    projecteditform = new ProjectEditForm(this);
-    establishConnections();
-    QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QString id = projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
-        projecteditform->EditProject(id);
+    if(data.open()){
+        projecteditform = new ProjectEditForm(this);
+        establishConnections();
+        QModelIndexList list = ui->ProjectView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QString id = projectmodel->record(projectfiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
+            projecteditform->EditProject(id);
+        }
+        ui->error->setText("");
     }
-
-    //refreshProjectTab();
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 
 /* Option menu 2 for ProjectTab*/
@@ -1375,10 +1392,6 @@ void MainForm::on_ProjectItemDifference_clicked()
 
 
 
-
-
-
-
 // Item Section!
 
 /* Initialization,model,and refreshing for the
@@ -1426,27 +1439,33 @@ void MainForm::refreshItemTab(){
     itemmodel= ItemModel();
     itemfiltermodel = ItemFilterModel();
     ui->ItemView->setModel(itemfiltermodel);
-    establishConnections();
-    if(ui->ItemCategory->isChecked())
-        ui->ItemView->showColumn(2);
-    else
-        ui->ItemView->hideColumn(2);
-    if(ui->ItemSub->isChecked())
-        ui->ItemView->showColumn(3);
-    else
-        ui->ItemView->hideColumn(3);
-    if(ui->ItemDimension->isChecked())
-        ui->ItemView->showColumn(4);
-    else
-        ui->ItemView->hideColumn(4);
-    if(ui->ItemId->isChecked())
-        ui->ItemView->showColumn(0);
-    else
-        ui->ItemView->hideColumn(0);
-    if(ui->ItemName->isChecked())
-        ui->ItemView->showColumn(1);
-    else
-        ui->ItemView->hideColumn(1);
+    if(data.open()){
+        ui->error->setText("");
+        establishConnections();
+        if(ui->ItemCategory->isChecked())
+            ui->ItemView->showColumn(2);
+        else
+            ui->ItemView->hideColumn(2);
+        if(ui->ItemSub->isChecked())
+            ui->ItemView->showColumn(3);
+        else
+            ui->ItemView->hideColumn(3);
+        if(ui->ItemDimension->isChecked())
+            ui->ItemView->showColumn(4);
+        else
+            ui->ItemView->hideColumn(4);
+        if(ui->ItemId->isChecked())
+            ui->ItemView->showColumn(0);
+        else
+            ui->ItemView->hideColumn(0);
+        if(ui->ItemName->isChecked())
+            ui->ItemView->showColumn(1);
+        else
+            ui->ItemView->hideColumn(1);
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
 }
 void MainForm::refreshItemStuff(){
     refreshShiftItem();
@@ -1468,45 +1487,61 @@ void MainForm::refreshFromItemEdit(){
 
 void MainForm::on_ItemAdd_clicked()
 {
-    itemeditform = new ItemEditForm(this);
-    establishConnections();
-    itemeditform->AddItem();
-    refreshItemTab();
+    if(data.open()){
+        itemeditform = new ItemEditForm(this);
+        establishConnections();
+        itemeditform->AddItem();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 void MainForm::on_ItemEdit_clicked()
 {
-    itemeditform = new ItemEditForm(this);
-    establishConnections();
-    QModelIndexList list = ui->ItemView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
-        itemeditform->EditItem(id);
+    if(data.open()){
+        itemeditform = new ItemEditForm(this);
+        establishConnections();
+        QModelIndexList list = ui->ItemView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(0).toString();
+            itemeditform->EditItem(id);
+        }
+        ui->error->setText("");
     }
-    //refreshItemTab();
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 void MainForm::on_ItemDelete_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QModelIndexList list = ui->ItemView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the " +
-                                      itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
-                                      + " item from this project?", QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
-            for(int i=0; i< list.count(); i++)
-            {
-                QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
-                qry->clear();
-                qry->prepare("DELETE from itemlist where id='"+id+"'");
-                qry->exec();
+    if(data.open()){
+        QSqlQuery * qry = new QSqlQuery(data);
+        QModelIndexList list = ui->ItemView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete the " +
+                                          itemmodel->record(itemfiltermodel->mapToSource(list.at(0)).row()).value(1).toString()
+                                          + " item?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
+                for(int i=0; i< list.count(); i++)
+                {
+                    QString id = itemmodel->record(itemfiltermodel->mapToSource(list.at(i)).row()).value(0).toString();
+                    qry->clear();
+                    qry->prepare("DELETE from itemlist where id='"+id+"'");
+                    qry->exec();
+                }
+                refreshItemTab();
+                refreshShiftItem();
+                ui->MainTabs->setCurrentIndex(2);
             }
-            refreshItemTab();
-            refreshShiftItem();
-            ui->MainTabs->setCurrentIndex(2);
         }
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 }
 
@@ -1532,6 +1567,7 @@ void MainForm::on_ItemDimension_clicked()
 {
     refreshItemTab();
 }
+
 
 
 
@@ -1691,78 +1727,36 @@ QSortFilterProxyModel * MainForm::ShiftFilterModel(){
 }
 void MainForm::refreshShiftTab(){
 
-
     shiftmodel = ShiftModel();
     shiftfiltermodel = ShiftFilterModel();
     ui->ShiftView->setModel(shiftfiltermodel);
-
-//    for(int i = 0; i < shiftfiltermodel->rowCount();  i++)
-//    {
-//        ui->ShiftView->showRow(i);
-//    }
-
-//    if(ui->ShiftEmployeeBox->isChecked())
-//    {
-//        for(int i = 0; i< shiftfiltermodel->rowCount(); i++)
-//        {
-//            QString name = shiftfiltermodel->data(shiftfiltermodel->index(i,4),Qt::DisplayRole).toString();
-//            if(name != ui->ShiftEmployeeCombo->currentText()){
-
-//               ui->ShiftView->hideRow(i);
-//            }
-
-//        }
-//    }
-
-//    if(ui->ShiftProjectBox->isChecked())
-//    {
-//        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-//        {
-//            QString project = shiftfiltermodel->data(shiftfiltermodel->index(i,5),Qt::DisplayRole).toString();
-//            if(project != ui->ShiftProjectCombo->currentText()){
-//                ui->ShiftView->hideRow(i);
-//            }
-//        }
-//    }
-
-//    if(ui->ShiftItemBox->isChecked())
-//    {
-//        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-//        {
-//            QString item = shiftfiltermodel->data(shiftfiltermodel->index(i,6),Qt::DisplayRole).toString();
-//            if(item != ui->ShiftItemCombo->currentText())
-//            {
-//                ui->ShiftView->hideRow(i);
-//            }
-//        }
-//    }
-//    for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-//    {
-//        QString date = shiftfiltermodel->data(shiftfiltermodel->index(i,9),Qt::DisplayRole).toString();
-//        QDate in= QDate(date.split("-")[0].toInt(),date.split("-")[1].toInt(),date.split("-")[2].toInt());
-//        if(in < ui->ShiftDate1->date() || in > ui->ShiftDate2->date())
-//            ui->ShiftView->hideRow(i);
-//    }
-    int h = 0,m = 0;
-    for(int i=0; i< shiftfiltermodel->rowCount(); i++)
-    {
-        QString time = shiftfiltermodel->data(shiftfiltermodel->index(i,12),Qt::DisplayRole).toString();
-        if(!ui->ShiftView->isRowHidden(i)&&time!="")
+    if(data.open()){
+        ui->error->setText("");
+        int h = 0,m = 0;
+        for(int i=0; i< shiftfiltermodel->rowCount(); i++)
         {
-            QString hours = time.split(":")[0];
-            QString minutes = time.split(":")[1];
-            h += hours.toInt();
-            m += minutes.toInt();
+            QString time = shiftfiltermodel->data(shiftfiltermodel->index(i,12),Qt::DisplayRole).toString();
+            if(!ui->ShiftView->isRowHidden(i)&&time!="")
+            {
+                QString hours = time.split(":")[0];
+                QString minutes = time.split(":")[1];
+                h += hours.toInt();
+                m += minutes.toInt();
+            }
         }
-    }
-    h += m/60;
-    m = m%60;
+        h += m/60;
+        m = m%60;
 
-    QString hours = QString::number(h);
-    QString minutes = QString::number(m);
-    if (minutes == "0")
-        minutes ="00";
-    ui->ShiftTotalTime->setText(hours+":"+minutes);
+        QString hours = QString::number(h);
+        QString minutes = QString::number(m);
+        if (minutes == "0")
+            minutes ="00";
+        ui->ShiftTotalTime->setText(hours+":"+minutes);
+
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection");
+    }
 }
 void MainForm::displayShiftSuccess(){
     QMessageBox::StandardButton reply;
@@ -1827,54 +1821,71 @@ void MainForm::on_ShiftItemCombo_currentTextChanged(const QString &arg1)
 
 void MainForm::on_ShiftAdd_clicked()
 {
-    shifteditform = new ShiftEditForm(this);
-    establishConnections();
-    shifteditform->AddShift();
-    refreshShiftTab();
+    if(data.open()){
+        shifteditform = new ShiftEditForm(this);
+        establishConnections();
+        shifteditform->AddShift();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
+
 }
 void MainForm::on_ShiftEdit_clicked()
 {
-    shifteditform = new ShiftEditForm(this);
-    establishConnections();
-    QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
-    if(list!= QModelIndexList())
-    {
-        QModelIndex index =list.at(0);
-        QSqlRecord rec = shiftmodel->record(shiftfiltermodel->mapToSource(index).row());
-        if(rec.value(2).toString()=="0")
-            shifteditform->EditWorkingShift(rec.value(13).toString(),rec.value(0).toString());
-        else
-            shifteditform->EditFinishedShift(rec.value(13).toString());
+    if(data.open()){
+        shifteditform = new ShiftEditForm(this);
+        establishConnections();
+        QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
+        if(list!= QModelIndexList())
+        {
+            QModelIndex index =list.at(0);
+            QSqlRecord rec = shiftmodel->record(shiftfiltermodel->mapToSource(index).row());
+            if(rec.value(2).toString()=="0")
+                shifteditform->EditWorkingShift(rec.value(13).toString(),rec.value(0).toString());
+            else
+                shifteditform->EditFinishedShift(rec.value(13).toString());
+        }
+        ui->error->setText("");
     }
-    //refreshShiftTab();
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 }
 void MainForm::on_ShiftDelete_clicked()
 {
-    QSqlQuery * qry = new QSqlQuery(data);
-    QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
-    if(list != QModelIndexList())
-    {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete " +
-                                      shiftmodel->record(shiftfiltermodel->mapToSource(list.at(0)).row()).value(4).toString()
-                                      + "'s shift?", QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes) {
+    if(data.open()){
+        QSqlQuery * qry = new QSqlQuery(data);
+        QModelIndexList list = ui->ShiftView->selectionModel()->selection().indexes();
+        if(list != QModelIndexList())
+        {
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Time-Track",   "Are you sure you want to permanantly delete " +
+                                          shiftmodel->record(shiftfiltermodel->mapToSource(list.at(0)).row()).value(4).toString()
+                                          + "'s shift?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
 
-            for(int i=0; i< list.count(); i++)
-            {
-                QString id = shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(13).toString();
-                qry->clear();
-                qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
-                qry->exec();
-                if(shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(2).toString()=="0")
+                for(int i=0; i< list.count(); i++)
                 {
+                    QString id = shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(13).toString();
                     qry->clear();
-                    qry->prepare("update employeelist set active='0' where name='"+shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(4).toString()+"'");
+                    qry->prepare("DELETE from shiftlist where shiftid='"+id+"'");
                     qry->exec();
+                    if(shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(2).toString()=="0")
+                    {
+                        qry->clear();
+                        qry->prepare("update employeelist set active='0' where name='"+shiftmodel->record(shiftfiltermodel->mapToSource(list.at(i)).row()).value(4).toString()+"'");
+                        qry->exec();
+                    }
                 }
             }
+            refreshShiftTab();
         }
-        refreshShiftTab();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
     }
 }
 
@@ -2150,8 +2161,12 @@ void MainForm::on_SettingsAll_clicked()
 void MainForm::on_SettingsConnections_clicked()
 {
     this->hide();
+
     connectionForm = new ConnectionForm(this);
-    connectionForm->show();
+    if (connectionForm->getIp().split(".")[3] =="10")
+        connectionForm->showFullScreen();
+    else
+        connectionForm->showNormal();
     QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
 }
