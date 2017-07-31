@@ -772,11 +772,14 @@ void ShiftEditForm::on_FinishedButton_clicked()
                 success = false;
             qDebug()<<qry->lastError();
             qDebug()<<qry->lastQuery();
-
+            qry->clear();
+            qry->prepare("update employeelist set shiftcount = '"+shiftid+"' where id = '"+employeeid+"'");
+            qry->exec();
             if(activate){
                 qry->clear();
                 qry->prepare("update employeelist set active='1' where id='"+employeeid+"'");
                 qry->exec();
+
             }
 
             this->hide();

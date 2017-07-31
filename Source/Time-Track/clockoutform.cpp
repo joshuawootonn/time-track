@@ -455,10 +455,10 @@ void ClockoutForm::on_FinishedButton_clicked()
     if(data.open()){
         if(ui->timeLeft->text()!= "0:00"){
             if(ui->timeLeft->text().split(":")[0].toInt()>0){
-                ui->error->setText("Invalid: Too Little Time on Timesheet");
+                ui->error->setText("Invalid: Time Left Must Be 0:00");
             }
             else{
-                ui->error->setText("Invalid: Too Much Time on Timesheet");
+                ui->error->setText("Invalid: Time Left Must Be 0:00");
             }
         }else if(ui->Sections->rowCount()<1){
             ui->error->setText("Invalid: No Projects Added to Timesheet");
