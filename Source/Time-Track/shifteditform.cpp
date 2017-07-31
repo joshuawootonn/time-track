@@ -118,6 +118,17 @@ int ShiftEditForm::format_time_length(QDateTime a, QDateTime b){
     }
     return minutes+hours*60;
 }
+void ShiftEditForm::on_tabWidget_currentChanged(int index)
+{
+    if(index == 0){
+        ui->timeLeft->show();
+        ui->label->show();
+    }else{
+        ui->label->hide();
+        ui->timeLeft->hide();
+    }
+}
+
 /* These next three functions are for ininializing this
  * dialog according to its purpose. The first for adding
  * a new shift the second for editing a existing shift.
@@ -130,7 +141,6 @@ void ShiftEditForm::AddShift(){
 
 
     EmployeeInitialize();
-    EmployeeInitialize(false);
     ProjectInitialize();
     ItemInitialize();
     //LunchInitialize();
@@ -163,6 +173,7 @@ void ShiftEditForm::AddShift(){
 }
 void ShiftEditForm::EditFinishedShift(QString shiftid){
     deactivate = false;
+    activate = true;
     this->showNormal();
     shiftId = shiftid;
     EmployeeInitialize();
@@ -239,7 +250,6 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     activate = false;
     shiftId= shiftid;
     EmployeeInitialize();
-    EmployeeInitialize(true);
     ProjectInitialize();
     ItemInitialize();
     //LunchInitialize();
@@ -323,6 +333,10 @@ void ShiftEditForm::EmployeeInitialize(){
     comp->setCompletionMode(QCompleter::PopupCompletion);
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Name->setCurrentText("");
+    if(deactivate)
+        EmployeeInitialize(true);
+    else if(!deactivate)
+        EmployeeInitialize(false);
 
 }
 void ShiftEditForm::ProjectInitialize(){
@@ -486,9 +500,6 @@ void ShiftEditForm::on_Add_clicked()
     }
 
 }
-
-
-
 void ShiftEditForm::on_Edit_clicked()
 {
     if(ui->Projects->currentText() == ""){
@@ -529,8 +540,6 @@ void ShiftEditForm::on_Edit_clicked()
         ui->error->setText("Invalid: Select an Item");
     }
 }
-
-
 void ShiftEditForm::on_Delete_clicked()
 {
     if (clicked)
@@ -579,10 +588,7 @@ void ShiftEditForm::on_Sections_cellChanged()
 {
     TimeLeft();
 }
-//void ShiftEditForm::on_Lunch_currentTextChanged(const QString &arg1)
-//{
-//    TimeLeft();
-//}
+
 void ShiftEditForm::on_Lunch_timeChanged(const QTime &time)
 {
     TimeLeft();
@@ -722,13 +728,13 @@ void ShiftEditForm::on_FinishedButton_clicked()
                     qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
                     qry->exec();
                 }
+                this->hide();
+                emit finished();
 
             }
         }else{
             QSqlQuery* qry=new QSqlQuery(data);
-            qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
-            qry->exec();
-            qry->clear();
+
             QString shiftid;
             qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
             if(qry->exec()){
@@ -751,14 +757,21 @@ void ShiftEditForm::on_FinishedButton_clicked()
             QString timein = clockin.toString("HH:mm:ss");
             QString datein = clockin.toString("yyyy-MM-dd");
 
+            qry->clear();
+            qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+            qry->exec();
 
             qry->clear();
             qry->prepare("insert into shiftlist(employeeid,employeename,timein,datein,shiftid) values('"
-                     +employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
+                         +employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
+
+
             if (qry->exec())
                 success = true;
             else
                 success = false;
+            qDebug()<<qry->lastError();
+            qDebug()<<qry->lastQuery();
 
             if(activate){
                 qry->clear();
@@ -776,30 +789,28 @@ void ShiftEditForm::on_FinishedButton_clicked()
     }
 
 }
+void ShiftEditForm::on_FinishButton2_clicked()
+{
+    on_FinishedButton_clicked();
+}
 void ShiftEditForm::on_CancelButton_clicked()
 {
     success = true;
     this->hide();
     emit finished();
 }
-
-
-
-
-
-
-
-
-
-
-
-void ShiftEditForm::on_tabWidget_currentChanged(int index)
+void ShiftEditForm::on_CancelButton2_clicked()
 {
-    if(index == 0){
-        ui->timeLeft->show();
-        ui->label->show();
-    }else{
-        ui->label->hide();
-        ui->timeLeft->hide();
-    }
+    on_CancelButton_clicked();
 }
+
+
+
+
+
+
+
+
+
+
+

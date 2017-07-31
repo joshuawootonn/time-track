@@ -42,9 +42,12 @@ public:
     bool getSuccess() const;
 
 private slots:
+    void on_tabWidget_currentChanged(int index);
     void on_Projects_currentIndexChanged(const QString &arg1);
     void on_Projects_currentTextChanged(const QString &arg1);
+    void on_Items_currentTextChanged(const QString &arg1);
     void on_Add_clicked();
+    void on_Edit_clicked();
     void on_Delete_clicked();
     void on_Sections_cellClicked(int row, int column);
     void on_Sections_cellChanged();
@@ -54,14 +57,21 @@ private slots:
     void on_DateTime2_dateTimeChanged(const QDateTime &dateTime);
     void on_Description_textChanged();
     void on_FinishedButton_clicked();
+    void on_FinishButton2_clicked();
     void on_CancelButton_clicked();
+    void on_CancelButton2_clicked();
     void on_RefreshButton_clicked();
 
-    void on_Items_currentTextChanged(const QString &arg1);
 
-    void on_Edit_clicked();
 
-    void on_tabWidget_currentChanged(int index);
+
+
+
+
+
+
+
+
 
 signals:
     void finished();

@@ -72,17 +72,6 @@ public:
     QWidget *right;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *Sections;
-    QWidget *tab_4;
-    QGridLayout *gridLayout_4;
-    QWidget *smallwidger;
-    QGridLayout *gridLayout_3;
-    QSpacerItem *verticalSpacer;
-    QSpacerItem *horizontalSpacer_5;
-    QSpacerItem *horizontalSpacer_4;
-    QVBoxLayout *verticalLayout_4;
-    QComboBox *ClockinName;
-    QDateTimeEdit *ClockinDateTime;
-    QSpacerItem *verticalSpacer_3;
     QWidget *bottom;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
@@ -93,6 +82,22 @@ public:
     QPushButton *RefreshButton;
     QPushButton *FinishedButton;
     QPushButton *CancelButton;
+    QWidget *tab_4;
+    QGridLayout *gridLayout_4;
+    QWidget *smallwidger;
+    QGridLayout *gridLayout_3;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_5;
+    QVBoxLayout *verticalLayout_4;
+    QComboBox *ClockinName;
+    QDateTimeEdit *ClockinDateTime;
+    QSpacerItem *verticalSpacer_3;
+    QWidget *bottom2;
+    QHBoxLayout *horizontalLayout_12;
+    QSpacerItem *horizontalSpacer_6;
+    QPushButton *FinishButton2;
+    QPushButton *CancelButton2;
 
     void setupUi(QWidget *ShiftEditForm)
     {
@@ -438,59 +443,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
-
-        gridLayout_2->addWidget(bigwidger, 0, 0, 1, 1);
-
-        tabWidget->addTab(tab_3, QString());
-        tab_4 = new QWidget();
-        tab_4->setObjectName(QStringLiteral("tab_4"));
-        gridLayout_4 = new QGridLayout(tab_4);
-        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        smallwidger = new QWidget(tab_4);
-        smallwidger->setObjectName(QStringLiteral("smallwidger"));
-        gridLayout_3 = new QGridLayout(smallwidger);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        verticalSpacer = new QSpacerItem(20, 154, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_3->addItem(verticalSpacer, 1, 1, 1, 1);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer_5, 2, 2, 1, 1);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer_4, 2, 0, 1, 1);
-
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        ClockinName = new QComboBox(smallwidger);
-        ClockinName->setObjectName(QStringLiteral("ClockinName"));
-        ClockinName->setMinimumSize(QSize(350, 0));
-        ClockinName->setEditable(true);
-
-        verticalLayout_4->addWidget(ClockinName);
-
-        ClockinDateTime = new QDateTimeEdit(smallwidger);
-        ClockinDateTime->setObjectName(QStringLiteral("ClockinDateTime"));
-
-        verticalLayout_4->addWidget(ClockinDateTime);
-
-
-        gridLayout_3->addLayout(verticalLayout_4, 2, 1, 1, 1);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_3->addItem(verticalSpacer_3, 3, 1, 1, 1);
-
-
-        gridLayout_4->addWidget(smallwidger, 0, 0, 1, 1);
-
-        tabWidget->addTab(tab_4, QString());
-
-        gridLayout->addWidget(tabWidget, 0, 1, 1, 1);
-
-        bottom = new QWidget(ShiftEditForm);
+        bottom = new QWidget(bigwidger);
         bottom->setObjectName(QStringLiteral("bottom"));
         horizontalLayout_2 = new QHBoxLayout(bottom);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -542,7 +495,82 @@ public:
         horizontalLayout_2->addWidget(CancelButton);
 
 
-        gridLayout->addWidget(bottom, 1, 1, 1, 1);
+        verticalLayout_2->addWidget(bottom);
+
+
+        gridLayout_2->addWidget(bigwidger, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_3, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QStringLiteral("tab_4"));
+        gridLayout_4 = new QGridLayout(tab_4);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        smallwidger = new QWidget(tab_4);
+        smallwidger->setObjectName(QStringLiteral("smallwidger"));
+        gridLayout_3 = new QGridLayout(smallwidger);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        verticalSpacer = new QSpacerItem(20, 154, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_3->addItem(verticalSpacer, 1, 1, 1, 1);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_4, 2, 0, 1, 1);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_5, 2, 2, 1, 1);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        ClockinName = new QComboBox(smallwidger);
+        ClockinName->setObjectName(QStringLiteral("ClockinName"));
+        ClockinName->setMinimumSize(QSize(350, 0));
+        ClockinName->setEditable(true);
+
+        verticalLayout_4->addWidget(ClockinName);
+
+        ClockinDateTime = new QDateTimeEdit(smallwidger);
+        ClockinDateTime->setObjectName(QStringLiteral("ClockinDateTime"));
+
+        verticalLayout_4->addWidget(ClockinDateTime);
+
+
+        gridLayout_3->addLayout(verticalLayout_4, 2, 1, 1, 1);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_3->addItem(verticalSpacer_3, 3, 1, 1, 1);
+
+        bottom2 = new QWidget(smallwidger);
+        bottom2->setObjectName(QStringLiteral("bottom2"));
+        horizontalLayout_12 = new QHBoxLayout(bottom2);
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer_6);
+
+        FinishButton2 = new QPushButton(bottom2);
+        FinishButton2->setObjectName(QStringLiteral("FinishButton2"));
+        FinishButton2->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_12->addWidget(FinishButton2);
+
+        CancelButton2 = new QPushButton(bottom2);
+        CancelButton2->setObjectName(QStringLiteral("CancelButton2"));
+        CancelButton2->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout_12->addWidget(CancelButton2);
+
+
+        gridLayout_3->addWidget(bottom2, 4, 0, 1, 3);
+
+
+        gridLayout_4->addWidget(smallwidger, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_4, QString());
+
+        gridLayout->addWidget(tabWidget, 0, 1, 1, 1);
 
         QWidget::setTabOrder(DateTime1, DateTime2);
         QWidget::setTabOrder(DateTime2, Name);
@@ -561,7 +589,7 @@ public:
 
         retranslateUi(ShiftEditForm);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         FinishedButton->setDefault(false);
 
 
@@ -582,14 +610,16 @@ public:
         Delete->setText(QApplication::translate("ShiftEditForm", "Delete", Q_NULLPTR));
         label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", Q_NULLPTR));
         Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ShiftEditForm", "Complete Shift", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ShiftEditForm", "Clockin ", Q_NULLPTR));
         label->setText(QApplication::translate("ShiftEditForm", "Time Left:", Q_NULLPTR));
         timeLeft->setText(QString());
         error->setText(QString());
         RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", Q_NULLPTR));
         FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("ShiftEditForm", "Cancel", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ShiftEditForm", "Complete Shift", Q_NULLPTR));
+        FinishButton2->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
+        CancelButton2->setText(QApplication::translate("ShiftEditForm", "Cancel", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ShiftEditForm", "Clockin ", Q_NULLPTR));
     } // retranslateUi
 
 };

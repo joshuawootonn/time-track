@@ -794,7 +794,7 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     }
     QSqlQueryModel * model = new QSqlQueryModel();
     QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("SELECT * FROM employeelist WHERE current LIKE '"+current+"'");
+    qry->prepare("SELECT * FROM employeelist WHERE current LIKE '"+current+"'  ORDER BY name,adminstatus,pin");
     qry->exec();
     model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
@@ -1142,7 +1142,7 @@ QSqlQueryModel * MainForm::ProjectModel(){
     }
     QSqlQueryModel * model = new QSqlQueryModel();
     QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("SELECT * FROM projectlist WHERE current LIKE '"+current+"'");
+    qry->prepare("SELECT * FROM projectlist WHERE current LIKE '"+current+"'  ORDER BY date,name ");
     qry->exec();
     model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
@@ -1431,10 +1431,18 @@ void MainForm::ItemTab(){
 
 }
 QSqlQueryModel * MainForm::ItemModel(){
-    QSqlTableModel * model = new QSqlTableModel(0,data);
-    model->setTable("itemlist");
-    model->setEditStrategy(QSqlTableModel::OnFieldChange);
-    model->select();
+
+
+
+    QSqlQueryModel * model = new QSqlQueryModel();
+    QSqlQuery * qry = new QSqlQuery(data);
+    qry->prepare("SELECT * FROM itemlist ORDER BY name ");
+    qry->exec();
+    model->setQuery(*qry);
+
+
+
+
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
     model->setHeaderData(2,Qt::Horizontal,tr("Category"));
@@ -1703,7 +1711,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     }else{
         item = "%";
     }
-    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <'"+d2+"' AND employeename LIKE '"+employee+"'";
+    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <'"+d2+"' AND employeename LIKE '"+employee+"' ORDER BY datein,timein,employeename ";
     if(ui->ShiftProjectBox->isChecked())
         q = q+"AND projectname LIKE '"+project+"'";
     if(ui->ShiftItemBox->isChecked())
