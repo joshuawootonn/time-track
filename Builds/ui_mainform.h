@@ -1307,6 +1307,7 @@ public:
         groupBox_16->setObjectName(QStringLiteral("groupBox_16"));
         gridLayout_18 = new QGridLayout(groupBox_16);
         gridLayout_18->setObjectName(QStringLiteral("gridLayout_18"));
+        gridLayout_18->setContentsMargins(-1, 7, -1, 7);
         SettingsMax = new QPushButton(groupBox_16);
         SettingsMax->setObjectName(QStringLiteral("SettingsMax"));
 
@@ -1484,9 +1485,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(1);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(0);
+        HeaderTabs->setCurrentIndex(4);
         EmployeeAdd->setDefault(false);
 
 

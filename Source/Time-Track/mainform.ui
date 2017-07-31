@@ -146,7 +146,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -874,7 +874,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>4</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1895,6 +1895,12 @@ background-color:#E4E9EB;
               <string>Display</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_18">
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
               <item row="0" column="0">
                <widget class="QPushButton" name="SettingsMax">
                 <property name="text">
