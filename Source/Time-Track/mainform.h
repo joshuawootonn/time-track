@@ -197,6 +197,8 @@ private slots:
 
 
 
+    void on_basicPageFinish_clicked();
+
 public:
     Ui::MainForm *ui;
 
@@ -240,9 +242,6 @@ private:
 };
 
 #endif // MAINFORM_H
-
-
-
 
 
 

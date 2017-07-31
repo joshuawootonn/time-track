@@ -80,6 +80,7 @@ public:
     QPushButton *basicPageClockOut;
     QPushButton *basicPageAdvanced;
     QPushButton *basicPagePower;
+    QPushButton *basicPageFinish;
     QWidget *advPage;
     QGridLayout *gridLayout_7;
     QTabWidget *MainTabs;
@@ -606,6 +607,11 @@ public:
         basicPagePower->setObjectName(QStringLiteral("basicPagePower"));
 
         horizontalLayout_15->addWidget(basicPagePower);
+
+        basicPageFinish = new QPushButton(basicPage);
+        basicPageFinish->setObjectName(QStringLiteral("basicPageFinish"));
+
+        horizontalLayout_15->addWidget(basicPageFinish);
 
 
         gridLayout_2->addLayout(horizontalLayout_15, 1, 1, 1, 1);
@@ -1478,7 +1484,7 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(2);
+        mainStack->setCurrentIndex(1);
         MainTabs->setCurrentIndex(3);
         HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
@@ -1511,6 +1517,7 @@ public:
         basicPageClockOut->setText(QString());
         basicPageAdvanced->setText(QString());
         basicPagePower->setText(QString());
+        basicPageFinish->setText(QString());
         MainTabs->setTabText(MainTabs->indexOf(EmployeeTab), QApplication::translate("MainForm", "Employees", Q_NULLPTR));
         MainTabs->setTabText(MainTabs->indexOf(ProjectTab), QApplication::translate("MainForm", "Projects", Q_NULLPTR));
         MainTabs->setTabText(MainTabs->indexOf(ItemTab), QApplication::translate("MainForm", "Sub-Projects", Q_NULLPTR));

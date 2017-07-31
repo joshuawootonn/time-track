@@ -147,6 +147,11 @@ void MainForm::setIcons(){
     ui->basicPageConnect->setIcon(ButtonIcon);
     ui->basicPageConnect->setIconSize(QSize(200,200));
 
+    pixmap = * new QPixmap("../Icons/go-back-arrow.png");
+    ButtonIcon =  * new QIcon(pixmap);
+    ui->basicPageFinish->setIcon(ButtonIcon);
+    ui->basicPageFinish->setIconSize(QSize(200,200));
+
 //    pixmap = * new QPixmap("../Icons/connect.png");
 //    ButtonIcon =  * new QIcon(pixmap);
 //    ui->DataBaseConnect->setIcon(ButtonIcon);
@@ -530,6 +535,10 @@ void MainForm::on_basicPageAdvanced_clicked()
 void MainForm::on_basicPagePower_clicked()
 {
     QCoreApplication::quit();
+}
+void MainForm::on_basicPageFinish_clicked()
+{
+    loginInitialize();
 }
 void MainForm::on_mainFinish_clicked()
 {

@@ -146,7 +146,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -638,6 +638,13 @@ background-color:#ECEFED;
          </item>
          <item>
           <widget class="QPushButton" name="basicPagePower">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="basicPageFinish">
            <property name="text">
             <string/>
            </property>
