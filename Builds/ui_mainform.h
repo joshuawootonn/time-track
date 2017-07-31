@@ -414,76 +414,76 @@ public:
         gridLayout_17->setContentsMargins(0, 0, 0, 0);
         Login8 = new QPushButton(loginNumPad);
         Login8->setObjectName(QStringLiteral("Login8"));
-        Login8->setMinimumSize(QSize(50, 50));
+        Login8->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login8, 0, 1, 1, 1);
 
         Login2 = new QPushButton(loginNumPad);
         Login2->setObjectName(QStringLiteral("Login2"));
-        Login2->setMinimumSize(QSize(50, 50));
+        Login2->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login2, 3, 1, 1, 1);
 
         Login4 = new QPushButton(loginNumPad);
         Login4->setObjectName(QStringLiteral("Login4"));
-        Login4->setMinimumSize(QSize(50, 50));
+        Login4->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login4, 1, 0, 1, 1);
 
         Login7 = new QPushButton(loginNumPad);
         Login7->setObjectName(QStringLiteral("Login7"));
-        Login7->setMinimumSize(QSize(50, 50));
+        Login7->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login7, 0, 0, 1, 1);
 
         Login6 = new QPushButton(loginNumPad);
         Login6->setObjectName(QStringLiteral("Login6"));
-        Login6->setMinimumSize(QSize(50, 50));
+        Login6->setMinimumSize(QSize(65, 65));
         Login6->setFont(font);
 
         gridLayout_17->addWidget(Login6, 1, 2, 1, 1);
 
         Login5 = new QPushButton(loginNumPad);
         Login5->setObjectName(QStringLiteral("Login5"));
-        Login5->setMinimumSize(QSize(50, 50));
+        Login5->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login5, 1, 1, 1, 1);
 
         Login1 = new QPushButton(loginNumPad);
         Login1->setObjectName(QStringLiteral("Login1"));
-        Login1->setMinimumSize(QSize(50, 50));
+        Login1->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login1, 3, 0, 1, 1);
 
         Login9 = new QPushButton(loginNumPad);
         Login9->setObjectName(QStringLiteral("Login9"));
-        Login9->setMinimumSize(QSize(50, 50));
+        Login9->setMinimumSize(QSize(65, 65));
         Login9->setFont(font);
 
         gridLayout_17->addWidget(Login9, 0, 2, 1, 1);
 
         Login0 = new QPushButton(loginNumPad);
         Login0->setObjectName(QStringLiteral("Login0"));
-        Login0->setMinimumSize(QSize(50, 50));
+        Login0->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(Login0, 4, 0, 1, 1);
 
         LoginBack = new QPushButton(loginNumPad);
         LoginBack->setObjectName(QStringLiteral("LoginBack"));
-        LoginBack->setMinimumSize(QSize(50, 50));
+        LoginBack->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(LoginBack, 4, 1, 1, 1);
 
         Login3 = new QPushButton(loginNumPad);
         Login3->setObjectName(QStringLiteral("Login3"));
-        Login3->setMinimumSize(QSize(50, 50));
+        Login3->setMinimumSize(QSize(65, 65));
         Login3->setFont(font);
 
         gridLayout_17->addWidget(Login3, 3, 2, 1, 1);
 
         LoginGo = new QPushButton(loginNumPad);
         LoginGo->setObjectName(QStringLiteral("LoginGo"));
-        LoginGo->setMinimumSize(QSize(50, 50));
+        LoginGo->setMinimumSize(QSize(65, 65));
 
         gridLayout_17->addWidget(LoginGo, 4, 2, 1, 1);
 
@@ -505,7 +505,7 @@ public:
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         passEdit = new QLineEdit(loginWidget);
         passEdit->setObjectName(QStringLiteral("passEdit"));
-        passEdit->setMinimumSize(QSize(0, 45));
+        passEdit->setMinimumSize(QSize(0, 65));
         passEdit->setFont(font);
         passEdit->setMaxLength(6);
         passEdit->setEchoMode(QLineEdit::Password);
@@ -1478,9 +1478,9 @@ public:
 
         retranslateUi(MainForm);
 
-        mainStack->setCurrentIndex(0);
+        mainStack->setCurrentIndex(2);
         MainTabs->setCurrentIndex(3);
-        HeaderTabs->setCurrentIndex(1);
+        HeaderTabs->setCurrentIndex(0);
         EmployeeAdd->setDefault(false);
 
 

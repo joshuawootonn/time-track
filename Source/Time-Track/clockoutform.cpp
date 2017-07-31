@@ -84,6 +84,34 @@ QDateTime ClockoutForm::format_datetimes(QDateTime z)
     return z;
 
 }
+int ClockoutForm::format_time_length(QDateTime a, QDateTime b){
+    int secs = a.secsTo(b);
+    int minutes = secs/60;
+    int hours = minutes/60;
+    minutes = minutes%60;
+
+    if(minutes<7&&minutes>=0)
+    {
+        minutes = 0;
+    }
+    else if(minutes>=7&&minutes<23)
+    {
+        minutes = 15;
+    }
+    else if(minutes>=23&&minutes<37)
+    {
+        minutes = 30;
+    }
+    else if(minutes>=37&&minutes<53)
+    {
+        minutes = 45;
+    }
+    else{
+        minutes = 60;
+    }
+    return minutes+hours*60;
+}
+
 /* This event filter is used to detect when a lineedit is clicked
     and display a virtual keyboard if it is a tablet.*/
 bool ClockoutForm::eventFilter(QObject* object,QEvent* event)
@@ -223,7 +251,7 @@ void ClockoutForm::TimeLeft(){
     QDateTime indt,outdt;
     QSqlQuery qry(data);
 
-    outdt = format_datetimes(QDateTime::currentDateTime());
+    outdt = QDateTime::currentDateTime();
     QString timein,timeout,datein,dateout;
 
     timeout = outdt.toString("HH:mm:ss");
@@ -241,7 +269,7 @@ void ClockoutForm::TimeLeft(){
 
     qry.clear();
     qry.prepare("select timein,datein from shiftlist where shiftid='"+shiftcount+"'");
-    \
+
     if(qry.exec())
     {
         while(qry.next())
@@ -254,11 +282,7 @@ void ClockoutForm::TimeLeft(){
 
     indt = QDateTime(QDate::fromString(datein,"yyyy-MM-dd"),QTime::fromString(timein,"HH:mm:ss"));
 
-    int secs = indt.secsTo(outdt);
-    //qDebug()<<"Id"<<id<<"shiftcount"<<shiftcount<<"timein"<<timein<<"datein"<<datein;
-    //qDebug()<<"Seconds:"<<QString::number(secs)<<"indt"<<indt.toString()<<"outdt"<<outdt.toString();
-    int minutes = secs/60;
-//    qDebug()<<minutes;
+    int minutes = format_time_length(indt,outdt);
 
 
     for(int i =0;i < ui->Sections->rowCount(); i++){
@@ -273,16 +297,12 @@ void ClockoutForm::TimeLeft(){
     QString lunch = ui->Lunch->currentText();
     minutes-=(lunch.split(":")[0].toInt()*60);
     minutes-=lunch.split(":")[1].toInt();
-//    minutes-=ui->Lunch->time().hour()*60;
-//    minutes-=ui->Lunch->time().minute();
     int hours = minutes/60;
     minutes=minutes%60;
 
     QString j;
-    if(minutes==0){
+    if(minutes==0)
         j = QString::number(hours)+":"+QString::number(minutes)+"0";
-
-    }
     else
         j =QString::number(hours)+":"+QString::number(minutes);
 
@@ -463,7 +483,7 @@ void ClockoutForm::on_FinishedButton_clicked()
                     datein=qry->value(3).toString();
                 }
             }
-            QDateTime clockout = format_datetimes(QDateTime::currentDateTime());
+            QDateTime clockout = QDateTime::currentDateTime();
             QString timeout = clockout.toString("HH:mm:ss");
             QString dateout = clockout.toString("yyyy-MM-dd");
 

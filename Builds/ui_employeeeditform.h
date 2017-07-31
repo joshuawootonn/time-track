@@ -45,8 +45,8 @@ public:
     QWidget *widget2;
     QGridLayout *gridLayout;
     QCheckBox *admin;
-    QCheckBox *active;
     QCheckBox *current;
+    QCheckBox *active;
     QLabel *error;
     QWidget *widget3;
     QHBoxLayout *horizontalLayout_4;
@@ -232,15 +232,15 @@ public:
 
         gridLayout->addWidget(admin, 0, 0, 1, 1);
 
-        active = new QCheckBox(widget2);
-        active->setObjectName(QStringLiteral("active"));
-
-        gridLayout->addWidget(active, 1, 0, 1, 1);
-
         current = new QCheckBox(widget2);
         current->setObjectName(QStringLiteral("current"));
 
         gridLayout->addWidget(current, 0, 1, 1, 1);
+
+        active = new QCheckBox(widget2);
+        active->setObjectName(QStringLiteral("active"));
+
+        gridLayout->addWidget(active, 1, 0, 1, 1);
 
 
         verticalLayout->addWidget(widget2);
@@ -287,7 +287,6 @@ public:
         QWidget::setTabOrder(CancelButton, GenerateButton);
         QWidget::setTabOrder(GenerateButton, admin);
         QWidget::setTabOrder(admin, current);
-        QWidget::setTabOrder(current, active);
 
         retranslateUi(EmployeeEditForm);
 
@@ -301,8 +300,8 @@ public:
         label_2->setText(QApplication::translate("EmployeeEditForm", "Pin:", Q_NULLPTR));
         GenerateButton->setText(QApplication::translate("EmployeeEditForm", "Generate", Q_NULLPTR));
         admin->setText(QApplication::translate("EmployeeEditForm", "Admin", Q_NULLPTR));
-        active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", Q_NULLPTR));
         current->setText(QApplication::translate("EmployeeEditForm", "Employed", Q_NULLPTR));
+        active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", Q_NULLPTR));
         error->setText(QString());
         FinishButton->setText(QApplication::translate("EmployeeEditForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("EmployeeEditForm", "Cancel", Q_NULLPTR));

@@ -19,6 +19,8 @@ ShiftEditForm::ShiftEditForm(QWidget *parent) :
     ui->CancelButton->setDefault(false);
     ui->Description->setVisible(false);
     ui->Description_label->setVisible(false);
+    ui->tabWidget->setCurrentIndex(0);
+
 }
 
 ShiftEditForm::~ShiftEditForm()
@@ -89,7 +91,33 @@ QDateTime ShiftEditForm::format_datetimes(QDateTime z)
     return z;
 
 }
+int ShiftEditForm::format_time_length(QDateTime a, QDateTime b){
+    int secs = a.secsTo(b);
+    int minutes = secs/60;
+    int hours = minutes/60;
+    minutes = minutes%60;
 
+    if(minutes<7&&minutes>=0)
+    {
+        minutes = 0;
+    }
+    else if(minutes>=7&&minutes<23)
+    {
+        minutes = 15;
+    }
+    else if(minutes>=23&&minutes<37)
+    {
+        minutes = 30;
+    }
+    else if(minutes>=37&&minutes<53)
+    {
+        minutes = 45;
+    }
+    else{
+        minutes = 60;
+    }
+    return minutes+hours*60;
+}
 /* These next three functions are for ininializing this
  * dialog according to its purpose. The first for adding
  * a new shift the second for editing a existing shift.
@@ -98,14 +126,27 @@ QDateTime ShiftEditForm::format_datetimes(QDateTime z)
 void ShiftEditForm::AddShift(){
     this->showNormal();
     deactivate = false;
+    activate = true;
 
 
     EmployeeInitialize();
+    EmployeeInitialize(false);
     ProjectInitialize();
     ItemInitialize();
     //LunchInitialize();
     TimeLeft();
     //TimesInitialize();
+
+
+
+
+
+
+
+
+
+
+    ui->ClockinDateTime->setDateTime(QDateTime::currentDateTime());
 
 
     ui->DateTime1->setDateTime(QDateTime(QDate::currentDate(),QTime(6,30,0)));
@@ -168,7 +209,7 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
     ui->Sections->setHorizontalHeaderItem(1,new QTableWidgetItem("Items"));
     ui->Sections->setHorizontalHeaderItem(2,new QTableWidgetItem("Time"));
     ui->Sections->setHorizontalHeaderItem(3,new QTableWidgetItem("Note"));
-
+    ui->tabWidget->tabBar()->hide();
 
     qry->clear();
     qry->prepare("select time,projectname,itemname,description from shiftlist where shiftid='"+shiftid+"'");
@@ -195,15 +236,17 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
 void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
     this->showNormal();
     deactivate = true;
+    activate = false;
     shiftId= shiftid;
     EmployeeInitialize();
+    EmployeeInitialize(true);
     ProjectInitialize();
     ItemInitialize();
     //LunchInitialize();
     TimeLeft();
     // TimesInitialize();
-    ui->DateTime1->setDateTime(format_datetimes(QDateTime::currentDateTime()));
-    ui->DateTime2->setDateTime(format_datetimes(QDateTime::currentDateTime()));
+    ui->DateTime1->setDateTime(QDateTime::currentDateTime());
+    ui->DateTime2->setDateTime(QDateTime::currentDateTime());
 
     QSqlQuery* qry=new QSqlQuery(data);
     QString employeename,timein,datein;
@@ -221,11 +264,12 @@ void ShiftEditForm::EditWorkingShift(QString shiftid,QString id){
 
 
     ui->Name->setCurrentIndex(ui->Name->findText(employeename));
+    ui->ClockinName->setCurrentIndex(ui->ClockinName->findText(employeename));
 
     ui->DateTime1->setTime(QTime::fromString(timein,"HH:mm:ss"));
-
+    ui->ClockinDateTime->setTime(QTime::fromString(timein,"HH:mm:ss"));
     ui->DateTime1->setDate(QDate::fromString(datein,"yyyy-MM-dd"));
-
+    ui->ClockinDateTime->setDate(QDate::fromString(datein,"yyyy-MM-dd"));
 
     ui->Sections->setRowCount(0);
     ui->Sections->setColumnCount(4);
@@ -248,6 +292,23 @@ void ShiftEditForm::updateShiftEdit(){
 
 /* These next six functions are used to initialize the
  * comboboxes with there appropriate model's. */
+void ShiftEditForm::EmployeeInitialize(bool in){
+    QSqlQueryModel * modal=new QSqlQueryModel();
+    QSqlQuery* qry=new QSqlQuery(data);
+    if(in){
+        qry->prepare("select DISTINCT name from employeelist where current='1' AND active='1' ORDER BY name ASC");
+    }else{
+        qry->prepare("select DISTINCT name from employeelist where current='1' AND active='0' ORDER BY name ASC");
+    }
+    qry->exec();
+    modal->setQuery(*qry);
+    ui->ClockinName->setModel(modal);
+    QCompleter * comp = new QCompleter(this);
+    comp->setWidget(ui->Name);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->Name->setCurrentText("");
+}
 
 void ShiftEditForm::EmployeeInitialize(){
 
@@ -256,20 +317,12 @@ void ShiftEditForm::EmployeeInitialize(){
     qry->prepare("select DISTINCT name from employeelist where current='1'  ORDER BY name ASC");
     qry->exec();
     modal->setQuery(*qry);
-    ui->Name->setModel(modal);
-    /*
-    QCompleter * comp = new QCompleter(this);
-    comp->setModel(modal);
-    comp->setCaseSensitivity(Qt::CaseInsensitive);
-    comp->setCompletionMode(QCompleter::PopupCompletion);
-    ui->Name->setCompleter(comp);
-    ui->Name->setCurrentText("");*/
+    ui->Name->setModel(modal);    
     QCompleter * comp = new QCompleter(this);
     comp->setWidget(ui->Name);
     comp->setCompletionMode(QCompleter::PopupCompletion);
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->Name->setCurrentText("");
-
 
 }
 void ShiftEditForm::ProjectInitialize(){
@@ -341,13 +394,8 @@ void ShiftEditForm::TimeLeft(){
     indt = QDateTime(QDate::fromString(datein,"yyyy-MM-dd"),QTime::fromString(timein,"HH:mm:ss"));
     outdt = QDateTime(QDate::fromString(dateout,"yyyy-MM-dd"),QTime::fromString(timeout,"HH:mm:ss"));
 
-    indt = format_datetimes(indt);
-    outdt = format_datetimes(outdt);
 
-
-
-    int secs = indt.secsTo(outdt);
-    int minutes = secs/60;
+    int minutes = format_time_length(indt,outdt);
 
 
 
@@ -571,50 +619,117 @@ bool ShiftEditForm::getSuccess() const
 void ShiftEditForm::on_FinishedButton_clicked()
 {
     if(data.open()){
-        if(ui->Name->currentText()=="")
-        {
-            ui->error->setText("Invalid: Select Employee");
-        }
-        else if(ui->timeLeft->text()!= "0:00"){
-            if(ui->timeLeft->text().split(":")[0].toInt()>0){
-                ui->error->setText("Invalid: Too Little Time on Timesheet");
+        if(ui->tabWidget->currentIndex()==0){
+            if(ui->Name->currentText()=="")
+            {
+                ui->error->setText("Invalid: Select Employee");
+            }
+            else if(ui->timeLeft->text()!= "0:00"){
+                if(ui->timeLeft->text().split(":")[0].toInt()>0){
+                    ui->error->setText("Invalid: Too Little Time on Timesheet");
+                }
+                else{
+                    ui->error->setText("Invalid: Too Much Time on Timesheet");
+                }
+            }
+            else if(ui->Sections->rowCount()<1){
+                ui->error->setText("Invalid: No Projects Added to Timesheet");
             }
             else{
-                ui->error->setText("Invalid: Too Much Time on Timesheet");
+                QSqlQuery* qry=new QSqlQuery(data);
+                QString employeeid,employeename;
+
+
+                qry->clear();
+                qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
+                qry->exec();
+
+                employeename = ui->Name->currentText();
+                qry->prepare("select id from employeelist where name='"+employeename+"'");
+                if(qry->exec()){
+                    while(qry->next())
+                        employeeid = qry->value(0).toString();
+                }
+
+
+                QDateTime clockin = ui->DateTime1->dateTime();
+                QString timein = clockin.toString("HH:mm:ss");
+                QString datein = clockin.toString("yyyy-MM-dd");
+
+
+                QDateTime clockout = ui->DateTime2->dateTime();
+                QString timeout = clockout.toString("HH:mm:ss");
+                QString dateout = clockout.toString("yyyy-MM-dd");
+
+
+                QString projectname,itemname, projectid,itemid,hours,lunch,shiftid,description;
+                qry->clear();
+                qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
+                if(qry->exec()){
+                    while(qry->next()){
+                        shiftid=qry->value(0).toString();}}
+                int id = shiftid.toInt();
+                id++;
+                shiftid = QString::number(id);
+                qry->clear();
+
+
+                for(int i =0; i<ui->Sections->rowCount();i++){
+
+
+                    projectname = ui->Sections->item(i,0)->text();
+                    qry->prepare("select id from projectlist where name='"+projectname+"'");
+                    if(qry->exec()){
+                        while(qry->next()){
+                            projectid=qry->value(0).toString();}}
+                    qry->clear();
+                    itemname=ui->Sections->item(i,1)->text();
+                    qry->prepare("select id from itemlist where name='"+itemname+"'");
+                    if(qry->exec()){
+                        while(qry->next()){
+                            itemid=qry->value(0).toString();
+                        }
+                    }
+
+
+
+                    hours=ui->Sections->item(i,2)->text();
+
+                    description = ui->Sections->item(i,3)->text();
+
+                    if(ui->Lunch->time().minute() == 0)
+                        lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute())+"0";
+                    else
+                        lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+                    qry->clear();
+                    if(description!="")
+                        qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
+                                 +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"','"+description+"')");
+                    else
+                        qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
+                                 +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
+
+
+                    if (qry->exec())
+                        success = true;
+                    else
+                        success = false;
+                }
+
+
+                if(deactivate){
+                    qry->clear();
+                    qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+                    qry->exec();
+                }
+
             }
-        }
-        else if(ui->Sections->rowCount()<1){
-            ui->error->setText("Invalid: No Projects Added to Timesheet");
-        }
-        else{
+        }else{
             QSqlQuery* qry=new QSqlQuery(data);
-            QString employeeid,employeename;
-
-
-            qry->clear();
             qry->prepare("delete from shiftlist where shiftid='"+shiftId+"'");
             qry->exec();
-
-            employeename = ui->Name->currentText();
-            qry->prepare("select id from employeelist where name='"+employeename+"'");
-            if(qry->exec()){
-                while(qry->next())
-                    employeeid = qry->value(0).toString();
-            }
-
-
-            QDateTime clockin = ui->DateTime1->dateTime();
-            QString timein = clockin.toString("HH:mm:ss");
-            QString datein = clockin.toString("yyyy-MM-dd");
-
-
-            QDateTime clockout = ui->DateTime2->dateTime();
-            QString timeout = clockout.toString("HH:mm:ss");
-            QString dateout = clockout.toString("yyyy-MM-dd");
-
-
-            QString projectname,itemname, projectid,itemid,hours,lunch,shiftid,description;
             qry->clear();
+            QString shiftid;
             qry->prepare("select MAX(shiftid) As maxshiftid from shiftlist");
             if(qry->exec()){
                 while(qry->next()){
@@ -622,55 +737,32 @@ void ShiftEditForm::on_FinishedButton_clicked()
             int id = shiftid.toInt();
             id++;
             shiftid = QString::number(id);
+
+            QString employeename, employeeid;
+            employeename = ui->ClockinName->currentText();
             qry->clear();
-
-
-            for(int i =0; i<ui->Sections->rowCount();i++){
-
-
-                projectname = ui->Sections->item(i,0)->text();
-                qry->prepare("select id from projectlist where name='"+projectname+"'");
-                if(qry->exec()){
-                    while(qry->next()){
-                        projectid=qry->value(0).toString();}}
-                qry->clear();
-                itemname=ui->Sections->item(i,1)->text();
-                qry->prepare("select id from itemlist where name='"+itemname+"'");
-                if(qry->exec()){
-                    while(qry->next()){
-                        itemid=qry->value(0).toString();
-                    }
-                }
-
-
-
-                hours=ui->Sections->item(i,2)->text();
-
-                description = ui->Sections->item(i,3)->text();
-
-                if(ui->Lunch->time().minute() == 0)
-                    lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute())+"0";
-                else
-                    lunch=QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
-                qry->clear();
-                if(description!="")
-                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid,description) values('"
-                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"','"+description+"')");
-                else
-                    qry->prepare("insert into shiftlist(employeeid,projectid,itemid,employeename,projectname,itemname,timein,timeout,datein,dateout,timelunch,time,shiftid) values('"
-                             +employeeid+"','"+projectid+"','"+itemid+"','"+employeename+"','"+projectname+"','"+itemname+"','"+timein+"','"+timeout+"','"+datein+"','"+dateout+"','"+lunch+"','"+hours+"','"+shiftid+"')");
-
-
-                if (qry->exec())
-                    success = true;
-                else
-                    success = false;
+            qry->prepare("select id from employeelist where name='"+employeename+"'");
+            if(qry->exec()){
+                while(qry->next())
+                    employeeid = qry->value(0).toString();
             }
 
+            QDateTime clockin = ui->ClockinDateTime->dateTime();
+            QString timein = clockin.toString("HH:mm:ss");
+            QString datein = clockin.toString("yyyy-MM-dd");
 
-            if(deactivate){
+
+            qry->clear();
+            qry->prepare("insert into shiftlist(employeeid,employeename,timein,datein,shiftid) values('"
+                     +employeeid+"','"+employeename+"','"+timein+"','"+datein+"','"+shiftid+"')");
+            if (qry->exec())
+                success = true;
+            else
+                success = false;
+
+            if(activate){
                 qry->clear();
-                qry->prepare("update employeelist set active='0' where id='"+employeeid+"'");
+                qry->prepare("update employeelist set active='1' where id='"+employeeid+"'");
                 qry->exec();
             }
 
@@ -700,3 +792,14 @@ void ShiftEditForm::on_CancelButton_clicked()
 
 
 
+
+void ShiftEditForm::on_tabWidget_currentChanged(int index)
+{
+    if(index == 0){
+        ui->timeLeft->show();
+        ui->label->show();
+    }else{
+        ui->label->hide();
+        ui->timeLeft->hide();
+    }
+}

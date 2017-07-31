@@ -66,6 +66,7 @@ private:
     int selectedRow;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
+    int format_time_length(QDateTime a, QDateTime b);
 };
 
 class Style : public QProxyStyle

@@ -199,17 +199,17 @@ background-color:#FFFFFF;
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="active">
-           <property name="text">
-            <string>Clocked In</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="current">
            <property name="text">
             <string>Employed</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="active">
+           <property name="text">
+            <string>Clocked In</string>
            </property>
           </widget>
          </item>
@@ -287,7 +287,6 @@ background-color:#FFFFFF;
   <tabstop>GenerateButton</tabstop>
   <tabstop>admin</tabstop>
   <tabstop>current</tabstop>
-  <tabstop>active</tabstop>
  </tabstops>
  <resources/>
  <connections/>

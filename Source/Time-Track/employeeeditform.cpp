@@ -227,3 +227,5 @@ void EmployeeEditForm::on_pin_returnPressed()
 {
     on_FinishButton_clicked();
 }
+
+

@@ -146,7 +146,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
@@ -224,8 +224,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login8">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -237,8 +237,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login2">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -250,8 +250,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login4">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -263,8 +263,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login7">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -276,8 +276,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login6">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="font">
@@ -295,8 +295,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login5">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -308,8 +308,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login1">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -321,8 +321,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login9">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="font">
@@ -340,8 +340,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login0">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -353,8 +353,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="LoginBack">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -366,8 +366,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login3">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="font">
@@ -385,8 +385,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="LoginGo">
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
-                 <height>50</height>
+                 <width>65</width>
+                 <height>65</height>
                 </size>
                </property>
                <property name="text">
@@ -424,7 +424,7 @@ background-color:#ECEFED;
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>45</height>
+                <height>65</height>
                </size>
               </property>
               <property name="font">
@@ -867,7 +867,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>

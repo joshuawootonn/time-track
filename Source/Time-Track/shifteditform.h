@@ -33,6 +33,7 @@ public:
     void EditWorkingShift(QString Shiftid,QString id);
     void updateShiftEdit();
     void EmployeeInitialize();
+    void EmployeeInitialize(bool in);
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
@@ -60,11 +61,14 @@ private slots:
 
     void on_Edit_clicked();
 
+    void on_tabWidget_currentChanged(int index);
+
 signals:
     void finished();
 
 private:
     bool deactivate;
+    bool activate;
     Ui::ShiftEditForm *ui;
     QString shiftId;
     QSqlDatabase data;
@@ -73,6 +77,7 @@ private:
     bool success;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
+    int format_time_length(QDateTime a, QDateTime b);
 };
 
 

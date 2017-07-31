@@ -115,6 +115,7 @@ void MainForm::reenter(){
 
     showtheThings();
     basicInitialize();
+    loginInitialize();
 }
 
 /* Initialization of the different pages of mainform*/
@@ -325,11 +326,12 @@ void MainForm::basicInitialize()
         ui->basicPageClockIn->show();
         ui->basicPageClockOut->hide();
     }
-    ui->mainFinish->show();
+    ui->mainFinish->hide();
 }
 void MainForm::advInitialize(){
     ui->mainStack->setCurrentIndex(2);
     ui->MainTabs->tabBar()->hide();
+    ui->mainFinish->show();
 
     establishConnections();
 }
@@ -429,7 +431,7 @@ void MainForm::on_basicPageClockIn_clicked()
         QSqlQuery qry1(data),qry2(data),qry3(data),qry4(data);
         QString employeename, employeeid, timein,datein;
         QDateTime x = QDateTime::currentDateTime();
-        QDateTime z = format_datetimes(x);
+        QDateTime z = x;
 
         employeeid = id;
         timein = z.toString("HH:mm:ss");
@@ -470,6 +472,7 @@ void MainForm::on_basicPageClockIn_clicked()
         ui->basicPageClockIn->hide();
         ui->basicPageClockOut->show();
         ui->error->setText("");
+        loginInitialize();
     }else{
         ui->error->setText("Disconnected From Database. Verify Connection");
     }
@@ -491,6 +494,7 @@ void MainForm::on_basicPageClockOut_clicked()
 
         clockoutForm->ClockoutInitialize(id);
         ui->error->setText("");
+
     }else{
         ui->error->setText("Disconnected From Database. Verify Connection");
     }
@@ -1709,8 +1713,8 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(5,Qt::Horizontal,tr("Project Name"));
     model->setHeaderData(6,Qt::Horizontal,tr("Item Name"));
     model->setHeaderData(7,Qt::Horizontal,tr("Time In"));
-    model->setHeaderData(8,Qt::Horizontal,tr("Date In"));
-    model->setHeaderData(9,Qt::Horizontal,tr("Time Out"));
+    model->setHeaderData(8,Qt::Horizontal,tr("Time Out"));
+    model->setHeaderData(9,Qt::Horizontal,tr("Date In"));
     model->setHeaderData(10,Qt::Horizontal,tr("Date out"));
     model->setHeaderData(11,Qt::Horizontal,tr("Lunch"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));

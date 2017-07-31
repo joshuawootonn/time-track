@@ -45,6 +45,7 @@ private slots:
 
     void on_pin_returnPressed();
 
+
 signals:
     void finished();
 private:
