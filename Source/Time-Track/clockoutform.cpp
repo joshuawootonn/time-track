@@ -294,17 +294,30 @@ void ClockoutForm::TimeLeft(){
         minutes-=(item.split(":")[0].toInt()*60);
         minutes-=item.split(":")[1].toInt();
     }
+
     QString lunch = ui->Lunch->currentText();
     minutes-=(lunch.split(":")[0].toInt()*60);
     minutes-=lunch.split(":")[1].toInt();
+    bool negative = false;
+    if( minutes<0){
+        negative = true;
+    }
     int hours = minutes/60;
     minutes=minutes%60;
 
     QString j;
+    hours = qAbs(hours);
+    minutes = qAbs(minutes);
+    if(negative){
+        j="-";
+    }
+    else{
+        j="";
+    }
     if(minutes==0)
-        j = QString::number(hours)+":"+QString::number(minutes)+"0";
+        j += QString::number(hours)+":"+QString::number(minutes)+"0";
     else
-        j =QString::number(hours)+":"+QString::number(minutes);
+        j += QString::number(hours)+":"+QString::number(minutes);
 
     ui->timeLeft->setText(j);
 

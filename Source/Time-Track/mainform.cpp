@@ -692,7 +692,7 @@ void MainForm::EmployeeTab()
     ui->EmployeeView->showColumn(3);
     ui->EmployeeShiftCount->setChecked(false);
     ui->EmployeeView->hideColumn(4);
-    ui->EmployeeActive->setChecked(false);
+    ui->EmployeeActive->setChecked(true);
     ui->EmployeeView->hideColumn(5);
     ui->EmployeeCurrent->setChecked(false);
     ui->EmployeeView->hideColumn(6);

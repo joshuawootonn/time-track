@@ -26,7 +26,7 @@ background-color:#E8E8E8;
 }
 *{
 font-family:&quot;Calibri&quot;;
-font-size: 26px;
+font-size: 32px;
 color:#263544;
 }
 
@@ -96,11 +96,12 @@ border:none;
 QComboBox{
 border:none;
 background-color:#FFFFFF;
-padding-left:20px;
-
+padding-left:35px;
+ border: 0px solid 263544;	
 }
 QComboBox:hover {
 background-color:#D1D1D1;
+
 }
 QComboBox#Items,QComboBox#Projects{
 padding-left:2px;
@@ -108,7 +109,7 @@ padding-left:2px;
 
 
 QComboBox:drop-down{
-border:none;
+ border: none;
 }
 
 
@@ -161,9 +162,15 @@ margin: 0px 0px 0px 0px;
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
+              <width>200</width>
               <height>45</height>
              </size>
             </property>
@@ -183,7 +190,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
             <property name="sizeAdjustPolicy">
@@ -206,9 +213,15 @@ margin: 0px 0px 0px 0px;
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
+              <width>200</width>
               <height>45</height>
              </size>
             </property>
@@ -228,7 +241,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
            </widget>
@@ -250,7 +263,7 @@ margin: 0px 0px 0px 0px;
             </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
+              <width>200</width>
               <height>45</height>
              </size>
             </property>
@@ -273,7 +286,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
             <property name="echoMode">
@@ -296,9 +309,15 @@ margin: 0px 0px 0px 0px;
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
+              <width>200</width>
               <height>45</height>
              </size>
             </property>
@@ -311,8 +330,8 @@ margin: 0px 0px 0px 0px;
            <widget class="QComboBox" name="Hours">
             <property name="minimumSize">
              <size>
-              <width>50</width>
-              <height>50</height>
+              <width>100</width>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -328,7 +347,7 @@ margin: 0px 0px 0px 0px;
              <string/>
             </property>
             <property name="maxVisibleItems">
-             <number>13</number>
+             <number>17</number>
             </property>
            </widget>
           </item>
@@ -355,8 +374,8 @@ margin: 0px 0px 0px 0px;
            <widget class="QComboBox" name="Minutes">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>50</height>
+              <width>100</width>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -388,7 +407,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
             <property name="text">
@@ -401,7 +420,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
             <property name="text">
@@ -414,7 +433,7 @@ margin: 0px 0px 0px 0px;
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>50</height>
+              <height>70</height>
              </size>
             </property>
             <property name="text">
@@ -528,8 +547,8 @@ margin: 0px 0px 0px 0px;
          <widget class="QComboBox" name="Lunch">
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>50</height>
+            <width>140</width>
+            <height>70</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -548,7 +567,7 @@ margin: 0px 0px 0px 0px;
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>50</height>
+            <height>70</height>
            </size>
           </property>
           <property name="text">
@@ -561,7 +580,7 @@ margin: 0px 0px 0px 0px;
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>50</height>
+            <height>70</height>
            </size>
           </property>
           <property name="text">

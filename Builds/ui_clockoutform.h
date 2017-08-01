@@ -81,7 +81,7 @@ public:
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 26px;\n"
+"font-size: 32px;\n"
 "color:#263544;\n"
 "}\n"
 "\n"
@@ -152,11 +152,12 @@ public:
 "QComboBox{\n"
 "border:none;\n"
 "background-color:#FFFFFF;\n"
-"padding-left:20px;\n"
-"\n"
+"padding-left:35px;\n"
+" border: 0px solid 263544;	\n"
 "}\n"
 "QComboBox:hover {\n"
 "background-color:#D1D1D1;\n"
+"\n"
 "}\n"
 "QComboBox#Items,QComboBox#Projects{\n"
 "padding-left:2px;\n"
@@ -164,7 +165,7 @@ public:
 "\n"
 "\n"
 "QComboBox:drop-down{\n"
-"border:none;\n"
+" border: none;\n"
 "}\n"
 "\n"
 "\n"
@@ -217,7 +218,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy);
-        label_3->setMaximumSize(QSize(150, 45));
+        label_3->setMinimumSize(QSize(200, 0));
+        label_3->setMaximumSize(QSize(200, 45));
 
         horizontalLayout_9->addWidget(label_3);
 
@@ -228,7 +230,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(Projects->sizePolicy().hasHeightForWidth());
         Projects->setSizePolicy(sizePolicy1);
-        Projects->setMinimumSize(QSize(0, 50));
+        Projects->setMinimumSize(QSize(0, 70));
         Projects->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
         horizontalLayout_9->addWidget(Projects);
@@ -243,7 +245,8 @@ public:
         label_4->setObjectName(QStringLiteral("label_4"));
         sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
         label_4->setSizePolicy(sizePolicy);
-        label_4->setMaximumSize(QSize(150, 45));
+        label_4->setMinimumSize(QSize(200, 0));
+        label_4->setMaximumSize(QSize(200, 45));
 
         horizontalLayout_5->addWidget(label_4);
 
@@ -251,7 +254,7 @@ public:
         Items->setObjectName(QStringLiteral("Items"));
         sizePolicy1.setHeightForWidth(Items->sizePolicy().hasHeightForWidth());
         Items->setSizePolicy(sizePolicy1);
-        Items->setMinimumSize(QSize(0, 50));
+        Items->setMinimumSize(QSize(0, 70));
 
         horizontalLayout_5->addWidget(Items);
 
@@ -265,7 +268,7 @@ public:
         DescriptionLabel->setObjectName(QStringLiteral("DescriptionLabel"));
         sizePolicy.setHeightForWidth(DescriptionLabel->sizePolicy().hasHeightForWidth());
         DescriptionLabel->setSizePolicy(sizePolicy);
-        DescriptionLabel->setMaximumSize(QSize(150, 45));
+        DescriptionLabel->setMaximumSize(QSize(200, 45));
 
         horizontalLayout_6->addWidget(DescriptionLabel);
 
@@ -273,7 +276,7 @@ public:
         Description->setObjectName(QStringLiteral("Description"));
         sizePolicy1.setHeightForWidth(Description->sizePolicy().hasHeightForWidth());
         Description->setSizePolicy(sizePolicy1);
-        Description->setMinimumSize(QSize(0, 50));
+        Description->setMinimumSize(QSize(0, 70));
         Description->setEchoMode(QLineEdit::Normal);
 
         horizontalLayout_6->addWidget(Description);
@@ -288,16 +291,17 @@ public:
         label_5->setObjectName(QStringLiteral("label_5"));
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
-        label_5->setMaximumSize(QSize(150, 45));
+        label_5->setMinimumSize(QSize(200, 0));
+        label_5->setMaximumSize(QSize(200, 45));
 
         horizontalLayout_8->addWidget(label_5);
 
         Hours = new QComboBox(bigwidger);
         Hours->setObjectName(QStringLiteral("Hours"));
-        Hours->setMinimumSize(QSize(50, 50));
+        Hours->setMinimumSize(QSize(100, 70));
         Hours->setMaximumSize(QSize(70, 16777215));
         Hours->setEditable(false);
-        Hours->setMaxVisibleItems(13);
+        Hours->setMaxVisibleItems(17);
 
         horizontalLayout_8->addWidget(Hours);
 
@@ -310,7 +314,7 @@ public:
 
         Minutes = new QComboBox(bigwidger);
         Minutes->setObjectName(QStringLiteral("Minutes"));
-        Minutes->setMinimumSize(QSize(0, 50));
+        Minutes->setMinimumSize(QSize(100, 70));
         Minutes->setMaximumSize(QSize(70, 16777215));
         Minutes->setEditable(false);
 
@@ -322,19 +326,19 @@ public:
 
         Add = new QPushButton(bigwidger);
         Add->setObjectName(QStringLiteral("Add"));
-        Add->setMinimumSize(QSize(100, 50));
+        Add->setMinimumSize(QSize(100, 70));
 
         horizontalLayout_8->addWidget(Add);
 
         Edit = new QPushButton(bigwidger);
         Edit->setObjectName(QStringLiteral("Edit"));
-        Edit->setMinimumSize(QSize(100, 50));
+        Edit->setMinimumSize(QSize(100, 70));
 
         horizontalLayout_8->addWidget(Edit);
 
         Delete = new QPushButton(bigwidger);
         Delete->setObjectName(QStringLiteral("Delete"));
-        Delete->setMinimumSize(QSize(100, 50));
+        Delete->setMinimumSize(QSize(100, 70));
 
         horizontalLayout_8->addWidget(Delete);
 
@@ -399,7 +403,7 @@ public:
 
         Lunch = new QComboBox(bigwidger);
         Lunch->setObjectName(QStringLiteral("Lunch"));
-        Lunch->setMinimumSize(QSize(0, 50));
+        Lunch->setMinimumSize(QSize(140, 70));
         Lunch->setMaximumSize(QSize(100, 16777215));
         Lunch->setEditable(false);
 
@@ -407,13 +411,13 @@ public:
 
         FinishedButton = new QPushButton(bigwidger);
         FinishedButton->setObjectName(QStringLiteral("FinishedButton"));
-        FinishedButton->setMinimumSize(QSize(100, 50));
+        FinishedButton->setMinimumSize(QSize(100, 70));
 
         horizontalLayout_2->addWidget(FinishedButton);
 
         CancelButton = new QPushButton(bigwidger);
         CancelButton->setObjectName(QStringLiteral("CancelButton"));
-        CancelButton->setMinimumSize(QSize(100, 50));
+        CancelButton->setMinimumSize(QSize(100, 70));
 
         horizontalLayout_2->addWidget(CancelButton);
 

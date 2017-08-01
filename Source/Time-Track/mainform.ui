@@ -150,7 +150,13 @@ QGroupBox::title {
      </property>
      <widget class="QWidget" name="loginPage">
       <property name="styleSheet">
-       <string notr="true">
+       <string notr="true">*{
+font-family:&quot;Calibri&quot;;
+font-size: 40px;
+color:#263544;
+
+
+}
 
 QPushButton{
 padding:3px;
@@ -160,7 +166,7 @@ background-color:#FFF;
 QLineEdit{ 
 background-color:#FFF;
  border: 0px solid 263544;	
-font-size: 32px;
+font-size: 42px;
 }
 QLineEdit:hover{ 
 background-color:#FFFFFF;
@@ -174,12 +180,7 @@ background-color:#D1D1D1;
 
 #E5EAE7
 */
-*{
-font-family:&quot;Calibri&quot;;
-font-size: 19px;
-color:#263544;
 
-}
 QPushButton#basicPageConnect{
 padding:3px;
 border:none;
@@ -224,8 +225,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login8">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -237,8 +238,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login2">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -250,8 +251,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login4">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -263,8 +264,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login7">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -276,8 +277,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login6">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="font">
@@ -295,8 +296,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login5">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -308,8 +309,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login1">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -321,8 +322,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login9">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="font">
@@ -340,8 +341,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login0">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -353,8 +354,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="LoginBack">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
@@ -366,8 +367,8 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="Login3">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="font">
@@ -385,12 +386,12 @@ background-color:#ECEFED;
               <widget class="QPushButton" name="LoginGo">
                <property name="minimumSize">
                 <size>
-                 <width>65</width>
-                 <height>65</height>
+                 <width>70</width>
+                 <height>70</height>
                 </size>
                </property>
                <property name="text">
-                <string>Go</string>
+                <string>Enter</string>
                </property>
               </widget>
              </item>
@@ -423,8 +424,8 @@ background-color:#ECEFED;
              <widget class="QLineEdit" name="passEdit">
               <property name="minimumSize">
                <size>
-                <width>0</width>
-                <height>65</height>
+                <width>70</width>
+                <height>70</height>
                </size>
               </property>
               <property name="font">
