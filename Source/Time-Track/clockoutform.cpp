@@ -12,6 +12,12 @@ ClockoutForm::ClockoutForm(QWidget *parent) :
     clicked = false;
     ui->Projects->setStyle(new Style());
     ui->Items->setStyle(new Style());
+    ui->Sections->setStyle(new Style());
+
+
+    QHeaderView *verticalHeader = ui->Sections->verticalHeader();
+    verticalHeader->setSectionResizeMode(QHeaderView::Fixed);
+    verticalHeader->setDefaultSectionSize(70);
 }
 
 
