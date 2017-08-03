@@ -60,9 +60,9 @@ bool ConnectionForm::eventFilter(QObject* object,QEvent* event)
             QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
         return false;
     }
-    else if(object == ui->ipEdit && event->type() == QEvent::MouseButtonPress) {
+    else if(object == ui->ipEdit2 && event->type() == QEvent::MouseButtonPress) {
 
-        ui->ipEdit->setFocus();
+        ui->ipEdit2->setFocus();
         QRect rec = QApplication::desktop()->screenGeometry();
         if(rec.width() < 1400)
             QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
