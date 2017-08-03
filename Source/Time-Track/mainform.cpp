@@ -2,18 +2,26 @@
 #include "ui_mainform.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QFile>
+#include <QStandardPaths>
 MainForm::MainForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainForm)
 {
     ui->setupUi(this);
-
-    this->hide();
     connectionForm = new ConnectionForm(this);
-
     QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
 
-    connectionForm->auto_connect();
+    QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
+    if(!file.open(QIODevice::ReadOnly)) {
+        file.close();
+        connectionForm->show();
+    }else{
+        file.close();
+        start();
+    }
+
+
 
 }
 
@@ -24,12 +32,29 @@ MainForm::~MainForm()
 
 void MainForm::start(){
 
+    QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString text = in.readAll();
 
-    connectionForm->read();
-    ip = connectionForm->getIp();
-    if(Connect(connectionForm->getDatabase(),connectionForm->getPort(),connectionForm->getUsername(),connectionForm->getPassword(),connectionForm->getIp())){
+    qDebug()<<file.isOpen()<<text.split(" ").length();
+    if(file.isOpen() && text.split(" ").length() == 5){
+
+        QString databasename,port,username,pass;
+
+        qDebug()<<text<<text.split(" ").length();
+        ip =text.split(" ")[4];
+        databasename = text.split(" ")[0];
+        port = text.split(" ")[1];
+        username = text.split(" ")[2];
+        pass = text.split(" ")[3];
+
+        qDebug()<<ip<<databasename<<port<<username;
+        file.close();
+
+        Connect(databasename,port,username,pass,ip);
+
         ui->error->setText("");
-        connectionForm->hide();
         if (ip.split(".")[3] =="10")
             this->showFullScreen();
         else
@@ -50,15 +75,13 @@ void MainForm::start(){
         loginInitialize();
         isConnected();
         setIcons();
+
     }
     else
     {
         this->hide();
-
-//        connectionForm->hide();
-//        connectionForm = new ConnectionForm(this);
-//        connectionForm->show();
         QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
+        connectionForm->show();
         connectionForm->setError("Invalid Connection");
     }
 }
@@ -78,16 +101,9 @@ bool MainForm::Connect(QString database,QString port,QString username,QString pa
     data.setPassword(password);
     data.setUserName(username);
     data.setHostName(ip);
-    data.open();
     ui->ConnectionLabel->setText(data.lastError().text());
-    if(data.isOpen())
-        return true;
-     else
-    {
-        QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/");
-        dir.removeRecursively();
-        return false;
-    }
+    return data.open();
+
 }
 
 /* These classes connect the different forms through
@@ -289,12 +305,11 @@ void MainForm::isConnected(){
     }
     else
     {
-        ui->passEdit->hide();
-        ui->passEdit->hide();
-        ui->loginNumPad->hide();
+        this->hide();
+        QObject::connect(connectionForm,SIGNAL(finished()),this,SLOT(start()));
+        connectionForm->show();
+        connectionForm->setError("Invalid Connection");
 
-        ui->basicPageConnect->show();
-        ui->ConnectionLabel->show();
     }
 }
 void MainForm::basicInitialize()
@@ -508,7 +523,6 @@ void MainForm::on_basicPageClockOut_clicked()
 void MainForm::on_basicPageConnect_clicked()
 {
     this->hide();
-    connectionForm = new ConnectionForm(this);
     if (connectionForm->getIp().split(".")[3] =="10")
         connectionForm->showFullScreen();
     else
@@ -2183,7 +2197,6 @@ void MainForm::on_SettingsConnections_clicked()
 {
     this->hide();
 
-    connectionForm = new ConnectionForm(this);
     if (connectionForm->getIp().split(".")[3] =="10")
         connectionForm->showFullScreen();
     else

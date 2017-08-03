@@ -2871,7 +2871,9 @@ debug/mainform.o: ../Source/Time-Track/mainform.cpp ../Source/Time-Track/mainfor
 		C:/Qt/5.9.1/mingw53_32/include/QtGui/qfontdatabase.h \
 		ui_mainform.h \
 		C:/Qt/5.9.1/mingw53_32/include/QtWidgets/QFileDialog \
-		C:/Qt/5.9.1/mingw53_32/include/QtWidgets/qfiledialog.h
+		C:/Qt/5.9.1/mingw53_32/include/QtWidgets/qfiledialog.h \
+		C:/Qt/5.9.1/mingw53_32/include/QtCore/QFile \
+		C:/Qt/5.9.1/mingw53_32/include/QtCore/QStandardPaths
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainform.o ..\Source\Time-Track\mainform.cpp
 
 debug/clockoutform.o: ../Source/Time-Track/clockoutform.cpp ../Source/Time-Track/clockoutform.h \

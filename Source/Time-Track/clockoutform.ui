@@ -347,7 +347,7 @@ margin: 0px 0px 0px 0px;
              <string/>
             </property>
             <property name="maxVisibleItems">
-             <number>17</number>
+             <number>13</number>
             </property>
            </widget>
           </item>

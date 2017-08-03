@@ -14,23 +14,17 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     ui->databaseEdit->setText("aacidatabase");
     ui->usernameEdit->setText("user");
     ui->portEdit->setText("3306");
-    ui->ipEdit->addItem("192.168.41.187");
-    ui->ipEdit->addItem("192.168.0.10");
-    ui->ipEdit->addItem("192.168.1.111");
-    ui->error->hide();
-
-
-
-
-    automatic = false;
-    read();
-    ui->connect->setEnabled(false);
-    pingConnection();
+    ui->ipEdit->addItem("Office");
+    ui->ipEdit->addItem("Shop");
+    ui->ipEdit->addItem("Custom");
+    ui->ipeditwidget->hide();
     ui->databaseEdit->installEventFilter(this);
     ui->portEdit->installEventFilter(this);
     ui->usernameEdit->installEventFilter(this);
     ui->ipEdit->installEventFilter(this);
 
+    ui->progress->hide();
+    ui->testConnection->hide();
 
 }
 
@@ -77,26 +71,15 @@ bool ConnectionForm::eventFilter(QObject* object,QEvent* event)
     return false;
 }
 /* Toggle the connection button  */
-void ConnectionForm::loadConnection(bool s){
 
-    if(s){
-        setError("Valid");
-        ui->connect->setEnabled(true);
-    }
-    else{
-        setError("Invalid");
-        ui->connect->setEnabled(false);
-    }
-
-}
 /* Threaded ping operation to test the validity of an ip  */
 void ConnectionForm::pingConnection(){
 
-    ui->connect->setEnabled(false);
+
 
     QThread* thread = new QThread(this);
     Work* worker = new Work;
-    worker->connection = ui->ipEdit->currentText();
+    worker->connection = ip;
     worker->moveToThread(thread);
 
     connect(thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
@@ -104,7 +87,6 @@ void ConnectionForm::pingConnection(){
 
     connect(worker, SIGNAL(progress(int)), this->ui->progress , SLOT(setValue(int)));
 
-    connect(worker, SIGNAL(done(bool)),this,SLOT(loadConnection(bool)));
 
 
     thread->start();
@@ -112,7 +94,7 @@ void ConnectionForm::pingConnection(){
 
 }
 /* Exporting the saved data */
-void ConnectionForm::write(){
+void ConnectionForm::write(){   
     QDir dir(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory));
     if(dir.exists())
     {
@@ -121,16 +103,11 @@ void ConnectionForm::write(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-
-        //qDebug()<<"write monkey" << file.fileName();
         return;
     }
     QTextStream out(&file);
-    ip = ui->ipEdit->currentText();
     qDebug()<<"write"<<ip;
-    out<<database<<" "<<port<<" "<<username<<" "<<password<<" "<<ip<<" ";
-    out<<"1 ";
-
+    out<<database<<" "<<port<<" "<<username<<" "<<password<<" "<<ip;
 
     file.flush();
     file.close();
@@ -138,26 +115,9 @@ void ConnectionForm::write(){
 /* Importing the saved data */
 void ConnectionForm::read(){
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
-    if (!file.open(QFile::ReadOnly | QFile::Text))
-    {
-        //qDebug()<<"read monkey" << file.fileName();
-        return;
-    }
-
     QTextStream in(&file);
     QString text = in.readAll();
-    if( text.split(" ").length() == 6)
-    {
-        ip =text.split(" ")[4];
-        ui->databaseEdit->setText(text.split(" ")[0]);
-        ui->portEdit->setText(text.split(" ")[1]);
-        ui->usernameEdit->setText(text.split(" ")[2]);
-        ui->passwordEdit->setText(text.split(" ")[3]);
-        int index = ui->ipEdit->findText(text.split(" ")[4]);
-        if ( index != -1 ) { // -1 for not found
-           ui->ipEdit->setCurrentIndex(index);
-        }
-    }
+
     if( text.split(" ").length() == 7)
     {
         ip =text.split(" ")[4];
@@ -171,22 +131,15 @@ void ConnectionForm::read(){
         }
         automatic = text.split(" ")[5].toInt();
     }
-
-    qDebug()<<"read"<<this->getIp()<<ip<<ui->ipEdit->currentText();
-
+    qDebug()<<"read"<<ip<<text.split(" ").length();
     file.close();
 }
+
+
 /* Toggles whether dialog shows depending on whether settings
   have been initialized.
 */
-void ConnectionForm::auto_connect(){
-    if(automatic){
-        emit finished();
-        this->hide();
-    }
-    else
-        this->show();
-}
+
 /* Error outputting  */
 void ConnectionForm::setError(QString x){
     ui->error->show();
@@ -234,16 +187,26 @@ void ConnectionForm::on_passwordEdit_textChanged(const QString &arg1)
 }
 void ConnectionForm::on_ipEdit_currentTextChanged(const QString &arg1)
 {
-    ip = arg1;
-    ui->connect->setEnabled(false);
-    setError("Press ? to validate");
+    if(arg1 == "Custom"){
+        ui->ipeditwidget->show();
+    }else if(arg1 == "Office"){
+        ip = "192.168.41.184";
+        ui->ipeditwidget->hide();
+    }else if(arg1 == "Shop"){
+        ip = "192.168.0.10";
+        ui->ipeditwidget->hide();
+    }
+
 }
-void ConnectionForm::on_testConnection_clicked()
+void ConnectionForm::on_ipEdit2_textChanged(const QString &arg1)
 {
-    pingConnection();
+    ip = ui->ipEdit2->text();
 }
+
 void ConnectionForm::on_connect_clicked()
 {
+    ui->error->setText("");
+    pingConnection();
     if(ui->databaseEdit->text() == "")
         setError("Please enter a database");
     else if(ui->portEdit->text() == "")
@@ -255,9 +218,12 @@ void ConnectionForm::on_connect_clicked()
     else
     {
         write();
+        this->hide();
         emit finished();
-
     }
 }
+
+
+
 
 

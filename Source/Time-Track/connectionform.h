@@ -16,8 +16,6 @@ public:
     explicit ConnectionForm(QWidget *parent = 0);
     ~ConnectionForm();
     bool eventFilter(QObject* object,QEvent* event);
-    void auto_connect();
-
     QString getDatabase() const;
     QString getPort() const;
     QString getUsername() const;
@@ -33,10 +31,12 @@ private slots:
     void on_usernameEdit_textChanged(const QString &arg1);
     void on_passwordEdit_textChanged(const QString &arg1);
     void on_ipEdit_currentTextChanged(const QString &arg1);
-    void on_testConnection_clicked();
-    void loadConnection(bool s);
 
 
+
+
+
+    void on_ipEdit2_textChanged(const QString &arg1);
 
 signals:
     void finished();

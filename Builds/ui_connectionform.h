@@ -32,10 +32,6 @@ class Ui_ConnectionForm
 {
 public:
     QGridLayout *gridLayout;
-    QSpacerItem *horizontalSpacer_3;
-    QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *verticalSpacer;
-    QSpacerItem *verticalSpacer_2;
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout;
     QWidget *horizontalWidget;
@@ -59,6 +55,10 @@ public:
     QLabel *label_2;
     QComboBox *ipEdit;
     QPushButton *testConnection;
+    QWidget *ipeditwidget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label;
+    QLineEdit *ipEdit2;
     QWidget *widget;
     QHBoxLayout *_2;
     QLabel *error;
@@ -70,14 +70,14 @@ public:
     {
         if (ConnectionForm->objectName().isEmpty())
             ConnectionForm->setObjectName(QStringLiteral("ConnectionForm"));
-        ConnectionForm->resize(374, 330);
+        ConnectionForm->resize(907, 629);
         ConnectionForm->setStyleSheet(QLatin1String("QDialog#ConnectionForm{\n"
 "\n"
 "background-color:#E5EAE7;\n"
 "}\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
-"font-size: 16px;\n"
+"font-size: 32px;\n"
 "color:#263544;\n"
 "}\n"
 "\n"
@@ -190,26 +190,8 @@ public:
 ""));
         gridLayout = new QGridLayout(ConnectionForm);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_3, 1, 2, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_2, 1, 0, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 2, 1, 1, 1);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_2, 0, 1, 1, 1);
-
         verticalWidget = new QWidget(ConnectionForm);
         verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
-        verticalWidget->setMinimumSize(QSize(340, 300));
-        verticalWidget->setMaximumSize(QSize(340, 300));
         verticalLayout = new QVBoxLayout(verticalWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalWidget = new QWidget(verticalWidget);
@@ -219,13 +201,13 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_5 = new QLabel(horizontalWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setMinimumSize(QSize(75, 0));
+        label_5->setMinimumSize(QSize(150, 70));
 
         horizontalLayout_3->addWidget(label_5);
 
         databaseEdit = new QLineEdit(horizontalWidget);
         databaseEdit->setObjectName(QStringLiteral("databaseEdit"));
-        databaseEdit->setMinimumSize(QSize(0, 25));
+        databaseEdit->setMinimumSize(QSize(0, 70));
         databaseEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
         databaseEdit->setEchoMode(QLineEdit::Normal);
 
@@ -240,13 +222,13 @@ public:
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         label_6 = new QLabel(horizontalWidget_2);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setMinimumSize(QSize(75, 0));
+        label_6->setMinimumSize(QSize(150, 0));
 
         horizontalLayout_4->addWidget(label_6);
 
         portEdit = new QLineEdit(horizontalWidget_2);
         portEdit->setObjectName(QStringLiteral("portEdit"));
-        portEdit->setMinimumSize(QSize(0, 25));
+        portEdit->setMinimumSize(QSize(0, 70));
         portEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
         portEdit->setEchoMode(QLineEdit::Normal);
 
@@ -261,13 +243,13 @@ public:
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_4 = new QLabel(horizontalWidget_3);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setMinimumSize(QSize(75, 0));
+        label_4->setMinimumSize(QSize(150, 0));
 
         horizontalLayout_5->addWidget(label_4);
 
         usernameEdit = new QLineEdit(horizontalWidget_3);
         usernameEdit->setObjectName(QStringLiteral("usernameEdit"));
-        usernameEdit->setMinimumSize(QSize(0, 25));
+        usernameEdit->setMinimumSize(QSize(0, 70));
         usernameEdit->setInputMethodHints(Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData);
 
         horizontalLayout_5->addWidget(usernameEdit);
@@ -281,13 +263,13 @@ public:
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         label_3 = new QLabel(horizontalWidget_4);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setMinimumSize(QSize(75, 0));
+        label_3->setMinimumSize(QSize(150, 0));
 
         horizontalLayout_6->addWidget(label_3);
 
         passwordEdit = new QLineEdit(horizontalWidget_4);
         passwordEdit->setObjectName(QStringLiteral("passwordEdit"));
-        passwordEdit->setMinimumSize(QSize(0, 25));
+        passwordEdit->setMinimumSize(QSize(0, 70));
         passwordEdit->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_6->addWidget(passwordEdit);
@@ -301,15 +283,15 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         label_2 = new QLabel(horizontalWidget_5);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setMinimumSize(QSize(50, 0));
+        label_2->setMinimumSize(QSize(150, 0));
         label_2->setMaximumSize(QSize(75, 16777215));
 
         horizontalLayout_7->addWidget(label_2);
 
         ipEdit = new QComboBox(horizontalWidget_5);
         ipEdit->setObjectName(QStringLiteral("ipEdit"));
-        ipEdit->setMinimumSize(QSize(0, 25));
-        ipEdit->setEditable(true);
+        ipEdit->setMinimumSize(QSize(0, 70));
+        ipEdit->setEditable(false);
 
         horizontalLayout_7->addWidget(ipEdit);
 
@@ -322,6 +304,27 @@ public:
 
 
         verticalLayout->addWidget(horizontalWidget_5);
+
+        ipeditwidget = new QWidget(verticalWidget);
+        ipeditwidget->setObjectName(QStringLiteral("ipeditwidget"));
+        horizontalLayout = new QHBoxLayout(ipeditwidget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(9, 9, 9, 9);
+        label = new QLabel(ipeditwidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMinimumSize(QSize(150, 0));
+        label->setMaximumSize(QSize(75, 16777215));
+
+        horizontalLayout->addWidget(label);
+
+        ipEdit2 = new QLineEdit(ipeditwidget);
+        ipEdit2->setObjectName(QStringLiteral("ipEdit2"));
+        ipEdit2->setMinimumSize(QSize(0, 70));
+
+        horizontalLayout->addWidget(ipEdit2);
+
+
+        verticalLayout->addWidget(ipeditwidget);
 
         widget = new QWidget(verticalWidget);
         widget->setObjectName(QStringLiteral("widget"));
@@ -340,7 +343,8 @@ public:
 
         connect = new QPushButton(widget);
         connect->setObjectName(QStringLiteral("connect"));
-        connect->setMaximumSize(QSize(16777215, 25));
+        connect->setMinimumSize(QSize(150, 70));
+        connect->setMaximumSize(QSize(16777215, 70));
 
         _2->addWidget(connect);
 
@@ -356,7 +360,7 @@ public:
         verticalLayout->addWidget(progress);
 
 
-        gridLayout->addWidget(verticalWidget, 1, 1, 1, 1);
+        gridLayout->addWidget(verticalWidget, 0, 0, 1, 1);
 
         QWidget::setTabOrder(databaseEdit, portEdit);
         QWidget::setTabOrder(portEdit, usernameEdit);
@@ -377,6 +381,7 @@ public:
         label_3->setText(QApplication::translate("ConnectionForm", "Password:", Q_NULLPTR));
         label_2->setText(QApplication::translate("ConnectionForm", "IP:", Q_NULLPTR));
         testConnection->setText(QApplication::translate("ConnectionForm", "?", Q_NULLPTR));
+        label->setText(QString());
         error->setText(QString());
         connect->setText(QApplication::translate("ConnectionForm", "Connect", Q_NULLPTR));
         progress->setFormat(QString());

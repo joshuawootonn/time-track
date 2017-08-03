@@ -301,7 +301,7 @@ public:
         Hours->setMinimumSize(QSize(100, 70));
         Hours->setMaximumSize(QSize(70, 16777215));
         Hours->setEditable(false);
-        Hours->setMaxVisibleItems(17);
+        Hours->setMaxVisibleItems(13);
 
         horizontalLayout_8->addWidget(Hours);
 

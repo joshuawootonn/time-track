@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
-    <height>330</height>
+    <width>907</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@ background-color:#E5EAE7;
 }
 *{
 font-family:&quot;Calibri&quot;;
-font-size: 16px;
+font-size: 32px;
 color:#263544;
 }
 
@@ -132,72 +132,8 @@ background-color:#FFFFFF;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="2">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
+   <item row="0" column="0">
     <widget class="QWidget" name="verticalWidget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>340</width>
-       <height>300</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>340</width>
-       <height>300</height>
-      </size>
-     </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QWidget" name="horizontalWidget" native="true">
@@ -209,8 +145,8 @@ background-color:#FFFFFF;
           <widget class="QLabel" name="label_5">
            <property name="minimumSize">
             <size>
-             <width>75</width>
-             <height>0</height>
+             <width>150</width>
+             <height>70</height>
             </size>
            </property>
            <property name="text">
@@ -223,7 +159,7 @@ background-color:#FFFFFF;
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="inputMethodHints">
@@ -244,7 +180,7 @@ background-color:#FFFFFF;
           <widget class="QLabel" name="label_6">
            <property name="minimumSize">
             <size>
-             <width>75</width>
+             <width>150</width>
              <height>0</height>
             </size>
            </property>
@@ -258,7 +194,7 @@ background-color:#FFFFFF;
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="inputMethodHints">
@@ -279,7 +215,7 @@ background-color:#FFFFFF;
           <widget class="QLabel" name="label_4">
            <property name="minimumSize">
             <size>
-             <width>75</width>
+             <width>150</width>
              <height>0</height>
             </size>
            </property>
@@ -293,7 +229,7 @@ background-color:#FFFFFF;
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="inputMethodHints">
@@ -311,7 +247,7 @@ background-color:#FFFFFF;
           <widget class="QLabel" name="label_3">
            <property name="minimumSize">
             <size>
-             <width>75</width>
+             <width>150</width>
              <height>0</height>
             </size>
            </property>
@@ -325,7 +261,7 @@ background-color:#FFFFFF;
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="echoMode">
@@ -343,7 +279,7 @@ background-color:#FFFFFF;
           <widget class="QLabel" name="label_2">
            <property name="minimumSize">
             <size>
-             <width>50</width>
+             <width>150</width>
              <height>0</height>
             </size>
            </property>
@@ -363,11 +299,11 @@ background-color:#FFFFFF;
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="editable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -387,6 +323,53 @@ background-color:#FFFFFF;
            </property>
            <property name="text">
             <string>?</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="ipeditwidget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>9</number>
+         </property>
+         <property name="bottomMargin">
+          <number>9</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>75</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="ipEdit2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>70</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -427,10 +410,16 @@ background-color:#FFFFFF;
          </item>
          <item>
           <widget class="QPushButton" name="connect">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>70</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>25</height>
+             <height>70</height>
             </size>
            </property>
            <property name="text">
