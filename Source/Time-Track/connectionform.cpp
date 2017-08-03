@@ -21,8 +21,8 @@ ConnectionForm::ConnectionForm(QWidget *parent) :
     ui->databaseEdit->installEventFilter(this);
     ui->portEdit->installEventFilter(this);
     ui->usernameEdit->installEventFilter(this);
-    ui->ipEdit->installEventFilter(this);
-
+    ui->ipEdit2->installEventFilter(this);
+    ui->passwordEdit->installEventFilter(this);
     ui->progress->hide();
     ui->testConnection->hide();
 
@@ -55,6 +55,13 @@ bool ConnectionForm::eventFilter(QObject* object,QEvent* event)
     else if(object == ui->usernameEdit && event->type() == QEvent::MouseButtonPress) {
 
         ui->usernameEdit->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }else if(object == ui->passwordEdit && event->type() == QEvent::MouseButtonPress) {
+
+        ui->passwordEditB->setFocus();
         QRect rec = QApplication::desktop()->screenGeometry();
         if(rec.width() < 1400)
             QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
