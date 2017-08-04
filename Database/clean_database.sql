@@ -57,7 +57,7 @@ CREATE TABLE `employeelist` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `pin_UNIQUE` (`pin`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `employeelist` (
 
 LOCK TABLES `employeelist` WRITE;
 /*!40000 ALTER TABLE `employeelist` DISABLE KEYS */;
-INSERT INTO `employeelist` VALUES (64,'Admin',1111,1,1,0,1),(69,'Employee',2222,0,1,0,1);
+INSERT INTO `employeelist` VALUES (64,'Admin',111111,1,18,0,1),(69,'Employee',222222,0,17,0,1);
 /*!40000 ALTER TABLE `employeelist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +85,7 @@ CREATE TABLE `itemlist` (
   `dimension` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,62 +94,64 @@ CREATE TABLE `itemlist` (
 
 LOCK TABLES `itemlist` WRITE;
 /*!40000 ALTER TABLE `itemlist` DISABLE KEYS */;
-INSERT INTO `itemlist` VALUES (22,'Item 1',NULL,NULL,NULL),(23,'Item 2',NULL,NULL,NULL),(24,'item 3',NULL,NULL,NULL),(25,'Other',NULL,NULL,NULL);
+INSERT INTO `itemlist` VALUES (22,'Item 1',NULL,NULL,NULL),(23,'Item 2',NULL,NULL,NULL),(24,'item 3',NULL,NULL,NULL),(25,'Other',NULL,NULL,NULL),(26,'Item 4',NULL,NULL,NULL),(27,'Item 5',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `itemlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `project13`
+-- Table structure for table `project21`
 --
 
-DROP TABLE IF EXISTS `project13`;
+DROP TABLE IF EXISTS `project21`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project13` (
+CREATE TABLE `project21` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemid` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `quantity` varchar(45) DEFAULT NULL,
   `dimension` varchar(45) DEFAULT NULL,
+  `ehours` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project13`
+-- Dumping data for table `project21`
 --
 
-LOCK TABLES `project13` WRITE;
-/*!40000 ALTER TABLE `project13` DISABLE KEYS */;
-INSERT INTO `project13` VALUES (1,22,'Item 1','1','LS'),(2,23,'Item 2','1','LS');
-/*!40000 ALTER TABLE `project13` ENABLE KEYS */;
+LOCK TABLES `project21` WRITE;
+/*!40000 ALTER TABLE `project21` DISABLE KEYS */;
+INSERT INTO `project21` VALUES (1,22,'Item 1','1','LS','100'),(2,27,'Item 5','1','LS','500');
+/*!40000 ALTER TABLE `project21` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `project16`
+-- Table structure for table `project22`
 --
 
-DROP TABLE IF EXISTS `project16`;
+DROP TABLE IF EXISTS `project22`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project16` (
+CREATE TABLE `project22` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemid` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `quantity` varchar(45) DEFAULT NULL,
   `dimension` varchar(45) DEFAULT NULL,
+  `ehours` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project16`
+-- Dumping data for table `project22`
 --
 
-LOCK TABLES `project16` WRITE;
-/*!40000 ALTER TABLE `project16` DISABLE KEYS */;
-INSERT INTO `project16` VALUES (1,24,'item 3','2500','SF'),(2,25,'Other','1','LS');
-/*!40000 ALTER TABLE `project16` ENABLE KEYS */;
+LOCK TABLES `project22` WRITE;
+/*!40000 ALTER TABLE `project22` DISABLE KEYS */;
+INSERT INTO `project22` VALUES (1,25,'Other','1','LS','20');
+/*!40000 ALTER TABLE `project22` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -165,7 +167,7 @@ CREATE TABLE `projectlist` (
   `current` varchar(45) NOT NULL,
   `date` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +176,7 @@ CREATE TABLE `projectlist` (
 
 LOCK TABLES `projectlist` WRITE;
 /*!40000 ALTER TABLE `projectlist` DISABLE KEYS */;
-INSERT INTO `projectlist` VALUES (13,'Project 1','1','7/26/2017'),(16,'Project 2','1','7/26/2017');
+INSERT INTO `projectlist` VALUES (21,'Project 1','1','8/4/2017'),(22,'Project 2','1','8/4/2017');
 /*!40000 ALTER TABLE `projectlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +204,7 @@ CREATE TABLE `shiftlist` (
   `shiftid` int(11) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +213,7 @@ CREATE TABLE `shiftlist` (
 
 LOCK TABLES `shiftlist` WRITE;
 /*!40000 ALTER TABLE `shiftlist` DISABLE KEYS */;
-INSERT INTO `shiftlist` VALUES (17,69,13,22,'Employee','Project 1','Item 1','06:30:00.000','18:30:00.000','2017-07-26','2017-07-26','0:30','11:30',1,NULL),(20,64,16,24,'Admin','Project 2','item 3','06:30:00.000','18:30:00.000','2017-07-26','2017-07-26','0:45','6:00',2,NULL),(21,64,16,25,'Admin','Project 2','Other','06:30:00.000','18:30:00.000','2017-07-26','2017-07-26','0:45','5:15',2,'2. Worked on unlisted item'),(22,69,16,25,'Employee','Project 2','Other','06:30:00.000','18:30:00.000','2017-07-26','2017-07-26','0:00','8:00',3,'1. Extra Work'),(23,69,13,23,'Employee','Project 1','Item 2','06:30:00.000','18:30:00.000','2017-07-26','2017-07-26','0:00','4:00',3,NULL);
+INSERT INTO `shiftlist` VALUES (73,64,21,27,'Admin','Project 1','Item 5','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',1,NULL),(74,69,22,25,'Employee','Project 2','Other','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',2,'Worked on unlisted items');
 /*!40000 ALTER TABLE `shiftlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-26  9:34:21
+-- Dump completed on 2017-08-04 13:42:19

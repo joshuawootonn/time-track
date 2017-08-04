@@ -20,9 +20,6 @@ MainForm::MainForm(QWidget *parent) :
         file.close();
         start();
     }
-
-
-
 }
 
 MainForm::~MainForm()
@@ -37,19 +34,19 @@ void MainForm::start(){
     QTextStream in(&file);
     QString text = in.readAll();
 
-    qDebug()<<file.isOpen()<<text.split(" ").length();
+    //qDebug()<<file.isOpen()<<text.split(" ").length();
     if(file.isOpen() && text.split(" ").length() == 5){
 
         QString databasename,port,username,pass;
 
-        qDebug()<<text<<text.split(" ").length();
+        //qDebug()<<text<<text.split(" ").length();
         ip =text.split(" ")[4];
         databasename = text.split(" ")[0];
         port = text.split(" ")[1];
         username = text.split(" ")[2];
         pass = text.split(" ")[3];
 
-        qDebug()<<ip<<databasename<<port<<username;
+        //qDebug()<<ip<<databasename<<port<<username;
         file.close();
 
         Connect(databasename,port,username,pass,ip);
@@ -59,7 +56,7 @@ void MainForm::start(){
             this->showFullScreen();
         else
             this->showMaximized();
-        qDebug()<<"start"<<ip;
+        //qDebug()<<"start"<<ip;
         clockoutForm = new ClockoutForm(this);
         clockoutForm->hide();
         shifteditform = new ShiftEditForm(this);
@@ -1725,11 +1722,14 @@ QSqlQueryModel * MainForm::ShiftModel(){
     }else{
         item = "%";
     }
-    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <'"+d2+"' AND employeename LIKE '"+employee+"' ORDER BY datein,timein,employeename ";
+    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <'"+d2+"'";
+    if(ui->ShiftEmployeeBox->isChecked())
+        q = q+" AND employeename='"+employee+"'";
     if(ui->ShiftProjectBox->isChecked())
-        q = q+"AND projectname LIKE '"+project+"'";
+        q = q+" AND projectname='"+project+"'";
     if(ui->ShiftItemBox->isChecked())
-        q = q+"AND itemname LIKE '"+item+"'";
+        q = q+" AND itemname='"+item+"'";
+    q = q+ " ORDER BY datein,timein,employeename";
     qry->prepare(q);
     qry->exec();
     model->setQuery(*qry);
@@ -1750,7 +1750,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(11,Qt::Horizontal,tr("Lunch"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
     model->setHeaderData(14,Qt::Horizontal,tr("Description"));
-    //qDebug()<<"SHIFT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
+    qDebug()<<"SHIFT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
 
 }
@@ -1828,7 +1828,6 @@ void MainForm::on_ShiftProjectBox_clicked()
     else
         ui->ShiftProjectCombo->setEnabled(false);
     refreshShiftItem();
-
 }
 void MainForm::on_ShiftItemBox_clicked()
 {
