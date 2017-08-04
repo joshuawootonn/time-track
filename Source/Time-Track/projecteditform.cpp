@@ -105,7 +105,6 @@ void ProjectEditForm::EditProject(QString x){
     this->showNormal();
     task="edit";
     id = x;
-    DateInitialize();
     ItemInitialize();
     DimensionInitialize();
     SectionInitialize();
@@ -119,7 +118,8 @@ void ProjectEditForm::EditProject(QString x){
                 ui->current->setChecked(true);
             else
                 ui->current->setChecked(false);
-            ui->bidDate->setDate(qry->value(2).toDate());
+            ui->bidDate->setDate(QDate(qry->value(2).toString().split("/")[2].toInt(),qry->value(2).toString().split("/")[0].toInt(),qry->value(2).toString().split("/")[1].toInt()));
+
         }
     }
 

@@ -1226,7 +1226,7 @@ void MainForm::refreshProjectItemTable(){
         h+=m/60;
         m = m%60;
         double ahours = h + (((double)m)/60);
-        qDebug()<<qry->lastQuery();
+        //qDebug()<<qry->lastQuery();
         ui->ProjectItemWidget->setItem(i,7,new QTableWidgetItem(QString::number(ahours)));
 
 
@@ -1750,7 +1750,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     model->setHeaderData(11,Qt::Horizontal,tr("Lunch"));
     model->setHeaderData(12,Qt::Horizontal,tr("Time"));
     model->setHeaderData(14,Qt::Horizontal,tr("Description"));
-    qDebug()<<"SHIFT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
+    //qDebug()<<"SHIFT MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
 
 }
