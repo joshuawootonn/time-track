@@ -530,7 +530,11 @@ void ClockoutForm::on_FinishedButton_clicked()
 
 
                 hours=ui->Sections->item(i,2)->text();
+                QTime x = QTime(hours.split(":")[0].toInt(),hours.split(":")[1].toInt(),0);
+                hours = x.toString("h:mm");
                 lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
+                QTime y = QTime(lunch.split(":")[0].toInt(),lunch.split(":")[1].toInt(),0);
+                lunch = y.toString("h:mm");
                 qry->clear();
                 description = ui->Sections->item(i,3)->text();
 

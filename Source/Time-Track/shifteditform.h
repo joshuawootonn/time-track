@@ -27,7 +27,7 @@ class ShiftEditForm : public QDialog
 public:
     explicit ShiftEditForm(QWidget *parent = 0);
     ~ShiftEditForm();
-
+    bool eventFilter(QObject* object,QEvent* event);
     void AddShift();
     void EditFinishedShift(QString shiftid);
     void EditWorkingShift(QString Shiftid,QString id);

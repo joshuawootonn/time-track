@@ -41,6 +41,7 @@ class MainForm : public QWidget
 public:
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
+    bool eventFilter(QObject* object,QEvent* event);
 
 
     bool Connect(QString database,QString port,QString username,QString password,QString ip);

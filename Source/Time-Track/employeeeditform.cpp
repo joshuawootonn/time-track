@@ -9,6 +9,8 @@ EmployeeEditForm::EmployeeEditForm(QWidget *parent) :
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
     ui->admin->setChecked(false);
+    ui->name->installEventFilter(this);
+    ui->pin->installEventFilter(this);
 
 
 }
@@ -55,12 +57,33 @@ void EmployeeEditForm::EditEmployee(QString x){
         ui->active->setChecked(true);
     else
         ui->active->setChecked(false);
-
+    ui->name->installEventFilter(this);
+    ui->pin->installEventFilter(this);
 }
 
 EmployeeEditForm::~EmployeeEditForm()
 {
     delete ui;
+}
+bool EmployeeEditForm::eventFilter(QObject* object,QEvent* event)
+{
+    if(object == ui->name && event->type() == QEvent::MouseButtonPress) {
+
+        ui->name->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    else if(object == ui->pin && event->type() == QEvent::MouseButtonPress) {
+
+        ui->pin->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    return false;
 }
 // Generates random unique pin
 int EmployeeEditForm::generateRandom(){

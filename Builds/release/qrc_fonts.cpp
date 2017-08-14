@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // C:/Users/Joshua/Dropbox/Joshua/Time-Track/Source/Time-Track/fonts/Roboto-Regular.ttf
+  // C:/Users/Joshua/Dropbox/Time-Track/Source/Time-Track/fonts/Roboto-Regular.ttf
   0x0,0x2,0x9e,0x9c,
   0x0,
   0x1,0x0,0x0,0x0,0x12,0x1,0x0,0x0,0x4,0x0,0x20,0x47,0x44,0x45,0x46,0xb4,

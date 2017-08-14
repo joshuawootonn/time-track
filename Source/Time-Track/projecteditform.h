@@ -27,6 +27,7 @@ class ProjectEditForm : public QDialog
 public:
     explicit ProjectEditForm(QWidget *parent = 0);
     ~ProjectEditForm();
+    bool eventFilter(QObject* object,QEvent* event);
     void ItemInitialize();
     void DimensionInitialize();
     void DefaultItemInitialize();

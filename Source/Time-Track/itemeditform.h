@@ -27,6 +27,7 @@ class ItemEditForm : public QDialog
 public:
     explicit ItemEditForm(QWidget *parent = 0);
     ~ItemEditForm();
+    bool eventFilter(QObject* object,QEvent* event);
     void AddItem();
     QString AddValid();
     void EditItem(QString x);

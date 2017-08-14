@@ -20,13 +20,44 @@ MainForm::MainForm(QWidget *parent) :
         file.close();
         start();
     }
+
+    ui->ShiftEmployeeCombo->installEventFilter(this);
+    ui->ShiftProjectCombo->installEventFilter(this);
+    ui->ShiftItemCombo->installEventFilter(this);
 }
 
 MainForm::~MainForm()
 {
     delete ui;
 }
+bool MainForm::eventFilter(QObject* object,QEvent* event)
+{
+    if(object == ui->ShiftEmployeeCombo && event->type() == QEvent::MouseButtonPress) {
 
+        ui->ShiftEmployeeCombo->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    else if(object == ui->ShiftProjectCombo && event->type() == QEvent::MouseButtonPress) {
+
+        ui->ShiftProjectCombo->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    else if(object == ui->ShiftItemCombo && event->type() == QEvent::MouseButtonPress) {
+
+        ui->ShiftItemCombo->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    return false;
+}
 void MainForm::start(){
 
     QFile file(QStandardPaths::locate(QStandardPaths::DocumentsLocation,QString(),QStandardPaths::LocateDirectory)+"Time-Track/Connection.txt");
@@ -1632,6 +1663,10 @@ void MainForm::ShiftTab(){
 
     ui->ShiftView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->ShiftView->horizontalHeader()->setStretchLastSection(true);
+    ui->ShiftEmployeeBox->setChecked(false);
+    ui->ShiftProjectBox->setChecked(false);
+    ui->ShiftItemBox->setChecked(false);
+
     ui->ShiftEmployeeCombo->setEnabled(false);
     ui->ShiftProjectCombo->setEnabled(false);
     ui->ShiftItemCombo->setEnabled(false);

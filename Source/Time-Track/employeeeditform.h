@@ -27,6 +27,7 @@ class EmployeeEditForm : public QDialog
 public:
     explicit EmployeeEditForm(QWidget *parent = 0);
     ~EmployeeEditForm();
+    bool eventFilter(QObject* object,QEvent* event);
     void AddEmployee();
     QString AddValid();
     int generateRandom();

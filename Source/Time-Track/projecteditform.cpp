@@ -10,13 +10,52 @@ ProjectEditForm::ProjectEditForm(QWidget *parent) :
     data = ((MainForm*)parentWidget())->getData();
     clicked=false;
 
+    ui->Hours->installEventFilter(this);
+    ui->Quantity->installEventFilter(this);
+    ui->Item->installEventFilter(this);
+    ui->name->installEventFilter(this);
+
 }
 
 ProjectEditForm::~ProjectEditForm()
 {
     delete ui;
 }
+bool ProjectEditForm::eventFilter(QObject* object,QEvent* event)
+{
+    if(object == ui->name && event->type() == QEvent::MouseButtonPress) {
 
+        ui->name->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    else if(object == ui->Item && event->type() == QEvent::MouseButtonPress) {
+
+        ui->Item->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    else if(object == ui->Quantity && event->type() == QEvent::MouseButtonPress) {
+
+        ui->Quantity->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }else if(object == ui->Hours && event->type() == QEvent::MouseButtonPress) {
+
+        ui->Hours->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    return false;
+}
 void ProjectEditForm::DateInitialize(){
     ui->bidDate->setDate(QDate::currentDate());
 }

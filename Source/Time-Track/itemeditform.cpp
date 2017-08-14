@@ -8,6 +8,7 @@ ItemEditForm::ItemEditForm(QWidget *parent) :
 {
     ui->setupUi(this);
     data = ((MainForm*)parentWidget())->getData();
+    ui->name->installEventFilter(this);
 }
 void ItemEditForm::AddItem(){
     this->showNormal();
@@ -94,7 +95,18 @@ ItemEditForm::~ItemEditForm()
 {
     delete ui;
 }
+bool ItemEditForm::eventFilter(QObject* object,QEvent* event)
+{
+    if(object == ui->name && event->type() == QEvent::MouseButtonPress) {
 
+        ui->name->setFocus();
+        QRect rec = QApplication::desktop()->screenGeometry();
+        if(rec.width() < 1400)
+            QDesktopServices::openUrl(QUrl("file:///C:/Program Files/Common Files/Microsoft Shared/Ink/TabTip.exe"));
+        return false;
+    }
+    return false;
+}
 
 QString ItemEditForm::getSuccessMsg() const
 {
