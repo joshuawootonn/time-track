@@ -14,9 +14,11 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -32,21 +34,29 @@ public:
     QDialogButtonBox *buttonBox;
     QWidget *ExcelWidget;
     QGridLayout *gridLayout_2;
-    QLabel *label;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_4;
+    QDateEdit *To;
+    QLabel *label_3;
+    QDateEdit *From;
     QLineEdit *ExcelLocation;
     QPushButton *ExcelLocationChange;
-    QComboBox *ExcelTableChange;
+    QLabel *label;
     QLabel *label_2;
+    QComboBox *ExcelTableChange;
+    QComboBox *ExcelTableName;
+    QLabel *label_5;
 
     void setupUi(QDialog *ExportForm)
     {
         if (ExportForm->objectName().isEmpty())
             ExportForm->setObjectName(QStringLiteral("ExportForm"));
-        ExportForm->resize(515, 124);
+        ExportForm->resize(525, 165);
         ExportForm->setStyleSheet(QLatin1String("QWidget#MainForm{\n"
 "\n"
 "background-color:#E5EAE7;\n"
 "}\n"
+"\n"
 "*{\n"
 "font-family:\"Calibri\";\n"
 "font-size: 14px;\n"
@@ -114,21 +124,43 @@ public:
 "\n"
 "QPushButton#basicPageConnect:hover{\n"
 "border-radius:15px;\n"
-"\n"
 ""
-                        "}\n"
+                        "\n"
+"}\n"
+"\n"
+"QDateTimeEdit{\n"
+"border:none;\n"
+"background-color:#FFFFFF;\n"
+"}\n"
+"QDateEditTime:hover{\n"
+"border:none;\n"
+"background-color:#D1D1D1;\n"
+"}\n"
+"QDateEditTime::drop-down{\n"
+"border:none;\n"
+"}\n"
+"\n"
 "\n"
 "QComboBox{\n"
 "border:none;\n"
-"background-color:#F1F4F5;\n"
+"background-color:#FFFFFF;\n"
 "}\n"
 "QComboBox:hover {\n"
-"background-color:#E4E9EB;\n"
+"background-color:#D1D1D1;\n"
 "}\n"
+"\n"
 "QComboBox:drop-down{\n"
 "border:none;\n"
 "}\n"
+"QLineEdit,QTimeEdit,QDateEdit,QSpinBox,QDateTimeEdit{ \n"
+"background-color:#FFFFFF;\n"
+" border: 0px solid #D1D1D1;	\n"
 "\n"
+"}\n"
+"QLineEdit:hover,QTimeEdit:hover,QDateEdit:hover,QSpinBox:hover,QDateTimeEdit:hover{ \n"
+"background-color:#FFFFFF;\n"
+" border: 1px solid #D1D1D1;	\n"
+"}\n"
 "\n"
 "QRadioButton{\n"
 "padding:0px;\n"
@@ -150,7 +182,8 @@ public:
 "    border: 0px solid gray;\n"
 "	\n"
 "    margin-top: 0.5em;\n"
-"	margin-right:0px;\n"
+""
+                        "	margin-right:0px;\n"
 "	margin-left:0px;\n"
 "}\n"
 "QGroupBox::title {\n"
@@ -185,10 +218,32 @@ public:
         ExcelWidget->setObjectName(QStringLiteral("ExcelWidget"));
         gridLayout_2 = new QGridLayout(ExcelWidget);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        label = new QLabel(ExcelWidget);
-        label->setObjectName(QStringLiteral("label"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        label_4 = new QLabel(ExcelWidget);
+        label_4->setObjectName(QStringLiteral("label_4"));
 
-        gridLayout_2->addWidget(label, 0, 0, 1, 1);
+        horizontalLayout->addWidget(label_4);
+
+        To = new QDateEdit(ExcelWidget);
+        To->setObjectName(QStringLiteral("To"));
+        To->setCalendarPopup(true);
+
+        horizontalLayout->addWidget(To);
+
+        label_3 = new QLabel(ExcelWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        horizontalLayout->addWidget(label_3);
+
+        From = new QDateEdit(ExcelWidget);
+        From->setObjectName(QStringLiteral("From"));
+        From->setCalendarPopup(true);
+
+        horizontalLayout->addWidget(From);
+
+
+        gridLayout_2->addLayout(horizontalLayout, 1, 0, 1, 2);
 
         ExcelLocation = new QLineEdit(ExcelWidget);
         ExcelLocation->setObjectName(QStringLiteral("ExcelLocation"));
@@ -200,15 +255,31 @@ public:
 
         gridLayout_2->addWidget(ExcelLocationChange, 0, 2, 1, 1);
 
-        ExcelTableChange = new QComboBox(ExcelWidget);
-        ExcelTableChange->setObjectName(QStringLiteral("ExcelTableChange"));
+        label = new QLabel(ExcelWidget);
+        label->setObjectName(QStringLiteral("label"));
 
-        gridLayout_2->addWidget(ExcelTableChange, 1, 1, 1, 1);
+        gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
         label_2 = new QLabel(ExcelWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
-        gridLayout_2->addWidget(label_2, 1, 0, 1, 1);
+        gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
+
+        ExcelTableChange = new QComboBox(ExcelWidget);
+        ExcelTableChange->setObjectName(QStringLiteral("ExcelTableChange"));
+
+        gridLayout_2->addWidget(ExcelTableChange, 2, 1, 1, 1);
+
+        ExcelTableName = new QComboBox(ExcelWidget);
+        ExcelTableName->setObjectName(QStringLiteral("ExcelTableName"));
+        ExcelTableName->setEditable(true);
+
+        gridLayout_2->addWidget(ExcelTableName, 3, 1, 1, 1);
+
+        label_5 = new QLabel(ExcelWidget);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout_2->addWidget(label_5, 3, 0, 1, 1);
 
 
         gridLayout->addWidget(ExcelWidget, 0, 0, 1, 1);
@@ -224,9 +295,12 @@ public:
     void retranslateUi(QDialog *ExportForm)
     {
         ExportForm->setWindowTitle(QApplication::translate("ExportForm", "Dialog", Q_NULLPTR));
-        label->setText(QApplication::translate("ExportForm", "File Location:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ExportForm", "To:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ExportForm", "From:", Q_NULLPTR));
         ExcelLocationChange->setText(QApplication::translate("ExportForm", "+", Q_NULLPTR));
+        label->setText(QApplication::translate("ExportForm", "File Location:", Q_NULLPTR));
         label_2->setText(QApplication::translate("ExportForm", "Table to Export:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("ExportForm", "Employee:", Q_NULLPTR));
     } // retranslateUi
 
 };

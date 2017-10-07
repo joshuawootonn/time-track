@@ -123,7 +123,7 @@ bool EmployeeEditForm::getSuccess() const
 // Validation for when a employeee is created
 QString EmployeeEditForm::AddValid(){
     QString error;
-    QRegExp name_regrex("^[a-zA-Z ]+$");
+    QRegExp name_regrex("^[a-zA-Z, ]+$");
     QRegExp pin_regrex("^[0-9]+$");
 
     if(ui->name->text().length()<5)
@@ -139,7 +139,7 @@ QString EmployeeEditForm::AddValid(){
 // Validation for when a employee is edited
 QString EmployeeEditForm::EditValid(){
     QString error = "";
-    QRegExp name_regrex("^[a-zA-Z ]+$");
+    QRegExp name_regrex("^[a-zA-Z, ]+$");
     QRegExp pin_regrex("^[0-9]+$");
     if(ui->name->text().length()<5)
         error = "Invalid Name: Minimum length 5";

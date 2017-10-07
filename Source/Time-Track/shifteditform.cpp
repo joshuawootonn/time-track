@@ -314,7 +314,10 @@ void ShiftEditForm::EditFinishedShift(QString shiftid){
         while(qry->next())
         {
             ui->Sections->setRowCount(ui->Sections->rowCount()+1);
-            ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(qry->value(0).toString()));
+            if(qry->value(0).toString() != "")
+                ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem(qry->value(0).toString()));
+            else
+                ui->Sections->setItem(ui->Sections->rowCount()-1,2,new QTableWidgetItem("0:00"));
             ui->Sections->setItem(ui->Sections->rowCount()-1,0,new QTableWidgetItem(qry->value(1).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,1,new QTableWidgetItem(qry->value(2).toString()));
             ui->Sections->setItem(ui->Sections->rowCount()-1,3,new QTableWidgetItem(qry->value(3).toString()));
@@ -409,7 +412,8 @@ void ShiftEditForm::EmployeeInitialize(){
 
     QSqlQueryModel * modal=new QSqlQueryModel();
     QSqlQuery* qry=new QSqlQuery(data);
-    qry->prepare("select DISTINCT name from employeelist where current='1'  ORDER BY name ASC");
+    QString x = "where current='1' ";
+    qry->prepare("select DISTINCT name from employeelist ORDER BY name ASC");
     qry->exec();
     modal->setQuery(*qry);
     ui->Name->setModel(modal);    

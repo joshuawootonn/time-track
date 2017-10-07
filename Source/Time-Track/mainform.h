@@ -21,6 +21,7 @@
 
 #include "xlsxdocument.h"
 #include "xlsxrichstring.h"
+#include "xlsxabstractsheet.h"
 #include "xlsxworkbook.h"
 #include "xlsxformat.h"
 #include <QCompleter>

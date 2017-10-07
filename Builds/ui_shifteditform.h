@@ -589,7 +589,7 @@ public:
 
         retranslateUi(ShiftEditForm);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         FinishedButton->setDefault(false);
 
 

@@ -17,6 +17,9 @@ public:
     Ui::ExportForm *ui;
     QString Location;
     QString Table;
+    QString Name;
+    QDate To;
+    QDate From;
 
 signals:
     void excel();
@@ -25,6 +28,9 @@ signals:
 private slots:
     void on_ExcelLocationChange_clicked();
     void on_buttonBox_accepted();
+    void EmployeeInitialize();
+
+    void on_ExcelTableChange_currentTextChanged(const QString &arg1);
 
 private:
 

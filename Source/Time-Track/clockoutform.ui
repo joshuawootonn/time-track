@@ -347,7 +347,7 @@ margin: 0px 0px 0px 0px;
              <string/>
             </property>
             <property name="maxVisibleItems">
-             <number>13</number>
+             <number>16</number>
             </property>
            </widget>
           </item>
@@ -459,6 +459,9 @@ margin: 0px 0px 0px 0px;
           <width>500</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
         </property>
         <property name="alternatingRowColors">
          <bool>true</bool>

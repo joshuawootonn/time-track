@@ -301,7 +301,7 @@ public:
         Hours->setMinimumSize(QSize(100, 70));
         Hours->setMaximumSize(QSize(70, 16777215));
         Hours->setEditable(false);
-        Hours->setMaxVisibleItems(13);
+        Hours->setMaxVisibleItems(16);
 
         horizontalLayout_8->addWidget(Hours);
 
@@ -357,6 +357,7 @@ public:
         Sections = new QTableWidget(bigwidger);
         Sections->setObjectName(QStringLiteral("Sections"));
         Sections->setMinimumSize(QSize(500, 0));
+        Sections->setEditTriggers(QAbstractItemView::NoEditTriggers);
         Sections->setAlternatingRowColors(true);
         Sections->setGridStyle(Qt::SolidLine);
         Sections->verticalHeader()->setMinimumSectionSize(30);

@@ -1046,9 +1046,6 @@ void MainForm::ProjectTab(){
 
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
-
-
-
     refreshProjectItemTab();
     refreshProjectItemTable();
 }
@@ -1248,10 +1245,12 @@ void MainForm::refreshProjectItemTable(){
         qry->prepare("SELECT time FROM shiftlist WHERE projectid='"+id+"' AND itemid='"+ui->ProjectItemWidget->item(i,1)->text()+"'");
         if(qry->exec()){
             while(qry->next()){
+               if(qry->value(0).toString() != ""){
+                   QString time = qry->value(0).toString();
+                   h += time.split(":")[0].toInt();
+                   m += time.split(":")[1].toInt();
+               }
 
-               QString time = qry->value(0).toString();
-               h += time.split(":")[0].toInt();
-               m += time.split(":")[1].toInt();
             }
         }
         h+=m/60;
@@ -1262,7 +1261,7 @@ void MainForm::refreshProjectItemTable(){
 
 
 
-        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toInt())/ui->ProjectItemWidget->item(i,3)->text().toInt(),'f',3);
+        QString a = QString::number(((double)ui->ProjectItemWidget->item(i,7)->text().toDouble())/ui->ProjectItemWidget->item(i,3)->text().toDouble(),'f',3);
         ui->ProjectItemWidget->setItem(i,8,new QTableWidgetItem(a+" HR/"+ui->ProjectItemWidget->item(i,4)->text()));
 
         QString p = QString::number(((double)(100*ui->ProjectItemWidget->item(i,7)->text().toDouble()))/ui->ProjectItemWidget->item(i,5)->text().toDouble(),'f',0);
@@ -1757,7 +1756,7 @@ QSqlQueryModel * MainForm::ShiftModel(){
     }else{
         item = "%";
     }
-    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <'"+d2+"'";
+    QString q = "SELECT * FROM shiftlist WHERE datein >='"+d1+"' AND datein <='"+d2+"'";
     if(ui->ShiftEmployeeBox->isChecked())
         q = q+" AND employeename='"+employee+"'";
     if(ui->ShiftProjectBox->isChecked())
@@ -1972,7 +1971,7 @@ void MainForm::SettingsTab(){
 
     QSqlQueryModel * x = ProjectModel();
     currentProject = x->record(1).value(1).toString();
-    ui->groupBox_18->hide();
+
     ui->groupBox_19->hide();
     ui->groupBox_20->hide();
 
@@ -1987,17 +1986,38 @@ void MainForm::on_SettingsFull_clicked()
     this->setWindowState(Qt::WindowFullScreen);
 }
 void MainForm::on_SettingsExport_clicked()
-{
-    exportForm =  new ExportForm(this);
-    establishConnections();
-    exportForm->show();
+{    
+    if(data.open()){
+        exportForm =  new ExportForm(this);
+        establishConnections();
+        exportForm->show();
+        ui->error->setText("");
+    }
+    else{
+        ui->error->setText("Disconnected From Database. Verify Connection and Try Again");
+    }
 
 }
 void MainForm::exportToExcel(){
 
     QString FileToExport = exportForm->Location;
     QString TabletoExport = exportForm->Table;
+    QString Name = exportForm->Name;
+    QDate To = exportForm->To;
+    QDate From = exportForm->From;
     QXlsx::Document doc;
+
+    QXlsx::Format title;
+    title.setFontBold(true);
+    title.setFontSize(20);
+
+    QXlsx::Format subtitle;
+    subtitle.setFontBold(true);
+    subtitle.setFontSize(15);
+
+    QXlsx::Format label;
+    label.setFontBold(true);
+    label.setFontSize(13);
 
     if(TabletoExport == "Employees")
     {
@@ -2019,21 +2039,22 @@ void MainForm::exportToExcel(){
         label.setFontBold(true);
         label.setFontSize(15);
         doc.setRowFormat(4,4,label);
-
+        qDebug()<<"title";
 
         doc.write(4,1,"Name");
         doc.write(4,2,"Pin");
         doc.write(4,3,"Admin Status");
 
-        for(int i = 0; i < model->rowCount(); i++){
-            for(int j = 0; j < model->columnCount(); j++){
-                if(!ui->EmployeeView->isRowHidden(i))
-                {
-                    if(j == 1 || j == 2 || j == 3)
-                        doc.write(i+5,j, model->record(i).value(j).toString());
-                }
-            }
-        }
+//        for(int i = 0; i < model->rowCount(); i++){
+//            for(int j = 0; j < model->columnCount(); j++){
+//                if(!ui->EmployeeView->isRowHidden(i))
+//                {
+//                    if(j == 1 || j == 2 || j == 3)
+//                        doc.write(i+5,j, model->record(i).value(j).toString());
+//                }
+//            }
+//        }
+        qDebug()<<"write";
     }
     if(TabletoExport == "Projects")
     {
@@ -2111,114 +2132,280 @@ void MainForm::exportToExcel(){
             }
         }
     }
-    if(TabletoExport == "Project's Items")
+    if(TabletoExport == "Shift")
     {
         QSqlQuery * qry = new QSqlQuery(data);
-        QSqlTableModel * model = new QSqlTableModel(0,data);
-        qry->prepare("select id from projectlist where name='"+currentProject+"'");
-        QString currentId;
-        if(qry->exec())
-        {
-            while(qry->next())
-            {
-                currentId = qry->value(0).toString();
-            }
-        }
 
-        doc.write(1,1,"AACI");
-        doc.write(2,1,"Project: " + currentProject);
-        doc.write(4,1,"Items");
+        doc.write(1,1,"AACI - Time Sheet");
+        doc.write(2,1,"Employee: " + Name);
+        doc.write(3,1,"Period: "+To.toString("yyyy/M/dd")+" - "+ From.toString("yyyy/M/dd"));
 
-        QXlsx::Format title;
-        title.setFontBold(true);
-        title.setFontSize(20);
         doc.setRowFormat(1,1,title);
 
-        QXlsx::Format label;
-        label.setFontBold(true);
-        label.setFontSize(15);
-        doc.setRowFormat(4,4,label);
 
+        doc.setRowFormat(2,3,label);
         qry->clear();
-        QString table = "project"+currentId;
-        qry->prepare("select name from "+table+"");
+        QString q = "SELECT * FROM shiftlist WHERE datein >='"+To.toString("yyyy-M-dd")+"' AND datein <='"+From.toString("yyyy-M-dd")+"'"
+                    "AND employeename='"+Name+"' ORDER BY datein,timein,employeename";
+
+        qry->prepare(q);
+        int rowLocation =0;
         if(qry->exec())
         {
             int i =0;
+            QHash<QString, QString> hash;
             while(qry->next())
             {
-                doc.write(i+5,1, qry->value(0).toString());
+                QString tot = hash["Total"];
+                QString val = hash[qry->value(5).toString()];
+                if(val == "")
+                    val="0:00";
+                if(tot == "")
+                    tot="0:00";
+                QString time = qry->value(12).toString();
+
+
+
+
+
+
+
+                if(time != ""){
+                    int h = val.split(":")[0].toInt() + time.split(":")[0].toInt();
+                    int m = h*60 + val.split(":")[1].toInt() + time.split(":")[1].toInt();
+                    time = QString::number(m/60)+":"+QString::number(m%60);
+                }else{
+                    time = "0:00";
+                }
+
+                hash[qry->value(5).toString()] = time;
+
+                time = qry->value(12).toString();
+
+                int th = tot.split(":")[0].toInt();
+                int tm = th*60 + tot.split(":")[1].toInt();
+                if(time != ""){
+                    th = tot.split(":")[0].toInt() + time.split(":")[0].toInt();
+                    tm = th*60 + tot.split(":")[1].toInt() +time.split(":")[1].toInt();
+                }
+
+
+                time = QString::number(tm/60)+":"+QString::number(tm%60);
+
+                hash["Total"] = time;
                 i++;
             }
+            doc.setRowFormat(5,5,subtitle);
+            doc.setRowFormat(6,6,label);
+            doc.write(5,1,"Summary");
+            doc.write(6,1,"Project");
+            doc.write(6,8,"Time");
+            rowLocation =7;
+            QHashIterator<QString, QString> j(hash);
+            while (j.hasNext()) {
+                j.next();
+                if(j.key() != "Total"){
+                    doc.write(rowLocation,1,j.key());
+                    doc.write(rowLocation,8,j.value());
+                    rowLocation++;
+                }
+            }
+            doc.setRowFormat(rowLocation,rowLocation,label);
+            doc.write(rowLocation,1,"Total");
+            doc.write(rowLocation,8,hash["Total"]);
+            rowLocation++;
         }else
         {
             doc.write(5,1,"No project selected in the project tab. Please do so, and try again.");
         }
+        if(qry->exec()){
+            rowLocation+=3;
+            doc.setRowFormat(rowLocation,rowLocation,subtitle);
+            doc.write(rowLocation,1,"Details");
+            rowLocation++;
+            int colLength[] = {7,4,8,9,4,5,4};
+            doc.setRowFormat(rowLocation,rowLocation,label);
+            doc.write(rowLocation,1,"Project");
+            doc.write(rowLocation,2,"Item");
+            doc.write(rowLocation,3,"Clock In");
+            doc.write(rowLocation,4,"Clock Out");
+            doc.write(rowLocation,5,"Date");
+            doc.write(rowLocation,6,"Lunch");
+            doc.write(rowLocation,8,"Time");
+            rowLocation++;
+            while(qry->next()){
 
-
+                if(qry->value(5).toString().length() > colLength[0]){ colLength[0] = qry->value(5).toString().length();}
+                doc.write(rowLocation,1, qry->value(5).toString());
+                if(qry->value(6).toString().length() > colLength[1]){ colLength[1] = qry->value(6).toString().length();}
+                doc.write(rowLocation,2, qry->value(6).toString());
+                if(qry->value(7).toString().length() > colLength[2]){ colLength[2] = qry->value(7).toString().length();}
+                doc.write(rowLocation,3, qry->value(7).toString());
+                if(qry->value(8).toString().length() > colLength[3]){ colLength[3] = qry->value(8).toString().length();}
+                doc.write(rowLocation,4, qry->value(8).toString());
+                if(qry->value(9).toString().length() > colLength[4]){ colLength[4] = qry->value(9).toString().length();}
+                doc.write(rowLocation,5, qry->value(9).toString());
+                if(qry->value(11).toString().length() > colLength[5]){ colLength[5] = qry->value(11).toString().length();}
+                doc.write(rowLocation,6, qry->value(11).toString());
+                if(qry->value(12).toString().length() > colLength[6]){ colLength[6] = qry->value(12).toString().length();}
+                doc.write(rowLocation,8, qry->value(12).toString());
+                rowLocation++;
+            }
+            doc.setColumnWidth(1,1,colLength[0]+2);
+            doc.setColumnWidth(2,2,colLength[1]+2);
+            doc.setColumnWidth(3,3,colLength[2]+2);
+            doc.setColumnWidth(4,4,colLength[3]+2);
+            doc.setColumnWidth(5,5,colLength[4]+2);
+            doc.setColumnWidth(6,6,colLength[5]+2);
+            doc.setColumnWidth(8,8,colLength[6]+2);
+        }
     }
-    if(TabletoExport == "Shifts"){
-        QSqlQueryModel * model = (QSqlQueryModel *)ui->ShiftView->model();
+    if(TabletoExport == "All Shifts"){
 
-        QXlsx::Format title;
-        title.setFontBold(true);
-        title.setFontSize(20);
-        doc.setRowFormat(1,1,title);
-
-        doc.write(1,1,"AACI");
-        if(ui->ShiftEmployeeCombo->isEnabled())
-            doc.write(2,1,"Employee(s): "+ui->ShiftEmployeeCombo->currentText());
-        else
-            doc.write(2,1,"Employee(s): All");
-        if(ui->ShiftProjectCombo->isEnabled())
-            doc.write(3,1,"Project(s): "+ui->ShiftProjectCombo->currentText());
-        else
-            doc.write(3,1,"Project(s): All");
-        if(ui->ShiftItemCombo->isEnabled())
-            doc.write(4,1,"Item(s): "+ui->ShiftItemCombo->currentText());
-        else
-            doc.write(4,1,"Item(s): All");
-
-        QXlsx::Format label;
-        label.setFontBold(true);
-        label.setFontSize(15);
-        doc.setRowFormat(6,6,label);
-
-
-        doc.write(6,1,"Name");
-        doc.write(6,2,"Project");
-        doc.write(6,3,"Item");
-        doc.write(6,4,"Clock In");
-        doc.write(6,5,"Clock out");
-        doc.write(6,6,"Lunch");
-        doc.write(6,7,"Time");
-        doc.write(6,8,"Notes");
-        for(int i = 0; i < model->rowCount(); i++){
-            for(int j = 0; j < model->columnCount(); j++){
-
-                if(!ui->ShiftView->isRowHidden(i))
-                {
-
-                    if(j == 4 || j == 5 || j == 6)
-                        doc.write(i+7,j-3, model->record(i).value(j).toString());
-                    else if( j == 7 || j == 8)
-                        doc.write(i+7,j-3, (model->record(i).value(j).toString() + " " + model->record(i).value(j+2).toString()));
-                    else if( j == 11 || j == 12)
-                        doc.write(i+7,j-5, model->record(i).value(j).toString());
-                    else if(j == 14)
-                        doc.write(i+7,j-6, model->record(i).value(j).toString());
-
-                }
-                //doc.write(i+1,j+1, model->record(i).value(j).toString());
-
+        QSqlQuery* qry=new QSqlQuery(data);
+        QString x = "where current='1' ";
+        qry->prepare("select DISTINCT employeename from shiftlist WHERE datein >='"+To.toString("yyyy-M-dd")+"' AND datein <='"+From.toString("yyyy-M-dd")+"'ORDER BY employeename ASC");
+        QList<QString> Names;
+        if(qry->exec())
+        {
+            while(qry->next()){
+                Names<<qry->value(0).toString();
             }
         }
+        qDebug()<<Names<<"before loop";
 
+        for(int i = 0;i< Names.length(); i++){
+            Name = Names[i];
+            qry->clear();
+            doc.addSheet(Name);
+            doc.write(1,1,"AACI - Time Sheet");
+            doc.write(2,1,"Employee: " + Name);
+            doc.write(3,1,"Period: "+To.toString("yyyy/M/dd")+" - "+ From.toString("yyyy/M/dd"));
+            doc.setRowFormat(1,1,title);
+            doc.setRowFormat(2,3,label);
+            qry->clear();
+            QString q = "SELECT * FROM shiftlist WHERE datein >='"+To.toString("yyyy-M-dd")+"' AND datein <='"+From.toString("yyyy-M-dd")+"'"
+                        "AND employeename='"+Name+"' ORDER BY datein,timein,employeename";
+
+            qry->prepare(q);
+            int rowLocation =0;
+
+            if(qry->exec())
+            {
+                int i =0;
+                QHash<QString, QString> hash;
+                while(qry->next())
+                {
+                    QString tot = hash["Total"];
+                    QString val = hash[qry->value(5).toString()];
+                    if(val == "")
+                        val="0:00";
+                    if(tot == "")
+                        tot="0:00";
+                    QString time = qry->value(12).toString();
+
+                    if(time != ""){
+                        int h = val.split(":")[0].toInt() + time.split(":")[0].toInt();
+                        int m = h*60 + val.split(":")[1].toInt() + time.split(":")[1].toInt();
+                        time = QString::number(m/60)+":"+QString::number(m%60);
+                    }else{
+                        time = "0:00";
+                    }
+
+                    hash[qry->value(5).toString()] = time;
+
+                    time = qry->value(12).toString();
+
+                    int th = tot.split(":")[0].toInt();
+                    int tm = th*60 + tot.split(":")[1].toInt();
+                    if(time != ""){
+                        th = tot.split(":")[0].toInt() + time.split(":")[0].toInt();
+                        tm = th*60 + tot.split(":")[1].toInt() +time.split(":")[1].toInt();
+                    }
+
+                    time = QString::number(tm/60)+":"+QString::number(tm%60);
+
+                    hash["Total"] = time;
+                    i++;
+                }
+
+                doc.setRowFormat(5,5,subtitle);
+                doc.setRowFormat(6,6,label);
+                doc.write(5,1,"Summary");
+                doc.write(6,1,"Project");
+                doc.write(6,8,"Time");
+                rowLocation =7;
+                QHashIterator<QString, QString> j(hash);
+                while (j.hasNext()) {
+                    j.next();
+                    if(j.key() != "Total"){
+                        doc.write(rowLocation,1,j.key());
+                        doc.write(rowLocation,8,j.value());
+                        rowLocation++;
+                    }
+                }
+                doc.setRowFormat(rowLocation,rowLocation,label);
+                doc.write(rowLocation,1,"Total");
+                doc.write(rowLocation,8,hash["Total"]);
+                rowLocation++;
+            }else{
+                doc.write(5,1,"No project selected in the project tab. Please do so, and try again.");
+            }
+
+
+
+
+
+
+
+            int colLength[] = {7,4,8,9,4,5,4};
+            if(qry->exec()){
+                rowLocation+=3;
+                doc.setRowFormat(rowLocation,rowLocation,subtitle);
+                doc.write(rowLocation,1,"Details");
+                rowLocation++;
+                doc.setRowFormat(rowLocation,rowLocation,label);
+                doc.write(rowLocation,1,"Project");
+                doc.write(rowLocation,2,"Item");
+                doc.write(rowLocation,3,"Clock In");
+                doc.write(rowLocation,4,"Clock Out");
+                doc.write(rowLocation,5,"Date");
+                doc.write(rowLocation,6,"Lunch");
+                doc.write(rowLocation,8,"Time");
+                rowLocation++;
+                while(qry->next()){
+                    if(qry->value(5).toString().length() > colLength[0]){ colLength[0] = qry->value(5).toString().length();}
+                    doc.write(rowLocation,1, qry->value(5).toString());
+                    if(qry->value(6).toString().length() > colLength[1]){ colLength[1] = qry->value(6).toString().length();}
+                    doc.write(rowLocation,2, qry->value(6).toString());
+                    if(qry->value(7).toString().length() > colLength[2]){ colLength[2] = qry->value(7).toString().length();}
+                    doc.write(rowLocation,3, qry->value(7).toString());
+                    if(qry->value(8).toString().length() > colLength[3]){ colLength[3] = qry->value(8).toString().length();}
+                    doc.write(rowLocation,4, qry->value(8).toString());
+                    if(qry->value(9).toString().length() > colLength[4]){ colLength[4] = qry->value(9).toString().length();}
+                    doc.write(rowLocation,5, qry->value(9).toString());
+                    if(qry->value(11).toString().length() > colLength[5]){ colLength[5] = qry->value(11).toString().length();}
+                    doc.write(rowLocation,6, qry->value(11).toString());
+                    if(qry->value(12).toString().length() > colLength[6]){ colLength[6] = qry->value(12).toString().length();}
+                    doc.write(rowLocation,8, qry->value(12).toString());
+                    rowLocation++;
+                }
+            }
+            doc.setColumnWidth(1,1,colLength[0]+2);
+            doc.setColumnWidth(2,2,colLength[1]+2);
+            doc.setColumnWidth(3,3,colLength[2]+2);
+            doc.setColumnWidth(4,4,colLength[3]+2);
+            doc.setColumnWidth(5,5,colLength[4]+2);
+            doc.setColumnWidth(6,6,colLength[5]+2);
+            doc.setColumnWidth(8,8,colLength[6]+2);
+
+
+        }
     }
+
     doc.saveAs(FileToExport);
-
-
 }
+
 void MainForm::on_SettingsPrint_clicked()
 {
 
