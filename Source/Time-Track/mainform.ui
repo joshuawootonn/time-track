@@ -875,7 +875,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
@@ -1003,41 +1003,6 @@ background-color:#FE938C;
               <property name="bottomMargin">
                <number>7</number>
               </property>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="EmployeeShiftCount">
-                <property name="text">
-                 <string>ShiftCount</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="EmployeeAdminStatus">
-                <property name="text">
-                 <string>AdminStatus</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="EmployeeActive">
-                <property name="text">
-                 <string>Clocked In</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="EmployeePin">
-                <property name="text">
-                 <string>Pin</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="EmployeeCurrent">
-                <property name="text">
-                 <string>Employed</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QCheckBox" name="EmployeeId">
                 <property name="text">
@@ -1049,6 +1014,48 @@ background-color:#FE938C;
                <widget class="QCheckBox" name="EmployeeName">
                 <property name="text">
                  <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QCheckBox" name="EmployeeCurrent">
+                <property name="text">
+                 <string>Employed</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QCheckBox" name="EmployeeActive">
+                <property name="text">
+                 <string>Clocked In</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="EmployeeShiftCount">
+                <property name="text">
+                 <string>ShiftCount</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="EmployeeAdminStatus">
+                <property name="text">
+                 <string>AdminStatus</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="EmployeePin">
+                <property name="text">
+                 <string>Pin</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="EmployeeCrew">
+                <property name="text">
+                 <string>Crew</string>
                 </property>
                </widget>
               </item>
@@ -2093,11 +2100,6 @@ background-color:#E4E9EB;
   </layout>
  </widget>
  <tabstops>
-  <tabstop>EmployeePin</tabstop>
-  <tabstop>EmployeeAdminStatus</tabstop>
-  <tabstop>EmployeeShiftCount</tabstop>
-  <tabstop>EmployeeActive</tabstop>
-  <tabstop>EmployeeCurrent</tabstop>
   <tabstop>PastRadio</tabstop>
   <tabstop>AllRadio</tabstop>
   <tabstop>CurrentRadio</tabstop>

@@ -112,6 +112,7 @@ private slots:
     void displayEmployeeSuccess();
     void refreshFromEmployeeEdit();
     void on_EmployeeName_clicked();
+    void on_EmployeeCrew_clicked();
     void on_EmployeePin_clicked();
     void on_EmployeeAdminStatus_clicked();
     void on_EmployeeShiftCount_clicked();
@@ -200,6 +201,8 @@ private slots:
 
 
     void on_basicPageFinish_clicked();
+
+
 
 public:
     Ui::MainForm *ui;

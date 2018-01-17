@@ -728,16 +728,18 @@ void MainForm::EmployeeTab()
     ui->EmployeeView->hideColumn(0);
     ui->EmployeeName->setChecked(true);
     ui->EmployeeView->showColumn(1);
-    ui->EmployeePin->setChecked(true);
+    ui->EmployeeCrew->setChecked(true);
     ui->EmployeeView->showColumn(2);
-    ui->EmployeeAdminStatus->setChecked(true);
+    ui->EmployeePin->setChecked(true);
     ui->EmployeeView->showColumn(3);
+    ui->EmployeeAdminStatus->setChecked(true);
+    ui->EmployeeView->showColumn(4);
     ui->EmployeeShiftCount->setChecked(false);
-    ui->EmployeeView->hideColumn(4);
-    ui->EmployeeActive->setChecked(true);
     ui->EmployeeView->hideColumn(5);
-    ui->EmployeeCurrent->setChecked(false);
+    ui->EmployeeActive->setChecked(true);
     ui->EmployeeView->hideColumn(6);
+    ui->EmployeeCurrent->setChecked(false);
+    ui->EmployeeView->hideColumn(7);
     ui->CurrentRadio->setChecked(true);
     refreshEmployeeTab();
 
@@ -760,35 +762,39 @@ void MainForm::refreshEmployeeTab(){
         if(ui->EmployeeId->isChecked())
             ui->EmployeeView->showColumn(0);
         else
-            ui->EmployeeView->hideColumn(0);
+            ui->EmployeeView->hideColumn(0);        
         if(ui->EmployeeName->isChecked())
             ui->EmployeeView->showColumn(1);
         else
             ui->EmployeeView->hideColumn(1);
-        if(ui->EmployeePin->isChecked())
+        if(ui->EmployeeCrew->isChecked())
             ui->EmployeeView->showColumn(2);
         else
             ui->EmployeeView->hideColumn(2);
-
-        if(ui->EmployeeAdminStatus->isChecked())
+        if(ui->EmployeePin->isChecked())
             ui->EmployeeView->showColumn(3);
         else
             ui->EmployeeView->hideColumn(3);
 
-        if(ui->EmployeeShiftCount->isChecked())
+        if(ui->EmployeeAdminStatus->isChecked())
             ui->EmployeeView->showColumn(4);
         else
             ui->EmployeeView->hideColumn(4);
 
-        if(ui->EmployeeActive->isChecked())
+        if(ui->EmployeeShiftCount->isChecked())
             ui->EmployeeView->showColumn(5);
         else
             ui->EmployeeView->hideColumn(5);
 
-        if(ui->EmployeeCurrent->isChecked())
+        if(ui->EmployeeActive->isChecked())
             ui->EmployeeView->showColumn(6);
         else
             ui->EmployeeView->hideColumn(6);
+
+        if(ui->EmployeeCurrent->isChecked())
+            ui->EmployeeView->showColumn(7);
+        else
+            ui->EmployeeView->hideColumn(7);
         if(ui->AllRadio->isChecked()){
             QSqlQueryModel * x = EmployeeModel();
             for(int i=0; i< x->rowCount(); i++)
@@ -800,7 +806,7 @@ void MainForm::refreshEmployeeTab(){
             QSqlQueryModel * x = EmployeeModel();
             for(int i=0; i< x->rowCount(); i++)
             {
-                int current = x->record(i).value(6).toInt();
+                int current = x->record(i).value(7).toInt();
                 if(current == 1)
                    ui->EmployeeView->showRow(i);
                 else
@@ -811,7 +817,7 @@ void MainForm::refreshEmployeeTab(){
             QSqlQueryModel * x = EmployeeModel();
             for(int i=0; i< x->rowCount(); i++)
             {
-                int current = x->record(i).value(6).toInt();
+                int current = x->record(i).value(7).toInt();
                 if(current == 1)
                    ui->EmployeeView->hideRow(i);
                 else
@@ -841,11 +847,12 @@ QSqlQueryModel * MainForm::EmployeeModel(){
     model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
     model->setHeaderData(1,Qt::Horizontal,tr("Name"));
-    model->setHeaderData(2,Qt::Horizontal,tr("Pin"));
-    model->setHeaderData(3,Qt::Horizontal,tr("Adminstatus"));
-    model->setHeaderData(4,Qt::Horizontal,tr("Shiftcount"));
-    model->setHeaderData(5,Qt::Horizontal,tr("Clocked In"));
-    model->setHeaderData(6,Qt::Horizontal,tr("Employed"));
+    model->setHeaderData(2,Qt::Horizontal,tr("Crew"));
+    model->setHeaderData(3,Qt::Horizontal,tr("Pin"));
+    model->setHeaderData(4,Qt::Horizontal,tr("Adminstatus"));
+    model->setHeaderData(5,Qt::Horizontal,tr("Shiftcount"));
+    model->setHeaderData(6,Qt::Horizontal,tr("Clocked In"));
+    model->setHeaderData(7,Qt::Horizontal,tr("Employed"));
 
     //qDebug()<<"EMPLOYEE MODEL: "<<qry->lastError().text()<<qry->executedQuery();
     return model;
@@ -955,6 +962,10 @@ void MainForm::on_EmployeeDelete_clicked()
 /* Option menu 2 for EmployeeTab*/
 
 void MainForm::on_EmployeeName_clicked()
+{
+    refreshEmployeeTab();
+}
+void MainForm::on_EmployeeCrew_clicked()
 {
     refreshEmployeeTab();
 }
