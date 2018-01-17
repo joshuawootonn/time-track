@@ -14,11 +14,16 @@ EmployeeEditForm::EmployeeEditForm(QWidget *parent) :
 
 
 }
+
+
 // Initializer for when a employee is being created
 void EmployeeEditForm::AddEmployee(){
     this->showNormal();
     task="add";
+
+    this->CrewInitialize();
     ui->name->setText("");
+    ui->crew->setCurrentText("");
     ui->pin->setText("");
     ui->admin->setChecked(false);
     ui->active->setChecked(false);
@@ -31,18 +36,23 @@ void EmployeeEditForm::EditEmployee(QString x){
     task = "edit";
     id=x;
     QSqlQuery * qry = new QSqlQuery(data);
-    QString name,pin,admin,current,active;
-    qry->prepare("SELECT name,pin,adminstatus,current,active FROM employeelist WHERE id ='"+id+"'");
+    QString name,pin,admin,current,active,crew;
+    qry->prepare("SELECT name,crew,pin,adminstatus,current,active FROM employeelist WHERE id ='"+id+"'");
     if(qry->exec()){
         while(qry->next()){
             name = qry->value(0).toString();
-            pin = qry->value(1).toString();
-            admin = qry->value(2).toString();
-            current = qry->value(3).toString();
-            active = qry->value(4).toString();
+            crew = qry->value(1).toString();
+            pin = qry->value(2).toString();
+            admin = qry->value(3).toString();
+            current = qry->value(4).toString();
+            active = qry->value(5).toString();
         }
     }
+
+    this->CrewInitialize();
+
     ui->name->setText(name);
+    ui->crew->setCurrentText(crew);
     ui->pin->setText(pin);
     if(admin =="1")
         ui->admin->setChecked(true);
@@ -65,6 +75,20 @@ EmployeeEditForm::~EmployeeEditForm()
 {
     delete ui;
 }
+
+void EmployeeEditForm::CrewInitialize(){
+    QSqlQueryModel * modal = new QSqlQueryModel();
+    QSqlQuery* qry = new QSqlQuery(data);
+    qry->prepare("select DISTINCT crew from employeelist ORDER BY name ASC");
+    qry->exec();
+    modal->setQuery(*qry);
+    ui->crew->setModel(modal);
+    QCompleter * comp = new QCompleter(this);
+    comp->setWidget(ui->crew);
+    comp->setCompletionMode(QCompleter::PopupCompletion);
+    comp->setCaseSensitivity(Qt::CaseInsensitive);
+}
+
 bool EmployeeEditForm::eventFilter(QObject* object,QEvent* event)
 {
     if(object == ui->name && event->type() == QEvent::MouseButtonPress) {
@@ -130,6 +154,8 @@ QString EmployeeEditForm::AddValid(){
         error = "Invalid Name: Minimum length 5";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Must be Letters only";
+    else if (!name_regrex.exactMatch(ui->crew->currentText()))
+       error = "Invalid Crew: Must be Letters only";
     else if(ui->pin->text().length() < 4)
        error = "Invalid Pin: Minimum length 4";
     else if(!pin_regrex.exactMatch(ui->pin->text()))
@@ -145,6 +171,8 @@ QString EmployeeEditForm::EditValid(){
         error = "Invalid Name: Minimum length 5";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Must be Letters only";
+    else if (!name_regrex.exactMatch(ui->crew->currentText()))
+       error = "Invalid Crew: Must be Letters only";
     else if(ui->pin->text().length() < 4)
        error = "Invalid Pin: Minimum length 4";
     else if(!pin_regrex.exactMatch(ui->pin->text()))
@@ -187,8 +215,8 @@ void EmployeeEditForm::on_FinishButton_clicked()
             QString admin = QString::number(int(ui->admin->isChecked()));
             QString active = QString::number(int(ui->active->isChecked()));
             QString current = QString::number(int(ui->current->isChecked()));
-            qry->prepare("insert into employeelist(name,pin,adminstatus,shiftcount,active,current) "
-                         " values('"+ui->name->text()+"','"+ui->pin->text()+"','"+admin+"','1','"+active+"','"+current+"')");
+            qry->prepare("insert into employeelist(name,crew,pin,adminstatus,shiftcount,active,current) "
+                         " values('"+ui->name->text()+"','"+ui->crew->currentText()+"','"+ui->pin->text()+"','"+admin+"','1','"+active+"','"+current+"')");
             if (qry->exec())
                 success = true;
             else{
@@ -205,7 +233,7 @@ void EmployeeEditForm::on_FinishButton_clicked()
             QString admin = QString::number(int(ui->admin->isChecked()));
             QString active = QString::number(int(ui->active->isChecked()));
             QString current = QString::number(int(ui->current->isChecked()));
-            qry->prepare("update employeelist set name='"+ui->name->text()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+current+"', active='"+active+"'  where id = '"+id+"'");
+            qry->prepare("update employeelist set name='"+ui->name->text()+"',crew='"+ui->crew->currentText()+"', pin='"+ui->pin->text()+"', adminstatus='"+admin+"', current='"+current+"', active='"+active+"'  where id = '"+id+"'");
 
             if (qry->exec())
                 success = true;
@@ -245,7 +273,6 @@ void EmployeeEditForm::on_CancelButton_clicked()
     emit finished();
 
 }
-
 void EmployeeEditForm::on_pin_returnPressed()
 {
     on_FinishButton_clicked();

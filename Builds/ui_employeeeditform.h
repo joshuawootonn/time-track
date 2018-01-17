@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'employeeeditform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -37,6 +38,10 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *name;
+    QWidget *widget_2;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_3;
+    QComboBox *crew;
     QWidget *widget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
@@ -58,7 +63,7 @@ public:
     {
         if (EmployeeEditForm->objectName().isEmpty())
             EmployeeEditForm->setObjectName(QStringLiteral("EmployeeEditForm"));
-        EmployeeEditForm->resize(326, 266);
+        EmployeeEditForm->resize(326, 311);
         EmployeeEditForm->setStyleSheet(QLatin1String("QDialog#EmployeeEditForm{\n"
 "\n"
 "background-color:#E8E8E8;\n"
@@ -199,6 +204,26 @@ public:
 
         verticalLayout->addWidget(widget);
 
+        widget_2 = new QWidget(bigwidger);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        horizontalLayout_3 = new QHBoxLayout(widget_2);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        label_3 = new QLabel(widget_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setMinimumSize(QSize(50, 0));
+        label_3->setMaximumSize(QSize(50, 16777215));
+
+        horizontalLayout_3->addWidget(label_3);
+
+        crew = new QComboBox(widget_2);
+        crew->setObjectName(QStringLiteral("crew"));
+        crew->setEditable(true);
+
+        horizontalLayout_3->addWidget(crew);
+
+
+        verticalLayout->addWidget(widget_2);
+
         widget1 = new QWidget(bigwidger);
         widget1->setObjectName(QStringLiteral("widget1"));
         horizontalLayout_2 = new QHBoxLayout(widget1);
@@ -295,16 +320,17 @@ public:
 
     void retranslateUi(QDialog *EmployeeEditForm)
     {
-        EmployeeEditForm->setWindowTitle(QApplication::translate("EmployeeEditForm", "Employee Edit", Q_NULLPTR));
-        label->setText(QApplication::translate("EmployeeEditForm", "Name:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("EmployeeEditForm", "Pin:", Q_NULLPTR));
-        GenerateButton->setText(QApplication::translate("EmployeeEditForm", "Generate", Q_NULLPTR));
-        admin->setText(QApplication::translate("EmployeeEditForm", "Admin", Q_NULLPTR));
-        current->setText(QApplication::translate("EmployeeEditForm", "Employed", Q_NULLPTR));
-        active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", Q_NULLPTR));
+        EmployeeEditForm->setWindowTitle(QApplication::translate("EmployeeEditForm", "Employee Edit", nullptr));
+        label->setText(QApplication::translate("EmployeeEditForm", "Name:", nullptr));
+        label_3->setText(QApplication::translate("EmployeeEditForm", "Crew: ", nullptr));
+        label_2->setText(QApplication::translate("EmployeeEditForm", "Pin:", nullptr));
+        GenerateButton->setText(QApplication::translate("EmployeeEditForm", "Generate", nullptr));
+        admin->setText(QApplication::translate("EmployeeEditForm", "Admin", nullptr));
+        current->setText(QApplication::translate("EmployeeEditForm", "Employed", nullptr));
+        active->setText(QApplication::translate("EmployeeEditForm", "Clocked In", nullptr));
         error->setText(QString());
-        FinishButton->setText(QApplication::translate("EmployeeEditForm", "Finish", Q_NULLPTR));
-        CancelButton->setText(QApplication::translate("EmployeeEditForm", "Cancel", Q_NULLPTR));
+        FinishButton->setText(QApplication::translate("EmployeeEditForm", "Finish", nullptr));
+        CancelButton->setText(QApplication::translate("EmployeeEditForm", "Cancel", nullptr));
     } // retranslateUi
 
 };

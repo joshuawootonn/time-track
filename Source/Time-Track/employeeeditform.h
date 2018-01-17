@@ -33,7 +33,7 @@ public:
     int generateRandom();
     void EditEmployee(QString id);
     QString EditValid();
-
+    void CrewInitialize();
     bool getSuccess() const;
     QString getSuccessMsg() const;
 
