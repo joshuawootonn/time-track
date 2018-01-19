@@ -57,9 +57,13 @@ public:
     QTableWidget *Sections;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout_10;
+    QLabel *label_2;
     QLabel *timeAllocated;
     QLabel *label;
     QLabel *timeTotal;
+    QSpacerItem *horizontalSpacer_4;
+    QLabel *label_7;
+    QLabel *timeWeek;
     QSpacerItem *horizontalSpacer_3;
     QLabel *error;
     QSpacerItem *horizontalSpacer;
@@ -369,8 +373,14 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        label_2 = new QLabel(bigwidger);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        horizontalLayout_10->addWidget(label_2);
+
         timeAllocated = new QLabel(bigwidger);
         timeAllocated->setObjectName(QStringLiteral("timeAllocated"));
+        timeAllocated->setMinimumSize(QSize(20, 0));
 
         horizontalLayout_10->addWidget(timeAllocated);
 
@@ -383,6 +393,20 @@ public:
         timeTotal->setObjectName(QStringLiteral("timeTotal"));
 
         horizontalLayout_10->addWidget(timeTotal);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer_4);
+
+        label_7 = new QLabel(bigwidger);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        horizontalLayout_10->addWidget(label_7);
+
+        timeWeek = new QLabel(bigwidger);
+        timeWeek->setObjectName(QStringLiteral("timeWeek"));
+
+        horizontalLayout_10->addWidget(timeWeek);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -466,9 +490,12 @@ public:
         Add->setText(QApplication::translate("ClockoutForm", "Add", nullptr));
         Edit->setText(QApplication::translate("ClockoutForm", "Edit", nullptr));
         Delete->setText(QApplication::translate("ClockoutForm", "Delete", nullptr));
+        label_2->setText(QApplication::translate("ClockoutForm", "Time: ", nullptr));
         timeAllocated->setText(QString());
         label->setText(QApplication::translate("ClockoutForm", "/", nullptr));
         timeTotal->setText(QString());
+        label_7->setText(QApplication::translate("ClockoutForm", "Week Total: ", nullptr));
+        timeWeek->setText(QString());
         error->setText(QString());
         label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", nullptr));
         FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", nullptr));

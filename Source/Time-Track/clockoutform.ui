@@ -479,7 +479,20 @@ margin: 0px 0px 0px 0px;
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Time: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="timeAllocated">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -494,6 +507,33 @@ margin: 0px 0px 0px 0px;
           </item>
           <item>
            <widget class="QLabel" name="timeTotal">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Week Total: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="timeWeek">
             <property name="text">
              <string/>
             </property>

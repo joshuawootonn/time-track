@@ -142,6 +142,7 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ItemInitialize();
     TimesInitialize();
     TimeLeft();
+    WeekInitialize();
     ui->Description->setVisible(false);
     ui->DescriptionLabel->setVisible(false);
 
@@ -204,8 +205,6 @@ void ClockoutForm::TimesInitialize(){
            while(qry->next())
            {
                ui->Minutes->addItem(qry->value(0).toString());
-
-
            }
     }
     qry->clear();
@@ -251,6 +250,27 @@ void ClockoutForm::TimesInitialize(){
 
 
 }
+void ClockoutForm::WeekInitialize(){
+    QSqlQuery* qry = new QSqlQuery(data);
+    int day = QDate::currentDate().dayOfWeek();
+    QString d1 = QDate::currentDate().addDays(-day).toString("yyyy-M-dd");
+    QString d2 = QDate::currentDate().addDays(6-day).toString("yyyy-M-dd");
+
+
+    int min = 0;
+    qry->prepare("SELECT time FROM shiftlist WHERE datein <='"+d2+"' AND datein >='"+d1+"'");
+    if(qry->exec())
+    {
+        while(qry->next())
+        {
+
+            min += TimeStringToMinutes(qry->value(0).toString());
+        }
+    }
+    ui->timeWeek->setText(minutesToTimeString(min));
+
+}
+
 void ClockoutForm::TimeLeft(){
 
     QDateTime indt,outdt;
@@ -301,6 +321,30 @@ void ClockoutForm::TimeLeft(){
     }    
     ui->timeAllocated->setText(minutesToTimeString(minutesAllocated));
 
+
+
+
+
+    int day = QDate::currentDate().dayOfWeek();
+    QString d1 = QDate::currentDate().addDays(-day).toString("yyyy-M-dd");
+    QString d2 = QDate::currentDate().addDays(6-day).toString("yyyy-M-dd");
+
+
+    int weekMinutes = 0;
+    qry.clear();
+    qry.prepare("SELECT time FROM shiftlist WHERE datein <='"+d2+"' AND datein >='"+d1+"'");
+    if(qry.exec())
+    {
+        while(qry.next())
+        {
+
+            weekMinutes += TimeStringToMinutes(qry.value(0).toString());
+        }
+    }
+    ui->timeWeek->setText(minutesToTimeString(weekMinutes+minutes));
+
+
+
     if(minutes > minutesAllocated){
         timeStatus = -1;
     }else if(minutes < minutesAllocated){
@@ -321,7 +365,14 @@ QString ClockoutForm::minutesToTimeString(int m){
         return "-" + time;
     return time;
 }
-
+int ClockoutForm::TimeStringToMinutes(QString time){
+    if(time == "")
+        return 0;
+    int min =0;
+    min += time.split(":")[0].toInt()*60;
+    min += time.split(":")[1].toInt()%60;
+    return min;
+}
 /*These classes are used to update the table and
  * comboboxs when triggers are hit*/
 

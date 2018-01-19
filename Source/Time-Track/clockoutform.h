@@ -35,8 +35,10 @@ public:
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
+    void WeekInitialize();
     void TimeLeft();
     QString minutesToTimeString(int m);
+    int TimeStringToMinutes(QString time);
 
 private slots:    
     void on_Projects_currentIndexChanged(const QString &arg);
