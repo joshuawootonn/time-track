@@ -721,21 +721,16 @@ bool ShiftEditForm::getSuccess() const
 void ShiftEditForm::on_FinishedButton_clicked()
 {
     if(data.open()){
-        if(ui->tabWidget->currentIndex()==0){
-            QTime *allocatedTime = new QTime(ui->timeAllocated->text().split(":")[0].toInt(),ui->timeAllocated->text().split(":")[1].toInt());
-            QTime *totalTime = new QTime(ui->timeTotal->text().split(":")[0].toInt(),ui->timeTotal->text().split(":")[1].toInt());
-            qDebug()<<*allocatedTime<<*totalTime;
+        if(ui->tabWidget->currentIndex()==0){            
             if(ui->Name->currentText()=="")
             {
                 ui->error->setText("Invalid: Select Employee");
             }
-            else if(timeStatus != 0){
-                if(timeStatus == -1){
-                    ui->error->setText("Invalid: Too Little Time on Timesheet");
-                }
-                else{
-                    ui->error->setText("Invalid: Too Much Time on Timesheet");
-                }
+            if(timeStatus == -1){
+                ui->error->setText("Invalid: Too Little Time on Timesheet");
+            }
+            else if (timeStatus == 1){
+                ui->error->setText("Invalid: Too Much Time on Timesheet");
             }
             else if(ui->Sections->rowCount()<1){
                 ui->error->setText("Invalid: No Projects Added to Timesheet");

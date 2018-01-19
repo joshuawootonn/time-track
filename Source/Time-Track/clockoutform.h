@@ -36,6 +36,7 @@ public:
     void ItemInitialize();
     void TimesInitialize();
     void TimeLeft();
+    QString minutesToTimeString(int m);
 
 private slots:    
     void on_Projects_currentIndexChanged(const QString &arg);
@@ -65,6 +66,7 @@ private:
     bool clicked;
     int selectedRow;
     QString totalTime;
+    int timeStatus;
     QDateTime format_datetimes(QDateTime z);
     int format_time_length(QDateTime a, QDateTime b);
 };
