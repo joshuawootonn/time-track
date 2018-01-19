@@ -513,6 +513,31 @@ void ShiftEditForm::TimeLeft(){
         minutesAllocated+=item.split(":")[1].toInt();
     }
     ui->timeAllocated->setText(minutesToTimeString(minutesAllocated));
+
+
+
+
+    int day = ui->DateTime1->date().dayOfWeek();
+    QString d1 = ui->DateTime1->date().addDays(-day).toString("yyyy-M-dd");
+    QString d2 = ui->DateTime1->date().addDays(6-day).toString("yyyy-M-dd");
+
+
+    int weekMinutes = 0;
+    QSqlQuery qry(data);
+    qry.clear();
+    qry.prepare("SELECT time FROM shiftlist WHERE datein <='"+d2+"' AND datein >='"+d1+"'");
+    if(qry.exec())
+    {
+        while(qry.next())
+        {
+
+            weekMinutes += TimeStringToMinutes(qry.value(0).toString());
+        }
+    }
+    ui->timeWeek->setText(minutesToTimeString(weekMinutes+minutes));
+
+
+
     //for ease of calculating whether this form is completed
     if(minutes > minutesAllocated){
         timeStatus = -1;
@@ -537,7 +562,14 @@ QString ShiftEditForm::minutesToTimeString(int m){
         return "-" + time;
     return time;
 }
-
+int ShiftEditForm::TimeStringToMinutes(QString time){
+    if(time == "")
+        return 0;
+    int min =0;
+    min += time.split(":")[0].toInt()*60;
+    min += time.split(":")[1].toInt()%60;
+    return min;
+}
 
 /*These classes are used to update the table and
  * comboboxs when triggers are hit*/

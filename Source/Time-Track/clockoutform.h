@@ -35,7 +35,6 @@ public:
     void ProjectInitialize();
     void ItemInitialize();
     void TimesInitialize();
-    void WeekInitialize();
     void TimeLeft();
     QString minutesToTimeString(int m);
     int TimeStringToMinutes(QString time);

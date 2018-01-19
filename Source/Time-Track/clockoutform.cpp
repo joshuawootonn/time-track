@@ -142,7 +142,6 @@ void ClockoutForm::ClockoutInitialize(QString i){
     ItemInitialize();
     TimesInitialize();
     TimeLeft();
-    WeekInitialize();
     ui->Description->setVisible(false);
     ui->DescriptionLabel->setVisible(false);
 
@@ -250,26 +249,7 @@ void ClockoutForm::TimesInitialize(){
 
 
 }
-void ClockoutForm::WeekInitialize(){
-    QSqlQuery* qry = new QSqlQuery(data);
-    int day = QDate::currentDate().dayOfWeek();
-    QString d1 = QDate::currentDate().addDays(-day).toString("yyyy-M-dd");
-    QString d2 = QDate::currentDate().addDays(6-day).toString("yyyy-M-dd");
 
-
-    int min = 0;
-    qry->prepare("SELECT time FROM shiftlist WHERE datein <='"+d2+"' AND datein >='"+d1+"'");
-    if(qry->exec())
-    {
-        while(qry->next())
-        {
-
-            min += TimeStringToMinutes(qry->value(0).toString());
-        }
-    }
-    ui->timeWeek->setText(minutesToTimeString(min));
-
-}
 
 void ClockoutForm::TimeLeft(){
 

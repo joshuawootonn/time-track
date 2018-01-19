@@ -41,6 +41,7 @@ public:
     void LunchInitialize();
     bool getSuccess() const;
     QString minutesToTimeString(int m);
+    int TimeStringToMinutes(QString time);
 private slots:
     void on_tabWidget_currentChanged(int index);
     void on_Projects_currentIndexChanged(const QString &arg1);

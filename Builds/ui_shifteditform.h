@@ -78,6 +78,9 @@ public:
     QLabel *label;
     QLabel *timeTotal;
     QSpacerItem *horizontalSpacer_3;
+    QLabel *label_2;
+    QLabel *timeWeek;
+    QSpacerItem *horizontalSpacer_7;
     QLabel *error;
     QSpacerItem *horizontalSpacer;
     QPushButton *RefreshButton;
@@ -467,6 +470,20 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
+        label_2 = new QLabel(bottom);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        horizontalLayout_2->addWidget(label_2);
+
+        timeWeek = new QLabel(bottom);
+        timeWeek->setObjectName(QStringLiteral("timeWeek"));
+
+        horizontalLayout_2->addWidget(timeWeek);
+
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_7);
+
         error = new QLabel(bottom);
         error->setObjectName(QStringLiteral("error"));
 
@@ -619,6 +636,8 @@ public:
         timeAllocated->setText(QString());
         label->setText(QApplication::translate("ShiftEditForm", "/", nullptr));
         timeTotal->setText(QString());
+        label_2->setText(QApplication::translate("ShiftEditForm", "Week Total: ", nullptr));
+        timeWeek->setText(QString());
         error->setText(QString());
         RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", nullptr));
         FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", nullptr));
