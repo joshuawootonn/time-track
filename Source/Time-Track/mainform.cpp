@@ -1054,7 +1054,6 @@ void MainForm::ProjectTab(){
 
 
 }
-
 void MainForm::on_ProjectView_clicked(const QModelIndex &index)
 {
     refreshProjectItemTab();
@@ -1072,11 +1071,7 @@ void MainForm::refreshProjectTab(){
     if(data.open()){
         ui->error->setText("");
 
-        establishConnections();
-
-        ui->ProjectItemWidget->clear();
-        ui->ProjectItemWidget->setRowCount(0);
-        ui->ProjectItemWidget->setColumnCount(0);
+        establishConnections();        
 
         if(ui->ProjectId->isChecked())
             ui->ProjectView->showColumn(0);
@@ -1192,7 +1187,7 @@ QSqlQueryModel * MainForm::ProjectModel(){
     }
     QSqlQueryModel * model = new QSqlQueryModel();
     QSqlQuery * qry = new QSqlQuery(data);
-    qry->prepare("SELECT * FROM projectlist WHERE current LIKE '"+current+"'  ORDER BY date,name ");
+    qry->prepare("SELECT * FROM projectlist WHERE current LIKE '"+current+"'  ORDER BY name,date ");
     qry->exec();
     model->setQuery(*qry);
     model->setHeaderData(0,Qt::Horizontal,tr("Id"));
@@ -1212,9 +1207,13 @@ QSortFilterProxyModel * MainForm::ProjectFilterModel(){
 }
 void MainForm::refreshProjectItemTable(){
     QModelIndexList  list =  ui->ProjectView->selectionModel()->selection().indexes();
+    qDebug()<<list.length();
+
     ui->ProjectItemWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     QModelIndex index = list.at(0);
     QString id = projectmodel->record(projectfiltermodel->mapToSource(index).row()).value(0).toString();
+    ui->ProjectItemWidget->clear();
+    ui->ProjectItemWidget->clearContents();
     ui->ProjectItemWidget->setRowCount(0);
     ui->ProjectItemWidget->setColumnCount(10);
     ui->ProjectItemWidget->setHorizontalHeaderItem(0,new QTableWidgetItem("Id"));
@@ -1229,7 +1228,9 @@ void MainForm::refreshProjectItemTable(){
     ui->ProjectItemWidget->setHorizontalHeaderItem(9,new QTableWidgetItem("Difference(%)"));
     ui->ProjectItemWidget->hideColumn(0);
     ui->ProjectItemWidget->hideColumn(1);
-    ui->ProjectItemWidget->clearContents();
+
+
+
 
 
     QSqlQuery * qry = new QSqlQuery(data);
@@ -2050,7 +2051,7 @@ void MainForm::exportToExcel(){
         label.setFontBold(true);
         label.setFontSize(15);
         doc.setRowFormat(4,4,label);
-        qDebug()<<"title";
+        //qDebug()<<"title";
 
         doc.write(4,1,"Name");
         doc.write(4,2,"Pin");
@@ -2065,7 +2066,7 @@ void MainForm::exportToExcel(){
 //                }
 //            }
 //        }
-        qDebug()<<"write";
+        //qDebug()<<"write";
     }
     if(TabletoExport == "Projects")
     {
@@ -2283,7 +2284,7 @@ void MainForm::exportToExcel(){
                 Names<<qry->value(0).toString();
             }
         }
-        qDebug()<<Names<<"before loop";
+        //qDebug()<<Names<<"before loop";
 
         for(int i = 0;i< Names.length(); i++){
             Name = Names[i];
@@ -2308,6 +2309,7 @@ void MainForm::exportToExcel(){
                 while(qry->next())
                 {
                     QString tot = hash["Total"];
+                    //qDebug()<<qry->value(5).toString()<< qry->value(12).toString();
                     QString val = hash[qry->value(5).toString()];
                     if(val == "")
                         val="0:00";

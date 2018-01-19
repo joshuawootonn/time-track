@@ -865,8 +865,6 @@ void ShiftEditForm::on_FinishedButton_clicked()
                 success = true;
             else
                 success = false;
-            qDebug()<<qry->lastError();
-            qDebug()<<qry->lastQuery();
             qry->clear();
             qry->prepare("update employeelist set shiftcount = '"+shiftid+"' where id = '"+employeeid+"'");
             qry->exec();

@@ -672,7 +672,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>3</number>
+          <number>1</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -875,7 +875,7 @@ background-color:#ECEFED;
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideLeft</enum>
