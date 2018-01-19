@@ -40,7 +40,7 @@ public:
     void TimeLeft();
     void LunchInitialize();
     bool getSuccess() const;
-
+    QString minutesToTimeString(int m);
 private slots:
     void on_tabWidget_currentChanged(int index);
     void on_Projects_currentIndexChanged(const QString &arg1);
@@ -85,6 +85,7 @@ private:
     int selectedRow;
     bool clicked;
     bool success;
+    int timeStatus;
     QString totalTime;
     QDateTime format_datetimes(QDateTime z);
     int format_time_length(QDateTime a, QDateTime b);

@@ -150,7 +150,7 @@ background-color:#FFFFFF;
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -560,14 +560,21 @@ background-color:#FFFFFF;
            <widget class="QWidget" name="bottom" native="true">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="timeAllocated">
                <property name="text">
-                <string>Time Left:</string>
+                <string/>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="timeLeft">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>/</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="timeTotal">
                <property name="text">
                 <string/>
                </property>

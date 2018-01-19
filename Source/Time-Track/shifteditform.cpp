@@ -206,11 +206,13 @@ int ShiftEditForm::format_time_length(QDateTime a, QDateTime b){
 void ShiftEditForm::on_tabWidget_currentChanged(int index)
 {
     if(index == 0){
-        ui->timeLeft->show();
+        ui->timeAllocated->show();
+        ui->timeTotal->show();
         ui->label->show();
     }else{
         ui->label->hide();
-        ui->timeLeft->hide();
+        ui->timeAllocated->hide();
+        ui->timeTotal->hide();
     }
 }
 
@@ -499,43 +501,41 @@ void ShiftEditForm::TimeLeft(){
 
 
     int minutes = format_time_length(indt,outdt);
-
-
-
-    for(int i =0;i < ui->Sections->rowCount(); i++){
-
-        QString item = ui->Sections->item(i,2)->text();
-        minutes-=(item.split(":")[0].toInt()*60);
-        minutes-=item.split(":")[1].toInt();
-    }
-//    QString lunch = ui->Lunch->currentText();
-//    minutes-=(lunch.split(":")[0].toInt()*60);
-//    minutes-=lunch.split(":")[1].toInt();
     minutes-=ui->Lunch->time().hour()*60;
     minutes-=ui->Lunch->time().minute();
-    bool negative = false;
-    if( minutes<0){
-        negative = true;
+
+
+    ui->timeTotal->setText(minutesToTimeString(minutes));
+    int minutesAllocated = 0;
+    for(int i =0;i < ui->Sections->rowCount(); i++){
+        QString item = ui->Sections->item(i,2)->text();
+        minutesAllocated+=(item.split(":")[0].toInt()*60);
+        minutesAllocated+=item.split(":")[1].toInt();
     }
-    int hours = minutes/60;
-    minutes=minutes%60;
-    QString j;
-    hours = qAbs(hours);
-    minutes = qAbs(minutes);
-    if(negative){
-        j="-";
+    ui->timeAllocated->setText(minutesToTimeString(minutesAllocated));
+    //for ease of calculating whether this form is completed
+    if(minutes > minutesAllocated){
+        timeStatus = -1;
+    }else if(minutes < minutesAllocated){
+        timeStatus = 1;
+    }else{
+        timeStatus = 0;
     }
-    else{
-        j="";
-    }
-    if(minutes==0){
-        j += QString::number(hours)+":"+QString::number(minutes)+"0";
-    }
+
+}
+QString ShiftEditForm::minutesToTimeString(int m){
+    qDebug()<<m;
+    QString time = "";
+    time += QString::number(qAbs(m/60));
+    qDebug()<<time << qAbs(m/60);
+    time += ":";
+    if(qAbs(m%60) < 10)
+        time += QString::number(qAbs(m%60))+"0";
     else
-        j += QString::number(hours)+":"+QString::number(minutes);
-
-    ui->timeLeft->setText(j);
-
+        time += QString::number(qAbs(m%60));
+    if(m < 0)
+        return "-" + time;
+    return time;
 }
 
 
@@ -591,10 +591,8 @@ void ShiftEditForm::on_Add_clicked()
         TimeLeft();
         ui->Items->clearEditText();
         ui->Projects->clearEditText();
-        if(ui->timeLeft->text() == "0:00")
+        if(ui->timeAllocated->text() == ui->timeTotal->text())
             ui->FinishedButton->setFocus();
-        else if (ui->timeLeft->text().split(":")[0] == "0")
-            ui->Lunch->setFocus();
         else
             ui->Projects->setFocus();
     }
@@ -628,10 +626,8 @@ void ShiftEditForm::on_Edit_clicked()
         TimeLeft();
         ui->Items->clearEditText();
         ui->Projects->clearEditText();
-        if(ui->timeLeft->text() == "0:00")
+        if(ui->timeAllocated->text() == ui->timeTotal->text())
             ui->FinishedButton->setFocus();
-        else if (ui->timeLeft->text().split(":")[0] == "0")
-            ui->Lunch->setFocus();
         else
             ui->Projects->setFocus();
 
@@ -726,12 +722,15 @@ void ShiftEditForm::on_FinishedButton_clicked()
 {
     if(data.open()){
         if(ui->tabWidget->currentIndex()==0){
+            QTime *allocatedTime = new QTime(ui->timeAllocated->text().split(":")[0].toInt(),ui->timeAllocated->text().split(":")[1].toInt());
+            QTime *totalTime = new QTime(ui->timeTotal->text().split(":")[0].toInt(),ui->timeTotal->text().split(":")[1].toInt());
+            qDebug()<<*allocatedTime<<*totalTime;
             if(ui->Name->currentText()=="")
             {
                 ui->error->setText("Invalid: Select Employee");
             }
-            else if(ui->timeLeft->text()!= "0:00"){
-                if(ui->timeLeft->text().split(":")[0].toInt()>0){
+            else if(timeStatus != 0){
+                if(timeStatus == -1){
                     ui->error->setText("Invalid: Too Little Time on Timesheet");
                 }
                 else{

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'shifteditform.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -74,8 +74,9 @@ public:
     QTableWidget *Sections;
     QWidget *bottom;
     QHBoxLayout *horizontalLayout_2;
+    QLabel *timeAllocated;
     QLabel *label;
-    QLabel *timeLeft;
+    QLabel *timeTotal;
     QSpacerItem *horizontalSpacer_3;
     QLabel *error;
     QSpacerItem *horizontalSpacer;
@@ -447,15 +448,20 @@ public:
         bottom->setObjectName(QStringLiteral("bottom"));
         horizontalLayout_2 = new QHBoxLayout(bottom);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        timeAllocated = new QLabel(bottom);
+        timeAllocated->setObjectName(QStringLiteral("timeAllocated"));
+
+        horizontalLayout_2->addWidget(timeAllocated);
+
         label = new QLabel(bottom);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout_2->addWidget(label);
 
-        timeLeft = new QLabel(bottom);
-        timeLeft->setObjectName(QStringLiteral("timeLeft"));
+        timeTotal = new QLabel(bottom);
+        timeTotal->setObjectName(QStringLiteral("timeTotal"));
 
-        horizontalLayout_2->addWidget(timeLeft);
+        horizontalLayout_2->addWidget(timeTotal);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -589,7 +595,7 @@ public:
 
         retranslateUi(ShiftEditForm);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         FinishedButton->setDefault(false);
 
 
@@ -598,28 +604,29 @@ public:
 
     void retranslateUi(QWidget *ShiftEditForm)
     {
-        ShiftEditForm->setWindowTitle(QApplication::translate("ShiftEditForm", "Shift Edit", Q_NULLPTR));
-        label_3->setText(QApplication::translate("ShiftEditForm", "Name:", Q_NULLPTR));
-        label_4->setText(QApplication::translate("ShiftEditForm", "Project:", Q_NULLPTR));
-        label_5->setText(QApplication::translate("ShiftEditForm", "Task:", Q_NULLPTR));
-        Description_label->setText(QApplication::translate("ShiftEditForm", "Notes:", Q_NULLPTR));
-        label_7->setText(QApplication::translate("ShiftEditForm", "Time Worked:", Q_NULLPTR));
-        Times->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
-        Add->setText(QApplication::translate("ShiftEditForm", "Add", Q_NULLPTR));
-        Edit->setText(QApplication::translate("ShiftEditForm", "Edit", Q_NULLPTR));
-        Delete->setText(QApplication::translate("ShiftEditForm", "Delete", Q_NULLPTR));
-        label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", Q_NULLPTR));
-        Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
-        label->setText(QApplication::translate("ShiftEditForm", "Time Left:", Q_NULLPTR));
-        timeLeft->setText(QString());
+        ShiftEditForm->setWindowTitle(QApplication::translate("ShiftEditForm", "Shift Edit", nullptr));
+        label_3->setText(QApplication::translate("ShiftEditForm", "Name:", nullptr));
+        label_4->setText(QApplication::translate("ShiftEditForm", "Project:", nullptr));
+        label_5->setText(QApplication::translate("ShiftEditForm", "Task:", nullptr));
+        Description_label->setText(QApplication::translate("ShiftEditForm", "Notes:", nullptr));
+        label_7->setText(QApplication::translate("ShiftEditForm", "Time Worked:", nullptr));
+        Times->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", nullptr));
+        Add->setText(QApplication::translate("ShiftEditForm", "Add", nullptr));
+        Edit->setText(QApplication::translate("ShiftEditForm", "Edit", nullptr));
+        Delete->setText(QApplication::translate("ShiftEditForm", "Delete", nullptr));
+        label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", nullptr));
+        Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", nullptr));
+        timeAllocated->setText(QString());
+        label->setText(QApplication::translate("ShiftEditForm", "/", nullptr));
+        timeTotal->setText(QString());
         error->setText(QString());
-        RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", Q_NULLPTR));
-        FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
-        CancelButton->setText(QApplication::translate("ShiftEditForm", "Cancel", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ShiftEditForm", "Complete Shift", Q_NULLPTR));
-        FinishButton2->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
-        CancelButton2->setText(QApplication::translate("ShiftEditForm", "Cancel", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ShiftEditForm", "Clockin ", Q_NULLPTR));
+        RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", nullptr));
+        FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", nullptr));
+        CancelButton->setText(QApplication::translate("ShiftEditForm", "Cancel", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ShiftEditForm", "Complete Shift", nullptr));
+        FinishButton2->setText(QApplication::translate("ShiftEditForm", "Finish", nullptr));
+        CancelButton2->setText(QApplication::translate("ShiftEditForm", "Cancel", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ShiftEditForm", "Clockin ", nullptr));
     } // retranslateUi
 
 };
