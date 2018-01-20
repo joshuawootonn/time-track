@@ -74,13 +74,9 @@ public:
     QTableWidget *Sections;
     QWidget *bottom;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *timeAllocated;
-    QLabel *label;
-    QLabel *timeTotal;
-    QSpacerItem *horizontalSpacer_3;
     QLabel *label_2;
-    QLabel *timeWeek;
-    QSpacerItem *horizontalSpacer_7;
+    QLabel *timeLeft;
+    QSpacerItem *horizontalSpacer_3;
     QLabel *error;
     QSpacerItem *horizontalSpacer;
     QPushButton *RefreshButton;
@@ -451,38 +447,19 @@ public:
         bottom->setObjectName(QStringLiteral("bottom"));
         horizontalLayout_2 = new QHBoxLayout(bottom);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        timeAllocated = new QLabel(bottom);
-        timeAllocated->setObjectName(QStringLiteral("timeAllocated"));
-
-        horizontalLayout_2->addWidget(timeAllocated);
-
-        label = new QLabel(bottom);
-        label->setObjectName(QStringLiteral("label"));
-
-        horizontalLayout_2->addWidget(label);
-
-        timeTotal = new QLabel(bottom);
-        timeTotal->setObjectName(QStringLiteral("timeTotal"));
-
-        horizontalLayout_2->addWidget(timeTotal);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_3);
-
         label_2 = new QLabel(bottom);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
-        timeWeek = new QLabel(bottom);
-        timeWeek->setObjectName(QStringLiteral("timeWeek"));
+        timeLeft = new QLabel(bottom);
+        timeLeft->setObjectName(QStringLiteral("timeLeft"));
 
-        horizontalLayout_2->addWidget(timeWeek);
+        horizontalLayout_2->addWidget(timeLeft);
 
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addItem(horizontalSpacer_7);
+        horizontalLayout_2->addItem(horizontalSpacer_3);
 
         error = new QLabel(bottom);
         error->setObjectName(QStringLiteral("error"));
@@ -633,11 +610,8 @@ public:
         Delete->setText(QApplication::translate("ShiftEditForm", "Delete", Q_NULLPTR));
         label_6->setText(QApplication::translate("ShiftEditForm", "Lunch Taken:", Q_NULLPTR));
         Lunch->setDisplayFormat(QApplication::translate("ShiftEditForm", "hh:mm", Q_NULLPTR));
-        timeAllocated->setText(QString());
-        label->setText(QApplication::translate("ShiftEditForm", "/", Q_NULLPTR));
-        timeTotal->setText(QString());
-        label_2->setText(QApplication::translate("ShiftEditForm", "Week Total: ", Q_NULLPTR));
-        timeWeek->setText(QString());
+        label_2->setText(QApplication::translate("ShiftEditForm", "Time Left: ", Q_NULLPTR));
+        timeLeft->setText(QString());
         error->setText(QString());
         RefreshButton->setText(QApplication::translate("ShiftEditForm", "Refresh", Q_NULLPTR));
         FinishedButton->setText(QApplication::translate("ShiftEditForm", "Finish", Q_NULLPTR));
