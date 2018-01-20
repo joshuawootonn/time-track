@@ -46,8 +46,6 @@ void ExportForm::EmployeeInitialize(){
     comp->setCompletionMode(QCompleter::PopupCompletion);
     comp->setCaseSensitivity(Qt::CaseInsensitive);
     ui->ExcelTableName->setCurrentText("");
-
-
 }
 void ExportForm::on_buttonBox_accepted()
 {

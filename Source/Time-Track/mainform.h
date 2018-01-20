@@ -193,6 +193,8 @@ private slots:
     void on_SettingsFull_clicked();
     void on_SettingsExport_clicked();
     void exportToExcel();
+    QString minutesToTimeString(int m);
+    int TimeStringToMinutes(QString time);
     void on_SettingsPrint_clicked();
     void on_SettingsAll_clicked();
     void on_SettingsConnections_clicked();
