@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: aacidatabase
+-- Host: localhost    Database: time-track-database
 -- ------------------------------------------------------
--- Server version	5.7.21-log
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -49,7 +49,6 @@ DROP TABLE IF EXISTS `employeelist`;
 CREATE TABLE `employeelist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `crew` varchar(45) DEFAULT NULL,
   `pin` int(11) NOT NULL,
   `adminstatus` int(11) NOT NULL,
   `shiftcount` int(11) NOT NULL,
@@ -67,7 +66,7 @@ CREATE TABLE `employeelist` (
 
 LOCK TABLES `employeelist` WRITE;
 /*!40000 ALTER TABLE `employeelist` DISABLE KEYS */;
-INSERT INTO `employeelist` VALUES (64,'Admin','asdfwe',111111,1,10,0,1),(69,'Employee','asdffasd',222222,0,17,0,1);
+INSERT INTO `employeelist` VALUES (64,'Admin',111111,1,18,0,1),(69,'Employee',222222,0,17,0,1);
 /*!40000 ALTER TABLE `employeelist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +85,7 @@ CREATE TABLE `itemlist` (
   `dimension` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +167,7 @@ CREATE TABLE `projectlist` (
   `current` varchar(45) NOT NULL,
   `date` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +204,7 @@ CREATE TABLE `shiftlist` (
   `shiftid` int(11) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +213,7 @@ CREATE TABLE `shiftlist` (
 
 LOCK TABLES `shiftlist` WRITE;
 /*!40000 ALTER TABLE `shiftlist` DISABLE KEYS */;
-INSERT INTO `shiftlist` VALUES (73,64,21,27,'Admin','Project 1','Item 5','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',1,NULL),(74,69,22,25,'Employee','Project 2','Other','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',2,'Worked on unlisted items'),(78,64,21,22,'Admin','Project 1','Item 1','06:30:00.000','18:30:00.000','2018-01-16','2018-01-16','0:00','12:00',6,NULL),(79,64,21,22,'Admin','Project 1','Item 1','06:30:00.000','18:30:00.000','2018-01-16','2018-01-16','0:00','12:00',7,NULL),(80,64,21,22,'Admin','Project 1','Item 1','06:30:00.000','18:30:00.000','2018-01-16','2018-01-16','0:00','12:00',8,NULL),(81,64,21,22,'Admin','Project 1','Item 1','06:30:00.000','18:30:00.000','2018-01-16','2018-01-16','0:00','12:00',9,NULL);
+INSERT INTO `shiftlist` VALUES (73,64,21,27,'Admin','Project 1','Item 5','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',1,NULL),(74,69,22,25,'Employee','Project 2','Other','06:30:00.000','18:30:00.000','2017-08-04','2017-08-04','0:00','12:00',2,'Worked on unlisted items');
 /*!40000 ALTER TABLE `shiftlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,4 +250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-20 12:19:52
+-- Dump completed on 2017-08-04 13:42:19
