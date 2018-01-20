@@ -2147,14 +2147,11 @@ void MainForm::exportToExcel(){
     if(TabletoExport == "Shift")
     {
         QSqlQuery * qry = new QSqlQuery(data);
-
+        doc.addSheet(Name);
         doc.write(1,1,"AACI - Time Sheet");
         doc.write(2,1,"Employee: " + Name);
         doc.write(3,1,"Period: "+To.toString("yyyy/M/dd")+" - "+ From.toString("yyyy/M/dd"));
-
         doc.setRowFormat(1,1,title);
-
-
         doc.setRowFormat(2,3,label);
         qry->clear();
         QString q = "SELECT * FROM shiftlist WHERE datein >='"+To.toString("yyyy-M-dd")+"' AND datein <='"+From.toString("yyyy-M-dd")+"'"
@@ -2162,80 +2159,83 @@ void MainForm::exportToExcel(){
 
         qry->prepare(q);
         int rowLocation =0;
+
         if(qry->exec())
         {
             int i =0;
-            QHash<QString, QString> hash;
+            int total = 0;
+            QHash<QString, int> otHash;
+            QHash<QString, int> hash;
+
             while(qry->next())
             {
-                QString tot = hash["Total"];
-                QString val = hash[qry->value(5).toString()];
-                if(val == "")
-                    val="0:00";
-                if(tot == "")
-                    tot="0:00";
+                int tot = hash["Total"];
+                int ot = otHash["Total"];
+                int regval = hash[qry->value(5).toString()];
+                int otval = otHash[qry->value(5).toString()];
                 QString time = qry->value(12).toString();
 
+                if(tot >= 2400){
+                    otHash[qry->value(5).toString()] = TimeStringToMinutes(time)+otval;
+                    ot +=TimeStringToMinutes(time);
 
-
-
-
-
-
-                if(time != ""){
-                    int h = val.split(":")[0].toInt() + time.split(":")[0].toInt();
-                    int m = h*60 + val.split(":")[1].toInt() + time.split(":")[1].toInt();
-                    time = QString::number(m/60)+":"+QString::number(m%60);
+                }else if(tot + TimeStringToMinutes(time) < 2400){
+                    hash[qry->value(5).toString()] = TimeStringToMinutes(time)+regval;
+                    tot +=TimeStringToMinutes(time);
                 }else{
-                    time = "0:00";
+                    int timeLeft = 2400 - tot;
+                    hash[qry->value(5).toString()] = timeLeft+regval;
+                    otHash[qry->value(5).toString()] = TimeStringToMinutes(time) - timeLeft;
+                    tot += timeLeft;
+                    ot += TimeStringToMinutes(time) - timeLeft;
                 }
-
-                hash[qry->value(5).toString()] = time;
-
-                time = qry->value(12).toString();
-
-                int th = tot.split(":")[0].toInt();
-                int tm = th*60 + tot.split(":")[1].toInt();
-                if(time != ""){
-                    th = tot.split(":")[0].toInt() + time.split(":")[0].toInt();
-                    tm = th*60 + tot.split(":")[1].toInt() +time.split(":")[1].toInt();
-                }
-
-
-                time = QString::number(tm/60)+":"+QString::number(tm%60);
-
-                hash["Total"] = time;
+                total = ot+tot;
+                hash["Total"] = tot;
+                otHash["Total"] = ot;
                 i++;
             }
+
             doc.setRowFormat(5,5,subtitle);
             doc.setRowFormat(6,6,label);
             doc.write(5,1,"Summary");
             doc.write(6,1,"Project");
+            doc.write(6,6,"Reg");
+            doc.write(6,7,"OT");
             doc.write(6,8,"Time");
             rowLocation =7;
-            QHashIterator<QString, QString> j(hash);
-            while (j.hasNext()) {
-                j.next();
-                if(j.key() != "Total"){
-                    doc.write(rowLocation,1,j.key());
-                    doc.write(rowLocation,8,j.value());
+            QList<QString> allPlaces = hash.keys();
+            allPlaces.append(otHash.keys());
+            QSet<QString> allPlacesWithoutDups = QSet<QString>::fromList(allPlaces);
+            QSetIterator<QString> allPlacesIter(allPlacesWithoutDups);
+            while(allPlacesIter.hasNext()){
+                QString place = allPlacesIter.next();
+                if(place != "Total" && place != ""){
+                    doc.write(rowLocation,1,place);
+                    if(hash[place]!= 0)
+                        doc.write(rowLocation,6,minutesToTimeString(hash[place]));
+                    if(otHash[place]!= 0)
+                        doc.write(rowLocation,7,minutesToTimeString(otHash[place]));
+                    doc.write(rowLocation,8,minutesToTimeString(hash[place]+otHash[place]));
                     rowLocation++;
                 }
             }
             doc.setRowFormat(rowLocation,rowLocation,label);
             doc.write(rowLocation,1,"Total");
-            doc.write(rowLocation,8,hash["Total"]);
+            doc.write(rowLocation,6,minutesToTimeString(hash["Total"]));
+            doc.write(rowLocation,7,minutesToTimeString(otHash["Total"]));
+            doc.write(rowLocation,8,minutesToTimeString(total));
             rowLocation++;
-        }else
-        {
+        }else{
             doc.write(5,1,"No project selected in the project tab. Please do so, and try again.");
         }
+
+        int colLength[] = {7,4,8,9,4,5,4};
         if(qry->exec()){
+            int total = 0;
             rowLocation+=3;
             doc.setRowFormat(rowLocation,rowLocation,subtitle);
             doc.write(rowLocation,1,"Details");
             rowLocation++;
-            int colLength[] = {7,4,8,9,4,5,4};
             doc.setRowFormat(rowLocation,rowLocation,label);
             doc.write(rowLocation,1,"Project");
             doc.write(rowLocation,2,"Item");
@@ -2243,10 +2243,10 @@ void MainForm::exportToExcel(){
             doc.write(rowLocation,4,"Clock Out");
             doc.write(rowLocation,5,"Date");
             doc.write(rowLocation,6,"Lunch");
-            doc.write(rowLocation,8,"Time");
+            doc.write(rowLocation,7,"Reg");
+            doc.write(rowLocation,8,"OT");
             rowLocation++;
             while(qry->next()){
-
                 if(qry->value(5).toString().length() > colLength[0]){ colLength[0] = qry->value(5).toString().length();}
                 doc.write(rowLocation,1, qry->value(5).toString());
                 if(qry->value(6).toString().length() > colLength[1]){ colLength[1] = qry->value(6).toString().length();}
@@ -2260,17 +2260,31 @@ void MainForm::exportToExcel(){
                 if(qry->value(11).toString().length() > colLength[5]){ colLength[5] = qry->value(11).toString().length();}
                 doc.write(rowLocation,6, qry->value(11).toString());
                 if(qry->value(12).toString().length() > colLength[6]){ colLength[6] = qry->value(12).toString().length();}
-                doc.write(rowLocation,8, qry->value(12).toString());
+                int minutes = TimeStringToMinutes(qry->value(12).toString());
+                if(total+minutes <=2400)
+                    doc.write(rowLocation,7, qry->value(12).toString());
+                else if(total > 2400)
+                    doc.write(rowLocation,8, qry->value(12).toString());
+                else{
+                    doc.write(rowLocation,7, minutesToTimeString(2400-total));
+                    doc.write(rowLocation,8, minutesToTimeString(minutes-2400+total));
+                }
+                total+=minutes;
                 rowLocation++;
             }
-            doc.setColumnWidth(1,1,colLength[0]+2);
-            doc.setColumnWidth(2,2,colLength[1]+2);
-            doc.setColumnWidth(3,3,colLength[2]+2);
-            doc.setColumnWidth(4,4,colLength[3]+2);
-            doc.setColumnWidth(5,5,colLength[4]+2);
-            doc.setColumnWidth(6,6,colLength[5]+2);
-            doc.setColumnWidth(8,8,colLength[6]+2);
         }
+        doc.setColumnWidth(1,1,colLength[0]+2);
+        doc.setColumnWidth(2,2,colLength[1]+2);
+        doc.setColumnWidth(3,3,colLength[2]+2);
+        doc.setColumnWidth(4,4,colLength[3]+2);
+        doc.setColumnWidth(5,5,colLength[4]+2);
+        doc.setColumnWidth(6,6,colLength[5]+2);
+        doc.setColumnWidth(8,8,colLength[6]+2);
+
+
+
+        doc.saveAs(FileToExport);
+
     }
     if(TabletoExport == "All Shifts"){
 
@@ -2315,16 +2329,10 @@ void MainForm::exportToExcel(){
                     int ot = otHash["Total"];
                     int regval = hash[qry->value(5).toString()];
                     int otval = otHash[qry->value(5).toString()];
-                    qDebug()<<"Values"<<regval<<otval<<qry->value(5).toString();
-
                     QString time = qry->value(12).toString();
 
-
                     if(tot >= 2400){
-                        qDebug()<<"Before: "<<otHash[qry->value(5).toString()];
-                        qDebug()<<TimeStringToMinutes(time)<<time<<otval;
                         otHash[qry->value(5).toString()] = TimeStringToMinutes(time)+otval;
-                        qDebug()<<"After: "<<otHash[qry->value(5).toString()];
                         ot +=TimeStringToMinutes(time);
 
                     }else if(tot + TimeStringToMinutes(time) < 2400){
@@ -2359,8 +2367,10 @@ void MainForm::exportToExcel(){
                     QString place = allPlacesIter.next();
                     if(place != "Total" && place != ""){
                         doc.write(rowLocation,1,place);
-                        doc.write(rowLocation,6,minutesToTimeString(hash[place]));
-                        doc.write(rowLocation,7,minutesToTimeString(otHash[place]));
+                        if(hash[place]!= 0)
+                            doc.write(rowLocation,6,minutesToTimeString(hash[place]));
+                        if(otHash[place]!= 0)
+                            doc.write(rowLocation,7,minutesToTimeString(otHash[place]));
                         doc.write(rowLocation,8,minutesToTimeString(hash[place]+otHash[place]));
                         rowLocation++;
                     }
@@ -2374,12 +2384,6 @@ void MainForm::exportToExcel(){
             }else{
                 doc.write(5,1,"No project selected in the project tab. Please do so, and try again.");
             }
-
-
-
-
-
-
 
             int colLength[] = {7,4,8,9,4,5,4};
             if(qry->exec()){
