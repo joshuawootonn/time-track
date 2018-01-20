@@ -288,6 +288,62 @@ void ClockoutForm::TimeLeft(){
     indt = QDateTime(QDate::fromString(datein,"yyyy-MM-dd"),QTime::fromString(timein,"HH:mm:ss"));
 
     int minutes = format_time_length(indt,outdt);
+    int shiftminutes = minutes;
+    QString lunch = ui->Lunch->currentText();
+    shiftminutes-=(lunch.split(":")[0].toInt()*60);
+    shiftminutes-=lunch.split(":")[1].toInt();
+
+    for(int i =0;i < ui->Sections->rowCount(); i++){
+
+
+        QString item = ui->Sections->item(i,2)->text();
+
+
+        minutes-=(item.split(":")[0].toInt()*60);
+        minutes-=item.split(":")[1].toInt();
+    }
+
+    minutes-=(lunch.split(":")[0].toInt()*60);
+    minutes-=lunch.split(":")[1].toInt();
+    bool negative = false;
+    if( minutes<0){
+        negative = true;
+    }
+    int hours = minutes/60;
+    minutes=minutes%60;
+
+    QString j;
+    hours = qAbs(hours);
+    minutes = qAbs(minutes);
+    if(negative){
+        j="-";
+    }
+    else{
+        j="";
+    }
+    if(minutes==0)
+        j += QString::number(hours)+":"+QString::number(minutes)+"0";
+    else
+        j += QString::number(hours)+":"+QString::number(minutes);
+
+    ui->timeLeft->setText(j);
+
+    int day = QDate::currentDate().dayOfWeek();
+    QString d1 = QDate::currentDate().addDays(-day).toString("yyyy-M-dd");
+    QString d2 = QDate::currentDate().addDays(6-day).toString("yyyy-M-dd");
+    int weekMinutes = 0;
+    qry.clear();
+    qry.prepare("SELECT time FROM shiftlist WHERE employeeid = '"+id+"' AND datein <='"+d2+"' AND datein >='"+d1+"'");
+    if(qry.exec())
+    {
+        while(qry.next())
+        {
+
+            weekMinutes += TimeStringToMinutes(qry.value(0).toString());
+        }
+    }
+    ui->timeWeek->setText(minutesToTimeString(weekMinutes+shiftminutes));
+    /*
     QString lunch = ui->Lunch->currentText();
     minutes-=(lunch.split(":")[0].toInt()*60);
     minutes-=lunch.split(":")[1].toInt();
@@ -312,7 +368,7 @@ void ClockoutForm::TimeLeft(){
 
     int weekMinutes = 0;
     qry.clear();
-    qry.prepare("SELECT time FROM shiftlist WHERE datein <='"+d2+"' AND datein >='"+d1+"'");
+    qry.prepare("SELECT time FROM shiftlist WHERE employeeid = '"+id+"' AND datein <='"+d2+"' AND datein >='"+d1+"'");
     if(qry.exec())
     {
         while(qry.next())
@@ -331,7 +387,7 @@ void ClockoutForm::TimeLeft(){
         timeStatus = 1;
     }else{
         timeStatus = 0;
-    }
+    }*/
 }
 QString ClockoutForm::minutesToTimeString(int m){
     QString time = "";

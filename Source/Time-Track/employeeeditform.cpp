@@ -154,7 +154,7 @@ QString EmployeeEditForm::AddValid(){
         error = "Invalid Name: Minimum length 5";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Must be Letters only";
-    else if (!name_regrex.exactMatch(ui->crew->currentText()))
+    else if (ui->crew->currentText() != "" && !name_regrex.exactMatch(ui->crew->currentText()))
        error = "Invalid Crew: Must be Letters only";
     else if(ui->pin->text().length() < 4)
        error = "Invalid Pin: Minimum length 4";
@@ -171,7 +171,7 @@ QString EmployeeEditForm::EditValid(){
         error = "Invalid Name: Minimum length 5";
     else if (!name_regrex.exactMatch(ui->name->text()))
        error = "Invalid Name: Must be Letters only";
-    else if (!name_regrex.exactMatch(ui->crew->currentText()))
+    else if (ui->crew->currentText() != "" && !name_regrex.exactMatch(ui->crew->currentText()))
        error = "Invalid Crew: Must be Letters only";
     else if(ui->pin->text().length() < 4)
        error = "Invalid Pin: Minimum length 4";

@@ -363,7 +363,7 @@ void MainForm::basicInitialize()
             active = qry.value(0).toString();
         }
     }
-
+    qDebug()<<"HEY"<<active;
     if(active == "1")
     {
        ui->basicPageClockIn->hide();
@@ -662,6 +662,7 @@ QDateTime MainForm::format_datetimes(QDateTime z)
 void MainForm::on_passEdit_returnPressed()
 {
     if(data.open()){
+
         pin= ui->passEdit->text();
         QSqlQuery qry1(data),qry2(data);
         qry1.prepare("SELECT current FROM employeelist where pin = '"+pin+"'");
@@ -672,6 +673,7 @@ void MainForm::on_passEdit_returnPressed()
             while(qry1.next())
             {
                 current = qry1.value(0).toString();
+
                 count++;
             }
             if(count == 1 && current=="1")
