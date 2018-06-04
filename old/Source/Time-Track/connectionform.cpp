@@ -196,7 +196,7 @@ void ConnectionForm::on_ipEdit_currentTextChanged(const QString &arg1)
 {
     if(arg1 == "Custom"){
         ui->ipeditwidget->show();
-    }else if(arg1 == "Office"){
+    }else if(arg1 == "Office"){        
         ip = "192.168.41.184";
         ui->ipeditwidget->hide();
     }else if(arg1 == "Shop"){
