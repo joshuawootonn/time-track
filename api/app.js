@@ -1,5 +1,17 @@
 var Sequelize = require('sequelize');
+const app = require('express')();
 require('dotenv').config()
+
+
+
+
+
+
+
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // var connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
 //   host: process.env.DB_HOST,
@@ -41,22 +53,3 @@ require('dotenv').config()
 
 
 
-var SequelizeAuto = require('sequelize-auto')
-var auto = new SequelizeAuto(process.env.DB_SCHEMA, process.env.DB_USER, process.env.DB_PASS);
-
-auto.run(function (err) {
-  if (err) throw err;
-  console.log(auto.tables); // table list
-  console.log(auto.foreignKeys); // foreign key list
-});
-
-
-// var SequelizeAuto = require('sequelize-auto')
-// var auto = new SequelizeAuto('timetrack', 'root', '5656');
-
-// auto.run(function (err) {
-//   if (err) throw err;
-
-//   console.log(auto.tables); // table list
-//   console.log(auto.foreignKeys); // foreign key list
-// });
