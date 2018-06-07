@@ -1,26 +1,24 @@
+const Sequelize = require('sequelize');
 const express = require('express');
 const router = express.Router();
 const app = express();
 require('dotenv').config();
+
+
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 
-// var connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
-//   host: process.env.DB_HOST,
-//   dialect: process.env.DB_DIALECT
-// });
-// var Article = connection.define('article',{
-//   title: Sequelize.STRING,
-//   body: Sequelize.TEXT
-// })
+const connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
+  host: process.env.DB_HOST,
+  dialect: process.env.DB_DIALECT
+});
 
-// connection.sync();
+const seq = connection.sync();
 
-
-require('./routes/employee')(router,"db");
+const routes = require('./routes/authority.route')(router);
 app.use('/api',router);
 app.get('/', (req, res) => res.send('Hello World!'));
 

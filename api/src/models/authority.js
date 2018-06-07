@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     {
       id: {
         type: DataTypes.INTEGER(11),
-        allowNull: false,
+        //allowNull: false,
         primaryKey: true,
       },
       type: {
@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'authority',
+      timestamps: false,
     },
   );
 };
