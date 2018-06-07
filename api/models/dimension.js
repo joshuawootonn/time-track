@@ -2,12 +2,13 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    'category',
+    'dimension',
     {
       id: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true,        
+        autoIncrement: true
       },
       type: {
         type: DataTypes.STRING(45),
@@ -15,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     {
-      tableName: 'category',
+      tableName: 'dimension',
       timestamps: false,
     },
   );

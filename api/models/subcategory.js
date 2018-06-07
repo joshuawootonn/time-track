@@ -2,33 +2,39 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    'task',
+    'subcategory',
     {
       id: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true,        
+        autoIncrement: true
       },
-      name: {
+      type: {
         type: DataTypes.STRING(45),
         allowNull: false,
         unique: true,
       },
-      is_active: {
-        type: DataTypes.INTEGER(4),
-        allowNull: true,
-      },
-      subcategory_id: {
+      category_id: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
         references: {
-          model: 'subcategory',
+          model: 'category',
+          key: 'id',
+        },
+      },
+      dimension_id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'dimension',
           key: 'id',
         },
       },
     },
     {
-      tableName: 'task',
+      tableName: 'subcategory',
       timestamps: false,
     },
   );

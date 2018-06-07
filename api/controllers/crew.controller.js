@@ -2,6 +2,7 @@
 
 const models = require('../models')
 exports.create = (req, res) => {
+  console.log(req.body)
   models.crew.create({
     name: req.body.name
   }).then(() => {

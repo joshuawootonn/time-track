@@ -11,14 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 
-const connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT
-});
-
-const seq = connection.sync();
-
-const routes = require('./routes/authority.route')(router);
+require('./routes/authority.route')(router);
 require('./routes/crew.route')(router);
 require('./routes/employee.route')(router)
 app.use('/api',router);

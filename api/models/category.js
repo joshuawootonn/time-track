@@ -2,20 +2,21 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    'authority',
+    'category',
     {
       id: {
         type: DataTypes.INTEGER(11),
-        //allowNull: false,
-        primaryKey: true,
+        allowNull: false,
+        primaryKey: true,        
+        autoIncrement: true
       },
       type: {
         type: DataTypes.STRING(45),
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
-      tableName: 'authority',
+      tableName: 'category',
       timestamps: false,
     },
   );

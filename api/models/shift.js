@@ -7,7 +7,8 @@ module.exports = function(sequelize, DataTypes) {
       id: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true,        
+        autoIncrement: true
       },
       clock_in_date: {
         type: DataTypes.DATE,

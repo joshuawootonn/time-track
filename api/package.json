@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "refresh-models": "node src/config/sequelize_refresh.js",
-    "start": "node src/index",
-    "watch": "nodemon src/index",
-    "db:migrate": "babel-node ./scripts/db/migrate",
-    "pretest": "npm run db:migrate",
-    "test": "jest",
+    "start": "cross-env NODE_ENV=development node index",
+    "watch": "cross-env NODE_ENV=development nodemon index",
+    "pretest": "cross-env NODE_ENV=test npm run migrate",
+    "migrate":"cross-env NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest",
     "lint": "eslint --fix ./src"
   },
   "author": "Joshua Wootonn",
@@ -17,6 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "child-process-promise": "^2.2.1",
+    "cross-env": "^5.1.6",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mysql": "^2.15.0",

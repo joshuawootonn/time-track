@@ -6,13 +6,14 @@ module.exports = function(sequelize, DataTypes) {
     {
       id: {
         type: DataTypes.INTEGER(11),
-        //allowNull: false,
-        primaryKey: true,
+        allowNull: true,
+        primaryKey: true,        
+        autoIncrement: true
       },
       name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        unique: true,
+        unique: false,
       },
     },
     {

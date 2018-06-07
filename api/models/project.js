@@ -2,20 +2,29 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    'dimension',
+    'project',
     {
       id: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true,        
+        autoIncrement: true
       },
-      type: {
+      name: {
         type: DataTypes.STRING(45),
+        allowNull: true,
+      },
+      is_active: {
+        type: DataTypes.INTEGER(4),
+        allowNull: true,
+      },
+      date: {
+        type: DataTypes.DATE,
         allowNull: true,
       },
     },
     {
-      tableName: 'dimension',
+      tableName: 'project',
       timestamps: false,
     },
   );

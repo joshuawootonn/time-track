@@ -1,15 +1,19 @@
+'use strict';
 
 var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(__filename);
-require('dotenv').config();
+var env       = process.env.NODE_ENV || 'development';
+var config    = require('../config/config.json')[env];
 var db        = {};
 
-const sequelize = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
-  host: process.env.DB_HOST,
-  dialect: process.env.DB_DIALECT
-});
+
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
 fs
   .readdirSync(__dirname)
@@ -26,6 +30,8 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+//sequelize.sync({force:true});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
