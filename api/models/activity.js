@@ -1,7 +1,7 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('shift_section', {
+	return sequelize.define('activity', {
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
@@ -23,23 +23,23 @@ module.exports = function(sequelize, DataTypes) {
 				key: 'id'
 			}
 		},
-		task_id: {
+		project_task_task_id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
 			references: {
-				model: 'task',
-				key: 'id'
+				model: 'project_task',
+				key: 'task_id'
 			}
 		},
-		project_id: {
+		project_task_project_id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
 			references: {
-				model: 'project',
-				key: 'id'
+				model: 'project_task',
+				key: 'project_id'
 			}
 		}
 	}, {
-		tableName: 'shift_section'
+		tableName: 'activity'
 	});
 };

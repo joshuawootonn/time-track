@@ -24,19 +24,20 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER(4),
 			allowNull: false
 		},
-		crew_id: {
-			type: DataTypes.INTEGER(11),
-			allowNull: false,
-			references: {
-				model: 'crew',
-				key: 'id'
-			}
-		},
 		authority_id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
 			references: {
 				model: 'authority',
+				key: 'id'
+			}
+		},
+		crew_id: {
+			type: DataTypes.INTEGER(11),
+			allowNull: false,
+			primaryKey: true,
+			references: {
+				model: 'crew',
 				key: 'id'
 			}
 		}
