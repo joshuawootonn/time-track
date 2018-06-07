@@ -7,6 +7,8 @@
     "refresh-models": "node src/config/sequelize_refresh.js",
     "start": "node src/index",
     "watch": "nodemon src/index",
+    "db:migrate": "babel-node ./scripts/db/migrate",
+    "pretest": "npm run db:migrate",
     "test": "jest",
     "lint": "eslint --fix ./src"
   },

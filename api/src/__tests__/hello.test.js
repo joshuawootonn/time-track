@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
-test('should pass integration tests', (done) => {
+test('Base Route Test', (done) => {
   request(app)
     .get('/')
     .expect(200, 'Hello World!')

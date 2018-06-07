@@ -3,15 +3,13 @@
 const models = require('../models')
 exports.create = (req, res) => {
   models.crew.create({
-    type: "crew1"
+    name: req.body.name
   }).then(() => {
-    res.send({ message: "Created crew" });
+    res.status(200).send({ message: "Created Crew" });
   }).catch((error) => {
     res.status(400).send({ message: error })
   })
-
-
-  //template.create(req.params.data);
+  console.log("create")
 };
 exports.find = (req, res) => {
   models.crew.find({
