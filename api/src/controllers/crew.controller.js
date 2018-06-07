@@ -14,7 +14,7 @@ exports.create = (req, res) => {
   //template.create(req.params.data);
 };
 exports.find = (req, res) => {
-  models.crew.create({
+  models.crew.find({
     type: "crew1"
   }).then(() => {
     res.send({ message: "Created crew" });

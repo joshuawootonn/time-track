@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "refresh-models": "node src/config/sequelize_refresh.js",
-    "start": "node src/app",
-    "watch": "nodemon src/app",    
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index",
+    "watch": "nodemon src/index",
+    "test": "jest",
     "lint": "eslint --fix ./src"
   },
   "author": "Joshua Wootonn",
@@ -28,6 +28,9 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "prettier": "^1.13.4"
+    "jest": "^23.1.0",
+    "prettier": "^1.13.4",
+    "supertest": "^3.1.0",
+    "supertest-as-promised": "^4.0.2"
   }
 }
