@@ -1,10 +1,12 @@
-//var Sequelize = require('sequelize');
-const app = require('express')();
+const express = require('express');
+const router = express.Router();
+const app = express();
 require('dotenv').config();
 
-app.get('/', (req, res) => res.send('Hello World!'));
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
 // var connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,process.env.DB_PASS,{
 //   host: process.env.DB_HOST,
@@ -16,6 +18,17 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'));
 // })
 
 // connection.sync();
+
+
+require('./routes/employee')(router,"db");
+app.use('/api',router);
+app.get('/', (req, res) => res.send('Hello World!'));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
+
 
 // const mysql = require('mysql2');
 
