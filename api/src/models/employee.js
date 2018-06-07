@@ -6,12 +6,13 @@ module.exports = function(sequelize, DataTypes) {
     {
       id: {
         type: DataTypes.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
+        //allowNull: false,
+        primaryKey: true,        
       },
       name: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        unique:true
       },
       pin: {
         type: DataTypes.INTEGER(11),
@@ -46,6 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'employee',
+      timestamps: false,
     },
   );
 };

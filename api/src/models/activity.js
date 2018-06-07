@@ -44,6 +44,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'activity',
+      timestamps: false,
     },
   );
 };

@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'dimension',
+      timestamps: false,
     },
   );
 };

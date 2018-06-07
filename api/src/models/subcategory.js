@@ -34,6 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'subcategory',
+      timestamps: false,
     },
   );
 };

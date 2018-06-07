@@ -37,6 +37,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'project_task',
+      timestamps: false,
     },
   );
 };

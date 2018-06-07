@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'shift',
+      timestamps: false,
     },
   );
 };

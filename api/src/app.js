@@ -19,6 +19,8 @@ const connection = new Sequelize(process.env.DB_SCHEMA,process.env.DB_USER,proce
 const seq = connection.sync();
 
 const routes = require('./routes/authority.route')(router);
+require('./routes/crew.route')(router);
+require('./routes/employee.route')(router)
 app.use('/api',router);
 app.get('/', (req, res) => res.send('Hello World!'));
 
