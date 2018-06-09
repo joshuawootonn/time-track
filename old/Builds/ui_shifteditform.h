@@ -416,7 +416,7 @@ public:
         Lunch->setObjectName(QStringLiteral("Lunch"));
         Lunch->setMinimumSize(QSize(350, 0));
         Lunch->setMaximumSize(QSize(350, 16777215));
-        Lunch->setMaximumTime(QTime(1, 0, 0));
+        Lunch->setMaximumTime(QTime(6, 0, 0));
         Lunch->setCurrentSection(QDateTimeEdit::HourSection);
 
         horizontalLayout_8->addWidget(Lunch);

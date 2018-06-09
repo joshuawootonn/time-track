@@ -66,7 +66,9 @@ public:
     QLabel *error;
     QSpacerItem *horizontalSpacer;
     QLabel *label_6;
-    QComboBox *Lunch;
+    QComboBox *LunchHours;
+    QLabel *label;
+    QComboBox *LunchMinutes;
     QPushButton *FinishedButton;
     QPushButton *CancelButton;
 
@@ -419,13 +421,25 @@ public:
 
         horizontalLayout_2->addWidget(label_6);
 
-        Lunch = new QComboBox(bigwidger);
-        Lunch->setObjectName(QStringLiteral("Lunch"));
-        Lunch->setMinimumSize(QSize(140, 70));
-        Lunch->setMaximumSize(QSize(100, 16777215));
-        Lunch->setEditable(false);
+        LunchHours = new QComboBox(bigwidger);
+        LunchHours->setObjectName(QStringLiteral("LunchHours"));
+        LunchHours->setMinimumSize(QSize(100, 70));
+        LunchHours->setMaximumSize(QSize(100, 16777215));
+        LunchHours->setEditable(false);
 
-        horizontalLayout_2->addWidget(Lunch);
+        horizontalLayout_2->addWidget(LunchHours);
+
+        label = new QLabel(bigwidger);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        LunchMinutes = new QComboBox(bigwidger);
+        LunchMinutes->setObjectName(QStringLiteral("LunchMinutes"));
+        LunchMinutes->setMinimumSize(QSize(100, 70));
+        LunchMinutes->setMaximumSize(QSize(100, 16777215));
+
+        horizontalLayout_2->addWidget(LunchMinutes);
 
         FinishedButton = new QPushButton(bigwidger);
         FinishedButton->setObjectName(QStringLiteral("FinishedButton"));
@@ -455,8 +469,8 @@ public:
         QWidget::setTabOrder(Minutes, Add);
         QWidget::setTabOrder(Add, Edit);
         QWidget::setTabOrder(Edit, Delete);
-        QWidget::setTabOrder(Delete, Lunch);
-        QWidget::setTabOrder(Lunch, FinishedButton);
+        QWidget::setTabOrder(Delete, LunchHours);
+        QWidget::setTabOrder(LunchHours, FinishedButton);
         QWidget::setTabOrder(FinishedButton, CancelButton);
         QWidget::setTabOrder(CancelButton, Sections);
 
@@ -483,6 +497,7 @@ public:
         timeWeek->setText(QString());
         error->setText(QString());
         label_6->setText(QApplication::translate("ClockoutForm", "Lunch Taken:", Q_NULLPTR));
+        label->setText(QApplication::translate("ClockoutForm", ":", Q_NULLPTR));
         FinishedButton->setText(QApplication::translate("ClockoutForm", "Finish", Q_NULLPTR));
         CancelButton->setText(QApplication::translate("ClockoutForm", "Cancel", Q_NULLPTR));
     } // retranslateUi
