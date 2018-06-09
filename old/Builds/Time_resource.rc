@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\Joshua\\Dropbox\\Time-Track\\Source\\Time-Track\\icon.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\Joshua\\Dropbox\\Time-Track\\old\\Source\\Time-Track\\icon.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 0,0,0,0

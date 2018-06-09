@@ -309,6 +309,7 @@ void ClockoutForm::TimeLeft(){
     if( minutes<0){
         negative = true;
     }
+    int timeLeftInMinutes = minutes;
     int hours = minutes/60;
     minutes=minutes%60;
 
@@ -355,6 +356,7 @@ void ClockoutForm::TimeLeft(){
         minutesAllocated+=(item.split(":")[0].toInt()*60);
         minutesAllocated+=item.split(":")[1].toInt();
     }    
+
     ui->timeAllocated->setText(minutesToTimeString(minutesAllocated));
 
 
@@ -378,16 +380,16 @@ void ClockoutForm::TimeLeft(){
         }
     }
     ui->timeWeek->setText(minutesToTimeString(weekMinutes+minutes));
+    */
 
 
-
-    if(minutes > minutesAllocated){
+    if(timeLeftInMinutes > 0){
         timeStatus = -1;
-    }else if(minutes < minutesAllocated){
+    }else if(timeLeftInMinutes < 0){
         timeStatus = 1;
     }else{
         timeStatus = 0;
-    }*/
+    }
 }
 QString ClockoutForm::minutesToTimeString(int m){
     QString time = "";
