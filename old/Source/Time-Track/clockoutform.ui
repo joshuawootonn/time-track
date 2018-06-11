@@ -574,10 +574,10 @@ margin: 0px 0px 0px 0px;
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="Lunch">
+         <widget class="QComboBox" name="LunchHours">
           <property name="minimumSize">
            <size>
-            <width>140</width>
+            <width>100</width>
             <height>70</height>
            </size>
           </property>
@@ -589,6 +589,29 @@ margin: 0px 0px 0px 0px;
           </property>
           <property name="editable">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="LunchMinutes">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -634,7 +657,7 @@ margin: 0px 0px 0px 0px;
   <tabstop>Add</tabstop>
   <tabstop>Edit</tabstop>
   <tabstop>Delete</tabstop>
-  <tabstop>Lunch</tabstop>
+  <tabstop>LunchHours</tabstop>
   <tabstop>FinishedButton</tabstop>
   <tabstop>CancelButton</tabstop>
   <tabstop>Sections</tabstop>

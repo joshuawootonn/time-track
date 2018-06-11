@@ -198,6 +198,8 @@ void ClockoutForm::ItemInitialize(){
 }
 void ClockoutForm::TimesInitialize(){
     QSqlQuery* qry = new QSqlQuery(data);
+
+
     qry->prepare("Select time from timelist where idtimelist < 5 ORDER BY time");
     if(qry->exec())
     {
@@ -206,6 +208,7 @@ void ClockoutForm::TimesInitialize(){
                ui->Minutes->addItem(qry->value(0).toString());
            }
     }
+
     qry->clear();
     qry->prepare("Select time from timelist where idtimelist < 5 AND idtimelist <> 3 ORDER BY time");
     if(qry->exec())
@@ -213,11 +216,19 @@ void ClockoutForm::TimesInitialize(){
            while(qry->next())
            {
 
-               ui->Lunch->addItem("00:"+qry->value(0).toString());
+               ui->LunchMinutes->addItem(qry->value(0).toString());
 
            }
     }
-    ui->Lunch->addItem("01:00");
+    qry->clear();
+    qry->prepare("Select time from timelist where idtimelist >= 4 AND idtimelist <= 10");
+    if(qry->exec())
+    {
+           while(qry->next())
+           {
+               ui->LunchHours->addItem(qry->value(0).toString());
+           }
+    }
     qry->clear();
     qry->prepare("Select time from timelist where idtimelist >= 4 ORDER BY time");
     if(qry->exec())
@@ -242,10 +253,16 @@ void ClockoutForm::TimesInitialize(){
     }
     for (int i = 0 ; i < ui->Minutes->count() ; ++i) {
         ui->Minutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
-        ui->Lunch->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
     }
-    ui->Lunch->setCurrentIndex(2);
+    for (int i = 0 ; i < ui->LunchHours->count() ; ++i) {
+        ui->LunchHours->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+    }
+    for (int i = 0 ; i < ui->LunchMinutes->count() ; ++i) {
+        ui->LunchMinutes->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+    }
 
+    ui->LunchHours->setCurrentIndex(0);
+    ui->LunchMinutes->setCurrentIndex(2);
 
 
 }
@@ -289,26 +306,24 @@ void ClockoutForm::TimeLeft(){
 
     int minutes = format_time_length(indt,outdt);
     int shiftminutes = minutes;
-    QString lunch = ui->Lunch->currentText();
-    shiftminutes-=(lunch.split(":")[0].toInt()*60);
-    shiftminutes-=lunch.split(":")[1].toInt();
+    QString lunchHours = ui->LunchHours->currentText();
+    QString lunchMinutes = ui->LunchMinutes->currentText();
+    shiftminutes-=(lunchHours.toInt()*60);
+    shiftminutes-=lunchMinutes.toInt();
 
     for(int i =0;i < ui->Sections->rowCount(); i++){
-
-
         QString item = ui->Sections->item(i,2)->text();
-
-
         minutes-=(item.split(":")[0].toInt()*60);
         minutes-=item.split(":")[1].toInt();
     }
 
-    minutes-=(lunch.split(":")[0].toInt()*60);
-    minutes-=lunch.split(":")[1].toInt();
+    minutes-=(lunchHours.toInt()*60);
+    minutes-=lunchMinutes.toInt();
     bool negative = false;
     if( minutes<0){
         negative = true;
     }
+    int timeLeftInMinutes = minutes;
     int hours = minutes/60;
     minutes=minutes%60;
 
@@ -355,6 +370,7 @@ void ClockoutForm::TimeLeft(){
         minutesAllocated+=(item.split(":")[0].toInt()*60);
         minutesAllocated+=item.split(":")[1].toInt();
     }    
+
     ui->timeAllocated->setText(minutesToTimeString(minutesAllocated));
 
 
@@ -378,16 +394,16 @@ void ClockoutForm::TimeLeft(){
         }
     }
     ui->timeWeek->setText(minutesToTimeString(weekMinutes+minutes));
+    */
 
 
-
-    if(minutes > minutesAllocated){
+    if(timeLeftInMinutes > 0){
         timeStatus = -1;
-    }else if(minutes < minutesAllocated){
+    }else if(timeLeftInMinutes < 0){
         timeStatus = 1;
     }else{
         timeStatus = 0;
-    }*/
+    }
 }
 QString ClockoutForm::minutesToTimeString(int m){
     QString time = "";
@@ -534,10 +550,15 @@ void ClockoutForm::on_Sections_cellChanged()
 {
     TimeLeft();
 }
-void ClockoutForm::on_Lunch_currentTextChanged(const QString &arg1)
+void ClockoutForm::on_LunchHours_currentTextChanged(const QString &arg1)
 {
     TimeLeft();
 }
+void ClockoutForm::on_LunchMinutes_currentTextChanged(const QString &arg1)
+{
+    TimeLeft();
+}
+
 void ClockoutForm::on_Description_textChanged()
 {
     TimeLeft();
@@ -611,8 +632,7 @@ void ClockoutForm::on_FinishedButton_clicked()
                 hours=ui->Sections->item(i,2)->text();
                 QTime x = QTime(hours.split(":")[0].toInt(),hours.split(":")[1].toInt(),0);
                 hours = x.toString("h:mm");
-                lunch=ui->Lunch->currentText();//QString::number(ui->Lunch->time().hour())+":"+QString::number(ui->Lunch->time().minute());
-                QTime y = QTime(lunch.split(":")[0].toInt(),lunch.split(":")[1].toInt(),0);
+                QTime y = QTime(ui->LunchHours->currentText().toInt(),ui->LunchMinutes->currentText().toInt(),0);
                 lunch = y.toString("h:mm");
                 qry->clear();
                 description = ui->Sections->item(i,3)->text();
@@ -666,4 +686,5 @@ void ClockoutForm::on_Items_currentTextChanged(const QString &arg1)
         ui->DescriptionLabel->setVisible(false);
     }
 }
+
 

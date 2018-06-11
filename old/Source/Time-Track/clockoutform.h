@@ -45,7 +45,8 @@ private slots:
     void on_Delete_clicked();
     void on_Sections_cellClicked(int row, int column);
     void on_Sections_cellChanged();
-    void on_Lunch_currentTextChanged(const QString &arg1);
+    void on_LunchHours_currentTextChanged(const QString &arg1);
+    void on_LunchMinutes_currentTextChanged(const QString &arg1);
     void on_Description_textChanged();
     void on_FinishedButton_clicked();
     void on_CancelButton_clicked();
@@ -53,8 +54,9 @@ private slots:
 
 
     void on_Items_currentTextChanged(const QString &arg1);
-
     void on_Edit_clicked();
+
+
 
 signals:
     void finished();
