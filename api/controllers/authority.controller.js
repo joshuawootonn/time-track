@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   }).then(() => {
     res.send(200);
   }).catch((error) => {
-    res.status(400).send({ error: error })
+    res.status(400).send({ error })
   })
 };
 exports.findAll = (req, res) => {
@@ -17,7 +17,7 @@ exports.findAll = (req, res) => {
   .then((authorities) => {
     res.send(authorities);
   }).catch((error) => {
-    res.status(400).send({ error: error })
+    res.status(400).send({ error })
   })
 };
 exports.find = (req, res) => {
@@ -29,25 +29,32 @@ exports.find = (req, res) => {
   .then((authorities) => {
     res.send(authorities);
   }).catch((error) => {
-    res.status(400).send({ error: error })
+    res.status(400).send({ error })
   })
 };
 exports.update = (req, res) => {
-  models.authority.create({
-    type: "admin"
+  models.authority.update({
+    ...req.body
+  },{
+    where: {
+      id: req.params.id
+    }
   }).then(() => {
-    res.send({ message: "Created admin" });
+    res.send({ message: "Update admin" });
   }).catch(() => {
-    res.status(400).send({ message: "Not valid data" })
+    res.status(400).send({ error })
   })
 
 };
 exports.destroy = (req, res) => {
-  models.authority.create({
-    type: "admin"
+  models.authority.destroy({
+    where: {
+      id: req.params.id
+    }
   }).then(() => {
-    res.send({ message: "Created admin" });
+    res.send({ message: "Deleted admin" });
   }).catch(() => {
-    res.status(400).send({ message: "Not valid data" })
+    res.status(400).send({ error })
   })
 };
+
