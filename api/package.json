@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "refresh-models": "node src/config/sequelize_refresh.js",
-    "start": "cross-env NODE_ENV=development node index",
-    "watch": "cross-env NODE_ENV=development nodemon index",
+    "start": "cross-env NODE_ENV=development node --exec babel-node index",
+    "watch": "cross-env NODE_ENV=development nodemon --exec babel-node index",
     "pretest": "cross-env NODE_ENV=test npm run migrate",
-    "migrate":"cross-env NODE_ENV=test sequelize db:migrate",
+    "migrate": "cross-env NODE_ENV=test sequelize db:migrate",
     "test": "NODE_ENV=test jest",
     "lint": "eslint --fix ./src"
   },
@@ -27,7 +27,10 @@
     "sequelize-auto": "^0.4.29"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint-config-last": "0.0.5",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-jest": "^21.17.0",
