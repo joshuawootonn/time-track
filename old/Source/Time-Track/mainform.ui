@@ -672,7 +672,7 @@ background-color:#ECEFED;
        <item row="2" column="0">
         <widget class="QTabWidget" name="MainTabs">
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <property name="tabsClosable">
           <bool>false</bool>
@@ -1749,14 +1749,14 @@ background-color:#8DAA91;
               <item row="2" column="0">
                <widget class="QLabel" name="label_3">
                 <property name="text">
-                 <string>Item:</string>
+                 <string>Task:</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_2">
                 <property name="text">
-                 <string>Project:</string>
+                 <string>Project: </string>
                 </property>
                </widget>
               </item>

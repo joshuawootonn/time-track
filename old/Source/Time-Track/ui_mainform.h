@@ -1488,7 +1488,7 @@ public:
         retranslateUi(MainForm);
 
         mainStack->setCurrentIndex(2);
-        MainTabs->setCurrentIndex(1);
+        MainTabs->setCurrentIndex(2);
         HeaderTabs->setCurrentIndex(3);
         EmployeeAdd->setDefault(false);
 
@@ -1584,8 +1584,8 @@ public:
         ShiftDelete->setText(QString());
         groupBox_5->setTitle(QApplication::translate("MainForm", "Display By", Q_NULLPTR));
         label2323->setText(QApplication::translate("MainForm", "Employee:", Q_NULLPTR));
-        label_3->setText(QApplication::translate("MainForm", "Item:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("MainForm", "Project:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainForm", "Task:", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainForm", "Project: ", Q_NULLPTR));
         ShiftEmployeeBox->setText(QString());
         ShiftProjectBox->setText(QString());
         ShiftItemBox->setText(QString());
