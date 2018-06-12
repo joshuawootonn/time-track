@@ -7,7 +7,7 @@
     "refresh-models": "node src/config/sequelize_refresh.js",
     "start": "cross-env NODE_ENV=development node --exec babel-node index",
     "watch": "cross-env NODE_ENV=development nodemon --exec  babel-node index",
-    
+    "seed": "cross-env NODE_ENV=test sequelize db:seed:all",
     "test": "cross-env NODE_ENV=test jest --watch",
     "lint": "eslint --fix ./src"
   },
@@ -20,6 +20,7 @@
     "cross-env": "^5.1.6",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "moment": "^2.22.2",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
     "sequelize": "^4.37.10",
