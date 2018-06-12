@@ -7,9 +7,10 @@ exports.create = (req, res) => {
   models.authority.create({
     type: req.body.type
   }).then(() => {
-    res.send(200);
+    res.send(200,{message: "Authority Created"})
   }).catch((error) => {
     res.status(400).send({ error })
+    console.log(error);
   })
 };
 exports.findAll = (req, res) => {
