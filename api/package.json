@@ -9,7 +9,7 @@
     "watch": "cross-env NODE_ENV=development nodemon --exec  babel-node index",
     "seed": "cross-env NODE_ENV=test sequelize db:seed:all",
     "test": "cross-env NODE_ENV=test jest --watch",
-    "lint": "eslint --fix ./src"
+    "lint": "eslint --fix ./routes ./seeders ./__tests__ ./controllers ./config"
   },
   "author": "Joshua Wootonn",
   "email": "joshuawootonn@gmail.com",
