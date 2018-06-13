@@ -10,11 +10,11 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,        
         autoIncrement: true
       },
-      clock_in_date: {
+      clock_in: {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      clock_out_date: {
+      clock_out: {
         type: DataTypes.DATE,
         allowNull: true,
       },

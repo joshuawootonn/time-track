@@ -13,11 +13,14 @@ module.exports = function(sequelize, DataTypes) {
       name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        unique: true,
+      },
+      numeric: {
+        type: DataTypes.INTEGER(4),
+        allowNull: false
       },
       is_active: {
         type: DataTypes.INTEGER(4),
-        allowNull: true,
+        allowNull: false,
       },
       subcategory_id: {
         type: DataTypes.INTEGER(11),

@@ -10,10 +10,13 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,          
         autoIncrement: true      
       },
-      name: {
+      first_name: {
         type: DataTypes.STRING(45),
-        allowNull: false,
-        unique:true
+        allowNull: false
+      },
+      last_name: {
+        type: DataTypes.STRING(45),
+        allowNull: false
       },
       pin: {
         type: DataTypes.INTEGER(11),
