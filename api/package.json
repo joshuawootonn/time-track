@@ -1,43 +1,35 @@
 {
-  "name": "time-track-api",
+  "name": "api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "refresh-models": "node src/config/sequelize_refresh.js",
-    "start": "cross-env NODE_ENV=development node --exec babel-node index",
-    "watch": "cross-env NODE_ENV=development nodemon --exec  babel-node index",
-    "seed": "cross-env NODE_ENV=test sequelize db:seed:all",
-    "test": "cross-env NODE_ENV=test jest --watch",
-    "lint": "eslint --fix ./routes ./seeders ./__tests__ ./controllers ./config"
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=4"
   },
-  "author": "Joshua Wootonn",
-  "email": "joshuawootonn@gmail.com",
-  "license": "ISC",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "nodemon .",
+    "posttest": "npm run lint && nsp check"
+  },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "child-process-promise": "^2.2.1",
-    "cross-env": "^5.1.6",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "moment": "^2.22.2",
-    "mysql": "^2.15.0",
-    "mysql2": "^1.5.3",
-    "sequelize": "^4.37.10",
-    "sequelize-auto": "^0.4.29"
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "helmet": "^3.10.0",
+    "loopback": "^3.19.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^6.0.0",
+    "loopback-connector-mysql": "^5.2.0",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint-config-last": "0.0.5",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jest": "^23.1.0",
-    "prettier": "^1.13.4",
-    "supertest": "^3.1.0",
-    "supertest-as-promised": "^4.0.2"
-  }
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "nsp": "^2.1.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "description": "api"
 }

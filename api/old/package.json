@@ -1,0 +1,44 @@
+{
+  "name": "time-track-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "refresh-models": "cross-env NODE_ENV=development node ./scripts/db_to_models.js",
+    "refresh-db": "cross-env NODE_ENV=development babel-node ./scripts/models_to_db.js",    
+    "start": "cross-env NODE_ENV=development babel-node index",
+    "watch": "cross-env NODE_ENV=development nodemon --exec  babel-node index",
+    "seed": "cross-env NODE_ENV=development sequelize db:seed:all",    
+    "test": "cross-env NODE_ENV=test jest --watch",
+    "lint": "eslint --fix ./routes ./seeders ./__tests__ ./controllers ./config"
+  },
+  "author": "Joshua Wootonn",
+  "email": "joshuawootonn@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "child-process-promise": "^2.2.1",
+    "cross-env": "^5.1.6",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "moment": "^2.22.2",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.10",
+    "sequelize-auto": "^0.4.29"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint-config-last": "0.0.5",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^23.1.0",
+    "prettier": "^1.13.4",
+    "supertest": "^3.1.0",
+    "supertest-as-promised": "^4.0.2"
+  }
+}
