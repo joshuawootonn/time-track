@@ -35,7 +35,47 @@
     "dataSource": "db",
     "public": false
   },
-  "authority": {
+  "Authority": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Crew": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Employee": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Shift": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Activity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProjectTask": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Task": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Subcategory": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Dimension": {
     "dataSource": "db",
     "public": true
   }

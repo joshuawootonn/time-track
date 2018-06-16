@@ -1,10 +1,10 @@
 {
-  "name": "Authority",
+  "name": "Dimension",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "time-track-development",
-      "table": "authority"
+      "table": "dimension"
     },
     "relations": {}
   },

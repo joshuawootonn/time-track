@@ -1,14 +1,29 @@
 {
-  "name": "Authority",
+  "name": "Project",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "time-track-development",
-      "table": "authority"
+      "table": "project"
     },
     "relations": {}
   },
   "properties": {
+    "date": {
+      "type": "Date",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "date",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
     "id": {
       "type": "Number",
       "required": true,
@@ -25,14 +40,29 @@
         "nullable": "N"
       }
     },
-    "type": {
+    "isActive": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 3,
+      "scale": 0,
+      "mysql": {
+        "columnName": "is_active",
+        "dataType": "tinyint",
+        "dataLength": null,
+        "dataPrecision": 3,
+        "dataScale": 0,
+        "nullable": "N"
+      }
+    },
+    "name": {
       "type": "String",
       "required": true,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "type",
+        "columnName": "name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,

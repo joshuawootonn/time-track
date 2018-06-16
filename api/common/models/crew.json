@@ -1,10 +1,10 @@
 {
-  "name": "Authority",
+  "name": "Crew",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "time-track-development",
-      "table": "authority"
+      "table": "crew"
     },
     "relations": {}
   },
@@ -25,14 +25,14 @@
         "nullable": "N"
       }
     },
-    "type": {
+    "name": {
       "type": "String",
       "required": true,
       "length": 45,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "type",
+        "columnName": "name",
         "dataType": "varchar",
         "dataLength": 45,
         "dataPrecision": null,
