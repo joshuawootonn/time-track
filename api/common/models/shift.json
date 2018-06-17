@@ -7,10 +7,21 @@
       "table": "shift"
     },
     "relations": {
-      "fkShiftEmployee1rel": {
-        "model": "Employee",
+      "employee": {
         "type": "belongsTo",
-        "foreignKey": "employeeId"
+        "model": "Employee",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "activities": {
+        "type": "hasMany",
+        "model": "Activity",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
@@ -62,11 +73,11 @@
     },
     "id": {
       "type": "Number",
+      "id": 1,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -91,5 +102,9 @@
         "nullable": "Y"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

@@ -7,15 +7,29 @@
       "table": "employee"
     },
     "relations": {
-      "fkEmployeeAuthority1rel": {
-        "model": "Authority",
+      "crew": {
         "type": "belongsTo",
-        "foreignKey": "authorityId"
-      },
-      "fkEmployeeCrew1rel": {
         "model": "Crew",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "authority": {
         "type": "belongsTo",
-        "foreignKey": "crewId"
+        "model": "Authority",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "shifts": {
+        "type": "hasMany",
+        "model": "Shift",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
@@ -67,11 +81,11 @@
     },
     "id": {
       "type": "Number",
+      "id": 1,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -141,5 +155,9 @@
         "nullable": "N"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

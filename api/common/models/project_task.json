@@ -7,15 +7,29 @@
       "table": "project_task"
     },
     "relations": {
-      "fkTaskHasProjectTask1rel": {
-        "model": "Task",
-        "type": "belongsTo",
-        "foreignKey": "taskId"
+      "activities": {
+        "type": "hasMany",
+        "model": "Activity",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       },
-      "fkTaskHasProjectProject1rel": {
-        "model": "Project",
+      "project": {
         "type": "belongsTo",
-        "foreignKey": "projectId"
+        "model": "Project",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "task": {
+        "type": "belongsTo",
+        "model": "Task",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
@@ -37,11 +51,11 @@
     },
     "id": {
       "type": "Number",
-      "required": true,
+      "id": 1,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -96,5 +110,9 @@
         "nullable": "N"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

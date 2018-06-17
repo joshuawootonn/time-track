@@ -7,15 +7,29 @@
       "table": "subcategory"
     },
     "relations": {
-      "fkSubcategoryCategory1rel": {
-        "model": "Category",
-        "type": "belongsTo",
-        "foreignKey": "categoryId"
+      "tasks": {
+        "type": "hasMany",
+        "model": "Task",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       },
-      "fkSubcategoryDimension1rel": {
-        "model": "Dimension",
+      "category": {
         "type": "belongsTo",
-        "foreignKey": "dimensionId"
+        "model": "Category",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "dimension": {
+        "type": "belongsTo",
+        "model": "Dimension",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
@@ -52,11 +66,11 @@
     },
     "id": {
       "type": "Number",
+      "id": 1,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -81,5 +95,11 @@
         "nullable": "N"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {
+    
+  },
+  "acls": [],
+  "methods": {}
 }

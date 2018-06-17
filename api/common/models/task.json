@@ -7,21 +7,40 @@
       "table": "task"
     },
     "relations": {
-      "fkTaskSubcategory1rel": {
-        "model": "Subcategory",
+      "projects": {
+        "type": "hasAndBelongsToMany",
+        "model": "Project",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "projectTasks": {
+        "type": "hasMany",
+        "model": "ProjectTask",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      },
+      "subcategory": {
         "type": "belongsTo",
-        "foreignKey": "subcategoryId"
+        "model": "Subcategory",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
   "properties": {
     "id": {
       "type": "Number",
+      "id": 1,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -76,5 +95,11 @@
         "nullable": "N"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {
+    
+  },
+  "acls": [],
+  "methods": {}
 }

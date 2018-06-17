@@ -6,16 +6,25 @@
       "schema": "time-track-development",
       "table": "authority"
     },
-    "relations": {}
+    "relations": {
+      "employees": {
+        "type": "hasMany",
+        "model": "Employee",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
+      }
+    }
   },
   "properties": {
     "id": {
       "type": "Number",
+      "id": 1,
       "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
-      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -40,5 +49,9 @@
         "nullable": "N"
       }
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

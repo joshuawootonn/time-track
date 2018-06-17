@@ -19,9 +19,7 @@
 //   projectId: '1',
 // };
 
-
-
-// beforeEach((done) => {  
+// beforeEach((done) => {
 //   taskModel.destroyAll((err) => { });
 //   taskModel.create([{
 //     id: 1,
@@ -35,12 +33,12 @@
 //     estimateTime: "500",
 //     taskId: '1',
 //     projectId: '1',
-//   }],(err)=> { 
-//     done();}) 
+//   }],(err)=> {
+//     done();})
 // })
 
 // describe('/projectTasks', () => {
-  
+
 //   test('gets all task', done => {
 //     return request(app).get('/api/projectTasks').expect(200).then(response => {
 //       expect(response.body.length).toBe(2);
@@ -62,5 +60,5 @@
 //   test('updates task 3', done => {
 //     return request(app).put('/api/projectTasks/2').send(updateData).expect(200,done);
 //   })
-  
+
 // })
