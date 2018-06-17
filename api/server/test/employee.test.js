@@ -3,8 +3,6 @@ const request = require('supertest');
 process.env.NODE_ENV ='test'
 
 const employeeModel = app.models['Employee'];
-const authorityModel = app.models['Authority']
-const crewModel = app.models['Crew']
 
 const createData = {
   id: 3,
