@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "start": "nodemon .",
     "test": "jest --watch",
-    "pretest": "cross-env NODE_ENV=test",
-    "posttest": "npm run lint && nsp check"
+    "pretest": "cross-env NODE_ENV=test"
   },
   "dependencies": {
     "compression": "^1.0.3",
