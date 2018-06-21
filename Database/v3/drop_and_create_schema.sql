@@ -1,0 +1,3 @@
+
+CREATE SCHEMA IF NOT EXISTS `time-track` DEFAULT CHARACTER SET utf8 ;
+USE `time-track` ;

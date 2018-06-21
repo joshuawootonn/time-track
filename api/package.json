@@ -7,7 +7,10 @@
   },
   "scripts": {
     "lint": "eslint --fix .",
-    "start": "nodemon .",
+    "start": "cross-env NODE_ENV=production node .",
+    "startlocal" : "cross-env NODE_ENV=local node .",
+    "watch" : "cross-env NODE_ENV=production nodemon .",
+    "watchlocal" : "cross-env NODE_ENV=local nodemon .",
     "test": "jest --runInBand --watch",
     "pretest": "cross-env NODE_ENV=test"
   },
@@ -15,6 +18,7 @@
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
     "helmet": "^3.10.0",
     "lodash": "^4.17.10",
     "loopback": "^3.19.0",

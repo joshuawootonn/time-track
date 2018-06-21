@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'cloud';
 var server = require('../server');
 
 var ds = server.dataSources.db;
