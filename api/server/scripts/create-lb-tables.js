@@ -1,7 +1,15 @@
+/***************************
+This is a programmatic way of running 'drop_and_create_credential_tables.sql'
+
+1. Make sure that the correct mysql stuff is in a .env file in the root dir
+2. Make sure you set the NODE_ENV variable to the correct enviroment
+3. Make sure that datasource.{NODE_ENV}.js is configured to take the env variables
+
+***************************/
+
+
 process.env.NODE_ENV="cloud"
 
-console.log(process.env.NODE_ENV);
-require('dotenv').config()
 var server = require('../server');
 
 var ds = server.dataSources.db;

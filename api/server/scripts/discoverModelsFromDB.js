@@ -1,3 +1,18 @@
+/***************************
+This is a programmatic way of getting the models from database
+
+*Note* This sucks at getting the relationships right. The docs say: 
+'The discovery of model relations is limited to BelongsTo relations. Other relation types, for example HasMany, are not supported yet.'
+
+1. Change datasource file 
+2. Change const modelNames to find the tables you want
+3. Run
+4. Go through the created models deleteing the relations:{} contents at the bottom
+5. Create the corresponding relations with 'lb relation'
+6. These relations will be generated at the top in the options section
+***************************/
+
+
 const loopback = require('loopback');
 const promisify = require('util').promisify;
 const fs = require('fs');
@@ -7,6 +22,7 @@ const mkdirp = promisify(require('mkdirp'));
 const _ = require('lodash');
 
 const DATASOURCE_NAME = 'db';
+//Change this ------------------------------------------------
 const dataSourceConfig = require('../datasources.json');
 const db = new loopback.DataSource(dataSourceConfig[DATASOURCE_NAME]);
 
@@ -18,23 +34,12 @@ discover().then(
 
 
 async function discover() {
-  // It's important to pass the same "options" object to all calls
-  // of dataSource.discoverSchemas(), it allows the method to cache
-  // discovered related models
   const options = { relations: true };
-
-  // Discover models and relations
-
   const modelNames = ['authority', 'crew','employee','shift','activity','project_task', 'project', 'task', 'subcategory','category', 'dimension'];
-
   let schemas = [];
-
-
   for (let modelName of modelNames) {
     schemas.push(await db.discoverSchemas(modelName, options))
   }
-
-  // Create model definition files
   await mkdirp('../../common/models');
  
   let i = 0;

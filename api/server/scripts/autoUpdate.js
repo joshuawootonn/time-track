@@ -1,3 +1,7 @@
+/***************************
+This script was never used but it just updates the database where the tables do not exist
+***************************/
+
 var server = require('../server');
 var ds = server.dataSources.db;
 
@@ -11,3 +15,5 @@ ds.isActual(models, function(err, actual) {
   }
   ds.disconnect();
 });
+
+
