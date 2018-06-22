@@ -9,6 +9,7 @@
     "lint": "eslint --fix .",
     "start": "cross-env NODE_ENV=production node .",
     "startlocal" : "cross-env NODE_ENV=local node .",
+    "startcloud" : "cross-env NODE_ENV=cloud node .",
     "watch" : "cross-env NODE_ENV=production nodemon .",
     "watchlocal" : "cross-env NODE_ENV=local nodemon .",
     "test": "jest --runInBand --watch",

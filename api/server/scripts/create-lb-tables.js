@@ -1,4 +1,7 @@
-process.env.NODE_ENV = 'cloud';
+process.env.NODE_ENV="cloud"
+
+console.log(process.env.NODE_ENV);
+require('dotenv').config()
 var server = require('../server');
 
 var ds = server.dataSources.db;

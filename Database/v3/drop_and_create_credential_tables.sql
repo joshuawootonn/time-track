@@ -1,7 +1,7 @@
 
-DROP TABLE IF EXISTS `time-track`.`acl` ;
+DROP TABLE IF EXISTS `time-track`.`ACL` ;
 
-CREATE TABLE IF NOT EXISTS `time-track`.`acl` (
+CREATE TABLE IF NOT EXISTS `time-track`.`ACL` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `model` varchar(512) DEFAULT NULL,
  `property` varchar(512) DEFAULT NULL,
@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS `time-track`.`acl` (
 
 
 
-DROP TABLE IF EXISTS `time-track`.`accesstoken` ;
+DROP TABLE IF EXISTS `time-track`.`AccessToken` ;
 
-CREATE TABLE IF NOT EXISTS `time-track`.`accesstoken` (
+CREATE TABLE IF NOT EXISTS `time-track`.`AccessToken` (
    `id` varchar(255) NOT NULL,
    `ttl` int(11) DEFAULT NULL,
    `scopes` text,
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `time-track`.`accesstoken` (
  ) ENGINE=InnoDB;
 
 
-DROP TABLE IF EXISTS `time-track`.`user` ;
+DROP TABLE IF EXISTS `time-track`.`User` ;
 
-CREATE TABLE IF NOT EXISTS `time-track`.`user` (
+CREATE TABLE IF NOT EXISTS `time-track`.`User` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `realm` varchar(512) DEFAULT NULL,
    `username` varchar(512) DEFAULT NULL,
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `time-track`.`user` (
  ) ENGINE=InnoDB ;
 
 
-DROP TABLE IF EXISTS `time-track`.`role` ;
+DROP TABLE IF EXISTS `time-track`.`Role` ;
 
-CREATE TABLE IF NOT EXISTS `time-track`.`role` (
+CREATE TABLE IF NOT EXISTS `time-track`.`Role` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `name` varchar(512) NOT NULL,
    `description` varchar(512) DEFAULT NULL,
@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS `time-track`.`role` (
  ) ENGINE=InnoDB ;
 
 
-DROP TABLE IF EXISTS `time-track`.`rolemapping` ;
+DROP TABLE IF EXISTS `time-track`.`RoleMapping` ;
 
-CREATE TABLE IF NOT EXISTS `time-track`.`rolemapping` (
+CREATE TABLE IF NOT EXISTS `time-track`.`RoleMapping` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `principalType` varchar(512) DEFAULT NULL,
    `principalId` varchar(255) DEFAULT NULL,
