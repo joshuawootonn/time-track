@@ -8,12 +8,13 @@
   "scripts": {
     "lint": "eslint --fix .",
     "start": "cross-env NODE_ENV=production node .",
-    "startlocal" : "cross-env NODE_ENV=local node .",
-    "startcloud" : "cross-env NODE_ENV=cloud node .",
-    "watch" : "cross-env NODE_ENV=production nodemon .",
-    "watchlocal" : "cross-env NODE_ENV=local nodemon .",
+    "startlocal": "cross-env NODE_ENV=local node .",
+    "startcloud": "cross-env NODE_ENV=cloud node .",
+    "watch": "cross-env NODE_ENV=production nodemon .",
+    "watchlocal": "cross-env NODE_ENV=local nodemon .",
     "test": "jest --runInBand --watch",
-    "pretest": "cross-env NODE_ENV=test"
+    "pretest": "cross-env NODE_ENV=test",
+    "seed": "node ./server/scripts/seed"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -30,6 +31,7 @@
     "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
+    "chalk": "^2.4.1",
     "eslint": "^3.19.0",
     "eslint-config-last": "0.0.5",
     "eslint-config-loopback": "^8.0.0",

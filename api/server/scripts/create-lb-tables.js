@@ -8,7 +8,7 @@ This is a programmatic way of running 'drop_and_create_credential_tables.sql'
 ***************************/
 
 
-process.env.NODE_ENV="cloud"
+process.env.NODE_ENV="local"
 
 var server = require('../server');
 
