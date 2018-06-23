@@ -1,6 +1,10 @@
 /***************************
-This script was never used but it just updates the database where the tables do not exist
-***************************/
+ * This script was never used but it just updates the database where the tables do not exist
+ *   
+ * Change:
+ */
+process.env.NODE_ENV = 'local';
+/*  */ 
 
 var server = require('../server');
 var ds = server.dataSources.db;

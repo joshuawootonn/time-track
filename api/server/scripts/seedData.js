@@ -1,4 +1,5 @@
-module.exports.authority = [
+/* This file is just a collection of data to seed to the database */
+module.exports.Authority = [
   {
     id: 1,
     type: 'Admin',
@@ -13,7 +14,7 @@ module.exports.authority = [
   },
 ];
 
-module.exports.category = [
+module.exports.Category = [
   {
     id: 1,
     type: 'PCC',
@@ -28,7 +29,7 @@ module.exports.category = [
   },
 ];
 
-module.exports.crew = [
+module.exports.Crew = [
   {
     id: 1,
     name: 'Crew 1',
@@ -44,7 +45,7 @@ module.exports.crew = [
 ];
 
 
-module.exports.dimension = [
+module.exports.Dimension = [
   {
     id: 1,
     type: 'LS',
@@ -59,7 +60,7 @@ module.exports.dimension = [
   },
 ];
 
-module.exports.employee = [
+module.exports.Employee = [
   {
     id: 1,
     firstName: 'Joshua',
@@ -81,7 +82,7 @@ module.exports.employee = [
     crewId: '1',
   },
 ];
-module.exports.project_task = [
+module.exports.ProjectTask = [
   {
     id: 1,
     quantity: "100",
@@ -100,7 +101,7 @@ const date = new Date()
   .toISOString()
   .slice(0, 19)
   .replace('T', ' ');
-module.exports.project = [
+module.exports.Project = [
   {
     id: 1,
     name: 'Project 1',
@@ -120,7 +121,7 @@ module.exports.project = [
     date: `${date}`,
   },
 ];
-module.exports.subCategory = [
+module.exports.Subcategory = [
   {
     id: 1,
     type: 'Sidewalk',
@@ -134,7 +135,7 @@ module.exports.subCategory = [
     dimensionId: '1',
   },
 ];
-module.exports.task = [
+module.exports.Task = [
   {
     id: 1,
     name: '7" Sidewalk',
@@ -161,7 +162,7 @@ from = from.toISOString()
   .replace('T', ' ');
 
 
-module.exports.shift = [
+module.exports.Shift = [
   {
     id: 1,
     clockInDate: from,
@@ -170,17 +171,41 @@ module.exports.shift = [
     length: "600"
   },
   {
-    id: 1,
+    id: 2,
     clockInDate: from,
     clockOutDate: to,
     employeeId: "1",
     length: "600"
   },
   {
-    id: 1,
+    id: 3,
     clockInDate: from,
     clockOutDate: to,
     employeeId: "2",
     length: "600"
   }
+]
+
+module.exports.Activity = [
+  {
+    id: 1,
+    description: "This is a description",
+    length:"600",
+    projectTaskId: 1,
+    shiftId: 1
+  },
+  {
+    id: 2,
+    description: "This is a description 2",
+    length:"600",
+    projectTaskId: 2,
+    shiftId: 2
+  },
+  {
+    id:3,
+    description: "This is a description 3",
+    length:"600",
+    projectTaskId: 1,
+    shiftId: 3
+  },
 ]
