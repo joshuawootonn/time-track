@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
 
 import Navigation from 'components/Auth/Navigation';
-// import LandingPage from './Auth/Landing';
-// import SignUpPage from './Auth/SignUp';
-// import SignInPage from './Auth/SignIn';
-// import PasswordForgetPage from './Auth/PasswordForget';
-// import HomePage from './Auth/Home';
-// import AccountPage from './Auth/Account';
+import LandingPage from './Auth/Landing';
+import SignUpPage from './Auth/SignUp';
+import SignInPage from './Auth/SignIn';
+import PasswordForgetPage from './Auth/PasswordForget';
+import HomePage from './Auth/Home';
+import AccountPage from './Auth/Account';
 
 import * as routes from 'constants/routes';
 
@@ -19,7 +19,7 @@ const App = () =>
 
       <hr/>
 
-      {/* <Route
+      <Route
         exact path={routes.LANDING}
         component={() => <LandingPage />}
       />
@@ -42,7 +42,7 @@ const App = () =>
       <Route
         exact path={routes.ACCOUNT}
         component={() => <AccountPage />}
-      /> */}
+      />
     </div>
   </Router>
 
