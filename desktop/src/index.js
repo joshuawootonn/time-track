@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/app';
+import Auth from 'auth/auth';
 
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
@@ -18,7 +18,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Auth />
   </Provider>,
   document.getElementById('root')
 );

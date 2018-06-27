@@ -3,12 +3,12 @@ import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 
-import SignInPage from './Auth/SignIn';
-import HomePage from './Auth/Home';
+import SignInPage from 'auth/SignIn';
+import AuthedRoutes from 'auth/AuthedRoutes';
 
 import * as status from 'constants/status';
 
-class App extends Component {
+class Auth extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -17,7 +17,7 @@ class App extends Component {
           <PrivateRoute
             user={this.props.user}
             path="/"
-            component={HomePage}
+            component={AuthedRoutes}
           />
         </Switch>
       </BrowserRouter>
@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Auth);
 
 function PrivateRoute({ component: Component, user, ...rest }) {
   return (
