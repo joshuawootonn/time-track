@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
+import SigninForm from 'components/forms/SigninForm';
 
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -18,19 +19,19 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      username: 'AACI',
       password: '',
       error: null,
     };
   }
   componentDidMount = () => {
-    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+    // const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
 
-    if (cred.username && cred.password) {
-      this.props.login(cred.username, cred.password).then(() => {
-        this.props.history.push(routes.HOME);
-      });
-    }
+    // if (cred.username && cred.password) {
+    //   this.props.login(cred.username, cred.password).then(() => {
+    //     this.props.history.push(routes.HOME);
+    //   });
+    // }
   };
 
   onSubmit = event => {
@@ -49,6 +50,9 @@ class SignInForm extends Component {
 
     event.preventDefault();
   };
+  onChange = event => {
+    this.setState({[event.target.name]: event.target.value});
+  }
   // send = () => {
   //   console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))
   // }
@@ -57,41 +61,14 @@ class SignInForm extends Component {
   // }
 
   render() {
-    const { username, password, error } = this.state;
-
-    const isInvalid = password === '' || username === '';
-
-    return (
-      <div>
-        <h1>Sign in</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            value={username}
-            onChange={event =>
-              this.setState(byPropKey('username', event.target.value))
-            }
-            type="text"
-            placeholder="Username"
-          />
-          <input
-            value={password}
-            onChange={event =>
-              this.setState(byPropKey('password', event.target.value))
-            }
-            type="password"
-            placeholder="Password"
-          />
-          <button disabled={isInvalid} type="submit">
-            Sign In
-          </button>
-
-          {error && <p>{error.message}</p>}
-        </form>
-        {/*         
-        <button onClick={this.send}>Send!</button>
-        <button onClick={this.receive}>Get!</button> */}
-      </div>
-    );
+    const { username, password, error } = this.state;    
+    return <SigninForm 
+      username={username} 
+      password={password} 
+      error={error} 
+      onChange={this.onChange} 
+      onSubmit={this.onSubmit} 
+    />    
   }
 }
 
