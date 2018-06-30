@@ -7,7 +7,6 @@ import Unauthed from 'auth/appUnauthed';
 import Authed from 'auth/appAuthed';
 import * as actions from 'store/User/actions';
 
-
 class App extends Component {
   render() {
     return (

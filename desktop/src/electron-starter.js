@@ -1,8 +1,10 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron');
+const url = require('url');
+const path = require('path');
 const settings = require('electron-settings');
 const IPCConstants = require('./constants/ipc');
-const SettingConstants = require('./constants/settings');
+const SETTINGS = require('./constants/settings');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -12,10 +14,6 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    // webPreferences: {
-    //   nodeIntegration: false,
-    //   preload: __dirname + '/preload.js'
-    // }
   });
 
   // and load the index.html of the app.
@@ -66,25 +64,18 @@ app.on('activate', function() {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-// ipcMain.on('save-cred', (event,arg) => {
-//   settings.set('user_cred',{
-//     username: username,
-//     password: password
-//   })
-// })
-
 ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
-  settings.set('user_cred', {
+  settings.set(`${SETTINGS.USER_CRED}`, {
     username: arg.username,
     password: arg.password,
   });
   event.returnValue = arg;
 });
 
-ipcMain.on(IPCConstants.GET_CRED, (event, arg) => {
+ipcMain.on(IPCConstants.GET_CRED, event => {
   const cred = {
-    username: settings.get('user_cred.username'),
-    password: settings.get('user_cred.password'),
+    username: settings.get(`${SETTINGS.USER_CRED}.username`),
+    password: settings.get(`${SETTINGS.USER_CRED}.password`),
   };
   event.returnValue = cred;
 });

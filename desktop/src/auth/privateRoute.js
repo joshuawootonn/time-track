@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
 import * as status from 'constants/status';
 
 export default function PrivateRoute({ component: Component, user, ...rest }) {
@@ -18,3 +19,8 @@ export default function PrivateRoute({ component: Component, user, ...rest }) {
     />
   );
 }
+PrivateRoute.propTypes = {
+  component: PropTypes.node.isRequired,
+  user: PropTypes.object.isRequired,
+  location: PropTypes.string.isRequired,
+};

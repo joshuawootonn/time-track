@@ -1,1 +1,1 @@
-module.USER_CRED = 'user_cred';
+module.exports.USER_CRED = 'user_cred';

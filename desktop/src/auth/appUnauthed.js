@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
+
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
@@ -23,8 +25,9 @@ class SignInForm extends Component {
   }
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+
     if (cred.username && cred.password) {
-      this.props.login(cred.username, cred.password).then(asdf => {
+      this.props.login(cred.username, cred.password).then(() => {
         this.props.history.push(routes.HOME);
       });
     }
@@ -36,7 +39,7 @@ class SignInForm extends Component {
 
     this.props
       .login(username, password)
-      .then(asdf => {
+      .then(() => {
         ipcRenderer.sendSync(IPCConstants.SET_CRED, { username, password });
         history.push(routes.HOME);
       })
@@ -91,6 +94,11 @@ class SignInForm extends Component {
     );
   }
 }
+
+SignInForm.propTypes = {
+  login: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => {
   return {
