@@ -9,10 +9,15 @@ const styles = theme => ({
   },
   heroContent: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'row'
   },
-  error:{
-    marginTop: '16px'
+  button: {
+    height: '100px',
+    width: '100px'
+  },
+  buttonIcon: {
+    height: '70px',
+    width: '70px'
   }
 });
 

@@ -4,8 +4,7 @@ import AccountActionForm from 'components/forms/AccountActionForm';
 class ActionAction extends Component {
   render () {
     return (
-      <div> 
-        hey
+      <div>        
 
      <AccountActionForm /> 
 
