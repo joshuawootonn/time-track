@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import App from 'app';
 
 import thunk from 'redux-thunk';
@@ -20,5 +20,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

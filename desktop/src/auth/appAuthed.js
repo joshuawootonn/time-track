@@ -1,15 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class AuthedRoute extends Component {
-  render () {
-    return (
-      <div>
-        Woo HOo
-      </div>
-    )
+  render() {
+    return <div>Woo HOo</div>;
   }
 }
-
-
 
 export default AuthedRoute;

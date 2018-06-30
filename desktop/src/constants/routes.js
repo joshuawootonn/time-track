@@ -1,2 +1,2 @@
 export const HOME = '/';
-export const SIGNIN = '/auth'
+export const SIGNIN = '/auth';

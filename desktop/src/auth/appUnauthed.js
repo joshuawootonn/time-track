@@ -5,8 +5,7 @@ import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
 const electron = window.require('electron');
-const ipcRenderer  = electron.ipcRenderer;
-
+const ipcRenderer = electron.ipcRenderer;
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -20,50 +19,44 @@ class SignInForm extends Component {
       username: '',
       password: '',
       error: null,
-    };     
+    };
   }
-  componentDidMount = () => {    
-    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, "")
+  componentDidMount = () => {
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
     if (cred.username && cred.password) {
-      this.props.login(cred.username, cred.password)
-        .then((asdf) => {
-          this.props.history.push(routes.HOME)
-        })
+      this.props.login(cred.username, cred.password).then(asdf => {
+        this.props.history.push(routes.HOME);
+      });
     }
-  }
-  
-  onSubmit = (event) => {
+  };
+
+  onSubmit = event => {
     const { username, password } = this.state;
     const { history } = this.props;
-    
-    this.props.login(username, password)
-      .then((asdf) => {
-        ipcRenderer.sendSync(IPCConstants.SET_CRED,{username,password})
-        history.push(routes.HOME);      
+
+    this.props
+      .login(username, password)
+      .then(asdf => {
+        ipcRenderer.sendSync(IPCConstants.SET_CRED, { username, password });
+        history.push(routes.HOME);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
       });
 
     event.preventDefault();
-  }
+  };
   // send = () => {
-  //   console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))   
+  //   console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))
   // }
   // receive = () => {
-  //   console.log(ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message")) 
+  //   console.log(ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message"))
   // }
 
   render() {
-    const {
-      username,
-      password,
-      error,
-    } = this.state;
+    const { username, password, error } = this.state;
 
-    const isInvalid =
-      password === '' ||
-      username === '';
+    const isInvalid = password === '' || username === '';
 
     return (
       <div>
@@ -71,20 +64,23 @@ class SignInForm extends Component {
         <form onSubmit={this.onSubmit}>
           <input
             value={username}
-            onChange={event => this.setState(byPropKey('username', event.target.value))}
+            onChange={event =>
+              this.setState(byPropKey('username', event.target.value))
+            }
             type="text"
             placeholder="Username"
           />
           <input
             value={password}
-            onChange={event => this.setState(byPropKey('password', event.target.value))}
+            onChange={event =>
+              this.setState(byPropKey('password', event.target.value))
+            }
             type="password"
             placeholder="Password"
           />
           <button disabled={isInvalid} type="submit">
             Sign In
-        </button>
-          
+          </button>
 
           {error && <p>{error.message}</p>}
         </form>
@@ -92,17 +88,19 @@ class SignInForm extends Component {
         <button onClick={this.send}>Send!</button>
         <button onClick={this.receive}>Get!</button> */}
       </div>
-
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    user: state.user
-  }
-}
+    user: state.user,
+  };
+};
 
-
-export default withRouter(connect(mapStateToProps, actions)(SignInForm));
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    actions,
+  )(SignInForm),
+);
