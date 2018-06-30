@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron')
 const settings = require('electron-settings');
+const IPCConstants = require('./constants/ipc');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -69,6 +70,15 @@ app.on('activate', function () {
 //   })
 // })
 
-ipcMain.on('asdf', (event, arg) => {
-  console.log("here", arg)
+
+ipcMain.on(IPCConstants.SET_CRED,  (event, arg) => {
+  console.log(arg);  
+  event.returnValue = "nice"
 })
+
+
+ipcMain.on(IPCConstants.GET_CRED,  (event, arg) => {
+  console.log(arg);  
+  event.returnValue = "nice"
+})
+

@@ -3,10 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
+import * as IPCConstants from 'constants/ipc';
 import isElectron from 'is-electron';
 const electron = window.require('electron');
 const fs = electron.remote.require('fs');
 const ipcRenderer  = electron.ipcRenderer;
+
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -37,7 +39,7 @@ class SignInForm extends Component {
     this.props.login(username, password)
       .then((asdf) => {
         //if( isElectron())
-          //window.ipcRenderer.send('asdf',username)
+          ipcRenderer.send('asdf',username)
 
         history.push(routes.HOME);      
       })
@@ -48,8 +50,10 @@ class SignInForm extends Component {
     event.preventDefault();
   }
   send = () => {
-    //window.ipcRenderer.send('asdf',"the message")
-    console.log('asdf');
+    console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,"the message"))   
+  }
+  receive = () => {
+    console.log(ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message")) 
   }
 
   render() {
@@ -86,7 +90,9 @@ class SignInForm extends Component {
 
           {error && <p>{error.message}</p>}
         </form>
+        
         <button onClick={this.send}>Send!</button>
+        <button onClick={this.receive}>Get!</button>
       </div>
 
     );
