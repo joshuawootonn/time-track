@@ -19,11 +19,26 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
-      username: 'josh',
-      password: '5656',
+      username: '',
+      password: '',
       error: null,
     };
-    console.log(this.props);
+     
+  }
+  componentDidMount = () => {
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message")
+    if(cred.username && cred.password){
+      this.props.login(cred.username, cred.password)
+      .then((asdf) => {
+        this.props.history.push(routes.HOME);      
+      })
+      .catch(error => {
+        this.setState(byPropKey('error', error));
+      });
+    }
+    
+
+
   }
   
   onSubmit = (event) => {
@@ -38,9 +53,7 @@ class SignInForm extends Component {
     
     this.props.login(username, password)
       .then((asdf) => {
-        //if( isElectron())
-          ipcRenderer.send('asdf',username)
-
+        ipcRenderer.sendSync(IPCConstants.SET_CRED,{username,password})
         history.push(routes.HOME);      
       })
       .catch(error => {
@@ -50,7 +63,7 @@ class SignInForm extends Component {
     event.preventDefault();
   }
   send = () => {
-    console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,"the message"))   
+    console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))   
   }
   receive = () => {
     console.log(ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message")) 

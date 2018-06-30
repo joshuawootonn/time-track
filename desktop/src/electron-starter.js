@@ -2,6 +2,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const settings = require('electron-settings');
 const IPCConstants = require('./constants/ipc');
+const SettingConstants = require('./constants/settings');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -72,13 +73,19 @@ app.on('activate', function () {
 
 
 ipcMain.on(IPCConstants.SET_CRED,  (event, arg) => {
-  console.log(arg);  
-  event.returnValue = "nice"
+    settings.set('user_cred',{
+    username: arg.username,
+    password: arg.password
+  })
+  event.returnValue = arg;
 })
 
 
 ipcMain.on(IPCConstants.GET_CRED,  (event, arg) => {
-  console.log(arg);  
-  event.returnValue = "nice"
+  const cred = {
+    username: settings.get("user_cred.username"),
+    password: settings.get("user_cred.password")
+  }
+  event.returnValue = cred;
 })
 
