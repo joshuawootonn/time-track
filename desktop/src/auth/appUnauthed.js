@@ -25,13 +25,13 @@ class SignInForm extends Component {
     };
   }
   componentDidMount = () => {
-    // const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
 
-    // if (cred.username && cred.password) {
-    //   this.props.login(cred.username, cred.password).then(() => {
-    //     this.props.history.push(routes.HOME);
-    //   });
-    // }
+    if (cred.username && cred.password) {
+      this.props.login(cred.username, cred.password).then(() => {
+        this.props.history.push(routes.HOME);
+      });
+    }
   };
 
   onSubmit = event => {
