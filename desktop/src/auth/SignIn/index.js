@@ -3,6 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
+import isElectron from 'is-electron';
+const electron = window.require('electron');
+const fs = electron.remote.require('fs');
+const ipcRenderer  = electron.ipcRenderer;
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -13,8 +17,8 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: '',
+      username: 'josh',
+      password: '5656',
       error: null,
     };
     console.log(this.props);
@@ -29,17 +33,23 @@ class SignInForm extends Component {
     const {
       history,
     } = this.props;
-
+    
     this.props.login(username, password)
-      .then(() => {
-        console.log("how")
-        history.push(routes.HOME);
+      .then((asdf) => {
+        //if( isElectron())
+          //window.ipcRenderer.send('asdf',username)
+
+        history.push(routes.HOME);      
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
       });
 
     event.preventDefault();
+  }
+  send = () => {
+    //window.ipcRenderer.send('asdf',"the message")
+    console.log('asdf');
   }
 
   render() {
@@ -72,10 +82,11 @@ class SignInForm extends Component {
           <button disabled={isInvalid} type="submit">
             Sign In
         </button>
+          
 
           {error && <p>{error.message}</p>}
         </form>
-
+        <button onClick={this.send}>Send!</button>
       </div>
 
     );
