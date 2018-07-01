@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import AccountActionForm from 'components/forms/AccountActionForm';
+import AccountActionContainer from 'containers/accountActionContainer';
 
 class ActionAction extends Component {
   render () {
     return (
       <div>        
-
-     <AccountActionForm /> 
-
+        <AccountActionContainer />
       </div>
     )
   }

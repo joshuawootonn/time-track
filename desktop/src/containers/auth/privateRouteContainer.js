@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import * as status from 'constants/status';
 
+
+
 export default function PrivateRoute({ component: Component, user, ...rest }) {
   return (
     <Route
