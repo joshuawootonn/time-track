@@ -29,7 +29,7 @@ class SignInForm extends Component {
 
     if (cred.username && cred.password) {
       this.props.login(cred.username, cred.password).then(() => {
-        this.props.history.push(routes.HOME);
+        this.props.history.push(routes.SIGNIN);
       });
     }
   };
@@ -42,7 +42,7 @@ class SignInForm extends Component {
       .login(username, password)
       .then(() => {
         ipcRenderer.sendSync(IPCConstants.SET_CRED, { username, password });
-        history.push(routes.HOME);
+        history.push(routes.SIGNIN);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));

@@ -1,2 +1,4 @@
-export const HOME = '/';
-export const SIGNIN = '/auth';
+export const ACCOUNT = '/account';
+export const AUTH = '/auth';
+export const DASHBOARD = '/dashboard'
+export const SIGNIN = '/';

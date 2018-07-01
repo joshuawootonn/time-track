@@ -48,6 +48,7 @@
     "babel-eslint": "^8.2.5",
     "electron": "^2.0.3",
     "electron-builder": "^20.16.0",
+    "electron-devtools-installer": "^2.2.4",
     "eslint": "^5.0.1",
     "eslint-config-last": "^0.0.5",
     "eslint-config-prettier": "^2.9.0",
