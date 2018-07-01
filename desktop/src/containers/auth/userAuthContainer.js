@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from 'store/User/actions';
+import * as actions from 'store/User/action';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
 import SigninForm from 'components/forms/SigninForm';

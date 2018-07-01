@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import * as status from 'constants/status';
-import * as actions from 'store/User/actions';
+import * as actions from 'store/User/action';
 import { connect } from 'react-redux';
 
 class PrivateRoute extends Component {

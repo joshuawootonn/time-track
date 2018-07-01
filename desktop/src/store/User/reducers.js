@@ -2,7 +2,6 @@ import * as actions from 'constants/actionsTypes';
 import * as status from 'constants/status';
 export const userInitialState = {
   status: status.INIT,
-  data: null,
   selected: null,
 };
 
@@ -16,13 +15,13 @@ export default (state = userInitialState, action) => {
     case actions.USER_LOGIN_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        id: action.payload.userId,
+        access: action.payload.id,
         status: status.SUCCESS,
       };
     case actions.USER_LOGIN_FAILURE:
       return {
         ...state,
-        data: action.payload,
         status: status.FAILURE,
       };
 
