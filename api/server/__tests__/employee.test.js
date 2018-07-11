@@ -56,7 +56,7 @@ beforeEach(done => {
   );
 });
 
-describe('/employee', () => {
+describe.skip('/employee', () => {
   test('gets all employee', done => {
     return request(app)
       .get('/api/employees')

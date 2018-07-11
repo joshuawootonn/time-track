@@ -5,10 +5,10 @@
  * Make sure you set the NODE_ENV variable to the correct enviroment
  * Make sure that datasource.{NODE_ENV}.js is configured to take the env variables
  *   
- * Change:
+ * Change: NODE_ENV
  */
-process.env.NODE_ENV = 'local';
-/*  */ 
+process.env.NODE_ENV="test"
+
 
 var server = require('../server');
 

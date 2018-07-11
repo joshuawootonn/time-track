@@ -1,10 +1,9 @@
 /**********************************
  * Delete and Reseeds
  *   
- * Change:
+ * Change:NODE_ENV
  */
- process.env.NODE_ENV = 'local';
- /*  */ 
+process.env.NODE_ENV="test"
 
 const app = require('../server');
 const chalk = require('chalk')
@@ -29,7 +28,7 @@ const createThem = (ele, cb) => {
   })
 }
 
-const modelNames = ['Activity', 'ProjectTask', 'Shift', 'Employee', 'Task', 'Subcategory',
+const modelNames = ['Activity', 'ProjectTask', 'Shift','Task', 'Employee', 'Subcategory',
   'Crew', 'Authority', 'Project', 'Category', 'Dimension']
 const modelNamesReverse = modelNames.reverse();
 

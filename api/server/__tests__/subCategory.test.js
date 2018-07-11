@@ -40,7 +40,7 @@ beforeEach(done => {
   );
 });
 
-describe('/subCategory', () => {
+describe.skip('/subCategory', () => {
   test('gets all subCategory', done => {
     return request(app)
       .get('/api/subCategories')

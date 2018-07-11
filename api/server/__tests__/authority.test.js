@@ -2,7 +2,7 @@ const app = require('../server.js');
 const request = require('supertest');
 process.env.NODE_ENV = 'test';
 
-const model = app.models['Dimension'];
+const model = app.models['Authority'];
 const createData = {
   id: 4,
   type: 'new',
@@ -12,21 +12,21 @@ const updateData = {
   type: 'newer',
 };
 
-beforeEach(done => {
+beforeAll(done => {
   model.destroyAll(err => {});
   model.create(
     [
       {
         id: 1,
-        type: 'LS',
+        type: 'Admin',
       },
       {
         id: 2,
-        type: 'SF',
+        type: 'Manager',
       },
       {
         id: 3,
-        type: 'SY',
+        type: 'Employee',
       },
     ],
     () => {
@@ -35,36 +35,36 @@ beforeEach(done => {
   );
 });
 
-describe('/dimensions', () => {
-  test('gets all dimension', done => {
+describe('/authority', () => {
+  test('gets all authority', done => {
     return request(app)
-      .get('/api/dimensions')
+      .get('/api/authorities')
       .expect(200, done);
   });
-  test('gets a dimension', done => {
+  test('gets a authority', done => {
     return request(app)
-      .get('/api/dimensions/1')
+      .get('/api/authorities/1')
       .expect(200)
       .then(response => {
-        expect(response.body.type).toBe('LS');
+        expect(response.body.type).toBe('Admin');
         done();
       });
   });
-  test('creates a new dimension', done => {
+  test('creates a new authority', done => {
     return request(app)
-      .post('/api/dimensions')
+      .post('/api/authorities')
       .send(createData)
       .expect(200, done);
   });
-  test('updates dimension 4', done => {
+  test('updates authority 3', done => {
     return request(app)
-      .put('/api/dimensions/3')
+      .put('/api/authorities/3')
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a dimension', done => {
+  test('deletes a authority', done => {
     return request(app)
-      .delete('/api/dimensions/3')
+      .delete('/api/authorities/2')
       .send()
       .expect(200, done);
   });

@@ -7,14 +7,13 @@
   },
   "scripts": {
     "lint": "eslint --fix .",
-    "start": "cross-env NODE_ENV=production node .",
-    "startlocal": "cross-env NODE_ENV=local node .",
-    "startcloud": "cross-env NODE_ENV=cloud node .",
-    "watch": "cross-env NODE_ENV=production nodemon .",
-    "watchlocal": "cross-env NODE_ENV=local nodemon .",
+    "start": "cross-env NODE_ENV=test node .",
+    "watch": "cross-env NODE_ENV=local nodemon .",
     "test": "jest --runInBand --watch",
     "pretest": "cross-env NODE_ENV=test",
-    "seed": "node ./server/scripts/seed"
+    "seed": "node ./server/scripts/seed",
+    "migrate": "node ./server/scripts/autoMigrate",
+    "migrateAuth": "node ./server/scripts/createAuth"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -31,6 +30,7 @@
     "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
+    "@loopback/testlab": "^0.10.11",
     "async": "^2.6.1",
     "chalk": "^2.4.1",
     "eslint": "^3.19.0",
@@ -40,6 +40,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "jest": "^23.1.0",
     "jest-preset-loopback": "^1.0.0",
+    "mocha": "^5.2.0",
     "nsp": "^2.1.0",
     "prettier": "^1.13.5",
     "supertest": "^3.1.0"

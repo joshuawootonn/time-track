@@ -2,7 +2,7 @@ const app = require('../server.js');
 const request = require('supertest');
 process.env.NODE_ENV = 'test';
 
-const model = app.models['Authority'];
+const model = app.models['Dimension'];
 const createData = {
   id: 4,
   type: 'new',
@@ -18,15 +18,15 @@ beforeEach(done => {
     [
       {
         id: 1,
-        type: 'Admin',
+        type: 'LS',
       },
       {
         id: 2,
-        type: 'Manager',
+        type: 'SF',
       },
       {
         id: 3,
-        type: 'Employee',
+        type: 'SY',
       },
     ],
     () => {
@@ -35,36 +35,36 @@ beforeEach(done => {
   );
 });
 
-describe('/authority', () => {
-  test('gets all authority', done => {
+describe.skip('/dimensions', () => {
+  test('gets all dimension', done => {
     return request(app)
-      .get('/api/authorities')
+      .get('/api/dimensions')
       .expect(200, done);
   });
-  test('gets a authority', done => {
+  test('gets a dimension', done => {
     return request(app)
-      .get('/api/authorities/1')
+      .get('/api/dimensions/1')
       .expect(200)
       .then(response => {
-        expect(response.body.type).toBe('Admin');
+        expect(response.body.type).toBe('LS');
         done();
       });
   });
-  test('creates a new authority', done => {
+  test('creates a new dimension', done => {
     return request(app)
-      .post('/api/authorities')
+      .post('/api/dimensions')
       .send(createData)
       .expect(200, done);
   });
-  test('updates authority 4', done => {
+  test('updates dimension 4', done => {
     return request(app)
-      .put('/api/authorities/4')
+      .put('/api/dimensions/3')
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a authority', done => {
+  test('deletes a dimension', done => {
     return request(app)
-      .delete('/api/authorities/4')
+      .delete('/api/dimensions/3')
       .send()
       .expect(200, done);
   });

@@ -40,7 +40,7 @@ beforeEach(done => {
   );
 });
 
-describe('/tasks', () => {
+describe.skip('/tasks', () => {
   test('gets all task', done => {
     return request(app)
       .get('/api/tasks')
