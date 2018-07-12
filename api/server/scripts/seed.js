@@ -34,16 +34,21 @@ const modelNamesReverse = modelNames.reverse();
 
 
 async.eachSeries(modelNames, deleteThem, (err) => {
-  if (err)
+  if (err){
     log(err);
+    app.dataSources.db.disconnect();
+  }
   else {
     log(chalk.bgGreen("Deleted All"));
     
     async.eachSeries(modelNamesReverse, createThem, (err) => {
-      if (err)
+      if (err){
         log(err);
+        app.dataSources.db.disconnect();
+      }
       else{
         log(chalk.bgGreen("Created All"));
+       app.dataSources.db.disconnect();
       }          
     })
   }

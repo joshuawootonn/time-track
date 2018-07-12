@@ -28,7 +28,7 @@ const updateData = {
 
 
 describe('/employee', () => {
-  beforeEach(done => {
+  beforeAll(done => {
     employeeModel.destroyAll(err => {
       employeeModel.create(
         [
@@ -56,10 +56,13 @@ describe('/employee', () => {
         err => {
           done();
         },
-    );
+      );
     });
-
   });
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
+  })
   test('gets all employee', done => {
     return request(app)
       .get('/api/employees')

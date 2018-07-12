@@ -20,7 +20,7 @@ const updateData = {
 
 
 describe('/tasks', () => {
-  beforeEach(done => {
+  beforeAll(done => {
     taskModel.destroyAll(err => {
       taskModel.create(
         [
@@ -40,10 +40,13 @@ describe('/tasks', () => {
         err => {
           done();
         },
-    );
+      );
     });
-
   });
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
+  })
   test('gets all task', done => {
     return request(app)
       .get('/api/tasks')

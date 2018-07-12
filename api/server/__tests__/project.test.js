@@ -22,7 +22,7 @@ const updateData = {
 
 
 describe('/projects', () => {
-  beforeEach(done => {
+  beforeAll(done => {
     model.destroyAll(err => {
       model.create(
         [
@@ -48,11 +48,13 @@ describe('/projects', () => {
         () => {
           done();
         },
-    );
+      );
     });
-
   });
-
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
+  })
   test('gets all project', done => {
     return request(app)
       .get('/api/projects')

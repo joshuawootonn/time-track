@@ -21,7 +21,7 @@ const updateData = {
 
 
 describe('/projectTasks', () => {
-  beforeEach((done) => {
+  beforeAll((done) => {
     taskModel.destroyAll((err) => {
       taskModel.create([{
         id: 1,
@@ -39,6 +39,10 @@ describe('/projectTasks', () => {
         done();
       })
     });
+  })
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
   })
 
   test('gets all task', done => {

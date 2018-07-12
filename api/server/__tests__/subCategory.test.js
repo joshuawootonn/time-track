@@ -20,7 +20,7 @@ const updateData = {
 
 
 describe('/subCategory', () => {
-  beforeEach(done => {
+  beforeAll(done => {
     subCategoryModel.destroyAll(err => {
       subCategoryModel.create(
         [
@@ -40,10 +40,13 @@ describe('/subCategory', () => {
         err => {
           done();
         },
-    );
+      );
     });
-
   });
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
+  })
   test('gets all subCategory', done => {
     return request(app)
       .get('/api/subCategories')

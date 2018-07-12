@@ -21,7 +21,7 @@ const updateData = {
 
 
 describe('/shifts', () => {
-  beforeEach((done) => {
+  beforeAll((done) => {
     shiftModel.destroyAll((err) => {
       shiftModel.create([{
         id: 1,
@@ -39,7 +39,10 @@ describe('/shifts', () => {
         done();
       })
     });
-
+  })
+  afterAll(done => {
+    app.dataSources.db.disconnect();
+    done();
   })
 
   test('gets all shifts', done => {
