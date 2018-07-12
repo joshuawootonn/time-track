@@ -3,14 +3,14 @@
  *   
  * Change:NODE_ENV
  */
-process.env.NODE_ENV="test"
+process.env.NODE_ENV = "test"
 
 const app = require('../server');
 const chalk = require('chalk')
 const log = console.log;
 const models = app.models;
 const async = require('async');
-
+const ds = app.dataSource.db;
 const data = require('./seedData');
 
 const deleteThem = (ele, cb) => {
@@ -28,28 +28,28 @@ const createThem = (ele, cb) => {
   })
 }
 
-const modelNames = ['Activity', 'ProjectTask', 'Shift','Task', 'Employee', 'Subcategory',
+const modelNames = ['Activity', 'ProjectTask', 'Shift', 'Task', 'Employee', 'Subcategory',
   'Crew', 'Authority', 'Project', 'Category', 'Dimension']
 const modelNamesReverse = modelNames.reverse();
 
 
 async.eachSeries(modelNames, deleteThem, (err) => {
-  if (err){
-    log(err);
-    app.dataSources.db.disconnect();
+  if (err) {
+    log(err); 
+    ds.disconnect();
   }
   else {
     log(chalk.bgGreen("Deleted All"));
-    
+
     async.eachSeries(modelNamesReverse, createThem, (err) => {
-      if (err){
-        log(err);
-        app.dataSources.db.disconnect();
+      if (err) {
+        log(err); 
+        ds.disconnect();
       }
-      else{
+      else {
         log(chalk.bgGreen("Created All"));
-       app.dataSources.db.disconnect();
-      }          
+        ds.disconnect();
+      }
     })
   }
 })  
