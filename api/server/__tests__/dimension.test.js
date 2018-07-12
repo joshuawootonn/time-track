@@ -16,26 +16,28 @@ const updateData = {
 
 describe('/dimensions', () => {
   beforeEach(done => {
-    model.destroyAll(err => {});
-    model.create(
-      [
-        {
-          id: 1,
-          type: 'LS',
+    model.destroyAll(err => {
+      model.create(
+        [
+          {
+            id: 1,
+            type: 'LS',
+          },
+          {
+            id: 2,
+            type: 'SF',
+          },
+          {
+            id: 3,
+            type: 'SY',
+          },
+        ],
+        () => {
+          done();
         },
-        {
-          id: 2,
-          type: 'SF',
-        },
-        {
-          id: 3,
-          type: 'SY',
-        },
-      ],
-      () => {
-        done();
-      },
     );
+    });
+
   });
   test('gets all dimension', done => {
     return request(app)

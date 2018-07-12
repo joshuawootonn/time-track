@@ -17,26 +17,28 @@ const updateData = {
 
 describe('/crew', () => {
   beforeEach(done => {
-    model.destroyAll(err => {});
-    model.create(
-      [
-        {
-          id: 1,
-          name: 'Crew 1',
+    model.destroyAll(err => {
+      model.create(
+        [
+          {
+            id: 1,
+            name: 'Crew 1',
+          },
+          {
+            id: 2,
+            name: 'Crew 2',
+          },
+          {
+            id: 3,
+            name: 'Crew 3',
+          },
+        ],
+        () => {
+          done();
         },
-        {
-          id: 2,
-          name: 'Crew 2',
-        },
-        {
-          id: 3,
-          name: 'Crew 3',
-        },
-      ],
-      () => {
-        done();
-      },
     );
+    });
+
   });
   test('gets all crew', done => {
     return request(app)

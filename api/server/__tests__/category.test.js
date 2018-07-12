@@ -14,29 +14,31 @@ const updateData = {
 
 
 describe('/categories', () => {
-  
+
   beforeEach(done => {
-  model.destroyAll(err => {});
-  model.create(
-    [
-      {
-        id: 1,
-        type: 'PCC',
-      },
-      {
-        id: 2,
-        type: 'Earthwork',
-      },
-      {
-        id: 3,
-        type: 'Setup',
-      },
-    ],
-    () => {
-      done();
-    },
-  );
-});
+    model.destroyAll(err => {
+      model.create(
+        [
+          {
+            id: 1,
+            type: 'PCC',
+          },
+          {
+            id: 2,
+            type: 'Earthwork',
+          },
+          {
+            id: 3,
+            type: 'Setup',
+          },
+        ],
+        () => {
+          done();
+        },
+    );
+    });
+
+  });
   test('gets all category', done => {
     return request(app)
       .get('/api/categories')

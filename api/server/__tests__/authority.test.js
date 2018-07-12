@@ -15,28 +15,30 @@ const updateData = {
 
 describe('/authority', () => {
   beforeEach(done => {
-    model.destroyAll(err => {});
-    model.create(
-      [
-        {
-          id: 1,
-          type: 'Admin',
+    model.destroyAll(err => {
+      model.create(
+        [
+          {
+            id: 1,
+            type: 'Admin',
+          },
+          {
+            id: 2,
+            type: 'Manager',
+          },
+          {
+            id: 3,
+            type: 'Employee',
+          },
+        ],
+        () => {
+          done();
         },
-        {
-          id: 2,
-          type: 'Manager',
-        },
-        {
-          id: 3,
-          type: 'Employee',
-        },
-      ],
-      () => {
-        done();
-      },
     );
+    });
+
   });
-  
+
   test('gets all authority', done => {
     return request(app)
       .get('/api/authorities')

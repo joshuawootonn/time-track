@@ -21,26 +21,28 @@ const updateData = {
 
 describe('/subCategory', () => {
   beforeEach(done => {
-    subCategoryModel.destroyAll(err => {});
-    subCategoryModel.create(
-      [
-        {
-          id: 1,
-          type: 'Sidewalk',
-          categoryId: '1',
-          dimensionId: '1',
+    subCategoryModel.destroyAll(err => {
+      subCategoryModel.create(
+        [
+          {
+            id: 1,
+            type: 'Sidewalk',
+            categoryId: '1',
+            dimensionId: '1',
+          },
+          {
+            id: 2,
+            type: 'Pavement',
+            categoryId: '1',
+            dimensionId: '1',
+          },
+        ],
+        err => {
+          done();
         },
-        {
-          id: 2,
-          type: 'Pavement',
-          categoryId: '1',
-          dimensionId: '1',
-        },
-      ],
-      err => {
-        done();
-      },
     );
+    });
+
   });
   test('gets all subCategory', done => {
     return request(app)

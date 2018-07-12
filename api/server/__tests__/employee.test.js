@@ -29,34 +29,36 @@ const updateData = {
 
 describe('/employee', () => {
   beforeEach(done => {
-    employeeModel.destroyAll(err => {});
-    employeeModel.create(
-      [
-        {
-          id: 1,
-          firstName: 'Joshua',
-          lastName: 'Wootonn',
-          pin: '565656',
-          isEmployed: '1',
-          isWorking: '0',
-          authorityId: '1',
-          crewId: '1',
+    employeeModel.destroyAll(err => {
+      employeeModel.create(
+        [
+          {
+            id: 1,
+            firstName: 'Joshua',
+            lastName: 'Wootonn',
+            pin: '565656',
+            isEmployed: '1',
+            isWorking: '0',
+            authorityId: '1',
+            crewId: '1',
+          },
+          {
+            id: 2,
+            firstName: 'Jay',
+            lastName: 'Simon',
+            pin: '234234',
+            isEmployed: '1',
+            isWorking: '0',
+            authorityId: '1',
+            crewId: '1',
+          },
+        ],
+        err => {
+          done();
         },
-        {
-          id: 2,
-          firstName: 'Jay',
-          lastName: 'Simon',
-          pin: '234234',
-          isEmployed: '1',
-          isWorking: '0',
-          authorityId: '1',
-          crewId: '1',
-        },
-      ],
-      err => {
-        done();
-      },
     );
+    });
+
   });
   test('gets all employee', done => {
     return request(app)
