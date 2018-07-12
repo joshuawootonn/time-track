@@ -12,30 +12,31 @@ const updateData = {
   type: 'newer',
 };
 
-beforeEach(done => {
-  model.destroyAll(err => {});
-  model.create(
-    [
-      {
-        id: 1,
-        type: 'LS',
-      },
-      {
-        id: 2,
-        type: 'SF',
-      },
-      {
-        id: 3,
-        type: 'SY',
-      },
-    ],
-    () => {
-      done();
-    },
-  );
-});
 
-describe.skip('/dimensions', () => {
+
+describe('/dimensions', () => {
+  beforeEach(done => {
+    model.destroyAll(err => {});
+    model.create(
+      [
+        {
+          id: 1,
+          type: 'LS',
+        },
+        {
+          id: 2,
+          type: 'SF',
+        },
+        {
+          id: 3,
+          type: 'SY',
+        },
+      ],
+      () => {
+        done();
+      },
+    );
+  });
   test('gets all dimension', done => {
     return request(app)
       .get('/api/dimensions')
@@ -56,15 +57,15 @@ describe.skip('/dimensions', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('updates dimension 4', done => {
+  test('updates dimension 3', done => {
     return request(app)
       .put('/api/dimensions/3')
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a dimension', done => {
+  test('deletes dimension 2', done => {
     return request(app)
-      .delete('/api/dimensions/3')
+      .delete('/api/dimensions/2')
       .send()
       .expect(200, done);
   });

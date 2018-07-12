@@ -12,30 +12,31 @@ const updateData = {
   type: 'newer',
 };
 
-beforeAll(done => {
-  model.destroyAll(err => {});
-  model.create(
-    [
-      {
-        id: 1,
-        type: 'Admin',
-      },
-      {
-        id: 2,
-        type: 'Manager',
-      },
-      {
-        id: 3,
-        type: 'Employee',
-      },
-    ],
-    () => {
-      done();
-    },
-  );
-});
 
 describe('/authority', () => {
+  beforeEach(done => {
+    model.destroyAll(err => {});
+    model.create(
+      [
+        {
+          id: 1,
+          type: 'Admin',
+        },
+        {
+          id: 2,
+          type: 'Manager',
+        },
+        {
+          id: 3,
+          type: 'Employee',
+        },
+      ],
+      () => {
+        done();
+      },
+    );
+  });
+  
   test('gets all authority', done => {
     return request(app)
       .get('/api/authorities')
@@ -62,7 +63,7 @@ describe('/authority', () => {
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a authority', done => {
+  test('deletes authority 2', done => {
     return request(app)
       .delete('/api/authorities/2')
       .send()

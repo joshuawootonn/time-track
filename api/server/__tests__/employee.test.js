@@ -25,38 +25,39 @@ const updateData = {
   crewId: '1',
 };
 
-beforeEach(done => {
-  employeeModel.destroyAll(err => {});
-  employeeModel.create(
-    [
-      {
-        id: 1,
-        firstName: 'Joshua',
-        lastName: 'Wootonn',
-        pin: '565656',
-        isEmployed: '1',
-        isWorking: '0',
-        authorityId: '1',
-        crewId: '1',
-      },
-      {
-        id: 2,
-        firstName: 'Jay',
-        lastName: 'Simon',
-        pin: '234234',
-        isEmployed: '1',
-        isWorking: '0',
-        authorityId: '1',
-        crewId: '1',
-      },
-    ],
-    err => {
-      done();
-    },
-  );
-});
 
-describe.skip('/employee', () => {
+
+describe('/employee', () => {
+  beforeEach(done => {
+    employeeModel.destroyAll(err => {});
+    employeeModel.create(
+      [
+        {
+          id: 1,
+          firstName: 'Joshua',
+          lastName: 'Wootonn',
+          pin: '565656',
+          isEmployed: '1',
+          isWorking: '0',
+          authorityId: '1',
+          crewId: '1',
+        },
+        {
+          id: 2,
+          firstName: 'Jay',
+          lastName: 'Simon',
+          pin: '234234',
+          isEmployed: '1',
+          isWorking: '0',
+          authorityId: '1',
+          crewId: '1',
+        },
+      ],
+      err => {
+        done();
+      },
+    );
+  });
   test('gets all employee', done => {
     return request(app)
       .get('/api/employees')
@@ -81,13 +82,13 @@ describe.skip('/employee', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('deletes a employee', done => {
+  test('deletes employee 3', done => {
     return request(app)
       .delete('/api/employees/3')
       .send()
       .expect(200, done);
   });
-  test('updates employee 3', done => {
+  test('updates employee 2', done => {
     return request(app)
       .put('/api/employees/2')
       .send(updateData)

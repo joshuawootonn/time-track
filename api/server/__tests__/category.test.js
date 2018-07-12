@@ -12,7 +12,10 @@ const updateData = {
   type: 'newer',
 };
 
-beforeAll(done => {
+
+describe('/categories', () => {
+  
+  beforeEach(done => {
   model.destroyAll(err => {});
   model.create(
     [
@@ -34,8 +37,6 @@ beforeAll(done => {
     },
   );
 });
-
-describe.skip('/categories', () => {
   test('gets all category', done => {
     return request(app)
       .get('/api/categories')
@@ -62,7 +63,7 @@ describe.skip('/categories', () => {
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a category', done => {
+  test('deletes category 2', done => {
     return request(app)
       .delete('/api/categories/2')
       .send()

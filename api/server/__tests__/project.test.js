@@ -20,36 +20,37 @@ const updateData = {
   date: `${date}`,
 };
 
-beforeEach(done => {
-  model.destroyAll(err => {});
-  model.create(
-    [
-      {
-        id: 1,
-        name: 'Project 1',
-        isActive: '1',
-        date: `${date}`,
-      },
-      {
-        id: 2,
-        name: 'Project 2',
-        isActive: '1',
-        date: `${date}`,
-      },
-      {
-        id: 3,
-        name: 'Project 3',
-        isActive: '0',
-        date: `${date}`,
-      },
-    ],
-    () => {
-      done();
-    },
-  );
-});
 
-describe.skip('/projects', () => {
+describe('/projects', () => {
+  beforeEach(done => {
+    model.destroyAll(err => {});
+    model.create(
+      [
+        {
+          id: 1,
+          name: 'Project 1',
+          isActive: '1',
+          date: `${date}`,
+        },
+        {
+          id: 2,
+          name: 'Project 2',
+          isActive: '1',
+          date: `${date}`,
+        },
+        {
+          id: 3,
+          name: 'Project 3',
+          isActive: '0',
+          date: `${date}`,
+        },
+      ],
+      () => {
+        done();
+      },
+    );
+  });
+  
   test('gets all project', done => {
     return request(app)
       .get('/api/projects')
@@ -70,15 +71,15 @@ describe.skip('/projects', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('updates project 4', done => {
+  test('updates project 3', done => {
     return request(app)
       .put('/api/projects/3')
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a project', done => {
+  test('deletes project 2', done => {
     return request(app)
-      .delete('/api/projects/3')
+      .delete('/api/projects/2')
       .send()
       .expect(200, done);
   });

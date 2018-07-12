@@ -17,30 +17,31 @@ const updateData = {
   subcategoryId: '1',
 };
 
-beforeEach(done => {
-  taskModel.destroyAll(err => {});
-  taskModel.create(
-    [
-      {
-        id: 1,
-        name: '7" Sidewalk',
-        isActive: '1',
-        subcategoryId: '1',
-      },
-      {
-        id: 2,
-        name: '6" Sidewalk',
-        isActive: '1',
-        subcategoryId: '1',
-      },
-    ],
-    err => {
-      done();
-    },
-  );
-});
+
 
 describe.skip('/tasks', () => {
+  beforeEach(done => {
+    taskModel.destroyAll(err => {});
+    taskModel.create(
+      [
+        {
+          id: 1,
+          name: '7" Sidewalk',
+          isActive: '1',
+          subcategoryId: '1',
+        },
+        {
+          id: 2,
+          name: '6" Sidewalk',
+          isActive: '1',
+          subcategoryId: '1',
+        },
+      ],
+      err => {
+        done();
+      },
+    );
+  });
   test('gets all task', done => {
     return request(app)
       .get('/api/tasks')
@@ -65,7 +66,7 @@ describe.skip('/tasks', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('deletes a task', done => {
+  test('deletes task 2', done => {
     return request(app)
       .delete('/api/tasks/2')
       .send()
@@ -73,7 +74,7 @@ describe.skip('/tasks', () => {
   });
   test('updates task 3', done => {
     return request(app)
-      .put('/api/tasks/2')
+      .put('/api/tasks/3')
       .send(updateData)
       .expect(200, done);
   });

@@ -17,30 +17,31 @@ const updateData = {
   dimensionId: '1',
 };
 
-beforeEach(done => {
-  subCategoryModel.destroyAll(err => {});
-  subCategoryModel.create(
-    [
-      {
-        id: 1,
-        type: 'Sidewalk',
-        categoryId: '1',
-        dimensionId: '1',
-      },
-      {
-        id: 2,
-        type: 'Pavement',
-        categoryId: '1',
-        dimensionId: '1',
-      },
-    ],
-    err => {
-      done();
-    },
-  );
-});
 
-describe.skip('/subCategory', () => {
+
+describe('/subCategory', () => {
+  beforeEach(done => {
+    subCategoryModel.destroyAll(err => {});
+    subCategoryModel.create(
+      [
+        {
+          id: 1,
+          type: 'Sidewalk',
+          categoryId: '1',
+          dimensionId: '1',
+        },
+        {
+          id: 2,
+          type: 'Pavement',
+          categoryId: '1',
+          dimensionId: '1',
+        },
+      ],
+      err => {
+        done();
+      },
+    );
+  });
   test('gets all subCategory', done => {
     return request(app)
       .get('/api/subCategories')
@@ -65,15 +66,15 @@ describe.skip('/subCategory', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('deletes a subCategory', done => {
+  test('deletes subCategory 2', done => {
     return request(app)
       .delete('/api/subCategories/2')
       .send()
       .expect(200, done);
   });
-  test('updates subCategory 3', done => {
+  test('updates subCategory 1', done => {
     return request(app)
-      .put('/api/subCategories/2')
+      .put('/api/subCategories/1')
       .send(updateData)
       .expect(200, done);
   });

@@ -13,30 +13,31 @@ const updateData = {
   name: 'newer',
 };
 
-beforeEach(done => {
-  model.destroyAll(err => {});
-  model.create(
-    [
-      {
-        id: 1,
-        name: 'Crew 1',
-      },
-      {
-        id: 2,
-        name: 'Crew 2',
-      },
-      {
-        id: 3,
-        name: 'Crew 3',
-      },
-    ],
-    () => {
-      done();
-    },
-  );
-});
 
-describe.skip('/crew', () => {
+
+describe('/crew', () => {
+  beforeEach(done => {
+    model.destroyAll(err => {});
+    model.create(
+      [
+        {
+          id: 1,
+          name: 'Crew 1',
+        },
+        {
+          id: 2,
+          name: 'Crew 2',
+        },
+        {
+          id: 3,
+          name: 'Crew 3',
+        },
+      ],
+      () => {
+        done();
+      },
+    );
+  });
   test('gets all crew', done => {
     return request(app)
       .get('/api/crews')
@@ -61,15 +62,15 @@ describe.skip('/crew', () => {
       .send(createData)
       .expect(200, done);
   });
-  test('updates crew 4', done => {
+  test('updates crew 3', done => {
     return request(app)
-      .put('/api/crews/4')
+      .put('/api/crews/3')
       .send(updateData)
       .expect(200, done);
   });
-  test('deletes a crew', done => {
+  test('deletes crew 2', done => {
     return request(app)
-      .delete('/api/crews/4')
+      .delete('/api/crews/2')
       .send()
       .expect(200, done);
   });
