@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from 'store/User/action';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
-import SigninForm from 'components/forms/SigninForm';
+import AuthSigin from 'components/forms/AuthSignin';
 
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -62,7 +62,7 @@ class SignInForm extends Component {
 
   render() {
     const { username, password, error } = this.state;    
-    return <SigninForm 
+    return <AuthSigin 
       username={username} 
       password={password} 
       error={error} 
