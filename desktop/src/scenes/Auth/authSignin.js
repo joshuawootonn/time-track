@@ -1,4 +1,4 @@
-import AuthContainer from 'containers/Users/AuthContainer';
+import AuthContainer from 'containers/Auth/AuthContainer';
 
 import React, { Component } from 'react'
 

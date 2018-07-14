@@ -1,13 +1,13 @@
 import RouteMapper from './routeMapper';
 
-import userRoutes from 'routes/User';
+import accountRoutes from 'routes/Account';
 
 const routes = [
   {
     component: RouteMapper,
     path: '/',
     name: 'Employee Signin',
-    routes: userRoutes 
+    routes: accountRoutes 
   }
 ]
 
