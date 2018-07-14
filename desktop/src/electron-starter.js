@@ -2,10 +2,10 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const url = require('url');
 const path = require('path');
-const settings = require('electron-settings');
+const settings = require('../../../../Users/jose5/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/electron-settings');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
-const IPCConstants = require('./constants/ipc');
-const SETTINGS = require('./constants/settings');
+const IPCConstants = require('constants/ipc');
+const SETTINGS = require('constants/settings');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
