@@ -4,11 +4,10 @@
  * Make sure that the correct mysql stuff is in a .env file in the root dir
  * Make sure you set the NODE_ENV variable to the correct enviroment
  * Make sure that datasource.{NODE_ENV}.js is configured to take the env variables
- *   
+ *
  * Change: NODE_ENV
  */
-process.env.NODE_ENV="test"
-
+process.env.NODE_ENV = 'test';
 
 var server = require('../server');
 

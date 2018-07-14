@@ -12,7 +12,6 @@ const updateData = {
   type: 'newer',
 };
 
-
 describe('/authority', () => {
   beforeAll(done => {
     model.destroyAll(err => {
@@ -34,13 +33,13 @@ describe('/authority', () => {
         () => {
           done();
         },
-    );
+      );
     });
   });
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
 
   test('gets all authority', done => {
     return request(app)

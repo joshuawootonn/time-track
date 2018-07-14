@@ -12,8 +12,6 @@ const updateData = {
   type: 'newer',
 };
 
-
-
 describe('/dimensions', () => {
   beforeAll(done => {
     model.destroyAll(err => {
@@ -35,13 +33,13 @@ describe('/dimensions', () => {
         () => {
           done();
         },
-    );
+      );
     });
   });
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all dimension', done => {
     return request(app)
       .get('/api/dimensions')

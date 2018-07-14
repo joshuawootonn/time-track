@@ -13,8 +13,6 @@ const updateData = {
   name: 'newer',
 };
 
-
-
 describe('/crew', () => {
   beforeAll(done => {
     model.destroyAll(err => {
@@ -36,13 +34,13 @@ describe('/crew', () => {
         () => {
           done();
         },
-    );
+      );
     });
   });
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all crew', done => {
     return request(app)
       .get('/api/crews')

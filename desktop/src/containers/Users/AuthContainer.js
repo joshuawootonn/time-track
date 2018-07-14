@@ -19,14 +19,14 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
-      username: 'AACI',
+      username: 'aaci',
       password: '',
       error: null,
     };
   }
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-
+    console.log(cred.password);
     if (cred.username && cred.password) {
       this.props.login(cred.username, cred.password).then(() => {
         this.props.history.push(routes.SIGNIN);

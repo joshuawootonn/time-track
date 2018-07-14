@@ -12,9 +12,7 @@ const updateData = {
   type: 'newer',
 };
 
-
 describe('/categories', () => {
-
   beforeAll(done => {
     model.destroyAll(err => {
       model.create(
@@ -35,13 +33,13 @@ describe('/categories', () => {
         () => {
           done();
         },
-    );
+      );
     });
   });
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all category', done => {
     return request(app)
       .get('/api/categories')

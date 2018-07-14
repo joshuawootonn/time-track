@@ -17,8 +17,6 @@ const updateData = {
   subcategoryId: '1',
 };
 
-
-
 describe('/tasks', () => {
   beforeAll(done => {
     taskModel.destroyAll(err => {
@@ -46,7 +44,7 @@ describe('/tasks', () => {
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all task', done => {
     return request(app)
       .get('/api/tasks')

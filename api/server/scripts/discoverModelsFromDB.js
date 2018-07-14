@@ -12,7 +12,6 @@ This is a programmatic way of getting the models from database
 6. These relations will be generated at the top in the options section
 ***************************/
 
-
 const loopback = require('loopback');
 const promisify = require('util').promisify;
 const fs = require('fs');
@@ -22,48 +21,64 @@ const mkdirp = promisify(require('mkdirp'));
 const _ = require('lodash');
 
 const DATASOURCE_NAME = 'db';
-//Change this ------------------------------------------------
+// Change this ------------------------------------------------
 const dataSourceConfig = require('../datasources.json');
 const db = new loopback.DataSource(dataSourceConfig[DATASOURCE_NAME]);
 
-
 discover().then(
   success => process.exit(),
-  error => { console.error('UNHANDLED ERROR:\n', error); process.exit(1); },
+  error => {
+    console.error('UNHANDLED ERROR:\n', error);
+    process.exit(1);
+  },
 );
-
 
 async function discover() {
   const options = { relations: true };
-  const modelNames = ['authority', 'crew','employee','shift','activity','project_task', 'project', 'task', 'subcategory','category', 'dimension'];
+  const modelNames = [
+    'authority',
+    'crew',
+    'employee',
+    'shift',
+    'activity',
+    'project_task',
+    'project',
+    'task',
+    'subcategory',
+    'category',
+    'dimension',
+  ];
   let schemas = [];
   for (let modelName of modelNames) {
-    schemas.push(await db.discoverSchemas(modelName, options))
+    schemas.push(await db.discoverSchemas(modelName, options));
   }
   await mkdirp('../../common/models');
- 
+
   let i = 0;
   for (let schema of schemas) {
     await writeFile(
       `../../common/models/${modelNames[i]}.json`,
-      JSON.stringify(schemas[0][`time-track-development.${modelNames[i]}`], null, 2)
+      JSON.stringify(
+        schemas[0][`time-track-development.${modelNames[i]}`],
+        null,
+        2,
+      ),
     );
     i++;
   }
-
 
   // Expose models via REST API
   const configJson = await readFile('../model-config.json', 'utf-8');
   console.log('MODEL CONFIG', configJson);
   const config = JSON.parse(configJson);
 
-  for(let modelName of modelNames){
-    config[_.chain(modelName).camelCase().upperFirst()] = { dataSource: DATASOURCE_NAME, public: true }
+  for (let modelName of modelNames) {
+    config[
+      _.chain(modelName)
+        .camelCase()
+        .upperFirst()
+    ] = { dataSource: DATASOURCE_NAME, public: true };
   }
-  
-  await writeFile(
-    '../model-config.json',
-    JSON.stringify(config, null, 2)
-  );
-}
 
+  await writeFile('../model-config.json', JSON.stringify(config, null, 2));
+}

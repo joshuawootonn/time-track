@@ -25,8 +25,6 @@ const updateData = {
   crewId: '1',
 };
 
-
-
 describe('/employee', () => {
   beforeAll(done => {
     employeeModel.destroyAll(err => {
@@ -62,7 +60,7 @@ describe('/employee', () => {
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all employee', done => {
     return request(app)
       .get('/api/employees')

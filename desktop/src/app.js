@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import PrivateRoute from 'containers/auth/privateRouteContainer';
-import UserAuthContainer from 'containers/auth/userAuthContainer';
+import PrivateRoute from 'containers/privateRouteContainer';
+import UserAuthScene from 'scenes/Users/AuthScene';
 import AccountActionScene from 'scenes/accountActionScene';
 import SigninScene from 'scenes/signinScene';
 
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/auth" component={UserAuthContainer} />
+          <Route path="/auth" component={UserAuthScene} />
           <PrivateRoute path="/account" component={AccountActionScene} />
           <PrivateRoute path="/" component={SigninScene} />
         </Switch>

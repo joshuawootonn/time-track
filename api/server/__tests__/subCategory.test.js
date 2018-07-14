@@ -17,8 +17,6 @@ const updateData = {
   dimensionId: '1',
 };
 
-
-
 describe('/subCategory', () => {
   beforeAll(done => {
     subCategoryModel.destroyAll(err => {
@@ -46,7 +44,7 @@ describe('/subCategory', () => {
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all subCategory', done => {
     return request(app)
       .get('/api/subCategories')

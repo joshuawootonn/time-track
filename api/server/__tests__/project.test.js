@@ -20,7 +20,6 @@ const updateData = {
   date: `${date}`,
 };
 
-
 describe('/projects', () => {
   beforeAll(done => {
     model.destroyAll(err => {
@@ -54,7 +53,7 @@ describe('/projects', () => {
   afterAll(done => {
     app.dataSources.db.disconnect();
     done();
-  })
+  });
   test('gets all project', done => {
     return request(app)
       .get('/api/projects')

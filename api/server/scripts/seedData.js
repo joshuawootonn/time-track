@@ -1,4 +1,5 @@
 /* This file is just a collection of data to seed to the database */
+
 module.exports.Authority = [
   {
     id: 1,
@@ -44,7 +45,6 @@ module.exports.Crew = [
   },
 ];
 
-
 module.exports.Dimension = [
   {
     id: 1,
@@ -85,17 +85,18 @@ module.exports.Employee = [
 module.exports.ProjectTask = [
   {
     id: 1,
-    quantity: "100",
-    estimateTime: "1000",
+    quantity: '100',
+    estimateTime: '1000',
     taskId: '1',
     projectId: '1',
-  }, {
+  },
+  {
     id: 2,
-    quantity: "200",
-    estimateTime: "500",
+    quantity: '200',
+    estimateTime: '500',
     taskId: '1',
     projectId: '1',
-  }
+  },
 ];
 const date = new Date()
   .toISOString()
@@ -150,62 +151,63 @@ module.exports.Task = [
   },
 ];
 
-let to = new Date()
+let to = new Date();
 to.setHours(18);
-to = to.toISOString()
+to = to
+  .toISOString()
   .slice(0, 19)
   .replace('T', ' ');
 let from = new Date();
 from.setHours(18);
-from = from.toISOString()
+from = from
+  .toISOString()
   .slice(0, 19)
   .replace('T', ' ');
-
 
 module.exports.Shift = [
   {
     id: 1,
     clockInDate: from,
     clockOutDate: to,
-    employeeId: "1",
-    length: "600"
+    employeeId: '1',
+    length: '600',
   },
   {
     id: 2,
     clockInDate: from,
     clockOutDate: to,
-    employeeId: "1",
-    length: "600"
+    employeeId: '1',
+    length: '600',
   },
   {
     id: 3,
     clockInDate: from,
     clockOutDate: to,
-    employeeId: "2",
-    length: "600"
-  }
-]
+    employeeId: '2',
+    length: '600',
+  },
+];
 
 module.exports.Activity = [
   {
     id: 1,
-    description: "This is a description",
-    length:"600",
+    description: 'This is a description',
+    length: '600',
     projectTaskId: 1,
-    shiftId: 1
+    shiftId: 1,
   },
   {
     id: 2,
-    description: "This is a description 2",
-    length:"600",
+    description: 'This is a description 2',
+    length: '600',
     projectTaskId: 2,
-    shiftId: 2
+    shiftId: 2,
   },
   {
-    id:3,
-    description: "This is a description 3",
-    length:"600",
+    id: 3,
+    description: 'This is a description 3',
+    length: '600',
     projectTaskId: 1,
-    shiftId: 3
+    shiftId: 3,
   },
-]
+];
