@@ -5,7 +5,7 @@ import PrivateRoute from 'routes/privateRoute';
 import UserAuthScene from 'scenes/Users/AuthScene';
 import AccountActionScene from 'scenes/accountActionScene';
 import SigninScene from 'scenes/signinScene';
-import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
+import PrivateRouteWithSubRoutes from 'routes/privateRouteWithSubRoutes';
 
 import routes from 'routes';
 
@@ -18,7 +18,7 @@ class App extends Component {
           <Route path="/auth" component={UserAuthScene} />
           
           {routes.map((route,i) => {
-            return <RouteWithSubRoutes key={i} {...route} /> ;
+            return <PrivateRouteWithSubRoutes key={i} component={route.component} {...route} /> ;
           })}
 
           {/* <PrivateRoute path="/account" component={AccountActionScene} />

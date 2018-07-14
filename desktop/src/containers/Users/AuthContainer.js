@@ -27,11 +27,11 @@ class SignInForm extends Component {
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
     console.log(cred.password);
-    // if (cred.username && cred.password) {
-    //   this.props.login(cred.username, cred.password).then(() => {
-    //     this.props.history.push(routes.SIGNIN);
-    //   });
-    // }
+    if (cred.username && cred.password) {
+      this.props.login(cred.username, cred.password).then(() => {
+        this.props.history.push(routes.SIGNIN);
+      });
+    }
   };
 
   onSubmit = event => {

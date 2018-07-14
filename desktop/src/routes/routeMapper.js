@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
-import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
+import PrivateRouteWithSubRoutes from 'routes/privateRouteWithSubRoutes';
 
 export class RouteMapper extends Component {
   render() {
     return (
-      <div>{this.props.routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}</div>
+      <div>{this.props.routes.map((route, i) => <PrivateRouteWithSubRoutes key={i} component={route.component} {...route} />)}</div>
     );
   }
 }
