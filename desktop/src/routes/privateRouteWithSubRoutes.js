@@ -9,16 +9,16 @@ import { connect } from 'react-redux';
 export const RouteWithSubRoutes = (props) => {
   
   const { path, exact, user, routes } = props;
-  
+
   const Component = props.component;
+
   return (
     <Route
       path={path}
       exact={exact}
       render={routeProps => 
        user.status === status.SUCCESS ? (
-          <Component routes={props.routes}  />
-          
+          <Component routes={props.routes}  />          
         ) : (
           <Redirect
             to={{ pathname: '/auth', state: { from: routeProps.location } }}

@@ -5,6 +5,7 @@ import Signin from 'components/forms/AccountSigin'
 
 class SigninScene extends Component {
   render () {
+    console.log('siginin renders')
     return (
       <div>
         <SigninContainer />

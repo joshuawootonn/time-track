@@ -14,7 +14,7 @@ const AccountActionForm = (props) => {
         <IconButton className={classes.button}>
           <ShowChart className={classes.buttonIcon} />
         </IconButton>
-        <IconButton className={classes.button}>
+        <IconButton onClick={props.back} className={classes.button}>
           <ArrowBack className={classes.buttonIcon} />
         </IconButton>
       </div>

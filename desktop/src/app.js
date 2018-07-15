@@ -5,6 +5,8 @@ import PrivateRoute from 'routes/privateRoute';
 import AuthSigninScene from 'scenes/Auth/authSignin';
 import PrivateRouteWithSubRoutes from 'routes/privateRouteWithSubRoutes';
 
+import asdf from 'components/testing/asdf/asdf';
+
 import routes from 'routes';
 
 
@@ -14,7 +16,6 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/auth" component={AuthSigninScene} />
-          
           {routes.map((route,i) => {
             return <PrivateRouteWithSubRoutes key={i} component={route.component} {...route} /> ;
           })}
@@ -25,3 +26,5 @@ class App extends Component {
 }
 
 export default App;
+
+

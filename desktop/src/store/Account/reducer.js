@@ -15,9 +15,7 @@ export default (state = accountInitialState, action) => {
     case actions.ACCOUNT_LOGIN_SUCCESS:
       return {
         ...state,
-        payload: action.payload,
-        // id: action.payload.userId,
-        // access: action.payload.id,
+        ...action.payload.data,
         status: status.SUCCESS,
       };
     case actions.ACCOUNT_LOGIN_FAILURE:
