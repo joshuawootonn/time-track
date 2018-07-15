@@ -1,34 +1,57 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Paper,TextField } from '@material-ui/core';
+import {Field} from 'formik';
 
 import styles from './styles';
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
 
 class AccountSigin extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, id } = this.props;
     return (
       <div className={classes.hero}>
-        
-        <Grid className={classes.heroContent}
-         alignItems={"center"}
-          justify={"center"}
-          container
-          spacing="12">
-          {numbers.map((num, i) => {
-            return <Grid container justify={"center"} xs={4}>
-              <Button variant="outlined">1</Button>
+        <div className={classes.heroContent}>
+          
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              <Field component={WrappedTextField} name="pin" type="password" label="Pin" /> 
             </Grid>
-          })}
+            {numbers.map((num, i) => {
+              return <Grid key={i} item xs={4} >
+                <Button variant="outlined">{num}</Button>
+              </Grid>            
+            })}
+            <Grid item xs={4}>
+                <Button variant="outlined">Clear</Button>
+              </Grid>  
+              <Grid item xs={4}>
+                <Button variant="outlined">Enter</Button>
+              </Grid>  
+          </Grid>
 
-        </Grid>
-
+        </div>
       </div>
-
     )
   }
 }
 export default withStyles(styles)(AccountSigin)
+
+
+const WrappedTextField = ({ field, ...rest, id, label,type }) =>
+  <div>
+    <TextField
+      {...field}
+      {...rest}
+      id={id}
+      label={label}
+      type={type}
+      fullWidth
+      margin="normal"
+    />
+    {/* {form.errors[field.name] 
+        && form.touched[field.name] 
+           && <div>{form.errors[field.name]}</div>} */}
+  </div>

@@ -7,7 +7,7 @@ import * as actions from 'store/User/action';
 import { connect } from 'react-redux';
 
 export const RouteWithSubRoutes = (props) => {
-  console.log(props.routes);
+  
   const { path, exact, user, routes } = props;
   
   const Component = props.component;

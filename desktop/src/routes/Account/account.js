@@ -1,5 +1,5 @@
-import AccountActionScene from 'scenes/Account/accountAction';
-import AccountSigninScene from 'scenes/Account/accountSignin';
+import AccountActionScene from 'scenes/Account/accountActionScene';
+import AccountSigninScene from 'scenes/Account/accountSigninScene';
 
 export default [
   {

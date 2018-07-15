@@ -1,18 +1,21 @@
 const styles = theme => ({
   hero: {
     height: "100vh",
-    width: "100%",
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+
+  },
+  textField:{
+    width: '100%'
   },
   heroContent: {
-    width: '400px'
+    width: '300px',
   },
   error:{
     marginTop: '16px'
-  }
+  },
 });
 
 export default styles;

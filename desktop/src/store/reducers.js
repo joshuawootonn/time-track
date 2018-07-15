@@ -3,11 +3,12 @@ import { combineReducers } from '../../../../../Users/jose5/AppData/Local/Micros
 import user from './User/reducers';
 import entities from './Normalizr/entitiesReducer'
 import results from './Normalizr/resultsReducer'
-
+import account from './Account/reducer';
 
 const rootReducer = combineReducers({
   entities,
   results,
   user,
+  account
 });
 export default rootReducer;
