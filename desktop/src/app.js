@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import PrivateRoute from 'routes/privateRoute';
 import AuthSigninScene from 'scenes/Auth/authSignin';
-import PrivateRouteWithSubRoutes from 'routes/privateRouteWithSubRoutes';
-
+import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
 import asdf from 'components/testing/asdf/asdf';
 
 import routes from 'routes';
@@ -16,8 +15,10 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/auth" component={AuthSigninScene} />
+          {/* <Route path={routes[0].path} exact={routes[0].exact} render */}
+
           {routes.map((route,i) => {
-            return <PrivateRouteWithSubRoutes key={i} component={route.component} {...route} /> ;
+            return <RouteWithSubRoutes key={i} {...route} /> ;
           })}
         </Switch>
       </BrowserRouter>

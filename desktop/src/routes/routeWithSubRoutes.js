@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import PrivateRoute from './privateRoute';
 
 export const RouteWithSubRoutes = route => (
-  <PrivateRoute
+  <Route
     path={route.path}
     exact={route.exact}   
     

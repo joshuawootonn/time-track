@@ -29,7 +29,7 @@ class SignInForm extends Component {
     console.log(cred.password);
     if (cred.username && cred.password) {
       this.props.login(cred.username, cred.password).then(() => {
-        this.props.history.push('/actions');
+        this.props.history.push('/');
         console.log(this.props.history)
       });
     }
