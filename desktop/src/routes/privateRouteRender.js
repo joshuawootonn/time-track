@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 class PrivateRoute extends Component {
   render () {
     const {user} = this.props;
-    const Component = this.props.component;
+    const Component = this.props;
+    console.log(this.props);
     return (
       <Route
         render={props =>
