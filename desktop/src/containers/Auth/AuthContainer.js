@@ -26,11 +26,10 @@ class SignInForm extends Component {
   }
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-    console.log(cred.password);
+
     if (cred.username && cred.password) {
       this.props.login(cred.username, cred.password).then(() => {
         this.props.history.push('/');
-        console.log(this.props.history);
       });
     }
   };
@@ -54,16 +53,9 @@ class SignInForm extends Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  // send = () => {
-  //   console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))
-  // }
-  // receive = () => {
-  //   console.log(ipcRenderer.sendSync(IPCConstants.GET_CRED,"the message"))
-  // }
 
   render() {
     const { username, password, error } = this.state;
-    console.log(this.props.history.location.pathname);
     return (
       <AuthSigin
         username={username}

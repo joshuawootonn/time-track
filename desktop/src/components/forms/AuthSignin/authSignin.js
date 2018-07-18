@@ -53,7 +53,11 @@ const AuthSigninForm = props => {
 
 AuthSigninForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  error: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(AuthSigninForm);

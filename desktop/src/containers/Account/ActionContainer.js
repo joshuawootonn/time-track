@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import AccountActionForm from 'components/forms/AccountAction';
 
 class AccountAction extends Component {
   back = () => {
-    console.log(this.props.history.location.pathname);
     this.props.history.push('/');
   };
   render() {
-    console.log(this.props.history.location.pathname);
     return (
       <div>
         <AccountActionForm back={this.back} />
@@ -16,5 +16,9 @@ class AccountAction extends Component {
     );
   }
 }
+
+AccountAction.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 export default withRouter(AccountAction);

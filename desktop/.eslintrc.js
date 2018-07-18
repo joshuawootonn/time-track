@@ -9,6 +9,7 @@ module.exports = {
     "es6": true
   },
   rules: {
+    'no-console': 'off',
     'prettier/prettier': [ // customizing prettier rules (unfortunately not many of them are customizable)
       'error',
       {

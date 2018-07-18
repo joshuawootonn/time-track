@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import PrivateRoute from './privateRoute';
 
 export const RouteWithSubRoutes = route => (
   <Route

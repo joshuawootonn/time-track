@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 
-import * as routes from 'constants/routes';
-//import {account as accountActions} from 'store/actions';
 import * as accountActions from 'store/Account/action';
-
 import AccountSigin from 'components/forms/AccountSigin';
 
 class SignInContainer extends Component {
   render() {
     const { getAccountByPin, history } = this.props;
-    console.log(this.props.history.location.pathname);
     return (
       <Formik
         initialValues={{ pin: '565656' }}
@@ -22,15 +19,7 @@ class SignInContainer extends Component {
         }}
         onSubmit={values => {
           getAccountByPin(values.pin).then(() => {
-            console.log(
-              'asdfasdfasdfasdfas',
-              this.props.history.location.pathname,
-            );
-            this.props.history.push('/actions');
-            console.log(
-              'asdfasdfasdfasdfas',
-              this.props.history.location.pathname,
-            );
+            history.push('/actions');
           });
         }}
         render={({ errors, touched, isSubmitting }) => (
@@ -44,6 +33,11 @@ class SignInContainer extends Component {
     );
   }
 }
+
+SignInContainer.propTypes = {
+  getAccountByPin: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 const mapDispatchToProps = dispatch => {
   return {

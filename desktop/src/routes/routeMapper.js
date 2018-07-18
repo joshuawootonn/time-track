@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
-import PrivateRouteWithSubRoutes from 'routes/privateRouteWithSubRoutes';
 import { RouteWithSubRoutes } from './routeWithSubRoutes';
 
 export class RouteMapper extends Component {

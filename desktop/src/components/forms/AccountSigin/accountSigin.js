@@ -20,7 +20,7 @@ class AccountSiginForm extends Component {
             <Grid container spacing={24}>
               <Grid item xs={12}>
                 <Field
-                  component={(props) => <TextField {...props} type="password"/>}                
+                  component={props => <TextField {...props} type="password" />}
                   name="pin"
                   label="Pin"
                 />
@@ -58,4 +58,3 @@ AccountSiginForm.propTypes = {
 };
 
 export default withStyles(styles)(AccountSiginForm);
-
