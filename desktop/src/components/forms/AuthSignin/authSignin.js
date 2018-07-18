@@ -10,9 +10,9 @@ import Password from 'components/inputs/Password';
 import styles from './styles';
 
 const AuthSigninForm = props => {
-  const { classes, username, password, onSubmit, isSubmitting,globalError } = props;
-
-  const isInvalid = password === '' || username === '';
+  const { classes,onSubmit, isSubmitting,globalError } = props;
+ 
+  const isInvalid = true //password === '' || username === '';
   return (
     <div className={classes.hero}>
       <Form className={classes.heroContent}>
@@ -49,10 +49,6 @@ const AuthSigninForm = props => {
 
 AuthSigninForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   globalError: PropTypes.string.isRequired
 };
 

@@ -22,10 +22,9 @@ const TextField = ({ field, form, id, label }) =>
   
 TextField.propTypes = {
   field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
+  form: PropTypes.object.isRequired,  
+  id: PropTypes.string,
   label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default (TextField);

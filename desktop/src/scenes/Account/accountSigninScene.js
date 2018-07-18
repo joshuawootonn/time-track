@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import AccountSigninContainer from 'containers/Account/AccountSigninContainer';
+import AccountSigninContainer from 'containers/Account/accountSigninContainer';
 
 class AccountSigninScene extends Component {
   render() {
-    console.log('siginin renders');
     return (
       <div>
         <AccountSigninContainer />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AccountActionContainer from 'containers/Account/AccountActionContainer';
+import AccountActionContainer from 'containers/Account/accountActionContainer';
 
 class AccountActionAction extends Component {
   render() {

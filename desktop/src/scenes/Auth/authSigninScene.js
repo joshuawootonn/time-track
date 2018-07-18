@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AuthSigninContainer from 'containers/Auth/AuthSigninContainer';
+import AuthSigninContainer from 'containers/Auth/authSigninContainer';
 
 
 class AuthSigninScene extends Component {

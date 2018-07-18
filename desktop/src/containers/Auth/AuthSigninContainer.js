@@ -38,7 +38,6 @@ class SignInForm extends Component {
   };
 
   render() {
-    console.log(this.state.error)
     return (
       <div>
       <Formik
