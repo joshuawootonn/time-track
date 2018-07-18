@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-import SigninContainer from 'containers/Account/SigninContainer';
+import AccountSigninContainer from 'containers/Account/AccountSigninContainer';
 
-class SigninScene extends Component {
+class AccountSigninScene extends Component {
   render() {
     console.log('siginin renders');
     return (
       <div>
-        <SigninContainer />
+        <AccountSigninContainer />
       </div>
     );
   }
 }
 
-export default SigninScene;
+export default AccountSigninScene;

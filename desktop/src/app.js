@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import PrivateRoute from 'routes/privateRoute';
-import AuthSigninScene from 'scenes/Auth/authSignin';
+import AuthSigninScene from 'scenes/Auth/authSigninScene';
 import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
 
 import routes from 'routes';
