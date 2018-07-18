@@ -1,13 +1,11 @@
 import AuthContainer from 'containers/Auth/AuthContainer';
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class AuthScene extends Component {
-  render () {
-    return (
-      <AuthContainer /> 
-    )
+  render() {
+    return <AuthContainer />;
   }
 }
 
-export default AuthScene
+export default AuthScene;

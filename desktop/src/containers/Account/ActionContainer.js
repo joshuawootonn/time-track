@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import AccountActionForm from 'components/forms/AccountActionForm';
+import AccountActionForm from 'components/forms/AccountAction';
 
 class AccountAction extends Component {
-  back = () =>{
-    console.log(this.props.history.location.pathname)
+  back = () => {
+    console.log(this.props.history.location.pathname);
     this.props.history.push('/');
-  }
-  render () {
-
-    console.log(this.props.history.location.pathname)
+  };
+  render() {
+    console.log(this.props.history.location.pathname);
     return (
       <div>
-      <AccountActionForm back={this.back}/>
+        <AccountActionForm back={this.back} />
       </div>
-    )
+    );
   }
 }
 

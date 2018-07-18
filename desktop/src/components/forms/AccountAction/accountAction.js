@@ -1,16 +1,20 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
+import { ShowChart, Check, ArrowBack } from '@material-ui/icons';
+
 import styles from './styles';
-import { ShowChart, Check, Close, ArrowBack } from '@material-ui/icons'
-import { IconButton } from '@material-ui/core'
-const AccountActionForm = (props) => {
-  const {classes} = props;
+
+const AccountActionForm = props => {
+  const { classes } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
         <IconButton className={classes.button}>
           <Check className={classes.buttonIcon} />
-        </IconButton>    
+        </IconButton>
         <IconButton className={classes.button}>
           <ShowChart className={classes.buttonIcon} />
         </IconButton>
@@ -19,7 +23,12 @@ const AccountActionForm = (props) => {
         </IconButton>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withStyles(styles)(AccountActionForm)
+AccountActionForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  back: PropTypes.func.isRequired,
+};
+
+export default withStyles(styles)(AccountActionForm);

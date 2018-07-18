@@ -7,8 +7,8 @@ const routes = [
     component: RouteMapper,
     path: '/',
     name: 'Employee Signin',
-    routes: accountRoutes 
-  }
-]
+    routes: accountRoutes,
+  },
+];
 
 export default routes;

@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import AccountAction from 'containers/Account/ActionContainer';
 
 class ActionAction extends Component {
-  render () {
-    
+  render() {
     return (
-      <div>    
-      <AccountAction />
+      <div>
+        <AccountAction />
       </div>
-    )
+    );
   }
 }
 
-export default ActionAction
+export default ActionAction;

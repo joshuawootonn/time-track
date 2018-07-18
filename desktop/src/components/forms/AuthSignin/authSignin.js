@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Typography, TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import styles from './styles';
 
-const SigninForm = (props) => {
+const AuthSigninForm = props => {
   const { classes, username, password, error, onSubmit, onChange } = props;
   const isInvalid = password === '' || username === '';
   return (
@@ -34,19 +36,24 @@ const SigninForm = (props) => {
           color="primary"
           variant="contained"
           onClick={onSubmit}
-          >
+        >
           Submit
         </Button>
-
       </form>
-      <div className={classes.error} >
-        {error && <Typography color="error" variant="button">{error.message}</Typography>}
+      <div className={classes.error}>
+        {error && (
+          <Typography color="error" variant="button">
+            {error.message}
+          </Typography>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
+AuthSigninForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+};
 
-
-
-export default withStyles(styles)(SigninForm)
+export default withStyles(styles)(AuthSigninForm);

@@ -11,7 +11,7 @@ import reducer from 'store/reducers';
 import './index.css';
 const middleware = [thunk];
 const store = createStore(
-  reducer,  
+  reducer,
   composeWithDevTools(applyMiddleware(...middleware)),
 );
 

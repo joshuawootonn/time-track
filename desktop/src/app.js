@@ -7,14 +7,13 @@ import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
 
 import routes from 'routes';
 
-
-const AuthedRoutes = () =>
+const AuthedRoutes = () => (
   <div>
     {routes.map((route, i) => {
       return <RouteWithSubRoutes key={i} {...route} />;
     })}
   </div>
-
+);
 
 class App extends Component {
   render() {
@@ -30,5 +29,3 @@ class App extends Component {
 }
 
 export default App;
-
-

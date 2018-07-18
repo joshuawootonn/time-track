@@ -7,7 +7,11 @@ import { RouteWithSubRoutes } from './routeWithSubRoutes';
 export class RouteMapper extends Component {
   render() {
     return (
-      <div>{this.props.routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}</div>
+      <div>
+        {this.props.routes.map((route, i) => (
+          <RouteWithSubRoutes key={i} {...route} />
+        ))}
+      </div>
     );
   }
 }

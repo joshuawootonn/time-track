@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import * as status from 'constants/status';
@@ -6,8 +6,8 @@ import * as actions from 'store/User/action';
 import { connect } from 'react-redux';
 
 class PrivateRoute extends Component {
-  render () {
-    const {user} = this.props;
+  render() {
+    const { user } = this.props;
     const Component = this.props.component;
     return (
       <Route
@@ -36,4 +36,7 @@ const mapStateToProps = state => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps,actions)(PrivateRoute);
+export default connect(
+  mapStateToProps,
+  actions,
+)(PrivateRoute);

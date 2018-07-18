@@ -30,7 +30,7 @@ class SignInForm extends Component {
     if (cred.username && cred.password) {
       this.props.login(cred.username, cred.password).then(() => {
         this.props.history.push('/');
-        console.log(this.props.history)
+        console.log(this.props.history);
       });
     }
   };
@@ -52,8 +52,8 @@ class SignInForm extends Component {
     event.preventDefault();
   };
   onChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
   // send = () => {
   //   console.log(ipcRenderer.sendSync(IPCConstants.SET_CRED,{username: "",password: ""}))
   // }
@@ -62,15 +62,17 @@ class SignInForm extends Component {
   // }
 
   render() {
-    const { username, password, error } = this.state;   
-    console.log(this.props.history.location.pathname) 
-    return <AuthSigin 
-      username={username} 
-      password={password} 
-      error={error} 
-      onChange={this.onChange} 
-      onSubmit={this.onSubmit} 
-    />    
+    const { username, password, error } = this.state;
+    console.log(this.props.history.location.pathname);
+    return (
+      <AuthSigin
+        username={username}
+        password={password}
+        error={error}
+        onChange={this.onChange}
+        onSubmit={this.onSubmit}
+      />
+    );
   }
 }
 

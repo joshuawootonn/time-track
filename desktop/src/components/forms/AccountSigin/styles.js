@@ -1,20 +1,19 @@
-const styles = theme => ({
+const styles = () => ({
   hero: {
-    height: "100vh",
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
-
+    alignItems: 'center',
   },
-  textField:{
-    width: '100%'
+  textField: {
+    width: '100%',
   },
   heroContent: {
     width: '300px',
   },
-  error:{
-    marginTop: '16px'
+  error: {
+    marginTop: '16px',
   },
 });
 
