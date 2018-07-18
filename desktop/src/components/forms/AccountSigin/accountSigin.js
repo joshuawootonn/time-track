@@ -28,18 +28,22 @@ class AccountSiginForm extends Component {
               {numbers.map((num, i) => {
                 return (
                   <Grid key={i} item xs={4}>
-                    <Button variant="outlined">{num}</Button>
+                    <Button variant="contained">{num}</Button>
                   </Grid>
                 );
               })}
               <Grid item xs={4}>
-                <Button variant="outlined">Clear</Button>
+                <Button 
+                  color="secondary"
+                  variant="contained"
+                >Clear</Button>
               </Grid>
               <Grid item xs={4}>
                 <Button
                   type="submit"
+                  color="primary"
                   disabled={isSubmitting}
-                  variant="outlined"
+                  variant="contained"
                 >
                   Enter
                 </Button>
