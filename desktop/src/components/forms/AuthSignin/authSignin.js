@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Typography, TextField, Button } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { Field, Form } from 'formik';
 
+import TextField from 'components/inputs/TextField';
+import Password from 'components/inputs/Password';
 import styles from './styles';
 
 const AuthSigninForm = props => {
@@ -11,25 +14,18 @@ const AuthSigninForm = props => {
   const isInvalid = password === '' || username === '';
   return (
     <div className={classes.hero}>
-      <form onSubmit={onSubmit} className={classes.heroContent}>
+      <Form className={classes.heroContent}>
         <Typography variant="title">Select Network</Typography>
-        <TextField
-          label="Name"
-          className={classes.textField}
-          value={username}
-          onChange={onChange}
-          margin="normal"
+        <Field 
+          component={TextField}
           name="username"
+          label="Network"
         />
-        <TextField
-          label="Password"
-          className={classes.textField}
-          type="password"
-          margin="normal"
-          onChange={onChange}
-          value={password}
+        <Field 
+          component={Password}
           name="password"
-        />
+          label="Password"
+        />          
         <Button
           type="submit"
           disabled={isInvalid}
@@ -39,7 +35,7 @@ const AuthSigninForm = props => {
         >
           Submit
         </Button>
-      </form>
+      </Form>
       <div className={classes.error}>
         {error && (
           <Typography color="error" variant="button">

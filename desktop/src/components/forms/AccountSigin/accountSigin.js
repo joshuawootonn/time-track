@@ -6,7 +6,7 @@ import { Button, Grid } from '@material-ui/core';
 import { Field, Form } from 'formik';
 
 import styles from './styles';
-import TextField from 'components/inputs/TextField';
+import Password from 'components/inputs/Password'
 
 const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
@@ -20,7 +20,7 @@ class AccountSiginForm extends Component {
             <Grid container spacing={24}>
               <Grid item xs={12}>
                 <Field
-                  component={props => <TextField {...props} type="password" />}
+                  component={Password}
                   name="pin"
                   label="Pin"
                 />

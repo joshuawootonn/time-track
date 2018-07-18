@@ -8,7 +8,7 @@ const TextField = ({ field, form, id, label, type }) => (
     {...field}
     id={id}
     label={label}
-    type={type ? type : 'search'}
+    type="password"
     InputLabelProps={{ shrink: true }}
     fullWidth
     margin="normal"
