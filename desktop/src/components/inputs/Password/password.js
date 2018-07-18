@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 
-const TextField = ({ field, form, id, label, type }) => {
-
-  console.log(form.errors)
-  return <MUTextField
+const TextField = ({ field, form, id, label }) => 
+ <MUTextField
     {...field}
     id={id}
     label={label}
@@ -21,7 +19,7 @@ const TextField = ({ field, form, id, label, type }) => {
         : ' '
     }
   />
-}
+  
 TextField.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,

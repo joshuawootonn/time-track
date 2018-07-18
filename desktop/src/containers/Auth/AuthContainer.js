@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
+import {Typography} from '@material-ui/core'
 
 
 import { auth as authValidation} from 'constants/formValidation';
@@ -17,26 +18,35 @@ const ipcRenderer = electron.ipcRenderer;
 
 
 class SignInForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      error: ''
+    }
+  }
 
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-
     // if (cred.username && cred.password) {
-    //   this.props.login(cred.username, cred.password).then(() => {
+    //   this.props.login(cred.username, cred.password)
+    //   .then(() => {
     //     this.props.history.push('/');
-    //   });
+    //   })
+   
     // }
+    
   };
 
   render() {
+    console.log(this.state.error)
     return (
+      <div>
       <Formik
-        initialValues={{ username: '', password: '' }}
+        initialValues={{ username: 'josh', password: '5656' }}
         validationSchema={authValidation}
-        onSubmit={values => {
+        onSubmit={(values,functions) => {
           const { history } = this.props;
           const {username, password} = values
-
           this.props
             .login(username, password)
             .then(() => {
@@ -44,22 +54,22 @@ class SignInForm extends Component {
               history.push(routes.SIGNIN);
             })
             .catch(error => {
-              //this.setState(byPropKey('error', error));
-
-              // TODO: Add a handler for network error
-
-              //
+              this.setState({error: error.message}) 
+              functions.setSubmitting(false)
             });
-        }}
+        }}        
         render={({ errors, touched, isSubmitting }) => (
           <AuthSigin
             touched={touched}
             isSubmitting={isSubmitting}
             errors={errors}
+            globalError={this.state.error} 
           />
         )} 
         
       />
+      </div>
+      
      
     );
   }
