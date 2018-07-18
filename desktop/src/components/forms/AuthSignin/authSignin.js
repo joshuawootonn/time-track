@@ -10,7 +10,8 @@ import Password from 'components/inputs/Password';
 import styles from './styles';
 
 const AuthSigninForm = props => {
-  const { classes, username, password, error, onSubmit, onChange } = props;
+  const { classes, username, password, error, onSubmit, isSubmitting } = props;
+
   const isInvalid = password === '' || username === '';
   return (
     <div className={classes.hero}>
@@ -31,6 +32,7 @@ const AuthSigninForm = props => {
           disabled={isInvalid}
           color="primary"
           variant="contained"
+          disabled={isSubmitting}
           onClick={onSubmit}
         >
           Submit

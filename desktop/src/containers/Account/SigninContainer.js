@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 
+import { account as accountValidation} from 'constants/formValidation';
 import * as accountActions from 'store/Account/action';
 import AccountSigin from 'components/forms/AccountSigin';
 
@@ -14,9 +15,7 @@ class SignInContainer extends Component {
     return (
       <Formik
         initialValues={{ pin: '565656' }}
-        validate={values => {
-          console.log('validate', values);
-        }}
+        validationSchema={accountValidation}
         onSubmit={values => {
           getAccountByPin(values.pin).then(() => {
             history.push('/actions');

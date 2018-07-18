@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 
+
+import { auth as authValidation} from 'constants/formValidation';
 import * as actions from 'store/User/action';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
@@ -19,20 +21,18 @@ class SignInForm extends Component {
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
 
-    if (cred.username && cred.password) {
-      this.props.login(cred.username, cred.password).then(() => {
-        this.props.history.push('/');
-      });
-    }
+    // if (cred.username && cred.password) {
+    //   this.props.login(cred.username, cred.password).then(() => {
+    //     this.props.history.push('/');
+    //   });
+    // }
   };
 
   render() {
     return (
       <Formik
         initialValues={{ username: '', password: '' }}
-        validate={values => {
-          console.log('validate', values);
-        }}
+        validationSchema={authValidation}
         onSubmit={values => {
           const { history } = this.props;
           const {username, password} = values
