@@ -9,12 +9,11 @@ export const login = (username, password) => {
 
     return endpoint.login(username, password).then(
       response => {
-        dispatch({ type: userActionTypes.USER_LOGIN_SUCCESS, payload: response.data });
-        return Promise.resolve();
+        return dispatch({ type: userActionTypes.USER_LOGIN_SUCCESS, payload: response.data });       
       },
       error => {
         dispatch({ type: userActionTypes.USER_LOGIN_FAILURE, payload: error });
-        return Promise.reject(error);
+        throw error
       },
     );
   };

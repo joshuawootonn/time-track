@@ -12,6 +12,7 @@ export const getAccountByPin = pin => {
       },
       error => {
         dispatch({ type: accountActionTypes.ACCOUNT_LOGIN_FAILURE, payload: error });
+        throw error
       },
     );
   };
