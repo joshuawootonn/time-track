@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 
-import { account as accountValidation} from 'constants/formValidation';
+import { account as accountValidation } from 'constants/formValidation';
 import * as accountActions from 'store/Account/action';
 import AccountSigin from 'components/forms/AccountSigin';
 
@@ -21,12 +21,10 @@ class SignInContainer extends Component {
             history.push('/actions');
           });
         }}
-        render={({ errors, touched, isSubmitting }) => (
+        render={(formProps) =>( 
           <AccountSigin
-            errors={errors}
-            touched={touched}
-            isSubmitting={isSubmitting}
-          />
+            {...formProps}
+          />      
         )}
       />
     );

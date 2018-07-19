@@ -11,8 +11,17 @@ import Password from 'components/inputs/Password'
 const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
 class AccountSiginForm extends Component {
+  appendPin = (newChar) => {
+    if(this.props.values.pin.length === 6) return;
+    this.props.setFieldValue("pin",this.props.values.pin + newChar,false)
+  }
+  resetPin = () => {
+    this.props.setFieldValue("pin", "", false)
+  }
   render() {
-    const { classes, isSubmitting } = this.props;
+    const { classes, isSubmitting,values } = this.props;
+    console.log(this.props);
+    console.log(values);
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
@@ -28,12 +37,13 @@ class AccountSiginForm extends Component {
               {numbers.map((num, i) => {
                 return (
                   <Grid key={i} item xs={4}>
-                    <Button variant="contained">{num}</Button>
+                    <Button onClick={()=>this.appendPin(num)} variant="contained">{num}</Button>
                   </Grid>
                 );
               })}
               <Grid item xs={4}>
                 <Button 
+                  onClick={this.resetPin}
                   color="secondary"
                   variant="contained"
                 >Clear</Button>
@@ -59,6 +69,8 @@ class AccountSiginForm extends Component {
 AccountSiginForm.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func
 };
 
 export default withStyles(styles)(AccountSiginForm);
