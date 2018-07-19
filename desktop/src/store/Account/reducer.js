@@ -1,4 +1,4 @@
-import * as actions from 'constants/actionsTypes';
+import {account as accountActionTypes} from 'constants/ActionTypes';
 import * as status from 'constants/status';
 export const accountInitialState = {
   status: status.INIT,
@@ -7,18 +7,18 @@ export const accountInitialState = {
 
 export default (state = accountInitialState, action) => {
   switch (action.type) {
-    case actions.ACCOUNT_LOGIN_REQUEST:
+    case accountActionTypes.ACCOUNT_LOGIN_REQUEST:
       return {
         ...state,
         status: status.LOADING,
       };
-    case actions.ACCOUNT_LOGIN_SUCCESS:
+    case accountActionTypes.ACCOUNT_LOGIN_SUCCESS:
       return {
         ...state,
         ...action.payload.data,
         status: status.SUCCESS,
       };
-    case actions.ACCOUNT_LOGIN_FAILURE:
+    case accountActionTypes.ACCOUNT_LOGIN_FAILURE:
       return {
         ...state,
         status: status.FAILURE,

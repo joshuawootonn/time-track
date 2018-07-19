@@ -1,4 +1,5 @@
-import * as user from './User/action';
-import * as account from './Account/action';
+import * as user from './User/actions';
+import * as account from './Account/actions';
+import * as shift from './Shift/actions';
 
-export { user, account };
+export { user, account, shift };

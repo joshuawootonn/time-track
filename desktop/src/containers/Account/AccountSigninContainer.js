@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 
 import { account as accountValidation } from 'constants/formValidation';
-import * as accountActions from 'store/Account/action';
+import * as accountActions from 'store/Account/actions';
 import AccountSigin from 'components/forms/AccountSigin';
 
 class SignInContainer extends Component {
