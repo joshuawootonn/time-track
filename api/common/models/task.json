@@ -101,5 +101,7 @@
     
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "idInjection": false,
+  "generated" : false
 }

@@ -19,12 +19,13 @@
   },
   "properties": {
     "id": {
-      "type": "Number",
-      "id": 1,
+      "type": "Number",      
       "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
+      "generated":true,
+      "id": true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -53,5 +54,7 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "idInjection": false,
+  "generated" : false
 }

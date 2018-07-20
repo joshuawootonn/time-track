@@ -84,7 +84,7 @@
         "dataLength": null,
         "dataPrecision": 10,
         "dataScale": 0,
-        "nullable": "N"
+        "nullable": "N",
       }
     },
     "length": {
@@ -106,5 +106,6 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "idInjection": false,
+  "generated" : false
 }

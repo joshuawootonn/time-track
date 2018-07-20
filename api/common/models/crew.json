@@ -53,5 +53,7 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "idInjection": false,
+  "generated" : false
 }
