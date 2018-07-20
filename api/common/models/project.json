@@ -48,6 +48,7 @@
       "length": null,
       "precision": 10,
       "scale": 0,
+      "generated" : true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -92,6 +93,5 @@
   "relations": {},
   "acls": [],
   "methods": {},
-  "idInjection": false,
-  "generated" : false
+  "idInjection": false
 }
