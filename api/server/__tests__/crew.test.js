@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const model = app.models['Crew'];
 
 const createData = {
-  id: 4,
   name: 'new',
 };
 
@@ -19,15 +18,12 @@ describe('/crew', () => {
       model.create(
         [
           {
-            id: 1,
             name: 'Crew 1',
           },
           {
-            id: 2,
             name: 'Crew 2',
           },
           {
-            id: 3,
             name: 'Crew 3',
           },
         ],

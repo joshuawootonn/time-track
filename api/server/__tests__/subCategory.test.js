@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const subCategoryModel = app.models['Subcategory'];
 
 const createData = {
-  id: 3,
   type: 'Driveway',
   categoryId: '1',
   dimensionId: '1',
@@ -23,13 +22,11 @@ describe('/subCategory', () => {
       subCategoryModel.create(
         [
           {
-            id: 1,
             type: 'Sidewalk',
             categoryId: '1',
             dimensionId: '1',
           },
           {
-            id: 2,
             type: 'Pavement',
             categoryId: '1',
             dimensionId: '1',

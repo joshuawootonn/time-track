@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const employeeModel = app.models['Employee'];
 
 const createData = {
-  id: 3,
   firstName: 'Gene',
   lastName: 'Simon',
   pin: '546546',
@@ -31,7 +30,6 @@ describe('/employee', () => {
       employeeModel.create(
         [
           {
-            id: 1,
             firstName: 'Joshua',
             lastName: 'Wootonn',
             pin: '565656',
@@ -41,7 +39,6 @@ describe('/employee', () => {
             crewId: '1',
           },
           {
-            id: 2,
             firstName: 'Jay',
             lastName: 'Simon',
             pin: '234234',

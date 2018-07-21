@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'test';
 
 const model = app.models['Authority'];
 const createData = {
-  id: 4,
   type: 'new',
 };
 
@@ -18,15 +17,12 @@ describe('/authority', () => {
       model.create(
         [
           {
-            id: 1,
             type: 'Admin',
           },
           {
-            id: 2,
             type: 'Manager',
           },
           {
-            id: 3,
             type: 'Employee',
           },
         ],

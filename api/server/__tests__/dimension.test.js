@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'test';
 
 const model = app.models['Dimension'];
 const createData = {
-  id: 4,
   type: 'new',
 };
 
@@ -18,15 +17,12 @@ describe('/dimensions', () => {
       model.create(
         [
           {
-            id: 1,
             type: 'LS',
           },
           {
-            id: 2,
             type: 'SF',
           },
           {
-            id: 3,
             type: 'SY',
           },
         ],

@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const taskModel = app.models['ProjectTask'];
 
 const createData = {
-  id: 3,
   quantity: '100',
   estimateTime: '1000',
   taskId: '1',
@@ -25,14 +24,12 @@ describe('/projectTasks', () => {
       taskModel.create(
         [
           {
-            id: 1,
             quantity: '100',
             estimateTime: '1000',
             taskId: '1',
             projectId: '1',
           },
           {
-            id: 2,
             quantity: '200',
             estimateTime: '500',
             taskId: '1',

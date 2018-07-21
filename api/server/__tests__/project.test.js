@@ -8,7 +8,6 @@ const date = new Date()
   .slice(0, 19)
   .replace('T', ' ');
 const createData = {
-  id: 4,
   name: 'Project 4',
   isActive: '0',
   date: `${date}`,
@@ -26,19 +25,16 @@ describe('/projects', () => {
       model.create(
         [
           {
-            id: 1,
             name: 'Project 1',
             isActive: '1',
             date: `${date}`,
           },
           {
-            id: 2,
             name: 'Project 2',
             isActive: '1',
             date: `${date}`,
           },
           {
-            id: 3,
             name: 'Project 3',
             isActive: '0',
             date: `${date}`,

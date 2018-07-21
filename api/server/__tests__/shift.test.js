@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const shiftModel = app.models['Shift'];
 
 const createData = {
-  id: 3,
   clockInDate: '2018-07-12 04:28:28',
   clockOutDate: '2018-07-12 04:28:28',
   employeeId: '2',
@@ -25,14 +24,12 @@ describe('/shifts', () => {
       shiftModel.create(
         [
           {
-            id: 1,
             clockInDate: '2018-07-12 04:28:28',
             clockOutDate: '2018-07-12 04:28:28',
             employeeId: '1',
             length: '1479',
           },
           {
-            id: 2,
             clockInDate: '2018-07-12 04:28:28',
             clockOutDate: '2018-07-12 04:28:28',
             employeeId: '1',

@@ -5,7 +5,6 @@ process.env.NODE_ENV = 'test';
 const taskModel = app.models['Task'];
 
 const createData = {
-  id: 3,
   name: '5" Sidewalk',
   isActive: '1',
   subcategoryId: '1',
@@ -23,13 +22,11 @@ describe('/tasks', () => {
       taskModel.create(
         [
           {
-            id: 1,
             name: '7" Sidewalk',
             isActive: '1',
             subcategoryId: '1',
           },
           {
-            id: 2,
             name: '6" Sidewalk',
             isActive: '1',
             subcategoryId: '1',

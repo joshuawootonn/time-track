@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'test';
 
 const model = app.models['Category'];
 const createData = {
-  id: 4,
   type: 'new',
 };
 
@@ -18,15 +17,12 @@ describe('/categories', () => {
       model.create(
         [
           {
-            id: 1,
             type: 'PCC',
           },
           {
-            id: 2,
             type: 'Earthwork',
           },
           {
-            id: 3,
             type: 'Setup',
           },
         ],
