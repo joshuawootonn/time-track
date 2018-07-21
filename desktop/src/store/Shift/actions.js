@@ -1,34 +1,26 @@
 import { shift as shiftActionTypes } from 'constants/ActionTypes';
 
-import {employee as employeeActions} from 'store/actions';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
 
-export const clockIn = employee => {
-  return dispatch => {
-    dispatch({ type: shiftActionTypes.SHIFT_CLOCKIN_REQUEST });
-
-    
-    const clockInObject = {
-      clockInDate: new Date().toUTCString(),
-      employeeId: employee.id,
-    };
-    return endpoint.clockIn(clockInObject).then(
-      response => {
-        const payload = normalize(
-          { shifts: [response.data] },
-          schemas.shiftArray,
-        );
-        dispatch({ type: shiftActionTypes.SHIFT_CLOCKIN_SUCCESS, payload });
-      },
-      error => {
-        dispatch({
-          type: shiftActionTypes.SHIFT_CLOCKIN_FAILURE,
-          payload: error,
-        });
-        throw error;
-      },
-    );
+export const postShift = shift => {
+  return async dispatch => {
+    dispatch({ type: shiftActionTypes.SHIFT_POST_REQUEST });
+    try {
+      const response = await endpoint.postShift(shift);
+      const payload = normalize(
+        { shifts: [response.data] },
+        schemas.shiftArray,
+      );
+      return dispatch({ type: shiftActionTypes.SHIFT_POST_SUCCESS, payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({
+        type: shiftActionTypes.SHIFT_POST_FAILURE,
+        payload: e,
+      });
+      throw e;
+    }
   };
 };

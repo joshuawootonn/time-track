@@ -3,8 +3,10 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { shift as shiftActions } from 'store/actions';
-import { snack as snackActions } from 'store/actions';
+import {
+  snack as snackActions,
+  employee as employeeActions,
+} from 'store/actions';
 import * as status from 'constants/status';
 
 import AccountActionForm from 'components/forms/AccountAction';
@@ -14,9 +16,12 @@ class AccountAction extends Component {
     this.props.history.push('/');
   };
   clockIn = () => {
-    const account = this.props.account;
+    const { entities, employee } = this.props;
+
+    const asdf = entities.employees[employee.current];
+    console.log(asdf, entities, employee);
     this.props
-      .clockIn(account)
+      .clockIn(asdf)
       .then(() => {
         this.props.openSnack(status.SUCCESS, 'Clocked in Success!');
         this.props.history.push('/');
@@ -40,13 +45,13 @@ AccountAction.propTypes = {
   history: PropTypes.object.isRequired,
   account: PropTypes.object,
   openSnack: PropTypes.func,
-  clockIn: PropTypes.func,
+  clockIn: PropTypes.func,  
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    clockIn: employeeId => {
-      return dispatch(shiftActions.clockIn(employeeId));
+    clockIn: employee => {
+      return dispatch(employeeActions.clockIn(employee));
     },
     openSnack: (type, message) => {
       return dispatch(snackActions.openSnack(type, message));
@@ -56,7 +61,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    account: state.account,
+    employee: state.employee,
+    entities: state.entities,
   };
 };
 

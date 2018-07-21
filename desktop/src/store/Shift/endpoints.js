@@ -4,8 +4,8 @@ import axios from 'axios';
 const DOMAIN = 'shifts';
 
 //http://localhost:4000/api/employees/findone?filter[where][pin]=565656
-export const clockIn = clockInObject => {
+export const postShift = shift => {
   return axios.post(`${HOST}/${DOMAIN}`, {
-    ...clockInObject,
+    ...shift,
   });
 };

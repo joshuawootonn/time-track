@@ -6,18 +6,18 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 
 import { account as accountValidation } from 'constants/formValidation';
-import * as accountActions from 'store/Account/actions';
+import { employee as employeeActions } from 'store/actions';
 import AccountSigin from 'components/forms/AccountSigin';
 
 class SignInContainer extends Component {
   render() {
-    const { getAccountByPin, history } = this.props;
+    const { login, history } = this.props;
     return (
       <Formik
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
         onSubmit={values => {
-          getAccountByPin(values.pin).then(() => {
+          login(values.pin).then(() => {
             history.push('/actions');
           });
         }}
@@ -28,14 +28,14 @@ class SignInContainer extends Component {
 }
 
 SignInContainer.propTypes = {
-  getAccountByPin: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAccountByPin: pin => {
-      return dispatch(accountActions.getAccountByPin(pin));
+    login: pin => {
+      return dispatch(employeeActions.login(pin));
     },
   };
 };

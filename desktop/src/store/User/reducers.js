@@ -2,7 +2,6 @@ import { user as userActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
 export const userInitialState = {
   status: status.INIT,
-  selected: null,
 };
 
 export default (state = userInitialState, action) => {
