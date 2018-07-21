@@ -4,13 +4,12 @@ import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
 
 
-export const clockIn = () => {
+export const clockIn = (employeeId) => {
   return dispatch => {
-    dispatch({ type: shiftActionTypes.SHIFT_CLOCKIN_REQUEST });
-    const accountId = 1;
+    dispatch({ type: shiftActionTypes.SHIFT_CLOCKIN_REQUEST });    
     const clockInObject = {
-      "clockInDate": "2018-07-21T02:43:19.715Z",
-      "employeeId": 0
+      "clockInDate": new Date().toUTCString(),
+      "employeeId": employeeId
     }
     return endpoint.clockIn(clockInObject).then(
       response => {

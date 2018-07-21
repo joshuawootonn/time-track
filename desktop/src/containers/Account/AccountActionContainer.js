@@ -12,7 +12,10 @@ class AccountAction extends Component {
     this.props.history.push('/');
   };
   clockIn = () => {
-    this.props.clockIn();
+    const accountId = this.props.account.id;
+    this.props.clockIn(accountId).then(() => {
+      this.props.history.push('/');
+    });
   }
   render() {
     console.log(this.props)
@@ -30,11 +33,17 @@ AccountAction.propTypes = {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    clockIn: () => {
-      dispatch(shiftActions.clockIn())
+    clockIn: (employeeId) => {
+      return dispatch(shiftActions.clockIn(employeeId))
     }
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    account: state.account
+  }
+}
 
-export default withRouter(connect(null,mapDispatchToProps)(AccountAction));
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AccountAction));

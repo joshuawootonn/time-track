@@ -17,3 +17,6 @@ export const getAccountByPin = pin => {
     );
   };
 };
+export const getMostRecentShift = id => {
+  
+}

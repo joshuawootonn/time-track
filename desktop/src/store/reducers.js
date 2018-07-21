@@ -1,14 +1,16 @@
-import { combineReducers } from '../../../../../Users/jose5/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-redux/node_modules/redux';
+import { combineReducers } from 'redux';
 
 import user from './User/reducers';
 import entities from './Normalizr/entitiesReducer';
 import results from './Normalizr/resultsReducer';
 import account from './Account/reducer';
+import snack from './Snack/reducers'
 
 const rootReducer = combineReducers({
   entities,
   results,
   user,
   account,
+  snack
 });
 export default rootReducer;
