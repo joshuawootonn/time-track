@@ -2,7 +2,7 @@ import {snack as snackActionTypes }from 'constants/ActionTypes';
 
 export const modalInitialState = {
   snackType: null,
-  snackProps: {}
+  snackMessage: null
 }
 
 export default (state = modalInitialState, action) => {
@@ -10,7 +10,7 @@ export default (state = modalInitialState, action) => {
     case snackActionTypes.SHOW_SNACK:
       return {
         snackType: action.snackType,
-        snackProps: action.snackProps
+        snackMessage: action.snackMessage
       };
     case snackActionTypes.HIDE_SNACK:
       return modalInitialState;

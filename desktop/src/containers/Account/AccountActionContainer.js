@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {shift as shiftActions} from 'store/actions';
+import {snack as snackActions} from 'store/actions';
+import * as status from 'constants/status';
 
 import AccountActionForm from 'components/forms/AccountAction';
 
@@ -13,10 +15,15 @@ class AccountAction extends Component {
   };
   clockIn = () => {
     const accountId = this.props.account.id;
-    this.props.clockIn(accountId).then(() => {
-      this.props.clockinSnack();
+    this.props.clockIn(accountId)
+    .then(() => {
+      this.props.openSnack(status.SUCCESS,"Clocked in Success!");
       this.props.history.push('/');
-    });
+    })
+    .catch(() => {
+      this.props.openSnack(status.FAILURE,"Clock in failed!");
+      this.props.history.push('/')
+    })
   }
   render() {
     console.log(this.props)
@@ -37,9 +44,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     clockIn: (employeeId) => {
       return dispatch(shiftActions.clockIn(employeeId));
     },
-    clockinSnack: () => {
-      return dispatch(shiftActions.clockInSnack());
+    openSnack: (type,message) => {
+      return dispatch(snackActions.openSnack(type,message));
     }
+
   }
 }
 

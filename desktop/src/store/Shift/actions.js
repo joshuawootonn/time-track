@@ -26,6 +26,6 @@ export const clockIn = (employeeId) => {
   };
 }
 
-export const clockInSnack = () => {
-  return snackActions.openSnack(shiftActionTypes.SHIFT_CLOCKIN_SNACK,"yo")
+export const clockInSnack = (message,type) => {
+  return snackActions.openSnack({message,type})
 }

@@ -1,17 +1,14 @@
 import {snack as snackActionTypes} from 'constants/ActionTypes';
 
-export const openSnack = (type, props) => {
+export const openSnack = (type, message) => {
   return {
     type: snackActionTypes.SHOW_SNACK,
     snackType: type,
-    snackProps: {
-      ...props
-    }
+    snackMessage: message
   }
 }
 export const closeSnack = (type) => {
   return {
-    type: snackActionTypes.HIDE_SNACK,
-    snackType: type
+    type: snackActionTypes.HIDE_SNACK
   }
 }
