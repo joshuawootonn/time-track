@@ -1,16 +1,16 @@
 import {snack as snackActionTypes }from 'constants/ActionTypes';
 
 export const modalInitialState = {
-  modalType: null,
-  modalProps: {}
+  snackType: null,
+  snackProps: {}
 }
 
 export default (state = modalInitialState, action) => {
   switch (action.type) {
     case snackActionTypes.SHOW_SNACK:
       return {
-        modalType: action.modalType,
-        modalProps: action.modalProps
+        snackType: action.snackType,
+        snackProps: action.snackProps
       };
     case snackActionTypes.HIDE_SNACK:
       return modalInitialState;

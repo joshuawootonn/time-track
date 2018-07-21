@@ -1,4 +1,6 @@
 import { shift as shiftActionTypes } from 'constants/ActionTypes';
+
+import {snack as snackActions} from 'store/actions';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
@@ -22,4 +24,8 @@ export const clockIn = (employeeId) => {
       },
     );
   };
+}
+
+export const clockInSnack = () => {
+  return snackActions.openSnack(shiftActionTypes.SHIFT_CLOCKIN_SNACK,"yo")
 }

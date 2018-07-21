@@ -20,8 +20,6 @@ class AccountSiginForm extends Component {
   }
   render() {
     const { classes, isSubmitting,values } = this.props;
-    console.log(this.props);
-    console.log(values);
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>

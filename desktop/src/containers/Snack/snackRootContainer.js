@@ -2,40 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ProjectAddModal from 'containers/Projects/addContainer';
-import ProjectEditModal from 'containers/Projects/editContainer';
-import ProjectDeleteModal from 'containers/Projects/deleteContainer';
-import ProjectDuplicateModal from 'containers/Projects/duplicateContainer';
+import SnackContainer from 'containers/Snack/snackContainer'
+import { Snackbar } from '@material-ui/core';
 
-import Modal from 'components/wrappers/Modal';
+import { snack as snackActions } from 'store/actions';
+import {shift as shiftActionTypes} from 'constants/ActionTypes';
 
-import {modal as modalActions} from 'store/actions';
-import * as actionTypes from 'constants/actionTypes';
-
-const MODAL_COMPONENTS = {
-  [actionTypes.ADD_PROJECT_MODAL]: ProjectAddModal,
-  [actionTypes.EDIT_PROJECT_MODAL]: ProjectEditModal,
-  [actionTypes.DELETE_PROJECT_MODAL]: ProjectDeleteModal,
-  [actionTypes.DUPLICATE_PROJECT_MODAL]: ProjectDuplicateModal
+const SNACK_COMPONENTS = {
+  [shiftActionTypes.SHIFT_CLOCKIN_SNACK]: SnackContainer,
   /* other modals */
 }
 
 export class SnackRootContainer extends Component {
-  toggleModal = () => {
-    this.props.closeModal();
+  closeSnack = () => {
+    this.props.closeSnack();
   }
   render() {
-    const { modalType, modalProps } = this.props;
-    if (!modalType) {
+    const { snackType, snackProps } = this.props;
+    console.log("root", this.props)
+    if (!snackType) {
       return null // after React v15 you can return null here
     }
-    const SpecificModal = MODAL_COMPONENTS[modalType]
-    return(
-      <Modal open={true} toggle={this.toggleModal}>    
-      <SpecificModal toggleModal={this.toggleModal} data={modalProps} />
-    </Modal>
+    console.log("root", "real reander")
+    const SpecificSnack = SNACK_COMPONENTS[snackType]
+    return (
+      <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: "right" }} open={true} onClose={this.closeSnack} >
+         <SpecificSnack data={snackProps} closeSnack={this.closeSnack}/> 
+      </Snackbar>
     )
-    
+
   }
 }
 
@@ -43,4 +38,4 @@ SnackRootContainer.propTypes = {
   closeModal: PropTypes.func
 }
 
-export default connect( state => state.modal ,modalActions)(SnackRootContainer)
+export default connect(state => state.snack, snackActions)(SnackRootContainer)

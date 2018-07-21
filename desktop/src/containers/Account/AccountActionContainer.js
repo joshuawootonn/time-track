@@ -14,6 +14,7 @@ class AccountAction extends Component {
   clockIn = () => {
     const accountId = this.props.account.id;
     this.props.clockIn(accountId).then(() => {
+      this.props.clockinSnack();
       this.props.history.push('/');
     });
   }
@@ -34,7 +35,10 @@ AccountAction.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     clockIn: (employeeId) => {
-      return dispatch(shiftActions.clockIn(employeeId))
+      return dispatch(shiftActions.clockIn(employeeId));
+    },
+    clockinSnack: () => {
+      return dispatch(shiftActions.clockInSnack());
     }
   }
 }
