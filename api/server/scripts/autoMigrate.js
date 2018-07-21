@@ -4,7 +4,7 @@
  * Change: NODE_ENV
  */
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'local';
 
 var app = require('../server');
 var ds = app.dataSources.db;

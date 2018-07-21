@@ -12,7 +12,7 @@ const AccountActionForm = props => {
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
-        <IconButton className={classes.button}>
+        <IconButton onClick={props.clockIn} className={classes.button}>
           <Check className={classes.buttonIcon} />
         </IconButton>
         <IconButton className={classes.button}>
@@ -29,6 +29,7 @@ const AccountActionForm = props => {
 AccountActionForm.propTypes = {
   classes: PropTypes.object.isRequired,
   back: PropTypes.func.isRequired,
+  clockIn: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AccountActionForm);

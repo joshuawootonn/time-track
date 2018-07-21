@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint --fix .",
-    "start": "cross-env NODE_ENV=test node .",
+    "start": "cross-env NODE_ENV=local node .",
     "watch": "cross-env NODE_ENV=local nodemon .",
     "test": "jest --runInBand  ",
     "pretest": "cross-env NODE_ENV=test",
