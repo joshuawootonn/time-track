@@ -5,7 +5,7 @@ import PrivateRoute from 'routes/privateRoute';
 import AuthSigninScene from 'scenes/Auth/authSigninScene';
 import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
 
-import SnackRootContainer from 'containers/Snack/snackRootContainer'
+import SnackRootContainer from 'containers/Snack/snackRootContainer';
 
 import routes from 'routes';
 

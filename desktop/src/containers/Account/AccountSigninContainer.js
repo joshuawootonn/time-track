@@ -21,11 +21,7 @@ class SignInContainer extends Component {
             history.push('/actions');
           });
         }}
-        render={(formProps) =>( 
-          <AccountSigin
-            {...formProps}
-          />      
-        )}
+        render={formProps => <AccountSigin {...formProps} />}
       />
     );
   }

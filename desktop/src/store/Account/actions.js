@@ -1,4 +1,4 @@
-import {account as accountActionTypes} from 'constants/ActionTypes';
+import { account as accountActionTypes } from 'constants/ActionTypes';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 
@@ -8,16 +8,19 @@ export const getAccountByPin = pin => {
 
     return endpoint.getAccountByPin(pin).then(
       response => {
-        dispatch({ type: accountActionTypes.ACCOUNT_LOGIN_SUCCESS, payload: response });
+        dispatch({
+          type: accountActionTypes.ACCOUNT_LOGIN_SUCCESS,
+          payload: response,
+        });
       },
       error => {
-        dispatch({ type: accountActionTypes.ACCOUNT_LOGIN_FAILURE, payload: error });
-        throw error
+        dispatch({
+          type: accountActionTypes.ACCOUNT_LOGIN_FAILURE,
+          payload: error,
+        });
+        throw error;
       },
     );
   };
 };
-export const getMostRecentShift = id => {
-  
-}
-
+export const getMostRecentShift = id => {};

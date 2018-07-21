@@ -6,45 +6,48 @@ import { Button, Grid } from '@material-ui/core';
 import { Field, Form } from 'formik';
 
 import styles from './styles';
-import Password from 'components/inputs/Password'
+import Password from 'components/inputs/Password';
 
 const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
 class AccountSiginForm extends Component {
-  appendPin = (newChar) => {
-    if(this.props.values.pin.length === 6) return;
-    this.props.setFieldValue("pin",this.props.values.pin + newChar,false)
-  }
+  appendPin = newChar => {
+    if (this.props.values.pin.length === 6) return;
+    this.props.setFieldValue('pin', this.props.values.pin + newChar, false);
+  };
   resetPin = () => {
-    this.props.setFieldValue("pin", "", false)
-  }
+    this.props.setFieldValue('pin', '', false);
+  };
   render() {
-    const { classes, isSubmitting,values } = this.props;
+    const { classes, isSubmitting } = this.props;
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
           <Form>
             <Grid container spacing={24}>
               <Grid item xs={12}>
-                <Field
-                  component={Password}
-                  name="pin"
-                  label="Pin"
-                />
+                <Field component={Password} name="pin" label="Pin" />
               </Grid>
               {numbers.map((num, i) => {
                 return (
                   <Grid key={i} item xs={4}>
-                    <Button onClick={()=>this.appendPin(num)} variant="contained">{num}</Button>
+                    <Button
+                      onClick={() => this.appendPin(num)}
+                      variant="contained"
+                    >
+                      {num}
+                    </Button>
                   </Grid>
                 );
               })}
               <Grid item xs={4}>
-                <Button 
+                <Button
                   onClick={this.resetPin}
                   color="secondary"
                   variant="contained"
-                >Clear</Button>
+                >
+                  Clear
+                </Button>
               </Grid>
               <Grid item xs={4}>
                 <Button
@@ -68,7 +71,7 @@ AccountSiginForm.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func
+  setFieldValue: PropTypes.func,
 };
 
 export default withStyles(styles)(AccountSiginForm);

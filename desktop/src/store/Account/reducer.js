@@ -1,4 +1,4 @@
-import {account as accountActionTypes} from 'constants/ActionTypes';
+import { account as accountActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
 export const accountInitialState = {
   status: status.INIT,

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 
-const TextField = ({ field, form, id, label,  }) => (
+const TextField = ({ field, form, id, label }) => (
   <MUTextField
     {...field}
     id={id}
     label={label}
-    type='search'
+    type="search"
     InputLabelProps={{ shrink: true }}
     fullWidth
     margin="normal"
@@ -28,4 +28,4 @@ TextField.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-export default (TextField);
+export default TextField;

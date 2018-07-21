@@ -1,4 +1,4 @@
-import {user as userActionTypes} from 'constants/ActionTypes';
+import { user as userActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
 export const userInitialState = {
   status: status.INIT,

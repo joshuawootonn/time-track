@@ -26,7 +26,7 @@ class PrivateRoute extends Component {
 }
 
 PrivateRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.node,PropTypes.func]),
+  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   user: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };

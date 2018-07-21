@@ -4,8 +4,6 @@ import App from 'app';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-
-
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -19,12 +17,11 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware)),
 );
 
-
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#344955', }, 
+    primary: { main: '#344955' },
     secondary: { main: '#faab1a' },
-    action: { main: '#17262a' }
+    action: { main: '#17262a' },
   },
 });
 
@@ -33,7 +30,7 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <App />
-    </MuiThemeProvider >
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root'),
 );

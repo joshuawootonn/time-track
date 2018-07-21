@@ -10,26 +10,16 @@ import Password from 'components/inputs/Password';
 import styles from './styles';
 
 const AuthSigninForm = props => {
-  const { classes,onSubmit, isSubmitting,globalError } = props;
- 
-  const isInvalid = true //password === '' || username === '';
+  const { classes, onSubmit, isSubmitting, globalError } = props;
+
   return (
     <div className={classes.hero}>
       <Form className={classes.heroContent}>
         <Typography variant="title">Select Network</Typography>
-        <Field
-          component={TextField}
-          name="username"
-          label="Network"
-        />
-        <Field
-          component={Password}
-          name="password"
-          label="Password"
-        />
+        <Field component={TextField} name="username" label="Network" />
+        <Field component={Password} name="password" label="Password" />
         <Button
           type="submit"
-          disabled={isInvalid}
           color="primary"
           variant="contained"
           disabled={isSubmitting}
@@ -49,7 +39,9 @@ const AuthSigninForm = props => {
 
 AuthSigninForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  globalError: PropTypes.string.isRequired
+  globalError: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool,
 };
 
 export default withStyles(styles)(AuthSigninForm);

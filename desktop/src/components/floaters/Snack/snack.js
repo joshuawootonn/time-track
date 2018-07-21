@@ -1,27 +1,29 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import classNames from 'classnames'
-import { Snackbar, SnackbarContent, Icon, IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons'
-import green from '@material-ui/core/colors/green';
-import amber from '@material-ui/core/colors/amber';
+import {
+  Snackbar as MUSnackbar,
+  SnackbarContent,
+  IconButton,
+} from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
-const Success = (props) => {
-  const { classes, onClose, position, icon } = props;
+import styles from './styles';
+
+const SnackBar = props => {
+  const { classes, onClose, position, type, icon, message } = props;
   return (
-    <Snackbar
-      anchorOrigin={position}
-      open={true}
-      onClose={onClose}>
+    <MUSnackbar anchorOrigin={position} open={true} onClose={onClose}>
       <SnackbarContent
-        className={classes[props.type]}
+        className={classes[type]}
         message={
           <div className={classes.content}>
-            {props.icon}
+            {icon}
             <div className={classes.space} />
-            {props.message}
-          </div>}
+            {message}
+          </div>
+        }
         action={[
           <IconButton
             key="close"
@@ -34,28 +36,17 @@ const Success = (props) => {
           </IconButton>,
         ]}
       />
-    </Snackbar >
-  )
-}
+    </MUSnackbar>
+  );
+};
 
-const styles1 = theme => ({
-  success: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  error: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  icon: {
-    fontSize: 20,
-  },
-  space: {
-    width: 10
-  },
-  content: {
-    display: 'flex',
-    alignItems: 'center',
-    
-  },
-});
+SnackBar.propTypes = {
+  classes: PropTypes.object,
+  onClose: PropTypes.func,
+  position: PropTypes.object,
+  type: PropTypes.string,
+  icon: PropTypes.node,
+  message: PropTypes.string,
+};
 
-export default withStyles(styles1)(Success)
+export default withStyles(styles)(SnackBar);

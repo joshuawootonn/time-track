@@ -29,7 +29,7 @@ const AccountActionForm = props => {
 AccountActionForm.propTypes = {
   classes: PropTypes.object.isRequired,
   back: PropTypes.func.isRequired,
-  clockIn: PropTypes.func.isRequired
+  clockIn: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(AccountActionForm);
