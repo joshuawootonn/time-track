@@ -9,6 +9,7 @@ module.exports = {
     "es6": true
   },
   rules: {
+    'max-len':["error", { "code": 100 }],
     'no-console': 'off',
     eqeqeq: ['error', 'always'], // adding some custom ESLint rules
   },

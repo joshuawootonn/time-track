@@ -7,11 +7,3 @@ const DOMAIN = 'employees';
 export const getAccountByPin = pin => {
   return axios.get(`${HOST}/${DOMAIN}/findone?filter[where][pin]=${pin}`);
 };
-
-//http://localhost:4000/api/Shifts/findOne?filter[where][employeeId]=1&[order]=id%20DESC
-
-export const getMostRecentShift = id => {
-  return axios.get(
-    `${HOST}/${DOMAIN}/findOne?filter[where][${id}]=1&[order]=id%20DESC`,
-  );
-};

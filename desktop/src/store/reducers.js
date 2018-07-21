@@ -5,6 +5,7 @@ import entities from './Normalizr/entitiesReducer';
 import results from './Normalizr/resultsReducer';
 import account from './Account/reducer';
 import snack from './Snack/reducers';
+import employee from './Employee/reducer';
 
 const rootReducer = combineReducers({
   entities,
@@ -12,5 +13,6 @@ const rootReducer = combineReducers({
   user,
   account,
   snack,
+  employee,
 });
 export default rootReducer;

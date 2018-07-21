@@ -14,9 +14,9 @@ class AccountAction extends Component {
     this.props.history.push('/');
   };
   clockIn = () => {
-    const accountId = this.props.account.id;
+    const account = this.props.account;
     this.props
-      .clockIn(accountId)
+      .clockIn(account)
       .then(() => {
         this.props.openSnack(status.SUCCESS, 'Clocked in Success!');
         this.props.history.push('/');
