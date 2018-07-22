@@ -17,8 +17,9 @@ class SignInContainer extends Component {
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
         onSubmit={values => {
-          login(values.pin).then(() => {
-            history.push('/actions');
+          login(values.pin).then((asdf) => {
+            console.log(asdf);
+            history.push('/employee');
           });
         }}
         render={formProps => <AccountSigin {...formProps} />}

@@ -1,12 +1,6 @@
-import AccountActionScene from 'scenes/Account/accountActionScene';
 import AccountSigninScene from 'scenes/Account/accountSigninScene';
 
-export default [
-  {
-    path: '/actions',
-    component: AccountActionScene,
-    name: 'Actions',
-  },
+export default [ 
   {
     exact: true,
     path: '/',

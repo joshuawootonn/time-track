@@ -57,6 +57,11 @@ export const clockIn = employee => {
   };
 };
 
+
+export const clockOut = employee => {
+  
+}
+
 export const login = pin => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_REQUEST });

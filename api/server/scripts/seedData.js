@@ -2,14 +2,13 @@
 
 module.exports.Authority = [
   {
-    
-    type: 'Admin',
+    type: 'admin',
   },
   {
-    type: 'Manager',
+    type: 'manager',
   },
   {
-    type: 'Employee',
+    type: 'employee',
   },
 ];
 

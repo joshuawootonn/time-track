@@ -17,9 +17,7 @@ class AccountAction extends Component {
   };
   clockIn = () => {
     const { entities, employee } = this.props;
-
     const asdf = entities.employees[employee.current];
-    console.log(asdf, entities, employee);
     this.props
       .clockIn(asdf)
       .then(() => {
@@ -31,12 +29,13 @@ class AccountAction extends Component {
         this.props.history.push('/');
       });
   };
+  clockOut = () => {
+    this.props.history.push('/clockout');
+  }
   render() {
     console.log(this.props);
     return (
-      <div>
-        <AccountActionForm back={this.back} clockIn={this.clockIn} />
-      </div>
+      <AccountActionForm back={this.back} clockIn={this.clockIn} />
     );
   }
 }
@@ -45,7 +44,7 @@ AccountAction.propTypes = {
   history: PropTypes.object.isRequired,
   account: PropTypes.object,
   openSnack: PropTypes.func,
-  clockIn: PropTypes.func,  
+  clockIn: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => {
