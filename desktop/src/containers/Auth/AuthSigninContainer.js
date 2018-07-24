@@ -24,12 +24,12 @@ class SignInForm extends Component {
 
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-    // if (cred.username && cred.password) {
-    //   this.props.login(cred.username, cred.password)
-    //   .then(() => {
-    //     this.props.history.push('/');
-    //   })
-    // }
+    if (cred.username && cred.password) {
+      this.props.login(cred.username, cred.password)
+      .then(() => {
+        this.props.history.push('/');
+      })
+    }
   };
 
   render() {
@@ -48,7 +48,7 @@ class SignInForm extends Component {
                   username,
                   password,
                 });
-                history.push(routes.SIGNIN);
+                history.push(routes.ROOT);
               })
               .catch(error => {
                 this.setState({ error: error.message });

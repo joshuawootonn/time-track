@@ -1,5 +1,9 @@
-export const ACCOUNT = '/account';
-export const AUTH = '/auth';
-export const DASHBOARD = '/dashboard';
-export const SIGNIN = '/';
-export const ACTIONS = '/actions';
+export const ROOT = '/';
+
+export const EMPLOYEE = 'employee';
+export const ADMIN = 'admin';
+export const MANAGER = 'manager';
+
+export const CLOCKOUT = 'clockout';
+export const EXPORT = 'export';
+export const ANALYZE = 'analyze';

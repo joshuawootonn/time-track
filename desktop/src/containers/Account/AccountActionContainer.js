@@ -7,7 +7,7 @@ import {
   snack as snackActions,
   employee as employeeActions,
 } from 'store/actions';
-import * as accountType from 'constants/accountType';
+import { employee as employeeSelectors } from 'store/selectors';
 import * as status from 'constants/status';
 
 import AccountActionForm from 'components/forms/AccountAction';
@@ -39,11 +39,12 @@ class AccountAction extends Component {
   export = () => {
     this.props.history.push(`/${this.props.type}/export`);
   } 
-  render() {
-    const {type} = this.props;
-   
+  render() {    
+    console.log(this.props.history.location.pathname);
+    const {type,currentEmployee} = this.props;
     return (
       <AccountActionForm
+        isWorking={currentEmployee.isWorking}
         type={type}
         back={this.back}
         clockIn={this.clockIn}
@@ -77,6 +78,7 @@ const mapStateToProps = state => {
   return {
     employee: state.employee,
     entities: state.entities,
+    currentEmployee: employeeSelectors.getCurrentEmployee(state)
   };
 };
 

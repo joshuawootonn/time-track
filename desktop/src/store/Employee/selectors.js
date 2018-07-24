@@ -1,15 +1,27 @@
 import { createSelector } from 'reselect';
 
-export const getProjectsFromEntities = state => state.entities.employee;
-export const getProjectsFromResults = state => state.results.employee;
+export const getEmployeesFromEntities = state => state.entities.employees;
+export const getEmployeesFromResults = state => state.results.employees;
 
-export const getCurrentEmployee = createSelector(
-  getProjectsFromResults,
-  getProjectsFromEntities,
-  (results, projects) => {
-    if (!results || results.size === 0) return null;
-    return results.map(projectId => {
-      return projects[projectId];
-    });
+export const getEmployeeFromState = state => state.employee;
+
+export const getCurrentEmployee = createSelector( 
+  getEmployeesFromEntities,
+  getEmployeeFromState,
+  ( employees, employee) => {
+    return employees[employee.current]
   },
 );
+
+export const getAllEmployees = createSelector(
+  getEmployeesFromEntities,getEmployeesFromResults,
+  (employees,results) => {
+    if (!results || results.size === 0) return null;
+    return results.map(employeeId => {
+      return employees[employeeId];
+    }); 
+  }
+)
+
+
+

@@ -8,16 +8,20 @@ import { ShowChart, Check, Close, ArrowBack,Storage } from '@material-ui/icons';
 import styles from './styles';
 
 const AccountActionForm = props => {
-  const { classes } = props;
+  const { classes, isWorking } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
-        <IconButton onClick={props.clockIn} className={classes.button}>
-          <Check className={classes.buttonIcon} />
-        </IconButton>
+        {
+        isWorking ? 
         <IconButton onClick={props.clockOut} className={classes.button}>
           <Close className={classes.buttonIcon} />
         </IconButton>
+        : 
+        <IconButton onClick={props.clockIn} className={classes.button}>
+          <Check className={classes.buttonIcon} />
+        </IconButton>
+        } 
         <IconButton onClick={props.export} className={classes.button}>
           <Storage className={classes.buttonIcon} />
         </IconButton>

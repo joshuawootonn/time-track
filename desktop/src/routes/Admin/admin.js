@@ -1,11 +1,20 @@
 import accountActionScene from 'scenes/Account/accountActionScene';
-import * as accountTypes from 'constants/accountType'
+import clockOutScene from 'scenes/Clock/clockOutScene';
+import * as routes from 'constants/routes'
 
 export default [
   {
-    path: `/${accountTypes.ADMIN}`,
+    path: `/${routes.ADMIN}`,
     component: accountActionScene,
+    exact: true,
     name: 'Admin Actions',
-    type: accountTypes.ADMIN
+    type: routes.ADMIN
+  },
+  {
+    path: `/${routes.ADMIN}/${routes.CLOCKOUT}`,
+    component: clockOutScene,
+    exact: true,
+    name: 'Admin Clockout',
+    type: routes.ADMIN
   },
 ]
