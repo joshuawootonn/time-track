@@ -5,23 +5,39 @@ import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 
-import { account as accountValidation } from 'constants/formValidation';
-import { employee as employeeActions } from 'store/actions';
-import { shift as shiftActions } from 'store/actions';
+import { shift as shiftValidation } from 'constants/formValidation';
+import { shift as shiftActions,employee as employeeActions } from 'store/actions';
 import {employee as employeeSelectors, shift as shiftSelectors} from 'store/selectors';
-import AccountSigin from 'components/forms/AccountSigin';
+import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
   componentDidMount = () => {
-    console.log(this.props)
-    this.props.getCurrentShift(1);
+    this.props.getCurrentShift(this.props.currentEmployee.id);
   }
   render () {
-    console.log(this.props);
+    const {currentEmployee,currentShift} = this.props;
+    const isLoading = !currentShift;
+
+
+    if(isLoading){
+      return <div>Loading</div>
+    }
+
     return (
-      <div>
-        NIce
-      </div>
+      <Formik
+        initialValues={{ pin: '565656' }}
+        validationSchema={shiftValidation}
+        onSubmit={values => {
+          console.log(values);
+
+
+
+
+
+
+        }}
+        render={formProps => <ClockOut {...formProps} />}
+      />
     )
   }
 }

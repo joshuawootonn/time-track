@@ -10,3 +10,6 @@ export const account = Yup.object().shape({
     .max(6, 'Pins are 6 characters')
     .required('Pin required'),
 });
+export const shift = Yup.object().shape({
+  length: Yup.string().required('Length required')
+})
