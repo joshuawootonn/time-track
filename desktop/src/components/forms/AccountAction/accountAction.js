@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton } from '@material-ui/core';
-import { ShowChart, Check, ArrowBack } from '@material-ui/icons';
+import { ShowChart, Check, Close, ArrowBack,Storage } from '@material-ui/icons';
 
 import styles from './styles';
 
@@ -15,7 +15,13 @@ const AccountActionForm = props => {
         <IconButton onClick={props.clockIn} className={classes.button}>
           <Check className={classes.buttonIcon} />
         </IconButton>
-        <IconButton className={classes.button}>
+        <IconButton onClick={props.clockOut} className={classes.button}>
+          <Close className={classes.buttonIcon} />
+        </IconButton>
+        <IconButton onClick={props.export} className={classes.button}>
+          <Storage className={classes.buttonIcon} />
+        </IconButton>
+        <IconButton onClick={props.analyze} className={classes.button}>
           <ShowChart className={classes.buttonIcon} />
         </IconButton>
         <IconButton onClick={props.back} className={classes.button}>

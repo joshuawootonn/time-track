@@ -7,6 +7,7 @@ import {
   snack as snackActions,
   employee as employeeActions,
 } from 'store/actions';
+import * as accountType from 'constants/accountType';
 import * as status from 'constants/status';
 
 import AccountActionForm from 'components/forms/AccountAction';
@@ -30,12 +31,26 @@ class AccountAction extends Component {
       });
   };
   clockOut = () => {
-    this.props.history.push('/clockout');
+    this.props.history.push(`/${this.props.type}/clockout`);
   }
+  analyze = () => {
+    this.props.history.push(`/${this.props.type}/analyze`);
+  }
+  export = () => {
+    this.props.history.push(`/${this.props.type}/export`);
+  } 
   render() {
-    console.log(this.props);
+    const {type} = this.props;
+   
     return (
-      <AccountActionForm back={this.back} clockIn={this.clockIn} />
+      <AccountActionForm
+        type={type}
+        back={this.back}
+        clockIn={this.clockIn}
+        clockOut={this.clockOut}
+        analyze={this.analyze}
+        export={this.export}      
+      />
     );
   }
 }

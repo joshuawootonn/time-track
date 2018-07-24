@@ -18,11 +18,11 @@ export const putEmployee = employee => {
         type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS,
         payload,
       });
-    } catch (e) {
-      dispatch({
+    } catch (e) {dispatch({
         type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE,
         payload: e,
       });
+      
       throw e;
     }
   };
@@ -59,7 +59,7 @@ export const clockIn = employee => {
 
 
 export const clockOut = employee => {
-  
+
 }
 
 export const login = pin => {
