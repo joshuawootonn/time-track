@@ -10,3 +10,4 @@ export const CLOCKIN_EMPLOYEE_REQUEST = 'clockin_employee_request';
 export const CLOCKIN_EMPLOYEE_SUCCESS = 'clockin_employee_success';
 export const CLOCKIN_EMPLOYEE_FAILURE = 'clockin_employee_failure';
 export const CLOCKIN_EMPLOYEE_SNACK = 'clockin_employee_snack';
+

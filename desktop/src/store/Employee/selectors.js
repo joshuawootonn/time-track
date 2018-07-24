@@ -9,7 +9,7 @@ export const getCurrentEmployee = createSelector(
   getEmployeesFromEntities,
   getEmployeeFromState,
   ( employees, employee) => {
-    return employees[employee.current]
+    return employees[employee.current.id]
   },
 );
 

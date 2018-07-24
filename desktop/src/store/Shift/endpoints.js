@@ -9,3 +9,6 @@ export const postShift = shift => {
     ...shift,
   });
 };
+export const getCurrentShift = employeeId => {
+  return axios.get(`${HOST}/${DOMAIN}/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`)
+}
