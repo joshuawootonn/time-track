@@ -40,7 +40,6 @@ class AccountAction extends Component {
     this.props.history.push(`/${this.props.type}/export`);
   } 
   render() {    
-    console.log(this.props.history.location.pathname);
     const {type,currentEmployee} = this.props;
     return (
       <AccountActionForm

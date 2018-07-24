@@ -18,7 +18,6 @@ class SignInContainer extends Component {
         validationSchema={accountValidation}
         onSubmit={values => {
           login(values.pin).then((asdf) => {
-            console.log(asdf);
             history.push('/employee');
           });
         }}

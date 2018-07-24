@@ -38,7 +38,7 @@ export const getCurrentShift = employeeId => {
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
-        data: response.data,
+        data: response.data[0],
       });
     } catch (e) {
       dispatch({

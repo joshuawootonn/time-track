@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
+import ClockOutContainer from 'containers/Clock/clockOutContainer';
+
 class ClockOutScene extends Component {
   render () {
     return (
       <div>
-        Clockout {this.props.type}
+        <ClockOutContainer type={this.props.type} />
       </div>
     )
   }
