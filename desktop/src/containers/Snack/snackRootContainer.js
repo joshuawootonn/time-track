@@ -12,7 +12,6 @@ export class SnackRootContainer extends Component {
     if (!snackType || !snackMessage) {
       return null;
     }
-
     return (
       <SnackContainer
         message={snackMessage}

@@ -6,21 +6,21 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
-import { shift as shiftActions,employee as employeeActions } from 'store/actions';
-import {employee as employeeSelectors, shift as shiftSelectors} from 'store/selectors';
+import { shift as shiftActions, employee as employeeActions } from 'store/actions';
+import { employee as employeeSelectors, shift as shiftSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   }
-  
-  render () {
-    const {currentEmployee,currentShift} = this.props;
+
+  render() {
+    const { currentEmployee, currentShift } = this.props;
     const isLoading = !currentShift;
 
 
-    if(isLoading){
+    if (isLoading) {
       return <div>Loading</div>
     }
 
@@ -30,12 +30,10 @@ class ClockOutContainer extends Component {
         validationSchema={shiftValidation}
         onSubmit={values => {
           console.log(values);
-          const {currentEmployee,currentShift,history} = this.props;
-          this.props.clockOut(currentEmployee,currentShift)
-          .then(()=>{
-            history.push('/')
-          })
-          
+          const { currentEmployee, currentShift, history } = this.props;
+          this.props.clockOut(currentEmployee, currentShift)
+            .then(() => history.push('/'))
+            .catch(() => history.push('/'))
 
 
 
@@ -53,19 +51,19 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch,ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getCurrentShift: (employeeId) => {
-      dispatch(shiftActions.getCurrentShift(employeeId))
+      return dispatch(shiftActions.getCurrentShift(employeeId))
     },
-    clockOut: (employee,shift) => {
-      dispatch(employeeActions.clockOut(employee,shift))
+    clockOut: (employee, shift) => {
+      return dispatch(employeeActions.clockOut(employee, shift))
     }
   }
 }
 
 export default withRouter(
-  connect(mapStateToProps,mapDispatchToProps)(ClockOutContainer)
+  connect(mapStateToProps, mapDispatchToProps)(ClockOutContainer)
 )
 
 
