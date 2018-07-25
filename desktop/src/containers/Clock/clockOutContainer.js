@@ -14,6 +14,7 @@ class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   }
+  
   render () {
     const {currentEmployee,currentShift} = this.props;
     const isLoading = !currentShift;
@@ -25,13 +26,16 @@ class ClockOutContainer extends Component {
 
     return (
       <Formik
-        initialValues={{ pin: '565656' }}
+        initialValues={{ length: '0' }}
         validationSchema={shiftValidation}
         onSubmit={values => {
           console.log(values);
-
-
-
+          const {currentEmployee,currentShift,history} = this.props;
+          this.props.clockOut(currentEmployee,currentShift)
+          .then(()=>{
+            history.push('/')
+          })
+          
 
 
 
@@ -53,6 +57,9 @@ const mapDispatchToProps = (dispatch,ownProps) => {
   return {
     getCurrentShift: (employeeId) => {
       dispatch(shiftActions.getCurrentShift(employeeId))
+    },
+    clockOut: (employee,shift) => {
+      dispatch(employeeActions.clockOut(employee,shift))
     }
   }
 }

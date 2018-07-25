@@ -13,6 +13,7 @@
     "is-electron": "^2.1.0",
     "keytar": "^4.2.1",
     "lodash": "^4.17.10",
+    "moment": "^2.22.2",
     "normalizr": "^3.2.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

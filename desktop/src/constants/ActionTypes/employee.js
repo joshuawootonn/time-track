@@ -11,3 +11,8 @@ export const CLOCKIN_EMPLOYEE_SUCCESS = 'clockin_employee_success';
 export const CLOCKIN_EMPLOYEE_FAILURE = 'clockin_employee_failure';
 export const CLOCKIN_EMPLOYEE_SNACK = 'clockin_employee_snack';
 
+export const CLOCKOUT_EMPLOYEE_REQUEST = 'clockout_employee_request';
+export const CLOCKOUT_EMPLOYEE_SUCCESS = 'clockout_employee_success';
+export const CLOCKOUT_EMPLOYEE_FAILURE = 'clockout_employee_failure';
+export const CLOCKOUT_EMPLOYEE_SNACK = 'clockout_employee_snack';
+

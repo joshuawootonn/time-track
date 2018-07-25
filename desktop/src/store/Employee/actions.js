@@ -1,8 +1,9 @@
-import { employee as employeeActionTypes } from 'constants/ActionTypes';
+import { normalize } from 'normalizr';
+import moment from 'moment'
 
+import { employee as employeeActionTypes } from 'constants/ActionTypes';
 import { shift as shiftActions } from 'store/actions';
 import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
 
 export const putEmployee = employee => {
@@ -40,7 +41,7 @@ export const clockIn = employee => {
     dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_REQUEST });
     try {
       const clockInObject = {
-        clockInDate: new Date().toUTCString(),
+        clockInDate: moment().toString(),
         employeeId: employee.id,
       };
       await dispatch(shiftActions.postShift(clockInObject));
@@ -59,8 +60,29 @@ export const clockIn = employee => {
 
 
 
-export const clockOut = employee => {
+export const clockOut = (employee,shift) => {
+  return async dispatch =>{ 
+    dispatch({type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST});
+    try{
+      const currentMoment = moment();
+      const clockInMoment = moment(shift.clockInDate);
+      const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
+      const minutes = shiftDuration.asMinutes();
 
+      const clockOutObject = {
+        ...shift,
+        clockOutDate: currentMoment.toString(),
+        length: minutes
+      };
+      await dispatch(shiftActions.putShift(clockOutObject));
+      await dispatch(toggleIsWorking(employee));
+      return  dispatch({type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS})
+    } catch(e) {
+      console.log(e);
+      return dispatch({type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,payload:e})
+      throw e;
+    }
+  }
 }
 
 export const login = pin => {

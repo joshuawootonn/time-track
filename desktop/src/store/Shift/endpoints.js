@@ -9,6 +9,14 @@ export const postShift = shift => {
     ...shift,
   });
 };
+
+export const putShift = shift => {
+  return axios.put(`${HOST}/${DOMAIN}`, {
+    ...shift,
+  });
+};
+
+
 export const getCurrentShift = employeeId => {
   return axios.get(`${HOST}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`)
 }

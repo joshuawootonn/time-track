@@ -25,6 +25,27 @@ export const postShift = shift => {
   };
 };
 
+export const putShift = shift => {
+  return async dispatch => {
+    dispatch({ type: shiftActionTypes.PUT_SHIFT_REQUEST });
+    try {
+      const response = await endpoint.putShift(shift);
+      const payload = normalize(
+        { shifts: [response.data] },
+        schemas.shiftArray,
+      );
+      return dispatch({ type: shiftActionTypes.PUT_SHIFT_SUCCESS, payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({
+        type: shiftActionTypes.PUT_SHIFT_FAILURE,
+        payload: e,
+      });
+      throw e;
+    }
+  };
+};
+
 
 export const getCurrentShift = employeeId => {
   return async dispatch => {

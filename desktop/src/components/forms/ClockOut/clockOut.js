@@ -17,17 +17,7 @@ class ClockOutForm extends Component {
         <div className={classes.heroContent}>
           <Form>
             <Grid container spacing={24}>
-             
-              <Grid item xs={4}>
-                <Button
-                  onClick={this.resetPin}
-                  color="secondary"
-                  variant="contained"
-                >
-                  Clear
-                </Button>
-              </Grid>
-              <Grid item xs={4}>
+                       
                 <Button
                   type="submit"
                   color="primary"
@@ -36,7 +26,13 @@ class ClockOutForm extends Component {
                 >
                   Enter
                 </Button>
-              </Grid>
+                <Button
+                  onClick={this.resetPin}
+                  color="secondary"
+                  variant="text"
+                >
+                  Cancel
+                </Button>
             </Grid>
           </Form>
         </div>
