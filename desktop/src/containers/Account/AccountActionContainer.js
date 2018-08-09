@@ -22,7 +22,7 @@ class AccountAction extends Component {
 
     this.props.clockIn(asdf)
       .then(() => history.push('/'))
-      .catch(() => history.push('/'))
+     
 
   };
   clockOut = () => {

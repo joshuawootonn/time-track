@@ -43,7 +43,7 @@ export const clockIn = employee => {
     dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_REQUEST });
     try {
       const clockInObject = {
-        clockInDate: moment().toString(),
+        clockInDate: moment().subtract(7,'hours').toString(),
         employeeId: employee.id,
       };
       await dispatch(shiftActions.postShift(clockInObject));

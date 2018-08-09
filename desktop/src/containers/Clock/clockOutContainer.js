@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
@@ -14,16 +15,30 @@ class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   }
+  cancel= () => {
+    this.props.history.goBack()
+  }
 
   render() {
     const { currentEmployee, currentShift } = this.props;
     const isLoading = !currentShift;
 
-
     if (isLoading) {
       return <div>Loading</div>
     }
 
+    const currentMoment = moment();
+    const clockInMoment = moment(currentShift.clockInDate);
+    const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
+    const minutes = shiftDuration.asMinutes();
+
+    const clockOutObject = {
+      in: clockInMoment.format('h:mm a'),
+      out: currentMoment.format('h:mm a'),
+      date: clockInMoment.format('MMM Do YYYY'),
+      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}` 
+    };
+    console.log(clockOutObject)
     return (
       <Formik
         initialValues={{ length: '0' }}
@@ -33,12 +48,12 @@ class ClockOutContainer extends Component {
           const { currentEmployee, currentShift, history } = this.props;
           this.props.clockOut(currentEmployee, currentShift)
             .then(() => history.push('/'))
-            .catch(() => history.push('/'))
+            
 
 
 
         }}
-        render={formProps => <ClockOut {...formProps} />}
+        render={formProps => <ClockOut cancel={this.cancel} shift={clockOutObject} {...formProps} />}
       />
     )
   }
