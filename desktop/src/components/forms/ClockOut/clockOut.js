@@ -13,7 +13,8 @@ import Test from './test';
 class ClockOutForm extends Component {
 
   render() {
-    const { classes, isSubmitting, cancel, shift } = this.props;
+    const { classes, isSubmitting, cancel, shift,values } = this.props;
+    console.log(values)
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
@@ -46,7 +47,7 @@ class ClockOutForm extends Component {
                 </div>
               </Grid>
               <Grid item xs={12}>
-                <Test />
+                <Test values={values} />
               </Grid>
               <Grid item xs={12} >
                 <div className={classes.buttonBox} >
