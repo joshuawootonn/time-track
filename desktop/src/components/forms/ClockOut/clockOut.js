@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import styles from './styles';
 
+import Test from './test';
 
 class ClockOutForm extends Component {
 
@@ -45,7 +46,7 @@ class ClockOutForm extends Component {
                 </div>
               </Grid>
               <Grid item xs={12}>
-
+                <Test />
               </Grid>
               <Grid item xs={12} >
                 <div className={classes.buttonBox} >
@@ -66,11 +67,8 @@ class ClockOutForm extends Component {
                   >
                     Cancel
                 </Button>
-
                 </div>
-
               </Grid>
-
             </Grid>
           </Form>
         </div>
