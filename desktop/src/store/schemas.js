@@ -2,18 +2,81 @@ import { schema } from 'normalizr';
 
 
 
-export const shift = new schema.Entity('shifts');
-export const employee = new schema.Entity('employees');
-export const crew = new schema.Entity('crew');
-export const authority = new schema.Entity('authorities');
-export const project = new schema.Entity('project');
-export const task = new schema.Entity('task');
-export const projectTask = new schema.Entity('projectTask');
 
-export const shiftArray = { shifts: [shift] };
-export const employeeArray = { employees: [employee] };
-export const crewArray = { crews: [crew] }
-export const authorityArray = { authorities: [authority] };
-export const projectArray = { projects: [project] }
-export const taskArray = { tasks: [task] }
-export const projectTaskArray = { projectTask: [projectTask]}
+export const crewSchema = new schema.Entity('crews');
+export const authoritySchema = new schema.Entity('authorities');
+export const employeeSchema = new schema.Entity('employees');
+export const shiftSchema = new schema.Entity('shifts');
+export const activitySchema = new schema.Entity('activities')
+export const projectTaskSchema = new schema.Entity('projectTasks');
+export const projectSchema = new schema.Entity('projects');
+export const taskSchema = new schema.Entity('tasks');
+export const subcategorySchema = new schema.Entity('subcategory');
+export const categorySchema = new schema.Entity('category');
+export const dimensionSchema = new schema.Entity('dimension');
+
+crewSchema.define({
+  employees: [employeeSchema]  
+})
+
+authoritySchema.define({
+  employees: [employeeSchema]
+})
+
+employeeSchema.define({
+  authority: authoritySchema,
+  crew: crewSchema,
+  shifts: [shiftSchema]
+})
+
+shiftSchema.define({
+  employee: employeeSchema,
+  activities: [activitySchema]
+})
+
+activitySchema.define({
+  shift: shiftSchema,
+  projectTask: projectTaskSchema
+})
+
+projectTaskSchema.define({
+  activities: [activitySchema],
+  project: projectSchema,
+  task: taskSchema
+})
+
+projectSchema.define({
+  projectTasks: [projectTaskSchema]
+})
+
+taskSchema.define({
+  projectTasks: [projectTaskSchema],
+  subcategory: subcategorySchema
+})
+
+subcategorySchema.define({
+  tasks: [taskSchema],
+  category: categorySchema,
+  dimension: dimensionSchema
+})
+
+categorySchema.define({
+  subcategories: [subcategorySchema]
+})
+
+dimensionSchema.define({  
+  subcategories: [subcategorySchema]
+})
+
+
+export const crewArray = { crews: [crewSchema] }
+export const authorityArray = { authorities: [authoritySchema] };
+export const employeeArray = { employees: [employeeSchema] };
+export const shiftArray = { shifts: [shiftSchema] };
+export const activityArray = { activities: [activitySchema]}
+export const projectTaskArray = { projectTask: [projectTaskSchema]}
+export const projectArray = { projects: [projectSchema] }
+export const taskArray = { tasks: [taskSchema] }
+export const subcategoryArray = {subcategories: [subcategorySchema]}
+export const categoryArray = {categories: [categorySchema]}
+export const dimensionArray = {dimension: [dimensionSchema]}
