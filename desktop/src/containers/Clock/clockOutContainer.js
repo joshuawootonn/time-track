@@ -41,7 +41,7 @@ class ClockOutContainer extends Component {
     console.log(clockOutObject)
     return (
       <Formik
-        initialValues={{ activities: [{ projectTask: 'asdf', length: 500, description: '' }, { projectTask: 'fdsa', length: 500, description: '' }] }}
+        initialValues={{ activities: [{ projectTask: 1, length: 500, description: '' }, { projectTask: 2, length: 500, description: '' }] }}
         validationSchema={shiftValidation}
         onSubmit={values => {
           console.log(values);
