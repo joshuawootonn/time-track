@@ -1,26 +1,27 @@
-import {project as projectActionTypes} from 'constants/ActionTypes';
+import {projectActionTypes} from 'constants/ActionTypes';
 
 import * as endpoint from './endpoints';
 import {normalize} from 'normalizr'
-import * as schemas from 'store/schemas';
+import {projectArray} from 'store/schemas';
 
-export const getCrews = () => {
+export const getProjects = () => {
   return async dispatch => {
-    dispatch({type: projectActionTypes.GET_CREWS_REQUEST})
+    dispatch({type: projectActionTypes.GET_PROJECTS_REQUEST})
     try{
-      const response = await endpoint.getCrews();
+      const response = await endpoint.getProjects();
       const payload = normalize(
-        { crews: response.data},
-        schemas.crewArray,
+        { project: response.data},
+        projectArray,
       );
+      console.log(response,payload);
       return dispatch({
-        type: projectActionTypes.GET_CREWS_SUCCESS,
+        type: projectActionTypes.GET_PROJECTS_SUCCESS,
         payload,
       });
       console.log(response);    
     }catch(e){
       dispatch({
-        type: projectActionTypes.GET_CREWS_FAILURE,
+        type: projectActionTypes.GET_PROJECTS_FAILURE,
         payload: e,
       });
       throw e;

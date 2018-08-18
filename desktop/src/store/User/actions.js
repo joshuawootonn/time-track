@@ -1,6 +1,6 @@
-import { user as userActionTypes } from 'constants/ActionTypes';
+import { userActionTypes } from 'constants/ActionTypes';
 
-import {authority as authorityActions, crew as crewActions} from 'store/actions';
+import {authorityActions, crewActions} from 'store/actions';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';

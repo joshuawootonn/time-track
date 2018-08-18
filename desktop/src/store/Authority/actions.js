@@ -1,4 +1,4 @@
-import {authority as authorityActionTypes} from 'constants/ActionTypes';
+import {authorityActionTypes} from 'constants/ActionTypes';
 
 import * as endpoint from './endpoints';
 import {normalize} from 'normalizr'

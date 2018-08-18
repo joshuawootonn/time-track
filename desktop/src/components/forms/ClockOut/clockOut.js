@@ -14,7 +14,7 @@ class ClockOutForm extends Component {
 
   render() {
     const { classes, isSubmitting, cancel, shift,values } = this.props;
-    console.log(values)
+    //console.log(values)
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>

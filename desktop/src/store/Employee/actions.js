@@ -1,8 +1,8 @@
 import { normalize } from 'normalizr';
 import moment from 'moment'
 
-import { employee as employeeActionTypes } from 'constants/ActionTypes';
-import { shift as shiftActions,snack as snackActions } from 'store/actions';
+import {employeeActionTypes } from 'constants/ActionTypes';
+import { shiftActions, snackActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';

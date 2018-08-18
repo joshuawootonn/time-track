@@ -1,4 +1,4 @@
-import { snack as snackActionTypes } from 'constants/ActionTypes';
+import { snackActionTypes } from 'constants/ActionTypes';
 
 export const openSnack = (type, message) => {
   return {

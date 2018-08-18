@@ -1,12 +1,13 @@
-import * as user from './user';
-import * as shift from './shift';
-import * as snack from './snack';
-import * as employee from './employee';
-import * as crew from './crew';
-import * as authority from './authority';
-import * as project from './project';
-import * as projectTask from './projectTask';
-import * as task from './task';
+import * as userActionTypes from './user';
+import * as shiftActionTypes from './shift';
+import * as snackActionTypes from './snack';
+import * as employeeActionTypes from './employee';
+import * as crewActionTypes from './crew';
+import * as authorityActionTypes from './authority';
+import * as projectActionTypes from './project';
+import * as projectTaskActionTypes from './projectTask';
+import * as taskActionTypes from './task';
 
 
-export { user, shift, snack, employee, crew, authority, project, projectTask, task };
+export { userActionTypes, shiftActionTypes, snackActionTypes, employeeActionTypes, 
+  crewActionTypes, authorityActionTypes, projectActionTypes, projectTaskActionTypes, taskActionTypes };

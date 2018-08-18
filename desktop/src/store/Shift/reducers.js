@@ -1,4 +1,4 @@
-import { shift as shiftActionTypes } from 'constants/ActionTypes';
+import {shiftActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
 
 export const shiftInitialState = {

@@ -1,3 +1,3 @@
-import * as employee from './Employee/selectors';
-import * as shift from './Shift/selectors';
-export {employee, shift};
+import * as employeeSelectors from './Employee/selectors';
+import * as shiftSelectors from './Shift/selectors';
+export {employeeSelectors, shiftSelectors};

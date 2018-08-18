@@ -1,4 +1,4 @@
-import {crew as crewActionTypes} from 'constants/ActionTypes';
+import {crewActionTypes} from 'constants/ActionTypes';
 
 import * as endpoint from './endpoints';
 import {normalize} from 'normalizr'

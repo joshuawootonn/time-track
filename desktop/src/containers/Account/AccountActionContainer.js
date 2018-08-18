@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  snack as snackActions,
-  employee as employeeActions,
+  snackActions,
+  employeeActions,
 } from 'store/actions';
-import { employee as employeeSelectors } from 'store/selectors';
+import {employeeSelectors } from 'store/selectors';
 
 
 import AccountActionForm from 'components/forms/AccountAction';

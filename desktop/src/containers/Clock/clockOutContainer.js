@@ -7,13 +7,14 @@ import moment from 'moment';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
-import { shift as shiftActions, employee as employeeActions } from 'store/actions';
-import { employee as employeeSelectors, shift as shiftSelectors } from 'store/selectors';
+import {shiftActions,employeeActions,projectActions,taskActions,projectTaskActions } from 'store/actions';
+import { employeeSelectors, shiftSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
+    this.props.getStuff();
   }
   cancel= () => {
     this.props.history.goBack()
@@ -38,7 +39,7 @@ class ClockOutContainer extends Component {
       date: clockInMoment.format('MMM Do YYYY'),
       length: `${shiftDuration.hours()}:${shiftDuration.minutes()}` 
     };
-    console.log(clockOutObject)
+    //console.log(clockOutObject)
     return (
       <Formik
         initialValues={{ activities: [{ projectTask: 1, length: 500, description: '' }, { projectTask: 2, length: 500, description: '' }] }}
@@ -73,6 +74,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     clockOut: (employee, shift) => {
       return dispatch(employeeActions.clockOut(employee, shift))
+    },
+    getStuff: () => {
+      dispatch(projectActions.getProjects());
+      dispatch(taskActions.getTasks());
+      dispatch(projectTaskActions.getProjectTask());
+      return;
+      
     }
   }
 }
