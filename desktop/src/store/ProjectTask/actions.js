@@ -9,8 +9,9 @@ export const getProjectTask = () => {
     dispatch({type: projectTaskActionTypes.GET_PROJECT_TASKS_REQUEST})
     try{
       const response = await endpoint.getProjectTasks();
+      console.log(response.data);
       const payload = normalize(
-        { projectTask: response.data},
+        { projectTasks: response.data},
         projectTaskArray,
       );
       console.log(response,payload);

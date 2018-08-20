@@ -46,27 +46,27 @@ projectTaskSchema.define({
 })
 
 projectSchema.define({
-  projectTasks: [projectTaskSchema]
+  projectTasks: projectTaskArray
 })
 
 taskSchema.define({
-  projectTasks: [projectTaskSchema],
+  projectTasks: projectTaskArray,
   subcategory: subcategorySchema
 })
 
-subcategorySchema.define({
-  tasks: [taskSchema],
-  category: categorySchema,
-  dimension: dimensionSchema
-})
+// subcategorySchema.define({
+//   tasks: [taskSchema],
+//   category: categorySchema,
+//   dimension: dimensionSchema
+// })
 
-categorySchema.define({
-  subcategories: [subcategorySchema]
-})
+// categorySchema.define({
+//   subcategories: [subcategorySchema]
+// })
 
-dimensionSchema.define({  
-  subcategories: [subcategorySchema]
-})
+// dimensionSchema.define({  
+//   subcategories: [subcategorySchema]
+// })
 
 
 export const crewArray = { crews: [crewSchema] }
@@ -74,7 +74,7 @@ export const authorityArray = { authorities: [authoritySchema] };
 export const employeeArray = { employees: [employeeSchema] };
 export const shiftArray = { shifts: [shiftSchema] };
 export const activityArray = { activities: [activitySchema]}
-export const projectTaskArray = { projectTask: [projectTaskSchema]}
+export const projectTaskArray = { projectTasks: [projectTaskSchema]}
 export const projectArray = { projects: [projectSchema] }
 export const taskArray = { tasks: [taskSchema] }
 export const subcategoryArray = {subcategories: [subcategorySchema]}

@@ -10,7 +10,7 @@ export const getTasks = () => {
     try{
       const response = await endpoint.getTasks();
       const payload = normalize(
-        { task: response.data},
+        { tasks: response.data},
         taskArray,
       );
       console.log(response,payload);

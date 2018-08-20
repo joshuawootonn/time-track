@@ -22,7 +22,7 @@ class ClockOutContainer extends Component {
 
   render() {
     const { currentEmployee, currentShift } = this.props;
-    const isLoading = !currentShift;
+    const isLoading = !(currentShift && ;
 
     if (isLoading) {
       return <div>Loading</div>
@@ -64,6 +64,7 @@ const mapStateToProps = (state) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state)
+    
   }
 }
 
@@ -79,8 +80,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(projectActions.getProjects());
       dispatch(taskActions.getTasks());
       dispatch(projectTaskActions.getProjectTask());
-      return;
-      
+      return;      
     }
   }
 }
