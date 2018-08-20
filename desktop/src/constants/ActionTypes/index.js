@@ -7,7 +7,8 @@ import * as authorityActionTypes from './authority';
 import * as projectActionTypes from './project';
 import * as projectTaskActionTypes from './projectTask';
 import * as taskActionTypes from './task';
+import * as staticActionTypes from './static';
 
 
 export { userActionTypes, shiftActionTypes, snackActionTypes, employeeActionTypes, 
-  crewActionTypes, authorityActionTypes, projectActionTypes, projectTaskActionTypes, taskActionTypes };
+  crewActionTypes, authorityActionTypes, projectActionTypes, projectTaskActionTypes, taskActionTypes,staticActionTypes };

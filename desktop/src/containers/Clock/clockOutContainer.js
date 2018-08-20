@@ -7,22 +7,22 @@ import moment from 'moment';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
-import {shiftActions,employeeActions,projectActions,taskActions,projectTaskActions } from 'store/actions';
+import { shiftActions, employeeActions, projectActions, taskActions, projectTaskActions, staticActions } from 'store/actions';
 import { employeeSelectors, shiftSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
-    this.props.getStuff();
+
   }
-  cancel= () => {
+  cancel = () => {
     this.props.history.goBack()
   }
 
   render() {
     const { currentEmployee, currentShift } = this.props;
-    const isLoading = !(currentShift && ;
+    const isLoading = !(currentShift);
 
     if (isLoading) {
       return <div>Loading</div>
@@ -37,7 +37,7 @@ class ClockOutContainer extends Component {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
       date: clockInMoment.format('MMM Do YYYY'),
-      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}` 
+      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`
     };
     //console.log(clockOutObject)
     return (
@@ -49,7 +49,7 @@ class ClockOutContainer extends Component {
           const { currentEmployee, currentShift, history } = this.props;
           this.props.clockOut(currentEmployee, currentShift)
             .then(() => history.push('/'))
-            
+
 
 
 
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state)
-    
+
   }
 }
 
@@ -76,12 +76,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     clockOut: (employee, shift) => {
       return dispatch(employeeActions.clockOut(employee, shift))
     },
-    getStuff: () => {
-      dispatch(projectActions.getProjects());
-      dispatch(taskActions.getTasks());
-      dispatch(projectTaskActions.getProjectTask());
-      return;      
-    }
+
   }
 }
 

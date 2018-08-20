@@ -7,5 +7,7 @@ import * as crewActions from './Crew/actions';
 import * as projectActions from './Project/actions';
 import * as projectTaskActions from './ProjectTask/actions';
 import * as taskActions from './Task/actions';
+import * as staticActions from './Static/actions';
 
-export { userActions, shiftActions, snackActions, employeeActions, authorityActions, crewActions ,projectActions,projectTaskActions, taskActions };
+export { userActions, shiftActions, snackActions, employeeActions, authorityActions, crewActions
+   ,projectActions,projectTaskActions, taskActions,staticActions };
