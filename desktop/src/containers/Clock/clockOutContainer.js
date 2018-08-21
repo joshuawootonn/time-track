@@ -7,14 +7,13 @@ import moment from 'moment';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
-import { shiftActions, employeeActions, projectActions, taskActions, projectTaskActions, staticActions } from 'store/actions';
-import { employeeSelectors, shiftSelectors } from 'store/selectors';
+import { shiftActions, employeeActions} from 'store/actions';
+import { employeeSelectors, shiftSelectors,taskSelectors,projectSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id);
-
   }
   cancel = () => {
     this.props.history.goBack()
@@ -48,7 +47,7 @@ class ClockOutContainer extends Component {
           console.log(values);
           const { currentEmployee, currentShift, history } = this.props;
           this.props.clockOut(currentEmployee, currentShift)
-            .then(() => history.push('/'))
+            .then(() => history.push('/'))d
 
 
 
@@ -63,8 +62,9 @@ class ClockOutContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
-    currentEmployee: employeeSelectors.getCurrentEmployee(state)
-
+    currentEmployee: employeeSelectors.getCurrentEmployee(state),
+    projects: projectSelectors.getAllProjects(state),
+    tasks: taskSelectors.getAllTasks(state)
   }
 }
 
@@ -76,7 +76,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     clockOut: (employee, shift) => {
       return dispatch(employeeActions.clockOut(employee, shift))
     },
-
   }
 }
 
