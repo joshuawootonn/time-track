@@ -56,8 +56,10 @@ class ClockOutForm extends Component {
                     <div>
                       {this.props.values.activities &&
                         this.props.values.activities.map((activity, index) => {
+
+                          console.log(activity)
                           return (<div key={index}>
-                            <Field name={`activities.${index}.projectTask`}
+                            <Field name={`activities.${index}.project`}
                               render={({ field }) => (
                                 <CustomSelect
                                   labelText="Select"
@@ -67,10 +69,10 @@ class ClockOutForm extends Component {
                                   selectProps={{
                                     autoWidth: true,
                                     ...field,
-                                    input: <Input name={`activities.${index}.projectTask`} />
+                                    input: <Input name={`activities.${index}.project`} />
                                   }}
                                 >
-                                  {items.map((item, i) => {
+                                  {this.props.projects.map((item, i) => {
                                     return (
                                       <MenuItem key={i} value={item.id}>
                                         {item.name}
@@ -80,6 +82,7 @@ class ClockOutForm extends Component {
                                 </CustomSelect>
                               )}
                             />
+                           
 
 
                             <Field name={`activities.${index}.projectTask`} />

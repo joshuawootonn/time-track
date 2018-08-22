@@ -7,8 +7,8 @@ import moment from 'moment';
 import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
-import { shiftActions, employeeActions} from 'store/actions';
-import { employeeSelectors, shiftSelectors,taskSelectors,projectSelectors,projectTaskSelectors } from 'store/selectors';
+import { shiftActions, employeeActions } from 'store/actions';
+import { employeeSelectors, shiftSelectors, taskSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
@@ -39,7 +39,7 @@ class ClockOutContainer extends Component {
     };
     return (
       <Formik
-        initialValues={{ activities: [{ projectTask: 1, length: 500, description: '' }, { projectTask: 2, length: 500, description: '' }] }}
+        initialValues={{ activities: [{project: 1, projectTask: 1, length: 500, description: '' }] }}
         validationSchema={shiftValidation}
         onSubmit={values => {
           console.log(values);
@@ -51,7 +51,12 @@ class ClockOutContainer extends Component {
 
 
         }}
-        render={formProps => <ClockOut cancel={this.cancel} shift={clockOutObject} {...formProps} />}
+        render={formProps => {
+            console.log(this.props.projects)
+          return (
+            <ClockOut cancel={this.cancel} shift={clockOutObject} {...formProps} projects={this.props.projects}/>
+          )
+        }}
       />
     )
   }
@@ -61,9 +66,7 @@ const mapStateToProps = (state) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjects(state),
-    tasks: taskSelectors.getAllTasks(state),
-    projectTasks: projectTaskSelectors.getAllProjectTasks(state)
+    projects: projectSelectors.getAllProjectObjects(state)
   }
 }
 
