@@ -10,7 +10,7 @@ const styles = () => ({
     width: '100%',
   },
   heroContent: {
-    width: '300px',
+    width: '800px',
   },
   error: {
     marginTop: '16px',
@@ -28,7 +28,17 @@ const styles = () => ({
   },
   button: {
     marginLeft: '10px'
+  },
+  horizontalBox: {
+    display: 'flex',
+    flexDirection: 'row',    
+  },
+  verticalCenterBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
+ 
 });
 
 export default styles;

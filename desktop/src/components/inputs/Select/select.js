@@ -1,15 +1,16 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { Select as SelectInput, FormControl, InputLabel, } from '@material-ui/core';
+import { Select as SelectInput, FormControl, InputLabel,FormHelperText } from '@material-ui/core';
 
 const Select = (props) => {
 
   console.log(props);
-  const {formControlProps,label,LabelProps,selectProps} = props;
+  const {formControlProps,label,LabelProps,selectProps,helperText,FormHelperTextProps} = props;
   return(
   <FormControl
     {...formControlProps}
+    margin="normal"
   >
     {label !== undefined ? (
       <InputLabel
@@ -19,7 +20,9 @@ const Select = (props) => {
       </InputLabel>
     ) : null}
     <SelectInput
+      margin="normal"
       MenuProps={{
+
         getContentAnchorEl: null,
         anchorOrigin: {
           vertical: 'bottom',
@@ -30,6 +33,7 @@ const Select = (props) => {
     >
       {props.children}
     </SelectInput>
+    
   </FormControl>)
 }
 

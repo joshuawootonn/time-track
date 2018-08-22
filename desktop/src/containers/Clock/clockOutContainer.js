@@ -12,14 +12,19 @@ import { employeeSelectors, shiftSelectors, projectSelectors } from 'store/selec
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
- 
+  constructor(props){
+    super(props);
+    this.state = {activities: []}
+  }
+
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id)
-      
+
   }
   cancel = () => {
     this.props.history.goBack()
   }
+  
 
   render() {
     const { currentEmployee, currentShift } = this.props;
@@ -40,26 +45,30 @@ class ClockOutContainer extends Component {
       length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`
     };
     return (
-      <Formik
-        initialValues={{ activities: [{ project: 1, projectTask: 0, length: 500, description: '' }] }}
-        validationSchema={shiftValidation}
-        onSubmit={values => {
-          console.log(values);
-          const { currentEmployee, currentShift, history } = this.props;
-          this.props.clockOut(currentEmployee, currentShift)
-            .then(() => history.push('/'))
+      <div>
+
+        <Formik
+          initialValues={{ activities: [{ project: 1, projectTask: 0, length: 500, description: '' }] }}
+          validationSchema={shiftValidation}
+          onSubmit={values => {
+            console.log(values);
+            const { currentEmployee, currentShift, history } = this.props;
+            this.props.clockOut(currentEmployee, currentShift)
+              .then(() => history.push('/'))
 
 
 
 
-        }}
-        render={formProps => {
+          }}
+          render={formProps => {
 
-          return (
-            <ClockOut cancel={this.cancel} shift={clockOutObject} {...formProps} projects={this.props.projects} />
-          )
-        }}
-      />
+            return (
+              <ClockOut addActivity={this.addActivity} cancel={this.cancel} shift={clockOutObject} {...formProps} projects={this.props.projects} />
+            )
+          }}
+        />
+      </div>
+
     )
   }
 }

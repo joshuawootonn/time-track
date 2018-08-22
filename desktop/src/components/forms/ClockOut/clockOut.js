@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 
 
-import { Formik, Form, Field, FieldArray } from 'formik';
+import { Form, Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons'
 import moment from 'moment';
 
@@ -65,7 +65,7 @@ class ClockOutForm extends Component {
                         this.props.values.activities.map((activity, index) => {
 
                           console.log(activity, projects)
-                          return (<div key={index}>
+                          return (<div key={index} className={classes.horizontalBox}>
                             <Field name={`activities.${index}.project`}
                               render={({ field }) => (
                                 <Select
@@ -144,17 +144,22 @@ class ClockOutForm extends Component {
                               render={(fieldProps) => (
                                 <TextField label="Description" {...fieldProps} />
                               )} />
-                            <IconButton
-                              type="button"
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              <Close />
-                            </IconButton>
+
+                            <div className={classes.verticalCenterBox}>
+                              <IconButton
+                                type="button"
+                                className={classes.iconButton}
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                <Close />
+                              </IconButton>
+                            </div>
+
                           </div>)
                         }
 
                         )}
-                      <Button color="primary" type="button" onClick={() => arrayHelpers.push({ project: 1, projectTask: 0, length: 500, description: '' })}>
+                      <Button color="primary" variant="contained" onClick={() => arrayHelpers.push({ project: 1, projectTask: 0, length: 500, description: '' })}>
                         Add Activity
                       </Button>
                     </div>
