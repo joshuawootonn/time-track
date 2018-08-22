@@ -9,9 +9,10 @@ import { Close } from '@material-ui/icons'
 import moment from 'moment';
 
 import styles from './styles';
-
+import TextField from 'components/inputs/TextField'
 
 const items = [{ id: 1, name: "name" }, { id: 2, name: 'eman' }];
+const times = [{id: 1, name: '0:30'}, {id:2, name: '1:00'},{id:3, name: '1:30'},{id:4, name: '2:00'}]
 
 class ClockOutForm extends Component {
 
@@ -108,10 +109,32 @@ class ClockOutForm extends Component {
                                 </CustomSelect>
                               )}
                             />
-                           
 
+                            <Field name={`activities.${index}.length`}
+                              render={({ field }) => (
+                                <CustomSelect
+                                  labelText="Length"
+                                  formControlProps={{
+                                    fullWidth: true
+                                  }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
+                                    input: <Input name={`activities.${index}.length`} />
+                                  }}
+                                >
+                                  {times.map((time, i) => {
+                                    return (
+                                      <MenuItem key={i} value={time.id}>
+                                        {time.name}
+                                      </MenuItem>
+                                    );
+                                  })}
+                                </CustomSelect>
+                              )}
+                            />
 
-                            <Field value={activity.description} name={`activities.${index}.description`} />
+                            <Field value={activity.description} component={TextField} name={`activities.${index}.description`} />
                             <IconButton
                               type="button"
                               onClick={() => arrayHelpers.remove(index)}
@@ -122,7 +145,7 @@ class ClockOutForm extends Component {
                         }
 
                         )}
-                      <Button color="primary" type="button" onClick={() => arrayHelpers.push({ projectTask: 'ghdf', length: 500, description: '' })}>
+                      <Button color="primary" type="button" onClick={() => arrayHelpers.push({ project: 1, projectTask: 0, length: 500, description: '' })}>
                         Add Activity
                       </Button>
                     </div>
