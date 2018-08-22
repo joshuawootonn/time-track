@@ -9,17 +9,17 @@ export const getProjects = () => {
     dispatch({type: projectActionTypes.GET_PROJECTS_REQUEST})
     try{
       const response = await endpoint.getProjects();
-      console.log(response.data);
+      //console.log(response.data);
       const payload = normalize(
         { projects: response.data},
         projectArray,
       );
-      console.log(response,payload);
+      //console.log(response,payload);
       return dispatch({
         type: projectActionTypes.GET_PROJECTS_SUCCESS,
         payload,
       });
-      console.log(response);    
+      //console.log(response);    
     }catch(e){
       dispatch({
         type: projectActionTypes.GET_PROJECTS_FAILURE,

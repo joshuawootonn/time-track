@@ -16,7 +16,7 @@ const items = [{ id: 1, name: "name" }, { id: 2, name: 'eman' }];
 class ClockOutForm extends Component {
 
   render() {
-    const { classes, isSubmitting, cancel, shift, values } = this.props;
+    const { classes, isSubmitting, cancel, shift, values,projects } = this.props;
     //console.log(values)
     return (
       <div className={classes.hero}>
@@ -57,12 +57,12 @@ class ClockOutForm extends Component {
                       {this.props.values.activities &&
                         this.props.values.activities.map((activity, index) => {
 
-                          console.log(activity)
+                          console.log(activity,projects)
                           return (<div key={index}>
                             <Field name={`activities.${index}.project`}
                               render={({ field }) => (
                                 <CustomSelect
-                                  labelText="Select"
+                                  labelText="Project"
                                   formControlProps={{
                                     fullWidth: true
                                   }}
@@ -72,10 +72,36 @@ class ClockOutForm extends Component {
                                     input: <Input name={`activities.${index}.project`} />
                                   }}
                                 >
-                                  {this.props.projects.map((item, i) => {
+                                  {Object.keys(projects).map((key, i) => {
+                                    //This protects against projects that don't have accociated tasks
+                                    if(!projects[key].tasks) 
+                                      return null;
                                     return (
-                                      <MenuItem key={i} value={item.id}>
-                                        {item.name}
+                                      <MenuItem key={i} value={projects[key].id}>
+                                        {projects[key].name}
+                                      </MenuItem>
+                                    );
+                                  })}
+                                </CustomSelect>
+                              )}
+                            />
+                            <Field name={`activities.${index}.projectTask`}
+                              render={({ field }) => (
+                                <CustomSelect
+                                  labelText="Task"
+                                  formControlProps={{
+                                    fullWidth: true
+                                  }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
+                                    input: <Input name={`activities.${index}.projectTask`} />
+                                  }}
+                                >
+                                  {projects[activity.project].tasks.map((task, i) => {
+                                    return (
+                                      <MenuItem key={i} value={task.projectTaskId}>
+                                        {task.name}
                                       </MenuItem>
                                     );
                                   })}
@@ -85,8 +111,6 @@ class ClockOutForm extends Component {
                            
 
 
-                            <Field name={`activities.${index}.projectTask`} />
-                            <Field value={activity.length} name={`activities.${index}.length`} />
                             <Field value={activity.description} name={`activities.${index}.description`} />
                             <IconButton
                               type="button"

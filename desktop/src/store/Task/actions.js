@@ -13,12 +13,12 @@ export const getTasks = () => {
         { tasks: response.data},
         taskArray,
       );
-      console.log(response,payload);
+      //console.log(response,payload);
       return dispatch({
         type: taskActionTypes.GET_TASKS_SUCCESS,
         payload,
       });
-      console.log(response);    
+      //console.log(response);    
     }catch(e){
       dispatch({
         type: taskActionTypes.GET_TASKS_FAILURE,

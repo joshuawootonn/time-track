@@ -19,13 +19,11 @@ export const getAllProjectObjects = createSelector(
   getProjectsFromEntities, getTasksFromEntities, getAllProjectTasks,
   (projects, tasks, projectTasks) => {
 
-    projectTasks.forEach(pt => {
-      if (projects[pt.projectId].tasks)
-        projects[pt.projectId].tasks = [...projects[pt.projectId].tasks, tasks[pt.taskId]]
-      else
-        projects[pt.projectId].tasks = [tasks[pt.taskId]]
+    const newProjects = { ...projects }
+    projectTasks.forEach(pt => {  
+        newProjects[pt.projectId].tasks = [{ ...tasks[pt.taskId], projectTaskId: pt.id }]
     });
-    return {projects}
+    return newProjects
   }
 )
 

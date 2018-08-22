@@ -39,7 +39,7 @@ class ClockOutContainer extends Component {
     };
     return (
       <Formik
-        initialValues={{ activities: [{project: 1, projectTask: 1, length: 500, description: '' }] }}
+        initialValues={{ activities: [{project: 1, projectTask: null, length: 500, description: '' }] }}
         validationSchema={shiftValidation}
         onSubmit={values => {
           console.log(values);
@@ -66,7 +66,8 @@ const mapStateToProps = (state) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjectObjects(state)
+    projects: projectSelectors.getAllProjectObjects(state),
+    projectArray: projectSelectors.getAllProjects(state)
   }
 }
 
