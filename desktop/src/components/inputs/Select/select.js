@@ -1,26 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
-import { Select as SelectInput, MenuItem } from '@material-ui/core';
+import { Select as SelectInput, FormControl, InputLabel, } from '@material-ui/core';
 
 const Select = (props) => {
 
   console.log(props);
-
-  return <SelectInput
-    value={props.field.value}
-    onChange={props.field.onChange(props.field.value)}
-    MenuProps={{
-      getContentAnchorEl: null,
-      anchorOrigin: {
-        vertical: 'bottom',
-        horizontal: 'left',
-      },
-    }}
-    {...props.selectProps}
+  const {formControlProps,label,LabelProps,selectProps} = props;
+  return(
+  <FormControl
+    {...formControlProps}
   >
-    {props.children}
-  </SelectInput>
+    {label !== undefined ? (
+      <InputLabel
+        {...LabelProps}
+      >
+        {label}
+      </InputLabel>
+    ) : null}
+    <SelectInput
+      MenuProps={{
+        getContentAnchorEl: null,
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+      }}
+      {...selectProps}
+    >
+      {props.children}
+    </SelectInput>
+  </FormControl>)
 }
 
 Select.propTypes = {

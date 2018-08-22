@@ -8,16 +8,11 @@ import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
-import { employeeSelectors, shiftSelectors, taskSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
+import { employeeSelectors, shiftSelectors, projectSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
-  constructor(props) {
-    super(props);
-
-   
-   
-  }
+ 
   componentDidMount = () => {
     this.props.getCurrentShift(this.props.currentEmployee.id)
       
