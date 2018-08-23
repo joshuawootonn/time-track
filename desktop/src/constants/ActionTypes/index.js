@@ -21,5 +21,5 @@ export {
   projectTaskActionTypes,
   taskActionTypes,
   activityActionTypes,
-  staticActionTypes
+  staticActionTypes,
 };

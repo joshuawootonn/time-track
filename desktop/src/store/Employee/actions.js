@@ -66,7 +66,7 @@ export const clockIn = employee => {
   };
 };
 
-export const clockOut = (employee, shift,activities) => {
+export const clockOut = (employee, shift, activities) => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST });
     try {
@@ -83,10 +83,8 @@ export const clockOut = (employee, shift,activities) => {
       await activities.forEach(activity => {
         //activity.projectId = undefined;
         activity.shiftId = shift.id;
-        dispatch(activityActions.postActivity(activity))
+        dispatch(activityActions.postActivity(activity));
       });
-
-
 
       await dispatch(shiftActions.putShift(clockOutObject));
       await dispatch(toggleIsWorking(employee));

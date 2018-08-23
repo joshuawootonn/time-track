@@ -53,16 +53,15 @@ class ClockOutContainer extends Component {
             { projectId: 1, projectTaskId: 0, length: 500, description: '' },
           ],
         }}
-       
         onSubmit={values => {
           const { currentEmployee, currentShift, history } = this.props;
-           this.props.clockOut(currentEmployee, currentShift, values.activities)
-              .then(() => history.push('/')) 
+          this.props
+            .clockOut(currentEmployee, currentShift, values.activities)
+            .then(() => history.push('/'));
         }}
-        render={(formikProps) => {
+        render={formikProps => {
           return (
             <ClockOut
-              
               cancel={this.cancel}
               shift={clockOutObject}
               projects={this.props.projects}
@@ -89,8 +88,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getCurrentShift: employeeId => {
       return dispatch(shiftActions.getCurrentShift(employeeId));
     },
-    clockOut: (employee, shift,activities) => {
-      return dispatch(employeeActions.clockOut(employee, shift,activities));
+    clockOut: (employee, shift, activities) => {
+      return dispatch(employeeActions.clockOut(employee, shift, activities));
     },
   };
 };

@@ -16,21 +16,13 @@ import {
 import { Form, Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons';
 import moment from 'moment';
-
+import momentDurationFormatSetup from "moment-duration-format";
 import styles from './styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
+import times from 'constants/times'
 
-const items = [{ id: 1, name: 'name' }, { id: 2, name: 'eman' }];
-const times = [
-  { id: 1, name: '0:30' },
-  { id: 2, name: '1:00' },
-  { id: 3, name: '1:30' },
-  { id: 4, name: '2:00' },
-];
-
-const ClockOutForm = (props) => {
-
+const ClockOutForm = props => {
   const {
     classes,
     isSubmitting,
@@ -46,28 +38,18 @@ const ClockOutForm = (props) => {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <div className={classes.lineBox}>
-                <Typography variant="title" >
-                  Date:
-                  </Typography>
-                <Typography variant="title" >
-                  {shift.date}
-                </Typography>
+                <Typography variant="title">Date:</Typography>
+                <Typography variant="title">{shift.date}</Typography>
               </div>
               <div className={classes.lineBox}>
-                <Typography variant="title" >
-                  Time:
-                  </Typography>
-                <Typography variant="title" >
+                <Typography variant="title">Time:</Typography>
+                <Typography variant="title">
                   {shift.in} - {shift.out}
                 </Typography>
               </div>
               <div className={classes.lineBox}>
-                <Typography variant="title" >
-                  Time Worked:
-                  </Typography>
-                <Typography variant="title" >
-                  {shift.length}
-                </Typography>
+                <Typography variant="title">Time Worked:</Typography>
+                <Typography variant="title">{shift.length}</Typography>
               </div>
             </Grid>
 
@@ -78,113 +60,150 @@ const ClockOutForm = (props) => {
                   <div>
                     {values.activities &&
                       values.activities.map((activity, index) => {
+                        return (
+                          <div key={index} className={classes.horizontalBox}>
+                            <Field
+                              name={`activities.${index}.projectId`}
+                              render={({ field }) => (
+                                <Select
+                                  label="Project"
+                                  formControlProps={{
+                                    fullWidth: true,
+                                  }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
+                                    input: (
+                                      <Input
+                                        name={`activities.${index}.projectId`}
+                                      />
+                                    ),
+                                  }}
+                                >
+                                  {Object.keys(projects).map((key, i) => {
+                                    //This protects against projects that don't have accociated tasks
+                                    if (!projects[key].tasks) return null;
+                                    return (
+                                      <MenuItem
+                                        key={i}
+                                        id="projectId"
+                                        value={projects[key].id}
+                                      >
+                                        {projects[key].name}
+                                      </MenuItem>
+                                    );
+                                  })}
+                                </Select>
+                              )}
+                            />
+                            <Field
+                              name={`activities.${index}.projectTaskId`}
+                              render={({ field }) => (
+                                <Select
+                                  label="Task"
+                                  formControlProps={{
+                                    fullWidth: true,
+                                  }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
 
+                                    input: (
+                                      <Input
+                                        name={`activities.${index}.projectTaskId`}
+                                      />
+                                    ),
+                                  }}
+                                >
+                                  {projects[activity.projectId].tasks.map(
+                                    (task, i) => {
+                                      return (
+                                        <MenuItem
+                                          key={i}
+                                          id="projectTaskId"
+                                          value={task.projectTaskId}
+                                        >
+                                          {task.name}
+                                        </MenuItem>
+                                      );
+                                    },
+                                  )}
+                                </Select>
+                              )}
+                            />
 
-                        return (<div key={index} className={classes.horizontalBox}>
-                          <Field name={`activities.${index}.projectId`}
-                            render={({ field }) => (
-                              <Select
-                                label="Project"
-                                formControlProps={{
-                                  fullWidth: true
-                                }}
+                            <Field
+                              name={`activities.${index}.length`}
+                              render={({ field }) => (
+                                <Select
+                                  label="Length"
+                                  formControlProps={{
+                                    fullWidth: true,
+                                  }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
+                                    input: (
+                                      <Input
+                                        name={`activities.${index}.length`}
+                                      />
+                                    ),
+                                  }}
+                                >
+                                  {times.map((time, i) => {
+                                    return (
+                                      <MenuItem
+                                        key={i}
+                                        id="length"
+                                        value={time.asMinutes()}
+                                      >
+                                        {time.format("h:mm",{trim: false})}
+                                      </MenuItem>
+                                    );
+                                  })}
+                                </Select>
+                              )}
+                            />
 
-                                selectProps={{
-                                  autoWidth: true,
-                                  ...field,
-                                  input: <Input name={`activities.${index}.projectId`} />
+                            <Field
+                              value={activity.description}
+                              name={`activities.${index}.description`}
+                              render={fieldProps => (
+                                <TextField
+                                  label="Description"
+                                  {...fieldProps}
+                                />
+                              )}
+                            />
 
-                                }}
+                            <div className={classes.verticalCenterBox}>
+                              <IconButton
+                                type="button"
+                                className={classes.iconButton}
+                                onClick={() => arrayHelpers.remove(index)}
                               >
-                                {Object.keys(projects).map((key, i) => {
-                                  //This protects against projects that don't have accociated tasks
-                                  if (!projects[key].tasks)
-                                    return null;
-                                  return (
-                                    <MenuItem key={i} id="projectId" value={projects[key].id}>
-                                      {projects[key].name}
-                                    </MenuItem>
-                                  );
-                                })}
-                              </Select>
-                            )}
-                          />
-                          <Field name={`activities.${index}.projectTaskId`}
-                            render={({ field }) => (
-                              <Select
-                                label="Task"
-                                formControlProps={{
-                                  fullWidth: true
-                                }}
-
-                                selectProps={{
-                                  autoWidth: true,
-                                  ...field,
-
-                                  input: <Input name={`activities.${index}.projectTaskId`} />
-                                }}
-                              >
-                                {projects[activity.projectId].tasks.map((task, i) => {
-                                  return (
-                                    <MenuItem key={i} id="projectTaskId" value={task.projectTaskId}>
-                                      {task.name}
-                                    </MenuItem>
-                                  );
-                                })}
-                              </Select>
-                            )}
-                          />
-
-                          <Field name={`activities.${index}.length`}
-                            render={({ field }) => (
-                              <Select
-                                label="Length"
-                                formControlProps={{
-                                  fullWidth: true
-                                }}
-
-                                selectProps={{
-                                  autoWidth: true,
-                                  ...field,
-                                  input: <Input name={`activities.${index}.length`} />
-                                }}
-                              >
-                                {times.map((time, i) => {
-                                  return (
-                                    <MenuItem key={i} id="length" value={time.id}>
-                                      {time.name}
-                                    </MenuItem>
-                                  );
-                                })}
-                              </Select>
-                            )}
-                          />
-
-                          <Field value={activity.description} name={`activities.${index}.description`}
-                            render={(fieldProps) => (
-                              <TextField label="Description" {...fieldProps} />
-                            )} />
-
-                          <div className={classes.verticalCenterBox}>
-                            <IconButton
-                              type="button"
-                              className={classes.iconButton}
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              <Close />
-                            </IconButton>
+                                <Close />
+                              </IconButton>
+                            </div>
                           </div>
-
-                        </div>)
+                        );
+                      })}
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() =>
+                        arrayHelpers.push({
+                          projectId: 1,
+                          projectTaskId: 0,
+                          length: 500,
+                          description: '',
+                        })
                       }
-
-                      )}
-                    <Button color="primary" variant="contained" onClick={() => arrayHelpers.push({ projectId: 1, projectTaskId: 0, length: 500, description: '' })}>
+                    >
                       Add Activity
-                      </Button>
+                    </Button>
                   </div>
-                )
-                }
+                )}
               />
             </Grid>
             <Grid item xs={12}>
@@ -195,11 +214,10 @@ const ClockOutForm = (props) => {
                   disabled={isSubmitting}
                   variant="contained"
                   className={classes.button}
-
                 >
                   Enter
-                  </Button>
-                <button type="submit">asdf</button>
+                </Button>
+                
                 <Button
                   type="submit"
                   //onClick={cancel}
@@ -208,7 +226,7 @@ const ClockOutForm = (props) => {
                   className={classes.button}
                 >
                   Cancel
-                  </Button>
+                </Button>
               </div>
             </Grid>
           </Grid>
@@ -216,8 +234,7 @@ const ClockOutForm = (props) => {
       </div>
     </div>
   );
-}
-
+};
 
 ClockOutForm.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -227,4 +244,3 @@ ClockOutForm.propTypes = {
 };
 
 export default withStyles(styles)(ClockOutForm);
-

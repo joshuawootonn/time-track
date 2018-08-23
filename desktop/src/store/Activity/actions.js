@@ -1,4 +1,4 @@
-import {activityActionTypes} from 'constants/ActionTypes'
+import { activityActionTypes } from 'constants/ActionTypes';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -13,7 +13,10 @@ export const postActivity = activity => {
         { activities: [response.data] },
         schemas.activityArray,
       );
-      return dispatch({ type: activityActionTypes.POST_ACTIVITY_SUCCESS, payload });
+      return dispatch({
+        type: activityActionTypes.POST_ACTIVITY_SUCCESS,
+        payload,
+      });
     } catch (e) {
       console.log(e);
       return dispatch({
@@ -23,4 +26,4 @@ export const postActivity = activity => {
       throw e;
     }
   };
-}
+};
