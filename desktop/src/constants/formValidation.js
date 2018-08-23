@@ -11,5 +11,5 @@ export const account = Yup.object().shape({
     .required('Pin required'),
 });
 export const shift = Yup.object().shape({
-  length: Yup.string().required('Length required')
-})
+  length: Yup.string().required('Length required'),
+});

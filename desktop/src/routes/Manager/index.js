@@ -1,2 +1,2 @@
 import Manager from './manager';
-export default Manager
+export default Manager;

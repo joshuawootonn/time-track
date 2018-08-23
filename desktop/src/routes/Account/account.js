@@ -1,6 +1,6 @@
 import AccountSigninScene from 'scenes/Account/accountSigninScene';
 
-export default [ 
+export default [
   {
     exact: true,
     path: '/',

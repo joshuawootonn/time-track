@@ -17,5 +17,7 @@ export const putShift = shift => {
 };
 
 export const getCurrentShift = employeeId => {
-  return axios.get(`${HOST}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`)
-}
+  return axios.get(
+    `${HOST}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`,
+  );
+};

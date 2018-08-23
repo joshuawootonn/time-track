@@ -5,23 +5,21 @@ export const getEmployeesFromResults = state => state.results.employees;
 
 export const getEmployeeFromState = state => state.employee;
 
-export const getCurrentEmployee = createSelector( 
+export const getCurrentEmployee = createSelector(
   getEmployeesFromEntities,
   getEmployeeFromState,
-  ( employees, employee) => {
-    return employees[employee.current.id]
+  (employees, employee) => {
+    return employees[employee.current.id];
   },
 );
 
 export const getAllEmployees = createSelector(
-  getEmployeesFromEntities,getEmployeesFromResults,
-  (employees,results) => {
+  getEmployeesFromEntities,
+  getEmployeesFromResults,
+  (employees, results) => {
     if (!results || results.size === 0) return null;
     return results.map(employeeId => {
       return employees[employeeId];
-    }); 
-  }
-)
-
-
-
+    });
+  },
+);

@@ -46,16 +46,12 @@ export const putShift = shift => {
   };
 };
 
-
 export const getCurrentShift = employeeId => {
   return async dispatch => {
     dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_REQUEST });
     try {
       const response = await endpoint.getCurrentShift(employeeId);
-      const payload = normalize(
-        { shifts: response.data },
-        schemas.shiftArray,
-      );
+      const payload = normalize({ shifts: response.data }, schemas.shiftArray);
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
@@ -69,4 +65,4 @@ export const getCurrentShift = employeeId => {
       throw e;
     }
   };
-}
+};

@@ -9,6 +9,15 @@ import * as projectTaskActionTypes from './projectTask';
 import * as taskActionTypes from './task';
 import * as staticActionTypes from './static';
 
-
-export { userActionTypes, shiftActionTypes, snackActionTypes, employeeActionTypes, 
-  crewActionTypes, authorityActionTypes, projectActionTypes, projectTaskActionTypes, taskActionTypes,staticActionTypes };
+export {
+  userActionTypes,
+  shiftActionTypes,
+  snackActionTypes,
+  employeeActionTypes,
+  crewActionTypes,
+  authorityActionTypes,
+  projectActionTypes,
+  projectTaskActionTypes,
+  taskActionTypes,
+  staticActionTypes,
+};

@@ -1,12 +1,11 @@
 import { staticActionTypes } from 'constants/ActionTypes';
 
-import { projectActions, projectTaskActions, taskActions } from 'store/actions'
+import { projectActions, projectTaskActions, taskActions } from 'store/actions';
 
 export const getStaticData = () => {
   return async dispatch => {
-    dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST })
+    dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
     try {
-
       dispatch(projectActions.getProjects());
       dispatch(projectTaskActions.getProjectTask());
       dispatch(taskActions.getTasks());
@@ -19,5 +18,5 @@ export const getStaticData = () => {
       });
       throw e;
     }
-  }
-}
+  };
+};

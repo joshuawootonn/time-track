@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import SnackContainer from 'containers/Snack/snackContainer';
 
-import {snackActions } from 'store/actions';
+import { snackActions } from 'store/actions';
 
 export class SnackRootContainer extends Component {
   render() {

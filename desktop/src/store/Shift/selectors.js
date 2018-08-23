@@ -5,12 +5,12 @@ export const getShiftsFromResults = state => state.results.shifts;
 
 export const getShiftFromState = state => state.shift;
 
-export const getCurrentShift = createSelector( 
+export const getCurrentShift = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,
   getShiftFromState,
-  ( shifts,results, shift) => {
+  (shifts, results, shift) => {
     if (!results || results.size === 0) return null;
-    return shifts[shift.current.id]
+    return shifts[shift.current.id];
   },
 );

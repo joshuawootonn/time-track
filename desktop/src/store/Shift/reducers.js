@@ -1,10 +1,10 @@
-import {shiftActionTypes } from 'constants/ActionTypes';
+import { shiftActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
 
 export const shiftInitialState = {
   current: {
     id: null,
-    status: status.INIT
+    status: status.INIT,
   },
 };
 
@@ -13,27 +13,27 @@ export default (state = shiftInitialState, action) => {
     case shiftActionTypes.GET_CURRENT_SHIFT_REQUEST:
       return {
         ...state,
-        current:{
+        current: {
           id: null,
-          status: status.LOADING
-        }         
+          status: status.LOADING,
+        },
       };
     case shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS:
       return {
         ...state,
-        current:{
+        current: {
           id: action.data.id,
-          status: status.SUCCESS
-        }         
+          status: status.SUCCESS,
+        },
       };
-      case shiftActionTypes.GET_CURRENT_SHIFT_FAILURE:
+    case shiftActionTypes.GET_CURRENT_SHIFT_FAILURE:
       return {
         ...state,
-        current:{
+        current: {
           id: null,
-          status: status.FAILURE
-        }         
-      }; 
+          status: status.FAILURE,
+        },
+      };
 
     default:
       return state;

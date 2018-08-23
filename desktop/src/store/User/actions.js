@@ -1,6 +1,6 @@
 import { userActionTypes } from 'constants/ActionTypes';
 
-import {authorityActions, crewActions} from 'store/actions';
+import { authorityActions, crewActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -14,7 +14,7 @@ export const login = (username, password) => {
 
       await dispatch(authorityActions.getAuthorities());
       await dispatch(crewActions.getCrews());
-      
+
       dispatch({
         type: userActionTypes.USER_LOGIN_SUCCESS,
         payload: response.data,

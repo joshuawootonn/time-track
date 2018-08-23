@@ -3,9 +3,7 @@ import AccountActionContainer from 'containers/Account/accountActionContainer';
 
 class AccountActionAction extends Component {
   render() {
-    return (
-      <AccountActionContainer type={this.props.type} />
-    );
+    return <AccountActionContainer type={this.props.type} />;
   }
 }
 

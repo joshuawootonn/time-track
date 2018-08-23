@@ -1,6 +1,6 @@
 import accountActionScene from 'scenes/Account/accountActionScene';
 import clockOutScene from 'scenes/Clock/clockOutScene';
-import * as routes from 'constants/routes'
+import * as routes from 'constants/routes';
 
 export default [
   {
@@ -8,13 +8,13 @@ export default [
     component: accountActionScene,
     exact: true,
     name: 'Employee Actions',
-    type: routes.EMPLOYEE
+    type: routes.EMPLOYEE,
   },
   {
     path: `/${routes.EMPLOYEE}/${routes.CLOCKOUT}`,
     component: clockOutScene,
     exact: true,
     name: 'Employee Clockout',
-    type: routes.EMPLOYEE
+    type: routes.EMPLOYEE,
   },
-]
+];

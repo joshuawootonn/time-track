@@ -13,6 +13,6 @@ const rootReducer = combineReducers({
   user,
   snack,
   employee,
-  shift
+  shift,
 });
 export default rootReducer;

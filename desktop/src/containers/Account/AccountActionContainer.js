@@ -3,12 +3,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {
-  snackActions,
-  employeeActions,
-} from 'store/actions';
-import {employeeSelectors } from 'store/selectors';
-
+import { snackActions, employeeActions } from 'store/actions';
+import { employeeSelectors } from 'store/selectors';
 
 import AccountActionForm from 'components/forms/AccountAction';
 
@@ -20,20 +16,17 @@ class AccountAction extends Component {
     const { entities, employee, history } = this.props;
     const asdf = entities.employees[employee.current.id];
 
-    this.props.clockIn(asdf)
-      .then(() => history.push('/'))
-     
-
+    this.props.clockIn(asdf).then(() => history.push('/'));
   };
   clockOut = () => {
     this.props.history.push(`/${this.props.type}/clockout`);
-  }
+  };
   analyze = () => {
     this.props.history.push(`/${this.props.type}/analyze`);
-  }
+  };
   export = () => {
     this.props.history.push(`/${this.props.type}/export`);
-  }
+  };
   render() {
     const { type, currentEmployee } = this.props;
     return (
@@ -72,7 +65,7 @@ const mapStateToProps = state => {
   return {
     employee: state.employee,
     entities: state.entities,
-    currentEmployee: employeeSelectors.getCurrentEmployee(state)
+    currentEmployee: employeeSelectors.getCurrentEmployee(state),
   };
 };
 

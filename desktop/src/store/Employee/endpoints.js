@@ -17,4 +17,3 @@ export const putEmployee = (id, employee) => {
 export const getEmployeeByPin = pin => {
   return axios.get(`${HOST}/${DOMAIN}/findone?filter[where][pin]=${pin}`);
 };
-

@@ -6,18 +6,18 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 
 import { account as accountValidation } from 'constants/formValidation';
-import { employeeActions,staticActions } from 'store/actions';
+import { employeeActions, staticActions } from 'store/actions';
 import AccountSigin from 'components/forms/AccountSigin';
 
 class SignInContainer extends Component {
   render() {
-    const { login, history,getStaticData } = this.props;
+    const { login, history, getStaticData } = this.props;
     return (
       <Formik
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
         onSubmit={values => {
-          login(values.pin).then((asdf) => {
+          login(values.pin).then(asdf => {
             history.push('/employee');
           });
           getStaticData();
@@ -40,7 +40,7 @@ const mapDispatchToProps = dispatch => {
     },
     getStaticData: () => {
       return dispatch(staticActions.getStaticData());
-   }
+    },
   };
 };
 

@@ -18,27 +18,26 @@ const styles = () => ({
   lineBox: {
     display: 'flex',
     alignItems: 'space-between',
-    justifyContent: "space-between"
+    justifyContent: 'space-between',
   },
   buttonBox: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'flex-end',    
+    justifyContent: 'flex-end',
   },
   button: {
-    marginLeft: '10px'
+    marginLeft: '10px',
   },
   horizontalBox: {
     display: 'flex',
-    flexDirection: 'row',    
+    flexDirection: 'row',
   },
   verticalCenterBox: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
-  }
- 
+    alignItems: 'center',
+  },
 });
 
 export default styles;
