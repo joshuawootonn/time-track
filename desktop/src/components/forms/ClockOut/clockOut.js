@@ -81,7 +81,7 @@ const ClockOutForm = (props) => {
 
 
                         return (<div key={index} className={classes.horizontalBox}>
-                          <Field name={`activities.${index}.project`}
+                          <Field name={`activities.${index}.projectId`}
                             render={({ field }) => (
                               <Select
                                 label="Project"
@@ -92,7 +92,7 @@ const ClockOutForm = (props) => {
                                 selectProps={{
                                   autoWidth: true,
                                   ...field,
-                                  input: <Input name={`activities.${index}.project`} />
+                                  input: <Input name={`activities.${index}.projectId`} />
 
                                 }}
                               >
@@ -101,7 +101,7 @@ const ClockOutForm = (props) => {
                                   if (!projects[key].tasks)
                                     return null;
                                   return (
-                                    <MenuItem key={i} id="project" value={projects[key].id}>
+                                    <MenuItem key={i} id="projectId" value={projects[key].id}>
                                       {projects[key].name}
                                     </MenuItem>
                                   );
@@ -109,7 +109,7 @@ const ClockOutForm = (props) => {
                               </Select>
                             )}
                           />
-                          <Field name={`activities.${index}.projectTask`}
+                          <Field name={`activities.${index}.projectTaskId`}
                             render={({ field }) => (
                               <Select
                                 label="Task"
@@ -121,12 +121,12 @@ const ClockOutForm = (props) => {
                                   autoWidth: true,
                                   ...field,
 
-                                  input: <Input name={`activities.${index}.projectTask`} />
+                                  input: <Input name={`activities.${index}.projectTaskId`} />
                                 }}
                               >
-                                {projects[activity.project].tasks.map((task, i) => {
+                                {projects[activity.projectId].tasks.map((task, i) => {
                                   return (
-                                    <MenuItem key={i} id="projectTask" value={task.projectTaskId}>
+                                    <MenuItem key={i} id="projectTaskId" value={task.projectTaskId}>
                                       {task.name}
                                     </MenuItem>
                                   );
@@ -179,7 +179,7 @@ const ClockOutForm = (props) => {
                       }
 
                       )}
-                    <Button color="primary" variant="contained" onClick={() => arrayHelpers.push({ project: 1, projectTask: 0, length: 500, description: '' })}>
+                    <Button color="primary" variant="contained" onClick={() => arrayHelpers.push({ projectId: 1, projectTaskId: 0, length: 500, description: '' })}>
                       Add Activity
                       </Button>
                   </div>

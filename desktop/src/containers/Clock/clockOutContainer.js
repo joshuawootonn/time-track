@@ -50,7 +50,7 @@ class ClockOutContainer extends Component {
       <Formik
         initialValues={{
           activities: [
-            { project: 1, projectTask: 0, length: 500, description: '' },
+            { projectId: 1, projectTaskId: 0, length: 500, description: '' },
           ],
         }}
        
@@ -89,8 +89,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getCurrentShift: employeeId => {
       return dispatch(shiftActions.getCurrentShift(employeeId));
     },
-    clockOut: (employee, shift) => {
-      return dispatch(employeeActions.clockOut(employee, shift));
+    clockOut: (employee, shift,activities) => {
+      return dispatch(employeeActions.clockOut(employee, shift,activities));
     },
   };
 };

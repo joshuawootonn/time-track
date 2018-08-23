@@ -2,7 +2,7 @@ import { normalize } from 'normalizr';
 import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/ActionTypes';
-import { shiftActions, snackActions } from 'store/actions';
+import { shiftActions, snackActions, activityActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
@@ -80,8 +80,13 @@ export const clockOut = (employee, shift,activities) => {
         clockOutDate: currentMoment.toString(),
         length: minutes,
       };
+      await activities.forEach(activity => {
+        //activity.projectId = undefined;
+        activity.shiftId = shift.id;
+        dispatch(activityActions.postActivity(activity))
+      });
 
-      console.log()
+
 
       await dispatch(shiftActions.putShift(clockOutObject));
       await dispatch(toggleIsWorking(employee));

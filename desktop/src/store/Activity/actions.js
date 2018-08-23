@@ -8,7 +8,7 @@ export const postActivity = activity => {
   return async dispatch => {
     dispatch({ type: activityActionTypes.POST_ACTIVITY_REQUEST });
     try {
-      const response = await endpoint.postActivity(shift);
+      const response = await endpoint.postActivity(activity);
       const payload = normalize(
         { activities: [response.data] },
         schemas.activityArray,

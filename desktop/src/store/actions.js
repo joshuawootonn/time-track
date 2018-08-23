@@ -7,6 +7,7 @@ import * as crewActions from './Crew/actions';
 import * as projectActions from './Project/actions';
 import * as projectTaskActions from './ProjectTask/actions';
 import * as taskActions from './Task/actions';
+import * as activityActions from './Activity/actions';
 import * as staticActions from './Static/actions';
 
 export {
@@ -19,5 +20,6 @@ export {
   projectActions,
   projectTaskActions,
   taskActions,
+  activityActions,
   staticActions,
 };
