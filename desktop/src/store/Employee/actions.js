@@ -66,7 +66,7 @@ export const clockIn = employee => {
   };
 };
 
-export const clockOut = (employee, shift) => {
+export const clockOut = (employee, shift,activities) => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST });
     try {
@@ -80,6 +80,9 @@ export const clockOut = (employee, shift) => {
         clockOutDate: currentMoment.toString(),
         length: minutes,
       };
+
+      console.log()
+
       await dispatch(shiftActions.putShift(clockOutObject));
       await dispatch(toggleIsWorking(employee));
       dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out Success!'));

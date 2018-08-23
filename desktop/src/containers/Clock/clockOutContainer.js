@@ -56,7 +56,6 @@ class ClockOutContainer extends Component {
        
         onSubmit={values => {
           const { currentEmployee, currentShift, history } = this.props;
-          console.log(currentShift, currentEmployee, values);
            this.props.clockOut(currentEmployee, currentShift, values.activities)
               .then(() => history.push('/')) 
         }}

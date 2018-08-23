@@ -7,6 +7,7 @@ import * as authorityActionTypes from './authority';
 import * as projectActionTypes from './project';
 import * as projectTaskActionTypes from './projectTask';
 import * as taskActionTypes from './task';
+import * as activityActionTypes from './activity';
 import * as staticActionTypes from './static';
 
 export {
@@ -19,5 +20,6 @@ export {
   projectActionTypes,
   projectTaskActionTypes,
   taskActionTypes,
-  staticActionTypes,
+  activityActionTypes,
+  staticActionTypes
 };
