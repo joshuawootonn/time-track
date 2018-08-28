@@ -1,34 +1,22 @@
-import moment from 'moment'
-export default  [
-  moment.duration(.5, 'hours'),
+import moment from 'moment';
+export const hours = [
   moment.duration(1, 'hours'),
-  moment.duration(1.5, 'hours'),
   moment.duration(2, 'hours'),
-  moment.duration(2.5, 'hours'),
   moment.duration(3, 'hours'),
-  moment.duration(3.5, 'hours'),
   moment.duration(4, 'hours'),
-  moment.duration(4.5, 'hours'),
   moment.duration(5, 'hours'),
-  moment.duration(5.5, 'hours'),
   moment.duration(6, 'hours'),
-  moment.duration(6.5, 'hours'),
   moment.duration(7, 'hours'),
-  moment.duration(7.5, 'hours'),
   moment.duration(8, 'hours'),
-  moment.duration(8.5, 'hours'),
   moment.duration(9, 'hours'),
-  moment.duration(9.5, 'hours'),
   moment.duration(10, 'hours'),
-  moment.duration(10.5, 'hours'),
   moment.duration(11, 'hours'),
-  moment.duration(11.5, 'hours'),
   moment.duration(12, 'hours'),
-  moment.duration(12.5, 'hours'),
-  moment.duration(13, 'hours'),
-  moment.duration(13.5, 'hours'),
-  moment.duration(14, 'hours'),
-  moment.duration(14.5, 'hours'),
-  moment.duration(15, 'hours'),
-  moment.duration(15.5, 'hours'),
+];
+
+export const minutes = [
+  moment.duration(0, 'hours'),
+  moment.duration(0.25, 'hours'),
+  moment.duration(0.5, 'hours'),
+  moment.duration(0.75, 'hours'),
 ];

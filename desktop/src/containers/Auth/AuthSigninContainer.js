@@ -17,9 +17,7 @@ const ipcRenderer = electron.ipcRenderer;
 class SignInForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      error: '',
-    };
+    this.state = { error: '' };
   }
 
   componentDidMount = () => {
@@ -76,9 +74,7 @@ SignInForm.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
+  return { user: state.user };
 };
 
 export default withRouter(

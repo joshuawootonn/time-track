@@ -15,8 +15,6 @@ export class RouteMapper extends Component {
   }
 }
 
-RouteMapper.propTypes = {
-  routes: PropTypes.array.isRequired,
-};
+RouteMapper.propTypes = { routes: PropTypes.array.isRequired };
 
 export default RouteMapper;

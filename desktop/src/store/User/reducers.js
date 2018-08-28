@@ -1,8 +1,6 @@
 import { userActionTypes } from 'constants/ActionTypes';
 import * as status from 'constants/status';
-export const userInitialState = {
-  status: status.INIT,
-};
+export const userInitialState = { status: status.INIT };
 
 export default (state = userInitialState, action) => {
   switch (action.type) {

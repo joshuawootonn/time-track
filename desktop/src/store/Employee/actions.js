@@ -81,7 +81,7 @@ export const clockOut = (employee, shift, activities) => {
         length: minutes,
       };
       await activities.forEach(activity => {
-        //activity.projectId = undefined;
+        // activity.projectId = undefined;
         activity.shiftId = shift.id;
         dispatch(activityActions.postActivity(activity));
       });

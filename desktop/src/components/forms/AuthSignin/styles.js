@@ -11,9 +11,7 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  error: {
-    marginTop: '16px',
-  },
+  error: { marginTop: '16px' },
 });
 
 export default styles;

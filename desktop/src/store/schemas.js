@@ -12,13 +12,9 @@ export const subcategorySchema = new schema.Entity('subcategory');
 export const categorySchema = new schema.Entity('category');
 export const dimensionSchema = new schema.Entity('dimension');
 
-crewSchema.define({
-  employees: [employeeSchema],
-});
+crewSchema.define({ employees: [employeeSchema] });
 
-authoritySchema.define({
-  employees: [employeeSchema],
-});
+authoritySchema.define({ employees: [employeeSchema] });
 
 employeeSchema.define({
   authority: authoritySchema,
@@ -42,9 +38,7 @@ projectTaskSchema.define({
   task: taskSchema,
 });
 
-projectSchema.define({
-  projectTasks: projectTaskArray,
-});
+projectSchema.define({ projectTasks: projectTaskArray });
 
 taskSchema.define({
   projectTasks: projectTaskArray,

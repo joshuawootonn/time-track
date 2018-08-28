@@ -58,6 +58,7 @@
     "electron-builder": "^20.16.0",
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^5.0.1",
+    "eslint-config-google": "^0.9.1",
     "eslint-config-last": "^0.0.5",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.1",

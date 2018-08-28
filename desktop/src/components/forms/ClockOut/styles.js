@@ -6,15 +6,9 @@ const styles = () => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textField: {
-    width: '100%',
-  },
-  heroContent: {
-    width: '800px',
-  },
-  error: {
-    marginTop: '16px',
-  },
+  textField: { width: '100%' },
+  heroContent: { width: '800px' },
+  error: { marginTop: '16px' },
   lineBox: {
     display: 'flex',
     alignItems: 'space-between',
@@ -26,9 +20,7 @@ const styles = () => ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  button: {
-    marginLeft: '10px',
-  },
+  button: { marginLeft: '10px' },
   horizontalBox: {
     display: 'flex',
     flexDirection: 'row',

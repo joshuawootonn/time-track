@@ -6,15 +6,9 @@ const styles = () => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textField: {
-    width: '100%',
-  },
-  heroContent: {
-    width: '300px',
-  },
-  error: {
-    marginTop: '16px',
-  },
+  textField: { width: '100%' },
+  heroContent: { width: '300px' },
+  error: { marginTop: '16px' },
 });
 
 export default styles;

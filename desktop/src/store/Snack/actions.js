@@ -8,7 +8,5 @@ export const openSnack = (type, message) => {
   };
 };
 export const closeSnack = () => {
-  return {
-    type: snackActionTypes.HIDE_SNACK,
-  };
+  return { type: snackActionTypes.HIDE_SNACK };
 };

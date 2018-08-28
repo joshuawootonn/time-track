@@ -16,11 +16,11 @@ import {
 import { Form, Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons';
 import moment from 'moment';
-import momentDurationFormatSetup from "moment-duration-format";
+import momentDurationFormatSetup from 'moment-duration-format';
 import styles from './styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
-import times from 'constants/times'
+import { minutes, hours } from 'constants/times';
 
 const ClockOutForm = props => {
   const {
@@ -67,9 +67,7 @@ const ClockOutForm = props => {
                               render={({ field }) => (
                                 <Select
                                   label="Project"
-                                  formControlProps={{
-                                    fullWidth: true,
-                                  }}
+                                  formControlProps={{ fullWidth: true }}
                                   selectProps={{
                                     autoWidth: true,
                                     ...field,
@@ -81,7 +79,7 @@ const ClockOutForm = props => {
                                   }}
                                 >
                                   {Object.keys(projects).map((key, i) => {
-                                    //This protects against projects that don't have accociated tasks
+                                    // This protects against projects that don't have accociated tasks
                                     if (!projects[key].tasks) return null;
                                     return (
                                       <MenuItem
@@ -101,13 +99,10 @@ const ClockOutForm = props => {
                               render={({ field }) => (
                                 <Select
                                   label="Task"
-                                  formControlProps={{
-                                    fullWidth: true,
-                                  }}
+                                  formControlProps={{ fullWidth: true }}
                                   selectProps={{
                                     autoWidth: true,
                                     ...field,
-
                                     input: (
                                       <Input
                                         name={`activities.${index}.projectTaskId`}
@@ -137,9 +132,7 @@ const ClockOutForm = props => {
                               render={({ field }) => (
                                 <Select
                                   label="Length"
-                                  formControlProps={{
-                                    fullWidth: true,
-                                  }}
+                                  formControlProps={{ fullWidth: true }}
                                   selectProps={{
                                     autoWidth: true,
                                     ...field,
@@ -150,14 +143,44 @@ const ClockOutForm = props => {
                                     ),
                                   }}
                                 >
-                                  {times.map((time, i) => {
+                                  {hours.map((time, i) => {
                                     return (
                                       <MenuItem
                                         key={i}
                                         id="length"
                                         value={time.asMinutes()}
                                       >
-                                        {time.format("h:mm",{trim: false})}
+                                        {time.format('h:mm', { trim: false })}
+                                      </MenuItem>
+                                    );
+                                  })}
+                                </Select>
+                              )}
+                            />
+                            <Field
+                              name={`activities.${index}.length`}
+                              render={({ field }) => (
+                                <Select
+                                  label="Length"
+                                  formControlProps={{ fullWidth: true }}
+                                  selectProps={{
+                                    autoWidth: true,
+                                    ...field,
+                                    input: (
+                                      <Input
+                                        name={`activities.${index}.length`}
+                                      />
+                                    ),
+                                  }}
+                                >
+                                  {minutes.map((time, i) => {
+                                    return (
+                                      <MenuItem
+                                        key={i}
+                                        id="length"
+                                        value={time.asMinutes()}
+                                      >
+                                        {time.format('h:mm', { trim: false })}
                                       </MenuItem>
                                     );
                                   })}
@@ -217,10 +240,10 @@ const ClockOutForm = props => {
                 >
                   Enter
                 </Button>
-                
+
                 <Button
                   type="submit"
-                  //onClick={cancel}
+                  // onClick={cancel}
                   color="secondary"
                   variant="text"
                   className={classes.button}
