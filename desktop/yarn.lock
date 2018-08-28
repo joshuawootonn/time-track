@@ -2786,6 +2786,10 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
+eslint-config-google@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-google/-/eslint-config-google-0.9.1.tgz#83353c3dba05f72bb123169a4094f4ff120391eb"
+
 eslint-config-last@^0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/eslint-config-last/-/eslint-config-last-0.0.5.tgz#8b6b9ce917ed3dcfe830864d00b923ce98d0b488"

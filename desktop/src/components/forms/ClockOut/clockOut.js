@@ -9,18 +9,14 @@ import {
   IconButton,
   MenuItem,
   Input,
-  FormControl,
-  InputLabel,
 } from '@material-ui/core';
 
-import { Form, Field, FieldArray } from 'formik';
+import { Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons';
-import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
 import styles from './styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
-import { minutes, hours } from 'constants/times';
+import Time from 'containers/Inputs/time';
 
 const ClockOutForm = props => {
   const {
@@ -126,68 +122,15 @@ const ClockOutForm = props => {
                                 </Select>
                               )}
                             />
-
-                            <Field
+                            <Field 
                               name={`activities.${index}.length`}
-                              render={({ field }) => (
-                                <Select
-                                  label="Length"
-                                  formControlProps={{ fullWidth: true }}
-                                  selectProps={{
-                                    autoWidth: true,
-                                    ...field,
-                                    input: (
-                                      <Input
-                                        name={`activities.${index}.length`}
-                                      />
-                                    ),
-                                  }}
-                                >
-                                  {hours.map((time, i) => {
-                                    return (
-                                      <MenuItem
-                                        key={i}
-                                        id="length"
-                                        value={time.asMinutes()}
-                                      >
-                                        {time.format('h:mm', { trim: false })}
-                                      </MenuItem>
-                                    );
-                                  })}
-                                </Select>
-                              )}
+                              render={fieldProps => {                           
+                                return(
+                                  <Time {...fieldProps} name="" />
+                                )
+                              }} 
+                              
                             />
-                            <Field
-                              name={`activities.${index}.length`}
-                              render={({ field }) => (
-                                <Select
-                                  label="Length"
-                                  formControlProps={{ fullWidth: true }}
-                                  selectProps={{
-                                    autoWidth: true,
-                                    ...field,
-                                    input: (
-                                      <Input
-                                        name={`activities.${index}.length`}
-                                      />
-                                    ),
-                                  }}
-                                >
-                                  {minutes.map((time, i) => {
-                                    return (
-                                      <MenuItem
-                                        key={i}
-                                        id="length"
-                                        value={time.asMinutes()}
-                                      >
-                                        {time.format('h:mm', { trim: false })}
-                                      </MenuItem>
-                                    );
-                                  })}
-                                </Select>
-                              )}
-                            />
-
                             <Field
                               value={activity.description}
                               name={`activities.${index}.description`}
