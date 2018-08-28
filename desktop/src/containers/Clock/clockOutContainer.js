@@ -49,7 +49,12 @@ class ClockOutContainer extends Component {
     return (
       <Formik
         initialValues={{
-          activities: [],
+          activities: [{
+            projectId: Object.keys(this.props.projects)[0],
+            projectTaskId: -1,
+            length: 0,
+            description: ''
+          }],
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history } = this.props;

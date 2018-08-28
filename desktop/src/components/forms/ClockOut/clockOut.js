@@ -28,32 +28,33 @@ const ClockOutForm = props => {
     shift,
     values,
     projects,
+    cancel
   } = props;
-  console.log(shift)
+  console.log(projects)
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={24}>
-            <Grid item xs={12} className={classes.lineBox}>
+            <Grid item xs={12} className={classes.formHeader}>
 
               <Typography variant="display2">Clock Out</Typography>
-              
-              <div className={classes.verticalCenterBox}>
-                <SvgIcon  className={classes.headlineIcon}  color="action"><DateIcon /></SvgIcon>
+
+              <div className={classes.formHeader}>
+                <SvgIcon className={classes.formHeaderIcon} color="action"><DateIcon /></SvgIcon>
                 <Typography variant="headline">{shift.date}</Typography>
               </div>
 
-              <div className={classes.verticalCenterBox}>
-                <SvgIcon  className={classes.headlineIcon}  color="action"><TimeIcon /></SvgIcon>
+              <div className={classes.formHeader}>
+                <SvgIcon className={classes.formHeaderIcon} color="action"><TimeIcon /></SvgIcon>
                 <Typography variant="headline">{shift.in} - {shift.out}</Typography>
               </div>
 
-              <div className={classes.verticalCenterBox}>
-                <SvgIcon className={classes.headlineIcon} color="action"><DurationIcon /></SvgIcon>
+              <div className={classes.formHeader}>
+                <SvgIcon className={classes.formHeaderIcon} color="action"><DurationIcon /></SvgIcon>
                 <Typography variant="headline">Length:  {shift.length}</Typography>
               </div>
-              
+
             </Grid>
 
             <Grid item xs={12}>
@@ -64,146 +65,146 @@ const ClockOutForm = props => {
                     {values.activities &&
                       values.activities.map((activity, index) => {
                         return (
-                          <div key={index} className={cx(classes.card, classes.horizontalBox)}>
-                            <div className={classes.card}>
-                              <div className={classes.horizontalBox}>
-                                <Field
-                                  name={`activities.${index}.projectId`}
-                                  render={({ field }) => (
-                                    <Select
-                                      label="Project"
-                                      formControlProps={{ fullWidth: true }}
-                                      selectProps={{
-                                        autoWidth: true,
-                                        ...field,
-                                        input: (
-                                          <Input
-                                            name={`activities.${index}.projectId`}
-                                          />
-                                        ),
-                                      }}
-                                    >
-                                      {Object.keys(projects).map((key, i) => {
-                                        // This protects against projects that don't have accociated tasks
-                                        if (!projects[key].tasks) return null;
+                          <div key={index} className={cx(classes.card, classes.verticalCenterBox)}>
+
+                            <div className={classes.formBody}>
+                              <Field
+                                
+                                name={`activities.${index}.projectId`}
+                                render={({ field }) => (
+                                  <Select
+                                    label="Project"                                    
+                                    formControlProps={{ fullWidth: true }}
+                                    selectProps={{
+                                      autoWidth: true,
+                                      ...field,
+                                      input: (
+                                        <Input
+                                          name={`activities.${index}.projectId`}
+                                        />
+                                      ),
+                                    }}
+                                  >
+                                    {Object.keys(projects).map((key, i) => {
+                                      // This protects against projects that don't have accociated tasks
+                                      if (!projects[key].tasks) return null;
+                                      return (
+                                        <MenuItem
+                                          key={i}
+                                          id="projectId"
+                                          value={projects[key].id}
+                                        >
+                                          {projects[key].name}
+                                        </MenuItem>
+                                      );
+                                    })}
+                                  </Select>
+                                )}
+                              />
+                              <Field
+                                name={`activities.${index}.projectTaskId`}
+                                render={({ field }) => (
+                                  <Select
+                                    label="Task"
+                                    formControlProps={{ fullWidth: true }}
+                                    selectProps={{
+                                      autoWidth: true,
+                                      ...field,
+                                      input: (
+                                        <Input
+                                          name={`activities.${index}.projectTaskId`}
+                                        />
+                                      ),
+                                    }}
+                                  >
+                                    {projects[activity.projectId].tasks.map(
+                                      (task, i) => {
                                         return (
                                           <MenuItem
                                             key={i}
-                                            id="projectId"
-                                            value={projects[key].id}
+                                            id="projectTaskId"
+                                            value={task.projectTaskId}
                                           >
-                                            {projects[key].name}
+                                            {task.name}
                                           </MenuItem>
                                         );
-                                      })}
-                                    </Select>
-                                  )}
-                                />
-                                <Field
-                                  name={`activities.${index}.projectTaskId`}
-                                  render={({ field }) => (
-                                    <Select
-                                      label="Task"
-                                      formControlProps={{ fullWidth: true }}
-                                      selectProps={{
-                                        autoWidth: true,
-                                        ...field,
-                                        input: (
-                                          <Input
-                                            name={`activities.${index}.projectTaskId`}
-                                          />
-                                        ),
-                                      }}
-                                    >
-                                      {projects[activity.projectId].tasks.map(
-                                        (task, i) => {
-                                          return (
-                                            <MenuItem
-                                              key={i}
-                                              id="projectTaskId"
-                                              value={task.projectTaskId}
-                                            >
-                                              {task.name}
-                                            </MenuItem>
-                                          );
-                                        },
-                                      )}
-                                    </Select>
-                                  )}
-                                />
+                                      },
+                                    )}
+                                  </Select>
+                                )}
+                              />
 
-                                <Field
-                                  name={`activities.${index}.length`}
-                                  render={fieldProps => {
-                                    return <Time {...fieldProps} name="" />;
-                                  }}
-                                />
-                                <Field
-                                  value={activity.description}
-                                  name={`activities.${index}.description`}
-                                  render={fieldProps => (
-                                    <TextField
-                                      label="Description"
-                                      {...fieldProps}
-                                    />
-                                  )}
-                                />
-
-
+                              <Field
+                                name={`activities.${index}.length`}
+                                render={fieldProps => {
+                                  return <Time {...fieldProps} name="" />;
+                                }}
+                              />
+                              <Field
+                                value={activity.description}
+                                name={`activities.${index}.description`}
+                                render={fieldProps => (
+                                  <TextField
+                                    label="Description"
+                                    {...fieldProps}
+                                  />
+                                )}
+                              />
+                              <div className={classes.verticalCenter}>
+                                <IconButton
+                                  type="button"
+                                  color="secondary"
+                                  className={classes.iconButton}
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  <Close />
+                                </IconButton>
                               </div>
                             </div>
-                            <div className={classes.verticalCenterBox}>
-                              <IconButton
-                                type="button"
-                                className={classes.iconButton}
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                <Close />
-                              </IconButton>
-                            </div>
+
                           </div>
                         );
                       })}
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      onClick={() =>
-                        arrayHelpers.push({
-                          projectId: 1,
-                          projectTaskId: 0,
-                          length: 500,
-                          description: '',
-                        })
-                      }
-                    >
-                      Add Activity
-                    </Button>
+
+                    <Grid item xs={12} className={classes.formFooter}>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={() =>
+                          arrayHelpers.push({
+                            projectId: Object.keys(projects)[0],
+                            projectTaskId: -1,
+                            length: 0,
+                            description: '',
+                          })
+                        }
+                      >
+                        Add Activity
+                      </Button>
+                      <div>
+                        <Button
+                          type="submit"
+                          color="primary"
+                          disabled={isSubmitting}
+                          variant="contained"
+                          className={classes.button}
+                        >
+                          Clock Out
+                        </Button>
+
+                        <Button
+                          onClick={cancel}
+                          color="secondary"
+                          variant="text"
+                          className={classes.button}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </Grid>
                   </div>
                 )}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <div className={classes.buttonBox}>
-                <Button
-                  type="submit"
-                  color="primary"
-                  disabled={isSubmitting}
-                  variant="contained"
-                  className={classes.button}
-                >
-                  Enter
-                </Button>
-
-                <Button
-                  type="submit"
-                  // onClick={cancel}
-                  color="secondary"
-                  variant="text"
-                  className={classes.button}
-                >
-                  Cancel
-                </Button>
-              </div>
             </Grid>
           </Grid>
         </form>

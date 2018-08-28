@@ -7,40 +7,53 @@ const styles = (theme) => ({
     alignItems: 'center',
   },
   textField: { width: '100%' },
-  heroContent: { 
+  heroContent: {
     width: '100%',
-    
-    maxWidth: '1000px' },
+    maxWidth: '1000px'
+  },
   error: { marginTop: '16px' },
-  lineBox: {
-    display: 'flex',
-    alignItems: 'center',
+  spaceBetween: {
     justifyContent: 'space-between',
   },
-  buttonBox: {
-    display: 'flex',
-    flexDirection: 'row',
+  flexEnd: {
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
   button: { marginLeft: '10px' },
-  horizontalBox: {
+  
+  verticalCenter: {
     display: 'flex',
-    flexDirection: 'row',
+    alignItems: 'center'
   },
-  card: {
-    width: '100%'
-  },
-  verticalCenterBox: {
+ 
+
+  formHeader: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  headlineIcon: {
+    justifyContent: 'space-between',
+  }, 
+  formHeaderIcon: {
     fontSize: '32px',
     margin: '0 10px'
+  },
+
+  formBody: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',   
+  },
+  formElement: {
+    marginLeft: '10px'
+  },
+
+  formFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   }
- 
+  
 });
 
 export default styles;
