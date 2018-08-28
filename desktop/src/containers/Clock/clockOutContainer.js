@@ -29,7 +29,7 @@ class ClockOutContainer extends Component {
   };
 
   render() {
-    const { currentEmployee, currentShift } = this.props;
+    const { currentEmployee, currentShift,projects } = this.props;
     const isLoading = !currentShift;
     if (isLoading) {
       return <div>Loading</div>;
@@ -46,11 +46,13 @@ class ClockOutContainer extends Component {
       date: clockInMoment.format('MMM Do YYYY'),
       length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`,
     };
+
+    console.log(projects)
     return (
       <Formik
         initialValues={{
           activities: [{
-            projectId: Object.keys(this.props.projects)[0],
+            projectId: Object.keys(projects)[0],
             projectTaskId: -1,
             length: 0,
             description: ''
@@ -67,7 +69,7 @@ class ClockOutContainer extends Component {
             <ClockOut
               cancel={this.cancel}
               shift={clockOutObject}
-              projects={this.props.projects}
+              projects={projects}
               {...formikProps}
             />
           );
@@ -81,8 +83,7 @@ const mapStateToProps = state => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjectObjects(state),
-    projectArray: projectSelectors.getAllProjects(state),
+    projects: projectSelectors.getAllProjectObjectsWithTasks(state),
   };
 };
 

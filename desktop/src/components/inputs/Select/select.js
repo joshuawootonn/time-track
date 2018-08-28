@@ -13,12 +13,12 @@ const Select = props => {
     formControlProps,
     label,
     labelProps,
-    selectProps,
+    selectProps
   } = props;
   return (
-    <FormControl {...formControlProps} margin="normal">
+    <FormControl {...formControlProps}  margin="normal">
       {label !== undefined ? (
-        <InputLabel {...labelProps}>{label}</InputLabel>
+        <InputLabel {...labelProps} >{label}</InputLabel>
       ) : null}
       <SelectInput
         

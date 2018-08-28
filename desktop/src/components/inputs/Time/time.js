@@ -50,8 +50,8 @@ export class Time extends Component {
         >
           {hours.map((time, i) => {
             return (
-              <MenuItem key={i} id="length" value={time.asMinutes()}>
-                {time.format('h:mm', { trim: false })}
+              <MenuItem key={i} id="length" value={time.value}>
+                {time.label}
               </MenuItem>
             );
           })}
@@ -79,8 +79,8 @@ export class Time extends Component {
         >
           {minutes.map((time, i) => {
             return (
-              <MenuItem key={i} id="length" value={time.asMinutes()}>
-                {time.format('h:mm', { trim: false })}
+              <MenuItem key={i} id="length" value={time.value}>
+                {time.label}
               </MenuItem>
             );
           })}

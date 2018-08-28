@@ -30,7 +30,6 @@ const ClockOutForm = props => {
     projects,
     cancel
   } = props;
-  console.log(projects)
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -68,13 +67,13 @@ const ClockOutForm = props => {
                           <div key={index} className={cx(classes.card, classes.verticalCenterBox)}>
 
                             <div className={classes.formBody}>
-                              <Field
+                               <Field
 
                                 name={`activities.${index}.projectId`}
                                 render={({ field }) => (
                                   <Select
                                     label="Project"
-                                    //className={classes.formElement}                                 
+                                    className={classes.formElement}                                 
                                     formControlProps={{
                                       className: classes.formElement,
                                       fullWidth: true
@@ -95,7 +94,7 @@ const ClockOutForm = props => {
                                   >
                                     {Object.keys(projects).map((key, i) => {
                                       // This protects against projects that don't have accociated tasks
-                                      if (!projects[key].tasks) return null;
+                                      
                                       return (
                                         <MenuItem
                                           key={i}
