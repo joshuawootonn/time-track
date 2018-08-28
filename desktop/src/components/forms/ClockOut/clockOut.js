@@ -16,7 +16,7 @@ import { Close } from '@material-ui/icons';
 import styles from './styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
-import Time from 'containers/Inputs/time';
+import Time from 'components/inputs/Time';
 
 const ClockOutForm = props => {
   const {
@@ -122,14 +122,11 @@ const ClockOutForm = props => {
                                 </Select>
                               )}
                             />
-                            <Field 
+                            <Field
                               name={`activities.${index}.length`}
-                              render={fieldProps => {                           
-                                return(
-                                  <Time {...fieldProps} name="" />
-                                )
-                              }} 
-                              
+                              render={fieldProps => {
+                                return <Time {...fieldProps} name="" />;
+                              }}
                             />
                             <Field
                               value={activity.description}
