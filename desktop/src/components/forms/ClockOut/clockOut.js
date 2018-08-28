@@ -69,15 +69,23 @@ const ClockOutForm = props => {
 
                             <div className={classes.formBody}>
                               <Field
-                                
+
                                 name={`activities.${index}.projectId`}
                                 render={({ field }) => (
                                   <Select
-                                    label="Project"                                    
-                                    formControlProps={{ fullWidth: true }}
+                                    label="Project"
+                                    //className={classes.formElement}                                 
+                                    formControlProps={{
+                                      className: classes.formElement,
+                                      fullWidth: true
+                                    }}
+                                    labelProps={{
+                                      className: classes.formElement
+                                    }}
                                     selectProps={{
                                       autoWidth: true,
                                       ...field,
+                                      className: classes.formElement,
                                       input: (
                                         <Input
                                           name={`activities.${index}.projectId`}
@@ -106,8 +114,16 @@ const ClockOutForm = props => {
                                 render={({ field }) => (
                                   <Select
                                     label="Task"
-                                    formControlProps={{ fullWidth: true }}
+                                    formControlProps={{
+                                      className: classes.formElement,
+                                      fullWidth: true
+                                    }}
+                                    labelProps={{
+                                      className: classes.formElement
+                                    }}
                                     selectProps={{
+
+                                      className: classes.formElement,
                                       autoWidth: true,
                                       ...field,
                                       input: (
@@ -137,7 +153,11 @@ const ClockOutForm = props => {
                               <Field
                                 name={`activities.${index}.length`}
                                 render={fieldProps => {
-                                  return <Time {...fieldProps} name="" />;
+                                  return <Time
+                                    {...fieldProps}
+                                    className={classes.formElement}
+                                    name=""
+                                  />;
                                 }}
                               />
                               <Field
@@ -146,6 +166,7 @@ const ClockOutForm = props => {
                                 render={fieldProps => (
                                   <TextField
                                     label="Description"
+                                    className={classes.formElement}
                                     {...fieldProps}
                                   />
                                 )}

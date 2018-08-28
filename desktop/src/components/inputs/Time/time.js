@@ -14,7 +14,7 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, orientation } = this.props;
+    const { classes, orientation, className } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
@@ -29,8 +29,15 @@ export class Time extends Component {
       <div className={wrapperClasses}>
         <Select
           label="Hours"
-          formControlProps={{ fullWidth: true }}
+          formControlProps={{
+            className: className,
+            fullWidth: true
+          }}
+          labelProps={{
+            className: className
+          }}
           selectProps={{
+            className: className,
             autoWidth: true,
             onChange: e => {
               this.props.form.setFieldValue(
@@ -51,8 +58,15 @@ export class Time extends Component {
         </Select>
         <Select
           label="Minutes"
-          formControlProps={{ fullWidth: true }}
+          formControlProps={{
+            className: className,
+            fullWidth: true
+          }}
+          labelProps={{
+            className: className
+          }}
           selectProps={{
+            className: className,
             autoWidth: true,
             onChange: e => {
               this.props.form.setFieldValue(

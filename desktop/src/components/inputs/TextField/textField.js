@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 
-const TextField = ({ field, form, id, label }) => (
+const TextField = ({ field, form, id, label,className }) => (
   <MUTextField
     {...field}
     id={id}
@@ -11,6 +11,7 @@ const TextField = ({ field, form, id, label }) => (
     type="search"
     InputLabelProps={{ shrink: true }}
     fullWidth
+    className={className}
     margin="normal"
     FormHelperTextProps={{ error: true }}
     helperText={

@@ -12,17 +12,16 @@ const Select = props => {
   const {
     formControlProps,
     label,
-    LabelProps,
+    labelProps,
     selectProps,
-    helperText,
-    FormHelperTextProps,
   } = props;
   return (
     <FormControl {...formControlProps} margin="normal">
       {label !== undefined ? (
-        <InputLabel {...LabelProps}>{label}</InputLabel>
+        <InputLabel {...labelProps}>{label}</InputLabel>
       ) : null}
       <SelectInput
+        
         MenuProps={{
           getContentAnchorEl: null,
           anchorOrigin: {
@@ -40,13 +39,7 @@ const Select = props => {
 
 Select.propTypes = {
   value: PropTypes.string,
-  onChange: PropTypes.func,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ),
+  onChange: PropTypes.func, 
 };
 
 export default Select;

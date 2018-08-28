@@ -32,6 +32,7 @@ const styles = (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginRight: theme.spacing.unit
   }, 
   formHeaderIcon: {
     fontSize: '32px',
@@ -41,10 +42,10 @@ const styles = (theme) => ({
   formBody: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',   
+    justifyContent: 'space-between',  
   },
   formElement: {
-    marginLeft: '10px'
+    marginRight: theme.spacing.unit,
   },
 
   formFooter: {
@@ -52,8 +53,7 @@ const styles = (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  }
-  
+  }  
 });
 
 export default styles;
