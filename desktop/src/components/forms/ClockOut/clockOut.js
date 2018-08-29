@@ -59,21 +59,22 @@ const ClockOutForm = props => {
             <Grid item xs={12}>
               <FieldArray
                 name="activities"
-                render={arrayHelpers => (
-                  <div>
+                render={arrayHelpers => {
+                  console.log(values.activities)
+                  return (<div>
                     {values.activities &&
                       values.activities.map((activity, index) => {
                         return (
                           <div key={index} className={cx(classes.card, classes.verticalCenterBox)}>
 
                             <div className={classes.formBody}>
-                               <Field
+                              <Field
 
                                 name={`activities.${index}.projectId`}
                                 render={({ field }) => (
                                   <Select
                                     label="Project"
-                                    className={classes.formElement}                                 
+                                    className={classes.formElement}
                                     formControlProps={{
                                       className: classes.formElement,
                                       fullWidth: true
@@ -94,7 +95,7 @@ const ClockOutForm = props => {
                                   >
                                     {Object.keys(projects).map((key, i) => {
                                       // This protects against projects that don't have accociated tasks
-                                      
+
                                       return (
                                         <MenuItem
                                           key={i}
@@ -132,7 +133,7 @@ const ClockOutForm = props => {
                                       ),
                                     }}
                                   >
-                                    {projects[activity.projectId].tasks.map(
+                                    {projects[activity.projectId] && projects[activity.projectId].tasks && projects[activity.projectId].tasks.map(
                                       (task, i) => {
                                         return (
                                           <MenuItem
@@ -222,8 +223,11 @@ const ClockOutForm = props => {
                         </Button>
                       </div>
                     </Grid>
-                  </div>
-                )}
+                  </div>)
+                }
+
+
+                }
               />
             </Grid>
           </Grid>

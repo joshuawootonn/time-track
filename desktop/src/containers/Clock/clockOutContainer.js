@@ -47,12 +47,11 @@ class ClockOutContainer extends Component {
       length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`,
     };
 
-    console.log(projects)
     return (
       <Formik
         initialValues={{
           activities: [{
-            projectId: Object.keys(projects)[0],
+            projectId: -1,
             projectTaskId: -1,
             length: 0,
             description: ''
@@ -64,6 +63,7 @@ class ClockOutContainer extends Component {
             .clockOut(currentEmployee, currentShift, values.activities)
             .then(() => history.push('/'));
         }}
+        validationSchema={shiftValidation}
         render={formikProps => {
           return (
             <ClockOut

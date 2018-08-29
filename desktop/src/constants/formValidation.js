@@ -11,5 +11,13 @@ export const account = Yup.object().shape({
     .required('Pin required'),
 });
 export const shift = Yup.object().shape({
-  length: Yup.string().required('Length required'),
+  activites: Yup.array().of(
+    Yup.object().shape({
+      length: Yup.number().positive().required('Time selection required'),
+      projectId: Yup.number().positive().required('Project selection required'),
+      projectTaskId: Yup.number().positive().required('Task selection required'),
+      description: Yup.string(),
+    })
+  )     
+  
 });

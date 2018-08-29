@@ -1,6 +1,10 @@
 import moment from 'moment';
 export const hours = [
   {
+    value: moment.duration(0, 'hours').asMinutes(),
+    label: moment.duration(0, 'hours').format('h:mm', { trim: false })
+  },
+  {
     value: moment.duration(1, 'hours').asMinutes(),
     label: moment.duration(1, 'hours').format('h:mm', { trim: false })
   },
@@ -54,14 +58,14 @@ export const minutes = [
   {
     value: moment.duration(0, 'hours').asMinutes(),
     label: moment.duration(0, 'hours').format('h:mm', { trim: false })
-  },{
+  }, {
     value: moment.duration(0.25, 'hours').asMinutes(),
     label: moment.duration(0.25, 'hours').format('h:mm', { trim: false })
   },
   {
     value: moment.duration(0.5, 'hours').asMinutes(),
     label: moment.duration(0.5, 'hours').format('h:mm', { trim: false })
-  },{
+  }, {
     value: moment.duration(0.75, 'hours').asMinutes(),
     label: moment.duration(0.75, 'hours').format('h:mm', { trim: false })
   },

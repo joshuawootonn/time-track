@@ -55,8 +55,7 @@ export const getAllProjectObjectsWithTasks = createSelector(
           [key]: newProjects[key]
         };
       }, {});
-      
-    console.log(filtered)
+    
     return filtered;
   },
 )
