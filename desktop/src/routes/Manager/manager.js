@@ -1,5 +1,6 @@
 import accountActionScene from 'scenes/Account/accountActionScene';
 import clockOutScene from 'scenes/Clock/clockOutScene';
+import exportScene from 'scenes/Export/exportScene';
 import * as routes from 'constants/routes';
 
 export default [
@@ -17,4 +18,11 @@ export default [
     name: 'Manager Clockout',
     type: routes.MANAGER,
   },
+  {
+    path: `/${routes.MANAGER}/${routes.EXPORT}`,
+    component: exportScene,
+    exact: true,
+    name: 'Manager Export',
+    type: routes.MANAGER
+  }
 ];

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { snackActions, employeeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
+import * as routes from 'constants/routes';
 
 import AccountActionForm from 'components/forms/AccountAction';
 
@@ -19,16 +20,18 @@ class AccountAction extends Component {
     this.props.clockIn(asdf).then(() => history.push('/'));
   };
   clockOut = () => {
-    this.props.history.push(`/${this.props.type}/clockout`);
+    this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   };
   analyze = () => {
-    this.props.history.push(`/${this.props.type}/analyze`);
+    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
   export = () => {
-    this.props.history.push(`/${this.props.type}/export`);
+    this.props.history.push(`/${this.props.type}/${routes.EXPORT}`);
   };
   render() {
     const { type, currentEmployee } = this.props;
+
+    console.log(this.props.history.location, this.props.type);
     return (
       <AccountActionForm
         isWorking={currentEmployee.isWorking}
