@@ -8,6 +8,7 @@ class ExportScene extends Component {
     return (
       <div>
         ExportContainer
+        <ExportContainer />
       </div>
     )
   }

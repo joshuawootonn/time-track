@@ -111,6 +111,8 @@ export const login = pin => {
         { employees: [response.data] },
         schemas.employeeArray,
       );
+
+      
       return dispatch({
         type: employeeActionTypes.LOGIN_EMPLOYEE_SUCCESS,
         payload,
