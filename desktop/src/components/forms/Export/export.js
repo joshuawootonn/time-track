@@ -6,6 +6,7 @@ import { Grid, MenuItem, Button } from '@material-ui/core'
 import styles from './styles'
 
 import Select from 'components/inputs/Select'
+import TextField from 'components/inputs/TextField'
 
 
 const exportTypes = [{ id: 0, name: "Employeee" }, { id: 2, name: "Project" }, { id: 3, name: "Task" }, { id: 4, name: "Crew" }]
@@ -42,27 +43,14 @@ class ExportForm extends Component {
               </Select>
             </Grid>
             <Grid item xs={12}>
-              <Select
+              <TextField
+                id="from"
                 label="From"
-                formControlProps={{
-                  fullWidth: true
-                }}
+                type="date"
+                InputLabelProps={{shrink: true}}
+                fullWidth
                 margin="none"
-              >
-                {
-                  exportTypes.map((exportType, i) => {
-                    return (
-                      <MenuItem
-                        key={i}
-                        id="id"
-                        value={exportType.name}
-                      >
-                        {exportType.name}
-                      </MenuItem>
-                    )
-                  })
-                }
-              </Select>
+                />              
             </Grid>
             <Grid item xs={6}>
               <Select
