@@ -29,7 +29,7 @@ class ClockOutContainer extends Component {
   };
 
   render() {
-    const { currentEmployee, currentShift,projects } = this.props;
+    const { currentEmployee, currentShift, projects } = this.props;
     const isLoading = !currentShift;
     if (isLoading) {
       return <div>Loading</div>;
@@ -58,9 +58,8 @@ class ClockOutContainer extends Component {
           }],
         }}
         onSubmit={values => {
-          const { currentEmployee, currentShift, history } = this.props;
-          this.props
-            .clockOut(currentEmployee, currentShift, values.activities)
+          const { currentEmployee, currentShift, history, clockOut } = this.props;
+          clockOut(currentEmployee, currentShift, values.activities)
             .then(() => history.push('/'));
         }}
         validationSchema={shiftValidation}
