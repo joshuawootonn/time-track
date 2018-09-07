@@ -51,7 +51,7 @@ const styles = (theme) => ({
   formFooter: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
   }  
 });

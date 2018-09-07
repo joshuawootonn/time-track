@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, MenuItem } from '@material-ui/core'
+import { Grid, MenuItem, Button } from '@material-ui/core'
 
 import styles from './styles'
 
@@ -17,7 +17,7 @@ class ExportForm extends Component {
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent} >
-          <Grid container spacing={12}>
+          <Grid container spacing={24}>
             <Grid item xs={12}>
               <Select
                 label="Export By"
@@ -110,7 +110,28 @@ class ExportForm extends Component {
                 }
               </Select>
             </Grid>
+            <Grid item xs={12} className={classes.formFooter}>
+              <div>
+                <Button
+                  type="submit"
+                  color="primary"
+                //  disabled={isSubmitting} 
+                  variant="contained"
+                  className={classes.button}
+                >
+                  export
+                </Button>
 
+                <Button
+                //  onClick={cancel}
+                  color="secondary"
+                  variant="text"
+                  className={classes.button}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </Grid>
           </Grid>
         </div>
       </div>

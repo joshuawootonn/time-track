@@ -9,8 +9,17 @@ const styles = (theme) => ({
   textField: { width: '100%' },
   heroContent: {
     width: '100%',
-    maxWidth: '1000px'
-  } 
+    maxWidth: '500px'
+  },
+  button: {
+    marginLeft: "10px"
+  },
+  formFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  }  
 });
 
 export default styles;
