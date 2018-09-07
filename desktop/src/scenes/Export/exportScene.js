@@ -7,7 +7,6 @@ class ExportScene extends Component {
     console.log("export ")
     return (
       <div>
-        ExportContainer
         <ExportContainer />
       </div>
     )

@@ -13,10 +13,13 @@ const Select = props => {
     formControlProps,
     label,
     labelProps,
-    selectProps
+    selectProps,
+    margin
   } = props;
+
+
   return (
-    <FormControl {...formControlProps}  margin="normal">
+    <FormControl {...formControlProps}  margin={margin}>
       {label !== undefined ? (
         <InputLabel {...labelProps} >{label}</InputLabel>
       ) : null}
@@ -37,7 +40,12 @@ const Select = props => {
   );
 };
 
+Select.defaultProps = {
+  margin: 'normal'
+}
+
 Select.propTypes = {
+  margin: PropTypes.oneOf(['normal','dense','none']),
   value: PropTypes.string,
   onChange: PropTypes.func, 
 };
