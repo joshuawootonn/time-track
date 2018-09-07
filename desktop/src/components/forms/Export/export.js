@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, MenuItem, Button, Typography } from '@material-ui/core'
+import { Grid, MenuItem, Button, Typography,Input } from '@material-ui/core'
 import { Field, Form } from 'formik';
 
 import styles from './styles'
@@ -30,7 +30,8 @@ class ExportForm extends Component {
             <Grid item xs={12}>
               <Field
                 name="exportBy"
-                render={({ field }) => {
+                render={({ field,form }) => {
+                  console.log(form.values)
                   return (
                     <Select
                       label="Export By"
@@ -39,7 +40,14 @@ class ExportForm extends Component {
                       }}
                       margin="none"
                       selectProps={{
-                        ...field
+                        autoWidth: true,
+                        ...field,
+                        className: classes.formElement,
+                        input: (
+                          <Input
+                            name="exportBy"
+                          />
+                        ),
                       }}
                     >
                       {
@@ -96,7 +104,12 @@ class ExportForm extends Component {
                         fullWidth: true
                       }}
                       selectProps={{
-                        ...field
+                        ...field,
+                        input: (
+                          <Input
+                            name="for"
+                          />
+                        ),
                       }}
                       margin="none"
                     >
@@ -129,7 +142,14 @@ class ExportForm extends Component {
                         fullWidth: true
                       }}
                       selectProps={{
-                        ...field
+                        autoWidth: true,
+                        ...field,
+                        className: classes.formElement,
+                        input: (
+                          <Input
+                            name="length"
+                          />
+                        ),
                       }}
                       margin="none"
                     >

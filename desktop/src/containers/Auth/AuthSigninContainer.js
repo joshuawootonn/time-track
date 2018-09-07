@@ -52,7 +52,7 @@ class SignInForm extends Component {
                 functions.setSubmitting(false);
               });
           }}
-          render={({ errors, touched, isSubmitting, onSubmit }) => {
+          render={({ errors, touched, isSubmitting }) => {
             return (
               <AuthSigin
                 touched={touched}

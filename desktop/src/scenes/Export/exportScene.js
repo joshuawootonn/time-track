@@ -4,7 +4,6 @@ import ExportContainer from 'containers/Export/exportContainer'
 
 class ExportScene extends Component {
   render () {
-    console.log("export ")
     return (
       <div>
         <ExportContainer />

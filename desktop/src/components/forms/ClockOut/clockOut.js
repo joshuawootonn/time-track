@@ -60,7 +60,7 @@ const ClockOutForm = props => {
               <FieldArray
                 name="activities"
                 render={arrayHelpers => {
-                  console.log(values.activities)
+                  //console.log(values.activities)
                   return (<div>
                     {values.activities &&
                       values.activities.map((activity, index) => {

@@ -35,7 +35,6 @@ SignInContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.entities.authorities)
   return {
     authorityEntities: state.entities.authorities
   }

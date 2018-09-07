@@ -17,7 +17,6 @@ const Select = props => {
     margin
   } = props;
 
-
   return (
     <FormControl {...formControlProps}  margin={margin}>
       {label !== undefined ? (

@@ -31,7 +31,7 @@ class AccountAction extends Component {
   render() {
     const { type, currentEmployee } = this.props;
 
-    console.log(this.props.history.location, this.props.type);
+  
     return (
       <AccountActionForm
         isWorking={currentEmployee.isWorking}
