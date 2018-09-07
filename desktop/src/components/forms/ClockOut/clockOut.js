@@ -122,7 +122,6 @@ const ClockOutForm = props => {
                                       className: classes.formElement
                                     }}
                                     selectProps={{
-
                                       className: classes.formElement,
                                       autoWidth: true,
                                       ...field,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, MenuItem, Button } from '@material-ui/core'
+import { Grid, MenuItem, Button, Typography } from '@material-ui/core'
+import { Field, Form } from 'formik';
 
 import styles from './styles'
 
@@ -14,93 +15,141 @@ const times = [{ id: 0, name: "1" }, { id: 1, name: "2" }, { id: 2, name: "3" },
 { id: 3, name: "4" }, { id: 4, name: "5" }, { id: 5, name: "6" },
 { id: 6, name: "7" }, { id: 7, name: "8" }, { id: 8, name: "9" },
 { id: 9, name: "10" }, { id: 10, name: "11" }, { id: 11, name: "12" },]
-const durations = [{id: 0, name: "day(s)"},{id: 1, name: "week(s)"}, {id: 2, name: "month(s)"},{id:3, name: "year(s)"}]
+const durations = [{ id: 0, name: "day(s)" }, { id: 1, name: "week(s)" }, { id: 2, name: "month(s)" }, { id: 3, name: "year(s)" }]
 
 class ExportForm extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.hero}>
-        <div className={classes.heroContent} >
+        <Form className={classes.heroContent} >
           <Grid container spacing={24}>
             <Grid item xs={12}>
-              <Select
-                label="Export By"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                margin="none"
-              >
-                {
-                  exportTypes.map((exportType, i) => {
-                    return (
-                      <MenuItem
-                        key={i}
-                        id="id"
-                        value={exportType.name}
-                      >
-                        {exportType.name}
-                      </MenuItem>
-                    )
-                  })
-                }
-              </Select>
+              <Typography variant="display2">Export</Typography>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                id="from"
+              <Field
+                name="exportBy"
+                render={({ field }) => {
+                  return (
+                    <Select
+                      label="Export By"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      margin="none"
+                      selectProps={{
+                        ...field
+                      }}
+                    >
+                      {
+                        exportTypes.map((exportType, i) => {
+                          return (
+                            <MenuItem
+                              key={i}
+                              id="id"
+                              value={exportType.name}
+                            >
+                              {exportType.name}
+                            </MenuItem>
+                          )
+                        })
+                      }
+                    </Select>
+                  )
+                }}
+              />
+
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                name='from'
+                component={TextField}
                 label="From"
                 type="date"
-                InputLabelProps={{ shrink: true }}
-                fullWidth
-                margin="none"
+              /* render={(fieldstuff) => {
+               console.log(fieldstuff)
+               return ( 
+                 <TextField
+                   id="from"
+                   
+                   
+                   InputLabelProps={{ shrink: true }}
+                   fullWidth
+                   margin="none"
+                   helper={false}
+                   {...fieldstuff}
+                 />
+               )
+             }} */
+              />
+
+            </Grid>
+            <Grid item xs={6}>
+              <Field
+                name="for"
+                render={({ field }) => {
+                  return (
+                    <Select
+                      label="For"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      selectProps={{
+                        ...field
+                      }}
+                      margin="none"
+                    >
+                      {
+                        times.map((time, i) => {
+                          return (
+                            <MenuItem
+                              key={i}
+                              id="id"
+                              value={time.name}
+                            >
+                              {time.name}
+                            </MenuItem>
+                          )
+                        })
+                      }
+                    </Select>
+                  )
+                }}
               />
             </Grid>
             <Grid item xs={6}>
-              <Select
-                label="For"
-                formControlProps={{
-                  fullWidth: true
+              <Field
+                name="length"
+                render={({ field }) => {
+                  return (
+                    <Select
+                      label="Length"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      selectProps={{
+                        ...field
+                      }}
+                      margin="none"
+                    >
+                      {
+                        durations.map((duration, i) => {
+                          return (
+                            <MenuItem
+                              key={i}
+                              id="id"
+                              value={duration.name}
+                            >
+                              {duration.name}
+                            </MenuItem>
+                          )
+                        })
+                      }
+                    </Select>
+                  )
                 }}
-                margin="none"
-              >
-                {
-                  times.map((time, i) => {
-                    return (
-                      <MenuItem
-                        key={i}
-                        id="id"
-                        value={time.name}
-                      >
-                        {time.name}
-                      </MenuItem>
-                    )
-                  })
-                }
-              </Select>
-            </Grid>
-            <Grid item xs={6}>
-              <Select
-                label="Length"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                margin="none"
-              >
-                {
-                  durations.map((duration, i) => {
-                    return (
-                      <MenuItem
-                        key={i}
-                        id="id"
-                        value={duration.name}
-                      >
-                        {duration.name}
-                      </MenuItem>
-                    )
-                  })
-                }
-              </Select>
+              />
             </Grid>
             <Grid item xs={12} className={classes.formFooter}>
               <div>
@@ -125,7 +174,7 @@ class ExportForm extends Component {
               </div>
             </Grid>
           </Grid>
-        </div>
+        </Form>
       </div>
     )
   }
