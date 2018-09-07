@@ -10,7 +10,11 @@ import TextField from 'components/inputs/TextField'
 
 
 const exportTypes = [{ id: 0, name: "Employeee" }, { id: 2, name: "Project" }, { id: 3, name: "Task" }, { id: 4, name: "Crew" }]
-
+const times = [{ id: 0, name: "1" }, { id: 1, name: "2" }, { id: 2, name: "3" },
+{ id: 3, name: "4" }, { id: 4, name: "5" }, { id: 5, name: "6" },
+{ id: 6, name: "7" }, { id: 7, name: "8" }, { id: 8, name: "9" },
+{ id: 9, name: "10" }, { id: 10, name: "11" }, { id: 11, name: "12" },]
+const durations = [{id: 0, name: "day(s)"},{id: 1, name: "week(s)"}, {id: 2, name: "month(s)"},{id:3, name: "year(s)"}]
 
 class ExportForm extends Component {
   render() {
@@ -47,28 +51,28 @@ class ExportForm extends Component {
                 id="from"
                 label="From"
                 type="date"
-                InputLabelProps={{shrink: true}}
+                InputLabelProps={{ shrink: true }}
                 fullWidth
                 margin="none"
-                />              
+              />
             </Grid>
             <Grid item xs={6}>
               <Select
-                label="Export By"
+                label="For"
                 formControlProps={{
                   fullWidth: true
                 }}
                 margin="none"
               >
                 {
-                  exportTypes.map((exportType, i) => {
+                  times.map((time, i) => {
                     return (
                       <MenuItem
                         key={i}
                         id="id"
-                        value={exportType.name}
+                        value={time.name}
                       >
-                        {exportType.name}
+                        {time.name}
                       </MenuItem>
                     )
                   })
@@ -77,21 +81,21 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={6}>
               <Select
-                label="Export By"
+                label="Length"
                 formControlProps={{
                   fullWidth: true
                 }}
                 margin="none"
               >
                 {
-                  exportTypes.map((exportType, i) => {
+                  durations.map((duration, i) => {
                     return (
                       <MenuItem
                         key={i}
                         id="id"
-                        value={exportType.name}
+                        value={duration.name}
                       >
-                        {exportType.name}
+                        {duration.name}
                       </MenuItem>
                     )
                   })
@@ -103,7 +107,7 @@ class ExportForm extends Component {
                 <Button
                   type="submit"
                   color="primary"
-                //  disabled={isSubmitting} 
+                  //  disabled={isSubmitting} 
                   variant="contained"
                   className={classes.button}
                 >
@@ -111,7 +115,7 @@ class ExportForm extends Component {
                 </Button>
 
                 <Button
-                //  onClick={cancel}
+                  //  onClick={cancel}
                   color="secondary"
                   variant="text"
                   className={classes.button}
