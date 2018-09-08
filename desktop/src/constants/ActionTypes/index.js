@@ -9,7 +9,7 @@ import * as projectTaskActionTypes from './projectTask';
 import * as taskActionTypes from './task';
 import * as activityActionTypes from './activity';
 import * as staticActionTypes from './static';
-import * as exportActionsTypes from './export';
+import * as exportActionTypes from './export';
 
 export {
   userActionTypes,

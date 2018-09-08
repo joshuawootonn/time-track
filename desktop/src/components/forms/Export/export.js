@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, MenuItem, Button, Typography,Input } from '@material-ui/core'
+import { Grid, MenuItem, Button, Typography, Input } from '@material-ui/core'
 import { Field, Form } from 'formik';
 
 import styles from './styles'
 
 import Select from 'components/inputs/Select'
 import TextField from 'components/inputs/TextField'
+import File from 'components/inputs/File'
 
 
 const exportTypes = [{ id: 0, name: "Employeee" }, { id: 2, name: "Project" }, { id: 3, name: "Task" }, { id: 4, name: "Crew" }]
@@ -30,7 +31,7 @@ class ExportForm extends Component {
             <Grid item xs={12}>
               <Field
                 name="exportBy"
-                render={({ field,form }) => {
+                render={({ field, form }) => {
                   console.log(form.values)
                   return (
                     <Select
@@ -74,24 +75,17 @@ class ExportForm extends Component {
                 name='from'
                 component={TextField}
                 label="From"
-                type="date"
-              /* render={(fieldstuff) => {
-               console.log(fieldstuff)
-               return ( 
-                 <TextField
-                   id="from"
-                   
-                   
-                   InputLabelProps={{ shrink: true }}
-                   fullWidth
-                   margin="none"
-                   helper={false}
-                   {...fieldstuff}
-                 />
-               )
-             }} */
+                type="date"              
               />
 
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                name="file"
+                component={File}
+                label="File"
+                type="file"
+                />              
             </Grid>
             <Grid item xs={6}>
               <Field

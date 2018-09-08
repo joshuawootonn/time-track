@@ -18,12 +18,12 @@ const Select = props => {
   } = props;
 
   return (
-    <FormControl {...formControlProps}  margin={margin}>
+    <FormControl {...formControlProps} margin={margin}>
       {label !== undefined ? (
         <InputLabel {...labelProps} >{label}</InputLabel>
       ) : null}
       <SelectInput
-        
+
         MenuProps={{
           getContentAnchorEl: null,
           anchorOrigin: {
@@ -44,9 +44,9 @@ Select.defaultProps = {
 }
 
 Select.propTypes = {
-  margin: PropTypes.oneOf(['normal','dense','none']),
+  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   value: PropTypes.string,
-  onChange: PropTypes.func, 
+  onChange: PropTypes.func,
 };
 
 export default Select;
