@@ -57,7 +57,7 @@ class ExportForm extends Component {
                             <MenuItem
                               key={i}
                               id="id"
-                              value={exportType.name}
+                              value={exportType.id}
                             >
                               {exportType.name}
                             </MenuItem>
@@ -74,19 +74,12 @@ class ExportForm extends Component {
               <Field
                 name='from'
                 component={TextField}
+                margin="none"
                 label="From"
-                type="date"              
+                type="date"
               />
+            </Grid>
 
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="file"
-                component={File}
-                label="File"
-                type="file"
-                />              
-            </Grid>
             <Grid item xs={6}>
               <Field
                 name="for"
@@ -113,7 +106,7 @@ class ExportForm extends Component {
                             <MenuItem
                               key={i}
                               id="id"
-                              value={time.name}
+                              value={time.id}
                             >
                               {time.name}
                             </MenuItem>
@@ -153,7 +146,7 @@ class ExportForm extends Component {
                             <MenuItem
                               key={i}
                               id="id"
-                              value={duration.name}
+                              value={duration.id}
                             >
                               {duration.name}
                             </MenuItem>
@@ -163,6 +156,14 @@ class ExportForm extends Component {
                     </Select>
                   )
                 }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                name="file"
+                component={File}
+                label="File"
+                type="file"
               />
             </Grid>
             <Grid item xs={12} className={classes.formFooter}>

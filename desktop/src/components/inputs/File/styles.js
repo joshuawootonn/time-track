@@ -14,9 +14,9 @@ const styles = (theme) => ({
     justifyContent: 'space-between',  
     
   },
-  center: {
+  buttonAlign: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
   button: {
     marginLeft: '10px',

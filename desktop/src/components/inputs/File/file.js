@@ -7,10 +7,15 @@ import styles from './styles'
 
 class File extends Component {
   fileChange = (e) => {
-    console.log(e, e.target.value)
+    const { form, field } = this.props;
+    form.setFieldValue(
+      field.name,
+      e.target.files[0].path,
+    );
   }
   render() {
-    const { label, labelProps, formControlProps, margin, classes } = this.props;
+    const { label, labelProps, formControlProps, margin, classes, field } = this.props;
+    console.log(this.props)
     return (
       <FormControl {...formControlProps} fullWidth margin={margin}>
         <div className={classes.row}>
@@ -19,6 +24,7 @@ class File extends Component {
           ) : null}
           <Input
             fullWidth
+            {...field}
           />
           <input
             accept="image/*"
@@ -28,7 +34,7 @@ class File extends Component {
             type="file"
             onChange={this.fileChange}
           />
-          <label htmlFor="contained-button-file" className={classes.center}>
+          <label htmlFor="contained-button-file" className={classes.buttonAlign}>
             <Button variant="contained" color="primary" component="span" className={classes.button} >
               Select File
           </Button>

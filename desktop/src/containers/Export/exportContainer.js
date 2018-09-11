@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { Formik } from 'formik'
+import moment from 'moment'
 
 import Export from 'components/forms/Export'
 
@@ -16,10 +17,11 @@ class ExportContainer extends Component {
     return (
       <Formik
         initialValues={{
-          exportBy: 1,
-          from: new Date().toString(),
-          for: 1,
-          length: 1
+          exportBy: 0,
+          from: moment().format('YYYY-MM-DD'),
+          for: 0,
+          length: 0,
+          file: ""
         }}
         onSubmit={values => {
           const {exportToExcel,history} = this.props;
