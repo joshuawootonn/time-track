@@ -4,11 +4,11 @@ import { exportActionTypes } from 'constants/ActionTypes';
 import {  snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
-export const exportToExcel = (exportBy, from, type, length) => {
+export const exportToExcel = (exportBy, from, type, length,file) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
-    
+      console.log(exportBy,from,type,length,file)
 
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Export Success!'),

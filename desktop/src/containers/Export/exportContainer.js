@@ -19,13 +19,15 @@ class ExportContainer extends Component {
         initialValues={{
           exportBy: 0,
           from: moment().format('YYYY-MM-DD'),
-          for: 0,
+          type: 0,
           length: 0,
           file: ""
         }}
         onSubmit={values => {
           const {exportToExcel,history} = this.props;
-          exportToExcel("exportBy","from","type","length")
+          console.log(values)
+          const {exportBy,from,type,length,file} = values
+          exportToExcel(exportBy,from,type,length,file)
             .then(() => history.push('/'))
         }}
         render={formikProps => {
@@ -42,8 +44,8 @@ class ExportContainer extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    exportToExcel: (exportBy, from, type, length) => {
-      return dispatch(exportActions.exportToExcel(exportBy, from, type, length))
+    exportToExcel: (exportBy, from, type, length,file) => {
+      return dispatch(exportActions.exportToExcel(exportBy, from, type, length,file))
     }
   }
 }

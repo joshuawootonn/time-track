@@ -82,11 +82,11 @@ class ExportForm extends Component {
 
             <Grid item xs={6}>
               <Field
-                name="for"
+                name="type"
                 render={({ field }) => {
                   return (
                     <Select
-                      label="For"
+                      label="Type"
                       formControlProps={{
                         fullWidth: true
                       }}
@@ -94,7 +94,7 @@ class ExportForm extends Component {
                         ...field,
                         input: (
                           <Input
-                            name="for"
+                            name="type"
                           />
                         ),
                       }}
