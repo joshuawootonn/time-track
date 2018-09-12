@@ -15,7 +15,7 @@ class File extends Component {
   }
   render() {
     const { label, labelProps, formControlProps, margin, classes, field } = this.props;
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <FormControl {...formControlProps} fullWidth margin={margin}>
         <div className={classes.row}>
@@ -27,10 +27,9 @@ class File extends Component {
             {...field}
           />
           <input
-            accept="image/*"
+            accept=".xlsx, .xls"
             id="contained-button-file"
-            className={classes.inputToHide}
-            multiple
+            className={classes.inputToHide}                       
             type="file"
             onChange={this.fileChange}
           />

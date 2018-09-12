@@ -32,7 +32,7 @@ class ExportForm extends Component {
               <Field
                 name="exportBy"
                 render={({ field, form }) => {
-                  console.log(form.values)
+                  //console.log(form.values)
                   return (
                     <Select
                       label="Export By"

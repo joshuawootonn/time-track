@@ -1,14 +1,21 @@
 import { exportActionTypes } from 'constants/ActionTypes';
 
-
+import * as IPCConstants from 'constants/ipc';
 import {  snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
-export const exportToExcel = (exportBy, from, type, length,file) => {
+
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
+
+export const exportToExcel = (values) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
-      console.log(exportBy,from,type,length,file)
+      await dispatch(
+        ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, values)
+      );
+
 
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Export Success!'),
