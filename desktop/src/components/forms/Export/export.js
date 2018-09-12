@@ -10,17 +10,11 @@ import Select from 'components/inputs/Select'
 import TextField from 'components/inputs/TextField'
 import File from 'components/inputs/File'
 
-
-const exportTypes = [{ id: 0, name: "Employeee" }, { id: 2, name: "Project" }, { id: 3, name: "Task" }, { id: 4, name: "Crew" }]
-const times = [{ id: 0, name: "1" }, { id: 1, name: "2" }, { id: 2, name: "3" },
-{ id: 3, name: "4" }, { id: 4, name: "5" }, { id: 5, name: "6" },
-{ id: 6, name: "7" }, { id: 7, name: "8" }, { id: 8, name: "9" },
-{ id: 9, name: "10" }, { id: 10, name: "11" }, { id: 11, name: "12" },]
-const durations = [{ id: 0, name: "day(s)" }, { id: 1, name: "week(s)" }, { id: 2, name: "month(s)" }, { id: 3, name: "year(s)" }]
+import * as exportConstants from 'constants/export'
 
 class ExportForm extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes,cancel } = this.props;
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent} >
@@ -30,9 +24,9 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={12}>
               <Field
-                name="exportBy"
-                render={({ field, form }) => {
-                  //console.log(form.values)
+                name="exportCategory"
+                render={({ field,form }) => {
+                  console.log(form.values,form.errors)
                   return (
                     <Select
                       label="Export By"
@@ -46,13 +40,13 @@ class ExportForm extends Component {
                         className: classes.formElement,
                         input: (
                           <Input
-                            name="exportBy"
+                            name="exportCategory"
                           />
                         ),
                       }}
                     >
                       {
-                        exportTypes.map((exportType, i) => {
+                        exportConstants.exportCategory.map((exportType, i) => {
                           return (
                             <MenuItem
                               key={i}
@@ -72,7 +66,7 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={12}>
               <Field
-                name='from'
+                name='startTime'
                 component={TextField}
                 margin="none"
                 label="From"
@@ -82,7 +76,7 @@ class ExportForm extends Component {
 
             <Grid item xs={6}>
               <Field
-                name="type"
+                name="timeLength"
                 render={({ field }) => {
                   return (
                     <Select
@@ -94,14 +88,14 @@ class ExportForm extends Component {
                         ...field,
                         input: (
                           <Input
-                            name="type"
+                            name="timeLength"
                           />
                         ),
                       }}
                       margin="none"
                     >
                       {
-                        times.map((time, i) => {
+                        exportConstants.timeLength.map((time, i) => {
                           return (
                             <MenuItem
                               key={i}
@@ -120,7 +114,7 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={6}>
               <Field
-                name="length"
+                name="timeLengthType"
                 render={({ field }) => {
                   return (
                     <Select
@@ -134,14 +128,14 @@ class ExportForm extends Component {
                         className: classes.formElement,
                         input: (
                           <Input
-                            name="length"
+                            name="timeLengthType"
                           />
                         ),
                       }}
                       margin="none"
                     >
                       {
-                        durations.map((duration, i) => {
+                        exportConstants.timeLengthType.map((duration, i) => {
                           return (
                             <MenuItem
                               key={i}
@@ -160,7 +154,7 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={12}>
               <Field
-                name="file"
+                name="fileLocation"
                 component={File}
                 label="File"
                 type="file"
@@ -179,7 +173,7 @@ class ExportForm extends Component {
                 </Button>
 
                 <Button
-                  //  onClick={cancel}
+                  onClick={cancel}
                   color="secondary"
                   variant="text"
                   className={classes.button}

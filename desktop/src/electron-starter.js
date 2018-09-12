@@ -125,7 +125,7 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   worksheet.getCell('A6').value = "1989";
   worksheet.getCell('B6').value = 2014;
 
-  workbook.xlsx.writeFile(arg.file).then(function () {
+  workbook.xlsx.writeFile(arg.fileLocation).then(function () {
     event.returnValue = "saved";
   });
 

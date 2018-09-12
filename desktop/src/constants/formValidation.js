@@ -18,6 +18,13 @@ export const shift = Yup.object().shape({
       projectTaskId: Yup.number().positive().required('Task selection required'),
       description: Yup.string(),
     })
-  )     
-  
+  ) 
 });
+export const exportValidation = Yup.object().shape({
+  exportCategory: Yup.number().min(0, 'Invalid export category'),
+  startTime: Yup.date().required('Invalid from date'),
+  timeLength: Yup.number().min(0, 'Invalid time length'),
+  timeLengthType: Yup.number().min(0, 'Invalid time length type'),
+  fileLocation: Yup.string().required('File location is required').matches(new RegExp(/\.(xls|xlsx)$/i), 'File locaiton must be an Xls or Xlsx file')
+})
+

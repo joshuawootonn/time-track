@@ -8,14 +8,15 @@ import * as status from 'constants/status';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
-export const exportToExcel = (values) => {
+export const exportToExcel = (exportCategory,startTime,timeLength,timeLengthType,fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
-      await dispatch(
-        ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, values)
-      );
 
+    
+
+    
+      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, {fileLocation})     
 
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Export Success!'),
