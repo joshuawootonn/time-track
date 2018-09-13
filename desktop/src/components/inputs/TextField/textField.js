@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 
-const TextField = ({ field, form, id, label, className, type, margin }) => (
+const TextField = ({ field, form, label, className, type, margin }) => (
   <MUTextField
     {...field}
-    id={id}
     label={label}
     type={type}
     InputLabelProps={{ shrink: true }}
@@ -28,11 +27,12 @@ TextField.defaultProps = {
   margin: 'normal'
 }
 
-TextField.propTypes = {
-  type: PropTypes.string,
+TextField.propTypes = {  
   field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
-  id: PropTypes.string,
+  form: PropTypes.object.isRequired,  
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  type: PropTypes.string,
   label: PropTypes.string.isRequired,
   margin: PropTypes.string
 };

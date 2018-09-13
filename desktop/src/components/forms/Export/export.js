@@ -9,6 +9,7 @@ import styles from './styles'
 import Select from 'components/inputs/Select'
 import TextField from 'components/inputs/TextField'
 import File from 'components/inputs/File'
+import SelectNew from 'components/inputs/SelectNew';
 
 import * as exportConstants from 'constants/export'
 
@@ -28,7 +29,7 @@ class ExportForm extends Component {
                 render={({ field, form }) => {
                   console.log(form.values, form.errors)
                   return (
-                    <Select
+                    <SelectNew
                       label="Export By"
                       formControlProps={{
                         fullWidth: true
@@ -50,6 +51,15 @@ class ExportForm extends Component {
                 }}
               />
 
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                name="exportCategory"
+                component={SelectNew}
+                items={exportConstants.exportCategory}
+                fullWidth
+                label="Export By"
+              />
             </Grid>
             <Grid item xs={12}>
               <Field
