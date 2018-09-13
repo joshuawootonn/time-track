@@ -31,7 +31,6 @@ class AccountAction extends Component {
   render() {
     const { type, currentEmployee } = this.props;
 
-  
     return (
       <AccountActionForm
         isWorking={currentEmployee.isWorking}

@@ -5,8 +5,8 @@ const styles = theme => ({
   space: { width: 10 },
   content: {
     display: 'flex',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 });
 
 export default styles;

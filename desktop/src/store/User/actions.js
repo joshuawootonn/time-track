@@ -17,7 +17,7 @@ export const login = (username, password) => {
 
       dispatch({
         type: userActionTypes.USER_LOGIN_SUCCESS,
-        payload: response.data,
+        payload: response.data
       });
     } catch (e) {
       dispatch({ type: userActionTypes.USER_LOGIN_FAILURE, payload: e });

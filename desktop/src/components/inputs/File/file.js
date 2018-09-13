@@ -1,47 +1,56 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Button, InputLabel, FormControl, Input } from '@material-ui/core'
+import { Button, InputLabel, FormControl, Input } from '@material-ui/core';
 
-import styles from './styles'
+import styles from './styles';
 
 class File extends Component {
-  fileChange = (e) => {
+  fileChange = e => {
     const { form, field } = this.props;
-    form.setFieldValue(
-      field.name,
-      e.target.files[0].path,
-    );
-  }
+    form.setFieldValue(field.name, e.target.files[0].path);
+  };
   render() {
-    const { label, labelProps, formControlProps, margin, classes, field } = this.props;
+    const {
+      label,
+      labelProps,
+      formControlProps,
+      margin,
+      classes,
+      field,
+    } = this.props;
     //console.log(this.props)
     return (
       <FormControl {...formControlProps} fullWidth margin={margin}>
         <div className={classes.row}>
           {label !== undefined ? (
-            <InputLabel {...labelProps} >{label}</InputLabel>
+            <InputLabel {...labelProps}>{label}</InputLabel>
           ) : null}
-          <Input
-            fullWidth
-            {...field}
-          />
+          <Input fullWidth {...field} />
           <input
             accept=".xlsx, .xls"
             id="contained-button-file"
-            className={classes.inputToHide}                       
+            className={classes.inputToHide}
             type="file"
             onChange={this.fileChange}
           />
-          <label htmlFor="contained-button-file" className={classes.buttonAlign}>
-            <Button variant="contained" color="primary" component="span" className={classes.button} >
+          <label
+            htmlFor="contained-button-file"
+            className={classes.buttonAlign}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              component="span"
+              className={classes.button}
+            >
               Select File
-          </Button>
+            </Button>
           </label>
-        </div >
+        </div>
       </FormControl>
-    )
+    );
   }
 }
 
-export default withStyles(styles)(File)
+export default withStyles(styles)(File);

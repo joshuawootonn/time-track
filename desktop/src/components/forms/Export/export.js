@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, MenuItem, Button, Typography, Input } from '@material-ui/core'
+import { Grid, Button, Typography } from '@material-ui/core';
 import { Field, Form } from 'formik';
 
-import styles from './styles'
+import styles from './styles';
 
-import TextField from 'components/inputs/TextField'
-import File from 'components/inputs/File'
+import TextField from 'components/inputs/TextField';
+import File from 'components/inputs/File';
 import Select from 'components/inputs/Select';
 
-import * as exportConstants from 'constants/export'
+import * as exportConstants from 'constants/export';
 
 class ExportForm extends Component {
   render() {
     const { classes, cancel, isSubmitting } = this.props;
     return (
       <div className={classes.hero}>
-        <Form className={classes.heroContent} >
+        <Form className={classes.heroContent}>
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <Typography variant="display2">Export</Typography>
-            </Grid>            
+            </Grid>
             <Grid item xs={12}>
               <Field
                 name="exportCategory"
@@ -33,7 +33,7 @@ class ExportForm extends Component {
             </Grid>
             <Grid item xs={12}>
               <Field
-                name='startTime'
+                name="startTime"
                 component={TextField}
                 margin="none"
                 label="From"
@@ -48,7 +48,7 @@ class ExportForm extends Component {
                 fullWidth
                 label="Type"
                 margin="none"
-              />             
+              />
             </Grid>
             <Grid item xs={6}>
               <Field
@@ -58,7 +58,7 @@ class ExportForm extends Component {
                 fullWidth
                 label="Length"
                 margin="none"
-              />                 
+              />
             </Grid>
             <Grid item xs={12}>
               <Field
@@ -73,7 +73,7 @@ class ExportForm extends Component {
                 <Button
                   type="submit"
                   color="primary"
-                  disabled={isSubmitting} 
+                  disabled={isSubmitting}
                   variant="contained"
                   className={classes.button}
                 >
@@ -93,8 +93,8 @@ class ExportForm extends Component {
           </Grid>
         </Form>
       </div>
-    )
+    );
   }
 }
 
-export default withStyles(styles)(ExportForm)
+export default withStyles(styles)(ExportForm);

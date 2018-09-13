@@ -5,20 +5,20 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   heroContent: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   button: {
     height: '100px',
-    width: '100px',
+    width: '100px'
   },
   buttonIcon: {
     height: '70px',
-    width: '70px',
-  },
+    width: '70px'
+  }
 });
 
 export default styles;

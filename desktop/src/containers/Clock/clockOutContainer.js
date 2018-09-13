@@ -50,17 +50,25 @@ class ClockOutContainer extends Component {
     return (
       <Formik
         initialValues={{
-          activities: [{
-            projectId: -1,
-            projectTaskId: -1,
-            length: 0,
-            description: ''
-          }],
+          activities: [
+            {
+              projectId: -1,
+              projectTaskId: -1,
+              length: 0,
+              description: '',
+            },
+          ],
         }}
         onSubmit={values => {
-          const { currentEmployee, currentShift, history, clockOut } = this.props;
-          clockOut(currentEmployee, currentShift, values.activities)
-            .then(() => history.push('/'));
+          const {
+            currentEmployee,
+            currentShift,
+            history,
+            clockOut,
+          } = this.props;
+          clockOut(currentEmployee, currentShift, values.activities).then(() =>
+            history.push('/'),
+          );
         }}
         validationSchema={shiftValidation}
         render={formikProps => {

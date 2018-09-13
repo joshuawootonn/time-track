@@ -12,13 +12,13 @@ export const getCrews = () => {
       const payload = normalize({ crews: response.data }, schemas.crewArray);
       return dispatch({
         type: crewActionTypes.GET_CREWS_SUCCESS,
-        payload,
+        payload
       });
       console.log(response);
     } catch (e) {
       dispatch({
         type: crewActionTypes.GET_CREWS_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

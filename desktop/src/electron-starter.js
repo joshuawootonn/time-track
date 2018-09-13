@@ -6,7 +6,7 @@ const settings = require('electron-settings');
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS,
+  REDUX_DEVTOOLS
 } = require('electron-devtools-installer');
 const IPCConstants = require('./constants/ipc');
 
@@ -21,7 +21,7 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 600
   });
 
   // and load the index.html of the app.
@@ -31,7 +31,7 @@ function createWindow() {
     url.format({
       pathname: path.join(__dirname, '/../build/index.html'),
       protocol: 'file:',
-      slashes: true,
+      slashes: true
     });
   mainWindow.loadURL(startUrl);
 
@@ -39,7 +39,7 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  mainWindow.on('closed', function () {
+  mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
@@ -61,7 +61,7 @@ app.on('ready', () => {
 });
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
@@ -69,7 +69,7 @@ app.on('window-all-closed', function () {
   }
 });
 
-app.on('activate', function () {
+app.on('activate', function() {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
@@ -83,7 +83,7 @@ app.on('activate', function () {
 ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   settings.set(`${SETTINGS.USER_CRED}`, {
     username: arg.username,
-    password: arg.password,
+    password: arg.password
   });
   event.returnValue = arg;
 });
@@ -91,43 +91,37 @@ ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
 ipcMain.on(IPCConstants.GET_CRED, event => {
   const cred = {
     username: settings.get(`${SETTINGS.USER_CRED}.username`),
-    password: settings.get(`${SETTINGS.USER_CRED}.password`),
+    password: settings.get(`${SETTINGS.USER_CRED}.password`)
   };
   event.returnValue = cred;
 });
 
 ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
-  console.log("we out here", arg);
+  console.log('we out here', arg);
 
   var workbook = new Excel.Workbook();
   var worksheet = workbook.addWorksheet('Discography2');
 
   // add column headers
   worksheet.columns = [
-    { header: 'Album', key: 'album' },
-    { header: 'Year', key: 'year' }
+    { header: 'Album', key: 'album' }, { header: 'Year', key: 'year' }
   ];
 
   // add row using keys
-  worksheet.addRow({ album: "Taylor Swift", year: 2006 });
+  worksheet.addRow({ album: 'Taylor Swift', year: 2006 });
 
   // add rows the dumb way
-  worksheet.addRow(["Fearless", 2008]);
+  worksheet.addRow(['Fearless', 2008]);
 
   // add an array of rows
-  var rows = [
-    ["Speak Now", 2010],
-    { album: "Red", year: 2012 }
-  ];
+  var rows = [['Speak Now', 2010], { album: 'Red', year: 2012 }];
   worksheet.addRows(rows);
 
   // edit cells directly
-  worksheet.getCell('A6').value = "1989";
+  worksheet.getCell('A6').value = '1989';
   worksheet.getCell('B6').value = 2014;
 
-  workbook.xlsx.writeFile(arg.fileLocation).then(function () {
-    event.returnValue = "saved";
+  workbook.xlsx.writeFile(arg.fileLocation).then(function() {
+    event.returnValue = 'saved';
   });
-
-
-})
+});

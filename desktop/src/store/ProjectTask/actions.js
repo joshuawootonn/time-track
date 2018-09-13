@@ -17,13 +17,13 @@ export const getProjectTask = () => {
       // console.log(response,payload);
       return dispatch({
         type: projectTaskActionTypes.GET_PROJECT_TASKS_SUCCESS,
-        payload,
+        payload
       });
       // console.log(response);
     } catch (e) {
       dispatch({
         type: projectTaskActionTypes.GET_PROJECT_TASKS_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

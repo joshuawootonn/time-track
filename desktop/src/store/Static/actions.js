@@ -14,7 +14,7 @@ export const getStaticData = () => {
     } catch (e) {
       dispatch({
         type: staticActionTypes.GET_STATIC_DATA_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

@@ -11,14 +11,14 @@ import AccountSigin from 'components/forms/AccountSigin';
 
 class SignInContainer extends Component {
   render() {
-    const { login, history, getStaticData,authorityEntities } = this.props;
+    const { login, history, getStaticData, authorityEntities } = this.props;
     return (
       <Formik
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
         onSubmit={values => {
           login(values.pin).then(asdf => {
-            const {authorityId} = asdf.data;
+            const { authorityId } = asdf.data;
             history.push(`/${authorityEntities[authorityId].type}`);
           });
           getStaticData();
@@ -31,14 +31,14 @@ class SignInContainer extends Component {
 
 SignInContainer.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     authorityEntities: state.entities.authorities
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => {
     },
     getStaticData: () => {
       return dispatch(staticActions.getStaticData());
-    },
+    }
   };
 };
 

@@ -1,2 +1,2 @@
-import Export from './export'
+import Export from './export';
 export default Export;

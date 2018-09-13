@@ -18,7 +18,7 @@ export const postShift = shift => {
       console.log(e);
       return dispatch({
         type: shiftActionTypes.SHIFT_POST_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }
@@ -39,7 +39,7 @@ export const putShift = shift => {
       console.log(e);
       return dispatch({
         type: shiftActionTypes.PUT_SHIFT_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }
@@ -55,12 +55,12 @@ export const getCurrentShift = employeeId => {
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
-        data: response.data[0],
+        data: response.data[0]
       });
     } catch (e) {
       dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

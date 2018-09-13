@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { getTasksFromEntities } from 'store/Task/selectors';
 import { getAllProjectTasks } from 'store/ProjectTask/selectors';
 
-
 export const getProjectsFromEntities = state => state.entities.projects;
 export const getProjectsFromResults = state => state.results.projects;
 
@@ -27,7 +26,7 @@ export const getAllProjectObjects = createSelector(
     const newProjects = { ...projects };
     projectTasks.forEach(pt => {
       newProjects[pt.projectId].tasks = [
-        { ...tasks[pt.taskId], projectTaskId: pt.id },
+        { ...tasks[pt.taskId], projectTaskId: pt.id }
       ];
     });
     return newProjects;
@@ -42,7 +41,7 @@ export const getAllProjectObjectsWithTasks = createSelector(
     const newProjects = { ...projects };
     projectTasks.forEach(pt => {
       newProjects[pt.projectId].tasks = [
-        { ...tasks[pt.taskId], projectTaskId: pt.id },
+        { ...tasks[pt.taskId], projectTaskId: pt.id }
       ];
     });
 
@@ -55,7 +54,7 @@ export const getAllProjectObjectsWithTasks = createSelector(
           [key]: newProjects[key]
         };
       }, {});
-    
+
     return filtered;
   },
-)
+);

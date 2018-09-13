@@ -8,7 +8,7 @@ import {
   Check,
   Close,
   ArrowBack,
-  Storage,
+  Storage
 } from '@material-ui/icons';
 
 import styles from './styles';
@@ -44,7 +44,7 @@ const AccountActionForm = props => {
 AccountActionForm.propTypes = {
   classes: PropTypes.object.isRequired,
   back: PropTypes.func.isRequired,
-  clockIn: PropTypes.func.isRequired,
+  clockIn: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AccountActionForm);

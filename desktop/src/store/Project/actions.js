@@ -14,13 +14,13 @@ export const getProjects = () => {
       // console.log(response,payload);
       return dispatch({
         type: projectActionTypes.GET_PROJECTS_SUCCESS,
-        payload,
+        payload
       });
       // console.log(response);
     } catch (e) {
       dispatch({
         type: projectActionTypes.GET_PROJECTS_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

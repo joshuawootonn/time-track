@@ -19,30 +19,30 @@ authoritySchema.define({ employees: [employeeSchema] });
 employeeSchema.define({
   authority: authoritySchema,
   crew: crewSchema,
-  shifts: [shiftSchema],
+  shifts: [shiftSchema]
 });
 
 shiftSchema.define({
   employee: employeeSchema,
-  activities: [activitySchema],
+  activities: [activitySchema]
 });
 
 activitySchema.define({
   shift: shiftSchema,
-  projectTask: projectTaskSchema,
+  projectTask: projectTaskSchema
 });
 
 projectTaskSchema.define({
   activities: [activitySchema],
   project: projectSchema,
-  task: taskSchema,
+  task: taskSchema
 });
 
 projectSchema.define({ projectTasks: projectTaskArray });
 
 taskSchema.define({
   projectTasks: projectTaskArray,
-  subcategory: subcategorySchema,
+  subcategory: subcategorySchema
 });
 
 // subcategorySchema.define({

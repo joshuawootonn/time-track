@@ -22,7 +22,7 @@ export class Time extends Component {
     const wrapperClasses = cx({
       [classes.fieldWrapper]: true,
       [classes.horizontal]: orientation === 'Horizontal',
-      [classes.vertical]: orientation === 'Vertical',
+      [classes.vertical]: orientation === 'Vertical'
     });
 
     return (
@@ -45,7 +45,7 @@ export class Time extends Component {
                 value + e.target.value - hoursValue,
               );
             },
-            value: hoursValue,
+            value: hoursValue
           }}
         >
           {hours.map((time, i) => {
@@ -74,7 +74,7 @@ export class Time extends Component {
                 value + e.target.value - minutesValue,
               );
             },
-            value: minutesValue,
+            value: minutesValue
           }}
         >
           {minutes.map((time, i) => {
@@ -90,13 +90,13 @@ export class Time extends Component {
   }
 }
 Time.defaultProps = {
-  orientation: 'Horizontal',
+  orientation: 'Horizontal'
 };
 
 Time.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
-  orientation: PropTypes.oneOf(['Horizontal', 'Vertical']),
+  orientation: PropTypes.oneOf(['Horizontal', 'Vertical'])
 };
 
 export default withStyles(styles)(Time);

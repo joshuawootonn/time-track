@@ -1,54 +1,34 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-import {
-  Select as SelectInput,
-  FormControl,
-  InputLabel,
-  MenuItem
-} from '@material-ui/core';
 
-const Select = ({
-  field,
-  form,
-  label,
-  margin,
-  fullWidth,
-  items,
-  children,
-  formControlProps,
-  labelProps,
-  selectProps,
-  itemProps,
-}) => {
-  console.log(field,form);
+import { Select as SelectInput, FormControl, InputLabel, MenuItem } from '@material-ui/core';
+
+const Select = ({ field, form, label, margin,
+  fullWidth, items, children, formControlProps,
+  labelProps, selectProps, itemProps }) => {
 
   return (
     <FormControl {...formControlProps} margin={margin} fullWidth={fullWidth}>
-      {label && <InputLabel {...labelProps} >{label}</InputLabel>}
+      {label && <InputLabel {...labelProps}>{label}</InputLabel>}
       <SelectInput
         {...selectProps}
         {...field}
         // Fix for handleblur I was getting on deselect
         // https://github.com/jaredpalmer/formik/issues/640
         onBlur={event => {
-            event.target.name = field.name;
-            form.handleBlur(event);
-        }}        
+          event.target.name = field.name;
+          form.handleBlur(event);
+        }}
         fullWidth={fullWidth}
       >
-        {items && items.map((item, i) => {
-          return (
-            <MenuItem
-              {...itemProps}
-              key={i}
-              id={item.id}
-              value={item.id}
-            >
-              {item.name}
-            </MenuItem>
-          )
-        })}
+        {items &&
+          items.map((item, i) => {
+            return (
+              <MenuItem {...itemProps} key={i} id={item.id} value={item.id}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
         {children}
       </SelectInput>
     </FormControl>
@@ -58,7 +38,7 @@ const Select = ({
 Select.defaultProps = {
   margin: 'normal',
   fullWidth: false
-}
+};
 
 Select.propTypes = {
   field: PropTypes.object.isRequired,

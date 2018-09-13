@@ -1,10 +1,10 @@
-const styles = (theme) => ({
+const styles = theme => ({
   hero: {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textField: { width: '100%' },
   heroContent: {
@@ -12,14 +12,14 @@ const styles = (theme) => ({
     maxWidth: '500px'
   },
   button: {
-    marginLeft: "10px"
+    marginLeft: '10px'
   },
   formFooter: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-  }  
+    justifyContent: 'flex-end'
+  }
 });
 
 export default styles;

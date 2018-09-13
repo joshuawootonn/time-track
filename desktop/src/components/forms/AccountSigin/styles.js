@@ -4,11 +4,11 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textField: { width: '100%' },
   heroContent: { width: '300px' },
-  error: { marginTop: '16px' },
+  error: { marginTop: '16px' }
 });
 
 export default styles;

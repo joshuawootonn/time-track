@@ -4,7 +4,7 @@ export const openSnack = (type, message) => {
   return {
     type: snackActionTypes.SHOW_SNACK,
     snackType: type,
-    snackMessage: message,
+    snackMessage: message
   };
 };
 export const closeSnack = () => {

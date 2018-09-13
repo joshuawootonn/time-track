@@ -40,9 +40,7 @@ AuthSigninForm.propTypes = {
   classes: PropTypes.object.isRequired,
   globalError: PropTypes.string.isRequired,
   onSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool,
+  isSubmitting: PropTypes.bool
 };
 
 export default withStyles(styles)(AuthSigninForm);
-
-

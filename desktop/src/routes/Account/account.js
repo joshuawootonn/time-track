@@ -5,6 +5,6 @@ export default [
     exact: true,
     path: '/',
     component: AccountSigninScene,
-    name: 'Signin',
-  },
+    name: 'Signin'
+  }
 ];

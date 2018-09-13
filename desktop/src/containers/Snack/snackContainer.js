@@ -14,15 +14,15 @@ class SnackContainer extends Component {
 
     let icon;
     switch (type) {
-      case status.SUCCESS:
-        icon = <Check />;
-        break;
-      case status.FAILURE:
-        icon = <Error />;
-        break;
-      default:
-        icon = null;
-        break;
+    case status.SUCCESS:
+      icon = <Check />;
+      break;
+    case status.FAILURE:
+      icon = <Error />;
+      break;
+    default:
+      icon = null;
+      break;
     }
 
     return (
@@ -40,7 +40,7 @@ class SnackContainer extends Component {
 SnackContainer.propTypes = {
   message: PropTypes.string,
   type: PropTypes.string,
-  onClose: PropTypes.func,
+  onClose: PropTypes.func
 };
 
 export default SnackContainer;

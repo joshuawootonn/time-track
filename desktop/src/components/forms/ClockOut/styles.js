@@ -1,10 +1,10 @@
-const styles = (theme) => ({
+const styles = theme => ({
   hero: {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textField: { width: '100%' },
   heroContent: {
@@ -13,19 +13,18 @@ const styles = (theme) => ({
   },
   error: { marginTop: '16px' },
   spaceBetween: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   flexEnd: {
     alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   button: { marginLeft: '10px' },
-  
+
   verticalCenter: {
     display: 'flex',
     alignItems: 'center'
   },
- 
 
   formHeader: {
     display: 'flex',
@@ -33,7 +32,7 @@ const styles = (theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginRight: theme.spacing.unit
-  }, 
+  },
   formHeaderIcon: {
     fontSize: '32px',
     margin: '0 10px'
@@ -42,18 +41,18 @@ const styles = (theme) => ({
   formBody: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',  
+    justifyContent: 'space-between'
   },
   formElement: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
 
   formFooter: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
-    justifyContent: 'space-between',
-  }  
+    justifyContent: 'space-between'
+  }
 });
 
 export default styles;

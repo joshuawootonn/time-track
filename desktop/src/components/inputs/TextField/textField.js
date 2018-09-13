@@ -13,23 +13,22 @@ const TextField = ({ field, form, label, className, type, margin }) => (
     className={className}
     margin={margin}
     FormHelperTextProps={{ error: true }}
-    helperText={form && form.errors[field.name] && form.touched[field.name]
-      ? form.errors[field.name]
-      : ' '
+    helperText={
+      form && form.errors[field.name] && form.touched[field.name]
+        ? form.errors[field.name]
+        : ' '
     }
   />
 );
 
-
-
 TextField.defaultProps = {
   type: 'search',
   margin: 'normal'
-}
+};
 
-TextField.propTypes = {  
+TextField.propTypes = {
   field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,  
+  form: PropTypes.object.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
   type: PropTypes.string,

@@ -13,13 +13,13 @@ export const getTasks = () => {
       // console.log(response,payload);
       return dispatch({
         type: taskActionTypes.GET_TASKS_SUCCESS,
-        payload,
+        payload
       });
       // console.log(response);
     } catch (e) {
       dispatch({
         type: taskActionTypes.GET_TASKS_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

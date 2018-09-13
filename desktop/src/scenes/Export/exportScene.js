@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import ExportContainer from 'containers/Export/exportContainer'
+import ExportContainer from 'containers/Export/exportContainer';
 
 class ExportScene extends Component {
-  render () {
+  render() {
     return (
       <div>
         <ExportContainer />
       </div>
-    )
+    );
   }
 }
 
-export default ExportScene
+export default ExportScene;

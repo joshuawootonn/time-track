@@ -25,7 +25,7 @@ export class SnackRootContainer extends Component {
 SnackRootContainer.propTypes = {
   closeSnack: PropTypes.func,
   snackType: PropTypes.string,
-  snackMessage: PropTypes.string,
+  snackMessage: PropTypes.string
 };
 
 export default connect(

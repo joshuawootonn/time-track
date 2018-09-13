@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Snackbar as MUSnackbar,
   SnackbarContent,
-  IconButton,
+  IconButton
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
@@ -33,7 +33,7 @@ const SnackBar = props => {
             onClick={onClose}
           >
             <Close className={classes.icon} />
-          </IconButton>,
+          </IconButton>
         ]}
       />
     </MUSnackbar>
@@ -46,7 +46,7 @@ SnackBar.propTypes = {
   position: PropTypes.object,
   type: PropTypes.string,
   icon: PropTypes.node,
-  message: PropTypes.string,
+  message: PropTypes.string
 };
 
 export default withStyles(styles)(SnackBar);

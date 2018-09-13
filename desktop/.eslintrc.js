@@ -1,24 +1,49 @@
 module.exports = {
-  "extends": ["last","plugin:react/recommended" ],
   "env": {
     "amd": true,
     "node": true,
+
     "browser": true,
     "es6": true
   },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
-    "sourceType": "module",
-},
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    'max-len': ["error", { "code": 100 }],
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    'max-len': ["error", { "code": 150 }],
     'no-console': 'off',
     'eqeqeq': ['error', 'always'], // adding some custom ESLint rules
-    'semi': ['warn', 'always'],
+    'semi': ['error', 'always'],
     'quotes': ['error', 'single'],
-    "object-curly-spacing": [2, "always"],
+    "object-curly-spacing": [1, "always"],
     "arrow-parens": ["error", "as-needed"],
-    
-  },
+    "comma-dangle": ["error", "never"],
+    "array-element-newline": ["error", "never"],
+    "allowAllPropertiesOnSameLine": false
+
+  }
 };
-
-

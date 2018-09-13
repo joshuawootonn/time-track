@@ -6,6 +6,6 @@ const DOMAIN = 'users';
 export const login = (username, password) => {
   return axios.post(`${HOST}/${DOMAIN}/login/`, {
     username,
-    password,
+    password
   });
 };

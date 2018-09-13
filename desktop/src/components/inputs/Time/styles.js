@@ -5,11 +5,11 @@ const styles = () => ({
     width: '100%'
   },
   vertical: {
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   horizontal: {
-    flexDirection: 'row',
-  },
+    flexDirection: 'row'
+  }
 });
 
 export default styles;

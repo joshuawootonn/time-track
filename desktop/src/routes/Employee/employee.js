@@ -8,13 +8,12 @@ export default [
     component: accountActionScene,
     exact: true,
     name: 'Employee Actions',
-    type: routes.EMPLOYEE,
-  },
-  {
+    type: routes.EMPLOYEE
+  }, {
     path: `/${routes.EMPLOYEE}/${routes.CLOCKOUT}`,
     component: clockOutScene,
     exact: true,
     name: 'Employee Clockout',
-    type: routes.EMPLOYEE,
-  },
+    type: routes.EMPLOYEE
+  }
 ];

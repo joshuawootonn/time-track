@@ -25,7 +25,7 @@ TextField.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   id: PropTypes.string,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 export default TextField;

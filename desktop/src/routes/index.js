@@ -10,26 +10,23 @@ const routes = [
     component: RouteMapper,
     path: '/',
     name: 'Signin',
-    routes: accountRoutes,
-  },
-  {
+    routes: accountRoutes
+  }, {
     component: RouteMapper,
     path: '/employee',
     name: 'Employee',
-    routes: employeeRoutes,
-  },
-  {
+    routes: employeeRoutes
+  }, {
     component: RouteMapper,
     path: '/manager',
     name: 'Manager',
-    routes: managerRoutes,
-  },
-  {
+    routes: managerRoutes
+  }, {
     component: RouteMapper,
     path: '/admin',
     name: 'Admin',
-    routes: adminRoutes,
-  },
+    routes: adminRoutes
+  }
 ];
 
 export default routes;

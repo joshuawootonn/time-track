@@ -18,13 +18,13 @@ export const putEmployee = employee => {
       );
       return dispatch({
         type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS,
-        payload,
+        payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
         type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }
@@ -34,7 +34,7 @@ export const putEmployee = employee => {
 export const toggleIsWorking = employee => {
   return putEmployee({
     ...employee,
-    isWorking: !employee.isWorking,
+    isWorking: !employee.isWorking
   });
 };
 
@@ -46,7 +46,7 @@ export const clockIn = employee => {
         clockInDate: moment()
           .subtract(7, 'hours')
           .toString(),
-        employeeId: employee.id,
+        employeeId: employee.id
       };
       await dispatch(shiftActions.postShift(clockInObject));
       await dispatch(toggleIsWorking(employee));
@@ -59,7 +59,7 @@ export const clockIn = employee => {
       dispatch(snackActions.openSnack(status.FAILURE, 'Clock in failed!'));
       return dispatch({
         type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }
@@ -78,7 +78,7 @@ export const clockOut = (employee, shift, activities) => {
       const clockOutObject = {
         ...shift,
         clockOutDate: currentMoment.toString(),
-        length: minutes,
+        length: minutes
       };
       await activities.forEach(activity => {
         // activity.projectId = undefined;
@@ -95,7 +95,7 @@ export const clockOut = (employee, shift, activities) => {
       dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out Success!'));
       return dispatch({
         type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }
@@ -112,16 +112,15 @@ export const login = pin => {
         schemas.employeeArray,
       );
 
-      
       return dispatch({
         type: employeeActionTypes.LOGIN_EMPLOYEE_SUCCESS,
         payload,
-        data: response.data,
+        data: response.data
       });
     } catch (e) {
       dispatch({
         type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

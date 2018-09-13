@@ -1,4 +1,4 @@
-const styles = (theme) => ({
+const styles = theme => ({
   inputToHide: {
     width: '0px',
     height: '0px',
@@ -8,11 +8,10 @@ const styles = (theme) => ({
     zIndex: '-1'
   },
   row: {
-    display: "flex",
+    display: 'flex',
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between',  
-    
+    justifyContent: 'space-between'
   },
   buttonAlign: {
     display: 'flex',

@@ -15,13 +15,13 @@ export const postActivity = activity => {
       );
       return dispatch({
         type: activityActionTypes.POST_ACTIVITY_SUCCESS,
-        payload,
+        payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
         type: activityActionTypes.POST_ACTIVITY_FAILURE,
-        payload: e,
+        payload: e
       });
       throw e;
     }

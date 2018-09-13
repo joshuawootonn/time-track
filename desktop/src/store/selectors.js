@@ -8,5 +8,5 @@ export {
   shiftSelectors,
   projectSelectors,
   projectTaskSelectors,
-  taskSelectors,
+  taskSelectors
 };
