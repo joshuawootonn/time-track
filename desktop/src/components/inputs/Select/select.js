@@ -5,7 +5,7 @@ import {
   Select as SelectInput,
   FormControl,
   InputLabel,
-  FormHelperText,
+  MenuItem
 } from '@material-ui/core';
 
 const Select = props => {
@@ -14,7 +14,8 @@ const Select = props => {
     label,
     labelProps,
     selectProps,
-    margin
+    margin,
+    items
   } = props;
 
   return (
@@ -33,6 +34,17 @@ const Select = props => {
         }}
         {...selectProps}
       >
+        {items && items.map((item, i) => {
+          return (
+            <MenuItem
+              key={i}
+              id="id"
+              value={item.id}
+            >
+              {item.name}
+            </MenuItem>
+          )
+        })}
         {props.children}
       </SelectInput>
     </FormControl>
@@ -47,6 +59,7 @@ Select.propTypes = {
   margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   value: PropTypes.string,
   onChange: PropTypes.func,
+  items: PropTypes.array
 };
 
 export default Select;

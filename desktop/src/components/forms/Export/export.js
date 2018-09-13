@@ -14,7 +14,7 @@ import * as exportConstants from 'constants/export'
 
 class ExportForm extends Component {
   render() {
-    const { classes,cancel } = this.props;
+    const { classes, cancel } = this.props;
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent} >
@@ -25,8 +25,8 @@ class ExportForm extends Component {
             <Grid item xs={12}>
               <Field
                 name="exportCategory"
-                render={({ field,form }) => {
-                  console.log(form.values,form.errors)
+                render={({ field, form }) => {
+                  console.log(form.values, form.errors)
                   return (
                     <Select
                       label="Export By"
@@ -44,21 +44,8 @@ class ExportForm extends Component {
                           />
                         ),
                       }}
-                    >
-                      {
-                        exportConstants.exportCategory.map((exportType, i) => {
-                          return (
-                            <MenuItem
-                              key={i}
-                              id="id"
-                              value={exportType.id}
-                            >
-                              {exportType.name}
-                            </MenuItem>
-                          )
-                        })
-                      }
-                    </Select>
+                      items={exportConstants.exportCategory}
+                    />                      
                   )
                 }}
               />
@@ -93,21 +80,8 @@ class ExportForm extends Component {
                         ),
                       }}
                       margin="none"
-                    >
-                      {
-                        exportConstants.timeLength.map((time, i) => {
-                          return (
-                            <MenuItem
-                              key={i}
-                              id="id"
-                              value={time.id}
-                            >
-                              {time.name}
-                            </MenuItem>
-                          )
-                        })
-                      }
-                    </Select>
+                      items={exportConstants.timeLength}
+                    />                      
                   )
                 }}
               />
@@ -133,21 +107,8 @@ class ExportForm extends Component {
                         ),
                       }}
                       margin="none"
-                    >
-                      {
-                        exportConstants.timeLengthType.map((duration, i) => {
-                          return (
-                            <MenuItem
-                              key={i}
-                              id="id"
-                              value={duration.id}
-                            >
-                              {duration.name}
-                            </MenuItem>
-                          )
-                        })
-                      }
-                    </Select>
+                      items={exportConstants.timeLengthType}
+                    />
                   )
                 }}
               />
