@@ -8,58 +8,71 @@ import {
   MenuItem
 } from '@material-ui/core';
 
-const Select = props => {
-  const {
-    formControlProps,
-    label,
-    labelProps,
-    selectProps,
-    margin,
-    items
-  } = props;
+const Select = ({
+  field,
+  form,
+  label,
+  margin,
+  fullWidth,
+  items,
+  children,
+  formControlProps,
+  labelProps,
+  selectProps,
+  itemProps,
+}) => {
+  console.log(field,form);
 
   return (
-    <FormControl {...formControlProps} margin={margin}>
-      {label !== undefined ? (
-        <InputLabel {...labelProps} >{label}</InputLabel>
-      ) : null}
+    <FormControl {...formControlProps} margin={margin} fullWidth={fullWidth}>
+      {label && <InputLabel {...labelProps} >{label}</InputLabel>}
       <SelectInput
-
-        MenuProps={{
-          getContentAnchorEl: null,
-          anchorOrigin: {
-            vertical: 'bottom',
-            horizontal: 'left',
-          },
-        }}
         {...selectProps}
+        {...field}
+        // Fix for handleblur I was getting on deselect
+        // https://github.com/jaredpalmer/formik/issues/640
+        onBlur={event => {
+            event.target.name = field.name;
+            form.handleBlur(event);
+        }}        
+        fullWidth={fullWidth}
       >
         {items && items.map((item, i) => {
           return (
             <MenuItem
+              {...itemProps}
               key={i}
-              id="id"
+              id={item.id}
               value={item.id}
             >
               {item.name}
             </MenuItem>
           )
         })}
-        {props.children}
+        {children}
       </SelectInput>
     </FormControl>
   );
 };
 
 Select.defaultProps = {
-  margin: 'normal'
+  margin: 'normal',
+  fullWidth: false
 }
 
 Select.propTypes = {
-  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
+  field: PropTypes.object.isRequired,
+  form: PropTypes.object.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  items: PropTypes.array
+  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
+  fullWidth: PropTypes.bool,
+  items: PropTypes.array,
+  children: PropTypes.element,
+  formControlProps: PropTypes.object,
+  labelProps: PropTypes.object,
+  selectProps: PropTypes.object,
+  itemProps: PropTypes.object
 };
 
 export default Select;

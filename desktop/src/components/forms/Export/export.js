@@ -6,56 +6,26 @@ import { Field, Form } from 'formik';
 
 import styles from './styles'
 
-import Select from 'components/inputs/Select'
 import TextField from 'components/inputs/TextField'
 import File from 'components/inputs/File'
-import SelectNew from 'components/inputs/SelectNew';
+import Select from 'components/inputs/Select';
 
 import * as exportConstants from 'constants/export'
 
 class ExportForm extends Component {
   render() {
-    const { classes, cancel } = this.props;
+    const { classes, cancel, isSubmitting } = this.props;
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent} >
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <Typography variant="display2">Export</Typography>
-            </Grid>
+            </Grid>            
             <Grid item xs={12}>
               <Field
                 name="exportCategory"
-                render={({ field, form }) => {
-                  console.log(form.values, form.errors)
-                  return (
-                    <SelectNew
-                      label="Export By"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      margin="none"
-                      selectProps={{
-                        autoWidth: true,
-                        ...field,
-                        className: classes.formElement,
-                        input: (
-                          <Input
-                            name="exportCategory"
-                          />
-                        ),
-                      }}
-                      items={exportConstants.exportCategory}
-                    />                      
-                  )
-                }}
-              />
-
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="exportCategory"
-                component={SelectNew}
+                component={Select}
                 items={exportConstants.exportCategory}
                 fullWidth
                 label="Export By"
@@ -70,58 +40,25 @@ class ExportForm extends Component {
                 type="date"
               />
             </Grid>
-
             <Grid item xs={6}>
               <Field
                 name="timeLength"
-                render={({ field }) => {
-                  return (
-                    <Select
-                      label="Type"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      selectProps={{
-                        ...field,
-                        input: (
-                          <Input
-                            name="timeLength"
-                          />
-                        ),
-                      }}
-                      margin="none"
-                      items={exportConstants.timeLength}
-                    />                      
-                  )
-                }}
-              />
+                component={Select}
+                items={exportConstants.timeLength}
+                fullWidth
+                label="Type"
+                margin="none"
+              />             
             </Grid>
             <Grid item xs={6}>
               <Field
                 name="timeLengthType"
-                render={({ field }) => {
-                  return (
-                    <Select
-                      label="Length"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      selectProps={{
-                        autoWidth: true,
-                        ...field,
-                        className: classes.formElement,
-                        input: (
-                          <Input
-                            name="timeLengthType"
-                          />
-                        ),
-                      }}
-                      margin="none"
-                      items={exportConstants.timeLengthType}
-                    />
-                  )
-                }}
-              />
+                component={Select}
+                items={exportConstants.timeLengthType}
+                fullWidth
+                label="Length"
+                margin="none"
+              />                 
             </Grid>
             <Grid item xs={12}>
               <Field
@@ -136,11 +73,11 @@ class ExportForm extends Component {
                 <Button
                   type="submit"
                   color="primary"
-                  //  disabled={isSubmitting} 
+                  disabled={isSubmitting} 
                   variant="contained"
                   className={classes.button}
                 >
-                  export
+                  Export
                 </Button>
 
                 <Button
