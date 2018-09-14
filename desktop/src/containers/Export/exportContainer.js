@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -23,24 +23,13 @@ class ExportContainer extends Component {
           startTime: moment().format('YYYY-MM-DD'),
           timeLength: 0,
           timeLengthType: 0,
-          fileLocation: '',
+          fileLocation: ''
         }}
         onSubmit={values => {
           const { exportToExcel, history } = this.props;
-          const {
-            exportCategory,
-            startTime,
-            timeLength,
-            timeLengthType,
-            fileLocation
-          } = values;
-          exportToExcel(
-            exportCategory,
-            startTime,
-            timeLength,
-            timeLengthType,
-            fileLocation,
-          ).then(() => history.push('/'));
+          const { exportCategory, startTime, timeLength, timeLengthType, fileLocation } = values;
+          exportToExcel(exportCategory, startTime, timeLength, timeLengthType, fileLocation)
+            .then(() => history.push('/'));
         }}
         validationSchema={exportValidation}
         render={formikProps => {
@@ -53,23 +42,11 @@ class ExportContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    exportToExcel: (
-      exportCategory,
-      startTime,
-      timeLength,
-      timeLengthType,
-      fileLocation,
-    ) => {
+    exportToExcel: (exportCategory, startTime, timeLength, timeLengthType, fileLocation ) => {
       return dispatch(
-        exportActions.exportToExcel(
-          exportCategory,
-          startTime,
-          timeLength,
-          timeLengthType,
-          fileLocation,
-        ),
+        exportActions.exportToExcel(exportCategory, startTime, timeLength, timeLengthType, fileLocation),
       );
-    },
+    }
   };
 };
 

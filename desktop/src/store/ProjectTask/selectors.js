@@ -1,8 +1,4 @@
 import { createSelector } from 'reselect';
-import {
-  getProjectsFromEntities,
-  getProjectsFromResults
-} from 'store/Project/selectors';
 
 export const getProjectTasksFromEntities = state => state.entities.projectTasks;
 export const getProjectTasksFromResults = state => state.results.projectTasks;

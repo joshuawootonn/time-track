@@ -71,7 +71,7 @@ AccountSiginForm.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func,
+  setFieldValue: PropTypes.func
 };
 
 export default withStyles(styles)(AccountSiginForm);

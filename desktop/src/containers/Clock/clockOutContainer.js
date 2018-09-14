@@ -11,7 +11,7 @@ import { shiftActions, employeeActions } from 'store/actions';
 import {
   employeeSelectors,
   shiftSelectors,
-  projectSelectors,
+  projectSelectors
 } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
@@ -29,7 +29,7 @@ class ClockOutContainer extends Component {
   };
 
   render() {
-    const { currentEmployee, currentShift, projects } = this.props;
+    const { currentShift, projects } = this.props;
     const isLoading = !currentShift;
     if (isLoading) {
       return <div>Loading</div>;
@@ -38,13 +38,13 @@ class ClockOutContainer extends Component {
     const currentMoment = moment();
     const clockInMoment = moment(currentShift.clockInDate);
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
-    const minutes = shiftDuration.asMinutes();
+
 
     const clockOutObject = {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
       date: clockInMoment.format('MMM Do YYYY'),
-      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`,
+      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`
     };
 
     return (
@@ -55,17 +55,12 @@ class ClockOutContainer extends Component {
               projectId: -1,
               projectTaskId: -1,
               length: 0,
-              description: '',
-            },
-          ],
+              description: ''
+            }
+          ]
         }}
         onSubmit={values => {
-          const {
-            currentEmployee,
-            currentShift,
-            history,
-            clockOut,
-          } = this.props;
+          const { currentEmployee, currentShift, history, clockOut } = this.props;
           clockOut(currentEmployee, currentShift, values.activities).then(() =>
             history.push('/'),
           );
@@ -86,22 +81,26 @@ class ClockOutContainer extends Component {
   }
 }
 
+ClockOutContainer.propTypes = {
+  currentEmployee: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjectObjectsWithTasks(state),
+    projects: projectSelectors.getAllProjectObjectsWithTasks(state)
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     getCurrentShift: employeeId => {
       return dispatch(shiftActions.getCurrentShift(employeeId));
     },
     clockOut: (employee, shift, activities) => {
       return dispatch(employeeActions.clockOut(employee, shift, activities));
-    },
+    }
   };
 };
 

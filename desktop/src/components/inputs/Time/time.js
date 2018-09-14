@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
-import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
 
 import { minutes, hours } from 'constants/times';
 import Select from 'components/inputs/Select';
@@ -94,9 +92,11 @@ Time.defaultProps = {
 };
 
 Time.propTypes = {
+  classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
-  orientation: PropTypes.oneOf(['Horizontal', 'Vertical'])
+  orientation: PropTypes.oneOf(['Horizontal', 'Vertical']),
+  className: PropTypes.object
 };
 
 export default withStyles(styles)(Time);

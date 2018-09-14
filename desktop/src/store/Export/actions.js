@@ -7,13 +7,7 @@ import * as status from 'constants/status';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
-export const exportToExcel = (
-  exportCategory,
-  startTime,
-  timeLength,
-  timeLengthType,
-  fileLocation,
-) => {
+export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthType, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
@@ -28,7 +22,6 @@ export const exportToExcel = (
         type: exportActionTypes.EXPORT_EXCEL_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };

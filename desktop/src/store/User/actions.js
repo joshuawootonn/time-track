@@ -3,8 +3,6 @@ import { userActionTypes } from 'constants/ActionTypes';
 import { authorityActions, crewActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from '../schemas';
 
 export const login = (username, password) => {
   return async dispatch => {

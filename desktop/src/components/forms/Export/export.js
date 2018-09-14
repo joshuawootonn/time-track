@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Button, Typography } from '@material-ui/core';
@@ -97,4 +98,9 @@ class ExportForm extends Component {
   }
 }
 
+ExportForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  cancel:PropTypes.func,
+  isSubmitting: PropTypes.bool.isRequired
+};
 export default withStyles(styles)(ExportForm);

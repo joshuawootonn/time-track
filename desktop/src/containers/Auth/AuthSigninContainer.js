@@ -43,7 +43,7 @@ class SignInForm extends Component {
               .then(() => {
                 ipcRenderer.sendSync(IPCConstants.SET_CRED, {
                   username,
-                  password,
+                  password
                 });
                 history.push(routes.ROOT);
               })
@@ -70,7 +70,7 @@ class SignInForm extends Component {
 
 SignInForm.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {

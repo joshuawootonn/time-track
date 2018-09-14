@@ -26,7 +26,6 @@ export const putEmployee = employee => {
         type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };
@@ -61,7 +60,6 @@ export const clockIn = employee => {
         type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };
@@ -97,7 +95,6 @@ export const clockOut = (employee, shift, activities) => {
         type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };

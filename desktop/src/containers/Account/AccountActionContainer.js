@@ -50,6 +50,10 @@ AccountAction.propTypes = {
   account: PropTypes.object,
   openSnack: PropTypes.func,
   clockIn: PropTypes.func,
+  entities: PropTypes.object.isRequired,
+  employee: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
+  currentEmployee: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = dispatch => {
@@ -59,7 +63,7 @@ const mapDispatchToProps = dispatch => {
     },
     openSnack: (type, message) => {
       return dispatch(snackActions.openSnack(type, message));
-    },
+    }
   };
 };
 
@@ -67,7 +71,7 @@ const mapStateToProps = state => {
   return {
     employee: state.employee,
     entities: state.entities,
-    currentEmployee: employeeSelectors.getCurrentEmployee(state),
+    currentEmployee: employeeSelectors.getCurrentEmployee(state)
   };
 };
 

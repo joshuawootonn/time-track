@@ -1,4 +1,4 @@
-const styles = theme => ({
+const styles = () => ({
   inputToHide: {
     width: '0px',
     height: '0px',

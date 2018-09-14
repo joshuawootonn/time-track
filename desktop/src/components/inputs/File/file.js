@@ -11,15 +11,7 @@ class File extends Component {
     form.setFieldValue(field.name, e.target.files[0].path);
   };
   render() {
-    const {
-      label,
-      labelProps,
-      formControlProps,
-      margin,
-      classes,
-      field,
-    } = this.props;
-    //console.log(this.props)
+    const { label, labelProps, formControlProps, margin, classes, field } = this.props;
     return (
       <FormControl {...formControlProps} fullWidth margin={margin}>
         <div className={classes.row}>

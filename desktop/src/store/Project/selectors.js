@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
 
 import { getTasksFromEntities } from 'store/Task/selectors';
 import { getAllProjectTasks } from 'store/ProjectTask/selectors';

@@ -1,4 +1,4 @@
-const styles = theme => ({
+const styles = () => ({
   hero: {
     height: '100vh',
     display: 'flex',

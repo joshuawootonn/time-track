@@ -23,7 +23,6 @@ export const postActivity = activity => {
         type: activityActionTypes.POST_ACTIVITY_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };

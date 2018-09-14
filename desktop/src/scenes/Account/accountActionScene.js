@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import AccountActionContainer from 'containers/Account/accountActionContainer';
 
-class AccountActionAction extends Component {
+class AccountAction extends Component {
   render() {
     return <AccountActionContainer type={this.props.type} />;
   }
 }
 
-export default AccountActionAction;
+AccountAction.propTypes = {
+  type: PropTypes.string.isRequired
+};
+
+export default AccountAction;

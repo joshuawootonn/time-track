@@ -1,22 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  Button,
-  Grid,
-  Typography,
-  IconButton,
-  MenuItem,
-  Input,
-  SvgIcon
-} from '@material-ui/core';
-import {
-  AccessTime as TimeIcon,
-  Timer as DurationIcon,
-  Today as DateIcon
-} from '@material-ui/icons';
+import { Button, Grid, Typography, IconButton, MenuItem, Input, SvgIcon } from '@material-ui/core';
+import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon } from '@material-ui/icons';
 import { Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons';
 import styles from './styles';
@@ -25,15 +13,7 @@ import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
 
 const ClockOutForm = props => {
-  const {
-    classes,
-    isSubmitting,
-    handleSubmit,
-    shift,
-    values,
-    projects,
-    cancel
-  } = props;
+  const { classes, isSubmitting, handleSubmit, shift, values, projects, cancel } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -72,7 +52,6 @@ const ClockOutForm = props => {
               <FieldArray
                 name="activities"
                 render={arrayHelpers => {
-                  //console.log(values.activities)
                   return (
                     <div>
                       {values.activities &&
@@ -258,7 +237,11 @@ ClockOutForm.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func
+  setFieldValue: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  shift: PropTypes.object,
+  projects: PropTypes.object,
+  cancel: PropTypes.func
 };
 
 export default withStyles(styles)(ClockOutForm);

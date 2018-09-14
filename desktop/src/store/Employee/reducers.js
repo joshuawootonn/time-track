@@ -31,13 +31,9 @@ export default (state = employeeInitialState, action) => {
       current: {
         id: null,
         status: status.FAILURE
-      }
-    };
-  case employeeActionTypes.LOGIN_EMPLOYEE_FAILURE:
-    return {
-      ...state,
+      },
       selected: null
-    };
+    };  
   default:
     return state;
   }

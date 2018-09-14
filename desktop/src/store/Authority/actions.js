@@ -17,13 +17,11 @@ export const getAuthorities = () => {
         type: authorityActionTypes.GET_AUTHORITIES_SUCCESS,
         payload
       });
-      console.log(response);
     } catch (e) {
       dispatch({
         type: authorityActionTypes.GET_AUTHORITIES_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };

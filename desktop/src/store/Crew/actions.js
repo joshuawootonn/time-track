@@ -14,13 +14,11 @@ export const getCrews = () => {
         type: crewActionTypes.GET_CREWS_SUCCESS,
         payload
       });
-      console.log(response);
     } catch (e) {
       dispatch({
         type: crewActionTypes.GET_CREWS_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };

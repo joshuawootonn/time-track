@@ -20,7 +20,6 @@ export const postShift = shift => {
         type: shiftActionTypes.SHIFT_POST_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };
@@ -41,7 +40,6 @@ export const putShift = shift => {
         type: shiftActionTypes.PUT_SHIFT_FAILURE,
         payload: e
       });
-      throw e;
     }
   };
 };
