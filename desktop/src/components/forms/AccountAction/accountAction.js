@@ -39,7 +39,7 @@ AccountActionForm.propTypes = {
   classes: PropTypes.object.isRequired,
   back: PropTypes.func.isRequired,
   clockIn: PropTypes.func.isRequired,
-  isWorking: PropTypes.bool,
+  isWorking: PropTypes.number,
   clockOut: PropTypes.func.isRequired,
   export: PropTypes.func.isRequired,
   analyze: PropTypes.func.isRequired
