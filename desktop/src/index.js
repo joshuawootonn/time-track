@@ -12,10 +12,11 @@ import { Provider } from 'react-redux';
 import reducer from 'store/reducers';
 import './index.css';
 const middleware = [thunk];
-const store = createStore(
+export const store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(...middleware)),
 );
+
 
 const theme = createMuiTheme({
   palette: {

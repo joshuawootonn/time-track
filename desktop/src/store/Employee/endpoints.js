@@ -5,6 +5,10 @@ const DOMAIN = 'employees';
 
 // CRUD
 
+export const getEmployees = () => {
+  return axios.get(`${HOST}/${DOMAIN}/`)
+}
+
 export const putEmployee = (id, employee) => {
   return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...employee });
 };

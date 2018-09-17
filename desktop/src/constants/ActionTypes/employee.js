@@ -2,6 +2,10 @@ export const UPDATE_EMPLOYEE_REQUEST = 'update_employee_request';
 export const UPDATE_EMPLOYEE_SUCCESS = 'update_employee_success';
 export const UPDATE_EMPLOYEE_FAILURE = 'update_employee_failure';
 
+export const GET_EMPLOYEE_REQUEST = 'get_employee_request';
+export const GET_EMPLOYEE_SUCCESS = 'get_employee_success';
+export const GET_EMPLOYEE_FAILURE = 'get_employee_failure';
+
 export const LOGIN_EMPLOYEE_REQUEST = 'login_employee_request';
 export const LOGIN_EMPLOYEE_SUCCESS = 'login_employee_success';
 export const LOGIN_EMPLOYEE_FAILURE = 'login_employee_failure';

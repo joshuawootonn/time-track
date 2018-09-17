@@ -7,6 +7,29 @@ import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
 
+export const getEmployees = () => {
+  return async dispatch => {
+    dispatch({ type: employeeActionTypes.GET_EMPLOYEE_REQUEST });
+    try {
+      const response = await endpoint.getEmployees();
+      const payload = normalize(
+        { employees: response.data },
+        schemas.employeeArray,
+      );
+      return dispatch({
+        type: employeeActionTypes.GET_EMPLOYEE_SUCCESS,
+        payload
+      });
+    } catch (e) {
+      console.log(e);
+      return dispatch({
+        type: employeeActionTypes.GET_EMPLOYEE_FAILURE,
+        payload: e
+      });
+    }
+  };
+};
+
 export const putEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });

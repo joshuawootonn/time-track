@@ -1,4 +1,7 @@
 import { exportActionTypes } from 'constants/ActionTypes';
+import {getEmployees} from 'store/Employee/actions'
+import {getAllEmployees} from 'store/Employee/selectors'
+import {store} from 'index';
 
 import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
@@ -11,7 +14,12 @@ export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthT
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
-      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
+
+      //await download();
+      await dispatch(getEmployees())
+      //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
+      formatEmployee();
+      
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
@@ -25,3 +33,22 @@ export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthT
     }
   };
 };
+
+const download = async () => {
+  await Promise.all([getEmployees])
+}
+
+const formatEmployee = (startTime,timeLength,timeLengthType) => {
+  let asdf = {}
+  //console.log(getEmployees())
+
+  
+
+
+
+}
+
+
+const getEmployeesasdf = () => {
+  return getAllEmployees(store.getState());
+}
