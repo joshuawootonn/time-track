@@ -17,3 +17,9 @@ export const getCurrentShift = employeeId => {
     `${HOST}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`,
   );
 };
+
+export const getShiftsInRange = (startTime, endTime) => {
+  return axios.get(
+   `${HOST}/employees/` filter[where]["clockInDate"][between]["2018-07-24"]="2018-07-26"
+  )
+}
