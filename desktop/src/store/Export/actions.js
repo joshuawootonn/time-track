@@ -1,5 +1,5 @@
 import { exportActionTypes } from 'constants/ActionTypes';
-import {employeeActions, projectActions, projectTaskActions, taskActions } from 'store/actions';
+import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
 import {getAllEmployees} from 'store/Employee/selectors'
 import {store} from 'index';
@@ -16,6 +16,8 @@ export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthT
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
 
+      const start = moment(startTime)
+      const end = start.add(timeLength,)
 
       await dispatch(getDataForEmployeeExport())
      

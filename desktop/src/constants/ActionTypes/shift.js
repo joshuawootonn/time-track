@@ -9,3 +9,7 @@ export const PUT_SHIFT_FAILURE = 'put_shift_failure';
 export const GET_CURRENT_SHIFT_REQUEST = 'get_current_shift_request';
 export const GET_CURRENT_SHIFT_SUCCESS = 'get_current_shift_success';
 export const GET_CURRENT_SHIFT_FAILURE = 'get_current_shift_failure';
+
+export const GET_SHIFTS_IN_RANGE_REQUEST = 'get_shifts_in_range_request';
+export const GET_SHIFTS_IN_RANGE_SUCCESS = 'get_shifts_in_range_success';
+export const GET_SHIFTS_IN_RANGE_FAILURE = 'get_shifts_in_range_failure';

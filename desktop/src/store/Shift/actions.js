@@ -3,6 +3,7 @@ import { shiftActionTypes } from 'constants/ActionTypes';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
+import {timeLength,timeLengthType} from 'constants/export';
 
 export const postShift = shift => {
   return async dispatch => {
@@ -53,7 +54,7 @@ export const getCurrentShift = employeeId => {
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
-        data: response.data[0]
+        data: payload
       });
     } catch (e) {
       dispatch({
@@ -67,18 +68,21 @@ export const getCurrentShift = employeeId => {
 
 export const getShiftsInRange = (startTime,endTime) => {
   return async dispatch => {
-    dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_REQUEST });
+    dispatch({ type: shiftActionTypes.GET_SHIFTS_IN_RANGE_REQUEST });
     try {
-      const response = await endpoint.getCurrentShift(employeeId);
+      const response = await endpoint.getShiftsInRange(startTime,endTime);
+      console.log(response);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
+
+
+      console.log("success", payload)
       return dispatch({
-        type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
-        payload,
-        data: response.data[0]
+        type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS,
+        payload
       });
     } catch (e) {
       dispatch({
-        type: shiftActionTypes.GET_CURRENT_SHIFT_FAILURE,
+        type: shiftActionTypes.GET_SHIFTS_IN_RANGE_FAILURE,
         payload: e
       });
       throw e;
