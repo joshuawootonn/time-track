@@ -32,35 +32,24 @@ class ExportForm extends Component {
                 label="Export By"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.row}>
               <Field
-                name="startTime"
+                name="start"
                 component={TextField}
                 margin="none"
                 label="From"
                 type="date"
               />
-            </Grid>
-            <Grid item xs={6}>
               <Field
-                name="timeLength"
-                component={Select}
-                items={exportConstants.timeLength}
-                fullWidth
-                label="Type"
+                className={classes.spaceAround}
+                name="end"
+                component={TextField}
                 margin="none"
+                label="To"
+                type="date"
               />
             </Grid>
-            <Grid item xs={6}>
-              <Field
-                name="timeLengthType"
-                component={Select}
-                items={exportConstants.timeLengthType}
-                fullWidth
-                label="Length"
-                margin="none"
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <Field
                 name="fileLocation"
@@ -69,14 +58,13 @@ class ExportForm extends Component {
                 type="file"
               />
             </Grid>
-            <Grid item xs={12} className={classes.formFooter}>
+            <Grid item xs={12} className={classes.row}>
               <div>
                 <Button
                   type="submit"
                   color="primary"
                   disabled={isSubmitting}
                   variant="contained"
-                  className={classes.button}
                 >
                   Export
                 </Button>
@@ -85,7 +73,7 @@ class ExportForm extends Component {
                   onClick={cancel}
                   color="secondary"
                   variant="text"
-                  className={classes.button}
+                  className={classes.spaceAround}
                 >
                   Cancel
                 </Button>
@@ -100,7 +88,7 @@ class ExportForm extends Component {
 
 ExportForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  cancel:PropTypes.func,
+  cancel: PropTypes.func,
   isSubmitting: PropTypes.bool.isRequired
 };
 export default withStyles(styles)(ExportForm);

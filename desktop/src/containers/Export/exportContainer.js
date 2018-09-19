@@ -20,15 +20,16 @@ class ExportContainer extends Component {
       <Formik
         initialValues={{
           exportCategory: 0,
-          startTime: moment('2018-08-26').format('YYYY-MM-DD'),
+          start: moment('2018-08-26').format('YYYY-MM-DD'),
+          end: moment('2018-09-01').format('YYYY-MM-DD'),
           timeLength: 0,
           timeLengthType: 0,
           fileLocation: ''
         }}
         onSubmit={values => {
           const { exportToExcel, history } = this.props;
-          const { exportCategory, startTime, timeLength, timeLengthType, fileLocation } = values;
-          exportToExcel(exportCategory, startTime, timeLength, timeLengthType, fileLocation)
+          const { exportCategory, start, end, fileLocation } = values;
+          exportToExcel(exportCategory, start, end, fileLocation)
             .then(() => history.push('/'));
         }}
         validationSchema={exportValidation}
@@ -42,9 +43,9 @@ class ExportContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    exportToExcel: (exportCategory, startTime, timeLength, timeLengthType, fileLocation ) => {
+    exportToExcel: (exportCategory, start, end, fileLocation ) => {
       return dispatch(
-        exportActions.exportToExcel(exportCategory, startTime, timeLength, timeLengthType, fileLocation),
+        exportActions.exportToExcel(exportCategory, start, end, fileLocation),
       );
     }
   };

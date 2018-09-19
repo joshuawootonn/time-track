@@ -28,9 +28,9 @@ export const shift = Yup.object().shape({
 });
 export const exportValidation = Yup.object().shape({
   exportCategory: Yup.number().min(0, 'Invalid export category'),
-  startTime: Yup.date().required('Invalid from date'),
-  timeLength: Yup.number().min(0, 'Invalid time length'),
-  timeLengthType: Yup.number().min(0, 'Invalid time length type'),
+  start: Yup.date().required('Invalid start date'),
+  end: Yup.date().required('Invalid end date'),
+ 
   fileLocation: Yup.string()
     .required('File location is required')
     .matches(

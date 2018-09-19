@@ -11,18 +11,17 @@ import * as status from 'constants/status';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
-export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthType, fileLocation) => {
+export const exportToExcel = (exportCategory, start, end, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
 
-      const start = moment(startTime)
-      const end = start.add(timeLength,)
+      console.log(exportCategory,start,end,fileLocation);
 
-      await dispatch(getDataForEmployeeExport())
+      // await dispatch(getDataForEmployeeExport())
      
-      //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
-      formatEmployee();
+      // //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
+      // formatEmployee();
       
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));

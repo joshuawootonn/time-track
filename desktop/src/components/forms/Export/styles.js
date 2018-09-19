@@ -11,10 +11,10 @@ const styles = () => ({
     width: '100%',
     maxWidth: '500px'
   },
-  button: {
-    marginLeft: '10px'
+  spaceAround: {
+    marginLeft: '8px'
   },
-  formFooter: {
+  row: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
