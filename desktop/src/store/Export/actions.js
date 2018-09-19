@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import { exportActionTypes } from 'constants/ActionTypes';
 import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
@@ -16,9 +18,12 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
 
-      console.log(exportCategory,start,end,fileLocation);
+      //console.log(exportCategory,new moment(start).format('YYYY-MM-DD HH:mm:ss'),new moment(end).toString(),fileLocation);
 
-      // await dispatch(getDataForEmployeeExport())
+      const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
+      const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
+      
+      await dispatch(getDataForEmployeeExport(startMoment,endMoment))
      
       // //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
       // formatEmployee();
@@ -45,7 +50,7 @@ export const getDataForEmployeeExport = (startTime, endTime) => {
         dispatch(projectActions.getProjects()),
         dispatch(projectTaskActions.getProjectTask()),
         dispatch(taskActions.getTasks()),
-        dispatch(shiftActions.getShifts(startTime,endTime))
+        dispatch(shiftActions.getShiftsInRange(startTime,endTime))
       ])       
 
     } catch (e) {

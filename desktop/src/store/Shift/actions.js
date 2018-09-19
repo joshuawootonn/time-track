@@ -75,7 +75,6 @@ export const getShiftsInRange = (startTime,endTime) => {
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
 
 
-      console.log("success", payload)
       return dispatch({
         type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS,
         payload
