@@ -1,5 +1,6 @@
 import { exportActionTypes } from 'constants/ActionTypes';
-import {getEmployees} from 'store/Employee/actions'
+import {employeeActions, projectActions, projectTaskActions, taskActions } from 'store/actions';
+
 import {getAllEmployees} from 'store/Employee/selectors'
 import {store} from 'index';
 
@@ -15,8 +16,9 @@ export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthT
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
 
-      //await download();
-      await dispatch(getEmployees())
+
+      await dispatch(getDataForEmployeeExport())
+     
       //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
       formatEmployee();
       
@@ -34,9 +36,24 @@ export const exportToExcel = (exportCategory, startTime, timeLength, timeLengthT
   };
 };
 
-const download = async () => {
-  await Promise.all([getEmployees])
+export const getDataForEmployeeExport = (startTime, endTime) => {
+  return async dispatch => {
+    try {
+      await Promise.all([
+        dispatch(employeeActions.getEmployees()),
+        dispatch(projectActions.getProjects()),
+        dispatch(projectTaskActions.getProjectTask()),
+        dispatch(taskActions.getTasks()),
+        dispatch(shiftActions.getShifts(startTime,endTime))
+      ])       
+
+    } catch (e) {
+      console.log(e);   
+    }
+  };
 }
+
+
 
 const formatEmployee = (startTime,timeLength,timeLengthType) => {
   let asdf = {}

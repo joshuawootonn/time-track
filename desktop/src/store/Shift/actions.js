@@ -64,3 +64,24 @@ export const getCurrentShift = employeeId => {
     }
   };
 };
+
+export const getShiftsInRange = (startTime,endTime) => {
+  return async dispatch => {
+    dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_REQUEST });
+    try {
+      const response = await endpoint.getCurrentShift(employeeId);
+      const payload = normalize({ shifts: response.data }, schemas.shiftArray);
+      return dispatch({
+        type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
+        payload,
+        data: response.data[0]
+      });
+    } catch (e) {
+      dispatch({
+        type: shiftActionTypes.GET_CURRENT_SHIFT_FAILURE,
+        payload: e
+      });
+      throw e;
+    }
+  };
+};
