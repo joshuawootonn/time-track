@@ -8,9 +8,3 @@ export const timeLengthType = [
   { id: 0, name: 'day(s)', momentVersion: 'd' }, { id: 1, name: 'week(s)' , momentVersion: 'w'}, { id: 2, name: 'month(s)', momentVersion: 'M' }, { id: 3, name: 'year(s)', momentVersion: 'y' }
 ];
 
-
-export const getEndDateTime = (startTime, timeLength,timeLengthType) => {
-
-
-
-}

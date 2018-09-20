@@ -3,7 +3,7 @@ import moment from 'moment'
 import { exportActionTypes } from 'constants/ActionTypes';
 import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
-import {getAllEmployees} from 'store/Employee/selectors'
+import {employeeSelectors, shiftSelectors, projectSelectors} from 'store/selectors'
 import {store} from 'index';
 
 import * as IPCConstants from 'constants/ipc';
@@ -23,8 +23,8 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
       
-      await dispatch(getDataForEmployeeExport(startMoment,endMoment))
-     
+      await dispatch(getData(exportCategory,startMoment,endMoment))
+      formatData(exportCategory)
       // //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
       // formatEmployee();
       
@@ -42,7 +42,8 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
   };
 };
 
-export const getDataForEmployeeExport = (startTime, endTime) => {
+export const getData = (exportCategory,startTime, endTime) => {
+  // TODO: different actions based on the export category
   return async dispatch => {
     try {
       await Promise.all([
@@ -59,19 +60,20 @@ export const getDataForEmployeeExport = (startTime, endTime) => {
   };
 }
 
-
-
-const formatEmployee = (startTime,timeLength,timeLengthType) => {
-  let asdf = {}
-  //console.log(getEmployees())
-
+const formatData = (exportCategory) => {
+  // TODO: different formatting routines for the export category
+  // array of employees
+  const employees = employeeSelectors.getAllEmployees(store.getState())
+  // array of shifts w/ embedded activities
+  const shifts = {}//getAllShiftsInRange(store.getState())
+  // object w/ id keys for projectTasks
+  const projects = projectSelectors.getAllProjectObjectsWithTasks(store.getState())
+  console.log(employees,shifts,projects)
   
-
-
-
-}
-
-
-const getEmployeesasdf = () => {
-  return getAllEmployees(store.getState());
+  // let exportData = []
+  // employees.forEach(employee => {
+  //   exportData.push({
+  //     key
+  //   })
+  // });
 }
