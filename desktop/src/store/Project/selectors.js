@@ -17,20 +17,20 @@ export const getAllProjects = createSelector(
   },
 );
 
+
 export const getAllProjectObjects = createSelector(
-  getProjectsFromEntities,
-  getTasksFromEntities,
-  getAllProjectTasks,
-  (projects, tasks, projectTasks) => {
-    const newProjects = { ...projects };
-    projectTasks.forEach(pt => {
-      newProjects[pt.projectId].tasks = [
-        { ...tasks[pt.taskId], projectTaskId: pt.id }
-      ];
-    });
-    return newProjects;
+  getAllProjects,
+  (projects) => {
+    // if the task array is empty
+    if (!projects) return null;    
+    // reduce the task array to a object with id as they key
+    return Object.assign({}, ...projects.map(project => ({[project.id]: project})))
+    
   },
 );
+
+
+
 
 export const getAllProjectObjectsWithTasks = createSelector(
   getProjectsFromEntities,
