@@ -3,7 +3,7 @@ import moment from 'moment'
 import { exportActionTypes } from 'constants/ActionTypes';
 import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
-import {employeeSelectors, shiftSelectors, projectSelectors} from 'store/selectors'
+import {employeeSelectors, shiftSelectors, projectSelectors,projectTaskSelectors} from 'store/selectors'
 import {store} from 'index';
 
 import * as IPCConstants from 'constants/ipc';
@@ -67,8 +67,8 @@ const formatData = (exportCategory) => {
   // array of shifts w/ embedded activities
   const shifts = {}//getAllShiftsInRange(store.getState())
   // object w/ id keys for projectTasks
-  const projects = projectSelectors.getAllProjectObjectsWithTasks(store.getState())
-  console.log(employees,shifts,projects)
+  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
+  console.log(employees,shifts,projectTasks)
   
   // let exportData = []
   // employees.forEach(employee => {
