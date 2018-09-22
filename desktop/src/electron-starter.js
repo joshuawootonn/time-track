@@ -99,27 +99,38 @@ ipcMain.on(IPCConstants.GET_CRED, event => {
 ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   console.log('we out here', arg);
 
+  const {data} = arg;
+
   var workbook = new Excel.Workbook();
-  var worksheet = workbook.addWorksheet('Discography2');
 
-  // add column headers
-  worksheet.columns = [
-    { header: 'Album', key: 'album' }, { header: 'Year', key: 'year' }
-  ];
+  data.forEach(workSheetData => {
+    var worksheet = workbook.addWorksheet(workSheetData.key);
 
-  // add row using keys
-  worksheet.addRow({ album: 'Taylor Swift', year: 2006 });
+    workSheetData.header.forEach(headerData => {
+      worksheet.addRow(headerData);      
+    });
+    
+  });
 
-  // add rows the dumb way
-  worksheet.addRow(['Fearless', 2008]);
 
-  // add an array of rows
-  var rows = [['Speak Now', 2010], { album: 'Red', year: 2012 }];
-  worksheet.addRows(rows);
+  // // add column headers
+  // worksheet.columns = [
+  //   { header: 'Album', key: 'album' }, { header: 'Year', key: 'year' }
+  // ];
 
-  // edit cells directly
-  worksheet.getCell('A6').value = '1989';
-  worksheet.getCell('B6').value = 2014;
+  // // add row using keys
+  // worksheet.addRow({ album: 'Taylor Swift', year: 2006 });
+
+  // // add rows the dumb way
+  // worksheet.addRow(['Fearless', 2008]);
+
+  // // add an array of rows
+  // var rows = [['Speak Now', 2010], { album: 'Red', year: 2012 }];
+  // worksheet.addRows(rows);
+
+  // // edit cells directly
+  // worksheet.getCell('A6').value = '1989';
+  // worksheet.getCell('B6').value = 2014;
 
   workbook.xlsx.writeFile(arg.fileLocation).then(function() {
     event.returnValue = 'saved';

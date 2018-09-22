@@ -24,10 +24,9 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
       
       await dispatch(getData(exportCategory,startMoment,endMoment))
-      formatData(exportCategory,startMoment,endMoment)
-      // //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
-      // formatEmployee();
-      
+      const exportData = formatData(exportCategory,startMoment,endMoment)
+      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
+     
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
@@ -69,11 +68,19 @@ const formatData = (exportCategory,startTime,endTime) => {
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
   
+  console.log(employees,shifts,projectTasks)
   
-  // let exportData = []
-  // employees.forEach(employee => {
-  //   exportData.push({
-  //     key
-  //   })
-  // });
+  let exportData = []
+  employees.forEach(employee => {
+    exportData.push({
+      key: `${employee.firstName} ${employee.lastName}`,
+      header:[
+        ["AACI - Time Sheet"],
+        [`Employee: ${employee.firstName} ${employee.lastName}`],
+        [`Period: ${moment(startTime).format("YYYY/MM/DD")} - ${moment(endTime).format("YYYY/MM/DD")}`]
+      ]
+    })
+  });
+
+  return exportData
 }
