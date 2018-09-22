@@ -24,7 +24,7 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
       
       await dispatch(getData(exportCategory,startMoment,endMoment))
-      formatData(exportCategory)
+      formatData(exportCategory,startMoment,endMoment)
       // //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation });
       // formatEmployee();
       
@@ -51,8 +51,8 @@ export const getData = (exportCategory,startTime, endTime) => {
         dispatch(projectActions.getProjects()),
         dispatch(projectTaskActions.getProjectTask()),
         dispatch(taskActions.getTasks()),
-        dispatch(shiftActions.getShiftsInRange(startTime,endTime))
-      ])       
+        dispatch(shiftActions.getShiftsInRange(endTime,endTime))
+      ])      
 
     } catch (e) {
       console.log(e);   
@@ -60,21 +60,16 @@ export const getData = (exportCategory,startTime, endTime) => {
   };
 }
 
-const formatData = (exportCategory) => {
+const formatData = (exportCategory,startTime,endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
   const employees = employeeSelectors.getAllEmployees(store.getState())
   // array of shifts w/ embedded activities
   const shifts = {}//getAllShiftsInRange(store.getState())
-  // object w/ id keys for projectTasks
-  //const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
+  // object of project tasks indexed by id with task and project attached
+  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
 
-  console.log(projectSelectors.getAllProjectObjects(store.getState()))
-  console.log(taskSelectors.getAllTaskObjects(store.getState()))
-  console.log("asdf")
-
-  console.log(employees,shifts)
-  
+  console.log(shiftSelectors.getShiftsInRange(store.getState(),{startTime,endTime}))
   // let exportData = []
   // employees.forEach(employee => {
   //   exportData.push({
