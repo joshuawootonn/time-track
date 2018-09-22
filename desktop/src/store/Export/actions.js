@@ -3,7 +3,7 @@ import moment from 'moment'
 import { exportActionTypes } from 'constants/ActionTypes';
 import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
-import {employeeSelectors, shiftSelectors, projectSelectors,projectTaskSelectors, taskSelectors} from 'store/selectors'
+import {employeeSelectors, shiftSelectors, projectSelectors,projectTaskSelectors,activitySelectors, taskSelectors} from 'store/selectors'
 import {store} from 'index';
 
 import * as IPCConstants from 'constants/ipc';
@@ -51,7 +51,7 @@ export const getData = (exportCategory,startTime, endTime) => {
         dispatch(projectActions.getProjects()),
         dispatch(projectTaskActions.getProjectTask()),
         dispatch(taskActions.getTasks()),
-        dispatch(shiftActions.getShiftsInRange(endTime,endTime))
+        dispatch(shiftActions.getShiftsInRange(startTime,endTime))
       ])      
 
     } catch (e) {
@@ -65,11 +65,11 @@ const formatData = (exportCategory,startTime,endTime) => {
   // array of employees
   const employees = employeeSelectors.getAllEmployees(store.getState())
   // array of shifts w/ embedded activities
-  const shifts = {}//getAllShiftsInRange(store.getState())
+  const shifts = shiftSelectors.getShiftsInRange(store.getState(),{startTime,endTime})
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
-
-  console.log(shiftSelectors.getShiftsInRange(store.getState(),{startTime,endTime}))
+  
+  
   // let exportData = []
   // employees.forEach(employee => {
   //   exportData.push({
