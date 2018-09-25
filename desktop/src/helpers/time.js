@@ -1,0 +1,6 @@
+export const minutesToString = minutes => { 
+  const m = Math.floor(minutes%60);
+  const hoursString = Math.round(minutes/60);
+  const minutesString = m > 10 ? m : '0' + m;
+  return `${hoursString}:${minutesString}`;
+};

@@ -42,9 +42,8 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
-  // field: PropTypes.object.isRequired,
-  //form: PropTypes.object.isRequired,
-  //value: PropTypes.string,
+  field: PropTypes.object.isRequired,
+  form: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   fullWidth: PropTypes.bool,

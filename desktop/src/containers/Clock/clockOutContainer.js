@@ -8,12 +8,8 @@ import { Formik } from 'formik';
 
 import { shift as shiftValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
-import {
-  employeeSelectors,
-  shiftSelectors,
-  projectSelectors,
-  projectTaskSelectors
-} from 'store/selectors';
+import { minutesToString } from 'helpers/time';
+import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
 
 class ClockOutContainer extends Component {
@@ -30,7 +26,7 @@ class ClockOutContainer extends Component {
   };
 
   render() {
-    const { currentShift, projects,projectTasks } = this.props;
+    const { currentShift, projects, projectTasks } = this.props;
     //console.log(currentShift,projectTasks)
     const isLoading = !currentShift;
     if (isLoading) {
@@ -46,10 +42,10 @@ class ClockOutContainer extends Component {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
       date: clockInMoment.format('MMM Do YYYY'),
-      length: `${shiftDuration.hours()}:${shiftDuration.minutes()}`
+      length: `${minutesToString(shiftDuration.asMinutes())}`
     };
 
-    
+
     return (
       <Formik
         initialValues={{

@@ -4,6 +4,7 @@ import { exportActionTypes } from 'constants/ActionTypes';
 import { employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
 import { employeeSelectors, shiftSelectors, projectTaskSelectors } from 'store/selectors';
+import {minutesToString} from 'helpers/time';
 import { store } from 'index';
 
 import * as IPCConstants from 'constants/ipc';
@@ -98,10 +99,4 @@ const formatData = (exportCategory,startTime,endTime) => {
   });
 
   return exportData;
-};
-
-const minutesToString = minutes => {  
-  const hoursString = Math.round(minutes/60);
-  const minutesString = minutes%60 > 10 ? minutes%60 : '0' + minutes%60;
-  return `${hoursString}:${minutesString}`;
 };

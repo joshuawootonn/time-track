@@ -90,7 +90,7 @@ Time.defaultProps = {
 };
 
 Time.propTypes = {
-  margin: PropTypes.bool,
+  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   fullWidth: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
