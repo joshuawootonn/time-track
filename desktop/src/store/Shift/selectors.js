@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import moment from 'moment'
-import {getActivitiesFromEntities} from 'store/Activity/selectors'
+import moment from 'moment';
+import { getActivitiesFromEntities } from 'store/Activity/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
@@ -32,16 +32,16 @@ export const getShiftsInRange = createSelector(
     // while mapping activity ids to array of activities
     return results.map(shiftId => {      
       return {
-          ...shifts[shiftId],
-          activities: shifts[shiftId].activities.map(activityId => {
-            return activities[activityId]
-          }
+        ...shifts[shiftId],
+        activities: shifts[shiftId].activities.map(activityId => {
+          return activities[activityId];
+        }
         )
       };
     })
     // remove any shift that is not within the bounds of correct clockInDate
-    .filter((shift) => {      
-      return moment(shift.clockInDate).isBetween(moment(start),moment(end))
-    });
+      .filter(shift => {      
+        return moment(shift.clockInDate).isBetween(moment(start),moment(end));
+      });
   }
-)
+);

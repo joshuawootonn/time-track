@@ -35,7 +35,7 @@ module.exports = {
       "error",
       "never"
     ],
-    'max-len': ["error", { "code": 150 }],
+    //'max-len': ["error", { "code": 150 }],
     'no-console': 'off',
     'eqeqeq': ['error', 'always'], // adding some custom ESLint rules
     'semi': ['error', 'always'],

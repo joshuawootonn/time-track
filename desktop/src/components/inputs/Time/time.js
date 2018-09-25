@@ -23,7 +23,7 @@ export class Time extends Component {
       [classes.vertical]: orientation === 'Vertical'
     });
 
-    console.log(value, minutesValue, hoursValue)
+    console.log(value, minutesValue, hoursValue);
     return (
       <div className={wrapperClasses}>
         <Select
@@ -34,7 +34,7 @@ export class Time extends Component {
           label="Hours"
           selectProps={{
             onChange: e => {
-              console.log(e.target.value, hoursValue)
+              console.log(e.target.value, hoursValue);
               this.props.form.setFieldValue(
                 name,
                 value + e.target.value - hoursValue,
@@ -84,10 +84,14 @@ export class Time extends Component {
   }
 }
 Time.defaultProps = {
-  orientation: 'Horizontal'
+  orientation: 'Horizontal',
+  margin: 'normal',
+  fullWidth: false
 };
 
 Time.propTypes = {
+  margin: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
@@ -98,19 +102,3 @@ Time.propTypes = {
 export default withStyles(styles)(Time);
 
 
-// <Select
-//           field={field}
-//           form={form}
-//           label="Minutes"         
-//           selectProps={{
-//             /* onChange: e => {
-//               this.props.form.setFieldValue(
-//                 name,
-//                 value + e.target.value - minutesValue,
-//               );
-//             }, */
-//             value: minutesValue
-//           }}
-//           items={minutes}
-//         >      
-//         </Select>

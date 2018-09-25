@@ -99,7 +99,7 @@ ipcMain.on(IPCConstants.GET_CRED, event => {
 ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   console.log('we out here', arg);
 
-  const {data} = arg;
+  const { data } = arg;
 
   var workbook = new Excel.Workbook();
 
@@ -112,7 +112,7 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     
     workSheetData.details.forEach(detailData => {
       worksheet.addRow(detailData);
-    })
+    });
   });
 
 

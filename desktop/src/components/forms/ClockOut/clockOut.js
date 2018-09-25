@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid, Typography, IconButton, MenuItem, Input, SvgIcon } from '@material-ui/core';
+import { Button, Grid, Typography, IconButton, MenuItem, SvgIcon } from '@material-ui/core';
 import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon } from '@material-ui/icons';
 import { Field, FieldArray } from 'formik';
 import { Close } from '@material-ui/icons';
@@ -79,9 +79,11 @@ const ClockOutForm = props => {
                                   label="Task"
                                 >
                                   {
-                                    projectTasks
-                                      .filter((projectTask) => { return activity.projectId == projectTask.projectId })
-                                      .map((projectTask, i) => {
+                                    projectTasks // This code iterates the projectTask 
+                                      .filter(projectTask => {
+                                        return activity.projectId === projectTask.projectId; // filters based on project selected
+                                      })
+                                      .map((projectTask, i) => { // maps those elements
                                         return (
                                           <MenuItem
                                             key={i}
@@ -93,13 +95,13 @@ const ClockOutForm = props => {
                                         );
                                       })
                                   }
-                                </Field>                               
+                                </Field>
 
-                                
+
                                 <Field
-                                  name={`activities.${index}.length`}                                 
-                                  component={Time}   
-                                  fullWidth                              
+                                  name={`activities.${index}.length`}
+                                  component={Time}
+                                  fullWidth
                                 />
                                 <Field
                                   name={`activities.${index}.description`}

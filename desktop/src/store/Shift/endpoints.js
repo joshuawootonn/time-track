@@ -20,6 +20,6 @@ export const getCurrentShift = employeeId => {
 
 export const getShiftsInRange = (startTime, endTime) => {
   return axios.get(
-   `${HOST}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
-  )
-}
+    `${HOST}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
+  );
+};

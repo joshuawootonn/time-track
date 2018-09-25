@@ -42,7 +42,7 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
- // field: PropTypes.object.isRequired,
+  // field: PropTypes.object.isRequired,
   //form: PropTypes.object.isRequired,
   //value: PropTypes.string,
   onChange: PropTypes.func,

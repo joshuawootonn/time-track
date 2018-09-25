@@ -1,10 +1,10 @@
-import moment from 'moment'
+import moment from 'moment';
 
 import { exportActionTypes } from 'constants/ActionTypes';
-import {employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
+import { employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
 
-import {employeeSelectors, shiftSelectors, projectSelectors,projectTaskSelectors,activitySelectors, taskSelectors} from 'store/selectors'
-import {store} from 'index';
+import { employeeSelectors, shiftSelectors, projectTaskSelectors } from 'store/selectors';
+import { store } from 'index';
 
 import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
@@ -23,8 +23,8 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
       
-      await dispatch(getData(exportCategory,startMoment,endMoment))
-      const exportData = formatData(exportCategory,startMoment,endMoment)
+      await dispatch(getData(exportCategory,startMoment,endMoment));
+      const exportData = formatData(exportCategory,startMoment,endMoment);
       ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
      
 
@@ -46,69 +46,62 @@ export const getData = (exportCategory,startTime, endTime) => {
   return async dispatch => {
     try {
       await Promise.all([
-        dispatch(employeeActions.getEmployees()),
-        dispatch(projectActions.getProjects()),
-        dispatch(projectTaskActions.getProjectTask()),
-        dispatch(taskActions.getTasks()),
-        dispatch(shiftActions.getShiftsInRange(startTime,endTime))
-      ])      
+        dispatch(employeeActions.getEmployees()), dispatch(projectActions.getProjects()), dispatch(projectTaskActions.getProjectTask()), dispatch(taskActions.getTasks()), dispatch(shiftActions.getShiftsInRange(startTime,endTime))
+      ]);      
 
     } catch (e) {
       console.log(e);   
     }
   };
-}
+};
 
 const formatData = (exportCategory,startTime,endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
-  const employees = employeeSelectors.getAllEmployees(store.getState())
+  const employees = employeeSelectors.getAllEmployees(store.getState());
   // array of shifts w/ embedded activities
-  const shifts = shiftSelectors.getShiftsInRange(store.getState(),{startTime,endTime})
+  const shifts = shiftSelectors.getShiftsInRange(store.getState(),{ startTime,endTime });
   // object of project tasks indexed by id with task and project attached
-  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
+  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   
-  console.log(employees,shifts,projectTasks)
-
-
-  
-
+  console.log(employees,shifts,projectTasks);
 
 
   
-  let exportData = []
+
+
+
+  
+  let exportData = [];
   employees.forEach(employee => {
-    const shiftData = []
-    const shiftsOfEmployees = shifts.filter((shift) => {
+    const shiftData = [];
+    const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
-    })
+    });
 
 
 
-    shiftsOfEmployees.forEach((shift) => {
-      shiftData.push([moment(shift.clockInDate).format("YYYY/MM/DD"),moment(shift.clockInDate).format("h:mm a"),moment(shift.clockOutDate).format("h:mm a"), minutesToString(shift.length)])
-      shiftData.push([])
-    })
+    shiftsOfEmployees.forEach(shift => {
+      shiftData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),moment(shift.clockInDate).format('h:mm a'),moment(shift.clockOutDate).format('h:mm a'), minutesToString(shift.length)]);
+      shiftData.push([]);
+    });
 
     exportData.push({
       key: `${employee.firstName} ${employee.lastName}`,
       header:[
-        ["AACI - Time Sheet"],
-        [`Employee: ${employee.firstName} ${employee.lastName}`],
-        [`Period: ${moment(startTime).format("YYYY/MM/DD")} - ${moment(endTime).format("YYYY/MM/DD")}`]
+        ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
       ],
       details: [
-        ["Details"],
-        ...shiftData
+        ['Details'], ...shiftData
       ]
-    })
+    });
   });
 
-  return exportData
-}
+  return exportData;
+};
 
-const minutesToString = (minutes) => {  
-  const hoursString = Math.round(minutes/60)
-  const minutesString = minutes%60 > 10 ? minutes%60 : "0" + minutes%60;
-  return `${hoursString}:${minutesString}`
-}
+const minutesToString = minutes => {  
+  const hoursString = Math.round(minutes/60);
+  const minutesString = minutes%60 > 10 ? minutes%60 : '0' + minutes%60;
+  return `${hoursString}:${minutesString}`;
+};

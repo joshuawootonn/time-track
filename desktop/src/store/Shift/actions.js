@@ -3,7 +3,6 @@ import { shiftActionTypes } from 'constants/ActionTypes';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as schemas from 'store/schemas';
-import {timeLength,timeLengthType} from 'constants/export';
 
 export const postShift = shift => {
   return async dispatch => {

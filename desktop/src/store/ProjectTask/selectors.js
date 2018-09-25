@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { getAllTaskObjects } from 'store/Task/selectors'
+import { getAllTaskObjects } from 'store/Task/selectors';
 import { getAllProjectObjects } from 'store/Project/selectors';
 
 export const getProjectTasksFromEntities = state => state.entities.projectTasks;
@@ -19,7 +19,7 @@ export const getAllProjectTasks = createSelector(
         ...projectTasks[projectTaskId],
         task: tasks[projectTasks[projectTaskId].taskId],
         project: projects[projectTasks[projectTaskId].projectId]
-      }
+      };
     });
   },
 );
@@ -27,13 +27,13 @@ export const getAllProjectTasks = createSelector(
 
 export const getAllProjectTasksObjects = createSelector(
   getAllProjectTasks,
-  (projectTasks) => {
+  projectTasks => {
     // if the projectTask array is empty
     if (!projectTasks) return null;
     // reduce the projectTask array to a object with id as they key
     return Object.assign({}, ...projectTasks.map(projectTask => ({
-        [projectTask.id]: projectTask
-      })
-    ))    
+      [projectTask.id]: projectTask
+    })
+    ));    
   },
 );
