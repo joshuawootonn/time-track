@@ -6,6 +6,7 @@ import { shiftActions, snackActions, activityActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
+import {currentRoundedTime} from 'helpers/time'
 
 export const getEmployees = () => {
   return async dispatch => {
@@ -65,7 +66,7 @@ export const clockIn = employee => {
     dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_REQUEST });
     try {
       const clockInObject = {
-        clockInDate: moment()
+        clockInDate: currentRoundedTime()
           .subtract(7, 'hours')
           .toString(),
         employeeId: employee.id
@@ -91,7 +92,7 @@ export const clockOut = (employee, shift, activities) => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST });
     try {
-      const currentMoment = moment();
+      const currentMoment = currentRoundedTime();
       const clockInMoment = moment(shift.clockInDate);
       const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
       const minutes = shiftDuration.asMinutes();

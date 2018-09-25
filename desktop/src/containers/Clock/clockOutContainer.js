@@ -11,6 +11,7 @@ import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
+import {currentRoundedTime} from 'helpers/time'
 
 class ClockOutContainer extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class ClockOutContainer extends Component {
       return <div>Loading</div>;
     }
 
-    const currentMoment = moment();
+    const currentMoment = currentRoundedTime();
     const clockInMoment = moment(currentShift.clockInDate);
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 
