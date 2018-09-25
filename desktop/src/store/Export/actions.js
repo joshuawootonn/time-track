@@ -69,18 +69,46 @@ const formatData = (exportCategory,startTime,endTime) => {
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState())
   
   console.log(employees,shifts,projectTasks)
+
+
+  
+
+
+
   
   let exportData = []
   employees.forEach(employee => {
+    const shiftData = []
+    const shiftsOfEmployees = shifts.filter((shift) => {
+      return employee.id === shift.employeeId;
+    })
+
+
+
+    shiftsOfEmployees.forEach((shift) => {
+      shiftData.push([moment(shift.clockInDate).format("YYYY/MM/DD"),moment(shift.clockInDate).format("h:mm a"),moment(shift.clockOutDate).format("h:mm a"), minutesToString(shift.length)])
+      shiftData.push([])
+    })
+
     exportData.push({
       key: `${employee.firstName} ${employee.lastName}`,
       header:[
         ["AACI - Time Sheet"],
         [`Employee: ${employee.firstName} ${employee.lastName}`],
         [`Period: ${moment(startTime).format("YYYY/MM/DD")} - ${moment(endTime).format("YYYY/MM/DD")}`]
+      ],
+      details: [
+        ["Details"],
+        ...shiftData
       ]
     })
   });
 
   return exportData
+}
+
+const minutesToString = (minutes) => {  
+  const hoursString = Math.round(minutes/60)
+  const minutesString = minutes%60 > 10 ? minutes%60 : "0" + minutes%60;
+  return `${hoursString}:${minutesString}`
 }
