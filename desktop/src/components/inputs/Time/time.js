@@ -12,7 +12,7 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, orientation, className } = this.props;
+    const { classes, orientation, field, form,margin,fullWidth } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
@@ -23,21 +23,18 @@ export class Time extends Component {
       [classes.vertical]: orientation === 'Vertical'
     });
 
+    console.log(value, minutesValue, hoursValue)
     return (
       <div className={wrapperClasses}>
         <Select
+          field={field}
+          form={form}          
+          margin={margin}
+          fullWidth={fullWidth}
           label="Hours"
-          formControlProps={{
-            className: className,
-            fullWidth: true
-          }}
-          labelProps={{
-            className: className
-          }}
           selectProps={{
-            className: className,
-            autoWidth: true,
             onChange: e => {
+              console.log(e.target.value, hoursValue)
               this.props.form.setFieldValue(
                 name,
                 value + e.target.value - hoursValue,
@@ -45,27 +42,24 @@ export class Time extends Component {
             },
             value: hoursValue
           }}
+          value={hoursValue}
         >
-          {hours.map((time, i) => {
+          {hours.map((item, i) => {
             return (
-              <MenuItem key={i} id="length" value={time.value}>
-                {time.label}
+              <MenuItem key={i} id={item.id} value={item.value}>
+                {item.name}
               </MenuItem>
             );
           })}
         </Select>
+
         <Select
+          field={field}
+          form={form}
+          margin={margin}
+          fullWidth={fullWidth}
           label="Minutes"
-          formControlProps={{
-            className: className,
-            fullWidth: true
-          }}
-          labelProps={{
-            className: className
-          }}
           selectProps={{
-            className: className,
-            autoWidth: true,
             onChange: e => {
               this.props.form.setFieldValue(
                 name,
@@ -74,15 +68,17 @@ export class Time extends Component {
             },
             value: minutesValue
           }}
+          value={minutesValue}
         >
-          {minutes.map((time, i) => {
+          {minutes.map((item, i) => {
             return (
-              <MenuItem key={i} id="length" value={time.value}>
-                {time.label}
+              <MenuItem key={i} id={item.id} value={item.value}>
+                {item.name}
               </MenuItem>
             );
           })}
         </Select>
+
       </div>
     );
   }
@@ -100,3 +96,21 @@ Time.propTypes = {
 };
 
 export default withStyles(styles)(Time);
+
+
+// <Select
+//           field={field}
+//           form={form}
+//           label="Minutes"         
+//           selectProps={{
+//             /* onChange: e => {
+//               this.props.form.setFieldValue(
+//                 name,
+//                 value + e.target.value - minutesValue,
+//               );
+//             }, */
+//             value: minutesValue
+//           }}
+//           items={minutes}
+//         >      
+//         </Select>

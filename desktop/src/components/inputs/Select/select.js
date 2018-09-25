@@ -10,15 +10,16 @@ const Select = ({ field, form, label, margin,
   return (
     <FormControl {...formControlProps} margin={margin} fullWidth={fullWidth}>
       {label && <InputLabel {...labelProps}>{label}</InputLabel>}
-      <SelectInput
-        {...selectProps}
+      <SelectInput        
         {...field}
+        {...selectProps}
         // Fix for handleblur I was getting on deselect
         // https://github.com/jaredpalmer/formik/issues/640
         onBlur={event => {
+          console.log(event.target,field);
           event.target.name = field.name;
           form.handleBlur(event);
-        }}
+        }} 
         fullWidth={fullWidth}
       >
         {items &&
@@ -41,14 +42,14 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
-  field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
-  value: PropTypes.string,
+ // field: PropTypes.object.isRequired,
+  //form: PropTypes.object.isRequired,
+  //value: PropTypes.string,
   onChange: PropTypes.func,
   margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   fullWidth: PropTypes.bool,
   items: PropTypes.array,
-  children: PropTypes.element,
+  children: PropTypes.array,
   formControlProps: PropTypes.object,
   labelProps: PropTypes.object,
   selectProps: PropTypes.object,

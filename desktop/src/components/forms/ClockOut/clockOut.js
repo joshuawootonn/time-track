@@ -13,7 +13,7 @@ import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
 
 const ClockOutForm = props => {
-  const { classes, isSubmitting, handleSubmit, shift, values, projects, cancel } = props;
+  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -67,108 +67,44 @@ const ClockOutForm = props => {
                               <div className={classes.formBody}>
                                 <Field
                                   name={`activities.${index}.projectId`}
-                                  render={({ field }) => (
-                                    <Select
-                                      label="Project"
-                                      className={classes.formElement}
-                                      formControlProps={{
-                                        className: classes.formElement,
-                                        fullWidth: true
-                                      }}
-                                      labelProps={{
-                                        className: classes.formElement
-                                      }}
-                                      selectProps={{
-                                        autoWidth: true,
-                                        ...field,
-                                        className: classes.formElement,
-                                        input: (
-                                          <Input
-                                            name={`activities.${index}.projectId`}
-                                          />
-                                        )
-                                      }}
-                                    >
-                                      {Object.keys(projects).map((key, i) => {
-                                        // This protects against projects that don't have accociated tasks
-
-                                        return (
-                                          <MenuItem
-                                            key={i}
-                                            id="projectId"
-                                            value={projects[key].id}
-                                          >
-                                            {projects[key].name}
-                                          </MenuItem>
-                                        );
-                                      })}
-                                    </Select>
-                                  )}
+                                  component={Select}
+                                  items={projects}
+                                  fullWidth
+                                  label="Project"
                                 />
                                 <Field
                                   name={`activities.${index}.projectTaskId`}
-                                  render={({ field }) => (
-                                    <Select
-                                      label="Task"
-                                      formControlProps={{
-                                        className: classes.formElement,
-                                        fullWidth: true
-                                      }}
-                                      labelProps={{
-                                        className: classes.formElement
-                                      }}
-                                      selectProps={{
-                                        className: classes.formElement,
-                                        autoWidth: true,
-                                        ...field,
-                                        input: (
-                                          <Input
-                                            name={`activities.${index}.projectTaskId`}
-                                          />
-                                        )
-                                      }}
-                                    >
-                                      {projects[activity.projectId] &&
-                                        projects[activity.projectId].tasks &&
-                                        projects[activity.projectId].tasks.map(
-                                          (task, i) => {
-                                            return (
-                                              <MenuItem
-                                                key={i}
-                                                id="projectTaskId"
-                                                value={task.projectTaskId}
-                                              >
-                                                {task.name}
-                                              </MenuItem>
-                                            );
-                                          },
-                                        )}
-                                    </Select>
-                                  )}
-                                />
+                                  component={Select}
+                                  fullWidth
+                                  label="Task"
+                                >
+                                  {
+                                    projectTasks
+                                      .filter((projectTask) => { return activity.projectId == projectTask.projectId })
+                                      .map((projectTask, i) => {
+                                        return (
+                                          <MenuItem
+                                            key={i}
+                                            id="projectTaskId"
+                                            value={projectTask.id}
+                                          >
+                                            {projectTask.task.name}
+                                          </MenuItem>
+                                        );
+                                      })
+                                  }
+                                </Field>                               
 
+                                
                                 <Field
-                                  name={`activities.${index}.length`}
-                                  render={fieldProps => {
-                                    return (
-                                      <Time
-                                        {...fieldProps}
-                                        className={classes.formElement}
-                                        name=""
-                                      />
-                                    );
-                                  }}
+                                  name={`activities.${index}.length`}                                 
+                                  component={Time}   
+                                  fullWidth                              
                                 />
                                 <Field
-                                  value={activity.description}
                                   name={`activities.${index}.description`}
-                                  render={fieldProps => (
-                                    <TextField
-                                      label="Description"
-                                      className={classes.formElement}
-                                      {...fieldProps}
-                                    />
-                                  )}
+                                  label="Description"
+                                  component={TextField}
                                 />
                                 <div className={classes.verticalCenter}>
                                   <IconButton
@@ -240,7 +176,8 @@ ClockOutForm.propTypes = {
   setFieldValue: PropTypes.func,
   handleSubmit: PropTypes.func,
   shift: PropTypes.object,
-  projects: PropTypes.object,
+  projects: PropTypes.array,
+  projectTasks: PropTypes.array,
   cancel: PropTypes.func
 };
 

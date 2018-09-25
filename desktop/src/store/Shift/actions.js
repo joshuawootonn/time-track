@@ -51,10 +51,11 @@ export const getCurrentShift = employeeId => {
     try {
       const response = await endpoint.getCurrentShift(employeeId);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
+      console.log(payload,response);
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
-        data: payload
+        data: response.data[0]
       });
     } catch (e) {
       dispatch({
