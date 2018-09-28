@@ -109,6 +109,10 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     workSheetData.header.forEach(headerData => {
       worksheet.addRow(headerData);      
     });
+
+    workSheetData.summary.forEach(summaryData => {
+      worksheet.addRow(summaryData);      
+    });
     
     workSheetData.details.forEach(detailData => {
       worksheet.addRow(detailData);

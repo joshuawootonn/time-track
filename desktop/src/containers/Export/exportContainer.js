@@ -20,8 +20,8 @@ class ExportContainer extends Component {
       <Formik
         initialValues={{
           exportCategory: 0,
-          start: moment('2018-08-26').format('YYYY-MM-DD'),
-          end: moment('2018-09-02').format('YYYY-MM-DD'),
+          start: moment('2018-09-22').format('YYYY-MM-DD'),
+          end: moment('2018-09-29').format('YYYY-MM-DD'),
           timeLength: 0,
           timeLengthType: 0,
           fileLocation: ''

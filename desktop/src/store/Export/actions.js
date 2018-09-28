@@ -83,7 +83,11 @@ const formatData = (exportCategory,startTime,endTime) => {
 
 
     shiftsOfEmployees.forEach(shift => {
-      shiftData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),moment(shift.clockInDate).format('h:mm a'),moment(shift.clockOutDate).format('h:mm a'), minutesToString(shift.length)]);
+      shiftData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),moment(shift.clockInDate).format('h:mm a'),moment(shift.clockOutDate).format('h:mm a'),minutesToString(shift.lunch), minutesToString(shift.length)]);
+      console.log(shift);
+      shift.activities.forEach((activity) => {
+        shiftData.push(['','',projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name,minutesToString(activity.length)])
+      })
       shiftData.push([]);
     });
 
@@ -92,7 +96,12 @@ const formatData = (exportCategory,startTime,endTime) => {
       header:[
         ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
       ],
+      summary: [
+        [''],[''],
+        ['Summary']
+      ],
       details: [
+        [''],[''],
         ['Details'], ...shiftData
       ]
     });
