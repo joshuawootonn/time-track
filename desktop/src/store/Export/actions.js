@@ -3,7 +3,7 @@ import moment from 'moment';
 import { exportActionTypes } from 'constants/ActionTypes';
 import { employeeActions, projectActions, projectTaskActions, taskActions, shiftActions } from 'store/actions';
 
-import { employeeSelectors, shiftSelectors, projectTaskSelectors } from 'store/selectors';
+import { employeeSelectors, shiftSelectors, projectTaskSelectors, projectSelectors } from 'store/selectors';
 import { minutesToString } from 'helpers/time';
 import { store } from 'index';
 
@@ -65,6 +65,7 @@ const formatData = (exportCategory, startTime, endTime) => {
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
 
+  const projects = projectSelectors.getAllProjectObjects(store.getState());
   console.log(employees, shifts, projectTasks);
 
 
@@ -75,7 +76,7 @@ const formatData = (exportCategory, startTime, endTime) => {
 
   let exportData = [];
   employees.forEach(employee => {
-    const detailData = [],summaryData = [];
+    const detailData = [], summaryData = [];
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
@@ -86,30 +87,59 @@ const formatData = (exportCategory, startTime, endTime) => {
     }
     let totalTimeForWeek = 0;
 
-    shiftsOfEmployees.forEach(shift => {           
+    const projectTotals = {};
+
+    shiftsOfEmployees.forEach(shift => {
       shift.activities.forEach((activity, i) => {
-        
-        let overtimeActivityLength,regularActivityLength;
-        if(totalTimeForWeek >= 2400){
-          overtimeActivityLength = activity.length
-        }else if (totalTimeForWeek+activity.length >= 2400){
-          overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
-          regularActivityLength = (2400-totalTimeForWeek);
-        }else {
-          regularActivityLength =activity.length
+
+        // Adding individual activity times 
+        let overtimeActivityLength, regularActivityLength;
+        let projectId = projectTasks[activity.projectTaskId].project.id;
+        if(!projectTotals[projectId]){
+          projectTotals[projectId] = {total:0,reg:0,ot:0}
         }
-        totalTimeForWeek+=activity.length
+        if (totalTimeForWeek >= 2400) {
+          overtimeActivityLength = activity.length
+          projectTotals[projectId] = {
+            total: projectTotals[projectId].total + activity.length,
+            reg: projectTotals[projectId].reg,
+            ot: projectTotals[projectId].ot + activity.length
+          } 
+        } else if (totalTimeForWeek + activity.length >= 2400) {
+          overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
+          regularActivityLength = (2400 - totalTimeForWeek);          
+          projectTotals[projectId] = {
+            total: projectTotals[projectId].total + activity.length,
+            reg: projectTotals[projectId].reg + regularActivityLength,
+            ot: projectTotals[projectId].ot + overtimeActivityLength
+          } 
+        } else {
+          regularActivityLength = activity.length
+          projectTotals[projectId] = {
+            total: projectTotals[projectId].total + activity.length,
+            reg: projectTotals[projectId].reg + activity.length,
+            ot: projectTotals[projectId].ot 
+          } 
+        }
+        console.log(projectTotals)
+
+
+
+        totalTimeForWeek += activity.length
         if (i === 0) {
           detailData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),
           moment(shift.clockInDate).format('h:mm a'),
           moment(shift.clockOutDate).format('h:mm a'),
-          minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength),minutesToString(overtimeActivityLength)])
+          minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)])
         } else {
-          detailData.push(['', '', '', '', projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength),minutesToString(overtimeActivityLength)])
+          detailData.push(['', '', '', '', projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)])
         }
       })
-      detailData.push([]);
     });
+
+    for(let key in projectTotals){
+      summaryData.push([projects[key].name,'','','','','',minutesToString(projectTotals[key].reg),minutesToString(projectTotals[key].ot),minutesToString(projectTotals[key].total)])
+    }
 
     exportData.push({
       key: `${employee.firstName} ${employee.lastName}`,
@@ -118,7 +148,9 @@ const formatData = (exportCategory, startTime, endTime) => {
       ],
       summary: [
         [''], [''],
-        ['Summary']
+        ['Summary'],
+        ['Project', '', '', '', '','', 'Reg', 'OT', 'Total'],
+        ...summaryData
       ],
       details: [
         [''], [''],
