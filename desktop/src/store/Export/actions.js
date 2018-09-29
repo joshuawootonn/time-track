@@ -1,10 +1,10 @@
 import moment from 'moment';
 
 import { exportActionTypes } from 'constants/ActionTypes';
-import { employeeActions, projectActions, projectTaskActions, taskActions,shiftActions } from 'store/actions';
+import { employeeActions, projectActions, projectTaskActions, taskActions, shiftActions } from 'store/actions';
 
 import { employeeSelectors, shiftSelectors, projectTaskSelectors } from 'store/selectors';
-import {minutesToString} from 'helpers/time';
+import { minutesToString } from 'helpers/time';
 import { store } from 'index';
 
 import * as IPCConstants from 'constants/ipc';
@@ -23,11 +23,11 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
 
       const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
-      
-      await dispatch(getData(exportCategory,startMoment,endMoment));
-      const exportData = formatData(exportCategory,startMoment,endMoment);
+
+      await dispatch(getData(exportCategory, startMoment, endMoment));
+      const exportData = formatData(exportCategory, startMoment, endMoment);
       ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
-     
+
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
@@ -42,67 +42,89 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
   };
 };
 
-export const getData = (exportCategory,startTime, endTime) => {
+export const getData = (exportCategory, startTime, endTime) => {
   // TODO: different actions based on the export category
   return async dispatch => {
     try {
       await Promise.all([
-        dispatch(employeeActions.getEmployees()), dispatch(projectActions.getProjects()), dispatch(projectTaskActions.getProjectTask()), dispatch(taskActions.getTasks()), dispatch(shiftActions.getShiftsInRange(startTime,endTime))
-      ]);      
+        dispatch(employeeActions.getEmployees()), dispatch(projectActions.getProjects()), dispatch(projectTaskActions.getProjectTask()), dispatch(taskActions.getTasks()), dispatch(shiftActions.getShiftsInRange(startTime, endTime))
+      ]);
 
     } catch (e) {
-      console.log(e);   
+      console.log(e);
     }
   };
 };
 
-const formatData = (exportCategory,startTime,endTime) => {
+const formatData = (exportCategory, startTime, endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
   const employees = employeeSelectors.getAllEmployees(store.getState());
   // array of shifts w/ embedded activities
-  const shifts = shiftSelectors.getShiftsInRange(store.getState(),{ startTime,endTime });
+  const shifts = shiftSelectors.getShiftsInRange(store.getState(), { startTime, endTime });
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
-  
-  console.log(employees,shifts,projectTasks);
 
-
-  
+  console.log(employees, shifts, projectTasks);
 
 
 
-  
+
+
+
+
   let exportData = [];
   employees.forEach(employee => {
-    const shiftData = [];
+    const detailData = [],summaryData = [];
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
+    const styleStrength = {
+      1: [],
+      2: [],
+      3: []
+    }
+    let totalTimeForWeek = 0;
 
-
-
-    shiftsOfEmployees.forEach(shift => {
-      shiftData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),moment(shift.clockInDate).format('h:mm a'),moment(shift.clockOutDate).format('h:mm a'),minutesToString(shift.lunch), minutesToString(shift.length)]);
-      console.log(shift);
-      shift.activities.forEach((activity) => {
-        shiftData.push(['','',projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name,minutesToString(activity.length)])
+    shiftsOfEmployees.forEach(shift => {           
+      shift.activities.forEach((activity, i) => {
+        
+        let overtimeActivityLength,regularActivityLength;
+        if(totalTimeForWeek >= 2400){
+          overtimeActivityLength = activity.length
+        }else if (totalTimeForWeek+activity.length >= 2400){
+          overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
+          regularActivityLength = (2400-totalTimeForWeek);
+        }else {
+          regularActivityLength =activity.length
+        }
+        totalTimeForWeek+=activity.length
+        if (i === 0) {
+          detailData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),
+          moment(shift.clockInDate).format('h:mm a'),
+          moment(shift.clockOutDate).format('h:mm a'),
+          minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength),minutesToString(overtimeActivityLength)])
+        } else {
+          detailData.push(['', '', '', '', projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength),minutesToString(overtimeActivityLength)])
+        }
       })
-      shiftData.push([]);
+      detailData.push([]);
     });
 
     exportData.push({
       key: `${employee.firstName} ${employee.lastName}`,
-      header:[
+      header: [
         ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
       ],
       summary: [
-        [''],[''],
+        [''], [''],
         ['Summary']
       ],
       details: [
-        [''],[''],
-        ['Details'], ...shiftData
+        [''], [''],
+        ['Details'],
+        ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'],
+        ...detailData
       ]
     });
   });

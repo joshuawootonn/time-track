@@ -1,6 +1,7 @@
 import moment from 'moment'
 
 export const minutesToString = minutes => { 
+  if (!minutes) return '';
   const m = Math.floor(minutes%60);
   const hoursString = Math.round(minutes/60);
   const minutesString = m > 10 ? m : '0' + m;
