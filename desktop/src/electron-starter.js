@@ -104,7 +104,9 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   var workbook = new Excel.Workbook();
 
   data.forEach(workSheetData => {
-    var worksheet = workbook.addWorksheet(workSheetData.key);
+    var worksheet = workbook.addWorksheet(workSheetData.key, {
+      pageSetup: {fitToPage: true}
+    });
 
     workSheetData.header.forEach(headerData => {
       worksheet.addRow(headerData);      
@@ -117,6 +119,21 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     workSheetData.details.forEach(detailData => {
       worksheet.addRow(detailData);
     });
+
+    workSheetData.sheetStyles[1].forEach((ele)=> {
+      worksheet.getRow(ele).font = {  size: 20, bold: true };
+    })
+
+    workSheetData.sheetStyles[2].forEach((ele)=> {
+      worksheet.getRow(ele).font = {  size:15, bold: true };
+    })
+
+    workSheetData.sheetStyles[3].forEach((ele)=> {
+      worksheet.getRow(ele).font = {  size: 13, bold: true };
+    })
+    worksheet.columns.forEach(column => {
+      column.width = column.header.length < 12 ? 12 : column.header.length +2
+    })
   });
 
 
