@@ -21,15 +21,14 @@ class ExportContainer extends Component {
         initialValues={{
           exportCategory: 0,
           start: moment('2018-09-22').format('YYYY-MM-DD'),
-          end: moment('2018-09-29').format('YYYY-MM-DD'),
           timeLength: 0,
           timeLengthType: 0,
           fileLocation: ''
         }}
         onSubmit={values => {
           const { exportToExcel, history } = this.props;
-          const { exportCategory, start, end, fileLocation } = values;
-          exportToExcel(exportCategory, start, end, fileLocation)
+          const { exportCategory, start, fileLocation } = values;
+          exportToExcel(exportCategory, start, fileLocation)
             .then(() => history.push('/'));
         }}
         validationSchema={exportValidation}
@@ -43,9 +42,9 @@ class ExportContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    exportToExcel: (exportCategory, start, end, fileLocation ) => {
+    exportToExcel: (exportCategory, start, fileLocation ) => {
       return dispatch(
-        exportActions.exportToExcel(exportCategory, start, end, fileLocation),
+        exportActions.exportToExcel(exportCategory, start, fileLocation),
       );
     }
   };

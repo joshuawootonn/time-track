@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 
-const TextField = ({ field, form, label, className, type, margin }) => (
+const TextField = ({ field, form, label, className, type, margin, helper }) => (
   <MUTextField
     {...field}
     label={label}
@@ -12,7 +12,7 @@ const TextField = ({ field, form, label, className, type, margin }) => (
     fullWidth
     className={className}
     margin={margin}
-    FormHelperTextProps={{ error: true }}
+    FormHelperTextProps={helper ==='none' ? { style:{ display:'none' },error: true } : { error: true  }}    
     helperText={
       form && form.errors[field.name] && form.touched[field.name]
         ? form.errors[field.name]
@@ -23,7 +23,8 @@ const TextField = ({ field, form, label, className, type, margin }) => (
 
 TextField.defaultProps = {
   type: 'search',
-  margin: 'normal'
+  margin: 'normal',
+  helper: 'normal'
 };
 
 TextField.propTypes = {
@@ -33,7 +34,8 @@ TextField.propTypes = {
   onChange: PropTypes.func,
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
-  margin: PropTypes.string
+  margin: PropTypes.string,
+  helper: PropTypes.oneOf(['none','normal'])
 };
 
 export default TextField;

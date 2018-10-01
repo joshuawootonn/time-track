@@ -14,7 +14,7 @@ import * as status from 'constants/status';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
-export const exportToExcel = (exportCategory, start, end, fileLocation) => {
+export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {
@@ -22,7 +22,7 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       //console.log(exportCategory,new moment(start).format('YYYY-MM-DD HH:mm:ss'),new moment(end).toString(),fileLocation);
 
       const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
-      const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
+      const endMoment = new moment(start).add(7,'days').format('YYYY-MM-DD HH:mm:ss');
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);

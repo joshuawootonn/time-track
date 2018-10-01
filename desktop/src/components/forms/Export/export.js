@@ -23,33 +23,24 @@ class ExportForm extends Component {
             <Grid item xs={12}>
               <Typography variant="display2">Export</Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.row}>
               <Field
                 name="exportCategory"
                 component={Select}
                 items={exportConstants.exportCategory}
                 fullWidth
+                margin="none"
                 label="Export By"
               />
-            </Grid>
-            <Grid item xs={12} className={classes.row}>
               <Field
                 name="start"
                 component={TextField}
+                helper="none"
                 margin="none"
                 label="From"
                 type="date"
               />
-              <Field
-                className={classes.spaceAround}
-                name="end"
-                component={TextField}
-                margin="none"
-                label="To"
-                type="date"
-              />
             </Grid>
-
             <Grid item xs={12}>
               <Field
                 name="fileLocation"
