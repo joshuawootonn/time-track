@@ -1,4 +1,4 @@
-const styles = () => ({
+const styles = theme => ({
   hero: {
     height: '100vh',
     display: 'flex',
@@ -18,7 +18,10 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
+  },
+  error: {
+    color: theme.palette.error.main
   }
 });
 

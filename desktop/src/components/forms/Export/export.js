@@ -15,7 +15,8 @@ import * as exportConstants from 'constants/export';
 
 class ExportForm extends Component {
   render() {
-    const { classes, cancel, isSubmitting } = this.props;
+    const { classes, cancel, isSubmitting, errors } = this.props;
+    console.log(isSubmitting, Object.keys(errors).length !== 0);
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent}>
@@ -50,16 +51,16 @@ class ExportForm extends Component {
               />
             </Grid>
             <Grid item xs={12} className={classes.row}>
+              <Typography variant="body1" className={classes.error}>{errors[Object.keys(errors)[0]]}</Typography>
               <div>
                 <Button
                   type="submit"
                   color="primary"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || Object.keys(errors).length !== 0 }
                   variant="contained"
                 >
                   Export
                 </Button>
-
                 <Button
                   onClick={cancel}
                   color="secondary"

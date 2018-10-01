@@ -28,7 +28,7 @@ class ClockOutContainer extends Component {
 
   render() {
     const { currentShift, projects, projectTasks } = this.props;
-    //console.log(currentShift,projectTasks)
+    
     const isLoading = !currentShift;
     if (isLoading) {
       return <div>Loading</div>;

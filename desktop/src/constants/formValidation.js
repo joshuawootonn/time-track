@@ -33,6 +33,6 @@ export const exportValidation = Yup.object().shape({
     .required('File location is required')
     .matches(
       new RegExp(/\.(xls|xlsx)$/i),
-      'File locaiton must be an Xls or Xlsx file',
+      'File location must be an Xls or Xlsx file',
     )
 });
