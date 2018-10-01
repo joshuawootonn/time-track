@@ -11,7 +11,7 @@ import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
 import ClockOut from 'components/forms/ClockOut';
-import {currentRoundedTime} from 'helpers/time'
+import { currentRoundedTime } from 'helpers/time';
 
 class ClockOutContainer extends Component {
   constructor(props) {

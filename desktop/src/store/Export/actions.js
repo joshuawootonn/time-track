@@ -25,7 +25,7 @@ export const exportToExcel = (exportCategory, start, end, fileLocation) => {
       const endMoment = new moment(end).format('YYYY-MM-DD HH:mm:ss');
 
       await dispatch(getData(startMoment, endMoment));
-      const exportData = formatData( startMoment, endMoment);
+      const exportData = formatData(startMoment, endMoment);
 
       ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
@@ -60,7 +60,7 @@ const formatData = (startTime, endTime) => {
   const employees = employeeSelectors.getAllEmployees(store.getState());
   // array of shifts w/ embedded activities
   const shifts = shiftSelectors.getShiftsInRange(store.getState(), { startTime, endTime });
-    // object of project tasks indexed by id with task and project attached
+  // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
 
@@ -70,94 +70,92 @@ const formatData = (startTime, endTime) => {
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
-    
-    
+
+
     const individualProjectTotals = {};
-    const allProjectTotals = { total: 0, reg: 0, ot: 0 }
+    const allProjectTotals = { total: 0, reg: 0, ot: 0 };
 
     // Summary 
     let totalTimeForWeek = 0;
     shiftsOfEmployees.forEach(shift => {
-      shift.activities.forEach((activity, i) => {
+      shift.activities.forEach(activity => {
 
         // Adding individual activity times 
-        let overtimeActivityLength, regularActivityLength 
         let currentProjectId = projectTasks[activity.projectTaskId].project.id;
-        
+
         // if project hasn't been added to total 
         if (!individualProjectTotals[currentProjectId]) {
-          individualProjectTotals[currentProjectId] = { total: 0, reg: 0, ot: 0 }
+          individualProjectTotals[currentProjectId] = { total: 0, reg: 0, ot: 0 };
         }
 
         if (totalTimeForWeek >= 2400) {
-          allProjectTotals.total += activity.length
-          allProjectTotals.ot += activity.length
-          individualProjectTotals[currentProjectId].total += activity.length
-          individualProjectTotals[currentProjectId].ot +=activity.length
-         
+          allProjectTotals.total += activity.length;
+          allProjectTotals.ot += activity.length;
+          individualProjectTotals[currentProjectId].total += activity.length;
+          individualProjectTotals[currentProjectId].ot += activity.length;
+
         } else if (totalTimeForWeek + activity.length >= 2400) {
 
-          allProjectTotals.total += activity.length
-          allProjectTotals.reg += (2400 - totalTimeForWeek)
-          allProjectTotals.ot += (totalTimeForWeek + activity.length - 2400)
-          individualProjectTotals[currentProjectId].total += activity.length
-          individualProjectTotals[currentProjectId].reg +=(2400 - totalTimeForWeek)      
-          individualProjectTotals[currentProjectId].ot +=(totalTimeForWeek + activity.length - 2400)
+          allProjectTotals.total += activity.length;
+          allProjectTotals.reg += (2400 - totalTimeForWeek);
+          allProjectTotals.ot += (totalTimeForWeek + activity.length - 2400);
+          individualProjectTotals[currentProjectId].total += activity.length;
+          individualProjectTotals[currentProjectId].reg += (2400 - totalTimeForWeek);
+          individualProjectTotals[currentProjectId].ot += (totalTimeForWeek + activity.length - 2400);
 
         } else {
 
-          allProjectTotals.total += activity.length
-          allProjectTotals.reg += activity.length
-          individualProjectTotals[currentProjectId].total += activity.length
-          individualProjectTotals[currentProjectId].reg +=activity.length
-          
+          allProjectTotals.total += activity.length;
+          allProjectTotals.reg += activity.length;
+          individualProjectTotals[currentProjectId].total += activity.length;
+          individualProjectTotals[currentProjectId].reg += activity.length;
+
         }
-        totalTimeForWeek += activity.length       
-      })
+        totalTimeForWeek += activity.length;
+      });
     });
     // add all summary rows
     for (let key in individualProjectTotals) {
-      summaryData.push([projects[key].name, '', '', '', '', minutesToString(individualProjectTotals[key].reg), minutesToString(individualProjectTotals[key].ot), minutesToString(individualProjectTotals[key].total)])
+      summaryData.push([projects[key].name, '', '', '', '', minutesToString(individualProjectTotals[key].reg), minutesToString(individualProjectTotals[key].ot), minutesToString(individualProjectTotals[key].total)]);
     }
     // add the total summary row
-    summaryData.push(['Total','', '', '', '', minutesToString(allProjectTotals.reg),minutesToString(allProjectTotals.ot),minutesToString(allProjectTotals.total)])
-    
-    
+    summaryData.push(['Total', '', '', '', '', minutesToString(allProjectTotals.reg), minutesToString(allProjectTotals.ot), minutesToString(allProjectTotals.total)]);
+
+
     // Details 
-    totalTimeForWeek = 0
+    totalTimeForWeek = 0;
     shiftsOfEmployees.forEach(shift => {
       shift.activities.forEach((activity, i) => {
         let overtimeActivityLength, regularActivityLength;
 
         if (totalTimeForWeek >= 2400) {
-          regularActivityLength = activity.length
+          regularActivityLength = activity.length;
         } else if (totalTimeForWeek + activity.length >= 2400) {
           overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
           regularActivityLength = (2400 - totalTimeForWeek);
         } else {
-          overtimeActivityLength = activity.length
+          overtimeActivityLength = activity.length;
         }
 
-        totalTimeForWeek += activity.length
+        totalTimeForWeek += activity.length;
         if (i === 0) {
-          detailData.push([moment(shift.clockInDate).format('YYYY/MM/DD'),
-          moment(shift.clockInDate).format('h:mm a'),
-          moment(shift.clockOutDate).format('h:mm a'),
-          minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)])
+          detailData.push([
+            moment(shift.clockInDate).format('MM/DD/YYYY'), moment(shift.clockInDate).format('h:mm a'), moment(shift.clockOutDate).format('h:mm a'), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         } else {
-          detailData.push(['', '', '', projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)])
+          detailData.push(['','','','',projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         }
-      })
+      });
     });
 
-    
+
     // Style
-    const numOfSummaryRows = Object.keys(individualProjectTotals).length;
+    const spacerRows = Object.keys(individualProjectTotals).length;
     const sheetStyles = {
       1: [1],
-      2: [6,numOfSummaryRows + 11],
-      3: [2, 3, 7,numOfSummaryRows + 8,numOfSummaryRows + 12]
-    }
+      2: [6, spacerRows + 11],
+      3: [2, 3, 7, spacerRows + 8, spacerRows + 12],
+      spacerRows
+    };
 
     exportData.push({
       key: `${employee.firstName} ${employee.lastName}`,
@@ -165,16 +163,10 @@ const formatData = (startTime, endTime) => {
         ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
       ],
       summary: [
-        [''], [''],
-        ['Summary'],
-        ['Project', '', '', '', '', 'Reg', 'OT', 'Total'],
-        ...summaryData
+        [''], [''], ['Summary','', '', '', ''], ['Project', '', '', '', '', 'Reg', 'OT', 'Total'], ...summaryData
       ],
       details: [
-        [''], [''],
-        ['Details'],
-        ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'],
-        ...detailData
+        [''], [''], ['Details'], ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'], ...detailData
       ],
       sheetStyles
     });

@@ -6,7 +6,7 @@ import { shiftActions, snackActions, activityActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
-import {currentRoundedTime} from 'helpers/time'
+import { currentRoundedTime } from 'helpers/time';
 
 export const getEmployees = () => {
   return async dispatch => {

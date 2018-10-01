@@ -105,7 +105,7 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
 
   data.forEach(workSheetData => {
     var worksheet = workbook.addWorksheet(workSheetData.key, {
-      pageSetup: {fitToPage: true}
+      pageSetup: { fitToPage: true }
     });
 
     workSheetData.header.forEach(headerData => {
@@ -120,20 +120,25 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
       worksheet.addRow(detailData);
     });
 
-    workSheetData.sheetStyles[1].forEach((ele)=> {
+    workSheetData.sheetStyles[1].forEach(ele=> {
       worksheet.getRow(ele).font = {  size: 20, bold: true };
-    })
+    });
 
-    workSheetData.sheetStyles[2].forEach((ele)=> {
+    workSheetData.sheetStyles[2].forEach(ele=> {
       worksheet.getRow(ele).font = {  size:15, bold: true };
-    })
+    });
 
-    workSheetData.sheetStyles[3].forEach((ele)=> {
+    workSheetData.sheetStyles[3].forEach(ele=> {
       worksheet.getRow(ele).font = {  size: 13, bold: true };
-    })
+    });
     worksheet.columns.forEach(column => {
-      column.width = column.header.length < 12 ? 12 : column.header.length +2
-    })
+      let maxWidth = 5;
+      column.eachCell({ includeEmpty: false },(cell, rowNumber) => {
+        if(rowNumber> workSheetData.sheetStyles.spacerRows + 9 && cell.text.length > maxWidth)
+          maxWidth = cell.text.length;
+      });
+      column.width = maxWidth+2;
+    });
   });
 
 
@@ -155,6 +160,8 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   // // edit cells directly
   // worksheet.getCell('A6').value = '1989';
   // worksheet.getCell('B6').value = 2014;
+
+
 
   workbook.xlsx.writeFile(arg.fileLocation).then(function() {
     event.returnValue = 'saved';

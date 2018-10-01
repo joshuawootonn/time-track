@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from 'moment';
 
 export const minutesToString = minutes => { 
   if (!minutes) return '';
@@ -9,5 +9,5 @@ export const minutesToString = minutes => {
 };
 
 export const currentRoundedTime = () =>{ 
-  return moment().minute(Math.round(moment().minute() / 15) * 15).second(0)
-}
+  return moment().minute(Math.round(moment().minute() / 15) * 15).second(0);
+};
