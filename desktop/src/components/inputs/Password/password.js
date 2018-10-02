@@ -14,7 +14,7 @@ const TextField = ({ field, form, id, label, helper }) => (
     fullWidth
     margin="normal"
     FormHelperTextProps={helper !=='none' ? { style:{ display:'none' },error: true } : { error: true  }}
-    helperText={getIn(form.errors, field.name)|| ' '}
+    helperText={getIn(form.errors, field.name)|| ' '} 
   />
 );
 

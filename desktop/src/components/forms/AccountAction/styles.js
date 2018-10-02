@@ -18,6 +18,9 @@ const styles = () => ({
   buttonIcon: {
     height: '70px',
     width: '70px'
+  },
+  toolTip: {
+    fontSize: '15px !important',
   }
 });
 

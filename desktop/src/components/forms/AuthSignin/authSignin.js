@@ -19,6 +19,7 @@ const AuthSigninForm = props => {
         <Field component={TextField} name="username" label="Network" />
         <Field component={Password} name="password" label="Password" />
         <Button
+          className={classes.button}
           type="submit"
           color="primary"
           variant="contained"
