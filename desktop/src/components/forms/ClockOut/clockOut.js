@@ -4,26 +4,21 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Typography, IconButton, MenuItem, SvgIcon } from '@material-ui/core';
-import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon } from '@material-ui/icons';
+import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon,Close } from '@material-ui/icons';
 import { Field, FieldArray } from 'formik';
-import { Close } from '@material-ui/icons';
-import styles from './styles';
+
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
+
+import styles from './styles';
+
 import { minutesToString } from 'helpers/time';
 
 const ClockOutForm = props => {
-  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel, errors,timeLeft } = props;
-  let errorGeneralMessage;
-  if (errors.activities && typeof errors.activities === 'string'){
-    errorGeneralMessage = errors.activities;
-  }else if (errors.lunch && typeof errors.lunch === 'string'){
-    errorGeneralMessage = errors.lunch;
-  }
-
-
- 
+  const { classes, isSubmitting, handleSubmit, shift, values, 
+    projects, projectTasks, cancel, errors,timeLeft,generalError } = props;
+  
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -106,8 +101,6 @@ const ClockOutForm = props => {
                                       })
                                   }
                                 </Field>
-
-
                                 <Field
                                   name={`activities.${index}.length`}
                                   component={Time}
@@ -161,13 +154,12 @@ const ClockOutForm = props => {
                       </Grid>
 
                       <Grid item xs={12} className={classes.formFooter}>
-                      <Typography variant="headline" margin="none">
+                        <Typography variant="headline" margin="none">
                           Time Left: {minutesToString(timeLeft)}
                         </Typography>
-                        <Typography variant="headline" margin="none" className={classes.error}>
-                          {errorGeneralMessage}
-                        </Typography>
-                       
+                        <Typography variant="body1" margin="none" className={classes.error}>
+                          {generalError}
+                        </Typography>                      
 
                         <div>
                           <Button
@@ -212,7 +204,9 @@ ClockOutForm.propTypes = {
   projects: PropTypes.array,
   projectTasks: PropTypes.array,
   cancel: PropTypes.func,
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  timeLeft: PropTypes.number,
+  generalError: PropTypes.string
 };
 
 export default withStyles(styles)(ClockOutForm);

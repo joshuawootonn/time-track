@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Formik } from 'formik';
 
+import ClockOut from 'components/forms/ClockOut';
+import Progress from 'components/helpers/Progress';
+
 import { shift as shiftValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
-import ClockOut from 'components/forms/ClockOut';
 import { currentRoundedTime } from 'helpers/time';
 
 class ClockOutContainer extends Component {
@@ -31,7 +33,7 @@ class ClockOutContainer extends Component {
 
     const isLoading = !currentShift;
     if (isLoading) {
-      return <div>Loading</div>;
+      return <Progress variant="circular" fullPage />;
     }
 
     const currentMoment = currentRoundedTime();
@@ -68,19 +70,29 @@ class ClockOutContainer extends Component {
           );
         }}
         validationSchema={shiftValidation}
-        render={(formikProps) => {
+        render={formikProps => {
           //console.log(formikProps.values);
-          
+          const { errors,values } = formikProps;
           // Time left is the duraction - lunch - all the activity times
-          let timeLeft = Math.floor(shiftDuration.asMinutes()) - formikProps.values.lunch;
-          formikProps.values.activities.forEach((activity) => {
-            timeLeft -= activity.length
-          })
+          let timeLeft = Math.floor(shiftDuration.asMinutes()) - values.lunch;
+          values.activities.forEach(activity => {
+            timeLeft -= activity.length;
+          });
+          
+          let generalError;
+          if (errors.activities && typeof errors.activities === 'string'){
+            generalError = errors.activities;
+          }else if (errors.lunch && typeof errors.lunch === 'string'){
+            generalError = errors.lunch;
+          }
+        
+
           return (
             <ClockOut
               cancel={this.cancel}
               shift={clockOutObject}
               projects={projects}
+              generalError={generalError}
               timeLeft={timeLeft}
               projectTasks={projectTasks}
               {...formikProps}
