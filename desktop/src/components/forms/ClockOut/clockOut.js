@@ -15,13 +15,13 @@ import Time from 'components/inputs/Time';
 const ClockOutForm = props => {
   const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel, errors } = props;
   let errorGeneralMessage;
-  console.log(!!errors.activities,typeof errors.activities === 'string');
   if (errors.activities && typeof errors.activities === 'string'){
     errorGeneralMessage = errors.activities;
   }else if (errors.lunch && typeof errors.lunch === 'string'){
     errorGeneralMessage = errors.lunch;
   }
   
+  console.log(values.activities,errors.activities);
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { MenuItem } from '@material-ui/core';
+import { MenuItem, FormHelperText, FormControl } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import cx from 'classnames';
+import { getIn } from 'formik';
 
 import { minutes, hours } from 'constants/times';
 import Select from 'components/inputs/Select';
@@ -12,7 +13,7 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, orientation, field, form,margin,fullWidth,label1,label2 } = this.props;
+    const { classes, orientation, field, form, margin, fullWidth, label1, label2, helper } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
@@ -25,61 +26,67 @@ export class Time extends Component {
 
     //console.log(value, minutesValue, hoursValue);
     return (
-      <div className={wrapperClasses}>
-        <Select
-          field={field}
-          form={form}          
-          margin={margin}
-          fullWidth={fullWidth}
-          label={label1}
-          selectProps={{
-            onChange: e => {
-              console.log(e.target.value, hoursValue);
-              this.props.form.setFieldValue(
-                name,
-                value + e.target.value - hoursValue,
+      <FormControl fullWidth={fullWidth}  className={classes.fieldWrapper + " " + classes.vertical}>
+        <div className={classes.fieldWrapper + " " + classes.horizontal} >
+          <Select
+            field={field}
+            form={form}
+            margin={margin}
+            fullWidth={fullWidth}
+            label={label1}
+            selectProps={{
+              onChange: e => {
+                console.log(e.target.value, hoursValue);
+                this.props.form.setFieldValue(
+                  name,
+                  value + e.target.value - hoursValue,
+                );
+              },
+              value: hoursValue
+            }}
+            value={hoursValue}
+            helper="none"
+          >
+            {hours.map((item, i) => {
+              return (
+                <MenuItem key={i} id={item.id} value={item.value}>
+                  {item.name}
+                </MenuItem>
               );
-            },
-            value: hoursValue
-          }}
-          value={hoursValue}
-        >
-          {hours.map((item, i) => {
-            return (
-              <MenuItem key={i} id={item.id} value={item.value}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
+            })}
+          </Select>
 
-        <Select
-          field={field}
-          form={form}
-          margin={margin}
-          fullWidth={fullWidth}
-          label={label2}
-          selectProps={{
-            onChange: e => {
-              this.props.form.setFieldValue(
-                name,
-                value + e.target.value - minutesValue,
+          <Select
+            field={field}
+            form={form}
+            margin={margin}
+            fullWidth={fullWidth}
+            label={label2}
+            selectProps={{
+              onChange: e => {
+                this.props.form.setFieldValue(
+                  name,
+                  value + e.target.value - minutesValue,
+                );
+              },
+              value: minutesValue
+            }}
+            value={minutesValue}
+            helper="none"
+          >
+            {minutes.map((item, i) => {
+              return (
+                <MenuItem key={i} id={item.id} value={item.value}>
+                  {item.name}
+                </MenuItem>
               );
-            },
-            value: minutesValue
-          }}
-          value={minutesValue}
-        >
-          {minutes.map((item, i) => {
-            return (
-              <MenuItem key={i} id={item.id} value={item.value}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
-
-      </div>
+            })}
+          </Select>
+        </div>
+        {helper === 'normal' && <FormHelperText error={true}>
+          {getIn(form.errors, field.name)}
+        </FormHelperText>}
+      </FormControl>
     );
   }
 }
@@ -88,7 +95,8 @@ Time.defaultProps = {
   margin: 'normal',
   fullWidth: false,
   label1: 'Hours',
-  label2: 'Minutes'
+  label2: 'Minutes',
+  helper: 'normal'
 };
 
 Time.propTypes = {
@@ -99,6 +107,7 @@ Time.propTypes = {
   form: PropTypes.object.isRequired,
   orientation: PropTypes.oneOf(['Horizontal', 'Vertical']),
   className: PropTypes.object,
+  helper: PropTypes.oneOf(['normal', 'none']),
   label1: PropTypes.string,
   label2: PropTypes.string
 };

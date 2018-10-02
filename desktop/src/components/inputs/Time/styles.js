@@ -4,7 +4,7 @@ const styles = () => ({
     flexDirection: 'column',
     width: '100%'
   },
-  vertical: {
+   vertical: {
     flexDirection: 'column'
   },
   horizontal: {

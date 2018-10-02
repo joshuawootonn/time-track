@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
+import {getIn} from 'formik'
 
 const TextField = ({ field, form, id, label }) => (
   <MUTextField
@@ -13,11 +14,7 @@ const TextField = ({ field, form, id, label }) => (
     fullWidth
     margin="normal"
     FormHelperTextProps={{ error: true }}
-    helperText={
-      form.errors[field.name] && form.touched[field.name]
-        ? form.errors[field.name]
-        : ' '
-    }
+    helperText={getIn(form.errors, field.name)}
   />
 );
 

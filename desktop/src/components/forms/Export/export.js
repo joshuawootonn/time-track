@@ -35,8 +35,7 @@ class ExportForm extends Component {
               />
               <Field
                 name="start"
-                component={TextField}
-                helper="none"
+                component={TextField}              
                 margin="none"
                 label="From"
                 type="date"
@@ -47,6 +46,7 @@ class ExportForm extends Component {
                 name="fileLocation"
                 component={File}
                 label="File"
+                fullWidth
                 type="file"
               />
             </Grid>

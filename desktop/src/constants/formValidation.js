@@ -14,7 +14,7 @@ export const shift = Yup.object().shape({
   activities: Yup.array().of(
     Yup.object().shape({
       length: Yup.number()
-        .positive()
+        .min(1,'Time must be specified')
         .required('Time selection required'),
       projectId: Yup.number()
         .positive('Project selection required')
