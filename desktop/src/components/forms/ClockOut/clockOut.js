@@ -13,7 +13,15 @@ import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
 
 const ClockOutForm = props => {
-  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel } = props;
+  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel, errors } = props;
+  let errorGeneralMessage;
+  console.log(!!errors.activities,typeof errors.activities === 'string');
+  if (errors.activities && typeof errors.activities === 'string'){
+    errorGeneralMessage = errors.activities;
+  }else if (errors.lunch && typeof errors.lunch === 'string'){
+    errorGeneralMessage = errors.lunch;
+  }
+  
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -124,6 +132,16 @@ const ClockOutForm = props => {
                         })}
 
                       <Grid item xs={12} className={classes.formFooter}>
+                        <div className={classes.lunchBox}>
+                          <Field
+                            name={`lunch`}
+                            label1="Lunch"
+                            label2=" "
+                            fullWidth
+                            margin="none"
+                            component={Time}
+                          />
+                        </div>
                         <Button
                           color="primary"
                           variant="contained"
@@ -138,21 +156,19 @@ const ClockOutForm = props => {
                         >
                           Add Activity
                         </Button>
-                        <div className={classes.lunchBox}>
-                          <Field
-                            name={`lunch`}
-                            label1="Lunch"
-                            label2=" "
-                            fullWidth
-                            component={Time}
-                          />
-                        </div>
+                      </Grid>
+
+                      <Grid item xs={12} className={classes.formFooter}>
+
+                        <Typography variant="body1" margin="none" className={classes.error}>
+                          {errorGeneralMessage}
+                        </Typography>
 
                         <div>
                           <Button
                             type="submit"
                             color="primary"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || Object.keys(errors).length !== 0}
                             variant="contained"
                             className={classes.button}
                           >

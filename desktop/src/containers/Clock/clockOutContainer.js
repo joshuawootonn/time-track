@@ -68,7 +68,7 @@ class ClockOutContainer extends Component {
         }}
         validationSchema={shiftValidation}
         render={formikProps => {
-          console.log(formikProps.values);
+          //console.log(formikProps.values);
           return (
             <ClockOut
               cancel={this.cancel}

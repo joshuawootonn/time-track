@@ -6,7 +6,7 @@ import { Select as SelectInput, FormControl, InputLabel, MenuItem } from '@mater
 const Select = ({ field, form, label, margin,
   fullWidth, items, children, formControlProps,
   labelProps, selectProps, itemProps }) => {
-
+  //console.log(form.errors,field.name,form.errors[field.name]);
   return (
     <FormControl {...formControlProps} margin={margin} fullWidth={fullWidth}>
       {label && <InputLabel {...labelProps}>{label}</InputLabel>}

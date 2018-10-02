@@ -23,7 +23,7 @@ export class Time extends Component {
       [classes.vertical]: orientation === 'Vertical'
     });
 
-    console.log(value, minutesValue, hoursValue);
+    //console.log(value, minutesValue, hoursValue);
     return (
       <div className={wrapperClasses}>
         <Select

@@ -17,14 +17,14 @@ export const shift = Yup.object().shape({
         .positive()
         .required('Time selection required'),
       projectId: Yup.number()
-        .positive()
+        .positive('Project selection required')
         .required('Project selection required'),
       projectTaskId: Yup.number()
-        .positive()
+        .positive('Task selection required')
         .required('Task selection required'),
       description: Yup.string()
     }),
-  )
+  ).required('Activity selection required')
 });
 export const exportValidation = Yup.object().shape({
   exportCategory: Yup.number().min(0, 'Invalid export category'),

@@ -11,7 +11,9 @@ const styles = theme => ({
     width: '100%',
     maxWidth: '1000px'
   },
-  error: { marginTop: '16px' },
+  error: {
+    color: theme.palette.error.main
+  },
   spaceBetween: {
     justifyContent: 'space-between'
   },
@@ -51,10 +53,11 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height:'68px'
   },
   lunchBox: {
-    width: '200px',
+    width: '150px',
   }
 });
 
