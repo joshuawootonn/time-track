@@ -42,8 +42,9 @@ class ClockOutContainer extends Component {
     const clockOutObject = {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
-      date: clockInMoment.format('MMM Do YYYY'),
-      length: `${minutesToString(shiftDuration.asMinutes())}`
+      date: clockInMoment.format('MMM D'),
+      length: `${minutesToString(shiftDuration.asMinutes())}`,
+      lengthInMinutes: Math.floor(shiftDuration.asMinutes())
     };
 
 
@@ -67,13 +68,20 @@ class ClockOutContainer extends Component {
           );
         }}
         validationSchema={shiftValidation}
-        render={formikProps => {
+        render={(formikProps) => {
           //console.log(formikProps.values);
+          
+          // Time left is the duraction - lunch - all the activity times
+          let timeLeft = Math.floor(shiftDuration.asMinutes()) - formikProps.values.lunch;
+          formikProps.values.activities.forEach((activity) => {
+            timeLeft -= activity.length
+          })
           return (
             <ClockOut
               cancel={this.cancel}
               shift={clockOutObject}
               projects={projects}
+              timeLeft={timeLeft}
               projectTasks={projectTasks}
               {...formikProps}
             />

@@ -11,17 +11,19 @@ import styles from './styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
+import { minutesToString } from 'helpers/time';
 
 const ClockOutForm = props => {
-  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel, errors } = props;
+  const { classes, isSubmitting, handleSubmit, shift, values, projects, projectTasks, cancel, errors,timeLeft } = props;
   let errorGeneralMessage;
   if (errors.activities && typeof errors.activities === 'string'){
     errorGeneralMessage = errors.activities;
   }else if (errors.lunch && typeof errors.lunch === 'string'){
     errorGeneralMessage = errors.lunch;
   }
-  
-  console.log(values.activities,errors.activities);
+
+
+ 
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -159,16 +161,19 @@ const ClockOutForm = props => {
                       </Grid>
 
                       <Grid item xs={12} className={classes.formFooter}>
-
-                        <Typography variant="body1" margin="none" className={classes.error}>
+                      <Typography variant="headline" margin="none">
+                          Time Left: {minutesToString(timeLeft)}
+                        </Typography>
+                        <Typography variant="headline" margin="none" className={classes.error}>
                           {errorGeneralMessage}
                         </Typography>
+                       
 
                         <div>
                           <Button
                             type="submit"
                             color="primary"
-                            disabled={isSubmitting || Object.keys(errors).length !== 0}
+                            disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
                             variant="contained"
                             className={classes.button}
                           >

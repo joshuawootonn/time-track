@@ -1,9 +1,9 @@
 import moment from 'moment';
 
 export const minutesToString = minutes => { 
-  if (!minutes) return '';
+  if (minutes !== 0 && !minutes) return '';
   const m = Math.floor(minutes%60);
-  const hoursString = Math.round(minutes/60);
+  const hoursString = Math.floor(minutes/60);
   const minutesString = m > 10 ? m : '0' + m;
   return `${hoursString}:${minutesString}`;
 };
