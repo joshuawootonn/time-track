@@ -12,7 +12,7 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, orientation, field, form,margin,fullWidth } = this.props;
+    const { classes, orientation, field, form,margin,fullWidth,label1,label2 } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
@@ -31,7 +31,7 @@ export class Time extends Component {
           form={form}          
           margin={margin}
           fullWidth={fullWidth}
-          label="Hours"
+          label={label1}
           selectProps={{
             onChange: e => {
               console.log(e.target.value, hoursValue);
@@ -58,7 +58,7 @@ export class Time extends Component {
           form={form}
           margin={margin}
           fullWidth={fullWidth}
-          label="Minutes"
+          label={label2}
           selectProps={{
             onChange: e => {
               this.props.form.setFieldValue(
@@ -86,7 +86,9 @@ export class Time extends Component {
 Time.defaultProps = {
   orientation: 'Horizontal',
   margin: 'normal',
-  fullWidth: false
+  fullWidth: false,
+  label1: 'Hours',
+  label2: 'Minutes'
 };
 
 Time.propTypes = {
@@ -96,7 +98,9 @@ Time.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   orientation: PropTypes.oneOf(['Horizontal', 'Vertical']),
-  className: PropTypes.object
+  className: PropTypes.object,
+  label1: PropTypes.string,
+  label2: PropTypes.string
 };
 
 export default withStyles(styles)(Time);

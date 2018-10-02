@@ -138,6 +138,16 @@ const ClockOutForm = props => {
                         >
                           Add Activity
                         </Button>
+                        <div className={classes.lunchBox}>
+                          <Field
+                            name={`lunch`}
+                            label1="Lunch"
+                            label2=" "
+                            fullWidth
+                            component={Time}
+                          />
+                        </div>
+
                         <div>
                           <Button
                             type="submit"

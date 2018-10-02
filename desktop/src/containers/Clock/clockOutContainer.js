@@ -28,7 +28,7 @@ class ClockOutContainer extends Component {
 
   render() {
     const { currentShift, projects, projectTasks } = this.props;
-    
+
     const isLoading = !currentShift;
     if (isLoading) {
       return <div>Loading</div>;
@@ -50,6 +50,7 @@ class ClockOutContainer extends Component {
     return (
       <Formik
         initialValues={{
+          lunch: 0,
           activities: [
             {
               projectId: -1,
@@ -61,7 +62,7 @@ class ClockOutContainer extends Component {
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history, clockOut } = this.props;
-          clockOut(currentEmployee, currentShift, values.activities).then(() =>
+          clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
             history.push('/'),
           );
         }}
@@ -101,8 +102,8 @@ const mapDispatchToProps = dispatch => {
     getCurrentShift: employeeId => {
       return dispatch(shiftActions.getCurrentShift(employeeId));
     },
-    clockOut: (employee, shift, activities) => {
-      return dispatch(employeeActions.clockOut(employee, shift, activities));
+    clockOut: (employee, shift, activities, lunch) => {
+      return dispatch(employeeActions.clockOut(employee, shift, activities, lunch));
     }
   };
 };

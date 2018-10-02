@@ -50,8 +50,11 @@ const styles = theme => ({
   formFooter: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  lunchBox: {
+    width: '200px',
   }
 });
 

@@ -88,7 +88,7 @@ export const clockIn = employee => {
   };
 };
 
-export const clockOut = (employee, shift, activities) => {
+export const clockOut = (employee, shift, activities, lunch) => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST });
     try {
@@ -99,6 +99,7 @@ export const clockOut = (employee, shift, activities) => {
 
       const clockOutObject = {
         ...shift,
+        lunch: lunch,
         clockOutDate: currentMoment.toString(),
         length: minutes
       };
