@@ -21,7 +21,7 @@ class ExportForm extends Component {
       <div className={classes.hero}>
         <Form className={classes.heroContent}>
           <Grid container spacing={24}>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.title}>
               <Typography variant="display2">Export</Typography>
             </Grid>
             <Grid item xs={12} className={classes.row}>
@@ -47,6 +47,7 @@ class ExportForm extends Component {
                 component={File}
                 label="File"
                 fullWidth
+                margin="none"
                 type="file"
               />
             </Grid>

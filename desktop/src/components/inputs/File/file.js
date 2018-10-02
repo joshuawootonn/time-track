@@ -18,7 +18,7 @@ class File extends Component {
       <FormControl {...formControlProps} fullWidth={fullWidth} margin={margin}>
         <div className={classes.row}>
           {label !== undefined ? (
-            <InputLabel {...labelProps}>{label}</InputLabel>
+            <InputLabel shrink {...labelProps}>{label}</InputLabel>
           ) : null}
           <Input fullWidth={fullWidth} {...field} />
           <input

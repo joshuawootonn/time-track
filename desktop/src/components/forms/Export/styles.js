@@ -22,6 +22,9 @@ const styles = theme => ({
   },
   error: {
     color: theme.palette.error.main
+  },
+  title: {
+    paddingBottom: '16px !important'
   }
 });
 
