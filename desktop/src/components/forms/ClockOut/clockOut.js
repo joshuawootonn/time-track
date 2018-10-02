@@ -134,7 +134,7 @@ const ClockOutForm = props => {
                       <Grid item xs={12} className={classes.formFooter}>
                         <div className={classes.lunchBox}>
                           <Field
-                            name={`lunch`}
+                            name={'lunch'}
                             label1="Lunch"
                             label2=" "
                             fullWidth
@@ -206,7 +206,8 @@ ClockOutForm.propTypes = {
   shift: PropTypes.object,
   projects: PropTypes.array,
   projectTasks: PropTypes.array,
-  cancel: PropTypes.func
+  cancel: PropTypes.func,
+  errors: PropTypes.object
 };
 
 export default withStyles(styles)(ClockOutForm);

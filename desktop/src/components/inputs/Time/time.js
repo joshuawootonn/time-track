@@ -13,21 +13,15 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, orientation, field, form, margin, fullWidth, label1, label2, helper } = this.props;
+    const { classes, field, form, margin, fullWidth, label1, label2, helper } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
 
-    const wrapperClasses = cx({
-      [classes.fieldWrapper]: true,
-      [classes.horizontal]: orientation === 'Horizontal',
-      [classes.vertical]: orientation === 'Vertical'
-    });
-
     //console.log(value, minutesValue, hoursValue);
     return (
-      <FormControl fullWidth={fullWidth}  className={classes.fieldWrapper + " " + classes.vertical}>
-        <div className={classes.fieldWrapper + " " + classes.horizontal} >
+      <FormControl fullWidth={fullWidth}  className={cx(classes.fieldWrapper,classes.vertical)}>
+        <div className={cx(classes.fieldWrapper,classes.horizontal)} >
           <Select
             field={field}
             form={form}
@@ -83,7 +77,7 @@ export class Time extends Component {
             })}
           </Select>
         </div>
-        {helper === 'normal' && <FormHelperText error={true}>
+        {helper === 'normal' && <FormHelperText className={classes.helper} error={true}>
           {getIn(form.errors, field.name)}
         </FormHelperText>}
       </FormControl>
@@ -91,7 +85,6 @@ export class Time extends Component {
   }
 }
 Time.defaultProps = {
-  orientation: 'Horizontal',
   margin: 'normal',
   fullWidth: false,
   label1: 'Hours',
@@ -105,7 +98,6 @@ Time.propTypes = {
   classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
-  orientation: PropTypes.oneOf(['Horizontal', 'Vertical']),
   className: PropTypes.object,
   helper: PropTypes.oneOf(['normal', 'none']),
   label1: PropTypes.string,

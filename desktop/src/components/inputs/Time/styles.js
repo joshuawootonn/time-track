@@ -4,11 +4,14 @@ const styles = () => ({
     flexDirection: 'column',
     width: '100%'
   },
-   vertical: {
+  vertical: {
     flexDirection: 'column'
   },
   horizontal: {
     flexDirection: 'row'
+  },
+  helper: {
+    marginTop: '0px'
   }
 });
 

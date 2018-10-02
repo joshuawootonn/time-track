@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Button, InputLabel, FormControl, Input,FormHelperText } from '@material-ui/core';
-import {getIn} from 'formik'
+import { getIn } from 'formik';
 
 import styles from './styles';
 
@@ -43,8 +43,8 @@ class File extends Component {
           </label>
         </div>
         {helper === 'normal' && <FormHelperText error={true}>
-        {getIn(form.errors, field.name)}
-      </FormHelperText>}
+          {getIn(form.errors, field.name)}
+        </FormHelperText>}
       </FormControl>
     );
   }
@@ -62,7 +62,7 @@ File.propTypes = {
   onChange: PropTypes.func,
   margin: PropTypes.oneOf(['normal', 'dense', 'none']),
   fullWidth: PropTypes.bool,
-  helper: PropTypes.oneOf(['normal', 'none']),
+  helper: PropTypes.oneOf(['normal', 'none'])
 };
 
 export default withStyles(styles)(File);

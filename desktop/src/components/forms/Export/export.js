@@ -15,8 +15,7 @@ import * as exportConstants from 'constants/export';
 
 class ExportForm extends Component {
   render() {
-    const { classes, cancel, isSubmitting, errors } = this.props;
-    console.log(isSubmitting, Object.keys(errors).length !== 0);
+    const { classes, cancel, isSubmitting, errors } = this.props;    
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent}>
@@ -82,6 +81,7 @@ class ExportForm extends Component {
 ExportForm.propTypes = {
   classes: PropTypes.object.isRequired,
   cancel: PropTypes.func,
-  isSubmitting: PropTypes.bool.isRequired
+  isSubmitting: PropTypes.bool.isRequired,
+  errors: PropTypes.object
 };
 export default withStyles(styles)(ExportForm);

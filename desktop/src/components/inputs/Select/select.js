@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Select as SelectInput, FormControl, InputLabel, MenuItem, FormHelperText } from '@material-ui/core';
-import { getIn } from 'formik'
+import { getIn } from 'formik';
 
 const Select = ({ field, form, label, margin,
   fullWidth, items, children, formControlProps,
@@ -57,7 +57,7 @@ Select.propTypes = {
   labelProps: PropTypes.object,
   selectProps: PropTypes.object,
   itemProps: PropTypes.object,
-  helper: PropTypes.oneOf(['normal', 'none']),
+  helper: PropTypes.oneOf(['normal', 'none'])
 };
 
 export default Select;

@@ -57,7 +57,7 @@ const styles = theme => ({
     height:'68px'
   },
   lunchBox: {
-    width: '150px',
+    width: '150px'
   }
 });
 

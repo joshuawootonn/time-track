@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
-import {getIn} from 'formik'
+import { getIn } from 'formik';
 
 const TextField = ({ field, form, label, className, type, margin, helper }) => (
   <MUTextField
@@ -13,8 +13,8 @@ const TextField = ({ field, form, label, className, type, margin, helper }) => (
     fullWidth
     className={className}
     margin={margin}
-    /* FormHelperTextProps={helper !=='none' ? { style:{ display:'none' },error: true } : { error: true  }}  */
-    helperText={getIn(form.errors, field.name) || " "}
+    FormHelperTextProps={helper !=='none' ? { style:{ display:'none' },error: true } : { error: true  }} 
+    helperText={getIn(form.errors, field.name) || ' '}
   />
 );
 
