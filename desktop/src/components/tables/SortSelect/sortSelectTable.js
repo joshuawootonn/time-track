@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import EnhancedTableHead from './head';
 import EnhancedTableToolbar from './tool'
 import styles from './styles';
+import * as TableDataTypes from 'constants/tableDataTypes'
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -48,7 +49,7 @@ class EnhancedTable extends React.Component {
     order: 'asc',
     orderBy: 'calories',
     selected: [],
-    
+
     page: 0,
     rowsPerPage: 5,
   };
@@ -104,10 +105,10 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, tableData, headerData} = this.props;
-    const {  order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { classes, tableData, headerData } = this.props;
+    const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage);
-    
+
     return (
       <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -141,11 +142,16 @@ class EnhancedTable extends React.Component {
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       {headerData.map((ele) => {
-                        const val = n[ele.id]
-                        if(typeof val === "number")
-                          return <TableCell numeric >{val}</TableCell>
-                        if(typeof val === "string")
-                          return <TableCell >{val}</TableCell>
+                        //console.log(ele);
+                        const { type, id, key } = ele;
+                        
+                        if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
+                          return <TableCell  key={id} numeric >{n[id]}</TableCell>
+                        } else if (type === TableDataTypes.STRING) {
+                          return <TableCell key={id} >{n[id]}</TableCell>
+                        } else if (type === TableDataTypes.OBJECT) {                         
+                          return <TableCell key={id} >{n[id][key]}</TableCell>
+                        }
                       })}
                       {/* <TableCell component="th" scope="row" padding="none">
                         {n.firstName}
