@@ -34,6 +34,7 @@ class AccountSiginForm extends Component {
                     <Button
                       onClick={() => this.appendPin(num)}
                       variant="contained"
+                      className={classes.button}
                     >
                       {num}
                     </Button>
@@ -45,6 +46,7 @@ class AccountSiginForm extends Component {
                   onClick={this.resetPin}
                   color="secondary"
                   variant="contained"
+                  className={classes.button}
                 >
                   Clear
                 </Button>
@@ -55,6 +57,7 @@ class AccountSiginForm extends Component {
                   color="primary"
                   disabled={isSubmitting}
                   variant="contained"
+                  className={classes.button}
                 >
                   Enter
                 </Button>

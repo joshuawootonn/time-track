@@ -21,7 +21,7 @@ class ExportForm extends Component {
         <Form className={classes.heroContent}>
           <Grid container spacing={24}>
             <Grid item xs={12} className={classes.title}>
-              <Typography variant="display2">Export</Typography>
+              <Typography variant="h3">Export</Typography>
             </Grid>
             <Grid item xs={12} className={classes.row}>
               <Field

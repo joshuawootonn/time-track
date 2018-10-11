@@ -25,20 +25,20 @@ const ClockOutForm = props => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={24}>
             <Grid item xs={12} className={classes.formHeader}>
-              <Typography variant="display2">Clock Out</Typography>
+              <Typography variant="h3">Clock Out</Typography>
 
               <div className={classes.formHeader}>
                 <SvgIcon className={classes.formHeaderIcon} color="action">
                   <DateIcon />
                 </SvgIcon>
-                <Typography variant="headline">{shift.date}</Typography>
+                <Typography variant="h5">{shift.date}</Typography>
               </div>
 
               <div className={classes.formHeader}>
                 <SvgIcon className={classes.formHeaderIcon} color="action">
                   <TimeIcon />
                 </SvgIcon>
-                <Typography variant="headline">
+                <Typography variant="h5">
                   {shift.in} - {shift.out}
                 </Typography>
               </div>
@@ -47,7 +47,7 @@ const ClockOutForm = props => {
                 <SvgIcon className={classes.formHeaderIcon} color="action">
                   <DurationIcon />
                 </SvgIcon>
-                <Typography variant="headline">
+                <Typography variant="h5">
                   Length: {shift.length}
                 </Typography>
               </div>
@@ -154,7 +154,7 @@ const ClockOutForm = props => {
                       </Grid>
 
                       <Grid item xs={12} className={classes.formFooter}>
-                        <Typography variant="headline" margin="none">
+                        <Typography variant="h5" margin="none">
                           Time Left: {minutesToString(timeLeft)}
                         </Typography>
                         <Typography variant="body1" margin="none" className={classes.error}>

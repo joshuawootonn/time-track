@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
+import { TableCell } from '@material-ui/core';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import EnhancedTableHead from './head';
 import EnhancedTableToolbar from './tool'
@@ -110,7 +109,7 @@ class EnhancedTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, tableData.length - page * rowsPerPage);
 
     return (
-      <Paper className={classes.root}>
+      <div >
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
@@ -144,22 +143,15 @@ class EnhancedTable extends React.Component {
                       {headerData.map((ele) => {
                         //console.log(ele);
                         const { type, id, key } = ele;
-                        
+
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-                          return <TableCell  key={id} numeric >{n[id]}</TableCell>
+                          return <TableCell key={id} numeric >{n[id]}</TableCell>
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell key={id} >{n[id]}</TableCell>
-                        } else if (type === TableDataTypes.OBJECT) {                         
+                        } else if (type === TableDataTypes.OBJECT) {
                           return <TableCell key={id} >{n[id][key]}</TableCell>
                         }
                       })}
-                      {/* <TableCell component="th" scope="row" padding="none">
-                        {n.firstName}
-                      </TableCell>
-                      
-                      <TableCell numeric>{n.fat}</TableCell>
-                      <TableCell numeric>{n.carbs}</TableCell>
-                      <TableCell numeric>{n.protein}</TableCell> */}
                     </TableRow>
                   );
                 })}
@@ -185,7 +177,8 @@ class EnhancedTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
-      </Paper>
+        </div>
+
     );
   }
 }

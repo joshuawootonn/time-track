@@ -15,7 +15,7 @@ const AuthSigninForm = props => {
   return (
     <div className={classes.hero}>
       <Form className={classes.heroContent}>
-        <Typography variant="title">Select Network</Typography>
+        <Typography variant="h6">Select Network</Typography>
         <Field component={TextField} name="username" label="Network" />
         <Field component={Password} name="password" label="Password" />
         <Button

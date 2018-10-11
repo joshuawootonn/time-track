@@ -2,11 +2,10 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    width: '100%',    
   },
   table: {
-    minWidth: 1020,
+    minWidth: 400,
   },
   tableWrapper: {
     overflowX: 'auto',

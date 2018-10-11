@@ -13,29 +13,29 @@ const AccountActionForm = props => {
     <div className={classes.hero}>
       <div className={classes.heroContent}>
         {isWorking ? (
-          <Tooltip open={true} title="Clock Out" classes={{ tooltip: classes.toolTip }}>
+          <Tooltip open={true} title="Clock Out" classes={{ tooltip: classes.toolTip }} placement="bottom">
             <IconButton onClick={clockOut} className={classes.button}>
               <Close className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
         ) : (
-            <Tooltip open={true} title="Clock In" classes={{ tooltip: classes.toolTip }}>
+            <Tooltip open={true} title="Clock In" classes={{ tooltip: classes.toolTip }} placement="bottom">
               <IconButton onClick={clockIn} className={classes.button}>
                 <Check className={classes.buttonIcon} />
               </IconButton>
             </Tooltip>
           )}
-        <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }}>
+        <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }} placement="bottom">
           <IconButton onClick={props.export} className={classes.button}>
             <Storage className={classes.buttonIcon} />
           </IconButton>
         </Tooltip>
-        <Tooltip open={true} title="Analysis" classes={{ tooltip: classes.toolTip }}>
+        <Tooltip open={true} title="Analysis" classes={{ tooltip: classes.toolTip }} placement="bottom">
           <IconButton onClick={analyze} className={classes.button}>
             <ShowChart className={classes.buttonIcon} />
           </IconButton>
         </Tooltip>
-        <Tooltip open={true} title="Back" classes={{ tooltip: classes.toolTip }}>
+        <Tooltip open={true} title="Back" classes={{ tooltip: classes.toolTip }} placement="bottom">
           <IconButton onClick={back} className={classes.button}>
             <ArrowBack className={classes.buttonIcon} />
           </IconButton>

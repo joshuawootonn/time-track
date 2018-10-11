@@ -8,7 +8,8 @@ const styles = () => ({
   },
   textField: { width: '100%' },
   heroContent: { width: '300px' },
-  error: { marginTop: '16px' }
+  error: { marginTop: '16px' },
+  button: { width: '100%' }
 });
 
 export default styles;
