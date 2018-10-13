@@ -16,7 +16,7 @@ class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
     orderBy: 'firstName',
-    selected: {}
+  
   };
   
   desc = (a, b, orderBy) => {            
@@ -57,24 +57,23 @@ class EnhancedTable extends React.Component {
   };
 
   handleClick = (event, id) => {
-    const { selected } = this.state;
-    const { tableData } = this.props;
+    const { tableData,selected } = this.props;
 
     console.log(id, tableData[id], Object.keys(tableData));
 
     if(selected && selected.id === id){
-      this.setState({ selected: {} });
+      this.props.select({})
     }else{
-      this.setState({ selected: tableData[id-1] });
+      this.props.select(tableData[id-1])
     }
   };
  
 
-  isSelected = id => this.state.selected && this.state.selected.id === id;
+  isSelected = id => this.state.props && this.props.selected.id === id;
 
   render() {
-    const { classes, tableData, headerData } = this.props;
-    const { order, orderBy, selected } = this.state;
+    const { classes, tableData, headerData,selected } = this.props;
+    const { order, orderBy } = this.state;
     
     return (
       <div >
