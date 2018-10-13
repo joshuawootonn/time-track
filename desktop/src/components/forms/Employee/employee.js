@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid } from '@material-ui/core';
 import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select'
+import Select from 'components/inputs/Select';
+import Switch from 'components/inputs/Switch';
 import styles from './styles';
 
 class Employee extends Component {
   render() {
     const { classes, crews, authorities } = this.props;
-    console.log(this.props.values);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -52,13 +52,26 @@ class Employee extends Component {
               className={classes.field}
             />
           </Grid>
+          <Grid item xs={12} className={classes.row}>
+            <Field
+              name="isEmployed"
+              component={Switch}
+              label="Employed"
+              className={classes.field}
+            />
+          </Grid>
 
         </Grid>
       </Form>
 
-    )
+    );
   }
 }
 
+Employee.propTypes = {
+  classes: PropTypes.object.isRequired,
+  authorities: PropTypes.array.isRequired,
+  crews: PropTypes.array.isRequired
+};
 
 export default withStyles(styles)(Employee);

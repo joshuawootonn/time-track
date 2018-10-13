@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
@@ -14,14 +14,14 @@ class EmployeeEditContainer extends Component {
     return (
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
+          firstName: '',
+          lastName: '',
           authorityId: 1,
           crewId: 1,
-          isEmployeed: 1
+          isEmployed: true
         }}
         onSubmit={() => {
-          console.log("TODO: onSubmit")
+          console.log('TODO: onSubmit');
         }}
         render={formikProps => {
           return <Employee
@@ -31,7 +31,7 @@ class EmployeeEditContainer extends Component {
           />;
         }}
       />
-    )
+    );
   }
 }
 
@@ -42,4 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(EmployeeEditContainer)
+export default connect(mapStateToProps, null)(EmployeeEditContainer);

@@ -19,8 +19,8 @@ class EmployeeContainer extends Component {
   componentDidMount = () => {
     this.props.getEmployees();
   }
-  selectEmployee = (employee) => {
-    this.setState({selected: employee})
+  selectEmployee = employee => {
+    this.setState({ selected: employee });
   }
   render() {
     const { employees } = this.props;
@@ -30,11 +30,11 @@ class EmployeeContainer extends Component {
       return <Progress variant="circular" fullPage />;
     }
     return (
-      <Grid container spacing={12}>
-        <Grid item xs={6}>
+      <Grid container >
+        <Grid item xs={7}>
           <SortSelectTable tableData={employees} headerData={rows} selected={selected} select={this.selectEmployee} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <EmployeeEditContainer selected={selected}/>
         </Grid>
       </Grid>

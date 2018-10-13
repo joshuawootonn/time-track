@@ -15,7 +15,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'firstName',
+    orderBy: 'firstName'
   
   };
   
@@ -62,9 +62,9 @@ class EnhancedTable extends React.Component {
     console.log(id, tableData[id], Object.keys(tableData));
 
     if(selected && selected.id === id){
-      this.props.select({})
+      this.props.select({});
     }else{
-      this.props.select(tableData[id-1])
+      this.props.select(tableData[id-1]);
     }
   };
  
@@ -132,7 +132,9 @@ class EnhancedTable extends React.Component {
 EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableData: PropTypes.array.isRequired,
-  headerData: PropTypes.array.isRequired
+  headerData: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
+  select: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(EnhancedTable);
