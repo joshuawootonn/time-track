@@ -5,26 +5,41 @@ import { Formik } from 'formik';
 
 import Employee from 'components/forms/Employee';
 
+import { authoritySelectors, crewSelectors } from 'store/selectors';
+
 class EmployeeEditContainer extends Component {
-  render () {
+  render() {
+
+    const { authorities, crews } = this.props;
     return (
-      <Formik 
+      <Formik
         initialValues={{
           firstName: "",
           lastName: "",
-          authorityId: "",
-          crewId: "",
+          authorityId: 1,
+          crewId: 1,
           isEmployeed: 1
         }}
         onSubmit={() => {
           console.log("TODO: onSubmit")
         }}
         render={formikProps => {
-          return <Employee {...formikProps} />;
+          return <Employee
+            authorities={authorities}
+            crews={crews}
+            {...formikProps}
+          />;
         }}
-        />
+      />
     )
   }
 }
 
-export default EmployeeEditContainer
+const mapStateToProps = state => {
+  return {
+    crews: crewSelectors.getAllCrews(state),
+    authorities: authoritySelectors.getAllAuthorities(state)
+  };
+};
+
+export default connect(mapStateToProps, null)(EmployeeEditContainer)

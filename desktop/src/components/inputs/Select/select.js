@@ -6,9 +6,9 @@ import { getIn } from 'formik';
 
 const Select = ({ field, form, label, margin,
   fullWidth, items, children, formControlProps,
-  labelProps, selectProps, itemProps,helper }) => {
+  labelProps, selectProps, itemProps,helper,className }) => {
   return (
-    <FormControl {...formControlProps} margin={margin} fullWidth={fullWidth}>
+    <FormControl className={className} {...formControlProps} margin={margin} fullWidth={fullWidth}>
       {label && <InputLabel {...labelProps}>{label}</InputLabel>}
       <SelectInput
         {...field}
@@ -26,7 +26,7 @@ const Select = ({ field, form, label, margin,
           items.map((item, i) => {
             return (
               <MenuItem {...itemProps} key={i} id={item.id} value={item.id}>
-                {item.name}
+                {item.name || item.type}
               </MenuItem>
             );
           })}

@@ -6,12 +6,13 @@ import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles'
 
 import TextField from 'components/inputs/TextField';
+import Select from 'components/inputs/Select'
 import styles from './styles';
 
 class Employee extends Component {
   render() {
-    const { classes } = this.props;
-    console.log(this.props);
+    const { classes, crews, authorities } = this.props;
+    console.log(this.props.values);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -33,7 +34,25 @@ class Employee extends Component {
               className={classes.field}
             />
           </Grid>
-          
+          <Grid item xs={12} className={classes.row}>
+            <Field
+              name="authorityId"
+              component={Select}
+              items={authorities}
+              fullWidth
+              label="Authority"
+              className={classes.field}
+            />
+            <Field
+              name="crewId"
+              component={Select}
+              items={crews}
+              fullWidth
+              label="Crew"
+              className={classes.field}
+            />
+          </Grid>
+
         </Grid>
       </Form>
 

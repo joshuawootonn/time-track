@@ -10,7 +10,7 @@ const styles = () => ({
     justifyContent: 'space-between'
   },
   field:{
-    margin: '0 8px'
+    margin: 'auto 8px'
   },
   error: { marginTop: '16px' },
   button: { marginTop: '16px' }
