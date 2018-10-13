@@ -39,7 +39,7 @@ export const getAllEmployeesWithContents = createSelector(
         ...emp,
         authority: authorities[emp.authorityId],
         crew: crews[emp.crewId]
-      }
+      };
     });
   },
 );

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class ProjectContainer extends Component {
   render () {
@@ -6,8 +6,8 @@ class ProjectContainer extends Component {
       <div>
         project
       </div>
-    )
+    );
   }
 }
 
-export default ProjectContainer
+export default ProjectContainer;

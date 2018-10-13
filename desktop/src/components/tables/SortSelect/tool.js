@@ -1,14 +1,10 @@
-
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Toolbar,Typography,IconButton, Tooltip } from '@material-ui/core';
+import { Delete,FilterList } from '@material-ui/icons';
 import styles from './styles';
 
 let EnhancedTableToolbar = props => {
@@ -16,7 +12,7 @@ let EnhancedTableToolbar = props => {
   return (
     <Toolbar
       className={classNames(classes.toolbarRoot, {
-        [classes.highlight]: numSelected > 0,
+        [classes.highlight]: numSelected > 0
       })}
     >
       <div className={classes.title}>
@@ -35,13 +31,13 @@ let EnhancedTableToolbar = props => {
         {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
-              <DeleteIcon />
+              <Delete />
             </IconButton>
           </Tooltip>
         ) : (
           <Tooltip title="Filter list">
             <IconButton aria-label="Filter list">
-              <FilterListIcon />
+              <FilterList />
             </IconButton>
           </Tooltip>
         )}
@@ -52,7 +48,7 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(EnhancedTableToolbar);

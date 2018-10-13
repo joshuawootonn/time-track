@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class ShiftContainer extends Component {
   render () {
@@ -6,8 +6,8 @@ class ShiftContainer extends Component {
       <div>
         shift
       </div>
-    )
+    );
   }
 }
 
-export default ShiftContainer
+export default ShiftContainer;

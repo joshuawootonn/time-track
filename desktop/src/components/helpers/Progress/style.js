@@ -10,7 +10,7 @@ const styles = () => ({
     width: '100vw',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   fullPageInner: {
     

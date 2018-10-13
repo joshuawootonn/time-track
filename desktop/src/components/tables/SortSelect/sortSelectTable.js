@@ -1,22 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import { TableCell } from '@material-ui/core';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Checkbox from '@material-ui/core/Checkbox';
-import EnhancedTableHead from './head';
-import EnhancedTableToolbar from './tool'
-import styles from './styles';
-import * as TableDataTypes from 'constants/tableDataTypes'
 
-let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
-  counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
-}
+import { withStyles } from '@material-ui/core/styles';
+import { TableCell,TableRow, TablePagination,Checkbox,TableBody,Table } from '@material-ui/core';
+
+import EnhancedTableHead from './head';
+import EnhancedTableToolbar from './tool';
+import styles from './styles';
+import * as TableDataTypes from 'constants/tableDataTypes';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -50,7 +41,7 @@ class EnhancedTable extends React.Component {
     selected: [],
 
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 5
   };
 
   handleRequestSort = (event, property) => {
@@ -66,7 +57,7 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = event => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: this.props.tableData.map(n => n.id) }));
+      this.setState(() => ({ selected: this.props.tableData.map(n => n.id) }));
       return;
     }
     this.setState({ selected: [] });
@@ -140,16 +131,16 @@ class EnhancedTable extends React.Component {
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      {headerData.map((ele) => {
+                      {headerData.map(ele => {
                         //console.log(ele);
                         const { type, id, key } = ele;
 
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-                          return <TableCell key={id} numeric >{n[id]}</TableCell>
+                          return <TableCell key={id} numeric >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
-                          return <TableCell key={id} >{n[id]}</TableCell>
+                          return <TableCell key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
-                          return <TableCell key={id} >{n[id][key]}</TableCell>
+                          return <TableCell key={id} >{n[id][key]}</TableCell>;
                         }
                       })}
                     </TableRow>
@@ -169,15 +160,15 @@ class EnhancedTable extends React.Component {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'Previous Page',
+            'aria-label': 'Previous Page'
           }}
           nextIconButtonProps={{
-            'aria-label': 'Next Page',
+            'aria-label': 'Next Page'
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
-        </div>
+      </div>
 
     );
   }
@@ -185,7 +176,8 @@ class EnhancedTable extends React.Component {
 
 EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired,
-  tableData: PropTypes.array.isRequired
+  tableData: PropTypes.array.isRequired,
+  headerData: PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(EnhancedTable);

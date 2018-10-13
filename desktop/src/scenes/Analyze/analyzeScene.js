@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 
-import EmployeeContainer from 'containers/Analyze/employeesContainer'
-import ProjectContainer from 'containers/Analyze/projectsContainer'
+import EmployeeContainer from 'containers/Analyze/employeesContainer';
+import ProjectContainer from 'containers/Analyze/projectsContainer';
 import ShiftContainer from 'containers/Analyze/shiftsContainer';
 
 class AuthScene extends Component {
@@ -11,7 +11,7 @@ class AuthScene extends Component {
     tabValue: 0
   }
   handleTabValueChange = (e, tabValue) => {
-    this.setState({ tabValue })
+    this.setState({ tabValue });
   }
   render() {
     const { tabValue } = this.state;
@@ -28,8 +28,8 @@ class AuthScene extends Component {
         {tabValue === 1 && <ProjectContainer />}
         {tabValue === 2 && <ShiftContainer />}
       </div>
-    )
+    );
   }
 }
 
-export default AuthScene
+export default AuthScene;

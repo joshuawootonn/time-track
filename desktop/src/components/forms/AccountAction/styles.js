@@ -20,7 +20,7 @@ const styles = () => ({
     width: '70px'
   },
   toolTip: {
-    fontSize: '15px !important',
+    fontSize: '15px !important'
   }
 });
 

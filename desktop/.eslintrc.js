@@ -43,7 +43,7 @@ module.exports = {
     "object-curly-spacing": [1, "always"],
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "never"],
-    "array-element-newline": ["error", "never"],
+    //"array-element-newline": ["error", "never"],
     "allowAllPropertiesOnSameLine": false
 
   }

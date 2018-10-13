@@ -19,12 +19,12 @@ const AccountActionForm = props => {
             </IconButton>
           </Tooltip>
         ) : (
-            <Tooltip open={true} title="Clock In" classes={{ tooltip: classes.toolTip }} placement="bottom">
-              <IconButton onClick={clockIn} className={classes.button}>
-                <Check className={classes.buttonIcon} />
-              </IconButton>
-            </Tooltip>
-          )}
+          <Tooltip open={true} title="Clock In" classes={{ tooltip: classes.toolTip }} placement="bottom">
+            <IconButton onClick={clockIn} className={classes.button}>
+              <Check className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
         <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }} placement="bottom">
           <IconButton onClick={props.export} className={classes.button}>
             <Storage className={classes.buttonIcon} />

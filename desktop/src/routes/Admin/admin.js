@@ -1,7 +1,7 @@
 import accountActionScene from 'scenes/Account/accountActionScene';
 import clockOutScene from 'scenes/Clock/clockOutScene';
 import exportScene from 'scenes/Export/exportScene';
-import analyzeScene from 'scenes/Analyze/analyzeScene'
+import analyzeScene from 'scenes/Analyze/analyzeScene';
 import * as routes from 'constants/routes';
 
 export default [
@@ -29,6 +29,6 @@ export default [
     exact: true,
     name: 'Admin Analyze',
     type: routes.ADMIN
-  }, 
+  } 
 
 ];
