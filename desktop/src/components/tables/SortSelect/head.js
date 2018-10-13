@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TableCell, TableHead, TableRow, TableSortLabel, Checkbox, Tooltip } from '@material-ui/core';
+import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core';
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
@@ -9,17 +9,13 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, headerData } = this.props;
+    const {  order, orderBy, headerData } = this.props;
 
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
+          <TableCell>
+            
           </TableCell>
           {headerData.map(row => {
             return (
@@ -52,9 +48,8 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  selected: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,

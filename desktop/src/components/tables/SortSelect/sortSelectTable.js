@@ -16,7 +16,7 @@ class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
     orderBy: 'firstName',
-    selected: [],
+    selected: {}
   };
   
   desc = (a, b, orderBy) => {            
@@ -56,53 +56,36 @@ class EnhancedTable extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = event => {
-    if (event.target.checked) {
-      this.setState(() => ({ selected: this.props.tableData.map(n => n.id) }));
-      return;
-    }
-    this.setState({ selected: [] });
-  };
-
   handleClick = (event, id) => {
     const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
+    const { tableData } = this.props;
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
+    console.log(id, tableData[id], Object.keys(tableData));
+
+    if(selected && selected.id === id){
+      this.setState({ selected: {} });
+    }else{
+      this.setState({ selected: tableData[id-1] });
     }
-
-    this.setState({ selected: newSelected });
   };
  
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  isSelected = id => this.state.selected && this.state.selected.id === id;
 
   render() {
     const { classes, tableData, headerData } = this.props;
     const { order, orderBy, selected } = this.state;
-    console.log(order,orderBy)
+    
     return (
       <div >
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar selected={selected} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
               headerData={headerData}
-              numSelected={selected.length}
+              selected={selected}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={tableData.length}
             />

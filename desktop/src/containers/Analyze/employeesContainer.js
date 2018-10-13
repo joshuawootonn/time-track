@@ -20,6 +20,7 @@ class EmployeeContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
     }
+    console.log( typeof employees,typeof employees2);
     return (
       <Grid container>
         <Grid item xs={12}>
