@@ -9,6 +9,11 @@ import { authoritySelectors, crewSelectors } from 'store/selectors';
 import { employeeActions } from 'store/actions'
 
 class EmployeeEditContainer extends Component {
+  deleteEmployee = () =>{
+    const {selected} = this.props;
+    if(selected === {} && selected === null) return null;
+    this.props.deleteEmployee(selected);
+  }
   render() {
     const { authorities, crews, label, type, selected } = this.props;
     console.log(selected);
@@ -62,6 +67,7 @@ class EmployeeEditContainer extends Component {
           }}
           render={formikProps => {
             return <Employee
+              deleteEmployee={this.deleteEmployee}
               authorities={authorities}
               crews={crews}
               label={label}
@@ -90,6 +96,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateEmployee: employee => {
       return dispatch(employeeActions.putEmployee(employee));
+    },
+    deleteEmployee: employee => {
+      return dispatch(employeeActions.deleteEmployee(employee));
     }
   }
 }

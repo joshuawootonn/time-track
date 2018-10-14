@@ -15,7 +15,7 @@ import styles from './styles';
 
 class Employee extends Component {
   render() {
-    const { classes, crews, authorities, label, isSubmitting, type } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -24,7 +24,7 @@ class Employee extends Component {
               {label}
             </Typography>
             {type === "edit" && <Tooltip title="Delete">
-              <IconButton aria-label="Delete">
+              <IconButton onClick={deleteEmployee} aria-label="Delete">
                 <Delete />
               </IconButton>
             </Tooltip>}

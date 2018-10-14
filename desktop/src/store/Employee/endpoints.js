@@ -17,6 +17,10 @@ export const postEmployee = (employee) => {
   return axios.post(`${HOST}/${DOMAIN}`, { ...employee })
 }
 
+export const deleteEmployee = (employee) => {
+  return axios.delete(`${HOST}/${DOMAIN}/${employee.id}`)
+}
+
 // EXTRA
 
 // http://localhost:4000/api/employees/findone?filter[where][pin]=565656

@@ -40,6 +40,10 @@ export const putEmployee = employee => {
         { employees: [response.data] },
         schemas.employeeArray,
       );
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Employee Updated'),
+      );
+
       return dispatch({
         type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS,
         payload
@@ -82,6 +86,49 @@ export const postEmployee = employee => {
   };
 };
 
+export const deleteEmployee = employee => {
+  return async dispatch => {
+    dispatch({ type: employeeActionTypes.DELETE_EMPLOYEE_REQUEST });
+    try {
+      const response = await endpoint.deleteEmployee(employee);
+      const payload = normalize(
+        { employees: [response.data] },
+        schemas.employeeArray,
+      );
+      console.log(response,payload);
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Employee deleted!'),
+      );
+      
+      const deleted = {
+        entities: {
+          employees: {
+            [employee.id]: employee
+          }
+        },
+        result: {
+          employees: [employee.id]
+        }
+      }
+
+
+      return dispatch({
+        type: employeeActionTypes.DELETE_EMPLOYEE_SUCCESS,
+        deleted
+      });
+    } catch (e) {
+      console.log(e);
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Employee deletion failed!'),
+      );
+      return dispatch({
+        type: employeeActionTypes.DELETE_EMPLOYEE_FAILURE,
+        payload: e
+      });
+    }
+  };
+};
+
 export const toggleIsWorking = employee => {
   return putEmployee({
     ...employee,
@@ -102,7 +149,7 @@ export const clockIn = employee => {
       await dispatch(shiftActions.postShift(clockInObject));
       await dispatch(toggleIsWorking(employee));
       await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Clock in Success!'),
+        snackActions.openSnack(status.SUCCESS, 'Clock in success!'),
       );
       return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_SUCCESS });
     } catch (e) {
@@ -139,11 +186,11 @@ export const clockOut = (employee, shift, activities, lunch) => {
 
       await dispatch(shiftActions.putShift(clockOutObject));
       await dispatch(toggleIsWorking(employee));
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out Success!'));
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
     } catch (e) {
       console.log(e);
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out Success!'));
+      dispatch(snackActions.openSnack(status.FAILURE, 'Clock out failed!'));
       return dispatch({
         type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,
         payload: e
