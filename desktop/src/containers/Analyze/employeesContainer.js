@@ -50,12 +50,12 @@ class EmployeeContainer extends Component {
         {status === INITIAL && <div>click on something</div>}
         {status === ADDING &&
           <Grid item xs={5}>
-            <EmployeeEditContainer label="Add" />
+            <EmployeeEditContainer type="add" label="Add" />
           </Grid>
         }
         {status === EDITING &&
           <Grid item xs={5}>
-            <EmployeeEditContainer label="Edit" selected={selected} />
+            <EmployeeEditContainer type="edit" label="Edit" selected={selected} />
           </Grid>
         }
 

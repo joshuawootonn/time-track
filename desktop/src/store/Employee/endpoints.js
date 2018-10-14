@@ -13,6 +13,10 @@ export const putEmployee = (id, employee) => {
   return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...employee });
 };
 
+export const postEmployee = (employee) => {
+  return axios.post(`${HOST}/${DOMAIN}`, { ...employee })
+}
+
 // EXTRA
 
 // http://localhost:4000/api/employees/findone?filter[where][pin]=565656

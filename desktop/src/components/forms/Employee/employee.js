@@ -13,10 +13,9 @@ import styles from './styles';
 
 class Employee extends Component {
   render() {
-    const { classes, crews, authorities, label, isSubmitting } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type } = this.props;
     return (
       <Form>
-
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12}>
             <Typography variant="h6">
@@ -62,12 +61,34 @@ class Employee extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
+            <div className={classes.field + " " + classes.switchBox} >
+              <Field
+                name="isEmployed"
+                component={Switch}
+                label="Is Employed"
+                className={classes.field}
+              />
+              <Field
+                name="isWorking"
+                component={Switch}
+                disabled={true}
+                label="Is Working"
+                className={classes.field}
+              />
+            </div>
+
             <Field
-              name="isEmployed"
-              component={Switch}
-              label="Employed"
+              name="pin"
+              component={TextField}
+              margin="none"
+              label="Pin"
+              type="search"
               className={classes.field}
+              helper="normal"
             />
+          </Grid>
+          <Grid item xs={12} className={classes.row}>
+            <div></div>
             <div>
               <Button
                 type="submit"
@@ -100,7 +121,8 @@ class Employee extends Component {
 Employee.propTypes = {
   classes: PropTypes.object.isRequired,
   authorities: PropTypes.array.isRequired,
-  crews: PropTypes.array.isRequired
+  crews: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Employee);

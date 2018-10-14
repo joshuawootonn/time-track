@@ -54,6 +54,34 @@ export const putEmployee = employee => {
   };
 };
 
+export const postEmployee = employee => {
+  return async dispatch => {
+    dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
+    try {
+      const response = await endpoint.postEmployee(employee);
+      const payload = normalize(
+        { employees: [response.data] },
+        schemas.employeeArray,
+      );
+
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Employee Created'),
+      );
+
+      return dispatch({
+        type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS,
+        payload
+      });
+    } catch (e) {
+      console.log(e);
+      return dispatch({
+        type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE,
+        payload: e
+      });
+    }
+  };
+};
+
 export const toggleIsWorking = employee => {
   return putEmployee({
     ...employee,

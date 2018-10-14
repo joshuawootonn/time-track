@@ -6,6 +6,10 @@ export const GET_EMPLOYEE_REQUEST = 'get_employee_request';
 export const GET_EMPLOYEE_SUCCESS = 'get_employee_success';
 export const GET_EMPLOYEE_FAILURE = 'get_employee_failure';
 
+export const CREATE_EMPLOYEE_REQUEST = 'create_employee_request';
+export const CREATE_EMPLOYEE_SUCCESS = 'create_employee_success';
+export const CREATE_EMPLOYEE_FAILURE = 'create_employee_failure';
+
 export const LOGIN_EMPLOYEE_REQUEST = 'login_employee_request';
 export const LOGIN_EMPLOYEE_SUCCESS = 'login_employee_success';
 export const LOGIN_EMPLOYEE_FAILURE = 'login_employee_failure';

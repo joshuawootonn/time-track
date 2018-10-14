@@ -12,6 +12,11 @@ const styles = () => ({
   field:{
     margin: 'auto 8px'
   },
+  switchBox: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
   error: { marginTop: '16px' },
 });
 

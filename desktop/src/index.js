@@ -19,6 +19,9 @@ export const store = createStore(
 
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: { main: '#344955' },
     secondary: { main: '#faab1a' },
