@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Grid, Typography, Button, Tooltip,IconButton } from '@material-ui/core';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
-import {Delete} from '@material-ui/icons';
+import { Delete } from '@material-ui/icons';
 
 
 
@@ -23,7 +23,7 @@ class Employee extends Component {
             <Typography variant="h6">
               {label}
             </Typography>
-            {type === "edit" && <Tooltip title="Delete">
+            {type === 'edit' && <Tooltip title="Delete">
               <IconButton onClick={deleteEmployee} aria-label="Delete">
                 <Delete />
               </IconButton>
@@ -69,7 +69,7 @@ class Employee extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <div className={classes.field + " " + classes.switchBox} >
+            <div className={classes.field + ' ' + classes.switchBox} >
               <Field
                 name="isEmployed"
                 component={Switch}

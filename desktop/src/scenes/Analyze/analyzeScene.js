@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import { AppBar, Tabs, Tab, IconButton,Toolbar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import {ArrowBack} from '@material-ui/icons'
+import { ArrowBack } from '@material-ui/icons';
 
 import EmployeeContainer from 'containers/Analyze/employeesContainer';
 import ProjectContainer from 'containers/Analyze/projectsContainer';
@@ -11,7 +11,7 @@ import ShiftContainer from 'containers/Analyze/shiftsContainer';
 
 const styles = {
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   tool: {
     minHeight: 0

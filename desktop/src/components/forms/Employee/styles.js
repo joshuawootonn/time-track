@@ -17,7 +17,7 @@ const styles = () => ({
     display: 'flex',
     justifyContent: 'space-around'
   },
-  error: { marginTop: '16px' },
+  error: { marginTop: '16px' }
 });
 
 export default styles;

@@ -54,7 +54,7 @@ class EnhancedTable extends React.Component {
 
   handleClick = (event, id) => {
     const { tableData,selected } = this.props;
-    this.props.select(tableData.find((ele) => {return ele.id === id}));
+    this.props.select(tableData.find(ele => {return ele.id === id;}));
   
   };
  

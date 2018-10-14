@@ -102,14 +102,12 @@ export const deleteEmployee = employee => {
       
       const deleted = {
         entities: {
-          employees: {
-            [employee.id]: employee
-          }
+          employees: [employee.id]          
         },
         result: {
           employees: [employee.id]
         }
-      }
+      };
 
 
       return dispatch({

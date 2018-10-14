@@ -30,10 +30,10 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>       
         <Tooltip title="Add">
-            <IconButton aria-label="Add" onClick={add}>
-              <Add />
-            </IconButton>
-          </Tooltip>
+          <IconButton aria-label="Add" onClick={add}>
+            <Add />
+          </IconButton>
+        </Tooltip>
       </div>
     </Toolbar>
   );

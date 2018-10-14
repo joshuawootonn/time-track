@@ -20,7 +20,7 @@ export const store = createStore(
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true,
+    useNextVariants: true
   },
   palette: {
     primary: { main: '#344955' },

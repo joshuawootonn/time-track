@@ -11,9 +11,9 @@ import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import EmployeeEditContainer from 'containers/Analyze/employeeEditContainer';
 
-const EDITING = "editing";
+const EDITING = 'editing';
 const ADDING = 'adding';
-const INITIAL = 'initial'
+const INITIAL = 'initial';
 
 class EmployeeContainer extends Component {
   state = {
@@ -27,7 +27,7 @@ class EmployeeContainer extends Component {
   addEmployee = () => {
     this.setState({
       status: ADDING
-    })
+    });
   }
   selectEmployee = employee => {
     if(employee === this.state.selected){

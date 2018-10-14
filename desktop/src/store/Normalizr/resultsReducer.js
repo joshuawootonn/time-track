@@ -20,16 +20,17 @@ function arrayUnique(array) {
 
 export default (state = {}, action) => {
   const { payload, deleted } = action;
-  
+
   if (payload && payload.result) {
     return _.mergeWith({}, state, payload.result, payloadCustomizer);
   } else if (deleted && deleted.result) {
-    //console.log(state.employees);
     let temp = {};
-    Object.keys(state).forEach((result) => {      
-      temp[result] = _.difference(state[result],deleted.result[result])
-    })
-    //console.log(temp.employees);
+    // Loop through result types
+    Object.keys(state).forEach(resultType => {
+      const itemsToDelete = deleted.result[resultType];
+      // If there are such deletions get the difference of the state and items to delete
+      temp[resultType] = itemsToDelete ? _.difference(state[resultType], itemsToDelete) : state[resultType];
+    });
     return temp;
   }
   return state;

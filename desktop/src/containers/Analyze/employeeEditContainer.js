@@ -6,18 +6,18 @@ import { Formik } from 'formik';
 import Employee from 'components/forms/Employee';
 
 import { authoritySelectors, crewSelectors } from 'store/selectors';
-import { employeeActions } from 'store/actions'
+import { employeeActions } from 'store/actions';
 
 class EmployeeEditContainer extends Component {
   deleteEmployee = () =>{
-    const {selected} = this.props;
+    const { selected } = this.props;
     if(selected === {} && selected === null) return null;
     this.props.deleteEmployee(selected);
   }
   render() {
     const { authorities, crews, label, type, selected } = this.props;
     console.log(selected);
-    if (type === "add") {
+    if (type === 'add') {
       return (
         <Formik
           initialValues={{
@@ -34,7 +34,7 @@ class EmployeeEditContainer extends Component {
             createEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
-              isWorking: values.isWorking ? 1 : 0,
+              isWorking: values.isWorking ? 1 : 0
             });
           }}
           render={formikProps => {
@@ -56,13 +56,13 @@ class EmployeeEditContainer extends Component {
             ...selected,
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false
-           }}
+          }}
           onSubmit={values => {
             const { updateEmployee } = this.props;
             updateEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
-              isWorking: values.isWorking ? 1 : 0,
+              isWorking: values.isWorking ? 1 : 0
             });
           }}
           render={formikProps => {
@@ -100,7 +100,7 @@ const mapDispatchToProps = dispatch => {
     deleteEmployee: employee => {
       return dispatch(employeeActions.deleteEmployee(employee));
     }
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeEditContainer);

@@ -16,8 +16,8 @@ const Switch = ({ field, className, label,disabled }) => {
       />
     }
     label={label}
-  />
-}
+  />;
+};
 
 Switch.propTypes = {
   field: PropTypes.object.isRequired,
