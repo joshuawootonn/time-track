@@ -31,7 +31,6 @@ class AuthScene extends Component {
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
-    console.log(this.props.history);
     return (
       <div>
         <AppBar position="static">

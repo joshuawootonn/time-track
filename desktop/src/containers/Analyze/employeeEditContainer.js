@@ -6,13 +6,13 @@ import { Formik } from 'formik';
 import Employee from 'components/forms/Employee';
 
 import { authoritySelectors, crewSelectors } from 'store/selectors';
-import {employeeActions} from 'store/actions'
+import { employeeActions } from 'store/actions'
 
 class EmployeeEditContainer extends Component {
   render() {
-
-    const { authorities, crews, label,type } = this.props;
-    if(type === "add"){
+    const { authorities, crews, label, type, selected } = this.props;
+    console.log(selected);
+    if (type === "add") {
       return (
         <Formik
           initialValues={{
@@ -25,8 +25,7 @@ class EmployeeEditContainer extends Component {
             isWorking: false
           }}
           onSubmit={values => {
-            const {createEmployee} = this.props;
-            
+            const { createEmployee } = this.props;
             createEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
@@ -44,20 +43,22 @@ class EmployeeEditContainer extends Component {
           }}
         />
       );
-    }else{
+    } else {
       return (
         <Formik
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            authorityId: 1,
-            crewId: 1,
-            pin: '',
-            isEmployed: true,
-            isWorking: false
-          }}
-          onSubmit={() => {
-            console.log('TODO: onSubmit');
+          enableReinitialize
+          initialValues={{ 
+            ...selected,
+            isEmployed: selected.isEmployed ? true : false,
+            isWorking: selected.isWorking ? true : false
+           }}
+          onSubmit={values => {
+            const { updateEmployee } = this.props;
+            updateEmployee({
+              ...values,
+              isEmployed: values.isEmployed ? 1 : 0,
+              isWorking: values.isWorking ? 1 : 0,
+            });
           }}
           render={formikProps => {
             return <Employee
@@ -71,7 +72,7 @@ class EmployeeEditContainer extends Component {
         />
       );
     }
-    
+
   }
 }
 
@@ -87,9 +88,9 @@ const mapDispatchToProps = dispatch => {
     createEmployee: employee => {
       return dispatch(employeeActions.postEmployee(employee));
     },
-    // updateEmployee: employee => {
-    //   return dispatch(employeeActions.putEmployee(employee));
-    // }
+    updateEmployee: employee => {
+      return dispatch(employeeActions.putEmployee(employee));
+    }
   }
 }
 

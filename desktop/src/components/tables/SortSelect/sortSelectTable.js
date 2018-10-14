@@ -45,9 +45,6 @@ class EnhancedTable extends React.Component {
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = 'desc';
-
-    console.log(property);
-
     if (this.state.orderBy === property && this.state.order === 'desc') {
       order = 'asc';
     }
@@ -57,18 +54,12 @@ class EnhancedTable extends React.Component {
 
   handleClick = (event, id) => {
     const { tableData,selected } = this.props;
-
-    console.log(id, tableData[id], Object.keys(tableData));
-
-    if(selected && selected.id === id){
-      this.props.select({});
-    }else{
-      this.props.select(tableData[id-1]);
-    }
+    this.props.select(tableData.find((ele) => {return ele.id === id}));
+  
   };
  
 
-  isSelected = id => this.state.props && this.props.selected.id === id;
+  isSelected = id => this.props.selected.id === id;
 
   render() {
     const { classes, tableData, headerData,selected,add } = this.props;
@@ -90,7 +81,7 @@ class EnhancedTable extends React.Component {
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy))
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);
+                  const isSelected = this.isSelected(n.id);                 
                   return (
                     <TableRow
                       hover

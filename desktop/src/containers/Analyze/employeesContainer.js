@@ -30,14 +30,23 @@ class EmployeeContainer extends Component {
     })
   }
   selectEmployee = employee => {
-    this.setState({
-      selected: employee,
-      status: EDITING
-    });
+    if(employee === this.state.selected){
+      this.setState({
+        selected: {},
+        status: INITIAL
+      });
+    }else{
+      this.setState({
+        selected: employee,
+        status: EDITING
+      });
+    }
+    
   }
   render() {
     const { employees } = this.props;
     const { selected, status } = this.state;
+    
     const isLoading = !employees;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;

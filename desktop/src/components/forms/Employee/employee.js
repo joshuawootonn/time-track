@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography, Button, Tooltip,IconButton } from '@material-ui/core';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
+import {Delete} from '@material-ui/icons';
+
 
 
 import TextField from 'components/inputs/TextField';
@@ -17,10 +19,16 @@ class Employee extends Component {
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.row}>
             <Typography variant="h6">
               {label}
             </Typography>
+            {type === "edit" && <Tooltip title="Delete">
+              <IconButton aria-label="Delete">
+                <Delete />
+              </IconButton>
+            </Tooltip>}
+
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field

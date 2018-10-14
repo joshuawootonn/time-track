@@ -9,7 +9,7 @@ import styles from './styles';
 
 let EnhancedTableToolbar = props => {
   const { selected, classes,add } = props;
-  console.log(selected);
+  //console.log(selected);
   return (
     <Toolbar
       className={classNames(classes.toolbarRoot, {
@@ -28,14 +28,7 @@ let EnhancedTableToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {Object.keys(selected).length !== 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <Delete />
-            </IconButton>
-          </Tooltip>
-        ) :null}
+      <div className={classes.actions}>       
         <Tooltip title="Add">
             <IconButton aria-label="Add" onClick={add}>
               <Add />
