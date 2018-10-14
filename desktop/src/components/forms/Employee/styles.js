@@ -13,7 +13,6 @@ const styles = () => ({
     margin: 'auto 8px'
   },
   error: { marginTop: '16px' },
-  button: { marginTop: '16px' }
 });
 
 export default styles;

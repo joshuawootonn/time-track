@@ -11,20 +11,33 @@ import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import EmployeeEditContainer from 'containers/Analyze/employeeEditContainer';
 
+const EDITING = "editing";
+const ADDING = 'adding';
+const INITIAL = 'initial'
+
 class EmployeeContainer extends Component {
   state = {
-    selected: {}
+    selected: {},
+    status: INITIAL
   }
 
   componentDidMount = () => {
     this.props.getEmployees();
   }
+  addEmployee = () => {
+    this.setState({
+      status: ADDING
+    })
+  }
   selectEmployee = employee => {
-    this.setState({ selected: employee });
+    this.setState({
+      selected: employee,
+      status: EDITING
+    });
   }
   render() {
     const { employees } = this.props;
-    const { selected } = this.state;
+    const { selected, status } = this.state;
     const isLoading = !employees;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
@@ -32,11 +45,20 @@ class EmployeeContainer extends Component {
     return (
       <Grid container >
         <Grid item xs={7}>
-          <SortSelectTable tableData={employees} headerData={rows} selected={selected} select={this.selectEmployee} />
+          <SortSelectTable tableData={employees} headerData={rows} selected={selected} select={this.selectEmployee} add={this.addEmployee}/>
         </Grid>
-        <Grid item xs={5}>
-          <EmployeeEditContainer selected={selected}/>
-        </Grid>
+        {status === INITIAL && <div>click on something</div>}
+        {status === ADDING &&
+          <Grid item xs={5}>
+            <EmployeeEditContainer label="Add" />
+          </Grid>
+        }
+        {status === EDITING &&
+          <Grid item xs={5}>
+            <EmployeeEditContainer label="Edit" selected={selected} />
+          </Grid>
+        }
+
       </Grid>
     );
   }

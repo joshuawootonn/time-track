@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 
 import { Switch as MUSwitch, FormControlLabel } from '@material-ui/core';
 
-const Switch = ({ field, className, label }) => (
-  <FormControlLabel
+const Switch = ({ field, className, label }) => {
+  console.log(field)
+  return <FormControlLabel
     className={className}
     control={
-      <MUSwitch
-        checked={field.value}
+      <MUSwitch        
         {...field}
+        checked={field.value}
+        value={field.value.toString()}
       />
     }
     label={label}
   />
-);
+}
 
 Switch.propTypes = {
   field: PropTypes.object.isRequired,

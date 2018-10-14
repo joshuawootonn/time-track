@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Toolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
-import { Delete, FilterList } from '@material-ui/icons';
+import { Delete, FilterList,Add } from '@material-ui/icons';
 import styles from './styles';
 
 let EnhancedTableToolbar = props => {
-  const { selected, classes } = props;
+  const { selected, classes,add } = props;
   console.log(selected);
   return (
     <Toolbar
@@ -35,13 +35,12 @@ let EnhancedTableToolbar = props => {
               <Delete />
             </IconButton>
           </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterList />
+        ) :null}
+        <Tooltip title="Add">
+            <IconButton aria-label="Add" onClick={add}>
+              <Add />
             </IconButton>
           </Tooltip>
-        )}
       </div>
     </Toolbar>
   );

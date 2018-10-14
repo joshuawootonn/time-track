@@ -15,8 +15,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'firstName'
-  
+    orderBy: 'firstName'  
   };
   
   desc = (a, b, orderBy) => {            
@@ -72,12 +71,12 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.props && this.props.selected.id === id;
 
   render() {
-    const { classes, tableData, headerData,selected } = this.props;
+    const { classes, tableData, headerData,selected,add } = this.props;
     const { order, orderBy } = this.state;
     
     return (
       <div >
-        <EnhancedTableToolbar selected={selected} />
+        <EnhancedTableToolbar selected={selected} add={add} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead

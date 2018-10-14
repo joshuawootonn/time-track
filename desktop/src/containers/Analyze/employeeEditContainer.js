@@ -10,7 +10,7 @@ import { authoritySelectors, crewSelectors } from 'store/selectors';
 class EmployeeEditContainer extends Component {
   render() {
 
-    const { authorities, crews } = this.props;
+    const { authorities, crews, label } = this.props;
     return (
       <Formik
         initialValues={{
@@ -18,7 +18,7 @@ class EmployeeEditContainer extends Component {
           lastName: '',
           authorityId: 1,
           crewId: 1,
-          isEmployed: true
+          isEmployed: "true"
         }}
         onSubmit={() => {
           console.log('TODO: onSubmit');
@@ -27,6 +27,7 @@ class EmployeeEditContainer extends Component {
           return <Employee
             authorities={authorities}
             crews={crews}
+            label={label}
             {...formikProps}
           />;
         }}
