@@ -18,13 +18,13 @@ const SnackBar = props => {
       <SnackbarContent
         className={classes[type]}
         message={
-          <div className={classes.content}>
+          <span className={classes.content}>
             {icon}
-            <div className={classes.space} />
+            <span className={classes.space} />
             {message}
-          </div>
+          </span>
         }
-        action={[
+        action={
           <IconButton
             key="close"
             aria-label="Close"
@@ -34,7 +34,7 @@ const SnackBar = props => {
           >
             <Close className={classes.icon} />
           </IconButton>
-        ]}
+        }
       />
     </MUSnackbar>
   );

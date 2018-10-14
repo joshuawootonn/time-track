@@ -14,7 +14,7 @@ class SignInContainer extends Component {
   componentDidMount = () => {
     // REMOVE before deploy
     const { login, history, getStaticData, authorityEntities } = this.props;
-    login('565656').then(asdf => {
+    login('333333').then(asdf => {
       const { authorityId } = asdf.data;
       history.push(`/${authorityEntities[authorityId].type}`);
     });
