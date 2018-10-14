@@ -9,10 +9,13 @@ import { authoritySelectors, crewSelectors } from 'store/selectors';
 import { employeeActions } from 'store/actions';
 
 class EmployeeEditContainer extends Component {
-  deleteEmployee = () =>{
-    const { selected } = this.props;
-    if(selected === {} && selected === null) return null;
-    this.props.deleteEmployee(selected);
+  deleteEmployee = () => {
+    const { selected, select, deleteEmployee } = this.props;
+    if (selected === {} && selected === null) return null;
+
+    deleteEmployee(selected).then(() => {
+      select({});
+    });
   }
   render() {
     const { authorities, crews, label, type, selected } = this.props;
@@ -29,13 +32,22 @@ class EmployeeEditContainer extends Component {
             isEmployed: true,
             isWorking: false
           }}
-          onSubmit={values => {
+          onSubmit={(values, { resetForm, setErrors, setSubmitting, setStatus }) => {
             const { createEmployee } = this.props;
             createEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0
-            });
+            }).then(() => {
+              resetForm()
+              setStatus({ success: true })
+              console.log("wow");
+            }).catch((e) => {
+              console.log("asdf", e);
+              setStatus({ success: false })
+              setSubmitting(false)
+              setErrors({ submit: e })
+            })
           }}
           render={formikProps => {
             return <Employee
@@ -52,7 +64,7 @@ class EmployeeEditContainer extends Component {
       return (
         <Formik
           enableReinitialize
-          initialValues={{ 
+          initialValues={{
             ...selected,
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false

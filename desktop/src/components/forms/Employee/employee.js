@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip,IconButton } from '@material-ui/core';
+import { Grid, Typography, Button, Tooltip, IconButton } from '@material-ui/core';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
@@ -16,6 +16,7 @@ import styles from './styles';
 class Employee extends Component {
   render() {
     const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee } = this.props;
+    console.log(this.props.errors);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -96,7 +97,9 @@ class Employee extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <div></div>
+            <Typography color="error" variant="button" className={classes.field}>
+              {this.props.errors.submit}
+            </Typography>
             <div>
               <Button
                 type="submit"
