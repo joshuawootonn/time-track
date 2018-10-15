@@ -31,6 +31,7 @@ class ExportForm extends Component {
                 fullWidth
                 margin="none"
                 label="Export By"
+                helper="normal"
               />
               <Field
                 name="start"
@@ -38,6 +39,7 @@ class ExportForm extends Component {
                 margin="none"
                 label="From"
                 type="date"
+                helper="normal"
               />
             </Grid>
             <Grid item xs={12}>

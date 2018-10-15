@@ -12,7 +12,7 @@ import AccountActionForm from 'components/forms/AccountAction';
 class AccountAction extends Component {
   componentDidMount = () => {
     // REMOVE before deploy
-    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    //this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   }
   back = () => {
     this.props.history.push('/');
@@ -27,6 +27,7 @@ class AccountAction extends Component {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   };
   analyze = () => {
+    console.log(this.props.type,routes.ANALYZE)
     this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
   export = () => {

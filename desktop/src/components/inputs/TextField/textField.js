@@ -13,7 +13,7 @@ const TextField = ({ field, form, label, className, type, margin, helper }) => (
     fullWidth
     className={className}
     margin={margin}
-    FormHelperTextProps={helper !=='none' ? { style:{ display:'none' },error: true } : { error: true  }} 
+    FormHelperTextProps={helper ==='none' ? { style:{ display:'none' },error: true } : { error: true  }} 
     helperText={getIn(form.errors, field.name) || ' '}
   />
 );

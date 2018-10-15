@@ -13,12 +13,12 @@ class SignInContainer extends Component {
 
   componentDidMount = () => {
     // REMOVE before deploy
-    const { login, history, getStaticData, authorityEntities } = this.props;
-    login('565656').then(asdf => {
-      const { authorityId } = asdf.data;
-      history.push(`/${authorityEntities[authorityId].type}`);
-    });
-    getStaticData();
+    // const { login, history, getStaticData, authorityEntities } = this.props;
+    // login('565656').then(asdf => {
+    //   const { authorityId } = asdf.data;
+    //   history.push(`/${authorityEntities[authorityId].type}`);
+    // });
+    // getStaticData();
   }
   render() {
     const { login, history, getStaticData, authorityEntities } = this.props;
