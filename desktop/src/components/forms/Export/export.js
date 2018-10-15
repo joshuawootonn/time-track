@@ -15,7 +15,7 @@ import * as exportConstants from 'constants/export';
 
 class ExportForm extends Component {
   render() {
-    const { classes, cancel, isSubmitting, errors } = this.props;    
+    const { classes, cancel, isSubmitting, errors,values } = this.props;    
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent}>
@@ -58,7 +58,7 @@ class ExportForm extends Component {
                 <Button
                   type="submit"
                   color="primary"
-                  disabled={isSubmitting || Object.keys(errors).length !== 0 }
+                  disabled={isSubmitting || Object.keys(errors).length !== 0 || values.fileLocation.length === 0 }
                   variant="contained"
                 >
                   Export
@@ -81,6 +81,7 @@ class ExportForm extends Component {
 }
 
 ExportForm.propTypes = {
+  values: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   cancel: PropTypes.func,
   isSubmitting: PropTypes.bool.isRequired,
