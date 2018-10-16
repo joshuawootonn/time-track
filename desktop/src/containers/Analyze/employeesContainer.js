@@ -29,10 +29,8 @@ class EmployeeContainer extends Component {
       status: ADDING
     });
   }
-  selectEmployee = employee => {
-    console.log("selectEmployee",employee);
-    if(employee === this.state.selected || employee == {}){
-      console.log("here")
+  selectEmployee = employee => {    
+    if(employee === null || employee === this.state.selected){      
       this.setState({
         selected: {},
         status: INITIAL
@@ -52,7 +50,6 @@ class EmployeeContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
     }
-    console.log("status in employee container",status,selected);
     return (
       <Grid container >
         <Grid item xs={7}>
@@ -69,7 +66,6 @@ class EmployeeContainer extends Component {
             <EmployeeEditContainer type="edit" label="Edit" selected={selected} select={this.selectEmployee} />
           </Grid>
         }
-
       </Grid>
     );
   }

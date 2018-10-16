@@ -13,9 +13,8 @@ class EmployeeEditContainer extends Component {
     const { selected, select, deleteEmployee } = this.props;
     if (selected === {} && selected === null) return null;
 
-    deleteEmployee(selected).then(() => {
-      select({});
-    });
+    deleteEmployee(selected)
+    select(null);  
   }
   render() {
     const { authorities, crews, label, type, selected } = this.props;
