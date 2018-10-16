@@ -9,9 +9,6 @@ import EnhancedTableToolbar from './tool';
 import styles from './styles';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
-
-
-
 class EnhancedTable extends React.Component {
   state = {
     order: 'asc',

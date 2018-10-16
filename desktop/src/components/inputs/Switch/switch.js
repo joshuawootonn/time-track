@@ -12,7 +12,8 @@ const Switch = ({ field, className, label,disabled }) => {
         {...field}
         disabled={disabled}
         checked={field.value}
-        value={typeof field.value === Boolean && field.value.toString()}
+        value="asdf"
+        //value={typeof field.value === Boolean && field.value.toString()}
       />
     }
     label={label}

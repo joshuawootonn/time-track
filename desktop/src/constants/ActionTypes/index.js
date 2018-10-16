@@ -10,6 +10,7 @@ import * as taskActionTypes from './task';
 import * as activityActionTypes from './activity';
 import * as staticActionTypes from './static';
 import * as exportActionTypes from './export';
+import * as selectedActionTypes from './selected';
 
 export {
   userActionTypes,
@@ -23,5 +24,6 @@ export {
   taskActionTypes,
   activityActionTypes,
   staticActionTypes,
-  exportActionTypes
+  exportActionTypes,
+  selectedActionTypes
 };

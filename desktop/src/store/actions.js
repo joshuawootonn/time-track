@@ -10,6 +10,7 @@ import * as taskActions from './Task/actions';
 import * as activityActions from './Activity/actions';
 import * as staticActions from './Static/actions';
 import * as exportActions from './Export/actions';
+import * as selectedActions from './Selected/actions';
 
 export {
   userActions,
@@ -23,5 +24,6 @@ export {
   taskActions,
   activityActions,
   staticActions,
-  exportActions
+  exportActions,
+  selectedActions
 };

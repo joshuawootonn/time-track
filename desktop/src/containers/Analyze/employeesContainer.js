@@ -21,7 +21,7 @@ class EmployeeContainer extends Component {
     selected: {},
     status: INITIAL
   };
-
+  
   componentDidMount = () => {
     this.props.getEmployees();
   };

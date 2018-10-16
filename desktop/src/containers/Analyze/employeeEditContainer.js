@@ -82,8 +82,8 @@ class EmployeeEditContainer extends Component {
               isWorking: values.isWorking ? 1 : 0
             }).then(
               () => {
-                select(selected.id);
-                select(selected.id);
+                // select(selected.id);
+                // select(selected.id);
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
                 console.log('wow');
