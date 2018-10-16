@@ -9,6 +9,7 @@ import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selec
 import { employeeActions,analyzeActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
+import {employeeValidation} from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   deleteEmployee = () => {
@@ -47,6 +48,7 @@ class EmployeeEditContainer extends Component {
             isEmployed: true,
             isWorking: false
           }}
+          validationSchema={employeeValidation}
           onSubmit={(values, formikFunctions) => {
             const { createEmployee } = this.props;
             createEmployee({
@@ -90,7 +92,8 @@ class EmployeeEditContainer extends Component {
             ...selected,
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false
-          }}
+          }}          
+          validationSchema={employeeValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateEmployee } = this.props;
             updateEmployee({

@@ -36,3 +36,25 @@ export const exportValidation = Yup.object().shape({
       'File location must be an Xls or Xlsx file',
     )
 });
+
+export const employeeValidation = Yup.object().shape({
+  firstName: Yup.string()
+    .required('First Name is required')
+    .matches(new RegExp(/[a-zA-Z]{2,}/),'First Name format is invalid'),
+  lastName: Yup.string()
+    .required('Last Name is required')
+    .matches(new RegExp(/[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?/), 'Last Name format is invalid'),
+  authorityId: Yup.number()
+    .positive('Authority selection is required')
+    .required('Authority selection is required'),
+  crewId: Yup.number()
+    .positive('Crew selection is required')
+    .required('Crew selection is required'),
+  pin: Yup.string()
+    .required('Pin is required')
+    .matches(new RegExp(/\b(\d{6})\b/),'Pin format is invalid'),
+  isEmployed: Yup.boolean(),
+  isWorking: Yup.boolean()
+});
+
+
