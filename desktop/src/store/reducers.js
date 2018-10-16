@@ -6,7 +6,7 @@ import results from './Normalizr/resultsReducer';
 import snack from './Snack/reducers';
 import employee from './Employee/reducers';
 import shift from './Shift/reducers';
-import selected from './Selected/reducers';
+import analyze from './Analyze/reducers';
 
 const rootReducer = combineReducers({
   entities,
@@ -15,6 +15,6 @@ const rootReducer = combineReducers({
   snack,
   employee,
   shift,
-  selected
+  analyze
 });
 export default rootReducer;
