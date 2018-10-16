@@ -3,14 +3,19 @@ import { taskActionTypes } from 'constants/ActionTypes';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import { taskArray } from 'store/schemas';
+import { normalizeEmbeddedData } from 'helpers/store';
 
 export const getTasks = () => {
   return async dispatch => {
     dispatch({ type: taskActionTypes.GET_TASKS_REQUEST });
     try {
       const response = await endpoint.getTasks();
-      const payload = normalize({ tasks: response.data }, taskArray);
-      // console.log(response,payload);
+      
+      let payload = normalize({ tasks: response.data }, taskArray);
+
+      payload = normalizeEmbeddedData(payload);
+
+      console.log(response.data,payload);
       return dispatch({
         type: taskActionTypes.GET_TASKS_SUCCESS,
         payload
@@ -25,3 +30,4 @@ export const getTasks = () => {
     }
   };
 };
+

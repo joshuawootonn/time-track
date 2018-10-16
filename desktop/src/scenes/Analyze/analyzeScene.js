@@ -8,6 +8,8 @@ import { ArrowBack } from '@material-ui/icons';
 
 import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
+import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer'
+import TaskIndexContainer from 'containers/Analyze/taskIndexContainer'
 import ProjectContainer from 'containers/Analyze/projectsContainer';
 import ShiftContainer from 'containers/Analyze/shiftsContainer';
 
@@ -23,7 +25,7 @@ const styles = {
 class AnalyzeScene extends Component {
 
   state = {
-    tabValue: 0
+    tabValue: 2
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -37,14 +39,14 @@ class AnalyzeScene extends Component {
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
-    console.log('here we are');
     return (
       <div>
         <AppBar position="static">
           <Toolbar className={classes.tool}>
             <Tabs value={tabValue} onChange={this.handleTabValueChange} className={classes.grow}>
               <Tab label="Employees" />
-              <Tab label="Projects" />
+              <Tab label="Projects" />              
+              <Tab label="Tasks" />
               <Tab label="Shifts" />
             </Tabs>
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
@@ -60,7 +62,16 @@ class AnalyzeScene extends Component {
           </Grid>
         </Grid>}
         {tabValue === 1 && <ProjectContainer />}
-        {tabValue === 2 && <ShiftContainer />}
+        {tabValue === 2 && <Grid container>
+          
+          <Grid item xs={7}>
+            <TaskIndexContainer />
+          </Grid>
+          <Grid item xs={5}>
+            <TaskDetailsContainer />
+          </Grid>
+        </Grid>}
+        {tabValue === 3 && <ShiftContainer />}
       </div>
     );
   }

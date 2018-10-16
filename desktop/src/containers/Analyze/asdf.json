@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "category": {
+      "1": {
+        "id": 1,
+        "type": "Earthwork"
+      }
+    },
+    "dimension": {
+      "1": {
+        "id": 1,
+        "type": "SF"
+      }
+    },
+    "subcategory": {
+      "1": {
+        "categoryId": 1,
+        "dimensionId": 1,
+        "id": 1,
+        "type": "Pavement",
+        "category": 1,
+        "dimension": 1
+      }
+    },
+    "tasks": {
+      "1": {
+        "id": 1,
+        "isActive": 1,
+        "name": "6\" Sidewalk",
+        "subcategoryId": 1,
+        "subcategory": 1
+      },
+      "2": {
+        "id": 2,
+        "isActive": 1,
+        "name": "7\" Sidewalk",
+        "subcategoryId": 1,
+        "subcategory": 1
+      }
+    }
+  },
+  "result": {
+    "tasks": [
+      1,
+      2
+    ]
+  }
+}

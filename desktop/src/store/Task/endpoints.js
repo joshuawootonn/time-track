@@ -4,5 +4,7 @@ import axios from 'axios';
 const DOMAIN = 'tasks';
 
 export const getTasks = () => {
-  return axios.get(`${HOST}/${DOMAIN}`);
+  //  if normalizr was good.
+  return axios.get(`${HOST}/${DOMAIN}?filter[include][subcategory]=category&filter[include][subcategory]=dimension`);
 };
+
