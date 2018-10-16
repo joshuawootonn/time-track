@@ -2,24 +2,39 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import {Typography} from '@material-ui/core';
 
 import Employee from 'components/forms/Employee';
-
-import { authoritySelectors, crewSelectors } from 'store/selectors';
-import { employeeActions } from 'store/actions';
+import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
+import { employeeActions,analyzeActions } from 'store/actions';
+import * as analyzeConstants from 'constants/analyze';
+import Hero from 'components/layouts/Hero';
 
 class EmployeeEditContainer extends Component {
   deleteEmployee = () => {
-    const { selected, select, deleteEmployee } = this.props;
-    if (selected === {} && selected === null) return null;
-
+    const { selected, deleteEmployee } = this.props;  
     deleteEmployee(selected);
-    select(null);
   };
+
+
   render() {
-    const { authorities, crews, label, type, selected,select } = this.props;
-    
-    if (type === 'add') {
+
+
+    const { authorities, crews, selected,selectEmployee,status } = this.props;
+
+    // console.log('details: ',status,selected,selectEmployee);
+
+
+    if(status === analyzeConstants.INIT){
+      return (
+        <Hero fullWidth fullHeight>
+          <Typography variant="h6">Select an Employee.. </Typography>
+        </Hero>
+      );
+    }
+      
+      
+    if(status === analyzeConstants.ADDING ){
       return (
         <Formik
           enableReinitialize
@@ -57,15 +72,17 @@ class EmployeeEditContainer extends Component {
               <Employee
                 authorities={authorities}
                 crews={crews}
-                label={label}
-                type={type}
+                label="Add"
+                type="add"
                 {...formikProps}
               />
             );
           }}
         />
       );
-    } else {
+    } 
+      
+    if(status === analyzeConstants.EDITING){
       return (
         <Formik
           enableReinitialize
@@ -82,8 +99,6 @@ class EmployeeEditContainer extends Component {
               isWorking: values.isWorking ? 1 : 0
             }).then(
               () => {
-                // select(selected.id);
-                // select(selected.id);
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
                 console.log('wow');
@@ -102,22 +117,24 @@ class EmployeeEditContainer extends Component {
                 deleteEmployee={this.deleteEmployee}
                 authorities={authorities}
                 crews={crews}
-                label={label}
-                type={type}
+                label="Edit"
+                type="edit"
                 {...formikProps}
               />
             );
           }}
         />
       );
-    }
+    } 
   }
 }
 
 const mapStateToProps = state => {
   return {
     crews: crewSelectors.getAllCrews(state),
-    authorities: authoritySelectors.getAllAuthorities(state)
+    authorities: authoritySelectors.getAllAuthorities(state),
+    selected: employeeSelectors.getSelectedEmployee(state),
+    status: state.analyze.employeeStatus    
   };
 };
 
@@ -131,6 +148,12 @@ const mapDispatchToProps = dispatch => {
     },
     deleteEmployee: employee => {
       return dispatch(employeeActions.deleteEmployee(employee));
+    },
+    selectEmployee: employee => {
+      return dispatch(analyzeActions.selectEmployee(employee));
+    },
+    setEmployeeStatus: status => {
+      return dispatch(analyzeActions.setEmployeeStatus(status));
     }
   };
 };

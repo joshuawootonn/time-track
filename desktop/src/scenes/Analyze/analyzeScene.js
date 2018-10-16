@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { AppBar, Tabs, Tab, IconButton,Toolbar } from '@material-ui/core';
+import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack } from '@material-ui/icons';
 
-import EmployeeContainer from 'containers/Analyze/employeesContainer';
+import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
+import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
 import ProjectContainer from 'containers/Analyze/projectsContainer';
 import ShiftContainer from 'containers/Analyze/shiftsContainer';
 
@@ -31,7 +32,7 @@ class AuthScene extends Component {
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
-    console.log("here we are");
+    console.log('here we are');
     return (
       <div>
         <AppBar position="static">
@@ -45,7 +46,14 @@ class AuthScene extends Component {
           </Toolbar>
 
         </AppBar>
-        {tabValue === 0 && <EmployeeContainer />}
+        {tabValue === 0 && <Grid container>
+          <Grid item xs={7}>
+            <EmployeeIndexContainer />
+          </Grid>
+          <Grid item xs={5}>
+            <EmployeeDetailsContainer />
+          </Grid>
+        </Grid>}
         {tabValue === 1 && <ProjectContainer />}
         {tabValue === 2 && <ShiftContainer />}
       </div>

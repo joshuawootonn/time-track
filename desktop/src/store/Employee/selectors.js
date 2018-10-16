@@ -3,9 +3,13 @@ import { createSelector } from 'reselect';
 export const getEmployeesFromEntities = state => state.entities.employees;
 export const getEmployeesFromResults = state => state.results.employees;
 
+
+
 export const getEmployeeFromState = state => state.employee;
 export const getAuthoritiesFromEntities = state => state.entities.authorities;
 export const getCrewsFromEntities = state => state.entities.crews;
+
+export const getAnalyzeState = state => state.analyze;
 
 export const getCurrentEmployee = createSelector(
   getEmployeesFromEntities,
@@ -43,3 +47,14 @@ export const getAllEmployeesWithContents = createSelector(
     });
   },
 );
+
+export const getSelectedEmployee = createSelector(
+  getEmployeesFromEntities,
+  getAnalyzeState,
+  (employees, analyze) => {
+    if(analyze.employee === -1) 
+      return {};
+    else 
+      return employees[analyze.employee];
+  }
+)
