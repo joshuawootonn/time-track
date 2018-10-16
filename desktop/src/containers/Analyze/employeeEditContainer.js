@@ -17,11 +17,12 @@ class EmployeeEditContainer extends Component {
     select(null);
   };
   render() {
-    const { authorities, crews, label, type, selected } = this.props;
+    const { authorities, crews, label, type, selected,select } = this.props;
     
     if (type === 'add') {
       return (
         <Formik
+          enableReinitialize
           initialValues={{
             firstName: '',
             lastName: '',
@@ -73,13 +74,27 @@ class EmployeeEditContainer extends Component {
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false
           }}
-          onSubmit={values => {
+          onSubmit={(values,formikFunctions) => {
             const { updateEmployee } = this.props;
             updateEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0
-            });
+            }).then(
+              () => {
+                select(selected.id);
+                select(selected.id);
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow');
+              },
+              e => {
+                console.log('asdf', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
           }}
           render={formikProps => {
             return (

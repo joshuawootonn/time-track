@@ -30,16 +30,19 @@ class EmployeeContainer extends Component {
       status: ADDING
     });
   };
-  selectEmployee = employee => {
-    if (employee === null || employee === this.state.selected) {
+  selectEmployeeById = id => {
+    if (id === -1 || id === this.state.selected.id) {
       this.setState({
         selected: {},
         status: INITIAL
       });
     } else {
+      const employeeSelected = this.props.employees.find(
+        employee => employee.id === id
+      );
       this.setState({
-        selected: employee,
-        status: EDITING
+        selected: employeeSelected,
+        status: employeeSelected !== -1 ? EDITING : INITIAL
       });
     }
   };
@@ -58,7 +61,7 @@ class EmployeeContainer extends Component {
             tableData={employees}
             headerData={rows}
             selected={selected}
-            select={this.selectEmployee}
+            select={this.selectEmployeeById}
             add={this.addEmployee}
           />
         </Grid>
@@ -80,7 +83,7 @@ class EmployeeContainer extends Component {
               type="edit"
               label="Edit"
               selected={selected}
-              select={this.selectEmployee}
+              select={this.selectEmployeeById}
             />
           </Grid>
         )}
