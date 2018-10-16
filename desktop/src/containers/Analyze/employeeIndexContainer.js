@@ -10,9 +10,11 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import * as analyzeStatus from 'constants/analyze';
 
 class EmployeeContainer extends Component {
+  
   componentDidMount = () => {
     this.props.getEmployees();
   };
+
   render() {
     const { employees, selected, selectEmployee,setEmployeeStatus } = this.props;
 
@@ -27,7 +29,7 @@ class EmployeeContainer extends Component {
         headerData={rows}
         selected={selected}
         select={selectEmployee}
-        add={() => {setEmployeeStatus(analyzeStatus.ADDING)}}
+        add={() => {setEmployeeStatus(analyzeStatus.ADDING);}}
       />
     );
   }
@@ -56,7 +58,10 @@ const mapDispatchToProps = dispatch => {
 
 EmployeeContainer.propTypes = {
   employees: PropTypes.array.isRequired,
-  getEmployees: PropTypes.func.isRequired
+  getEmployees: PropTypes.func.isRequired,
+  selected: PropTypes.object,
+  selectEmployee: PropTypes.func.isRequired,
+  setEmployeeStatus: PropTypes.func.isRequired
 };
 
 export default connect(

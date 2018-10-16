@@ -57,4 +57,4 @@ export const getSelectedEmployee = createSelector(
     else 
       return employees[analyze.employee];
   }
-)
+);

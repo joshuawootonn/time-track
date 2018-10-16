@@ -2,29 +2,24 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 import Employee from 'components/forms/Employee';
 import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
 import { employeeActions,analyzeActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
-import {employeeValidation} from 'constants/formValidation';
+import { employeeValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
+  
   deleteEmployee = () => {
     const { selected, deleteEmployee } = this.props;  
     deleteEmployee(selected);
   };
 
-
   render() {
-
-
-    const { authorities, crews, selected,selectEmployee,status } = this.props;
-
-    // console.log('details: ',status,selected,selectEmployee);
-
+    const { authorities, crews, selected,status } = this.props;
 
     if(status === analyzeConstants.INIT){
       return (
@@ -33,8 +28,7 @@ class EmployeeEditContainer extends Component {
         </Hero>
       );
     }
-      
-      
+            
     if(status === analyzeConstants.ADDING ){
       return (
         <Formik

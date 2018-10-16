@@ -1,18 +1,18 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Toolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
-import { Delete, FilterList,Add } from '@material-ui/icons';
+import { Add } from '@material-ui/icons';
+
 import styles from './styles';
 
 let EnhancedTableToolbar = props => {
-  const { selected, classes,add } = props;
-  //console.log(selected);
+  const { selected, classes, add } = props;
   return (
     <Toolbar
-      className={classNames(classes.toolbarRoot, {
+      className={cx(classes.toolbarRoot, {
         [classes.highlight]: Object.keys(selected).length !== 0
       })}
     >
@@ -41,7 +41,8 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  selected: PropTypes.object.isRequired
+  selected: PropTypes.object.isRequired,
+  add: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(EnhancedTableToolbar);

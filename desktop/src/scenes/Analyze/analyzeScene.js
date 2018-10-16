@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,16 +20,20 @@ const styles = {
   }
 };
 
-class AuthScene extends Component {
+class AnalyzeScene extends Component {
+
   state = {
     tabValue: 0
   }
+
   handleTabValueChange = (e, tabValue) => {
     this.setState({ tabValue });
   }
+
   back = () => {
     this.props.history.goBack();
   }
+
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
@@ -61,4 +66,9 @@ class AuthScene extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(AuthScene));
+AnalyzeScene.propTypes = {
+  history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
+};
+
+export default withRouter(withStyles(styles)(AnalyzeScene));

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip, IconButton } from '@material-ui/core';
+import {  Grid,  Typography,  Button,  Tooltip,  IconButton } from '@material-ui/core';
+import cx from 'classnames';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
-
-
 
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
@@ -14,22 +13,21 @@ import Switch from 'components/inputs/Switch';
 import styles from './styles';
 
 class Employee extends Component {
-  render() {
-    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee,resetForm,initialValues } = this.props;
-    console.log(this.props);
+  render() { 
+    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee, resetForm, initialValues,errors } = this.props;
+    //console.log(this.props);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
-            <Typography variant="h6">
-              {label}
-            </Typography>
-            {type === 'edit' && <Tooltip title="Delete">
-              <IconButton onClick={deleteEmployee} aria-label="Delete">
-                <Delete />
-              </IconButton>
-            </Tooltip>}
-
+            <Typography variant="h6">{label}</Typography>
+            {type === 'edit' && (
+              <Tooltip title="Delete">
+                <IconButton onClick={deleteEmployee} aria-label="Delete">
+                  <Delete />
+                </IconButton>
+              </Tooltip>
+            )}
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -70,7 +68,7 @@ class Employee extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <div className={classes.field + ' ' + classes.switchBox} >
+            <div className={cx(classes.field,classes.switchBox)}>
               <Field
                 name="isEmployed"
                 component={Switch}
@@ -97,8 +95,12 @@ class Employee extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <Typography color="error" variant="button" className={classes.field}>
-              {this.props.errors.submit}
+            <Typography
+              color="error"
+              variant="button"
+              className={classes.field}
+            >
+              {errors.submit}
             </Typography>
             <div>
               <Button
@@ -111,7 +113,9 @@ class Employee extends Component {
                 Save
               </Button>
               <Button
-                onClick={()=> {resetForm(initialValues)}}
+                onClick={() => {
+                  resetForm(initialValues);
+                }}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
@@ -121,10 +125,8 @@ class Employee extends Component {
               </Button>
             </div>
           </Grid>
-
         </Grid>
       </Form>
-
     );
   }
 }
@@ -133,7 +135,13 @@ Employee.propTypes = {
   classes: PropTypes.object.isRequired,
   authorities: PropTypes.array.isRequired,
   crews: PropTypes.array.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  deleteEmployee: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Employee);
