@@ -13,49 +13,54 @@ class EmployeeEditContainer extends Component {
     const { selected, select, deleteEmployee } = this.props;
     if (selected === {} && selected === null) return null;
 
-    deleteEmployee(selected)
-    select(null);  
-  }
+    deleteEmployee(selected);
+    select(null);
+  };
   render() {
     const { authorities, crews, label, type, selected } = this.props;
-    console.log(selected);
+    
     if (type === 'add') {
       return (
         <Formik
           initialValues={{
             firstName: '',
             lastName: '',
-            authorityId: -1,
-            crewId: -1,
+            authorityId: 1,
+            crewId: 1,
             pin: '',
             isEmployed: true,
             isWorking: false
           }}
-          onSubmit={(values, { resetForm, setErrors, setSubmitting, setStatus }) => {
+          onSubmit={(values, formikFunctions) => {
             const { createEmployee } = this.props;
             createEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0
-            }).then(() => {
-              resetForm()
-              setStatus({ success: true })
-              console.log("wow");
-            }).catch((e) => {
-              console.log("asdf", e);
-              setStatus({ success: false })
-              setSubmitting(false)
-              setErrors({ submit: e })
-            })
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow');
+              },
+              e => {
+                console.log('asdf', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
           }}
           render={formikProps => {
-            return <Employee
-              authorities={authorities}
-              crews={crews}
-              label={label}
-              type={type}
-              {...formikProps}
-            />;
+            return (
+              <Employee
+                authorities={authorities}
+                crews={crews}
+                label={label}
+                type={type}
+                {...formikProps}
+              />
+            );
           }}
         />
       );
@@ -77,19 +82,20 @@ class EmployeeEditContainer extends Component {
             });
           }}
           render={formikProps => {
-            return <Employee
-              deleteEmployee={this.deleteEmployee}
-              authorities={authorities}
-              crews={crews}
-              label={label}
-              type={type}
-              {...formikProps}
-            />;
+            return (
+              <Employee
+                deleteEmployee={this.deleteEmployee}
+                authorities={authorities}
+                crews={crews}
+                label={label}
+                type={type}
+                {...formikProps}
+              />
+            );
           }}
         />
       );
     }
-
   }
 }
 
@@ -114,4 +120,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeEditContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeEditContainer);

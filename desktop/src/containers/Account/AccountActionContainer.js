@@ -27,7 +27,7 @@ class AccountAction extends Component {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   };
   analyze = () => {
-    console.log(this.props.type,routes.ANALYZE)
+    console.log(this.props.type,routes.ANALYZE);
     this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
   export = () => {

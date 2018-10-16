@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { LinearProgress, CircularProgress } from '@material-ui/core';
 
-import styles from './style';
+import styles from './styles';
 
-export const Progress = props => {
-  const { classes, fullPage, fullHeight, fullWidth, variant } = props;
+export const Hero = props => {
+  const { classes, fullPage, fullHeight, fullWidth, children } = props;
 
   const wrapperClasses = cx({
     [classes.fullPageWrapper]: fullPage,
@@ -28,27 +27,25 @@ export const Progress = props => {
   return (
     <div className={wrapperClasses}>
       <div className={innerClasses}>
-        {variant === 'linear' ? <LinearProgress /> : null}
-        {variant === 'circular' ? <CircularProgress /> : null}
+        {children}
       </div>
     </div>
   );
 };
 
-Progress.defaultProps = {
+Hero.defaultProps = {
   fullWidth: false,
   fullHeight: false,
-  fullPage: false,
-  variant: 'circular'
+  fullPage: false
 };
 
-Progress.propTypes = {
+Hero.propTypes = {
+  children: PropTypes.node.isRequired,
   fullWidth: PropTypes.bool,
   fullHeight: PropTypes.bool,
   fullPage: PropTypes.bool,
-  variant: PropTypes.oneOf(['circular', 'linear']),
   classes: PropTypes.object.isRequired
 };
 
 
-export default withStyles(styles)(Progress);
+export default withStyles(styles)(Hero);

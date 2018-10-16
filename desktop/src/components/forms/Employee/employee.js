@@ -16,7 +16,7 @@ import styles from './styles';
 class Employee extends Component {
   render() {
     const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee } = this.props;
-    console.log(this.props.errors);
+    //console.log(this.props.errors);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
