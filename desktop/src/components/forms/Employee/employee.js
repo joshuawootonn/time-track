@@ -15,8 +15,8 @@ import styles from './styles';
 
 class Employee extends Component {
   render() {
-    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee } = this.props;
-    //console.log(this.props.errors);
+    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee,resetForm,initialValues } = this.props;
+    console.log(this.props);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -111,13 +111,13 @@ class Employee extends Component {
                 Save
               </Button>
               <Button
-                //onClick={cancel}
+                onClick={()=> {resetForm(initialValues)}}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
                 className={classes.button}
               >
-                Cancel
+                Reset
               </Button>
             </div>
           </Grid>
