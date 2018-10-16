@@ -3,6 +3,11 @@ import { createSelector } from 'reselect';
 export const getTasksFromEntities = state => state.entities.tasks;
 export const getTasksFromResults = state => state.results.tasks;
 
+export const getDimensionsFromEntities = state => state.entities.dimension;
+export const getCategoriesFromEntities = state => state.entities.category;
+export const getSubcategoriesFromEntities = state => state.entities.subcategory;
+
+
 export const getAllTasks = createSelector(
   getTasksFromEntities,
   getTasksFromResults,
@@ -22,4 +27,24 @@ export const getAllTaskObjects = createSelector(
     // reduce the task array to a object with id as they key
     return Object.assign({}, ...tasks.map(object => ({ [object.id]: object })));    
   },
+);
+
+export const getAllTasksWithContent = createSelector(
+  getTasksFromEntities,
+  getTasksFromResults,
+  getDimensionsFromEntities,
+  getCategoriesFromEntities,
+  getSubcategoriesFromEntities,
+  (tasks,results,dimensions,categories,subcategories) => {
+    if(!results || results.size === 0) return null;
+    return results.map(taskId => {
+      const task = tasks[taskId];
+      return {
+        ...task,
+        subcategory: subcategories[task.subcategoryId],
+        category: categories[subcategories[task.subcategoryId].categoryId],
+        dimension: dimensions[subcategories[task.subcategoryId].dimensionId]
+      };
+    });
+  }
 );

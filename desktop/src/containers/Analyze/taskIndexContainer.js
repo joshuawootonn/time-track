@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { employeeActions, analyzeActions } from 'store/actions';
-import { employeeSelectors } from 'store/selectors';
+import { taskActions, analyzeActions } from 'store/actions';
+import { employeeSelectors,taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -12,27 +12,25 @@ import * as analyzeStatus from 'constants/analyze';
 class TaskIndexContainer extends Component {
   
   componentDidMount = () => {
-    // this.props.getTasks();
-    // this.props.getSubcategories();
-    // this.props.getCategories();
-    // this.props.getDimensions();
+    this.props.getTasks();
   };
 
   render() {
-    const { employees, selected, selectEmployee,setEmployeeStatus } = this.props;
+    const { tasks, selected, selectEmployee,setEmployeeStatus } = this.props;
 
-    const isLoading = !employees;
+    const isLoading = !tasks;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
     }
-
+    console.log(tasks);
+   
     return (
       <SortSelectTable
-        tableData={employees}
+        tableData={tasks}
         headerData={rows}
-        selected={selected}
-        select={selectEmployee}
-        add={() => {setEmployeeStatus(analyzeStatus.ADDING);}}
+        selected={{}}
+        select={()=>{console.log('select task');}}
+        add={() => {console.log('add task');}}
       />
     );
   }
@@ -40,28 +38,29 @@ class TaskIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    employees: employeeSelectors.getAllEmployeesWithContents(state),
-    selected: employeeSelectors.getSelectedEmployee(state)
+    tasks: taskSelectors.getAllTasksWithContent(state)
+    // employees: employeeSelectors.getAllEmployeesWithContents(state),
+    // selected: employeeSelectors.getSelectedEmployee(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getEmployees: () => {
-      return dispatch(employeeActions.getEmployees());
-    },
-    selectEmployee: employee => {
-      return dispatch(analyzeActions.selectEmployee(employee));
-    },
-    setEmployeeStatus: status => {
-      return dispatch(analyzeActions.setEmployeeStatus(status));
+    getTasks: () => {
+      return dispatch(taskActions.getTasks());
     }
+    // selectEmployee: employee => {
+    //   return dispatch(analyzeActions.selectEmployee(employee));
+    // },
+    // setEmployeeStatus: status => {
+    //   return dispatch(analyzeActions.setEmployeeStatus(status));
+    // }
   };
 };
 
 TaskIndexContainer.propTypes = {
   employees: PropTypes.array.isRequired,
-  getEmployees: PropTypes.func.isRequired,
+  getTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
   selectEmployee: PropTypes.func.isRequired,
   setEmployeeStatus: PropTypes.func.isRequired
@@ -74,47 +73,41 @@ export default connect(
 
 const rows = [
   {
-    id: 'firstName',
+    id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'First Name',
+    label: 'Name',
     type: TableDataTypes.STRING
   },
   {
-    id: 'lastName',
+    id: 'subcategory',
     numeric: false,
     disablePadding: false,
-    label: 'Last Name',
-    type: TableDataTypes.STRING
-  },
-  {
-    id: 'authority',
-    numeric: false,
-    disablePadding: false,
-    label: 'Authority',
+    label: 'Subcategory',
     type: TableDataTypes.OBJECT,
     key: 'type'
   },
   {
-    id: 'crew',
+    id: 'category',
     numeric: false,
     disablePadding: false,
-    label: 'Crew',
+    label: 'Category',
     type: TableDataTypes.OBJECT,
-    key: 'name'
+    key: 'type'
   },
   {
-    id: 'isEmployed',
-    numeric: true,
+    id: 'dimension',
+    numeric: false,
     disablePadding: false,
-    label: 'Currently Employed',
-    type: TableDataTypes.BOOLEAN
-  },
+    label: 'Dimension',
+    type: TableDataTypes.OBJECT,
+    key: 'type'
+  }, 
   {
-    id: 'isWorking',
+    id: 'isActive',
     numeric: true,
     disablePadding: false,
-    label: 'Currently Working',
+    label: 'Active',
     type: TableDataTypes.BOOLEAN
   }
 ];
