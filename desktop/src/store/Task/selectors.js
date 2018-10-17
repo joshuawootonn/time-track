@@ -43,7 +43,7 @@ export const getAllTasksWithContent = createSelector(
         ...task,
         subcategory: subcategories[task.subcategoryId],
         category: categories[subcategories[task.subcategoryId].categoryId],
-        dimension: dimensions[subcategories[task.subcategoryId].dimensionId]
+        dimension: dimensions[task.dimensionId]
       };
     });
   }

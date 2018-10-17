@@ -42,13 +42,13 @@ projectSchema.define({ projectTasks: projectTaskArray });
 
 taskSchema.define({
   projectTasks: projectTaskArray,
-  subcategory: subcategorySchema
+  subcategory: subcategorySchema,
+  dimension: dimensionSchema
 });
 
 subcategorySchema.define({
   tasks: [taskSchema],
-  category: categorySchema,
-  dimension: dimensionSchema
+  category: categorySchema
 })
 
 categorySchema.define({
