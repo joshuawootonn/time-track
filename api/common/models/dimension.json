@@ -6,14 +6,16 @@
       "schema": "time-track-development",
       "table": "dimension"
     },
-    "relations": {"subcategories": {
-      "type": "hasMany",
-      "model": "Subcategory",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
+    "relations": {
+      "tasks": {
+        "type": "hasMany",
+        "model": "Task",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
-    }}
+    }
   },
   "properties": {
     "id": {
@@ -23,7 +25,7 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "generated" : true,
+      "generated": true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
