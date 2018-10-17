@@ -22,7 +22,7 @@ class EnhancedTableHead extends React.Component {
               <TableCell
                 key={row.id}
                 numeric={row.numeric}
-                padding={row.disablePadding ? 'none' : 'default'}
+                padding={row.padding}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip

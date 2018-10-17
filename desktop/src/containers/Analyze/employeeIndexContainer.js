@@ -73,21 +73,21 @@ const rows = [
   {
     id: 'firstName',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.STRING
   },
   {
     id: 'lastName',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.STRING
   },
   {
     id: 'authority',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Authority',
     type: TableDataTypes.OBJECT,
     key: 'type'
@@ -95,7 +95,7 @@ const rows = [
   {
     id: 'crew',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Crew',
     type: TableDataTypes.OBJECT,
     key: 'name'
@@ -103,14 +103,14 @@ const rows = [
   {
     id: 'isEmployed',
     numeric: true,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Currently Employed',
     type: TableDataTypes.BOOLEAN
   },
   {
     id: 'isWorking',
     numeric: true,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Currently Working',
     type: TableDataTypes.BOOLEAN
   }

@@ -97,11 +97,11 @@ class EnhancedTable extends React.Component {
                         const { type, id, key } = ele;
 
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-                          return <TableCell key={id} numeric >{n[id]}</TableCell>;
+                          return <TableCell padding="dense" key={id} numeric >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
-                          return <TableCell key={id} >{n[id]}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
-                          return <TableCell key={id} >{n[id][key]}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{n[id][key]}</TableCell>;
                         }
                       })}
                     </TableRow>

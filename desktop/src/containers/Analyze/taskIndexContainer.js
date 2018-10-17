@@ -75,39 +75,40 @@ const rows = [
   {
     id: 'name',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Name',
     type: TableDataTypes.STRING
-  },
-  {
-    id: 'subcategory',
-    numeric: false,
-    disablePadding: false,
-    label: 'Subcategory',
-    type: TableDataTypes.OBJECT,
-    key: 'type'
-  },
+  }, 
   {
     id: 'category',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Category',
     type: TableDataTypes.OBJECT,
     key: 'type'
   },
   {
+    id: 'subcategory',
+    numeric: false,
+    padding: 'dense',
+    label: 'Subcategory',
+    type: TableDataTypes.OBJECT,
+    key: 'type'
+  },
+ 
+  {
     id: 'dimension',
     numeric: false,
-    disablePadding: false,
+    padding: 'dense',
     label: 'Dimension',
     type: TableDataTypes.OBJECT,
     key: 'type'
   }, 
   {
     id: 'isActive',
-    numeric: true,
-    disablePadding: false,
+    numeric: false,
+    padding: 'dense',
     label: 'Active',
-    type: TableDataTypes.BOOLEAN
+    type: TableDataTypes.STRING
   }
 ];
