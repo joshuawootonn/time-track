@@ -11,6 +11,9 @@ import * as activityActionTypes from './activity';
 import * as staticActionTypes from './static';
 import * as exportActionTypes from './export';
 import * as analyzeActionTypes from './analyze';
+import * as dimensionActionTypes from './dimension';
+import * as categoryActionTypes from './category';
+import * as subcategoryActionTypes from './subcategory';
 
 export {
   userActionTypes,
@@ -25,5 +28,8 @@ export {
   activityActionTypes,
   staticActionTypes,
   exportActionTypes,
-  analyzeActionTypes
+  analyzeActionTypes,
+  dimensionActionTypes,
+  categoryActionTypes,
+  subcategoryActionTypes
 };

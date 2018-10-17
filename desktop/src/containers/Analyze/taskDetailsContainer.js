@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
-import { taskSelectors } from 'store/selectors';
+import { taskSelectors,categorySelectors,subcategorySelectors,dimensionSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import { analyzeActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
@@ -13,7 +13,7 @@ import Task from 'components/forms/Task';
 
 class TaskDetailsContainer extends Component {
   render() {
-    const { status } = this.props;
+    const { status,categories,subcategories,dimensions } = this.props;
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -21,6 +21,7 @@ class TaskDetailsContainer extends Component {
         </Hero>
       );
     }
+    console.log('container: ',this.props);
     if(status === analyzeConstants.ADDING || status === analyzeConstants.EDITING){
       return (
         <Formik 
@@ -33,19 +34,22 @@ class TaskDetailsContainer extends Component {
             isActive: true
           }}
           onSubmit={(values,formikFunctions) => {
-            console.log("submitted");
+            console.log('submitted');
             formikFunctions.resetForm();
           }}
           render={formikProps => {
             return (
               <Task 
-                
+                categories={categories}
+                subcategories={subcategories}
+                dimensions={dimensions}
                 label="Add"
                 type="add"
                 {...formikProps}
               />
-            )
+            );
           }}
+        />
       );
     }
   }
@@ -54,7 +58,10 @@ class TaskDetailsContainer extends Component {
 const mapStateToProps = state => {
   return {
     selected: taskSelectors.getSelectedTask(state),
-    status: state.analyze.taskStatus
+    status: state.analyze.taskStatus,
+    categories: categorySelectors.getAllCategories(state),
+    subcategories: subcategorySelectors.getAllSubcategories(state),
+    dimensions: dimensionSelectors.getAllDimensions(state)
   };
 };
 
@@ -81,6 +88,6 @@ const mapDispatchToProps = dispatch => {
 
 TaskDetailsContainer.propTypes = {
   status: PropTypes.string.isRequired
-}
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(TaskDetailsContainer);

@@ -78,8 +78,7 @@ class EnhancedTable extends React.Component {
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy))
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);  
-                  console.log(isSelected);               
+                  const isSelected = this.isSelected(n.id);                                   
                   return (
                     <TableRow
                       hover
@@ -104,6 +103,7 @@ class EnhancedTable extends React.Component {
                         } else if (type === TableDataTypes.OBJECT) {
                           return <TableCell padding="dense" key={id} >{n[id][key]}</TableCell>;
                         }
+                        return null;
                       })}
                     </TableRow>
                   );

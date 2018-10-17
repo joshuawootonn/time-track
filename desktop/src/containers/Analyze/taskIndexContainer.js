@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 TaskIndexContainer.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.array,
   getTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
   selectTask: PropTypes.func.isRequired,

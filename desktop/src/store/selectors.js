@@ -6,6 +6,9 @@ import * as projectTaskSelectors from './ProjectTask/selectors';
 import * as activitySelectors from './Activity/selectors';
 import * as authoritySelectors from './Authority/selectors';
 import * as crewSelectors from './Crew/selectors';
+import * as categorySelectors from './Category/selectors';
+import * as subcategorySelectors from './Subcategory/selectors';
+import * as dimensionSelectors from './Dimension/selectors';
 
 export {
   employeeSelectors,
@@ -15,5 +18,8 @@ export {
   taskSelectors,
   activitySelectors,
   authoritySelectors,
-  crewSelectors
+  crewSelectors,
+  categorySelectors,
+  subcategorySelectors,
+  dimensionSelectors
 };
