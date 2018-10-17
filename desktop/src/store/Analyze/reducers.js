@@ -1,4 +1,4 @@
-import { analyzeActionTypes,employeeActionTypes } from 'constants/ActionTypes';
+import { analyzeActionTypes, employeeActionTypes,taskActionTypes } from 'constants/ActionTypes';
 import * as analyzeStatus from 'constants/analyze';
 
 const selectedInitialState = {
@@ -33,15 +33,44 @@ export default (state = selectedInitialState, action) => {
       ...state,
       employeeStatus: action.payload
     };
-  
-    
+
   case employeeActionTypes.DELETE_EMPLOYEE_SUCCESS:
     return {
       ...state,
       employeeStatus: analyzeStatus.INIT,
       employee: -1
     };
-    
+
+
+
+  case analyzeActionTypes.SELECT_TASK:
+    if (state.task !== -1 && state.task === action.payload) {
+      return {
+        ...state,
+        task: -1,
+        taskStatus: analyzeStatus.INIT
+      };
+    } else if (state.task) {
+      return {
+        ...state,
+        task: action.payload,
+        taskStatus: analyzeStatus.EDITING
+      };
+    }
+    return state;
+  case analyzeActionTypes.SET_TASK_STATUS:
+    return {
+      ...state,
+      taskStatus: action.payload
+    };
+
+  case taskActionTypes.DELETE_TASK_SUCCESS:
+    return {
+      ...state,
+      taskStatus: analyzeStatus.INIT,
+      task: -1
+    };
+
   default:
     return state;
   }

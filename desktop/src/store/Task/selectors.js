@@ -7,6 +7,7 @@ export const getDimensionsFromEntities = state => state.entities.dimension;
 export const getCategoriesFromEntities = state => state.entities.category;
 export const getSubcategoriesFromEntities = state => state.entities.subcategory;
 
+export const getAnalyzeState = state => state.analyze;
 
 export const getAllTasks = createSelector(
   getTasksFromEntities,
@@ -46,5 +47,16 @@ export const getAllTasksWithContent = createSelector(
         dimension: dimensions[task.dimensionId]
       };
     });
+  }
+);
+
+export const getSelectedTask = createSelector(
+  getTasksFromEntities,
+  getAnalyzeState,
+  (tasks,analyze) => {
+    if(analyze.task === -1)
+      return {};
+    else
+      return tasks[analyze.task];
   }
 );

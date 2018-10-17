@@ -9,7 +9,7 @@ import { Add } from '@material-ui/icons';
 import styles from './styles';
 
 let EnhancedTableToolbar = props => {
-  const { selected, classes, add } = props;
+  const { selected, classes, add,label,selectLabel } = props;
   return (
     <Toolbar
       className={cx(classes.toolbarRoot, {
@@ -19,11 +19,11 @@ let EnhancedTableToolbar = props => {
       <div className={classes.title}>
         {Object.keys(selected).length !== 0 ? (
           <Typography color="inherit" variant="h6">
-            {selected.firstName} {selected.lastName} selected
+            {selectLabel(selected)}
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-              Employees
+            {label}
           </Typography>
         )}
       </div>
@@ -42,7 +42,9 @@ let EnhancedTableToolbar = props => {
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
-  add: PropTypes.func.isRequired
+  add: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  selectLabel: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(EnhancedTableToolbar);

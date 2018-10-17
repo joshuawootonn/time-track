@@ -49,15 +49,15 @@ taskSchema.define({
 subcategorySchema.define({
   tasks: [taskSchema],
   category: categorySchema
-})
+});
 
 categorySchema.define({
   subcategories: [subcategorySchema]
-})
+});
 
 dimensionSchema.define({
   subcategories: [subcategorySchema]
-})
+});
 
 export const crewArray = { crews: [crewSchema] };
 export const authorityArray = { authorities: [authoritySchema] };

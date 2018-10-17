@@ -8,8 +8,8 @@ import { ArrowBack } from '@material-ui/icons';
 
 import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
-import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer'
-import TaskIndexContainer from 'containers/Analyze/taskIndexContainer'
+import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer';
+import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectContainer from 'containers/Analyze/projectsContainer';
 import ShiftContainer from 'containers/Analyze/shiftsContainer';
 

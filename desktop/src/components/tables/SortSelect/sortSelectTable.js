@@ -55,16 +55,16 @@ class EnhancedTable extends React.Component {
   }; 
 
   isSelected = id => {
-    this.props.selected.id === id;
+    return this.props.selected.id === id;
   }
 
   render() {
-    const { classes, tableData, headerData,selected,add } = this.props;
+    const { classes, tableData, headerData,selected,add,label,selectLabel } = this.props;
     const { order, orderBy } = this.state;
     
     return (
       <div >
-        <EnhancedTableToolbar selected={selected} add={add} />
+        <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -78,7 +78,8 @@ class EnhancedTable extends React.Component {
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy))
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);                 
+                  const isSelected = this.isSelected(n.id);  
+                  console.log(isSelected);               
                   return (
                     <TableRow
                       hover
@@ -122,7 +123,9 @@ EnhancedTable.propTypes = {
   headerData: PropTypes.array.isRequired,
   selected: PropTypes.object.isRequired,
   select: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired
+  add: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  selectLabel: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(EnhancedTable);

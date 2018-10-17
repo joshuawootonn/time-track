@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { taskActions, analyzeActions } from 'store/actions';
-import { employeeSelectors,taskSelectors } from 'store/selectors';
+import { taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -16,7 +16,7 @@ class TaskIndexContainer extends Component {
   };
 
   render() {
-    const { tasks, selected, selectEmployee,setEmployeeStatus } = this.props;
+    const { tasks, selected, selectTask,setTaskStatus } = this.props;
 
     const isLoading = !tasks;
     if (isLoading) {
@@ -26,11 +26,13 @@ class TaskIndexContainer extends Component {
    
     return (
       <SortSelectTable
+        selectLabel={selected => {return `${selected.name} selected`;}}
+        label="Tasks"
         tableData={tasks}
         headerData={rows}
-        selected={{}}
-        select={()=>{console.log('select task');}}
-        add={() => {console.log('add task');}}
+        selected={selected}
+        select={selectTask}
+        add={() => {setTaskStatus(analyzeStatus.ADDING);}}
       />
     );
   }
@@ -38,9 +40,8 @@ class TaskIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    tasks: taskSelectors.getAllTasksWithContent(state)
-    // employees: employeeSelectors.getAllEmployeesWithContents(state),
-    // selected: employeeSelectors.getSelectedEmployee(state)
+    tasks: taskSelectors.getAllTasksWithContent(state),
+    selected: taskSelectors.getSelectedTask(state)
   };
 };
 
@@ -48,22 +49,22 @@ const mapDispatchToProps = dispatch => {
   return {
     getTasks: () => {
       return dispatch(taskActions.getTasks());
+    },
+    selectTask: task => {
+      return dispatch(analyzeActions.selectTask(task));
+    },
+    setTaskStatus: status => {
+      return dispatch(analyzeActions.setTaskStatus(status));
     }
-    // selectEmployee: employee => {
-    //   return dispatch(analyzeActions.selectEmployee(employee));
-    // },
-    // setEmployeeStatus: status => {
-    //   return dispatch(analyzeActions.setEmployeeStatus(status));
-    // }
   };
 };
 
 TaskIndexContainer.propTypes = {
-  employees: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
   getTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
-  selectEmployee: PropTypes.func.isRequired,
-  setEmployeeStatus: PropTypes.func.isRequired
+  selectTask: PropTypes.func.isRequired,
+  setTaskStatus: PropTypes.func.isRequired
 };
 
 export default connect(

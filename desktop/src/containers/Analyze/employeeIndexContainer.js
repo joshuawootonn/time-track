@@ -25,6 +25,8 @@ class EmployeeContainer extends Component {
 
     return (
       <SortSelectTable
+        selectLabel={selected => {return `${selected.firstName} ${selected.lastName} selected`;}}
+        label="Employees"
         tableData={employees}
         headerData={rows}
         selected={selected}
