@@ -9,6 +9,7 @@ import { taskSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import { analyzeActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
+import Task from 'components/forms/Task';
 
 class TaskDetailsContainer extends Component {
   render() {
@@ -22,7 +23,29 @@ class TaskDetailsContainer extends Component {
     }
     if(status === analyzeConstants.ADDING || status === analyzeConstants.EDITING){
       return (
-        <div>sadf</div>
+        <Formik 
+          enableReinitialize
+          initialValues={{
+            name: '',
+            categoryId: -1,
+            subcategoryId: -1,
+            dimensionId: -1,
+            isActive: true
+          }}
+          onSubmit={(values,formikFunctions) => {
+            console.log("submitted");
+            formikFunctions.resetForm();
+          }}
+          render={formikProps => {
+            return (
+              <Task 
+                
+                label="Add"
+                type="add"
+                {...formikProps}
+              />
+            )
+          }}
       );
     }
   }
