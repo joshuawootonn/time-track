@@ -1,6 +1,6 @@
 import { staticActionTypes } from 'constants/ActionTypes';
 
-import { projectActions, projectTaskActions, taskActions } from 'store/actions';
+import { projectActions, projectTaskActions, taskActions,categoryActions,dimensionActions,subcategoryActions } from 'store/actions';
 
 export const getStaticData = () => {
   return async dispatch => {
@@ -9,6 +9,10 @@ export const getStaticData = () => {
       dispatch(projectActions.getProjects());
       dispatch(projectTaskActions.getProjectTask());
       dispatch(taskActions.getTasks());
+      // dispatch(categoryActions.getCategories());
+      // dispatch(subcategoryActions.getSubcategories());
+      // dispatch(dimensionActions.getDimensions());
+
 
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
     } catch (e) {

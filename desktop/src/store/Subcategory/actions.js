@@ -9,11 +9,10 @@ export const getSubcategories = () => {
     dispatch({ type: subcategoryActionTypes.GET_SUBCATEGORIES_REQUEST });
     try {
       const response = await endpoint.getSubcategories();
-      const payload = normalize(
-        {subcategories: response.data } ,
-        schemas.subcategoryArray,
-      );
-      console.log('fml',{ subcategories: response.data },response.data,payload);
+      const payload = normalize({subcategories: response.data }, schemas.subcategoryArray);
+      
+      console.log('s',response.data,payload);
+      
       return dispatch({
         type: subcategoryActionTypes.GET_SUBCATEGORIES_SUCCESS,
         payload

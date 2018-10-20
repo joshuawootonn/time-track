@@ -12,7 +12,7 @@ import * as analyzeStatus from 'constants/analyze';
 class TaskIndexContainer extends Component {
   
   componentDidMount = () => {
-    this.props.getTasks();
+    //this.props.getTasks();
   };
 
   render() {

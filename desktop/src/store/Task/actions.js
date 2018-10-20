@@ -12,15 +12,15 @@ export const getTasks = () => {
     try {
 
       await dispatch(categoryActions.getCategories());
-      await dispatch(subcategoryActions.getSubcategories());
-      await dispatch(dimensionActions.getDimensions());
+      //await dispatch(subcategoryActions.getSubcategories());
+      //await dispatch(dimensionActions.getDimensions());
 
       const response = await endpoint.getTasks();
 
       
       
       let payload = normalize({ tasks: response.data }, taskArray);
-      console.log(response.data,payload)
+      console.log('tasks',response.data,payload);
       //payload = normalizeEmbeddedData(payload);
 
       //console.log(response.data,payload);
