@@ -8,9 +8,9 @@ export const activitySchema = new schema.Entity('activities');
 export const projectTaskSchema = new schema.Entity('projectTasks');
 export const projectSchema = new schema.Entity('projects');
 export const taskSchema = new schema.Entity('tasks');
-export const subcategorySchema = new schema.Entity('subcategory');
-export const categorySchema = new schema.Entity('category');
-export const dimensionSchema = new schema.Entity('dimension');
+export const subcategorySchema = new schema.Entity('subcategories');
+export const categorySchema = new schema.Entity('categories');
+export const dimensionSchema = new schema.Entity('dimensions');
 
 crewSchema.define({ employees: [employeeSchema] });
 

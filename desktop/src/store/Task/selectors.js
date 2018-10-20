@@ -3,9 +3,9 @@ import { createSelector } from 'reselect';
 export const getTasksFromEntities = state => state.entities.tasks;
 export const getTasksFromResults = state => state.results.tasks;
 
-export const getDimensionsFromEntities = state => state.entities.dimension;
-export const getCategoriesFromEntities = state => state.entities.category;
-export const getSubcategoriesFromEntities = state => state.entities.subcategory;
+export const getDimensionsFromEntities = state => state.entities.dimensions;
+export const getCategoriesFromEntities = state => state.entities.categories;
+export const getSubcategoriesFromEntities = state => state.entities.subcategories;
 
 export const getAnalyzeState = state => state.analyze;
 
