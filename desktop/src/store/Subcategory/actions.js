@@ -9,7 +9,7 @@ export const getSubcategories = () => {
     dispatch({ type: subcategoryActionTypes.GET_SUBCATEGORIES_REQUEST });
     try {
       const response = await endpoint.getSubcategories();
-      const payload = normalize({subcategories: response.data }, schemas.subcategoryArray);
+      const payload = normalize({ subcategories: response.data }, schemas.subcategoryArray);
             
       return dispatch({
         type: subcategoryActionTypes.GET_SUBCATEGORIES_SUCCESS,

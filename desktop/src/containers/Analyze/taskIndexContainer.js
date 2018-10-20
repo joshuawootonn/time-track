@@ -12,7 +12,7 @@ import * as analyzeStatus from 'constants/analyze';
 class TaskIndexContainer extends Component {
   
   componentDidMount = () => {
-    //this.props.getTasks();
+    this.props.getTasks();
   };
 
   render() {
@@ -21,9 +21,7 @@ class TaskIndexContainer extends Component {
     const isLoading = !tasks;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
-    }
-    console.log(tasks);
-   
+    }   
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.name} selected`;}}

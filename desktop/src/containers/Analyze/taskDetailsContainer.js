@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors,dimensionSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
-import { analyzeActions } from 'store/actions';
+import { analyzeActions, taskActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 
@@ -68,15 +68,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // createEmployee: employee => {
-    //   return dispatch(employeeActions.postEmployee(employee));
-    // },
-    // updateEmployee: employee => {
-    //   return dispatch(employeeActions.putEmployee(employee));
-    // },
-    // deleteEmployee: employee => {
-    //   return dispatch(employeeActions.deleteEmployee(employee));
-    // },
+    createTask: task => {
+      return dispatch(taskActions.postTask(task));
+    },
+    updateTask: task => {
+      return dispatch(taskActions.putTask(task));
+    },
+    deleteTask: task => {
+      return dispatch(taskActions.deleteTask(task));
+    },
     selectTask: task => {
       return dispatch(analyzeActions.selectTask(task));
     },

@@ -27,3 +27,12 @@ export const getTasks = () => {
   };
 };
 
+export const postTask = task => {
+  console.log(task);
+};
+export const putTask = task => {
+  console.log(task);
+};
+export const deleteTask = task => {
+  console.log(task);
+};
