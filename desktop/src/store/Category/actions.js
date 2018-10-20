@@ -13,7 +13,6 @@ export const getCategories = () => {
         { categories: response.data },
         schemas.categoryArray,
       );
-      console.log('c',response.data,payload);
       return dispatch({
         type: categoryActionTypes.GET_CATEGORIES_SUCCESS,
         payload

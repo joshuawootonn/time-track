@@ -13,7 +13,6 @@ export const getDimensions = () => {
         { dimensions: response.data },
         schemas.dimensionArray,
       );
-      console.log('d',response.data,payload);
       return dispatch({
         type: dimensionActionTypes.GET_DIMENSIONS_SUCCESS,
         payload
