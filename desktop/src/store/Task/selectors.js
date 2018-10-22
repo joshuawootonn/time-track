@@ -52,11 +52,14 @@ export const getAllTasksWithContent = createSelector(
 
 export const getSelectedTask = createSelector(
   getTasksFromEntities,
+  getSubcategoriesFromEntities,
   getAnalyzeState,
-  (tasks,analyze) => {
+  (tasks,subcategories,analyze) => {
     if(analyze.task === -1)
       return {};
-    else
-      return tasks[analyze.task];
+    else{
+      const temp = tasks[analyze.task];
+      return {...temp,categoryId: subcategories[temp.subcategoryId].categoryId };
+    }      
   }
 );

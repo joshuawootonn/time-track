@@ -13,7 +13,7 @@ import Task from 'components/forms/Task';
 
 class TaskDetailsContainer extends Component {
   render() {
-    const { status,categories,subcategories,dimensions } = this.props;
+    const { status,categories,subcategories,dimensions,selected } = this.props;
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -22,7 +22,7 @@ class TaskDetailsContainer extends Component {
       );
     }
     console.log('container: ',this.props);
-    if(status === analyzeConstants.ADDING || status === analyzeConstants.EDITING){
+    if(status === analyzeConstants.ADDING){
       return (
         <Formik 
           enableReinitialize
@@ -32,6 +32,33 @@ class TaskDetailsContainer extends Component {
             subcategoryId: -1,
             dimensionId: -1,
             isActive: true
+          }}
+          onSubmit={(values,formikFunctions) => {
+            console.log('submitted');
+            formikFunctions.resetForm();
+          }}
+          render={formikProps => {
+            return (
+              <Task 
+                categories={categories}
+                subcategories={subcategories}
+                dimensions={dimensions}
+                label="Add"
+                type="add"
+                {...formikProps}
+              />
+            );
+          }}
+        />
+      );
+    }
+    if(status === analyzeConstants.EDITING){
+      return (
+        <Formik 
+          enableReinitialize
+          initialValues={{
+            ...selected,
+            isActive: selected.isActive ? true : false
           }}
           onSubmit={(values,formikFunctions) => {
             console.log('submitted');
