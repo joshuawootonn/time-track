@@ -82,8 +82,17 @@ class TaskDetailsContainer extends Component {
           }}
           onSubmit={(values,formikFunctions) => {
             const { updateTask } = this.props;
+            console.log({
+              name: values.name,
+              dimensionId: values.dimensionId,
+              subcategoryId: values.subcategoryId,
+              isActive: values.isActive ? 1 : 0
+            })
             updateTask({
-              ...values,
+              id: values.id,
+              name: values.name,
+              dimensionId: values.dimensionId,
+              subcategoryId: values.subcategoryId,
               isActive: values.isActive ? 1 : 0
             }).then(
               () => {
