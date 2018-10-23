@@ -116,7 +116,7 @@ export const deleteEmployee = employee => {
     } catch (e) {
       console.log(e);
       await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Employee deletion failed!'),
+        snackActions.openSnack(status.FAILURE, 'Employee deletion failed!'),
       );
       return dispatch({
         type: employeeActionTypes.DELETE_EMPLOYEE_FAILURE,

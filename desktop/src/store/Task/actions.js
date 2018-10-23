@@ -54,8 +54,62 @@ export const postTask = task => {
   };
 };
 export const putTask = task => {
-  console.log(task);
+  return async dispatch => {
+    dispatch({ type: taskActionTypes.UPDATE_TASK_REQUEST });
+    try {
+      const response = await endpoint.putTask(task.id,task);
+      const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
+
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Task Updated'),
+      );
+
+      return dispatch({
+        type: taskActionTypes.UPDATE_TASK_SUCCESS,
+        payload
+      });
+    } catch (e) {
+      console.log(e);
+      return dispatch({
+        type: taskActionTypes.UPDATE_TASK_FAILURE,
+        payload: e
+      });
+    }
+  };
 };
 export const deleteTask = task => {
-  console.log(task);
+  return async dispatch => {
+    dispatch({ type: taskActionTypes.DELETE_TASK_REQUEST });
+    try {
+      const response = await endpoint.deleteTask(task);
+      const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
+
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, 'Task deleted'),
+      );
+
+      const deleted = {
+        entities:{
+          tasks: [task.id]
+        },
+        result: {
+          tasks: [task.id]
+        }
+      }
+
+      return dispatch({
+        type: taskActionTypes.DELETE_TASK_SUCCESS,
+        deleted
+      });
+    } catch (e) {
+      console.log(e);
+      await dispatch(
+        snackActions.openSnack(status.FAILURE, 'Task deletion failed!'),
+      );
+      return dispatch({
+        type: taskActionTypes.DELETE_TASK_FAILURE,
+        payload: e
+      });
+    }
+  };
 };
