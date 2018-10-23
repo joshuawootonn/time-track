@@ -14,7 +14,7 @@ import Switch from 'components/inputs/Switch';
 class Task extends Component {
   
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     const { label,deleteTask,type,classes,categories,dimensions, subcategories,isSubmitting,resetForm,initialValues,errors } = this.props;
     return (
       <Form>

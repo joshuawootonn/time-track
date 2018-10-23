@@ -109,7 +109,6 @@ export const deleteEmployee = employee => {
         }
       };
 
-
       return dispatch({
         type: employeeActionTypes.DELETE_EMPLOYEE_SUCCESS,
         deleted

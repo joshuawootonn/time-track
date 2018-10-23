@@ -12,6 +12,10 @@ import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 
 class TaskDetailsContainer extends Component {
+  deleteTask = () => {
+    const { selected,deleteTask } = this.props;
+    deleteTask(selected);
+  }
   render() {
     const { status,categories,subcategories,dimensions,selected } = this.props;
     if(status === analyzeConstants.INIT){
@@ -34,8 +38,24 @@ class TaskDetailsContainer extends Component {
             isActive: true
           }}
           onSubmit={(values,formikFunctions) => {
-            console.log('submitted');
-            formikFunctions.resetForm();
+            const { createTask } = this.props;
+            console.log(values);
+            createTask({
+              ...values,
+              isActive: values.isActive ? 1 : 0
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow task created');
+              },
+              e => {
+                console.log('asdf task create error', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
           }}
           render={formikProps => {
             return (
@@ -61,17 +81,33 @@ class TaskDetailsContainer extends Component {
             isActive: selected.isActive ? true : false
           }}
           onSubmit={(values,formikFunctions) => {
-            console.log('submitted');
-            formikFunctions.resetForm();
+            const { updateTask } = this.props;
+            updateTask({
+              ...values,
+              isActive: values.isActive ? 1 : 0
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow task updated');
+              },
+              e => {
+                console.log('asdf task update error', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
           }}
           render={formikProps => {
             return (
               <Task 
+                deleteTask={this.deleteTask}
                 categories={categories}
                 subcategories={subcategories}
                 dimensions={dimensions}
-                label="Add"
-                type="add"
+                label="Edit"
+                type="edit"
                 {...formikProps}
               />
             );
