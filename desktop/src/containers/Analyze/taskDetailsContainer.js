@@ -41,7 +41,9 @@ class TaskDetailsContainer extends Component {
             const { createTask } = this.props;
             console.log(values);
             createTask({
-              ...values,
+              name: values.name,
+              dimensionId: values.dimensionId,
+              subcategoryId: values.subcategoryId,
               isActive: values.isActive ? 1 : 0
             }).then(
               () => {
@@ -81,13 +83,7 @@ class TaskDetailsContainer extends Component {
             isActive: selected.isActive ? true : false
           }}
           onSubmit={(values,formikFunctions) => {
-            const { updateTask } = this.props;
-            console.log({
-              name: values.name,
-              dimensionId: values.dimensionId,
-              subcategoryId: values.subcategoryId,
-              isActive: values.isActive ? 1 : 0
-            })
+            const { updateTask } = this.props;            
             updateTask({
               id: values.id,
               name: values.name,
