@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { TableCell,TableRow,Checkbox,TableBody,Table } from '@material-ui/core';
+import moment from 'moment';
 
 import EnhancedTableHead from './head';
 import EnhancedTableToolbar from './tool';
@@ -102,6 +103,8 @@ class EnhancedTable extends React.Component {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
                           return <TableCell padding="dense" key={id} >{n[id][key]}</TableCell>;
+                        } else if (type === TableDataTypes.DATE) {
+                          return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         }
                         return null;
                       })}

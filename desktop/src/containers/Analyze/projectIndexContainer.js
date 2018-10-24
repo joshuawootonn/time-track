@@ -64,8 +64,6 @@ ProjectIndexContainer.propTypes ={
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndexContainer);
 
-
-
 const rows = [
   {
     id: 'name',
@@ -79,7 +77,7 @@ const rows = [
     numeric: false,
     padding: 'dense',
     label: 'Date',
-    type: TableDataTypes.STRING
+    type: TableDataTypes.DATE
   }, 
   {
     id: 'isActive',
