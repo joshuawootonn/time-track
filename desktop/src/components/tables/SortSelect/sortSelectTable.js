@@ -61,7 +61,7 @@ class EnhancedTable extends React.Component {
   render() {
     const { classes, tableData, headerData,selected,add,label,selectLabel } = this.props;
     const { order, orderBy } = this.state;
-    
+    console.log(tableData)
     return (
       <div >
         <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel}/>

@@ -10,7 +10,7 @@ export const getCrews = () => {
     try {
       const response = await endpoint.getCrews();
       const payload = normalize({ crews: response.data }, schemas.crewArray);
-      console.log('sadf',{ crews: response.data },response.data,payload);
+      //console.log('sadf',{ crews: response.data },response.data,payload);
       return dispatch({
         type: crewActionTypes.GET_CREWS_SUCCESS,
         payload

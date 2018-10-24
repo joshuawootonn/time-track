@@ -10,7 +10,8 @@ import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContaine
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
 import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
-import ProjectContainer from 'containers/Analyze/projectsContainer';
+import ProjectDetailsContainer from 'containers/Analyze/projectDetailsContainer';
+import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
 import ShiftContainer from 'containers/Analyze/shiftsContainer';
 
 const styles = {
@@ -25,7 +26,7 @@ const styles = {
 class AnalyzeScene extends Component {
 
   state = {
-    tabValue: 2
+    tabValue: 1
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -61,7 +62,14 @@ class AnalyzeScene extends Component {
             <EmployeeDetailsContainer />
           </Grid>
         </Grid>}
-        {tabValue === 1 && <ProjectContainer />}
+        {tabValue === 1 && <Grid container>
+          <Grid item xs={7}>
+            <ProjectIndexContainer />
+          </Grid>
+          <Grid item xs={5}>
+            <ProjectDetailsContainer />
+          </Grid>
+        </Grid>}
         {tabValue === 2 && <Grid container>
           
           <Grid item xs={7}>
