@@ -15,7 +15,7 @@ class Task extends Component {
   
   render() {
     //console.log(this.props);
-    const { label,deleteTask,type,classes,categories,dimensions, subcategories,isSubmitting,resetForm,initialValues,errors } = this.props;
+    const { label,deleteTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -39,6 +39,12 @@ class Task extends Component {
               className={classes.field}
               helper="normal"
             />
+            <Field
+              name="isActive"
+              component={Switch}
+              label="Active"
+              className={classes.field}
+            />
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -61,24 +67,7 @@ class Task extends Component {
             >
               
             </Field>
-          </Grid>
-          <Grid item xs={12} className={classes.row}>
-            <Field
-              name="dimensionId"
-              component={Select}
-              items={dimensions}
-              fullWidth
-              label="Dimension"
-              className={classes.field}
-            />
-            
-            <Field
-              name="isActive"
-              component={Switch}
-              label="Active"
-              className={classes.field}
-            />
-          </Grid>
+          </Grid>          
           <Grid item xs={12} className={classes.row}>
             <Typography
               color="error"
@@ -125,7 +114,6 @@ Task.propTypes = {
   type: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
   subcategories: PropTypes.array.isRequired,
-  dimensions: PropTypes.array.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,

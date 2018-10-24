@@ -72,8 +72,5 @@ export const taskValidation = Yup.object().shape({
   subcategoryId: Yup.number()
     .positive('Subcategory selection is required')
     .required('Subcategory selection is required'),
-  dimensionId: Yup.number()
-    .positive('Dimension selection is required')
-    .required('Dimension selection is required'),
   isActive: Yup.boolean()
 });

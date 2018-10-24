@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
-import { taskSelectors,categorySelectors,subcategorySelectors,dimensionSelectors } from 'store/selectors';
+import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import { analyzeActions, taskActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
-import {taskValidation} from 'constants/formValidation';
+import { taskValidation } from 'constants/formValidation';
 
 class TaskDetailsContainer extends Component {
   deleteTask = () => {
@@ -18,7 +18,7 @@ class TaskDetailsContainer extends Component {
     deleteTask(selected);
   }
   render() {
-    const { status,categories,subcategories,dimensions,selected } = this.props;
+    const { status,categories,subcategories,selected } = this.props;
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -35,7 +35,6 @@ class TaskDetailsContainer extends Component {
             name: '',
             categoryId: -1,
             subcategoryId: -1,
-            dimensionId: -1,
             isActive: true
           }}
           validationSchema={taskValidation}
@@ -44,7 +43,6 @@ class TaskDetailsContainer extends Component {
             console.log(values);
             createTask({
               name: values.name,
-              dimensionId: values.dimensionId,
               subcategoryId: values.subcategoryId,
               isActive: values.isActive ? 1 : 0
             }).then(
@@ -66,7 +64,6 @@ class TaskDetailsContainer extends Component {
               <Task 
                 categories={categories}
                 subcategories={subcategories}
-                dimensions={dimensions}
                 label="Add"
                 type="add"
                 {...formikProps}
@@ -90,7 +87,6 @@ class TaskDetailsContainer extends Component {
             updateTask({
               id: values.id,
               name: values.name,
-              dimensionId: values.dimensionId,
               subcategoryId: values.subcategoryId,
               isActive: values.isActive ? 1 : 0
             }).then(
@@ -112,8 +108,7 @@ class TaskDetailsContainer extends Component {
               <Task 
                 deleteTask={this.deleteTask}
                 categories={categories}
-                subcategories={subcategories}
-                dimensions={dimensions}
+                subcategories={subcategories}                
                 label="Edit"
                 type="edit"
                 {...formikProps}
@@ -131,8 +126,7 @@ const mapStateToProps = state => {
     selected: taskSelectors.getSelectedTask(state),
     status: state.analyze.taskStatus,
     categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state),
-    dimensions: dimensionSelectors.getAllDimensions(state)
+    subcategories: subcategorySelectors.getAllSubcategories(state)    
   };
 };
 

@@ -38,13 +38,14 @@ export const getAllTasksWithContent = createSelector(
   getSubcategoriesFromEntities,
   (tasks,results,dimensions,categories,subcategories) => {
     if(!results || results.size === 0) return null;
+    console.log(dimensions, categories)
     return results.map(taskId => {
       const task = tasks[taskId];
       return {
         ...task,
         subcategory: subcategories[task.subcategoryId],
         category: categories[subcategories[task.subcategoryId].categoryId],
-        dimension: dimensions[task.dimensionId]
+        dimension: dimensions[subcategories[task.subcategoryId].dimensionId] 
       };
     });
   }

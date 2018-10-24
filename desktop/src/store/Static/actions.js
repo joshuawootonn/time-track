@@ -9,9 +9,9 @@ export const getStaticData = () => {
       dispatch(projectActions.getProjects());
       dispatch(projectTaskActions.getProjectTask());
       dispatch(taskActions.getTasks());
-      dispatch(categoryActions.getCategories());
-      dispatch(subcategoryActions.getSubcategories());
+      dispatch(categoryActions.getCategories());      
       dispatch(dimensionActions.getDimensions());
+      dispatch(subcategoryActions.getSubcategories());
 
 
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
