@@ -25,7 +25,7 @@ class TaskDetailsContainer extends Component {
         </Hero>
       );
     }
-    console.log('container: ',this.props);
+    //console.log('container: ',this.props);
     if(status === analyzeConstants.ADDING){
       return (
         <Formik 

@@ -52,11 +52,15 @@ class Task extends Component {
             <Field
               name="subcategoryId"
               component={Select}
-              items={subcategories}
+              items={subcategories.filter(subcat => {
+                return subcat.categoryId === this.props.values.categoryId
+              })}
               fullWidth
               label="Subcategory"
               className={classes.field}
-            />
+            >
+              
+            </Field>
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
