@@ -14,20 +14,20 @@ class ProjectIndexContainer extends Component {
     this.props.getProjects();
   }
   render () {
-    const { projects,selectProject,setProjectStatus } = this.props;
+    const { projects,selectProject,setProjectStatus,selected } = this.props;
     const isLoading = !projects;
     //console.log(projects);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }  
-    console.log(projects); 
+    console.log(selected); 
     return (
       <SortSelectTable 
         selectLabel={selected => {return `${selected.name} selected`;}}
         label="Projects"
         tableData={projects}
         headerData={rows}
-        selected={{}}
+        selected={selected}
         select={selectProject}
         add={()=> setProjectStatus(analyzeStatus.ADDING)}
       />
@@ -37,8 +37,8 @@ class ProjectIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    projects: projectSelectors.getAllProjects(state)
-    //selected: taskSelectors.getSelectedTask(state)
+    projects: projectSelectors.getAllProjects(state),
+    selected: projectSelectors.getSelectedProject(state)
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -47,10 +47,10 @@ const mapDispatchToProps = dispatch => {
       return dispatch(projectActions.getProjects());
     },
     selectProject: project => {
-      //return dispatch(analyzeActions.selectTask(task));
+      return dispatch(analyzeActions.selectProject(project));
     },
     setProjectStatus: status => {
-      //return dispatch(analyzeActions.setTaskStatus(status));
+      return dispatch(analyzeActions.setProjectStatus(status));
     }
   };
 };
@@ -58,7 +58,8 @@ ProjectIndexContainer.propTypes ={
   projects: PropTypes.array,
   getProjects: PropTypes.func.isRequired,
   selectProject: PropTypes.func.isRequired,
-  setProjectStatus: PropTypes.func.isRequired
+  setProjectStatus: PropTypes.func.isRequired,
+  selected: PropTypes.object
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndexContainer);

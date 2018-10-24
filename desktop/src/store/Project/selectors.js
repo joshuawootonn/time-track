@@ -3,6 +3,9 @@ import { createSelector } from 'reselect';
 export const getProjectsFromEntities = state => state.entities.projects;
 export const getProjectsFromResults = state => state.results.projects;
 
+export const getAnalyzeState = state => state.analyze;
+
+
 export const getAllProjects = createSelector(
   getProjectsFromEntities,
   getProjectsFromResults,
@@ -26,3 +29,14 @@ export const getAllProjectObjects = createSelector(
 );
 
 
+export const getSelectedProject = createSelector(
+  getProjectsFromEntities,
+  getAnalyzeState,
+  (projects,analyze) => {
+    if(analyze.project === -1)
+      return {};
+    else{
+      return projects[analyze.project];
+    }      
+  }
+);

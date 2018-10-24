@@ -13,3 +13,10 @@ export const setTaskStatus = status => {
   return { type: analyzeActionTypes.SET_TASK_STATUS, payload: status };    
 };
 
+export const selectProject = project => {
+  return { type: analyzeActionTypes.SELECT_PROJECT, payload: project };    
+};
+export const setProjectStatus = status => {
+  return { type: analyzeActionTypes.SET_PROJECT_STATUS, payload: status };    
+};
+
