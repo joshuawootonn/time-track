@@ -26,3 +26,13 @@ export const getProjects = () => {
     }
   };
 };
+
+export const postProject = project => {
+  console.log('post');
+}
+export const putProject = project => {
+  console.log('put');
+}
+export const deleteProject = project => {
+  console.log('delete');
+}
