@@ -6,14 +6,16 @@
       "schema": "time-track-development",
       "table": "category"
     },
-    "relations": {"subcategories": {
-      "type": "hasMany",
-      "model": "Subcategory",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
+    "relations": {
+      "subcategories": {
+        "type": "hasMany",
+        "model": "Subcategory",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
-    }}
+    }
   },
   "properties": {
     "id": {

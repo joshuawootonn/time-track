@@ -107,10 +107,12 @@ module.exports.Subcategory = [
   {
     type: 'Sidewalk',
     categoryId: '1',
+    dimensionId: '1',
   },
   {
     type: 'Pavement',
     categoryId: '1',
+    dimensionId: '1',
   },
 ];
 module.exports.Task = [
@@ -118,13 +120,11 @@ module.exports.Task = [
     name: '7" Sidewalk',
     isActive: '1',
     subcategoryId: '1',
-    dimensionId: '1',
   },
   {
     name: '6" Sidewalk',
     isActive: '1',
     subcategoryId: '1',
-    dimensionId: '1',
   },
 ];
 

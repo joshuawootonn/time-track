@@ -22,6 +22,14 @@
         "options": {
           "nestRemoting": true
         }
+      },
+      "dimension": {
+        "type": "belongsTo",
+        "model": "Dimension",
+        "foreignKey": "",
+        "options": {
+          "nestRemoting": true
+        }
       }
     }
   },
@@ -70,6 +78,21 @@
         "dataLength": 45,
         "dataPrecision": null,
         "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "dimensionId": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "dimension_id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
         "nullable": "N"
       }
     }

@@ -7,9 +7,9 @@
       "table": "dimension"
     },
     "relations": {
-      "tasks": {
+      "subcategories": {
         "type": "hasMany",
-        "model": "Task",
+        "model": "Subcategory",
         "foreignKey": "",
         "options": {
           "nestRemoting": true
