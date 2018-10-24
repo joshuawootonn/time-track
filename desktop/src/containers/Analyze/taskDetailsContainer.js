@@ -10,6 +10,7 @@ import * as analyzeConstants from 'constants/analyze';
 import { analyzeActions, taskActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
+import {taskValidation} from 'constants/formValidation';
 
 class TaskDetailsContainer extends Component {
   deleteTask = () => {
@@ -37,6 +38,7 @@ class TaskDetailsContainer extends Component {
             dimensionId: -1,
             isActive: true
           }}
+          validationSchema={taskValidation}
           onSubmit={(values,formikFunctions) => {
             const { createTask } = this.props;
             console.log(values);
@@ -81,7 +83,8 @@ class TaskDetailsContainer extends Component {
           initialValues={{
             ...selected,
             isActive: selected.isActive ? true : false
-          }}
+          }}          
+          validationSchema={taskValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateTask } = this.props;            
             updateTask({

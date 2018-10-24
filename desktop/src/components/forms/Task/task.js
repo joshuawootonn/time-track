@@ -75,7 +75,6 @@ class Task extends Component {
             <Field
               name="isActive"
               component={Switch}
-              disabled={true}
               label="Active"
               className={classes.field}
             />
@@ -122,7 +121,7 @@ class Task extends Component {
 Task.propTypes = {
   classes: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  deleteTask: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func,
   type: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
   subcategories: PropTypes.array.isRequired,
