@@ -6,3 +6,14 @@ const DOMAIN = 'projects';
 export const getProjects = () => {
   return axios.get(`${HOST}/${DOMAIN}`);
 };
+export const postProject = project => {
+  return axios.post(`${HOST}/${DOMAIN}`,{ ...project });
+};
+
+export const putProject = (id, project) => {
+  return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...project });
+}
+
+export const deleteProject = project => {
+  return axios.delete(`${HOST}/${DOMAIN}/${project.id}`);
+};
