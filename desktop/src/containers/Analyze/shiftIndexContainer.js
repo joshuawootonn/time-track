@@ -17,11 +17,22 @@ class ShiftIndexContainer extends Component {
   }
   render () {
     const { shifts } = this.props;
-    console.log(shifts);
+    const isLoading = !shifts;
+    //console.log(projects);
+    if (isLoading) {
+      return <Progress variant="circular" fullWidth fullHeight />;
+    }  
+    //console.log(selected); 
     return (
-      <div>
-        
-      </div>
+      <SortSelectTable 
+        selectLabel={selected => {return `${selected.name} selected`;}}
+        label="Shifts"
+        tableData={shifts}
+        headerData={rows}
+        selected={{}}
+        select={()=>{}}
+        add={()=>{}}
+      />
     );
   }
 }
@@ -52,3 +63,34 @@ ShiftIndexContainer.propTypes = {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShiftIndexContainer);
+
+const rows = [
+  {
+    id: 'employeeId',
+    numeric: false,
+    padding: 'dense',
+    label: 'Name',
+    type: TableDataTypes.NUMBER
+  }, 
+  {
+    id: 'clockInDate',
+    numeric: false,
+    padding: 'dense',
+    label: 'Clock In',
+    type: TableDataTypes.DATETIME
+  }, 
+  {
+    id: 'clockOutDate',
+    numeric: false,
+    padding: 'dense',
+    label: 'Clock Out',
+    type: TableDataTypes.DATETIME
+  }, 
+  {
+    id: 'isActive',
+    numeric: false,
+    padding: 'dense',
+    label: 'Active',
+    type: TableDataTypes.LENGTH
+  }   
+];

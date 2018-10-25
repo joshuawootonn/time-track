@@ -105,6 +105,10 @@ class EnhancedTable extends React.Component {
                           return <TableCell padding="dense" key={id} >{n[id][key]}</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
+                        } else if (type === TableDataTypes.DATETIME) {
+                          return <TableCell padding="dense" key={id} >{moment(n[id]).format('hh:mm a MM/DD')}</TableCell>
+                        } else if (type === TableDataTypes.LENGTH) {
+                          return <TableCell padding="dense" key={id} >{`${n[id]/60}:${n[id]/60%60}`}</TableCell>
                         }
                         return null;
                       })}
