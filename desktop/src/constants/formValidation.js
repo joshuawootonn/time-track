@@ -74,3 +74,11 @@ export const taskValidation = Yup.object().shape({
     .required('Subcategory selection is required'),
   isActive: Yup.boolean()
 });
+
+export const projectValidation = Yup.object().shape({
+  name: Yup.string()
+    .required('Name is required')
+    .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), 'Name format is invalid'),
+  date: Yup.date().required('Invalid date'),
+  isActive: Yup.boolean()
+});

@@ -10,7 +10,7 @@ import { projectActions,analyzeActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
-
+import { projectValidation } from 'constants/formValidation';
 
 class ProjectContainer extends Component {
 
@@ -38,6 +38,7 @@ class ProjectContainer extends Component {
             isActive: true,
             date: moment().startOf('day').format('YYYY-MM-DD')
           }}
+          validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
             const { createProject } = this.props;
             console.log(values);
@@ -80,6 +81,7 @@ class ProjectContainer extends Component {
             isActive: selected.isActive ? true : false,
             date: moment(selected.date).startOf('day').format('YYYY-MM-DD')
           }} 
+          validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateProject } = this.props;
             console.log(values);
