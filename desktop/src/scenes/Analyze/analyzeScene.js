@@ -12,7 +12,7 @@ import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectDetailsContainer from 'containers/Analyze/projectDetailsContainer';
 import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
-import ShiftContainer from 'containers/Analyze/shiftsContainer';
+import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
 
 const styles = {
   grow: {
@@ -26,7 +26,7 @@ const styles = {
 class AnalyzeScene extends Component {
 
   state = {
-    tabValue: 1
+    tabValue: 3
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -79,7 +79,11 @@ class AnalyzeScene extends Component {
             <TaskDetailsContainer />
           </Grid>
         </Grid>}
-        {tabValue === 3 && <ShiftContainer />}
+        {tabValue === 3 && <Grid container>
+          <Grid item xs={7}>
+            <ShiftIndexContainer />
+          </Grid>
+        </Grid>}
       </div>
     );
   }

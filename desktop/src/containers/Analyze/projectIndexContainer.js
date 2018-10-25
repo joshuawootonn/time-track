@@ -85,6 +85,5 @@ const rows = [
     padding: 'dense',
     label: 'Active',
     type: TableDataTypes.STRING
-  } 
-  
+  }   
 ];
