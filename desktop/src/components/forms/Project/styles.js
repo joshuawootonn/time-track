@@ -9,6 +9,9 @@ const styles = () => ({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
+  headerRow: {
+    minHeight: '72px'
+  },
   field:{
     margin: 'auto 8px'
   },

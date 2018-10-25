@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Field, Form } from 'formik';
+import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid,Tooltip,IconButton, Typography, Button } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
@@ -19,7 +20,7 @@ class Task extends Component {
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12}  className={classes.row} >
+          <Grid item xs={12}  className={cx(classes.headerRow,classes.row)} >
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
@@ -96,10 +97,8 @@ class Task extends Component {
                 Reset
               </Button>
             </div>
-          </Grid>
-        
+          </Grid>        
         </Grid>
-
       </Form>
     );
   }

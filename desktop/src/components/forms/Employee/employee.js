@@ -19,7 +19,7 @@ class Employee extends Component {
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={classes.row}>
+          <Grid item xs={12} className={cx(classes.headerRow,classes.row)}>
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">

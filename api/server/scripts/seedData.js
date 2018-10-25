@@ -55,7 +55,7 @@ module.exports.Employee = [
     pin: '565656',
     isEmployed: '1',
     isWorking: '0',
-    authorityId: '3',
+    authorityId: '2',
     crewId: '1',
   },
   {

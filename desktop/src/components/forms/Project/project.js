@@ -19,7 +19,7 @@ class Project extends Component {
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={classes.row}>
+          <Grid item xs={12} className={cx(classes.headerRow,classes.row)}>
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
@@ -38,13 +38,7 @@ class Project extends Component {
               type="search"
               className={classes.field}
               helper="normal"
-            />
-            <Field
-              name="isActive"
-              component={Switch}
-              label="Active"
-              className={classes.field}
-            />
+            />           
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -52,10 +46,48 @@ class Project extends Component {
               component={TextField}              
               margin="none"
               label="Start Date"
-              type="date"
+              type="date"              
+              className={classes.field}
               helper="normal"
-            />     
-          </Grid>    
+            />    
+            <Field
+              name="isActive"
+              component={Switch}
+              label="Active"
+              className={classes.field}
+            /> 
+          </Grid> 
+          <Grid item xs={12} className={classes.row}>
+            <Typography
+              color="error"
+              variant="button"
+              className={classes.field}
+            >
+              {errors.submit}
+            </Typography>
+            <div>
+              <Button
+                type="submit"
+                color="primary"
+                disabled={isSubmitting}
+                variant="contained"
+                className={classes.button}
+              >
+                Save
+              </Button>
+              <Button
+                onClick={() => {
+                  resetForm(initialValues);
+                }}
+                disabled={isSubmitting}
+                color="secondary"
+                variant="text"
+                className={classes.button}
+              >
+                Reset
+              </Button>
+            </div>
+          </Grid>      
         </Grid>
       </Form>
     );
