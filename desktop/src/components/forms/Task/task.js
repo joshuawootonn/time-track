@@ -64,9 +64,7 @@ class Task extends Component {
               fullWidth
               label="Subcategory"
               className={classes.field}
-            >
-              
-            </Field>
+            />
           </Grid>          
           <Grid item xs={12} className={classes.row}>
             <Typography

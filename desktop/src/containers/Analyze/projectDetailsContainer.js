@@ -32,7 +32,11 @@ class ProjectContainer extends Component {
         <Formik
           render={formikProps => {
             return (
-              <Project />
+              <Project 
+                label="Add"
+                type="add"
+                {...formikProps}              
+              />
             );
           }} 
         /> 
@@ -43,7 +47,12 @@ class ProjectContainer extends Component {
         <Formik
           render={formikProps => {
             return (
-              <Project />
+              <Project
+                label="Edit"
+                type="edit"
+                deleteProject={this.deleteProject}
+                {...formikProps}
+              />
             );
           }} 
         /> 

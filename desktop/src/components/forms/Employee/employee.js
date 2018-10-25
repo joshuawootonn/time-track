@@ -138,7 +138,7 @@ Employee.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  deleteEmployee: PropTypes.func.isRequired,
+  deleteEmployee: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
