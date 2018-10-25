@@ -15,7 +15,9 @@ import styles from './styles';
 
 class Project extends Component {
   render() {
+
     const { classes,label, type,deleteProject,isSubmitting, resetForm, initialValues,errors } = this.props;
+
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>

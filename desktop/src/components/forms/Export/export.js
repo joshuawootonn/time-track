@@ -15,7 +15,8 @@ import * as exportConstants from 'constants/export';
 
 class ExportForm extends Component {
   render() {
-    const { classes, cancel, isSubmitting, errors,values } = this.props;    
+    const { classes, cancel, isSubmitting, errors,values,initialValues } = this.props;    
+  
     return (
       <div className={classes.hero}>
         <Form className={classes.heroContent}>

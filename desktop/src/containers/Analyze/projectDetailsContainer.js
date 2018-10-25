@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
+import moment from 'moment';
 
 import { projectSelectors } from 'store/selectors';
 import { projectActions,analyzeActions } from 'store/actions';
@@ -27,9 +28,37 @@ class ProjectContainer extends Component {
         </Hero>
       );
     }
+    
     if(status === analyzeConstants.ADDING){
       return (
         <Formik
+          enableReinitialize
+          initialValues={{
+            name: '',
+            isActive: true,
+            date: moment().startOf('day').format('YYYY-MM-DD')
+          }}
+          onSubmit={(values,formikFunctions) => {
+            const { createProject } = this.props;
+            console.log(values);
+            createProject({
+              name: values.name,
+              isActive: values.isActive ? 1 : 0,
+              date: moment(values.date).format('MM-DD-YY HH:mm:ss')
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow project created');
+              },
+              e => {
+                console.log('asdf project create error', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
+          }}
           render={formikProps => {
             return (
               <Project 
@@ -45,6 +74,34 @@ class ProjectContainer extends Component {
     if(status === analyzeConstants.EDITING){
       return (
         <Formik
+          enableReinitialize
+          initialValues={{
+            ...selected,
+            isActive: selected.isActive ? true : false,
+            date: moment(selected.date).startOf('day').format('YYYY-MM-DD')
+          }} 
+          onSubmit={(values,formikFunctions) => {
+            const { updateProject } = this.props;
+            console.log(values);
+            updateProject({
+              id: values.id,
+              name: values.name,
+              isActive: values.isActive ? 1 : 0,
+              date: moment(values.date).format('MM-DD-YY HH:mm:ss')
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow project updated');
+              },
+              e => {
+                console.log('asdf project update error', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
+          }}
           render={formikProps => {
             return (
               <Project
