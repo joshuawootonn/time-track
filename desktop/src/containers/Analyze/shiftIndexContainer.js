@@ -87,10 +87,10 @@ const rows = [
     type: TableDataTypes.DATETIME
   }, 
   {
-    id: 'isActive',
+    id: 'length',
     numeric: false,
     padding: 'dense',
-    label: 'Active',
+    label: 'Length',
     type: TableDataTypes.LENGTH
   }   
 ];

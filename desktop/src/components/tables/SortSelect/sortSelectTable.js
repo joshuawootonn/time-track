@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { TableCell,TableRow,Checkbox,TableBody,Table } from '@material-ui/core';
-import moment from 'moment';
+import moment, { duration } from 'moment';
 
 import EnhancedTableHead from './head';
 import EnhancedTableToolbar from './tool';
@@ -106,9 +106,10 @@ class EnhancedTable extends React.Component {
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
-                          return <TableCell padding="dense" key={id} >{moment(n[id]).format('hh:mm a MM/DD')}</TableCell>
+                          return <TableCell padding="dense" key={id} >{moment(n[id]).format('hh:mm a MM/DD')}</TableCell>;
                         } else if (type === TableDataTypes.LENGTH) {
-                          return <TableCell padding="dense" key={id} >{`${n[id]/60}:${n[id]/60%60}`}</TableCell>
+                          const length = moment.duration(n[id], 'minutes')
+                          return <TableCell padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
                         }
                         return null;
                       })}
