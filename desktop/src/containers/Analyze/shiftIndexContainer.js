@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import moment from 'moment';
 
-import { shiftActions, analyzeActions } from 'store/actions';
+import { employeeActions,shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -13,16 +13,18 @@ import * as analyzeStatus from 'constants/analyze';
 
 class ShiftIndexContainer extends Component {
   componentDidMount = () => {
+    // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
+    this.props.getEmployees();
     this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().format('MM-DD-YY HH:mm:ss'));
   }
   render() {
     const { shifts, selectShift, setShiftStatus,selected } = this.props;
     const isLoading = !shifts;
-    //console.log(projects);
+    console.log(shifts);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
-    console.log(selected); 
+    //console.log(selected); 
     return (
       <SortSelectTable
         selectLabel={selected => { return `${selected.name} selected`; }}
@@ -45,6 +47,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    getEmployees: () => {
+      return dispatch(employeeActions.getEmployees());
+    },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
     },
@@ -59,18 +64,31 @@ const mapDispatchToProps = dispatch => {
 
 ShiftIndexContainer.propTypes = {
   shifts: PropTypes.array,
-  getShiftsInRange: PropTypes.func.isRequired
+  getShiftsInRange: PropTypes.func.isRequired,
+  getEmployees: PropTypes.func.isRequired,
+  selectShift: PropTypes.func.isRequired,
+  setShiftStatus: PropTypes.func.isRequired,
+  selected: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndexContainer);
 
 const rows = [
   {
-    id: 'employeeId',
+    id: 'employee',
     numeric: false,
     padding: 'dense',
-    label: 'Name',
-    type: TableDataTypes.NUMBER
+    label: 'First Name',
+    type: TableDataTypes.OBJECT,
+    key: 'firstName'
+  },
+  {
+    id: 'employee',
+    numeric: false,
+    padding: 'dense',
+    label: 'Last Name',
+    type: TableDataTypes.OBJECT,
+    key: 'lastName'
   },
   {
     id: 'clockInDate',

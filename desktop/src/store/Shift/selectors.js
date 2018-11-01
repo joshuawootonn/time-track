@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
+import { getEmployeesFromEntities } from 'store/Employee/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
@@ -24,9 +25,10 @@ export const getShiftsInRange = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,  
   getActivitiesFromEntities,
+  getEmployeesFromEntities,
   (_,props) => props.startTime,
   (_,props) => props.endTime,
-  (shifts,results,activities,start,end) => {
+  (shifts,results,activities,employees,start,end) => {
     if (!results || results.size === 0) return null;
     
     // map the shift Ids to array of shift objects 
@@ -34,10 +36,10 @@ export const getShiftsInRange = createSelector(
     return results.map(shiftId => {      
       return {
         ...shifts[shiftId],
+        employee: employees[shifts[shiftId].employeeId],
         activities: shifts[shiftId].activities.map(activityId => {
           return activities[activityId];
-        }
-        )
+        })
       };
     })
     // remove any shift that is not within the bounds of correct clockInDate
@@ -57,4 +59,4 @@ export const getSelectedShift = createSelector(
       return shifts[analyze.shift];
     }      
   }
-)
+);
