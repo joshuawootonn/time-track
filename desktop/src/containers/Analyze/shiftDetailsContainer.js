@@ -27,6 +27,8 @@ class ShiftDetailsContainer extends Component {
           label="Activities"
           tableData={selected.activities}
           headerData={rows}
+          edit={()=> {console.log('edit');}}
+          remove={()=> {console.log('remove');}}
         />
       );
     }

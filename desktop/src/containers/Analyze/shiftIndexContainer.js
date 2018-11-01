@@ -35,7 +35,7 @@ class ShiftIndexContainer extends Component {
         headerData={rows}
         selected={selected}
         select={selectShift}
-        add={() => setShiftStatus(analyzeStatus.ADDING)}
+        add={() => console.log('add')}
       />
     );
   }

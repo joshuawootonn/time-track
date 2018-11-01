@@ -13,10 +13,10 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class EnhancedTable extends React.Component {
   
   render() {
-    const { classes, tableData, headerData,edit, label } = this.props;   
+    const { classes, tableData, headerData,edit, label,add,remove } = this.props;   
     return (
       <div >
-        <EnhancedTableToolbar edit={edit} label={label} />
+        <EnhancedTableToolbar edit={edit} add={add} remove={remove} label={label} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -74,7 +74,9 @@ EnhancedTable.propTypes = {
   tableData: PropTypes.array.isRequired,
   headerData: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
-  edit:PropTypes.func
+  edit:PropTypes.func,
+  add:PropTypes.func,
+  remove:PropTypes.func
 };
 
 export default withStyles(styles)(EnhancedTable);
