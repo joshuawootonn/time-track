@@ -6,7 +6,7 @@ class ShiftDetailsContainer extends Component {
   render () {
     return (
       <div>
-        
+        asdf
       </div>
     );
   }

@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import { employeeActions,shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
-import SortExpandTable from 'components/tables/SortExpand';
+import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import * as analyzeStatus from 'constants/analyze';
@@ -26,7 +26,7 @@ class ShiftIndexContainer extends Component {
     }
     //console.log(selected); 
     return (
-      <SortExpandTable
+      <SortSelectTable
         selectLabel={selected => { return `${selected.name} selected`; }}
         label="Shifts"
         tableData={shifts}

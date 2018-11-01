@@ -81,8 +81,11 @@ class AnalyzeScene extends Component {
           </Grid>
         </Grid>}
         {tabValue === 3 && <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <ShiftIndexContainer />
+          </Grid>
+          <Grid item xs={6}>
+            <ShiftDetailsContainer />
           </Grid>
         </Grid>}
       </div>
