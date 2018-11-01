@@ -79,7 +79,8 @@ class EnhancedTable extends React.Component {
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy))
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);                                   
+                  const isSelected = this.isSelected(n.id);    
+                                                
                   return (
                     <TableRow
                       hover
@@ -96,14 +97,14 @@ class EnhancedTable extends React.Component {
                       {headerData.map(ele => {
                         //console.log(ele);
                         const { type, id, key } = ele;
-
+                        
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
                           return <TableCell padding="dense" key={id} numeric >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
-                          console.log(n,n[id]);
-                          return <TableCell padding="dense" key={id} >{n[id][key]}</TableCell>;
+                          
+                          return <TableCell padding="dense" key={id+key} >{n[id][key]}</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {

@@ -20,7 +20,7 @@ class EnhancedTableHead extends React.Component {
           {headerData.map(row => {
             return (
               <TableCell
-                key={row.id}
+                key={row.id + row.key}
                 numeric={row.numeric}
                 padding={row.padding}
                 sortDirection={orderBy === row.id ? order : false}
