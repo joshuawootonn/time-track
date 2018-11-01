@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import moment from 'moment';
 
-import { employeeActions,shiftActions, analyzeActions } from 'store/actions';
+import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -15,10 +15,12 @@ class ShiftIndexContainer extends Component {
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
     this.props.getEmployees();
+    this.props.getProjects();
+    this.props.getTasks();
     this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().format('MM-DD-YY HH:mm:ss'));
   }
   render() {
-    const { shifts, selectShift, setShiftStatus,selected } = this.props;
+    const { shifts, selectShift, setShiftStatus, selected } = this.props;
     const isLoading = !shifts;
     console.log(shifts);
     if (isLoading) {
@@ -50,6 +52,12 @@ const mapDispatchToProps = dispatch => {
     getEmployees: () => {
       return dispatch(employeeActions.getEmployees());
     },
+    getProjects: () => {
+      return dispatch(projectActions.getProjects());
+    },
+    getTasks: () => {
+      return dispatch(taskActions.getTasks());
+    },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
     },
@@ -66,6 +74,8 @@ ShiftIndexContainer.propTypes = {
   shifts: PropTypes.array,
   getShiftsInRange: PropTypes.func.isRequired,
   getEmployees: PropTypes.func.isRequired,
+  getProjects: PropTypes.func.isRequired,
+  getTasks: PropTypes.func.isRequired,
   selectShift: PropTypes.func.isRequired,
   setShiftStatus: PropTypes.func.isRequired,
   selected: PropTypes.object

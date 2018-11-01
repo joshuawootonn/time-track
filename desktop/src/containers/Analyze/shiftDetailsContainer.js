@@ -1,25 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Typography } from '@material-ui/core';
+
 import ClockOutContainer from 'containers/Clock/clockOutContainer';
 import {shiftSelectors} from 'store/selectors';
+import * as analyzeConstants from 'constants/analyze';
+import Hero from 'components/layouts/Hero';
+import GenericTable from 'components/tables/Generic'
+import * as TableDataTypes from 'constants/tableDataTypes';
 
 class ShiftDetailsContainer extends Component {
   render () {
     const { selected,status } = this.props;
     console.log(selected,status)
-    return (
-      <div>
-        asdf
-      </div>
-    );
+    if(status === analyzeConstants.INIT){
+      return (
+        <Hero fullWidth fullHeight>
+          <Typography variant="h6">Select an Project.. </Typography>
+        </Hero>
+      );
+    }
+    if(status === analyzeConstants.EDITING){
+      return (
+        <GenericTable
+          selectLabel={selected => {return `${selected.firstName} ${selected.lastName} selected`;}}
+          label="Employees"
+          tableData={selected.activities}
+          headerData={rows}
+          selected={{}}
+          select={() => {}}
+          add={() => {}}
+        />
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    selected: shiftSelectors.getSelectedShift(state),
-    
+    selected: shiftSelectors.getSelectedShift(state),    
     status: state.analyze.shiftStatus    
   };
 };
@@ -45,3 +65,30 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShiftDetailsContainer);
+
+
+const rows = [
+  {
+    id: 'projectTask',
+    numeric: false,
+    padding: 'dense',
+    label: 'Project',
+    type: TableDataTypes.OBJECT,
+    key: 'projectId'
+  },
+  {
+    id: 'projectTask',
+    numeric: false,
+    padding: 'dense',
+    label: 'Task',
+    type: TableDataTypes.OBJECT,
+    key: 'taskId'
+  },
+  {
+    id: 'length',
+    numeric: false,
+    padding: 'dense',
+    label: 'Length',
+    type: TableDataTypes.LENGTH
+  }  
+];
