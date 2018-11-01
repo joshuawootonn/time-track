@@ -53,7 +53,7 @@ export const postProject = project => {
       });
     }
   };
-}
+};
 export const putProject = project => {
   return async dispatch => {
     dispatch({ type: projectActionTypes.UPDATE_PROJECT_REQUEST });
@@ -77,13 +77,13 @@ export const putProject = project => {
       });
     }
   };
-}
+};
 export const deleteProject = project => {
   return async dispatch => {
     dispatch({ type: projectActionTypes.DELETE_PROJECT_REQUEST });
     try {
-      const response = await endpoint.deleteProject(project);
-      const payload = normalize({ projects: [response.data] }, schemas.projectArray);
+      await endpoint.deleteProject(project);
+      //const payload = normalize({ projects: [response.data] }, schemas.projectArray);
 
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Project deleted'),
@@ -96,7 +96,7 @@ export const deleteProject = project => {
         result: {
           projects: [project.id]
         }
-      }
+      };
 
       return dispatch({
         type: projectActionTypes.DELETE_PROJECT_SUCCESS,
@@ -113,4 +113,4 @@ export const deleteProject = project => {
       });
     }
   };
-}
+};

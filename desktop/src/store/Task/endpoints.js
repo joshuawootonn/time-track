@@ -13,7 +13,7 @@ export const postTask = task => {
 
 export const putTask = (id, task) => {
   return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...task });
-}
+};
 
 export const deleteTask = task => {
   return axios.delete(`${HOST}/${DOMAIN}/${task.id}`);

@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
 
 import ClockOutContainer from 'containers/Clock/clockOutContainer';
-import {shiftSelectors} from 'store/selectors';
+import { shiftSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
-import GenericTable from 'components/tables/Generic'
+import GenericTable from 'components/tables/Generic';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
 class ShiftDetailsContainer extends Component {
@@ -24,13 +24,9 @@ class ShiftDetailsContainer extends Component {
     if(status === analyzeConstants.EDITING){
       return (
         <GenericTable
-          selectLabel={selected => {console.log(selected); return `${selected.employee.firstName} ${selected.lastName} selected`;}}
           label="Activities"
           tableData={selected.activities}
           headerData={rows}
-          selected={{}}
-          select={() => {}}
-          add={() => {}}
         />
       );
     }

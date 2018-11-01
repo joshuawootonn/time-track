@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { TableCell,TableRow,Checkbox,TableBody,Table } from '@material-ui/core';
-import moment, { duration } from 'moment';
+import moment from 'moment';
 
 import EnhancedTableHead from './head';
 import EnhancedTableToolbar from './tool';

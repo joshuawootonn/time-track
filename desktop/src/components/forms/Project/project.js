@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 import styles from './styles';
 

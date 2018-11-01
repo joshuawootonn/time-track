@@ -1,43 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core';
+import { TableCell, TableHead, TableRow } from '@material-ui/core';
 
-class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
-
+class EnhancedTableHead extends React.Component {  
   render() {
-    const {  order, orderBy, headerData } = this.props;
+    const {  headerData } = this.props;
 
     return (
       <TableHead>
-        <TableRow>
-          <TableCell>
-            
-          </TableCell>
+        <TableRow>        
           {headerData.map(row => {
             return (
               <TableCell
                 key={row.id + row.key}
                 numeric={row.numeric}
                 padding={row.padding}
-                sortDirection={orderBy === row.id ? order : false}
-              >
-                <Tooltip
-                  title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
-                  enterDelay={300}
-                >
-                  <TableSortLabel
-                    active={orderBy === row.id}
-                    direction={order}
-                    onClick={this.createSortHandler(row.id)}
-                  >
-                    {row.label}
-                  </TableSortLabel>
-                </Tooltip>
+              >               
+                {row.label}                 
               </TableCell>
             );
           }, this)}
@@ -48,10 +28,6 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  selected: PropTypes.object.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
   headerData: PropTypes.array.isRequired
 };

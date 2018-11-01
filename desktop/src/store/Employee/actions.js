@@ -90,12 +90,9 @@ export const deleteEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.DELETE_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoint.deleteEmployee(employee);
-      const payload = normalize(
-        { employees: [response.data] },
-        schemas.employeeArray,
-      );
-      console.log(response,payload);
+      await endpoint.deleteEmployee(employee);
+      //const payload = normalize( { employees: [response.data] },schemas.employeeArray);
+      
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Employee deleted!'),
       );

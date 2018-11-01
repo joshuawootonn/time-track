@@ -60,7 +60,7 @@ class Task extends Component {
               name="subcategoryId"
               component={Select}
               items={subcategories.filter(subcat => {
-                return subcat.categoryId === this.props.values.categoryId
+                return subcat.categoryId === this.props.values.categoryId;
               })}
               fullWidth
               label="Subcategory"
@@ -114,7 +114,8 @@ Task.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  values: PropTypes.object
 };
 
 export default withStyles(styles)(Task);

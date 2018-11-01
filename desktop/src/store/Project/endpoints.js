@@ -12,7 +12,7 @@ export const postProject = project => {
 
 export const putProject = (id, project) => {
   return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...project });
-}
+};
 
 export const deleteProject = project => {
   return axios.delete(`${HOST}/${DOMAIN}/${project.id}`);

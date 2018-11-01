@@ -81,8 +81,8 @@ export const deleteTask = task => {
   return async dispatch => {
     dispatch({ type: taskActionTypes.DELETE_TASK_REQUEST });
     try {
-      const response = await endpoint.deleteTask(task);
-      const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
+      await endpoint.deleteTask(task);
+      //const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
 
       await dispatch(
         snackActions.openSnack(status.SUCCESS, 'Task deleted'),
@@ -95,7 +95,7 @@ export const deleteTask = task => {
         result: {
           tasks: [task.id]
         }
-      }
+      };
 
       return dispatch({
         type: taskActionTypes.DELETE_TASK_SUCCESS,
