@@ -13,6 +13,7 @@ import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectDetailsContainer from 'containers/Analyze/projectDetailsContainer';
 import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
 import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
+import ShiftDetailsContainer from 'containers/Analyze/shiftDetailsContainer'
 
 const styles = {
   grow: {
@@ -80,7 +81,7 @@ class AnalyzeScene extends Component {
           </Grid>
         </Grid>}
         {tabValue === 3 && <Grid container>
-          <Grid item xs={7}>
+          <Grid item xs={12}>
             <ShiftIndexContainer />
           </Grid>
         </Grid>}

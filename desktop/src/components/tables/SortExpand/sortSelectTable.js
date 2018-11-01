@@ -13,7 +13,8 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class EnhancedTable extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'firstName'
+    orderBy: 'firstName',
+    expanded: []  
   };
   
   desc = (a, b, orderBy) => {            
@@ -24,7 +25,15 @@ class EnhancedTable extends React.Component {
       return 1;
     }
     return 0;    
-  }  
+  }
+  expandRow = i => {
+    const { expanded } = this.state;
+    if(expanded.includes(i)){
+      this.setState({ expanded: expanded.filter(ele => {ele !== i;}) });
+    } else {
+      this.setState({ expanded: expanded.concat([i]) });
+    }
+  }
   
   stableSort = (array, cmp) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
@@ -134,7 +143,9 @@ EnhancedTable.propTypes = {
   select: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  selectLabel: PropTypes.func.isRequired
+  selectLabel: PropTypes.func.isRequired,
+  expandable: PropTypes.bool,
+  expansionComponent: PropTypes.node
 };
 
 export default withStyles(styles)(EnhancedTable);
