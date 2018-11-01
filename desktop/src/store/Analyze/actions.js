@@ -20,3 +20,9 @@ export const setProjectStatus = status => {
   return { type: analyzeActionTypes.SET_PROJECT_STATUS, payload: status };    
 };
 
+export const selectShift = shift => {
+  return { type: analyzeActionTypes.SELECT_SHIFT, payload: shift };
+};
+export const setShiftStatus = status => {
+  return { type: analyzeActionTypes.SET_SHIFT_STATUS, payload: status };
+};

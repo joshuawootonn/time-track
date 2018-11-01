@@ -6,6 +6,7 @@ export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
 
 
+export const getAnalyzeState = state => state.analyze;
 
 export const getShiftFromState = state => state.shift;
 
@@ -45,3 +46,15 @@ export const getShiftsInRange = createSelector(
       });
   }
 );
+
+export const getSelectedShift = createSelector(
+  getShiftsFromEntities,
+  getAnalyzeState,
+  (shifts,analyze) => {
+    if(analyze.shift === -1)
+      return {};
+    else{
+      return shifts[analyze.shift];
+    }      
+  }
+)

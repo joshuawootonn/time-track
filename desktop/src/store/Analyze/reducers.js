@@ -1,4 +1,4 @@
-import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes } from 'constants/ActionTypes';
+import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes } from 'constants/ActionTypes';
 import * as analyzeStatus from 'constants/analyze';
 
 const selectedInitialState = {
@@ -97,6 +97,34 @@ export default (state = selectedInitialState, action) => {
       ...state,
       projectStatus: analyzeStatus.INIT,
       project: -1
+    };
+
+  case analyzeActionTypes.SELECT_SHIFT:
+    if (state.shift !== -1 && state.shift === action.payload) {
+      return {
+        ...state,
+        shift: -1,
+        shiftStatus: analyzeStatus.INIT
+      };
+    } else if (state.shift) {
+      return {
+        ...state,
+        shift: action.payload,
+        shiftStatus: analyzeStatus.EDITING
+      };
+    }
+    return state;
+  case analyzeActionTypes.SET_SHIFT_STATUS:
+    return {
+      ...state,
+      shiftStatus: action.payload
+    };
+
+  case shiftActionTypes.DELETE_SHIFT_SUCCESS:
+    return {
+      ...state,
+      shiftStatus: analyzeStatus.INIT,
+      shift: -1
     };
 
   default:

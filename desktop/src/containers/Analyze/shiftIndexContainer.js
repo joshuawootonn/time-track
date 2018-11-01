@@ -13,25 +13,25 @@ import * as analyzeStatus from 'constants/analyze';
 
 class ShiftIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'),moment().format('MM-DD-YY HH:mm:ss'));
+    this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().format('MM-DD-YY HH:mm:ss'));
   }
-  render () {
-    const { shifts } = this.props;
+  render() {
+    const { shifts, selectShift, setShiftStatus,selected } = this.props;
     const isLoading = !shifts;
     //console.log(projects);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
-    }  
-    //console.log(selected); 
+    }
+    console.log(selected); 
     return (
-      <SortSelectTable 
-        selectLabel={selected => {return `${selected.name} selected`;}}
+      <SortSelectTable
+        selectLabel={selected => { return `${selected.name} selected`; }}
         label="Shifts"
         tableData={shifts}
         headerData={rows}
-        selected={{}}
-        select={()=>{}}
-        add={()=>{}}
+        selected={selected}
+        select={selectShift}
+        add={() => setShiftStatus(analyzeStatus.ADDING)}
       />
     );
   }
@@ -39,21 +39,21 @@ class ShiftIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().format('MM-DD-YY HH:mm:ss')})
-    // selected: projectSelectors.getSelectedProject(state)
+    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().format('MM-DD-YY HH:mm:ss') }),
+    selected: shiftSelectors.getSelectedShift(state)
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getShiftsInRange: (start,end) => {
-      return dispatch(shiftActions.getShiftsInRange(start,end));
+    getShiftsInRange: (start, end) => {
+      return dispatch(shiftActions.getShiftsInRange(start, end));
+    },
+    selectShift: shift => {
+      return dispatch(analyzeActions.selectShift(shift));
+    },
+    setShiftStatus: status => {
+      return dispatch(analyzeActions.setShiftStatus(status));
     }
-    // selectProject: project => {
-    //   return dispatch(analyzeActions.selectProject(project));
-    // },
-    // setProjectStatus: status => {
-    //   return dispatch(analyzeActions.setProjectStatus(status));
-    // }
   };
 };
 
@@ -62,7 +62,7 @@ ShiftIndexContainer.propTypes = {
   getShiftsInRange: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ShiftIndexContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndexContainer);
 
 const rows = [
   {
@@ -71,26 +71,26 @@ const rows = [
     padding: 'dense',
     label: 'Name',
     type: TableDataTypes.NUMBER
-  }, 
+  },
   {
     id: 'clockInDate',
     numeric: false,
     padding: 'dense',
     label: 'Clock In',
     type: TableDataTypes.DATETIME
-  }, 
+  },
   {
     id: 'clockOutDate',
     numeric: false,
     padding: 'dense',
     label: 'Clock Out',
     type: TableDataTypes.DATETIME
-  }, 
+  },
   {
     id: 'length',
     numeric: false,
     padding: 'dense',
     label: 'Length',
     type: TableDataTypes.LENGTH
-  }   
+  }
 ];
