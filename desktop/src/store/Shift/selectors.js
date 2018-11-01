@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
 import { getEmployeesFromEntities } from 'store/Employee/selectors';
-import { getAllProjectTasks } from 'store/ProjectTask/selectors';
+import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
@@ -53,7 +53,7 @@ export const getShiftsInRange = createSelector(
 export const getSelectedShift = createSelector(
   getShiftsFromEntities,
   getActivitiesFromEntities,
-  getAllProjectTasks,
+  getAllProjectTasksObjects,
   getAnalyzeState,
   (shifts,activities,projectTasks, analyze) => {
     if(analyze.shift === -1)
@@ -62,6 +62,8 @@ export const getSelectedShift = createSelector(
       return {
         ...shifts[analyze.shift],
         activities: shifts[analyze.shift].activities.map(activityId => {
+          console.log(projectTasks[activities[activityId].projectTaskId],activities[activityId].projectTaskId)
+          console.log(projectTasks)
           return {
             ...activities[activityId],
             projectTask: projectTasks[activities[activityId].projectTaskId]

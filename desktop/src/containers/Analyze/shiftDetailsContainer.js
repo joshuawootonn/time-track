@@ -13,7 +13,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class ShiftDetailsContainer extends Component {
   render () {
     const { selected,status } = this.props;
-    console.log(selected,status)
+    //console.log(selected,status)
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -24,8 +24,8 @@ class ShiftDetailsContainer extends Component {
     if(status === analyzeConstants.EDITING){
       return (
         <GenericTable
-          selectLabel={selected => {return `${selected.firstName} ${selected.lastName} selected`;}}
-          label="Employees"
+          selectLabel={selected => {console.log(selected); return `${selected.employee.firstName} ${selected.lastName} selected`;}}
+          label="Activities"
           tableData={selected.activities}
           headerData={rows}
           selected={{}}
