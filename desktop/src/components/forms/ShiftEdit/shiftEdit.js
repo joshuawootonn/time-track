@@ -146,12 +146,13 @@ class ShiftEdit extends Component {
                     <Grid item xs={12} className={classes.formFooter}>
                       <div className={classes.lunchBox}>
                         <Field
-                          name={'lunch'}
+                          name='lunch'
                           label1="Lunch"
                           label2=" "
                           fullWidth
                           margin="none"
-                          component={Time}
+                          component={Time}                          
+                          className={classes.field} 
                         />
                       </div>
                       <Button

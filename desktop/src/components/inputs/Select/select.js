@@ -26,7 +26,7 @@ const Select = ({ field, form, label, margin,
           items.map((item, i) => {
             return (
               <MenuItem {...itemProps} key={i} id={item.id} value={item.id}>
-                {item.name || item.type}
+                {item.name || item.type || item.firstName + ' ' + item.lastName}
               </MenuItem>
             );
           })}

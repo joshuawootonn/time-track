@@ -13,7 +13,7 @@ import styles from './styles';
 export class Time extends Component {
   render() {
     const { value, name } = this.props.field;
-    const { classes, field, form, margin, fullWidth, label1, label2, helper } = this.props;
+    const { classes, field, form, margin, fullWidth, label1, label2, helper,className } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
@@ -25,6 +25,7 @@ export class Time extends Component {
           <Select
             field={field}
             form={form}
+            className={className}
             margin={margin}
             fullWidth={fullWidth}
             label={label1}
@@ -49,10 +50,10 @@ export class Time extends Component {
               );
             })}
           </Select>
-
           <Select
             field={field}
             form={form}
+            className={className}
             margin={margin}
             fullWidth={fullWidth}
             label={label2}
