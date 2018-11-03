@@ -17,3 +17,11 @@ export const GET_SHIFTS_IN_RANGE_FAILURE = 'get_shifts_in_range_failure';
 export const DELETE_SHIFT_REQUEST = 'delete_shift_request';
 export const DELETE_SHIFT_SUCCESS = 'delete_shift_success';
 export const DELETE_SHIFT_FAILURE = 'delete_shift_failure';
+
+export const ADD_SHIFT_REQUEST = 'add_shift_request';
+export const ADD_SHIFT_SUCCESS = 'add_shift_success';
+export const ADD_SHIFT_FAILURE = 'add_shift_failure';
+
+export const EDIT_SHIFT_REQUEST = 'edit_shift_request';
+export const EDIT_SHIFT_SUCCESS = 'edit_shift_success';
+export const EDIT_SHIFT_FAILURE = 'edit_shift_failure';

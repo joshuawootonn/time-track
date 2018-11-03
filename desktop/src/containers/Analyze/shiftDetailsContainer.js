@@ -7,6 +7,7 @@ import moment from 'moment';
 
 import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
+import { shiftActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import GenericTable from 'components/tables/Generic';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -38,7 +39,7 @@ class ShiftDetailsContainer extends Component {
       return (
         <Formik
           initialValues={{
-            lunch: 0,
+            /* lunch: 0,
             clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
             clockOutDate : moment().format('YYYY-MM-DDThh:mm'),
             employeeId: -1,
@@ -49,7 +50,28 @@ class ShiftDetailsContainer extends Component {
                 length: 0,
                 description: ''
               }
+            ] */
+            lunch: 30,
+            clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
+            clockOutDate : moment().format('YYYY-MM-DDThh:mm'),
+            employeeId: 1,
+            activities: [
+              {
+                projectId: 1,
+                projectTaskId: 2,
+                length: 120,
+                description: ''
+              },{
+                projectId: 1,
+                projectTaskId: 1,
+                length: 180,
+                description: ''
+              }
             ]
+          }}
+          onSubmit={values => {
+            const { addShift } = this.props;
+            addShift(values,values.activities);
           }}
           render={formikProps => {
             return (
@@ -81,6 +103,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addShift: (shift,activities) => {
+      return dispatch(shiftActions.addShift( shift, activities));
+    }
     // createProject: project => {
     //   return dispatch(projectActions.postProject(project));
     // },
