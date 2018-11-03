@@ -31,13 +31,11 @@ class EnhancedTable extends React.Component {
                                                
                   return (
                     <TableRow
-                      hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      hover                      
                       role="checkbox"
                       tabIndex={-1}
                       key={n.id}
-                    >
-                      
+                    >                      
                       {headerData.map(ele => {
                         const { type, id, keys } = ele;
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {

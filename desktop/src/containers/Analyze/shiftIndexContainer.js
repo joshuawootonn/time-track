@@ -26,7 +26,7 @@ class ShiftIndexContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
-    console.log(selected); 
+    //console.log(selected); 
     return (
       <SortSelectTable
         selectLabel={selected => { return `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`; }}
@@ -35,7 +35,7 @@ class ShiftIndexContainer extends Component {
         headerData={rows}
         selected={selected}
         select={selectShift}
-        add={() => console.log('add')}
+        add={() => setShiftStatus(analyzeStatus.ADDING)}
       />
     );
   }

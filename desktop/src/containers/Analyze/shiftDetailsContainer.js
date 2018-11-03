@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Typography } from '@material-ui/core';
+import { Formik } from 'formik';
 
-import ClockOutContainer from 'containers/Clock/clockOutContainer';
-import { shiftSelectors } from 'store/selectors';
+import { shiftSelectors,projectSelectors, projectTaskSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import GenericTable from 'components/tables/Generic';
 import * as TableDataTypes from 'constants/tableDataTypes';
+import ShiftEditContainer from 'components/forms/ShiftEdit';
 
 class ShiftDetailsContainer extends Component {
   render () {
-    const { selected,status } = this.props;
+    const { selected,status,projects,projectTasks } = this.props;
     //console.log(selected,status)
     if(status === analyzeConstants.INIT){
       return (
@@ -32,13 +33,43 @@ class ShiftDetailsContainer extends Component {
         />
       );
     }
+    if(status === analyzeConstants.ADDING){
+      return (
+        <Formik
+          initialValues={{
+            lunch: 0,
+            activities: [
+              {
+                projectId: -1,
+                projectTaskId: -1,
+                length: 0,
+                description: ''
+              }
+            ]
+          }}
+          render={formikProps => {
+            return (
+              <ShiftEditContainer
+                label="Add Shift"
+                type="add"
+                projects={projects}
+                projectTasks={projectTasks}
+                {...formikProps}
+              />
+            );
+          }}
+        />
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
     selected: shiftSelectors.getSelectedShift(state),    
-    status: state.analyze.shiftStatus    
+    status: state.analyze.shiftStatus,
+    projects: projectSelectors.getAllProjects(state),
+    projectTasks: projectTaskSelectors.getAllProjectTasks(state)
   };
 };
 
