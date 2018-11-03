@@ -13,7 +13,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class ShiftDetailsContainer extends Component {
   render () {
     const { selected,status } = this.props;
-    console.log(selected,status)
+    //console.log(selected,status)
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>

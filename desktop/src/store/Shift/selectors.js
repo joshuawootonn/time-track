@@ -53,17 +53,19 @@ export const getShiftsInRange = createSelector(
 export const getSelectedShift = createSelector(
   getShiftsFromEntities,
   getActivitiesFromEntities,
-  getAllProjectTasksObjects,
+  getAllProjectTasksObjects,  
+  getEmployeesFromEntities,
   getAnalyzeState,
-  (shifts,activities,projectTasks, analyze) => {
+  (shifts,activities,projectTasks,employees, analyze) => {
     if(analyze.shift === -1)
       return {};
     else{
       return {
         ...shifts[analyze.shift],
+        employee: employees[shifts[analyze.shift].employeeId],
         activities: shifts[analyze.shift].activities.map(activityId => {
-          console.log(projectTasks[activities[activityId].projectTaskId],activities[activityId].projectTaskId);
-          console.log(projectTasks);
+          //console.log(projectTasks[activities[activityId].projectTaskId],activities[activityId].projectTaskId);
+          //console.log(projectTasks);
           return {
             ...activities[activityId],
             projectTask: projectTasks[activities[activityId].projectTaskId]
