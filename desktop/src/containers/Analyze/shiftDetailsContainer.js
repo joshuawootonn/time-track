@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 
 import { Typography } from '@material-ui/core';
 import { Formik } from 'formik';
+import moment from 'moment';
 
-import { shiftSelectors,projectSelectors, projectTaskSelectors } from 'store/selectors';
+import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors } from 'store/selectors';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import GenericTable from 'components/tables/Generic';
@@ -13,7 +14,7 @@ import ShiftEditContainer from 'components/forms/ShiftEdit';
 
 class ShiftDetailsContainer extends Component {
   render () {
-    const { selected,status,projects,projectTasks } = this.props;
+    const { selected,status,projects,projectTasks,employees } = this.props;
     //console.log(selected,status)
     if(status === analyzeConstants.INIT){
       return (
@@ -38,6 +39,9 @@ class ShiftDetailsContainer extends Component {
         <Formik
           initialValues={{
             lunch: 0,
+            clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
+            clockOutDate : moment().format('YYYY-MM-DDThh:mm'),
+            employeeId: -1,
             activities: [
               {
                 projectId: -1,
@@ -52,6 +56,7 @@ class ShiftDetailsContainer extends Component {
               <ShiftEditContainer
                 label="Add Shift"
                 type="add"
+                employees={employees}
                 projects={projects}
                 projectTasks={projectTasks}
                 {...formikProps}
@@ -69,7 +74,8 @@ const mapStateToProps = state => {
     selected: shiftSelectors.getSelectedShift(state),    
     status: state.analyze.shiftStatus,
     projects: projectSelectors.getAllProjects(state),
-    projectTasks: projectTaskSelectors.getAllProjectTasks(state)
+    projectTasks: projectTaskSelectors.getAllProjectTasks(state),
+    employees: employeeSelectors.getAllEmployeesWithContents(state)
   };
 };
 

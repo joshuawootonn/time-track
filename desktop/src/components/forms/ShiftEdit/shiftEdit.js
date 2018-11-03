@@ -7,6 +7,7 @@ import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
+import moment from 'moment';
 
 import TextField from 'components/inputs/TextField';
 import Switch from 'components/inputs/Switch';
@@ -20,7 +21,8 @@ import { minutesToString } from 'helpers/time';
 class ShiftEdit extends Component {
   render () {
     const { classes,label,type,deleteShift,isSubmitting,resetForm,initialValues,errors, handleSubmit, shift, values, 
-      projects, projectTasks, cancel,timeLeft,generalError  } = this.props;
+      projects, projectTasks,employees, cancel,timeLeft,generalError  } = this.props;
+
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -36,29 +38,29 @@ class ShiftEdit extends Component {
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
-              name="name"
-              component={TextField}
-              margin="none"
-              label="Employee Name"
-              type="search"
-              className={classes.field}
-              helper="normal"
-            />     
+              name='employeeId'
+              component={Select}
+              items={employees}
+              fullWidth                    
+              className={classes.field}        
+              label="Employee"
+            /> 
             <Field
-              name="date"
+              name="clockInDate"
               component={TextField}              
               margin="none"
               label="Start Date"
-              type="date"              
+              type="datetime-local"              
               className={classes.field}
               helper="normal"
             />   
             <Field
-              name="date"
+              name="clockOutDate"
               component={TextField}              
               margin="none"
               label="Start Date"
-              type="date"              
+              type="datetime-local"
+              defaultValue="2017-05-24T10:30"      
               className={classes.field}
               helper="normal"
             />         
@@ -87,12 +89,14 @@ class ShiftEdit extends Component {
                                   items={projects}
                                   fullWidth
                                   label="Project"
+                                  className={classes.field} 
                                 />
                                 <Field
                                   name={`activities.${index}.projectTaskId`}
                                   component={Select}
                                   fullWidth
                                   label="Task"
+                                  className={classes.field} 
                                 >
                                   {
                                     projectTasks // This code iterates the projectTask 
@@ -116,11 +120,13 @@ class ShiftEdit extends Component {
                                   name={`activities.${index}.length`}
                                   component={Time}
                                   fullWidth
+                                  className={classes.field} 
                                 />
                                 <Field
                                   name={`activities.${index}.description`}
                                   label="Description"
                                   component={TextField}
+                                  className={classes.field} 
                                 />
                                 <div className={classes.verticalCenter}>
                                   <IconButton
@@ -168,9 +174,13 @@ class ShiftEdit extends Component {
                       <Typography variant="h5" margin="none">
                           Time Left: {minutesToString(timeLeft)}
                       </Typography>
-                      <Typography variant="body1" margin="none" className={classes.error}>
-                        {generalError}
-                      </Typography>                      
+                      <Typography
+                        color="error"
+                        variant="button"
+                        className={classes.field}
+                      >
+                        {errors.submit}
+                      </Typography>                 
 
                       <div>
                         <Button
@@ -180,7 +190,7 @@ class ShiftEdit extends Component {
                           variant="contained"
                           className={classes.button}
                         >
-                            Clock Out
+                          Save
                         </Button>
 
                         <Button
@@ -189,7 +199,7 @@ class ShiftEdit extends Component {
                           variant="text"
                           className={classes.button}
                         >
-                            Cancel
+                          Cancel
                         </Button>
                       </div>
                     </Grid>
@@ -197,39 +207,7 @@ class ShiftEdit extends Component {
                 );
               }}
             />
-          </Grid>
-          
-          <Grid item xs={12} className={classes.row}>
-            <Typography
-              color="error"
-              variant="button"
-              className={classes.field}
-            >
-              {errors.submit}
-            </Typography>
-            <div>
-              <Button
-                type="submit"
-                color="primary"
-                disabled={isSubmitting}
-                variant="contained"
-                className={classes.button}
-              >
-                Save
-              </Button>
-              <Button
-                onClick={() => {
-                  resetForm(initialValues);
-                }}
-                disabled={isSubmitting}
-                color="secondary"
-                variant="text"
-                className={classes.button}
-              >
-                Reset
-              </Button>
-            </div>
-          </Grid>      
+          </Grid> 
         </Grid>
       </Form>
     );
