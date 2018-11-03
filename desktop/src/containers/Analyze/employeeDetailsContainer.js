@@ -24,7 +24,7 @@ class EmployeeEditContainer extends Component {
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select an Employee.. </Typography>
+          <Typography variant="h6">Select a Employee.. </Typography>
         </Hero>
       );
     }

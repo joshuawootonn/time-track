@@ -22,7 +22,7 @@ class TaskDetailsContainer extends Component {
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select an Task.. </Typography>
+          <Typography variant="h6">Select a Task.. </Typography>
         </Hero>
       );
     }

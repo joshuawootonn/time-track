@@ -13,11 +13,11 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 class ShiftDetailsContainer extends Component {
   render () {
     const { selected,status } = this.props;
-    //console.log(selected,status)
+    console.log(selected,status)
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select an Project.. </Typography>
+          <Typography variant="h6">Select a Shift.. </Typography>
         </Hero>
       );
     }
@@ -72,7 +72,7 @@ const rows = [
     padding: 'dense',
     label: 'Project',
     type: TableDataTypes.OBJECT,
-    key: 'projectId'
+    keys: ['project','name']
   },
   {
     id: 'projectTask',
@@ -80,7 +80,7 @@ const rows = [
     padding: 'dense',
     label: 'Task',
     type: TableDataTypes.OBJECT,
-    key: 'taskId'
+    keys: ['task','name']
   },
   {
     id: 'length',

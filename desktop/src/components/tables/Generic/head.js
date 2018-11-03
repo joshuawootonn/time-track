@@ -7,13 +7,15 @@ class EnhancedTableHead extends React.Component {
   render() {
     const {  headerData } = this.props;
 
+    
     return (
       <TableHead>
         <TableRow>        
           {headerData.map(row => {
+            const key = row.keys ? row.id + row.keys.join('') : row.id;            
             return (
               <TableCell
-                key={row.id + row.key}
+                key={key}
                 numeric={row.numeric}
                 padding={row.padding}
               >               

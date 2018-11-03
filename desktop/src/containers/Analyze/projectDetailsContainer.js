@@ -24,7 +24,7 @@ class ProjectContainer extends Component {
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select an Project.. </Typography>
+          <Typography variant="h6">Select a Project.. </Typography>
         </Hero>
       );
     }

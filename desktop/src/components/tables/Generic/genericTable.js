@@ -11,7 +11,9 @@ import styles from './styles';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
 class EnhancedTable extends React.Component {
-  
+  deconstructObjectbyKey = (obj,key) => {
+    return obj[key];
+  }
   render() {
     const { classes, tableData, headerData,edit, label,add,remove } = this.props;   
     return (
@@ -37,23 +39,21 @@ class EnhancedTable extends React.Component {
                     >
                       
                       {headerData.map(ele => {
-                        //console.log(ele);
-                        const { type, id, key } = ele;
-                        
+                        const { type, id, keys } = ele;
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
                           return <TableCell padding="dense" key={id} numeric >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
-                          //console.log(n,id,key,n[id])
-                          return <TableCell padding="dense" key={id+key} >{n[id][key]}</TableCell>;
+                          // The reduce function here is just used to deconstruct the objects to the value that we want on the table
+                          return <TableCell padding="dense" key={id+keys.join('')} >{keys.reduce((object, currentKey) => object[currentKey],n[id])}</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('hh:mm a MM/DD')}</TableCell>;
                         } else if (type === TableDataTypes.LENGTH) {
                           const length = moment.duration(n[id], 'minutes');
-                          return <TableCell padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
+                          return <TableCell padding="dense" key={id+length.hours()} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
                         }
                         return null;
                       })}

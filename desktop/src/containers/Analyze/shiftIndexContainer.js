@@ -22,7 +22,7 @@ class ShiftIndexContainer extends Component {
   render() {
     const { shifts, selectShift, setShiftStatus, selected } = this.props;
     const isLoading = !shifts;
-    console.log(shifts);
+    //console.log(shifts);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
