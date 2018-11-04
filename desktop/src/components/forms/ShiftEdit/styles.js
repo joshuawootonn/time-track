@@ -20,7 +20,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-around'
   },
-  error: { marginTop: '16px' },
   button: {
     marginLeft: '8px'
   },
@@ -41,7 +40,6 @@ const styles = theme => ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end'
   },
-  button: { marginLeft: '10px' },
 
   verticalCenter: {
     display: 'flex',

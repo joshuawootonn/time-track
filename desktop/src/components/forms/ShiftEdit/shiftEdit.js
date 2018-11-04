@@ -7,10 +7,8 @@ import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
-import moment from 'moment';
 
 import TextField from 'components/inputs/TextField';
-import Switch from 'components/inputs/Switch';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
 
@@ -20,8 +18,8 @@ import { minutesToString } from 'helpers/time';
 
 class ShiftEdit extends Component {
   render() {
-    const { classes, label, type, deleteShift, isSubmitting, resetForm, initialValues, errors, handleSubmit, shift, values,
-      projects, projectTasks, employees, cancel, timeLeft, generalError } = this.props;
+    const { classes, label, type, deleteShift, isSubmitting, resetForm, initialValues, errors,  values,
+      projects, projectTasks, employees,  timeLeft, generalError } = this.props;
 
     return (
       <Form>
@@ -199,12 +197,14 @@ class ShiftEdit extends Component {
               </Button>
 
               <Button
-                onClick={cancel}
+                onClick={() => {
+                  resetForm(initialValues);
+                }}
                 color="secondary"
                 variant="text"
                 className={classes.button}
               >
-                Cancel
+                Reset
               </Button>
             </div>
           </Grid>
@@ -222,7 +222,13 @@ ShiftEdit.propTypes = {
   deleteShift: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  projects: PropTypes.array.isRequired, 
+  projectTasks: PropTypes.array.isRequired, 
+  employees: PropTypes.array.isRequired,
+  timeLeft: PropTypes.string.isRequired,
+  generalError: PropTypes.string.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ShiftEdit);

@@ -40,6 +40,7 @@ class ShiftDetailsContainer extends Component {
     if(status === analyzeConstants.ADDING){
       return (
         <Formik
+          enableReinitialize
           initialValues={{
             lunch: 0,
             clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
