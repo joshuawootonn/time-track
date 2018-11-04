@@ -12,7 +12,7 @@ import AccountActionForm from 'components/forms/AccountAction';
 class AccountAction extends Component {
   componentDidMount = () => {
     // REMOVE before deploy
-    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    //this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   }
   back = () => {
     this.props.history.push('/');
@@ -35,7 +35,6 @@ class AccountAction extends Component {
   };
   render() {
     const { type, currentEmployee } = this.props;
-
     return (
       <AccountActionForm
         isWorking={currentEmployee.isWorking}

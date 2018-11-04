@@ -6,9 +6,10 @@ import { IconButton, Tooltip } from '@material-ui/core';
 import { ShowChart, Check, Close, ArrowBack, Storage } from '@material-ui/icons';
 
 import styles from './styles';
+import * as authorityConstants from 'constants/authority';
 
 const AccountActionForm = props => {
-  const { classes, isWorking, clockIn, clockOut, analyze, back } = props;
+  const { classes, isWorking, clockIn, clockOut, analyze, back,type } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -25,22 +26,25 @@ const AccountActionForm = props => {
             </IconButton>
           </Tooltip>
         )}
-        <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }} placement="bottom">
-          <IconButton onClick={props.export} className={classes.button}>
-            <Storage className={classes.buttonIcon} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip open={true} title="Analysis" classes={{ tooltip: classes.toolTip }} placement="bottom">
-          <IconButton onClick={analyze} className={classes.button}>
-            <ShowChart className={classes.buttonIcon} />
-          </IconButton>
-        </Tooltip>
+        {(type === authorityConstants.MANAGER || type === authorityConstants.ADMIN) && 
+          <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }} placement="bottom">
+            <IconButton onClick={props.export} className={classes.button}>
+              <Storage className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        }
+        { type === authorityConstants.ADMIN && 
+          <Tooltip open={true} title="Analysis" classes={{ tooltip: classes.toolTip }} placement="bottom">
+            <IconButton onClick={analyze} className={classes.button}>
+              <ShowChart className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        }       
         <Tooltip open={true} title="Back" classes={{ tooltip: classes.toolTip }} placement="bottom">
           <IconButton onClick={back} className={classes.button}>
             <ArrowBack className={classes.buttonIcon} />
           </IconButton>
         </Tooltip>
-
       </div>
     </div>
   );
@@ -53,7 +57,8 @@ AccountActionForm.propTypes = {
   isWorking: PropTypes.number,
   clockOut: PropTypes.func.isRequired,
   export: PropTypes.func.isRequired,
-  analyze: PropTypes.func.isRequired
+  analyze: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(AccountActionForm);
