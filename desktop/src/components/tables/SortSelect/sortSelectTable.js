@@ -16,7 +16,19 @@ class EnhancedTable extends React.Component {
     orderBy: 'firstName'
   };
   
-  desc = (a, b, orderBy) => {            
+  desc = (a, b, orderBy,type, keys) => {
+    if(type === TableDataTypes.OBJECT){
+      const aVal = keys.reduce((object, currentKey) => object[currentKey],a[orderBy])
+      const bVal = keys.reduce((object, currentKey) => object[currentKey],b[orderBy])
+      if ( bVal < aVal) {
+        return -1;
+      }
+      if (bVal > aVal) {
+        return 1;
+      }
+      return 0; 
+    }
+    
     if (b[orderBy] < a[orderBy]) {
       return -1;
     }
@@ -36,18 +48,19 @@ class EnhancedTable extends React.Component {
     return stabilizedThis.map(el => el[0]);
   }
   
-  getSorting = (order, orderBy) => {
-    return order === 'desc' ? (a, b) => this.desc(a, b, orderBy) : (a, b) => -this.desc(a, b, orderBy);
+  getSorting = (order, orderBy, type, keys) => {
+    return order === 'desc' ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
   }
 
-  handleRequestSort = (event, property) => {
+  handleRequestSort = (event, property, type = TableDataTypes.STRING, keys = []) => {
     const orderBy = property;
+    
     let order = 'desc';
     if (this.state.orderBy === property && this.state.order === 'desc') {
       order = 'asc';
     }
 
-    this.setState({ order, orderBy });
+    this.setState({ order, orderBy, type, keys });
   };
 
   handleClick = (event, id) => {
@@ -61,8 +74,8 @@ class EnhancedTable extends React.Component {
 
   render() {
     const { classes, tableData, headerData,selected,add,label,selectLabel } = this.props;
-    const { order, orderBy } = this.state;
-    //console.log(tableData)
+    const { order, orderBy,type,keys } = this.state;
+    console.log(order,orderBy);
     return (
       <div >
         <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel}/>
@@ -73,11 +86,13 @@ class EnhancedTable extends React.Component {
               selected={selected}
               order={order}
               orderBy={orderBy}
+              type={type}
+              keys={keys}
               onRequestSort={this.handleRequestSort}
               rowCount={tableData.length}
             />
             <TableBody>
-              {this.stableSort(tableData, this.getSorting(order, orderBy))
+              {this.stableSort(tableData, this.getSorting(order, orderBy, type, keys))
                 .map(n => {
                   const isSelected = this.isSelected(n.id);    
                                                 
@@ -96,15 +111,15 @@ class EnhancedTable extends React.Component {
                       </TableCell>
                       {headerData.map(ele => {
                         //console.log(ele);
-                        const { type, id, key } = ele;
+                        const { type, id, keys } = ele;
                         
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
                           return <TableCell padding="dense" key={id} numeric >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
-                          
-                          return <TableCell padding="dense" key={id+key} >{n[id][key]}</TableCell>;
+                          // The reduce function here is just used to deconstruct the objects to the value that we want on the table
+                          return <TableCell padding="dense" key={id+keys.join('')} >{keys.reduce((object, currentKey) => object[currentKey],n[id])}</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {

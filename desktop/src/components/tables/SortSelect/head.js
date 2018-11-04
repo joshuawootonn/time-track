@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 
 import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core';
 
+import * as TableDataTypes from 'constants/tableDataTypes';
+
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
+  createSortHandler = (property,type,keys) => event => {
+    this.props.onRequestSort(event, property,type,keys);
   };
 
   render() {
-    const {  order, orderBy, headerData } = this.props;
-
+    const {  order, orderBy, headerData,keys,type } = this.props;
+    
     return (
       <TableHead>
         <TableRow>
@@ -18,6 +20,12 @@ class EnhancedTableHead extends React.Component {
             
           </TableCell>
           {headerData.map(row => {
+            let sortedColumn;
+            if(type === TableDataTypes.OBJECT) {
+              sortedColumn = orderBy === row.id && keys === row.keys && type === row.type;
+            }else {
+              sortedColumn = orderBy === row.id;
+            }
             return (
               <TableCell
                 key={row.id + row.key}
@@ -31,9 +39,9 @@ class EnhancedTableHead extends React.Component {
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    active={orderBy === row.id}
+                    active={sortedColumn}
                     direction={order}
-                    onClick={this.createSortHandler(row.id)}
+                    onClick={this.createSortHandler(row.id,row.type,row.keys)}
                   >
                     {row.label}
                   </TableSortLabel>
@@ -53,7 +61,9 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
-  headerData: PropTypes.array.isRequired
+  headerData: PropTypes.array.isRequired,
+  keys: PropTypes.array,
+  type: PropTypes.string
 };
 
 export default EnhancedTableHead;

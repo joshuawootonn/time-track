@@ -88,7 +88,7 @@ const rows = [
     padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.OBJECT,
-    key: 'firstName'
+    keys: ['firstName']
   },
   {
     id: 'employee',
@@ -96,7 +96,7 @@ const rows = [
     padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.OBJECT,
-    key: 'lastName'
+    keys: ['lastName']
   },
   {
     id: 'clockInDate',

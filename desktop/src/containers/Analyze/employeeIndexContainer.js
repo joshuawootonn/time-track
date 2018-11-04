@@ -92,7 +92,7 @@ const rows = [
     padding: 'dense',
     label: 'Authority',
     type: TableDataTypes.OBJECT,
-    key: 'type'
+    keys: ['type']
   },
   {
     id: 'crew',
@@ -100,7 +100,7 @@ const rows = [
     padding: 'dense',
     label: 'Crew',
     type: TableDataTypes.OBJECT,
-    key: 'name'
+    keys: ['name']
   },
   {
     id: 'isEmployed',

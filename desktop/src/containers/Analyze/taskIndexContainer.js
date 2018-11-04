@@ -84,7 +84,7 @@ const rows = [
     padding: 'dense',
     label: 'Category',
     type: TableDataTypes.OBJECT,
-    key: 'type'
+    keys: ['type']
   },
   {
     id: 'subcategory',
@@ -92,7 +92,7 @@ const rows = [
     padding: 'dense',
     label: 'Subcategory',
     type: TableDataTypes.OBJECT,
-    key: 'type'
+    keys: ['type']
   },
  
   {
@@ -101,7 +101,7 @@ const rows = [
     padding: 'dense',
     label: 'Dimension',
     type: TableDataTypes.OBJECT,
-    key: 'type'
+    keys: ['type']
   }, 
   {
     id: 'isActive',
