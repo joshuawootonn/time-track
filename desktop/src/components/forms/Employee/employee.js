@@ -78,7 +78,6 @@ class Employee extends Component {
               <Field
                 name="isWorking"
                 component={Switch}
-                disabled={true}
                 label="Is Working"
                 className={classes.field}
               />

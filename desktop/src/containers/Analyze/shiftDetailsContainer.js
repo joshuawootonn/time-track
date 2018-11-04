@@ -22,7 +22,7 @@ class ShiftDetailsContainer extends Component {
   };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
-    //console.log(selected,status);
+    console.log('asdfasdfasdfas',selected,status);
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -99,8 +99,8 @@ class ShiftDetailsContainer extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            lunch: 0,
-            clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDTHH:mm'),            
+            /* lunch: 0,
+            clockInDate : moment().subtract('minutes',390).format('YYYY-MM-DDTHH:mm'),            
             clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
             employeeId: -1,
             activities: [
@@ -110,24 +110,24 @@ class ShiftDetailsContainer extends Component {
                 length: 0,
                 description: ''
               }
-            ] 
-            /*lunch: 30,
-            clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
+            ] */
+            lunch: 30,
+            clockInDate : moment().subtract('minutes',390).format('YYYY-MM-DDTHH:mm'),            
             clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
             employeeId: 1,
             activities: [
               {
                 projectId: 1,
                 projectTaskId: 2,
-                length: 120,
+                length: 150,
                 description: ''
               },{
                 projectId: 1,
                 projectTaskId: 1,
-                length: 180,
+                length: 210,
                 description: ''
               }
-            ]*/
+            ]
           }}
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
