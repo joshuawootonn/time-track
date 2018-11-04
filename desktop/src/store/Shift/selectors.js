@@ -43,6 +43,7 @@ export const getShiftsInRange = createSelector(
         })
       };
     })
+      
     // remove any shift that is not within the bounds of correct clockInDate
       .filter(shift => {      
         return moment(shift.clockInDate).isBetween(moment(start),moment(end));

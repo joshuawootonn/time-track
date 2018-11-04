@@ -57,9 +57,13 @@ export const getData = (startTime, endTime) => {
 const formatData = (startTime, endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
-  const employees = employeeSelectors.getAllEmployees(store.getState());
+  const employees = employeeSelectors.getAllEmployees(store.getState())
+    // sort so that employees get added in order
+    .sort((a,b)=> a.lastName + a.firstName > b.lastName + b.firstName);
   // array of shifts w/ embedded activities
-  const shifts = shiftSelectors.getShiftsInRange(store.getState(), { startTime, endTime });
+  const shifts = shiftSelectors
+    .getShiftsInRange(store.getState(), { startTime, endTime })
+    .sort((a,b)=> a.clockInDate > b.clockInDate);
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
