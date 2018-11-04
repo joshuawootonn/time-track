@@ -42,12 +42,12 @@ export const getShiftsInRange = createSelector(
           return activities[activityId];
         })
       };
-    })
+    }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
+      return moment(shift.clockInDate).isBetween(moment(start,'MM-DD-YY HH:mm:ss'),moment(end,'MM-DD-YY HH:mm:ss'));
+    });
       
-    // remove any shift that is not within the bounds of correct clockInDate
-      .filter(shift => {      
-        return moment(shift.clockInDate).isBetween(moment(start),moment(end));
-      });
+    
+      
   }
 );
 

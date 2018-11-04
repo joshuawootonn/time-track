@@ -23,7 +23,7 @@ function createWindow() {
     width: 800,
     height: 600
   });
-
+ 
   // and load the index.html of the app.
   // load the index.html of the app.
   const startUrl =
@@ -162,8 +162,11 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   // worksheet.getCell('B6').value = 2014;
 
 
-
-  workbook.xlsx.writeFile(arg.fileLocation).then(function() {
-    event.returnValue = 'saved';
-  });
+  try{
+    workbook.xlsx.writeFile(arg.fileLocation).then(function() {
+      event.returnValue = 'saved';
+    });
+  } catch(e) {
+    event.returnValue = 'failed';
+  }
 });

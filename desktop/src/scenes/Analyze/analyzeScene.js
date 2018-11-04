@@ -27,7 +27,7 @@ const styles = {
 class AnalyzeScene extends Component {
 
   state = {
-    tabValue: 3
+    tabValue: 0
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -85,7 +85,7 @@ class AnalyzeScene extends Component {
             <ShiftIndexContainer />
           </Grid>
           <Grid item xs={6}>
-            <ShiftDetailsContainer />
+            <ShiftDetailsContainer /> 
           </Grid>
         </Grid>}
       </div>

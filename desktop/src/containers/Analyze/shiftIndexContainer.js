@@ -22,11 +22,9 @@ class ShiftIndexContainer extends Component {
   render() {
     const { shifts, selectShift, setShiftStatus, selected } = this.props;
     const isLoading = !shifts;
-    //console.log(shifts);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
-    console.log(shifts); 
     return (
       <SortSelectTable
         selectLabel={selected => { return `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`; }}

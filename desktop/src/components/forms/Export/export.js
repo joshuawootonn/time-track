@@ -23,7 +23,7 @@ class ExportForm extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12} className={classes.title}>
               <Typography variant="h3">Export</Typography>
-            </Grid>
+            </Grid>            
             <Grid item xs={12} className={classes.row}>
               <Field
                 name="exportCategory"
