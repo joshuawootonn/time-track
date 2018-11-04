@@ -22,7 +22,7 @@ class ShiftDetailsContainer extends Component {
   };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
-    console.log('asdfasdfasdfas',selected,status);
+    //console.log('asdfasdfasdfas',selected,status);
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -48,8 +48,8 @@ class ShiftDetailsContainer extends Component {
           }}
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
-            const { addShift } = this.props;
-            addShift(values,values.activities).then(
+            const { editShift } = this.props;
+            editShift(values,values.activities).then(
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });

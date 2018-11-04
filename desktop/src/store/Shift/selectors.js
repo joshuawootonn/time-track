@@ -37,8 +37,8 @@ export const getShiftsInRange = createSelector(
     return results.map(shiftId => {      
       return {
         ...shifts[shiftId],
-        employee: employees[shifts[shiftId].employeeId],
-        activities: shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
+        employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
+        activities: shifts[shiftId] && shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
           return activities[activityId];
         })
       };
@@ -63,7 +63,7 @@ export const getSelectedShift = createSelector(
       console.log(shifts[analyze.shift])
       return {
         ...shifts[analyze.shift],
-        employee: employees[shifts[analyze.shift].employeeId],
+        employee: shifts[analyze.shift] && employees[shifts[analyze.shift].employeeId],
         activities: shifts[analyze.shift] && shifts[analyze.shift].activities && shifts[analyze.shift].activities.map(activityId => {
           return {
             ...activities[activityId],

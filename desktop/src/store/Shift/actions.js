@@ -8,7 +8,23 @@ import { normalize } from 'normalizr';
 import * as status from 'constants/status';
 import * as schemas from 'store/schemas';
 
+export const getShift = id => {
+  return async dispatch => {
+    dispatch({ type: shiftActionTypes.GET_SHIFT_REQUEST });
+    try {
+      const response = await endpoint.getShift(id);
 
+      const payload = normalize(
+        { shifts: [response.data] },
+        schemas.shiftArray,
+      );
+      return dispatch({ type: shiftActionTypes.GET_SHIFT_SUCCESS,payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: shiftActionTypes.GET_SHIFT_FAILURE,payload: e });
+    }
+  };
+};
 
 
 export const postShift = shift => {
@@ -16,13 +32,13 @@ export const postShift = shift => {
     dispatch({ type: shiftActionTypes.SHIFT_POST_REQUEST });
     try {
       const response = await endpoint.postShift(shift);
-     // console.log(response.data);
+      console.log('post',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
-     // console.log(payload)
-      return dispatch({ type: shiftActionTypes.SHIFT_POST_SUCCESS, payload, data: response.data });
+      console.log('post',payload);
+      return dispatch({ type: shiftActionTypes.SHIFT_POST_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
       return dispatch({
@@ -39,11 +55,13 @@ export const putShift = shift => {
     dispatch({ type: shiftActionTypes.PUT_SHIFT_REQUEST });
     try {
       const response = await endpoint.putShift(shift);
+      console.log('put',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
-      return dispatch({ type: shiftActionTypes.PUT_SHIFT_SUCCESS, payload });
+      console.log('put',payload);
+      return dispatch({ type: shiftActionTypes.PUT_SHIFT_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
       return dispatch({
@@ -83,7 +101,7 @@ export const getShiftsInRange = (startTime,endTime) => {
       const response = await endpoint.getShiftsInRange(startTime,endTime);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
 
-      console.log(payload)
+      console.log(payload);
       return dispatch({
         type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS,
         payload
@@ -117,14 +135,15 @@ export const addShift = (shift,activities) => {
         clockOutDate: clockOutMoment.toString(),
         activities: activities
       };
-      const response = await dispatch(postShift(shiftObject));
-      
-      await activities.forEach(activity => {
+      const response = await dispatch(postShift(shiftObject));      
+      for(const activity of activities) {
         // activity.projectId = undefined;
         activity.shiftId = response.data.id;
-        dispatch(activityActions.postActivity(activity));
-      });
-     
+        console.log(activity);
+        await dispatch(activityActions.postActivity(activity));
+      }
+      
+      await dispatch(getShift(response.data.id));
     
       dispatch(snackActions.openSnack(status.SUCCESS, 'Shift add success!'));
       return dispatch({ type: shiftActionTypes.ADD_SHIFT_SUCCESS });
@@ -150,8 +169,9 @@ export const editShift = (shift,activities) => {
       const clockOutMoment = moment(shift.clockOutMoment);
       const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment));
       const minutes = shiftDuration.asMinutes();
-     
+      console.log('id',shift.id);
       const shiftObject = {
+        id: shift.id,
         employeeId: shift.employeeId,        
         length: minutes,
         lunch: shift.lunch,
@@ -159,17 +179,22 @@ export const editShift = (shift,activities) => {
         clockOutDate: clockOutMoment.toString()
       };
       const response = await dispatch(putShift(shiftObject));      
-      await activities.forEach(activity => {
+      for(const activity of activities) {
         // activity.projectId = undefined;
         activity.shiftId = response.data.id;
-        dispatch(activityActions.postActivity(activity));
-      });
+        activity.id = undefined;
+        console.log(activity);
+        await dispatch(activityActions.postActivity(activity));
+      }
+      await dispatch(getShift(response.data.id));
+
+
       dispatch(snackActions.openSnack(status.SUCCESS, 'Shift edit success!'));
       return dispatch({ type: shiftActionTypes.EDIT_SHIFT_SUCCESS });
     } catch (e) {
       console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Shift edit failed!'));
-      return dispatch({type: shiftActionTypes.ADD_SHIFT_FAILURE, payload: e });
+      return dispatch({ type: shiftActionTypes.ADD_SHIFT_FAILURE, payload: e });
     }
   };
 };
@@ -190,11 +215,11 @@ export const deleteShift = shift => {
       };
 
       dispatch(snackActions.openSnack(status.SUCCESS, 'Shift deletion success!'));      
-      return dispatch({type: shiftActionTypes.DELETE_SHIFT_SUCCESS, deleted });
+      return dispatch({ type: shiftActionTypes.DELETE_SHIFT_SUCCESS, deleted });
     } catch (e) {
       console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Shift deletion failed!'));
-      return dispatch({type: shiftActionTypes.DELETE_SHIFT_FAILURE, payload: e });
+      return dispatch({ type: shiftActionTypes.DELETE_SHIFT_FAILURE, payload: e });
     }
   };
 };

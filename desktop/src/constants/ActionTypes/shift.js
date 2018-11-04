@@ -1,3 +1,7 @@
+export const GET_SHIFT_REQUEST = 'get_shift_request';
+export const GET_SHIFT_SUCCESS = 'get_shift_success';
+export const GET_SHIFT_FAILURE = 'get_shift_failure';
+
 export const SHIFT_POST_REQUEST = 'shift_post_request';
 export const SHIFT_POST_SUCCESS = 'shift_post_success';
 export const SHIFT_POST_FAILURE = 'shift_post_failure';
