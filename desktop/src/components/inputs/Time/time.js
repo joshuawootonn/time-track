@@ -99,7 +99,7 @@ Time.propTypes = {
   classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
-  className: PropTypes.object,
+  className: PropTypes.string,
   helper: PropTypes.oneOf(['normal', 'none']),
   label1: PropTypes.string,
   label2: PropTypes.string

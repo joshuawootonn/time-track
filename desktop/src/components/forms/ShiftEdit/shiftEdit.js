@@ -226,8 +226,8 @@ ShiftEdit.propTypes = {
   projects: PropTypes.array.isRequired, 
   projectTasks: PropTypes.array.isRequired, 
   employees: PropTypes.array.isRequired,
-  timeLeft: PropTypes.string.isRequired,
-  generalError: PropTypes.string.isRequired,
+  timeLeft: PropTypes.number.isRequired,
+  generalError: PropTypes.string,
   values: PropTypes.object.isRequired
 };
 
