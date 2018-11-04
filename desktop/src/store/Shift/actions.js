@@ -129,3 +129,65 @@ export const addShift = (shift,activities) => {
     }
   };
 };
+
+export const editShift = (shift,activities) => {
+  return  async dispatch => {
+    try {
+      console.log(shift,activities);
+
+      const clockInMoment = moment(shift.clockInDate);
+      const clockOutMoment = moment(shift.clockOutMoment);
+      const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment));
+      const minutes = shiftDuration.asMinutes();
+     
+      const shiftObject = {
+        employeeId: shift.employeeId,        
+        length: minutes,
+        lunch: shift.lunch,
+        clockInDate: clockInMoment.toString(),
+        clockOutDate: clockOutMoment.toString()
+      };
+      const response = await dispatch(postShift(shiftObject));
+      console.log(response);
+      await activities.forEach(activity => {
+        // activity.projectId = undefined;
+        activity.shiftId = response.data.id;
+        dispatch(activityActions.postActivity(activity));
+      });
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Shift add success!'));
+      return dispatch({ type: shiftActionTypes.ADD_SHIFT_SUCCESS });
+    } catch (e) {
+      console.log(e);
+      dispatch(snackActions.openSnack(status.FAILURE, 'Shift add failed!'));
+      return dispatch({
+        type: shiftActionTypes.ADD_SHIFT_FAILURE,
+        payload: e
+      });
+    }
+  };
+};
+
+export const deleteShift = shift => {
+  return  async dispatch => {
+    try {
+      const response1 = await endpoint.deleteRelatedActivities(shift);
+      const response2 = await endpoint.deleteShift(shift);
+      console.log(response1,response2);
+      const deleted = {
+        entities: {
+          shifts: [shift.id]          
+        },
+        result: {
+          shifts: [shift.id]
+        }
+      };
+
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Shift deletion success!'));      
+      return dispatch({type: shiftActionTypes.DELETE_SHIFT_SUCCESS, deleted });
+    } catch (e) {
+      console.log(e);
+      dispatch(snackActions.openSnack(status.FAILURE, 'Shift deletion failed!'));
+      return dispatch({type: shiftActionTypes.DELETE_SHIFT_FAILURE, payload: e });
+    }
+  };
+};

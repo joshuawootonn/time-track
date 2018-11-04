@@ -16,6 +16,10 @@ import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
 class ShiftDetailsContainer extends Component {
+  deleteShift = () => {
+    const { selected, deleteShift } = this.props;  
+    deleteShift(selected);
+  };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
     //console.log(selected,status);
@@ -81,7 +85,8 @@ class ShiftDetailsContainer extends Component {
                 projects={projects}
                 projectTasks={projectTasks}
                 timeLeft={timeLeft}      
-                generalError={generalError}          
+                generalError={generalError} 
+                deleteShift={this.deleteShift}         
                 {...formikProps}
               />
             );
@@ -189,22 +194,13 @@ const mapDispatchToProps = dispatch => {
   return {
     addShift: (shift,activities) => {
       return dispatch(shiftActions.addShift( shift, activities));
+    },
+    editShift: (shift,activities) => {
+      return dispatch(shiftActions.editShift(shift,activities));
+    },
+    deleteShift: shift => {
+      return dispatch(shiftActions.deleteShift(shift));
     }
-    // createProject: project => {
-    //   return dispatch(projectActions.postProject(project));
-    // },
-    // updateProject: project => {
-    //   return dispatch(projectActions.putProject(project));
-    // },
-    // deleteProject: project => {
-    //   return dispatch(projectActions.deleteProject(project));
-    // },
-    // selectProject: project => {
-    //   return dispatch(analyzeActions.selectProject(project));
-    // },
-    // setProjectStatus: status => {
-    //   return dispatch(analyzeActions.setProjectStatus(status));
-    // }
   };
 };
 
