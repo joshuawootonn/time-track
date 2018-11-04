@@ -12,6 +12,8 @@ import Hero from 'components/layouts/Hero';
 import GenericTable from 'components/tables/Generic';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
+import { shift as shiftValidation } from 'constants/formValidation';
+import { minutesRoudedTime } from 'helpers/time';
 
 class ShiftDetailsContainer extends Component {
   render () {
@@ -39,7 +41,7 @@ class ShiftDetailsContainer extends Component {
       return (
         <Formik
           initialValues={{
-            /* lunch: 0,
+            lunch: 0,
             clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
             clockOutDate : moment().format('YYYY-MM-DDThh:mm'),
             employeeId: -1,
@@ -50,10 +52,10 @@ class ShiftDetailsContainer extends Component {
                 length: 0,
                 description: ''
               }
-            ] */
-            lunch: 30,
+            ] 
+            /*lunch: 30,
             clockInDate : moment().startOf('day').add('minutes',390).format('YYYY-MM-DDThh:mm'),            
-            clockOutDate : moment().format('YYYY-MM-DDThh:mm'),
+            clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
             employeeId: 1,
             activities: [
               {
@@ -67,13 +69,40 @@ class ShiftDetailsContainer extends Component {
                 length: 180,
                 description: ''
               }
-            ]
+            ]*/
           }}
-          onSubmit={values => {
+          validationSchema={shiftValidation}
+          onSubmit={(values,formikFunctions) => {
             const { addShift } = this.props;
-            addShift(values,values.activities);
+            addShift(values,values.activities).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+                console.log('wow');
+              },
+              e => {
+                console.log('asdf', e);
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: e });
+              }
+            );
           }}
           render={formikProps => {
+            const { values,errors } =formikProps;
+            const shiftDuration = moment.duration(moment(values.clockOutMoment).diff(moment(values.clockInDate)));
+            let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
+            values.activities.forEach(activity => {
+              timeLeft -= activity.length;
+            });
+            
+
+            let generalError;
+            if (errors.activities && typeof errors.activities === 'string'){
+              generalError = errors.activities;
+            }else if (errors.lunch && typeof errors.lunch === 'string'){
+              generalError = errors.lunch;
+            }
             return (
               <ShiftEditContainer
                 label="Add Shift"
@@ -81,6 +110,8 @@ class ShiftDetailsContainer extends Component {
                 employees={employees}
                 projects={projects}
                 projectTasks={projectTasks}
+                timeLeft={timeLeft}      
+                generalError={generalError}          
                 {...formikProps}
               />
             );

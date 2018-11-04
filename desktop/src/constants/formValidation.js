@@ -10,7 +10,7 @@ export const account = Yup.object().shape({
     .max(6, 'Pins are 6 characters')
     .required('Pin required')
 });
-export const shift = Yup.object().shape({
+export const clockout = Yup.object().shape({
   activities: Yup.array()
     .of(
       Yup.object().shape({
@@ -28,6 +28,31 @@ export const shift = Yup.object().shape({
     )
     .required('Activity selection required')
 });
+
+export const shift = Yup.object().shape({
+  employeeId: Yup.number()
+    .positive('Employee selection required')
+    .required('Employee selection required'),
+  clockInDate: Yup.date().required('Invalid clock in date'),
+  clockOutDate: Yup.date().required('Invalid clock out date'),
+  activities: Yup.array()
+    .of(
+      Yup.object().shape({
+        length: Yup.number()
+          .min(1, 'Time must be specified')
+          .required('Time selection required'),
+        projectId: Yup.number()
+          .positive('Project selection required')
+          .required('Project selection required'),
+        projectTaskId: Yup.number()
+          .positive('Task selection required')
+          .required('Task selection required'),
+        description: Yup.string()
+      })
+    )
+    .required('Activity selection required')
+});
+
 export const exportValidation = Yup.object().shape({
   exportCategory: Yup.number().min(0, 'Invalid export category'),
   start: Yup.date().required('Invalid start date'),

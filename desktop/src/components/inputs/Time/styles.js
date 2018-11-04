@@ -9,10 +9,10 @@ const styles = () => ({
   },
   horizontal: {
     flexDirection: 'row'
-  },
-  helper: {
-    marginTop: '0px'
   }
+  // helper: {
+  //   marginTop: '0px'
+  // }
 });
 
 export default styles;

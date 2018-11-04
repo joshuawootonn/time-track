@@ -11,3 +11,7 @@ export const minutesToString = minutes => {
 export const currentRoundedTime = () =>{ 
   return moment().minute(Math.round(moment().minute() / 15) * 15).second(0);
 };
+
+export const minutesRoudedTime = minutes => {
+  return Math.round(minutes / 15) * 15;
+};

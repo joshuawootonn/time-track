@@ -62,6 +62,7 @@ const styles = theme => ({
 
   formBody: {
     display: 'flex',
+    padding: '12px 0',
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -78,6 +79,9 @@ const styles = theme => ({
   },
   lunchBox: {
     width: '150px'
+  },
+  fullWidth: {
+    width: '100%'
   }
 });
 

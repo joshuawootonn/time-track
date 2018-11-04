@@ -9,7 +9,7 @@ import { Formik } from 'formik';
 import ClockOut from 'components/forms/ClockOut';
 import Progress from 'components/helpers/Progress';
 
-import { shift as shiftValidation } from 'constants/formValidation';
+import { clockout as clockoutValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
@@ -69,7 +69,7 @@ class ClockOutContainer extends Component {
             history.push('/'),
           );
         }}
-        validationSchema={shiftValidation}
+        validationSchema={clockoutValidation}
         render={formikProps => {
           //console.log(formikProps.values);
           const { errors,values } = formikProps;
@@ -134,3 +134,5 @@ export default withRouter(
     mapDispatchToProps,
   )(ClockOutContainer),
 );
+
+
