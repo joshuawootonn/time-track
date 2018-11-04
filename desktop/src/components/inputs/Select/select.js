@@ -6,7 +6,7 @@ import { getIn } from 'formik';
 
 const Select = ({ field, form, label, margin,
   fullWidth, items, children, formControlProps,
-  labelProps, selectProps, itemProps,helper,className }) => {
+  labelProps, selectProps, itemProps,helper,className,onChange }) => { 
   return (
     <FormControl className={className} {...formControlProps} margin={margin} fullWidth={fullWidth}>
       {label && <InputLabel {...labelProps}>{label}</InputLabel>}
@@ -20,6 +20,10 @@ const Select = ({ field, form, label, margin,
           event.target.name = field.name;
           form.handleBlur(event);
         }}
+        onChange={event => {
+          field.onChange(event);
+          onChange && onChange(event);
+        }}        
         fullWidth={fullWidth}
       >
         {items &&
@@ -57,7 +61,8 @@ Select.propTypes = {
   labelProps: PropTypes.object,
   selectProps: PropTypes.object,
   itemProps: PropTypes.object,
-  helper: PropTypes.oneOf(['normal', 'none'])
+  helper: PropTypes.oneOf(['normal', 'none']),
+  onchange: PropTypes.func
 };
 
 export default Select;

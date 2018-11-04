@@ -9,7 +9,6 @@ import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors
 import * as analyzeConstants from 'constants/analyze';
 import { shiftActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
-import GenericTable from 'components/tables/Generic';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
@@ -70,7 +69,7 @@ class ShiftDetailsContainer extends Component {
             values.activities.forEach(activity => {
               timeLeft -= activity.length;
             });            
-
+            console.log(values,errors);
             let generalError;
             if (errors.activities && typeof errors.activities === 'string'){
               generalError = errors.activities;
@@ -154,7 +153,7 @@ class ShiftDetailsContainer extends Component {
               timeLeft -= activity.length;
             });
             
-
+            
             let generalError;
             if (errors.activities && typeof errors.activities === 'string'){
               generalError = errors.activities;

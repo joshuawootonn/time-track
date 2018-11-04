@@ -7,7 +7,7 @@ const DOMAIN = 'shifts';
 
 export const getShift = id => {
   return axios.get(`${HOST}/${DOMAIN}/${id}?filter[include]=activities`);
-}
+};
 
 export const postShift = shift => {
   return axios.post(`${HOST}/${DOMAIN}?filter[include]=activities`, { ...shift });
@@ -34,5 +34,5 @@ export const deleteShift = shift => {
 };
 
 export const deleteRelatedActivities = shift => {
-  return axios.delete(`${HOST}/${DOMAIN}/${shift.id}/activities`)
-}
+  return axios.delete(`${HOST}/${DOMAIN}/${shift.id}/activities`);
+};

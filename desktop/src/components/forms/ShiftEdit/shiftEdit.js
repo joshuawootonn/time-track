@@ -68,6 +68,7 @@ class ShiftEdit extends Component {
           <FieldArray
             name="activities"
             render={arrayHelpers => {
+              console.log();
               return (
                 <Grid item xs={12} container>
                   {values.activities &&
@@ -86,8 +87,14 @@ class ShiftEdit extends Component {
                               component={Select}
                               items={projects}
                               fullWidth
-                              label="Project"
+                              label="Project"                                                           
                               className={classes.field}
+                              onChange={ () => {                                  
+                                arrayHelpers.form.setFieldValue(
+                                  `activities.${index}.projectTaskId`,
+                                  -1,
+                                );                                  
+                              }}
                             />
                             <Field
                               name={`activities.${index}.projectTaskId`}

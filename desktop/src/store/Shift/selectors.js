@@ -60,7 +60,7 @@ export const getSelectedShift = createSelector(
     if(analyze.shift === -1)
       return {};
     else{
-      console.log(shifts[analyze.shift])
+      console.log(shifts[analyze.shift]);
       return {
         ...shifts[analyze.shift],
         employee: shifts[analyze.shift] && employees[shifts[analyze.shift].employeeId],
