@@ -10,14 +10,14 @@ import Password from 'components/inputs/Password';
 import styles from './styles';
 
 const AuthSigninForm = props => {
-  const { classes, isSubmitting, globalError } = props;
+  const { classes, isSubmitting, errors } = props;
 
   return (
     <div className={classes.hero}>
       <Form className={classes.heroContent}>
         <Typography variant="h6">Select Network</Typography>
-        <Field component={TextField} name="username" label="Network" />
-        <Field component={Password} name="password" label="Password" />
+        <Field component={TextField} name="username" label="Network" helper="none"/>
+        <Field component={Password} name="password" label="Password" helper="none" />
         <Button
           className={classes.button}
           type="submit"
@@ -29,8 +29,8 @@ const AuthSigninForm = props => {
         </Button>
       </Form>
       <div className={classes.error}>
-        <Typography color="error" variant="button">
-          {globalError}
+        <Typography color="error">
+          {errors.submit}
         </Typography>
       </div>
     </div>
@@ -39,7 +39,7 @@ const AuthSigninForm = props => {
 
 AuthSigninForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  globalError: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired,
   onSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool
 };

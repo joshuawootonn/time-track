@@ -9,7 +9,8 @@ const styles = () => ({
   textField: { width: '100%' },
   heroContent: { width: '300px' },
   error: { marginTop: '16px' },
-  button: { width: '100%' }
+  button: { width: '100%' },
+  centerText: { textAlign: 'center' }
 });
 
 export default styles;

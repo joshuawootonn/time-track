@@ -15,11 +15,6 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 class SignInForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: '' };
-  }
-
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
     if (cred.username && cred.password) {
@@ -28,19 +23,20 @@ class SignInForm extends Component {
       });
     }
   };
-
   render() {
     return (
       <div>
         <Formik
           initialValues={{ username: 'josh', password: '5656' }}
           validationSchema={authValidation}
-          onSubmit={(values, functions) => {
+          onSubmit={(values, formikFunctions) => {
             const { history } = this.props;
             const { username, password } = values;
             this.props
               .login(username, password)
               .then(() => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
                 ipcRenderer.sendSync(IPCConstants.SET_CRED, {
                   username,
                   password
@@ -48,19 +44,13 @@ class SignInForm extends Component {
                 history.push(routes.ROOT);
               })
               .catch(error => {
-                this.setState({ error: error.message });
-                functions.setSubmitting(false);
+                formikFunctions.setErrors({ submit: error.message });
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
               });
           }}
-          render={({ errors, touched, isSubmitting }) => {
-            return (
-              <AuthSigin
-                touched={touched}
-                isSubmitting={isSubmitting}
-                errors={errors}
-                globalError={this.state.error}
-              />
-            );
+          render={formProps => {
+            return ( <AuthSigin {...formProps}/> );
           }}
         />
       </div>

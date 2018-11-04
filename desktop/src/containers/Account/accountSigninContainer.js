@@ -18,8 +18,7 @@ class SignInContainer extends Component {
     // login('565656').then(asdf => {
     //   const { authorityId } = asdf.data;  
     //   history.push(`/${authorityEntities[authorityId].type}`);         
-    // });
-    
+    // });    
   }
   render() {
     const { login, history, getStaticData, authorityEntities } = this.props;
@@ -27,12 +26,21 @@ class SignInContainer extends Component {
       <Formik
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
-        onSubmit={values => {
-          login(values.pin).then(asdf => {
-            const { authorityId } = asdf.data;
-            history.push(`/${authorityEntities[authorityId].type}`);
-          });
-          getStaticData();
+        onSubmit={(values,formikFunctions) => {
+          login(values.pin).then(
+            response => {
+              formikFunctions.resetForm();
+              formikFunctions.setStatus({ success: true });
+              const { authorityId } = response.data;
+              history.push(`/${authorityEntities[authorityId].type}`);
+              getStaticData();
+            },
+            () => {
+              formikFunctions.setStatus({ success: false });
+              formikFunctions.setSubmitting(false);              
+              formikFunctions.setErrors({ submit: 'Invalid pin!' });
+            }
+          );          
         }}
         render={formProps => <AccountSigin {...formProps} />}
       />

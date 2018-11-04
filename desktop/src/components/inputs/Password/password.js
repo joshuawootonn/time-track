@@ -4,22 +4,23 @@ import PropTypes from 'prop-types';
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
 
-const TextField = ({ field, form, id, label, helper }) => (
+const TextField = ({ field, form, id, label, helper,margin }) => (
   <MUTextField
-    {...field}
+    {...field}    
     id={id}
     label={label}
     type="password"
     InputLabelProps={{ shrink: true }}
     fullWidth
-    margin="normal"
-    FormHelperTextProps={helper !=='none' ? { style:{ display:'none' },error: true } : { error: true  }}
+    margin={margin}
+    FormHelperTextProps={helper ==='none' ? { style:{ display:'none' },error: true } : { error: true  }}
     helperText={getIn(form.errors, field.name)|| ' '} 
   />
 );
 
 TextField.defaultProps = {  
-  helper: 'normal'
+  helper: 'normal',
+  margin: 'normal'
 };
 
 TextField.propTypes = {
