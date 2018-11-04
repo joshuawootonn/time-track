@@ -13,11 +13,12 @@ export const getShift = id => {
     dispatch({ type: shiftActionTypes.GET_SHIFT_REQUEST });
     try {
       const response = await endpoint.getShift(id);
-
+      console.log('get',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
+      console.log('get',payload);
       return dispatch({ type: shiftActionTypes.GET_SHIFT_SUCCESS,payload });
     } catch (e) {
       console.log(e);
@@ -186,6 +187,7 @@ export const editShift = (shift,activities) => {
         console.log(activity);
         await dispatch(activityActions.postActivity(activity));
       }
+     
       await dispatch(getShift(response.data.id));
 
 

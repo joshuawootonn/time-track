@@ -1,8 +1,18 @@
 import _ from 'lodash';
+
+
+function payloadCustomizer(objValue, srcValue) {
+  // this makes sub arrays in objects take the new values and ignore the existing
+  if (_.isArray(srcValue)) {
+    return srcValue;
+  }
+}
+
+
 export default (state = {}, action) => {
   const { payload, deleted } = action;
   if (payload && payload.entities) {
-    return _.merge({}, state, payload.entities);
+    return _.mergeWith({}, state, payload.entities,payloadCustomizer);
   } else if (deleted && deleted.entities) {
     let temp = {};
     // Loops through entity types

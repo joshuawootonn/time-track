@@ -12,6 +12,10 @@ const Select = ({ field, form, label, margin,
       {label && <InputLabel {...labelProps}>{label}</InputLabel>}
       <SelectInput
         {...field}
+        onChange={event => {
+          field.onChange(event);
+          onChange && onChange(event);
+        }} 
         {...selectProps}
         // Fix for handleblur I was getting on deselect
         // https://github.com/jaredpalmer/formik/issues/640
@@ -19,11 +23,7 @@ const Select = ({ field, form, label, margin,
           console.log(event.target, field);
           event.target.name = field.name;
           form.handleBlur(event);
-        }}
-        onChange={event => {
-          field.onChange(event);
-          onChange && onChange(event);
-        }}        
+        }}               
         fullWidth={fullWidth}
       >
         {items &&
