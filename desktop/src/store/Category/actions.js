@@ -54,7 +54,7 @@ export const postCategory = category => {
   return async dispatch => {
     dispatch({ type: categoryActionTypes.CREATE_CATEGORY_REQUEST });
     try {    
-      const response = await endpoint.postCategory(category.id, category);
+      const response = await endpoint.postCategory(category);
       const payload = normalize(
         { categories: [response.data] },
         schemas.categoryArray,
@@ -74,12 +74,17 @@ export const deleteCategory = category => {
   return async dispatch => {
     dispatch({ type: categoryActionTypes.DELETE_CATEGORY_REQUEST });
     try {    
-      const response = await endpoint.deleteCategory(category.id, category);
-      const payload = normalize(
-        { categories: [response.data] },
-        schemas.categoryArray,
-      );
-      return dispatch({ type: categoryActionTypes.DELETE_CATEGORY_SUCCESS, payload });
+      await endpoint.deleteCategory(category);
+      const deleted = {
+        entities: {
+          categories: [category.id]          
+        },
+        result: {
+          categories: [category.id]
+        }
+      };
+
+      return dispatch({ type: categoryActionTypes.DELETE_CATEGORY_SUCCESS, deleted });
     } catch (e) {
       console.log(e);
       return dispatch({ type: categoryActionTypes.DELETE_CATEGORY_FAILURE, payload: e });

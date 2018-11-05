@@ -11,6 +11,12 @@ export const authorityValidation = Yup.object().shape({
 export const crewValidation = Yup.object().shape({
   name: Yup.string().required('Type is required')
 });
+export const categoryValidation = Yup.object().shape({
+  type: Yup.string().required('Type is required')
+});
+export const subcategoryValidation = Yup.object().shape({
+  type: Yup.string().required('Type is required')
+});
 export const account = Yup.object().shape({
   pin: Yup.string()
     .min(6, 'Pins are 6 characters')

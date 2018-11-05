@@ -4,27 +4,27 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
-import Employee from 'components/forms/Employee';
+import Category from 'components/forms/Category';
 import { authoritySelectors, crewSelectors,employeeSelectors, categorySelectors } from 'store/selectors';
 import { employeeActions,authorityActions, crewActions, categoryActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
-import { employeeValidation } from 'constants/formValidation';
+import { employeeValidation, categoryValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   
-  deleteEmployee = () => {
-    const { selected, deleteEmployee } = this.props;  
-    deleteEmployee(selected);
+  deleteCategory = () => {
+    const { selected, deleteCategory } = this.props;  
+    deleteCategory(selected);
   };
 
   render() {
-    const { authorities, crews, selected,status,editAuthoritiesModal,editCrewsModal } = this.props;
+    const { selected,status } = this.props;
 
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select a Employee.. </Typography>
+          <Typography variant="h6">Select a Category.. </Typography>
         </Hero>
       );
     }
@@ -34,29 +34,20 @@ class EmployeeEditContainer extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            firstName: '',
-            lastName: '',
-            authorityId: 1,
-            crewId: 1,
-            pin: '',
-            isEmployed: true,
-            isWorking: false
+            type: ''
           }}
-          validationSchema={employeeValidation}
+          validationSchema={categoryValidation}
           onSubmit={(values, formikFunctions) => {
-            const { createEmployee } = this.props;
-            createEmployee({
-              ...values,
-              isEmployed: values.isEmployed ? 1 : 0,
-              isWorking: values.isWorking ? 1 : 0
+            const { createCategory } = this.props;
+            console.log(values);
+            createCategory({
+              ...values
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
-                console.log('wow');
+                formikFunctions.setStatus({ success: true });               
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -65,13 +56,9 @@ class EmployeeEditContainer extends Component {
           }}
           render={formikProps => {
             return (
-              <Employee
-                authorities={authorities}
-                crews={crews}
+              <Category
                 label="Add"
                 type="add"
-                editAuthorities={editAuthoritiesModal}
-                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );
@@ -85,25 +72,19 @@ class EmployeeEditContainer extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            ...selected,
-            isEmployed: selected.isEmployed ? true : false,
-            isWorking: selected.isWorking ? true : false
+            ...selected
           }}          
-          validationSchema={employeeValidation}
+          validationSchema={categoryValidation}
           onSubmit={(values,formikFunctions) => {
-            const { updateEmployee } = this.props;
-            updateEmployee({
-              ...values,
-              isEmployed: values.isEmployed ? 1 : 0,
-              isWorking: values.isWorking ? 1 : 0
+            const { updateCategory } = this.props;
+            updateCategory({
+              ...values
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
-                console.log('wow');
+                formikFunctions.setStatus({ success: true });                
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -112,14 +93,10 @@ class EmployeeEditContainer extends Component {
           }}
           render={formikProps => {
             return (
-              <Employee
-                deleteEmployee={this.deleteEmployee}
-                authorities={authorities}
-                crews={crews}
+              <Category
+                deleteCategory={this.deleteCategory}
                 label="Edit"
                 type="edit"
-                editAuthorities={editAuthoritiesModal}
-                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );

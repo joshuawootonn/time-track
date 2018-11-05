@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import CategoryIndexContainer from 'containers/Analyze/categoryIndexContainer';
+import CategoryDetailContainer from 'containers/Analyze/categoryDetailContainer';
 import SubCategoryIndexContainer from 'containers/Analyze/subcategoryIndexContainer';
 
 const styles = () => ({
@@ -24,6 +25,9 @@ class CategoryModalContainer extends Component {
       <div className={classes.root}>     
         <div className={classes.min}>
           <CategoryIndexContainer />
+        </div>
+        <div className={classes.min}>
+          <CategoryDetailContainer />
         </div>
         <div className={classes.min}>
           <SubCategoryIndexContainer /> 

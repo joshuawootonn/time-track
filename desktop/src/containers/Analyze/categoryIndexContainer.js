@@ -6,13 +6,14 @@ import { categoryActions,analyzeActions } from 'store/actions';
 import { categorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
+import * as analyzeStatus from 'constants/analyze';
 
 class CategoryIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getCategories();
   }
   render () {
-    const { categories,selectCategory,selected } = this.props;    
+    const { categories,selectCategory,selected,setCategoryStatus } = this.props;    
     console.log(categories);
     return (
       <SortSelectTable
@@ -21,7 +22,8 @@ class CategoryIndexContainer extends Component {
         tableData={categories}
         headerData={rows}
         selected={selected}
-        select={selectCategory}
+        select={selectCategory}        
+        add={() => {setCategoryStatus(analyzeStatus.ADDING);}}
       />
     );
   }
@@ -52,7 +54,8 @@ CategoryIndexContainer.propTypes = {
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   selectCategory: PropTypes.func.isRequired,
-  selected: PropTypes.object.isRequired
+  selected: PropTypes.object.isRequired,
+  setCategoryStatus:PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndexContainer);

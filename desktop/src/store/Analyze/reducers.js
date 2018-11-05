@@ -1,4 +1,4 @@
-import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes } from 'constants/ActionTypes';
+import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes, categoryActionTypes } from 'constants/ActionTypes';
 import * as analyzeStatus from 'constants/analyze';
 
 const selectedInitialState = {
@@ -186,28 +186,28 @@ export default (state = selectedInitialState, action) => {
       return {
         ...state,
         category: -1,
-        categoryShift: analyzeStatus.INIT
+        categoryStatus: analyzeStatus.INIT
       };
     } else if (state.shift) {
       return {
         ...state,
         category: action.payload,
-        categoryShift: analyzeStatus.EDITING
+        categoryStatus: analyzeStatus.EDITING
       };
     }
     return state;
   case analyzeActionTypes.SET_CATEGORY_STATUS:
     return {
       ...state,
-      categoryShift: action.payload
+      categoryStatus: action.payload
     };
 
-    // case shiftActionTypes.DELETE:
-    //   return {
-    //     ...state,
-    //     categoryShift: analyzeStatus.INIT,
-    //     category: -1
-    //   };
+  case categoryActionTypes.DELETE_CATEGORY_SUCCESS:
+    return {
+      ...state,
+      categoryStatus: analyzeStatus.INIT,
+      category: -1
+    };
     
     
 
