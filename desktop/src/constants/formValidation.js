@@ -15,7 +15,10 @@ export const categoryValidation = Yup.object().shape({
   type: Yup.string().required('Type is required')
 });
 export const subcategoryValidation = Yup.object().shape({
-  type: Yup.string().required('Type is required')
+  type: Yup.string().required('Type is required'),
+  categoryId: Yup.number()
+    .positive('Category selection required')
+    .required('Category selection required')
 });
 export const account = Yup.object().shape({
   pin: Yup.string()
