@@ -26,3 +26,17 @@ export const selectShift = shift => {
 export const setShiftStatus = status => {
   return { type: analyzeActionTypes.SET_SHIFT_STATUS, payload: status };
 };
+
+export const selectAuthority = authority => {
+  return { type: analyzeActionTypes.SELECT_AUTHORITY, payload: authority };
+};
+export const setAuthorityStatus = status => {
+  return { type: analyzeActionTypes.SET_AUTHORITY_STATUS, payload: status };
+};
+
+export const selectCrew = crew => {
+  return { type: analyzeActionTypes.SELECT_CREW, payload: crew };
+};
+export const setCrewStatus = status => {
+  return { type: analyzeActionTypes.SET_CREW_STATUS, payload: status };
+};

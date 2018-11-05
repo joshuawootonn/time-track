@@ -28,13 +28,13 @@ let EnhancedTableToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>       
+      {add &&<div className={classes.actions}>       
         <Tooltip title="Add">
           <IconButton aria-label="Add" onClick={add}>
             <Add />
           </IconButton>
         </Tooltip>
-      </div>
+      </div>}
     </Toolbar>
   );
 };

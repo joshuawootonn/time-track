@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 export const getAuthoritiesFromEntities = state => state.entities.authorities;
 export const getAuthoritiesFromResults = state => state.results.authorities;
 
+export const getAnalyzeState = state => state.analyze;
+
 export const getAllAuthorities = createSelector(
   getAuthoritiesFromEntities,
   getAuthoritiesFromResults,
@@ -12,4 +14,16 @@ export const getAllAuthorities = createSelector(
       return authorities[authorityId];
     });
   },
+);
+
+
+export const getSelectedAuthority = createSelector(
+  getAuthoritiesFromEntities,
+  getAnalyzeState,
+  (authorities, analyze) => {
+    if(analyze.authority === -1) 
+      return {};
+    else 
+      return authorities[analyze.authority];
+  }
 );

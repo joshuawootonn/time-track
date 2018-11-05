@@ -4,9 +4,9 @@ const styles = theme => ({
   root: {
     width: '100%'    
   },
-  table: {
-    minWidth: 400
-  },
+  // table: {
+  //   minWidth: 400
+  // },
   tableWrapper: {
     overflowX: 'auto'
   },

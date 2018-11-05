@@ -1,13 +1,63 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { authorityActions,analyzeActions } from 'store/actions';
+import { authoritySelectors } from 'store/selectors';
+import SortSelectTable from 'components/tables/SortSelect';
+import * as TableDataTypes from 'constants/tableDataTypes';
+import * as analyzeStatus from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
+  componentDidMount = () => {
+    this.props.getAuthorities();
+  }
   render () {
+    const { authorities,selectAuthority,selected } = this.props;
+    console.log(authorities);
     return (
-      <div>
-        
-      </div>
+      <SortSelectTable
+        selectLabel={selected => {return `${selected.type} selected`}}
+        label="Authorities"
+        tableData={authorities}
+        headerData={rows}
+        selected={selected}
+        select={selectAuthority}
+      />
     );
   }
 }
 
-export default AuthorityIndexContainer;
+const mapStateToProps = state => {
+  return {
+    authorities: authoritySelectors.getAllAuthorities(state),
+    selected: authoritySelectors.getSelectedAuthority(state)
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAuthorities: () => {
+      return dispatch(authorityActions.getAuthorities());
+    },
+    selectAuthority: authority => {
+      return dispatch(analyzeActions.selectAuthority(authority));
+    },
+    setAuthorityStatus: status => {
+      return dispatch(analyzeActions.setAuthorityStatus(status));
+    }
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndexContainer);
+
+
+const rows = [
+  {
+    id: 'type',
+    numeric: false,
+    padding: 'dense',
+    label: 'Type',
+    type: TableDataTypes.STRING
+  },
+];

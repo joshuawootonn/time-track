@@ -9,3 +9,9 @@ export const SET_PROJECT_STATUS = 'set_project_status';
 
 export const SELECT_SHIFT = 'select_shift';
 export const SET_SHIFT_STATUS = 'set_shift_status';
+
+export const SELECT_CREW = 'select_crew';
+export const SET_CREW_STATUS = 'set_crew_status';
+
+export const SELECT_AUTHORITY = 'select_authority';
+export const SET_AUTHORITY_STATUS = 'set_authority_status';
