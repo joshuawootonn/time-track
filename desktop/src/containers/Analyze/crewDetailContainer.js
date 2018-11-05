@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
-import { authorityActions } from 'store/actions';
-import { authoritySelectors } from 'store/selectors';
-import { authorityValidation } from 'constants/formValidation';
+import { crewActions } from 'store/actions';
+import { crewSelectors } from 'store/selectors';
+import { crewValidation } from 'constants/formValidation';
 import * as analyzeConstants from 'constants/analyze';
-import Authority from 'components/forms/Authority';
+import Crew from 'components/forms/Crew';
 
 import Hero from 'components/layouts/Hero';
 
@@ -17,7 +17,7 @@ class CrewDetailContainer extends Component {
     if(status === analyzeConstants.INIT) {
       return (
         <Hero fullWidth fullHeight>
-          <Typography  variant="h6">Select a Authority.. </Typography>
+          <Typography  variant="h6">Select a Crew.. </Typography>
         </Hero>
       );
     }
@@ -28,10 +28,10 @@ class CrewDetailContainer extends Component {
           initialValues={{
             ...selected
           }}   
-          validationSchema={authorityValidation}
+          validationSchema={crewValidation}
           onSubmit={(values,formikFunctions) => {
-            const { updateAuthority } = this.props;
-            updateAuthority({
+            const { updateCrew } = this.props;
+            updateCrew({
               ...values
             }).then(
               () => {
@@ -48,7 +48,7 @@ class CrewDetailContainer extends Component {
           }}
           render={formikFuncitons => {
             return (
-              <Authority
+              <Crew
                 label="Edit"
                 {...formikFuncitons}
               />
@@ -61,15 +61,15 @@ class CrewDetailContainer extends Component {
 }
 const mapStateToProps = state => {
   return {
-    selected: authoritySelectors.getSelectedAuthority(state),
-    status: state.analyze.authorityStatus
+    selected: crewSelectors.getSelectedCrew(state),
+    status: state.analyze.crewStatus
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateAuthority: authority => {
-      return dispatch(authorityActions.putAuthority(authority));
+    updateCrew: crew => {
+      return dispatch(crewActions.putCrew(crew));
     }
   };
 };

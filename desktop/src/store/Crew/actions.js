@@ -28,3 +28,20 @@ export const getCrews = () => {
 export const editCrewsModal = () => {
   return  modalActions.openModal(crewActionTypes.EDIT_CREWS_MODAL, null);
 };
+
+export const putCrew = crew => {
+  return async dispatch => {
+    dispatch({ type: crewActionTypes.UPDATE_CREW_REQUEST });
+    try {    
+      const response = await endpoint.putCrew(crew.id, crew);
+      const payload = normalize(
+        { crews: [response.data] },
+        schemas.crewArray,
+      );
+      return dispatch({ type: crewActionTypes.UPDATE_CREW_SUCCESS, payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: crewActionTypes.UPDATE_CREW_FAILURE, payload: e });
+    }
+  };
+};
