@@ -6,8 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AuthorityIndexContainer from 'containers/Analyze/authorityIndexContainer';
 import AuthorityDetailContainer from 'containers/Analyze/authorityDetailContainer';
 
-
-
 const styles = () => ({
   root: {
     display: 'flex',
@@ -15,18 +13,15 @@ const styles = () => ({
     justifyContent: 'center'  
   },
   min: {
-    minWidth: '220px'
+    minWidth: '230px'
   }
 });
 
-
-
-class AuthorityEditContainer extends Component {
-  
+class AuthorityEditContainer extends Component {  
   render () {
     const { classes } = this.props;
     return ( 
-      <div className={classes.root}>
+      <div className={classes.root}>     
         <div className={classes.min}>
           <AuthorityIndexContainer />
         </div>
@@ -37,8 +32,6 @@ class AuthorityEditContainer extends Component {
     );   
   }
 }
-
-
 
 AuthorityEditContainer.propTypes = {
   classes: PropTypes.object.isRequired

@@ -8,7 +8,7 @@ import AuthorityModalContainer from 'containers/Analyze/authorityModalContainer'
 import CrewModalContainer from 'containers/Analyze/crewModalContainer';
 
 import { modalActions } from 'store/actions';
-import {authorityActionTypes, crewActionTypes} from 'constants/ActionTypes';
+import { authorityActionTypes, crewActionTypes } from 'constants/ActionTypes';
 
 const MODAL_COMPONENTS = {
   [authorityActionTypes.EDIT_AUTHORITIES_MODAL] : AuthorityModalContainer,

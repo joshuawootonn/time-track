@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class CrewEditContainer extends Component {
   render () {
@@ -6,8 +6,8 @@ class CrewEditContainer extends Component {
       <div>
         crew edit
       </div>
-    )
+    );
   }
 }
 
-export default CrewEditContainer
+export default CrewEditContainer;

@@ -6,7 +6,6 @@ import { authorityActions,analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import * as analyzeStatus from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
@@ -17,7 +16,7 @@ class AuthorityIndexContainer extends Component {
     console.log(authorities);
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.type} selected`}}
+        selectLabel={selected => {return `${selected.type} selected`;}}
         label="Authorities"
         tableData={authorities}
         headerData={rows}
@@ -49,6 +48,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+AuthorityIndexContainer.propTypes = {
+  getAuthorities: PropTypes.func.isRequired,
+  authorities: PropTypes.array.isRequired,
+  selectAuthority: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired
+};
+
 export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndexContainer);
 
 
@@ -59,5 +65,5 @@ const rows = [
     padding: 'dense',
     label: 'Type',
     type: TableDataTypes.STRING
-  },
+  }
 ];

@@ -18,8 +18,8 @@ class EnhancedTable extends React.Component {
   
   desc = (a, b, orderBy,type, keys) => {
     if(type === TableDataTypes.OBJECT){
-      const aVal = keys.reduce((object, currentKey) => object[currentKey],a[orderBy])
-      const bVal = keys.reduce((object, currentKey) => object[currentKey],b[orderBy])
+      const aVal = keys.reduce((object, currentKey) => object[currentKey],a[orderBy]);
+      const bVal = keys.reduce((object, currentKey) => object[currentKey],b[orderBy]);
       if ( bVal < aVal) {
         return -1;
       }
