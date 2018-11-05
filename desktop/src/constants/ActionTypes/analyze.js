@@ -15,3 +15,9 @@ export const SET_CREW_STATUS = 'set_crew_status';
 
 export const SELECT_AUTHORITY = 'select_authority';
 export const SET_AUTHORITY_STATUS = 'set_authority_status';
+
+export const SELECT_CATEGORY = 'select_category';
+export const SET_CATEGORY_STATUS = 'set_category_status';
+
+export const SELECT_SUBCATEGORY = 'select_subcategory';
+export const SET_SUBCATEGORY_STATUS = 'set_subcategory_status';

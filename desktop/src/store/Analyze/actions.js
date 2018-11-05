@@ -40,3 +40,17 @@ export const selectCrew = crew => {
 export const setCrewStatus = status => {
   return { type: analyzeActionTypes.SET_CREW_STATUS, payload: status };
 };
+
+export const selectCategory = category => {
+  return { type: analyzeActionTypes.SELECT_CATEGORY, payload: category };
+};
+export const setCategoryStatus = status => {
+  return { type: analyzeActionTypes.SET_CATEGORY_STATUS, payload: status };
+};
+
+export const selectSubcategory = subcategory => {
+  return { type: analyzeActionTypes.SELECT_SUBCATEGORY, payload: subcategory };
+};
+export const setSubcategoryStatus = status => {
+  return { type: analyzeActionTypes.SET_SUBCATEGORY_STATUS, payload: status };
+};

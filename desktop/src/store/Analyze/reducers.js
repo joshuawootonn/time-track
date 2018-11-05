@@ -8,12 +8,16 @@ const selectedInitialState = {
   shift: -1,
   authority: -1,
   crew: -1,
+  category: -1,
+  subcategory: -1,
   employeeStatus: analyzeStatus.INIT,
   projectStatus: analyzeStatus.INIT,
   taskStatus: analyzeStatus.INIT,
   shiftStatus: analyzeStatus.INIT,
   authorityStatus: analyzeStatus.INIT,
-  crewStatus: analyzeStatus.INIT
+  crewStatus: analyzeStatus.INIT,
+  categoryStatus: analyzeStatus.INIT,
+  subcategoryStatus: analyzeStatus.INIT
 };
 export default (state = selectedInitialState, action) => {
   switch (action.type) {
@@ -173,6 +177,67 @@ export default (state = selectedInitialState, action) => {
       ...state,
       crewStatus: action.payload
     };
+
+
+
+
+  case analyzeActionTypes.SELECT_CATEGORY:
+    if (state.category !== -1 && state.category === action.payload) {
+      return {
+        ...state,
+        category: -1,
+        categoryShift: analyzeStatus.INIT
+      };
+    } else if (state.shift) {
+      return {
+        ...state,
+        category: action.payload,
+        categoryShift: analyzeStatus.EDITING
+      };
+    }
+    return state;
+  case analyzeActionTypes.SET_CATEGORY_STATUS:
+    return {
+      ...state,
+      categoryShift: action.payload
+    };
+
+    // case shiftActionTypes.DELETE:
+    //   return {
+    //     ...state,
+    //     categoryShift: analyzeStatus.INIT,
+    //     category: -1
+    //   };
+    
+    
+
+  case analyzeActionTypes.SELECT_SUBCATEGORY:
+    if (state.shift !== -1 && state.shift === action.payload) {
+      return {
+        ...state,
+        subcategory: -1,
+        subcategoryStatus: analyzeStatus.INIT
+      };
+    } else if (state.shift) {
+      return {
+        ...state,
+        subcategory: action.payload,
+        subcategoryStatus: analyzeStatus.EDITING
+      };
+    }
+    return state;
+  case analyzeActionTypes.SET_SUBCATEGORY_STATUS:
+    return {
+      ...state,
+      subcategoryStatus: action.payload
+    };
+
+    // case shiftActionTypes.DELETE_SHIFT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     shiftStatus: analyzeStatus.INIT,
+    //     shift: -1
+    //   };
 
 
   default:

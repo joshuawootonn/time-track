@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 export const getSubcategoriesFromEntities = state => state.entities.subcategories;
 export const getSubcategoriesFromResults = state => state.results.subcategories;
 
+export const getAnalyzeState = state => state.analyze;
+
 export const getAllSubcategories = createSelector(
   getSubcategoriesFromEntities,
   getSubcategoriesFromResults,
@@ -12,4 +14,15 @@ export const getAllSubcategories = createSelector(
       return subcategories[subcategoryId];
     });
   },
+);
+
+export const getSelectedSubcategory = createSelector(
+  getSubcategoriesFromEntities,
+  getAnalyzeState,
+  (subcategories, analyze) => {
+    if(analyze.subcategory === -1) 
+      return {};
+    else 
+      return subcategories[analyze.subcategory];
+  }
 );
