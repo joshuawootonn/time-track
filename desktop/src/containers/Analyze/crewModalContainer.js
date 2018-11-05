@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class CrewEditContainer extends Component {
+import { withStyles } from '@material-ui/core/styles';
+
+import CrewIndexContainer from 'containers/Analyze/crewIndexContainer';
+import CrewDetailContainer from 'containers/Analyze/crewDetailContainer';
+
+const styles = () => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'  
+  },
+  min: {
+    minWidth: '230px'
+  }
+});
+
+class CrewEditContainer extends Component {  
   render () {
-    return (
-      <div>
-        crew edit
+    const { classes } = this.props;
+    return ( 
+      <div className={classes.root}>     
+        <div className={classes.min}>
+          <CrewIndexContainer />
+        </div>
+        <div className={classes.min}>
+           <CrewDetailContainer /> 
+        </div>
       </div>
-    );
+    );   
   }
 }
 
-export default CrewEditContainer;
+CrewEditContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(CrewEditContainer);
