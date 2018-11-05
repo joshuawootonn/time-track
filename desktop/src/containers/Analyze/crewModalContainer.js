@@ -26,7 +26,7 @@ class CrewEditContainer extends Component {
           <CrewIndexContainer />
         </div>
         <div className={classes.min}>
-           <CrewDetailContainer /> 
+          <CrewDetailContainer /> 
         </div>
       </div>
     );   
