@@ -22,7 +22,7 @@ Modal.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
-  children: PropTypes.array,
+  children: PropTypes.object.isRequired
 };
 
 export default withStyles(style)(Modal);

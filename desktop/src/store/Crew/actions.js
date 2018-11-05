@@ -1,4 +1,5 @@
 import { crewActionTypes } from 'constants/ActionTypes';
+import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -22,4 +23,8 @@ export const getCrews = () => {
       });
     }
   };
+};
+
+export const editCrewsModal = () => {
+  return  modalActions.openModal(crewActionTypes.EDIT_CREWS_MODAL, null);
 };

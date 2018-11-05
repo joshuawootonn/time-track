@@ -27,7 +27,7 @@ const styles = {
 class AnalyzeScene extends Component {
 
   state = {
-    tabValue: 3
+    tabValue: 0
   }
 
   handleTabValueChange = (e, tabValue) => {

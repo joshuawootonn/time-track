@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 
 import Modal from 'components/floaters/Modal';
 
+import AuthorityEditContainer from 'containers/Analyze/authorityEditContainer';
+import CrewEditContainer from 'containers/Analyze/crewEditContainer';
+
 import { modalActions } from 'store/actions';
-import { } from 'constants/ActionTypes';
+import {authorityActionTypes, crewActionTypes} from 'constants/ActionTypes';
 
 const MODAL_COMPONENTS = {
-  //[projectActionTypes.ADD_PROJECT_MODAL]: ProjectAddModal,
- 
+  [authorityActionTypes.EDIT_AUTHORITIES_MODAL] : AuthorityEditContainer,
+  [crewActionTypes.EDIT_CREWS_MODAL] : CrewEditContainer
   /* other modals */
 };
 

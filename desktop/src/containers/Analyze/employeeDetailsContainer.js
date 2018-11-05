@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 
 import Employee from 'components/forms/Employee';
 import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
-import { employeeActions,analyzeActions } from 'store/actions';
+import { employeeActions,authorityActions, crewActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { employeeValidation } from 'constants/formValidation';
@@ -19,7 +19,7 @@ class EmployeeEditContainer extends Component {
   };
 
   render() {
-    const { authorities, crews, selected,status } = this.props;
+    const { authorities, crews, selected,status,editAuthoritiesModal,editCrewsModal } = this.props;
 
     if(status === analyzeConstants.INIT){
       return (
@@ -70,6 +70,8 @@ class EmployeeEditContainer extends Component {
                 crews={crews}
                 label="Add"
                 type="add"
+                editAuthorities={editAuthoritiesModal}
+                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );
@@ -116,6 +118,8 @@ class EmployeeEditContainer extends Component {
                 crews={crews}
                 label="Edit"
                 type="edit"
+                editAuthorities={editAuthoritiesModal}
+                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );
@@ -146,11 +150,11 @@ const mapDispatchToProps = dispatch => {
     deleteEmployee: employee => {
       return dispatch(employeeActions.deleteEmployee(employee));
     },
-    selectEmployee: employee => {
-      return dispatch(analyzeActions.selectEmployee(employee));
+    editAuthoritiesModal: () => {
+      return dispatch(authorityActions.editAuthoritiesModal());
     },
-    setEmployeeStatus: status => {
-      return dispatch(analyzeActions.setEmployeeStatus(status));
+    editCrewsModal: () => {
+      return dispatch(crewActions.editCrewsModal());
     }
   };
 };

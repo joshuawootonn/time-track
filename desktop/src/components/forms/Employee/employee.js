@@ -5,7 +5,7 @@ import {  Grid,  Typography,  Button,  Tooltip,  IconButton } from '@material-ui
 import cx from 'classnames';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
-import { Delete } from '@material-ui/icons';
+import { Delete,Edit } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
@@ -14,7 +14,7 @@ import styles from './styles';
 
 class Employee extends Component {
   render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee, resetForm, initialValues,errors } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee, resetForm, initialValues,errors,editAuthorities,editCrews } = this.props;
     //console.log(this.props);
     return (
       <Form>
@@ -58,6 +58,11 @@ class Employee extends Component {
               label="Authority"
               className={classes.field}
             />
+            <Tooltip title="Edit Authorities">
+              <IconButton onClick={editAuthorities} aria-label="Edit Authorities">
+                <Edit />
+              </IconButton>
+            </Tooltip>
             <Field
               name="crewId"
               component={Select}
@@ -66,6 +71,11 @@ class Employee extends Component {
               label="Crew"
               className={classes.field}
             />
+            <Tooltip title="Edit Crews">
+              <IconButton onClick={editCrews} aria-label="Edit Crews">
+                <Edit />
+              </IconButton>
+            </Tooltip>
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <div className={cx(classes.field,classes.switchBox)}>
@@ -140,7 +150,9 @@ Employee.propTypes = {
   deleteEmployee: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  editAuthorities: PropTypes.func.isRequired,
+  editCrews: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Employee);

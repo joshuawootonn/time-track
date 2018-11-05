@@ -1,4 +1,5 @@
 import { authorityActionTypes } from 'constants/ActionTypes';
+import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -24,4 +25,8 @@ export const getAuthorities = () => {
       });
     }
   };
+};
+
+export const editAuthoritiesModal = () => {
+  return  modalActions.openModal(authorityActionTypes.EDIT_AUTHORITIES_MODAL, null);
 };
