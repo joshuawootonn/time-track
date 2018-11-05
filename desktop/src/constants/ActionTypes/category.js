@@ -8,7 +8,6 @@ export const UPDATE_CATEGORY_REQUEST = 'update_category_request';
 export const UPDATE_CATEGORY_SUCCESS = 'update_category_success';
 export const UPDATE_CATEGORY_FAILURE = 'update_category_failure';
 
-
 export const CREATE_CATEGORY_REQUEST = 'create_category_request';
 export const CREATE_CATEGORY_SUCCESS = 'create_category_success';
 export const CREATE_CATEGORY_FAILURE = 'create_category_failure';
