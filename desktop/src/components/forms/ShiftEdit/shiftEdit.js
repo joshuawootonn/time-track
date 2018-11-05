@@ -20,7 +20,6 @@ class ShiftEdit extends Component {
   render() {
     const { classes, label, type, deleteShift, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
-
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>

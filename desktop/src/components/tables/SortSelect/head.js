@@ -26,9 +26,10 @@ class EnhancedTableHead extends React.Component {
             }else {
               sortedColumn = orderBy === row.id;
             }
+            const key = row.keys ? row.id + row.keys.join('') : row.id;
             return (
               <TableCell
-                key={row.id + row.key}
+                key={key}
                 numeric={row.numeric}
                 padding={row.padding}
                 sortDirection={orderBy === row.id ? order : false}

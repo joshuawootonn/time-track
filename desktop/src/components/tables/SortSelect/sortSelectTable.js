@@ -75,7 +75,6 @@ class EnhancedTable extends React.Component {
   render() {
     const { classes, tableData, headerData,selected,add,label,selectLabel } = this.props;
     const { order, orderBy,type,keys } = this.state;
-    console.log(order,orderBy);
     return (
       <div >
         <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel}/>
@@ -94,8 +93,7 @@ class EnhancedTable extends React.Component {
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy, type, keys))
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);    
-                                                
+                  const isSelected = this.isSelected(n.id);                     
                   return (
                     <TableRow
                       hover

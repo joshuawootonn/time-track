@@ -44,10 +44,7 @@ export const getShiftsInRange = createSelector(
       };
     }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
       return moment(shift.clockInDate).isBetween(moment(start,'MM-DD-YY HH:mm:ss'),moment(end,'MM-DD-YY HH:mm:ss'));
-    });
-      
-    
-      
+    });      
   }
 );
 
@@ -61,7 +58,6 @@ export const getSelectedShift = createSelector(
     if(analyze.shift === -1)
       return {};
     else{
-      console.log(shifts[analyze.shift]);
       return {
         ...shifts[analyze.shift],
         employee: shifts[analyze.shift] && employees[shifts[analyze.shift].employeeId],

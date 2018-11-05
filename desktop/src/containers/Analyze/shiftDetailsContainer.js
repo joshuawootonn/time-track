@@ -52,10 +52,8 @@ class ShiftDetailsContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow');
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -69,7 +67,6 @@ class ShiftDetailsContainer extends Component {
             values.activities.forEach(activity => {
               timeLeft -= activity.length;
             });            
-            console.log(values,errors);
             let generalError;
             if (errors.activities && typeof errors.activities === 'string'){
               generalError = errors.activities;
@@ -97,9 +94,9 @@ class ShiftDetailsContainer extends Component {
       return (
         <Formik
           enableReinitialize
-          initialValues={{
-            /* lunch: 0,
-            clockInDate : moment().subtract('minutes',390).format('YYYY-MM-DDTHH:mm'),            
+          initialValues={{        
+            lunch: 30,
+            clockInDate : moment().startOf('day').add('minutes',450).format('YYYY-MM-DDTHH:mm'),            
             clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
             employeeId: -1,
             activities: [
@@ -107,23 +104,6 @@ class ShiftDetailsContainer extends Component {
                 projectId: -1,
                 projectTaskId: -1,
                 length: 0,
-                description: ''
-              }
-            ] */
-            lunch: 30,
-            clockInDate : moment().subtract('minutes',390).format('YYYY-MM-DDTHH:mm'),            
-            clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
-            employeeId: 1,
-            activities: [
-              {
-                projectId: 1,
-                projectTaskId: 2,
-                length: 150,
-                description: ''
-              },{
-                projectId: 1,
-                projectTaskId: 1,
-                length: 210,
                 description: ''
               }
             ]
@@ -135,10 +115,8 @@ class ShiftDetailsContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow');
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });

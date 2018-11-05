@@ -13,12 +13,12 @@ export const getShift = id => {
     dispatch({ type: shiftActionTypes.GET_SHIFT_REQUEST });
     try {
       const response = await endpoint.getShift(id);
-      console.log('get',response.data);
+      //console.log('get',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
-      console.log('get',payload);
+      //console.log('get',payload);
       return dispatch({ type: shiftActionTypes.GET_SHIFT_SUCCESS,payload });
     } catch (e) {
       console.log(e);
@@ -33,12 +33,12 @@ export const postShift = shift => {
     dispatch({ type: shiftActionTypes.SHIFT_POST_REQUEST });
     try {
       const response = await endpoint.postShift(shift);
-      console.log('post',response.data);
+      //console.log('post',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
-      console.log('post',payload);
+      //console.log('post',payload);
       return dispatch({ type: shiftActionTypes.SHIFT_POST_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
@@ -56,12 +56,12 @@ export const putShift = shift => {
     dispatch({ type: shiftActionTypes.PUT_SHIFT_REQUEST });
     try {
       const response = await endpoint.putShift(shift);
-      console.log('put',response.data);
+      //console.log('put',response.data);
       const payload = normalize(
         { shifts: [response.data] },
         schemas.shiftArray,
       );
-      console.log('put',payload);
+      //console.log('put',payload);
       return dispatch({ type: shiftActionTypes.PUT_SHIFT_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
@@ -79,7 +79,7 @@ export const getCurrentShift = employeeId => {
     try {
       const response = await endpoint.getCurrentShift(employeeId);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
-      console.log(payload,response);
+      
       return dispatch({
         type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
         payload,
@@ -102,7 +102,6 @@ export const getShiftsInRange = (startTime,endTime) => {
       const response = await endpoint.getShiftsInRange(startTime,endTime);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
 
-      console.log(payload);
       return dispatch({
         type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS,
         payload
@@ -124,7 +123,7 @@ export const addShift = (shift,activities) => {
       //console.log(shift,activities);
 
       const clockInMoment = moment(shift.clockInDate);
-      const clockOutMoment = moment(shift.clockOutMoment);
+      const clockOutMoment = moment(shift.clockOutDate);
       const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment));
       const minutes = shiftDuration.asMinutes();
      
@@ -140,7 +139,7 @@ export const addShift = (shift,activities) => {
       for(const activity of activities) {
         // activity.projectId = undefined;
         activity.shiftId = response.data.id;
-        console.log(activity);
+        
         await dispatch(activityActions.postActivity(activity));
       }
       
@@ -167,10 +166,10 @@ export const editShift = (shift,activities) => {
       await endpoint.deleteRelatedActivities(shift);      
 
       const clockInMoment = moment(shift.clockInDate);
-      const clockOutMoment = moment(shift.clockOutMoment);
+      const clockOutMoment = moment(shift.clockOutDate);
       const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment));
       const minutes = shiftDuration.asMinutes();
-      console.log('id',shift.id);
+     
       const shiftObject = {
         id: shift.id,
         employeeId: shift.employeeId,        
@@ -184,7 +183,6 @@ export const editShift = (shift,activities) => {
         // activity.projectId = undefined;
         activity.shiftId = response.data.id;
         activity.id = undefined;
-        console.log(activity);
         await dispatch(activityActions.postActivity(activity));
       }
      
