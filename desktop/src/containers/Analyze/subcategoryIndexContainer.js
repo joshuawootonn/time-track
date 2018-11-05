@@ -2,26 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { authorityActions,analyzeActions, subcategoryActions } from 'store/actions';
-import { authoritySelectors, subcategorySelectors } from 'store/selectors';
+import { analyzeActions, subcategoryActions } from 'store/actions';
+import { subcategorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
+import * as analyzeStatus from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getSubcategories();
   }
-  render () {
-    const { subcategories,selectSubcategory,selected } = this.props;
-    console.log(subcategories);
+  render() {
+    const { subcategories, selectSubcategory, selected, setSubcategoryStatus } = this.props;
+
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.type} selected`;}}
+        selectLabel={selected => { return `${selected.type} selected`; }}
         label="SubCategories"
         tableData={subcategories}
         headerData={rows}
         selected={selected}
         select={selectSubcategory}
+        add={() => { setSubcategoryStatus(analyzeStatus.ADDING); }}
       />
     );
   }
@@ -52,10 +54,11 @@ AuthorityIndexContainer.propTypes = {
   getSubcategories: PropTypes.func.isRequired,
   subcategories: PropTypes.array.isRequired,
   selectSubcategory: PropTypes.func.isRequired,
+  setSubcategoryStatus: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndexContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorityIndexContainer);
 
 
 const rows = [

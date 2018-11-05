@@ -14,7 +14,6 @@ class CategoryIndexContainer extends Component {
   }
   render () {
     const { categories,selectCategory,selected,setCategoryStatus } = this.props;    
-    console.log(categories);
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.type} selected`;}}

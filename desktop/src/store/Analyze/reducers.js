@@ -1,4 +1,4 @@
-import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes, categoryActionTypes } from 'constants/ActionTypes';
+import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes, categoryActionTypes, subcategoryActionTypes } from 'constants/ActionTypes';
 import * as analyzeStatus from 'constants/analyze';
 
 const selectedInitialState = {
@@ -188,7 +188,7 @@ export default (state = selectedInitialState, action) => {
         category: -1,
         categoryStatus: analyzeStatus.INIT
       };
-    } else if (state.shift) {
+    } else if (state.category) {
       return {
         ...state,
         category: action.payload,
@@ -212,13 +212,13 @@ export default (state = selectedInitialState, action) => {
     
 
   case analyzeActionTypes.SELECT_SUBCATEGORY:
-    if (state.shift !== -1 && state.shift === action.payload) {
+    if (state.subcategory !== -1 && state.subcategory === action.payload) {
       return {
         ...state,
         subcategory: -1,
         subcategoryStatus: analyzeStatus.INIT
       };
-    } else if (state.shift) {
+    } else if (state.subcategory) {
       return {
         ...state,
         subcategory: action.payload,
@@ -232,12 +232,12 @@ export default (state = selectedInitialState, action) => {
       subcategoryStatus: action.payload
     };
 
-    // case shiftActionTypes.DELETE_SHIFT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     shiftStatus: analyzeStatus.INIT,
-    //     shift: -1
-    //   };
+  case subcategoryActionTypes.DELETE_SUBCATEGORY_SUCCESS:
+    return {
+      ...state,
+      subcategoryStatus: analyzeStatus.INIT,
+      subcategory: -1
+    };
 
 
   default:

@@ -35,13 +35,16 @@ class EmployeeEditContainer extends Component {
           enableReinitialize
           initialValues={{
             type: '',
-            categoryId: -1
+            categoryId: -1,
+            dimensionId: 1
           }}
           validationSchema={subcategoryValidation}
           onSubmit={(values, formikFunctions) => {
             const { createSubcategory } = this.props;            
             createSubcategory({
-              ...values
+              ...values,
+              category: undefined,
+              dimension: undefined
             }).then(
               () => {
                 formikFunctions.resetForm();
@@ -78,8 +81,11 @@ class EmployeeEditContainer extends Component {
           validationSchema={subcategoryValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateSubcategory } = this.props;
+            console.log(values);
             updateSubcategory({
-              ...values
+              ...values,
+              category: undefined,
+              dimension: undefined
             }).then(
               () => {
                 formikFunctions.resetForm();

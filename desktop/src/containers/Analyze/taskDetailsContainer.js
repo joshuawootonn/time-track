@@ -66,7 +66,7 @@ class TaskDetailsContainer extends Component {
                 subcategories={subcategories}
                 label="Add"
                 type="add"
-                editCategoriesModal={editCategoriesModal}
+                editCategories={editCategoriesModal}
                 {...formikProps}
               />
             );
