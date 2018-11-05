@@ -28,5 +28,24 @@ export const getAuthorities = () => {
 };
 
 export const editAuthoritiesModal = () => {
-  return  modalActions.openModal(authorityActionTypes.EDIT_AUTHORITIES_MODAL, null);
+  return modalActions.openModal(authorityActionTypes.EDIT_AUTHORITIES_MODAL, null);
 };
+export const putAuthority = authority => {
+  return async dispatch => {
+    dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_REQUEST });
+    try {    
+      const response = await endpoint.putAuthority(authority.id, authority);
+      const payload = normalize(
+        { authorities: [response.data] },
+        schemas.authorityArray,
+      );
+      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_SUCCESS, payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_FAILURE, payload: e });
+    }
+  };
+};
+
+
+

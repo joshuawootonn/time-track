@@ -6,3 +6,6 @@ const DOMAIN = 'authorities';
 export const getAuthorities = () => {
   return axios.get(`${HOST}/${DOMAIN}`);
 };
+export const putAuthority = (id,authority) => {
+  return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...authority });
+};

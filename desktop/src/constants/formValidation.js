@@ -4,6 +4,13 @@ export const auth = Yup.object().shape({
   username: Yup.string().required('Network is required'),
   password: Yup.string().required('Password is required')
 });
+
+export const authorityValidation = Yup.object().shape({
+  type: Yup.string().required('Type is required')
+});
+export const crewValidation = Yup.object().shape({
+  name: Yup.string().required('Type is required')
+});
 export const account = Yup.object().shape({
   pin: Yup.string()
     .min(6, 'Pins are 6 characters')
