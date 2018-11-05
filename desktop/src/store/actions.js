@@ -14,6 +14,7 @@ import * as analyzeActions from './Analyze/actions';
 import * as categoryActions from './Category/actions';
 import * as subcategoryActions from './Subcategory/actions';
 import * as dimensionActions from './Dimension/actions';
+import * as modalActions from './Modal/actions';
 
 export {
   userActions,
@@ -31,5 +32,6 @@ export {
   analyzeActions,
   categoryActions,
   subcategoryActions,
-  dimensionActions
+  dimensionActions,
+  modalActions
 };

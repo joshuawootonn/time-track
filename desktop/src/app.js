@@ -5,13 +5,15 @@ import PrivateRoute from 'routes/privateRoute';
 import AuthSigninScene from 'scenes/Auth/authSigninScene';
 import RouteWithSubRoutes from 'routes/routeWithSubRoutes';
 
-import SnackRootContainer from 'containers/Snack/snackRootContainer';
+import SnackRootContainer from 'containers/Floaters/snackRootContainer';
+import ModalRootContainer from 'containers/Floaters/modalRootContainer';
 
 import routes from 'routes';
 
 const AuthedRoutes = () => (
   <div>
     <SnackRootContainer />
+    <ModalRootContainer />
     {routes.map((route, i) => {
       return <RouteWithSubRoutes key={i} {...route} />;
     })}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import SnackContainer from 'containers/Snack/snackContainer';
+import SnackContainer from 'containers/Floaters/snackContainer';
 
 import { snackActions } from 'store/actions';
 

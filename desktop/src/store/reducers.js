@@ -7,6 +7,7 @@ import snack from './Snack/reducers';
 import employee from './Employee/reducers';
 import shift from './Shift/reducers';
 import analyze from './Analyze/reducers';
+import modal from './Modal/reducers';
 
 const rootReducer = combineReducers({
   entities,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   snack,
   employee,
   shift,
-  analyze
+  analyze,
+  modal
 });
 export default rootReducer;
