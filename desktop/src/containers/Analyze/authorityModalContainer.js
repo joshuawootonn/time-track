@@ -12,9 +12,11 @@ const styles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }  
+    justifyContent: 'center'  
+  },
+  min: {
+    minWidth: '220px'
+  }
 });
 
 
@@ -25,8 +27,12 @@ class AuthorityEditContainer extends Component {
     const { classes } = this.props;
     return ( 
       <div className={classes.root}>
-        <AuthorityIndexContainer />
-        <AuthorityDetailContainer />
+        <div className={classes.min}>
+          <AuthorityIndexContainer />
+        </div>
+        <div className={classes.min}>
+          <AuthorityDetailContainer />
+        </div>
       </div>
     );   
   }
