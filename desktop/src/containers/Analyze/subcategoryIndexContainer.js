@@ -2,26 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { authorityActions,analyzeActions } from 'store/actions';
-import { authoritySelectors } from 'store/selectors';
+import { authorityActions,analyzeActions, subcategoryActions } from 'store/actions';
+import { authoritySelectors, subcategorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getAuthorities();
+    this.props.getSubcategories();
   }
   render () {
-    const { authorities,selectAuthority,selected } = this.props;
-    console.log(authorities);
+    const { subcategories,selectSubcategory,selected } = this.props;
+    console.log(subcategories);
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.type} selected`;}}
-        label="Authorities"
-        tableData={authorities}
+        label="SubCategories"
+        tableData={subcategories}
         headerData={rows}
         selected={selected}
-        select={selectAuthority}
+        select={selectSubcategory}
       />
     );
   }
@@ -29,29 +29,29 @@ class AuthorityIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    subcategories: authoritySelectors.getAllAuthorities(state),
-    selected: authoritySelectors.getSelectedAuthority(state)
+    subcategories: subcategorySelectors.getAllSubcategories(state),
+    selected: subcategorySelectors.getSelectedSubcategory(state)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAuthorities: () => {
-      return dispatch(authorityActions.getAuthorities());
+    getSubcategories: () => {
+      return dispatch(subcategoryActions.getSubcategories());
     },
-    selectAuthority: authority => {
-      return dispatch(analyzeActions.selectAuthority(authority));
+    selectSubcategory: authority => {
+      return dispatch(analyzeActions.selectSubcategory(authority));
     },
-    setAuthorityStatus: status => {
-      return dispatch(analyzeActions.setAuthorityStatus(status));
+    setSubcategoryStatus: status => {
+      return dispatch(analyzeActions.setSubcategoryStatus(status));
     }
   };
 };
 
 AuthorityIndexContainer.propTypes = {
-  getAuthorities: PropTypes.func.isRequired,
-  authorities: PropTypes.array.isRequired,
-  selectAuthority: PropTypes.func.isRequired,
+  getSubcategories: PropTypes.func.isRequired,
+  subcategories: PropTypes.array.isRequired,
+  selectSubcategory: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 
