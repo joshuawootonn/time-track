@@ -5,7 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CategoryIndexContainer from 'containers/Analyze/categoryIndexContainer';
 import CategoryDetailContainer from 'containers/Analyze/categoryDetailContainer';
-import SubCategoryIndexContainer from 'containers/Analyze/subcategoryIndexContainer';
+import SubcategoryIndexContainer from 'containers/Analyze/subcategoryIndexContainer';
+import SubcategoryDetailContainer from 'containers/Analyze/subcategoryDetailContainer';
 
 const styles = () => ({
   root: {
@@ -30,7 +31,10 @@ class CategoryModalContainer extends Component {
           <CategoryDetailContainer />
         </div>
         <div className={classes.min}>
-          <SubCategoryIndexContainer /> 
+          <SubcategoryIndexContainer /> 
+        </div>
+        <div className={classes.min}>
+          <SubcategoryDetailContainer /> 
         </div>
       </div>
     );  

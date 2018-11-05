@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
-import Category from 'components/forms/Category';
-import { subcategorySelectors } from 'store/selectors';
+import Subcategory from 'components/forms/Subcategory';
+import { subcategorySelectors,categorySelectors } from 'store/selectors';
 import {  subcategoryActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
@@ -19,7 +19,7 @@ class EmployeeEditContainer extends Component {
   };
 
   render() {
-    const { selected,status } = this.props;
+    const { selected,status,categories } = this.props;
 
     if(status === analyzeConstants.INIT){
       return (
@@ -56,9 +56,10 @@ class EmployeeEditContainer extends Component {
           }}
           render={formikProps => {
             return (
-              <Category
+              <Subcategory
                 label="Add"
                 type="add"
+                categories={categories}
                 {...formikProps}
               />
             );
@@ -93,10 +94,11 @@ class EmployeeEditContainer extends Component {
           }}
           render={formikProps => {
             return (
-              <Category
-                deleteCategory={this.deleteCategory}
+              <Subcategory
+                deleteSubcategory={this.deleteSubcategory}
                 label="Edit"
                 type="edit"
+                categories={categories}
                 {...formikProps}
               />
             );
@@ -109,6 +111,7 @@ class EmployeeEditContainer extends Component {
 
 const mapStateToProps = state => {
   return {
+    categories: categorySelectors.getAllCategories(state),
     subcategories: subcategorySelectors.getAllSubcategories(state),
     selected: subcategorySelectors.getSelectedSubcategory(state),
     status: state.analyze.subcategoryStatus    
