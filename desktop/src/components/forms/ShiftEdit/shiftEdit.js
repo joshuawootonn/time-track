@@ -69,7 +69,7 @@ class ShiftEdit extends Component {
             render={arrayHelpers => {
               console.log();
               return (
-                <Grid item xs={12} container>
+                <Grid item xs={12} container className={classes.body}>
                   {values.activities &&
                     values.activities.map((activity, index) => {
                       return (
@@ -80,7 +80,7 @@ class ShiftEdit extends Component {
                             classes.verticalCenterBox,
                           )}
                         >
-                          <div className={classes.formBody}>
+                          <div className={cx(classes.row,classes.bodyRow)}>
                             <Field
                               name={`activities.${index}.projectId`}
                               component={Select}
@@ -147,7 +147,7 @@ class ShiftEdit extends Component {
                       );
                     })                 
                   }
-                  <Grid item xs={12} className={classes.formFooter}>
+                  <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
                     <div className={classes.lunchBox}>
                       <Field
                         name='lunch'
@@ -180,7 +180,7 @@ class ShiftEdit extends Component {
             }
           />
 
-          <Grid item xs={12} className={classes.formFooter}>
+          <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
             <Typography variant="h5" margin="none">
               Time Left: {minutesToString(timeLeft)}
             </Typography>
