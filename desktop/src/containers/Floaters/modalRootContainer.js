@@ -6,13 +6,16 @@ import Modal from 'components/floaters/Modal';
 
 import AuthorityModalContainer from 'containers/Analyze/authorityModalContainer';
 import CrewModalContainer from 'containers/Analyze/crewModalContainer';
+import CategoryModalContainer from 'containers/Analyze/categoryModalContainer';
 
 import { modalActions } from 'store/actions';
-import { authorityActionTypes, crewActionTypes } from 'constants/ActionTypes';
+import { authorityActionTypes, crewActionTypes, categoryActionTypes } from 'constants/ActionTypes';
+
 
 const MODAL_COMPONENTS = {
   [authorityActionTypes.EDIT_AUTHORITIES_MODAL] : AuthorityModalContainer,
-  [crewActionTypes.EDIT_CREWS_MODAL] : CrewModalContainer
+  [crewActionTypes.EDIT_CREWS_MODAL] : CrewModalContainer,
+  [categoryActionTypes.EDIT_CATEGORIES_MODAL] : CategoryModalContainer
   /* other modals */
 };
 

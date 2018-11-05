@@ -5,7 +5,7 @@ import { Field, Form } from 'formik';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid,Tooltip,IconButton, Typography, Button } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+import { Delete,Edit } from '@material-ui/icons';
 
 import styles from './styles';
 import TextField from 'components/inputs/TextField';
@@ -16,7 +16,7 @@ class Task extends Component {
   
   render() {
     //console.log(this.props);
-    const { label,deleteTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors } = this.props;
+    const { label,deleteTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors,editCategories } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -66,6 +66,11 @@ class Task extends Component {
               label="Subcategory"
               className={classes.field}
             />
+            <Tooltip title="Edit Categories">
+              <IconButton onClick={editCategories} aria-label="Edit Categories">
+                <Edit />
+              </IconButton>
+            </Tooltip>
           </Grid>          
           <Grid item xs={12} className={classes.row}>
             <Typography
@@ -115,7 +120,8 @@ Task.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  values: PropTypes.object
+  values: PropTypes.object,
+  editCategories: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Task);

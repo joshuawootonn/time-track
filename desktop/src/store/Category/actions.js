@@ -1,4 +1,5 @@
 import { categoryActionTypes } from 'constants/ActionTypes';
+import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -25,3 +26,9 @@ export const getCategories = () => {
     }
   };
 };
+
+
+export const editCategoriesModal = () => {  
+  return modalActions.openModal(categoryActionTypes.EDIT_CATEGORIES_MODAL, null);
+}
+
