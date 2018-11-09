@@ -4,7 +4,7 @@ import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import { projectArray } from 'store/schemas';
 import * as schemas from 'store/schemas';
-import { snackActions } from 'store/actions';
+import { snackActions, projectTaskActions } from 'store/actions';
 import * as status from 'constants/status';
 
 export const getProjects = () => {
@@ -30,29 +30,45 @@ export const getProjects = () => {
   };
 };
 
-export const postProject = project => {
+
+export const createProject = project => {
   return async dispatch => {
     dispatch({ type: projectActionTypes.CREATE_PROJECT_REQUEST });
     try {
-      const response = await endpoint.postProject(project);
-      const payload = normalize({ projects: [response.data] }, schemas.projectArray);
 
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Project Created'),
-      );
+      const response = await dispatch(postProject(project));
+      console.log('create project',response);
+      for(const projectTask of project.projectTasks){
+        projectTask.projectId = response.data.id;
+        await dispatch(projectTaskActions.postProjectTask(projectTask));
+      }
 
-      return dispatch({
-        type: projectActionTypes.CREATE_PROJECT_SUCCESS,
-        payload
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Created'));
+      return dispatch({ type: projectActionTypes.CREATE_PROJECT_SUCCESS });
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: projectActionTypes.CREATE_PROJECT_FAILURE,
-        payload: e
-      });
+      return dispatch({ type: projectActionTypes.CREATE_PROJECT_FAILURE,payload: e });
     }
   };
+};
+
+export const postProject = project => {
+  return async dispatch => {
+    dispatch({ type: projectActionTypes.POST_PROJECT_REQUEST });
+    try {
+      const response = await endpoint.postProject(project);
+      const payload = normalize({ projects: [response.data] }, schemas.projectArray);
+    
+      return dispatch({ type: projectActionTypes.POST_PROJECT_SUCCESS,payload, data: response.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: projectActionTypes.POST_PROJECT_FAILURE,payload: e });
+    }
+  };
+};
+
+export const updateProject = project => {
+
 };
 export const putProject = project => {
   return async dispatch => {

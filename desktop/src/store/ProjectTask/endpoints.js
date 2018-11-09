@@ -6,3 +6,6 @@ const DOMAIN = 'projecttasks';
 export const getProjectTasks = () => {
   return axios.get(`${HOST}/${DOMAIN}`);
 };
+export const postProjectTasks = projectTask => {
+  return axios.post(`${HOST}/${DOMAIN}`,{ ...projectTask });
+};

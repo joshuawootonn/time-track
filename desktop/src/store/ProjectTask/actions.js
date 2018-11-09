@@ -3,6 +3,7 @@ import { projectTaskActionTypes } from 'constants/ActionTypes';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import { projectTaskArray } from 'store/schemas';
+import * as schemas from 'store/schemas';
 
 export const getProjectTask = () => {
   return async dispatch => {
@@ -26,6 +27,21 @@ export const getProjectTask = () => {
         payload: e
       });
       throw e;
+    }
+  };
+};
+
+export const postProjectTask = projectTask => {
+  return async dispatch => {
+    dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_REQUEST });
+    try {
+      const response = await endpoint.postProjectTasks(projectTask);
+      const payload = normalize({ projectTasks: [response.data] }, schemas.projectTaskArray);
+    
+      return dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_SUCCESS,payload });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_FAILURE,payload: e });
     }
   };
 };

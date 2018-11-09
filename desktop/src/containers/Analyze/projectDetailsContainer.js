@@ -47,7 +47,7 @@ class ProjectContainer extends Component {
               name: values.name,
               isActive: values.isActive ? 1 : 0,
               date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
-              projectTasks: []                                     
+              projectTasks: values.projectTasks                   
             }).then(
               () => {
                 formikFunctions.resetForm();
@@ -101,7 +101,8 @@ class ProjectContainer extends Component {
               id: values.id,
               name: values.name,
               isActive: values.isActive ? 1 : 0,
-              date: moment(values.date).format('MM-DD-YY HH:mm:ss')
+              date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
+              projectTasks: values.projectTasks
             }).then(
               () => {
                 formikFunctions.resetForm();
@@ -151,10 +152,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createProject: project => {
-      return dispatch(projectActions.postProject(project));
+      return dispatch(projectActions.createProject(project));
     },
     updateProject: project => {
-      return dispatch(projectActions.putProject(project));
+      return dispatch(projectActions.updateProject(project));
     },
     deleteProject: project => {
       return dispatch(projectActions.deleteProject(project));
