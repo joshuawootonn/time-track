@@ -1,4 +1,4 @@
-import { crewActionTypes } from 'constants/ActionTypes';
+import { crewActionTypes } from 'constants/actionTypeConstants';
 import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
@@ -31,17 +31,17 @@ export const editCrewsModal = () => {
 
 export const putCrew = crew => {
   return async dispatch => {
-    dispatch({ type: crewActionTypes.UPDATE_CREW_REQUEST });
+    dispatch({ type: crewActionTypes.PUT_CREW_REQUEST });
     try {    
       const response = await endpoint.putCrew(crew.id, crew);
       const payload = normalize(
         { crews: [response.data] },
         schemas.crewArray,
       );
-      return dispatch({ type: crewActionTypes.UPDATE_CREW_SUCCESS, payload });
+      return dispatch({ type: crewActionTypes.PUT_CREW_SUCCESS, payload });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: crewActionTypes.UPDATE_CREW_FAILURE, payload: e });
+      return dispatch({ type: crewActionTypes.PUT_CREW_FAILURE, payload: e });
     }
   };
 };

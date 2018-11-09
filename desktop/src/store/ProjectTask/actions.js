@@ -1,4 +1,4 @@
-import { projectTaskActionTypes } from 'constants/ActionTypes';
+import { projectTaskActionTypes } from 'constants/actionTypeConstants';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';

@@ -1,4 +1,4 @@
-import { authorityActionTypes } from 'constants/ActionTypes';
+import { authorityActionTypes } from 'constants/actionTypeConstants';
 import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
@@ -32,17 +32,17 @@ export const editAuthoritiesModal = () => {
 };
 export const putAuthority = authority => {
   return async dispatch => {
-    dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_REQUEST });
+    dispatch({ type: authorityActionTypes.PUT_AUTHORITY_REQUEST });
     try {    
       const response = await endpoint.putAuthority(authority.id, authority);
       const payload = normalize(
         { authorities: [response.data] },
         schemas.authorityArray,
       );
-      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_SUCCESS, payload });
+      return dispatch({ type: authorityActionTypes.PUT_AUTHORITY_SUCCESS, payload });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_FAILURE, payload: e });
+      return dispatch({ type: authorityActionTypes.PUT_AUTHORITY_FAILURE, payload: e });
     }
   };
 };

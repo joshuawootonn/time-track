@@ -1,8 +1,11 @@
-export const createCRUDActionTypes = domain => {
+export const createCRUDActionTypes = (domain,pluralDomain) => {
   return {
     [`GET_${domain.toUpperCase()}_REQUEST`]: `get_${domain.toLowerCase()}_request`,
     [`GET_${domain.toUpperCase()}_SUCCESS`]: `get_${domain.toLowerCase()}_success`,
     [`GET_${domain.toUpperCase()}_FAILURE`]: `get_${domain.toLowerCase()}_failure`,
+    [`GET_${pluralDomain.toUpperCase()}_REQUEST`]: `get_${pluralDomain.toLowerCase()}_request`,
+    [`GET_${pluralDomain.toUpperCase()}_SUCCESS`]: `get_${pluralDomain.toLowerCase()}_success`,
+    [`GET_${pluralDomain.toUpperCase()}_FAILURE`]: `get_${pluralDomain.toLowerCase()}_failure`,
     [`POST_${domain.toUpperCase()}_REQUEST`]: `post_${domain.toLowerCase()}_request`,
     [`POST_${domain.toUpperCase()}_SUCCESS`]: `post_${domain.toLowerCase()}_success`,
     [`POST_${domain.toUpperCase()}_FAILURE`]: `post_${domain.toLowerCase()}_failure`,

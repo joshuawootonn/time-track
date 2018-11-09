@@ -1,4 +1,4 @@
-import { categoryActionTypes } from 'constants/ActionTypes';
+import { categoryActionTypes } from 'constants/actionTypeConstants';
 import { modalActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
@@ -35,34 +35,34 @@ export const editCategoriesModal = () => {
 
 export const putCategory = category => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_REQUEST });
+    dispatch({ type: categoryActionTypes.PUT_CATEGORY_REQUEST });
     try {    
       const response = await endpoint.putCategory(category.id, category);
       const payload = normalize(
         { categories: [response.data] },
         schemas.categoryArray,
       );
-      return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_SUCCESS, payload });
+      return dispatch({ type: categoryActionTypes.PUT_CATEGORY_SUCCESS, payload });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_FAILURE, payload: e });
+      return dispatch({ type: categoryActionTypes.PUT_CATEGORY_FAILURE, payload: e });
     }
   };
 };
 
 export const postCategory = category => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.CREATE_CATEGORY_REQUEST });
+    dispatch({ type: categoryActionTypes.POST_CATEGORY_REQUEST });
     try {    
       const response = await endpoint.postCategory(category);
       const payload = normalize(
         { categories: [response.data] },
         schemas.categoryArray,
       );
-      return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_SUCCESS, payload });
+      return dispatch({ type: categoryActionTypes.POST_CATEGORY_SUCCESS, payload });
     } catch (e) {
       console.log(e);
-      return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_FAILURE, payload: e });
+      return dispatch({ type: categoryActionTypes.POST_CATEGORY_FAILURE, payload: e });
     }
   };
 };

@@ -1,4 +1,4 @@
-import { staticActionTypes } from 'constants/ActionTypes';
+import { staticActionTypes } from 'constants/actionTypeConstants';
 
 import { projectActions, projectTaskActions, taskActions,categoryActions,dimensionActions,subcategoryActions } from 'store/actions';
 

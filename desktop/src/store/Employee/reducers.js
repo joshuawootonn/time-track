@@ -1,4 +1,4 @@
-import { employeeActionTypes } from 'constants/ActionTypes';
+import { employeeActionTypes } from 'constants/actionTypeConstants';
 import * as status from 'constants/status';
 export const employeeInitialState = {
   current: {

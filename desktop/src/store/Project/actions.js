@@ -1,10 +1,10 @@
-import { projectActionTypes } from 'constants/ActionTypes';
+import { projectActionTypes } from 'constants/actionTypeConstants';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import { projectArray } from 'store/schemas';
 import * as schemas from 'store/schemas';
-import { snackActions, projectTaskActions,analyzeActions, projectActions } from 'store/actions';
+import { snackActions, projectTaskActions,analyzeActions } from 'store/actions';
 import * as status from 'constants/status';
 
 export const getProjects = () => {

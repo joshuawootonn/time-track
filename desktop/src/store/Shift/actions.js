@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { shiftActionTypes } from 'constants/ActionTypes';
+import { shiftActionTypes } from 'constants/actionTypeConstants';
 
 import { snackActions,activityActions,analyzeActions } from 'store/actions';
 import * as endpoint from './endpoints';

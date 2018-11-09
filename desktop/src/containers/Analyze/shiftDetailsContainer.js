@@ -13,7 +13,6 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
-import shiftActionTypes from 'constants/ActionTypes/shift';
 
 class ShiftDetailsContainer extends Component {
   deleteShift = () => {
@@ -21,7 +20,6 @@ class ShiftDetailsContainer extends Component {
     deleteShift(selected);
   };
   render () {
-    console.log(shiftActionTypes);
     const { selected,status,projects,projectTasks,employees } = this.props;
     //console.log('asdfasdfasdfas',selected,status);
     if(status === analyzeConstants.INIT){

@@ -9,7 +9,7 @@ import CrewModalContainer from 'containers/Analyze/crewModalContainer';
 import CategoryModalContainer from 'containers/Analyze/categoryModalContainer';
 
 import { modalActions } from 'store/actions';
-import { authorityActionTypes, crewActionTypes, categoryActionTypes } from 'constants/ActionTypes';
+import { authorityActionTypes, crewActionTypes, categoryActionTypes } from 'constants/actionTypeConstants';
 
 
 const MODAL_COMPONENTS = {

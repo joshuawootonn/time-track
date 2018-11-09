@@ -1,7 +1,7 @@
 import { normalize } from 'normalizr';
 import moment from 'moment';
 
-import { employeeActionTypes } from 'constants/ActionTypes';
+import { employeeActionTypes } from 'constants/actionTypeConstants';
 import { shiftActions, snackActions, activityActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import * as schemas from 'store/schemas';
@@ -33,7 +33,7 @@ export const getEmployees = () => {
 
 export const putEmployee = employee => {
   return async dispatch => {
-    dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
+    dispatch({ type: employeeActionTypes.PUT_EMPLOYEE_REQUEST });
     try {
       const response = await endpoint.putEmployee(employee.id, employee);
       const payload = normalize(
@@ -45,13 +45,13 @@ export const putEmployee = employee => {
       );
 
       return dispatch({
-        type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS,
+        type: employeeActionTypes.PUT_EMPLOYEE_SUCCESS,
         payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
-        type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE,
+        type: employeeActionTypes.PUT_EMPLOYEE_FAILURE,
         payload: e
       });
     }
@@ -60,7 +60,7 @@ export const putEmployee = employee => {
 
 export const postEmployee = employee => {
   return async dispatch => {
-    dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
+    dispatch({ type: employeeActionTypes.POST_EMPLOYEE_REQUEST });
     try {
       const response = await endpoint.postEmployee(employee);
       const payload = normalize(
@@ -73,13 +73,13 @@ export const postEmployee = employee => {
       );
 
       return dispatch({
-        type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS,
+        type: employeeActionTypes.POST_EMPLOYEE_SUCCESS,
         payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
-        type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE,
+        type: employeeActionTypes.POST_EMPLOYEE_FAILURE,
         payload: e
       });
     }

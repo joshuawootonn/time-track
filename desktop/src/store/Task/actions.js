@@ -1,4 +1,4 @@
-import { taskActionTypes } from 'constants/ActionTypes';
+import { taskActionTypes } from 'constants/actionTypeConstants';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
@@ -31,7 +31,7 @@ export const getTasks = () => {
 
 export const postTask = task => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.CREATE_TASK_REQUEST });
+    dispatch({ type: taskActionTypes.POST_TASK_REQUEST });
     try {
       const response = await endpoint.postTask(task);
       const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
@@ -41,13 +41,13 @@ export const postTask = task => {
       );
 
       return dispatch({
-        type: taskActionTypes.CREATE_TASK_SUCCESS,
+        type: taskActionTypes.POST_TASK_SUCCESS,
         payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
-        type: taskActionTypes.CREATE_TASK_FAILURE,
+        type: taskActionTypes.POST_TASK_FAILURE,
         payload: e
       });
     }
@@ -55,7 +55,7 @@ export const postTask = task => {
 };
 export const putTask = task => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.UPDATE_TASK_REQUEST });
+    dispatch({ type: taskActionTypes.PUT_TASK_REQUEST });
     try {
       const response = await endpoint.putTask(task.id,task);
       const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
@@ -65,13 +65,13 @@ export const putTask = task => {
       );
 
       return dispatch({
-        type: taskActionTypes.UPDATE_TASK_SUCCESS,
+        type: taskActionTypes.PUT_TASK_SUCCESS,
         payload
       });
     } catch (e) {
       console.log(e);
       return dispatch({
-        type: taskActionTypes.UPDATE_TASK_FAILURE,
+        type: taskActionTypes.PUT_TASK_FAILURE,
         payload: e
       });
     }

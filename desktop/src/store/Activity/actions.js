@@ -1,4 +1,4 @@
-import { activityActionTypes } from 'constants/ActionTypes';
+import {activityActionTypes } from 'constants/actionTypeConstants';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';

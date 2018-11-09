@@ -1,4 +1,4 @@
-import { dimensionActionTypes } from 'constants/ActionTypes';
+import { dimensionActionTypes } from 'constants/actionTypeConstants';
 
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';

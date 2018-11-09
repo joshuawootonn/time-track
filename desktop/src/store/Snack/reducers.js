@@ -1,4 +1,4 @@
-import { snackActionTypes } from 'constants/ActionTypes';
+import { snackActionTypes } from 'constants/actionTypeConstants';
 
 export const modalInitialState = {
   snackType: null,

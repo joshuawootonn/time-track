@@ -1,4 +1,4 @@
-import { analyzeActionTypes } from 'constants/ActionTypes';
+import { analyzeActionTypes } from 'constants/actionTypeConstants';
 
 export const selectEmployee = employee => {
   return { type: analyzeActionTypes.SELECT_EMPLOYEE, payload: employee };    

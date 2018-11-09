@@ -1,4 +1,5 @@
-import { analyzeActionTypes, employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes, categoryActionTypes, subcategoryActionTypes } from 'constants/ActionTypes';
+import { employeeActionTypes,taskActionTypes,projectActionTypes, shiftActionTypes, categoryActionTypes, subcategoryActionTypes } from 'constants/actionTypeConstants';
+import {analyzeActionTypes} from 'constants/actionTypeConstants';
 import * as analyzeStatus from 'constants/analyze';
 
 const selectedInitialState = {

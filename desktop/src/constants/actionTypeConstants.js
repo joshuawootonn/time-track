@@ -1,7 +1,7 @@
 import { createCustomActionTypes,createCRUDActionTypes } from 'helpers/actionTypes';
 
 const activityActionTypes = {
-  ...createCRUDActionTypes('activity') 
+  ...createCRUDActionTypes('activity','activities') 
 };
 
 
@@ -25,29 +25,29 @@ const analyzeActionTypes = {
 }; 
 
 const authorityActionTypes = {
-  ...createCRUDActionTypes('authority'),
+  ...createCRUDActionTypes('authority','authorities'),
   EDIT_AUTHORITIES_MODAL: 'edit_authorities_modal'
 };
 
 const categoryActionTypes = {
-  ...createCRUDActionTypes('category'),
+  ...createCRUDActionTypes('category','categories'),
   EDIT_CATEGORIES_MODAL: 'edit_categories_modal'
 };
 
 const crewActionTypes = {
-  ...createCRUDActionTypes('crew'),
+  ...createCRUDActionTypes('crew','crews'),
   EDIT_CREWS_MODAL: 'edit_crews_modal'
 };
 
 const dimensionActionTypes = {
-  ...createCRUDActionTypes('dimension')
+  ...createCRUDActionTypes('dimension','dimensions')
 };
 const employeeActionTypes = {
-  ...createCRUDActionTypes('employee'),
-  ...createCustomActionTypes('shift','login'),
-  ...createCustomActionTypes('shift','clockin'),
+  ...createCRUDActionTypes('employee','employees'),
+  ...createCustomActionTypes('employee','login'),
+  ...createCustomActionTypes('employee','clockin'),
   CLOCKIN_EMPLOYEE_SNACK: 'clockin_employee_snack',
-  ...createCustomActionTypes('shift','clockout'),
+  ...createCustomActionTypes('employee','clockout'),
   CLOCKOUT_EMPLOYEE_SNACK: 'clockout_employee_snack'
 };
 const exportActionTypes = {
@@ -58,17 +58,17 @@ const modalActionTypes = {
   SHOW_MODAL: 'show_modal'
 };
 const projectActionTypes = {
-  ...createCRUDActionTypes('project'),
+  ...createCRUDActionTypes('project','projects'),
   ...createCustomActionTypes('project','update'),
   ...createCustomActionTypes('project','create')
 };
 
 const projectTaskActionTypes = {
-  ...createCRUDActionTypes('project_task')
+  ...createCRUDActionTypes('project_task','project_tasks')
 };
 
 const shiftActionTypes = {
-  ...createCRUDActionTypes('shift'),
+  ...createCRUDActionTypes('shift','shifts'),
   ...createCustomActionTypes('shift','create'),
   ...createCustomActionTypes('shift','remove'),
   ...createCustomActionTypes('shift','edit'), 
@@ -85,10 +85,10 @@ const staticActionTypes = {
 };
 
 const subcategoryActionTypes = {
-  ...createCRUDActionTypes('subcategory')
+  ...createCRUDActionTypes('subcategory','subcategories')
 };
 const taskActionTypes = {
-  ...createCRUDActionTypes('task')
+  ...createCRUDActionTypes('task','tasks')
 };
 
 const userActionTypes = {
