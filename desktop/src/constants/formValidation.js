@@ -121,5 +121,26 @@ export const projectValidation = Yup.object().shape({
     .required('Name is required')
     .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), 'Name format is invalid'),
   date: Yup.date().required('Invalid date'),
-  isActive: Yup.boolean()
+  isActive: Yup.boolean(),
+  projectTasks: Yup.array()
+    .of(
+      Yup.object().shape({
+        categoryId: Yup.number()
+          .min(1, 'Selection required')
+          .required('Selection required'),
+        subcategoryId: Yup.number()
+          .positive('Selection required')
+          .required('Selection required'),
+        taskId: Yup.number()
+          .positive('Selection required')
+          .required('Selection required'),
+        estimateTime: Yup.number()
+          .positive('Postive numbers only')
+          .required('Postive numbers only'),
+        quantity: Yup.number()
+          .positive('Postive numbers only')
+          .required('Postive numbers only')
+      })
+    )
+    .required('Task selection required')
 });

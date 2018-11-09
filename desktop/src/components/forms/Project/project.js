@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {  Grid,  Typography,  Button,  Tooltip,  IconButton } from '@material-ui/core';
+import { Grid, Typography, Button, Tooltip, IconButton } from '@material-ui/core';
 import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
-import { Delete,Close } from '@material-ui/icons';
+import { Delete, Close } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
 import Switch from 'components/inputs/Switch';
@@ -17,12 +17,12 @@ import styles from './styles';
 class Project extends Component {
   render() {
 
-    const { classes,label, type,deleteProject,categories, subcategories, tasks, isSubmitting, resetForm, initialValues,errors,values } = this.props;
-    console.log(tasks);
+    const { classes, label, type, deleteProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
+    console.log(values.projectTasks);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={cx(classes.headerRow,classes.row)}>
+          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
@@ -32,7 +32,7 @@ class Project extends Component {
               </Tooltip>
             )}
           </Grid>
-          <Grid item xs={12}  className={classes.row}>
+          <Grid item xs={12} className={classes.row}>
             <Field
               name="name"
               component={TextField}
@@ -41,29 +41,27 @@ class Project extends Component {
               type="search"
               className={classes.field}
               helper="normal"
-            />           
-          </Grid>
-          <Grid item xs={12} className={classes.row}>
+            />
             <Field
               name="date"
-              component={TextField}              
+              component={TextField}
               margin="none"
               label="Start Date"
-              type="date"              
+              type="date"
               className={classes.field}
               helper="normal"
-            />    
+            />
             <Field
               name="isActive"
               component={Switch}
               label="Active"
               className={classes.field}
-            /> 
-          </Grid> 
+            />
+          </Grid>
           <FieldArray
             name="projectTasks"
             render={arrayHelpers => {
-              
+
               return (
                 <Grid item xs={12} container className={classes.body}>
                   {values.projectTasks &&
@@ -76,7 +74,7 @@ class Project extends Component {
                             classes.verticalCenterBox,
                           )}
                         >
-                          <div className={cx(classes.row,classes.bodyRow)}>
+                          <div className={cx(classes.row, classes.bodyRow)}>
                             <Field
                               name={`projectTasks.${index}.categoryId`}
                               component={Select}
@@ -84,6 +82,16 @@ class Project extends Component {
                               fullWidth
                               label="Category"
                               className={classes.field}
+                              onChange={() => {
+                                arrayHelpers.form.setFieldValue(
+                                  `projectTasks.${index}.subcategoryId`,
+                                  -1,
+                                );
+                                arrayHelpers.form.setFieldValue(
+                                  `projectTasks.${index}.taskId`,
+                                  -1,
+                                );
+                              }}
                             />
                             <Field
                               name={`projectTasks.${index}.subcategoryId`}
@@ -94,6 +102,12 @@ class Project extends Component {
                               fullWidth
                               label="Subcategory"
                               className={classes.field}
+                              onChange={() => {
+                                arrayHelpers.form.setFieldValue(
+                                  `projectTasks.${index}.taskId`,
+                                  -1,
+                                );
+                              }}
                             />
                             <Field
                               name={`projectTasks.${index}.taskId`}
@@ -104,7 +118,21 @@ class Project extends Component {
                               fullWidth
                               label="Task"
                               className={classes.field}
-                            />                            
+                            />
+                            <Field                              
+                              name={`projectTasks.${index}.estimateTime`}
+                              component={TextField}
+                              fullWidth
+                              label="Estimated Time"
+                              className={classes.field}
+                            />
+                            <Field                              
+                              name={`projectTasks.${index}.quantity`}
+                              component={TextField}
+                              fullWidth
+                              label="Quantity"
+                              className={classes.field}
+                            />
                             <div className={classes.verticalCenter}>
                               <IconButton
                                 type="button"
@@ -118,22 +146,24 @@ class Project extends Component {
                           </div>
                         </Grid>
                       );
-                    })                 
+                    })
                   }
-                  <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
                     <div className={classes.lunchBox}>
-                      
+
                     </div>
                     <Button
                       color="primary"
                       variant="contained"
                       onClick={() =>
-                        arrayHelpers.push({                          
+                        arrayHelpers.push({
                           categoryId: -1,
                           subcategoryId: -1,
-                          taskId: -1
+                          taskId: -1,
+                          quantity: 1,
+                          estimateTime: 1
                         })
-                      } 
+                      }
                     >
                       Add Task
                     </Button>
@@ -173,7 +203,7 @@ class Project extends Component {
                 Reset
               </Button>
             </div>
-          </Grid>      
+          </Grid>
         </Grid>
       </Form>
     );
@@ -190,7 +220,7 @@ Project.propTypes = {
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
-  subcategories:PropTypes.array.isRequired,
+  subcategories: PropTypes.array.isRequired,
   values: PropTypes.object.isRequired,
   tasks: PropTypes.array.isRequired
 };

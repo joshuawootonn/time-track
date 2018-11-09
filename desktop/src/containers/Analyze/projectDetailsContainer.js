@@ -48,8 +48,7 @@ class ProjectContainer extends Component {
               isActive: values.isActive ? 1 : 0,
               date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
               categoryId: Object.keys(categories)[0],
-              subcategoryId: -1
-                          
+              subcategoryId: -1                          
             }).then(
               () => {
                 formikFunctions.resetForm();

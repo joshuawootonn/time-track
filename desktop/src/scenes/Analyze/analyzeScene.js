@@ -64,10 +64,10 @@ class AnalyzeScene extends Component {
           </Grid>
         </Grid>}
         {tabValue === 1 && <Grid container>
-          <Grid item xs={7}>
+          <Grid item xs={4}>
             <ProjectIndexContainer />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={8}>
             <ProjectDetailsContainer />
           </Grid>
         </Grid>}
