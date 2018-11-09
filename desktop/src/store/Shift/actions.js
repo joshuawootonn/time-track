@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import { shiftActionTypes } from 'constants/ActionTypes';
 
-import { snackActions,activityActions } from 'store/actions';
+import { snackActions,activityActions,analyzeActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as status from 'constants/status';
@@ -144,6 +144,7 @@ export const addShift = (shift,activities) => {
       }
       
       await dispatch(getShift(response.data.id));
+      await dispatch(analyzeActions.selectShift(response.data.id));
     
       dispatch(snackActions.openSnack(status.SUCCESS, 'Shift add success!'));
       return dispatch({ type: shiftActionTypes.ADD_SHIFT_SUCCESS });

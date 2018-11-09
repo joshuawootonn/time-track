@@ -4,7 +4,7 @@ import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import { projectArray } from 'store/schemas';
 import * as schemas from 'store/schemas';
-import { snackActions, projectTaskActions } from 'store/actions';
+import { snackActions, projectTaskActions,analyzeActions, projectActions } from 'store/actions';
 import * as status from 'constants/status';
 
 export const getProjects = () => {
@@ -42,7 +42,7 @@ export const createProject = project => {
         projectTask.projectId = response.data.id;
         await dispatch(projectTaskActions.postProjectTask(projectTask));
       }
-
+      await dispatch(analyzeActions.selectProject(response.data.id));
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Created'));
       return dispatch({ type: projectActionTypes.CREATE_PROJECT_SUCCESS });
     } catch (e) {
@@ -57,8 +57,7 @@ export const postProject = project => {
     dispatch({ type: projectActionTypes.POST_PROJECT_REQUEST });
     try {
       const response = await endpoint.postProject(project);
-      const payload = normalize({ projects: [response.data] }, schemas.projectArray);
-    
+      const payload = normalize({ projects: [response.data] }, schemas.projectArray);    
       return dispatch({ type: projectActionTypes.POST_PROJECT_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
@@ -68,29 +67,46 @@ export const postProject = project => {
 };
 
 export const updateProject = project => {
-
-};
-export const putProject = project => {
   return async dispatch => {
     dispatch({ type: projectActionTypes.UPDATE_PROJECT_REQUEST });
     try {
-      const response = await endpoint.putProject(project.id,project);
-      const payload = normalize({ projects: [response.data] }, schemas.projectArray);
-
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Project Updated'),
-      );
-
-      return dispatch({
-        type: projectActionTypes.UPDATE_PROJECT_SUCCESS,
-        payload
-      });
+      const response = await dispatch(putProject(project));
+      
+      const { data } = await endpoint.getProjectTasksByProjectId(project);
+      console.log(data);
+      for(const projectTaskInDb of data){
+        if(!project.projectTasks.find(ele => ele.id === projectTaskInDb.id)){
+          await dispatch(projectTaskActions.deleteProjectTask(projectTaskInDb));
+        }
+      }
+      for(const projectTask of project.projectTasks){
+        if(projectTask.id){
+          projectTask.projectId = response.data.id;          
+          await dispatch(projectTaskActions.putProjectTask(projectTask));
+        }else{
+          projectTask.projectId = response.data.id;          
+          await dispatch(projectTaskActions.postProjectTask(projectTask));
+        }
+        
+      }
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Updated'));
+      return dispatch({ type: projectActionTypes.UPDATE_PROJECT_SUCCESS });
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: projectActionTypes.UPDATE_PROJECT_FAILURE,
-        payload: e
-      });
+      return dispatch({ type: projectActionTypes.UPDATE_PROJECT_FAILURE,payload: e });
+    }
+  };
+};
+export const putProject = project => {
+  return async dispatch => {
+    dispatch({ type: projectActionTypes.PUT_PROJECT_REQUEST });
+    try {
+      const response = await endpoint.putProject(project.id,project);
+      const payload = normalize({ projects: [response.data] }, schemas.projectArray);    
+      return dispatch({ type: projectActionTypes.PUT_PROJECT_SUCCESS,payload, data: response.data });
+    } catch (e) {
+      console.log(e);
+      return dispatch({ type: projectActionTypes.PUT_PROJECT_FAILURE,payload: e });
     }
   };
 };

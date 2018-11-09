@@ -17,7 +17,7 @@ class ShiftIndexContainer extends Component {
     this.props.getEmployees();
     this.props.getProjects();
     this.props.getTasks();
-    this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().format('MM-DD-YY HH:mm:ss'));
+    this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
   }
   render() {
     const { shifts, selectShift, setShiftStatus, selected } = this.props;
@@ -25,6 +25,7 @@ class ShiftIndexContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
+    console.log(shifts);
     return (
       <SortSelectTable
         selectLabel={selected => { return `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`; }}
@@ -41,7 +42,7 @@ class ShiftIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().format('MM-DD-YY HH:mm:ss') }),
+    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };

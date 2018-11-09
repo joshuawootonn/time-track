@@ -1,5 +1,6 @@
 {
   "name": "ProjectTask",
+  "forceId" : "false",
   "options": {
     "idInjection": false,
     "mysql": {

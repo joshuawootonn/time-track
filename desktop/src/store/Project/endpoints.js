@@ -17,3 +17,11 @@ export const putProject = (id, project) => {
 export const deleteProject = project => {
   return axios.delete(`${HOST}/${DOMAIN}/${project.id}`);
 };
+export const deleteRelatedProjectTasks = project => {
+  console.log(project);
+  return axios.delete(`${HOST}/${DOMAIN}/${project.id}/projecttasks`);
+};
+
+export const getProjectTasksByProjectId = project => {
+  return axios.get(`${HOST}/${DOMAIN}/${project.id}/projecttasks`);
+}

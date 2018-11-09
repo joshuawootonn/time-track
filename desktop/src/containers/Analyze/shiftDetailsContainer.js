@@ -39,6 +39,7 @@ class ShiftDetailsContainer extends Component {
             clockOutDate: moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm'),
             lunch: selected.lunch,
             activities: selected.activities.map(activity => {
+              console.log(activity)
               return {
                 ...activity,
                 projectId: activity.projectTask.projectId

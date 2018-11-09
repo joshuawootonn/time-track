@@ -20,7 +20,7 @@ const Select = ({ field, form, label, margin,
         // Fix for handleblur I was getting on deselect
         // https://github.com/jaredpalmer/formik/issues/640
         onBlur={event => {
-          console.log(event.target, field);
+          //console.log(event.target, field);
           event.target.name = field.name;
           form.handleBlur(event);
         }}               

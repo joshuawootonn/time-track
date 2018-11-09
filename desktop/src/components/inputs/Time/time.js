@@ -31,7 +31,7 @@ export class Time extends Component {
             label={label1}
             selectProps={{
               onChange: e => {
-                console.log(e.target.value, hoursValue);
+                //console.log(e.target.value, hoursValue);
                 this.props.form.setFieldValue(
                   name,
                   value + e.target.value - hoursValue,
