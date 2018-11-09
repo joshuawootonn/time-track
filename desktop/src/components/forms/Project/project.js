@@ -18,7 +18,7 @@ class Project extends Component {
   render() {
 
     const { classes, label, type, deleteProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
-    console.log(values.projectTasks);
+    console.log(values);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -185,7 +185,7 @@ class Project extends Component {
               <Button
                 type="submit"
                 color="primary"
-                disabled={isSubmitting}
+                disabled={isSubmitting || Object.keys(errors).length !== 0 }
                 variant="contained"
                 className={classes.button}
               >

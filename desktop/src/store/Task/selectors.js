@@ -20,15 +20,7 @@ export const getAllTasks = createSelector(
   },
 );
 
-export const getAllTaskObjects = createSelector(
-  getAllTasks,
-  tasks => {
-    // if the task array is empty
-    if (!tasks) return null;    
-    // reduce the task array to a object with id as they key
-    return Object.assign({}, ...tasks.map(object => ({ [object.id]: object })));    
-  },
-);
+
 
 export const getAllTasksWithContent = createSelector(
   getTasksFromEntities,
@@ -38,7 +30,7 @@ export const getAllTasksWithContent = createSelector(
   getSubcategoriesFromEntities,
   (tasks,results,dimensions,categories,subcategories) => {
     if(!results || results.size === 0) return null;
-    console.log(dimensions, categories);
+    //console.log(dimensions, categories);
     return results.map(taskId => {
       const task = tasks[taskId];
       return {
@@ -49,6 +41,16 @@ export const getAllTasksWithContent = createSelector(
       };
     });
   }
+);
+
+export const getAllTaskObjects = createSelector(
+  getAllTasksWithContent,
+  tasks => {
+    // if the task array is empty
+    if (!tasks) return null;    
+    // reduce the task array to a object with id as they key
+    return Object.assign({}, ...tasks.map(object => ({ [object.id]: object })));    
+  },
 );
 
 export const getSelectedTask = createSelector(

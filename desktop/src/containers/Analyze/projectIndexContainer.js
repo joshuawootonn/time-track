@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { projectActions, analyzeActions } from 'store/actions';
-import { projectSelectors } from 'store/selectors';
+import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -20,7 +20,7 @@ class ProjectIndexContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }  
-    console.log(selected); 
+    //console.log(selected); 
     return (
       <SortSelectTable 
         selectLabel={selected => {return `${selected.name} selected`;}}
@@ -38,7 +38,7 @@ class ProjectIndexContainer extends Component {
 const mapStateToProps = state => {
   return {
     projects: projectSelectors.getAllProjects(state),
-    selected: projectSelectors.getSelectedProject(state)
+    selected: projectTaskSelectors.getSelectedProject(state)
   };
 };
 const mapDispatchToProps = dispatch => {

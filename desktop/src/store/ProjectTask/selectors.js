@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { getAllTaskObjects } from 'store/Task/selectors';
-import { getAllProjectObjects } from 'store/Project/selectors';
+import { getAllProjectObjects,getProjectsFromEntities,getAnalyzeState } from 'store/Project/selectors';
 
 export const getProjectTasksFromEntities = state => state.entities.projectTasks;
 export const getProjectTasksFromResults = state => state.results.projectTasks;
@@ -36,4 +36,23 @@ export const getAllProjectTasksObjects = createSelector(
     })
     ));    
   },
+);
+
+
+export const getSelectedProject = createSelector(
+  getProjectsFromEntities,
+  getAnalyzeState,
+  getAllProjectTasks,
+  (projects,analyze,projectTasks) => {
+    if(analyze.project === -1)
+      return {};
+    else{
+      return {
+        ...projects[analyze.project],
+        projectTasks: projectTasks.filter(projectTask => {
+          return projectTask.projectId === projects[analyze.project].id;
+        })
+      };
+    }      
+  }
 );

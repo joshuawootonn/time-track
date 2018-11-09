@@ -6,6 +6,7 @@ export const getProjectsFromResults = state => state.results.projects;
 export const getAnalyzeState = state => state.analyze;
 
 
+
 export const getAllProjects = createSelector(
   getProjectsFromEntities,
   getProjectsFromResults,
@@ -26,17 +27,4 @@ export const getAllProjectObjects = createSelector(
     // reduce the task array to a object with id as they key
     return Object.assign({}, ...projects.map(object => ({ [object.id]: object })));
   },
-);
-
-
-export const getSelectedProject = createSelector(
-  getProjectsFromEntities,
-  getAnalyzeState,
-  (projects,analyze) => {
-    if(analyze.project === -1)
-      return {};
-    else{
-      return projects[analyze.project];
-    }      
-  }
 );

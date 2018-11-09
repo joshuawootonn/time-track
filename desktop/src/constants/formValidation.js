@@ -142,5 +142,4 @@ export const projectValidation = Yup.object().shape({
           .required('Postive numbers only')
       })
     )
-    .required('Task selection required')
 });

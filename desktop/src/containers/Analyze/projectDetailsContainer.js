@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
-import { projectSelectors,subcategorySelectors,categorySelectors,taskSelectors } from 'store/selectors';
+import { projectSelectors,subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
 import { projectActions,analyzeActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
@@ -20,7 +20,7 @@ class ProjectContainer extends Component {
   }
   render () {
     const { selected,status,categories,subcategories,tasks } = this.props;
-  
+    console.log('asdfasdfasdfas',selected,status);
     if(status === analyzeConstants.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -47,8 +47,7 @@ class ProjectContainer extends Component {
               name: values.name,
               isActive: values.isActive ? 1 : 0,
               date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
-              categoryId: Object.keys(categories)[0],
-              subcategoryId: -1                          
+              projectTasks: []                                     
             }).then(
               () => {
                 formikFunctions.resetForm();
@@ -85,7 +84,14 @@ class ProjectContainer extends Component {
           initialValues={{
             ...selected,
             isActive: selected.isActive ? true : false,
-            date: moment(selected.date).startOf('day').format('YYYY-MM-DD')
+            date: moment(selected.date).startOf('day').format('YYYY-MM-DD'),
+            projectTasks: selected.projectTasks.map(projectTask => {
+              return {
+                ...projectTask,
+                subcategoryId: projectTask.task.subcategoryId,
+                categoryId: projectTask.task.category.id
+              };
+            })
           }} 
           validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
@@ -127,18 +133,14 @@ class ProjectContainer extends Component {
       );
     }
 
-    return (
-      <div>
-        project
-      </div>
-    );
+    
   }
 }
 
 
 const mapStateToProps = state => {
   return {
-    selected: projectSelectors.getSelectedProject(state),
+    selected: projectTaskSelectors.getSelectedProject(state),
     status: state.analyze.projectStatus,
     categories: categorySelectors.getAllCategories(state),
     subcategories: subcategorySelectors.getAllSubcategories(state),
