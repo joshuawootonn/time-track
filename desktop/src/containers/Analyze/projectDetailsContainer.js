@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
-import { projectSelectors } from 'store/selectors';
+import { projectSelectors,subcategorySelectors,categorySelectors,taskSelectors } from 'store/selectors';
 import { projectActions,analyzeActions } from 'store/actions';
 import * as analyzeConstants from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
@@ -19,7 +19,7 @@ class ProjectContainer extends Component {
     deleteProject(selected);
   }
   render () {
-    const { selected,status } = this.props;
+    const { selected,status,categories,subcategories,tasks } = this.props;
   
     if(status === analyzeConstants.INIT){
       return (
@@ -36,7 +36,8 @@ class ProjectContainer extends Component {
           initialValues={{
             name: '',
             isActive: true,
-            date: moment().startOf('day').format('YYYY-MM-DD')
+            date: moment().startOf('day').format('YYYY-MM-DD'),
+            projectTasks: []
           }}
           validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
@@ -45,7 +46,10 @@ class ProjectContainer extends Component {
             createProject({
               name: values.name,
               isActive: values.isActive ? 1 : 0,
-              date: moment(values.date).format('MM-DD-YY HH:mm:ss')
+              date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
+              categoryId: Object.keys(categories)[0],
+              subcategoryId: -1
+                          
             }).then(
               () => {
                 formikFunctions.resetForm();
@@ -65,6 +69,9 @@ class ProjectContainer extends Component {
               <Project 
                 label="Add"
                 type="add"
+                categories={categories}
+                subcategories={subcategories}
+                tasks={tasks}
                 {...formikProps}              
               />
             );
@@ -109,6 +116,9 @@ class ProjectContainer extends Component {
               <Project
                 label="Edit"
                 type="edit"
+                categories={categories}
+                subcategories={subcategories}
+                tasks={tasks}
                 deleteProject={this.deleteProject}
                 {...formikProps}
               />
@@ -130,7 +140,10 @@ class ProjectContainer extends Component {
 const mapStateToProps = state => {
   return {
     selected: projectSelectors.getSelectedProject(state),
-    status: state.analyze.projectStatus    
+    status: state.analyze.projectStatus,
+    categories: categorySelectors.getAllCategories(state),
+    subcategories: subcategorySelectors.getAllSubcategories(state),
+    tasks: taskSelectors.getAllTasksWithContent(state)   
   };
 };
 
