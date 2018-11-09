@@ -14,9 +14,22 @@ export const DELETE_EMPLOYEE_REQUEST = 'delete_employee_request';
 export const DELETE_EMPLOYEE_SUCCESS = 'delete_employee_success';
 export const DELETE_EMPLOYEE_FAILURE = 'delete_employee_failure';
 
+
+
+
+
+
+
+
 export const LOGIN_EMPLOYEE_REQUEST = 'login_employee_request';
 export const LOGIN_EMPLOYEE_SUCCESS = 'login_employee_success';
 export const LOGIN_EMPLOYEE_FAILURE = 'login_employee_failure';
+
+
+
+
+
+
 
 export const CLOCKIN_EMPLOYEE_REQUEST = 'clockin_employee_request';
 export const CLOCKIN_EMPLOYEE_SUCCESS = 'clockin_employee_success';
