@@ -1,5 +1,5 @@
 import * as userActionTypes from './user';
-import * as shiftActionTypes from './shift';
+import shiftActionTypes from './shift';
 import * as snackActionTypes from './snack';
 import * as employeeActionTypes from './employee';
 import * as crewActionTypes from './crew';

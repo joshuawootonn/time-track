@@ -30,7 +30,7 @@ export const getShift = id => {
 
 export const postShift = shift => {
   return async dispatch => {
-    dispatch({ type: shiftActionTypes.SHIFT_POST_REQUEST });
+    dispatch({ type: shiftActionTypes.POST_SHIFT_REQUEST });
     try {
       const response = await endpoint.postShift(shift);
       //console.log('post',response.data);
@@ -39,11 +39,11 @@ export const postShift = shift => {
         schemas.shiftArray,
       );
       //console.log('post',payload);
-      return dispatch({ type: shiftActionTypes.SHIFT_POST_SUCCESS,payload, data: response.data });
+      return dispatch({ type: shiftActionTypes.POST_SHIFT_SUCCESS,payload, data: response.data });
     } catch (e) {
       console.log(e);
       return dispatch({
-        type: shiftActionTypes.SHIFT_POST_FAILURE,
+        type: shiftActionTypes.POST_SHIFT_FAILURE,
         payload: e
       });
     }
@@ -118,9 +118,8 @@ export const getShiftsInRange = (startTime,endTime) => {
 
 export const addShift = (shift,activities) => {
   return  async dispatch => {
-    dispatch({ type: shiftActionTypes.ADD_SHIFT_REQUEST });
+    dispatch({ type: shiftActionTypes.CREATE_SHIFT_REQUEST });
     try {
-      //console.log(shift,activities);
 
       const clockInMoment = moment(shift.clockInDate);
       const clockOutMoment = moment(shift.clockOutDate);
@@ -147,12 +146,12 @@ export const addShift = (shift,activities) => {
       await dispatch(analyzeActions.selectShift(response.data.id));
     
       dispatch(snackActions.openSnack(status.SUCCESS, 'Shift add success!'));
-      return dispatch({ type: shiftActionTypes.ADD_SHIFT_SUCCESS });
+      return dispatch({ type: shiftActionTypes.CREATE_SHIFT_SUCCESS });
     } catch (e) {
       console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Shift add failed!'));
       return dispatch({
-        type: shiftActionTypes.ADD_SHIFT_FAILURE,
+        type: shiftActionTypes.CREATE_SHIFT_FAILURE,
         payload: e
       });
     }

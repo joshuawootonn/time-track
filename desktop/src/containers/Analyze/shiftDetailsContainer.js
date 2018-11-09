@@ -13,6 +13,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
+import shiftActionTypes from 'constants/ActionTypes/shift';
 
 class ShiftDetailsContainer extends Component {
   deleteShift = () => {
@@ -20,6 +21,7 @@ class ShiftDetailsContainer extends Component {
     deleteShift(selected);
   };
   render () {
+    console.log(shiftActionTypes);
     const { selected,status,projects,projectTasks,employees } = this.props;
     //console.log('asdfasdfasdfas',selected,status);
     if(status === analyzeConstants.INIT){
@@ -39,7 +41,7 @@ class ShiftDetailsContainer extends Component {
             clockOutDate: moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm'),
             lunch: selected.lunch,
             activities: selected.activities.map(activity => {
-              console.log(activity)
+              console.log(activity);
               return {
                 ...activity,
                 projectId: activity.projectTask.projectId
@@ -112,6 +114,7 @@ class ShiftDetailsContainer extends Component {
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
             const { addShift } = this.props;
+            console.log(addShift,'asdf');
             addShift(values,values.activities).then(
               () => {
                 formikFunctions.resetForm();
