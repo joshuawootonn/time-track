@@ -18,7 +18,7 @@ export const createCRUDActionTypes = (domain,pluralDomain) => {
   };
 };
 
-export const createCustomActionTypes = (domain,type) => {
+export const createCustomAsyncActionType = (domain,type) => {
   return {
     [`${type.toUpperCase()}_${domain.toUpperCase()}_REQUEST`]: `${type.toLowerCase()}_${domain.toLowerCase()}_request`,
     [`${type.toUpperCase()}_${domain.toUpperCase()}_SUCCESS`]: `${type.toLowerCase()}_${domain.toLowerCase()}_success`,
@@ -26,7 +26,14 @@ export const createCustomActionTypes = (domain,type) => {
   };
 };
 
+export const createCustomSyncActionType = (domain,type) => {
+  return {
+    [`${type.toUpperCase()}_${domain.toUpperCase()}`]: `${type.toLowerCase()}_${domain.toLowerCase()}`    
+  };
+};
+
 export default {
-  createCustomActionTypes,
+  createCustomAsyncActionType,
+  createCustomSyncActionType,
   createCRUDActionTypes
 };
