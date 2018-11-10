@@ -17,11 +17,9 @@ class ProjectIndexContainer extends Component {
   render () {
     const { projects,select,setStatus,selected } = this.props;
     const isLoading = !projects;
-    //console.log(projects);
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }  
-    //console.log(selected); 
     return (
       <SortSelectTable 
         selectLabel={selected => {return `${selected.name} selected`;}}
@@ -46,16 +44,15 @@ const mapDispatchToProps = dispatch => {
   return {
     getProjects: () => {
       return dispatch(projectActions.getProjects());
-    },
-    
+    },    
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 ProjectIndexContainer.propTypes ={ 
   projects: PropTypes.array,
   getProjects: PropTypes.func.isRequired,
-  selectProject: PropTypes.func.isRequired,
-  setProjectStatus: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
 };
 

@@ -1,6 +1,6 @@
-import { employeeActionTypes, taskActionTypes, projectActionTypes, shiftActionTypes, categoryActionTypes, subcategoryActionTypes } from 'constants/actionTypeConstants';
+
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
-import { analyzeStatus, domains } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 
 const selectedInitialState = {
   employee: -1,
@@ -21,7 +21,6 @@ const selectedInitialState = {
   subcategoryStatus: analyzeStatus.INIT
 };
 export default (state = selectedInitialState, action) => {
-  console.log(action);
   switch (action.type) {
   case analyzeActionTypes.SELECT:
     if (state[action.domain] !== -1 && state[action.domain] === action.payload) {

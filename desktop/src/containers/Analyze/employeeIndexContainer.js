@@ -58,8 +58,8 @@ EmployeeContainer.propTypes = {
   employees: PropTypes.array.isRequired,
   getEmployees: PropTypes.func.isRequired,
   selected: PropTypes.object,
-  selectEmployee: PropTypes.func.isRequired,
-  setEmployeeStatus: PropTypes.func.isRequired
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired
 };
 
 export default connect(

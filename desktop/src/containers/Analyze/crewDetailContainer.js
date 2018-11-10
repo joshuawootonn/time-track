@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { crewActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import { crewValidation } from 'constants/formValidation';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 import Crew from 'components/forms/Crew';
 
 import Hero from 'components/layouts/Hero';

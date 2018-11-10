@@ -62,7 +62,6 @@ export const getSelectedShift = createSelector(
         ...shifts[analyze.shift],
         employee: shifts[analyze.shift] && employees[shifts[analyze.shift].employeeId],
         activities: shifts[analyze.shift] && shifts[analyze.shift].activities && shifts[analyze.shift].activities.map(activityId => {
-          console.log(projectTasks,activities[activityId]);
           return {
             ...activities[activityId],
             projectTask: projectTasks[activities[activityId].projectTaskId]

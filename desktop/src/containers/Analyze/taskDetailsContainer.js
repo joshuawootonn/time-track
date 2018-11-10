@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 import { analyzeActions, taskActions, categoryActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';

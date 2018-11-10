@@ -48,9 +48,9 @@ const mapDispatchToProps = dispatch => {
 CategoryIndexContainer.propTypes = {
   getCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  selectCategory: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired,
-  setCategoryStatus:PropTypes.func.isRequired
+  setStatus:PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndexContainer);

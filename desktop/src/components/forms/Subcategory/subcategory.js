@@ -92,7 +92,8 @@ Crew.propTypes = {
   errors: PropTypes.object.isRequired,
   deleteCategory: PropTypes.func,
   type: PropTypes.string.isRequired,
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  deleteSubcategory: PropTypes.func.isRequired
 };
 
 

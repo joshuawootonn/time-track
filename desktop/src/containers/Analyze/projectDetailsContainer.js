@@ -5,9 +5,9 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
-import { projectSelectors,subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
+import { subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
 import { projectActions,analyzeActions } from 'store/actions';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
 import { projectValidation } from 'constants/formValidation';
@@ -20,7 +20,7 @@ class ProjectContainer extends Component {
   }
   render () {
     const { selected,status,categories,subcategories,tasks } = this.props;
-    console.log('asdfasdfasdfas',selected,status);
+  
     if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>

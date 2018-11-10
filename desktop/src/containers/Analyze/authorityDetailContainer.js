@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { authorityActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import { authorityValidation } from 'constants/formValidation';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 import Authority from 'components/forms/Authority';
 
 import Hero from 'components/layouts/Hero';
@@ -38,7 +38,7 @@ class AuthorityDetailContainer extends Component {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
               },
-              e => {
+              () => {
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
               }

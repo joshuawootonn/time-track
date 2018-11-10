@@ -65,7 +65,7 @@ export const deleteProjectTask = projectTask => {
   return async dispatch => {
     dispatch({ type: projectTaskActionTypes.DELETE_PROJECT_TASKS_REQUEST });
     try {
-      const response = await endpoint.deleteProjectTask(projectTask);
+      await endpoint.deleteProjectTask(projectTask);
       const deleted = {
         entities:{
           projectTasks: [projectTask.id]

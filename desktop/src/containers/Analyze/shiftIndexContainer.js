@@ -26,7 +26,6 @@ class ShiftIndexContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
     }
-    console.log(shifts);
     return (
       <SortSelectTable
         selectLabel={selected => { return `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`; }}
@@ -72,8 +71,8 @@ ShiftIndexContainer.propTypes = {
   getEmployees: PropTypes.func.isRequired,
   getProjects: PropTypes.func.isRequired,
   getTasks: PropTypes.func.isRequired,
-  selectShift: PropTypes.func.isRequired,
-  setShiftStatus: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
 };
 

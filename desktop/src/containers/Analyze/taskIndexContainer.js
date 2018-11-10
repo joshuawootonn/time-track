@@ -19,7 +19,7 @@ class TaskIndexContainer extends Component {
 
   render() {
     const { tasks, selected, select,setStatus } = this.props;
-    console.log(this.props);
+    
     const isLoading = !tasks;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
@@ -58,8 +58,8 @@ TaskIndexContainer.propTypes = {
   tasks: PropTypes.array,
   getTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
-  selectTask: PropTypes.func.isRequired,
-  setTaskStatus: PropTypes.func.isRequired
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired
 };
 
 export default connect(

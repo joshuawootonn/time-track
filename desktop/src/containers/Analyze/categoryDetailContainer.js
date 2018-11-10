@@ -5,11 +5,11 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
 import Category from 'components/forms/Category';
-import { authoritySelectors, crewSelectors,employeeSelectors, categorySelectors } from 'store/selectors';
-import { employeeActions,authorityActions, crewActions, categoryActions } from 'store/actions';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { categorySelectors } from 'store/selectors';
+import { categoryActions } from 'store/actions';
+import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
-import { employeeValidation, categoryValidation } from 'constants/formValidation';
+import { categoryValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   

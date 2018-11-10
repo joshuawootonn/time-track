@@ -49,8 +49,8 @@ const mapDispatchToProps = dispatch => {
 AuthorityIndexContainer.propTypes = {
   getSubcategories: PropTypes.func.isRequired,
   subcategories: PropTypes.array.isRequired,
-  selectSubcategory: PropTypes.func.isRequired,
-  setSubcategoryStatus: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 

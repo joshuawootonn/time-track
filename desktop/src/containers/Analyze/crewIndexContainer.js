@@ -7,7 +7,7 @@ import { crewActions,analyzeActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeDomain } from 'constants/analyze';
 
 class CrewIndexContainer extends Component {
   componentDidMount = () => {
@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => {
 CrewIndexContainer.propTypes = {
   getCrews: PropTypes.func.isRequired,
   crews: PropTypes.array.isRequired,
-  selectCrew: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 

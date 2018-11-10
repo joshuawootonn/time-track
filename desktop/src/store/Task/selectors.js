@@ -30,7 +30,6 @@ export const getAllTasksWithContent = createSelector(
   getSubcategoriesFromEntities,
   (tasks,results,dimensions,categories,subcategories) => {
     if(!results || results.size === 0) return null;
-    //console.log(dimensions, categories);
     return results.map(taskId => {
       const task = tasks[taskId];
       return {

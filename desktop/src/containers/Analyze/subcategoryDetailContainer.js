@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 import Subcategory from 'components/forms/Subcategory';
 import { subcategorySelectors,categorySelectors } from 'store/selectors';
 import {  subcategoryActions } from 'store/actions';
-import { analyzeStatus,analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { subcategoryValidation } from 'constants/formValidation';
 

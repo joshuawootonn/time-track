@@ -9,7 +9,6 @@ import { Delete, Close } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
 import Switch from 'components/inputs/Switch';
-import Time from 'components/inputs/Time';
 import Select from 'components/inputs/Select';
 import styles from './styles';
 
@@ -18,7 +17,7 @@ class Project extends Component {
   render() {
 
     const { classes, label, type, deleteProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
-    console.log(values);
+ 
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
