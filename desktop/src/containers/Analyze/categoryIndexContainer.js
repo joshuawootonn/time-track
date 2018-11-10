@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { categoryActions,analyzeActions } from 'store/actions';
 import { categorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class CategoryIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getCategories();
   }
   render () {
-    const { categories,selectCategory,selected,setCategoryStatus } = this.props;    
+    const { categories,select,selected,setStatus } = this.props;    
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.type} selected`;}}
@@ -21,8 +22,8 @@ class CategoryIndexContainer extends Component {
         tableData={categories}
         headerData={rows}
         selected={selected}
-        select={selectCategory}        
-        add={() => {setCategoryStatus(analyzeStatus.ADDING);}}
+        select={object =>select(analyzeDomain.CATEGORY,object)}        
+        add={() => {setStatus(analyzeStatus.ADDING);}}
       />
     );
   }
@@ -40,12 +41,7 @@ const mapDispatchToProps = dispatch => {
     getCategories: () => {
       return dispatch(categoryActions.getCategories());
     },
-    selectCategory: category => {
-      return dispatch(analyzeActions.selectCategory(category));
-    },
-    setCategoryStatus: status => {
-      return dispatch(analyzeActions.setCategoryStatus(status));
-    }
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

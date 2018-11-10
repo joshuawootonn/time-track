@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { authorityActions,analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
@@ -13,8 +14,8 @@ class AuthorityIndexContainer extends Component {
     this.props.getAuthorities();
   }
   render () {
-    const { authorities,selectAuthority,selected } = this.props;
-    console.log(authorities);
+    const { authorities,select,selected } = this.props;
+    console.log(this.props);
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.type} selected`;}}
@@ -22,7 +23,7 @@ class AuthorityIndexContainer extends Component {
         tableData={authorities}
         headerData={rows}
         selected={selected}
-        select={selectAuthority}
+        select={object =>select(analyzeDomain.AUTHORITY,object)}
       />
     );
   }
@@ -40,12 +41,7 @@ const mapDispatchToProps = dispatch => {
     getAuthorities: () => {
       return dispatch(authorityActions.getAuthorities());
     },
-    selectAuthority: authority => {
-      return dispatch(analyzeActions.select(analyzeDomain.AUTHORITY,authority));
-    },
-    setAuthorityStatus: status => {
-      return dispatch(analyzeActions.setStatus(analyzeDomain.AUTHORITY,status));
-    }
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

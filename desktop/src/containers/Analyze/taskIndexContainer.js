@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 
 import { taskActions, analyzeActions } from 'store/actions';
 import { taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class TaskIndexContainer extends Component {
   
@@ -16,8 +18,8 @@ class TaskIndexContainer extends Component {
   };
 
   render() {
-    const { tasks, selected, selectTask,setTaskStatus } = this.props;
-
+    const { tasks, selected, select,setStatus } = this.props;
+    console.log(this.props);
     const isLoading = !tasks;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
@@ -29,8 +31,8 @@ class TaskIndexContainer extends Component {
         tableData={tasks}
         headerData={rows}
         selected={selected}
-        select={selectTask}
-        add={() => {setTaskStatus(analyzeStatus.ADDING);}}
+        select={object =>select(analyzeDomain.TASK,object)}
+        add={() => {setStatus(analyzeDomain.TASK,analyzeStatus.ADDING);}}
       />
     );
   }
@@ -47,13 +49,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getTasks: () => {
       return dispatch(taskActions.getTasks());
-    },
-    selectTask: task => {
-      return dispatch(analyzeActions.selectTask(task));
-    },
-    setTaskStatus: status => {
-      return dispatch(analyzeActions.setTaskStatus(status));
-    }
+    },    
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

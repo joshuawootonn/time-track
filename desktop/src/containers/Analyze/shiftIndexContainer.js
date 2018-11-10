@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
 
@@ -9,7 +10,7 @@ import { shiftSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class ShiftIndexContainer extends Component {
   componentDidMount = () => {
@@ -20,7 +21,7 @@ class ShiftIndexContainer extends Component {
     this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
   }
   render() {
-    const { shifts, selectShift, setShiftStatus, selected } = this.props;
+    const { shifts, select,setStatus, selected } = this.props;
     const isLoading = !shifts;
     if (isLoading) {
       return <Progress variant="circular" fullWidth fullHeight />;
@@ -33,8 +34,8 @@ class ShiftIndexContainer extends Component {
         tableData={shifts}
         headerData={rows}
         selected={selected}
-        select={selectShift}
-        add={() => setShiftStatus(analyzeStatus.ADDING)}
+        select={object =>select(analyzeDomain.SHIFT,object)}
+        add={() => setStatus(analyzeDomain.SHIFT,analyzeStatus.ADDING)}
       />
     );
   }
@@ -60,12 +61,8 @@ const mapDispatchToProps = dispatch => {
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
     },
-    selectShift: shift => {
-      return dispatch(analyzeActions.selectShift(shift));
-    },
-    setShiftStatus: status => {
-      return dispatch(analyzeActions.setShiftStatus(status));
-    }
+    
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { crewActions,analyzeActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class CrewIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getCrews();
   }
   render () {
-    const { crews,selectCrew,selected } = this.props; 
+    const { crews,select,selected } = this.props; 
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.name} selected`;}}
@@ -20,7 +22,7 @@ class CrewIndexContainer extends Component {
         tableData={crews}
         headerData={rows}
         selected={selected}
-        select={selectCrew}
+        select={object =>select(analyzeDomain.CREW,object)}
       />
     );
   }
@@ -38,12 +40,7 @@ const mapDispatchToProps = dispatch => {
     getCrews: () => {
       return dispatch(crewActions.getCrews());
     },
-    selectCrew: crew => {
-      return dispatch(analyzeActions.selectCrew(crew));
-    },
-    setCrewStatus: status => {
-      return dispatch(analyzeActions.setCrewStatus(status));
-    }
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

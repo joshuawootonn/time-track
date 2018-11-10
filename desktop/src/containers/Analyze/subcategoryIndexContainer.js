@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { analyzeActions, subcategoryActions } from 'store/actions';
 import { subcategorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getSubcategories();
   }
   render() {
-    const { subcategories, selectSubcategory, selected, setSubcategoryStatus } = this.props;
+    const { subcategories, select, selected, setStatus } = this.props;
 
     return (
       <SortSelectTable
@@ -22,8 +23,8 @@ class AuthorityIndexContainer extends Component {
         tableData={subcategories}
         headerData={rows}
         selected={selected}
-        select={selectSubcategory}
-        add={() => { setSubcategoryStatus(analyzeStatus.ADDING); }}
+        select={object =>select(analyzeDomain.SUBCATEGORY,object)}
+        add={() => { setStatus(analyzeDomain.AUTHORITY, analyzeStatus.ADDING); }}
       />
     );
   }
@@ -41,12 +42,7 @@ const mapDispatchToProps = dispatch => {
     getSubcategories: () => {
       return dispatch(subcategoryActions.getSubcategories());
     },
-    selectSubcategory: authority => {
-      return dispatch(analyzeActions.selectSubcategory(authority));
-    },
-    setSubcategoryStatus: status => {
-      return dispatch(analyzeActions.setSubcategoryStatus(status));
-    }
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 

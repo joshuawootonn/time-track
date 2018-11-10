@@ -64,7 +64,7 @@ class EnhancedTable extends React.Component {
   };
 
   handleClick = (event, id) => {
-    const { tableData,select } = this.props;
+    const { tableData,select, analyzeDomain } = this.props;
     select(tableData.find(ele => {return ele.id === id;}).id);  
   }; 
 
@@ -148,7 +148,8 @@ EnhancedTable.propTypes = {
   select: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  selectLabel: PropTypes.func.isRequired
+  selectLabel: PropTypes.func.isRequired,
+  analyzeDomain: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(EnhancedTable);

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { projectActions, analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class ProjectIndexContainer extends Component {
   componentDidMount = () => {
     this.props.getProjects();
   }
   render () {
-    const { projects,selectProject,setProjectStatus,selected } = this.props;
+    const { projects,select,setStatus,selected } = this.props;
     const isLoading = !projects;
     //console.log(projects);
     if (isLoading) {
@@ -28,8 +29,8 @@ class ProjectIndexContainer extends Component {
         tableData={projects}
         headerData={rows}
         selected={selected}
-        select={selectProject}
-        add={()=> setProjectStatus(analyzeStatus.ADDING)}
+        select={object =>select(analyzeDomain.PROJECT,object)}
+        add={()=> setStatus(analyzeDomain.PROJECT,analyzeStatus.ADDING)}
       />
     );
   }
@@ -46,12 +47,8 @@ const mapDispatchToProps = dispatch => {
     getProjects: () => {
       return dispatch(projectActions.getProjects());
     },
-    selectProject: project => {
-      return dispatch(analyzeActions.selectProject(project));
-    },
-    setProjectStatus: status => {
-      return dispatch(analyzeActions.setProjectStatus(status));
-    }
+    
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 ProjectIndexContainer.propTypes ={ 

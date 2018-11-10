@@ -21,6 +21,7 @@ const selectedInitialState = {
   subcategoryStatus: analyzeStatus.INIT
 };
 export default (state = selectedInitialState, action) => {
+  console.log(action);
   switch (action.type) {
   case analyzeActionTypes.SELECT:
     if (state[action.domain] !== -1 && state[action.domain] === action.payload) {
@@ -33,7 +34,7 @@ export default (state = selectedInitialState, action) => {
       return {
         ...state,
         [action.domain]: action.payload,
-        [`${action.domain}Status`]: analyzeStatus.INIT
+        [`${action.domain}Status`]: analyzeStatus.EDITING
       };
     }
     return state;

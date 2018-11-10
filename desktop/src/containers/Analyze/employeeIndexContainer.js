@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { employeeActions, analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 
 class EmployeeContainer extends Component {
   
@@ -16,7 +17,7 @@ class EmployeeContainer extends Component {
   };
 
   render() {
-    const { employees, selected, selectEmployee,setEmployeeStatus } = this.props;
+    const { employees, selected, select,setStatus } = this.props;
 
     const isLoading = !employees;
     if (isLoading) {
@@ -30,8 +31,8 @@ class EmployeeContainer extends Component {
         tableData={employees}
         headerData={rows}
         selected={selected}
-        select={selectEmployee}
-        add={() => {setEmployeeStatus(analyzeStatus.ADDING);}}
+        select={object =>select(analyzeDomain.EMPLOYEE,object)}
+        add={() => {setStatus(analyzeDomain.EMPLOYEE,analyzeStatus.ADDING);}}
       />
     );
   }
@@ -48,13 +49,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getEmployees: () => {
       return dispatch(employeeActions.getEmployees());
-    },
-    selectEmployee: employee => {
-      return dispatch(analyzeActions.selectEmployee(employee));
-    },
-    setEmployeeStatus: status => {
-      return dispatch(analyzeActions.setEmployeeStatus(status));
-    }
+    },    
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 
