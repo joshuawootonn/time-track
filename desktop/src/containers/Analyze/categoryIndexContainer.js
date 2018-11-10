@@ -6,7 +6,7 @@ import { categoryActions,analyzeActions } from 'store/actions';
 import { categorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import * as analyzeStatus from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 
 class CategoryIndexContainer extends Component {
   componentDidMount = () => {

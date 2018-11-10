@@ -24,4 +24,4 @@ export const deleteRelatedProjectTasks = project => {
 
 export const getProjectTasksByProjectId = project => {
   return axios.get(`${HOST}/${DOMAIN}/${project.id}/projecttasks`);
-}
+};

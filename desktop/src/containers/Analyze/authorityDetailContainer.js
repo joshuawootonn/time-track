@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { authorityActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import { authorityValidation } from 'constants/formValidation';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import Authority from 'components/forms/Authority';
 
 import Hero from 'components/layouts/Hero';
@@ -14,14 +14,14 @@ import Hero from 'components/layouts/Hero';
 class AuthorityDetailContainer extends Component {
   render() {
     const { selected,status } = this.props;
-    if(status === analyzeConstants.INIT) {
+    if(status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography  variant="h6">Select a Authority.. </Typography>
         </Hero>
       );
     }
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize
@@ -41,8 +41,6 @@ class AuthorityDetailContainer extends Component {
               e => {
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
-                //formikFunctions.setErrors({ submit: e });
-                console.log('asdf', e);
               }
             );
           }}

@@ -21,7 +21,10 @@ const analyzeActionTypes = {
   SELECT_CATEGORY: 'select_category',
   SET_CATEGORY_STATUS: 'set_category_status',  
   SELECT_SUBCATEGORY: 'select_subcategory',
-  SET_SUBCATEGORY_STATUS: 'set_subcategory_status'
+  SET_SUBCATEGORY_STATUS: 'set_subcategory_status',
+  SELECT: 'select_domain',
+  SET_STATUS: 'set_domain_status',
+  DELETE_SELECTED: 'delete_selected'
 }; 
 
 const authorityActionTypes = {

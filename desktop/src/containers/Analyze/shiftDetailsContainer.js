@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import moment from 'moment';
 
 import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors } from 'store/selectors';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import { shiftActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -22,14 +22,14 @@ class ShiftDetailsContainer extends Component {
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
     //console.log('asdfasdfasdfas',selected,status);
-    if(status === analyzeConstants.INIT){
+    if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Shift.. </Typography>
         </Hero>
       );
     }
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize
@@ -91,7 +91,7 @@ class ShiftDetailsContainer extends Component {
         />
       );
     }
-    if(status === analyzeConstants.ADDING){
+    if(status === analyzeStatus.ADDING){
       return (
         <Formik
           enableReinitialize

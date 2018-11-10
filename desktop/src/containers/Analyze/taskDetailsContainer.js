@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import { analyzeActions, taskActions, categoryActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
@@ -19,7 +19,7 @@ class TaskDetailsContainer extends Component {
   }
   render() {
     const { status,categories,subcategories,selected,editCategoriesModal } = this.props;
-    if(status === analyzeConstants.INIT){
+    if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Task.. </Typography>
@@ -27,7 +27,7 @@ class TaskDetailsContainer extends Component {
       );
     }
     //console.log('container: ',this.props);
-    if(status === analyzeConstants.ADDING){
+    if(status === analyzeStatus.ADDING){
       return (
         <Formik 
           enableReinitialize
@@ -74,7 +74,7 @@ class TaskDetailsContainer extends Component {
         />
       );
     }
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik 
           enableReinitialize

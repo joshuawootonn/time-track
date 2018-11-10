@@ -8,7 +8,7 @@ export const getSubcategories = () => {
 };
 
 export const putSubcategory = (id, subcategory) => {
-  console.log({...subcategory})
+  console.log({ ...subcategory });
   return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...subcategory });
 };
 

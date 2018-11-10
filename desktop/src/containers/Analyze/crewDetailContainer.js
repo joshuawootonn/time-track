@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { crewActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import { crewValidation } from 'constants/formValidation';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import Crew from 'components/forms/Crew';
 
 import Hero from 'components/layouts/Hero';
@@ -14,14 +14,14 @@ import Hero from 'components/layouts/Hero';
 class CrewDetailContainer extends Component {
   render() {
     const { selected,status } = this.props;
-    if(status === analyzeConstants.INIT) {
+    if(status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography  variant="h6">Select a Crew.. </Typography>
         </Hero>
       );
     }
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize

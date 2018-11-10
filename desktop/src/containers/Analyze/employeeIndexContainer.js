@@ -7,7 +7,7 @@ import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import * as analyzeStatus from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 
 class EmployeeContainer extends Component {
   

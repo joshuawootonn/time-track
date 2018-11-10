@@ -6,6 +6,7 @@ import { authorityActions,analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
@@ -40,10 +41,10 @@ const mapDispatchToProps = dispatch => {
       return dispatch(authorityActions.getAuthorities());
     },
     selectAuthority: authority => {
-      return dispatch(analyzeActions.selectAuthority(authority));
+      return dispatch(analyzeActions.select(analyzeDomain.AUTHORITY,authority));
     },
     setAuthorityStatus: status => {
-      return dispatch(analyzeActions.setAuthorityStatus(status));
+      return dispatch(analyzeActions.setStatus(analyzeDomain.AUTHORITY,status));
     }
   };
 };

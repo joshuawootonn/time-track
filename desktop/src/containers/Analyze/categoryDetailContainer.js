@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 import Category from 'components/forms/Category';
 import { authoritySelectors, crewSelectors,employeeSelectors, categorySelectors } from 'store/selectors';
 import { employeeActions,authorityActions, crewActions, categoryActions } from 'store/actions';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { employeeValidation, categoryValidation } from 'constants/formValidation';
 
@@ -21,7 +21,7 @@ class EmployeeEditContainer extends Component {
   render() {
     const { selected,status } = this.props;
 
-    if(status === analyzeConstants.INIT){
+    if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Category.. </Typography>
@@ -29,7 +29,7 @@ class EmployeeEditContainer extends Component {
       );
     }
             
-    if(status === analyzeConstants.ADDING ){
+    if(status === analyzeStatus.ADDING ){
       return (
         <Formik
           enableReinitialize
@@ -67,7 +67,7 @@ class EmployeeEditContainer extends Component {
       );
     } 
       
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize

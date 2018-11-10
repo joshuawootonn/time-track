@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import { projectSelectors,subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
 import { projectActions,analyzeActions } from 'store/actions';
-import * as analyzeConstants from 'constants/analyze';
+import { analyzeStatus,analyzeDomain } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
 import { projectValidation } from 'constants/formValidation';
@@ -21,7 +21,7 @@ class ProjectContainer extends Component {
   render () {
     const { selected,status,categories,subcategories,tasks } = this.props;
     console.log('asdfasdfasdfas',selected,status);
-    if(status === analyzeConstants.INIT){
+    if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Project.. </Typography>
@@ -29,7 +29,7 @@ class ProjectContainer extends Component {
       );
     }
     
-    if(status === analyzeConstants.ADDING){
+    if(status === analyzeStatus.ADDING){
       return (
         <Formik
           enableReinitialize
@@ -77,7 +77,7 @@ class ProjectContainer extends Component {
         /> 
       );
     }
-    if(status === analyzeConstants.EDITING){
+    if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize

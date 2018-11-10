@@ -6,7 +6,7 @@ import { analyzeActions, subcategoryActions } from 'store/actions';
 import { subcategorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import * as analyzeStatus from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {

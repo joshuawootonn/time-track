@@ -30,7 +30,7 @@ export const getCategories = () => {
 
 export const editCategoriesModal = () => {  
   return modalActions.openModal(categoryActionTypes.EDIT_CATEGORIES_MODAL, null);
-}
+};
 
 
 export const putCategory = category => {
