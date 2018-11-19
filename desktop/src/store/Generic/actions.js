@@ -46,6 +46,7 @@ export const post = (domain, object) => {
   return async dispatch => {    
     dispatch({ type: `post_${domain.singular}_request` });
     try {      
+      console.log(`${domain.singular}Endpoints`,endpoints[`${domain.singular}Endpoints`]);
       const response = await endpoints[`${domain.singular}Endpoints`].default.post(object);
       const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
       return dispatch({ type: `post_${domain.singular}_success`, payload });

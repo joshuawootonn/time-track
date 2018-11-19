@@ -25,6 +25,7 @@ class TaskIndexContainer extends Component {
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
     }   
+    console.log(tasks);
     return (
       <SortSelectTable
         selectLabel={selected => {return `${selected.name} selected`;}}

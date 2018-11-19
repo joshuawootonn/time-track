@@ -32,6 +32,7 @@ export const createSubcategory = subcategory => {
   return async dispatch => {
     dispatch({ type: subcategoryActionTypes.CREATE_SUBCATEGORY_REQUEST });
     try {
+      console.log(typeof genericActions.post,subcategory)
       await dispatch(genericActions.post(domains.SUBCATEGORY,subcategory));
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Created'));
       return dispatch({ type: subcategoryActionTypes.CREATE_SUBCATEGORY_SUCCESS });      
@@ -47,7 +48,7 @@ export const removeSubcategory = id => {
     dispatch({ type: subcategoryActionTypes.REMOVE_SUBCATEGORY_REQUEST });
     try {
       await dispatch(analyzeActions.deleteSelected(domains.SUBCATEGORY));
-      await dispatch(genericActions.delet(domains.CATEGORY,id));
+      await dispatch(genericActions.delet(domains.SUBCATEGORY,id));
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Deleted'));
       return dispatch({ type: subcategoryActionTypes.REMOVE_SUBCATEGORY_SUCCESS });      
