@@ -7,7 +7,8 @@ import { categoryActions,analyzeActions } from 'store/actions';
 import { categorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class CategoryIndexContainer extends Component {
   componentDidMount = () => {
@@ -22,8 +23,8 @@ class CategoryIndexContainer extends Component {
         tableData={categories}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.CATEGORY,object)}        
-        add={() => {setStatus(analyzeStatus.ADDING);}}
+        select={object =>select(domain.CATEGORY,object)}        
+        add={() => {setStatus(domain.CATEGORY,analyzeStatus.ADDING);}}
       />
     );
   }

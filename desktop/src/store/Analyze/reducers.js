@@ -23,30 +23,30 @@ const selectedInitialState = {
 export default (state = selectedInitialState, action) => {
   switch (action.type) {
   case analyzeActionTypes.SELECT:
-    if (state[action.domain] !== -1 && state[action.domain] === action.payload) {
+    if (state[action.domain.singular] !== -1 && state[action.domain.singular] === action.payload) {
       return {
         ...state,
-        [action.domain]: -1,
-        [`${action.domain}Status`]: analyzeStatus.INIT
+        [action.domain.singular]: -1,
+        [`${action.domain.singular}Status`]: analyzeStatus.INIT
       };
-    } else if (state[action.domain]) {
+    } else if (state[action.domain.singular]) {
       return {
         ...state,
-        [action.domain]: action.payload,
-        [`${action.domain}Status`]: analyzeStatus.EDITING
+        [action.domain.singular]: action.payload,
+        [`${action.domain.singular}Status`]: analyzeStatus.EDITING
       };
     }
     return state;
   case analyzeActionTypes.SET_STATUS:
     return {
       ...state,
-      [`${action.domain}Status`]: action.payload
+      [`${action.domain.singular}Status`]: action.payload
     };
   case analyzeActionTypes.DELETE_SELECTED: 
     return {
       ...state,
-      [`${action.domain}Status`]: analyzeStatus.INIT,
-      [action.domain]: -1
+      [`${action.domain.singular}Status`]: analyzeStatus.INIT,
+      [action.domain.singular]: -1
     };
   default:
     return state;

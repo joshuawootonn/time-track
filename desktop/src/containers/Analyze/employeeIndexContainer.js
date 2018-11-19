@@ -8,7 +8,8 @@ import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class EmployeeContainer extends Component {
   
@@ -31,8 +32,8 @@ class EmployeeContainer extends Component {
         tableData={employees}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.EMPLOYEE,object)}
-        add={() => {setStatus(analyzeDomain.EMPLOYEE,analyzeStatus.ADDING);}}
+        select={object =>select(domain.EMPLOYEE,object)}
+        add={() => {setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);}}
       />
     );
   }

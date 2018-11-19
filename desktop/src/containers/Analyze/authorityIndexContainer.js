@@ -7,7 +7,7 @@ import { authorityActions,analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeDomain } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
@@ -23,7 +23,7 @@ class AuthorityIndexContainer extends Component {
         tableData={authorities}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.AUTHORITY,object)}
+        select={object =>select(domain.AUTHORITY,object)}
       />
     );
   }

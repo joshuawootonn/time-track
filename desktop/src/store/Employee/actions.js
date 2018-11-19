@@ -2,7 +2,7 @@ import { normalize } from 'normalizr';
 import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/actionTypeConstants';
-import { shiftActions, snackActions, activityActions,genericActions } from 'store/actions';
+import { shiftActions, snackActions, activityActions,genericActions,analyzeActions } from 'store/actions';
 import endpoints from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
@@ -49,7 +49,9 @@ export const removeEmployee = id => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_REQUEST });
     try {
+      await dispatch(analyzeActions.deleteSelected(domains.EMPLOYEE));
       await dispatch(genericActions.delet(domains.EMPLOYEE,id));
+
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deleted'));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_SUCCESS });      
     } catch (e) {

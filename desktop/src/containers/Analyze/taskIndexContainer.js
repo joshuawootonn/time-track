@@ -9,7 +9,8 @@ import { taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class TaskIndexContainer extends Component {
   
@@ -31,8 +32,8 @@ class TaskIndexContainer extends Component {
         tableData={tasks}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.TASK,object)}
-        add={() => {setStatus(analyzeDomain.TASK,analyzeStatus.ADDING);}}
+        select={object =>select(domain.TASK,object)}
+        add={() => {setStatus(domain.TASK,analyzeStatus.ADDING);}}
       />
     );
   }

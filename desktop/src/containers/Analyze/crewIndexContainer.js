@@ -7,7 +7,7 @@ import { crewActions,analyzeActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeDomain } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class CrewIndexContainer extends Component {
   componentDidMount = () => {
@@ -22,7 +22,7 @@ class CrewIndexContainer extends Component {
         tableData={crews}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.CREW,object)}
+        select={object =>select(domain.CREW,object)}
       />
     );
   }

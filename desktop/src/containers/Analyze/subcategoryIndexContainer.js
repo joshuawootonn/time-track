@@ -7,7 +7,8 @@ import { analyzeActions, subcategoryActions } from 'store/actions';
 import { subcategorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
@@ -23,8 +24,8 @@ class AuthorityIndexContainer extends Component {
         tableData={subcategories}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.SUBCATEGORY,object)}
-        add={() => { setStatus(analyzeDomain.AUTHORITY, analyzeStatus.ADDING); }}
+        select={object =>select(domain.SUBCATEGORY,object)}
+        add={() => { setStatus(domain.AUTHORITY, analyzeStatus.ADDING); }}
       />
     );
   }

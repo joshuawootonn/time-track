@@ -8,7 +8,8 @@ import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class ProjectIndexContainer extends Component {
   componentDidMount = () => {
@@ -27,8 +28,8 @@ class ProjectIndexContainer extends Component {
         tableData={projects}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.PROJECT,object)}
-        add={()=> setStatus(analyzeDomain.PROJECT,analyzeStatus.ADDING)}
+        select={object =>select(domain.PROJECT,object)}
+        add={()=> setStatus(domain.PROJECT,analyzeStatus.ADDING)}
       />
     );
   }

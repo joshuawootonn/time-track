@@ -10,7 +10,8 @@ import { shiftSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus, analyzeDomain } from 'constants/analyze';
+import { analyzeStatus } from 'constants/analyze';
+import domain from 'constants/domains';
 
 class ShiftIndexContainer extends Component {
   componentDidMount = () => {
@@ -33,8 +34,8 @@ class ShiftIndexContainer extends Component {
         tableData={shifts}
         headerData={rows}
         selected={selected}
-        select={object =>select(analyzeDomain.SHIFT,object)}
-        add={() => setStatus(analyzeDomain.SHIFT,analyzeStatus.ADDING)}
+        select={object =>select(domain.SHIFT,object)}
+        add={() => setStatus(domain.SHIFT,analyzeStatus.ADDING)}
       />
     );
   }
