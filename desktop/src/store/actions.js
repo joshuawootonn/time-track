@@ -15,7 +15,7 @@ import * as categoryActions from './Category/actions';
 import * as subcategoryActions from './Subcategory/actions';
 import * as dimensionActions from './Dimension/actions';
 import * as modalActions from './Modal/actions';
-
+import * as genericActions from './Generic/actions';
 export {
   userActions,
   shiftActions,
@@ -33,5 +33,6 @@ export {
   categoryActions,
   subcategoryActions,
   dimensionActions,
-  modalActions
+  modalActions,
+  genericActions
 };

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { employeeActions, analyzeActions } from 'store/actions';
-import employeeCRUDActions from 'store/Employee/actions';
+import { genericActions, analyzeActions } from 'store/actions';
+import domains from 'constants/domains';
 
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
@@ -49,7 +49,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...employeeCRUDActions }, dispatch), 
+    getAllEmployees: () => {
+      return dispatch (genericActions.getAll(domains.EMPLOYEE));
+    },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
