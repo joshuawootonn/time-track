@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { employeeActions, analyzeActions } from 'store/actions';
+import employeeCRUDActions from 'store/Employee/actions';
+
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -13,12 +15,12 @@ import { analyzeStatus, analyzeDomain } from 'constants/analyze';
 class EmployeeContainer extends Component {
   
   componentDidMount = () => {
-    this.props.getEmployees();
+    this.props.getAllEmployees();    
   };
 
   render() {
     const { employees, selected, select,setStatus } = this.props;
-
+    console.log(this.props);
     const isLoading = !employees;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
@@ -47,16 +49,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getEmployees: () => {
-      return dispatch(employeeActions.getEmployees());
-    },    
+    ...bindActionCreators({ ...employeeCRUDActions }, dispatch), 
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 
 EmployeeContainer.propTypes = {
   employees: PropTypes.array.isRequired,
-  getEmployees: PropTypes.func.isRequired,
+  getAllEmployees: PropTypes.func.isRequired,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired

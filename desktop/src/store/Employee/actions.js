@@ -31,16 +31,12 @@ export const getEmployees = () => {
     }
   };
 };
-// stateDomain stateSchema endpoint params
 
-const generatedActions = generateCRUDActions();
+const generatedActions = generateCRUDActions('employee','employees',schemas.employeeArray,endpoints);
 
-const get = generatedActions.get;
-const getall = generatedActions.getall;
-const put = generatedActions.put;
-const delet = generatedActions.delete;
-const post = generatedActions.post;
-export const crud = { get,getall,put,delet,post }; 
+export default {
+  ...generatedActions
+};
 
 export const putEmployee = employee => {
   return async dispatch => {
