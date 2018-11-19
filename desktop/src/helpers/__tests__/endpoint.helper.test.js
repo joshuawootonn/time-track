@@ -28,7 +28,7 @@ describe('Endpoint Helpers', () => {
     generatedEnpoints.getAll().then(data => expect(data).toBeTruthy());
     generatedEnpoints.get().then(data => expect(data).toBeTruthy());
     generatedEnpoints.post().then(data => expect(data).toBeTruthy());
-    generatedEnpoints.put().then(data => expect(data).toBeTruthy());
-    generatedEnpoints.delet().then(data => expect(data).toBeTruthy());
+    generatedEnpoints.put(1).then(data => expect(data).toBeTruthy());
+    generatedEnpoints.delet(1).then(data => expect(data).toBeTruthy());
   });
 });
