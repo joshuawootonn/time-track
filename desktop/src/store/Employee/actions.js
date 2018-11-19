@@ -3,16 +3,17 @@ import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/actionTypeConstants';
 import { shiftActions, snackActions, activityActions } from 'store/actions';
-import * as endpoint from './endpoints';
+import endpoints from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
 import { currentRoundedTime } from 'helpers/time';
+import { generateCRUDActions } from 'helpers/action.helper';
 
 export const getEmployees = () => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.GET_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoint.getEmployees();
+      const response = await endpoints.get();
       const payload = normalize(
         { employees: response.data },
         schemas.employeeArray,
@@ -30,12 +31,22 @@ export const getEmployees = () => {
     }
   };
 };
+// stateDomain stateSchema endpoint params
+
+const generatedActions = generateCRUDActions();
+
+const get = generatedActions.get;
+const getall = generatedActions.getall;
+const put = generatedActions.put;
+const delet = generatedActions.delete;
+const post = generatedActions.post;
+export const crud = { get,getall,put,delet,post }; 
 
 export const putEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.PUT_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoint.putEmployee(employee.id, employee);
+      const response = await endpoints.put(employee);
       const payload = normalize(
         { employees: [response.data] },
         schemas.employeeArray,
@@ -62,7 +73,7 @@ export const postEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.POST_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoint.postEmployee(employee);
+      const response = await endpoints.post(employee);
       const payload = normalize(
         { employees: [response.data] },
         schemas.employeeArray,
@@ -90,7 +101,7 @@ export const deleteEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.DELETE_EMPLOYEE_REQUEST });
     try {
-      await endpoint.deleteEmployee(employee);
+      await endpoints.delet(employee.id);
       //const payload = normalize( { employees: [response.data] },schemas.employeeArray);
       
       await dispatch(
@@ -197,7 +208,7 @@ export const login = pin => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoint.getEmployeeByPin(pin);
+      const response = await endpoints.getEmployeeByPin(pin);
       const payload = normalize(
         { employees: [response.data] },
         schemas.employeeArray,
