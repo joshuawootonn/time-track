@@ -12,7 +12,7 @@ import domain from 'constants/domains';
 
 class CategoryIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getCategories();
+    this.props.getAllCategories();
   }
   render () {
     const { categories,select,selected,setStatus } = this.props;    
@@ -39,15 +39,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCategories: () => {
-      return dispatch(categoryActions.getCategories());
+    getAllCategories: () => {
+      return dispatch(categoryActions.getAllCategories());
     },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 
 CategoryIndexContainer.propTypes = {
-  getCategories: PropTypes.func.isRequired,
+  getAllCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired,

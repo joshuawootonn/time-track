@@ -16,7 +16,7 @@ import domain from 'constants/domains';
 class ShiftIndexContainer extends Component {
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
-    this.props.getEmployees();
+    this.props.getAllEmployees();
     this.props.getProjects();
     this.props.getTasks();
     this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
@@ -49,8 +49,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getEmployees: () => {
-      return dispatch(employeeActions.getEmployees());
+    getAllEmployees: () => {
+      return dispatch(employeeActions.getAllEmployees());
     },
     getProjects: () => {
       return dispatch(projectActions.getProjects());
@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => {
 ShiftIndexContainer.propTypes = {
   shifts: PropTypes.array,
   getShiftsInRange: PropTypes.func.isRequired,
-  getEmployees: PropTypes.func.isRequired,
+  getAllEmployees: PropTypes.func.isRequired,
   getProjects: PropTypes.func.isRequired,
   getTasks: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,

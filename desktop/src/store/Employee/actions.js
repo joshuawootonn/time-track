@@ -15,18 +15,17 @@ export const getAllEmployees = () => {
   };
 };
 
-
 export const updateEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
     try {
       await dispatch(genericActions.put(domains.EMPLOYEE,employee));
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated'));
-      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE.SUCCESS });      
+      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });      
     } catch (e) {
       console.log(e);
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated Failed'));
-      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
+      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
     }
   };
 };
@@ -41,7 +40,7 @@ export const createEmployee = employee => {
     } catch (e) {
       console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Creation Failed'));
-      return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
+      return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE });
     }
   };
 };
@@ -57,7 +56,7 @@ export const removeEmployee = id => {
     } catch (e) {
       console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deletion Failed'));
-      return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_REQUEST });
+      return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_FAILURE });
     }
   };
 };
@@ -120,7 +119,7 @@ export const clockOut = (employee, shift, activities, lunch) => {
 
       await dispatch(shiftActions.putShift(clockOutObject));
       await dispatch(toggleIsWorking(employee));
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
     } catch (e) {
       console.log(e);
@@ -138,10 +137,7 @@ export const login = pin => {
     dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_REQUEST });
     try {
       const response = await endpoints.getEmployeeByPin(pin);
-      const payload = normalize(
-        { employees: [response.data] },
-        schemas.employeeArray,
-      );
+      const payload = normalize({ employees: [response.data] }, schemas.employeeArray);
 
       return dispatch({
         type: employeeActionTypes.LOGIN_EMPLOYEE_SUCCESS,

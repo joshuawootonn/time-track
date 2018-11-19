@@ -42,6 +42,7 @@ export const put = (domain,object) =>{
   };
 };
 export const post = (domain, object) => {
+  console.log(domain,object);
   return async dispatch => {    
     dispatch({ type: `post_${domain.singular}_request` });
     try {      

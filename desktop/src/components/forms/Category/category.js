@@ -10,7 +10,7 @@ import styles from './styles';
 
 class Crew extends Component {
   render() {
-    const { classes, errors, initialValues, resetForm, isSubmitting, label,type,deleteCategory } = this.props;
+    const { classes, errors, initialValues, resetForm, isSubmitting, label,type,removeCategory } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -18,7 +18,7 @@ class Crew extends Component {
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
-                <IconButton onClick={deleteCategory} aria-label="Delete">
+                <IconButton onClick={removeCategory} aria-label="Delete">
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -79,7 +79,7 @@ Crew.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  deleteCategory: PropTypes.func,
+  removeCategory: PropTypes.func,
   type: PropTypes.string.isRequired
 
 };

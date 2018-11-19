@@ -23,5 +23,8 @@ export default {
   },SUBCATEGORY: {
     singular: 'subcategory',
     plural: 'subcategories'
+  },DIMENSION: {
+    singular: 'dimension',
+    plural: 'dimensions'
   }
 };

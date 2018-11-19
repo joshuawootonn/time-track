@@ -13,9 +13,9 @@ import { categoryValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   
-  deleteCategory = () => {
-    const { selected, deleteCategory } = this.props;  
-    deleteCategory(selected);
+  removeCategory = () => {
+    const { selected, removeCategory } = this.props;  
+    removeCategory(selected.id);
   };
 
   render() {
@@ -94,7 +94,7 @@ class EmployeeEditContainer extends Component {
           render={formikProps => {
             return (
               <Category
-                deleteCategory={this.deleteCategory}
+                removeCategory={this.removeCategory}
                 label="Edit"
                 type="edit"
                 {...formikProps}
@@ -118,13 +118,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createCategory: category => {
-      return dispatch(categoryActions.postCategory(category));
+      return dispatch(categoryActions.createCategory(category));
     },
     updateCategory: category => {
-      return dispatch(categoryActions.putCategory(category));
+      return dispatch(categoryActions.updateCategory(category));
     },
-    deleteCategory: category => {
-      return dispatch(categoryActions.deleteCategory(category));
+    removeCategory: category => {
+      return dispatch(categoryActions.removeCategory(category));
     }
   };
 };

@@ -12,7 +12,7 @@ import domain from 'constants/domains';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getSubcategories();
+    this.props.getAllSubcategories();
   }
   render() {
     const { subcategories, select, selected, setStatus } = this.props;
@@ -25,7 +25,7 @@ class AuthorityIndexContainer extends Component {
         headerData={rows}
         selected={selected}
         select={object =>select(domain.SUBCATEGORY,object)}
-        add={() => { setStatus(domain.AUTHORITY, analyzeStatus.ADDING); }}
+        add={() => { setStatus(domain.SUBCATEGORY, analyzeStatus.ADDING); }}
       />
     );
   }
@@ -40,15 +40,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSubcategories: () => {
-      return dispatch(subcategoryActions.getSubcategories());
+    getAllSubcategories: () => {
+      return dispatch(subcategoryActions.getAllSubcategories());
     },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 
 AuthorityIndexContainer.propTypes = {
-  getSubcategories: PropTypes.func.isRequired,
+  getAllSubcategories: PropTypes.func.isRequired,
   subcategories: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,

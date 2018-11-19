@@ -13,9 +13,9 @@ import { subcategoryValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   
-  deleteSubcategory = () => {
-    const { selected, deleteSubcategory } = this.props;  
-    deleteSubcategory(selected);
+  removeSubcategory = () => {
+    const { selected, removeSubcategory } = this.props;  
+    removeSubcategory(selected.id);
   };
 
   render() {
@@ -101,7 +101,7 @@ class EmployeeEditContainer extends Component {
           render={formikProps => {
             return (
               <Subcategory
-                deleteSubcategory={this.deleteSubcategory}
+                removeSubcategory={this.removeSubcategory}
                 label="Edit"
                 type="edit"
                 categories={categories}
@@ -127,13 +127,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createSubcategory: subcategory => {
-      return dispatch(subcategoryActions.postSubcategory(subcategory));
+      return dispatch(subcategoryActions.createSubcategory(subcategory));
     },
     updateSubcategory: subcategory => {
-      return dispatch(subcategoryActions.putSubcategory(subcategory));
+      return dispatch(subcategoryActions.updateSubcategory(subcategory));
     },
-    deleteSubcategory: subcategory => {
-      return dispatch(subcategoryActions.deleteSubcategory(subcategory));
+    removeSubcategory: subcategory => {
+      return dispatch(subcategoryActions.removeSubcategory(subcategory));
     }
   };
 };

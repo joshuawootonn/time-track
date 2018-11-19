@@ -1,93 +1,60 @@
 import { categoryActionTypes } from 'constants/actionTypeConstants';
-import { modalActions } from 'store/actions';
+import { modalActions,genericActions,snackActions,analyzeActions } from 'store/actions';
+import * as status from 'constants/status';
+import domains from 'constants/domains';
 
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from 'store/schemas';
-
-export const getCategories = () => {
+export const getAllCategories = () => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.GET_CATEGORIES_REQUEST });
-    try {
-      const response = await endpoint.getCategories();
-      const payload = normalize(
-        { categories: response.data },
-        schemas.categoryArray,
-      );
-      return dispatch({
-        type: categoryActionTypes.GET_CATEGORIES_SUCCESS,
-        payload
-      });
-    } catch (e) {
-      dispatch({
-        type: categoryActionTypes.GET_CATEGORIES_FAILURE,
-        payload: e
-      });
-    }
+    dispatch(genericActions.getAll(domains.CATEGORY));
   };
 };
-
 
 export const editCategoriesModal = () => {  
   return modalActions.openModal(categoryActionTypes.EDIT_CATEGORIES_MODAL, null);
 };
 
-
-export const putCategory = category => {
+export const updateCategory = category => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.PUT_CATEGORY_REQUEST });
-    try {    
-      const response = await endpoint.putCategory(category.id, category);
-      const payload = normalize(
-        { categories: [response.data] },
-        schemas.categoryArray,
-      );
-      return dispatch({ type: categoryActionTypes.PUT_CATEGORY_SUCCESS, payload });
+    dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_REQUEST });
+    try {
+      await dispatch(genericActions.put(domains.CATEGORY,category));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Updated'));
+      return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: categoryActionTypes.PUT_CATEGORY_FAILURE, payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Update Failed'));
+      return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_FAILURE });
     }
   };
 };
 
-export const postCategory = category => {
+export const createCategory = category => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.POST_CATEGORY_REQUEST });
-    try {    
-      const response = await endpoint.postCategory(category);
-      const payload = normalize(
-        { categories: [response.data] },
-        schemas.categoryArray,
-      );
-      return dispatch({ type: categoryActionTypes.POST_CATEGORY_SUCCESS, payload });
+    dispatch({ type: categoryActionTypes.CREATE_CATEGORY_REQUEST });
+    try {
+      await dispatch(genericActions.post(domains.CATEGORY,category));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Created'));
+      return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: categoryActionTypes.POST_CATEGORY_FAILURE, payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Creation Failed'));
+      return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_FAILURE });
     }
   };
 };
-
-
-
-
-export const deleteCategory = category => {
+export const removeCategory = id => {
   return async dispatch => {
-    dispatch({ type: categoryActionTypes.DELETE_CATEGORY_REQUEST });
-    try {    
-      await endpoint.deleteCategory(category);
-      const deleted = {
-        entities: {
-          categories: [category.id]          
-        },
-        result: {
-          categories: [category.id]
-        }
-      };
+    dispatch({ type: categoryActionTypes.REMOVE_CATEGORY_REQUEST });
+    try {
+      await dispatch(analyzeActions.deleteSelected(domains.CATEGORY));
+      await dispatch(genericActions.delet(domains.CATEGORY,id));
 
-      return dispatch({ type: categoryActionTypes.DELETE_CATEGORY_SUCCESS, deleted });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Deleted'));
+      return dispatch({ type: categoryActionTypes.REMOVE_CATEGORY_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: categoryActionTypes.DELETE_CATEGORY_FAILURE, payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Deletion Failed'));
+      return dispatch({ type: categoryActionTypes.REMOVE_CATEGORY_FAILURE });
     }
   };
 };
