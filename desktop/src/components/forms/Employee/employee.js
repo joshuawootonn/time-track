@@ -14,7 +14,7 @@ import styles from './styles';
 
 class Employee extends Component {
   render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, deleteEmployee, resetForm, initialValues,errors,editAuthorities,editCrews } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors,editAuthorities,editCrews } = this.props;
     //console.log(this.props);
     return (
       <Form>
@@ -23,7 +23,7 @@ class Employee extends Component {
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
-                <IconButton onClick={deleteEmployee} aria-label="Delete">
+                <IconButton onClick={removeEmployee} aria-label="Delete">
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -147,7 +147,7 @@ Employee.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  deleteEmployee: PropTypes.func,
+  removeEmployee: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,

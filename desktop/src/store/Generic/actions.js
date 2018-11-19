@@ -33,7 +33,7 @@ export const put = (domain,object) =>{
     dispatch({ type: `put_${domain.singular}_request` });
     try {      
       const response = await endpoints[`${domain.singular}Endpoints`].default.put(object);
-      const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
+      const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
       return dispatch({ type: `put_${domain.singular}_success`, payload });
     } catch (e) {
       console.log(e);
@@ -46,7 +46,7 @@ export const post = (domain, object) => {
     dispatch({ type: `post_${domain.singular}_request` });
     try {      
       const response = await endpoints[`${domain.singular}Endpoints`].default.post(object);
-      const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
+      const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
       return dispatch({ type: `post_${domain.singular}_success`, payload });
     } catch (e) {
       console.log(e);

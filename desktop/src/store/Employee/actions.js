@@ -2,136 +2,67 @@ import { normalize } from 'normalizr';
 import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/actionTypeConstants';
-import { shiftActions, snackActions, activityActions } from 'store/actions';
+import { shiftActions, snackActions, activityActions,genericActions } from 'store/actions';
 import endpoints from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
 import { currentRoundedTime } from 'helpers/time';
-import { generateCRUDActions } from 'helpers/action.helper';
+import domains from 'constants/domains';
 
-export const getEmployees = () => {
+export const getAllEmployees = () => {
   return async dispatch => {
-    dispatch({ type: employeeActionTypes.GET_EMPLOYEE_REQUEST });
+    dispatch(genericActions.getAll(domains.EMPLOYEE));    
+  };
+};
+
+
+export const updateEmployee = employee => {
+  return async dispatch => {
+    dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoints.get();
-      const payload = normalize(
-        { employees: response.data },
-        schemas.employeeArray,
-      );
-      return dispatch({
-        type: employeeActionTypes.GET_EMPLOYEE_SUCCESS,
-        payload
-      });
+      await dispatch(genericActions.put(domains.EMPLOYEE,employee));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated'));
+      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE.SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: employeeActionTypes.GET_EMPLOYEE_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated Failed'));
+      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
     }
   };
 };
 
-const generatedActions = generateCRUDActions('employee','employees',schemas.employeeArray,endpoints);
-
-export default {
-  ...generatedActions
-};
-
-export const putEmployee = employee => {
+export const createEmployee = employee => {
   return async dispatch => {
-    dispatch({ type: employeeActionTypes.PUT_EMPLOYEE_REQUEST });
+    dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
     try {
-      const response = await endpoints.put(employee);
-      const payload = normalize(
-        { employees: [response.data] },
-        schemas.employeeArray,
-      );
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Employee Updated'),
-      );
-
-      return dispatch({
-        type: employeeActionTypes.PUT_EMPLOYEE_SUCCESS,
-        payload
-      });
+      await dispatch(genericActions.post(domains.EMPLOYEE,employee));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Created'));
+      return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: employeeActionTypes.PUT_EMPLOYEE_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Creation Failed'));
+      return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
+    }
+  };
+};
+export const removeEmployee = id => {
+  return async dispatch => {
+    dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_REQUEST });
+    try {
+      await dispatch(genericActions.delet(domains.EMPLOYEE,id));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deleted'));
+      return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_SUCCESS });      
+    } catch (e) {
+      console.log(e);
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deletion Failed'));
+      return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_REQUEST });
     }
   };
 };
 
-export const postEmployee = employee => {
-  return async dispatch => {
-    dispatch({ type: employeeActionTypes.POST_EMPLOYEE_REQUEST });
-    try {
-      const response = await endpoints.post(employee);
-      const payload = normalize(
-        { employees: [response.data] },
-        schemas.employeeArray,
-      );
-
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Employee Created'),
-      );
-
-      return dispatch({
-        type: employeeActionTypes.POST_EMPLOYEE_SUCCESS,
-        payload
-      });
-    } catch (e) {
-      console.log(e);
-      return dispatch({
-        type: employeeActionTypes.POST_EMPLOYEE_FAILURE,
-        payload: e
-      });
-    }
-  };
-};
-
-export const deleteEmployee = employee => {
-  return async dispatch => {
-    dispatch({ type: employeeActionTypes.DELETE_EMPLOYEE_REQUEST });
-    try {
-      await endpoints.delet(employee.id);
-      //const payload = normalize( { employees: [response.data] },schemas.employeeArray);
-      
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Employee deleted!'),
-      );
-      
-      const deleted = {
-        entities: {
-          employees: [employee.id]          
-        },
-        result: {
-          employees: [employee.id]
-        }
-      };
-
-      return dispatch({
-        type: employeeActionTypes.DELETE_EMPLOYEE_SUCCESS,
-        deleted
-      });
-    } catch (e) {
-      console.log(e);
-      await dispatch(
-        snackActions.openSnack(status.FAILURE, 'Employee deletion failed!'),
-      );
-      return dispatch({
-        type: employeeActionTypes.DELETE_EMPLOYEE_FAILURE,
-        payload: e
-      });
-    }
-  };
-};
 
 export const toggleIsWorking = employee => {
-  return putEmployee({
+  return genericActions.put(domains.EMPLOYEE,{
     ...employee,
     isWorking: !employee.isWorking
   });

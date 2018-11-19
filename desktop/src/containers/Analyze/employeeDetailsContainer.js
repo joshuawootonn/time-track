@@ -13,9 +13,9 @@ import { employeeValidation } from 'constants/formValidation';
 
 class EmployeeEditContainer extends Component {
   
-  deleteEmployee = () => {
-    const { selected, deleteEmployee } = this.props;  
-    deleteEmployee(selected);
+  removeEmployee = () => {
+    const { selected, removeEmployee } = this.props;  
+    removeEmployee(selected.id);
   };
 
   render() {
@@ -113,7 +113,7 @@ class EmployeeEditContainer extends Component {
           render={formikProps => {
             return (
               <Employee
-                deleteEmployee={this.deleteEmployee}
+                removeEmployee={this.removeEmployee}
                 authorities={authorities}
                 crews={crews}
                 label="Edit"
@@ -142,13 +142,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createEmployee: employee => {
-      return dispatch(employeeActions.postEmployee(employee));
+      return dispatch(employeeActions.createEmployee(employee));
     },
     updateEmployee: employee => {
-      return dispatch(employeeActions.putEmployee(employee));
+      return dispatch(employeeActions.updateEmployee(employee));
     },
-    deleteEmployee: employee => {
-      return dispatch(employeeActions.deleteEmployee(employee));
+    removeEmployee: employee => {
+      return dispatch(employeeActions.removeEmployee(employee));
     },
     editAuthoritiesModal: () => {
       return dispatch(authorityActions.editAuthoritiesModal());

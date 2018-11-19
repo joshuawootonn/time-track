@@ -14,7 +14,16 @@ export const createCRUDActionTypes = (domain,pluralDomain = domain + 's') => {
     [`PUT_${domain.toUpperCase()}_FAILURE`]: `put_${domain.toLowerCase()}_failure`,
     [`DELETE_${domain.toUpperCase()}_REQUEST`]: `delete_${domain.toLowerCase()}_request`,
     [`DELETE_${domain.toUpperCase()}_SUCCESS`]: `delete_${domain.toLowerCase()}_success`,
-    [`DELETE_${domain.toUpperCase()}_FAILURE`]: `delete_${domain.toLowerCase()}_failure`
+    [`DELETE_${domain.toUpperCase()}_FAILURE`]: `delete_${domain.toLowerCase()}_failure`,
+    [`CREATE_${domain.toUpperCase()}_REQUEST`]: `create_${domain.toLowerCase()}_request`,
+    [`CREATE_${domain.toUpperCase()}_SUCCESS`]: `create_${domain.toLowerCase()}_success`,
+    [`CREATE_${domain.toUpperCase()}_FAILURE`]: `create_${domain.toLowerCase()}_failure`,
+    [`UPDATE_${domain.toUpperCase()}_REQUEST`]: `update_${domain.toLowerCase()}_request`,
+    [`UPDATE_${domain.toUpperCase()}_SUCCESS`]: `update_${domain.toLowerCase()}_success`,
+    [`UPDATE_${domain.toUpperCase()}_FAILURE`]: `update_${domain.toLowerCase()}_failure`,
+    [`REMOVE_${domain.toUpperCase()}_REQUEST`]: `remove_${domain.toLowerCase()}_request`,
+    [`REMOVE_${domain.toUpperCase()}_SUCCESS`]: `remove_${domain.toLowerCase()}_success`,
+    [`REMOVE_${domain.toUpperCase()}_FAILURE`]: `remove_${domain.toLowerCase()}_failure`
   };
 };
 

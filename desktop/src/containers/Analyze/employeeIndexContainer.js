@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { genericActions, analyzeActions } from 'store/actions';
-import domains from 'constants/domains';
-
+import { analyzeActions } from 'store/actions';
+import { getAllEmployees } from 'store/Employee/actions';
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -47,14 +45,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getAllEmployees: () => {
-      return dispatch (genericActions.getAll(domains.EMPLOYEE));
-    },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
-  };
-};
 
 EmployeeContainer.propTypes = {
   employees: PropTypes.array.isRequired,
@@ -66,7 +56,7 @@ EmployeeContainer.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getAllEmployees, ...analyzeActions }
 )(EmployeeContainer);
 
 const rows = [
