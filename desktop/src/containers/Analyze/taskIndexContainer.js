@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-
-import { taskActions, analyzeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
+import { getAllTasks } from 'store/Task/actions';
 import { taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -15,7 +14,7 @@ import domain from 'constants/domains';
 class TaskIndexContainer extends Component {
   
   componentDidMount = () => {
-    this.props.getTasks();
+    this.props.getAllTasks();
   };
 
   render() {
@@ -47,18 +46,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getTasks: () => {
-      return dispatch(taskActions.getTasks());
-    },    
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
-  };
-};
 
 TaskIndexContainer.propTypes = {
   tasks: PropTypes.array,
-  getTasks: PropTypes.func.isRequired,
+  getAllTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired
@@ -66,7 +57,7 @@ TaskIndexContainer.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getAllTasks,...analyzeActions }
 )(TaskIndexContainer);
 
 const rows = [

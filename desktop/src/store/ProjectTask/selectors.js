@@ -17,8 +17,8 @@ export const getAllProjectTasks = createSelector(
     return results.map(projectTaskId => {
       return {
         ...projectTasks[projectTaskId],
-        task: tasks[projectTasks[projectTaskId].taskId],
-        project: projects[projectTasks[projectTaskId].projectId]
+        task: tasks && tasks[projectTasks[projectTaskId].taskId],
+        project: projects && projects[projectTasks[projectTaskId].projectId]
       };
     });
   },

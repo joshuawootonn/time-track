@@ -16,7 +16,7 @@ class Task extends Component {
   
   render() {
     //console.log(this.props);
-    const { label,deleteTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors,editCategories } = this.props;
+    const { label,removeTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors,editCategories } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -24,7 +24,7 @@ class Task extends Component {
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
-                <IconButton onClick={deleteTask} aria-label="Delete">
+                <IconButton onClick={removeTask} aria-label="Delete">
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -112,7 +112,7 @@ class Task extends Component {
 Task.propTypes = {
   classes: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  deleteTask: PropTypes.func,
+  removeTask: PropTypes.func,
   type: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
   subcategories: PropTypes.array.isRequired,

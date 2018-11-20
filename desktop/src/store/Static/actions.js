@@ -6,12 +6,14 @@ export const getStaticData = () => {
   return async dispatch => {
     dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
     try {
-      dispatch(projectActions.getAllProjects());
-      dispatch(projectTaskActions.getAllProjectTasks());
-      dispatch(taskActions.getTasks());
+      
       dispatch(categoryActions.getAllCategories());      
       dispatch(dimensionActions.getAllDimensions());
-      dispatch(subcategoryActions.getAllSubcategories());
+      await dispatch(subcategoryActions.getAllSubcategories());
+      await dispatch(projectTaskActions.getAllProjectTasks());
+      await dispatch(projectActions.getAllProjects());
+      
+      await dispatch(taskActions.getAllTasks());
 
 
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });

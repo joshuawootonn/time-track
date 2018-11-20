@@ -7,15 +7,15 @@ import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
-import { analyzeActions, taskActions, categoryActions } from 'store/actions';
+import { taskActions, categoryActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 import { taskValidation } from 'constants/formValidation';
 
 class TaskDetailsContainer extends Component {
-  deleteTask = () => {
-    const { selected,deleteTask } = this.props;
-    deleteTask(selected);
+  removeTask = () => {
+    const { selected,removeTask } = this.props;
+    removeTask(selected.id);
   }
   render() {
     const { status,categories,subcategories,selected,editCategoriesModal } = this.props;
@@ -107,7 +107,7 @@ class TaskDetailsContainer extends Component {
           render={formikProps => {
             return (
               <Task 
-                deleteTask={this.deleteTask}
+                removeTask={this.removeTask}
                 categories={categories}
                 subcategories={subcategories}                
                 label="Edit"
@@ -136,20 +136,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createTask: task => {
-      return dispatch(taskActions.postTask(task));
+      return dispatch(taskActions.createTask(task));
     },
     updateTask: task => {
-      return dispatch(taskActions.putTask(task));
+      return dispatch(taskActions.updateTask(task));
     },
-    deleteTask: task => {
-      return dispatch(taskActions.deleteTask(task));
-    },
-    selectTask: task => {
-      return dispatch(analyzeActions.selectTask(task));
-    },
-    setTaskStatus: status => {
-      return dispatch(analyzeActions.setTaskStatus(status));
-    },
+    removeTask: id => {
+      return dispatch(taskActions.removeTask(id));
+    },    
     editCategoriesModal: () => {
       return dispatch(categoryActions.editCategoriesModal());
     }

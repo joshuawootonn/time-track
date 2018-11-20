@@ -5,7 +5,7 @@ import domains from 'constants/domains';
 
 export const getAllSubcategories = () => {
   return async dispatch => {
-    dispatch(genericActions.getAll(domains.CATEGORY));
+    dispatch(genericActions.getAll(domains.SUBCATEGORY));
   };
 };
 

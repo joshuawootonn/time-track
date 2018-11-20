@@ -1,115 +1,55 @@
 import { taskActionTypes } from 'constants/actionTypeConstants';
-
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from 'store/schemas';
-import { snackActions } from 'store/actions';
+import { snackActions,genericActions,analyzeActions } from 'store/actions';
 import * as status from 'constants/status';
-import { normalizeEmbeddedData } from 'helpers/store';
+import domains from 'constants/domains';
 
-export const getTasks = () => {
+export const getAllTasks = () => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.GET_TASKS_REQUEST });
-    try {
-  
-      const response = await endpoint.getTasks(); 
-      let payload = normalize({ tasks: response.data }, schemas.taskArray);
-
-      return dispatch({
-        type: taskActionTypes.GET_TASKS_SUCCESS,
-        payload: normalizeEmbeddedData(payload)
-      });
-    } catch (e) {
-      dispatch({
-        type: taskActionTypes.GET_TASKS_FAILURE,
-        payload: e
-      });
-      throw e;
-    }
+    dispatch(genericActions.getAll(domains.TASK));    
   };
 };
 
-export const postTask = task => {
+export const createTask = task => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.POST_TASK_REQUEST });
+    dispatch({ type: taskActionTypes.CREATE_TASK_REQUEST });
     try {
-      const response = await endpoint.postTask(task);
-      const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
-
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Task Created'),
-      );
-
-      return dispatch({
-        type: taskActionTypes.POST_TASK_SUCCESS,
-        payload
-      });
+      await dispatch(genericActions.post(domains.TASK,task));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Created'));
+      return dispatch({ type: taskActionTypes.CREATE_TASK_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: taskActionTypes.POST_TASK_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Creation Failed'));
+      return dispatch({ type: taskActionTypes.CREATE_TASK_FAILURE });
     }
   };
 };
-export const putTask = task => {
+export const updateTask = task => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.PUT_TASK_REQUEST });
+    dispatch({ type: taskActionTypes.UPDATE_TASK_REQUEST });
     try {
-      const response = await endpoint.putTask(task.id,task);
-      const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
-
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Task Updated'),
-      );
-
-      return dispatch({
-        type: taskActionTypes.PUT_TASK_SUCCESS,
-        payload
-      });
+      await dispatch(genericActions.put(domains.TASK,task));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Updated'));
+      return dispatch({ type: taskActionTypes.UPDATE_TASK_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: taskActionTypes.PUT_TASK_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Update Failed'));
+      return dispatch({ type: taskActionTypes.UPDATE_TASK_FAILURE });
     }
   };
 };
-export const deleteTask = task => {
+export const removeTask = id => {
   return async dispatch => {
-    dispatch({ type: taskActionTypes.DELETE_TASK_REQUEST });
+    dispatch({ type: taskActionTypes.REMOVE_TASK_REQUEST });
     try {
-      await endpoint.deleteTask(task);
-      //const payload = normalize({ tasks: [response.data] }, schemas.taskArray);
+      await dispatch(analyzeActions.deleteSelected(domains.TASK));
+      await dispatch(genericActions.delet(domains.TASK,id));
 
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Task deleted'),
-      );
-
-      const deleted = {
-        entities:{
-          tasks: [task.id]
-        },
-        result: {
-          tasks: [task.id]
-        }
-      };
-
-      return dispatch({
-        type: taskActionTypes.DELETE_TASK_SUCCESS,
-        deleted
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Deleted'));
+      return dispatch({ type: taskActionTypes.REMOVE_TASK_SUCCESS });      
     } catch (e) {
       console.log(e);
-      await dispatch(
-        snackActions.openSnack(status.FAILURE, 'Task deletion failed!'),
-      );
-      return dispatch({
-        type: taskActionTypes.DELETE_TASK_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Deletion Failed'));
+      return dispatch({ type: taskActionTypes.REMOVE_TASK_FAILURE });
     }
   };
 };
