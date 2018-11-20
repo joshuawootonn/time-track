@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { crewActions,analyzeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
+import { getAllCrews } from 'store/Crew/actions';
 import { crewSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -11,7 +11,7 @@ import domain from 'constants/domains';
 
 class CrewIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getCrews();
+    this.props.getAllCrews();
   }
   render () {
     const { crews,select,selected } = this.props; 
@@ -35,23 +35,16 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getCrews: () => {
-      return dispatch(crewActions.getCrews());
-    },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
-  };
-};
 
 CrewIndexContainer.propTypes = {
-  getCrews: PropTypes.func.isRequired,
+  getAllCrews: PropTypes.func.isRequired,
   crews: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(CrewIndexContainer);
+export default connect(mapStateToProps,
+  { getAllCrews, ...analyzeActions })(CrewIndexContainer);
 
 
 const rows = [

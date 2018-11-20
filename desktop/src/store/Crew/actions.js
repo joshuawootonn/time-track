@@ -1,27 +1,11 @@
 import { crewActionTypes } from 'constants/actionTypeConstants';
-import { modalActions } from 'store/actions';
+import { modalActions,genericActions,snackActions } from 'store/actions';
+import domains from 'constants/domains';
+import * as status from 'constants/status';
 
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from 'store/schemas';
-
-export const getCrews = () => {
+export const getAllCrews = () => {
   return async dispatch => {
-    dispatch({ type: crewActionTypes.GET_CREWS_REQUEST });
-    try {
-      const response = await endpoint.getCrews();
-      const payload = normalize({ crews: response.data }, schemas.crewArray);
-      //console.log('sadf',{ crews: response.data },response.data,payload);
-      return dispatch({
-        type: crewActionTypes.GET_CREWS_SUCCESS,
-        payload
-      });
-    } catch (e) {
-      dispatch({
-        type: crewActionTypes.GET_CREWS_FAILURE,
-        payload: e
-      });
-    }
+    dispatch(genericActions.getAll(domains.CREW));    
   };
 };
 
@@ -29,19 +13,17 @@ export const editCrewsModal = () => {
   return  modalActions.openModal(crewActionTypes.EDIT_CREWS_MODAL, null);
 };
 
-export const putCrew = crew => {
+export const updateCrew = crew => {
   return async dispatch => {
-    dispatch({ type: crewActionTypes.PUT_CREW_REQUEST });
-    try {    
-      const response = await endpoint.putCrew(crew.id, crew);
-      const payload = normalize(
-        { crews: [response.data] },
-        schemas.crewArray,
-      );
-      return dispatch({ type: crewActionTypes.PUT_CREW_SUCCESS, payload });
+    dispatch({ type: crewActionTypes.UPDATE_CREW_REQUEST });
+    try {
+      await dispatch(genericActions.put(domains.CREW,crew));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Updated'));
+      return dispatch({ type: crewActionTypes.UPDATE_CREW_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: crewActionTypes.PUT_CREW_FAILURE, payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Update Failed'));
+      return dispatch({ type: crewActionTypes.UPDATE_CREW_FAILURE });
     }
   };
 };

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { authorityActions,analyzeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
+import { getAllAuthorities } from 'store/Authority/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -11,7 +11,7 @@ import domain from 'constants/domains';
 
 class AuthorityIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getAuthorities();
+    this.props.getAllAuthorities();
   }
   render () {
     const { authorities,select,selected } = this.props;
@@ -36,23 +36,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getAuthorities: () => {
-      return dispatch(authorityActions.getAuthorities());
-    },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
-  };
-};
-
 AuthorityIndexContainer.propTypes = {
-  getAuthorities: PropTypes.func.isRequired,
+  getAllAuthorities: PropTypes.func.isRequired,
   authorities: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndexContainer);
+export default connect(mapStateToProps,
+  { getAllAuthorities, ...analyzeActions })(AuthorityIndexContainer);
 
 
 const rows = [

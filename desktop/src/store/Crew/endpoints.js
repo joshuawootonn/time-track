@@ -1,11 +1,4 @@
-import { HOST } from 'constants/network';
-
-import axios from 'axios';
+import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
 const DOMAIN = 'crews';
 
-export const getCrews = () => {
-  return axios.get(`${HOST}/${DOMAIN}`);
-};
-export const putCrew = (id,crew) => {
-  return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...crew });
-};
+export default generateCRUDEndpoints(DOMAIN);

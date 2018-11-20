@@ -66,13 +66,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateCrew: crew => {
-      return dispatch(crewActions.putCrew(crew));
-    }
-  };
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(CrewDetailContainer);
+export default connect(mapStateToProps, { ...crewActions })(CrewDetailContainer);

@@ -1,48 +1,29 @@
 import { authorityActionTypes } from 'constants/actionTypeConstants';
-import { modalActions } from 'store/actions';
+import { modalActions,genericActions,snackActions } from 'store/actions';
+import domains from 'constants/domains';
+import * as status from 'constants/status';
 
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from 'store/schemas';
-
-export const getAuthorities = () => {
+export const getAllAuthorities = () => {
   return async dispatch => {
-    dispatch({ type: authorityActionTypes.GET_AUTHORITIES_REQUEST });
-    try {
-      const response = await endpoint.getAuthorities();
-      const payload = normalize(
-        { authorities: response.data },
-        schemas.authorityArray,
-      );
-      return dispatch({
-        type: authorityActionTypes.GET_AUTHORITIES_SUCCESS,
-        payload
-      });
-    } catch (e) {
-      dispatch({
-        type: authorityActionTypes.GET_AUTHORITIES_FAILURE,
-        payload: e
-      });
-    }
+    dispatch(genericActions.getAll(domains.AUTHORITY));    
   };
 };
 
 export const editAuthoritiesModal = () => {
   return modalActions.openModal(authorityActionTypes.EDIT_AUTHORITIES_MODAL, null);
 };
-export const putAuthority = authority => {
+
+export const updateAuthority = authority => {
   return async dispatch => {
-    dispatch({ type: authorityActionTypes.PUT_AUTHORITY_REQUEST });
-    try {    
-      const response = await endpoint.putAuthority(authority.id, authority);
-      const payload = normalize(
-        { authorities: [response.data] },
-        schemas.authorityArray,
-      );
-      return dispatch({ type: authorityActionTypes.PUT_AUTHORITY_SUCCESS, payload });
+    dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_REQUEST });
+    try {
+      await dispatch(genericActions.put(domains.AUTHORITY,authority));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Updated'));
+      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: authorityActionTypes.PUT_AUTHORITY_FAILURE, payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Update Failed'));
+      return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_FAILURE });
     }
   };
 };

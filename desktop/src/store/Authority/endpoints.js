@@ -1,11 +1,4 @@
-import { HOST } from 'constants/network';
-
-import axios from 'axios';
+import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
 const DOMAIN = 'authorities';
 
-export const getAuthorities = () => {
-  return axios.get(`${HOST}/${DOMAIN}`);
-};
-export const putAuthority = (id,authority) => {
-  return axios.put(`${HOST}/${DOMAIN}/${id}`, { ...authority });
-};
+export default generateCRUDEndpoints(DOMAIN);

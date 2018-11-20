@@ -64,13 +64,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateAuthority: authority => {
-      return dispatch(authorityActions.putAuthority(authority));
-    }
-  };
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorityDetailContainer);
+export default connect(mapStateToProps,{ ...authorityActions } )(AuthorityDetailContainer);

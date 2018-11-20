@@ -10,8 +10,8 @@ export const login = (username, password) => {
     try {
       const response = await endpoint.login(username, password);
 
-      await dispatch(authorityActions.getAuthorities());
-      await dispatch(crewActions.getCrews());
+      await dispatch(authorityActions.getAllAuthorities());
+      await dispatch(crewActions.getAllCrews());
 
       dispatch({
         type: userActionTypes.LOGIN_USER_SUCCESS,

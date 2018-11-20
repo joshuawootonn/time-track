@@ -13,15 +13,16 @@ class SignInContainer extends Component {
 
   componentDidMount = () => {
     //REMOVE before deploy
-    const { login, history, getStaticData, authorityEntities } = this.props;
+    const { login, history, getStaticData } = this.props;
     getStaticData();
     login('565656').then(asdf => {
       const { authorityId } = asdf.data;  
-      history.push(`/${authorityEntities[authorityId].type}`);         
+      history.push(`/${this.props.authorityEntities[authorityId].type}`);         
     });    
   }
   render() {
     const { login, history, getStaticData, authorityEntities } = this.props;
+    console.log(authorityEntities)
     return (
       <Formik
         initialValues={{ pin: '565656' }}
