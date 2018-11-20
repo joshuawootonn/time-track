@@ -1,84 +1,56 @@
 import { projectTaskActionTypes } from 'constants/actionTypeConstants';
+import { genericActions,snackActions,analyzeActions } from 'store/actions';
+import domains from 'constants/domains';
+import * as status from 'constants/status';
 
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import { projectTaskArray } from 'store/schemas';
-import * as schemas from 'store/schemas';
-
-export const getProjectTask = () => {
+export const getAllProjectTasks = () => {
   return async dispatch => {
-    dispatch({ type: projectTaskActionTypes.GET_PROJECT_TASKS_REQUEST });
+    dispatch(genericActions.getAll(domains.PROJECTTASK));    
+  };
+};
+
+export const createProjectTask = projectTask => {
+  return async dispatch => {
+    dispatch({ type: projectTaskActionTypes.CREATE_PROJECTTASK_REQUEST });
     try {
-      const response = await endpoint.getProjectTasks();
-      // console.log(response.data);
-      const payload = normalize(
-        { projectTasks: response.data },
-        projectTaskArray,
-      );
-      // console.log(response,payload);
-      return dispatch({
-        type: projectTaskActionTypes.GET_PROJECT_TASKS_SUCCESS,
-        payload
-      });
-      // console.log(response);
+      await dispatch(genericActions.post(domains.PROJECTTASK,projectTask));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Created'));
+      return dispatch({ type: projectTaskActionTypes.CREATE_PROJECTTASK_SUCCESS });      
     } catch (e) {
-      dispatch({
-        type: projectTaskActionTypes.GET_PROJECT_TASKS_FAILURE,
-        payload: e
-      });
-      throw e;
+      console.log(e);
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Creation Failed'));
+      return dispatch({ type: projectTaskActionTypes.CREATE_PROJECTTASK_FAILURE });
+    }
+  };
+};
+export const updateProjectTask = projectTask => {
+  return async dispatch => {
+    dispatch({ type: projectTaskActionTypes.UPDATE_PROJECTTASK_REQUEST });
+    try {
+      await dispatch(genericActions.put(domains.PROJECTTASK,projectTask));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Updated'));
+      return dispatch({ type: projectTaskActionTypes.UPDATE_PROJECTTASK_SUCCESS });      
+    } catch (e) {
+      console.log(e);
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Update Failed'));
+      return dispatch({ type: projectTaskActionTypes.UPDATE_PROJECTTASK_FAILURE });
     }
   };
 };
 
-export const postProjectTask = projectTask => {
+export const removeProjectTask = id => {
   return async dispatch => {
-    dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_REQUEST });
+    dispatch({ type: projectTaskActionTypes.REMOVE_PROJECTTASK_REQUEST });
     try {
-      const response = await endpoint.postProjectTask(projectTask);
-      const payload = normalize({ projectTasks: [response.data] }, schemas.projectTaskArray);
-    
-      return dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_SUCCESS,payload });
+      await dispatch(analyzeActions.deleteSelected(domains.PROJECTTASK));
+      await dispatch(genericActions.delet(domains.PROJECTTASK,id));
+
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Deleted'));
+      return dispatch({ type: projectTaskActionTypes.REMOVE_PROJECTTASK_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({ type: projectTaskActionTypes.POST_PROJECT_TASKS_FAILURE,payload: e });
-    }
-  };
-};
-
-export const putProjectTask = projectTask => {
-  return async dispatch => {
-    dispatch({ type: projectTaskActionTypes.PUT_PROJECT_TASKS_REQUEST });
-    try {
-      const response = await endpoint.putProjectTask(projectTask);
-      const payload = normalize({ projectTasks: [response.data] }, schemas.projectTaskArray);
-    
-      return dispatch({ type: projectTaskActionTypes.PUT_PROJECT_TASKS_SUCCESS,payload });
-    } catch (e) {
-      console.log(e);
-      return dispatch({ type: projectTaskActionTypes.PUT_PROJECT_TASKS_FAILURE,payload: e });
-    }
-  };
-};
-
-export const deleteProjectTask = projectTask => {
-  return async dispatch => {
-    dispatch({ type: projectTaskActionTypes.DELETE_PROJECT_TASKS_REQUEST });
-    try {
-      await endpoint.deleteProjectTask(projectTask);
-      const deleted = {
-        entities:{
-          projectTasks: [projectTask.id]
-        },
-        result: {
-          projectTasks: [projectTask.id]
-        }
-      };
-
-      return dispatch({ type: projectTaskActionTypes.DELETE_PROJECT_TASKS_SUCCESS,deleted });
-    } catch (e) {
-      console.log(e);
-      return dispatch({ type: projectTaskActionTypes.DELETE_PROJECT_TASKS_FAILURE,payload: e });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Task Deletion Failed'));
+      return dispatch({ type: projectTaskActionTypes.REMOVE_PROJECTTASK_FAILURE });
     }
   };
 };

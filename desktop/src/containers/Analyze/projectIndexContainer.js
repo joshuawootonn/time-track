@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { projectActions, analyzeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
+import { getAllProjects } from 'store/Project/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -13,7 +13,7 @@ import domain from 'constants/domains';
 
 class ProjectIndexContainer extends Component {
   componentDidMount = () => {
-    this.props.getProjects();
+    this.props.getAllProjects();
   }
   render () {
     const { projects,select,setStatus,selected } = this.props;
@@ -41,23 +41,16 @@ const mapStateToProps = state => {
     selected: projectTaskSelectors.getSelectedProject(state)
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    getProjects: () => {
-      return dispatch(projectActions.getProjects());
-    },    
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
-  };
-};
+
 ProjectIndexContainer.propTypes ={ 
   projects: PropTypes.array,
-  getProjects: PropTypes.func.isRequired,
+  getAllProjects: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndexContainer);
+export default connect(mapStateToProps,{ getAllProjects,...analyzeActions })(ProjectIndexContainer);
 
 const rows = [
   {

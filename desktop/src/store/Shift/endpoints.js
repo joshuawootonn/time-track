@@ -5,15 +5,15 @@ const DOMAIN = 'shifts';
 
 // http://localhost:4000/api/employees/findone?filter[where][pin]=565656
 
-export const getShift = id => {
+export const get = id => {
   return axios.get(`${HOST}/${DOMAIN}/${id}?filter[include]=activities`);
 };
 
-export const postShift = shift => {
+export const post = shift => {
   return axios.post(`${HOST}/${DOMAIN}?filter[include]=activities`, { ...shift });
 };
 
-export const putShift = shift => {
+export const put = shift => {
   return axios.put(`${HOST}/${DOMAIN}/${shift.id}?filter[include]=activities`, { ...shift });
 };
 
@@ -29,7 +29,7 @@ export const getShiftsInRange = (startTime, endTime) => {
   );
 };
 
-export const deleteShift = shift => {
+export const delet = shift => {
   return axios.delete(`${HOST}/${DOMAIN}/${shift.id}`);
 };
 

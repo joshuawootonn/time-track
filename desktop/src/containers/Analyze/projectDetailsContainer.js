@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
 import { subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
-import { projectActions,analyzeActions } from 'store/actions';
+import { projectActions } from 'store/actions';
 import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
@@ -14,9 +14,9 @@ import { projectValidation } from 'constants/formValidation';
 
 class ProjectContainer extends Component {
 
-  deleteProject = () => {
-    const { selected,deleteProject } = this.props;
-    deleteProject(selected);
+  removeProject = () => {
+    const { selected,removeProject } = this.props;
+    removeProject(selected.id);
   }
   render () {
     const { selected,status,categories,subcategories,tasks } = this.props;
@@ -125,7 +125,7 @@ class ProjectContainer extends Component {
                 categories={categories}
                 subcategories={subcategories}
                 tasks={tasks}
-                deleteProject={this.deleteProject}
+                removeProject={this.removeProject}
                 {...formikProps}
               />
             );
@@ -157,14 +157,8 @@ const mapDispatchToProps = dispatch => {
     updateProject: project => {
       return dispatch(projectActions.updateProject(project));
     },
-    deleteProject: project => {
-      return dispatch(projectActions.deleteProject(project));
-    },
-    selectProject: project => {
-      return dispatch(analyzeActions.selectProject(project));
-    },
-    setProjectStatus: status => {
-      return dispatch(analyzeActions.setProjectStatus(status));
+    removeProject: id => {
+      return dispatch(projectActions.removeProject(id));
     }
   };
 };

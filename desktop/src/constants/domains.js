@@ -26,5 +26,8 @@ export default {
   },DIMENSION: {
     singular: 'dimension',
     plural: 'dimensions'
+  },PROJECTTASK: {
+    singular: 'projectTask',
+    plural: 'projectTasks'
   }
 };

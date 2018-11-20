@@ -1,28 +1,19 @@
 import { activityActionTypes } from 'constants/actionTypeConstants';
+import { snackActions,genericActions } from 'store/actions';
+import domains from 'constants/domains';
+import * as status from 'constants/status';
 
-import * as endpoint from './endpoints';
-import { normalize } from 'normalizr';
-import * as schemas from 'store/schemas';
-
-export const postActivity = activity => {
+export const createActivity = activity => {
   return async dispatch => {
-    dispatch({ type: activityActionTypes.POST_ACTIVITY_REQUEST });
+    dispatch({ type: activityActionTypes.CREATE_ACTIVITY_REQUEST });
     try {
-      const response = await endpoint.postActivity(activity);
-      const payload = normalize(
-        { activities: [response.data] },
-        schemas.activityArray,
-      );
-      return dispatch({
-        type: activityActionTypes.POST_ACTIVITY_SUCCESS,
-        payload
-      });
+      await dispatch(genericActions.post(domains.ACTIVITY,activity));
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Created'));
+      return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_SUCCESS });      
     } catch (e) {
       console.log(e);
-      return dispatch({
-        type: activityActionTypes.POST_ACTIVITY_FAILURE,
-        payload: e
-      });
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Creation Failed'));
+      return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_FAILURE });
     }
   };
 };

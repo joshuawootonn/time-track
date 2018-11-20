@@ -147,8 +147,8 @@ const mapDispatchToProps = dispatch => {
     updateEmployee: employee => {
       return dispatch(employeeActions.updateEmployee(employee));
     },
-    removeEmployee: employee => {
-      return dispatch(employeeActions.removeEmployee(employee));
+    removeEmployee: id => {
+      return dispatch(employeeActions.removeEmployee(id));
     },
     editAuthoritiesModal: () => {
       return dispatch(authorityActions.editAuthoritiesModal());

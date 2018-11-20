@@ -6,8 +6,8 @@ export const getStaticData = () => {
   return async dispatch => {
     dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
     try {
-      dispatch(projectActions.getProjects());
-      dispatch(projectTaskActions.getProjectTask());
+      dispatch(projectActions.getAllProjects());
+      dispatch(projectTaskActions.getAllProjectTasks());
       dispatch(taskActions.getTasks());
       dispatch(categoryActions.getAllCategories());      
       dispatch(dimensionActions.getAllDimensions());

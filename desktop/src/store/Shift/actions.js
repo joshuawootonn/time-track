@@ -12,7 +12,7 @@ export const getShift = id => {
   return async dispatch => {
     dispatch({ type: shiftActionTypes.GET_SHIFT_REQUEST });
     try {
-      const response = await endpoint.getShift(id);
+      const response = await endpoint.get(id);
       //console.log('get',response.data);
       const payload = normalize(
         { shifts: [response.data] },
@@ -32,7 +32,7 @@ export const postShift = shift => {
   return async dispatch => {
     dispatch({ type: shiftActionTypes.POST_SHIFT_REQUEST });
     try {
-      const response = await endpoint.postShift(shift);
+      const response = await endpoint.post(shift);
       //console.log('post',response.data);
       const payload = normalize(
         { shifts: [response.data] },
@@ -55,7 +55,7 @@ export const putShift = shift => {
   return async dispatch => {
     dispatch({ type: shiftActionTypes.PUT_SHIFT_REQUEST });
     try {
-      const response = await endpoint.putShift(shift);
+      const response = await endpoint.put(shift);
       //console.log('put',response.data);
       const payload = normalize(
         { shifts: [response.data] },
@@ -204,7 +204,7 @@ export const deleteShift = shift => {
     dispatch({ type: shiftActionTypes.DELETE_SHIFT_REQUEST });
     try {
       await endpoint.deleteRelatedActivities(shift);
-      await endpoint.deleteShift(shift);
+      await endpoint.delet(shift);
       const deleted = {
         entities: {
           shifts: [shift.id]          

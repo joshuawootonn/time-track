@@ -16,7 +16,7 @@ import styles from './styles';
 class Project extends Component {
   render() {
 
-    const { classes, label, type, deleteProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
+    const { classes, label, type, removeProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
  
     return (
       <Form>
@@ -25,7 +25,7 @@ class Project extends Component {
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
-                <IconButton onClick={deleteProject} aria-label="Delete">
+                <IconButton onClick={removeProject} aria-label="Delete">
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -214,7 +214,7 @@ Project.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  deleteProject: PropTypes.func,
+  removeProject: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
