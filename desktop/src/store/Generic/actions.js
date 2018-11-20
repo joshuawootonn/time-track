@@ -23,7 +23,7 @@ export const put = (domain,object) =>{
     dispatch({ type: `put_${domain.singular}_request` });       
     const response = await endpoints[`${domain.singular}Endpoints`].default.put(object);
     const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `put_${domain.singular}_success`, payload });    
+    return dispatch({ type: `put_${domain.singular}_success`, payload, data:response.data });    
   };
 };
 export const post = (domain, object) => {
@@ -33,7 +33,7 @@ export const post = (domain, object) => {
     console.log(`${domain.singular}Endpoints`,endpoints[`${domain.singular}Endpoints`]);
     const response = await endpoints[`${domain.singular}Endpoints`].default.post(object);
     const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `post_${domain.singular}_success`, payload });   
+    return dispatch({ type: `post_${domain.singular}_success`, payload, data:response.data });   
   };
 };
 export const delet = (domain,id) => {

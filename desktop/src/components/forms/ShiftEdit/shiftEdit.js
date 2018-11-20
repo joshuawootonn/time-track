@@ -18,7 +18,7 @@ import { minutesToString } from 'helpers/time';
 
 class ShiftEdit extends Component {
   render() {
-    const { classes, label, type, deleteShift, isSubmitting, resetForm, initialValues, errors,  values,
+    const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
     return (
       <Form>
@@ -27,7 +27,7 @@ class ShiftEdit extends Component {
             <Typography variant="h6">{label}</Typography>
             {type === 'edit' && (
               <Tooltip title="Delete">
-                <IconButton onClick={deleteShift} aria-label="Delete">
+                <IconButton onClick={removeShift} aria-label="Delete">
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -225,7 +225,7 @@ ShiftEdit.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  deleteShift: PropTypes.func,
+  removeShift: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,

@@ -29,5 +29,8 @@ export default {
   },PROJECTTASK: {
     singular: 'projectTask',
     plural: 'projectTasks'
+  },ACTIVITY: {
+    singular: 'activity',
+    plural: 'activities'
   }
 };

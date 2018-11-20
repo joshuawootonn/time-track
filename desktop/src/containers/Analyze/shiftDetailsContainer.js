@@ -14,9 +14,9 @@ import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
 class ShiftDetailsContainer extends Component {
-  deleteShift = () => {
-    const { selected, deleteShift } = this.props;  
-    deleteShift(selected);
+  removeShift = () => {
+    const { selected, removeShift } = this.props;  
+    removeShift(selected.id);
   };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
@@ -47,8 +47,8 @@ class ShiftDetailsContainer extends Component {
           }}
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
-            const { editShift } = this.props;
-            editShift(values,values.activities).then(
+            const { updateShift } = this.props;
+            updateShift(values,values.activities).then(
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
@@ -82,7 +82,7 @@ class ShiftDetailsContainer extends Component {
                 projectTasks={projectTasks}
                 timeLeft={timeLeft}      
                 generalError={generalError} 
-                deleteShift={this.deleteShift}         
+                removeShift={this.removeShift}         
                 {...formikProps}
               />
             );
@@ -110,8 +110,8 @@ class ShiftDetailsContainer extends Component {
           }}
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
-            const { addShift } = this.props;
-            addShift(values,values.activities).then(
+            const { createShift } = this.props;
+            createShift(values,values.activities).then(
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
@@ -169,14 +169,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addShift: (shift,activities) => {
-      return dispatch(shiftActions.addShift( shift, activities));
+    createShift: (shift,activities) => {
+      return dispatch(shiftActions.createShift( shift, activities));
     },
-    editShift: (shift,activities) => {
-      return dispatch(shiftActions.editShift(shift,activities));
+    updateShift: (shift,activities) => {
+      return dispatch(shiftActions.updateShift(shift,activities));
     },
-    deleteShift: shift => {
-      return dispatch(shiftActions.deleteShift(shift));
+    removeShift: shift => {
+      return dispatch(shiftActions.removeShift(shift));
     }
   };
 };

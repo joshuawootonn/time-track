@@ -18,8 +18,8 @@ class ShiftIndexContainer extends Component {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
     this.props.getAllEmployees();
     this.props.getAllProjects();
-    this.props.getTasks();
-    this.props.getShiftsInRange(moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
+    this.props.getAllTasks();
+    this.props.getShiftsInRange(moment().subtract(28, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
   }
   render() {
     const { shifts, select,setStatus, selected } = this.props;
@@ -43,7 +43,7 @@ class ShiftIndexContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(14, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
+    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(28, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };
@@ -55,8 +55,8 @@ const mapDispatchToProps = dispatch => {
     getAllProjects: () => {
       return dispatch(projectActions.getAllProjects());
     },
-    getTasks: () => {
-      return dispatch(taskActions.getTasks());
+    getAllTasks: () => {
+      return dispatch(taskActions.getAllTasks());
     },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
@@ -71,7 +71,7 @@ ShiftIndexContainer.propTypes = {
   getShiftsInRange: PropTypes.func.isRequired,
   getAllEmployees: PropTypes.func.isRequired,
   getAllProjects: PropTypes.func.isRequired,
-  getTasks: PropTypes.func.isRequired,
+  getAllTasks: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
