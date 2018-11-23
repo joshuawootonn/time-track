@@ -59,7 +59,21 @@
     "electron": "^2.0.3",
     "electron-builder": "^20.16.0",
     "electron-devtools-installer": "^2.2.4",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "^5.5.0",
-    "eslint-plugin-react": "^7.11.1"
+    "eslint-plugin-react": "^7.11.1",
+    "jest-enzyme": "^7.0.1",
+    "moxios": "^0.4.0",
+    "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!/node_modules/",
+      "!/src/routes",
+      "!src/index.js",
+      "!src/registerServiceWorker.js"
+    ]
   }
 }
