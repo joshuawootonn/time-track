@@ -1,6 +1,7 @@
-import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import moxios from 'moxios';
+import axios from 'axios';
 
 import { genericActions } from 'store/actions';
 import domains from 'constants/domains';
@@ -9,21 +10,23 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
 
-
-const requestMock = (status, payload) => {
-  moxios.wait(() => {
-    const request = moxios.requests.mostRecent();
-    request.respondWith({
-      status: status,
-      response: payload
-    });
+const mockResponse = (status, statusText, response) => {
+  return new window.Response(response, {
+    status: status,
+    statusText: statusText,
+    headers: {
+      'Content-type': 'application/json'
+    }
   });
 };
 
-
 describe('Generic Actions', () => {
-  beforeEach(() => { // Runs before each test in the suite
+  beforeEach(() => {
+    moxios.install(axios);
     store.clearActions();
+  });
+  afterEach(() => {
+    moxios.uninstall(axios);
   });
 
   test('dispatch 3 actions for all async actions', () => {
@@ -35,11 +38,31 @@ describe('Generic Actions', () => {
         payload: []
       }
     ];
-
-    store.dispatch(genericActions.getAll(domains.EMPLOYEE));
-    expect(store.getActions()).toEqual(expectedActions);
+    // window.fetch = jest.fn().mockImplementation(() =>
+    //   Promise.resolve(mockResponse(200, null, '{"ids":{"provider":' + id + '}}')));
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      
+      request.respondWith({
+        status: 200,
+        response: []
+      });
+    });
+    store.dispatch(genericActions.getAll(domains.EMPLOYEE)).then(() => {
+      const dispatchedActionTypes = store.getActions().map(action => action.type);
+      expect(dispatchedActionTypes).toEqual(expectedActionTypes);
+    });
+    
+    
+    
+    // .then(() => {
+    //   const dispatchedActionTypes = store.getActions().map(action => action.type);
+    //   expect(expectedActions.length).toBe(12);
+    //   expect(dispatchedActionTypes).toEqual(expectedActions.map(action => action.type));
+      
+    //   expect(1).toBe(2);
+    // });   
   });
-
 });
 
 

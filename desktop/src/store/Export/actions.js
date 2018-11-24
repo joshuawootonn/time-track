@@ -5,14 +5,14 @@ import { employeeActions, projectActions, projectTaskActions, taskActions, shift
 
 import { employeeSelectors, shiftSelectors, projectTaskSelectors, projectSelectors } from 'store/selectors';
 import { minutesToString } from 'helpers/time';
-import { store } from 'index';
+//import { store } from 'index';
 
 import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
-const electron = window.require('electron');
-const ipcRenderer = electron.ipcRenderer;
+// const electron = window.require('electron');
+// const ipcRenderer = electron.ipcRenderer;
 
 export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
@@ -25,9 +25,9 @@ export const exportToExcel = (exportCategory, start, fileLocation) => {
       const endMoment = new moment(start).add(7,'days').format('YYYY-MM-DD HH:mm:ss');
 
       await dispatch(getData(startMoment, endMoment));
-      const exportData = formatData(startMoment, endMoment);
+      //const exportData = formatData(startMoment, endMoment);
 
-      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
+      //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
     } catch (e) {

@@ -11,11 +11,12 @@ export const get = (domain,id) => {
   };
 };
 export const getAll = domain =>{
-  return async dispatch => {    
-    dispatch({ type: `get_${domain.plural}_request` });       
+  return async dispatch => { 
+    dispatch({ type: `get_${domain.plural}_request` });          
     const response = await endpoints[`${domain.singular}Endpoints`].default.getAll();
     const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `get_${domain.plural}_success`, payload });    
+    dispatch({ type: `get_${domain.plural}_success`, payload });    
+    return response;   
   };
 };
 export const put = (domain,object) =>{

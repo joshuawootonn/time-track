@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron');
+const electron = require('electron');
+const app = electron.app;
+const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
@@ -19,7 +21,7 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  mainWindow = new electron.BrowserWindow({
     width: 1000,
     height: 800
   });
