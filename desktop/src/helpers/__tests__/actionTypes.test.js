@@ -9,7 +9,7 @@ describe('Action Type Helper', () => {
     expect(keyCount(ActionTypeHelpers)).toEqual(3);
   });
   it('should return an object with 12 values for creatin CRUD action types', () => {
-    expect(keyCount(ActionTypeHelpers.createCRUDActionTypes('asdf'))).toEqual(15);
+    expect(keyCount(ActionTypeHelpers.createCRUDActionTypes('asdf'))).toEqual(24);
   });
   it('should return an object with 3 values for creatin async action types', () => {
     expect(keyCount(ActionTypeHelpers.createCustomAsyncActionType('asdf','asdf'))).toEqual(3);
