@@ -1,6 +1,7 @@
 import { normalize } from 'normalizr';
 import * as endpoints from 'store/endpoints';
 import * as schemas from 'store/schemas';
+import axios from 'axios';
 
 export const get = (domain,id) => {
   return async dispatch => {    
@@ -10,15 +11,22 @@ export const get = (domain,id) => {
     return dispatch({ type: `get_${domain.singular}_success`, payload });    
   };
 };
-export const getAll = domain =>{
-  return async dispatch => { 
-    dispatch({ type: `get_${domain.plural}_request` });          
-    const response = await endpoints[`${domain.singular}Endpoints`].default.getAll();
-    const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
-    dispatch({ type: `get_${domain.plural}_success`, payload });    
-    return response;   
-  };
+export const getAll = domain =>  {      
+  const getAll = endpoints[`${domain.singular}Endpoints`].default.getAll();
+  return dispatch => {
+    dispatch({ type: `get_${domain.plural}_request` });   
+    return getAll.then(
+      response => {
+        const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
+        dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
+      },
+      e => {
+        dispatch({ type: `get_${domain.plural}_failure`, e });  
+      }
+    );  
+  };     
 };
+
 export const put = (domain,object) =>{
   return async dispatch => {    
     dispatch({ type: `put_${domain.singular}_request` });       

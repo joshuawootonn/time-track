@@ -10,13 +10,13 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
 
-const mockResponse = (status, statusText, response) => {
-  return new window.Response(response, {
-    status: status,
-    statusText: statusText,
-    headers: {
-      'Content-type': 'application/json'
-    }
+const requestMock = (status, payload) => {
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent();
+    request.respondWith({
+      status: status,
+      response: payload
+    });
   });
 };
 
@@ -29,40 +29,16 @@ describe('Generic Actions', () => {
     moxios.uninstall(axios);
   });
 
-  test('dispatch 3 actions for all async actions', () => {
-    const expectedActions = [
-      {
-        type: 'get_employee_request'
-      },{
-        type: 'get_employee_success',
-        payload: []
-      }
-    ];
-    // window.fetch = jest.fn().mockImplementation(() =>
-    //   Promise.resolve(mockResponse(200, null, '{"ids":{"provider":' + id + '}}')));
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      
-      request.respondWith({
-        status: 200,
-        response: []
-      });
-    });
-    store.dispatch(genericActions.getAll(domains.EMPLOYEE)).then(() => {
+  test('dispatch 2 actions for getAll action', () => {
+    requestMock(200,[]);
+    const expectedActionTypes = [ 'get_employees_request', 'get_employees_success'];    
+    expect.assertions(1);
+    return store.dispatch(genericActions.getAll(domains.EMPLOYEE)).then(() => {
       const dispatchedActionTypes = store.getActions().map(action => action.type);
-      expect(dispatchedActionTypes).toEqual(expectedActionTypes);
-    });
-    
-    
-    
-    // .then(() => {
-    //   const dispatchedActionTypes = store.getActions().map(action => action.type);
-    //   expect(expectedActions.length).toBe(12);
-    //   expect(dispatchedActionTypes).toEqual(expectedActions.map(action => action.type));
-      
-    //   expect(1).toBe(2);
-    // });   
+      expect(dispatchedActionTypes).toEqual(expectedActionTypes);      
+    });   
   });
+  //test('dispatch 2 actions for get action', () )
 });
 
 

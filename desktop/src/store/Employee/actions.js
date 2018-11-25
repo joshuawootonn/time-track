@@ -10,8 +10,8 @@ import { currentRoundedTime } from 'helpers/time';
 import domains from 'constants/domains';
 
 export const getAllEmployees = () => {
-  return async dispatch => {
-    dispatch(genericActions.getAll(domains.EMPLOYEE));    
+  return dispatch => {
+    return dispatch(genericActions.getAll(domains.EMPLOYEE));    
   };
 };
 
@@ -19,16 +19,32 @@ export const updateEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
     try {
-      await dispatch(genericActions.put(domains.EMPLOYEE,employee));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated'));
-      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });      
+      const response = await dispatch(genericActions.put(domains.EMPLOYEE,employee));
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated'));
+      dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
+      return response;   
     } catch (e) {
       console.log(e);
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
-      return dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
+      dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
+      return e;
     }
   };
 };
+
+export const updateEmployee2 = employee => {
+  return dispatch => {
+    dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
+    return dispatch(genericActions.put(domains.EMPLOYEE,employee))
+      .then(response => {
+        dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
+      })
+      .catch(err => {
+        dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
+      });
+  };
+};
+
 
 export const createEmployee = employee => {
   return async dispatch => {
