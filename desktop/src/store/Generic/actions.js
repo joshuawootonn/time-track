@@ -80,7 +80,7 @@ export const delet = (domain,id) => {
         return dispatch({ type: `delete_${domain.singular}_success`, deleted });
       },
       e => {      
-        return dispatch({ type: `delete_${domain.singular}_success`, e });
+        return dispatch({ type: `delete_${domain.singular}_failure`, e });
       }
     );
        
