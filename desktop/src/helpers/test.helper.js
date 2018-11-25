@@ -12,7 +12,7 @@ export const requestMock = (status, payload) => {
       response: payload
     });
   });
-}
+};
 
 
 export const compareActionTypes = (
@@ -21,8 +21,23 @@ export const compareActionTypes = (
   action,
 ) => {
   expect.assertions(1);
-  return store.dispatch(action).then(() => {
+  return store.dispatch(action)
+    .finally(() => {
+      const dispatchedActionTypes = store.getActions().map(action => action.type);
+      expect(dispatchedActionTypes).toEqual(expectedActionTypes);
+    });
+};
+export const asdf = async (
+  expectedActionTypes,
+  store,
+  action,
+) => {
+  expect.assertions(1);
+  try{
+    await store.dispatch(action);
     const dispatchedActionTypes = store.getActions().map(action => action.type);
     expect(dispatchedActionTypes).toEqual(expectedActionTypes);
-  });
+  }catch(e){
+    return Promise.resolve(e);
+  }
 };

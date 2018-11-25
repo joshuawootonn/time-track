@@ -35,7 +35,7 @@ export const getAll = domain =>  {
 
 export const put = (domain,object) =>{
   const put = endpoints[`${domain.singular}Endpoints`].default.put(object);
-  return dispatch => {    
+  return async dispatch => {    
     dispatch({ type: `put_${domain.singular}_request` });       
     return put.then(
       response => {
@@ -44,7 +44,7 @@ export const put = (domain,object) =>{
       },
       e => {
         dispatch({ type: `put_${domain.singular}_failure`, e });
-        return Promise.reject(new Error(e));      
+        return Promise.reject(e);    
       }
     );
   };
@@ -60,7 +60,7 @@ export const post = (domain, object) => {
       },
       e => {
         dispatch({ type: `post_${domain.singular}_failure`, e }); 
-        return Promise.reject(new Error(e)); 
+        return Promise.reject(e); 
       }
     );      
   };
@@ -83,7 +83,7 @@ export const delet = (domain,id) => {
       },
       e => {      
         dispatch({ type: `delete_${domain.singular}_failure`, e });
-        return Promise.reject(new Error(e)); 
+        return Promise.reject(e); 
       }
     );
        

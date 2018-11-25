@@ -24,7 +24,7 @@ export const updateEmployee = employee => {
       dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
       return response;   
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
       dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
       return e;
@@ -40,7 +40,7 @@ export const createEmployee = employee => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Created'));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS });      
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Creation Failed'));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE });
     }
@@ -56,7 +56,7 @@ export const removeEmployee = id => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deleted'));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_SUCCESS });      
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deletion Failed'));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_FAILURE });
     }
@@ -65,10 +65,14 @@ export const removeEmployee = id => {
 
 
 export const toggleIsWorking = employee => {
-  return genericActions.put(domains.EMPLOYEE,{
-    ...employee,
-    isWorking: !employee.isWorking
-  });
+  return async dispatch => {
+    try {
+      await dispatch(genericActions.put(domains.EMPLOYEE,{
+        ...employee,
+        isWorking: !employee.isWorking
+      }));
+    } catch (e) {}
+  };
 };
 
 export const clockIn = employee => {
