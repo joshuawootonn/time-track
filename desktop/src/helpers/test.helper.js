@@ -14,7 +14,6 @@ export const requestMock = (status, payload) => {
   });
 };
 
-
 export const compareActionTypes = (
   expectedActionTypes,
   store,
@@ -26,18 +25,4 @@ export const compareActionTypes = (
       const dispatchedActionTypes = store.getActions().map(action => action.type);
       expect(dispatchedActionTypes).toEqual(expectedActionTypes);
     });
-};
-export const asdf = async (
-  expectedActionTypes,
-  store,
-  action,
-) => {
-  expect.assertions(1);
-  try{
-    await store.dispatch(action);
-    const dispatchedActionTypes = store.getActions().map(action => action.type);
-    expect(dispatchedActionTypes).toEqual(expectedActionTypes);
-  }catch(e){
-    return Promise.resolve(e);
-  }
 };

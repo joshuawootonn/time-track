@@ -55,6 +55,7 @@
     }
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.15.0",
     "babel-eslint": "^8.2.5",
     "electron": "^2.0.3",
     "electron-builder": "^20.16.0",

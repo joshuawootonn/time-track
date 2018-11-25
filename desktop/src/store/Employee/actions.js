@@ -2,7 +2,7 @@ import { normalize } from 'normalizr';
 import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/actionTypeConstants';
-import { shiftActions, snackActions, activityActions,genericActions,analyzeActions } from 'store/actions';
+import { snackActions, genericActions,analyzeActions } from 'store/actions';
 import endpoints from './endpoints';
 import * as schemas from 'store/schemas';
 import * as status from 'constants/status';
@@ -24,10 +24,8 @@ export const updateEmployee = employee => {
       dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
       return response;   
     } catch (e) {
-      //console.log(e);
       dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
-      dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
-      return e;
+      dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });      
     }
   };
 };
@@ -40,7 +38,6 @@ export const createEmployee = employee => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Created'));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS });      
     } catch (e) {
-      //console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Creation Failed'));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE });
     }
@@ -55,8 +52,7 @@ export const removeEmployee = id => {
 
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deleted'));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_SUCCESS });      
-    } catch (e) {
-      //console.log(e);
+    } catch (e) {      
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deletion Failed'));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_FAILURE });
     }
@@ -85,19 +81,13 @@ export const clockIn = employee => {
           .toString(),
         employeeId: employee.id
       };
-      await dispatch(shiftActions.postShift(clockInObject));
+      await dispatch(genericActions.post(domains.SHIFT,clockInObject));
       await dispatch(toggleIsWorking(employee));
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, 'Clock in success!'),
-      );
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in success!'));
       return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_SUCCESS });
     } catch (e) {
-      console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Clock in failed!'));
-      return dispatch({
-        type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE,
-        payload: e
-      });
+      return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE, payload: e });
     }
   };
 };
@@ -120,20 +110,16 @@ export const clockOut = (employee, shift, activities, lunch) => {
       await activities.forEach(activity => {
         // activity.projectId = undefined;
         activity.shiftId = shift.id;
-        dispatch(activityActions.postActivity(activity));
+        dispatch(genericActions.post(domains.ACTIVITY,activity));
       });
 
-      await dispatch(shiftActions.putShift(clockOutObject));
+      await dispatch(genericActions.put(domains.SHIFT,clockOutObject));
       await dispatch(toggleIsWorking(employee));
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
     } catch (e) {
-      console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Clock out failed!'));
-      return dispatch({
-        type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,
-        payload: e
-      });
+      return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE, payload: e });
     }
   };
 };
@@ -151,11 +137,7 @@ export const login = pin => {
         data: response.data
       });
     } catch (e) {
-      dispatch({
-        type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE,
-        payload: e
-      });
-      throw e;
+      return dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });      
     }
   };
 };

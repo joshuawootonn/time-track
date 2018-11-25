@@ -7,8 +7,10 @@ export const generateCRUDEndpoints = domain => {
     getAll: () => {
       return axios.get(`${HOST}/${domain}/`);
     },get: id => {
+      console.log(`${HOST}/${domain}/${id}`)
       return axios.get(`${HOST}/${domain}/${id}`);
     },put: employee => {
+      console.log(`${HOST}/${domain}/${employee.id}`);
       return axios.put(`${HOST}/${domain}/${employee.id}`, { ...employee });
     },post: employee => {
       return axios.post(`${HOST}/${domain}`, { ...employee });
