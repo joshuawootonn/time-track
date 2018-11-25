@@ -20,6 +20,18 @@ const requestMock = (status, payload) => {
   });
 };
 
+const compareActionTypes = (
+  expectedActionTypes,
+  store,
+  action,
+) => {
+  expect.assertions(1);
+  return store.dispatch(action).then(() => {
+    const dispatchedActionTypes = store.getActions().map(action => action.type);
+    expect(dispatchedActionTypes).toEqual(expectedActionTypes);
+  });
+};
+
 describe('Generic Actions', () => {
   beforeEach(() => {
     moxios.install(axios);
@@ -29,16 +41,28 @@ describe('Generic Actions', () => {
     moxios.uninstall(axios);
   });
 
-  test('dispatch 2 actions for getAll action', () => {
+  test('dispatch 2 actions for getAll action on success', () => {
     requestMock(200,[]);
-    const expectedActionTypes = [ 'get_employees_request', 'get_employees_success'];    
-    expect.assertions(1);
-    return store.dispatch(genericActions.getAll(domains.EMPLOYEE)).then(() => {
-      const dispatchedActionTypes = store.getActions().map(action => action.type);
-      expect(dispatchedActionTypes).toEqual(expectedActionTypes);      
-    });   
+    const expectedActionTypes = [ 'get_employees_request', 'get_employees_success'];   
+    return compareActionTypes(expectedActionTypes,store,genericActions.getAll(domains.EMPLOYEE));
   });
-  //test('dispatch 2 actions for get action', () )
+  test('dispatch 2 actions for getAll action on failure', () => {
+    requestMock(400,[]);
+    const expectedActionTypes = [ 'get_employees_request', 'get_employees_failure'];        
+    return compareActionTypes(expectedActionTypes,store,genericActions.getAll(domains.EMPLOYEE)); 
+  });
+  test('dispatch 2 actions for get action on success', () => {
+    requestMock(200,[]);
+    const expectedActionTypes = [ 'get_employee_request', 'get_employee_success'];        
+    return compareActionTypes(expectedActionTypes,store,genericActions.get(domains.EMPLOYEE,1)); 
+  }); 
+  test('dispatch 2 actions for get action on failure', () => {
+    requestMock(400,[]);
+    const expectedActionTypes = [ 'get_employee_request', 'get_employee_failure'];        
+    return compareActionTypes(expectedActionTypes,store,genericActions.get(domains.EMPLOYEE,1)); 
+  }); 
+
+  
 });
 
 

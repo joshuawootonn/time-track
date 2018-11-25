@@ -1,14 +1,20 @@
 import { normalize } from 'normalizr';
 import * as endpoints from 'store/endpoints';
 import * as schemas from 'store/schemas';
-import axios from 'axios';
 
 export const get = (domain,id) => {
-  return async dispatch => {    
-    dispatch({ type: `get_${domain.singular}_request` });    
-    const response = await endpoints[`${domain.singular}Endpoints`].default.get(id);
-    const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `get_${domain.singular}_success`, payload });    
+  const get = endpoints[`${domain.singular}Endpoints`].default.get(id);
+  return dispatch => {    
+    dispatch({ type: `get_${domain.singular}_request` });   
+    return get.then(
+      response => {
+        const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
+        return dispatch({ type: `get_${domain.singular}_success`, payload });  
+      },
+      e => {
+        return dispatch({ type: `get_${domain.singular}_failure`, e });  
+      }
+    );       
   };
 };
 export const getAll = domain =>  {      
@@ -18,45 +24,65 @@ export const getAll = domain =>  {
     return getAll.then(
       response => {
         const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
-        dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
+        return dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
       },
       e => {
-        dispatch({ type: `get_${domain.plural}_failure`, e });  
+        return dispatch({ type: `get_${domain.plural}_failure`, e });  
       }
     );  
   };     
 };
 
 export const put = (domain,object) =>{
-  return async dispatch => {    
+  const put = endpoints[`${domain.singular}Endpoints`].default.put(object);
+  return dispatch => {    
     dispatch({ type: `put_${domain.singular}_request` });       
-    const response = await endpoints[`${domain.singular}Endpoints`].default.put(object);
-    const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `put_${domain.singular}_success`, payload, data:response.data });    
+    return put.then(
+      response => {
+        const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
+        return dispatch({ type: `put_${domain.singular}_success`, payload, data:response.data });
+      },
+      e => {
+        return dispatch({ type: `put_${domain.singular}_failure`, e });          
+      }
+    );
   };
 };
 export const post = (domain, object) => {
-  console.log(domain,object);
-  return async dispatch => {    
+  const post = endpoints[`${domain.singular}Endpoints`].default.post(object);
+  return dispatch => {    
     dispatch({ type: `post_${domain.singular}_request` });       
-    console.log(`${domain.singular}Endpoints`,endpoints[`${domain.singular}Endpoints`]);
-    const response = await endpoints[`${domain.singular}Endpoints`].default.post(object);
-    const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
-    return dispatch({ type: `post_${domain.singular}_success`, payload, data:response.data });   
+    return post.then(
+      response => {
+        const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
+        return dispatch({ type: `post_${domain.singular}_success`, payload, data:response.data }); 
+      },
+      e => {
+        return dispatch({ type: `post_${domain.singular}_failure`, e }); 
+      }
+    );      
   };
 };
 export const delet = (domain,id) => {
-  return async dispatch => {    
+  const delet = endpoints[`${domain.singular}Endpoints`].default.delet(id);
+  return dispatch => {    
     dispatch({ type: `delete_${domain.singular}_request` });    
-    await endpoints[`${domain.singular}Endpoints`].default.delet(id);
-    const deleted ={
-      entities: {
-        [domain.plural] : [id]
+    return delet.then( 
+      () => {
+        const deleted ={
+          entities: {
+            [domain.plural] : [id]
+          },
+          result: {
+            [domain.plural] : [id]
+          }
+        };
+        return dispatch({ type: `delete_${domain.singular}_success`, deleted });
       },
-      result: {
-        [domain.plural] : [id]
+      e => {      
+        return dispatch({ type: `delete_${domain.singular}_success`, e });
       }
-    };
-    return dispatch({ type: `delete_${domain.singular}_success`, deleted });   
+    );
+       
   };
 };
