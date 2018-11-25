@@ -4,33 +4,12 @@ import moxios from 'moxios';
 import axios from 'axios';
 
 import { genericActions } from 'store/actions';
+import { compareActionTypes, requestMock } from 'helpers/test.helper';
 import domains from 'constants/domains';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
-
-const requestMock = (status, payload) => {
-  moxios.wait(() => {
-    const request = moxios.requests.mostRecent();
-    request.respondWith({
-      status: status,
-      response: payload
-    });
-  });
-};
-
-const compareActionTypes = (
-  expectedActionTypes,
-  store,
-  action,
-) => {
-  expect.assertions(1);
-  return store.dispatch(action).then(() => {
-    const dispatchedActionTypes = store.getActions().map(action => action.type);
-    expect(dispatchedActionTypes).toEqual(expectedActionTypes);
-  });
-};
 
 describe('Generic Actions', () => {
   beforeEach(() => {

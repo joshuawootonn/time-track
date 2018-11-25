@@ -27,7 +27,7 @@ export const getAll = domain =>  {
         return dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
       },
       e => {
-        return dispatch({ type: `get_${domain.plural}_failure`, e });  
+        return dispatch({ type: `get_${domain.plural}_failure`, e });        
       }
     );  
   };     
@@ -43,7 +43,8 @@ export const put = (domain,object) =>{
         return dispatch({ type: `put_${domain.singular}_success`, payload, data:response.data });
       },
       e => {
-        return dispatch({ type: `put_${domain.singular}_failure`, e });          
+        dispatch({ type: `put_${domain.singular}_failure`, e });
+        return Promise.reject(new Error(e));      
       }
     );
   };
@@ -58,7 +59,8 @@ export const post = (domain, object) => {
         return dispatch({ type: `post_${domain.singular}_success`, payload, data:response.data }); 
       },
       e => {
-        return dispatch({ type: `post_${domain.singular}_failure`, e }); 
+        dispatch({ type: `post_${domain.singular}_failure`, e }); 
+        return Promise.reject(new Error(e)); 
       }
     );      
   };
@@ -80,7 +82,8 @@ export const delet = (domain,id) => {
         return dispatch({ type: `delete_${domain.singular}_success`, deleted });
       },
       e => {      
-        return dispatch({ type: `delete_${domain.singular}_failure`, e });
+        dispatch({ type: `delete_${domain.singular}_failure`, e });
+        return Promise.reject(new Error(e)); 
       }
     );
        

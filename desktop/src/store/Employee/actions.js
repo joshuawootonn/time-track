@@ -32,20 +32,6 @@ export const updateEmployee = employee => {
   };
 };
 
-export const updateEmployee2 = employee => {
-  return dispatch => {
-    dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
-    return dispatch(genericActions.put(domains.EMPLOYEE,employee))
-      .then(response => {
-        dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
-      })
-      .catch(err => {
-        dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });
-      });
-  };
-};
-
-
 export const createEmployee = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
