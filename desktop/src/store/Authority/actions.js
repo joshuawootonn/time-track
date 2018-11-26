@@ -5,7 +5,7 @@ import * as status from 'constants/status';
 
 export const getAllAuthorities = () => {
   return async dispatch => {
-    dispatch(genericActions.getAll(domains.AUTHORITY));    
+    return dispatch(genericActions.getAll(domains.AUTHORITY));    
   };
 };
 
@@ -21,7 +21,6 @@ export const updateAuthority = authority => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Updated'));
       return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Update Failed'));
       return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_FAILURE });
     }

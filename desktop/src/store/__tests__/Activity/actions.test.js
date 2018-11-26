@@ -16,7 +16,7 @@ describe('Activity Actions', () => {
     mock = new MockAdapter(axios);
   });
   // CREATE
-  test('dispatch 4 actions for createActivity', async () => {
+  test('dispatch 5 actions for createActivity', async () => {
     const expectedActionTypes = [
       'create_activity_request',
       'post_activity_request',
@@ -27,7 +27,7 @@ describe('Activity Actions', () => {
     mock.onPost(/activities/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,activityActions.createActivity({ id: 1 }));
   });
-  test('dispatch 4 actions for createActivity', async () => {
+  test('dispatch 5 actions for createActivity', async () => {
     const expectedActionTypes = [
       'create_activity_request',
       'post_activity_request',
