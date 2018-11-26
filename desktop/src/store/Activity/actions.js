@@ -11,7 +11,6 @@ export const createActivity = activity => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Created'));
       return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Creation Failed'));
       return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_FAILURE });
     }

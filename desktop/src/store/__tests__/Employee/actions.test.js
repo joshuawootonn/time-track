@@ -1,29 +1,21 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import moxios from 'moxios';
 import axios from 'axios';
 import { employeeActions } from 'store/actions';
-import { compareActionTypes,requestMock } from 'helpers/test.helper';
-var MockAdapter = require('axios-mock-adapter');
+import { compareActionTypes } from 'helpers/test.helper';
+import MockAdapter from 'axios-mock-adapter';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
-
-
 let mock;
 const data = { response: true };
 
 describe('Employee Actions', () => {
   beforeEach(() => {
-    moxios.install(axios);
     store.clearActions();    
     mock = new MockAdapter(axios);
   });
-  afterEach(() => {
-    moxios.uninstall(axios);
-  });
-
   // GET ALL 
   test('dispatch 2 actions for getAllEmployees', async () => {
     const expectedActionTypes = [
