@@ -62,12 +62,10 @@ export const removeEmployee = id => {
 
 export const toggleIsWorking = employee => {
   return async dispatch => {
-    try {
-      await dispatch(genericActions.put(domains.EMPLOYEE,{
-        ...employee,
-        isWorking: !employee.isWorking
-      }));
-    } catch (e) {}
+    return dispatch(genericActions.put(domains.EMPLOYEE,{
+      ...employee,
+      isWorking: !employee.isWorking
+    }));
   };
 };
 
