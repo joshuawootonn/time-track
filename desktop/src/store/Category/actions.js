@@ -5,7 +5,7 @@ import domains from 'constants/domains';
 
 export const getAllCategories = () => {
   return async dispatch => {
-    dispatch(genericActions.getAll(domains.CATEGORY));
+    return dispatch(genericActions.getAll(domains.CATEGORY));
   };
 };
 
@@ -21,7 +21,6 @@ export const updateCategory = category => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Updated'));
       return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Update Failed'));
       return dispatch({ type: categoryActionTypes.UPDATE_CATEGORY_FAILURE });
     }
@@ -36,7 +35,6 @@ export const createCategory = category => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Created'));
       return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Creation Failed'));
       return dispatch({ type: categoryActionTypes.CREATE_CATEGORY_FAILURE });
     }
@@ -52,7 +50,6 @@ export const removeCategory = id => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Deleted'));
       return dispatch({ type: categoryActionTypes.REMOVE_CATEGORY_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Category Deletion Failed'));
       return dispatch({ type: categoryActionTypes.REMOVE_CATEGORY_FAILURE });
     }

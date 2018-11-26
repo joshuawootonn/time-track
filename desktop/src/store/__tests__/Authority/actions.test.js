@@ -27,7 +27,7 @@ describe('Authority Actions', () => {
   // EDIT AUTHORITIES MODAL 
   test('dispatch 1 action for editAuthoritiesModal', () => {
     const expectedActionTypes = ['show_modal'];
-    compareActionTypesSync(expectedActionTypes,store,authorityActions.editAuthoritiesModal(),true);
+    compareActionTypesSync(expectedActionTypes,store,authorityActions.editAuthoritiesModal());
   });
   // UPDATE
   test('dispatch 5 actions for updateAuthority', async () => {
