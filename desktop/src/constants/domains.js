@@ -27,8 +27,8 @@ export default {
     singular: 'dimension',
     plural: 'dimensions'
   },PROJECTTASK: {
-    singular: 'projectTask',
-    plural: 'projectTasks'
+    singular: 'project_task',
+    plural: 'project_tasks'
   },ACTIVITY: {
     singular: 'activity',
     plural: 'activities'

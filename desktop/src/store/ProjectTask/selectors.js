@@ -13,7 +13,7 @@ export const getAllProjectTasks = createSelector(
   getAllTaskObjects,
   getAllProjectObjects,
   (projectTasks, results,tasks,projects) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     return results.map(projectTaskId => {
       return {
         ...projectTasks[projectTaskId],

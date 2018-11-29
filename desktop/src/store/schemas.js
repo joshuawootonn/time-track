@@ -5,7 +5,7 @@ export const authoritySchema = new schema.Entity('authorities');
 export const employeeSchema = new schema.Entity('employees');
 export const shiftSchema = new schema.Entity('shifts');
 export const activitySchema = new schema.Entity('activities');
-export const projectTaskSchema = new schema.Entity('projectTasks');
+export const project_taskSchema = new schema.Entity('projectTasks');
 export const projectSchema = new schema.Entity('projects');
 export const taskSchema = new schema.Entity('tasks');
 export const subcategorySchema = new schema.Entity('subcategories');
@@ -30,20 +30,20 @@ shiftSchema.define({
 
 activitySchema.define({
   shift: shiftSchema,
-  projectTask: projectTaskSchema
+  project_task: project_taskSchema
 });
 
-projectTaskSchema.define({
+project_taskSchema.define({
   activities: [activitySchema],
   project: projectSchema,
   task: taskSchema
 });
 
 
-projectSchema.define({ projectTasks: [projectTaskSchema] });
+projectSchema.define({ project_tasks: [project_taskSchema] });
 
 taskSchema.define({
-  projectTasks: [projectTaskSchema],
+  project_tasks: [project_taskSchema],
   subcategory: subcategorySchema,
   dimension: dimensionSchema
 });
@@ -72,4 +72,4 @@ export const taskArray = { tasks: [taskSchema] };
 export const subcategoryArray = { subcategories: [subcategorySchema] };
 export const categoryArray = { categories: [categorySchema] };
 export const dimensionArray = { dimensions: [dimensionSchema] };
-export const projectTaskArray = { projectTasks: [projectTaskSchema] };
+export const project_taskArray = { project_tasks: [project_taskSchema] };
