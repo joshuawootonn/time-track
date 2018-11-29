@@ -7,7 +7,7 @@ export const getAllDimensions = createSelector(
   getDimensionsFromEntities,
   getDimensionsFromResults,
   (dimensions, results) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     return results.map(dimensionId => {
       return dimensions[dimensionId];
     });
