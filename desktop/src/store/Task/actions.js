@@ -5,7 +5,7 @@ import domains from 'constants/domains';
 
 export const getAllTasks = () => {
   return async dispatch => {
-    dispatch(genericActions.getAll(domains.TASK));    
+    return dispatch(genericActions.getAll(domains.TASK));    
   };
 };
 
@@ -17,7 +17,6 @@ export const createTask = task => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Created'));
       return dispatch({ type: taskActionTypes.CREATE_TASK_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Creation Failed'));
       return dispatch({ type: taskActionTypes.CREATE_TASK_FAILURE });
     }
@@ -31,7 +30,6 @@ export const updateTask = task => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Updated'));
       return dispatch({ type: taskActionTypes.UPDATE_TASK_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Update Failed'));
       return dispatch({ type: taskActionTypes.UPDATE_TASK_FAILURE });
     }
@@ -47,7 +45,6 @@ export const removeTask = id => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Deleted'));
       return dispatch({ type: taskActionTypes.REMOVE_TASK_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Task Deletion Failed'));
       return dispatch({ type: taskActionTypes.REMOVE_TASK_FAILURE });
     }

@@ -5,12 +5,13 @@ import { employeeActions, projectActions, projectTaskActions, taskActions, shift
 
 import { employeeSelectors, shiftSelectors, projectTaskSelectors, projectSelectors } from 'store/selectors';
 import { minutesToString } from 'helpers/time';
-//import { store } from 'index';
+
 
 import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
+//import { store } from 'index';
 // const electron = window.require('electron');
 // const ipcRenderer = electron.ipcRenderer;
 

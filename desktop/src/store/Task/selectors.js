@@ -1,26 +1,22 @@
 import { createSelector } from 'reselect';
+import { getAnalyzeState } from 'store/Analyze/selectors';
+import { getDimensionsFromEntities } from 'store/Dimension/selectors';
+import { getCategoriesFromEntities } from 'store/Category/selectors';
+import { getSubcategoriesFromEntities } from 'store/Subcategory/selectors';
 
 export const getTasksFromEntities = state => state.entities.tasks;
 export const getTasksFromResults = state => state.results.tasks;
-
-export const getDimensionsFromEntities = state => state.entities.dimensions;
-export const getCategoriesFromEntities = state => state.entities.categories;
-export const getSubcategoriesFromEntities = state => state.entities.subcategories;
-
-export const getAnalyzeState = state => state.analyze;
 
 export const getAllTasks = createSelector(
   getTasksFromEntities,
   getTasksFromResults,
   (tasks, results) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     return results.map(taskId => {
       return tasks[taskId];
     });
   },
 );
-
-
 
 export const getAllTasksWithContent = createSelector(
   getTasksFromEntities,
@@ -28,8 +24,8 @@ export const getAllTasksWithContent = createSelector(
   getDimensionsFromEntities,
   getCategoriesFromEntities,
   getSubcategoriesFromEntities,
-  (tasks,results,dimensions,categories,subcategories) => {
-    if(!results || results.size === 0) return null;
+  (tasks,results,dimensions,categories,subcategories) => {    
+    if(!results || results.length === 0) return null;
     return results.map(taskId => {
       const task = tasks[taskId];
       return {

@@ -21,7 +21,7 @@ export const initialState = {
   subcategoryStatus: analyzeStatus.INIT
 };
 export default (state = initialState, action) => {
-  if(!state.hasOwnProperty(action.domain.singular)){
+  if(action.domain && !state.hasOwnProperty(action.domain.singular)){
     return state;
   }
   switch (action.type) {

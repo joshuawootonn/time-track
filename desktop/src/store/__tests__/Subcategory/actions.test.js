@@ -17,7 +17,7 @@ describe('Subcategory Actions', () => {
     mock = new MockAdapter(axios);
   });
   // GET ALL 
-  test('dispatch 2 actions for getAllSubcategories', async () => {
+  test('getAllSubcategories should dispatch 2 actions on success', async () => {
     const expectedActionTypes = [
       'get_subcategories_request', 'get_subcategories_success'
     ];
@@ -31,7 +31,7 @@ describe('Subcategory Actions', () => {
   });
 
   // UPDATE
-  test('dispatch 4 actions for updateSubcategory', async () => {
+  test('updateSubcategory should dispatch 6 actions on success', async () => {
     const expectedActionTypes = [
       'update_subcategory_request',
       'put_subcategory_request',
@@ -42,7 +42,7 @@ describe('Subcategory Actions', () => {
     mock.onPut(/subcategories/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,subcategoryActions.updateSubcategory({ id: 1 }));
   });
-  test('dispatch 4 actions for updateSubcategory', async () => {
+  test('updateSubcategory should dispatch 6 actions on failure', async () => {
     const expectedActionTypes = [
       'update_subcategory_request',
       'put_subcategory_request',
@@ -54,7 +54,7 @@ describe('Subcategory Actions', () => {
     await compareActionTypes(expectedActionTypes,store,subcategoryActions.updateSubcategory({ id: 1 }));
   });
   // CREATE
-  test('dispatch 4 actions for createSubcategory', async () => {
+  test('createSubcategory should dispatch 6 actions on success', async () => {
     const expectedActionTypes = [
       'create_subcategory_request',
       'post_subcategory_request',
@@ -65,7 +65,7 @@ describe('Subcategory Actions', () => {
     mock.onPost(/subcategories/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,subcategoryActions.createSubcategory({ id: 1 }));
   });
-  test('dispatch 4 actions for createSubcategory', async () => {
+  test('createSubcategory should dispatch 6 actions on failure', async () => {
     const expectedActionTypes = [
       'create_subcategory_request',
       'post_subcategory_request',
@@ -77,7 +77,7 @@ describe('Subcategory Actions', () => {
     await compareActionTypes(expectedActionTypes,store,subcategoryActions.createSubcategory({ id: 1 }));
   });
   // REMOVE
-  test('dispatch 4 actions for removeSubcategory', async () => {
+  test('removeSubcategory should dispatch 6 actions on success', async () => {
     const expectedActionTypes = [
       'remove_subcategory_request',
       'delete_selected',
@@ -89,7 +89,7 @@ describe('Subcategory Actions', () => {
     mock.onDelete(/subcategories/).reply(200, data); 
     await compareActionTypes(expectedActionTypes,store,subcategoryActions.removeSubcategory(1));
   });
-  test('dispatch 4 actions for removeSubcategory', async () => {
+  test('removeSubcategory should dispatch 6 actions on failure', async () => {
     const expectedActionTypes = [
       'remove_subcategory_request',
       'delete_selected',
