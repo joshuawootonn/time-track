@@ -17,7 +17,7 @@ describe('Authority Actions', () => {
     mock = new MockAdapter(axios);
   });
   // GET ALL 
-  test('dispatch 2 actions for getAllAuthorities success', async () => {
+  test('getAllAuthorities should dispatch 2 actions for success', async () => {
     const expectedActionTypes = [
       'get_authorities_request', 'get_authorities_success'
     ];
@@ -25,12 +25,12 @@ describe('Authority Actions', () => {
     await compareActionTypes(expectedActionTypes,store,authorityActions.getAllAuthorities());
   });
   // EDIT AUTHORITIES MODAL 
-  test('dispatch 1 action for editAuthoritiesModal', () => {
+  test('editAuthoritiesModal should dispatch 1 action for success', () => {
     const expectedActionTypes = ['show_modal'];
     compareActionTypesSync(expectedActionTypes,store,authorityActions.editAuthoritiesModal());
   });
   // UPDATE
-  test('dispatch 5 actions for updateAuthority', async () => {
+  test('updateAuthority should dispatch 5 actions for success', async () => {
     const expectedActionTypes = [
       'update_authority_request',
       'put_authority_request',
@@ -41,7 +41,7 @@ describe('Authority Actions', () => {
     mock.onPut(/authorities/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,authorityActions.updateAuthority({ id: 1 }));
   });
-  test('dispatch 5 actions for updateAuthority failure', async () => {
+  test('updateAuthority should dispatch 5 actions for failure', async () => {
     const expectedActionTypes = [
       'update_authority_request',
       'put_authority_request',

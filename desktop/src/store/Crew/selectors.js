@@ -1,21 +1,19 @@
 import { createSelector } from 'reselect';
+import { getAnalyzeState } from 'store/Analyze/selectors';
 
 export const getCrewsFromEntities = state => state.entities.crews;
 export const getCrewsFromResults = state => state.results.crews;
-
-export const getAnalyzeState = state => state.analyze;
 
 export const getAllCrews = createSelector(
   getCrewsFromEntities,
   getCrewsFromResults,
   (crews, results) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     return results.map(crewId => {
       return crews[crewId];
     });
   },
 );
-
 
 export const getSelectedCrew = createSelector(
   getCrewsFromEntities,

@@ -4,7 +4,6 @@ import { getAnalyzeState } from 'store/Analyze/selectors';
 export const getAuthoritiesFromEntities = state => state.entities.authorities;
 export const getAuthoritiesFromResults = state => state.results.authorities;
 
-
 export const getAllAuthorities = createSelector(
   getAuthoritiesFromEntities,
   getAuthoritiesFromResults,
@@ -15,7 +14,6 @@ export const getAllAuthorities = createSelector(
     });
   },
 );
-
 
 export const getSelectedAuthority = createSelector(
   getAuthoritiesFromEntities,

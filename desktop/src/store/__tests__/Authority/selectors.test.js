@@ -1,7 +1,7 @@
 import { authoritySelectors } from 'store/selectors';
 import { initialState } from 'store/Analyze/reducers';
 
-describe('Activity Selectors', () => {
+describe('Authority Selectors', () => {
   test('should have two basic selectors', () => {
     authoritySelectors.getAuthoritiesFromEntities({ entities: { authorities:{} } });
     authoritySelectors.getAuthoritiesFromResults({ results: { authorities:[] } });

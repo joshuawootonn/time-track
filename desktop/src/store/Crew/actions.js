@@ -5,7 +5,7 @@ import * as status from 'constants/status';
 
 export const getAllCrews = () => {
   return async dispatch => {
-    dispatch(genericActions.getAll(domains.CREW));    
+    return dispatch(genericActions.getAll(domains.CREW));    
   };
 };
 
@@ -21,7 +21,6 @@ export const updateCrew = crew => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Updated'));
       return dispatch({ type: crewActionTypes.UPDATE_CREW_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Update Failed'));
       return dispatch({ type: crewActionTypes.UPDATE_CREW_FAILURE });
     }
