@@ -1,13 +1,12 @@
 import { employeeActionTypes } from 'constants/actionTypeConstants';
 import * as status from 'constants/status';
-export const employeeInitialState = {
+export const initialState = {
   current: {
     id: null,
     status: status.INIT
   }
 };
-
-export default (state = employeeInitialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
   case employeeActionTypes.LOGIN_EMPLOYEE_REQUEST:
     return {
