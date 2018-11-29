@@ -2,7 +2,7 @@
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
 import { analyzeStatus } from 'constants/analyze';
 
-const selectedInitialState = {
+export const initialState = {
   employee: -1,
   project: -1,
   task: -1,
@@ -20,23 +20,25 @@ const selectedInitialState = {
   categoryStatus: analyzeStatus.INIT,
   subcategoryStatus: analyzeStatus.INIT
 };
-export default (state = selectedInitialState, action) => {
+export default (state = initialState, action) => {
+  if(!state.hasOwnProperty(action.domain.singular)){
+    return state;
+  }
   switch (action.type) {
   case analyzeActionTypes.SELECT:
-    if (state[action.domain.singular] !== -1 && state[action.domain.singular] === action.payload) {
+    if ( state[action.domain.singular] !== -1 && state[action.domain.singular] === action.payload) {
       return {
         ...state,
         [action.domain.singular]: -1,
         [`${action.domain.singular}Status`]: analyzeStatus.INIT
       };
-    } else if (state[action.domain.singular]) {
+    } else  {
       return {
         ...state,
         [action.domain.singular]: action.payload,
         [`${action.domain.singular}Status`]: analyzeStatus.EDITING
       };
     }
-    return state;
   case analyzeActionTypes.SET_STATUS:
     return {
       ...state,
