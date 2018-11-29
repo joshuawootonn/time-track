@@ -5,17 +5,11 @@ const DOMAIN = 'projects';
 
 const CRUDendpoints = generateCRUDEndpoints(DOMAIN);
 
-const deleteRelatedProjectTasks = project => {
-  console.log(project);
-  return axios.delete(`${HOST}/${DOMAIN}/${project.id}/projecttasks`);
-};
-
 const getProjectTasksByProjectId = project => {
   return axios.get(`${HOST}/${DOMAIN}/${project.id}/projecttasks`);
 };
 
 export default {
   ...CRUDendpoints,
-  deleteRelatedProjectTasks,
   getProjectTasksByProjectId
 };

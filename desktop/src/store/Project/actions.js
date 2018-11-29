@@ -1,7 +1,7 @@
 import { projectActionTypes } from 'constants/actionTypeConstants';
 
 import endpoints from './endpoints';
-import { snackActions, projectTaskActions,analyzeActions,genericActions } from 'store/actions';
+import { snackActions, analyzeActions,genericActions } from 'store/actions';
 import * as status from 'constants/status';
 import domains from 'constants/domains';
 
@@ -38,8 +38,7 @@ export const updateProject = project => {
       const { data } = await endpoints.getProjectTasksByProjectId(project);
    
       for(const projectTaskInDb of data){
-        console.log(projectTaskInDb)
-        if(!project.projectTasks.find(ele => ele.id === projectTaskInDb.id)){          
+        if(!project.projectTasks.find(ele => ele.id === projectTaskInDb.id)){ 
           await dispatch(genericActions.delet(domains.PROJECTTASK, projectTaskInDb.id));
         }
       }

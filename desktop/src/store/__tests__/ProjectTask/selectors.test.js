@@ -58,6 +58,4 @@ describe('Subcategory Selectors', () => {
     expect(returnedValue).toEqual( { id: 1, projectTasks: [{ project: { val: 'qwer' }, projectId: 1, task: {val: 'zxcv' }, taskId: 1, val: 'asdf' }]
       , val: 'asdf' }); 
   });  
- 
-
 }); 

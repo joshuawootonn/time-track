@@ -24,7 +24,7 @@ describe('Project Actions', () => {
     mock.onGet(/projects/).reply(200,data);
     await compareActionTypes(expectedActionTypes,store,projectActions.getAllProjects());
   }); 
-  // UPDATE
+  //UPDATE
   test('updateProject should dispatch 6 actions on success', async () => {
     const expectedActionTypes = [
       'update_project_request',
@@ -53,18 +53,20 @@ describe('Project Actions', () => {
     mock.onPut(/project/).reply(200, { response: true, id: 1 });  
     await compareActionTypes(expectedActionTypes,store,projectActions.updateProject({ id: 1,projectTasks: [{ id: 1,projectId: 1 }] }));
   });
-  test('updateProject should dispatch 6 actions on success plus 2 for deleting existing projectTasks', async () => {
+  test('updateProject should dispatch 5 actions on success plus 2 for deleting existing projectTasks and 2 for putting new ones', async () => {
     const expectedActionTypes = [
       'update_project_request',
       'put_project_request', 
       'put_project_success', 
       'delete_project_task_request',
       'delete_project_task_success',
+      'put_project_task_request',
+      'put_project_task_success',
       'show_snack',
       'update_project_success' 
     ];    
     mock.onGet().reply(200, [{ id: 2 }]);  
-    mock.onDelete(/projectTask/).reply(200,data);
+    mock.onDelete().reply(200,data);
     mock.onPut(/project/).reply(200, { response: true, id: 1 });  
     await compareActionTypes(expectedActionTypes,store,projectActions.updateProject({ id: 1,projectTasks: [{ id: 1,projectId: 1 }] }));
   });
@@ -79,7 +81,7 @@ describe('Project Actions', () => {
     mock.onPut(/projects/).reply(400, data); 
     await compareActionTypes(expectedActionTypes,store,projectActions.updateProject({ id: 1 }));
   });
-  // CREATE
+  // // CREATE
   test('createProject should dispatch 7 actions on success', async () => {
     const expectedActionTypes = [
       'create_project_request',
@@ -119,7 +121,7 @@ describe('Project Actions', () => {
     mock.onPost(/projects/).reply(400, data); 
     await compareActionTypes(expectedActionTypes,store,projectActions.createProject({ id: 1 }));
   });
-  // REMOVE
+  // // REMOVE
   test('removeProject should dispatch 6 actions on success', async () => {
     const expectedActionTypes = [
       'remove_project_request',
