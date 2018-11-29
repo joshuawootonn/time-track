@@ -1,8 +1,8 @@
 import { userActionTypes } from 'constants/actionTypeConstants';
 import * as status from 'constants/status';
-export const userInitialState = { status: status.INIT };
+export const initialState = { status: status.INIT };
 
-export default (state = userInitialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
   case userActionTypes.LOGIN_USER_REQUEST:
     return {

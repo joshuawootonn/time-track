@@ -1,13 +1,11 @@
 import _ from 'lodash';
 
-
-function payloadCustomizer(objValue, srcValue) {
+export const payloadCustomizer = (objValue, srcValue) => {
   // this makes sub arrays in objects take the new values and ignore the existing
   if (_.isArray(srcValue)) {
     return srcValue;
   }
 }
-
 
 export default (state = {}, action) => {
   const { payload, deleted } = action;

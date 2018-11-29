@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-function payloadCustomizer(objValue, srcValue) {
+export const payloadCustomizer = (objValue, srcValue) => {
   // console.log(objValue,srcValue)
   if (_.isArray(objValue)) {
     return arrayUnique(objValue.concat(srcValue));
   }
-}
+};
 
-function arrayUnique(array) {
+export const arrayUnique = array => {
   let a = array.concat();
   for (let i = 0; i < a.length; ++i) {
     for (let j = i + 1; j < a.length; ++j) {
@@ -15,12 +15,11 @@ function arrayUnique(array) {
     }
   }
   return a;
-}
+};
 
 
 export default (state = {}, action) => {
   const { payload, deleted } = action;
-
   if (payload && payload.result) {
     return _.mergeWith({}, state, payload.result, payloadCustomizer);
   } else if (deleted && deleted.result) {

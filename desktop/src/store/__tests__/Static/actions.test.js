@@ -37,7 +37,7 @@ describe('Static Actions', () => {
     mock.onAny().reply(200,data);
     await compareActionTypes(expectedActionTypes,store,staticActions.getStaticData());
   });
-  test('getStaticData should dispatch 2 if network in one failure situation', async () => {
+  test('getStaticData should dispatch 4 if network in one failure situation', async () => {
     const expectedActionTypes = [
       'get_static_data_request',         
       'get_categories_request',
