@@ -11,7 +11,7 @@ export const compareActionTypes = (
   return store.dispatch(action)
     .then(() => {
       const dispatchedActionTypes = store.getActions().map(action => action.type);
-      expect(dispatchedActionTypes).toEqual(expectedActionTypes);
+      expect(dispatchedActionTypes.sort()).toEqual(expectedActionTypes.sort());
     },e => {
       const dispatchedActionTypes = store.getActions().map(action => action.type);
       expect(dispatchedActionTypes).toEqual(expectedActionTypes);      

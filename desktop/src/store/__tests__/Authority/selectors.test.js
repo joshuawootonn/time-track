@@ -23,6 +23,5 @@ describe('Authority Selectors', () => {
   test('getSelectedAuthority should return selected authority when', () => {
     const returnedValue = authoritySelectors.getSelectedAuthority.resultFunc({ 1: { value: 'asdf' } },{ ...initialState,authority:1 });
     expect(returnedValue).toEqual({ value:'asdf' }); 
-  });
-  
+  });  
 });
