@@ -1,11 +1,11 @@
 import { modalActionTypes } from 'constants/actionTypeConstants';
 
-export const modalInitialState = {
+export const initialState = {
   modalType: null,
   modalProps: {}
 };
 
-export default (state = modalInitialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
   case modalActionTypes.SHOW_MODAL:
     return {
@@ -13,7 +13,7 @@ export default (state = modalInitialState, action) => {
       modalProps: action.modalProps
     };
   case modalActionTypes.HIDE_MODAL:
-    return modalInitialState;
+    return initialState;
   default:
     return state;
   }
