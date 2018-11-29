@@ -9,6 +9,7 @@ import * as crewSelectors from './Crew/selectors';
 import * as categorySelectors from './Category/selectors';
 import * as subcategorySelectors from './Subcategory/selectors';
 import * as dimensionSelectors from './Dimension/selectors';
+import * as analyzeSelectors from './Analyze/selectors';
 
 export {
   employeeSelectors,
@@ -21,5 +22,6 @@ export {
   crewSelectors,
   categorySelectors,
   subcategorySelectors,
-  dimensionSelectors
+  dimensionSelectors,
+  analyzeSelectors
 };
