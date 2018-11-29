@@ -12,7 +12,8 @@ export const get = (domain,id) => {
         return dispatch({ type: `get_${domain.singular}_success`, payload });  
       },
       e => {
-        return dispatch({ type: `get_${domain.singular}_failure`, e });  
+        dispatch({ type: `get_${domain.singular}_failure`, e });  
+        return Promise.reject(e);   
       }
     );       
   };
@@ -27,7 +28,8 @@ export const getAll = domain =>  {
         return dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
       },
       e => {
-        return dispatch({ type: `get_${domain.plural}_failure`, e });        
+        dispatch({ type: `get_${domain.plural}_failure`, e });     
+        return Promise.reject(e);      
       }
     );  
   };     

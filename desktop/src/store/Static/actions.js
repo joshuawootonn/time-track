@@ -5,23 +5,16 @@ import { projectActions, projectTaskActions, taskActions,categoryActions,dimensi
 export const getStaticData = () => {
   return async dispatch => {
     dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
-    try {
-      
-      dispatch(categoryActions.getAllCategories());      
-      dispatch(dimensionActions.getAllDimensions());
+    try {      
+      await dispatch(categoryActions.getAllCategories());      
+      await dispatch(dimensionActions.getAllDimensions());
       await dispatch(subcategoryActions.getAllSubcategories());
       await dispatch(projectTaskActions.getAllProjectTasks());
-      await dispatch(projectActions.getAllProjects());
-      
+      await dispatch(projectActions.getAllProjects());      
       await dispatch(taskActions.getAllTasks());
-
-
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
     } catch (e) {
-      dispatch({
-        type: staticActionTypes.GET_STATIC_DATA_FAILURE,
-        payload: e
-      });
+      dispatch({type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e });
       throw e;
     }
   };

@@ -4,7 +4,7 @@ import * as status from 'constants/status';
 import domains from 'constants/domains';
 
 export const getAllCategories = () => {
-  return async dispatch => {
+  return async dispatch => {    
     return dispatch(genericActions.getAll(domains.CATEGORY));
   };
 };

@@ -9,9 +9,12 @@ export const compareActionTypes = (
 ) => {
   expect.assertions(1);
   return store.dispatch(action)
-    .finally(() => {
+    .then(() => {
       const dispatchedActionTypes = store.getActions().map(action => action.type);
       expect(dispatchedActionTypes).toEqual(expectedActionTypes);
+    },e => {
+      const dispatchedActionTypes = store.getActions().map(action => action.type);
+      expect(dispatchedActionTypes).toEqual(expectedActionTypes);      
     }); 
 };
 export const compareActionTypesSync = (
