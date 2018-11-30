@@ -3,19 +3,10 @@ import ReactDOM from 'react-dom';
 import App from 'app';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 
-import reducer from 'store/reducers';
+import store from './store'
 import './index.css';
-const middleware = [thunk];
-export const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(...middleware)),
-);
 
 
 const theme = createMuiTheme({
