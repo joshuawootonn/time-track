@@ -13,13 +13,9 @@ export const login = (username, password) => {
       await dispatch(authorityActions.getAllAuthorities());
       await dispatch(crewActions.getAllCrews());
 
-      dispatch({
-        type: userActionTypes.LOGIN_USER_SUCCESS,
-        payload: response.data
-      });
+      return dispatch({ type: userActionTypes.LOGIN_USER_SUCCESS, payload: response.data });
     } catch (e) {
-      dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
-      throw e;
+      return dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
     }
   };
 };

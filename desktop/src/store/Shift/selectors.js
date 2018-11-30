@@ -3,12 +3,10 @@ import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
 import { getEmployeesFromEntities } from 'store/Employee/selectors';
 import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
+import { getAnalyzeState } from 'store/Analyze/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
-
-
-export const getAnalyzeState = state => state.analyze;
 
 export const getShiftFromState = state => state.shift;
 
@@ -17,7 +15,7 @@ export const getCurrentShift = createSelector(
   getShiftsFromResults,
   getShiftFromState,
   (shifts, results, shift) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     return shifts[shift.current.id];
   },
 );
@@ -30,7 +28,7 @@ export const getShiftsInRange = createSelector(
   (_,props) => props.startTime,
   (_,props) => props.endTime,
   (shifts,results,activities,employees,start,end) => {
-    if (!results || results.size === 0) return null;
+    if (!results || results.length === 0) return null;
     
     // map the shift Ids to array of shift objects 
     // while mapping activity ids to array of activities

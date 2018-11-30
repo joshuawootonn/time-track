@@ -9,8 +9,6 @@ import * as status from 'constants/status';
 import * as schemas from 'store/schemas';
 import domains from 'constants/domains';
 
-
-
 export const getCurrentShift = employeeId => {
   return async dispatch => {
     dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_REQUEST });
@@ -18,17 +16,9 @@ export const getCurrentShift = employeeId => {
       const response = await endpoint.getCurrentShift(employeeId);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
       
-      return dispatch({
-        type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS,
-        payload,
-        data: response.data[0]
-      });
+      return dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_SUCCESS, payload, data: response.data[0] });
     } catch (e) {
-      dispatch({
-        type: shiftActionTypes.GET_CURRENT_SHIFT_FAILURE,
-        payload: e
-      });
-      throw e;
+      return dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_FAILURE, payload: e });
     }
   };
 };
@@ -40,16 +30,9 @@ export const getShiftsInRange = (startTime,endTime) => {
       const response = await endpoint.getShiftsInRange(startTime,endTime);
       const payload = normalize({ shifts: response.data }, schemas.shiftArray);
 
-      return dispatch({
-        type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS,
-        payload
-      });
+      return dispatch({ type: shiftActionTypes.GET_SHIFTS_IN_RANGE_SUCCESS, payload });
     } catch (e) {
-      dispatch({
-        type: shiftActionTypes.GET_SHIFTS_IN_RANGE_FAILURE,
-        payload: e
-      });
-      throw e;
+      return dispatch({ type: shiftActionTypes.GET_SHIFTS_IN_RANGE_FAILURE, payload: e }); 
     }
   };
 };
@@ -75,7 +58,6 @@ export const createShift = shift => {
       // Post parsed object to SHIFT endpoint
       const response = await dispatch(genericActions.post(domains.SHIFT,shiftObject));
       // Loop through the activities Posting them to the ACTIVITY endpoint
-      console.log(response);
       for(const activity of shift.activities) {
         // activity.projectId = undefined;
         activity.shiftId = response.data.id;        
@@ -88,7 +70,6 @@ export const createShift = shift => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Created'));
       return dispatch({ type: shiftActionTypes.CREATE_SHIFT_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Creation Failed'));
       return dispatch({ type: shiftActionTypes.CREATE_SHIFT_FAILURE });
     }
@@ -124,7 +105,6 @@ export const updateShift = shift => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Updated'));
       return dispatch({ type: shiftActionTypes.UPDATE_SHIFT_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Update Failed'));
       return dispatch({ type: shiftActionTypes.UPDATE_SHIFT_FAILURE });
     }
@@ -143,7 +123,6 @@ export const removeShift = id => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Deleted'));
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_SUCCESS });      
     } catch (e) {
-      console.log(e);
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Deletion Failed'));
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_FAILURE });
     }
