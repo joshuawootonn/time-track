@@ -1,5 +1,4 @@
 import 'jest-enzyme';
-import jsdom from 'jsdom'
 const Enzyme = require('enzyme');
 
 const Adapter = require('enzyme-adapter-react-16');
@@ -8,3 +7,6 @@ Enzyme.configure({ adapter: new Adapter() });
 
 // global.window = new jsdom.JSDOM().window;
 // global.document = window.document;
+global.window = {
+  require: jest.fn()
+};
