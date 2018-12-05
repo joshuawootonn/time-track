@@ -10,3 +10,13 @@ Enzyme.configure({ adapter: new Adapter() });
 global.window = {
   require: jest.fn()
 };
+
+const originalConsoleError = console.error;
+
+console.error = message => {
+  if (/(Failed prop type)/.test(message)) {
+    throw new Error(message);
+  }
+
+  originalConsoleError(message);
+};

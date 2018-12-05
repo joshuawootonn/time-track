@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Components should render correctly 1`] = `
+<WithStyles(Modal)
+  onClose={[Function]}
+  open={true}
+>
+  <div>
+    <div>
+      child
+    </div>
+  </div>
+</WithStyles(Modal)>
+`;
+
+exports[`Modal Components should render correctly withStyles 1`] = `
+<Modal
+  classes={
+    Object {
+      "paper": "Modal-paper-1",
+    }
+  }
+  open={true}
+  toggle={[Function]}
+>
+  <div>
+    child
+  </div>
+</Modal>
+`;
