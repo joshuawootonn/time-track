@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import styles from './styles';
 
-const SnackBar = props => {
+export const Snack = props => {
   const { classes, onClose, position, type, icon, message } = props;
   return (
     <MUSnackbar anchorOrigin={position} open={true} onClose={onClose}>
@@ -40,7 +40,7 @@ const SnackBar = props => {
   );
 };
 
-SnackBar.propTypes = {
+Snack.propTypes = {
   classes: PropTypes.object,
   onClose: PropTypes.func,
   position: PropTypes.object,
@@ -49,4 +49,4 @@ SnackBar.propTypes = {
   message: PropTypes.string
 };
 
-export default withStyles(styles)(SnackBar);
+export default withStyles(styles)(Snack);

@@ -1,9 +1,8 @@
 import React from 'react';
-import { shallow,mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { Modal } from 'components/floaters/Modal/modal';
 import ModalHOC from 'components/floaters/Modal';
-
 
 const props = {
   open: true,
@@ -19,7 +18,6 @@ const setup = () => {
 const setupHOC = () => {
   return shallow(<ModalHOC {...props} />);
 };
-
 
 describe('Modal Components', () => {
   it('should render correctly', () => {
