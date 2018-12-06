@@ -9,7 +9,7 @@ import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import styles from './styles';
 
-class Crew extends Component {
+export class Subcategory extends Component {
   render() {
     const { classes, errors, initialValues, resetForm, isSubmitting, label,type,removeSubcategory,categories } = this.props;
     return (
@@ -68,6 +68,7 @@ class Crew extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id="subcategory-reset-button"
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
@@ -83,7 +84,7 @@ class Crew extends Component {
   }
 }
 
-Crew.propTypes = {
+Subcategory.propTypes = {
   classes: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
@@ -96,4 +97,4 @@ Crew.propTypes = {
 };
 
 
-export default withStyles(styles)(Crew);
+export default withStyles(styles)(Subcategory);

@@ -13,7 +13,7 @@ import Select from 'components/inputs/Select';
 
 import * as exportConstants from 'constants/export';
 
-class ExportForm extends Component {
+export class Export extends Component {
   render() {
     const { classes, cancel, isSubmitting, errors,values } = this.props;    
   
@@ -81,11 +81,11 @@ class ExportForm extends Component {
   }
 }
 
-ExportForm.propTypes = {
+Export.propTypes = {
   values: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   cancel: PropTypes.func,
   isSubmitting: PropTypes.bool.isRequired,
   errors: PropTypes.object
 };
-export default withStyles(styles)(ExportForm);
+export default withStyles(styles)(Export);

@@ -13,10 +13,11 @@ import Select from 'components/inputs/Select';
 import styles from './styles';
 
 
-class Project extends Component {
+export class Project extends Component {
   render() {
 
-    const { classes, label, type, removeProject, categories, subcategories, tasks, isSubmitting, resetForm, initialValues, errors, values } = this.props;
+    const { classes, label, type, removeProject, categories, subcategories, tasks, 
+      isSubmitting, resetForm, initialValues, errors, values } = this.props;
  
     return (
       <Form>

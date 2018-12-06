@@ -12,7 +12,7 @@ import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 
-class Task extends Component {
+export class Task extends Component {
   
   render() {
     //console.log(this.props);
@@ -94,6 +94,7 @@ class Task extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id="task-reset-button"
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"

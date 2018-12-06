@@ -16,7 +16,7 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 
-class ShiftEdit extends Component {
+export class ShiftEdit extends Component {
   render() {
     const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
