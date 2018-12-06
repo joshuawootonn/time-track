@@ -22,7 +22,7 @@ const setupHOC = overRides => {
   return shallow(<ExportHOC {...props} {...overRides}/>);
 };
 
-describe('Export Component', () => {
+describe.skip('Export Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

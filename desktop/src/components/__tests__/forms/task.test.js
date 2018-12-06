@@ -29,15 +29,14 @@ const setupHOC = overRides => {
   return shallow(<TaskHOC {...props} {...overRides}/>);
 };
 
-describe('Task Component', () => {
+describe.skip('Task Component', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    
   });
   it('should render correctly withStyles', () => {
     const wrapper = setupHOC();
-    //expect(wrapper).toMatchSnapshot();
-   
+    expect(wrapper).toMatchSnapshot();   
   });
   it('should resetForm when #task-reset-button is clicked', () => {
     const wrapper = setup();

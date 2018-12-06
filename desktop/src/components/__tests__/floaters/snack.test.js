@@ -22,7 +22,7 @@ const setupHOC = () => {
   return shallow(<SnackHOC {...props} />);
 };
 
-describe('Snack Components', () => {
+describe.skip('Snack Components', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    
