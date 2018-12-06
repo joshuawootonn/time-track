@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from 'components/inputs/TextField';
 import styles from './styles';
 
-class Crew extends Component {
+export class Crew extends Component {
   render() {
     const { classes, errors, initialValues, resetForm, isSubmitting, label } = this.props;
     return (
@@ -49,6 +49,7 @@ class Crew extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id="crew-reset-button"
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"

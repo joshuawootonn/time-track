@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Crew Component should render correctly 1`] = `
+<Form>
+  <WithStyles(Grid)
+    container={true}
+    spacing={24}
+  >
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <WithStyles(Typography)
+        variant="h6"
+      >
+        label
+      </WithStyles(Typography)>
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <C
+        component={[Function]}
+        helper="normal"
+        label="Name"
+        margin="none"
+        name="name"
+        type="search"
+      />
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <WithStyles(Typography)
+        color="error"
+        variant="button"
+      />
+      <div>
+        <WithStyles(Button)
+          color="primary"
+          disabled={true}
+          type="submit"
+          variant="contained"
+        >
+          Save
+        </WithStyles(Button)>
+        <WithStyles(Button)
+          color="secondary"
+          disabled={true}
+          id="crew-reset-button"
+          onClick={[Function]}
+          variant="text"
+        >
+          Reset
+        </WithStyles(Button)>
+      </div>
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
+</Form>
+`;
+
+exports[`Crew Component should render correctly withStyles 1`] = `
+<Crew
+  classes={
+    Object {
+      "button": "Crew-button-7",
+      "error": "Crew-error-6",
+      "field": "Crew-field-4",
+      "gridContainer": "Crew-gridContainer-1",
+      "headerRow": "Crew-headerRow-3",
+      "row": "Crew-row-2",
+      "switchBox": "Crew-switchBox-5",
+    }
+  }
+  errors={Object {}}
+  initialValues={Object {}}
+  isSubmitting={true}
+  label="label"
+  resetForm={[Function]}
+/>
+`;

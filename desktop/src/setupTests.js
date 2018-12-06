@@ -21,6 +21,3 @@ console.error = message => {
   originalConsoleError(message);
 };
 
-global.formik = {
-  registerField: jest.fn()
-};

@@ -12,7 +12,7 @@ import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 import styles from './styles';
 
-class Employee extends Component {
+export class Employee extends Component {
   render() { 
     const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors,editAuthorities,editCrews } = this.props;
     //console.log(this.props);
@@ -125,6 +125,7 @@ class Employee extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id="employee-reset-button"
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
