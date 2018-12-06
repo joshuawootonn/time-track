@@ -9,7 +9,7 @@ import TextField from 'components/inputs/TextField';
 import Password from 'components/inputs/Password';
 import styles from './styles';
 
-const AuthSigninForm = props => {
+export const AuthSignin = props => {
   const { classes, isSubmitting, errors } = props;
 
   return (
@@ -37,11 +37,11 @@ const AuthSigninForm = props => {
   );
 };
 
-AuthSigninForm.propTypes = {
+AuthSignin.propTypes = {
   classes: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   onSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool
 };
 
-export default withStyles(styles)(AuthSigninForm);
+export default withStyles(styles)(AuthSignin);

@@ -1,27 +1,29 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Authority } from 'components/forms/Authority/authority';
-import AuthorityHOC from 'components/forms/Authority';
+import { Category } from 'components/forms/Category/category';
+import CategoryHOC from 'components/forms/Category';
 
 const props =  {  
   classes: {},
-  label: 'label',
   isSubmitting: true,
-  resetForm: jest.fn(),
   initialValues: {},
+  resetForm: jest.fn(),
+  label: 'label',
+  type: 'type',
+  removeCategory: jest.fn(),
   errors: {}
 };
 
 const setup = overRides => {  
-  return shallow(<Authority {...props} {...overRides}/>);    
+  return shallow(<Category {...props} {...overRides}/>);    
 };
 
 const setupHOC = overRides => {
-  return shallow(<AuthorityHOC {...props} {...overRides}/>);
+  return shallow(<CategoryHOC {...props} {...overRides}/>);
 };
 
-describe('Account Signin Component', () => {
+describe('Category Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -33,12 +35,16 @@ describe('Account Signin Component', () => {
     const wrapper = setupHOC();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should call resetForm on authority-reset-button', () => {
+  it('should render a delete button when type===edit', () => {
+    const wrapper = setup({ type: 'edit' });
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should call resetForm on category-reset-button', () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#authority-reset-button').first().simulate('click');
+    wrapper.find('#category-reset-button').first().simulate('click');
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Clockout Component should render correctly 1`] = `
+<div>
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <WithStyles(Grid)
+        container={true}
+        spacing={24}
+      >
+        <WithStyles(Grid)
+          item={true}
+          xs={12}
+        >
+          <WithStyles(Typography)
+            variant="h3"
+          >
+            Clock Out
+          </WithStyles(Typography)>
+          <div>
+            <WithStyles(SvgIcon)
+              color="action"
+            >
+              <pure(TodayIcon) />
+            </WithStyles(SvgIcon)>
+            <WithStyles(Typography)
+              variant="h5"
+            />
+          </div>
+          <div>
+            <WithStyles(SvgIcon)
+              color="action"
+            >
+              <pure(AccessTimeIcon) />
+            </WithStyles(SvgIcon)>
+            <WithStyles(Typography)
+              variant="h5"
+            >
+               - 
+            </WithStyles(Typography)>
+          </div>
+          <div>
+            <WithStyles(SvgIcon)
+              color="action"
+            >
+              <pure(TimerIcon) />
+            </WithStyles(SvgIcon)>
+            <WithStyles(Typography)
+              variant="h5"
+            >
+              Length: 
+            </WithStyles(Typography)>
+          </div>
+        </WithStyles(Grid)>
+        <WithStyles(Grid)
+          item={true}
+          xs={12}
+        >
+          <C
+            id="activities"
+            name="activities"
+            render={[Function]}
+          />
+        </WithStyles(Grid)>
+      </WithStyles(Grid)>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Clockout Component should render correctly withStyles 1`] = `
+<Component
+  cancel={[Function]}
+  classes={
+    Object {
+      "button": "Component-button-7",
+      "error": "Component-error-4",
+      "flexEnd": "Component-flexEnd-6",
+      "formBody": "Component-formBody-11",
+      "formElement": "Component-formElement-12",
+      "formFooter": "Component-formFooter-13",
+      "formHeader": "Component-formHeader-9",
+      "formHeaderIcon": "Component-formHeaderIcon-10",
+      "hero": "Component-hero-1",
+      "heroContent": "Component-heroContent-3",
+      "lunchBox": "Component-lunchBox-14",
+      "spaceBetween": "Component-spaceBetween-5",
+      "textField": "Component-textField-2",
+      "verticalCenter": "Component-verticalCenter-8",
+    }
+  }
+  errors={Object {}}
+  generalError="general error"
+  handleSubmit={[Function]}
+  initialValues={Object {}}
+  isSubmitting={true}
+  label="label"
+  projectTasks={
+    Array [
+      Object {
+        "projectId": 1,
+        "task": Object {
+          "name": "name",
+        },
+      },
+      Object {
+        "projectId": 0,
+        "task": Object {
+          "name": "name",
+        },
+      },
+    ]
+  }
+  projects={
+    Array [
+      Object {
+        "id": 1,
+      },
+      Object {
+        "id": 0,
+      },
+    ]
+  }
+  resetForm={[Function]}
+  setFieldValue={[Function]}
+  shift={Object {}}
+  timeLeft={0}
+  values={
+    Object {
+      "activities": Array [
+        Object {
+          "projectId": 1,
+        },
+        Object {
+          "projectId": 0,
+        },
+      ],
+    }
+  }
+/>
+`;

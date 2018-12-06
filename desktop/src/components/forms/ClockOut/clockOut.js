@@ -15,7 +15,7 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 
-const ClockOutForm = props => {
+export const Clockout = props => {
   const { classes, isSubmitting, handleSubmit, shift, values, 
     projects, projectTasks, cancel, errors,timeLeft,generalError } = props;
   
@@ -56,6 +56,7 @@ const ClockOutForm = props => {
             <Grid item xs={12}>
               <FieldArray
                 name="activities"
+                id="activities"
                 render={arrayHelpers => {
                   return (
                     <div>
@@ -110,10 +111,11 @@ const ClockOutForm = props => {
                                   name={`activities.${index}.description`}
                                   label="Description"
                                   component={TextField}
-                                />
+                                /> 
                                 <div className={classes.verticalCenter}>
                                   <IconButton
                                     type="button"
+                                    id={`remove-activity-${index}`}
                                     color="secondary"
                                     className={classes.iconButton}
                                     onClick={() => arrayHelpers.remove(index)}
@@ -140,6 +142,7 @@ const ClockOutForm = props => {
                         <Button
                           color="primary"
                           variant="contained"
+                          id='add-activity'
                           onClick={() =>
                             arrayHelpers.push({
                               projectId: Object.keys(projects)[0],
@@ -194,7 +197,7 @@ const ClockOutForm = props => {
   );
 };
 
-ClockOutForm.propTypes = {
+Clockout.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
@@ -209,4 +212,4 @@ ClockOutForm.propTypes = {
   generalError: PropTypes.string
 };
 
-export default withStyles(styles)(ClockOutForm);
+export default withStyles(styles)(Clockout);
