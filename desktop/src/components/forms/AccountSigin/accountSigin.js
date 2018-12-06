@@ -10,7 +10,7 @@ import Password from 'components/inputs/Password';
 
 const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
-class AccountSiginForm extends Component {
+export class AccountSigin extends Component {
   appendPin = newChar => {
     if (this.props.values.pin.length >= 6) return;
     this.props.setFieldValue('pin', this.props.values.pin + newChar, false);
@@ -18,6 +18,7 @@ class AccountSiginForm extends Component {
   resetPin = () => {
     this.props.setFieldValue('pin', '', false);
   };
+
   render() {
     const { classes, isSubmitting, errors } = this.props;
     
@@ -36,6 +37,7 @@ class AccountSiginForm extends Component {
                       onClick={() => this.appendPin(num)}
                       variant="contained"
                       className={classes.button}
+                      id={`button-${num}`}
                     >
                       {num}
                     </Button>
@@ -76,7 +78,7 @@ class AccountSiginForm extends Component {
   }
 }
 
-AccountSiginForm.propTypes = {
+AccountSigin.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   values: PropTypes.object.isRequired,
@@ -84,4 +86,4 @@ AccountSiginForm.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AccountSiginForm);
+export default withStyles(styles)(AccountSigin);

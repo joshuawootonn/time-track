@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import {Close} from '@material-ui/icons'
+import { Close } from '@material-ui/icons';
 
 import { Snack } from 'components/floaters/Snack/snack';
 import SnackHOC from 'components/floaters/Snack';

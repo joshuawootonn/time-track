@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal Components should render correctly 1`] = `
+exports[`Modal Component should render correctly 1`] = `
 <WithStyles(Modal)
   onClose={[Function]}
   open={true}
@@ -13,7 +13,7 @@ exports[`Modal Components should render correctly 1`] = `
 </WithStyles(Modal)>
 `;
 
-exports[`Modal Components should render correctly withStyles 1`] = `
+exports[`Modal Component should render correctly withStyles 1`] = `
 <Modal
   classes={
     Object {
