@@ -8,7 +8,7 @@ import { ShowChart, Check, Close, ArrowBack, Storage } from '@material-ui/icons'
 import styles from './styles';
 import * as authorityConstants from 'constants/authority';
 
-const AccountActionForm = props => {
+export const AccountAction = props => {
   const { classes, isWorking, clockIn, clockOut, analyze, back,type } = props;
   return (
     <div className={classes.hero}>
@@ -50,7 +50,7 @@ const AccountActionForm = props => {
   );
 };
 
-AccountActionForm.propTypes = {
+AccountAction.propTypes = {
   classes: PropTypes.object.isRequired,
   back: PropTypes.func.isRequired,
   clockIn: PropTypes.func.isRequired,
@@ -61,4 +61,4 @@ AccountActionForm.propTypes = {
   type: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(AccountActionForm);
+export default withStyles(styles)(AccountAction);
