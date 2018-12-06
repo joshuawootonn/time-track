@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Action Component should render correctly 1`] = `
+<div>
+  <div>
+    <WithStyles(Tooltip)
+      classes={
+        Object {
+          "tooltip": undefined,
+        }
+      }
+      open={true}
+      placement="bottom"
+      title="Clock In"
+    >
+      <WithStyles(IconButton)
+        onClick={[Function]}
+      >
+        <pure(CheckIcon) />
+      </WithStyles(IconButton)>
+    </WithStyles(Tooltip)>
+    <WithStyles(Tooltip)
+      classes={
+        Object {
+          "tooltip": undefined,
+        }
+      }
+      open={true}
+      placement="bottom"
+      title="Back"
+    >
+      <WithStyles(IconButton)
+        onClick={[Function]}
+      >
+        <pure(ArrowBackIcon) />
+      </WithStyles(IconButton)>
+    </WithStyles(Tooltip)>
+  </div>
+</div>
+`;
+
+exports[`Account Action Component should render correctly withStyles 1`] = `
+<Component
+  analyze={[Function]}
+  back={[Function]}
+  classes={
+    Object {
+      "button": "Component-button-3",
+      "buttonIcon": "Component-buttonIcon-4",
+      "hero": "Component-hero-1",
+      "heroContent": "Component-heroContent-2",
+      "toolTip": "Component-toolTip-5",
+    }
+  }
+  clockIn={[Function]}
+  clockOut={[Function]}
+  export={[Function]}
+  isWorking={0}
+  type="type"
+/>
+`;
