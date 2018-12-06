@@ -15,12 +15,12 @@ const props = {
   type: 'type'
 };
 
-const setup = () => {  
-  return shallow(<AccountAction {...props} />);    
+const setup = overRides => {  
+  return shallow(<AccountAction {...props} {...overRides}/>);    
 };
 
-const setupHOC = () => {
-  return shallow(<AccountActionHOC {...props} />);
+const setupHOC = overRides => {
+  return shallow(<AccountActionHOC {...props} {...overRides}/>);
 };
 
 describe('Account Action Component', () => {
@@ -30,6 +30,14 @@ describe('Account Action Component', () => {
   });
   it('should render correctly withStyles', () => {
     const wrapper = setupHOC();
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly when isWorking is false', () => {
+    const wrapper = setup({ isWorking: 1 });
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly when type === authorityConstants.ADMIN', () => {
+    const wrapper = setup({ type: 'admin' });
     expect(wrapper).toMatchSnapshot();
   });
 });

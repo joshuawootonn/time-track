@@ -63,5 +63,9 @@ describe('Account Signin Component', () => {
     expect(instance.appendPin).toHaveBeenCalledTimes(0);
     wrapper.find('#button-1').first().simulate('click');
     expect(instance.appendPin).toHaveBeenCalledTimes(1);
-  })
+  });
+  it('should disable to submit button if errors is not empty', () => {
+    const wrapper = setup({ errors: { asdf: 'asdf' } });
+    expect(wrapper).toMatchSnapshot();
+  });
 });

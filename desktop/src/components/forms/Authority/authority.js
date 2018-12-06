@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from 'components/inputs/TextField';
 import styles from './styles';
 
-class Authority extends Component {
+export class Authority extends Component {
   render() {
     const { classes, errors, initialValues, resetForm, isSubmitting, label } = this.props;
     return (
@@ -49,6 +49,7 @@ class Authority extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id="authority-reset-button"
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
