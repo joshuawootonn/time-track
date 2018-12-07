@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`File Input should render correctly 1`] = `
+<WithStyles(FormControl)
+  fullWidth={true}
+  margin="normal"
+>
+  <div>
+    <WithStyles(InputLabel)
+      shrink={true}
+    >
+      label
+    </WithStyles(InputLabel)>
+    <WithStyles(Input)
+      fullWidth={true}
+      name="name"
+    />
+    <input
+      accept=".xlsx, .xls"
+      id="contained-button-file"
+      onChange={[Function]}
+      type="file"
+    />
+    <label
+      htmlFor="contained-button-file"
+    >
+      <WithStyles(Button)
+        color="primary"
+        component="span"
+        variant="contained"
+      >
+        Select File
+      </WithStyles(Button)>
+    </label>
+  </div>
+  <WithStyles(FormHelperText)
+    error={true}
+  />
+</WithStyles(FormControl)>
+`;
+
+exports[`File Input should render correctly withStyles 1`] = `
+<File
+  classes={
+    Object {
+      "button": "File-button-4",
+      "buttonAlign": "File-buttonAlign-3",
+      "inputToHide": "File-inputToHide-1",
+      "row": "File-row-2",
+    }
+  }
+  field={
+    Object {
+      "name": "name",
+    }
+  }
+  form={
+    Object {
+      "errors": Object {},
+      "setFieldValue": [Function],
+    }
+  }
+  formControlProps={Object {}}
+  fullWidth={true}
+  helper="normal"
+  label="label"
+  labelProps={Object {}}
+  margin="normal"
+/>
+`;

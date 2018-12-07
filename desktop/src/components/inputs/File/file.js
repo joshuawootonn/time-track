@@ -7,7 +7,7 @@ import { getIn } from 'formik';
 
 import styles from './styles';
 
-class File extends Component {
+export class File extends Component {
   fileChange = e => {
     const { form, field } = this.props;
     form.setFieldValue(field.name, e.target.files[0].path);

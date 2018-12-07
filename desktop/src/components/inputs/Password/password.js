@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
 
-const TextField = ({ field, form, id, label, helper,margin }) => (
+export const Password = ({ field, form, id, label, helper,margin }) => (
   <MUTextField
     {...field}    
     id={id}
@@ -18,12 +18,12 @@ const TextField = ({ field, form, id, label, helper,margin }) => (
   />
 );
 
-TextField.defaultProps = {  
+Password.defaultProps = {  
   helper: 'normal',
   margin: 'normal'
 };
 
-TextField.propTypes = {
+Password.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   id: PropTypes.string,
@@ -31,4 +31,4 @@ TextField.propTypes = {
   helper: PropTypes.oneOf(['none','normal'])
 };
 
-export default TextField;
+export default Password;
