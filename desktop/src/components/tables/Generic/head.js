@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 
 import { TableCell, TableHead, TableRow } from '@material-ui/core';
 
-class EnhancedTableHead extends React.Component {  
+export class GenericHead extends React.Component {  
   render() {
     const {  headerData } = this.props;
-
-    
     return (
       <TableHead>
         <TableRow>        
@@ -29,9 +27,9 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
+GenericHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
   headerData: PropTypes.array.isRequired
 };
 
-export default EnhancedTableHead;
+export default GenericHead;

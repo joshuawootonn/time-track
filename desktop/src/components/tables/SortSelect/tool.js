@@ -8,7 +8,7 @@ import { Add } from '@material-ui/icons';
 
 import styles from './styles';
 
-let EnhancedTableToolbar = props => {
+export const SortSelectToolbar = props => {
   const { selected, classes, add,label,selectLabel } = props;
   return (
     <Toolbar
@@ -39,7 +39,7 @@ let EnhancedTableToolbar = props => {
   );
 };
 
-EnhancedTableToolbar.propTypes = {
+SortSelectToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   add: PropTypes.func.isRequired,
@@ -47,4 +47,4 @@ EnhancedTableToolbar.propTypes = {
   selectLabel: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(EnhancedTableToolbar);
+export default withStyles(styles)(SortSelectToolbar);

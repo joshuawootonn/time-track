@@ -10,10 +10,7 @@ import EnhancedTableToolbar from './tool';
 import styles from './styles';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
-class EnhancedTable extends React.Component {
-  deconstructObjectbyKey = (obj,key) => {
-    return obj[key];
-  }
+export class GenericTable extends React.Component { 
   render() {
     const { classes, tableData, headerData,edit, label,add,remove } = this.props;   
     return (
@@ -67,7 +64,7 @@ class EnhancedTable extends React.Component {
   }
 }
 
-EnhancedTable.propTypes = {
+GenericTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableData: PropTypes.array.isRequired,
   headerData: PropTypes.array.isRequired,
@@ -77,4 +74,4 @@ EnhancedTable.propTypes = {
   remove:PropTypes.func
 };
 
-export default withStyles(styles)(EnhancedTable);
+export default withStyles(styles)(GenericTable);

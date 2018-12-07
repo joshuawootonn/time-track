@@ -7,7 +7,7 @@ import { Add,Delete,Edit } from '@material-ui/icons';
 
 import styles from './styles';
 
-let EnhancedTableToolbar = props => {
+export const GenericToolbar = props => {
   const { classes, add,label,edit,remove } = props;
   return (
     <Toolbar
@@ -44,7 +44,7 @@ let EnhancedTableToolbar = props => {
   );
 };
 
-EnhancedTableToolbar.propTypes = {
+GenericToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   add: PropTypes.func,  
   edit: PropTypes.func,
@@ -52,4 +52,4 @@ EnhancedTableToolbar.propTypes = {
   label: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(EnhancedTableToolbar);
+export default withStyles(styles)(GenericToolbar);

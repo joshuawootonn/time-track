@@ -10,7 +10,7 @@ import EnhancedTableToolbar from './tool';
 import styles from './styles';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
-class EnhancedTable extends React.Component {
+export class SortSelectTable extends React.Component {
   state = {
     order: 'asc',
     orderBy: 'firstName'
@@ -92,11 +92,12 @@ class EnhancedTable extends React.Component {
             />
             <TableBody>
               {this.stableSort(tableData, this.getSorting(order, orderBy, type, keys))
-                .map(n => {
+                .map((n,i)=> {
                   const isSelected = this.isSelected(n.id);                     
                   return (
                     <TableRow
                       hover
+                      id={`row-${i}`}
                       onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
                       aria-checked={isSelected}
@@ -140,7 +141,7 @@ class EnhancedTable extends React.Component {
   }
 }
 
-EnhancedTable.propTypes = {
+SortSelectTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableData: PropTypes.array.isRequired,
   headerData: PropTypes.array.isRequired,
@@ -151,4 +152,4 @@ EnhancedTable.propTypes = {
   selectLabel: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(EnhancedTable);
+export default withStyles(styles)(SortSelectTable);

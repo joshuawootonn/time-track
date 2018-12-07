@@ -5,7 +5,7 @@ import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@materi
 
 import * as TableDataTypes from 'constants/tableDataTypes';
 
-class EnhancedTableHead extends React.Component {
+export class SortSelectHead extends React.Component {
   createSortHandler = (property,type,keys) => event => {
     this.props.onRequestSort(event, property,type,keys);
   };
@@ -32,7 +32,7 @@ class EnhancedTableHead extends React.Component {
                 key={key}
                 numeric={row.numeric}
                 padding={row.padding}
-                sortDirection={orderBy === row.id ? order : false}
+                sortDirection={orderBy === row.id ? order : false}                
               >
                 <Tooltip
                   title="Sort"
@@ -56,7 +56,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
+SortSelectHead.propTypes = {
   selected: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
@@ -67,4 +67,4 @@ EnhancedTableHead.propTypes = {
   type: PropTypes.string
 };
 
-export default EnhancedTableHead;
+export default SortSelectHead;
