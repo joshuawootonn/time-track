@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Password } from 'components/inputs/Password/password';
-import PasswordHOC from 'components/inputs/Password';
+import { TextField } from 'components/inputs/TextField/textField';
+import TextFieldHOC from 'components/inputs/TextField';
 
 const props =  {  
   form:{
@@ -21,14 +21,14 @@ const props =  {
 };
 
 const setup = overRides => {  
-  return mount(<Password {...props} {...overRides}/>);    
+  return mount(<TextField {...props} {...overRides}/>);    
 };
 
 const setupHOC = overRides => {
-  return mount(<PasswordHOC {...props} {...overRides}/>);
+  return mount(<TextFieldHOC {...props} {...overRides}/>);
 };
 
-describe('Password Input', () => {
+describe('TextField Input', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    
@@ -37,4 +37,8 @@ describe('Password Input', () => {
     const wrapper = setupHOC();
     expect(wrapper).toMatchSnapshot();   
   }); 
+  it('should render no helper text when helper="none"', () => {
+    const wrapper = setup({ helper: 'none' });
+    expect(wrapper).toMatchSnapshot();    
+  });
 });

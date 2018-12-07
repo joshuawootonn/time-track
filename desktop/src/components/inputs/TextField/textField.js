@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
 
-const TextField = ({ field, form, label, className, type, margin, helper }) => (
+export const TextField = ({ field, form, label, className, type, margin, helper }) => (
   <MUTextField
     {...field}
     label={label}

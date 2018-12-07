@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { File } from 'components/inputs/File/file';
 import FileHOC from 'components/inputs/File';
@@ -22,11 +22,11 @@ const props =  {
 };
 
 const setup = overRides => {  
-  return shallow(<File {...props} {...overRides}/>);    
+  return mount(<File {...props} {...overRides}/>);    
 };
 
 const setupHOC = overRides => {
-  return shallow(<FileHOC {...props} {...overRides}/>);
+  return mount(<FileHOC {...props} {...overRides}/>);
 };
 
 describe('File Input', () => {
