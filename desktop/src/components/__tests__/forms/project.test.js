@@ -29,7 +29,7 @@ const setupHOC = overRides => {
   return shallow(<ProjectHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Project Component', () => {
+describe('Project Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

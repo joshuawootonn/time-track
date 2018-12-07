@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snack Components should render correctly 1`] = `
+<WithStyles(Snackbar)
+  anchorOrigin={Object {}}
+  onClose={[Function]}
+  open={true}
+>
+  <WithStyles(SnackbarContent)
+    action={
+      <WithStyles(IconButton)
+        aria-label="Close"
+        className={undefined}
+        color="inherit"
+        onClick={[Function]}
+      >
+        <pure(CloseIcon)
+          className={undefined}
+        />
+      </WithStyles(IconButton)>
+    }
+    message={
+      <span
+        className={undefined}
+      >
+        <pure(CloseIcon) />
+        <span
+          className={undefined}
+        />
+        message
+      </span>
+    }
+  />
+</WithStyles(Snackbar)>
+`;
+
+exports[`Snack Components should render correctly withStyles 1`] = `
+<Component
+  classes={
+    Object {
+      "content": "Component-content-5",
+      "error": "Component-error-2",
+      "icon": "Component-icon-3",
+      "space": "Component-space-4",
+      "success": "Component-success-1",
+    }
+  }
+  icon={<pure(CloseIcon) />}
+  message="message"
+  onClose={[Function]}
+  position={Object {}}
+  type="type"
+/>
+`;

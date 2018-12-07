@@ -25,7 +25,7 @@ const setupHOC = overRides => {
   return shallow(<SubcategoryHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Subcategory Component', () => {
+describe('Subcategory Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

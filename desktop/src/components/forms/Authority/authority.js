@@ -74,5 +74,4 @@ Authority.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-
 export default withStyles(styles)(Authority);

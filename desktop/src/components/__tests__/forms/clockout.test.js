@@ -32,7 +32,7 @@ const setupHOC = overRides => {
   return shallow(<ClockoutHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Clockout Component', () => {
+describe('Clockout Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

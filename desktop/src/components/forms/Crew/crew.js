@@ -47,6 +47,7 @@ export class Crew extends Component {
               </Button>
               <Button
                 onClick={() => {
+                  console.log('clicked');
                   resetForm(initialValues);
                 }}
                 id="crew-reset-button"

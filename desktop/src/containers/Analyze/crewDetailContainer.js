@@ -11,7 +11,7 @@ import Crew from 'components/forms/Crew';
 
 import Hero from 'components/layouts/Hero';
 
-class CrewDetailContainer extends Component {
+export class CrewDetail extends Component {
   render() {
     const { selected,status } = this.props;
     if(status === analyzeStatus.INIT) {
@@ -66,4 +66,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { ...crewActions })(CrewDetailContainer);
+export default connect(mapStateToProps, { ...crewActions })(CrewDetail);

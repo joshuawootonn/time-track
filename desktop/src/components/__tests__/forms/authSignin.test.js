@@ -18,7 +18,7 @@ const setupHOC = overRides => {
   return shallow(<AuthSigninHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Auth Signin Component', () => {
+describe('Auth Signin Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

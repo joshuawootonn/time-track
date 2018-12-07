@@ -11,13 +11,13 @@ global.window = {
   require: jest.fn()
 };
 
-const originalConsoleError = console.error;
+// const originalConsoleError = console.error;
 
-console.error = message => {
-  if (/(Failed prop type)/.test(message)) {
-    throw new Error(message);
-  }
+// console.error = message => {
+//   if (/(Failed prop type)/.test(message)) {
+//     throw new Error(message);
+//   }
 
-  originalConsoleError(message);
-};
+//   originalConsoleError(message);
+// };
 

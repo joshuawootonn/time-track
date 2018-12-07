@@ -67,6 +67,7 @@
     "jest-enzyme": "^7.0.1",
     "jsdom": "^13.0.0",
     "moxios": "^0.4.0",
+    "react-testing-library": "^5.3.1",
     "redux-mock-store": "^1.5.3"
   },
   "jest": {
@@ -75,7 +76,8 @@
       "!/node_modules/",
       "!/src/routes",
       "!src/index.js",
-      "!src/registerServiceWorker.js"
+      "!src/registerServiceWorker.js",
+      "!src/**/styles.js"
     ]
   }
 }

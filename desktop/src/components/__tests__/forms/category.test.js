@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { createMount } from '@material-ui/core/test-utils';
 
 import { Category } from 'components/forms/Category/category';
 import CategoryHOC from 'components/forms/Category';
@@ -24,10 +23,7 @@ const setupHOC = overRides => {
   return shallow(<CategoryHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Category Component', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+describe('Category Component', () => {  
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    

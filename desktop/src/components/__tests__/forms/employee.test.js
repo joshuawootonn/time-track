@@ -27,7 +27,7 @@ const setupHOC = overRides => {
   return shallow(<EmployeeHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Employee Component', () => {
+describe('Employee Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

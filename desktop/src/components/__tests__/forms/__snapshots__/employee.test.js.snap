@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Employee Component should render correctly 1`] = `
+<Form>
+  <WithStyles(Grid)
+    container={true}
+    spacing={24}
+  >
+    <WithStyles(Grid)
+      className=""
+      item={true}
+      xs={12}
+    >
+      <WithStyles(Typography)
+        variant="h6"
+      >
+        label
+      </WithStyles(Typography)>
+      <WithStyles(Tooltip)
+        title="Delete"
+      >
+        <WithStyles(IconButton)
+          aria-label="Delete"
+          onClick={[Function]}
+        >
+          <pure(DeleteIcon) />
+        </WithStyles(IconButton)>
+      </WithStyles(Tooltip)>
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <C
+        component={[Function]}
+        helper="normal"
+        label="First Name"
+        margin="none"
+        name="firstName"
+        type="search"
+      />
+      <C
+        component={[Function]}
+        helper="normal"
+        label="Last Name"
+        margin="none"
+        name="lastName"
+        type="search"
+      />
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <C
+        component={[Function]}
+        fullWidth={true}
+        items={
+          Array [
+            Object {},
+            Object {},
+          ]
+        }
+        label="Authority"
+        name="authorityId"
+      />
+      <WithStyles(Tooltip)
+        title="Edit Authorities"
+      >
+        <WithStyles(IconButton)
+          aria-label="Edit Authorities"
+          onClick={[Function]}
+        >
+          <pure(EditIcon) />
+        </WithStyles(IconButton)>
+      </WithStyles(Tooltip)>
+      <C
+        component={[Function]}
+        fullWidth={true}
+        items={
+          Array [
+            Object {},
+            Object {},
+          ]
+        }
+        label="Crew"
+        name="crewId"
+      />
+      <WithStyles(Tooltip)
+        title="Edit Crews"
+      >
+        <WithStyles(IconButton)
+          aria-label="Edit Crews"
+          onClick={[Function]}
+        >
+          <pure(EditIcon) />
+        </WithStyles(IconButton)>
+      </WithStyles(Tooltip)>
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <div
+        className=""
+      >
+        <C
+          component={[Function]}
+          label="Is Employed"
+          name="isEmployed"
+        />
+        <C
+          component={[Function]}
+          label="Is Working"
+          name="isWorking"
+        />
+      </div>
+      <C
+        component={[Function]}
+        helper="normal"
+        label="Pin"
+        margin="none"
+        name="pin"
+        type="search"
+      />
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={12}
+    >
+      <WithStyles(Typography)
+        color="error"
+        variant="button"
+      />
+      <div>
+        <WithStyles(Button)
+          color="primary"
+          disabled={true}
+          type="submit"
+          variant="contained"
+        >
+          Save
+        </WithStyles(Button)>
+        <WithStyles(Button)
+          color="secondary"
+          disabled={true}
+          id="employee-reset-button"
+          onClick={[Function]}
+          variant="text"
+        >
+          Reset
+        </WithStyles(Button)>
+      </div>
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
+</Form>
+`;
+
+exports[`Employee Component should render correctly withStyles 1`] = `
+<Employee
+  authorities={
+    Array [
+      Object {},
+      Object {},
+    ]
+  }
+  classes={
+    Object {
+      "button": "Employee-button-7",
+      "error": "Employee-error-6",
+      "field": "Employee-field-4",
+      "gridContainer": "Employee-gridContainer-1",
+      "headerRow": "Employee-headerRow-3",
+      "row": "Employee-row-2",
+      "switchBox": "Employee-switchBox-5",
+    }
+  }
+  crews={
+    Array [
+      Object {},
+      Object {},
+    ]
+  }
+  editAuthorities={[Function]}
+  editCrews={[Function]}
+  errors={Object {}}
+  initialValues={Object {}}
+  isSubmitting={true}
+  label="label"
+  removeEmployee={[Function]}
+  resetForm={[Function]}
+  type="edit"
+/>
+`;

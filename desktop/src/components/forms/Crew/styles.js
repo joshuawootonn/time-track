@@ -1,4 +1,4 @@
-const styles = () => ({
+export default {
   gridContainer: {
     width: '100% !important',
     margin: 0
@@ -24,6 +24,4 @@ const styles = () => ({
   button: {
     marginLeft: '8px'
   }
-});
-
-export default styles;
+};

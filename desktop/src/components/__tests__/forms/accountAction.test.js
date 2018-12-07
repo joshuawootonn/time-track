@@ -23,7 +23,7 @@ const setupHOC = overRides => {
   return shallow(<AccountActionHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Account Action Component', () => {
+describe('Account Action Component', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    

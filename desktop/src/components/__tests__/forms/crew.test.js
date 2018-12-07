@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { Formik } from 'formik';
+import { mount } from 'enzyme';
 
 import { Crew } from 'components/forms/Crew/crew';
 import CrewHOC from 'components/forms/Crew';
+
 
 const props =  {  
   classes: {},
@@ -15,17 +17,14 @@ const props =  {
 
 
 const setup = overRides => {  
-  return shallow(<Crew {...props} {...overRides}/>);    
+  return mount(<Formik render={formikFunctions => <Crew {...props}  {...formikFunctions} {...overRides}/>}></Formik>);    
 };
 
-const setupHOC = overRides => {
-  return shallow(<CrewHOC {...props} {...overRides}/>);
+const setupHOC = overRides => {  
+  return mount(<Formik render={formikFunctions => <CrewHOC {...props}  {...formikFunctions} {...overRides}/>}></Formik>);    
 };
 
-describe.skip('Crew Component', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+describe('Crew Component', () => {  
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    
@@ -35,11 +34,10 @@ describe.skip('Crew Component', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should call resetForm on crew-reset-button', () => {
-    const wrapper = setup();
-    const instance = wrapper.instance();
-    instance.resetForm = jest.fn();
-    expect(props.resetForm).toHaveBeenCalledTimes(0);
+    const resetForm = jest.fn();
+    const wrapper = mount(<Formik render={formikFunctions => <Crew {...props}  {...formikFunctions} resetForm={resetForm} />}></Formik>);
+    expect(resetForm).toHaveBeenCalledTimes(0);
     wrapper.find('#crew-reset-button').first().simulate('click');
-    expect(props.resetForm).toHaveBeenCalledTimes(1);
-  });
+    expect(resetForm).toHaveBeenCalledTimes(1);
+  });  
 });

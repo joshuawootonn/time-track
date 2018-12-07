@@ -34,7 +34,7 @@ const setupHOC = overRides => {
   return shallow(<ShiftEditHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Project Component', () => {
+describe('Project Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

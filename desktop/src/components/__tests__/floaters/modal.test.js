@@ -19,7 +19,7 @@ const setupHOC = () => {
   return shallow(<ModalHOC {...props} />);
 };
 
-describe.skip('Modal Component', () => {
+describe('Modal Component', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    

@@ -29,7 +29,7 @@ const setupHOC = overRides => {
   return shallow(<TaskHOC {...props} {...overRides}/>);
 };
 
-describe.skip('Task Component', () => {
+describe('Task Component', () => {
   it('should render correctly', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();    
