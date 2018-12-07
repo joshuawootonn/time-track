@@ -11,8 +11,24 @@ import Select from 'components/inputs/Select';
 import styles from './styles';
 
 export class Time extends Component {
+  onChangeHours = e => {
+    const { field,form } = this.props;
+    const hoursValue = Math.floor(field.value / 60) * 60;
+    form.setFieldValue(
+      field.name,
+      field.value + e.target.value - hoursValue,
+    );
+  }
+  onChangeMinutes = e => {
+    const { field,form } = this.props;
+    const minutesValue = Math.floor(field.value % 60);
+    form.setFieldValue(
+      field.name,
+      field.value + e.target.value - minutesValue,
+    );
+  }
   render() {
-    const { value, name } = this.props.field;
+    const { value } = this.props.field;
     const { classes, field, form, margin, fullWidth, label1, label2, helper,className } = this.props;
 
     const minutesValue = Math.floor(value % 60);
@@ -30,13 +46,7 @@ export class Time extends Component {
             fullWidth={fullWidth}
             label={label1}
             selectProps={{
-              onChange: e => {
-                //console.log(e.target.value, hoursValue);
-                this.props.form.setFieldValue(
-                  name,
-                  value + e.target.value - hoursValue,
-                );
-              },
+              onChange: this.onChangeHour,
               value: hoursValue
             }}
             value={hoursValue}
@@ -58,12 +68,7 @@ export class Time extends Component {
             fullWidth={fullWidth}
             label={label2}
             selectProps={{
-              onChange: e => {
-                this.props.form.setFieldValue(
-                  name,
-                  value + e.target.value - minutesValue,
-                );
-              },
+              onChange: this.onChangeMinute,
               value: minutesValue
             }}
             value={minutesValue}

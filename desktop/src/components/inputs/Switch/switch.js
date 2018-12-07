@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Switch as MUSwitch, FormControlLabel } from '@material-ui/core';
 
-const Switch = ({ field, className, label,disabled }) => {
+export const Switch = ({ field, className, label,disabled }) => {
   //console.log(field)
   return <FormControlLabel
     className={className}
