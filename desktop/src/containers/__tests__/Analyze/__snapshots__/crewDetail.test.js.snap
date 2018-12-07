@@ -1197,7 +1197,7 @@ exports[`Crew Detail Container should render correctly 1`] = `
                               name="name"
                               type="search"
                             >
-                              <TextField
+                              <Component
                                 className="Crew-field-4"
                                 field={
                                   Object {
@@ -1484,7 +1484,7 @@ exports[`Crew Detail Container should render correctly 1`] = `
                                     </FormControl>
                                   </WithStyles(FormControl)>
                                 </TextField>
-                              </TextField>
+                              </Component>
                             </FieldInner>
                           </C>
                         </div>

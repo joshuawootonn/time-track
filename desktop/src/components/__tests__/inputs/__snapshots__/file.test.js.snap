@@ -1,0 +1,757 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`File Input should render correctly 1`] = `
+<File
+  classes={Object {}}
+  field={
+    Object {
+      "name": "name",
+    }
+  }
+  form={
+    Object {
+      "errors": Object {},
+      "setFieldValue": [Function],
+    }
+  }
+  formControlProps={Object {}}
+  fullWidth={true}
+  helper="normal"
+  label="label"
+  labelProps={Object {}}
+  margin="normal"
+>
+  <WithStyles(FormControl)
+    fullWidth={true}
+    margin="normal"
+  >
+    <FormControl
+      classes={
+        Object {
+          "fullWidth": "MuiFormControl-fullWidth-4",
+          "marginDense": "MuiFormControl-marginDense-3",
+          "marginNormal": "MuiFormControl-marginNormal-2",
+          "root": "MuiFormControl-root-1",
+        }
+      }
+      component="div"
+      disabled={false}
+      error={false}
+      fullWidth={true}
+      margin="normal"
+      required={false}
+      variant="standard"
+    >
+      <div
+        className="MuiFormControl-root-1 MuiFormControl-marginNormal-2 MuiFormControl-fullWidth-4"
+      >
+        <div>
+          <WithStyles(InputLabel)
+            shrink={true}
+          >
+            <InputLabel
+              classes={
+                Object {
+                  "animated": "MuiInputLabel-animated-9",
+                  "filled": "MuiInputLabel-filled-10",
+                  "formControl": "MuiInputLabel-formControl-6",
+                  "marginDense": "MuiInputLabel-marginDense-7",
+                  "outlined": "MuiInputLabel-outlined-11",
+                  "root": "MuiInputLabel-root-5",
+                  "shrink": "MuiInputLabel-shrink-8",
+                }
+              }
+              disableAnimation={false}
+              shrink={true}
+            >
+              <WithStyles(FormLabel)
+                className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                data-shrink={true}
+              >
+                <FormLabel
+                  className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                  classes={
+                    Object {
+                      "asterisk": "MuiFormLabel-asterisk-18",
+                      "disabled": "MuiFormLabel-disabled-14",
+                      "error": "MuiFormLabel-error-15",
+                      "filled": "MuiFormLabel-filled-16",
+                      "focused": "MuiFormLabel-focused-13",
+                      "required": "MuiFormLabel-required-17",
+                      "root": "MuiFormLabel-root-12",
+                    }
+                  }
+                  component="label"
+                  data-shrink={true}
+                >
+                  <label
+                    className="MuiFormLabel-root-12 MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                    data-shrink={true}
+                  >
+                    label
+                  </label>
+                </FormLabel>
+              </WithStyles(FormLabel)>
+            </InputLabel>
+          </WithStyles(InputLabel)>
+          <WithStyles(Input)
+            fullWidth={true}
+            name="name"
+          >
+            <Input
+              classes={
+                Object {
+                  "disabled": "MuiInput-disabled-22",
+                  "error": "MuiInput-error-24",
+                  "focused": "MuiInput-focused-21",
+                  "formControl": "MuiInput-formControl-20",
+                  "fullWidth": "MuiInput-fullWidth-26",
+                  "input": "MuiInput-input-27",
+                  "inputMarginDense": "MuiInput-inputMarginDense-28",
+                  "inputMultiline": "MuiInput-inputMultiline-29",
+                  "inputType": "MuiInput-inputType-30",
+                  "inputTypeSearch": "MuiInput-inputTypeSearch-31",
+                  "multiline": "MuiInput-multiline-25",
+                  "root": "MuiInput-root-19",
+                  "underline": "MuiInput-underline-23",
+                }
+              }
+              fullWidth={true}
+              name="name"
+            >
+              <WithStyles(InputBase)
+                classes={
+                  Object {
+                    "disabled": "MuiInput-disabled-22",
+                    "error": "MuiInput-error-24",
+                    "focused": "MuiInput-focused-21",
+                    "formControl": "MuiInput-formControl-20",
+                    "fullWidth": "MuiInput-fullWidth-26",
+                    "input": "MuiInput-input-27",
+                    "inputMarginDense": "MuiInput-inputMarginDense-28",
+                    "inputMultiline": "MuiInput-inputMultiline-29",
+                    "inputType": "MuiInput-inputType-30",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-31",
+                    "multiline": "MuiInput-multiline-25",
+                    "root": "MuiInput-root-19 MuiInput-underline-23",
+                    "underline": null,
+                  }
+                }
+                fullWidth={true}
+                inputComponent="input"
+                multiline={false}
+                name="name"
+                type="text"
+              >
+                <InputBase
+                  classes={
+                    Object {
+                      "adornedEnd": "MuiInputBase-adornedEnd-37",
+                      "adornedStart": "MuiInputBase-adornedStart-36",
+                      "disabled": "MuiInputBase-disabled-35 MuiInput-disabled-22",
+                      "error": "MuiInputBase-error-38 MuiInput-error-24",
+                      "focused": "MuiInputBase-focused-34 MuiInput-focused-21",
+                      "formControl": "MuiInputBase-formControl-33 MuiInput-formControl-20",
+                      "fullWidth": "MuiInputBase-fullWidth-41 MuiInput-fullWidth-26",
+                      "input": "MuiInputBase-input-42 MuiInput-input-27",
+                      "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-48",
+                      "inputAdornedStart": "MuiInputBase-inputAdornedStart-47",
+                      "inputMarginDense": "MuiInputBase-inputMarginDense-43 MuiInput-inputMarginDense-28",
+                      "inputMultiline": "MuiInputBase-inputMultiline-44 MuiInput-inputMultiline-29",
+                      "inputType": "MuiInputBase-inputType-45 MuiInput-inputType-30",
+                      "inputTypeSearch": "MuiInputBase-inputTypeSearch-46 MuiInput-inputTypeSearch-31",
+                      "marginDense": "MuiInputBase-marginDense-39",
+                      "multiline": "MuiInputBase-multiline-40 MuiInput-multiline-25",
+                      "root": "MuiInputBase-root-32 MuiInput-root-19 MuiInput-underline-23",
+                    }
+                  }
+                  fullWidth={true}
+                  inputComponent="input"
+                  multiline={false}
+                  name="name"
+                  type="text"
+                >
+                  <div
+                    className="MuiInputBase-root-32 MuiInput-root-19 MuiInput-underline-23 MuiInputBase-fullWidth-41 MuiInput-fullWidth-26 MuiInputBase-formControl-33 MuiInput-formControl-20"
+                    onClick={[Function]}
+                  >
+                    <input
+                      aria-invalid={false}
+                      className="MuiInputBase-input-42 MuiInput-input-27"
+                      disabled={false}
+                      name="name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      type="text"
+                    />
+                  </div>
+                </InputBase>
+              </WithStyles(InputBase)>
+            </Input>
+          </WithStyles(Input)>
+          <input
+            accept=".xlsx, .xls"
+            id="contained-button-file"
+            onChange={[Function]}
+            type="file"
+          />
+          <label
+            htmlFor="contained-button-file"
+          >
+            <WithStyles(Button)
+              color="primary"
+              component="span"
+              variant="contained"
+            >
+              <Button
+                classes={
+                  Object {
+                    "colorInherit": "MuiButton-colorInherit-70",
+                    "contained": "MuiButton-contained-60",
+                    "containedPrimary": "MuiButton-containedPrimary-61",
+                    "containedSecondary": "MuiButton-containedSecondary-62",
+                    "disabled": "MuiButton-disabled-69",
+                    "extendedFab": "MuiButton-extendedFab-67",
+                    "fab": "MuiButton-fab-66",
+                    "flat": "MuiButton-flat-54",
+                    "flatPrimary": "MuiButton-flatPrimary-55",
+                    "flatSecondary": "MuiButton-flatSecondary-56",
+                    "focusVisible": "MuiButton-focusVisible-68",
+                    "fullWidth": "MuiButton-fullWidth-74",
+                    "label": "MuiButton-label-50",
+                    "mini": "MuiButton-mini-71",
+                    "outlined": "MuiButton-outlined-57",
+                    "outlinedPrimary": "MuiButton-outlinedPrimary-58",
+                    "outlinedSecondary": "MuiButton-outlinedSecondary-59",
+                    "raised": "MuiButton-raised-63",
+                    "raisedPrimary": "MuiButton-raisedPrimary-64",
+                    "raisedSecondary": "MuiButton-raisedSecondary-65",
+                    "root": "MuiButton-root-49",
+                    "sizeLarge": "MuiButton-sizeLarge-73",
+                    "sizeSmall": "MuiButton-sizeSmall-72",
+                    "text": "MuiButton-text-51",
+                    "textPrimary": "MuiButton-textPrimary-52",
+                    "textSecondary": "MuiButton-textSecondary-53",
+                  }
+                }
+                color="primary"
+                component="span"
+                disableFocusRipple={false}
+                disabled={false}
+                fullWidth={false}
+                mini={false}
+                size="medium"
+                type="button"
+                variant="contained"
+              >
+                <WithStyles(ButtonBase)
+                  className="MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64"
+                  component="span"
+                  disabled={false}
+                  focusRipple={true}
+                  focusVisibleClassName="MuiButton-focusVisible-68"
+                  type="button"
+                >
+                  <ButtonBase
+                    centerRipple={false}
+                    className="MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64"
+                    classes={
+                      Object {
+                        "disabled": "MuiButtonBase-disabled-76",
+                        "focusVisible": "MuiButtonBase-focusVisible-77",
+                        "root": "MuiButtonBase-root-75",
+                      }
+                    }
+                    component="span"
+                    disableRipple={false}
+                    disableTouchRipple={false}
+                    disabled={false}
+                    focusRipple={true}
+                    focusVisibleClassName="MuiButton-focusVisible-68"
+                    tabIndex="0"
+                    type="button"
+                  >
+                    <span
+                      className="MuiButtonBase-root-75 MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64"
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <span
+                        className="MuiButton-label-50"
+                      >
+                        Select File
+                      </span>
+                      <WithStyles(TouchRipple)
+                        center={false}
+                        innerRef={[Function]}
+                      >
+                        <TouchRipple
+                          center={false}
+                          classes={
+                            Object {
+                              "child": "MuiTouchRipple-child-82",
+                              "childLeaving": "MuiTouchRipple-childLeaving-83",
+                              "childPulsate": "MuiTouchRipple-childPulsate-84",
+                              "ripple": "MuiTouchRipple-ripple-79",
+                              "ripplePulsate": "MuiTouchRipple-ripplePulsate-81",
+                              "rippleVisible": "MuiTouchRipple-rippleVisible-80",
+                              "root": "MuiTouchRipple-root-78",
+                            }
+                          }
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            className="MuiTouchRipple-root-78"
+                            component="span"
+                            enter={true}
+                            exit={true}
+                          >
+                            <span
+                              className="MuiTouchRipple-root-78"
+                            />
+                          </TransitionGroup>
+                        </TouchRipple>
+                      </WithStyles(TouchRipple)>
+                    </span>
+                  </ButtonBase>
+                </WithStyles(ButtonBase)>
+              </Button>
+            </WithStyles(Button)>
+          </label>
+        </div>
+        <WithStyles(FormHelperText)
+          error={true}
+        >
+          <FormHelperText
+            classes={
+              Object {
+                "contained": "MuiFormHelperText-contained-89",
+                "disabled": "MuiFormHelperText-disabled-87",
+                "error": "MuiFormHelperText-error-86",
+                "filled": "MuiFormHelperText-filled-91",
+                "focused": "MuiFormHelperText-focused-90",
+                "marginDense": "MuiFormHelperText-marginDense-88",
+                "required": "MuiFormHelperText-required-92",
+                "root": "MuiFormHelperText-root-85",
+              }
+            }
+            component="p"
+            error={true}
+          >
+            <p
+              className="MuiFormHelperText-root-85 MuiFormHelperText-error-86"
+            />
+          </FormHelperText>
+        </WithStyles(FormHelperText)>
+      </div>
+    </FormControl>
+  </WithStyles(FormControl)>
+</File>
+`;
+
+exports[`File Input should render correctly withStyles 1`] = `
+<WithStyles(File)
+  classes={Object {}}
+  field={
+    Object {
+      "name": "name",
+    }
+  }
+  form={
+    Object {
+      "errors": Object {},
+      "setFieldValue": [Function],
+    }
+  }
+  formControlProps={Object {}}
+  fullWidth={true}
+  helper="normal"
+  label="label"
+  labelProps={Object {}}
+  margin="normal"
+>
+  <File
+    classes={
+      Object {
+        "button": "File-button-96",
+        "buttonAlign": "File-buttonAlign-95",
+        "inputToHide": "File-inputToHide-93",
+        "row": "File-row-94",
+      }
+    }
+    field={
+      Object {
+        "name": "name",
+      }
+    }
+    form={
+      Object {
+        "errors": Object {},
+        "setFieldValue": [Function],
+      }
+    }
+    formControlProps={Object {}}
+    fullWidth={true}
+    helper="normal"
+    label="label"
+    labelProps={Object {}}
+    margin="normal"
+  >
+    <WithStyles(FormControl)
+      fullWidth={true}
+      margin="normal"
+    >
+      <FormControl
+        classes={
+          Object {
+            "fullWidth": "MuiFormControl-fullWidth-4",
+            "marginDense": "MuiFormControl-marginDense-3",
+            "marginNormal": "MuiFormControl-marginNormal-2",
+            "root": "MuiFormControl-root-1",
+          }
+        }
+        component="div"
+        disabled={false}
+        error={false}
+        fullWidth={true}
+        margin="normal"
+        required={false}
+        variant="standard"
+      >
+        <div
+          className="MuiFormControl-root-1 MuiFormControl-marginNormal-2 MuiFormControl-fullWidth-4"
+        >
+          <div
+            className="File-row-94"
+          >
+            <WithStyles(InputLabel)
+              shrink={true}
+            >
+              <InputLabel
+                classes={
+                  Object {
+                    "animated": "MuiInputLabel-animated-9",
+                    "filled": "MuiInputLabel-filled-10",
+                    "formControl": "MuiInputLabel-formControl-6",
+                    "marginDense": "MuiInputLabel-marginDense-7",
+                    "outlined": "MuiInputLabel-outlined-11",
+                    "root": "MuiInputLabel-root-5",
+                    "shrink": "MuiInputLabel-shrink-8",
+                  }
+                }
+                disableAnimation={false}
+                shrink={true}
+              >
+                <WithStyles(FormLabel)
+                  className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                  data-shrink={true}
+                >
+                  <FormLabel
+                    className="MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                    classes={
+                      Object {
+                        "asterisk": "MuiFormLabel-asterisk-18",
+                        "disabled": "MuiFormLabel-disabled-14",
+                        "error": "MuiFormLabel-error-15",
+                        "filled": "MuiFormLabel-filled-16",
+                        "focused": "MuiFormLabel-focused-13",
+                        "required": "MuiFormLabel-required-17",
+                        "root": "MuiFormLabel-root-12",
+                      }
+                    }
+                    component="label"
+                    data-shrink={true}
+                  >
+                    <label
+                      className="MuiFormLabel-root-12 MuiInputLabel-root-5 MuiInputLabel-formControl-6 MuiInputLabel-animated-9 MuiInputLabel-shrink-8"
+                      data-shrink={true}
+                    >
+                      label
+                    </label>
+                  </FormLabel>
+                </WithStyles(FormLabel)>
+              </InputLabel>
+            </WithStyles(InputLabel)>
+            <WithStyles(Input)
+              fullWidth={true}
+              name="name"
+            >
+              <Input
+                classes={
+                  Object {
+                    "disabled": "MuiInput-disabled-22",
+                    "error": "MuiInput-error-24",
+                    "focused": "MuiInput-focused-21",
+                    "formControl": "MuiInput-formControl-20",
+                    "fullWidth": "MuiInput-fullWidth-26",
+                    "input": "MuiInput-input-27",
+                    "inputMarginDense": "MuiInput-inputMarginDense-28",
+                    "inputMultiline": "MuiInput-inputMultiline-29",
+                    "inputType": "MuiInput-inputType-30",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-31",
+                    "multiline": "MuiInput-multiline-25",
+                    "root": "MuiInput-root-19",
+                    "underline": "MuiInput-underline-23",
+                  }
+                }
+                fullWidth={true}
+                name="name"
+              >
+                <WithStyles(InputBase)
+                  classes={
+                    Object {
+                      "disabled": "MuiInput-disabled-22",
+                      "error": "MuiInput-error-24",
+                      "focused": "MuiInput-focused-21",
+                      "formControl": "MuiInput-formControl-20",
+                      "fullWidth": "MuiInput-fullWidth-26",
+                      "input": "MuiInput-input-27",
+                      "inputMarginDense": "MuiInput-inputMarginDense-28",
+                      "inputMultiline": "MuiInput-inputMultiline-29",
+                      "inputType": "MuiInput-inputType-30",
+                      "inputTypeSearch": "MuiInput-inputTypeSearch-31",
+                      "multiline": "MuiInput-multiline-25",
+                      "root": "MuiInput-root-19 MuiInput-underline-23",
+                      "underline": null,
+                    }
+                  }
+                  fullWidth={true}
+                  inputComponent="input"
+                  multiline={false}
+                  name="name"
+                  type="text"
+                >
+                  <InputBase
+                    classes={
+                      Object {
+                        "adornedEnd": "MuiInputBase-adornedEnd-37",
+                        "adornedStart": "MuiInputBase-adornedStart-36",
+                        "disabled": "MuiInputBase-disabled-35 MuiInput-disabled-22",
+                        "error": "MuiInputBase-error-38 MuiInput-error-24",
+                        "focused": "MuiInputBase-focused-34 MuiInput-focused-21",
+                        "formControl": "MuiInputBase-formControl-33 MuiInput-formControl-20",
+                        "fullWidth": "MuiInputBase-fullWidth-41 MuiInput-fullWidth-26",
+                        "input": "MuiInputBase-input-42 MuiInput-input-27",
+                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-48",
+                        "inputAdornedStart": "MuiInputBase-inputAdornedStart-47",
+                        "inputMarginDense": "MuiInputBase-inputMarginDense-43 MuiInput-inputMarginDense-28",
+                        "inputMultiline": "MuiInputBase-inputMultiline-44 MuiInput-inputMultiline-29",
+                        "inputType": "MuiInputBase-inputType-45 MuiInput-inputType-30",
+                        "inputTypeSearch": "MuiInputBase-inputTypeSearch-46 MuiInput-inputTypeSearch-31",
+                        "marginDense": "MuiInputBase-marginDense-39",
+                        "multiline": "MuiInputBase-multiline-40 MuiInput-multiline-25",
+                        "root": "MuiInputBase-root-32 MuiInput-root-19 MuiInput-underline-23",
+                      }
+                    }
+                    fullWidth={true}
+                    inputComponent="input"
+                    multiline={false}
+                    name="name"
+                    type="text"
+                  >
+                    <div
+                      className="MuiInputBase-root-32 MuiInput-root-19 MuiInput-underline-23 MuiInputBase-fullWidth-41 MuiInput-fullWidth-26 MuiInputBase-formControl-33 MuiInput-formControl-20"
+                      onClick={[Function]}
+                    >
+                      <input
+                        aria-invalid={false}
+                        className="MuiInputBase-input-42 MuiInput-input-27"
+                        disabled={false}
+                        name="name"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        required={false}
+                        type="text"
+                      />
+                    </div>
+                  </InputBase>
+                </WithStyles(InputBase)>
+              </Input>
+            </WithStyles(Input)>
+            <input
+              accept=".xlsx, .xls"
+              className="File-inputToHide-93"
+              id="contained-button-file"
+              onChange={[Function]}
+              type="file"
+            />
+            <label
+              className="File-buttonAlign-95"
+              htmlFor="contained-button-file"
+            >
+              <WithStyles(Button)
+                className="File-button-96"
+                color="primary"
+                component="span"
+                variant="contained"
+              >
+                <Button
+                  className="File-button-96"
+                  classes={
+                    Object {
+                      "colorInherit": "MuiButton-colorInherit-70",
+                      "contained": "MuiButton-contained-60",
+                      "containedPrimary": "MuiButton-containedPrimary-61",
+                      "containedSecondary": "MuiButton-containedSecondary-62",
+                      "disabled": "MuiButton-disabled-69",
+                      "extendedFab": "MuiButton-extendedFab-67",
+                      "fab": "MuiButton-fab-66",
+                      "flat": "MuiButton-flat-54",
+                      "flatPrimary": "MuiButton-flatPrimary-55",
+                      "flatSecondary": "MuiButton-flatSecondary-56",
+                      "focusVisible": "MuiButton-focusVisible-68",
+                      "fullWidth": "MuiButton-fullWidth-74",
+                      "label": "MuiButton-label-50",
+                      "mini": "MuiButton-mini-71",
+                      "outlined": "MuiButton-outlined-57",
+                      "outlinedPrimary": "MuiButton-outlinedPrimary-58",
+                      "outlinedSecondary": "MuiButton-outlinedSecondary-59",
+                      "raised": "MuiButton-raised-63",
+                      "raisedPrimary": "MuiButton-raisedPrimary-64",
+                      "raisedSecondary": "MuiButton-raisedSecondary-65",
+                      "root": "MuiButton-root-49",
+                      "sizeLarge": "MuiButton-sizeLarge-73",
+                      "sizeSmall": "MuiButton-sizeSmall-72",
+                      "text": "MuiButton-text-51",
+                      "textPrimary": "MuiButton-textPrimary-52",
+                      "textSecondary": "MuiButton-textSecondary-53",
+                    }
+                  }
+                  color="primary"
+                  component="span"
+                  disableFocusRipple={false}
+                  disabled={false}
+                  fullWidth={false}
+                  mini={false}
+                  size="medium"
+                  type="button"
+                  variant="contained"
+                >
+                  <WithStyles(ButtonBase)
+                    className="MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64 File-button-96"
+                    component="span"
+                    disabled={false}
+                    focusRipple={true}
+                    focusVisibleClassName="MuiButton-focusVisible-68"
+                    type="button"
+                  >
+                    <ButtonBase
+                      centerRipple={false}
+                      className="MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64 File-button-96"
+                      classes={
+                        Object {
+                          "disabled": "MuiButtonBase-disabled-76",
+                          "focusVisible": "MuiButtonBase-focusVisible-77",
+                          "root": "MuiButtonBase-root-75",
+                        }
+                      }
+                      component="span"
+                      disableRipple={false}
+                      disableTouchRipple={false}
+                      disabled={false}
+                      focusRipple={true}
+                      focusVisibleClassName="MuiButton-focusVisible-68"
+                      tabIndex="0"
+                      type="button"
+                    >
+                      <span
+                        className="MuiButtonBase-root-75 MuiButton-root-49 MuiButton-contained-60 MuiButton-containedPrimary-61 MuiButton-raised-63 MuiButton-raisedPrimary-64 File-button-96"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        onKeyUp={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseLeave={[Function]}
+                        onMouseUp={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                        role="button"
+                        tabIndex="0"
+                      >
+                        <span
+                          className="MuiButton-label-50"
+                        >
+                          Select File
+                        </span>
+                        <WithStyles(TouchRipple)
+                          center={false}
+                          innerRef={[Function]}
+                        >
+                          <TouchRipple
+                            center={false}
+                            classes={
+                              Object {
+                                "child": "MuiTouchRipple-child-82",
+                                "childLeaving": "MuiTouchRipple-childLeaving-83",
+                                "childPulsate": "MuiTouchRipple-childPulsate-84",
+                                "ripple": "MuiTouchRipple-ripple-79",
+                                "ripplePulsate": "MuiTouchRipple-ripplePulsate-81",
+                                "rippleVisible": "MuiTouchRipple-rippleVisible-80",
+                                "root": "MuiTouchRipple-root-78",
+                              }
+                            }
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              className="MuiTouchRipple-root-78"
+                              component="span"
+                              enter={true}
+                              exit={true}
+                            >
+                              <span
+                                className="MuiTouchRipple-root-78"
+                              />
+                            </TransitionGroup>
+                          </TouchRipple>
+                        </WithStyles(TouchRipple)>
+                      </span>
+                    </ButtonBase>
+                  </WithStyles(ButtonBase)>
+                </Button>
+              </WithStyles(Button)>
+            </label>
+          </div>
+          <WithStyles(FormHelperText)
+            error={true}
+          >
+            <FormHelperText
+              classes={
+                Object {
+                  "contained": "MuiFormHelperText-contained-89",
+                  "disabled": "MuiFormHelperText-disabled-87",
+                  "error": "MuiFormHelperText-error-86",
+                  "filled": "MuiFormHelperText-filled-91",
+                  "focused": "MuiFormHelperText-focused-90",
+                  "marginDense": "MuiFormHelperText-marginDense-88",
+                  "required": "MuiFormHelperText-required-92",
+                  "root": "MuiFormHelperText-root-85",
+                }
+              }
+              component="p"
+              error={true}
+            >
+              <p
+                className="MuiFormHelperText-root-85 MuiFormHelperText-error-86"
+              />
+            </FormHelperText>
+          </WithStyles(FormHelperText)>
+        </div>
+      </FormControl>
+    </WithStyles(FormControl)>
+  </File>
+</WithStyles(File)>
+`;

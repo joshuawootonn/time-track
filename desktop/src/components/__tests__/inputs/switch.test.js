@@ -9,6 +9,9 @@ const props =  {
     errors: {},
     setFieldValue: jest.fn()
   },
+  field: {
+    value: true
+  },
   className: 'class',
   label: 'label',
   disabled: true

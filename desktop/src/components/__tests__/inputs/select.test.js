@@ -11,7 +11,8 @@ const props =  {
   },
   field: {
     name: 'name',
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    value: 'value'
   },
   label: 'label',
   labelProps: {},

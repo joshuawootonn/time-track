@@ -958,7 +958,7 @@ exports[`Crew Component should render correctly 1`] = `
                           name="name"
                           type="search"
                         >
-                          <TextField
+                          <Component
                             field={
                               Object {
                                 "name": "name",
@@ -1241,7 +1241,7 @@ exports[`Crew Component should render correctly 1`] = `
                                 </FormControl>
                               </WithStyles(FormControl)>
                             </TextField>
-                          </TextField>
+                          </Component>
                         </FieldInner>
                       </C>
                     </div>
@@ -3109,7 +3109,7 @@ exports[`Crew Component should render correctly withStyles 1`] = `
                             name="name"
                             type="search"
                           >
-                            <TextField
+                            <Component
                               className="Crew-field-228"
                               field={
                                 Object {
@@ -3396,7 +3396,7 @@ exports[`Crew Component should render correctly withStyles 1`] = `
                                   </FormControl>
                                 </WithStyles(FormControl)>
                               </TextField>
-                            </TextField>
+                            </Component>
                           </FieldInner>
                         </C>
                       </div>
