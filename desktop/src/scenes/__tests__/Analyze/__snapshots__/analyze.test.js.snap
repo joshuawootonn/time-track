@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Signin Scene should render correctly 1`] = `
+<Route>
+  <Component />
+</Route>
+`;
+
+exports[`Analyze Scene should render correctly 1`] = `
+<div>
+  <WithStyles(AppBar)
+    position="static"
+  >
+    <WithStyles(Toolbar)>
+      <WithStyles(Tabs)
+        onChange={[Function]}
+        value={1}
+      >
+        <WithStyles(Tab)
+          label="Employees"
+        />
+        <WithStyles(Tab)
+          label="Projects"
+        />
+        <WithStyles(Tab)
+          label="Tasks"
+        />
+        <WithStyles(Tab)
+          label="Shifts"
+        />
+      </WithStyles(Tabs)>
+      <WithStyles(IconButton)
+        color="inherit"
+        onClick={[Function]}
+      >
+        <pure(ArrowBackIcon) />
+      </WithStyles(IconButton)>
+    </WithStyles(Toolbar)>
+  </WithStyles(AppBar)>
+  <WithStyles(Grid)
+    container={true}
+  >
+    <WithStyles(Grid)
+      item={true}
+      xs={4}
+    >
+      <Connect(ProjectIndexContainer) />
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      xs={8}
+    >
+      <Connect(ProjectContainer) />
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
+</div>
+`;
+
+exports[`Analyze Scene should render correctly withStyles 1`] = `
+<Route>
+  <Component />
+</Route>
+`;

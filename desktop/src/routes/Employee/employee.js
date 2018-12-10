@@ -1,5 +1,5 @@
-import accountActionScene from 'scenes/Account/accountActionScene';
-import clockOutScene from 'scenes/Clock/clockOutScene';
+import accountActionScene from 'scenes/Account/accountAction';
+import clockOutScene from 'scenes/Clock/clockOut';
 import * as routes from 'constants/routes';
 
 export default [

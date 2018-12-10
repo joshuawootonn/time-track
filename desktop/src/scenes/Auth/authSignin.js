@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import AuthSigninContainer from 'containers/Auth/authSigninContainer';
 
-class AuthSigninScene extends Component {
+class AuthSignin extends Component {
   render() {
     return <AuthSigninContainer />;
   }
 }
 
-export default AuthSigninScene;
+export default AuthSignin;

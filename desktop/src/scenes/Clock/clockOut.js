@@ -3,18 +3,14 @@ import PropTypes from 'prop-types';
 
 import ClockOutContainer from 'containers/Clock/clockOutContainer';
 
-class ClockOutScene extends Component {
+class ClockOut extends Component {
   render() {
-    return (
-      <div>
-        <ClockOutContainer type={this.props.type} />
-      </div>
-    );
+    return <ClockOutContainer type={this.props.type} />;
   }
 }
 
-ClockOutScene.propTypes = {
+ClockOut.propTypes = {
   type: PropTypes.string.isRequired
 };
 
-export default ClockOutScene;
+export default ClockOut;

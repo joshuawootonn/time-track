@@ -9,7 +9,7 @@ import store from './store'
 import './index.css';
 
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
   typography: {
     useNextVariants: true
   },

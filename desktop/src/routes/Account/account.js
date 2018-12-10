@@ -1,4 +1,4 @@
-import AccountSigninScene from 'scenes/Account/accountSigninScene';
+import AccountSigninScene from 'scenes/Account/accountSignin';
 
 export default [
   {

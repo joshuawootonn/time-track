@@ -1,7 +1,7 @@
-import accountActionScene from 'scenes/Account/accountActionScene';
-import clockOutScene from 'scenes/Clock/clockOutScene';
-import exportScene from 'scenes/Export/exportScene';
-import analyzeScene from 'scenes/Analyze/analyzeScene';
+import accountActionScene from 'scenes/Account/accountAction';
+import clockOutScene from 'scenes/Clock/clockOut';
+import exportScene from 'scenes/Export/export';
+import analyzeScene from 'scenes/Analyze/analyze';
 import * as routes from 'constants/routes';
 
 export default [

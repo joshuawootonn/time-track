@@ -24,7 +24,7 @@ const styles = {
   }
 };
 
-class AnalyzeScene extends Component {
+export class Analyze extends Component {
 
   state = {
     tabValue: 1
@@ -93,9 +93,9 @@ class AnalyzeScene extends Component {
   }
 }
 
-AnalyzeScene.propTypes = {
+Analyze.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default withRouter(withStyles(styles)(AnalyzeScene));
+export default withRouter(withStyles(styles)(Analyze));
