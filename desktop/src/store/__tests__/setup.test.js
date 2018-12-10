@@ -1,4 +1,4 @@
-import * as actions from 'store/actions'
+import * as actions from 'store/actions';
 import * as selectors from 'store/selectors';
 import reducers from 'store/reducers';
 
