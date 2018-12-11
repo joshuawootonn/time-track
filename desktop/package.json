@@ -76,6 +76,8 @@
       "!/node_modules/",
       "!/src/routes",
       "!src/index.js",
+      "!src/electron-starter.js",
+      "!src/electron-wait-react.js",
       "!src/registerServiceWorker.js",
       "!src/**/styles.js"
     ]

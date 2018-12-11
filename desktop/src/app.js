@@ -10,7 +10,7 @@ import ModalRootContainer from 'containers/Floaters/modalRootContainer';
 
 import routes from 'routes';
 
-const AuthedRoutes = () => (
+export const AuthedRoutes = () => (
   <div>
     <SnackRootContainer />
     <ModalRootContainer />
