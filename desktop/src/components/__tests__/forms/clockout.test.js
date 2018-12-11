@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow,mount } from 'enzyme';
+import { FieldArray } from 'formik';
 
 import { Clockout } from 'components/forms/ClockOut/clockOut';
 import ClockoutHOC from 'components/forms/ClockOut';
@@ -23,6 +24,10 @@ const props =  {
   generalError: 'general error',
   errors: {}
 };
+const renderProps = { 
+  remove: jest.fn(),
+  push: jest.fn()
+};
 
 const setup = overRides => {  
   return shallow(<Clockout {...props} {...overRides}/>);    
@@ -30,6 +35,12 @@ const setup = overRides => {
 
 const setupHOC = overRides => {
   return shallow(<ClockoutHOC {...props} {...overRides}/>);
+};
+
+const setupWithRender = overRides => {
+  const wrapper = setup();  
+  const Render = wrapper.find(FieldArray).first().prop('render');  
+  return shallow(<Render {...renderProps} />);
 };
 
 describe('Clockout Component', () => {
@@ -44,24 +55,23 @@ describe('Clockout Component', () => {
     const wrapper = setupHOC();
     expect(wrapper).toMatchSnapshot();
   });
-  it.skip('should call render of acitvities fieldarray', () => {
-    const wrapper = setup();  
-    wrapper.find('#activities').first().render({
-      push: jest.fn(),
-      remove: jest.fn(),
-      registerField: jest.fn()
-    });
+  it('should call render of acitvities fieldarray', () => {
+    setupWithRender();
   });
-  it.skip('should remove an activity when a remove-activity-{1}', () => {
-    const wrapper = setup();
-    // TODO finish this test with validation of what the remove does
+  it('should remove an activity when a remove-activity-{1}', () => {
+    const wrapper = setupWithRender();
+    expect(renderProps.remove).toHaveBeenCalledTimes(0);
     wrapper.find('#remove-activity-1').first().simulate('click');
+    expect(renderProps.remove).toHaveBeenCalledTimes(1);
+    expect(renderProps.remove).toHaveBeenCalledWith(1);
   });
-  it.skip('should remove an activity when a remove-activity-{1}', () => {
-    const wrapper = setup();
-    // TODO finish this test with validation of what the add does
+  it('should remove an activity when a remove-activity-{1}', () => {
+    const wrapper = setupWithRender();
+    expect(renderProps.push).toHaveBeenCalledTimes(0);
     wrapper.find('#add-activity').first().simulate('click');
+    expect(renderProps.push).toHaveBeenCalledTimes(1);
   });
+  
   // it('should call resetForm on authority-reset-button', () => {
   //   const wrapper = setup();
   //   const instance = wrapper.instance();
