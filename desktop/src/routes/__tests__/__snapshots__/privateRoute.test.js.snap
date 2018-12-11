@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Private Route should redirect if user.state != status.SUCCESS 1`] = `
+<Route
+  render={[Function]}
+/>
+`;
+
+exports[`Private Route should render without error 1`] = `
+<Route
+  render={[Function]}
+/>
+`;

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import * as status from 'constants/status';
-import * as actions from 'store/User/actions';
+import { userActions } from 'store/actions';
 import { connect } from 'react-redux';
+import { userSelectors } from 'store/selectors';
 
-class PrivateRoute extends Component {
+export class PrivateRoute extends Component {
   render() {
     const { user } = this.props;
     const Component = this.props.component;
@@ -31,10 +32,7 @@ PrivateRoute.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return { user: state.user };
-};
 export default connect(
-  mapStateToProps,
-  actions,
+  { user: userSelectors.getUser },
+  userActions,
 )(PrivateRoute);
