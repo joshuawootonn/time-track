@@ -79,6 +79,7 @@ export class Project extends Component {
                               name={`projectTasks.${index}.categoryId`}
                               component={Select}
                               items={categories}
+                              id={`category-field-${index}`}
                               fullWidth
                               label="Category"
                               className={classes.field}
@@ -99,6 +100,7 @@ export class Project extends Component {
                               items={subcategories.filter(subcat => {
                                 return subcat.categoryId === projectTasks.categoryId;
                               })}
+                              id={`subcategory-field-${index}`}
                               fullWidth
                               label="Subcategory"
                               className={classes.field}
@@ -138,6 +140,7 @@ export class Project extends Component {
                                 type="button"
                                 color="secondary"
                                 className={classes.iconButton}
+                                id={`remove-projectTask-${index}`}
                                 onClick={() => arrayHelpers.remove(index)}
                               >
                                 <Close />
@@ -155,6 +158,7 @@ export class Project extends Component {
                     <Button
                       color="primary"
                       variant="contained"
+                      id={'add-projectTask'}
                       onClick={() =>
                         arrayHelpers.push({
                           categoryId: -1,
@@ -195,6 +199,7 @@ export class Project extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id={'project-reset-button'}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"

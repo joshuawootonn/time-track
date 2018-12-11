@@ -67,7 +67,6 @@ export class ShiftEdit extends Component {
           <FieldArray
             name="activities"
             render={arrayHelpers => {
-              console.log();
               return (
                 <Grid item xs={12} container className={classes.body}>
                   {values.activities &&
@@ -86,7 +85,8 @@ export class ShiftEdit extends Component {
                               component={Select}
                               items={projects}
                               fullWidth
-                              label="Project"                                                           
+                              label="Project"     
+                              id={`project-field-${index}`}                                                      
                               className={classes.field}
                               onChange={ () => {                                  
                                 arrayHelpers.form.setFieldValue(
@@ -135,6 +135,7 @@ export class ShiftEdit extends Component {
                             <div className={classes.verticalCenter}>
                               <IconButton
                                 type="button"
+                                id={`remove-activity-${index}`}
                                 color="secondary"
                                 className={classes.iconButton}
                                 onClick={() => arrayHelpers.remove(index)}
@@ -162,6 +163,7 @@ export class ShiftEdit extends Component {
                     <Button
                       color="primary"
                       variant="contained"
+                      id={'add-activity'}
                       onClick={() =>
                         arrayHelpers.push({
                           projectId: Object.keys(projects)[0],
@@ -206,6 +208,7 @@ export class ShiftEdit extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
+                id={'shift-edit-reset-button'}
                 color="secondary"
                 variant="text"
                 className={classes.button}

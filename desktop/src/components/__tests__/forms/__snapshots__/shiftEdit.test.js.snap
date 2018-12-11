@@ -100,6 +100,7 @@ exports[`ShiftEdit Component should render correctly 1`] = `
         </WithStyles(Button)>
         <WithStyles(Button)
           color="secondary"
+          id="shift-edit-reset-button"
           onClick={[Function]}
           variant="text"
         >
@@ -153,12 +154,45 @@ exports[`ShiftEdit Component should render correctly withStyles 1`] = `
     Array [
       Object {
         "id": 0,
+        "task": Object {
+          "category": Object {
+            "id": 0,
+            "name": "name0",
+          },
+          "id": 0,
+          "subcategory": Object {
+            "id": 0,
+            "name": "name0",
+          },
+        },
       },
       Object {
         "id": 1,
+        "task": Object {
+          "category": Object {
+            "id": 1,
+            "name": "name1",
+          },
+          "id": 1,
+          "subcategory": Object {
+            "id": 1,
+            "name": "name1",
+          },
+        },
       },
       Object {
         "id": 2,
+        "task": Object {
+          "category": Object {
+            "id": 2,
+            "name": "name2",
+          },
+          "id": 2,
+          "subcategory": Object {
+            "id": 2,
+            "name": "name2",
+          },
+        },
       },
     ]
   }
@@ -180,9 +214,16 @@ exports[`ShiftEdit Component should render correctly withStyles 1`] = `
   type="edit"
   values={
     Object {
-      "projectTasks": Array [
+      "activities": Array [
+        Object {
+          "categoryId": 0,
+          "id": 0,
+          "subcategoryId": 0,
+          "taskId": 0,
+        },
         Object {
           "categoryId": 1,
+          "id": 1,
           "subcategoryId": 1,
           "taskId": 1,
         },
