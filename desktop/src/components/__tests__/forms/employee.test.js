@@ -32,12 +32,10 @@ describe('Employee Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();  
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should call resetForm on employee-reset-button', () => {
     const wrapper = setup();

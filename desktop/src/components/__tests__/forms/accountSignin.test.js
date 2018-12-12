@@ -27,12 +27,10 @@ describe('Account Signin Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();  
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should call setFieldValue in resetPin', () => {
     const wrapper = setup();
@@ -65,7 +63,6 @@ describe('Account Signin Component', () => {
     expect(instance.appendPin).toHaveBeenCalledTimes(1);
   });
   it('should disable to submit button if errors is not empty', () => {
-    const wrapper = setup({ errors: { asdf: 'asdf' } });
-    expect(wrapper).toMatchSnapshot();
+    setup({ errors: { asdf: 'asdf' } });
   });
 });

@@ -30,15 +30,12 @@ const setupHOC = overRides => {
 
 describe('TextField Input', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();        
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();   
+    setupHOC();       
   }); 
   it('should render no helper text when helper="none"', () => {
-    const wrapper = setup({ helper: 'none' });
-    expect(wrapper).toMatchSnapshot();    
+    setup({ helper: 'none' });        
   });
 });

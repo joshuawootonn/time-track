@@ -14,7 +14,7 @@ export const getStaticData = () => {
       await dispatch(taskActions.getAllTasks());
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
     } catch (e) {
-      dispatch({type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e });
+      dispatch({ type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e });
       throw e;
     }
   };

@@ -22,7 +22,7 @@ class SignInContainer extends Component {
   }
   render() {
     const { login, history, getStaticData, authorityEntities } = this.props;
-    console.log(authorityEntities)
+    console.log(authorityEntities);
     return (
       <Formik
         initialValues={{ pin: '565656' }}

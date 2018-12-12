@@ -35,12 +35,10 @@ const setupHOC = overRides => {
 
 describe('Select Input', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();        
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();   
+    setupHOC();       
   }); 
   it('should call field.onChange and onChange on this.onChange', () => {
     const wrapper = setup();

@@ -25,16 +25,13 @@ const setupHOC = overRides => {
 
 describe('Category Component', () => {  
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();  
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();    
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();    
   });
   it('should render a delete button when type===edit', () => {
-    const wrapper = setup({ type: 'edit' });
-    expect(wrapper).toMatchSnapshot();
+    setup({ type: 'edit' });
   });
   it('should call resetForm on category-reset-button', () => {
     const wrapper = setup();

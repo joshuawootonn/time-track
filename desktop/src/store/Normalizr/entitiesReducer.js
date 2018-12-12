@@ -5,7 +5,7 @@ export const payloadCustomizer = (objValue, srcValue) => {
   if (_.isArray(srcValue)) {
     return srcValue;
   }
-}
+};
 
 export default (state = {}, action) => {
   const { payload, deleted } = action;

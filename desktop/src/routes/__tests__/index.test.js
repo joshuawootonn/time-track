@@ -15,7 +15,7 @@ describe('Index Route', () => {
       route.routes.forEach(subroute => {
         expect(subroute.path.match(routeRegex)).not.toBeNull();
         shallow(<subroute.component type={subroute.type}/>);
-      })
+      });
     });
   });
 });

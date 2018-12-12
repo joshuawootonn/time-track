@@ -24,11 +24,9 @@ const setupHOC = () => {
 
 describe('Snack Components', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();    
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
 });

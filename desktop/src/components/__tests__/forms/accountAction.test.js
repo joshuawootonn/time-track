@@ -25,19 +25,15 @@ const setupHOC = overRides => {
 
 describe('Account Action Component', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();   
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should render correctly when isWorking is false', () => {
-    const wrapper = setup({ isWorking: 1 });
-    expect(wrapper).toMatchSnapshot();
+    setup({ isWorking: 1 });
   });
   it('should render correctly when type === authorityConstants.ADMIN', () => {
-    const wrapper = setup({ type: 'admin' });
-    expect(wrapper).toMatchSnapshot();
+    setup({ type: 'admin' });
   });
 });

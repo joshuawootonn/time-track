@@ -30,7 +30,7 @@ export class Crew extends Component {
           <Grid item xs={12} className={classes.row}>
             <Typography
               color="error"
-              variant="button"
+              variant="subtitle2"
               className={classes.field}
             >
               {errors.submit}

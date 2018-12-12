@@ -31,12 +31,10 @@ const setupHOC = overRides => {
 
 describe('File Input', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();        
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();   
+    setupHOC();       
   });
   it('should call setFieldValue on this.fileChange', () => {
     const wrapper = setup();

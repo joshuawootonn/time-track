@@ -1,5 +1,4 @@
 import { shiftSelectors } from 'store/selectors';
-import { initialState } from 'store/Analyze/reducers';
 import moment from 'moment';
 
 describe('Shift Selectors', () => {

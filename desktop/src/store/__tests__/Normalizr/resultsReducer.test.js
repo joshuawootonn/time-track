@@ -1,4 +1,4 @@
-import resultReducer,{ arrayUnique,payloadCustomizer } from 'store/Normalizr/resultsReducer';
+import resultReducer,{ payloadCustomizer } from 'store/Normalizr/resultsReducer';
 
 describe('Result Reducer', () => {   
   it('payloadCustomizer should return unique objValue if it is an array', () => {
@@ -13,14 +13,14 @@ describe('Result Reducer', () => {
     expect(expectedState).toEqual(resultingState);
   });
   it('should mergeWith and add to existing entities', () => {
-    const existingState = { users: [1]}; 
+    const existingState = { users: [1] }; 
     const fakeAction =  { payload:{ result: { users: [2] } } };
     const expectedState = { users: [1,2] }; 
     const resultingState = resultReducer(existingState,fakeAction);    
     expect(expectedState).toEqual(resultingState);
   });
   it('should mergeWith and add to existing entities', () => {
-    const existingState = { users: [1]}; 
+    const existingState = { users: [1] }; 
     const fakeAction =  { deleted:{ result: { users: [1] } } };
     const expectedState = { users: [] }; 
     const resultingState = resultReducer(existingState,fakeAction);    

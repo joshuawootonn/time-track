@@ -42,7 +42,7 @@ const exportActionTypes = {
 };
 const modalActionTypes = {
   ...createCustomSyncActionType('modal','hide'),
-  ...createCustomSyncActionType('modal','show'),
+  ...createCustomSyncActionType('modal','show')
 };
 const projectActionTypes = {
   ...createCRUDActionTypes('project','projects'),

@@ -26,12 +26,10 @@ const setupHOC = overRides => {
 
 describe('Crew Component', () => {  
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();   
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should call resetForm on crew-reset-button', () => {
     const resetForm = jest.fn();

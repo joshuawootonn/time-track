@@ -55,7 +55,7 @@ describe('Subcategory Selectors', () => {
     const projectEntities = projectSelectors.getProjectsFromEntities({ entities: { projects:{ 1: { id: 1, val: 'asdf' } } } });
     const allProjectTasks=projectTaskSelectors.getAllProjectTasks.resultFunc({ 1: { val: 'asdf',projectId: 1, taskId:1 } },[1],{ 1: { val: 'zxcv' } },{ 1: { val: 'qwer' } });
     const returnedValue = projectTaskSelectors.getSelectedProject.resultFunc(projectEntities,{ ...initialState,project:1 },allProjectTasks);
-    expect(returnedValue).toEqual( { id: 1, projectTasks: [{ project: { val: 'qwer' }, projectId: 1, task: {val: 'zxcv' }, taskId: 1, val: 'asdf' }]
+    expect(returnedValue).toEqual( { id: 1, projectTasks: [{ project: { val: 'qwer' }, projectId: 1, task: { val: 'zxcv' }, taskId: 1, val: 'asdf' }]
       , val: 'asdf' }); 
   });  
 }); 

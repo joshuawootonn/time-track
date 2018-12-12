@@ -4,7 +4,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import { genericActions } from 'store/actions';
-import { compareActionTypes, requestMock } from 'helpers/test.helper';
+import { compareActionTypes } from 'helpers/test.helper';
 import domains from 'constants/domains';
 
 

@@ -13,12 +13,12 @@ const props =  {
   resetForm: jest.fn(),
   initialValues: {},
   values: {
-    activities: [{id: 0, categoryId: 0, subcategoryId: 0,taskId:0 },{ id: 1, categoryId: 1, subcategoryId: 1,taskId:1 }]
+    activities: [{ id: 0, categoryId: 0, subcategoryId: 0,taskId:0 },{ id: 1, categoryId: 1, subcategoryId: 1,taskId:1 }]
   },
   projects: [{ id: 0 },{ id: 1 },{ id: 2 }],
   projectTasks: [{ id: 0, task: { id: 0,category: { id: 0,name: 'name0' }, subcategory: { id: 0,name: 'name0' } } },
-  { id: 1, task: { id: 1,category: { id: 1,name: 'name1' }, subcategory: { id: 1,name: 'name1' } } },
-  { id: 2, task: { id: 2,category: { id: 2,name: 'name2' }, subcategory: { id: 2,name: 'name2' } }  }],
+    { id: 1, task: { id: 1,category: { id: 1,name: 'name1' }, subcategory: { id: 1,name: 'name1' } } },
+    { id: 2, task: { id: 2,category: { id: 2,name: 'name2' }, subcategory: { id: 2,name: 'name2' } }  }],
   employees: [{ id: 0 },{ id: 1 },{ id: 2 }],
   timeLeft: 60,
   generalError: 'General Error',
@@ -49,7 +49,7 @@ const setupHOC = overRides => {
 const setupWithRender = overRides => {
   const wrapper = setup();  
   const Render = wrapper.find(FieldArray).first().prop('render');  
-  return shallow(<Render {...renderProps} />);
+  return shallow(<Render {...renderProps} {...overRides}/>);
 };
 
 describe('ShiftEdit Component', () => {
@@ -57,25 +57,21 @@ describe('ShiftEdit Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();        
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();    
   });
   it('should call render of activites fieldarray', () => {
     setupWithRender();
   });
-
   it('should call onChange project Field', () => {
     const wrapper = setupWithRender();
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(0);
     wrapper.find('#project-field-1').first().simulate('change');
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(1);
     expect(renderProps.form.setFieldValue).toHaveBeenLastCalledWith('activities.1.projectTaskId',-1);
-  });
-  
+  });  
   it('should remove an activity when a remove-projectTask-1', () => {
     const wrapper = setupWithRender();
     expect(renderProps.remove).toHaveBeenCalledTimes(0);

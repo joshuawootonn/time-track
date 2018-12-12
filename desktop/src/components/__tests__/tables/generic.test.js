@@ -32,24 +32,19 @@ describe('Generic Table Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should render correctly with number based type', () => {   
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
   });
   it('should render correctly with boolean based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: 'true' }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: 'true' }] });
   });
   it('should render correctly with string based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: 'true' }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: 'true' }] });
   });
   it('should render correctly with object based type', () => {
     setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.OBJECT,keys: ['name'] }], tableData: [{ id: 1, qwer: { name: 'asdf' } }]  });   
@@ -61,33 +56,28 @@ describe('Generic Table Component', () => {
     setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.DATETIME }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
   });
   it('should render correctly with length based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
   });
 });
 
 describe('Generic Head Component', () => {
   it('should render correctly', () => {
     const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: 'dense', label: 'label' }] };
-    const wrapper = mount(<table><GenericHead {...props} /></table>);
-    expect(wrapper).toMatchSnapshot();
+    mount(<table><GenericHead {...props} /></table>);
   });
   it('should render correctly withStyles', () => {
     const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: 'dense', label: 'label' }] };
-    const wrapper = mount(<table><GenericHeadHOC {...props} /></table>);
-    expect(wrapper).toMatchSnapshot();
+    mount(<table><GenericHeadHOC {...props} /></table>);
   });
 });
 
 describe('Generic Toolbar Component', () => {
   it('should render correctly', () => {
     const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: 'label' };
-    const wrapper = mount(<GenericToolbar {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    mount(<GenericToolbar {...props} />);    
   });
   it('should render correctly withStyles', () => {
     const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: 'label' };
-    const wrapper = mount(<GenericToolbarHOC {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    mount(<GenericToolbarHOC {...props} />);
   });
 });

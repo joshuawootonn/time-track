@@ -8,7 +8,7 @@ import { Formik } from 'formik';
 import { auth as authValidation } from 'constants/formValidation';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
-import * as IPCConstants from 'constants/ipc';
+//import * as IPCConstants from 'constants/ipc';
 import AuthSigin from 'components/forms/AuthSignin';
 
 // const electron = window.require('electron');

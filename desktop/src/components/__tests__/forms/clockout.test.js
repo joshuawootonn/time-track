@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow,mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { FieldArray } from 'formik';
 
 import { Clockout } from 'components/forms/ClockOut/clockOut';
@@ -40,7 +40,7 @@ const setupHOC = overRides => {
 const setupWithRender = overRides => {
   const wrapper = setup();  
   const Render = wrapper.find(FieldArray).first().prop('render');  
-  return shallow(<Render {...renderProps} />);
+  return shallow(<Render {...renderProps} {...overRides}/>);
 };
 
 describe('Clockout Component', () => {
@@ -48,12 +48,10 @@ describe('Clockout Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();   
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should call render of acitvities fieldarray', () => {
     setupWithRender();
@@ -71,13 +69,4 @@ describe('Clockout Component', () => {
     wrapper.find('#add-activity').first().simulate('click');
     expect(renderProps.push).toHaveBeenCalledTimes(1);
   });
-  
-  // it('should call resetForm on authority-reset-button', () => {
-  //   const wrapper = setup();
-  //   const instance = wrapper.instance();
-  //   instance.resetForm = jest.fn();
-  //   expect(props.resetForm).toHaveBeenCalledTimes(0);
-  //   wrapper.find('#authority-reset-button').first().simulate('click');
-  //   expect(props.resetForm).toHaveBeenCalledTimes(1);
-  // });
 });

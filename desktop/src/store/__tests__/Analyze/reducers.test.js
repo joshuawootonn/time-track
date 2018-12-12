@@ -41,5 +41,5 @@ describe('Analyze Reducer', () => {
     const wackAction = { type: 'asdf',  domain:{ singular: 'asdf' } };
     const resultingState = analyzeReducer(initialState,wackAction);
     expect(initialState).toBe(resultingState);    
-  })
+  });
 });

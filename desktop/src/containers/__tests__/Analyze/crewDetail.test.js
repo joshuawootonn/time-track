@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow,mount } from 'enzyme';
+import { mount } from 'enzyme';
 
-import CrewDetailHOC, { CrewDetail } from 'containers/Analyze/crewDetailContainer';
+import { CrewDetail } from 'containers/Analyze/crewDetailContainer';
 
 const props =  {  
   selected: {},
@@ -20,12 +20,12 @@ const setup = overRides => {
 
 describe('Crew Detail Container', () => {  
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();
+        
   });
   // it('should render correctly withStyles', () => {
-  //   const wrapper = setupHOC();
-  //   expect(wrapper).toMatchSnapshot();
+  //   setupHOC();
+  //   
   // });
  
 });

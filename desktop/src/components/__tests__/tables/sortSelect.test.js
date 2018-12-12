@@ -33,24 +33,19 @@ describe('Sort Select Table Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    //expect(wrapper).toMatchSnapshot();    
+    setup();
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    //expect(wrapper).toMatchSnapshot();
+    setupHOC();
   });
   it('should render correctly with number based type', () => {   
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
   });
   it('should render correctly with boolean based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: 'true' }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: 'true' }] });    
   });
   it('should render correctly with string based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: 'true' }] });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: 'true' }] });
   });
   it('should render correctly with object based type', () => {
     setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.OBJECT,keys: ['name'] }], tableData: [{ id: 1, qwer: { name: 'asdf' } }]  });   
@@ -62,12 +57,10 @@ describe('Sort Select Table Component', () => {
     setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.DATETIME }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
   });
   it('should render correctly with length based type', () => {
-    const wrapper = setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
-    expect(wrapper).toMatchSnapshot();
+    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
   });
   it('should create appropriate sort handler', () => {
-    const wrapper = setup();   
-  
+    const wrapper = setup(); 
     const instance = wrapper.instance();
     let val = instance.desc({ 'asdf':1 },{ 'asdf': 0 },'asdf','asdf',null);    
     expect(val).toEqual(-1);
@@ -103,7 +96,7 @@ describe('Sort Select Table Component', () => {
     const instance = wrapper.instance();    
     wrapper.setState({ order: 'desc', orderBy: 'asdf' });
     instance.handleRequestSort(null,'asdf',null,null);
-    expect(wrapper.state('order')).toEqual('desc');
+    expect(wrapper.state('order')).toEqual('asc');
     expect(wrapper.state('orderBy')).toEqual('asdf');
     wrapper.setState({ order: 'asc' });
     instance.handleRequestSort(null,'asdf',null,null);
@@ -156,12 +149,10 @@ describe('Sort Select Head Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {    
-    const wrapper = setupHead();
-    expect(wrapper).toMatchSnapshot();
+    setupHead();    
   });
   it('should render correctly withStyles', () => {    
-    const wrapper = setupHeadHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHeadHOC();    
   });
   it('should create appropriate sort handler', () => {
     const wrapper = setupHead();   
@@ -182,8 +173,7 @@ describe('Sort Select Toolbar Component', () => {
       selectLabel :jest.fn(),
       selected: { id: 1, qwer: { name: 'asdf' } }
     };
-    const wrapper = mount(<SortSelectToolbar {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    mount(<SortSelectToolbar {...props} />);    
   });
   it('should render correctly withStyles', () => {
     const props = { 
@@ -193,7 +183,6 @@ describe('Sort Select Toolbar Component', () => {
       selectLabel :jest.fn(),
       selected: { id: 1, qwer: { name: 'asdf' } }
     };
-    const wrapper = mount(<SortSelectToolbarHOC {...props} />);
-    expect(wrapper).toMatchSnapshot();
+    mount(<SortSelectToolbarHOC {...props} />);    
   });
 });

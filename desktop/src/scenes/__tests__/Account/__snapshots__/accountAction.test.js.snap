@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Account Action Scene should render correctly 1`] = `
-<withRouter(Connect(AccountAction))
-  type="type"
-/>
-`;

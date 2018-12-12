@@ -41,7 +41,7 @@ const setupHOC = overRides => {
 const setupWithRender = overRides => {
   const wrapper = setup();  
   const Render = wrapper.find(FieldArray).first().prop('render');  
-  return shallow(<Render {...renderProps} />);
+  return shallow(<Render {...renderProps} {...overRides} />);
 };
 
 describe('Project Component', () => {
@@ -49,12 +49,10 @@ describe('Project Component', () => {
     jest.clearAllMocks();
   });
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();
   });
   it('should render correctly withStyles', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();    
   });
   it('should call render of projectTask fieldarray', () => {
     setupWithRender();

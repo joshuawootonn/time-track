@@ -15,11 +15,9 @@ const setupHOC = () => {
 
 describe('App', () => {
   it('should render correctly', () => {
-    const wrapper = setup();
-    expect(wrapper).toMatchSnapshot();    
+    setup();        
   });
   it('should render correctly withRouter', () => {
-    const wrapper = setupHOC();
-    expect(wrapper).toMatchSnapshot();
+    setupHOC();    
   });
 });
