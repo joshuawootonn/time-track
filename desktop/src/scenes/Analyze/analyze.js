@@ -10,7 +10,7 @@ import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContaine
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
 import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
-import ProjectDetailsContainer from 'containers/Analyze/projectDetailsContainer';
+import projectDetailContainer from 'containers/Analyze/projectDetailContainer';
 import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
 import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
 import ShiftDetailsContainer from 'containers/Analyze/shiftDetailsContainer';
@@ -68,7 +68,7 @@ export class Analyze extends Component {
             <ProjectIndexContainer />
           </Grid>
           <Grid item xs={8}>
-            <ProjectDetailsContainer />
+            <projectDetailContainer />
           </Grid>
         </Grid>}
         {tabValue === 2 && <Grid container>

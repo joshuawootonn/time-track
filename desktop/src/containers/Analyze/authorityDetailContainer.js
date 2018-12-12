@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
+
 import { authorityActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import { authorityValidation } from 'constants/formValidation';
 import { analyzeStatus } from 'constants/analyze';
 import Authority from 'components/forms/Authority';
-
 import Hero from 'components/layouts/Hero';
 
-class AuthorityDetailContainer extends Component {
+export class AuthorityDetail extends Component {
   render() {
     const { selected,status } = this.props;
     if(status === analyzeStatus.INIT) {
@@ -31,7 +31,7 @@ class AuthorityDetailContainer extends Component {
           validationSchema={authorityValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateAuthority } = this.props;
-            updateAuthority({
+            return updateAuthority({
               ...values
             }).then(
               () => {
@@ -57,6 +57,8 @@ class AuthorityDetailContainer extends Component {
     }
   }
 }
+
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     selected: authoritySelectors.getSelectedAuthority(state),
@@ -64,4 +66,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps,{ ...authorityActions } )(AuthorityDetailContainer);
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return{
+    updateAuthority:  values => {
+      return dispatch(authorityActions.updateAuthority(values));
+    }
+  }
+};
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(AuthorityDetail);

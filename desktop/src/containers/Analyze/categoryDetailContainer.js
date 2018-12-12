@@ -11,7 +11,7 @@ import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { categoryValidation } from 'constants/formValidation';
 
-class EmployeeEditContainer extends Component {
+export class CategoryDetail extends Component {
   
   removeCategory = () => {
     const { selected, removeCategory } = this.props;  
@@ -38,9 +38,8 @@ class EmployeeEditContainer extends Component {
           }}
           validationSchema={categoryValidation}
           onSubmit={(values, formikFunctions) => {
-            const { createCategory } = this.props;
-            console.log(values);
-            createCategory({
+            const { createCategory } = this.props;           
+            return createCategory({
               ...values
             }).then(
               () => {
@@ -77,7 +76,7 @@ class EmployeeEditContainer extends Component {
           validationSchema={categoryValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateCategory } = this.props;
-            updateCategory({
+            return updateCategory({
               ...values
             }).then(
               () => {
@@ -107,6 +106,7 @@ class EmployeeEditContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     categories: categorySelectors.getAllCategories(state),
@@ -115,6 +115,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createCategory: category => {
@@ -129,7 +130,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmployeeEditContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(CategoryDetail);

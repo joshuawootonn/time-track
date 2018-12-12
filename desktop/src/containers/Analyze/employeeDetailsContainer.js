@@ -11,8 +11,7 @@ import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { employeeValidation } from 'constants/formValidation';
 
-class EmployeeEditContainer extends Component {
-  
+export class EmployeeDetail extends Component {  
   removeEmployee = () => {
     const { selected, removeEmployee } = this.props;  
     removeEmployee(selected.id);
@@ -45,18 +44,16 @@ class EmployeeEditContainer extends Component {
           validationSchema={employeeValidation}
           onSubmit={(values, formikFunctions) => {
             const { createEmployee } = this.props;
-            createEmployee({
+            return createEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
-                console.log('wow');
+                formikFunctions.setStatus({ success: true })
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -92,7 +89,7 @@ class EmployeeEditContainer extends Component {
           validationSchema={employeeValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateEmployee } = this.props;
-            updateEmployee({
+            return updateEmployee({
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0
@@ -100,10 +97,8 @@ class EmployeeEditContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow');
               },
               e => {
-                console.log('asdf', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -130,6 +125,7 @@ class EmployeeEditContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     crews: crewSelectors.getAllCrews(state),
@@ -139,6 +135,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createEmployee: employee => {
@@ -159,7 +156,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmployeeEditContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(EmployeeDetail);

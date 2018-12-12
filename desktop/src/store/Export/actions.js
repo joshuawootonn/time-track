@@ -26,9 +26,9 @@ export const exportToExcel = (exportCategory, start, fileLocation) => {
       const endMoment = new moment(start).add(7,'days').format('YYYY-MM-DD HH:mm:ss');
 
       await dispatch(getData(startMoment, endMoment));
-      //const exportData = formatData(startMoment, endMoment);
+      const exportData = formatData(startMoment, endMoment);
 
-      //ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
+      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
     } catch (e) {

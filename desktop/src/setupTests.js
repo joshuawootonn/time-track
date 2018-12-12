@@ -20,4 +20,12 @@ console.error = message => {
 
   originalConsoleError(message);
 };
-
+global.window.require = function () {
+  return {
+    ipcRenderer: {
+      send: function () {
+        // Fake sending message to ipcMain
+      }
+    }
+  }
+};
