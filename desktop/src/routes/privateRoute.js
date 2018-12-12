@@ -32,7 +32,7 @@ PrivateRoute.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default connect(
-  { user: userSelectors.getUser },
-  userActions,
+export default connect(state =>
+  ({ user: userSelectors.getUser(state) }),
+userActions,
 )(PrivateRoute);

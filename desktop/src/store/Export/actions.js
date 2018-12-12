@@ -11,9 +11,9 @@ import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
-// import store from 'store';
-// const electron = window.require('electron');
-// const ipcRenderer = electron.ipcRenderer;
+import store from 'store';
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
 
 export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
