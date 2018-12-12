@@ -8,21 +8,22 @@ import { Formik } from 'formik';
 import { auth as authValidation } from 'constants/formValidation';
 import * as actions from 'store/User/actions';
 import * as routes from 'constants/routes';
-//import * as IPCConstants from 'constants/ipc';
-import AuthSigin from 'components/forms/AuthSignin';
+import * as IPCConstants from 'constants/ipc';
+import AuthSiginForm from 'components/forms/AuthSignin';
+import { userSelectors } from 'store/selectors';
 
-// const electron = window.require('electron');
-// const ipcRenderer = electron.ipcRenderer;
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
 
-class SignInForm extends Component {
-  // componentDidMount = () => {
-  //   const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-  //   if (cred.username && cred.password) {
-  //     this.props.login(cred.username, cred.password).then(() => {
-  //       this.props.history.push('/');
-  //     });
-  //   }
-  // };
+export class AuthSignin extends Component {
+  componentDidMount = () => {
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+    if (cred.username && cred.password) {
+      this.props.login(cred.username, cred.password).then(() => {
+        this.props.history.push('/');
+      });
+    }
+  };
   render() {
     return (
       <div>
@@ -30,17 +31,16 @@ class SignInForm extends Component {
           initialValues={{ username: 'josh', password: '5656' }}
           validationSchema={authValidation}
           onSubmit={(values, formikFunctions) => {
-            const { history } = this.props;
-            const { username, password } = values;
-            this.props
-              .login(username, password)
+            const { history,login } = this.props;
+            const { username, password } = values;            
+            return login(username, password)
               .then(() => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                {/* ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+                ipcRenderer.sendSync(IPCConstants.SET_CRED, {
                   username,
                   password
-                }); */}
+                }); 
                 history.push(routes.ROOT);
               })
               .catch(error => {
@@ -50,7 +50,7 @@ class SignInForm extends Component {
               });
           }}
           render={formProps => {
-            return ( <AuthSigin {...formProps}/> );
+            return ( <AuthSiginForm {...formProps}/> );
           }}
         />
       </div>
@@ -58,18 +58,13 @@ class SignInForm extends Component {
   }
 }
 
-SignInForm.propTypes = {
+AuthSignin.propTypes = {
   login: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
-  return { user: state.user };
+  return { user: userSelectors.getUser(state) };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    actions,
-  )(SignInForm),
-);
+export default withRouter(connect(mapStateToProps,actions)(AuthSignin));

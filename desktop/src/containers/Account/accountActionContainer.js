@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 import { snackActions, employeeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import * as routes from 'constants/routes';
-
 import AccountActionForm from 'components/forms/AccountAction';
 
-class AccountAction extends Component {
+export class AccountAction extends Component {
   componentDidMount = () => {
     // REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
@@ -18,16 +17,14 @@ class AccountAction extends Component {
     this.props.history.push('/');
   };
   clockIn = () => {
-    const { entities, employee, history } = this.props;
-    const asdf = entities.employees[employee.current.id];
-
-    this.props.clockIn(asdf).then(() => history.push('/'));
+    const { employees, employee, history } = this.props;
+    const employeeToClockin = employees[employee.current.id];
+    return this.props.clockIn(employeeToClockin).then(() => history.push('/'));
   };
   clockOut = () => {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   };
   analyze = () => {
-    console.log(this.props.type,routes.ANALYZE);
     this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
   export = () => {
@@ -51,15 +48,15 @@ class AccountAction extends Component {
 
 AccountAction.propTypes = {
   history: PropTypes.object.isRequired,
-  account: PropTypes.object,
   openSnack: PropTypes.func,
   clockIn: PropTypes.func,
-  entities: PropTypes.object.isRequired,
+  employees: PropTypes.object.isRequired,
   employee: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   currentEmployee: PropTypes.object.isRequired
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     clockIn: employee => {
@@ -71,17 +68,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     employee: state.employee,
     entities: state.entities,
+    employees: employeeSelectors.getEmployeesFromEntities(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state)
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(AccountAction),
-);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AccountAction));

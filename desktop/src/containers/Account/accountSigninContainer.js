@@ -8,32 +8,34 @@ import { Formik } from 'formik';
 import { account as accountValidation } from 'constants/formValidation';
 import { employeeActions, staticActions } from 'store/actions';
 import AccountSigin from 'components/forms/AccountSigin';
+import { authoritySelectors } from 'store/selectors';
 
-class SignInContainer extends Component {
+export class AccountSignin extends Component {
 
-  componentDidMount = () => {
-    //REMOVE before deploy
-    const { login, history, getStaticData } = this.props;
-    getStaticData();
-    login('565656').then(asdf => {
-      const { authorityId } = asdf.data;  
-      history.push(`/${this.props.authorityEntities[authorityId].type}`);         
-    });    
-  }
+  //componentDidMount = () => {
+  //REMOVE before deploy
+  // const { login, history, getStaticData } = this.props;
+  // getStaticData();
+  // login('565656').then(asdf => {
+  //   const { authorityId } = asdf.data;  
+  //   history.push(`/${this.props.authorities[authorityId].type}`);         
+  // }, () => {
+  //   //rip
+  // });    
+  //}
   render() {
-    const { login, history, getStaticData, authorityEntities } = this.props;
-    console.log(authorityEntities);
+    const { login, history, getStaticData, authorities } = this.props;
     return (
       <Formik
         initialValues={{ pin: '565656' }}
         validationSchema={accountValidation}
         onSubmit={(values,formikFunctions) => {
-          login(values.pin).then(
+          return login(values.pin).then(
             response => {
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });
               const { authorityId } = response.data;
-              history.push(`/${authorityEntities[authorityId].type}`);
+              history.push(`/${authorities[authorityId].type}`);
               getStaticData();
             },
             () => {
@@ -49,17 +51,19 @@ class SignInContainer extends Component {
   }
 }
 
-SignInContainer.propTypes = {
+AccountSignin.propTypes = {
   login: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
-    authorityEntities: state.entities.authorities
+    authorities: authoritySelectors.getAuthoritiesFromEntities(state)
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     login: pin => {
@@ -71,9 +75,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(SignInContainer),
-);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AccountSignin));

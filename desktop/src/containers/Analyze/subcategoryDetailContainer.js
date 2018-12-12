@@ -11,7 +11,7 @@ import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { subcategoryValidation } from 'constants/formValidation';
 
-class EmployeeEditContainer extends Component {
+export class SubcategoryDetail extends Component {
   
   removeSubcategory = () => {
     const { selected, removeSubcategory } = this.props;  
@@ -41,7 +41,7 @@ class EmployeeEditContainer extends Component {
           validationSchema={subcategoryValidation}
           onSubmit={(values, formikFunctions) => {
             const { createSubcategory } = this.props;            
-            createSubcategory({
+            return createSubcategory({
               ...values,
               category: undefined,
               dimension: undefined
@@ -81,8 +81,7 @@ class EmployeeEditContainer extends Component {
           validationSchema={subcategoryValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateSubcategory } = this.props;
-            console.log(values);
-            updateSubcategory({
+            return updateSubcategory({
               ...values,
               category: undefined,
               dimension: undefined
@@ -115,6 +114,7 @@ class EmployeeEditContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     categories: categorySelectors.getAllCategories(state),
@@ -124,6 +124,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createSubcategory: subcategory => {
@@ -138,7 +139,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmployeeEditContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(SubcategoryDetail);

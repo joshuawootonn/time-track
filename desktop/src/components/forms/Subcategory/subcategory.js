@@ -93,7 +93,7 @@ Subcategory.propTypes = {
   errors: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
-  removeSubcategory: PropTypes.func.isRequired
+  removeSubcategory: PropTypes.func
 };
 
 

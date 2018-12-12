@@ -12,13 +12,14 @@ import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 import { taskValidation } from 'constants/formValidation';
 
-class TaskDetailsContainer extends Component {
+export class TaskDetail extends Component {
   removeTask = () => {
     const { selected,removeTask } = this.props;
     removeTask(selected.id);
   }
   render() {
     const { status,categories,subcategories,selected,editCategoriesModal } = this.props;
+    
     if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -26,7 +27,7 @@ class TaskDetailsContainer extends Component {
         </Hero>
       );
     }
-    //console.log('container: ',this.props);
+
     if(status === analyzeStatus.ADDING){
       return (
         <Formik 
@@ -40,8 +41,7 @@ class TaskDetailsContainer extends Component {
           validationSchema={taskValidation}
           onSubmit={(values,formikFunctions) => {
             const { createTask } = this.props;
-            console.log(values);
-            createTask({
+            return createTask({
               name: values.name,
               subcategoryId: values.subcategoryId,
               isActive: values.isActive ? 1 : 0
@@ -49,10 +49,8 @@ class TaskDetailsContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow task created');
               },
               e => {
-                console.log('asdf task create error', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -74,6 +72,7 @@ class TaskDetailsContainer extends Component {
         />
       );
     }
+
     if(status === analyzeStatus.EDITING){
       return (
         <Formik 
@@ -85,7 +84,7 @@ class TaskDetailsContainer extends Component {
           validationSchema={taskValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateTask } = this.props;            
-            updateTask({
+            return updateTask({
               id: values.id,
               name: values.name,
               subcategoryId: values.subcategoryId,
@@ -94,10 +93,8 @@ class TaskDetailsContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow task updated');
               },
               e => {
-                console.log('asdf task update error', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -123,6 +120,7 @@ class TaskDetailsContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     selected: taskSelectors.getSelectedTask(state),
@@ -132,7 +130,7 @@ const mapStateToProps = state => {
   };
 };
 
-
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createTask: task => {
@@ -150,8 +148,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-TaskDetailsContainer.propTypes = {
+TaskDetail.propTypes = {
   status: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskDetailsContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(TaskDetail);

@@ -3,8 +3,8 @@ import { getAnalyzeState } from 'store/Analyze/selectors';
 import { getAllTaskObjects } from 'store/Task/selectors';
 import { getAllProjectObjects,getProjectsFromEntities } from 'store/Project/selectors';
 
-export const getProjectTasksFromEntities = state => state.entities.projectTasks;
-export const getProjectTasksFromResults = state => state.results.projectTasks;
+export const getProjectTasksFromEntities = state => state.entities.project_tasks;
+export const getProjectTasksFromResults = state => state.results.project_tasks;
 
 
 export const getAllProjectTasks = createSelector(  

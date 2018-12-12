@@ -13,14 +13,15 @@ import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
-class ShiftDetailsContainer extends Component {
+export class ShiftDetail extends Component {
   removeShift = () => {
     const { selected, removeShift } = this.props;  
     removeShift(selected.id);
   };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
-   
+    console.log(selected);
+    
     if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -28,6 +29,7 @@ class ShiftDetailsContainer extends Component {
         </Hero>
       );
     }
+
     if(status === analyzeStatus.EDITING){
       return (
         <Formik
@@ -37,8 +39,7 @@ class ShiftDetailsContainer extends Component {
             clockInDate: moment(selected.clockInDate).format('YYYY-MM-DDTHH:mm'),
             clockOutDate: moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm'),
             lunch: selected.lunch,
-            activities: selected.activities.map(activity => {
-              
+            activities: selected.activities.map(activity => {              
               return {
                 ...activity,
                 projectId: activity.projectTask.projectId
@@ -48,7 +49,7 @@ class ShiftDetailsContainer extends Component {
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateShift } = this.props;
-            updateShift(values,values.activities).then(
+            return updateShift(values).then(
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
@@ -90,6 +91,7 @@ class ShiftDetailsContainer extends Component {
         />
       );
     }
+
     if(status === analyzeStatus.ADDING){
       return (
         <Formik
@@ -111,7 +113,7 @@ class ShiftDetailsContainer extends Component {
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
             const { createShift } = this.props;
-            createShift(values,values.activities).then(
+            return createShift(values).then(
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
@@ -157,6 +159,7 @@ class ShiftDetailsContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     selected: shiftSelectors.getSelectedShift(state),    
@@ -167,6 +170,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createShift: (shift,activities) => {
@@ -181,6 +185,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ShiftDetailsContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(ShiftDetail);
 
 

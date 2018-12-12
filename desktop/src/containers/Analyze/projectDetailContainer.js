@@ -12,7 +12,7 @@ import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
 import { projectValidation } from 'constants/formValidation';
 
-class ProjectContainer extends Component {
+export class ProjectDetail extends Component {
 
   removeProject = () => {
     const { selected,removeProject } = this.props;
@@ -20,7 +20,6 @@ class ProjectContainer extends Component {
   }
   render () {
     const { selected,status,categories,subcategories,tasks } = this.props;
-  
     if(status === analyzeStatus.INIT){
       return (
         <Hero fullWidth fullHeight>
@@ -42,8 +41,7 @@ class ProjectContainer extends Component {
           validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
             const { createProject } = this.props;
-            console.log(values);
-            createProject({
+            return createProject({
               name: values.name,
               isActive: values.isActive ? 1 : 0,
               date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
@@ -52,10 +50,8 @@ class ProjectContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow project created');
               },
               e => {
-                console.log('asdf project create error', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -77,6 +73,7 @@ class ProjectContainer extends Component {
         /> 
       );
     }
+
     if(status === analyzeStatus.EDITING){
       return (
         <Formik
@@ -96,8 +93,8 @@ class ProjectContainer extends Component {
           validationSchema={projectValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateProject } = this.props;
-            console.log(values);
-            updateProject({
+          
+            return updateProject({
               id: values.id,
               name: values.name,
               isActive: values.isActive ? 1 : 0,
@@ -107,10 +104,8 @@ class ProjectContainer extends Component {
               () => {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: true });
-                console.log('wow project updated');
               },
               e => {
-                console.log('asdf project update error', e);
                 formikFunctions.setStatus({ success: false });
                 formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: e });
@@ -132,13 +127,11 @@ class ProjectContainer extends Component {
           }} 
         /> 
       );
-    }
-
-    
+    }    
   }
 }
 
-
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     selected: projectTaskSelectors.getSelectedProject(state),
@@ -149,6 +142,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     createProject: project => {
@@ -163,4 +157,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectDetail);

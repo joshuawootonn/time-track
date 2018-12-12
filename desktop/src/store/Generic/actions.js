@@ -7,7 +7,7 @@ export const get = (domain,id) => {
   return dispatch => {    
     dispatch({ type: `get_${domain.singular}_request` });   
     return get.then(
-      response => {
+      response => {        
         const payload = normalize({ [domain.plural]: [response.data] }, schemas[`${domain.singular}Array`]);
         return dispatch({ type: `get_${domain.singular}_success`, payload });  
       },
@@ -23,7 +23,7 @@ export const getAll = domain =>  {
   return dispatch => {
     dispatch({ type: `get_${domain.plural}_request` });   
     return getAll.then(
-      response => {
+      response => {        
         const payload = normalize({ [domain.plural]: response.data }, schemas[`${domain.singular}Array`]);
         return dispatch({ type: `get_${domain.plural}_success`, payload, data: response.data });  
       },

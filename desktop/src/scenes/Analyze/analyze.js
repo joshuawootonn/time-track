@@ -8,9 +8,9 @@ import { ArrowBack } from '@material-ui/icons';
 
 import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
-import TaskDetailsContainer from 'containers/Analyze/taskDetailsContainer';
+import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
-import projectDetailContainer from 'containers/Analyze/projectDetailContainer';
+import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';
 import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
 import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
 import ShiftDetailsContainer from 'containers/Analyze/shiftDetailsContainer';
@@ -68,7 +68,7 @@ export class Analyze extends Component {
             <ProjectIndexContainer />
           </Grid>
           <Grid item xs={8}>
-            <projectDetailContainer />
+            <ProjectDetailContainer />
           </Grid>
         </Grid>}
         {tabValue === 2 && <Grid container>
@@ -77,7 +77,7 @@ export class Analyze extends Component {
             <TaskIndexContainer />
           </Grid>
           <Grid item xs={5}>
-            <TaskDetailsContainer />
+            <TaskDetailContainer />
           </Grid>
         </Grid>}
         {tabValue === 3 && <Grid container>
