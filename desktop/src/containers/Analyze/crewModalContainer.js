@@ -17,7 +17,7 @@ const styles = () => ({
   }
 });
 
-class CrewEditContainer extends Component {  
+export class CrewModal extends Component {  
   render () {
     const { classes } = this.props;
     return ( 
@@ -33,8 +33,8 @@ class CrewEditContainer extends Component {
   }
 }
 
-CrewEditContainer.propTypes = {
+CrewModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CrewEditContainer);
+export default withStyles(styles)(CrewModal);

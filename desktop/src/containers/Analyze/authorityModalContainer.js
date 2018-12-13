@@ -17,7 +17,7 @@ const styles = () => ({
   }
 });
 
-class AuthorityEditContainer extends Component {  
+export class AuthorityModal extends Component {  
   render () {
     const { classes } = this.props;
     return ( 
@@ -33,8 +33,8 @@ class AuthorityEditContainer extends Component {
   }
 }
 
-AuthorityEditContainer.propTypes = {
+AuthorityModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AuthorityEditContainer);
+export default withStyles(styles)(AuthorityModal);

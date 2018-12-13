@@ -19,7 +19,7 @@ const MODAL_COMPONENTS = {
   /* other modals */
 };
 
-export class RootModalContainer extends Component {
+export class ModalRoot extends Component {
   toggleModal = () => {
     this.props.closeModal();
   }
@@ -38,15 +38,15 @@ export class RootModalContainer extends Component {
   }
 }
 
-RootModalContainer.propTypes = {
+ModalRoot.propTypes = {
   closeModal: PropTypes.func,
   modalType: PropTypes.string,
   modalProps: PropTypes.object
 };
 
-const mapStateToProps = state => {
-  /* istanbul ignore next */
+/* istanbul ignore next */
+const mapStateToProps = state => {  
   return state.modal;  
 };
 
-export default connect( mapStateToProps ,modalActions)(RootModalContainer);
+export default connect( mapStateToProps ,modalActions)(ModalRoot);

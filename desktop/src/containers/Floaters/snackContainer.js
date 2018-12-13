@@ -6,7 +6,7 @@ import { Check, Error } from '@material-ui/icons';
 import * as status from 'constants/status';
 import Snack from 'components/floaters/Snack';
 
-class SnackContainer extends Component {
+export class SnackContainer extends Component {
   render() {
     const { message, type, onClose } = this.props;
 

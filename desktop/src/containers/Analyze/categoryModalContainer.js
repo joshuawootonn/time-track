@@ -19,7 +19,7 @@ const styles = () => ({
   }
 });
 
-class CategoryModalContainer extends Component {
+export class CategoryModal extends Component {
   render () {
     const { classes } = this.props;
     return ( 
@@ -41,9 +41,9 @@ class CategoryModalContainer extends Component {
   }
 }
 
-CategoryModalContainer.propTypes = {
+CategoryModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 
-export default withStyles(styles)(CategoryModalContainer);
+export default withStyles(styles)(CategoryModal);

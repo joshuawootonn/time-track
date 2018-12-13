@@ -1,22 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import AuthorityModalHOC, { AuthorityModal } from 'containers/Analyze/authorityModalContainer';
+import CategoryModalHOC, { CategoryModal } from 'containers/Analyze/categoryModalContainer';
 
 const props =  {  
   classes: {}
 };
 
 const setup = overRides => {  
-  return shallow(<AuthorityModal {...props} {...overRides}/>);    
+  return shallow(<CategoryModal {...props} {...overRides}/>);    
 };
 
 const setupHOC = overRides => {  
-  return shallow(<AuthorityModalHOC {...props} {...overRides}/>);    
+  return shallow(<CategoryModalHOC {...props} {...overRides}/>);    
 };
 
 
-describe('Authority Modal Container', () => {  
+describe('Category Modal Container', () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });

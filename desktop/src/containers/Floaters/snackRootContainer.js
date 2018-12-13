@@ -6,7 +6,7 @@ import SnackContainer from 'containers/Floaters/snackContainer';
 
 import { snackActions } from 'store/actions';
 
-export class SnackRootContainer extends Component {
+export class SnackRoot extends Component {
   render() {
     const { snackType, snackMessage } = this.props;
     if (!snackType || !snackMessage) {
@@ -22,13 +22,15 @@ export class SnackRootContainer extends Component {
   }
 }
 
-SnackRootContainer.propTypes = {
+SnackRoot.propTypes = {
   closeSnack: PropTypes.func,
   snackType: PropTypes.string,
   snackMessage: PropTypes.string
 };
 
-export default connect(
-  state => state.snack,
-  snackActions,
-)(SnackRootContainer);
+/* istanbul ignore next */
+const mapStateToProps = state => {  
+  return state.snack;  
+};
+
+export default connect(mapStateToProps,snackActions)(SnackRoot);
