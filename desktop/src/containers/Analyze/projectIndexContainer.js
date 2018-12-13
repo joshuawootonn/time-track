@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { analyzeActions } from 'store/actions';
-import { getAllProjects } from 'store/Project/actions';
+import { analyzeActions, projectActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -11,38 +11,37 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-class ProjectIndexContainer extends Component {
+export class ProjectIndex extends Component {
   componentDidMount = () => {
     this.props.getAllProjects();
   }
+
+  selectLabel = selected =>`${selected.name} selected`;
+
+  select = object => this.props.select(domain.PROJECT,object)
+
+  add = () => this.props.setStatus(domain.PROJECT,analyzeStatus.ADDING)
+
   render () {
-    const { projects,select,setStatus,selected } = this.props;
-    const isLoading = !projects;
-    if (isLoading) {
-      return <Progress variant="circular" fullWidth fullHeight />;
-    }  
+    const { projects,selected } = this.props;
+
+    if (!projects || projects && !projects.length) return <Progress variant="circular" fullWidth fullHeight />;
+
     return (
       <SortSelectTable 
-        selectLabel={selected => {return `${selected.name} selected`;}}
+        selectLabel={this.selectLabel}
         label="Projects"
         tableData={projects}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.PROJECT,object)}
-        add={()=> setStatus(domain.PROJECT,analyzeStatus.ADDING)}
+        select={this.select}
+        add={this.add}
       />
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    projects: projectSelectors.getAllProjects(state),
-    selected: projectTaskSelectors.getSelectedProject(state)
-  };
-};
-
-ProjectIndexContainer.propTypes ={ 
+ProjectIndex.propTypes ={ 
   projects: PropTypes.array,
   getAllProjects: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
@@ -50,7 +49,26 @@ ProjectIndexContainer.propTypes ={
   selected: PropTypes.object
 };
 
-export default connect(mapStateToProps,{ getAllProjects,...analyzeActions })(ProjectIndexContainer);
+/* istanbul ignore next */
+const mapStateToProps = state => {
+  return {
+    projects: projectSelectors.getAllProjects(state),
+    selected: projectTaskSelectors.getSelectedProject(state)
+  };
+};
+
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllProjects: () => {
+      return dispatch(projectActions.getAllProjects());
+    },
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+  };
+};
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
 const rows = [
   {

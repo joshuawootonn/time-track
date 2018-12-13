@@ -13,40 +13,60 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-class ShiftIndexContainer extends Component {
+export class ShiftIndex extends Component {
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
     this.props.getAllEmployees();
     this.props.getAllProjects();
     this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(28, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
+    this.props.getShiftsInRange(moment().subtract(60, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
   }
+
+  selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
+
+  select = object => this.props.select(domain.SHIFT,object)
+
+  add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
+
   render() {
-    const { shifts, select,setStatus, selected } = this.props;
-    const isLoading = !shifts;
-    if (isLoading) {
-      return <Progress variant="circular" fullWidth fullHeight />;
-    }
+    const { shifts, selected } = this.props;
+    
+    if (!shifts || shifts && !shifts.length) return <Progress variant="circular" fullWidth fullHeight />;
+
     return (
       <SortSelectTable
-        selectLabel={selected => { return `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`; }}
+        selectLabel={this.selectLabel}
         label="Shifts"
         tableData={shifts}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.SHIFT,object)}
-        add={() => setStatus(domain.SHIFT,analyzeStatus.ADDING)}
+        select={this.select}
+        add={this.add}
       />
     );
   }
 }
 
+ShiftIndex.propTypes = {
+  shifts: PropTypes.array,
+  getShiftsInRange: PropTypes.func.isRequired,
+  getAllEmployees: PropTypes.func.isRequired,
+  getAllProjects: PropTypes.func.isRequired,
+  getAllTasks: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  selected: PropTypes.object
+};
+
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(28, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
+    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(60, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };
+
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     getAllEmployees: () => {
@@ -60,24 +80,12 @@ const mapDispatchToProps = dispatch => {
     },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
-    },
-    
+    },    
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };
 
-ShiftIndexContainer.propTypes = {
-  shifts: PropTypes.array,
-  getShiftsInRange: PropTypes.func.isRequired,
-  getAllEmployees: PropTypes.func.isRequired,
-  getAllProjects: PropTypes.func.isRequired,
-  getAllTasks: PropTypes.func.isRequired,
-  select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndexContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {

@@ -42,7 +42,7 @@ export const SortSelectToolbar = props => {
 SortSelectToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
-  add: PropTypes.func.isRequired,
+  add: PropTypes.func,
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired
 };

@@ -10,27 +10,43 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-class AuthorityIndexContainer extends Component {
+export class SubcategoryIndex extends Component {
   componentDidMount = () => {
     this.props.getAllSubcategories();
   }
+  
+  selectLabel = selected =>`${selected.type} selected`;
+
+  select = object => this.props.select(domain.SUBCATEGORY,object)
+
+  add = () => this.props.setStatus(domain.SUBCATEGORY,analyzeStatus.ADDING)
+
   render() {
-    const { subcategories, select, selected, setStatus } = this.props;
+    const { subcategories, selected } = this.props;
 
     return (
       <SortSelectTable
-        selectLabel={selected => { return `${selected.type} selected`; }}
+        selectLabel={this.selectLabel}
         label="SubCategories"
         tableData={subcategories}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.SUBCATEGORY,object)}
-        add={() => { setStatus(domain.SUBCATEGORY, analyzeStatus.ADDING); }}
+        select={this.select}
+        add={this.add}
       />
     );
   }
 }
 
+SubcategoryIndex.propTypes = {
+  getAllSubcategories: PropTypes.func.isRequired,
+  subcategories: PropTypes.array.isRequired,
+  select: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired
+};
+
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     subcategories: subcategorySelectors.getAllSubcategories(state),
@@ -38,6 +54,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     getAllSubcategories: () => {
@@ -47,16 +64,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-AuthorityIndexContainer.propTypes = {
-  getAllSubcategories: PropTypes.func.isRequired,
-  subcategories: PropTypes.array.isRequired,
-  select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorityIndexContainer);
-
+export default connect(mapStateToProps, mapDispatchToProps)(SubcategoryIndex);
 
 const rows = [
   {

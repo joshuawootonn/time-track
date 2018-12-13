@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { analyzeActions } from 'store/actions';
-import { getAllEmployees } from 'store/Employee/actions';
+import { analyzeActions,employeeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -11,43 +11,38 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-class EmployeeContainer extends Component {
-  
+export class EmployeeIndex extends Component {
   componentDidMount = () => {
     this.props.getAllEmployees();    
   };
+  
+  selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
+  select = object => this.props.select(domain.EMPLOYEE,object)
+
+  add = () => this.props.setStatus(domain.EMPLOYEE,analyzeStatus.ADDING)
+  
   render() {
-    const { employees, selected, select,setStatus } = this.props;
-    console.log(this.props);
-    const isLoading = !employees;
-    if (isLoading) {
-      return <Progress variant="circular" fullPage />;
-    }
+    const { employees, selected } = this.props;
+
+    // if employees is not defined or empty
+    if (!employees || employees && !employees.length) return <Progress variant="circular" fullPage />;
 
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.firstName} ${selected.lastName} selected`;}}
+        selectLabel={this.selectLabel}
         label="Employees"
         tableData={employees}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.EMPLOYEE,object)}
-        add={() => {setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);}}
+        select={this.select}
+        add={this.add}
       />
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    employees: employeeSelectors.getAllEmployeesWithContents(state),
-    selected: employeeSelectors.getSelectedEmployee(state)
-  };
-};
-
-
-EmployeeContainer.propTypes = {
+EmployeeIndex.propTypes = {
   employees: PropTypes.array.isRequired,
   getAllEmployees: PropTypes.func.isRequired,
   selected: PropTypes.object,
@@ -55,10 +50,25 @@ EmployeeContainer.propTypes = {
   setStatus: PropTypes.func.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { getAllEmployees, ...analyzeActions }
-)(EmployeeContainer);
+/* istanbul ignore next */
+const mapStateToProps = state => {
+  return {
+    employees: employeeSelectors.getAllEmployeesWithContents(state),
+    selected: employeeSelectors.getSelectedEmployee(state)
+  };
+};
+
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllEmployees: () => {
+      return dispatch(employeeActions.getAllEmployees());
+    },
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
 
 const rows = [
   {

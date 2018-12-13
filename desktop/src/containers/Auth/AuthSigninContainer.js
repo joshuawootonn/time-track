@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 
 import { auth as authValidation } from 'constants/formValidation';
-import * as actions from 'store/User/actions';
+import { userActions } from 'store/actions';
 import * as routes from 'constants/routes';
 import * as IPCConstants from 'constants/ipc';
 import AuthSiginForm from 'components/forms/AuthSignin';
@@ -26,34 +26,32 @@ export class AuthSignin extends Component {
   };
   render() {
     return (
-      <div>
-        <Formik
-          initialValues={{ username: 'josh', password: '5656' }}
-          validationSchema={authValidation}
-          onSubmit={(values, formikFunctions) => {
-            const { history,login } = this.props;
-            const { username, password } = values;            
-            return login(username, password)
-              .then(() => {
-                formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
-                ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-                  username,
-                  password
-                }); 
-                history.push(routes.ROOT);
-              })
-              .catch(error => {
-                formikFunctions.setErrors({ submit: error.message });
-                formikFunctions.setStatus({ success: false });
-                formikFunctions.setSubmitting(false);
-              });
-          }}
-          render={formProps => {
-            return ( <AuthSiginForm {...formProps}/> );
-          }}
-        />
-      </div>
+      <Formik
+        initialValues={{ username: 'josh', password: '5656' }}
+        validationSchema={authValidation}
+        onSubmit={(values, formikFunctions) => {
+          const { history,login } = this.props;
+          const { username, password } = values;            
+          return login(username, password)
+            .then(() => {
+              formikFunctions.resetForm();
+              formikFunctions.setStatus({ success: true });
+              ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+                username,
+                password
+              }); 
+              history.push(routes.ROOT);
+            },
+            error => {
+              formikFunctions.setErrors({ submit: error.message });
+              formikFunctions.setStatus({ success: false });
+              formikFunctions.setSubmitting(false);
+            });
+        }}
+        render={formProps => {
+          return ( <AuthSiginForm {...formProps}/> );
+        }}
+      />
     );
   }
 }
@@ -63,8 +61,18 @@ AuthSignin.propTypes = {
   history: PropTypes.object.isRequired
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return { user: userSelectors.getUser(state) };
 };
 
-export default withRouter(connect(mapStateToProps,actions)(AuthSignin));
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (username,password) => {
+      return dispatch(userActions.login(username,password));
+    }
+  };
+};
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AuthSignin));

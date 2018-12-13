@@ -11,6 +11,9 @@ const props =  {
   },
   login: jest.fn()
     .mockImplementationOnce(() => Promise.resolve(asdf))
+    .mockImplementationOnce(() => Promise.resolve(asdf))
+    .mockImplementationOnce(() => Promise.resolve(asdf))    
+    .mockImplementationOnce(() => Promise.resolve(asdf))
     .mockImplementationOnce(() => Promise.reject(new Error())),
 };
 
@@ -37,16 +40,16 @@ describe('Auth Signin Container', () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     
-    expect(props.login).toHaveBeenCalledTimes(0);
+    expect(props.login).toHaveBeenCalledTimes(1);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
     expect(props.history.push).toHaveBeenCalledTimes(0);
     onSubmit(values,formikFunctions).then(() => {      
       expect(formikFunctions.resetForm).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setStatus).toHaveBeenCalledTimes(1);
-      expect(props.login).toHaveBeenCalledTimes(1);        
-      expect(props.login).toHaveBeenCalledWith(values);      
-      expect(props.history.push).toHaveBeenCalledTimes(1);
+      expect(props.login).toHaveBeenCalledTimes(2);        
+      expect(props.login).toHaveBeenCalledWith(values.username,values.password);      
+      expect(props.history.push).toHaveBeenCalledTimes(2);
     });     
   });
   it('should test the onSubmit calls login and onResolve it should setStatus to {success: false} and setSubmitting to false and setErrors to {submit: "Invalid pin!"} ', () => {
@@ -54,18 +57,17 @@ describe('Auth Signin Container', () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     
-    expect(props.login).toHaveBeenCalledTimes(0);
+    expect(props.login).toHaveBeenCalledTimes(1);
     expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setErrors).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
-    expect(props.history.push).toHaveBeenCalledTimes(0);
     onSubmit(values,formikFunctions).then(() => {      
       expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setErrors).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setStatus).toHaveBeenCalledTimes(1);
-      expect(props.login).toHaveBeenCalledTimes(1);        
-      expect(props.login).toHaveBeenCalledWith(values);      
-      expect(props.history.push).toHaveBeenCalledTimes(0);
+      expect(props.login).toHaveBeenCalledTimes(2);        
+      expect(props.login).toHaveBeenCalledWith(values.username,values.password);      
+      expect(props.history.push).toHaveBeenCalledTimes(1);
     });     
   });
 

@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { analyzeActions } from 'store/actions';
-import { getAllAuthorities } from 'store/Authority/actions';
+import { authorityActions,analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
 
-class AuthorityIndexContainer extends Component {
+export class AuthorityIndex extends Component {
   componentDidMount = () => {
     this.props.getAllAuthorities();
   }
-  render () {
-    const { authorities,select,selected } = this.props;
   
+  selectLabel = selected => `${selected.type} selected`
+
+  select = object => this.props.select(domain.AUTHORITY,object)
+
+  render () {
+    const { authorities,selected } = this.props;
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.type} selected`;}}
+        selectLabel={this.selectLabel}
         label="Authorities"
         tableData={authorities}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.AUTHORITY,object)}
+        select={this.select}
       />
     );
   }
 }
 
+AuthorityIndex.propTypes = {
+  getAllAuthorities: PropTypes.func.isRequired,
+  authorities: PropTypes.array.isRequired,
+  select: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired
+};
+
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     authorities: authoritySelectors.getAllAuthorities(state),
@@ -36,16 +48,17 @@ const mapStateToProps = state => {
   };
 };
 
-AuthorityIndexContainer.propTypes = {
-  getAllAuthorities: PropTypes.func.isRequired,
-  authorities: PropTypes.array.isRequired,
-  select: PropTypes.func.isRequired,
-  selected: PropTypes.object.isRequired
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllAuthorities: () => {
+      return dispatch(authorityActions.getAllAuthorities());
+    },
+    ...bindActionCreators({ ...analyzeActions }, dispatch) 
+  };
 };
 
-export default connect(mapStateToProps,
-  { getAllAuthorities, ...analyzeActions })(AuthorityIndexContainer);
-
+export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndex);
 
 const rows = [
   {

@@ -147,7 +147,7 @@ SortSelectTable.propTypes = {
   headerData: PropTypes.array.isRequired,
   selected: PropTypes.object.isRequired,
   select: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired,
+  add: PropTypes.func,
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired
 };

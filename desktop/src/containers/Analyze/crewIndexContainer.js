@@ -1,33 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { analyzeActions } from 'store/actions';
-import { getAllCrews } from 'store/Crew/actions';
+import { analyzeActions,crewActions } from 'store/actions';
 import { crewSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
 
-class CrewIndexContainer extends Component {
+export class CrewIndex extends Component {
   componentDidMount = () => {
     this.props.getAllCrews();
   }
+
+  selectLabel = selected => `${selected.type} selected`
+
+  select = object => this.props.select(domain.CREW,object)
+
   render () {
-    const { crews,select,selected } = this.props; 
+    const { crews,selected } = this.props; 
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.name} selected`;}}
+        selectLabel={this.selectLabel}
         label="Crews"
         tableData={crews}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.CREW,object)}
+        select={this.select}
       />
     );
   }
 }
 
+CrewIndex.propTypes = {
+  getAllCrews: PropTypes.func.isRequired,
+  crews: PropTypes.array.isRequired,
+  select: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired
+};
+
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     crews: crewSelectors.getAllCrews(state),
@@ -35,17 +48,17 @@ const mapStateToProps = state => {
   };
 };
 
-
-CrewIndexContainer.propTypes = {
-  getAllCrews: PropTypes.func.isRequired,
-  crews: PropTypes.array.isRequired,
-  select: PropTypes.func.isRequired,
-  selected: PropTypes.object.isRequired
+/* istanbul ignore next */
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllCrews: () => {
+      return dispatch(crewActions.getAllCrews());
+    },
+    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+  };
 };
 
-export default connect(mapStateToProps,
-  { getAllCrews, ...analyzeActions })(CrewIndexContainer);
-
+export default connect(mapStateToProps,mapDispatchToProps)(CrewIndex);
 
 const rows = [
   {

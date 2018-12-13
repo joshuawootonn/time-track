@@ -10,26 +10,34 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-class CategoryIndexContainer extends Component {
+export class CategoryIndex extends Component {
   componentDidMount = () => {
     this.props.getAllCategories();
   }
+
+  selectLabel = selected => `${selected.type} selected`
+
+  select = object => this.props.select(domain.CATEGORY,object)
+
+  add = () => this.props.setStatus(domain.CATEGORY,analyzeStatus.ADDING)
+  
   render () {
-    const { categories,select,selected,setStatus } = this.props;    
+    const { categories,selected } = this.props;    
     return (
       <SortSelectTable
-        selectLabel={selected => {return `${selected.type} selected`;}}
+        selectLabel={this.selectLabel}
         label="Categories"
         tableData={categories}
         headerData={rows}
         selected={selected}
-        select={object =>select(domain.CATEGORY,object)}        
-        add={() => {setStatus(domain.CATEGORY,analyzeStatus.ADDING);}}
+        select={this.select}        
+        add={this.add}
       />
     );
   }
 }
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     categories: categorySelectors.getAllCategories(state),
@@ -37,6 +45,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     getAllCategories: () => {
@@ -46,7 +55,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-CategoryIndexContainer.propTypes = {
+CategoryIndex.propTypes = {
   getAllCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
@@ -54,8 +63,7 @@ CategoryIndexContainer.propTypes = {
   setStatus:PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndexContainer);
-
+export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndex);
 
 const rows = [
   {
