@@ -11,7 +11,7 @@ import Export from 'components/forms/Export';
 import { exportValidation } from 'constants/formValidation';
 import { exportActions } from 'store/actions';
 
-class ExportContainer extends Component {
+export class ExportContainer extends Component {
   cancel = () => {
     this.props.history.goBack();
   };
@@ -28,7 +28,7 @@ class ExportContainer extends Component {
         onSubmit={values => {
           const { exportToExcel, history } = this.props;
           const { exportCategory, start, fileLocation } = values;
-          exportToExcel(exportCategory, start, fileLocation)
+          return exportToExcel(exportCategory, start, fileLocation)
             .then(() => history.push('/'));
         }}
         validationSchema={exportValidation}
@@ -40,19 +40,13 @@ class ExportContainer extends Component {
   }
 }
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     exportToExcel: (exportCategory, start, fileLocation ) => {
-      return dispatch(
-        exportActions.exportToExcel(exportCategory, start, fileLocation),
-      );
+      return dispatch(exportActions.exportToExcel(exportCategory, start, fileLocation));
     }
   };
 };
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps,
-  )(ExportContainer),
-);
+export default withRouter(connect(null,mapDispatchToProps)(ExportContainer));
