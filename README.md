@@ -1,5 +1,5 @@
 # Time Track
-
+[![Coverage Status](https://coveralls.io/repos/github/joshuawootonn/time-track/badge.svg)](https://coveralls.io/github/joshuawootonn/time-track)
 ### About
 Time Track is a program primarily written for All American Concrete Inc. It is designed to document employee cost.
 	
