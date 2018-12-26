@@ -72,24 +72,22 @@ export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
 const rows = [
   {
-    id: 'name',
-    numeric: false,
+    id: 'name',    
     padding: 'dense',
     label: 'Name',
     type: TableDataTypes.STRING
   }, 
   {
-    id: 'date',
-    numeric: false,
+    id: 'date',    
     padding: 'dense',
     label: 'Date',
     type: TableDataTypes.DATE
   }, 
   {
-    id: 'isActive',
-    numeric: false,
+    id: 'isActive',   
+    align: 'right', 
     padding: 'dense',
     label: 'Active',
-    type: TableDataTypes.STRING
+    type: TableDataTypes.BOOLEAN
   }   
 ];

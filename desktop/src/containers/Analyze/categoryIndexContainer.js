@@ -68,7 +68,6 @@ export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndex);
 const rows = [
   {
     id: 'type',
-    numeric: false,
     padding: 'dense',
     label: 'Type',
     type: TableDataTypes.STRING

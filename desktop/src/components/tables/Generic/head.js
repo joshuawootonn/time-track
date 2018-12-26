@@ -14,7 +14,7 @@ export class GenericHead extends React.Component {
             return (
               <TableCell
                 key={key}
-                numeric={row.numeric}
+                align={row.align}
                 padding={row.padding}
               >               
                 {row.label}                 

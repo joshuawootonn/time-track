@@ -71,23 +71,20 @@ export default connect( mapStateToProps, mapDispatchToProps)(TaskIndex);
 
 const rows = [
   {
-    id: 'name',
-    numeric: false,
+    id: 'name',    
     padding: 'dense',
     label: 'Name',
     type: TableDataTypes.STRING
   }, 
   {
-    id: 'category',
-    numeric: false,
+    id: 'category',    
     padding: 'dense',
     label: 'Category',
     type: TableDataTypes.OBJECT,
     keys: ['type']
   },
   {
-    id: 'subcategory',
-    numeric: false,
+    id: 'subcategory',    
     padding: 'dense',
     label: 'Subcategory',
     type: TableDataTypes.OBJECT,
@@ -95,18 +92,17 @@ const rows = [
   },
  
   {
-    id: 'dimension',
-    numeric: false,
+    id: 'dimension',    
     padding: 'dense',
     label: 'Dimension',
     type: TableDataTypes.OBJECT,
     keys: ['type']
   }, 
   {
-    id: 'isActive',
-    numeric: false,
+    id: 'isActive',   
+    align: 'right', 
     padding: 'dense',
     label: 'Active',
-    type: TableDataTypes.STRING
+    type: TableDataTypes.BOOLEAN
   }
 ];

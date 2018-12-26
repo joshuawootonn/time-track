@@ -89,38 +89,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
-    id: 'employee',
-    numeric: false,
+    id: 'employee',    
     padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.OBJECT,
     keys: ['firstName']
   },
   {
-    id: 'employee',
-    numeric: false,
+    id: 'employee',    
     padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.OBJECT,
     keys: ['lastName']
   },
   {
-    id: 'clockInDate',
-    numeric: false,
+    id: 'clockInDate',    
     padding: 'dense',
     label: 'Clock In',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'clockOutDate',
-    numeric: false,
+    id: 'clockOutDate',    
     padding: 'dense',
     label: 'Clock Out',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'length',
-    numeric: false,
+    id: 'length',    
     padding: 'dense',
     label: 'Length',
     type: TableDataTypes.LENGTH

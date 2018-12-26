@@ -113,7 +113,7 @@ export class SortSelectTable extends React.Component {
                         const { type, id, keys } = ele;
                         
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-                          return <TableCell padding="dense" key={id} numeric >{n[id]}</TableCell>;
+                          return <TableCell padding="dense" key={id} align="right" >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {

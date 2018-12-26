@@ -63,7 +63,6 @@ export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndex);
 const rows = [
   {
     id: 'type',
-    numeric: false,
     padding: 'dense',
     label: 'Type',
     type: TableDataTypes.STRING

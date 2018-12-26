@@ -72,30 +72,26 @@ export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
 
 const rows = [
   {
-    id: 'firstName',
-    numeric: false,
+    id: 'firstName',    
     padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.STRING
   },
   {
-    id: 'lastName',
-    numeric: false,
+    id: 'lastName',    
     padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.STRING
   },
   {
-    id: 'authority',
-    numeric: false,
+    id: 'authority',    
     padding: 'dense',
     label: 'Authority',
     type: TableDataTypes.OBJECT,
     keys: ['type']
   },
   {
-    id: 'crew',
-    numeric: false,
+    id: 'crew',    
     padding: 'dense',
     label: 'Crew',
     type: TableDataTypes.OBJECT,
@@ -103,14 +99,14 @@ const rows = [
   },
   {
     id: 'isEmployed',
-    numeric: true,
+    align: 'right',
     padding: 'dense',
     label: 'Currently Employed',
     type: TableDataTypes.BOOLEAN
   },
   {
     id: 'isWorking',
-    numeric: true,
+    align: 'right',
     padding: 'dense',
     label: 'Currently Working',
     type: TableDataTypes.BOOLEAN

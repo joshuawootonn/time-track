@@ -30,13 +30,13 @@ export class SortSelectHead extends React.Component {
             return (
               <TableCell
                 key={key}
-                numeric={row.numeric}
+                align={row.align}
                 padding={row.padding}
                 sortDirection={orderBy === row.id ? order : false}                
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
+                  placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel
