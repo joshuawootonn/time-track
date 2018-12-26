@@ -20,7 +20,6 @@ export class ShiftDetail extends Component {
   };
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
-    console.log(selected);
     
     if(status === analyzeStatus.INIT){
       return (

@@ -60,11 +60,11 @@ export const removeEmployee = id => {
 };
 
 
-export const toggleIsWorking = employee => {
+export const setIsWorking = (employee,isWorking) => {
   return async dispatch => {
     return dispatch(genericActions.put(domains.EMPLOYEE,{
       ...employee,
-      isWorking: !employee.isWorking
+      isWorking: isWorking
     }));
   };
 };
@@ -80,7 +80,7 @@ export const clockIn = employee => {
         employeeId: employee.id
       };
       await dispatch(genericActions.post(domains.SHIFT,clockInObject));
-      await dispatch(toggleIsWorking(employee));
+      await dispatch(setIsWorking(employee,true));
       dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in success!'));
       return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_SUCCESS });
     } catch (e) {
@@ -112,7 +112,7 @@ export const clockOut = (employee, shift, activities, lunch) => {
       });
 
       await dispatch(genericActions.put(domains.SHIFT,clockOutObject));
-      await dispatch(toggleIsWorking(employee));
+      await dispatch(setIsWorking(employee,false));
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
     } catch (e) {

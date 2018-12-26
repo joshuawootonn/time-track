@@ -37,6 +37,8 @@
     "start": " nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "coverage": "react-scripts test --env=jsdom --coverage",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls", 
     "eject": "react-scripts eject",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
@@ -58,6 +60,7 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
     "babel-eslint": "^8.2.5",
+    "coveralls": "^3.0.2",
     "electron": "^2.0.3",
     "electron-builder": "^20.16.0",
     "electron-devtools-installer": "^2.2.4",

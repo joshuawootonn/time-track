@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import { shiftActionTypes } from 'constants/actionTypeConstants';
 
-import { snackActions,analyzeActions,genericActions } from 'store/actions';
+import { snackActions,analyzeActions,genericActions,employeeActions } from 'store/actions';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
 import * as status from 'constants/status';
@@ -113,10 +113,16 @@ export const updateShift = shift => {
 
 
 export const removeShift = id => {
-  return async dispatch => {
+  return async (dispatch,getState) => {
     dispatch({ type: shiftActionTypes.REMOVE_SHIFT_REQUEST });
     try {
       await dispatch(analyzeActions.deleteSelected(domains.SHIFT));
+      const shift = getState().entities.shifts[id];
+      // This clocks the employee out if you are deleting a shift in progress
+      if(shift && !shift.clockOutDate){
+        const employee = getState().entities.employees[shift.employeeId];
+        dispatch(employeeActions.setIsWorking(employee,false));
+      }
       await endpoint.deleteRelatedActivities(id);
       await dispatch(genericActions.delet(domains.SHIFT,id));
 

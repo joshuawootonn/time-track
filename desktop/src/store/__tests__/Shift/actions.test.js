@@ -132,7 +132,9 @@ describe('User Actions', () => {
       'remove_shift_success'       
     ];   
     mock.onAny().reply(200,[]);
-    await compareActionTypes(expectedActionTypes,store,shiftActions.removeShift(1));
+    const dispatch = jest.fn();
+    const getState = jest.fn();
+    await compareActionTypes(expectedActionTypes,store,shiftActions.removeShift(1)(dispatch,getState));
   });
   test('removeShift should dispatch 2 actions on Failure', async () => {
     const expectedActionTypes = [

@@ -97,14 +97,14 @@ describe('Employee Actions', () => {
     await compareActionTypes(expectedActionTypes,store,employeeActions.removeEmployee(1));
   });
   // TOGGLE IS WORKING
-  test('dispatch 4 actions for toggleIsWorking',async () => {
+  test('dispatch 4 actions for setIsWorking',async () => {
     const expectedActionTypes = [      
       'put_employee_request',
       'put_employee_success'
     ];
     
     mock.onPut(/employees/).reply(200, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.toggleIsWorking({ id: 1 }));
+    await compareActionTypes(expectedActionTypes,store,employeeActions.setIsWorking({ id: 1 },false));
   });  
   // CLOCK IN 
   test('dispatch 7 actions for clockIn on success',async () => {
