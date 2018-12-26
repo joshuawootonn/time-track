@@ -31,13 +31,13 @@ describe('Export Container', () => {
     expect(props.history.goBack).toHaveBeenCalledTimes(0);
     instance.cancel();
     expect(props.history.goBack).toHaveBeenCalledTimes(1);
-  })
+  });
   it('should call props.exportToExcel for the Formik onSubmit', () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     expect(props.exportToExcel).toHaveBeenCalledTimes(0);    
     expect(props.history.goBack).toHaveBeenCalledTimes(0);
-    const values = {}
+    const values = {};
     onSubmit(values,formikFunctions).then(() => {      
       expect(props.exportToExcel).toHaveBeenCalledTimes(1); 
       expect(props.history.goBack).toHaveBeenCalledTimes(1);    

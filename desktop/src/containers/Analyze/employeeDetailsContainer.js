@@ -51,7 +51,7 @@ export class EmployeeDetail extends Component {
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true })
+                formikFunctions.setStatus({ success: true });
               },
               e => {
                 formikFunctions.setStatus({ success: false });

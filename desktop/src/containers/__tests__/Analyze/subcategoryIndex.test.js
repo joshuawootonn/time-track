@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import { SubcategoryIndex } from 'containers/Analyze/subcategoryIndexContainer';
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
-import Progress from 'components/helpers/Progress';
 
 
 const props =  {  

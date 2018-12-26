@@ -70,7 +70,7 @@ const mapDispatchToProps = dispatch => {
     updateCrew: values => {
       return dispatch(crewActions.updateCrew(values));
     }
-  }  
+  };  
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CrewDetail);

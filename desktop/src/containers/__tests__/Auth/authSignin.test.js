@@ -14,7 +14,7 @@ const props =  {
     .mockImplementationOnce(() => Promise.resolve(asdf))
     .mockImplementationOnce(() => Promise.resolve(asdf))    
     .mockImplementationOnce(() => Promise.resolve(asdf))
-    .mockImplementationOnce(() => Promise.reject(new Error())),
+    .mockImplementationOnce(() => Promise.reject(new Error()))
 };
 
 const formikFunctions = {

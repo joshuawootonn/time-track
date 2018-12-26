@@ -127,14 +127,26 @@ describe('User Actions', () => {
       'remove_shift_request',
       'delete_shift_request',
       'delete_shift_success',
+      'put_employee_request',
+      'put_employee_success',
       'delete_selected',
       'show_snack',
       'remove_shift_success'       
     ];   
+    let testSpecificStore = mockStore({
+      entities: {
+        employees: {
+          1: {}
+        },
+        shifts: {
+          1: {
+            employeeId: 1
+          }
+        }
+      }
+    });
     mock.onAny().reply(200,[]);
-    const dispatch = jest.fn();
-    const getState = jest.fn();
-    await compareActionTypes(expectedActionTypes,store,shiftActions.removeShift(1)(dispatch,getState));
+    await compareActionTypes(expectedActionTypes,testSpecificStore,shiftActions.removeShift(1));
   });
   test('removeShift should dispatch 2 actions on Failure', async () => {
     const expectedActionTypes = [

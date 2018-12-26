@@ -8,6 +8,7 @@ export const compareActionTypes = (
   action
 ) => {
   expect.assertions(1);
+  
   return store.dispatch(action)
     .then(() => {
       const dispatchedActionTypes = store.getActions().map(action => action.type);

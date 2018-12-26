@@ -14,7 +14,6 @@ global.window = {
 };
 
 const originalConsoleError = console.error;
-const originalConsoleWarn = console.warn;
 
 console.error = message => {
   if (/(Failed prop type)/.test(message)) {
@@ -38,9 +37,9 @@ global.window.require = function () {
       },
       sendSync: function(key,val) {
         if(key === IPCConstants.GET_CRED){
-          return { username: 'josh', password: '5656' }
+          return { username: 'josh', password: '5656' };
         }
       }
     }
-  }
+  };
 };

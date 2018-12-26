@@ -72,7 +72,7 @@ const mapDispatchToProps = dispatch => {
     updateAuthority:  values => {
       return dispatch(authorityActions.updateAuthority(values));
     }
-  }
+  };
 };
 
 

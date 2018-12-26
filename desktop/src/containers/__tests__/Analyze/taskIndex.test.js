@@ -36,7 +36,7 @@ describe('Task Index Container', () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     const value = instance.selectLabel(props.selected);
-    expect(value).toEqual('7\" Sidewalk selected');
+    expect(value).toEqual('7" Sidewalk selected');
   });
   it('should call props.select on this.select', () => {
     const wrapper = setup();
