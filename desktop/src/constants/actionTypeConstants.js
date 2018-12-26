@@ -8,7 +8,8 @@ const activityActionTypes = {
 const analyzeActionTypes = { 
   SELECT: 'select_domain',
   SET_STATUS: 'set_domain_status',
-  DELETE_SELECTED: 'delete_selected'
+  DELETE_SELECTED: 'delete_selected',
+  EDIT_SETTINGS_MODAL: 'edit_settings_modal'
 }; 
 
 const authorityActionTypes = {

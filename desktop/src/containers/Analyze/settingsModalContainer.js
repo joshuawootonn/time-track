@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
+import { Typography,List,ListItem,ListItemText } from '@material-ui/core';
 
 import CategoryIndexContainer from 'containers/Analyze/categoryIndexContainer';
 import CategoryDetailContainer from 'containers/Analyze/categoryDetailContainer';
@@ -22,11 +23,33 @@ const styles = () => ({
   }
 });
 
-export class CategoryModal extends Component {
+const settings =['Authority','Crew','Category','Subcategory'];
+
+export class SettingsModal extends Component {
+  state = {
+    currentMenu: 0
+  }
+  menuSelect = num => () => {
+    this.setState({
+      currentMenu: num
+    });
+  }
   render () {
     const { classes } = this.props;
     return ( 
-      <div className={classes.root}>     
+      <div>    
+        <Typography variant="h3">Settings</Typography>
+        <div className={classes.root}>
+          <List>
+            {settings.map((setting,i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemText onClick={this.menuSelect(i)} primary={setting}/>
+                </ListItem>
+              );
+            })}
+          </List>
+        </div> 
         <div className={classes.index}>
           <CategoryIndexContainer />
         </div>
@@ -44,9 +67,9 @@ export class CategoryModal extends Component {
   }
 }
 
-CategoryModal.propTypes = {
+SettingsModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 
-export default withStyles(styles)(CategoryModal);
+export default withStyles(styles)(SettingsModal);

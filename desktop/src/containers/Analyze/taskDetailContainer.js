@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
-import { taskActions, categoryActions } from 'store/actions';
+import { taskActions, analyzeActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 import { taskValidation } from 'constants/formValidation';
@@ -143,7 +143,7 @@ const mapDispatchToProps = dispatch => {
       return dispatch(taskActions.removeTask(id));
     },    
     editCategoriesModal: () => {
-      return dispatch(categoryActions.editCategoriesModal());
+      return dispatch(analyzeActions.editSettingsModal());
     }
   };
 };

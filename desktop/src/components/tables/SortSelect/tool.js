@@ -18,7 +18,7 @@ export const SortSelectToolbar = props => {
     >
       <div className={classes.title}>
         {Object.keys(selected).length !== 0 ? (
-          <Typography color="inherit" variant="h6">
+          <Typography color="inherit" variant="h6" >
             {selectLabel(selected)}
           </Typography>
         ) : (
