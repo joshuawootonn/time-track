@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CategoryIndexContainer from 'containers/Analyze/categoryIndexContainer';
 import CategoryDetailContainer from 'containers/Analyze/categoryDetailContainer';
-import SubcategoryIndexContainer from 'containers/Analyze/subcategoryIndexContainer';
-import SubcategoryDetailContainer from 'containers/Analyze/subcategoryDetailContainer';
+// import SubcategoryIndexContainer from 'containers/Analyze/subcategoryIndexContainer';
+// import SubcategoryDetailContainer from 'containers/Analyze/subcategoryDetailContainer';
 
 const styles = () => ({
   root: {
