@@ -2,16 +2,17 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
-    width: '100%'    
-  },
-  // table: {
-  //   minWidth: 400
-  // },
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    height: '100%'
+  },  
   tableWrapper: {
     overflowX: 'auto'
   },
   toolbarRoot: {
-    paddingRight: theme.spacing.unit
+    paddingRight: theme.spacing.unit,
+    flexShrink: '0'
   },
   highlight:
     theme.palette.type === 'light'

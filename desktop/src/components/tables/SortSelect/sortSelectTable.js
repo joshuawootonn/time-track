@@ -76,7 +76,7 @@ export class SortSelectTable extends React.Component {
     const { classes, tableData, headerData,selected,add,label,selectLabel } = this.props;
     const { order, orderBy,type,keys } = this.state;
     return (
-      <div >
+      <div className={classes.root} >
         <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">

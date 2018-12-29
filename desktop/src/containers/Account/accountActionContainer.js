@@ -10,8 +10,8 @@ import AccountActionForm from 'components/forms/AccountAction';
 
 export class AccountAction extends Component {
   componentDidMount = () => {
-    // REMOVE before deploy
-    // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    //REMOVE before deploy
+    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   }
   back = () => {
     this.props.history.push('/');
