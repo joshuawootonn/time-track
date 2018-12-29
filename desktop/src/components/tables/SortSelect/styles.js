@@ -33,6 +33,11 @@ const styles = theme => ({
   title: {
     flex: '0 0 auto',
     textOverflow: 'ellipsis'
+  },
+  headerCell: {
+    background: 'white',
+    position: 'sticky',
+    top: 0
   }
 });
 

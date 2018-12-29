@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
 import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core';
 
+import styles from './styles';
 import * as TableDataTypes from 'constants/tableDataTypes';
 
 export class SortSelectHead extends React.Component {
@@ -11,13 +13,13 @@ export class SortSelectHead extends React.Component {
   };
 
   render() {
-    const {  order, orderBy, headerData,keys,type } = this.props;
+    const {  order, orderBy, headerData,keys,type, classes } = this.props;
     
     return (
       <TableHead>
         <TableRow>
-          <TableCell>
-            
+          <TableCell className={classes.headerCell}>
+            <div></div>
           </TableCell>
           {headerData.map(row => {
             let sortedColumn;
@@ -29,6 +31,7 @@ export class SortSelectHead extends React.Component {
             const key = row.keys ? row.id + row.keys.join('') : row.id;
             return (
               <TableCell
+                className={classes.headerCell}
                 key={key}
                 align={row.align}
                 padding={row.padding}
@@ -57,6 +60,7 @@ export class SortSelectHead extends React.Component {
 }
 
 SortSelectHead.propTypes = {
+  classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
@@ -67,4 +71,4 @@ SortSelectHead.propTypes = {
   type: PropTypes.string
 };
 
-export default SortSelectHead;
+export default withStyles(styles)(SortSelectHead);
