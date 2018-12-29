@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 
 import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
-import { taskActions, analyzeActions } from 'store/actions';
+import { taskActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 import { taskValidation } from 'constants/formValidation';
@@ -18,7 +18,7 @@ export class TaskDetail extends Component {
     removeTask(selected.id);
   }
   render() {
-    const { status,categories,subcategories,selected,editCategoriesModal } = this.props;
+    const { status,categories,subcategories,selected } = this.props;
     
     if(status === analyzeStatus.INIT){
       return (
@@ -64,7 +64,6 @@ export class TaskDetail extends Component {
                 subcategories={subcategories}
                 label="Add"
                 type="add"
-                editCategories={editCategoriesModal}
                 {...formikProps}
               />
             );
@@ -109,7 +108,6 @@ export class TaskDetail extends Component {
                 subcategories={subcategories}                
                 label="Edit"
                 type="edit"
-                editCategories={editCategoriesModal}
                 {...formikProps}
               />
             );
@@ -141,10 +139,7 @@ const mapDispatchToProps = dispatch => {
     },
     removeTask: id => {
       return dispatch(taskActions.removeTask(id));
-    },    
-    editCategoriesModal: () => {
-      return dispatch(analyzeActions.editSettingsModal());
-    }
+    }  
   };
 };
 

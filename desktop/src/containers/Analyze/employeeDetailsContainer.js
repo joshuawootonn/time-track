@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 
 import Employee from 'components/forms/Employee';
 import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
-import { employeeActions,authorityActions, crewActions } from 'store/actions';
+import { employeeActions } from 'store/actions';
 import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { employeeValidation } from 'constants/formValidation';
@@ -18,7 +18,7 @@ export class EmployeeDetail extends Component {
   };
 
   render() {
-    const { authorities, crews, selected,status,editAuthoritiesModal,editCrewsModal } = this.props;
+    const { authorities, crews, selected,status } = this.props;
 
     if(status === analyzeStatus.INIT){
       return (
@@ -67,8 +67,6 @@ export class EmployeeDetail extends Component {
                 crews={crews}
                 label="Add"
                 type="add"
-                editAuthorities={editAuthoritiesModal}
-                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );
@@ -113,8 +111,6 @@ export class EmployeeDetail extends Component {
                 crews={crews}
                 label="Edit"
                 type="edit"
-                editAuthorities={editAuthoritiesModal}
-                editCrews={editCrewsModal}
                 {...formikProps}
               />
             );
@@ -146,12 +142,6 @@ const mapDispatchToProps = dispatch => {
     },
     removeEmployee: id => {
       return dispatch(employeeActions.removeEmployee(id));
-    },
-    editAuthoritiesModal: () => {
-      return dispatch(authorityActions.editAuthoritiesModal());
-    },
-    editCrewsModal: () => {
-      return dispatch(crewActions.editCrewsModal());
     }
   };
 };
