@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import cx from 'classnames';
 import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings } from '@material-ui/icons';
@@ -21,14 +22,18 @@ const styles = {
   root: {
     height: '100vh'
   },
-  gridContainer: {
-    height: 'calc(100% - 48px)'
+  tab: {
+    height: 'calc(100% - 48px)',
+    display: 'none'
   },
   grow: {
     flexGrow: 1
   },
   tool: {
     minHeight: 0
+  },
+  visible: {
+    display: 'flex'
   }
 };
 
@@ -36,11 +41,7 @@ export class Analyze extends Component {
 
   state = {
     tabValue: 0
-  }
-
-  componentDidMount = () => {
-    this.props.openSettings();
-  }
+  }  
 
   handleTabValueChange = (e, tabValue) => {
     this.setState({ tabValue });
@@ -70,41 +71,39 @@ export class Analyze extends Component {
             <IconButton color="inherit" onClick={this.openSettings}><Settings /></IconButton>
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
-
         </AppBar>
-        {tabValue === 0 && <Grid container className={classes.gridContainer} >
+        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 0 })} >
           <Grid item xs={7}>
             <EmployeeIndexContainer />
           </Grid>
           <Grid item xs={5}>
             <EmployeeDetailsContainer />
           </Grid>
-        </Grid>}
-        {tabValue === 1 && <Grid container className={classes.gridContainer} >
+        </Grid>
+        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 1 })} >
           <Grid item xs={4}>
             <ProjectIndexContainer />
           </Grid>
           <Grid item xs={8}>
             <ProjectDetailContainer />
           </Grid>
-        </Grid>}
-        {tabValue === 2 && <Grid container className={classes.gridContainer} >
-          
+        </Grid>
+        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 2 })} >          
           <Grid item xs={7}>
             <TaskIndexContainer />
           </Grid>
           <Grid item xs={5}>
             <TaskDetailContainer />
           </Grid>
-        </Grid>}
-        {tabValue === 3 && <Grid container className={classes.gridContainer} >
+        </Grid> 
+        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 3 })} >
           <Grid item xs={6}>
             <ShiftIndexContainer />
           </Grid>
           <Grid item xs={6}>
             <ShiftDetailsContainer /> 
           </Grid>
-        </Grid>}
+        </Grid>
       </div>
     );
   }

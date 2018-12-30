@@ -26,7 +26,7 @@ export class TaskIndex extends Component {
     const { tasks, selected } = this.props;
     
     if (!tasks || tasks && !tasks.length) return <Progress variant="circular" fullWidth fullHeight />;
-    
+    console.log(tasks);
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}

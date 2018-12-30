@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, List, ListItem, ListItemText, Grid, Collapse, ListItemIcon } from '@material-ui/core';
 import { Category, Apps, Person, Group  } from '@material-ui/icons';
@@ -28,8 +29,12 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  gridContainer: {
+  container: {
     height: '100%'
+  },
+  tab: {
+    height: '100%',
+    display: 'none'
   },
   index: {
     minWidth: '260px'
@@ -39,6 +44,9 @@ const styles = theme => ({
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4
+  },
+  visible: {
+    display: 'flex'
   }
 });
 
@@ -64,19 +72,16 @@ export class SettingsModal extends Component {
     this.setState({
       currentMenu: num
     });
-    console.log(num);
   }
   render() {
     const { classes, open, toggleModal } = this.props;
     const { currentMenu } = this.state;
     return (
-      <Modal className={classes.modal} open={open} toggle={toggleModal}>
-        
-        <Grid container className={classes.gridContainer}  spacing={8}>
+      <Modal className={classes.modal} open={open} toggle={toggleModal}>        
+        <Grid container className={classes.container}  spacing={8}>
           <Grid item xs={2}>
             <Typography variant="h4">Settings</Typography>
-            <div className={classes.listWrapper}>            
-                
+            <div className={classes.listWrapper}>       
               <List >
                 {settings.map((setting, i) => {
                   return (
@@ -90,56 +95,41 @@ export class SettingsModal extends Component {
                 })}
               </List>        
             </div>
+          </Grid> 
+          <Grid item xs={10}>
+            <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 0 })} spacing={0}>
+              <Grid item xs={4}>
+                <AuthorityIndexContainer />
+              </Grid>
+              <Grid item xs={8}>
+                <AuthorityDetailContainer />
+              </Grid>
+            </Grid>
+            <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 1 })} spacing={0}>
+              <Grid item xs={4}>
+                <CrewIndexContainer />
+              </Grid>
+              <Grid item xs={8}>
+                <CrewDetailContainer />
+              </Grid>
+            </Grid>
+            <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 2 })} spacing={0}>
+              <Grid item xs={5}>
+                <CategoryIndexContainer />
+              </Grid>
+              <Grid item xs={7}>
+                <CategoryDetailContainer />
+              </Grid>
+            </Grid>
+            <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 3 })} spacing={0}>
+              <Grid item xs={5}>
+                <SubcategoryIndexContainer />
+              </Grid>
+              <Grid item xs={7}>
+                <SubcategoryDetailContainer />
+              </Grid>
+            </Grid>          
           </Grid>
-          
-          {currentMenu === 0 && 
-            <Grid item xs={10}>
-              <Grid container className={classes.gridContainer}  spacing={0}>
-                <Grid item xs={4}>
-                  <AuthorityIndexContainer />
-                </Grid>
-                <Grid item xs={8}>
-                  <AuthorityDetailContainer />
-                </Grid>
-              </Grid>          
-            </Grid>}
-
-          {currentMenu === 1 && 
-            <Grid item xs={10}>
-              <Grid container className={classes.gridContainer}  spacing={0}>
-                <Grid item xs={4}>
-                  <CrewIndexContainer />
-                </Grid>
-                <Grid item xs={8}>
-                  <CrewDetailContainer />
-                </Grid>
-              </Grid>          
-            </Grid>}
-
-          {currentMenu === 2 &&
-            <Grid item xs={10}>
-              <Grid container className={classes.gridContainer}  spacing={0}>
-                <Grid item xs={5}>
-                  <CategoryIndexContainer />
-                </Grid>
-                <Grid item xs={7}>
-                  <CategoryDetailContainer />
-                </Grid>
-              </Grid>          
-            </Grid>}
-           
-          {currentMenu === 3 && 
-            <Grid item xs={10}>
-              <Grid container className={classes.gridContainer}  spacing={0}>
-                <Grid item xs={5}>
-                  <SubcategoryIndexContainer />
-                </Grid>
-                <Grid item xs={7}>
-                  <SubcategoryDetailContainer />
-                </Grid>
-              </Grid>          
-            </Grid>}
-                  
         </Grid>         
       </Modal>
     );
