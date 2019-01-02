@@ -18,10 +18,7 @@ const ipcRenderer = electron.ipcRenderer;
 export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
-    try {
-
-      //console.log(exportCategory,new moment(start).format('YYYY-MM-DD HH:mm:ss'),new moment(end).toString(),fileLocation);
-
+    try {     
       const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
       const endMoment = new moment(start).add(7,'days').format('YYYY-MM-DD HH:mm:ss');
 
@@ -32,12 +29,8 @@ export const exportToExcel = (exportCategory, start, fileLocation) => {
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
     } catch (e) {
-      console.log(e);
       dispatch(snackActions.openSnack(status.FAILURE, 'Export failed!'));
-      return dispatch({
-        type: exportActionTypes.EXPORT_EXCEL_FAILURE,
-        payload: e
-      });
+      return dispatch({ type: exportActionTypes.EXPORT_EXCEL_FAILURE, payload: e });
     }
   };
 };

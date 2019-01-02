@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography, List, ListItem, ListItemText, Grid, Collapse, ListItemIcon } from '@material-ui/core';
+import { Typography, List, ListItem, ListItemText, Grid, ListItemIcon } from '@material-ui/core';
 import { Category, Apps, Person, Group  } from '@material-ui/icons';
 import Modal from 'components/floaters/Modal';
 
@@ -17,6 +17,7 @@ import SubcategoryIndexContainer from 'containers/Analyze/subcategoryIndexContai
 import SubcategoryDetailContainer from 'containers/Analyze/subcategoryDetailContainer';
 
 
+/* istanbul ignore next */
 const styles = theme => ({
   modal: {
     width: '90%',
@@ -64,7 +65,7 @@ const settings = [{
   icon: Apps
 }];
 
-export class SettingsModal extends Component {
+export class Settings extends Component {
   state = {
     currentMenu: 0    
   }
@@ -136,11 +137,11 @@ export class SettingsModal extends Component {
   }
 }
 
-SettingsModal.propTypes = {
+Settings.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired
 };
 
 
-export default withStyles(styles)(SettingsModal);
+export default withStyles(styles)(Settings);

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Formik } from 'formik';
 
-import ClockOut from 'components/forms/ClockOut';
+import ClockOutForm from 'components/forms/ClockOut';
 import Progress from 'components/helpers/Progress';
 
 import { clockout as clockoutValidation } from 'constants/formValidation';
@@ -15,7 +15,7 @@ import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
 import { currentRoundedTime } from 'helpers/time';
 
-class ClockOutContainer extends Component {
+export class ClockOut extends Component {
   constructor(props) {
     super(props);
     this.state = { activities: [] };
@@ -65,7 +65,7 @@ class ClockOutContainer extends Component {
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history, clockOut } = this.props;
-          clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
+          return clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
             history.push('/'),
           );
         }}
@@ -88,7 +88,7 @@ class ClockOutContainer extends Component {
         
 
           return (
-            <ClockOut
+            <ClockOutForm
               cancel={this.cancel}
               shift={clockOutObject}
               projects={projects}
@@ -104,10 +104,11 @@ class ClockOutContainer extends Component {
   }
 }
 
-ClockOutContainer.propTypes = {
+ClockOut.propTypes = {
   currentEmployee: PropTypes.object.isRequired
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
@@ -117,6 +118,7 @@ const mapStateToProps = state => {
   };
 };
 
+/* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
     getCurrentShift: employeeId => {
@@ -128,11 +130,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(ClockOutContainer),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ClockOut));
 
 

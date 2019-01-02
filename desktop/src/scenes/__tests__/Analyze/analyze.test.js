@@ -1,34 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import AnalyzeHOC,{ Analyze } from 'scenes/Analyze/analyze';
+import { Analyze } from 'scenes/Analyze/analyze';
 
 const props =  {
   classes: {},
   history: {
     goBack: jest.fn()
-  }
+  },
+  openSettings: jest.fn()
 };
 
 const setup = overRides => {  
   return shallow(<Analyze {...props} {...overRides}/>);
 };
 
-const setupHOC = overRides => {
-  return shallow(<AnalyzeHOC {...props} {...overRides} />);
-};
+
 
 describe('Analyze Scene', () => {  
   it('should render correctly', () => {
     setup();        
-  });
-  it('should render correctly withStyles', () => {
-    setupHOC();    
-  });
+  });  
   it('should display different containers based on state.tabValue', () =>{
     const wrapper = setup();
     const instance = wrapper.instance();
-    expect(wrapper.state().tabValue).toEqual(1);
+    expect(wrapper.state().tabValue).toEqual(0);
     instance.handleTabValueChange(null,2);
     expect(wrapper.state().tabValue).toEqual(2);
     instance.handleTabValueChange(null,0);

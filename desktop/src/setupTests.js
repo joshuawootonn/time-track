@@ -38,6 +38,8 @@ global.window.require = function () {
       sendSync: function(key,val) {
         if(key === IPCConstants.GET_CRED){
           return { username: 'josh', password: '5656' };
+        }else if (key === IPCConstants.CREATE_EXPORT){
+          return {};
         }
       }
     }

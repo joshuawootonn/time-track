@@ -51,10 +51,6 @@ export class Analyze extends Component {
     this.props.history.goBack();
   }
 
-  openSettings = () => {
-    this.props.openSettings();
-  }
-
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
@@ -68,7 +64,7 @@ export class Analyze extends Component {
               <Tab label="Tasks" />
               <Tab label="Shifts" />
             </Tabs>
-            <IconButton color="inherit" onClick={this.openSettings}><Settings /></IconButton>
+            <IconButton color="inherit" onClick={this.props.openSettings}><Settings /></IconButton>
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
         </AppBar>
