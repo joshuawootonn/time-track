@@ -84,6 +84,7 @@ app.on('activate', function() {
 
 ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   settings.set(`${SETTINGS.USER_CRED}`, {
+    ip: arg.ip,
     username: arg.username,
     password: arg.password
   });
@@ -92,6 +93,7 @@ ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
 
 ipcMain.on(IPCConstants.GET_CRED, event => {
   const cred = {
+    ip: settings.get(`${SETTINGS.USER_CRED}.ip`),
     username: settings.get(`${SETTINGS.USER_CRED}.username`),
     password: settings.get(`${SETTINGS.USER_CRED}.password`)
   };

@@ -1,10 +1,8 @@
-import { HOST } from 'constants/network';
-
 import axios from 'axios';
 const DOMAIN = 'users';
 
-export const login = (username, password) => {
-  return axios.post(`${HOST}/${DOMAIN}/login/`, {
+export const login = (ip, username, password) => {
+  return axios.post(`${ip}/api/${DOMAIN}/login/`, {
     username,
     password
   });

@@ -65,7 +65,7 @@ describe('User Actions', () => {
       'create_shift_success',
       'post_shift_success'     
     ];   
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     mock.onAny().reply(200,[]);
     await compareActionTypes(expectedActionTypes,store,shiftActions.createShift({
       clockInDate: currentMoment,
@@ -99,7 +99,7 @@ describe('User Actions', () => {
       'update_shift_success',
       'put_shift_success'     
     ];   
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     mock.onAny().reply(200,[]);
     await compareActionTypes(expectedActionTypes,store,shiftActions.updateShift({
       clockInDate: currentMoment,

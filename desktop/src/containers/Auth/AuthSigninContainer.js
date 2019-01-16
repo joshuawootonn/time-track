@@ -18,8 +18,8 @@ const ipcRenderer = electron.ipcRenderer;
 export class AuthSignin extends Component {
   componentDidMount = () => {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-    if (cred.username && cred.password) {
-      this.props.login(cred.username, cred.password).then(() => {
+    if (cred.ip && cred.username && cred.password) {
+      this.props.login(cred.ip, cred.username, cred.password).then(() => {
         this.props.history.push('/');
       });
     }
@@ -27,16 +27,18 @@ export class AuthSignin extends Component {
   render() {
     return (
       <Formik
-        initialValues={{ username: 'josh', password: '5656' }}
+        initialValues={{ ip: '', username: '', password: '' }}
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;
-          const { username, password } = values;            
-          return login(username, password)
+          const { ip, username, password } = values;
+                      
+          return login(ip, username, password)
             .then(() => {
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });
               ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+                ip,
                 username,
                 password
               }); 
@@ -69,8 +71,8 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    login: (username,password) => {
-      return dispatch(userActions.login(username,password));
+    login: (ip,username,password) => {
+      return dispatch(userActions.login(ip,username,password));
     }
   };
 };

@@ -19,8 +19,8 @@ export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {     
-      const startMoment = new moment(start).format('YYYY-MM-DD HH:mm:ss');
-      const endMoment = new moment(start).add(7,'days').format('YYYY-MM-DD HH:mm:ss');
+      const startMoment = new moment(start).format('MM-DD-YY HH:mm:ss');
+      const endMoment = new moment(start).add(7,'days').format('MM-DD-YY HH:mm:ss');
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
@@ -40,7 +40,7 @@ export const getData = (startTime, endTime) => {
   return async dispatch => {
     try {
       await Promise.all([
-        dispatch(employeeActions.getEmployees()), dispatch(projectActions.getProjects()), dispatch(projectTaskActions.getProjectTask()), dispatch(taskActions.getTasks()), dispatch(shiftActions.getShiftsInRange(startTime, endTime))
+        dispatch(employeeActions.getAllEmployees()), dispatch(projectActions.getAllProjects()), dispatch(projectTaskActions.getAllProjectTasks()), dispatch(taskActions.getAllTasks()), dispatch(shiftActions.getShiftsInRange(startTime, endTime))
       ]);
     } catch (e) {
       console.log(e);
@@ -62,13 +62,17 @@ const formatData = (startTime, endTime) => {
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
 
+  console.log(employees,shifts,projects,projectTasks)
   let exportData = [];
   employees.forEach(employee => {
     const detailData = [], summaryData = [];
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
-
+    console.log(shiftsOfEmployees);
+    if(shiftsOfEmployees.length >0){
+      console.log(employee);
+    }
 
     const individualProjectTotals = {};
     const allProjectTotals = { total: 0, reg: 0, ot: 0 };

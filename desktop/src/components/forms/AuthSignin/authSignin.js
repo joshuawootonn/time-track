@@ -16,6 +16,7 @@ export const AuthSignin = props => {
     <div className={classes.hero}>
       <Form className={classes.heroContent}>
         <Typography variant="h6">Select Network</Typography>
+        <Field component={TextField} name="ip" label="IP" helper="none" />
         <Field component={TextField} name="username" label="Network" helper="none"/>
         <Field component={Password} name="password" label="Password" helper="none" />
         <Button

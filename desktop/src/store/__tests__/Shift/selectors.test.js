@@ -50,7 +50,7 @@ describe('Shift Selectors', () => {
   });
   test('getShiftsInRange should return [] with invalid start and end time', () => {
     let returnValue = shiftSelectors.getShiftsInRange.resultFunc(
-      { 1: { val: 'asdf', id: 1, activities: [1,2 ], employeeId: 1 , clockInDate: moment().format('YYYY-MM-DD HH:mm:ss') } }, // shift entities
+      { 1: { val: 'asdf', id: 1, activities: [1,2 ], employeeId: 1 , clockInDate: moment().format('MM-DD-YY HH:mm:ss') } }, // shift entities
       [1], // shift results
       { 1: { id: 1, val: 'a' }, 2: { id: 2, val: 'b' } }, // activity entities
       { 1: { id: 1, val: 'josh' } }, // employee entities
@@ -60,7 +60,7 @@ describe('Shift Selectors', () => {
     expect(returnValue).toEqual([]);    
   });
   test('getShiftsInRange should return shifts with times between start and end time', () => {
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     let returnValue = shiftSelectors.getShiftsInRange.resultFunc(
       { 1: { val: 'asdf', id: 1, activities: [1,2 ], employeeId: 1 , clockInDate: currentMoment } }, // shift entities
       [1], // shift results
@@ -79,11 +79,11 @@ describe('Shift Selectors', () => {
     }]);    
   });
   test('getShiftInRange should get the startTime and endTime off of props', () => {
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     shiftSelectors.getShiftsInRange({ entities: { shifts: {} }, results: { shifts: [] } },{ startTime: currentMoment,endTime: currentMoment });
   });
   test('getSelectedShift should return {} fro no selected shift', () => {
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     let returnValue = shiftSelectors.getSelectedShift.resultFunc(
       { 1: { val: 'asdf', id: 1, activities: [1,2 ], employeeId: 1 , clockInDate: currentMoment } }, // shift entities
       { 1: { id: 1, val: 'a' }, 2: { id: 2, val: 'b' } }, // activity entities
@@ -94,7 +94,7 @@ describe('Shift Selectors', () => {
     expect(returnValue).toEqual({});
   });
   test('getSelectedShift should return {} fro no selected shift', () => {
-    let currentMoment =  moment().format('YYYY-MM-DD HH:mm:ss');
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     let returnValue = shiftSelectors.getSelectedShift.resultFunc(
       { 1: { val: 'asdf', id: 1, activities: [1,2 ], employeeId: 1 , clockInDate: currentMoment } }, // shift entities
       { 1: { id: 1, val: 'a',projectTaskId: 1 }, 2: { id: 2, val: 'b', projectTaskId:1 } }, // activity entities

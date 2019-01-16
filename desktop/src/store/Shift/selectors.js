@@ -29,7 +29,7 @@ export const getShiftsInRange = createSelector(
   (_,props) => props.endTime,
   (shifts,results,activities,employees,start,end) => {
     if (!results || results.length === 0) return null;
-    
+    console.log('shift selectors',start, end)
     // map the shift Ids to array of shift objects 
     // while mapping activity ids to array of activities
     return results.map(shiftId => {      

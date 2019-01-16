@@ -4,11 +4,11 @@ import { authorityActions, crewActions } from 'store/actions';
 
 import * as endpoint from './endpoints';
 
-export const login = (username, password) => {
+export const login = (ip,username, password) => {
   return async dispatch => {
     dispatch({ type: userActionTypes.LOGIN_USER_REQUEST });
     try {
-      const response = await endpoint.login(username, password);
+      const response = await endpoint.login(ip,username, password);
 
       await dispatch(authorityActions.getAllAuthorities());
       await dispatch(crewActions.getAllCrews());
