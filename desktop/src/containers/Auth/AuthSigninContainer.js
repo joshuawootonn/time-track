@@ -16,18 +16,13 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 export class AuthSignin extends Component {
-  componentDidMount = () => {
-    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
-    if (cred.ip && cred.username && cred.password) {
-      this.props.login(cred.ip, cred.username, cred.password).then(() => {
-        this.props.history.push('/');
-      });
-    }
-  };
+  
   render() {
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+    const hasValidCred = cred.ip && cred.username && cred.password;
     return (
       <Formik
-        initialValues={{ ip: '', username: '', password: '' }}
+        initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: '', username: '', password: ''}}
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;
@@ -36,14 +31,17 @@ export class AuthSignin extends Component {
             ip,
             username,
             password
-          });            
+          }); 
+          console.log('here');           
           return login(ip, username, password)
-            .then(() => {                    
+            .then(() => {      
+              console.log('here2');              
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });              
               history.push(routes.ROOT);
             },
             error => {
+              console.log(error);
               formikFunctions.setErrors({ submit: error.message });
               formikFunctions.setStatus({ success: false });
               formikFunctions.setSubmitting(false);
@@ -54,13 +52,14 @@ export class AuthSignin extends Component {
         }}
       />
     );
+    
+    
   }
 }
 
 AuthSignin.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  getStaticData: PropTypes.func.isRequired
+  history: PropTypes.object.isRequired
 };
 
 /* istanbul ignore next */

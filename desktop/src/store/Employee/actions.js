@@ -135,7 +135,8 @@ export const login = pin => {
         data: response.data
       });
     } catch (e) {
-      return dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });      
+      dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });  
+      return Promise.reject({message: 'NETWORK ERROR!'});    
     }
   };
 };

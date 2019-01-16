@@ -30,7 +30,7 @@ export class AccountSignin extends Component {
     const { login, history, getStaticData, authorities } = this.props;
     return (
       <Formik
-        initialValues={{ pin: '565656' }}
+        initialValues={{ pin: '' }}
         validationSchema={accountValidation}
         onSubmit={(values,formikFunctions) => {
           return login(values.pin).then(
@@ -41,10 +41,11 @@ export class AccountSignin extends Component {
               history.push(`/${authorities[authorityId].type}`);
               getStaticData();              
             },
-            () => {
+            e => {
+              formikFunctions.resetForm();
               formikFunctions.setStatus({ success: false });
               formikFunctions.setSubmitting(false);              
-              formikFunctions.setErrors({ submit: 'Invalid pin!' });
+              formikFunctions.setErrors({ submit: e.message || 'Invalid pin!' });
             }
           );          
         }}

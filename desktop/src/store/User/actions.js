@@ -15,7 +15,8 @@ export const login = (ip,username, password) => {
 
       return dispatch({ type: userActionTypes.LOGIN_USER_SUCCESS, payload: response.data });
     } catch (e) {
-      return dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
+      dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
+      return Promise.reject({ message: 'Could not connect!' });
     }
   };
 };
