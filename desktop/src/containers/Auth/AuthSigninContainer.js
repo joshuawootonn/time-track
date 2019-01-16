@@ -32,16 +32,15 @@ export class AuthSignin extends Component {
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;
           const { ip, username, password } = values;
-                      
+          ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+            ip,
+            username,
+            password
+          });            
           return login(ip, username, password)
-            .then(() => {
+            .then(() => {                    
               formikFunctions.resetForm();
-              formikFunctions.setStatus({ success: true });
-              ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-                ip,
-                username,
-                password
-              }); 
+              formikFunctions.setStatus({ success: true });              
               history.push(routes.ROOT);
             },
             error => {
@@ -60,7 +59,8 @@ export class AuthSignin extends Component {
 
 AuthSignin.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  getStaticData: PropTypes.func.isRequired
 };
 
 /* istanbul ignore next */

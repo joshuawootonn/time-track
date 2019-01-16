@@ -10,6 +10,8 @@ import { employeeActions, staticActions } from 'store/actions';
 import AccountSigin from 'components/forms/AccountSigin';
 import { authoritySelectors } from 'store/selectors';
 
+import { HOST } from 'constants/network';
+
 export class AccountSignin extends Component {
 
   componentDidMount = () => {
@@ -24,6 +26,7 @@ export class AccountSignin extends Component {
     // });    
   }
   render() {
+    console.log(HOST);
     const { login, history, getStaticData, authorities } = this.props;
     return (
       <Formik
@@ -36,7 +39,7 @@ export class AccountSignin extends Component {
               formikFunctions.setStatus({ success: true });
               const { authorityId } = response.data;
               history.push(`/${authorities[authorityId].type}`);
-              getStaticData();
+              getStaticData();              
             },
             () => {
               formikFunctions.setStatus({ success: false });
