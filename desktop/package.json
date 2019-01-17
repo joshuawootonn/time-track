@@ -1,6 +1,9 @@
 {
-  "name": "desktop",
-  "version": "0.1.0",
+  "name": "timetrack",
+  "productName": "Time Track",
+  "author": "Joshua Wootonn",
+  "description": "This is a time management software I wrote specific to All American Concrete in West Liberty, Iowa",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
@@ -31,14 +34,14 @@
     "reselect": "^3.0.1",
     "yup": "^0.25.1"
   },
-  "homepage": "./",
-  "main": "src/electron-starter.js",
+  "homepage": "./",  
+  "main": "public/electron.js",
   "scripts": {
     "start": " nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls", 
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "eject": "react-scripts eject",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
@@ -47,14 +50,16 @@
     "dist": "npm run build && build",
     "postinstall": "install-app-deps",
     "lint": "./node_modules/.bin/eslint --fix ."
-  },
+  }, 
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
+    "appId": "com.electron.timetrack",
     "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+      "target": "nsis",
+			"icon": "build/favicon.ico"  
     },
     "directories": {
-      "buildResources": "public"
+      "buildResources": "public",
+      "output": "release"
     }
   },
   "devDependencies": {
@@ -62,8 +67,9 @@
     "babel-eslint": "^8.2.5",
     "coveralls": "^3.0.2",
     "electron": "^2.0.3",
-    "electron-builder": "^20.16.0",
+    "electron-builder": "^20.38.5",
     "electron-devtools-installer": "^2.2.4",
+    "electron-packager": "^13.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "^5.5.0",
