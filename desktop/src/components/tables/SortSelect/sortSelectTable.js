@@ -109,16 +109,19 @@ export class SortSelectTable extends React.Component {
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       {headerData.map(ele => {
-                        //console.log(ele);
-                        const { type, id, keys } = ele;
-                        
+                        const { type, id, keys } = ele;                  
                         if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
                           return <TableCell padding="dense" key={id} align="right" >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.STRING) {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
                           // The reduce function here is just used to deconstruct the objects to the value that we want on the table
-                          return <TableCell padding="dense" key={id+keys.join('')} >{keys.reduce((object, currentKey) => object[currentKey],n[id])}</TableCell>;
+                          return <TableCell padding="dense" key={id+keys.join('')} >{
+                            keys.reduce((object, currentKey) => {
+                              // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
+                              return object === undefined ?  null : object[currentKey]
+                            },n[id])                          
+                          }</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
                           return <TableCell padding="dense" key={id} >{moment(n[id]).format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
