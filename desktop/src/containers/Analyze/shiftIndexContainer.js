@@ -31,13 +31,13 @@ export class ShiftIndex extends Component {
   render() {
     const { shifts, selected } = this.props;
     
-    if (!shifts || shifts && !shifts.length) return <Progress variant="circular" fullWidth fullHeight />;
+    if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
         label="Shifts"
-        tableData={shifts}
+        tableData={shifts || []}
         headerData={rows}
         selected={selected}
         select={this.select}

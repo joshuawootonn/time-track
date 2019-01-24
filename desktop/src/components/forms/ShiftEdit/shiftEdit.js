@@ -7,6 +7,7 @@ import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
+import moment from 'moment';
 
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
@@ -20,6 +21,7 @@ export class ShiftEdit extends Component {
   render() {
     const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
+    console.log(values);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -55,9 +57,8 @@ export class ShiftEdit extends Component {
               name="clockOutDate"
               component={TextField}
               margin="none"
-              label="Start Date"
+              label="End Date"
               type="datetime-local"
-              defaultValue="2017-05-24T10:30"
               className={classes.field}
               helper="normal"
             />

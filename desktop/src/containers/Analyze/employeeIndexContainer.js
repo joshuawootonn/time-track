@@ -26,13 +26,13 @@ export class EmployeeIndex extends Component {
     const { employees, selected } = this.props;
 
     // if employees is not defined or empty
-    if (!employees || employees && !employees.length) return <Progress variant="circular" fullPage />;
+    if (!employees) return <Progress variant="circular" fullPage />;
 
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
         label="Employees"
-        tableData={employees}
+        tableData={employees || []}
         headerData={rows}
         selected={selected}
         select={this.select}

@@ -130,7 +130,7 @@ const formatData = (startTime, endTime) => {
       shift.activities.forEach((activity, i) => {
         let overtimeActivityLength, regularActivityLength;
 
-        if (totalTimeForWeek >= 2400) {
+        if (totalTimeForWeek <= 2400) {
           regularActivityLength = activity.length;
         } else if (totalTimeForWeek + activity.length >= 2400) {
           overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);

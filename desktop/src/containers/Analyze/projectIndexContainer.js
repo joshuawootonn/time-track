@@ -25,13 +25,13 @@ export class ProjectIndex extends Component {
   render () {
     const { projects,selected } = this.props;
 
-    if (!projects || projects && !projects.length) return <Progress variant="circular" fullWidth fullHeight />;
+    if (projects === undefined) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
       <SortSelectTable 
         selectLabel={this.selectLabel}
         label="Projects"
-        tableData={projects}
+        tableData={projects || []}
         headerData={rows}
         selected={selected}
         select={this.select}

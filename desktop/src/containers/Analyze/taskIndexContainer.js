@@ -25,13 +25,13 @@ export class TaskIndex extends Component {
   render() {
     const { tasks, selected } = this.props;
     
-    if (!tasks || tasks && !tasks.length) return <Progress variant="circular" fullWidth fullHeight />;
-    console.log(tasks);
+    if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
+    
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
         label="Tasks"
-        tableData={tasks}
+        tableData={tasks || []}
         headerData={rows}
         selected={selected}
         select={this.select}

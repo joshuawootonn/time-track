@@ -12,6 +12,7 @@ import Hero from 'components/layouts/Hero';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
+import { currentRoundedTime } from 'helpers/time';
 
 export class ShiftDetail extends Component {
   removeShift = () => {
@@ -36,7 +37,7 @@ export class ShiftDetail extends Component {
           initialValues={{
             ...selected,
             clockInDate: moment(selected.clockInDate).format('YYYY-MM-DDTHH:mm'),
-            clockOutDate: moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm'),
+            clockOutDate: selected.clockOutDate ? moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm') : currentRoundedTime().format('YYYY-MM-DDTHH:mm'),
             lunch: selected.lunch,
             activities: selected.activities.map(activity => {              
               return {
