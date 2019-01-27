@@ -1,15 +1,24 @@
 
-const mysql = require('mysql2');
 
-const oldConnection = mysql.createConnection({
-  host: 'localhost',
-  user: 'translate_user',
-  password: '5656',
-  database: 'aacidatabase'
-})
-const newConnection = mysql.createConnection({
-  host: 'localhost',
-  user: 'translate_user',
-  password: '5656',
-  database: 'newdatabase'
-})
+
+
+
+
+
+async function main() {
+
+  
+
+
+  const [rows, fields] = await oldConnection.execute('SELECT * FROM `employeelist`');
+
+  rows.forEach(oldEmployee => {
+    `INSERT INTO ${NEW_EMPLOYEE} (name, pin, is_employed, is_working, crew_id, authority_id) VALUES (${oldEmployee.name},${oldEmployee.pin},${oldEmployee.current}, ${oldEmployee.active},0, ${oldEmployee.adminStatus ? '1' : '0'})`
+  });
+
+  newConnection.close();
+  oldConnection.close();
+
+}
+
+main();
