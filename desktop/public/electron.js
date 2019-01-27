@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const electron = require('electron');
+const { autoUpdater } = require('electron-updater');
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const url = require('url');
@@ -49,6 +50,7 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  autoUpdater.checkForUpdates();
 }
 
 // This method will be called when Electron has finished
@@ -73,8 +75,9 @@ app.on('activate', function() {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+/**
+ * Export stuff
+ */
 
 ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   settings.set(`${SETTINGS.USER_CRED}`, {
@@ -167,4 +170,43 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   } catch(e) {
     event.returnValue = 'failed';
   }
+});
+
+/**
+ * Auto Update
+ */
+
+const sendStatusToWindow = text => {
+  if (mainWindow) {
+    mainWindow.webContents.send('message', text);
+  }
+};
+
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+autoUpdater.on('update-available', info => {
+  sendStatusToWindow('Update available.');
+});
+autoUpdater.on('update-not-available', info => {
+  sendStatusToWindow('Update not available.');
+});
+autoUpdater.on('error', err => {
+  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+});
+autoUpdater.on('download-progress', progressObj => {
+  sendStatusToWindow(
+    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+  );
+});
+autoUpdater.on('update-downloaded', info => {
+  sendStatusToWindow('Update downloaded; will install now');
+});
+
+autoUpdater.on('update-downloaded', info => {
+  // Wait 5 seconds, then quit and install
+  // In your application, you don't need to wait 500 ms.
+  // You could call autoUpdater.quitAndInstall(); immediately
+  autoUpdater.quitAndInstall();
 });
