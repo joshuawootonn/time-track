@@ -76,13 +76,13 @@
     "name": {
       "type": "String",
       "required": true,
-      "length": 45,
+      "length": 180,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "name",
         "dataType": "varchar",
-        "dataLength": 45,
+        "dataLength": 180,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"

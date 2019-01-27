@@ -167,7 +167,7 @@ DROP TABLE IF EXISTS `time-track`.`project` ;
 
 CREATE TABLE IF NOT EXISTS `time-track`.`project` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(180) NOT NULL,
   `is_active` TINYINT NOT NULL DEFAULT 1,
   `date` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
