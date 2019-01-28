@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `time-track`.`shift` (
   `clock_in_date` DATETIME NULL,
   `clock_out_date` DATETIME NULL,
   `length` INT NULL,
+  `lunch` INT NULL,
   `employee_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_shift_employee1_idx` (`employee_id` ASC),
@@ -167,7 +168,7 @@ DROP TABLE IF EXISTS `time-track`.`project` ;
 
 CREATE TABLE IF NOT EXISTS `time-track`.`project` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(180) NOT NULL,
   `is_active` TINYINT NOT NULL DEFAULT 1,
   `date` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -209,7 +210,7 @@ DROP TABLE IF EXISTS `time-track`.`activity` ;
 CREATE TABLE IF NOT EXISTS `time-track`.`activity` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `length` INT NOT NULL,
-  `description` VARCHAR(45) NULL,
+  `description` VARCHAR(180) NULL,
   `shift_id` INT NOT NULL,
   `project_task_id` INT NOT NULL,
   INDEX `fk_table1_shift1_idx` (`shift_id` ASC),
