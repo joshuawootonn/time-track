@@ -1,7 +1,3 @@
-
-
-
-
 const constants = require('./constants')
 const moment = require('moment');
 
@@ -118,7 +114,7 @@ async function main() {
     
     const [shiftRows2] = await newConnection.execute(`SELECT * FROM ${constants.NEW_SHIFT_TABLE} WHERE id='${oldShift.shiftid}'`)
 
-    
+
     if(projectTaskRows.length > 0 && shiftRows2.length > 0)
     {
       await newConnection.execute(`INSERT INTO ${constants.NEW_ACTIVITY_TABLE} (id, length, description, shift_id, project_task_id) 
@@ -138,8 +134,8 @@ async function main() {
   console.log('Activity migration complete')
 
 
-  // newConnection.close();
-  // oldConnection.close();
+  newConnection.close();
+  oldConnection.close();
 
 }
 
