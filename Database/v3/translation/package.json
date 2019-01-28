@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "setup": "node ./setup",
-    "clean": "node ./clean"
+    "create": "node ./create",
+    "seed": "node ./seed",
+    "clean": "node ./clean",
+    "translate": "node ./translate"
   },
   "author": "",
   "license": "ISC",

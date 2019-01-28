@@ -1,5 +1,5 @@
 
-DROP SCHEMA `newdatabase`;
+DROP SCHEMA IF EXISTS `newdatabase`;
 CREATE SCHEMA IF NOT EXISTS `newdatabase` DEFAULT CHARACTER SET utf8 ;
 USE `newdatabase` ;
 
