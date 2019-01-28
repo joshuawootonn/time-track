@@ -7,16 +7,16 @@ async function main() {
   const mysql = require('mysql2/promise');
 
   const oldConnection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'aacidatabase',
-    password: '5656'
+    host: constants.HOST,
+    user: constants.USER,
+    database: constants.OLD_DATABASE,
+    password: constants.PASS
   })
   const newConnection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'newdatabase',
-    password: '5656'
+    host: constants.HOST,
+    user: constants.USER,
+    database: constants.NEW_DATABASE,
+    password: constants.PASS
   })
 
   // Employees
