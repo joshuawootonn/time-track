@@ -90,18 +90,8 @@ async function main() {
     function (err, results, fields) {
       console.log('Crew', err);
     }
-  );
-  
+  );  
   console.log('Script Finished')
-  setTimeout(() => {newConnection.close},2000);
+  setTimeout(() => {newConnection.close()},200);
 }
-
-
 main();
-
-// connection.query(
-//   '',
-//   function(err, results, fields) {
-//     console.log(err);
-//   }
-// );
