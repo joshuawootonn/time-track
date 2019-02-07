@@ -101,7 +101,7 @@ ipcMain.on(IPCConstants.GET_CRED, event => {
 });
 
 ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
-  console.log('we out here', arg);
+  //console.log('we out here', arg);
 
   const { data } = arg;
 

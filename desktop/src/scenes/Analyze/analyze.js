@@ -68,6 +68,7 @@ export class Analyze extends Component {
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
         </AppBar>
+        { tabValue === 0  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 0 })} >
           <Grid item xs={7}>
             <EmployeeIndexContainer />
@@ -75,7 +76,8 @@ export class Analyze extends Component {
           <Grid item xs={5}>
             <EmployeeDetailsContainer />
           </Grid>
-        </Grid>
+        </Grid>}
+        { tabValue === 1  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 1 })} >
           <Grid item xs={4}>
             <ProjectIndexContainer />
@@ -83,7 +85,8 @@ export class Analyze extends Component {
           <Grid item xs={8}>
             <ProjectDetailContainer />
           </Grid>
-        </Grid>
+        </Grid>}
+        { tabValue === 2  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 2 })} >          
           <Grid item xs={7}>
             <TaskIndexContainer />
@@ -91,7 +94,8 @@ export class Analyze extends Component {
           <Grid item xs={5}>
             <TaskDetailContainer />
           </Grid>
-        </Grid> 
+        </Grid> }
+        { tabValue === 3  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 3 })} >
           <Grid item xs={6}>
             <ShiftIndexContainer />
@@ -99,7 +103,7 @@ export class Analyze extends Component {
           <Grid item xs={6}>
             <ShiftDetailsContainer /> 
           </Grid>
-        </Grid>
+        </Grid>}
       </div>
     );
   }

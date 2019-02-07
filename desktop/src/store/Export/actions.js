@@ -43,7 +43,7 @@ export const getData = (startTime, endTime) => {
         dispatch(employeeActions.getAllEmployees()), dispatch(projectActions.getAllProjects()), dispatch(projectTaskActions.getAllProjectTasks()), dispatch(taskActions.getAllTasks()), dispatch(shiftActions.getShiftsInRange(startTime, endTime))
       ]);
     } catch (e) {
-      console.log(e);
+      //console.log(e);
     }
   };
 };
@@ -62,16 +62,16 @@ const formatData = (startTime, endTime) => {
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
 
-  console.log(employees,shifts,projects,projectTasks)
+  //(employees,shifts,projects,projectTasks)
   let exportData = [];
   employees.forEach(employee => {
     const detailData = [], summaryData = [];
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
-    console.log(shiftsOfEmployees);
+    //console.log(shiftsOfEmployees);
     if(shiftsOfEmployees.length >0){
-      console.log(employee);
+      //console.log(employee);
     }
 
     const individualProjectTotals = {};

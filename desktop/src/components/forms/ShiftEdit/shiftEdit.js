@@ -21,7 +21,7 @@ export class ShiftEdit extends Component {
   render() {
     const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
-    console.log(values);
+    //console.log(values);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>

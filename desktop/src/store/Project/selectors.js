@@ -10,7 +10,7 @@ export const getAllProjects = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(projectId => {
       return projects[projectId];
-    });
+    })
   },
 );
 

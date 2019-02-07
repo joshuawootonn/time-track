@@ -22,7 +22,7 @@ export class Time extends Component {
   onChangeMinutes = e => {
     const { field,form } = this.props;
     const minutesValue = Math.floor(field.value % 60);
-    console.log(minutesValue);
+    //console.log(minutesValue);
     form.setFieldValue(
       field.name,
       field.value + e.target.value - minutesValue,
@@ -35,7 +35,7 @@ export class Time extends Component {
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
 
-    console.log(value, minutesValue, hoursValue);
+    //console.log(value, minutesValue, hoursValue);
     return (
       <FormControl fullWidth={fullWidth}  className={cx(classes.fieldWrapper,classes.vertical)}>
         <div className={cx(classes.fieldWrapper,classes.horizontal)} >

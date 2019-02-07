@@ -31,17 +31,14 @@ export class AuthSignin extends Component {
             ip,
             username,
             password
-          }); 
-          console.log('here');           
+          });        
           return login(ip, username, password)
-            .then(() => {      
-              console.log('here2');              
+            .then(() => {                 
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });              
               history.push(routes.ROOT);
             },
             error => {
-              console.log(error);
               formikFunctions.setErrors({ submit: error.message });
               formikFunctions.setStatus({ success: false });
               formikFunctions.setSubmitting(false);

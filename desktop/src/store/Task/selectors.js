@@ -14,7 +14,7 @@ export const getAllTasks = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(taskId => {
       return tasks[taskId];
-    });
+    })
   },
 );
 
@@ -26,7 +26,7 @@ export const getAllTasksWithContent = createSelector(
   getSubcategoriesFromEntities,
   (tasks,results,dimensions,categories,subcategories) => {    
     if(!results || results.length === 0) return null;
-    console.log(dimensions,categories,subcategories);
+    //console.log(dimensions,categories,subcategories);
     return results.map(taskId => {
       const task = tasks[taskId];
       
