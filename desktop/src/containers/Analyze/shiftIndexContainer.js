@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
+import NewTable from 'components/tables/NewTable';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -34,7 +34,7 @@ export class ShiftIndex extends Component {
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
-      <SortSelectTable
+      <NewTable
         selectLabel={this.selectLabel}
         label="Shifts"
         tableData={shifts || []}
@@ -89,33 +89,43 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
-    id: 'employee',    
+    id: 'employee',   
+    //width: 150, 
+    height: 56,
     padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.OBJECT,
     keys: ['firstName']
   },
   {
-    id: 'employee',    
+    id: 'employee',   
+    //width: 150,   
+    height: 56,
     padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.OBJECT,
     keys: ['lastName']
   },
   {
-    id: 'clockInDate',    
+    id: 'clockInDate',   
+    //width: 150,   
+    height: 56,
     padding: 'dense',
     label: 'Clock In',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'clockOutDate',    
+    id: 'clockOutDate',  
+    //width: 150,  
+    height: 56,  
     padding: 'dense',
     label: 'Clock Out',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'length',    
+    id: 'length',     
+    //width: 150, 
+    height: 56,
     padding: 'dense',
     label: 'Length',
     type: TableDataTypes.LENGTH
