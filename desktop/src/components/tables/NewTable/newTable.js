@@ -13,6 +13,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import moment from 'moment';
 import 'react-virtualized/styles.css';
 import './styles.css';
+import { ToobleWrapper } from 'helpers/tooble';
 
 const styles2 = theme => ({
   table: {
@@ -22,7 +23,9 @@ const styles2 = theme => ({
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    flex: 1
+    flex: 1,
+    
+    marginRight: 0,
   },
   tableRow: {
     cursor: 'pointer'
@@ -30,10 +33,17 @@ const styles2 = theme => ({
   tableRowHover: {
     '&:hover': {
       backgroundColor: theme.palette.grey[200]
-    }
+    },
+    marginRight: 0,
+    flex: 1    
+  },
+  headerCell: {
+    marginRight: 0,
+    flex: 1
   },
   tableCell: {
-    flex: 1
+    flex: 1,
+    marginRight: 0,
   },
   noClick: {
     cursor: 'initial'
@@ -53,7 +63,7 @@ class MuiVirtualizedTable extends React.PureComponent {
     const { columns, classes, rowHeight, onRowClick } = this.props;
 
     const { type, id, keys } =  columns[columnIndex];
-    console.log(cellData);
+    //console.log(cellData);
     const c = classNames(classes.tableCell, classes.flexContainer, {
       [classes.noClick]: onRowClick == null
     });
@@ -88,26 +98,19 @@ class MuiVirtualizedTable extends React.PureComponent {
       [SortDirection.DESC]: 'desc'
     };
 
-    const inner =
-      !columns[columnIndex].disableSort && sort != null ? (
+    return (
+      <TableCell
+        className={classNames(classes.tableCell, classes.flexContainer)}
+        variant="head"
+        style={{ height: headerHeight, flex: 1 }}
+        align={columns[columnIndex].numeric || false ? 'right' : 'left'}
+      >
         <TableSortLabel
           active={dataKey === sortBy}
           direction={direction[sortDirection]}
         >
           {label}
         </TableSortLabel>
-      ) : (
-        label
-      );
-    const c = classNames(classes.tableCell, classes.flexContainer);
-    return (
-      <TableCell
-        className={c}
-        variant="head"
-        style={{ height: headerHeight, flex: 1 }}
-        align={columns[columnIndex].numeric || false ? 'right' : 'left'}
-      >
-        {inner}
       </TableCell>
     );
   };
@@ -123,24 +126,14 @@ class MuiVirtualizedTable extends React.PureComponent {
             width={width}
             {...tableProps}
             rowClassName={this.getRowClassName}
-            headerClassName={this.getRowClassName}
-            
+            headerClassName={classes.headerCell}                    
           >
             {columns.map(
               (
                 { cellContentRenderer = null, className, id, ...other },
                 index
               ) => {
-                // let renderer;
-                // if (cellContentRenderer != null) {
-                //   renderer = cellRendererProps =>
-                //     this.cellRenderer({
-                //       cellData: cellContentRenderer(cellRendererProps),
-                //       columnIndex: index
-                //     });
-                // } else {
-                //   renderer = this.cellRenderer;
-                // }
+                
                 return (
                   <Column
                     key={id}
@@ -191,18 +184,75 @@ const WrappedVirtualizedTable = withStyles(styles2)(MuiVirtualizedTable);
 
 
 class ReactVirtualizedTable extends React.Component {
+  constructor (props, context) {
+    super(props, context);
+
+    this.state = {
+      data: props.data 
+    };
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    const {
+      sortBy: prevSortBy,
+      sortDirection: prevSortDirection
+    } = this.state;
+
+    if (
+      nextState.sortBy !== prevSortBy ||
+      nextState.sortDirection !== prevSortDirection
+    ) {
+      const { sortBy, sortDirection } = nextState;
+      console.log('1');
+      let { data } = this.props;
+
+      if (sortBy) {
+        data = data.sort(item => item[sortBy]);
+        if (sortDirection === SortDirection.DESC) {
+          data = data.reverse();
+        }
+      }
+    }
+  }
+
   handleClick = event => {
     this.props.select(event.rowData.id);
   }
+  sort = value => {
+    console.log(value);
+    let { sortBy, sortDirection } = value;
+    const {
+      sortBy: prevSortBy,
+      sortDirection: prevSortDirection
+    } = this.state;
+    console.log('old',prevSortBy,prevSortDirection);
+    console.log('new', sortBy,sortDirection);
+    // If data was sorted DESC by this column.
+    // Rather than switch to ASC, return to "natural" order.
+    if (prevSortDirection === SortDirection.DESC) {
+      sortBy = null;
+      sortDirection = null;
+    }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {
+      
+      sortDirection = SortDirection.DESC;
+    }
+
+    this.setState({ sortBy, sortDirection });
+  }
   render() {
-    const { headerData, tableData, classes, select } = this.props;
+    
+    const { columns, classes, select } = this.props;
+    const { data, sortBy, sortDirection } = this.props;
     return (
       <div className={classes.root} >
         <WrappedVirtualizedTable
-          rowCount={tableData.length}
-          rowGetter={({ index }) => tableData[index]}
+          rowCount={data.length}
+          rowGetter={({ index }) => data[index]}
           onRowClick={this.handleClick}
-          columns={headerData}        
+          columns={columns}     
+          sort={this.sort} 
+          sortBy={sortBy}
+          sortDirection={sortDirection}  
         />
       </div>
     );
@@ -210,38 +260,5 @@ class ReactVirtualizedTable extends React.Component {
   
 }
 
-export default withStyles(styles)(ReactVirtualizedTable);
+export default withStyles(styles)(ToobleWrapper(ReactVirtualizedTable));
 
-
-// const asdf = [
-//   {
-//     width: 200,
-//     flexGrow: 1.0,
-//     label: 'Employee',
-//     dataKey: 'employee'
-//   },
-//   {
-//     width: 120,
-//     label: 'Calories (g)',
-//     dataKey: 'calories',
-//     numeric: true
-//   },
-//   {
-//     width: 120,
-//     label: 'Fat (g)',
-//     dataKey: 'fat',
-//     numeric: true
-//   },
-//   {
-//     width: 120,
-//     label: 'Carbs (g)',
-//     dataKey: 'carbs',
-//     numeric: true
-//   },
-//   {
-//     width: 120,
-//     label: 'Protein (g)',
-//     dataKey: 'protein',
-//     numeric: true
-//   }
-// ];
