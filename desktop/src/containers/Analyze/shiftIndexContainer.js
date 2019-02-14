@@ -12,7 +12,6 @@ import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
-import { Tooble } from 'helpers/tooble';
 
 export class ShiftIndex extends Component {
   componentDidMount = () => {
@@ -34,20 +33,16 @@ export class ShiftIndex extends Component {
     
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
-    return (
-      <Tooble 
+    return (     
+      <NewTable
+        // selectLabel={this.selectLabel}
+        // label="Shifts"
         data={shifts || []}
         columns={rows} 
-      >
-        <NewTable
-          // selectLabel={this.selectLabel}
-          // label="Shifts"
-          
-          selected={selected}
-          select={this.select}
-          // add={this.add}
-        />
-      </Tooble>      
+        selected={selected}
+        select={this.select}
+        // add={this.add}
+      />      
     );
   }
 }
