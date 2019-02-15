@@ -1,45 +1,60 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import TableCell from '@material-ui/core/TableCell';
-import * as TableDataTypes from 'constants/tableDataTypes';
+import {TableCell} from '@material-ui/core';
 import moment from 'moment';
-import 'react-virtualized/styles.css';
+
+import * as TableDataTypes from 'constants/tableDataTypes';
 
 class Cell extends React.Component {
   render() {
-    const { cellData, columnIndex = null } =this.props;
+    const { cellData, columnIndex = null,columns, classes, rowHeight } =this.props;
+    const { type, id, keys } =  columns[columnIndex]; 
 
-    const { columns, classes, rowHeight, onRowClick } = this.props;
+    let data, alignment = 'left', key = id;
 
-    const { type, id, keys } =  columns[columnIndex];
-    //console.log(cellData);
-    const c = classNames(classes.tableCell, classes.flexContainer, {
-      [classes.noClick]: onRowClick == null
-    });
     if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id} align="right" >{cellData}</TableCell>;
+      data = cellData;
+      alignment = 'right';
     } else if (type === TableDataTypes.STRING) {
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id} >{cellData}</TableCell>;
+      data = cellData;
     } else if (type === TableDataTypes.OBJECT) {
-    //console.log(columns,columnIndex,columns[columnIndex], cellData)
-    // The reduce function here is just used to deconstruct the objects to the value that we want on the table
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id + keys.join('')} >{
-        keys.reduce((object, currentKey) => {
+      // The reduce function here is just used to deconstruct the objects to the value that we want on the table      
+      data = keys.reduce((object, currentKey) => {
         // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
-          return object === undefined ? null : object[currentKey];
-        },cellData)
-      }</TableCell>;
+        return object === undefined ? null : object[currentKey];
+      },cellData);
+      key = id + keys.join('');
     } else if (type === TableDataTypes.DATE) {
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id} >{moment(cellData).format('MM/DD/YY')}</TableCell>;
+      data = moment(cellData).format('MM/DD/YY');
     } else if (type === TableDataTypes.DATETIME) {
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id} >{moment(cellData).format('hh:mm a MM/DD')}</TableCell>;
+      data = moment(cellData).format('hh:mm a MM/DD');
     } else if (type === TableDataTypes.LENGTH) {
       const length = moment.duration(cellData, 'minutes');
-      return <TableCell className={c} style={{ height: rowHeight }} padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
+      data = `${length.hours()}h ${length.minutes()}m`;
     }
-    return null;
+    return <TableCell 
+      className={ classNames(classes.tableCell, classes.flexContainer)} 
+      style={{ height: rowHeight }} 
+      padding="dense" 
+      key={key} 
+      align={alignment}
+    >
+      {data}
+    </TableCell>;
+    
   }
 }
+
+Cell.propTypes = {
+  cellData: PropTypes.any,
+  columnIndex: PropTypes.number,
+  columns: PropTypes.array,
+  classes: PropTypes.object,
+  rowHeight: PropTypes.number,
+  onRowClick: PropTypes.func
+};
 
 export default Cell;
 

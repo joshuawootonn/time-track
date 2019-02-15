@@ -1,12 +1,16 @@
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-const styles = theme => ({
+export const outerStyles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
     height: '100%'
   },  
+})
+
+export const tableStyles = theme => ({
+   
   tableWrapper: {
     overflowX: 'auto'
   },
@@ -38,7 +42,37 @@ const styles = theme => ({
     background: 'white',
     position: 'sticky',
     top: 0
+  },
+  table: {
+    fontFamily: theme.typography.fontFamily
+  },
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    boxSizing: 'border-box',
+    flex: 1,
+    
+    marginRight: 0
+  },
+  tableRow: {
+    cursor: 'pointer'
+  },
+  tableRowHover: {
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200]
+    },
+    marginRight: 0,
+    flex: 1    
+  },
+  headerCell: {
+    marginRight: 0,
+    flex: 1
+  },
+  tableCell: {
+    flex: 1,
+    marginRight: 0
+  },
+  noClick: {
+    cursor: 'initial'
   }
 });
-
-export default styles;

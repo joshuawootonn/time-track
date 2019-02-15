@@ -4,51 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import styles from './styles';
+
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
-import * as TableDataTypes from 'constants/tableDataTypes';
-import moment from 'moment';
 import 'react-virtualized/styles.css';
 
 import Cell from './cell';
 import Header from './header';
+import { outerStyles, tableStyles } from './styles';
 
-const style = theme => ({
-  table: {
-    fontFamily: theme.typography.fontFamily
-  },
-  flexContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    boxSizing: 'border-box',
-    flex: 1,
-    
-    marginRight: 0
-  },
-  tableRow: {
-    cursor: 'pointer'
-  },
-  tableRowHover: {
-    '&:hover': {
-      backgroundColor: theme.palette.grey[200]
-    },
-    marginRight: 0,
-    flex: 1    
-  },
-  headerCell: {
-    marginRight: 0,
-    flex: 1
-  },
-  tableCell: {
-    flex: 1,
-    marginRight: 0
-  },
-  noClick: {
-    cursor: 'initial'
-  }
-});
 
 class MuiVirtualizedTable extends React.PureComponent {
   getRowClassName = ({ index }) => {
@@ -132,7 +95,7 @@ MuiVirtualizedTable.defaultProps = {
   rowHeight: 56
 };
 
-const WrappedVirtualizedTable = withStyles(style)(MuiVirtualizedTable);
+const WrappedVirtualizedTable = withStyles(tableStyles)(MuiVirtualizedTable);
 
 
 class ReactVirtualizedTable extends React.Component {
@@ -157,13 +120,14 @@ class ReactVirtualizedTable extends React.Component {
       const { sortBy, sortDirection } = nextState;
       console.log('1');
       let { data } = this.props;
-
+      console.log(data);
       if (sortBy) {
         data = data.sort(item => item[sortBy]);
         if (sortDirection === SortDirection.DESC) {
           data = data.reverse();
         }
       }
+      console.log(data);
     }
   }
 
@@ -179,22 +143,21 @@ class ReactVirtualizedTable extends React.Component {
     } = this.state;
     console.log('old',prevSortBy,prevSortDirection);
     console.log('new', sortBy,sortDirection);
+    console.log('data', value);
     // If data was sorted DESC by this column.
     // Rather than switch to ASC, return to "natural" order.
     if (prevSortDirection === SortDirection.DESC) {
       sortBy = null;
       sortDirection = null;
-    }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {
-      
+    }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {      
       sortDirection = SortDirection.DESC;
     }
 
     this.setState({ sortBy, sortDirection });
   }
-  render() {
-    
-    const { columns, classes, select } = this.props;
-    const { data, sortBy, sortDirection } = this.props;
+  render() {    
+    const { data, sortBy, sortDirection, columns,classes } = this.props;
+    console.log(data);
     return (
       <div className={classes.root} >
         <WrappedVirtualizedTable
@@ -212,5 +175,5 @@ class ReactVirtualizedTable extends React.Component {
   
 }
 
-export default withStyles(styles)(ReactVirtualizedTable);
+export default withStyles(outerStyles)(ReactVirtualizedTable);
 
