@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
+import * as TableDataTypes from 'constants/tableDataTypes';
 import Cell from './cell';
 import Header from './header';
 import { outerStyles, tableStyles } from './styles';
@@ -55,7 +56,8 @@ class MuiVirtualizedTable extends React.PureComponent {
                     headerRenderer={headerProps =>
                       this.headerRenderer({
                         ...headerProps,
-                        columnIndex: index
+                        columnIndex: index,
+                        ...other
                       })
                     }
                     flexGrow={1}
@@ -103,7 +105,11 @@ class ReactVirtualizedTable extends React.Component {
     super(props, context);
 
     this.state = {
-      data: props.data 
+      data: props.data,
+      order: SortDirection.ASC,
+      orderBy: 'firstName',
+      type: TableDataTypes.STRING,
+      keys: null
     };
   }
 
@@ -117,47 +123,93 @@ class ReactVirtualizedTable extends React.Component {
       nextState.sortBy !== prevSortBy ||
       nextState.sortDirection !== prevSortDirection
     ) {
-      const { sortBy, sortDirection } = nextState;
-      console.log('1');
-      let { data } = this.props;
-      console.log(data);
-      if (sortBy) {
-        data = data.sort(item => item[sortBy]);
-        if (sortDirection === SortDirection.DESC) {
-          data = data.reverse();
-        }
-      }
-      console.log(data);
+      console.log(this.state);
+      this.setState({ data: this.stableSort(this.state.data, this.getSorting(nextState.sortDirection, nextState.sortBy, nextState.type, nextState.keys)) });  
     }
   }
+
+  
+  desc = (a, b, orderBy,type, keys) => {
+    if(type === TableDataTypes.OBJECT){
+      const aVal = keys.reduce((object, currentKey) => object[currentKey],a[orderBy]);
+      const bVal = keys.reduce((object, currentKey) => object[currentKey],b[orderBy]);
+      if ( bVal < aVal) {
+        return -1;
+      }
+      if (bVal > aVal) {
+        return 1;
+      }
+      return 0; 
+    }
+    
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;    
+  }  
+  
+  stableSort = (array, cmp) => {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = cmp(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map(el => el[0]);
+  }
+  
+  getSorting = (order, orderBy, type, keys) => {
+    return order === SortDirection.DESC ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
+  }
+
+  handleRequestSort = value => {    
+    let { sortBy, sortDirection } = value;
+
+    if (this.state.sortBy === sortBy && this.state.sortDirection === SortDirection.DESC) {
+      sortDirection = SortDirection.ASC;
+    }
+    //console.log(this.props.columns, sortBy);
+    let { keys,type } = this.props.columns.find(column => column.id === sortBy);
+   
+
+
+    this.setState({ sortDirection, sortBy, type, keys });
+  };
+
+
+
 
   handleClick = event => {
     this.props.select(event.rowData.id);
   }
-  sort = value => {
-    console.log(value);
-    let { sortBy, sortDirection } = value;
-    const {
-      sortBy: prevSortBy,
-      sortDirection: prevSortDirection
-    } = this.state;
-    console.log('old',prevSortBy,prevSortDirection);
-    console.log('new', sortBy,sortDirection);
-    console.log('data', value);
-    // If data was sorted DESC by this column.
-    // Rather than switch to ASC, return to "natural" order.
-    if (prevSortDirection === SortDirection.DESC) {
-      sortBy = null;
-      sortDirection = null;
-    }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {      
-      sortDirection = SortDirection.DESC;
-    }
+  // sort = value => {
+  //   console.log(value);
+  //   let { sortBy, sortDirection } = value;
+  //   const {
+  //     sortBy: prevSortBy,
+  //     sortDirection: prevSortDirection
+  //   } = this.state;
+  //   console.log('old',prevSortBy,prevSortDirection);
+  //   console.log('new', sortBy,sortDirection);
+  //   console.log('data', value);
+  //   // If data was sorted DESC by this column.
+  //   // Rather than switch to ASC, return to "natural" order.
+  //   if (prevSortDirection === SortDirection.DESC) {
+  //     sortBy = null;
+  //     sortDirection = null;
+  //   }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {      
+  //     sortDirection = SortDirection.DESC;
+  //   }
 
-    this.setState({ sortBy, sortDirection });
-  }
+  //   this.setState({ sortBy, sortDirection });
+  // }
   render() {    
-    const { data, sortBy, sortDirection, columns,classes } = this.props;
-    console.log(data);
+    const { columns, classes } = this.props;
+    const { sortBy, sortDirection,data } = this.state;
+    //console.log(data);
     return (
       <div className={classes.root} >
         <WrappedVirtualizedTable
@@ -165,7 +217,7 @@ class ReactVirtualizedTable extends React.Component {
           rowGetter={({ index }) => data[index]}
           onRowClick={this.handleClick}
           columns={columns}     
-          sort={this.sort} 
+          sort={this.handleRequestSort} 
           sortBy={sortBy}
           sortDirection={sortDirection}  
         />

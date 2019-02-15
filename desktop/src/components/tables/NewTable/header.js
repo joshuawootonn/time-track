@@ -10,7 +10,7 @@ import {  SortDirection } from 'react-virtualized';
 class Header extends React.Component {
   render() {
     const { label, columnIndex, dataKey, sortBy, sortDirection,headerHeight, columns, classes } = this.props;
-    
+    console.log(this.props);
     const direction = {
       [SortDirection.ASC]: 'asc',
       [SortDirection.DESC]: 'desc'
@@ -22,6 +22,7 @@ class Header extends React.Component {
         variant="head"
         style={{ height: headerHeight, flex: 1 }}
         align={columns[columnIndex].numeric || false ? 'right' : 'left'}
+        
       >
         <TableSortLabel
           active={dataKey === sortBy}
