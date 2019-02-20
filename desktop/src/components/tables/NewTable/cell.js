@@ -9,7 +9,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 
 class Cell extends React.Component {
   render() {
-    const { cellData,dataKey, rowData, columnIndex = null,columns, classes, rowHeight } =this.props;
+    const { cellData,rowData, columnIndex = null,columns, classes, rowHeight } = this.props;
     const { type, id, keys } =  columns[columnIndex]; 
 
     let data, alignment = 'left', key = id;
@@ -20,7 +20,6 @@ class Cell extends React.Component {
     } else if (type === TableDataTypes.STRING) {
       data = cellData;
     } else if (type === TableDataTypes.OBJECT) {
-      //console.log(this.props.rowData,dataKey);
       // The reduce function here is just used to deconstruct the objects to the value that we want on the table      
       data = keys.reduce((object, currentKey) => {
         // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
@@ -54,7 +53,8 @@ Cell.propTypes = {
   columns: PropTypes.array,
   classes: PropTypes.object,
   rowHeight: PropTypes.number,
-  onRowClick: PropTypes.func
+  onRowClick: PropTypes.func,
+  rowData: PropTypes.object
 };
 
 export default Cell;

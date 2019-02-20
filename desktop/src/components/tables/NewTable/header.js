@@ -7,15 +7,12 @@ import {  SortDirection } from 'react-virtualized';
 
 class Header extends React.Component {
   render() {
-    const { label, columnIndex, dataKey, sortBy, sortDirection,headerHeight, columns, classes, keys,type, sortKeys } = this.props;
+    const { label, columnIndex, sortBy, sortDirection,headerHeight, columns, classes } = this.props;
   
     const direction = {
       [SortDirection.ASC]: 'asc',
       [SortDirection.DESC]: 'desc'
-    };
-    console.log( columns[columnIndex].id,sortBy)
-
-    
+    };   
   
     return (
       <TableCell
@@ -25,7 +22,8 @@ class Header extends React.Component {
         align={columns[columnIndex].numeric || false ? 'right' : 'left'}        
       >
         <TableSortLabel
-          active={ columns[columnIndex].id === sortBy}
+          // here I compare the unique id with sortBy
+          active={columns[columnIndex].id === sortBy} 
           direction={direction[sortDirection]}
         >
           {label}

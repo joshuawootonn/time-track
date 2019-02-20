@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { isEqual } from 'lodash';
-
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
@@ -30,28 +28,21 @@ class ReactVirtualizedTable extends React.Component {
   }
 
   componentWillUpdate (nextProps, nextState) {
-    const {
-      sortBy: prevSortBy,
-      sortDirection: prevSortDirection
-    } = this.state;
+    const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
+    const { sortDirection,sortBy, type,sortKeys, sortKey } = nextState;
 
-    if (
-      nextState.sortBy !== prevSortBy ||
-      nextState.sortDirection !== prevSortDirection 
-    ) {
-      //console.log(this.state);
-      this.setState({ data: this.stableSort(this.state.data, this.getSorting(nextState.sortDirection, nextState.sortBy, nextState.type, nextState.sortKeys, nextState.sortKey)) });  
+    // if the sort order has actually changed
+    if (sortBy !== prevSortBy || sortDirection !== prevSortDirection ) {
+      //call sort on the items in state
+      this.setState({ data: this.sort(this.state.data,sortDirection, sortBy, type, sortKeys, sortKey) });  
     }
   }
 
   
-  desc = (a, b, sortBy,type, sortKeys,sortKey) => {
+  compareOrder = (a, b, sortBy,type, sortKeys,sortKey) => {
     if(type === TableDataTypes.OBJECT){
-      // console.log({ desc: keys });
       const aVal = sortKeys.reduce((object, currentKey) => object[currentKey],a[sortKey]);
       const bVal = sortKeys.reduce((object, currentKey) => object[currentKey],b[sortKey]);
-      // console.log({ aVal });
-      // console.log({ bVal });
       if ( bVal < aVal) {
         return -1;
       }
@@ -70,19 +61,18 @@ class ReactVirtualizedTable extends React.Component {
     return 0;    
   }  
   
-  stableSort = (array, cmp) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
+  sort = (array, sortDirection, sortBy, type, sortKeys, sortKey) => {
+    const stabilizedThis = array.map((el, index) => [el, index]);    
     stabilizedThis.sort((a, b) => {
-      const order = cmp(a[0], b[0]);
+      
+      let order = this.compareOrder(a[0], b[0], sortBy, type, sortKeys, sortKey);
+      sortDirection === SortDirection.DESC ? order = order * -1 : order;      
       if (order !== 0) return order;
-      return a[1] - b[1];
+      return a[1] - b[1]; 
     });
     return stabilizedThis.map(el => el[0]);
   }
-  
-  getSorting = (sortDirection, sortBy, type, sortKeys, sortKey) => {
-    return sortDirection === SortDirection.DESC ? (a, b) => this.desc(a, b, sortBy, type, sortKeys, sortKey) : (a, b) => -this.desc(a, b, sortBy, type, sortKeys, sortKey);
-  }
+ 
 
   handleRequestSort = value => {
     let { sortBy, sortDirection } = value;    
@@ -90,9 +80,9 @@ class ReactVirtualizedTable extends React.Component {
       sortDirection = SortDirection.ASC;
     }
     let { keys,type,dataKey } = this.props.columns.find(column => column.id === sortBy);
-   
-    console.log('handleRequest hit');
-
+    
+    // set state with the new sorting values
+    // these values will be evaluated in componentWillUpdate to see if the component should actually sort
     this.setState({ sortDirection, sortBy, type, sortKeys: keys, sortKey: dataKey });
   };
 
@@ -101,13 +91,6 @@ class ReactVirtualizedTable extends React.Component {
     this.props.select(event.rowData.id);
   }
   
-  getRowClassName = ({ index }) => {
-    const { classes, rowClassName, onRowClick } = this.props;
-
-    return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null
-    });
-  };
 
   cellRenderer = cellProps => {    
     const { classes, columns, rowHeight }= this.props;   
@@ -145,7 +128,7 @@ class ReactVirtualizedTable extends React.Component {
             rowCount={data.length}            
             onRowClick={this.handleClick}
             rowGetter={({ index }) => data[index]}
-            rowClassName={this.getRowClassName}
+            rowClassName={classNames(classes.tableRow, classes.flexContainer)}
             headerClassName={classes.headerCell}    
             sort={this.handleRequestSort} 
             sortBy={sortBy} 

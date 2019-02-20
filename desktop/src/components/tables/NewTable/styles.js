@@ -52,12 +52,13 @@ export default theme => ({
     marginRight: 0
   },
   tableRow: {
-    cursor: 'pointer'
-  },
-  tableRowHover: {
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.palette.grey[200]
     },
+  },
+  tableRowHover: {
+    
     marginRight: 0,
     flex: 1    
   },
