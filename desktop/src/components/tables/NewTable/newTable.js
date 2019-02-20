@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import { isEqual } from 'lodash';
 
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
@@ -11,93 +12,7 @@ import 'react-virtualized/styles.css';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import Cell from './cell';
 import Header from './header';
-import { outerStyles, tableStyles } from './styles';
-
-
-class MuiVirtualizedTable extends React.PureComponent {
-  getRowClassName = ({ index }) => {
-    const { classes, rowClassName, onRowClick } = this.props;
-
-    return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null
-    });
-  };
-
-  cellRenderer = cellProps => {
-    return <Cell {...cellProps} {...this.props} />;
-  }
-
-  headerRenderer = headerProps => {
-    return <Header {...headerProps} {...this.props} />;
-  }
-
-  render() {
-    const { classes, columns, ...tableProps } = this.props;
-    return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            className={classes.table}
-            height={height}
-            width={width}
-            {...tableProps}
-            rowClassName={this.getRowClassName}
-            headerClassName={classes.headerCell}                    
-          >
-            {columns.map(
-              (
-                { cellContentRenderer = null, className, id, ...other },
-                index
-              ) => {
-                
-                return (
-                  <Column
-                    key={id}
-                    headerRenderer={headerProps =>
-                      this.headerRenderer({
-                        ...headerProps,
-                        columnIndex: index,
-                        ...other
-                      })
-                    }
-                    flexGrow={1}
-                    className={classNames(classes.flexContainer, className)}
-                    cellRenderer={this.cellRenderer}
-                    dataKey={id}
-                    {...other}
-                  />
-                );
-              }
-            )}
-          </Table>
-        )}
-      </AutoSizer>
-    );
-  }
-}
-
-MuiVirtualizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      cellContentRenderer: PropTypes.func,
-      dataKey: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired
-    })
-  ).isRequired,
-  headerHeight: PropTypes.number,
-  onRowClick: PropTypes.func,
-  rowClassName: PropTypes.string,
-  rowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
-  sort: PropTypes.func
-};
-
-MuiVirtualizedTable.defaultProps = {
-  headerHeight: 56,
-  rowHeight: 56
-};
-
-const WrappedVirtualizedTable = withStyles(tableStyles)(MuiVirtualizedTable);
+import styles from './styles';
 
 
 class ReactVirtualizedTable extends React.Component {
@@ -106,10 +21,11 @@ class ReactVirtualizedTable extends React.Component {
 
     this.state = {
       data: props.data,
-      order: SortDirection.ASC,
-      orderBy: 'firstName',
+      sortDirection: SortDirection.ASC,
+      sortBy: 'firstName',
+      sortKey: 'employee',
       type: TableDataTypes.STRING,
-      keys: null
+      sortKeys: null
     };
   }
 
@@ -121,18 +37,21 @@ class ReactVirtualizedTable extends React.Component {
 
     if (
       nextState.sortBy !== prevSortBy ||
-      nextState.sortDirection !== prevSortDirection
+      nextState.sortDirection !== prevSortDirection 
     ) {
-      console.log(this.state);
-      this.setState({ data: this.stableSort(this.state.data, this.getSorting(nextState.sortDirection, nextState.sortBy, nextState.type, nextState.keys)) });  
+      //console.log(this.state);
+      this.setState({ data: this.stableSort(this.state.data, this.getSorting(nextState.sortDirection, nextState.sortBy, nextState.type, nextState.sortKeys, nextState.sortKey)) });  
     }
   }
 
   
-  desc = (a, b, orderBy,type, keys) => {
+  desc = (a, b, sortBy,type, sortKeys,sortKey) => {
     if(type === TableDataTypes.OBJECT){
-      const aVal = keys.reduce((object, currentKey) => object[currentKey],a[orderBy]);
-      const bVal = keys.reduce((object, currentKey) => object[currentKey],b[orderBy]);
+      // console.log({ desc: keys });
+      const aVal = sortKeys.reduce((object, currentKey) => object[currentKey],a[sortKey]);
+      const bVal = sortKeys.reduce((object, currentKey) => object[currentKey],b[sortKey]);
+      // console.log({ aVal });
+      // console.log({ bVal });
       if ( bVal < aVal) {
         return -1;
       }
@@ -142,10 +61,10 @@ class ReactVirtualizedTable extends React.Component {
       return 0; 
     }
     
-    if (b[orderBy] < a[orderBy]) {
+    if (b[sortBy] < a[sortBy]) {
       return -1;
     }
-    if (b[orderBy] > a[orderBy]) {
+    if (b[sortBy] > a[sortBy]) {
       return 1;
     }
     return 0;    
@@ -161,71 +80,134 @@ class ReactVirtualizedTable extends React.Component {
     return stabilizedThis.map(el => el[0]);
   }
   
-  getSorting = (order, orderBy, type, keys) => {
-    return order === SortDirection.DESC ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
+  getSorting = (sortDirection, sortBy, type, sortKeys, sortKey) => {
+    return sortDirection === SortDirection.DESC ? (a, b) => this.desc(a, b, sortBy, type, sortKeys, sortKey) : (a, b) => -this.desc(a, b, sortBy, type, sortKeys, sortKey);
   }
 
-  handleRequestSort = value => {    
-    let { sortBy, sortDirection } = value;
-
+  handleRequestSort = value => {
+    let { sortBy, sortDirection } = value;    
     if (this.state.sortBy === sortBy && this.state.sortDirection === SortDirection.DESC) {
       sortDirection = SortDirection.ASC;
     }
-    //console.log(this.props.columns, sortBy);
-    let { keys,type } = this.props.columns.find(column => column.id === sortBy);
+    let { keys,type,dataKey } = this.props.columns.find(column => column.id === sortBy);
    
+    console.log('handleRequest hit');
 
-
-    this.setState({ sortDirection, sortBy, type, keys });
+    this.setState({ sortDirection, sortBy, type, sortKeys: keys, sortKey: dataKey });
   };
-
-
 
 
   handleClick = event => {
     this.props.select(event.rowData.id);
   }
-  // sort = value => {
-  //   console.log(value);
-  //   let { sortBy, sortDirection } = value;
-  //   const {
-  //     sortBy: prevSortBy,
-  //     sortDirection: prevSortDirection
-  //   } = this.state;
-  //   console.log('old',prevSortBy,prevSortDirection);
-  //   console.log('new', sortBy,sortDirection);
-  //   console.log('data', value);
-  //   // If data was sorted DESC by this column.
-  //   // Rather than switch to ASC, return to "natural" order.
-  //   if (prevSortDirection === SortDirection.DESC) {
-  //     sortBy = null;
-  //     sortDirection = null;
-  //   }else if (prevSortDirection === SortDirection.ASC && prevSortBy === sortBy) {      
-  //     sortDirection = SortDirection.DESC;
-  //   }
+  
+  getRowClassName = ({ index }) => {
+    const { classes, rowClassName, onRowClick } = this.props;
 
-  //   this.setState({ sortBy, sortDirection });
-  // }
+    return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
+      [classes.tableRowHover]: index !== -1 && onRowClick != null
+    });
+  };
+
+  cellRenderer = cellProps => {    
+    const { classes, columns, rowHeight }= this.props;   
+    return <Cell {...cellProps} classes={classes} rowHeight={rowHeight} columns={columns}/>;
+  }
+
+  headerRenderer = headerProps => {  
+    const { classes, columns, headerHeight }= this.props;
+    const { sortBy, sortDirection, sortKeys } = this.state;
+
+    return <Header
+      {...headerProps} 
+      columns={columns} 
+      classes={classes} 
+      headerHeight={headerHeight}     
+      sortBy={sortBy} 
+      sortDirection={sortDirection}
+      sortKeys={sortKeys}
+    />;
+  }
+ 
+
   render() {    
     const { columns, classes } = this.props;
-    const { sortBy, sortDirection,data } = this.state;
-    //console.log(data);
+    const { sortBy, sortDirection, data } = this.state;    
+    const {  ...tableProps } = this.props;
     return (
-      <div className={classes.root} >
-        <WrappedVirtualizedTable
-          rowCount={data.length}
-          rowGetter={({ index }) => data[index]}
-          onRowClick={this.handleClick}
-          columns={columns}     
-          sort={this.handleRequestSort} 
-          sortBy={sortBy}
-          sortDirection={sortDirection}  
-        />
-      </div>
+      <AutoSizer>
+        {({ height, width }) => (
+          <Table
+            className={classes.table}
+            height={height}
+            width={width}
+            {...tableProps}            
+            rowCount={data.length}            
+            onRowClick={this.handleClick}
+            rowGetter={({ index }) => data[index]}
+            rowClassName={this.getRowClassName}
+            headerClassName={classes.headerCell}    
+            sort={this.handleRequestSort} 
+            sortBy={sortBy} 
+            sortDirection={sortDirection}         
+          >
+            {columns.map(
+              (
+                { className, id, ...other },
+                index
+              ) => {
+                
+                return (
+                  <Column
+                    key={id}
+                    headerRenderer={headerProps =>
+                      this.headerRenderer({
+                        ...headerProps,
+                        columnIndex: index,
+                        ...other
+                      })
+                    }                    
+                    flexGrow={1}
+                    className={classNames(classes.flexContainer, className)}
+                    cellRenderer={cellProps => 
+                      this.cellRenderer({
+                        ...cellProps 
+                        
+                      })
+                    }
+                    dataKey={id}                    
+                  />
+                );
+              }
+            )}
+          </Table>
+        )}
+      </AutoSizer>
     );
+  
+
+
+    // return (
+    //   <div className={classes.root} >
+    //     <WrappedVirtualizedTable
+    //       rowCount={data.length}
+    //       rowGetter={({ index }) => data[index]}
+    //       onRowClick={this.handleClick}
+    //       columns={columns}     
+    //       sort={this.handleRequestSort} 
+    //       sortBy={sortBy}
+    //       sortDirection={sortDirection}  
+    //     />
+    //   </div>
+    // );
   }
   
 }
 
-export default withStyles(outerStyles)(ReactVirtualizedTable);
+ReactVirtualizedTable.defaultProps = {
+  headerHeight: 56,
+  rowHeight: 56
+};
+
+export default withStyles(styles)(ReactVirtualizedTable);
 

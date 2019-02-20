@@ -89,8 +89,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
-    id: 'employee',   
-    //width: 150, 
+    id: 'firstName', 
+    dataKey: 'employee',
+    width: 150, 
     height: 56,
     padding: 'dense',
     label: 'First Name',
@@ -98,8 +99,9 @@ const rows = [
     keys: ['firstName']
   },
   {
-    id: 'employee',   
-    //width: 150,   
+    id: 'lastName', 
+    dataKey: 'employee',   
+    width: 150,   
     height: 56,
     padding: 'dense',
     label: 'Last Name',
@@ -107,24 +109,27 @@ const rows = [
     keys: ['lastName']
   },
   {
-    id: 'clockInDate',   
-    //width: 150,   
+    id: 'clockInDate',  
+    dataKey: 'clockInDate',  
+    width: 150,   
     height: 56,
     padding: 'dense',
     label: 'Clock In',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'clockOutDate',  
-    //width: 150,  
+    id: 'clockOutDate', 
+    dataKey: 'clockOutDate', 
+    width: 150,  
     height: 56,  
     padding: 'dense',
     label: 'Clock Out',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'length',     
-    //width: 150, 
+    id: 'length',    
+    dataKey: 'length',  
+    width: 150, 
     height: 56,
     padding: 'dense',
     label: 'Length',

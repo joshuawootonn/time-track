@@ -2,14 +2,14 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {TableCell} from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import moment from 'moment';
 
 import * as TableDataTypes from 'constants/tableDataTypes';
 
 class Cell extends React.Component {
   render() {
-    const { cellData, columnIndex = null,columns, classes, rowHeight } =this.props;
+    const { cellData,dataKey, rowData, columnIndex = null,columns, classes, rowHeight } =this.props;
     const { type, id, keys } =  columns[columnIndex]; 
 
     let data, alignment = 'left', key = id;
@@ -20,11 +20,12 @@ class Cell extends React.Component {
     } else if (type === TableDataTypes.STRING) {
       data = cellData;
     } else if (type === TableDataTypes.OBJECT) {
+      //console.log(this.props.rowData,dataKey);
       // The reduce function here is just used to deconstruct the objects to the value that we want on the table      
       data = keys.reduce((object, currentKey) => {
         // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
         return object === undefined ? null : object[currentKey];
-      },cellData);
+      },rowData[columns[columnIndex].dataKey]);
       key = id + keys.join('');
     } else if (type === TableDataTypes.DATE) {
       data = moment(cellData).format('MM/DD/YY');

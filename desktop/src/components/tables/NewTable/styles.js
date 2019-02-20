@@ -1,16 +1,13 @@
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-export const outerStyles = () => ({
+
+export default theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
     height: '100%'
   },  
-})
-
-export const tableStyles = theme => ({
-   
   tableWrapper: {
     overflowX: 'auto'
   },
