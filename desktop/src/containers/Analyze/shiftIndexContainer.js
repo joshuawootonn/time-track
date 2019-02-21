@@ -7,8 +7,8 @@ import moment from 'moment';
 
 import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
-import NewTable from 'components/tables/NewTable';
-import NewTableToolbar from 'components/toolbars/newTableToolbar';
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
+import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -35,18 +35,18 @@ export class ShiftIndex extends Component {
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (   
-      <div style={{height: '100%'}}>        
-        <NewTableToolbar 
+      <div style={{ height: 'calc(100% - 64px)' }}>        
+        <AnalyzeToolbar 
           selectLabel={this.selectLabel}
           label="Shifts"
           add={this.add}
           selected={selected}
         />
-        <NewTable
+        <VirtualizedSortSelect
           data={shifts || []}
           columns={rows} 
           selected={selected}
-          select={this.select}e      
+          select={this.select}     
         />
       </div>  
             

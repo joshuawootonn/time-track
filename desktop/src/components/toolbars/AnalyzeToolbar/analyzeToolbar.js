@@ -8,7 +8,7 @@ import { Add } from '@material-ui/icons';
 
 import styles from './styles';
 
-export const SortSelectToolbar = props => {
+export const AnalyzeToolbar = props => {
   const { selected, classes, add,label,selectLabel } = props;
   return (
     <Toolbar
@@ -39,7 +39,7 @@ export const SortSelectToolbar = props => {
   );
 };
 
-SortSelectToolbar.propTypes = {
+AnalyzeToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   add: PropTypes.func,
@@ -47,4 +47,4 @@ SortSelectToolbar.propTypes = {
   selectLabel: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SortSelectToolbar);
+export default withStyles(styles)(AnalyzeToolbar);

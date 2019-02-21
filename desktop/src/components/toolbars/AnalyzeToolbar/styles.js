@@ -1,15 +1,6 @@
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    height: '100%'
-  },  
-  tableWrapper: {
-    overflowX: 'auto'
-  },
+const styles = theme => ({ 
   toolbarRoot: {
     paddingRight: theme.spacing.unit,
     flexShrink: '0'
@@ -33,11 +24,6 @@ const styles = theme => ({
   title: {
     flex: '0 0 auto',
     textOverflow: 'ellipsis'
-  },
-  headerCell: {
-    background: 'white',
-    position: 'sticky',
-    top: 0
   }
 });
 

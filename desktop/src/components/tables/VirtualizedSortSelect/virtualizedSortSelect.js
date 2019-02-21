@@ -13,7 +13,7 @@ import Header from './header';
 import styles from './styles';
 
 
-class ReactVirtualizedTable extends React.Component {
+class VirtualizedSortSelect extends React.Component {
   constructor (props, context) {
     super(props, context);
 
@@ -167,30 +167,13 @@ class ReactVirtualizedTable extends React.Component {
         )}
       </AutoSizer>
     );
-  
-
-
-    // return (
-    //   <div className={classes.root} >
-    //     <WrappedVirtualizedTable
-    //       rowCount={data.length}
-    //       rowGetter={({ index }) => data[index]}
-    //       onRowClick={this.handleClick}
-    //       columns={columns}     
-    //       sort={this.handleRequestSort} 
-    //       sortBy={sortBy}
-    //       sortDirection={sortDirection}  
-    //     />
-    //   </div>
-    // );
-  }
-  
+  }  
 }
 
-ReactVirtualizedTable.defaultProps = {
+VirtualizedSortSelect.defaultProps = {
   headerHeight: 56,
   rowHeight: 56
 };
 
-export default withStyles(styles)(ReactVirtualizedTable);
+export default withStyles(styles)(VirtualizedSortSelect);
 
