@@ -118,7 +118,7 @@ const rows = [
   {
     id: 'clockInDate',  
     dataKey: 'clockInDate',  
-    width: 150,   
+    width: 200,   
     height: 56,
     padding: 'dense',
     label: 'Clock In',
@@ -127,7 +127,7 @@ const rows = [
   {
     id: 'clockOutDate', 
     dataKey: 'clockOutDate', 
-    width: 150,  
+    width: 200,  
     height: 56,  
     padding: 'dense',
     label: 'Clock Out',
@@ -136,7 +136,7 @@ const rows = [
   {
     id: 'length',    
     dataKey: 'length',  
-    width: 150, 
+    width: 120, 
     height: 56,
     padding: 'dense',
     label: 'Length',

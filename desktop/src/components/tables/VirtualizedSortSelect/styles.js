@@ -17,9 +17,9 @@ export default theme => ({
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    flex: 1,
-    
-    marginRight: 0
+    flex: 1,    
+    marginRight: 0,
+    textTransform: 'none'
   },
   //table 
   tableRow: {
@@ -35,6 +35,7 @@ export default theme => ({
   // header cell
   tableCell: {
     flex: 1,
-    marginRight: 0
+    marginRight: 0,
+    fontSize: '.8rem'
   }
 });

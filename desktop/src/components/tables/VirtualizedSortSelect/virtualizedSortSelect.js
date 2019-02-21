@@ -136,13 +136,14 @@ class VirtualizedSortSelect extends React.Component {
           >
             {columns.map(
               (
-                { className, id, ...other },
+                { className, id, width,...other },
                 index
               ) => {
                 
                 return (
                   <Column
                     key={id}
+                    width={width}
                     headerRenderer={headerProps =>
                       this.headerRenderer({
                         ...headerProps,
@@ -154,8 +155,7 @@ class VirtualizedSortSelect extends React.Component {
                     className={classNames(classes.flexContainer, className)}
                     cellRenderer={cellProps => 
                       this.cellRenderer({
-                        ...cellProps 
-                        
+                        ...cellProps                         
                       })
                     }
                     dataKey={id}                    
@@ -172,7 +172,7 @@ class VirtualizedSortSelect extends React.Component {
 
 VirtualizedSortSelect.defaultProps = {
   headerHeight: 56,
-  rowHeight: 56
+  rowHeight: 49
 };
 
 export default withStyles(styles)(VirtualizedSortSelect);
