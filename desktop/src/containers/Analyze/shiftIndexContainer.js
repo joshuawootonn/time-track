@@ -46,7 +46,8 @@ export class ShiftIndex extends Component {
           data={shifts || []}
           columns={rows} 
           selected={selected}
-          select={this.select}     
+          select={this.select}
+          initialSortBy="clockInDate"     
         />
       </div>  
             

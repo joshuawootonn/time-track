@@ -20,24 +20,28 @@ class VirtualizedSortSelect extends React.Component {
     this.state = {
       data: props.data,
       sortDirection: SortDirection.ASC,
-      sortBy: 'firstName',
-      sortKey: 'employee',
+      sortBy: props.initialSortBy || null,
+      sortKey: props.initialSortKey || null,
       type: TableDataTypes.STRING,
-      sortKeys: null
+      sortKeys: props.initialSortKeys || null
     };
   }
 
   componentWillUpdate (nextProps, nextState) {
     const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
     const { sortDirection,sortBy, type,sortKeys, sortKey } = nextState;
-
+    console.log('asdf')
     // if the sort order has actually changed
     if (sortBy !== prevSortBy || sortDirection !== prevSortDirection ) {
       //call sort on the items in state
+      
       this.setState({ data: this.sort(this.state.data,sortDirection, sortBy, type, sortKeys, sortKey) });  
     }
   }
-
+  componentDidMount () {
+    const { sortDirection,sortBy, type,sortKeys, sortKey, data } = this.state;
+    this.setState({ data: this.sort(data,sortDirection, sortBy, type, sortKeys, sortKey) }); 
+  }
   
   compareOrder = (a, b, sortBy,type, sortKeys,sortKey) => {
     if(type === TableDataTypes.OBJECT){
