@@ -127,8 +127,15 @@ export const login = pin => {
     dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_REQUEST });
     try {
       const response = await endpoints.getEmployeeByPin(pin);
-      const payload = normalize({ employees: [response.data] }, schemas.employeeArray);
+      const employeeObject = response.data;
+      
+      // Check that the employee isEmployed
+      if (!employeeObject.isEmployed){
+        dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE });  
+        return Promise.reject({message: 'Not currently employed!'});    
+      }
 
+      const payload = normalize({ employees: [response.data] }, schemas.employeeArray);
       return dispatch({
         type: employeeActionTypes.LOGIN_EMPLOYEE_SUCCESS,
         payload,
@@ -136,7 +143,7 @@ export const login = pin => {
       });
     } catch (e) {
       dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });  
-      return Promise.reject({message: 'NETWORK ERROR!'});    
+      return Promise.reject({message: 'Network Error!'});    
     }
   };
 };
