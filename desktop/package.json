@@ -28,17 +28,18 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-virtualized": "^9.21.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
-    "yup": "^0.25.1"
+    "yup": "^0.25.1"    
   },
   "homepage": "./",
-  "main": "public/electron.js",
+  "main": "src/electron-starter.js",
   "scripts": {
-    "start": " nf start -p 3000",
+    "start": "nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
@@ -59,11 +60,13 @@
       "target": "nsis",
       "icon": "build/favicon.ico"
     },
-    "publish": [{
-      "provider": "github",
-      "owner": "joshuawootonn",
-      "repo": "time-track"
-    }],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "joshuawootonn",
+        "repo": "time-track"
+      }
+    ],
     "directories": {
       "buildResources": "public",
       "output": "release"

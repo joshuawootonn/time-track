@@ -40,7 +40,7 @@ const styles = {
 export class Analyze extends Component {
 
   state = {
-    tabValue: 0
+    tabValue: 3
   }  
 
   handleTabValueChange = (e, tabValue) => {

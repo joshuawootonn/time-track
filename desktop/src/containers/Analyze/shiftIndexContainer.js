@@ -7,7 +7,8 @@ import moment from 'moment';
 
 import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
+import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -32,17 +33,23 @@ export class ShiftIndex extends Component {
     const { shifts, selected } = this.props;
     
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
-
-    return (
-      <SortSelectTable
-        selectLabel={this.selectLabel}
-        label="Shifts"
-        tableData={shifts || []}
-        headerData={rows}
-        selected={selected}
-        select={this.select}
-        add={this.add}
-      />
+    
+    return (   
+      <div style={{ height: 'calc(100% - 64px)' }}>        
+        <AnalyzeToolbar 
+          selectLabel={this.selectLabel}
+          label="Shifts"
+          add={this.add}
+          selected={selected}
+        />
+        <VirtualizedSortSelect
+          data={shifts || []}
+          columns={rows} 
+          selected={selected}
+          select={this.select}     
+        />
+      </div>  
+            
     );
   }
 }
@@ -89,33 +96,48 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
-    id: 'employee',    
+    id: 'firstName', 
+    dataKey: 'employee',
+    width: 150, 
+    height: 56,
     padding: 'dense',
     label: 'First Name',
     type: TableDataTypes.OBJECT,
     keys: ['firstName']
   },
   {
-    id: 'employee',    
+    id: 'lastName', 
+    dataKey: 'employee',   
+    width: 150,   
+    height: 56,
     padding: 'dense',
     label: 'Last Name',
     type: TableDataTypes.OBJECT,
     keys: ['lastName']
   },
   {
-    id: 'clockInDate',    
+    id: 'clockInDate',  
+    dataKey: 'clockInDate',  
+    width: 200,   
+    height: 56,
     padding: 'dense',
     label: 'Clock In',
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'clockOutDate',    
+    id: 'clockOutDate', 
+    dataKey: 'clockOutDate', 
+    width: 200,  
+    height: 56,  
     padding: 'dense',
     label: 'Clock Out',
     type: TableDataTypes.DATETIME
   },
   {
     id: 'length',    
+    dataKey: 'length',  
+    width: 120, 
+    height: 56,
     padding: 'dense',
     label: 'Length',
     type: TableDataTypes.LENGTH
