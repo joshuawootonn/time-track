@@ -13,7 +13,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 export class SortSelectTable extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'firstName'
+    orderBy: this.props.initialOrderBy || null
   };
   
   desc = (a, b, orderBy,type, keys) => {

@@ -36,6 +36,7 @@ export class TaskIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
+        initialOrderBy='name'
       />
     );
   }

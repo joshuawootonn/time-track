@@ -37,6 +37,7 @@ export class EmployeeIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
+        initialOrderBy='lastName'
       />
     );
   }
