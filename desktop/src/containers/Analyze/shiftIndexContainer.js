@@ -31,7 +31,7 @@ export class ShiftIndex extends Component {
 
   render() {
     const { shifts, selected } = this.props;
-    
+    console.log(shifts);
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (   

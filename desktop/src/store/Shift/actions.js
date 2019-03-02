@@ -77,13 +77,20 @@ export const createShift = shift => {
 };
 
 export const updateShift = shift => {
-  return async dispatch => {
+  return async (dispatch,getState) => {
     dispatch({ type: shiftActionTypes.UPDATE_SHIFT_REQUEST });
     try {
       const clockInMoment = moment(shift.clockInDate);
       const clockOutMoment = moment(shift.clockOutDate);
       const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment));
-     
+
+      // employee to not working
+      const oldShift = getState().entities.shifts[shift.id];
+      if(oldShift && !oldShift.clockOutDate){
+        const employee = getState().entities.employees[oldShift.employeeId];
+        dispatch(employeeActions.setIsWorking(employee,false));
+      }
+
       const shiftObject = {
         id: shift.id,
         employeeId: shift.employeeId,        
@@ -92,10 +99,11 @@ export const updateShift = shift => {
         clockInDate: clockInMoment.toString(),
         clockOutDate: clockOutMoment.toString()
       };      
+      console.log(shiftObject);
       const response = await dispatch(genericActions.put(domains.SHIFT,shiftObject));
+
       await endpoint.deleteRelatedActivities(shift.id); 
       for(const activity of shift.activities) {
-        // activity.projectId = undefined;
         activity.shiftId = response.data.id;
         activity.id = undefined;
         await dispatch(genericActions.post(domains.ACTIVITY,activity));
