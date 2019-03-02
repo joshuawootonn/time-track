@@ -20,6 +20,10 @@ export const getAllProjectTasks = createSelector(
         task: tasks && tasks[projectTasks[projectTaskId].taskId],
         project: projects && projects[projectTasks[projectTaskId].projectId]
       };
+    }).sort((a,b) => {
+      if(a.task.name > b.task.name) return 1;
+      if(a.task.name < b.task.name) return -1;
+      return 0;
     });
   },
 );

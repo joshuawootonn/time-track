@@ -14,6 +14,10 @@ export const getAllTasks = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(taskId => {
       return tasks[taskId];
+    }).sort((a,b) => {
+      if(a.name > b.name) return 1;
+      if(a.name < b.name) return -1;
+      return 0;
     })
   },
 );
@@ -36,6 +40,10 @@ export const getAllTasksWithContent = createSelector(
         category: categories && subcategories && categories[subcategories[task.subcategoryId].categoryId],
         dimension: dimensions && subcategories && dimensions[subcategories[task.subcategoryId].dimensionId] 
       };
+    }).sort((a,b) => {
+      if(a.name > b.name) return 1;
+      if(a.name < b.name) return -1;
+      return 0;
     });
   }
 );
