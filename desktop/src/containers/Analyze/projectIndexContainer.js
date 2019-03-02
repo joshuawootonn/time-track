@@ -25,6 +25,7 @@ export class ProjectIndex extends Component {
   render () {
     const { projects,selected } = this.props;
 
+    console.log('project analyze render');
     if (projects === undefined) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (

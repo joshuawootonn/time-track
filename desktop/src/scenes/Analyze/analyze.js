@@ -68,7 +68,7 @@ export class Analyze extends Component {
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
         </AppBar>
-        { tabValue === 0  && 
+        {/* { tabValue === 0  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 0 })} >
           <Grid item xs={7}>
             <EmployeeIndexContainer />
@@ -94,7 +94,7 @@ export class Analyze extends Component {
           <Grid item xs={5}>
             <TaskDetailContainer />
           </Grid>
-        </Grid> }
+        </Grid> } */}
         { tabValue === 3  && 
         <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 3 })} >
           <Grid item xs={6}>

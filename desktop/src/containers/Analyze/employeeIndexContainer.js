@@ -24,6 +24,7 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected } = this.props;
+    console.log('employee analyze render');
 
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;

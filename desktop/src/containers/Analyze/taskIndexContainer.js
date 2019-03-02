@@ -24,7 +24,7 @@ export class TaskIndex extends Component {
 
   render() {
     const { tasks, selected } = this.props;
-    
+    console.log('task analyze render');
     if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (

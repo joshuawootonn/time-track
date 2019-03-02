@@ -16,14 +16,14 @@ export class AccountSignin extends Component {
 
   componentDidMount = () => {
   //REMOVE before deploy
-    // const { login, history, getStaticData } = this.props;
-    // getStaticData();
-    // login('565656').then(asdf => {
-    //   const { authorityId } = asdf.data;  
-    //   history.push(`/${this.props.authorities[authorityId].type}`);         
-    // }, () => {
-    // //rip
-    // });    
+    const { login, history, getStaticData } = this.props;
+    getStaticData();
+    login('565656').then(asdf => {
+      const { authorityId } = asdf.data;  
+      history.push(`/${this.props.authorities[authorityId].type}`);         
+    }, () => {
+    //rip
+    });    
   }
   render() {
     console.log(HOST);

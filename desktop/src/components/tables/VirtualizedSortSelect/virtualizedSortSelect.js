@@ -27,21 +27,20 @@ class VirtualizedSortSelect extends React.Component {
     };
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
-    const { sortDirection,sortBy, type,sortKeys, sortKey } = nextState;
-    console.log('asdf')
-    // if the sort order has actually changed
-    if (sortBy !== prevSortBy || sortDirection !== prevSortDirection ) {
-      //call sort on the items in state
+  // componentWillUpdate (nextProps, nextState) {
+  //   const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
+  //   const { sortDirection,sortBy, type,sortKeys, sortKey } = nextState;
+    
+  //   // if the sort order has actually changed
+  //   if (sortBy !== prevSortBy || sortDirection !== prevSortDirection ) {     //call sort on the items in state
       
-      this.setState({ data: this.sort(this.state.data,sortDirection, sortBy, type, sortKeys, sortKey) });  
-    }
-  }
-  componentDidMount () {
-    const { sortDirection,sortBy, type,sortKeys, sortKey, data } = this.state;
-    this.setState({ data: this.sort(data,sortDirection, sortBy, type, sortKeys, sortKey) }); 
-  }
+  //     this.setState({ data: this.sort(this.state.data,sortDirection, sortBy, type, sortKeys, sortKey) });  
+  //   }
+  // }
+  // componentDidMount () {
+  //   const { sortDirection,sortBy, type,sortKeys, sortKey, data } = this.state;
+  //   this.setState({ data: this.sort(data,sortDirection, sortBy, type, sortKeys, sortKey) }); 
+  // }
   
   compareOrder = (a, b, sortBy,type, sortKeys,sortKey) => {
     if(type === TableDataTypes.OBJECT){
@@ -121,6 +120,7 @@ class VirtualizedSortSelect extends React.Component {
     const { columns, classes } = this.props;
     const { sortBy, sortDirection, data } = this.state;    
     const {  ...tableProps } = this.props;
+    console.log('table: virtualized')
     return (
       <AutoSizer>
         {({ height, width }) => (

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
+import {isEqualWith, isEqual} from 'lodash'
 
 import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
@@ -29,9 +30,37 @@ export class ShiftIndex extends Component {
 
   add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
 
+  shouldComponentUpdate(nextProps, nextState){
+    if (!isEqual(this.props.selected,nextProps.selected)){
+      return true
+    }
+    const areShiftsTheSame = isEqualWith( this.props.shifts, nextProps.shifts, (a,b) => {      
+      if(a === null && b === null){
+        return true;
+      }else if(a === null || b === null) {
+        return false;
+      }else if (a.length === b.length){
+        for(let i = 0; i < a.length; i++){
+          if(a.id !== b.id) 
+            return false;
+        }
+      }else {
+        return false;
+      }      
+      return true;
+    })
+
+    //console.log('render: ? ',!areShiftsTheSame)
+    if(areShiftsTheSame){
+      return false;
+    }else {
+      return true;
+    }
+    
+  }
   render() {
     const { shifts, selected } = this.props;
-    console.log(shifts);
+    //console.log('shift analyze render',shifts,selected);
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (   
