@@ -19,7 +19,7 @@ export const getAllEmployees = createSelector(
       if(a.firstName > b.firstName) return 1;
       if(a.firstName < b.firstName) return -1;
       return 0;
-    })
+    });
   },
 );
 export const getSelectedEmployee = createSelector(

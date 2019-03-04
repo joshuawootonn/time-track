@@ -38,7 +38,7 @@ describe('Export Container', () => {
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     expect(props.exportToExcel).toHaveBeenCalledTimes(0);    
     expect(props.history.push).toHaveBeenCalledTimes(0);
-    const values = {exportCategory: 1, start: 2, fileLocation: 3};
+    const values = { exportCategory: 1, start: 2, fileLocation: 3 };
     onSubmit(values,formikFunctions).then(() => {      
       expect(props.exportToExcel).toHaveBeenCalledTimes(1); 
       expect(props.history.push).toHaveBeenCalledTimes(1);    

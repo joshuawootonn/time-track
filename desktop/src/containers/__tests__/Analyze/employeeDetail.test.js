@@ -6,7 +6,7 @@ import { EmployeeDetail } from 'containers/Analyze/employeeDetailsContainer';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
-  selected: { id: 1,isEmployed: 0, isWorking: 1 },
+  selected: { id: 1,isEmployed: 0, isWorking: 1, authorityId: 1, crewId: 1 },
   status: analyzeStatus.INIT,
   authorities: [{ id: 1 },{ id: 2 }],
   crews: [{ id: 1 },{ id: 2 }],

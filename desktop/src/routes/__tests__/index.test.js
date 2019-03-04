@@ -2,6 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Index from 'routes/index';
 
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+
+const mockStore = configureMockStore([thunk]);
+const store = mockStore();
+
 describe('Index Route', () => { 
   it('should be an array with 4 element', () => {
     expect(Index).toBeDefined();
@@ -11,10 +18,16 @@ describe('Index Route', () => {
     const routeRegex = /^\/$|((\/)\w+)+/;
     Index.forEach(route => {
       expect(route.path.match(routeRegex)).not.toBeNull();
-      shallow(<route.component routes={route.routes} type={route.type}/>);
+      shallow(<Provider store={store}>
+        <route.component routes={route.routes} type={route.type}/>
+      </Provider>);
       route.routes.forEach(subroute => {
         expect(subroute.path.match(routeRegex)).not.toBeNull();
-        shallow(<subroute.component type={subroute.type}/>);
+        shallow(
+          <Provider store={store}>
+            <subroute.component type={subroute.type} />
+          </Provider>
+        );
       });
     });
   });

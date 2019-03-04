@@ -22,7 +22,7 @@ export class AuthSignin extends Component {
     const hasValidCred = cred.ip && cred.username && cred.password;
     return (
       <Formik
-        initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: '', username: '', password: ''}}
+        initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: '', username: '', password: '' }}
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;

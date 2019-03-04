@@ -13,7 +13,7 @@ export class SortSelectHead extends React.Component {
   };
 
   render() {
-    const {  order, orderBy, headerData,keys,type, classes } = this.props;
+    const {  order, orderBy, headerData, keys, type, classes } = this.props;
     
     return (
       <TableHead>
@@ -63,8 +63,8 @@ SortSelectHead.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
+  order: PropTypes.string,
+  orderBy: PropTypes.string,
   rowCount: PropTypes.number.isRequired,
   headerData: PropTypes.array.isRequired,
   keys: PropTypes.array,

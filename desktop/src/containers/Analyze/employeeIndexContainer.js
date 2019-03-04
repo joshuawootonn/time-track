@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { analyzeActions,employeeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -11,9 +11,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class EmployeeIndex extends Component {
-  
-  
+export class EmployeeIndex extends Component { 
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
   select = object => this.props.select(domain.EMPLOYEE,object)
@@ -43,7 +41,7 @@ export class EmployeeIndex extends Component {
 }
 
 EmployeeIndex.propTypes = {
-  employees: PropTypes.array.isRequired,
+  employees: PropTypes.array,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired

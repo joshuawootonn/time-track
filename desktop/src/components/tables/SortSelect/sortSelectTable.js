@@ -119,7 +119,7 @@ export class SortSelectTable extends React.Component {
                           return <TableCell padding="dense" key={id+keys.join('')} >{
                             keys.reduce((object, currentKey) => {
                               // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
-                              return object === undefined ?  null : object[currentKey]
+                              return object === undefined ?  null : object[currentKey];
                             },n[id])                          
                           }</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
@@ -151,6 +151,7 @@ SortSelectTable.propTypes = {
   selected: PropTypes.object.isRequired,
   select: PropTypes.func.isRequired,
   add: PropTypes.func,
+  initialOrderBy: PropTypes.string,
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired
 };

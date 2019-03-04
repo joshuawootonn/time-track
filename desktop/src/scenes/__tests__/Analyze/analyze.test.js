@@ -8,7 +8,11 @@ const props =  {
   history: {
     goBack: jest.fn()
   },
-  openSettings: jest.fn()
+  openSettings: jest.fn(),
+  getAllEmployees: jest.fn(),
+  getAllProjects: jest.fn(),
+  getAllTasks: jest.fn(),
+  getShiftsInRange:jest.fn()  
 };
 
 const setup = overRides => {  
@@ -24,7 +28,6 @@ describe('Analyze Scene', () => {
   it('should display different containers based on state.tabValue', () =>{
     const wrapper = setup();
     const instance = wrapper.instance();
-    expect(wrapper.state().tabValue).toEqual(0);
     instance.handleTabValueChange(null,2);
     expect(wrapper.state().tabValue).toEqual(2);
     instance.handleTabValueChange(null,0);

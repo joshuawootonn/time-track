@@ -7,7 +7,6 @@ import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
-import moment from 'moment';
 
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
