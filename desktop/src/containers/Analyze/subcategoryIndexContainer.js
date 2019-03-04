@@ -33,6 +33,7 @@ export class SubcategoryIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
+        initialOrderBy='type'
       />
     );
   }

@@ -62,7 +62,7 @@ export const removeEmployee = id => {
 
 export const setIsWorking = (employee,isWorking) => {
   return async dispatch => {
-    return dispatch(genericActions.put(domains.EMPLOYEE,{
+    return await dispatch(genericActions.put(domains.EMPLOYEE,{
       ...employee,
       isWorking: isWorking
     }));

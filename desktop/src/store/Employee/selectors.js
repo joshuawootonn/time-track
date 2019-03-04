@@ -15,7 +15,11 @@ export const getAllEmployees = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(employeeId => {
       return employees[employeeId];
-    });
+    }).sort((a,b) => {
+      if(a.firstName > b.firstName) return 1;
+      if(a.firstName < b.firstName) return -1;
+      return 0;
+    })
   },
 );
 export const getSelectedEmployee = createSelector(
@@ -52,6 +56,10 @@ export const getAllEmployeesWithContents = createSelector(
         authority: authorities[emp.authorityId],
         crew: crews[emp.crewId]
       };
+    }).sort((a,b) => {
+      if(a.firstName > b.firstName) return 1;
+      if(a.firstName < b.firstName) return -1;
+      return 0;
     });
   },
 );

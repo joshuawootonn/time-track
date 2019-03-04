@@ -12,9 +12,7 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ProjectIndex extends Component {
-  componentDidMount = () => {
-    this.props.getAllProjects();
-  }
+ 
 
   selectLabel = selected =>`${selected.name} selected`;
 
@@ -25,6 +23,7 @@ export class ProjectIndex extends Component {
   render () {
     const { projects,selected } = this.props;
 
+    console.log('project analyze render');
     if (projects === undefined) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
@@ -36,6 +35,7 @@ export class ProjectIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
+        initialOrderBy='name'
       />
     );
   }
@@ -43,7 +43,6 @@ export class ProjectIndex extends Component {
 
 ProjectIndex.propTypes ={ 
   projects: PropTypes.array,
-  getAllProjects: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
@@ -60,9 +59,6 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    getAllProjects: () => {
-      return dispatch(projectActions.getAllProjects());
-    },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };

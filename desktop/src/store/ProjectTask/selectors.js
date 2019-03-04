@@ -15,11 +15,16 @@ export const getAllProjectTasks = createSelector(
   (projectTasks, results,tasks,projects) => {
     if (!results || results.length === 0) return null;
     return results.map(projectTaskId => {
+      //console.log(tasks && tasks[projectTasks[projectTaskId].taskId])
       return {
         ...projectTasks[projectTaskId],
         task: tasks && tasks[projectTasks[projectTaskId].taskId],
         project: projects && projects[projectTasks[projectTaskId].projectId]
       };
+    }).sort((a,b) => {
+      if(a.task.name > b.task.name) return 1;
+      if(a.task.name < b.task.name) return -1;
+      return 0;
     });
   },
 );

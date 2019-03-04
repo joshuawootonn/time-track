@@ -87,7 +87,23 @@ describe('User Actions', () => {
     await compareActionTypes(expectedActionTypes,store,shiftActions.createShift({}));
   });
   //UPDATE SHIFT
-  test('updateShift should dispatch 5 actions on Failure', async () => {
+  let updateShiftStoreMock = mockStore({
+    entities: {
+      employees: {
+        1: {
+          id: 1,
+          firstName: 'first',
+          lastName: 'last'
+        }
+      },
+      shifts: {
+        1: {
+          employeeId: 1
+        }
+      }
+    }
+  });
+  test('updateShift should dispatch 9 actions on Success', async () => {
     const expectedActionTypes = [
       'update_shift_request',
       'put_shift_request',
@@ -100,8 +116,13 @@ describe('User Actions', () => {
       'put_shift_success'     
     ];   
     let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
-    mock.onAny().reply(200,[]);
-    await compareActionTypes(expectedActionTypes,store,shiftActions.updateShift({
+    mock.onPut(/shift/).reply(200,{
+      id: 1
+    });
+    mock.onAny(/activi/).reply(200,[])
+    mock.onGet(/shift/).reply(200,[])
+    await compareActionTypes(expectedActionTypes,updateShiftStoreMock,shiftActions.updateShift({
+      id: 1,
       clockInDate: currentMoment,
       clockOutDate: currentMoment,
       employeeId: 1,
@@ -109,6 +130,8 @@ describe('User Actions', () => {
       activities: [{ shiftId: 1 }]
     }));
   });
+
+
   test('updateShift should dispatch 5 actions on Failure', async () => {
     const expectedActionTypes = [
       'update_shift_request',
@@ -118,8 +141,45 @@ describe('User Actions', () => {
       'put_shift_failure'     
     ];   
     mock.onAny().reply(400,[]);
-    await compareActionTypes(expectedActionTypes,store,shiftActions.updateShift({}));
+    await compareActionTypes(expectedActionTypes,updateShiftStoreMock,shiftActions.updateShift({
+      id: 1,
+      employeeId: 1
+    }));
   });
+  test.skip('updateShift should clock employee out if you edit their un completed shift', async () => {
+    const expectedActionTypes = [
+      'update_shift_request',
+      'put_shift_request',
+      'get_shift_request',
+      'get_shift_success',
+      'post_activity_request',
+      'post_activity_success',
+      'show_snack',
+      'update_shift_success',
+      'put_shift_success'     
+    ];  
+    let testSpecificStore = mockStore({
+      entities: {
+        employees: {
+          1: {}
+        },
+        shifts: {
+          1: {
+            employeeId: 1
+          }
+        }
+      }
+    });
+    let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
+    mock.onAny().reply(200,[]);
+    await compareActionTypes(expectedActionTypes,store,shiftActions.updateShift({
+      clockInDate: currentMoment,
+      clockOutDate: currentMoment,
+      employeeId: 1,
+      lunch: 30,
+      activities: [{ shiftId: 1 }]
+    }));
+  })
 
   // REMOVE SHIFT
   test('removeShift should dispatch 2 actions on Success', async () => {

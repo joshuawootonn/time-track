@@ -49,6 +49,7 @@ export class ShiftDetail extends Component {
           validationSchema={shiftValidation}
           onSubmit={(values,formikFunctions) => {
             const { updateShift } = this.props;
+
             return updateShift(values).then(
               () => {
                 formikFunctions.resetForm();
@@ -173,11 +174,11 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    createShift: (shift,activities) => {
-      return dispatch(shiftActions.createShift( shift, activities));
+    createShift: (shift) => {
+      return dispatch(shiftActions.createShift( shift));
     },
-    updateShift: (shift,activities) => {
-      return dispatch(shiftActions.updateShift(shift,activities));
+    updateShift: (shift) => {
+      return dispatch(shiftActions.updateShift(shift));
     },
     removeShift: shift => {
       return dispatch(shiftActions.removeShift(shift));

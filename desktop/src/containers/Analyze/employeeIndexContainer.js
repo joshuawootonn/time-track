@@ -12,9 +12,7 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class EmployeeIndex extends Component {
-  componentDidMount = () => {
-    this.props.getAllEmployees();    
-  };
+  
   
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
@@ -24,6 +22,7 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected } = this.props;
+    console.log('employee analyze render');
 
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;
@@ -37,6 +36,7 @@ export class EmployeeIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
+        initialOrderBy='lastName'
       />
     );
   }
@@ -44,7 +44,6 @@ export class EmployeeIndex extends Component {
 
 EmployeeIndex.propTypes = {
   employees: PropTypes.array.isRequired,
-  getAllEmployees: PropTypes.func.isRequired,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired
@@ -61,9 +60,6 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    getAllEmployees: () => {
-      return dispatch(employeeActions.getAllEmployees());
-    },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };

@@ -28,6 +28,7 @@ export class AuthorityIndex extends Component {
         headerData={rows}
         selected={selected}
         select={this.select}
+        initialOrderBy='type'
       />
     );
   }

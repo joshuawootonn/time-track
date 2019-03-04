@@ -7,9 +7,10 @@ import moment from 'moment';
 
 import * as TableDataTypes from 'constants/tableDataTypes';
 
-class Cell extends React.Component {
-  render() {
-    const { cellData,rowData, columnIndex = null,columns, classes, rowHeight } = this.props;
+const Cell = (props) => {
+
+    //console.log('table: cell')
+    const { cellData,rowData, columnIndex = null,columns, classes, rowHeight } = props;
     const { type, id, keys } =  columns[columnIndex]; 
 
     let data, alignment = 'left', key = id;
@@ -44,7 +45,7 @@ class Cell extends React.Component {
       {data}
     </TableCell>;
     
-  }
+  
 }
 
 Cell.propTypes = {

@@ -5,9 +5,10 @@ import classNames from 'classnames';
 import { TableCell, TableSortLabel } from '@material-ui/core';
 import {  SortDirection } from 'react-virtualized';
 
-class Header extends React.Component {
-  render() {
-    const { label, columnIndex, sortBy, sortDirection,headerHeight, columns, classes } = this.props;
+const Header  = (props) => {
+    const { label, columnIndex, sortBy, sortDirection,headerHeight, columns, classes } = props;
+
+    //console.log('table: header')
   
     const direction = {
       [SortDirection.ASC]: 'asc',
@@ -30,8 +31,6 @@ class Header extends React.Component {
         </TableSortLabel>
       </TableCell>
     );
-  
-  }
 }
 
 Header.propTypes = {

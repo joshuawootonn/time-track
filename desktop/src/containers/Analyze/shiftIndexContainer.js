@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
+import {isEqualWith, isEqual} from 'lodash'
 
 import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
@@ -14,24 +15,46 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class ShiftIndex extends Component {
-  componentDidMount = () => {
-    // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
-    this.props.getAllEmployees();
-    this.props.getAllProjects();
-    this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(400, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
-  }
-
+export class ShiftIndex extends Component { 
+  
   selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
 
   select = object => this.props.select(domain.SHIFT,object)
 
   add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
 
+  shouldComponentUpdate(nextProps, nextState){
+    if (!isEqual(this.props.selected,nextProps.selected)){
+      return true
+    }
+    const areShiftsTheSame = isEqualWith( this.props.shifts, nextProps.shifts, (a,b) => {      
+      if(a === null && b === null){
+        return true;
+      }else if(a === null || b === null) {
+        return false;
+      }else if (a.length === b.length){
+        for(let i = 0; i < a.length; i++){
+          if(a.id !== b.id) 
+            return false;
+        }
+      }else {
+        return false;
+      }      
+      return true;
+    })
+
+    //console.log('render: ? ',!areShiftsTheSame)
+    if(areShiftsTheSame){
+      return false;
+    }else {
+      return true;
+    }
+    
+  }
+
   render() {
     const { shifts, selected } = this.props;
-    
+    //console.log('shift analyze render',shifts,selected);
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (   
@@ -46,7 +69,8 @@ export class ShiftIndex extends Component {
           data={shifts || []}
           columns={rows} 
           selected={selected}
-          select={this.select}     
+          select={this.select}
+          initialSortBy="clockInDate"     
         />
       </div>  
             
@@ -56,10 +80,6 @@ export class ShiftIndex extends Component {
 
 ShiftIndex.propTypes = {
   shifts: PropTypes.array,
-  getShiftsInRange: PropTypes.func.isRequired,
-  getAllEmployees: PropTypes.func.isRequired,
-  getAllProjects: PropTypes.func.isRequired,
-  getAllTasks: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
@@ -75,19 +95,7 @@ const mapStateToProps = state => {
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
-  return {
-    getAllEmployees: () => {
-      return dispatch(employeeActions.getAllEmployees());
-    },
-    getAllProjects: () => {
-      return dispatch(projectActions.getAllProjects());
-    },
-    getAllTasks: () => {
-      return dispatch(taskActions.getAllTasks());
-    },
-    getShiftsInRange: (start, end) => {
-      return dispatch(shiftActions.getShiftsInRange(start, end));
-    },    
+  return {    
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };

@@ -28,6 +28,7 @@ export class CrewIndex extends Component {
         headerData={rows}
         selected={selected}
         select={this.select}
+        initialOrderBy='name'
       />
     );
   }

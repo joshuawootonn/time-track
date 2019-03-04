@@ -12,6 +12,10 @@ export const getAllCategories = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(categoryId => {
       return categories[categoryId];
+    }).sort((a,b) => {
+      if(a.type > b.type) return 1;
+      if(a.type < b.type) return -1;
+      return 0;
     });
   },
 );

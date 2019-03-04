@@ -10,6 +10,10 @@ export const getAllProjects = createSelector(
     if (!results || results.length === 0) return null;
     return results.map(projectId => {
       return projects[projectId];
+    }).sort((a,b) => {
+      if(a.name > b.name) return 1;
+      if(a.name < b.name) return -1;
+      return 0;
     })
   },
 );
