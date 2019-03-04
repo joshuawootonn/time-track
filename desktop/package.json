@@ -1,9 +1,15 @@
 {
   "name": "timetrack",
   "productName": "Time Track",
-  "author": "Joshua Wootonn",
+  "author": { 
+    "name" : "Joshua Wootonn",
+    "email" : "joshuawootonn@gmail.com",
+    "url" : "http://www.joshuawootonn.com"
+    },
   "description": "This is a time management software I wrote specific to All American Concrete in West Liberty, Iowa",
   "version": "2.0.1",
+  "email": "joshuawootonn@gmail.com",
+  "url": "http://www.joshuawootonn.com",
   "private": true,
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
@@ -40,25 +46,29 @@
   "main": "src/electron-starter.js",
   "scripts": {
     "start": "nf start -p 3000",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "coverage": "react-scripts test --env=jsdom --coverage",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
-    "eject": "react-scripts eject",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
-    "react-start": "cross-env BROWSER=none react-scripts start",
+    "react-start": "cross-env BROWSER=none react-scripts start",    
+    "test": "react-scripts test --env=jsdom",
+    "lint": "./node_modules/.bin/eslint --fix .",
+    "build": "react-scripts build",
     "pack": "build --dir",
     "dist": "npm run build && build",
-    "publish": "npm run build && build --win -p always",
-    "postinstall": "install-app-deps",
-    "lint": "./node_modules/.bin/eslint --fix ."
+    "dist-win": "npm run build && build --win -p always",
+    "dist-linux": "npm run build && build --linux -p always",
+    "postinstall": "install-app-deps"    
   },
   "build": {
     "appId": "com.electron.timetrack",
     "win": {
       "target": "nsis",
       "icon": "build/favicon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     },
     "publish": [
       {
