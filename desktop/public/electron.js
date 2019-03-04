@@ -1,12 +1,18 @@
+// Modules to control application life and create native browser window
 const electron = require('electron');
-const { autoUpdater } = require("electron-updater")
+const { autoUpdater } = require('electron-updater');
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
 const log = require("electron-log")
-// HERE IS WHERE THE SHARED ELECTRON FILES START
+
+
+log.transports.file.level = "debug"
+autoUpdater.logger = log
+
+log.info('App starting...')  
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
@@ -52,10 +58,6 @@ function createWindow() {
     mainWindow = null;
   });
 
-
-  log.transports.file.level = "debug"
-  autoUpdater.logger = log
-  autoUpdater.checkForUpdatesAndNotify()
 }
 
 // This method will be called when Electron has finished
@@ -63,6 +65,12 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
+app.on('ready', function () {  
+  log.info('App ready and checking for updates.')
+  autoUpdater.checkForUpdatesAndNotify().then((updateCheckResult) => {
+    log.info(updateCheckResult);
+  })
+});
 
 
 // Quit when all windows are closed.
@@ -191,30 +199,34 @@ const sendStatusToWindow = text => {
 
 
 autoUpdater.on('checking-for-update', () => {
+  log.info('Checking for updates.') 
   sendStatusToWindow('Checking for update...');
-  
 });
 autoUpdater.on('update-available', info => {
+  log.info('Updates available.')
   sendStatusToWindow('Update available.');
 });
 autoUpdater.on('update-not-available', info => {
+  log.info('Updates not available.')
   sendStatusToWindow('Update not available.');
 });
 autoUpdater.on('error', err => {
-  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+  sendStatusToWindow(`Error in au
+  log.info('Error in auto update.')to-updater: ${err.toString()}`);
 });
 autoUpdater.on('download-progress', progressObj => {
+  
+  log.info('Download progress: ' + progressObj.percent)
   sendStatusToWindow(
     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
   );
 });
 autoUpdater.on('update-downloaded', info => {
-  sendStatusToWindow('Update downloaded; will install now');
-});
-
-autoUpdater.on('update-downloaded', info => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
+  
+  log.info('Update downloaded. Time to install...')  
+  sendStatusToWindow('Update downloaded; will install now');
   autoUpdater.quitAndInstall();
 });

@@ -1,12 +1,12 @@
 {
   "name": "timetrack",
-  "author": { 
-    "name" : "Joshua Wootonn",
-    "email" : "joshuawootonn@gmail.com",
-    "url" : "http://www.joshuawootonn.com"
-    },
+  "author": {
+    "name": "Joshua Wootonn",
+    "email": "joshuawootonn@gmail.com",
+    "url": "http://www.joshuawootonn.com"
+  },
   "description": "Time Managment & Analytics",
-  "version": "2.0.5",
+  "version": "2.0.10",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
+    "electron-log": "^3.0.1",
     "electron-settings": "^3.2.0",
     "electron-updater": "^4.0.6",
     "exceljs": "^1.6.2",
@@ -42,18 +43,18 @@
     "yup": "^0.25.1"
   },
   "homepage": "./",
-  "main": "src/electron.js",
+  "main": "src/electron-starter.js",
   "scripts": {
     "start": "nf start -p 3000",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
-    "react-start": "cross-env BROWSER=none react-scripts start",    
+    "react-start": "cross-env BROWSER=none react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "lint": "./node_modules/.bin/eslint --fix .",
     "build": "react-scripts build",
     "pack": "build --dir",
     "dist": "npm run build && build --win --linux -p always",
-    "postinstall": "install-app-deps"    
+    "postinstall": "install-app-deps"
   },
   "build": {
     "appId": "com.electron.timetrack",
@@ -104,7 +105,7 @@
       "!/node_modules/",
       "!/src/routes",
       "!src/index.js",
-      "!src/electron.js",
+      "!src/electron-starter.js",
       "!src/electron-wait-react.js",
       "!src/registerServiceWorker.js",
       "!src/**/styles.js"
