@@ -1,11 +1,12 @@
-// Modules to control application life and create native browser window
 const electron = require('electron');
-const { autoUpdater } = require('electron-updater');
+const { autoUpdater } = require("electron-updater")
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
+const log = require("electron-log")
+// HERE IS WHERE THE SHARED ELECTRON FILES START
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
@@ -50,13 +51,19 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-  autoUpdater.checkForUpdates();
+
+
+  log.transports.file.level = "debug"
+  autoUpdater.logger = log
+  autoUpdater.checkForUpdatesAndNotify()
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
+
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -185,6 +192,7 @@ const sendStatusToWindow = text => {
 
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
+  
 });
 autoUpdater.on('update-available', info => {
   sendStatusToWindow('Update available.');

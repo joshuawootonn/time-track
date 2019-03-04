@@ -1,18 +1,42 @@
-// Modules to control application life and create native browser window
 const electron = require('electron');
+const { autoUpdater } = require("electron-updater")
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
+const log = require("electron-log")
+
+
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS
 } = require('electron-devtools-installer');
-const IPCConstants = require('./constants/ipc');
 
-const SETTINGS = require('./constants/settings');
+
+app.on('ready', () => {
+  [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
+    installExtension(extension)
+      .then(name => console.log(`Added Extension: ${name}`))
+      .catch(err => console.log('An error occurred: ', err));
+  });
+});
+
+
+
+
+// HERE IS WHERE THE SHARED ELECTRON FILES START
+
+const IPCConstants = {
+  SET_CRED: 'set_cred',
+  GET_CRED: 'get_cred',
+  CREATE_EXPORT: 'create_export'
+};
+
+const SETTINGS = {
+  USER_CRED: 'user_cred'
+};
 
 var Excel = require('exceljs');
 // Keep a global reference of the window object, if you don't, the window will
@@ -47,6 +71,11 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+
+  log.transports.file.level = "debug"
+  autoUpdater.logger = log
+  autoUpdater.checkForUpdatesAndNotify()
 }
 
 // This method will be called when Electron has finished
@@ -54,13 +83,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-app.on('ready', () => {
-  [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
-    installExtension(extension)
-      .then(name => console.log(`Added Extension: ${name}`))
-      .catch(err => console.log('An error occurred: ', err));
-  });
-});
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -79,8 +102,9 @@ app.on('activate', function() {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+/**
+ * Export stuff
+ */
 
 ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   settings.set(`${SETTINGS.USER_CRED}`, {
@@ -173,4 +197,44 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   } catch(e) {
     event.returnValue = 'failed';
   }
+});
+
+/**
+ * Auto Update
+ */
+
+const sendStatusToWindow = text => {
+  if (mainWindow) {
+    mainWindow.webContents.send('message', text);
+  }
+};
+
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+  
+});
+autoUpdater.on('update-available', info => {
+  sendStatusToWindow('Update available.');
+});
+autoUpdater.on('update-not-available', info => {
+  sendStatusToWindow('Update not available.');
+});
+autoUpdater.on('error', err => {
+  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+});
+autoUpdater.on('download-progress', progressObj => {
+  sendStatusToWindow(
+    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+  );
+});
+autoUpdater.on('update-downloaded', info => {
+  sendStatusToWindow('Update downloaded; will install now');
+});
+
+autoUpdater.on('update-downloaded', info => {
+  // Wait 5 seconds, then quit and install
+  // In your application, you don't need to wait 500 ms.
+  // You could call autoUpdater.quitAndInstall(); immediately
+  autoUpdater.quitAndInstall();
 });
