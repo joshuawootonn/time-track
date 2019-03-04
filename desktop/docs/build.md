@@ -36,6 +36,6 @@ todo...
 #### Set GH_TOKEN
  1. Go [here](https://github.com/settings/tokens)
  2. Create key with good description so you know wtf you are doing next time
- 3. Set key in env `[Environment]::SetEnvironmentVariable("GH_TOKEN","<YOUR_TOKEN_HERE>","User")`
+ 3. Set key in env `[Environment]::SetEnvironmentVariable("GH_TOKEN","<YOUR_TOKEN_HERE>","User")` or set the variables perminantly by following [these](http://www.forbeslindesay.co.uk/post/42833119552/permanently-set-environment-variables-on-windows) instructions
  4. Cut that check 💰
 
