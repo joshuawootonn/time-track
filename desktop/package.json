@@ -1,16 +1,15 @@
 {
   "name": "timetrack",
-  "productName": "Time Track",
   "author": { 
     "name" : "Joshua Wootonn",
     "email" : "joshuawootonn@gmail.com",
     "url" : "http://www.joshuawootonn.com"
     },
-  "description": "This is a time management software I wrote specific to All American Concrete in West Liberty, Iowa",
+  "description": "Time Managment & Analytics",
   "version": "2.0.1",
-  "email": "joshuawootonn@gmail.com",
   "url": "http://www.joshuawootonn.com",
-  "private": true,
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "^3.2.0",
@@ -68,7 +67,8 @@
       "target": [
         "AppImage",
         "deb"
-      ]
+      ],
+      "icon": "build/favicon.ico"
     },
     "publish": [
       {
