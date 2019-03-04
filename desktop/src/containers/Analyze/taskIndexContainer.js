@@ -12,10 +12,7 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class TaskIndex extends Component {  
-  componentDidMount = () => {
-    this.props.getAllTasks();
-  };
-
+ 
   selectLabel = selected =>`${selected.name} selected`;
 
   select = object => this.props.select(domain.TASK,object)
@@ -44,7 +41,6 @@ export class TaskIndex extends Component {
 
 TaskIndex.propTypes = {
   tasks: PropTypes.array,
-  getAllTasks: PropTypes.func.isRequired,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired
@@ -61,9 +57,6 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    getAllTasks: () => {
-      return dispatch(taskActions.getAllTasks());
-    },
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };

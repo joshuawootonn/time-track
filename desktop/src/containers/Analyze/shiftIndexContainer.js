@@ -15,15 +15,8 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class ShiftIndex extends Component {
-  componentDidMount = () => {
-    // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
-    this.props.getAllEmployees();
-    this.props.getAllProjects();
-    this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(400, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
-  }
-
+export class ShiftIndex extends Component { 
+  
   selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
 
   select = object => this.props.select(domain.SHIFT,object)
@@ -58,6 +51,7 @@ export class ShiftIndex extends Component {
     }
     
   }
+
   render() {
     const { shifts, selected } = this.props;
     //console.log('shift analyze render',shifts,selected);
@@ -86,10 +80,6 @@ export class ShiftIndex extends Component {
 
 ShiftIndex.propTypes = {
   shifts: PropTypes.array,
-  getShiftsInRange: PropTypes.func.isRequired,
-  getAllEmployees: PropTypes.func.isRequired,
-  getAllProjects: PropTypes.func.isRequired,
-  getAllTasks: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object
@@ -105,19 +95,7 @@ const mapStateToProps = state => {
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
-  return {
-    getAllEmployees: () => {
-      return dispatch(employeeActions.getAllEmployees());
-    },
-    getAllProjects: () => {
-      return dispatch(projectActions.getAllProjects());
-    },
-    getAllTasks: () => {
-      return dispatch(taskActions.getAllTasks());
-    },
-    getShiftsInRange: (start, end) => {
-      return dispatch(shiftActions.getShiftsInRange(start, end));
-    },    
+  return {    
     ...bindActionCreators({ ...analyzeActions }, dispatch)   
   };
 };

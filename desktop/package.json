@@ -34,7 +34,7 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
-    "yup": "^0.25.1"    
+    "yup": "^0.25.1"
   },
   "homepage": "./",
   "main": "src/electron-starter.js",

@@ -7,8 +7,9 @@ import cx from 'classnames';
 import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings } from '@material-ui/icons';
+import moment from 'moment'
 
-import { analyzeActions } from 'store/actions';
+import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
 import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
 import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
 import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
@@ -24,7 +25,7 @@ const styles = {
   },
   tab: {
     height: 'calc(100% - 48px)',
-    display: 'none'
+    display: 'flex'
   },
   grow: {
     flexGrow: 1
@@ -32,9 +33,9 @@ const styles = {
   tool: {
     minHeight: 0
   },
-  visible: {
-    display: 'flex'
-  }
+  // visible: {
+  //   display: 'flex'
+  // }
 };
 
 export class Analyze extends Component {
@@ -42,6 +43,13 @@ export class Analyze extends Component {
   state = {
     tabValue: 3
   }  
+  componentDidMount = () => {
+    // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
+    this.props.getAllEmployees();
+    this.props.getAllProjects();
+    this.props.getAllTasks();
+    this.props.getShiftsInRange(moment().subtract(400, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
+  }
 
   handleTabValueChange = (e, tabValue) => {
     this.setState({ tabValue });
@@ -68,8 +76,8 @@ export class Analyze extends Component {
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
         </AppBar>
-        {/* { tabValue === 0  && 
-        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 0 })} >
+         { tabValue === 0  && 
+        <Grid container className={classes.tab } >
           <Grid item xs={7}>
             <EmployeeIndexContainer />
           </Grid>
@@ -78,7 +86,7 @@ export class Analyze extends Component {
           </Grid>
         </Grid>}
         { tabValue === 1  && 
-        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 1 })} >
+        <Grid container className={classes.tab} >
           <Grid item xs={4}>
             <ProjectIndexContainer />
           </Grid>
@@ -87,23 +95,23 @@ export class Analyze extends Component {
           </Grid>
         </Grid>}
         { tabValue === 2  && 
-        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 2 })} >          
+        <Grid container className={classes.tab}>          
           <Grid item xs={7}>
             <TaskIndexContainer />
           </Grid>
           <Grid item xs={5}>
             <TaskDetailContainer />
           </Grid>
-        </Grid> } */}
+        </Grid> } 
         { tabValue === 3  && 
-        <Grid container className={cx(classes.tab,{ [classes.visible]: tabValue === 3 })} >
+        <Grid container className={classes.tab} >
           <Grid item xs={6}>
             <ShiftIndexContainer />
           </Grid>
           <Grid item xs={6}>
             <ShiftDetailsContainer /> 
           </Grid>
-        </Grid>}
+        </Grid>} 
       </div>
     );
   }
@@ -112,7 +120,11 @@ export class Analyze extends Component {
 Analyze.propTypes = {
   history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  openSettings: PropTypes.func.isRequired
+  openSettings: PropTypes.func.isRequired,
+  getShiftsInRange: PropTypes.func.isRequired,
+  getAllEmployees: PropTypes.func.isRequired,
+  getAllProjects: PropTypes.func.isRequired,
+  getAllTasks: PropTypes.func.isRequired,
 };
 
 /* istanbul ignore next */
@@ -120,7 +132,19 @@ const mapDispatchToProps = dispatch => {
   return {      
     openSettings: () => {
       return dispatch(analyzeActions.editSettingsModal());
-    }
+    },
+    getAllEmployees: () => {
+      return dispatch(employeeActions.getAllEmployees());
+    },
+    getAllProjects: () => {
+      return dispatch(projectActions.getAllProjects());
+    },
+    getAllTasks: () => {
+      return dispatch(taskActions.getAllTasks());
+    },
+    getShiftsInRange: (start, end) => {
+      return dispatch(shiftActions.getShiftsInRange(start, end));
+    },  
   };
 };
 
