@@ -6,6 +6,7 @@ const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
+const log = require("electron-log")
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
@@ -50,7 +51,10 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-  autoUpdater.checkForUpdates();
+
+  log.transports.file.level = "debug"
+  autoUpdater.logger = log
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 // This method will be called when Electron has finished

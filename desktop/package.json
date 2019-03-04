@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
+    "electron-log": "^3.0.1",
     "electron-settings": "^3.2.0",
     "electron-updater": "^4.0.6",
     "exceljs": "^1.6.2",
@@ -72,7 +73,8 @@
       {
         "provider": "github",
         "owner": "joshuawootonn",
-        "repo": "time-track"
+        "repo": "time-track",
+        "publishAutoUpdate": true
       }
     ],
     "directories": {
