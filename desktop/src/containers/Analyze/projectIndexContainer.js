@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { analyzeActions, projectActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -12,8 +12,6 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ProjectIndex extends Component {
- 
-
   selectLabel = selected =>`${selected.name} selected`;
 
   select = object => this.props.select(domain.PROJECT,object)
@@ -24,7 +22,7 @@ export class ProjectIndex extends Component {
     const { projects,selected } = this.props;
 
     console.log('project analyze render');
-    if (projects === undefined) return <Progress variant="circular" fullWidth fullHeight />;
+    if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
       <SortSelectTable 

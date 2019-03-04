@@ -12,11 +12,11 @@ let mock;
 const data = { 
   authorityId: 1,
   crewId: 1,
-  firstName: "Jay",
+  firstName: 'Jay',
   id: 10,
   isEmployed: 1,
   isWorking: 1,
-  lastName: "Simon",
+  lastName: 'Simon',
   pin: 121212
 };
 
@@ -192,11 +192,11 @@ describe('Employee Actions', () => {
     const data = { response: {
       authorityId: 1,
       crewId: 1,
-      firstName: "Jay",
+      firstName: 'Jay',
       id: 10,
       isEmployed: 1,
       isWorking: 1,
-      lastName: "Simon",
+      lastName: 'Simon',
       pin: 121212
     } };
     mock.onPut(/employees/).reply(200, data);
@@ -245,9 +245,9 @@ describe('Employee Actions', () => {
       'login_employee_request',
       'login_employee_failure'
     ];
-    mock.onAny(/employees/).reply(200, {...data, isEmployed: 0});
-    await compareActionTypes(expectedActionTypes,store,employeeActions.login(111111))
-  })
+    mock.onAny(/employees/).reply(200, { ...data, isEmployed: 0 });
+    await compareActionTypes(expectedActionTypes,store,employeeActions.login(111111));
+  });
   test('should dispatch 2 actions for login', async () => {
     const expectedActionTypes = [
       'login_employee_request',

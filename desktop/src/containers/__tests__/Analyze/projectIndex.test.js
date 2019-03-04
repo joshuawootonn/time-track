@@ -29,7 +29,7 @@ describe('Project Index Container', () => {
     setup();       
   });
   it('should render loader if projects falsey', () => {
-    const wrapper = setup({ projects: [] });
+    const wrapper = setup({ projects: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
   it('should generate a proper label on this.selectLabel', () => {

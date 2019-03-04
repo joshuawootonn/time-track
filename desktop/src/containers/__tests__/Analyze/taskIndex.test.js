@@ -29,7 +29,7 @@ describe('Task Index Container', () => {
     setup();       
   });
   it('should render loader if projects falsey', () => {
-    const wrapper = setup({ tasks: [] });
+    const wrapper = setup({ tasks: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
   it('should generate a proper label on this.selectLabel', () => {

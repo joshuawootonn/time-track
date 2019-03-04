@@ -174,10 +174,10 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    createShift: (shift) => {
+    createShift: shift => {
       return dispatch(shiftActions.createShift( shift));
     },
-    updateShift: (shift) => {
+    updateShift: shift => {
       return dispatch(shiftActions.updateShift(shift));
     },
     removeShift: shift => {

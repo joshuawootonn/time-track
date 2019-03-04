@@ -16,9 +16,9 @@ describe('Project Selectors', () => {
     expect(returnedValue).toEqual([{ val:'asdf' }]);
   });
   test('getAllProjects should return a sorted version of the projects it is mapping', () => {
-    const returnedValue=projectSelectors.getAllProjects.resultFunc({ 1: { name: 'zxcv' }, 2: { name: 'asdf'} },[1,2]);
-    expect(returnedValue).toEqual([{ name:'asdf' },{name: 'zxcv'}]);
-  })
+    const returnedValue=projectSelectors.getAllProjects.resultFunc({ 1: { name: 'zxcv' }, 2: { name: 'asdf' } },[1,2]);
+    expect(returnedValue).toEqual([{ name:'asdf' },{ name: 'zxcv' }]);
+  });
   test('getAllProjectObjects should return object of task with content on success', () => {
     let returnedValue=projectSelectors.getAllProjects.resultFunc({ 1: { val: 'asdf', id: 1 } },[1]);
     expect(returnedValue).toEqual([{ val:'asdf',id: 1 }]);

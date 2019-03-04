@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import cx from 'classnames';
 import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings } from '@material-ui/icons';
-import moment from 'moment'
+import moment from 'moment';
 
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
 import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
@@ -32,7 +31,7 @@ const styles = {
   },
   tool: {
     minHeight: 0
-  },
+  }
   // visible: {
   //   display: 'flex'
   // }
@@ -76,30 +75,30 @@ export class Analyze extends Component {
             <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
           </Toolbar>
         </AppBar>
-         { tabValue === 0  && 
+        { tabValue === 0  && 
         <Grid container className={classes.tab } >
-          <Grid item xs={7}>
+          <Grid item xs={6}>
             <EmployeeIndexContainer />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <EmployeeDetailsContainer />
           </Grid>
         </Grid>}
         { tabValue === 1  && 
         <Grid container className={classes.tab} >
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <ProjectIndexContainer />
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <ProjectDetailContainer />
           </Grid>
         </Grid>}
         { tabValue === 2  && 
         <Grid container className={classes.tab}>          
-          <Grid item xs={7}>
+          <Grid item xs={6}>
             <TaskIndexContainer />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TaskDetailContainer />
           </Grid>
         </Grid> } 
@@ -124,7 +123,7 @@ Analyze.propTypes = {
   getShiftsInRange: PropTypes.func.isRequired,
   getAllEmployees: PropTypes.func.isRequired,
   getAllProjects: PropTypes.func.isRequired,
-  getAllTasks: PropTypes.func.isRequired,
+  getAllTasks: PropTypes.func.isRequired
 };
 
 /* istanbul ignore next */
@@ -144,7 +143,7 @@ const mapDispatchToProps = dispatch => {
     },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
-    },  
+    }  
   };
 };
 

@@ -136,7 +136,7 @@ const headProps = {
 };
 
 const setupHead = () => {  
-  return mount(<table><SortSelectHead {...headProps} /></table>);
+  return mount(<table><SortSelectHead {...headProps} classes={{}} /></table>);
 };
 
 const setupHeadHOC = () => {

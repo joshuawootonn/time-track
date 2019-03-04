@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { analyzeActions,taskActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
 import { taskSelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
@@ -12,7 +12,6 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class TaskIndex extends Component {  
- 
   selectLabel = selected =>`${selected.name} selected`;
 
   select = object => this.props.select(domain.TASK,object)

@@ -35,7 +35,7 @@ describe('Shift Index Container', () => {
     setup();       
   });
   it('should render loader if shifts falsey', () => {
-    const wrapper = setup({ shifts: [] });
+    const wrapper = setup({ shifts: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
   it('should generate a proper label on this.selectLabel', () => {

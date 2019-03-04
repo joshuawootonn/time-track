@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
-import {isEqualWith, isEqual} from 'lodash'
+import { isEqualWith, isEqual } from 'lodash';
 
-import { employeeActions, taskActions, projectActions, shiftActions, analyzeActions } from 'store/actions';
+import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
 import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
@@ -23,9 +23,9 @@ export class ShiftIndex extends Component {
 
   add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps){
     if (!isEqual(this.props.selected,nextProps.selected)){
-      return true
+      return true;
     }
     const areShiftsTheSame = isEqualWith( this.props.shifts, nextProps.shifts, (a,b) => {      
       if(a === null && b === null){
@@ -41,7 +41,7 @@ export class ShiftIndex extends Component {
         return false;
       }      
       return true;
-    })
+    });
 
     //console.log('render: ? ',!areShiftsTheSame)
     if(areShiftsTheSame){

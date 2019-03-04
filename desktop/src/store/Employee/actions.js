@@ -132,7 +132,7 @@ export const login = pin => {
       // Check that the employee isEmployed
       if (!employeeObject.isEmployed){
         dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE });  
-        return Promise.reject({message: 'Not currently employed!'});    
+        return Promise.reject({ message: 'Not currently employed!' });    
       }
 
       const payload = normalize({ employees: [response.data] }, schemas.employeeArray);
@@ -143,7 +143,7 @@ export const login = pin => {
       });
     } catch (e) {
       dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });  
-      return Promise.reject({message: 'Network Error!'});    
+      return Promise.reject({ message: 'Network Error!' });    
     }
   };
 };

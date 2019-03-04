@@ -40,7 +40,7 @@ describe('Auth Signin Container', () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     
-    expect(props.login).toHaveBeenCalledTimes(1);
+    expect(props.login).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
     expect(props.history.push).toHaveBeenCalledTimes(0);
@@ -57,7 +57,7 @@ describe('Auth Signin Container', () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
     
-    expect(props.login).toHaveBeenCalledTimes(1);
+    expect(props.login).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setErrors).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);

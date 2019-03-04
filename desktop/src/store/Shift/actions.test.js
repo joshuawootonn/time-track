@@ -119,8 +119,8 @@ describe('User Actions', () => {
     mock.onPut(/shift/).reply(200,{
       id: 1
     });
-    mock.onAny(/activi/).reply(200,[])
-    mock.onGet(/shift/).reply(200,[])
+    mock.onAny(/activi/).reply(200,[]);
+    mock.onGet(/shift/).reply(200,[]);
     await compareActionTypes(expectedActionTypes,updateShiftStoreMock,shiftActions.updateShift({
       id: 1,
       clockInDate: currentMoment,
@@ -172,14 +172,14 @@ describe('User Actions', () => {
     });
     let currentMoment =  moment().format('MM-DD-YY HH:mm:ss');
     mock.onAny().reply(200,[]);
-    await compareActionTypes(expectedActionTypes,store,shiftActions.updateShift({
+    await compareActionTypes(expectedActionTypes,testSpecificStore,shiftActions.updateShift({
       clockInDate: currentMoment,
       clockOutDate: currentMoment,
       employeeId: 1,
       lunch: 30,
       activities: [{ shiftId: 1 }]
     }));
-  })
+  });
 
   // REMOVE SHIFT
   test('removeShift should dispatch 2 actions on Success', async () => {

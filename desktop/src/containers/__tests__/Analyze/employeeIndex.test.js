@@ -29,7 +29,7 @@ describe('Employee Index Container', () => {
     setup();       
   });
   it('should render loader if employees falsey', () => {
-    const wrapper = setup({ employees: [] });
+    const wrapper = setup({ employees: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
   it('should generate a proper label on this.selectLabel', () => {

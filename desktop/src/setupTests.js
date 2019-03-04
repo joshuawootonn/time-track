@@ -29,13 +29,14 @@ console.warn = message => {
 
   //originalConsoleWarn(message);
 };
+//console.log = jest.fn();
 global.window.require = function () {
   return {
     ipcRenderer: {
       send: function () {
         // Fake sending message to ipcMain
       },
-      sendSync: function(key,val) {
+      sendSync: function(key) {
         if(key === IPCConstants.GET_CRED){
           return { username: 'josh', password: '5656' };
         }else if (key === IPCConstants.CREATE_EXPORT){
