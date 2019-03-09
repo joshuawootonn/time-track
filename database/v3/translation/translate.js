@@ -107,7 +107,8 @@ async function main() {
 
 
   for await( const oldShift of shiftRows) {
-    const timeOfActivity = oldShift.time.split(':')[0] * 60 + oldShift.time.split(':')[1] || 0
+    const timeOfActivity = oldShift.time.split(':')[0] * 60 + oldShift.time.split(':')[1] || 0;
+    console.log(timeOfActivity,oldShift.time,oldShift.time.split(':')[0], oldShift.time.split(':')[1] )
     
     const [projectTaskRows] = await newConnection.execute(`SELECT * FROM ${constants.NEW_PROJECT_TASK_TABLE} WHERE task_id='${oldShift.itemid}' AND project_id='${oldShift.projectid}'`)
     const [projectTaskRows2] = await newConnection.execute(`SELECT * FROM ${constants.NEW_PROJECT_TASK_TABLE} WHERE task_id='40' AND project_id='${oldShift.projectid}'`)
@@ -118,14 +119,14 @@ async function main() {
     if(projectTaskRows.length > 0 && shiftRows2.length > 0)
     {
       await newConnection.execute(`INSERT INTO ${constants.NEW_ACTIVITY_TABLE} (id, length, description, shift_id, project_task_id) 
-      VALUES (${oldShift.id}, '${timeOfActivity}', '${oldShift.description}', ${oldShift.shiftid}, ${projectTaskRows[0].id} )`)
+      VALUES (${oldShift.id}, '${timeOfActivity}', '${oldShift.description || ''}', ${oldShift.shiftid}, ${projectTaskRows[0].id} )`)
     } else if (projectTaskRows.length > 0)
     {
       console.log(`Activity with id: ${oldShift.id} and shiftid: ${oldShift.shiftid} was not inserted because the shift was never created`)
     } else if (projectTaskRows2.length > 0 && shiftRows2.length > 0)
     {
       await newConnection.execute(`INSERT INTO ${constants.NEW_ACTIVITY_TABLE} (id, length, description, shift_id, project_task_id) 
-      VALUES (${oldShift.id}, '${timeOfActivity}', '${oldShift.description}', ${oldShift.shiftid}, ${projectTaskRows2[0].id} )`)
+      VALUES (${oldShift.id}, '${timeOfActivity}', '${oldShift.description  || ''}', ${oldShift.shiftid}, ${projectTaskRows2[0].id} )`)
     } else 
     {
       console.log(`Activity with id: ${oldShift.id} and shiftid: ${oldShift.shiftid} was not inserted on line ${114} due to there not being a valid project task with task_id: ${oldShift.itemid} and project_id: ${oldShift.projectid}`)

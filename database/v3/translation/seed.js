@@ -3,10 +3,10 @@ const constants = require('./constants');
 async function main() {
   const mysql = require('mysql2/promise');
   const newConnection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'newdatabase',
-    password: '5656'
+    host: constants.HOST,
+    user: constants.USER,
+    database: constants.NEW_DATABASE,
+    password: constants.PASS
   })
   console.log('Script Starting')
   // Authority
