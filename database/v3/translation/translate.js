@@ -107,8 +107,8 @@ async function main() {
 
 
   for await( const oldShift of shiftRows) {
-    const timeOfActivity = oldShift.time.split(':')[0] * 60 + oldShift.time.split(':')[1] || 0;
-    console.log(timeOfActivity,oldShift.time,oldShift.time.split(':')[0], oldShift.time.split(':')[1] )
+    const timeOfActivity = oldShift.time.split(':').length > 1 ? parseInt(oldShift.time.split(':')[0]) * 60 + parseInt(oldShift.time.split(':')[1]) : '0';
+    //console.log(timeOfActivity,oldShift.time,parseInt(oldShift.time.split(':')[0]),parseInt(oldShift.time.split(':')[1]) )
     
     const [projectTaskRows] = await newConnection.execute(`SELECT * FROM ${constants.NEW_PROJECT_TASK_TABLE} WHERE task_id='${oldShift.itemid}' AND project_id='${oldShift.projectid}'`)
     const [projectTaskRows2] = await newConnection.execute(`SELECT * FROM ${constants.NEW_PROJECT_TASK_TABLE} WHERE task_id='40' AND project_id='${oldShift.projectid}'`)
