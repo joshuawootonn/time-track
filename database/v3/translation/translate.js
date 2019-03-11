@@ -94,7 +94,7 @@ async function main() {
       // console.log(oldShift.timeout, ' --- ',parseInt(outTimeString[0]), ' --- ',parseInt(outTimeString[1]), ' --- ', outDatetime);
       //const length = oldShift.time.split(':')[0] * 60 + oldShift.time.split(':')[1]
       const length = outDatetimeMoment.diff(inDatetimeMoment, 'minutes');
-      const lunch = oldShift.timelunch.split(':')[0] * 60 + oldShift.timelunch.split(':')[1]
+      const lunch = parseInt(oldShift.timelunch.split(':')[0]) * 60 + parseInt(oldShift.timelunch.split(':')[1])
       
       //console.log(oldShift.shiftid, inDatetime, outDatetime,length, lunch, oldShift.employeeid)
     
