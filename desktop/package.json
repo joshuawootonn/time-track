@@ -50,7 +50,7 @@
     "electron-start": "node src/electron-wait-react",
     "react-start": "cross-env BROWSER=none react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "lint": "./node_modules/.bin/eslint --fix .",
+    "lint": "eslint --fix .",
     "build": "react-scripts build",
     "pack": "build --dir",
     "dist": "npm run build && build --win --linux -p always",

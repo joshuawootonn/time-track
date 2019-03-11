@@ -35,7 +35,8 @@ describe('Project Actions', () => {
     ];    
     mock.onGet().reply(200, []);  
     mock.onDelete(/projectTask/).reply(200,data);
-    mock.onPut(/projects/).reply(200, { response: true, id: 1 });  
+    mock.onPut(/projects/).reply(200, { response: true, id: 1 });      
+    mock.onPost(/projects/).reply(200, { response: true, id: 2 });  
     await compareActionTypes(expectedActionTypes,store,projectActions.updateProject({ id: 1,projectTasks: [] }));
   });
   test('updateProject should dispatch 6 actions on success plus 2 for deleting existing projectTasks', async () => {

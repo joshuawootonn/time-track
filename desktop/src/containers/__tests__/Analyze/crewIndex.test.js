@@ -10,7 +10,8 @@ const props =  {
   select: jest.fn(),
   crews: [{ id: 1 },{ id: 2 }],
   getAllCrews: jest.fn()
-    .mockImplementationOnce(() => Promise.resolve())
+    .mockImplementationOnce(() => Promise.resolve()),
+  setStatus: jest.fn()
 };
 
 const setup = overRides => {  
@@ -28,7 +29,7 @@ describe('Crew Index Container', () => {
   it('should generate a proper label on this.selectLabel', () => {
     const wrapper = setup();
     const instance = wrapper.instance();
-    const value = instance.selectLabel({ type: 'Josh' });
+    const value = instance.selectLabel({ name: 'Josh' });
     expect(value).toEqual('Josh selected');
   });
   it('should call props.select on this.select', () => {

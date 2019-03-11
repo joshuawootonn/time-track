@@ -16,7 +16,8 @@ const props =  {
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
-  errors: {}
+  errors: {},
+  touched: {}
 };
 
 const setup = overRides => {  

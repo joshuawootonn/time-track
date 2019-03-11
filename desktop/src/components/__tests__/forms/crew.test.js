@@ -12,7 +12,9 @@ const props =  {
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
-  errors: {}
+  errors: {},
+  removeCrew:jest.fn(),
+  type: 'add'
 };
 
 
@@ -27,6 +29,9 @@ const setupHOC = overRides => {
 describe('Crew Component', () => {  
   it('should render correctly', () => {
     setup();   
+  });
+  it('should render correctly with edit type', () => {
+    setup({ type: 'edit' });   
   });
   it('should render correctly withStyles', () => {
     setupHOC();
