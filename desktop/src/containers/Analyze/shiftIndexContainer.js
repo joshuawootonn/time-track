@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
-import { isEqualWith, isEqual } from 'lodash';
 
 import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';

@@ -14,7 +14,7 @@ import styles from './styles';
 
 export class Employee extends Component {
   render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors, touched  } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors  } = this.props;
    
     return (
       <Form>
