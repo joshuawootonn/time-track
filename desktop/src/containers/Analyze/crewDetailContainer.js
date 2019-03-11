@@ -12,6 +12,10 @@ import Crew from 'components/forms/Crew';
 import Hero from 'components/layouts/Hero';
 
 export class CrewDetail extends Component {
+  removeCrew = () => {
+    const { selected, removeCrew } = this.props;  
+    removeCrew(selected.id);
+  };
   render() {
     const { selected,status } = this.props;
     if(status === analyzeStatus.INIT) {
@@ -47,7 +51,44 @@ export class CrewDetail extends Component {
           render={formikFuncitons => {
             return (
               <Crew
+                type="edit"
+                removeCrew={this.removeCrew}
                 label="Edit"
+                {...formikFuncitons}
+              />
+            );
+          }}
+        />
+      );
+    }
+    if(status === analyzeStatus.ADDING){
+      return (
+        <Formik
+          enableReinitialize
+          initialValues={{
+            name: ''
+          }}   
+          validationSchema={crewValidation}
+          onSubmit={(values,formikFunctions) => {
+            const { createCrew } = this.props;
+            return createCrew({
+              ...values
+            }).then(
+              () => {
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: true });
+              },
+              () => {
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);
+              }
+            );
+          }}
+          render={formikFuncitons => {
+            return (
+              <Crew
+                type="type"
+                label="Add"
                 {...formikFuncitons}
               />
             );
@@ -67,9 +108,16 @@ const mapStateToProps = state => ({
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
+    createCrew: values => {
+      return dispatch(crewActions.createCrew(values));
+    },
     updateCrew: values => {
       return dispatch(crewActions.updateCrew(values));
+    },    
+    removeCrew: values => {
+      return dispatch(crewActions.removeCrew(values));
     }
+    
   };  
 };
 
