@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Typography, IconButton, MenuItem, SvgIcon } from '@material-ui/core';
-import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon,Close } from '@material-ui/icons';
+import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon, Close } from '@material-ui/icons';
 import { Field, FieldArray } from 'formik';
 
 import TextField from 'components/inputs/TextField';
@@ -13,7 +13,7 @@ import Time from 'components/inputs/Time';
 
 import styles from './styles';
 
-import { minutesToString } from 'helpers/time';
+import { minutesToString, minutesRoudedTime } from 'helpers/time';
 
 export const Clockout = props => {
   const { classes, isSubmitting, handleSubmit, shift, values, 
@@ -158,7 +158,7 @@ export const Clockout = props => {
 
                       <Grid item xs={12} className={classes.formFooter}>
                         <Typography variant="h5" margin="none">
-                          Time Left: {minutesToString(timeLeft)}
+                          Time Left: {minutesToString(minutesRoudedTime(timeLeft))}
                         </Typography>
                         <Typography variant="body1" margin="none" className={classes.error}>
                           {generalError}
@@ -168,7 +168,7 @@ export const Clockout = props => {
                           <Button
                             type="submit"
                             color="primary"
-                            disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
+                            disabled={isSubmitting || Object.keys(errors).length !== 0 || minutesRoudedTime(timeLeft) !== 0}
                             variant="contained"
                             className={classes.button}
                           >
