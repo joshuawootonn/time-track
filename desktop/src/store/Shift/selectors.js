@@ -32,17 +32,19 @@ export const getShiftsInRange = createSelector(
     //console.log('shift selectors',start, end)
     // map the shift Ids to array of shift objects 
     // while mapping activity ids to array of activities
-    return results.map(shiftId => {      
-      return {
-        ...shifts[shiftId],
-        employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
-        activities: shifts[shiftId] && shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
-          return activities[activityId];
-        })
-      };
-    }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
-      return moment(shift.clockInDate).isBetween(moment(start,'MM-DD-YY HH:mm:ss'),moment(end,'MM-DD-YY HH:mm:ss'));
-    }).slice(results.length-200,results.length);      
+    //console.log(results);
+    return results.slice(-200)
+      .map(shiftId => {      
+        return {
+          ...shifts[shiftId],
+          employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
+          activities: shifts[shiftId] && shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
+            return activities[activityId];
+          })
+        };
+      }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
+        return moment(shift.clockInDate).isBetween(moment(start,'MM-DD-YY HH:mm:ss'),moment(end,'MM-DD-YY HH:mm:ss'));
+      })     
   }
 );
 
