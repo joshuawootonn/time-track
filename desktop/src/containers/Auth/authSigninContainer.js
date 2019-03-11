@@ -19,23 +19,24 @@ export class AuthSignin extends Component {
   render() {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
     const hasValidCred = cred.ip && cred.username && cred.password;
+    
     return (
       <Formik
         initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: '', username: '', password: '' }}
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;
-          const { ip, username, password } = values;                  
+          const { ip, username, password } = values;    
+          ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+            ip,
+            username,
+            password
+          });              
           return login(ip, username, password)
             .then(() => {                 
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });              
-              history.push(routes.ROOT);
-              ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-                ip,
-                username,
-                password
-              });
+              history.push(routes.ROOT);              
             },
             error => {
               formikFunctions.setErrors({ submit: error.message });

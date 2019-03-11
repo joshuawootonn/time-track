@@ -9,10 +9,11 @@ export const login = (ip,username, password) => {
     dispatch({ type: userActionTypes.LOGIN_USER_REQUEST });
     try {
       const response = await endpoint.login(ip,username, password);     
-      
+      console.log('1')
       await dispatch(authorityActions.getAllAuthorities());
+      console.log('2')
       await dispatch(crewActions.getAllCrews());
-
+      console.log('3')
       return dispatch({ type: userActionTypes.LOGIN_USER_SUCCESS, payload: response.data });
     } catch (e) {
       dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
