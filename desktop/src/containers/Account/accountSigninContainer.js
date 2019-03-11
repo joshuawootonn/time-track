@@ -26,7 +26,7 @@ export class AccountSignin extends Component {
     // });    
   }
   render() {
-    console.log(HOST);
+    console.log(HOST());
     const { login, history, getStaticData, authorities } = this.props;
     return (
       <Formik

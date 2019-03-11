@@ -9,30 +9,30 @@ const DOMAIN = 'shifts';
 const CRUDendpoints = generateCRUDEndpoints(DOMAIN);
 
 export const get = id => {
-  return axios.get(`${HOST}/${DOMAIN}/${id}?filter[include]=activities`);
+  return axios.get(`${HOST()}/${DOMAIN}/${id}?filter[include]=activities`);
 };
 
 export const post = shift => {
-  return axios.post(`${HOST}/${DOMAIN}?filter[include]=activities`, { ...shift });
+  return axios.post(`${HOST()}/${DOMAIN}?filter[include]=activities`, { ...shift });
 };
 
 export const put = shift => {
-  return axios.put(`${HOST}/${DOMAIN}/${shift.id}?filter[include]=activities`, { ...shift });
+  return axios.put(`${HOST()}/${DOMAIN}/${shift.id}?filter[include]=activities`, { ...shift });
 };
 
 export const getCurrentShift = employeeId => {
   return axios.get(
-    `${HOST}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`,
+    `${HOST()}/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`,
   );
 };
 
 export const getShiftsInRange = (startTime, endTime) => {
   return axios.get(
-    `${HOST}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
+    `${HOST()}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
   );
 };
 export const deleteRelatedActivities = id => {
-  return axios.delete(`${HOST}/${DOMAIN}/${id}/activities`);
+  return axios.delete(`${HOST()}/${DOMAIN}/${id}/activities`);
 };
 
 
