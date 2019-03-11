@@ -43,7 +43,7 @@ export class File extends Component {
           </label>
         </div>
         {helper === 'normal' && <FormHelperText error={true}>
-          {getIn(form.errors, field.name)}
+          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '}
         </FormHelperText>}
       </FormControl>
     );

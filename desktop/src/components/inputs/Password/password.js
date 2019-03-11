@@ -14,7 +14,7 @@ export const Password = ({ field, form, id, label, helper,margin }) => (
     fullWidth
     margin={margin}
     FormHelperTextProps={helper ==='none' ? { style:{ display:'none' },error: true } : { error: true  }}
-    helperText={getIn(form.errors, field.name)|| ' '} 
+    helperText={getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '} 
   />
 );
 

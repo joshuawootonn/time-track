@@ -16,7 +16,12 @@ export class EmployeeIndex extends Component {
 
   select = object => this.props.select(domain.EMPLOYEE,object)
 
-  add = () => this.props.setStatus(domain.EMPLOYEE,analyzeStatus.ADDING)
+  add = () => {
+    if(this.props.selected){
+      this.props.select(domain.EMPLOYEE,this.props.selected.id);
+    }
+    this.props.setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);
+  } 
   
   render() {
     const { employees, selected } = this.props;

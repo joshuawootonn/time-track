@@ -28,6 +28,14 @@ export class SortSelectTable extends React.Component {
       }
       return 0; 
     }
+    if(typeof b[orderBy] === 'string' && typeof a[orderBy] === 'string'){
+      if (b[orderBy].toUpperCase() < a[orderBy].toUpperCase()) {
+        return -1;
+      }
+      if (b[orderBy].toUpperCase() > a[orderBy].toUpperCase()) {
+        return 1;
+      }
+    }
     
     if (b[orderBy] < a[orderBy]) {
       return -1;
