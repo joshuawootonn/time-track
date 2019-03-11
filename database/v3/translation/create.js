@@ -147,12 +147,12 @@ async function main() {
       INDEX \`fk_employee_crew1_idx\` (\`crew_id\` ASC),
       CONSTRAINT \`fk_employee_authority1\`
         FOREIGN KEY (\`authority_id\`)
-        REFERENCES \`newdatabase\`.\`authority\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`authority\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT \`fk_employee_crew1\`
         FOREIGN KEY (\`crew_id\`)
-        REFERENCES \`newdatabase\`.\`crew\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`crew\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
@@ -176,7 +176,7 @@ async function main() {
       INDEX \`fk_shift_employee1_idx\` (\`employee_id\` ASC),
       CONSTRAINT \`fk_shift_employee1\`
         FOREIGN KEY (\`employee_id\`)
-        REFERENCES \`newdatabase\`.\`employee\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`employee\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
@@ -227,12 +227,12 @@ async function main() {
       INDEX \`fk_subcategory_dimension1_idx\` (\`dimension_id\` ASC),
       CONSTRAINT \`fk_subcategory_category1\`
         FOREIGN KEY (\`category_id\`)
-        REFERENCES \`newdatabase\`.\`category\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`category\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT \`fk_subcategory_dimension1\`
         FOREIGN KEY (\`dimension_id\`)
-        REFERENCES \`newdatabase\`.\`dimension\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`dimension\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
@@ -254,7 +254,7 @@ async function main() {
       INDEX \`fk_task_subcategory1_idx\` (\`subcategory_id\` ASC),
       CONSTRAINT \`fk_task_subcategory1\`
         FOREIGN KEY (\`subcategory_id\`)
-        REFERENCES \`newdatabase\`.\`subcategory\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`subcategory\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
@@ -294,12 +294,12 @@ async function main() {
       INDEX \`fk_task_has_project_task1_idx\` (\`task_id\` ASC),
       CONSTRAINT \`fk_task_has_project_task1\`
         FOREIGN KEY (\`task_id\`)
-        REFERENCES \`newdatabase\`.\`task\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`task\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT \`fk_task_has_project_project1\`
         FOREIGN KEY (\`project_id\`)
-        REFERENCES \`newdatabase\`.\`project\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`project\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
@@ -323,12 +323,12 @@ async function main() {
       INDEX \`fk_activity_project_task1_idx\` (\`project_task_id\` ASC),
       CONSTRAINT \`fk_table1_shift1\`
         FOREIGN KEY (\`shift_id\`)
-        REFERENCES \`newdatabase\`.\`shift\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`shift\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT \`fk_activity_project_task1\`
         FOREIGN KEY (\`project_task_id\`)
-        REFERENCES \`newdatabase\`.\`project_task\` (\`id\`)
+        REFERENCES \`${constants.NEW_DATABASE}\`.\`project_task\` (\`id\`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB;`)    
