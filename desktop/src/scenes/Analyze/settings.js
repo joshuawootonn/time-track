@@ -99,18 +99,18 @@ export class Settings extends Component {
           </Grid> 
           <Grid item xs={10}>
             <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 0 })} spacing={0}>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 <AuthorityIndexContainer />
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 <AuthorityDetailContainer />
               </Grid>
             </Grid>
             <Grid container className={cx(classes.tab,{ [classes.visible]: currentMenu === 1 })} spacing={0}>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 <CrewIndexContainer />
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={7}>
                 <CrewDetailContainer />
               </Grid>
             </Grid>

@@ -85,7 +85,7 @@ export class Time extends Component {
           </Select>
         </div>
         {helper === 'normal' && <FormHelperText className={cx(classes.helper)} error={true}>
-          {getIn(form.errors, field.name)}
+          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '}
         </FormHelperText>}
       </FormControl>
     );

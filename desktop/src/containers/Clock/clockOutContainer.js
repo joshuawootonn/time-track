@@ -13,7 +13,7 @@ import { clockout as clockoutValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
-import { currentRoundedTime } from 'helpers/time';
+import { currentRoundedTime, minutesRoudedTime } from 'helpers/time';
 
 export class ClockOut extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ export class ClockOut extends Component {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
       date: clockInMoment.format('MMM D'),
-      length: `${minutesToString(shiftDuration.asMinutes())}`,
+      length: `${minutesToString(minutesRoudedTime(shiftDuration.asMinutes()))}`,
       lengthInMinutes: Math.floor(shiftDuration.asMinutes())
     };
 

@@ -1,12 +1,12 @@
 {
   "name": "timetrack",
-  "author": { 
-    "name" : "Joshua Wootonn",
-    "email" : "joshuawootonn@gmail.com",
-    "url" : "http://www.joshuawootonn.com"
-    },
+  "author": {
+    "name": "Joshua Wootonn",
+    "email": "joshuawootonn@gmail.com",
+    "url": "http://www.joshuawootonn.com"
+  },
   "description": "Time Managment & Analytics",
-  "version": "2.0.3",
+  "version": "2.0.10",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -48,13 +48,13 @@
     "start": "nf start -p 3000",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
-    "react-start": "cross-env BROWSER=none react-scripts start",    
+    "react-start": "cross-env BROWSER=none react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "lint": "./node_modules/.bin/eslint --fix .",
+    "lint": "eslint --fix .",
     "build": "react-scripts build",
     "pack": "build --dir",
     "dist": "npm run build && build --win --linux -p always",
-    "postinstall": "install-app-deps"    
+    "postinstall": "install-app-deps"
   },
   "build": {
     "appId": "com.electron.timetrack",

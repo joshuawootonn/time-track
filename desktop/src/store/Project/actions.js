@@ -35,16 +35,24 @@ export const updateProject = project => {
     dispatch({ type: projectActionTypes.UPDATE_PROJECT_REQUEST });
     try {
       const response = await dispatch(genericActions.put(domains.PROJECT,project));
-      const { data } = await endpoints.getProjectTasksByProjectId(project);
-   
-      for(const projectTaskInDb of data){
-        if(!project.projectTasks.find(ele => ele.id === projectTaskInDb.id)){ 
+      const { data:projectInDb } = await endpoints.getWithProjectTasks(project);
+      
+      // if in database but not in update delete from database
+      for(const projectTaskInDb of projectInDb.projectTasks){
+        if(!project.projectTasks.find(ele => ele.id === projectTaskInDb.id)){           
           await dispatch(genericActions.delet(domains.PROJECTTASK, projectTaskInDb.id));
         }
       }
-      for(const projectTask of project.projectTasks){        
-        projectTask.projectId = response.data.id;          
-        await dispatch(genericActions.put(domains.PROJECTTASK, projectTask));               
+      for(const projectTask of project.projectTasks){     
+        // if in the database and in for put
+        if (projectInDb.projectTasks.find(ele =>  projectTask.id  && ele.id === projectTask.id)){
+          await dispatch(genericActions.put(domains.PROJECTTASK, projectTask)); 
+        }
+        else // otherwise post the new projectTask
+        {
+          projectTask.projectId = response.data.id;          
+          await dispatch(genericActions.post(domains.PROJECTTASK, projectTask)); 
+        }              
       }
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Updated'));
       return dispatch({ type: projectActionTypes.UPDATE_PROJECT_SUCCESS });      

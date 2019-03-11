@@ -79,7 +79,7 @@ export class Task extends Component {
               <Button
                 type="submit"
                 color="primary"
-                disabled={isSubmitting}
+                disabled={isSubmitting || Object.keys(errors).length !== 0}
                 variant="contained"
                 className={classes.button}
               >

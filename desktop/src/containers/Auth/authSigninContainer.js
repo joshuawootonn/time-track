@@ -15,8 +15,7 @@ import { userSelectors } from 'store/selectors';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
-export class AuthSignin extends Component {
-  
+export class AuthSignin extends Component {  
   render() {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
     const hasValidCred = cred.ip && cred.username && cred.password;
@@ -26,17 +25,17 @@ export class AuthSignin extends Component {
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;
-          const { ip, username, password } = values;
-          ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-            ip,
-            username,
-            password
-          });        
+          const { ip, username, password } = values;                  
           return login(ip, username, password)
             .then(() => {                 
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });              
               history.push(routes.ROOT);
+              ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+                ip,
+                username,
+                password
+              });
             },
             error => {
               formikFunctions.setErrors({ submit: error.message });

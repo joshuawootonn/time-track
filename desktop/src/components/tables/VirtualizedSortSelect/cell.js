@@ -6,6 +6,7 @@ import { TableCell } from '@material-ui/core';
 import moment from 'moment';
 
 import * as TableDataTypes from 'constants/tableDataTypes';
+import { minutesRoudedTime } from 'helpers/time';
 
 const Cell = props => {
 
@@ -32,8 +33,8 @@ const Cell = props => {
   } else if (type === TableDataTypes.DATETIME) {
     data = moment(cellData).format('hh:mm a MM/DD');
   } else if (type === TableDataTypes.LENGTH) {
-    const length = moment.duration(cellData, 'minutes');
-    data = `${length.hours()}h ${length.minutes()}m`;
+    const length = minutesRoudedTime(moment.duration(cellData, 'minutes').asMinutes());
+    data = `${Math.floor(length/60)}h ${length%60}m`;
   }
   return <TableCell 
     className={ classNames(classes.tableCell, classes.flexContainer)} 
