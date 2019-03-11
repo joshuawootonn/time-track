@@ -73,7 +73,8 @@
       {
         "provider": "github",
         "owner": "joshuawootonn",
-        "repo": "time-track"
+        "repo": "time-track",
+        "publishAutoUpdate": true
       }
     ],
     "directories": {
