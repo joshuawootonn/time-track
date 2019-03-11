@@ -33,7 +33,8 @@ export class ProjectIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
-        initialOrderBy='name'
+        initialOrderBy='date'
+        initialOrder='desc'
       />
     );
   }

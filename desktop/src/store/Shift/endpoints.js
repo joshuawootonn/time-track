@@ -35,6 +35,7 @@ export const deleteRelatedActivities = id => {
   return axios.delete(`${HOST}/${DOMAIN}/${id}/activities`);
 };
 
+
 export default {
   ...CRUDendpoints,
   get,post,put

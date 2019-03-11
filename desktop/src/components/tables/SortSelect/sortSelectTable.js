@@ -12,7 +12,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 
 export class SortSelectTable extends React.Component {
   state = {
-    order: 'asc',
+    order: this.props.initialOrder || 'asc',
     orderBy: this.props.initialOrderBy || null
   };
   
@@ -160,6 +160,7 @@ SortSelectTable.propTypes = {
   select: PropTypes.func.isRequired,
   add: PropTypes.func,
   initialOrderBy: PropTypes.string,
+  initialOrder: PropTypes.string,
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired
 };
