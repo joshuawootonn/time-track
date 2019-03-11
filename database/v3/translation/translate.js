@@ -79,17 +79,23 @@ async function main() {
 
   for await ( const oldShift of shiftRows){    
     if(hashOfUsedShiftIds[oldShift.shiftid] !== 1){ 
+      const round = (length) => Math.round(length/15) * 15;
+
       const inTimeString = oldShift.timein.split(':')
       const inDatetimeMoment = moment(oldShift.datein).add(parseInt(inTimeString[0]),'hours').add(parseInt(inTimeString[1]),'minutes');
 
       const outTimeString = oldShift.timeout.split(':')
       const outDatetimeMoment = moment(oldShift.datein).add(parseInt(outTimeString[0]),'hours').add(parseInt(outTimeString[1]),'minutes');
 
-      const inDatetime = inDatetimeMoment.format('YYYY-MM-DD HH:MM:SS');
-      const outDatetime = outDatetimeMoment.format('YYYY-MM-DD HH:MM:SS');     
+      const inDatetime = inDatetimeMoment.format("YYYY-MM-DD HH:mm:ss");
+      const outDatetime = outDatetimeMoment.format("YYYY-MM-DD HH:mm:ss");     
 
-      const length = moment.duration(outDatetimeMoment.diff(inDatetimeMoment)).asMinutes(); 
+      // console.log(oldShift.timein, ' --- ',parseInt(inTimeString[0]), ' --- ',parseInt(inTimeString[1]),' --- ', inDatetime)
+      // console.log(oldShift.timeout, ' --- ',parseInt(outTimeString[0]), ' --- ',parseInt(outTimeString[1]), ' --- ', outDatetime);
+      //const length = oldShift.time.split(':')[0] * 60 + oldShift.time.split(':')[1]
+      const length = outDatetimeMoment.diff(inDatetimeMoment, 'minutes');
       const lunch = oldShift.timelunch.split(':')[0] * 60 + oldShift.timelunch.split(':')[1]
+      
       //console.log(oldShift.shiftid, inDatetime, outDatetime,length, lunch, oldShift.employeeid)
     
       const [employeeRows] = await newConnection.execute(`SELECT * FROM ${constants.NEW_EMPLOYEE_TABLE} WHERE id='${oldShift.employeeid}'`)
