@@ -25,7 +25,7 @@ export class ClockOut extends Component {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   };
   cancel = () => {
-    this.props.history.goBack();
+    this.props.history.push('/');
   };
 
   render() {

@@ -55,7 +55,7 @@ export class Analyze extends Component {
   }
 
   back = () => {
-    this.props.history.goBack();
+    this.props.history.push('/');
   }
 
   render() {

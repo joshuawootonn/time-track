@@ -45,11 +45,11 @@ describe('ClockOut Container', () => {
     setup();
     expect(props.getCurrentShift).toHaveBeenCalledTimes(1);
   });  
-  it('should call this.props.history.goBack from this.cancel', () => {    
+  it('should call this.props.history.push from this.cancel', () => {    
     const wrapper = setup();
-    expect(props.history.goBack).toHaveBeenCalledTimes(0);
+    expect(props.history.push).toHaveBeenCalledTimes(0);
     wrapper.instance().cancel();
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(props.history.push).toHaveBeenCalledTimes(1);
   });
   it('should render a loader if currentShift hasn\'t been fetched yet', () => {
     const wrapper = setup({ currentShift: null });

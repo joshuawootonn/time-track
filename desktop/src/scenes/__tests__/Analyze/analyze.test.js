@@ -6,7 +6,8 @@ import { Analyze } from 'scenes/Analyze/analyze';
 const props =  {
   classes: {},
   history: {
-    goBack: jest.fn()
+    goBack: jest.fn(),
+    push: jest.fn()
   },
   openSettings: jest.fn(),
   getAllEmployees: jest.fn(),
@@ -35,11 +36,11 @@ describe('Analyze Scene', () => {
     instance.handleTabValueChange(null,3);
     expect(wrapper.state().tabValue).toEqual(3);
   });
-  it('should call this.props.history.goBack() on this.back()', () => {
+  it('should call this.props.history.push() on this.back()', () => {
     const wrapper = setup();
     const instance = wrapper.instance();
-    expect(props.history.goBack).toHaveBeenCalledTimes(0);
+    expect(props.history.push).toHaveBeenCalledTimes(0);
     instance.back();
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(props.history.push).toHaveBeenCalledTimes(1);
   });
 });

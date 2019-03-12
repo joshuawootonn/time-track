@@ -13,7 +13,7 @@ import { exportActions } from 'store/actions';
 
 export class ExportContainer extends Component {
   cancel = () => {
-    this.props.history.goBack();
+    this.props.history.push('/');
   };
   render() {
     return (

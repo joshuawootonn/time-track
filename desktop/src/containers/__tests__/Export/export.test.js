@@ -26,12 +26,12 @@ describe('Export Container', () => {
   it('should render correctly', () => {
     setup();       
   });  
-  it('should call props.history.goBack for this.cancel', () => {
+  it('should call props.history.push for this.cancel', () => {
     const wrapper = setup();
     const instance = wrapper.instance();
-    expect(props.history.goBack).toHaveBeenCalledTimes(0);
+    expect(props.history.push).toHaveBeenCalledTimes(0);
     instance.cancel();
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(props.history.push).toHaveBeenCalledTimes(1);
   });
   it('should call props.exportToExcel for the Formik onSubmit', () => {
     const wrapper = setup();
