@@ -6,7 +6,7 @@
     "url": "http://www.joshuawootonn.com"
   },
   "description": "Time Managment & Analytics",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -52,8 +52,8 @@
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint --fix .",
     "build": "react-scripts build",
-    "pack": "build --dir",
-    "dist": "npm run build && build --win --linux -p always",
+    "pack": "npm run build && build --linux --win",
+    "dist": "npm run build && build --linux --win -p always",
     "postinstall": "install-app-deps"
   },
   "build": {
@@ -86,7 +86,7 @@
     "axios-mock-adapter": "^1.15.0",
     "babel-eslint": "^8.2.5",
     "coveralls": "^3.0.2",
-    "electron": "^2.0.3",
+    "electron": "^4.1.1",
     "electron-builder": "^20.38.5",
     "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^13.0.1",
