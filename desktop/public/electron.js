@@ -55,7 +55,7 @@ function createWindow() {
   
   log.transports.file.level = "debug"
   autoUpdater.logger = log
-  autoUpdater.checkForUpdates();
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 // This method will be called when Electron has finished
@@ -177,42 +177,42 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   }
 });
 
-/**
- * Auto Update
- */
+// /**
+//  * Auto Update
+//  */
 
-const sendStatusToWindow = text => {
-  if (mainWindow) {
-    ipcMain.emit('message', text);
-  }
-};
+// const sendStatusToWindow = text => {
+//   if (mainWindow) {
+//     ipcMain.emit('message', text);
+//   }
+// };
 
 
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
-});
-autoUpdater.on('update-available', info => {
-  log.info('Update available.');
-  log.info(info);
-  //autoUpdater.downloadUpdate()
-});
-autoUpdater.on('update-not-available', info => {
-  log.info('Update not available.');
-  log.info(info);
-});
-autoUpdater.on('error', err => {
-  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
-  log.error(err);
-});
-// autoUpdater.on('download-progress', progressObj => {
-//   sendStatusToWindow(
-//     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-//   );
-//   log.info(progressObj);
+// autoUpdater.on('checking-for-update', () => {
+//   sendStatusToWindow('Checking for update...');
 // });
-autoUpdater.on('update-downloaded', info => {
-  log.info('Update downloaded; will install in 2s');
-  log.info(info);
-  setTimeout(() => autoUpdater.quitAndInstall(), 2000);
-});
+// autoUpdater.on('update-available', info => {
+//   log.info('Update available.');
+//   log.info(info);
+//   //autoUpdater.downloadUpdate()
+// });
+// autoUpdater.on('update-not-available', info => {
+//   log.info('Update not available.');
+//   log.info(info);
+// });
+// autoUpdater.on('error', err => {
+//   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+//   log.error(err);
+// });
+// // autoUpdater.on('download-progress', progressObj => {
+// //   sendStatusToWindow(
+// //     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+// //   );
+// //   log.info(progressObj);
+// // });
+// autoUpdater.on('update-downloaded', info => {
+//   log.info('Update downloaded; will install in 2s');
+//   log.info(info);
+//   setTimeout(() => autoUpdater.quitAndInstall(), 2000);
+// });
 
