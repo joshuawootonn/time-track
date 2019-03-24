@@ -183,7 +183,7 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
 
 const sendStatusToWindow = text => {
   if (mainWindow) {
-    mainWindow.webContents.send('message', text);
+    ipcMain.emit('message', text);
   }
 };
 
@@ -194,7 +194,7 @@ autoUpdater.on('checking-for-update', () => {
 autoUpdater.on('update-available', info => {
   log.info('Update available.');
   log.info(info);
-  autoUpdater.downloadUpdate()
+  //autoUpdater.downloadUpdate()
 });
 autoUpdater.on('update-not-available', info => {
   log.info('Update not available.');
@@ -211,8 +211,8 @@ autoUpdater.on('error', err => {
 //   log.info(progressObj);
 // });
 autoUpdater.on('update-downloaded', info => {
-  log.info('Update downloaded; will install in 5s');
+  log.info('Update downloaded; will install in 2s');
   log.info(info);
-  setTimeout(() => autoUpdater.quitAndInstall(), 5000);
+  setTimeout(() => autoUpdater.quitAndInstall(), 2000);
 });
 

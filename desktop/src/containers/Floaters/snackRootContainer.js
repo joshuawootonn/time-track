@@ -15,7 +15,8 @@ export class SnackRoot extends Component {
       notification: null
     };
   }
-  componentDidMount() {    
+  componentDidMount() {   
+    ipcRenderer 
     ipcRenderer.on('message' , function(event , message){ 
       this.setState({ notification: message });
       setTimeout(this.setState({ notification: null }),2000);
