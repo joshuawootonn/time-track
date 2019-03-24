@@ -3,15 +3,37 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SnackContainer from 'containers/Floaters/snackContainer';
-
 import { snackActions } from 'store/actions';
 
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
+
 export class SnackRoot extends Component {
+  constructor(props) {
+    super(props);
+    this.state ={
+      notification: null
+    };
+  }
+  componentDidMount() {    
+    ipcRenderer.on('message' , function(event , message){ 
+      this.setState({ notification: message });
+      setTimeout(this.setState({ notification: null }),2000);
+    });
+  }
   render() {
     const { snackType, snackMessage } = this.props;
+    const { notification } = this.state;
+    if(notification){
+      <SnackContainer
+        message={notification}
+        type='initial'
+      />;
+    }
     if (!snackType || !snackMessage) {
       return null;
     }
+
     return (
       <SnackContainer
         message={snackMessage}

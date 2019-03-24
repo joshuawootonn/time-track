@@ -19,21 +19,23 @@ export const Snack = props => {
         className={classes[type]}
         message={
           <span className={classes.content}>
-            {icon}
-            <span className={classes.space} />
+            {icon && icon}
+            {icon && <span className={classes.space} />}
             {message}
           </span>
         }
         action={
-          <IconButton
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            className={classes.close}
-            onClick={onClose}
-          >
-            <Close className={classes.icon} />
-          </IconButton>
+          <div>
+            {onClose &&  <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.close}
+              onClick={onClose}
+            >
+              <Close className={classes.icon} />
+            </IconButton>}
+          </div>
         }
       />
     </MUSnackbar>

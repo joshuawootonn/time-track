@@ -204,12 +204,12 @@ autoUpdater.on('error', err => {
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
   log.error(err);
 });
-autoUpdater.on('download-progress', progressObj => {
-  sendStatusToWindow(
-    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-  );
-  log.info(progressObj);
-});
+// autoUpdater.on('download-progress', progressObj => {
+//   sendStatusToWindow(
+//     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+//   );
+//   log.info(progressObj);
+// });
 autoUpdater.on('update-downloaded', info => {
   log.info('Update downloaded; will install in 5s');
   log.info(info);

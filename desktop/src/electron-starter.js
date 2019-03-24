@@ -9,11 +9,6 @@ const settings = require('electron-settings');
 const log = require('electron-log');
 
 
-log.transports.file.level = 'debug';
-autoUpdater.logger = log;
-
-log.info('App starting...');  
-
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
@@ -56,6 +51,10 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  log.transports.file.level = 'debug';
+  autoUpdater.logger = log;
+  autoUpdater.checkForUpdates();
 }
 
 // This method will be called when Electron has finished
@@ -204,34 +203,30 @@ const sendStatusToWindow = text => {
 
 
 autoUpdater.on('checking-for-update', () => {
-  log.info('Checking for updates.'); 
   sendStatusToWindow('Checking for update...');
 });
 autoUpdater.on('update-available', info => {
-  log.info('Updates available.');
-  sendStatusToWindow('Update available.');
+  log.info('Update available.');
+  log.info(info);
+  autoUpdater.downloadUpdate();
 });
 autoUpdater.on('update-not-available', info => {
-  log.info('Updates not available.');
-  sendStatusToWindow('Update not available.');
+  log.info('Update not available.');
+  log.info(info);
 });
 autoUpdater.on('error', err => {
-  sendStatusToWindow(`Error in au
-  log.info('Error in auto update.')to-updater: ${err.toString()}`);
+  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+  log.error(err);
 });
-autoUpdater.on('download-progress', progressObj => {
-  
-  log.info('Download progress: ' + progressObj.percent);
-  sendStatusToWindow(
-    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-  );
-});
+// autoUpdater.on('download-progress', progressObj => {
+//   sendStatusToWindow(
+//     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+//   );
+//   log.info(progressObj);
+// });
 autoUpdater.on('update-downloaded', info => {
-  // Wait 5 seconds, then quit and install
-  // In your application, you don't need to wait 500 ms.
-  // You could call autoUpdater.quitAndInstall(); immediately
-  
-  log.info('Update downloaded. Time to install...');  
-  sendStatusToWindow('Update downloaded; will install now');
-  autoUpdater.quitAndInstall();
+  log.info('Update downloaded; will install in 5s');
+  log.info(info);
+  setTimeout(() => autoUpdater.quitAndInstall(), 5000);
 });
+
