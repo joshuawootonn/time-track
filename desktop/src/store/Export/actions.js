@@ -130,19 +130,25 @@ const formatData = (startTime, endTime) => {
       shift.activities.forEach((activity, i) => {
         let overtimeActivityLength, regularActivityLength;
 
-        if (totalTimeForWeek <= 2400) {
+        if (totalTimeForWeek + activity.length <= 2400) {
           regularActivityLength = activity.length;
-        } else if (totalTimeForWeek + activity.length >= 2400) {
+        } else if (totalTimeForWeek > 2400) {
+          overtimeActivityLength= activity.length;          
+        } else {
           overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
           regularActivityLength = (2400 - totalTimeForWeek);
-        } else {
-          overtimeActivityLength = activity.length;
         }
+        if(shift.id === 13437){
+
+          console.log(regularActivityLength,overtimeActivityLength)
+          console.log(minutesToString(regularActivityLength),minutesToString(overtimeActivityLength))
+        }
+
 
         totalTimeForWeek += activity.length;
         if (i === 0) {
           detailData.push([
-            moment(shift.clockInDate).format('MM/DD/YYYY'), moment(shift.clockInDate).format('h:mm a'), moment(shift.clockOutDate).format('h:mm a'), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
+            moment(shift.clockInDate,'YYYY-MM-DDThh:mm:ss:SSS').format('MM/DD/YYYY'), moment(shift.clockInDate,'YYYY-MM-DDThh:mm:ss:SSS').format('h:mm a'), moment(shift.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').format('h:mm a'), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         } else {
           detailData.push(['','','','',projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         }

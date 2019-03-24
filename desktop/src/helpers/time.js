@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const minutesToString = minutes => { 
-  if (minutes !== 0 && !minutes) return '';
+  if (minutes === 0 || !minutes) return '';
   const isNegative = minutes < 0 ? true : false;
   const m = Math.abs(Math.floor(minutes%60));
   // wack fix for floor taking -1.5 to -2. use ceil for numbers less than 0
