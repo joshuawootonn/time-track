@@ -69,10 +69,8 @@ const formatData = (startTime, endTime) => {
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
-    //console.log(shiftsOfEmployees);
-    if(shiftsOfEmployees.length >0){
-      //console.log(employee);
-    }
+    const hasShifts = shiftsOfEmployees.length > 0 ? true : false;
+          
 
     const individualProjectTotals = {};
     const allProjectTotals = { total: 0, reg: 0, ot: 0 };
@@ -140,8 +138,8 @@ const formatData = (startTime, endTime) => {
         }
         if(shift.id === 13437){
 
-          console.log(regularActivityLength,overtimeActivityLength)
-          console.log(minutesToString(regularActivityLength),minutesToString(overtimeActivityLength))
+          console.log(regularActivityLength,overtimeActivityLength);
+          console.log(minutesToString(regularActivityLength),minutesToString(overtimeActivityLength));
         }
 
 
@@ -165,19 +163,35 @@ const formatData = (startTime, endTime) => {
       spacerRows
     };
 
-    exportData.push({
-      key: `${employee.firstName} ${employee.lastName}`,
-      header: [
-        ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
-      ],
-      summary: [
-        [''], [''], ['Summary','', '', '', ''], ['Project', '', '', '', '', 'Reg', 'OT', 'Total'], ...summaryData
-      ],
-      details: [
-        [''], [''], ['Details'], ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'], ...detailData
-      ],
-      sheetStyles
-    });
+    if(hasShifts){
+      exportData.push({
+        key: `${employee.firstName} ${employee.lastName}`,
+        header: [
+          ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
+        ],
+        summary: [
+          [''], [''], ['Summary','', '', '', ''], ['Project', '', '', '', '', 'Reg', 'OT', 'Total'], ...summaryData
+        ],
+        details: [
+          [''], [''], ['Details'], ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'], ...detailData
+        ],
+        sheetStyles
+      });
+    } else {
+      exportData.push({
+        key: `${employee.firstName} ${employee.lastName}`,
+        header: [
+          ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
+        ],
+        summary: [
+          [''], [''], ['No Shifts found for given period.']
+        ],
+        details: [         
+        ],
+        sheetStyles
+      });
+    }
+   
   });
   return exportData;
 };
