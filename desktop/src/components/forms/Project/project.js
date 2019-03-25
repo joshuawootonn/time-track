@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip, IconButton } from '@material-ui/core';
+import { Grid, Typography, Button, IconButton } from '@material-ui/core';
 import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
-import { Delete, Close } from '@material-ui/icons';
+import { Close } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
 import Switch from 'components/inputs/Switch';
@@ -16,7 +16,7 @@ import styles from './styles';
 export class Project extends Component {
   render() {
 
-    const { classes, label, type, removeProject, categories, subcategories, tasks, 
+    const { classes, label, categories, subcategories, tasks, 
       isSubmitting, resetForm, initialValues, errors, values } = this.props;
  
     return (
