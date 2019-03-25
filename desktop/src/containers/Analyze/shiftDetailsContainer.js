@@ -29,15 +29,15 @@ export class ShiftDetail extends Component {
         </Hero>
       );
     }
-
+    console.log(selected.clockInDate)
     if(status === analyzeStatus.EDITING){
       return (
         <Formik
           enableReinitialize
           initialValues={{
             ...selected,
-            clockInDate: moment(selected.clockInDate).format('YYYY-MM-DDTHH:mm'),
-            clockOutDate: selected.clockOutDate ? moment(selected.clockOutDate).format('YYYY-MM-DDTHH:mm') : currentRoundedTime().format('YYYY-MM-DDTHH:mm'),
+            clockInDate: moment(selected.clockInDate).format('YYYY-MM-DDThh:mm'),
+            clockOutDate: selected.clockOutDate ? moment(selected.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').format('YYYY-MM-DDThh:mm') : moment().format('YYYY-MM-DDThh:mm'),
             lunch: selected.lunch,
             activities: selected.activities.map(activity => {              
               return {
@@ -64,11 +64,12 @@ export class ShiftDetail extends Component {
           }}
           render={formikProps => {
             const { values,errors } = formikProps;
-            const shiftDuration = moment.duration(moment(values.clockOutDate).diff(moment(values.clockInDate)));
+            const shiftDuration = moment.duration(moment(values.clockOutDate,'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate,'YYYY-MM-DDTHH:mm')));
             let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
             values.activities.forEach(activity => {
               timeLeft -= activity.length;
-            });            
+            }); 
+            //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
             let generalError;
             if (errors.activities && typeof errors.activities === 'string'){
               generalError = errors.activities;

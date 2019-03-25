@@ -13,7 +13,7 @@ import { clockout as clockoutValidation } from 'constants/formValidation';
 import { shiftActions, employeeActions } from 'store/actions';
 import { minutesToString } from 'helpers/time';
 import { employeeSelectors, shiftSelectors, projectSelectors, projectTaskSelectors } from 'store/selectors';
-import { currentRoundedTime, minutesRoudedTime } from 'helpers/time';
+import { minutesRoudedTime } from 'helpers/time';
 
 export class ClockOut extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export class ClockOut extends Component {
       return <Progress variant="circular" fullPage />;
     }
 
-    const currentMoment = currentRoundedTime();
+    const currentMoment = moment();
     const clockInMoment = moment(currentShift.clockInDate);
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 

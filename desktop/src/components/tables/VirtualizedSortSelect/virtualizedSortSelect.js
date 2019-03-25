@@ -123,7 +123,7 @@ class VirtualizedSortSelect extends React.Component {
     const { columns, classes } = this.props;
     const { sortBy, sortDirection, data } = this.state;    
     const {  ...tableProps } = this.props;
-    console.log('table: virtualized',data.length);
+    // console.log('table: virtualized',data.length);
     return (
       <AutoSizer>
         {({ height, width }) => (
