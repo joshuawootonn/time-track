@@ -131,9 +131,9 @@ export class SortSelectTable extends React.Component {
                             },n[id])                          
                           }</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
-                          return <TableCell padding="dense" key={id} >{moment(n[id],'YYYY-MM-DD HH:mm:ss').format('MM/DD/YY')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('MM/DD/YY')}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
-                          return <TableCell padding="dense" key={id} >{moment(n[id],'YYYY-MM-DD HH:mm:ss').format('hh:mm a MM/DD')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('hh:mm a MM/DD')}</TableCell>;
                         } else if (type === TableDataTypes.LENGTH) {
                           const length = moment.duration(n[id], 'minutes');
                           return <TableCell padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;

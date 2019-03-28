@@ -81,7 +81,7 @@ export class ProjectDetail extends Component {
           initialValues={{
             ...selected,
             isActive: selected.isActive ? true : false,
-            date: moment(selected.date).startOf('day').format('YYYY-MM-DD'),
+            date: moment.utc(selected.date).local().startOf('day').format('YYYY-MM-DD'),
             projectTasks: selected.projectTasks.map(projectTask => {
               return {
                 ...projectTask,

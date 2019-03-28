@@ -37,7 +37,7 @@ export class ClockOut extends Component {
     }
 
     const currentMoment = moment();
-    const clockInMoment = moment(currentShift.clockInDate);
+    const clockInMoment = moment.utc(currentShift.clockInDate).local();
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 
 
