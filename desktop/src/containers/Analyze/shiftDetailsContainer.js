@@ -36,8 +36,8 @@ export class ShiftDetail extends Component {
           enableReinitialize
           initialValues={{
             ...selected,
-            clockInDate: moment(selected.clockInDate).format('YYYY-MM-DDThh:mm'),
-            clockOutDate: selected.clockOutDate ? moment(selected.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').format('YYYY-MM-DDThh:mm') : moment().format('YYYY-MM-DDThh:mm'),
+            clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),
+            clockOutDate: selected.clockOutDate ? moment.utc(selected.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').local().format('YYYY-MM-DDTHH:mm') : moment.utc().local().format('YYYY-MM-DDTHH:mm'),
             lunch: selected.lunch,
             activities: selected.activities.map(activity => {              
               return {

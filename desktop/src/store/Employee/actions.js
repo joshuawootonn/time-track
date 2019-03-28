@@ -72,9 +72,8 @@ export const clockIn = employee => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_REQUEST });
     try {
-      console.log(moment(new Date()).utc(), moment(new Date()));
       const clockInObject = {
-        clockInDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        clockInDate: new Date().toUTCString(),
         employeeId: employee.id
       };
       await dispatch(genericActions.post(domains.SHIFT,clockInObject));
