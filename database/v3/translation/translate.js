@@ -82,10 +82,10 @@ async function main() {
       const round = (length) => Math.round(length/15) * 15;
 
       const inTimeString = oldShift.timein.split(':')
-      const inDatetimeMoment = moment(oldShift.datein).add(parseInt(inTimeString[0]),'hours').add(parseInt(inTimeString[1]),'minutes');
+      const inDatetimeMoment = moment.utc(oldShift.datein).add(parseInt(inTimeString[0]),'hours').add(parseInt(inTimeString[1]),'minutes');
       
       const outTimeString = oldShift.timeout.split(':')
-      const outDatetimeMoment = moment(oldShift.datein).add(parseInt(outTimeString[0]),'hours').add(parseInt(outTimeString[1]),'minutes');
+      const outDatetimeMoment = moment.utc(oldShift.datein).add(parseInt(outTimeString[0]),'hours').add(parseInt(outTimeString[1]),'minutes');
 
       const inDatetime = inDatetimeMoment.format("YYYY-MM-DD HH:mm:ss");
       const outDatetime = outDatetimeMoment.format("YYYY-MM-DD HH:mm:ss");     

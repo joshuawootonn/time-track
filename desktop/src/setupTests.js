@@ -36,6 +36,9 @@ global.window.require = function () {
       send: function () {
         // Fake sending message to ipcMain
       },
+      on: function (string, fun) {
+        fun(null, string);
+      },
       sendSync: function(key) {
         if(key === IPCConstants.GET_CRED){
           return { username: 'josh', password: '5656' };

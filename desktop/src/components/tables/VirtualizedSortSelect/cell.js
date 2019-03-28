@@ -29,9 +29,9 @@ const Cell = props => {
     },rowData[columns[columnIndex].dataKey]);
     key = id + keys.join('');
   } else if (type === TableDataTypes.DATE) {
-    data = moment(cellData,'YYYY-MM-DDThh:mm:ss:SSS').format('MM/DD/YY');
+    data = moment.utc(cellData).local().format('MM/DD/YY');
   } else if (type === TableDataTypes.DATETIME) {
-    data = moment(cellData,'YYYY-MM-DDThh:mm:ss:SSS').format('hh:mm a MM/DD');
+    data = moment.utc(cellData).local().format('hh:mm a MM/DD');
   } else if (type === TableDataTypes.LENGTH) {
     const length = minutesRoudedTime(moment.duration(cellData, 'minutes').asMinutes());
     data = `${Math.floor(length/60)}h ${length%60}m`;

@@ -18,7 +18,10 @@ export class ShiftIndex extends Component {
   
   selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
 
-  select = object => this.props.select(domain.SHIFT,object)
+  select = object => {
+    console.log(object, this.props.shifts.filter(ele => ele.id === object));
+    this.props.select(domain.SHIFT,object);
+  }
 
   add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
 

@@ -15,6 +15,6 @@ describe('Time Helper', () => {
     expect(minutesToString(0)).toEqual('0:00');
     expect(minutesToString(-10)).toEqual('-0:10');    
     expect(minutesToString(-90)).toEqual('-1:30');
-    expect(minutesToString()).toEqual('');
+    expect(minutesToString()).toEqual('0:00');
   });
 });
