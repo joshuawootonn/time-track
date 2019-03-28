@@ -12,7 +12,6 @@ import Hero from 'components/layouts/Hero';
 import ShiftEditContainer from 'components/forms/ShiftEdit';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
-import { currentRoundedTime } from 'helpers/time';
 
 export class ShiftDetail extends Component {
   removeShift = () => {
@@ -29,7 +28,7 @@ export class ShiftDetail extends Component {
         </Hero>
       );
     }
-    console.log(selected.clockInDate)
+    console.log(selected.clockInDate);
     if(status === analyzeStatus.EDITING){
       return (
         <Formik
