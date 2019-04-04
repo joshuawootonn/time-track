@@ -55,7 +55,7 @@ export class ShiftEdit extends Component {
               <Button
                 type="submit"
                 color="primary"
-                disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
+                disabled={isSubmitting || Object.keys(errors).length !== 0}
                 variant="contained"
                 className={classes.button}
               >

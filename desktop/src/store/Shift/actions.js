@@ -76,6 +76,33 @@ export const createShift = shift => {
   };
 };
 
+export const createHalfShift = shift => {
+  return async (dispatch,getState) => {
+    dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_REQUEST });
+    try {
+      const shiftObject = {
+        employeeId: shift.employeeId,
+        clockInDate: moment(shift.clockInDate).utc().toString()
+      };
+      
+      console.log('create half shift action: ',shiftObject);
+
+      // create the half shift
+      await dispatch(genericActions.post(domains.SHIFT,shiftObject));
+
+      // set the employee is isWorking
+      const employee = getState().entities.employees[shift.employeeId];
+      await dispatch(employeeActions.setIsWorking(employee,true));
+
+      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in created!'));
+      return dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_SUCCESS });
+    } catch (e) {
+      dispatch(snackActions.openSnack(status.FAILURE, 'Clock in creation failed!'));
+      return dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_FAILURE, payload: e });
+    }
+  };
+};
+
 export const updateShift = shift => {
   return async (dispatch,getState) => {
     dispatch({ type: shiftActionTypes.UPDATE_SHIFT_REQUEST });
@@ -119,6 +146,30 @@ export const updateShift = shift => {
   };
 };
 
+export const updateHalfShift = shift => {
+  return async (dispatch) => {
+    dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_REQUEST });
+    try {
+      const shiftObject = {
+        id: shift.id,
+        employeeId: shift.employeeId,
+        clockInDate: moment(shift.clockInDate).utc().toString(),
+      };      
+
+      console.log('update half shift action: ',shiftObject);
+
+      const response = await dispatch(genericActions.put(domains.SHIFT,shiftObject));
+     
+      await dispatch(genericActions.get(domains.SHIFT,response.data.id));
+      
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in Updated'));
+      return dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_SUCCESS });      
+    } catch (e) {
+      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in update failed'));
+      return dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_FAILURE });
+    }
+  };
+};
 
 export const removeShift = id => {
   return async (dispatch,getState) => {

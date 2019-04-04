@@ -69,6 +69,13 @@ export const shift = Yup.object().shape({
     .required('Activity selection required')
 });
 
+export const halfShift = Yup.object().shape({
+  employeeId: Yup.number()
+    .positive('Employee selection required')
+    .required('Employee selection required'),
+  clockInDate: Yup.date().required('Invalid clock in date'),  
+});
+
 export const exportValidation = Yup.object().shape({
   exportCategory: Yup.number().min(0, 'Invalid export category'),
   start: Yup.date().required('Invalid start date'),

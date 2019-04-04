@@ -14,7 +14,7 @@ import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors
 import { analyzeStatus } from 'constants/analyze';
 import { shiftActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
-import { shift as shiftValidation } from 'constants/formValidation';
+import { shift as shiftValidation, halfShift as halfShiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
 
@@ -65,22 +65,15 @@ export class ShiftCRUD extends Component {
           {this.state.editingExtent === formConstants.HALF_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
-              ...selected,
-              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),
-              clockOutDate: selected.clockOutDate ? moment.utc(selected.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').local().format('YYYY-MM-DDTHH:mm') : moment.utc().local().format('YYYY-MM-DDTHH:mm'),
-              lunch: selected.lunch,
-              activities: selected.activities.map(activity => {              
-                return {
-                  ...activity,
-                  projectId: activity.projectTask.projectId
-                };
-              })            
+              id: selected.id,
+              employeeId: selected.employeeId,
+              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),                      
             }}
-            validationSchema={shiftValidation}
+            validationSchema={halfShiftValidation}
             onSubmit={(values,formikFunctions) => {
-              const { updateShift } = this.props;           
+              const { updateHalfShift } = this.props;           
 
-              return updateShift(values).then(
+              return updateHalfShift(values).then(
                 () => {
                   formikFunctions.resetForm();
                   formikFunctions.setStatus({ success: true });
@@ -94,18 +87,12 @@ export class ShiftCRUD extends Component {
             }}
             render={formikProps => {
               const { values,errors } = formikProps;
-              const shiftDuration = moment.duration(moment(values.clockOutDate,'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate,'YYYY-MM-DDTHH:mm')));
-              let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
-              values.activities.forEach(activity => {
-                timeLeft -= activity.length;
-              }); 
+              const shiftDuration = moment.duration(moment(new Date(),'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate,'YYYY-MM-DDTHH:mm')));
+              let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes()));
+              
               //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
-              let generalError;
-              if (errors.activities && typeof errors.activities === 'string'){
-                generalError = errors.activities;
-              }else if (errors.lunch && typeof errors.lunch === 'string'){
-                generalError = errors.lunch;
-              }
+              
+              console.log(timeLeft,values,selected)
               return (
                 <HalfShiftForm
                   label="Edit Shift"
@@ -114,7 +101,7 @@ export class ShiftCRUD extends Component {
                   projects={projects}
                   projectTasks={projectTasks}
                   timeLeft={timeLeft}      
-                  generalError={generalError} 
+                  generalError={''} 
                   removeShift={this.removeShift}         
                   {...formikProps}
                 />
@@ -270,10 +257,16 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createShift: shift => {
-      return dispatch(shiftActions.createShift( shift));
+      return dispatch(shiftActions.createShift(shift));
+    },
+    createHalfShift: shift => {
+      return dispatch(shiftActions.createHalfShift(shift));
     },
     updateShift: shift => {
       return dispatch(shiftActions.updateShift(shift));
+    },
+    updateHalfShift: shift => {
+      return dispatch(shiftActions.updateHalfShift(shift));
     },
     removeShift: shift => {
       return dispatch(shiftActions.removeShift(shift));
