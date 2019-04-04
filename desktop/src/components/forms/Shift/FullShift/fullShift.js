@@ -16,7 +16,7 @@ import { minutesToString } from 'helpers/time';
 
 export class ShiftEdit extends Component {
   render() {
-    const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
+    const { classes, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
     //console.log(values);
     return (
@@ -62,10 +62,7 @@ export class ShiftEdit extends Component {
                       return (
                         <Grid item xs={12}
                           key={index}
-                          className={cx(
-                            classes.card,
-                            classes.verticalCenterBox,
-                          )}
+                          className={cx(classes.card)}
                         >
                           <div className={cx(classes.row,classes.bodyRow)}>
                             <Field
@@ -189,7 +186,7 @@ export class ShiftEdit extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                Save Shift
               </Button>
 
               <Button
@@ -213,10 +210,7 @@ export class ShiftEdit extends Component {
 }
 ShiftEdit.propTypes = {
   classes: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  removeShift: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,

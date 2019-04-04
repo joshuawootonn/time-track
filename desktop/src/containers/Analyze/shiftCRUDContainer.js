@@ -168,7 +168,7 @@ export class ShiftCRUD extends Component {
                 generalError = errors.lunch;
               }
               return (
-                <HalfShiftForm
+                <FullShiftForm
                   label="Edit Shift"
                   type="edit"
                   employees={employees}
