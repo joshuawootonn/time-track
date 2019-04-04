@@ -22,14 +22,25 @@ export const FULL_SHIFT = 'full_shift';
 
 export class ShiftCRUD extends Component {
   state = {
-    crudExtent: HALF_SHIFT
+    [`${analyzeStatus.EDITING}Extent`]: HALF_SHIFT,
+    [`${analyzeStatus.ADDING}Extent`]: HALF_SHIFT,
   }
   removeShift = () => {
     const { selected, removeShift } = this.props;  
     removeShift(selected.id);
   };
+  /**
+   * Type: analyzeStatus
+   * Extent: HALF_SHIFT or  FULL_SHIFT
+   */
+  updateExtent = (type,extent) => {
+    this.setState({
+      [`${type}Extent`]: extent
+    })
+  }
   render () {
     const { selected,status,projects,projectTasks,employees } = this.props;
+    const {editingExtent,addingExtent} = this.state;
     
     if(status === analyzeStatus.INIT){
       return (
@@ -47,8 +58,11 @@ export class ShiftCRUD extends Component {
             label='Edit Shift'
             remove={this.removeShift}
             type={status}
+            extent={editingExtent}
+            extentOptions={[{type: HALF_SHIFT, label: 'Half Shift'},{type: FULL_SHIFT, label: 'Full Shift'}]}
+            updateExtent={this.updateExtent}
             />
-          {this.state.crudExtent === HALF_SHIFT  && <Formik
+          {this.state.editingExtent === HALF_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
               ...selected,
@@ -109,7 +123,7 @@ export class ShiftCRUD extends Component {
           />
           }
 
-          {this.state.crudExtent === FULL_SHIFT  && <Formik
+          {this.state.editingExtent === FULL_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
               ...selected,
