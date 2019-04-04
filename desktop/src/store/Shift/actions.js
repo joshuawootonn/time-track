@@ -88,8 +88,8 @@ export const createHalfShift = shift => {
       console.log('create half shift action: ',shiftObject);
 
       // create the half shift
-      await dispatch(genericActions.post(domains.SHIFT,shiftObject));
-
+      const response =  await dispatch(genericActions.post(domains.SHIFT,shiftObject));
+      await dispatch(genericActions.get(domains.SHIFT,response.data.id));
       // set the employee is isWorking
       const employee = getState().entities.employees[shift.employeeId];
       await dispatch(employeeActions.setIsWorking(employee,true));
@@ -161,7 +161,7 @@ export const updateHalfShift = shift => {
       const response = await dispatch(genericActions.put(domains.SHIFT,shiftObject));
      
       await dispatch(genericActions.get(domains.SHIFT,response.data.id));
-      
+
       await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in Updated'));
       return dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_SUCCESS });      
     } catch (e) {

@@ -10,7 +10,7 @@ import HalfShiftForm from 'components/forms/Shift/HalfShift';
 import FormHeader from 'components/forms/Shift/FormHeader'
 import * as formConstants from 'components/forms/Shift/constants';
 
-import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors } from 'store/selectors';
+import { shiftSelectors, projectSelectors, projectTaskSelectors, employeeSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import { shiftActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
@@ -26,23 +26,26 @@ export class ShiftCRUD extends Component {
     [`${analyzeStatus.ADDING}Extent`]: formConstants.HALF_SHIFT,
   }
   removeShift = () => {
-    const { selected, removeShift } = this.props;  
+    const { selected, removeShift } = this.props;
     removeShift(selected.id);
   };
   /**
    * Type: analyzeStatus
    * Extent: HALF_SHIFT or  FULL_SHIFT
    */
-  updateExtent = (type,extent) => {
+  updateExtent = (type, extent) => {
+    console.log(type,extent);
+    console.log(this.state);
     this.setState({
       [`${type}Extent`]: extent
-    })
+    });
+    console.log(this.state);
   }
-  render () {
-    const { selected,status,projects,projectTasks,employees } = this.props;
-    const {editingExtent,addingExtent} = this.state;
-    
-    if(status === analyzeStatus.INIT){
+  render() {
+    const { selected, status, projects, projectTasks, employees } = this.props;
+    const { editingExtent, addingExtent } = this.state;
+
+    if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Shift.. </Typography>
@@ -51,27 +54,27 @@ export class ShiftCRUD extends Component {
     }
     console.log('selected shift', selected);
 
-    if(status === analyzeStatus.EDITING){
+    if (status === analyzeStatus.EDITING) {
       return (
         <div>
-          <FormHeader 
+          <FormHeader
             label='Edit Shift'
             remove={this.removeShift}
             type={status}
             extent={editingExtent}
-            extentOptions={[{type: formConstants.HALF_SHIFT, label: 'Half Shift'},{type: formConstants.FULL_SHIFT, label: 'Full Shift'}]}
+            extentOptions={[{ type: formConstants.HALF_SHIFT, label: 'Half Shift' }, { type: formConstants.FULL_SHIFT, label: 'Full Shift' }]}
             updateExtent={this.updateExtent}
           />
-          {this.state.editingExtent === formConstants.HALF_SHIFT  && <Formik
+          {editingExtent === formConstants.HALF_SHIFT && <Formik
             enableReinitialize
             initialValues={{
               id: selected.id,
               employeeId: selected.employeeId,
-              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),                      
+              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),
             }}
             validationSchema={halfShiftValidation}
-            onSubmit={(values,formikFunctions) => {
-              const { updateHalfShift } = this.props;           
+            onSubmit={(values, formikFunctions) => {
+              const { updateHalfShift } = this.props;
 
               return updateHalfShift(values).then(
                 () => {
@@ -86,13 +89,13 @@ export class ShiftCRUD extends Component {
               );
             }}
             render={formikProps => {
-              const { values,errors } = formikProps;
-              const shiftDuration = moment.duration(moment(new Date(),'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate,'YYYY-MM-DDTHH:mm')));
+              const { values, errors } = formikProps;
+              const shiftDuration = moment.duration(moment(new Date(), 'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate, 'YYYY-MM-DDTHH:mm')));
               let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes()));
-              
+
               //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
-              
-              console.log(timeLeft,values,selected)
+
+              console.log(timeLeft, values, selected)
               return (
                 <HalfShiftForm
                   label="Edit Shift"
@@ -100,9 +103,9 @@ export class ShiftCRUD extends Component {
                   employees={employees}
                   projects={projects}
                   projectTasks={projectTasks}
-                  timeLeft={timeLeft}      
-                  generalError={''} 
-                  removeShift={this.removeShift}         
+                  timeLeft={timeLeft}
+                  generalError={''}
+                  removeShift={this.removeShift}
                   {...formikProps}
                 />
               );
@@ -110,23 +113,23 @@ export class ShiftCRUD extends Component {
           />
           }
 
-          {this.state.editingExtent === formConstants.FULL_SHIFT  && <Formik
+          {editingExtent === formConstants.FULL_SHIFT && <Formik
             enableReinitialize
             initialValues={{
               ...selected,
               clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),
-              clockOutDate: selected.clockOutDate ? moment.utc(selected.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').local().format('YYYY-MM-DDTHH:mm') : moment.utc().local().format('YYYY-MM-DDTHH:mm'),
+              clockOutDate: selected.clockOutDate ? moment.utc(selected.clockOutDate, 'YYYY-MM-DDThh:mm:ss:SSS').local().format('YYYY-MM-DDTHH:mm') : moment.utc().local().format('YYYY-MM-DDTHH:mm'),
               lunch: selected.lunch,
-              activities: selected.activities.map(activity => {              
+              activities: selected.activities ? selected.activities.map(activity => {
                 return {
                   ...activity,
                   projectId: activity.projectTask.projectId
                 };
-              })            
+              }) : []
             }}
             validationSchema={shiftValidation}
-            onSubmit={(values,formikFunctions) => {
-              const { updateShift } = this.props;           
+            onSubmit={(values, formikFunctions) => {
+              const { updateShift } = this.props;
 
               return updateShift(values).then(
                 () => {
@@ -141,17 +144,17 @@ export class ShiftCRUD extends Component {
               );
             }}
             render={formikProps => {
-              const { values,errors } = formikProps;
-              const shiftDuration = moment.duration(moment(values.clockOutDate,'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate,'YYYY-MM-DDTHH:mm')));
+              const { values, errors } = formikProps;
+              const shiftDuration = moment.duration(moment(values.clockOutDate, 'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate, 'YYYY-MM-DDTHH:mm')));
               let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
               values.activities.forEach(activity => {
                 timeLeft -= activity.length;
-              }); 
+              });
               //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
               let generalError;
-              if (errors.activities && typeof errors.activities === 'string'){
+              if (errors.activities && typeof errors.activities === 'string') {
                 generalError = errors.activities;
-              }else if (errors.lunch && typeof errors.lunch === 'string'){
+              } else if (errors.lunch && typeof errors.lunch === 'string') {
                 generalError = errors.lunch;
               }
               return (
@@ -161,9 +164,9 @@ export class ShiftCRUD extends Component {
                   employees={employees}
                   projects={projects}
                   projectTasks={projectTasks}
-                  timeLeft={timeLeft}      
-                  generalError={generalError} 
-                  removeShift={this.removeShift}         
+                  timeLeft={timeLeft}
+                  generalError={generalError}
+                  removeShift={this.removeShift}
                   {...formikProps}
                 />
               );
@@ -171,73 +174,121 @@ export class ShiftCRUD extends Component {
           />
           }
         </div>
-        
+
       );
     }
 
-    if(status === analyzeStatus.ADDING){
-      return (
-        <Formik
-          enableReinitialize
-          initialValues={{        
-            lunch: 30,
-            clockInDate : moment().startOf('day').add('minutes',450).format('YYYY-MM-DDTHH:mm'),            
-            clockOutDate : moment().format('YYYY-MM-DDTHH:mm'),
-            employeeId: -1,
-            activities: [
-              {
-                projectId: -1,
-                projectTaskId: -1,
-                length: 0,
-                description: ''
-              }
-            ]
-          }}
-          validationSchema={shiftValidation}
-          onSubmit={(values,formikFunctions) => {
-            const { createShift } = this.props;
-            return createShift(values).then(
-              () => {
-                formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
-              },
-              e => {
-                formikFunctions.setStatus({ success: false });
-                formikFunctions.setSubmitting(false);
-                formikFunctions.setErrors({ submit: e });
-              }
-            );
-          }}
-          render={formikProps => {
-            const { values,errors } =formikProps;
-            const shiftDuration = moment.duration(moment(values.clockOutDate).diff(moment(values.clockInDate)));
-            let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
-            values.activities.forEach(activity => {
-              timeLeft -= activity.length;
-            });
-            
-            
-            let generalError;
-            if (errors.activities && typeof errors.activities === 'string'){
-              generalError = errors.activities;
-            }else if (errors.lunch && typeof errors.lunch === 'string'){
-              generalError = errors.lunch;
-            }
-            return (
-              <FullShiftForm
-                label="Add Shift"
-                type="add"
-                employees={employees}
-                projects={projects}
-                projectTasks={projectTasks}
-                timeLeft={timeLeft}      
-                generalError={generalError}          
-                {...formikProps}
-              />
-            );
-          }}
+    if (status === analyzeStatus.ADDING) {
+      return (<div>
+        <FormHeader
+          label='Add Shift'
+          type={status}
+          extent={addingExtent}
+          extentOptions={[{ type: formConstants.HALF_SHIFT, label: 'Half Shift' }, { type: formConstants.FULL_SHIFT, label: 'Full Shift' }]}
+          updateExtent={this.updateExtent}
         />
-      );
+        {addingExtent === formConstants.HALF_SHIFT &&
+          <Formik
+            enableReinitialize
+            initialValues={{
+              clockInDate: moment().startOf('day').add('minutes', 450).format('YYYY-MM-DDTHH:mm'),              
+              employeeId: -1,
+            }}
+            validationSchema={halfShiftValidation}
+            onSubmit={(values, formikFunctions) => {
+              const { createHalfShift } = this.props;
+              return createHalfShift(values).then(
+                () => {
+                  formikFunctions.resetForm();
+                  formikFunctions.setStatus({ success: true });
+                },
+                e => {
+                  formikFunctions.setStatus({ success: false });
+                  formikFunctions.setSubmitting(false);
+                  formikFunctions.setErrors({ submit: e });
+                }
+              );
+            }}
+            render={formikProps => {
+              const shiftDuration = moment.duration(moment(new Date()).diff(moment(formikProps.values.clockInDate)));
+              let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes()));            
+              return (
+                <HalfShiftForm
+                  label="Add Shift"
+                  type="add"
+                  employees={employees}
+                  projects={projects}
+                  projectTasks={projectTasks}
+                  timeLeft={timeLeft}
+                  generalError={''}
+                  {...formikProps}
+                />
+              );
+            }}
+          />}
+        {addingExtent === formConstants.FULL_SHIFT &&
+          <Formik
+            enableReinitialize
+            initialValues={{
+              lunch: 30,
+              clockInDate: moment().startOf('day').add('minutes', 450).format('YYYY-MM-DDTHH:mm'),
+              clockOutDate: moment().format('YYYY-MM-DDTHH:mm'),
+              employeeId: -1,
+              activities: [
+                {
+                  projectId: -1,
+                  projectTaskId: -1,
+                  length: 0,
+                  description: ''
+                }
+              ]
+            }}
+            validationSchema={shiftValidation}
+            onSubmit={(values, formikFunctions) => {
+              const { createShift } = this.props;
+              return createShift(values).then(
+                () => {
+                  formikFunctions.resetForm();
+                  formikFunctions.setStatus({ success: true });
+                },
+                e => {
+                  formikFunctions.setStatus({ success: false });
+                  formikFunctions.setSubmitting(false);
+                  formikFunctions.setErrors({ submit: e });
+                }
+              );
+            }}
+            render={formikProps => {
+              const { values, errors } = formikProps;
+              const shiftDuration = moment.duration(moment(values.clockOutDate).diff(moment(values.clockInDate)));
+              let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) - values.lunch;
+              values.activities.forEach(activity => {
+                timeLeft -= activity.length;
+              });
+
+
+              let generalError;
+              if (errors.activities && typeof errors.activities === 'string') {
+                generalError = errors.activities;
+              } else if (errors.lunch && typeof errors.lunch === 'string') {
+                generalError = errors.lunch;
+              }
+              return (
+                <FullShiftForm
+                  label="Add Shift"
+                  type="add"
+                  employees={employees}
+                  projects={projects}
+                  projectTasks={projectTasks}
+                  timeLeft={timeLeft}
+                  generalError={generalError}
+                  {...formikProps}
+                />
+              );
+            }}
+          />}
+      </div>)
+
     }
   }
 }
@@ -245,7 +296,7 @@ export class ShiftCRUD extends Component {
 /* istanbul ignore next */
 const mapStateToProps = state => {
   return {
-    selected: shiftSelectors.getSelectedShift(state),    
+    selected: shiftSelectors.getSelectedShift(state),
     status: state.analyze.shiftStatus,
     projects: projectSelectors.getAllProjects(state),
     projectTasks: projectTaskSelectors.getAllProjectTasks(state),
@@ -274,6 +325,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ShiftCRUD);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftCRUD);
 
 
