@@ -8,6 +8,7 @@ import moment from 'moment';
 import FullShiftForm from 'components/forms/Shift/FullShift';
 import HalfShiftForm from 'components/forms/Shift/HalfShift';
 import FormHeader from 'components/forms/Shift/FormHeader'
+import * as formConstants from 'components/forms/Shift/constants';
 
 import { shiftSelectors,projectSelectors, projectTaskSelectors,employeeSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
@@ -16,14 +17,13 @@ import Hero from 'components/layouts/Hero';
 import { shift as shiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
-export const HALF_SHIFT = 'half_shift';
-export const FULL_SHIFT = 'full_shift';
+
 
 
 export class ShiftCRUD extends Component {
   state = {
-    [`${analyzeStatus.EDITING}Extent`]: HALF_SHIFT,
-    [`${analyzeStatus.ADDING}Extent`]: HALF_SHIFT,
+    [`${analyzeStatus.EDITING}Extent`]: formConstants.HALF_SHIFT,
+    [`${analyzeStatus.ADDING}Extent`]: formConstants.HALF_SHIFT,
   }
   removeShift = () => {
     const { selected, removeShift } = this.props;  
@@ -59,10 +59,10 @@ export class ShiftCRUD extends Component {
             remove={this.removeShift}
             type={status}
             extent={editingExtent}
-            extentOptions={[{type: HALF_SHIFT, label: 'Half Shift'},{type: FULL_SHIFT, label: 'Full Shift'}]}
+            extentOptions={[{type: formConstants.HALF_SHIFT, label: 'Half Shift'},{type: formConstants.FULL_SHIFT, label: 'Full Shift'}]}
             updateExtent={this.updateExtent}
-            />
-          {this.state.editingExtent === HALF_SHIFT  && <Formik
+          />
+          {this.state.editingExtent === formConstants.HALF_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
               ...selected,
@@ -123,7 +123,7 @@ export class ShiftCRUD extends Component {
           />
           }
 
-          {this.state.editingExtent === FULL_SHIFT  && <Formik
+          {this.state.editingExtent === formConstants.FULL_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
               ...selected,
