@@ -43,7 +43,11 @@ export class ShiftCRUD extends Component {
     if(status === analyzeStatus.EDITING){
       return (
         <div>
-          
+          <FormHeader 
+            label='Edit Shift'
+            remove={this.removeShift}
+            type={status}
+            />
           {this.state.crudExtent === HALF_SHIFT  && <Formik
             enableReinitialize
             initialValues={{
