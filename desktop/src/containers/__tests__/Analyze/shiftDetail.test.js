@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { ShiftDetail } from 'containers/Analyze/shiftDetailsContainer';
+import { ShiftDetail } from 'containers/Analyze/shiftCRUDContainer';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  

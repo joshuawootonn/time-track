@@ -23,17 +23,7 @@ export class ShiftEdit extends Component {
     //console.log(values);
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-            <Typography variant="h6">{label}</Typography>
-            {type === 'edit' && (
-              <Tooltip title="Delete">
-                <IconButton onClick={removeShift} aria-label="Delete">
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Grid>
+        <Grid container spacing={24} className={classes.gridContainer}>          
           <Grid item xs={12} className={classes.row}>
             <Field
               name='employeeId'
