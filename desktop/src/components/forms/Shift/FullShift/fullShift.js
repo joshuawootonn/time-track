@@ -16,12 +16,12 @@ import { minutesToString } from 'helpers/time';
 
 export class FullShift extends Component {
   render() {
-    const { classes, isSubmitting, resetForm, initialValues, errors,  values,
-      projects, projectTasks, employees,  timeLeft, generalError } = this.props;
-    // console.log(initialValues);
+    const { classes, isSubmitting, resetForm, initialValues, errors, values,
+      projects, projectTasks, employees, timeLeft, generalError } = this.props;
+    
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>          
+        <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Field
               name='employeeId'
@@ -59,25 +59,32 @@ export class FullShift extends Component {
                 <Grid item xs={12} container className={classes.body}>
                   {values.activities &&
                     values.activities.map((activity, index) => {
+                      projectTasks // This code iterates the projectTask 
+                        .filter(projectTask => {
+                          console.log(activity, projectTask.projectId)
+                          console.log(activity.projectId === projectTask.projectId)
+                          return activity.projectId === projectTask.projectId; // filters based on project selected
+                        })
+
                       return (
                         <Grid item xs={12}
                           key={index}
                           className={cx(classes.card)}
                         >
-                          <div className={cx(classes.row,classes.bodyRow)}>
+                          <div className={cx(classes.row, classes.bodyRow)}>
                             <Field
                               name={`activities.${index}.projectId`}
                               component={Select}
                               items={projects}
                               fullWidth
-                              label="Project"     
-                              id={`project-field-${index}`}                                                      
+                              label="Project"
+                              id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
                               className={classes.field}
-                              onChange={ () => {                                  
+                              onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `activities.${index}.projectTaskId`,
                                   -1,
-                                );                                  
+                                );
                               }}
                             />
                             <Field
@@ -120,7 +127,7 @@ export class FullShift extends Component {
                             <div className={classes.verticalCenter}>
                               <IconButton
                                 type="button"
-                                id={`remove-activity-${index}`}
+                                id={`${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_${index}`}
                                 color="secondary"
                                 className={classes.iconButton}
                                 onClick={() => arrayHelpers.remove(index)}
@@ -131,9 +138,9 @@ export class FullShift extends Component {
                           </div>
                         </Grid>
                       );
-                    })                 
+                    })
                   }
-                  <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
                     <div className={classes.lunchBox}>
                       <Field
                         name='lunch'
@@ -148,7 +155,7 @@ export class FullShift extends Component {
                     <Button
                       color="primary"
                       variant="contained"
-                      id={'add-activity'}
+                      id={ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}
                       onClick={() =>
                         arrayHelpers.push({
                           projectId: Object.keys(projects)[0],
@@ -156,7 +163,7 @@ export class FullShift extends Component {
                           length: 0,
                           description: ''
                         })
-                      } 
+                      }
                     >
                       Add Activity
                     </Button>
@@ -167,7 +174,7 @@ export class FullShift extends Component {
             }
           />
 
-          <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+          <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
             <Typography variant="h5" margin="none">
               Time Left: {minutesToString(timeLeft)}
             </Typography>
@@ -212,6 +219,9 @@ export class FullShift extends Component {
 
 export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = 'analyze_shift_full_shift_reset_button'
 export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_full_shift_submit_button'
+export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_add_activity_button'
+export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_remove_activity_button'
+export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = 'analyze_shift_full_shift_project_field';
 
 FullShift.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -219,8 +229,8 @@ FullShift.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  projects: PropTypes.array.isRequired, 
-  projectTasks: PropTypes.array.isRequired, 
+  projects: PropTypes.array.isRequired,
+  projectTasks: PropTypes.array.isRequired,
   employees: PropTypes.array.isRequired,
   timeLeft: PropTypes.number.isRequired,
   generalError: PropTypes.string,

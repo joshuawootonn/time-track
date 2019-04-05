@@ -1,12 +1,20 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { FieldArray } from 'formik';
 
-import {Formik} from 'formik'
+import { Formik } from 'formik'
 
-import { FullShift,ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID,ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID } from 'components/forms/Shift/FullShift/fullShift';
+import {
+  FullShift,
+  ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID,
+  ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID,
+  ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID,
+  ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID,
+  ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID
+} from 'components/forms/Shift/FullShift/fullShift';
 import FullShiftHOC from 'components/forms/Shift/FullShift';
 
-import {EMPLOYEE_MOCK, PROJECT_MOCK,PROJECT_TASK_MOCK} from 'constants/modelMocks'
+import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, ACTIVITY_MOCK } from 'constants/modelMocks'
 
 const INITIAL_VALUES_ADD = {
   lunch: 30,
@@ -31,47 +39,7 @@ const INTIIAL_VALUES_EDIT = {
   length: 232,
   lunch: null,
   activities: [
-    {
-      description: "",
-      id: 33640,
-      length: 225,
-      projectTaskId: 1,
-      shiftId: 13539,
-      projectTask: {
-        estimateTime: 758,
-        id: 1,
-        projectId: 1,
-        quantity: 1500,
-        taskId: 1,
-        task: {
-          id: 1,
-          isActive: 1,
-          name: "6\" Driveway",
-          subcategoryId: 1,
-          subcategory: {
-            categoryId: 1,
-            id: 1,
-            type: "Subcategory Name",
-            dimensionId: 1
-          },
-          category: {
-            id: 1,
-            type: "Category Name"
-          },
-          dimension: {
-            id: 1,
-            type: "Dimension Name"
-          }
-        },
-        project: {
-          date: "2017-02-13T00:02:00.000Z",
-          id: 1,
-          isActive: 0,
-          name: "1722: Musc. Co. Fruitland Whitetopping"
-        }
-      },
-      projectId: 1
-    }
+    ACTIVITY_MOCK
   ],
   employee: {
     authorityId: 2,
@@ -85,7 +53,7 @@ const INTIIAL_VALUES_EDIT = {
   }
 }
 
-const props =  {  
+const props = {
   classes: {},
   isSubmitting: false,
   resetForm: jest.fn(),
@@ -95,18 +63,29 @@ const props =  {
   projectTasks: PROJECT_TASK_MOCK,
   employees: EMPLOYEE_MOCK,
   timeLeft: 400,
-  generalError: '',  
+  generalError: '',
+  values: {
+    activities: ACTIVITY_MOCK
+  }
 };
 
-const setup = overRides => {  
+const renderProps = {
+  remove: jest.fn(),
+  push: jest.fn(),
+  form: {
+    setFieldValue: jest.fn()
+  }
+};
+
+const setup = overRides => {
   return mount(
     <Formik
       initialValues={INITIAL_VALUES_ADD}
       render={(formikProps) => (
-        <FullShift {...formikProps} {...props} {...overRides}/>
+        <FullShift {...formikProps} {...props} {...overRides} />
       )}
-    /> 
-  );    
+    />
+  );
 };
 
 const setupHOC = overRides => {
@@ -114,32 +93,62 @@ const setupHOC = overRides => {
     <Formik
       initialValues={INITIAL_VALUES_ADD}
       render={(formikProps) => (
-        <FullShiftHOC {...formikProps} {...props} {...overRides}/>
+        <FullShiftHOC {...formikProps} {...props} {...overRides} />
       )}
     />
   );
 };
+
+const setupWithRender = overRides => {
+  const wrapper = setup();
+  const Render = wrapper.find(FieldArray).first().prop('render');
+  return shallow(<Render {...renderProps} {...overRides} />);
+};
+
 
 describe('FullShift Component', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
   it('should mount correctly in add mode', () => {
-    setup({initialValues: INITIAL_VALUES_ADD});        
+    setup({ initialValues: INITIAL_VALUES_ADD });
   });
   it('should render correctly withStyles in add mode', () => {
-    setupHOC({initialValues: INITIAL_VALUES_ADD});    
+    setupHOC({ initialValues: INITIAL_VALUES_ADD });
   });
   it('should mount correctly in add mode', () => {
-    setup({initialValues: INTIIAL_VALUES_EDIT});        
+    setup({ initialValues: INTIIAL_VALUES_EDIT });
   });
   it('should render correctly withStyles in add mode', () => {
-    setupHOC({initialValues: INTIIAL_VALUES_EDIT});    
+    setupHOC({ initialValues: INTIIAL_VALUES_EDIT });
   });
   it(`should call props.resetForm when #${ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID} is clicked`, () => {
     const wrapper = setup();
     expect(props.resetForm).not.toHaveBeenCalled();
     wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID}`).first().simulate('click');
     expect(props.resetForm).toHaveBeenCalled();
-  })  
+  })
+  it(`it should call render of activities fieldArray`, () => {
+    setupWithRender();
+  })
+  it(`should remove an activity when #${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_0 is clicked`, () => {
+    const wrapper = setupWithRender();
+    expect(renderProps.remove).not.toHaveBeenCalled();
+    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_0`).first().simulate('click');
+    expect(renderProps.remove).toHaveBeenCalled();
+  });
+  it(`should add an activity when #${ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID} is clicked`, () => {
+    const wrapper = setupWithRender();
+    expect(renderProps.push).not.toHaveBeenCalled();
+    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}`).first().simulate('click');
+    expect(renderProps.push).toHaveBeenCalled();
+  });
+  it(`should renderProps.form.setFieldValue when project formik.Field changes`, () => {
+    const wrapper = setupWithRender();
+    expect(renderProps.form.setFieldValue).not.toHaveBeenCalled();
+    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_0`).first().prop('onChange')();
+    expect(renderProps.form.setFieldValue).toHaveBeenCalled();
+    expect(renderProps.form.setFieldValue).toHaveBeenCalledWith('activities.0.projectTaskId',-1);
+    
+  })
 });

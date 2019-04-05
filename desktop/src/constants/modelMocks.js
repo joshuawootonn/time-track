@@ -72,3 +72,45 @@ export const PROJECT_TASK_MOCK = [{
     subcategory: { id: 2, name: 'name2' }
   }
 }]
+
+export const ACTIVITY_MOCK = [{
+  description: "",
+  id: 1,
+  length: 225,
+  projectTaskId: 1,
+  shiftId: 1,
+  projectTask: {
+    estimateTime: 758,
+    id: 1,
+    projectId: 1,
+    quantity: 1500,
+    taskId: 1,
+    task: {
+      id: 1,
+      isActive: 1,
+      name: "6\" Driveway",
+      subcategoryId: 1,
+      subcategory: {
+        categoryId: 1,
+        id: 1,
+        type: "Subcategory Name",
+        dimensionId: 1
+      },
+      category: {
+        id: 1,
+        type: "Category Name"
+      },
+      dimension: {
+        id: 1,
+        type: "Dimension Name"
+      }
+    },
+    project: {
+      date: "2017-02-13T00:02:00.000Z",
+      id: 1,
+      isActive: 0,
+      name: "1722: Musc. Co. Fruitland Whitetopping"
+    }
+  },
+  projectId: 1
+}]
