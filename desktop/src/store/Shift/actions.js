@@ -84,9 +84,9 @@ export const createHalfShift = shift => {
         employeeId: shift.employeeId,
         clockInDate: moment(shift.clockInDate).utc().toString()
       };
-      
-      console.log('create half shift action: ',shiftObject);
-
+     
+      // console.log('create half shift action: ',shiftObject);
+    
       // create the half shift
       const response =  await dispatch(genericActions.post(domains.SHIFT,shiftObject));
       await dispatch(genericActions.get(domains.SHIFT,response.data.id));
@@ -156,7 +156,7 @@ export const updateHalfShift = shift => {
         clockInDate: moment(shift.clockInDate).utc().toString()
       };      
 
-      console.log('update half shift action: ',shiftObject);
+      // console.log('update half shift action: ',shiftObject);
 
       const response = await dispatch(genericActions.put(domains.SHIFT,shiftObject));
      
