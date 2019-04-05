@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip, IconButton, MenuItem } from '@material-ui/core';
+import { Grid, Typography, Button, IconButton, MenuItem } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
-import { Delete } from '@material-ui/icons';
-
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
@@ -16,24 +14,14 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 
-export class ShiftEdit extends Component {
+export class FullShift extends Component {
   render() {
-    const { classes, label, type, removeShift, isSubmitting, resetForm, initialValues, errors,  values,
-      projects, projectTasks, employees,  timeLeft, generalError } = this.props;
-    //console.log(values);
+    const { classes, isSubmitting, resetForm, initialValues, errors, values,
+      projects, projectTasks, employees, timeLeft, generalError } = this.props;
+    
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-            <Typography variant="h6">{label}</Typography>
-            {type === 'edit' && (
-              <Tooltip title="Delete">
-                <IconButton onClick={removeShift} aria-label="Delete">
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
               name='employeeId'
@@ -74,25 +62,22 @@ export class ShiftEdit extends Component {
                       return (
                         <Grid item xs={12}
                           key={index}
-                          className={cx(
-                            classes.card,
-                            classes.verticalCenterBox,
-                          )}
+                          className={cx(classes.card)}
                         >
-                          <div className={cx(classes.row,classes.bodyRow)}>
+                          <div className={cx(classes.row, classes.bodyRow)}>
                             <Field
                               name={`activities.${index}.projectId`}
                               component={Select}
                               items={projects}
                               fullWidth
-                              label="Project"     
-                              id={`project-field-${index}`}                                                      
+                              label="Project"
+                              id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
                               className={classes.field}
-                              onChange={ () => {                                  
+                              onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `activities.${index}.projectTaskId`,
                                   -1,
-                                );                                  
+                                );
                               }}
                             />
                             <Field
@@ -135,7 +120,7 @@ export class ShiftEdit extends Component {
                             <div className={classes.verticalCenter}>
                               <IconButton
                                 type="button"
-                                id={`remove-activity-${index}`}
+                                id={`${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_${index}`}
                                 color="secondary"
                                 className={classes.iconButton}
                                 onClick={() => arrayHelpers.remove(index)}
@@ -146,9 +131,9 @@ export class ShiftEdit extends Component {
                           </div>
                         </Grid>
                       );
-                    })                 
+                    })
                   }
-                  <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
                     <div className={classes.lunchBox}>
                       <Field
                         name='lunch'
@@ -163,7 +148,7 @@ export class ShiftEdit extends Component {
                     <Button
                       color="primary"
                       variant="contained"
-                      id={'add-activity'}
+                      id={ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}
                       onClick={() =>
                         arrayHelpers.push({
                           projectId: Object.keys(projects)[0],
@@ -171,7 +156,7 @@ export class ShiftEdit extends Component {
                           length: 0,
                           description: ''
                         })
-                      } 
+                      }
                     >
                       Add Activity
                     </Button>
@@ -182,7 +167,7 @@ export class ShiftEdit extends Component {
             }
           />
 
-          <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+          <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
             <Typography variant="h5" margin="none">
               Time Left: {minutesToString(timeLeft)}
             </Typography>
@@ -199,18 +184,19 @@ export class ShiftEdit extends Component {
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
                 variant="contained"
+                id={ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID}
                 className={classes.button}
               >
-                Save
+                Save Shift
               </Button>
 
               <Button
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={'shift-edit-reset-button'}
                 color="secondary"
                 variant="text"
+                id={ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID}
                 className={classes.button}
               >
                 Reset
@@ -223,21 +209,25 @@ export class ShiftEdit extends Component {
     );
   }
 }
-ShiftEdit.propTypes = {
+
+export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = 'analyze_shift_full_shift_reset_button';
+export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_full_shift_submit_button';
+export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_add_activity_button';
+export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_remove_activity_button';
+export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = 'analyze_shift_full_shift_project_field';
+
+FullShift.propTypes = {
   classes: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  removeShift: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  projects: PropTypes.array.isRequired, 
-  projectTasks: PropTypes.array.isRequired, 
+  projects: PropTypes.array.isRequired,
+  projectTasks: PropTypes.array.isRequired,
   employees: PropTypes.array.isRequired,
   timeLeft: PropTypes.number.isRequired,
   generalError: PropTypes.string,
   values: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ShiftEdit);
+export default withStyles(styles)(FullShift);

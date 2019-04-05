@@ -58,8 +58,10 @@ const projectTaskActionTypes = {
 const shiftActionTypes = {
   ...createCRUDActionTypes('shift','shifts'),
   ...createCustomAsyncActionType('shift','create'),
+  ...createCustomAsyncActionType('shift','create_half'),
   ...createCustomAsyncActionType('shift','remove'),
   ...createCustomAsyncActionType('shift','edit'), 
+  ...createCustomAsyncActionType('shift','edit_half'), 
   ...createCustomAsyncActionType('current_shift','get') ,  
   ...createCustomAsyncActionType('shifts_in_range','get') 
 };

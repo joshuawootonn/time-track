@@ -45,7 +45,7 @@ module.exports = {
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "never"],
     //"array-element-newline": ["error", "never"],
-    "allowAllPropertiesOnSameLine": false
-
+    "allowAllPropertiesOnSameLine": false,
+    "linebreak-style": 0
   }
 };

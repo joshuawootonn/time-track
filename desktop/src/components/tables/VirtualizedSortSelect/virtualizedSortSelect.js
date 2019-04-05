@@ -27,7 +27,7 @@ class VirtualizedSortSelect extends React.Component {
     };
   }
 
-  componentWillUpdate (nextProps, nextState) {
+  UNSAFE_componentWillUpdate (nextProps, nextState) {
     const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
     const { sortDirection,sortBy, type,sortKeys, sortKey } = nextState;
   
