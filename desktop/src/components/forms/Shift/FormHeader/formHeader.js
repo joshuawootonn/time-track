@@ -13,7 +13,7 @@ import { analyzeStatus } from 'constants/analyze';
 
 export const FormHeader = props => {
   const {classes,remove,label,type, extent, extentOptions,updateExtent} = props;
-
+  console.log(extentOptions)
   return (
     <Grid container spacing={24} className={classes.gridContainer}> 
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>

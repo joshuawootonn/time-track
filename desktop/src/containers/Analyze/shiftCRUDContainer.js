@@ -22,8 +22,8 @@ import { minutesRoudedTime } from 'helpers/time';
 
 export class ShiftCRUD extends Component {
   state = {
-    [`${analyzeStatus.EDITING}Extent`]: formConstants.HALF_SHIFT,
-    [`${analyzeStatus.ADDING}Extent`]: formConstants.HALF_SHIFT,
+    [`${analyzeStatus.EDITING}Extent`]: formConstants.FULL_SHIFT,
+    [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT,
   }
   removeShift = () => {
     const { selected, removeShift } = this.props;
@@ -41,10 +41,20 @@ export class ShiftCRUD extends Component {
     });
     console.log(this.state);
   }
+
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props.selected && this.props.selected.clockOutDate !== null) {
+  //     this.updateExtent(analyzeStatus.EDITING,formConstants.FULL_SHIFT);
+
+  //   }
+  // }
   render() {
     const { selected, status, projects, projectTasks, employees } = this.props;
     const { editingExtent, addingExtent } = this.state;
 
+    const isComplete = status === analyzeStatus.EDITING && selected && selected.clockOutDate !== null
+    console.log(isComplete)
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
@@ -61,8 +71,8 @@ export class ShiftCRUD extends Component {
             label='Edit Shift'
             remove={this.removeShift}
             type={status}
-            extent={editingExtent}
-            extentOptions={[{ type: formConstants.HALF_SHIFT, label: 'Half Shift' }, { type: formConstants.FULL_SHIFT, label: 'Full Shift' }]}
+            extent={isComplete ? formConstants.FULL_SHIFT : editingExtent}
+            extentOptions={isComplete ? [{ type: formConstants.FULL_SHIFT, label: 'Full Shift' }] : [ { type: formConstants.HALF_SHIFT, label: 'Half Shift' } , { type: formConstants.FULL_SHIFT, label: 'Full Shift' }]}
             updateExtent={this.updateExtent}
           />
           {editingExtent === formConstants.HALF_SHIFT && <Formik
