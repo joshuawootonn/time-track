@@ -13,10 +13,11 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 
-export class ShiftEdit extends Component {
+export class HalfShift extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
-     employees, timeLeft, generalError } = this.props;    
+     employees, timeLeft, generalError } = this.props;
+     console.log(initialValues);    
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>          
@@ -57,6 +58,7 @@ export class ShiftEdit extends Component {
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0}
                 variant="contained"
+                id={ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID}
                 className={classes.button}
               >
                 Save Clock In
@@ -69,6 +71,7 @@ export class ShiftEdit extends Component {
                 id={'shift-edit-reset-button'}
                 color="secondary"
                 variant="text"
+                id={ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}
                 className={classes.button}
               >
                 Reset
@@ -81,7 +84,11 @@ export class ShiftEdit extends Component {
     );
   }
 }
-ShiftEdit.propTypes = {
+
+export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = 'analyze_shift_half_shift_reset_button'
+export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_half_shift_submit_button'
+
+HalfShift.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
@@ -92,4 +99,4 @@ ShiftEdit.propTypes = {
   generalError: PropTypes.string,
 };
 
-export default withStyles(styles)(ShiftEdit);
+export default withStyles(styles)(HalfShift);

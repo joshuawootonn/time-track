@@ -7,29 +7,29 @@ import { Delete } from '@material-ui/icons';
 import cx from 'classnames';
 
 import styles from './styles';
-import * as formConstants from '../constants'
+import * as formConstants from '../../../../constants/formTypes'
 
 import { analyzeStatus } from 'constants/analyze';
 
 export const FormHeader = props => {
-  const {classes,remove,label,type, extent, extentOptions,updateExtent} = props;
-  console.log(extentOptions)
+  const {classes,remove,label,type, extent, extentOptions,updateExtent} = props;  
   return (
     <Grid container spacing={24} className={classes.gridContainer}> 
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
         <Typography variant="h6">{label}</Typography>
         <div>
           {extentOptions && extentOptions.length > 0 && 
-            extentOptions.map(extentOption => {
+            extentOptions.map((extentOption,i) => {
               return (
                 <Button
+                  key={i}
+                  id={`${ANALYZE_SHIFT_EXTENT_BUTTON_ID}_${i}`}
                   variant={extentOption.type == extent ? "contained" : "outlined"}
                   onClick={() => updateExtent(type,extentOption.type)}
                   style={{marginRight: '10px'}}
                 >
                   {extentOption.label}
                 </Button>
-
               )
             })
           }
@@ -45,6 +45,8 @@ export const FormHeader = props => {
     </Grid>
   );
 };
+
+export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = 'analyze_shift_extent_button'
 
 FormHeader.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -8,7 +8,7 @@ import moment from 'moment';
 import FullShiftForm from 'components/forms/Shift/FullShift';
 import HalfShiftForm from 'components/forms/Shift/HalfShift';
 import FormHeader from 'components/forms/Shift/FormHeader'
-import * as formConstants from 'components/forms/Shift/constants';
+import * as formConstants from 'constants/formTypes';
 
 import { shiftSelectors, projectSelectors, projectTaskSelectors, employeeSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
