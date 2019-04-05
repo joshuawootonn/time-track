@@ -114,3 +114,22 @@ export const ACTIVITY_MOCK = [{
   },
   projectId: 1
 }];
+
+export const SHIFT_MOCK = [{
+  clockInDate:'2018-11-25T15:00:00.000Z',
+  clockOutDate:null,
+  employeeId:2,
+  id:9,
+  length:null,
+  lunch:null,
+  activities:[],
+  employee:{ 
+    authorityId:1
+    ,crewId:1,
+    firstName:'Joshua',
+    id:2,
+    isEmployed:1,
+    isWorking:1,
+    lastName:'Wootonn',
+    pin:565656 } 
+}];

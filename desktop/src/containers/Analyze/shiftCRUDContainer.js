@@ -34,21 +34,11 @@ export class ShiftCRUD extends Component {
    * Extent: HALF_SHIFT or  FULL_SHIFT
    */
   updateExtent = (type, extent) => {
-    console.log(type,extent);
-    console.log(this.state);
     this.setState({
       [`${type}Extent`]: extent
     });
-    console.log(this.state);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   if (this.props.selected && this.props.selected.clockOutDate !== null) {
-  //     this.updateExtent(analyzeStatus.EDITING,formConstants.FULL_SHIFT);
-
-  //   }
-  // }
   render() {
     const { selected, status, projects, projectTasks, employees } = this.props;
     const { editingExtent, addingExtent } = this.state;
