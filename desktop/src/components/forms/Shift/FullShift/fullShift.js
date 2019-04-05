@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip, IconButton, MenuItem } from '@material-ui/core';
+import { Grid, Typography, Button, IconButton, MenuItem } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
@@ -14,11 +14,11 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 
-export class ShiftEdit extends Component {
+export class FullShift extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors,  values,
       projects, projectTasks, employees,  timeLeft, generalError } = this.props;
-    //console.log(values);
+    // console.log(initialValues);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>          
@@ -184,6 +184,7 @@ export class ShiftEdit extends Component {
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
                 variant="contained"
+                id={ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID}
                 className={classes.button}
               >
                 Save Shift
@@ -193,9 +194,9 @@ export class ShiftEdit extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={'shift-edit-reset-button'}
                 color="secondary"
                 variant="text"
+                id={ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID}
                 className={classes.button}
               >
                 Reset
@@ -208,7 +209,11 @@ export class ShiftEdit extends Component {
     );
   }
 }
-ShiftEdit.propTypes = {
+
+export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = 'analyze_shift_full_shift_reset_button'
+export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_full_shift_submit_button'
+
+FullShift.propTypes = {
   classes: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
@@ -222,4 +227,4 @@ ShiftEdit.propTypes = {
   values: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ShiftEdit);
+export default withStyles(styles)(FullShift);

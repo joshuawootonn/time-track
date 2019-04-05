@@ -73,6 +73,5 @@ describe('HalfShift Component', () => {
     expect(props.resetForm).not.toHaveBeenCalled();
     wrapper.find(`#${ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}`).first().simulate('click');
     expect(props.resetForm).toHaveBeenCalled();
-  })
-  
+  })  
 });
