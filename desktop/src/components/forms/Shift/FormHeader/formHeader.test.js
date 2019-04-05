@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import { FormHeader,ANALYZE_SHIFT_EXTENT_BUTTON_ID } from 'components/forms/Shift/FormHeader/formHeader';
 import FormHeaderHOC from 'components/forms/Shift/FormHeader';
 
-import * as formTypes from 'constants/formTypes'
+import * as formTypes from 'constants/formTypes';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
@@ -34,7 +34,7 @@ const setupHOC = overRides => {
 describe('Form Header Component', () => {  
   afterEach(() => {
     jest.resetAllMocks();
-  })
+  });
   it('should mount correctly', () => {
     setup();        
   });
@@ -46,5 +46,5 @@ describe('Form Header Component', () => {
     expect(props.updateExtent).not.toHaveBeenCalled();
     wrapper.find(`#${ANALYZE_SHIFT_EXTENT_BUTTON_ID}_0`).first().simulate('click');
     expect(props.updateExtent).toHaveBeenCalled();
-  })
+  });
 });

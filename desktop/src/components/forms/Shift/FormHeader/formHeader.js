@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, Tooltip, IconButton, MenuItem } from '@material-ui/core';
+import { Grid, Typography, Button, Tooltip, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
 import cx from 'classnames';
 
 import styles from './styles';
-import * as formConstants from '../../../../constants/formTypes'
+import * as formConstants from '../../../../constants/formTypes';
 
 import { analyzeStatus } from 'constants/analyze';
 
 export const FormHeader = props => {
-  const {classes,remove,label,type, extent, extentOptions,updateExtent} = props;  
+  const { classes,remove,label,type, extent, extentOptions,updateExtent } = props;  
   return (
     <Grid container spacing={24} className={classes.gridContainer}> 
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
@@ -24,13 +24,13 @@ export const FormHeader = props => {
                 <Button
                   key={i}
                   id={`${ANALYZE_SHIFT_EXTENT_BUTTON_ID}_${i}`}
-                  variant={extentOption.type == extent ? "contained" : "outlined"}
+                  variant={extentOption.type === extent ? 'contained' : 'outlined'}
                   onClick={() => updateExtent(type,extentOption.type)}
-                  style={{marginRight: '10px'}}
+                  style={{ marginRight: '10px' }}
                 >
                   {extentOption.label}
                 </Button>
-              )
+              );
             })
           }
         </div>
@@ -46,7 +46,7 @@ export const FormHeader = props => {
   );
 };
 
-export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = 'analyze_shift_extent_button'
+export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = 'analyze_shift_extent_button';
 
 FormHeader.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -59,6 +59,6 @@ FormHeader.propTypes = {
     label: PropTypes.string
   })),
   updateExtent: PropTypes.func
-}
+};
 
 export default withStyles(styles)(FormHeader);

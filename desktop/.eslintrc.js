@@ -46,6 +46,6 @@ module.exports = {
     "comma-dangle": ["error", "never"],
     //"array-element-newline": ["error", "never"],
     "allowAllPropertiesOnSameLine": false,
-    "linebreak-style": false
+    "linebreak-style": 0
   }
 };

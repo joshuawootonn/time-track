@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import FullShiftForm from 'components/forms/Shift/FullShift';
 import HalfShiftForm from 'components/forms/Shift/HalfShift';
-import FormHeader from 'components/forms/Shift/FormHeader'
+import FormHeader from 'components/forms/Shift/FormHeader';
 import * as formConstants from 'constants/formTypes';
 
 import { shiftSelectors, projectSelectors, projectTaskSelectors, employeeSelectors } from 'store/selectors';
@@ -23,7 +23,7 @@ import { minutesRoudedTime } from 'helpers/time';
 export class ShiftCRUD extends Component {
   state = {
     [`${analyzeStatus.EDITING}Extent`]: formConstants.FULL_SHIFT,
-    [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT,
+    [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT
   }
   removeShift = () => {
     const { selected, removeShift } = this.props;
@@ -53,8 +53,8 @@ export class ShiftCRUD extends Component {
     const { selected, status, projects, projectTasks, employees } = this.props;
     const { editingExtent, addingExtent } = this.state;
 
-    const isComplete = status === analyzeStatus.EDITING && selected && selected.clockOutDate !== null
-    console.log(isComplete)
+    const isComplete = status === analyzeStatus.EDITING && selected && selected.clockOutDate !== null;
+    console.log(isComplete);
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
@@ -80,7 +80,7 @@ export class ShiftCRUD extends Component {
             initialValues={{
               id: selected.id,
               employeeId: selected.employeeId,
-              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm'),
+              clockInDate: moment.utc(selected.clockInDate).local().format('YYYY-MM-DDTHH:mm')
             }}
             validationSchema={halfShiftValidation}
             onSubmit={(values, formikFunctions) => {
@@ -99,13 +99,13 @@ export class ShiftCRUD extends Component {
               );
             }}
             render={formikProps => {
-              const { values, errors } = formikProps;
+              const { values } = formikProps;
               const shiftDuration = moment.duration(moment(new Date(), 'YYYY-MM-DDTHH:mm').diff(moment(values.clockInDate, 'YYYY-MM-DDTHH:mm')));
               let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes()));
 
               //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
 
-              console.log(timeLeft, values, selected)
+              console.log(timeLeft, values, selected);
               return (
                 <HalfShiftForm
                   label="Edit Shift"
@@ -202,7 +202,7 @@ export class ShiftCRUD extends Component {
             enableReinitialize
             initialValues={{
               clockInDate: moment().startOf('day').add('minutes', 450).format('YYYY-MM-DDTHH:mm'),              
-              employeeId: -1,
+              employeeId: -1
             }}
             validationSchema={halfShiftValidation}
             onSubmit={(values, formikFunctions) => {
@@ -297,7 +297,7 @@ export class ShiftCRUD extends Component {
               );
             }}
           />}
-      </div>)
+      </div>);
 
     }
   }

@@ -11,24 +11,24 @@ export const EMPLOYEE_MOCK = [{
   id: 2,
   firstName: '2',
   lastName: '2'
-}]
+}];
 
 export const PROJECT_MOCK = [{
   id: 0,
   name: '0',
   isActive: 0,
-  date: "2017-02-13T00:02:00.000Z"
+  date: '2017-02-13T00:02:00.000Z'
 }, {
   id: 1,
   name: '1',
   isActive: 0,
-  date: "2017-02-13T00:02:00.000Z"
+  date: '2017-02-13T00:02:00.000Z'
 }, {
   id: 2,
   name: '2',
   isActive: 0,
-  date: "2017-02-13T00:02:00.000Z"
-}]
+  date: '2017-02-13T00:02:00.000Z'
+}];
 
 export const PROJECT_TASK_MOCK = [{
   id: 0,
@@ -39,7 +39,7 @@ export const PROJECT_TASK_MOCK = [{
   task: {
     id: 0,
     isActive: 0,
-    name: "0",
+    name: '0',
     category: { id: 0, name: 'name0' },
     subcategory: { id: 0, name: 'name0' }
   }
@@ -53,7 +53,7 @@ export const PROJECT_TASK_MOCK = [{
   task: {
     id: 1,
     isActive: 1,
-    name: "1",
+    name: '1',
     category: { id: 1, name: 'name1' },
     subcategory: { id: 1, name: 'name1' }
   }
@@ -67,14 +67,14 @@ export const PROJECT_TASK_MOCK = [{
   task: {
     id: 2,
     isActive: 2,
-    name: "2",
+    name: '2',
     category: { id: 2, name: 'name2' },
     subcategory: { id: 2, name: 'name2' }
   }
-}]
+}];
 
 export const ACTIVITY_MOCK = [{
-  description: "",
+  description: '',
   id: 1,
   length: 225,
   projectTaskId: 1,
@@ -88,29 +88,29 @@ export const ACTIVITY_MOCK = [{
     task: {
       id: 1,
       isActive: 1,
-      name: "6\" Driveway",
+      name: '6" Driveway',
       subcategoryId: 1,
       subcategory: {
         categoryId: 1,
         id: 1,
-        type: "Subcategory Name",
+        type: 'Subcategory Name',
         dimensionId: 1
       },
       category: {
         id: 1,
-        type: "Category Name"
+        type: 'Category Name'
       },
       dimension: {
         id: 1,
-        type: "Dimension Name"
+        type: 'Dimension Name'
       }
     },
     project: {
-      date: "2017-02-13T00:02:00.000Z",
+      date: '2017-02-13T00:02:00.000Z',
       id: 1,
       isActive: 0,
-      name: "1722: Musc. Co. Fruitland Whitetopping"
+      name: '1722: Musc. Co. Fruitland Whitetopping'
     }
   },
   projectId: 1
-}]
+}];

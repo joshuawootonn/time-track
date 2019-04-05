@@ -16,7 +16,7 @@ import { minutesToString } from 'helpers/time';
 export class HalfShift extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
-     employees, timeLeft, generalError } = this.props;
+      employees, timeLeft, generalError } = this.props;
     //  console.log(initialValues);    
     return (
       <Form>
@@ -68,7 +68,6 @@ export class HalfShift extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={'shift-edit-reset-button'}
                 color="secondary"
                 variant="text"
                 id={ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}
@@ -85,8 +84,8 @@ export class HalfShift extends Component {
   }
 }
 
-export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = 'analyze_shift_half_shift_reset_button'
-export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_half_shift_submit_button'
+export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = 'analyze_shift_half_shift_reset_button';
+export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_half_shift_submit_button';
 
 HalfShift.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -96,7 +95,7 @@ HalfShift.propTypes = {
   errors: PropTypes.object.isRequired,
   employees: PropTypes.array.isRequired,
   timeLeft: PropTypes.number.isRequired,
-  generalError: PropTypes.string,
+  generalError: PropTypes.string
 };
 
 export default withStyles(styles)(HalfShift);

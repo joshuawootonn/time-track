@@ -147,13 +147,13 @@ export const updateShift = shift => {
 };
 
 export const updateHalfShift = shift => {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_REQUEST });
     try {
       const shiftObject = {
         id: shift.id,
         employeeId: shift.employeeId,
-        clockInDate: moment(shift.clockInDate).utc().toString(),
+        clockInDate: moment(shift.clockInDate).utc().toString()
       };      
 
       console.log('update half shift action: ',shiftObject);
