@@ -44,7 +44,7 @@ export class ShiftCRUD extends Component {
     const { editingExtent, addingExtent } = this.state;
 
     const isComplete = status === analyzeStatus.EDITING && selected && selected.clockOutDate !== null;
-    console.log(isComplete);
+    // console.log(isComplete);
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
@@ -52,7 +52,7 @@ export class ShiftCRUD extends Component {
         </Hero>
       );
     }
-    console.log('selected shift', selected);
+    // console.log('selected shift', selected);
 
     if (status === analyzeStatus.EDITING) {
       return (
@@ -95,7 +95,7 @@ export class ShiftCRUD extends Component {
 
               //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
 
-              console.log(timeLeft, values, selected);
+              // console.log(timeLeft, values, selected);
               return (
                 <HalfShiftForm
                   label="Edit Shift"

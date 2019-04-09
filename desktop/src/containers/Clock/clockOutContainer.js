@@ -30,7 +30,7 @@ export class ClockOut extends Component {
 
   render() {
     const { currentShift, projects, projectTasks,lastWeeksShifts } = this.props;
-    console.log(lastWeeksShifts);
+    // console.log(lastWeeksShifts);
     
 
     const isLoading = !currentShift;

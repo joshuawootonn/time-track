@@ -136,12 +136,7 @@ const formatData = (startTime, endTime) => {
           overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
           regularActivityLength = (2400 - totalTimeForWeek);
         }
-        if(shift.id === 13437){
-
-          console.log(regularActivityLength,overtimeActivityLength);
-          console.log(minutesToString(regularActivityLength),minutesToString(overtimeActivityLength));
-        }
-
+        
 
         totalTimeForWeek += activity.length;
         if (i === 0) {

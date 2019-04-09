@@ -24,26 +24,18 @@ export class Clockout extends Component{
     currentTextField: null
   }
   onChange = input => {
-    console.log('ONchange: ',input);
     if(this.state.currentTextField !== null){
       this.props.setFieldValue(this.state.currentTextField,input);
     }
   }
-  onKeyPress = button => {
-    console.log('ONKeyPress: ',button);
-  }
-  on = (input, asdf) => {
-    // console.log('on',input,asdf);
+  onDescriptionFocus = (input, asdf) => {
     this.setState({ isKeyboardVisisble: true, currentTextField: asdf });
-    //this.keyboardRef.keyboard.setInput(input);
   }
-  off = () => {
-    // console.log('off');
+  onDescriptionBlur = () => {
     this.setState({ isKeyboardVisisble: false,currentTextField: null });
-    //this.keyboardRef.keyboard.clearInput();
   }
   render() {
-    const { classes, isSubmitting, handleSubmit, shift, values, length, lengthInMinutes,
+    const { classes, isSubmitting, handleSubmit, shift, values, length, 
       projects, projectTasks, cancel, errors, timeLeft, weekHourTotal, generalError } = this.props;
     
     return (
@@ -139,9 +131,9 @@ export class Clockout extends Component{
                                     label="Description"
                                     component={TextField}
                                     onFocus={e => {
-                                      this.on(e,`activities.${index}.description`);                                      
+                                      this.onDescriptionFocus(e,`activities.${index}.description`);                                      
                                     }}
-                                    onBlur={this.off}
+                                    onBlur={this.onDescriptionBlur}
                                   /> 
                                   <div className={classes.verticalCenter}>
                                     <IconButton
@@ -229,7 +221,6 @@ export class Clockout extends Component{
               <Keyboard 
                 ref={r => (this.keyboardRef = r)}
                 onChange={this.onChange}
-                onKeyPress={this.onKeyPress}
                 preventMouseDownDefault={true}
               />
             </Grid>

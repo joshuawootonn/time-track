@@ -126,7 +126,7 @@ export const updateShift = shift => {
         clockInDate: clockInMoment.toString(),
         clockOutDate: clockOutMoment.toString()
       };      
-      console.log(shiftObject);
+      // console.log(shiftObject);
       const response = await dispatch(genericActions.put(domains.SHIFT,shiftObject));
 
       await endpoint.deleteRelatedActivities(shift.id); 
