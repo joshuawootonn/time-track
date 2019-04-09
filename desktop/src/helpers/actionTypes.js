@@ -1,4 +1,4 @@
-export const createCRUDActionTypes = (domain,pluralDomain = domain + 's') => {
+export const createCRUDActionTypes = (domain,pluralDomain = domain + `s`) => {
   return {
     [`GET_${domain.toUpperCase()}_REQUEST`]: `get_${domain.toLowerCase()}_request`,
     [`GET_${domain.toUpperCase()}_SUCCESS`]: `get_${domain.toLowerCase()}_success`,

@@ -34,7 +34,7 @@ export class CategoryDetail extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            type: ''
+            type: ``
           }}
           validationSchema={categoryValidation}
           onSubmit={(values, formikFunctions) => {

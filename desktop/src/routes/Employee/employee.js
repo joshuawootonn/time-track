@@ -7,13 +7,13 @@ export default [
     path: `/${routes.EMPLOYEE}`,
     component: accountActionScene,
     exact: true,
-    name: 'Employee Actions',
+    name: `Employee Actions`,
     type: routes.EMPLOYEE
   }, {
     path: `/${routes.EMPLOYEE}/${routes.CLOCKOUT}`,
     component: clockOutScene,
     exact: true,
-    name: 'Employee Clockout',
+    name: `Employee Clockout`,
     type: routes.EMPLOYEE
   }
 ];

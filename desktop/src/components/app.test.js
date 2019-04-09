@@ -13,11 +13,11 @@ const setupHOC = () => {
   return shallow(<App {...props} />);
 };
 
-describe('App', () => {
-  it('should render correctly', () => {
+describe(`App`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withRouter', () => {
+  it(`should render correctly withRouter`, () => {
     setupHOC();    
   });
 });

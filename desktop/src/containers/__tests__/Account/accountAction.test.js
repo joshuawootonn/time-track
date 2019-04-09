@@ -12,7 +12,7 @@ const props =  {
   employees: { 1: {}, 0: {}, 2: {} },
   employee: { current: { id: 1 } },
   openSnack: jest.fn(),
-  type: 'type',
+  type: `type`,
   currentEmployee: { isWorking: 1 },
   clockIn: jest.fn()
     .mockImplementationOnce(() => Promise.resolve())
@@ -23,15 +23,15 @@ const setup = overRides => {
   return shallow(<AccountAction {...props} {...overRides}/>);    
 };
 
-describe('Account Action Container', () => {  
+describe(`Account Action Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();       
   });
-  it('should call history.push with // on this.back', () => { 
-    const values = '/';
+  it(`should call history.push with // on this.back`, () => { 
+    const values = `/`;
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.history.push).toHaveBeenCalledTimes(0);
@@ -39,7 +39,7 @@ describe('Account Action Container', () => {
     expect(props.history.push).toHaveBeenCalledTimes(1);  
     expect(props.history.push).toHaveBeenCalledWith(values);     
   });
-  it('should call history.push on successful this.clockIn ', () => {
+  it(`should call history.push on successful this.clockIn `, () => {
     const values = { };
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -52,7 +52,7 @@ describe('Account Action Container', () => {
       expect(props.clockIn).toHaveBeenCalledWith(values);
     });     
   });
-  it('should call history.push with /type/clockout on this.clockOut', () => { 
+  it(`should call history.push with /type/clockout on this.clockOut`, () => { 
     const values = `/${props.type}/${routes.CLOCKOUT}`;
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -61,7 +61,7 @@ describe('Account Action Container', () => {
     expect(props.history.push).toHaveBeenCalledTimes(1);  
     expect(props.history.push).toHaveBeenCalledWith(values);     
   });
-  it('should call history.push with /type/analyze on this.analze', () => { 
+  it(`should call history.push with /type/analyze on this.analze`, () => { 
     const values = `/${props.type}/${routes.ANALYZE}`;
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -70,7 +70,7 @@ describe('Account Action Container', () => {
     expect(props.history.push).toHaveBeenCalledTimes(1);  
     expect(props.history.push).toHaveBeenCalledWith(values);     
   });
-  it('should call history.push with /type/export on this.export', () => { 
+  it(`should call history.push with /type/export on this.export`, () => { 
     const values = `/${props.type}/${routes.EXPORT}`;
     const wrapper = setup();
     const instance = wrapper.instance();

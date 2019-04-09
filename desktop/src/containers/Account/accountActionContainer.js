@@ -11,15 +11,15 @@ import AccountActionForm from 'components/forms/AccountAction';
 export class AccountAction extends Component {
   componentDidMount = () => {
     //REMOVE before deploy
-    // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    // this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   }
   back = () => {
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   };
   clockIn = () => {
     const { employees, employee, history } = this.props;
     const employeeToClockin = employees[employee.current.id];
-    return this.props.clockIn(employeeToClockin).then(() => history.push('/'));
+    return this.props.clockIn(employeeToClockin).then(() => history.push(`/`));
   };
   clockOut = () => {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);

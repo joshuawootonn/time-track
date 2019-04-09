@@ -6,7 +6,7 @@ import AuthorityHOC from 'components/forms/Authority';
 
 const props =  {  
   classes: {},
-  label: 'label',
+  label: `label`,
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
@@ -21,19 +21,19 @@ const setupHOC = overRides => {
   return shallow(<AuthorityHOC {...props} {...overRides}/>);
 };
 
-describe('Authority Component', () => {
-  it('should render correctly', () => {
+describe(`Authority Component`, () => {
+  it(`should render correctly`, () => {
     setup(); 
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC(); 
   });
-  it('should call resetForm on authority-reset-button', () => {
+  it(`should call resetForm on authority-reset-button`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#authority-reset-button').first().simulate('click');
+    wrapper.find(`#authority-reset-button`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });
 });

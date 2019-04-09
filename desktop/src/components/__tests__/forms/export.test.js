@@ -8,7 +8,7 @@ const props =  {
   classes: {},
   isSubmitting: true,
   values: {
-    fileLocation: '123'
+    fileLocation: `123`
   },
   cancel: jest.fn(),
   errors: {}
@@ -22,14 +22,14 @@ const setupHOC = overRides => {
   return shallow(<ExportHOC {...props} {...overRides}/>);
 };
 
-describe('Export Component', () => {
+describe(`Export Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
 });

@@ -15,19 +15,19 @@ const setup = overRides => {
   return shallow(<ModalRoot {...props} {...overRides}/>);    
 };
 
-describe('Modal Root Container', () => {  
+describe(`Modal Root Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();       
   });  
-  it('should return null when modal type is null', () => {
+  it(`should return null when modal type is null`, () => {
     const wrapper = setup({ modalType: null });
     const instance = wrapper.instance();
     expect(instance.render()).toBeNull();
   });
-  it('should call props.closeModal on this.toggleModal', () => {    
+  it(`should call props.closeModal on this.toggleModal`, () => {    
     const wrapper = setup({ modalType: null });
     const instance = wrapper.instance();
     expect(props.closeModal).not.toHaveBeenCalled();

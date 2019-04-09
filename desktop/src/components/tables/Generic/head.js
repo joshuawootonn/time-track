@@ -10,7 +10,7 @@ export class GenericHead extends React.Component {
       <TableHead>
         <TableRow>        
           {headerData.map(row => {
-            const key = row.keys ? row.id + row.keys.join('') : row.id;            
+            const key = row.keys ? row.id + row.keys.join(``) : row.id;            
             return (
               <TableCell
                 key={key}

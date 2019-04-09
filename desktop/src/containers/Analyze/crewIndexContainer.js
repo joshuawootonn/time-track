@@ -68,9 +68,9 @@ export default connect(mapStateToProps,mapDispatchToProps)(CrewIndex);
 
 const rows = [
   {
-    id: 'name',
-    padding: 'dense',
-    label: 'Name',
+    id: `name`,
+    padding: `dense`,
+    label: `Name`,
     type: TableDataTypes.STRING
   }
 ];

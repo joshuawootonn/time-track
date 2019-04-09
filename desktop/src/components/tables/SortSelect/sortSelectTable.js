@@ -12,7 +12,7 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 
 export class SortSelectTable extends React.Component {
   state = {
-    order: this.props.initialOrder || 'asc',
+    order: this.props.initialOrder || `asc`,
     orderBy: this.props.initialOrderBy || null
   };
   
@@ -28,7 +28,7 @@ export class SortSelectTable extends React.Component {
       }
       return 0; 
     }
-    if(typeof b[orderBy] === 'string' && typeof a[orderBy] === 'string'){
+    if(typeof b[orderBy] === `string` && typeof a[orderBy] === `string`){
       if (b[orderBy].toUpperCase() < a[orderBy].toUpperCase()) {
         return -1;
       }
@@ -57,15 +57,15 @@ export class SortSelectTable extends React.Component {
   }
   
   getSorting = (order, orderBy, type, keys) => {
-    return order === 'desc' ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
+    return order === `desc` ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
   }
 
   handleRequestSort = (event, property, type = TableDataTypes.STRING, keys = []) => {
     const orderBy = property;
     
-    let order = 'desc';
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
+    let order = `desc`;
+    if (this.state.orderBy === property && this.state.order === `desc`) {
+      order = `asc`;
     }
 
     this.setState({ order, orderBy, type, keys });
@@ -124,18 +124,18 @@ export class SortSelectTable extends React.Component {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
                           // The reduce function here is just used to deconstruct the objects to the value that we want on the table
-                          return <TableCell padding="dense" key={id+keys.join('')} >{
+                          return <TableCell padding="dense" key={id+keys.join(``)} >{
                             keys.reduce((object, currentKey) => {
                               // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
                               return object === undefined ?  null : object[currentKey];
                             },n[id])                          
                           }</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('MM/DD/YY')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`MM/DD/YY`)}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('hh:mm a MM/DD')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`hh:mm a MM/DD`)}</TableCell>;
                         } else if (type === TableDataTypes.LENGTH) {
-                          const length = moment.duration(n[id], 'minutes');
+                          const length = moment.duration(n[id], `minutes`);
                           return <TableCell padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
                         }
                         return null;

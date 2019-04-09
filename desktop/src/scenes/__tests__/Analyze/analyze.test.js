@@ -22,11 +22,11 @@ const setup = overRides => {
 
 
 
-describe('Analyze Scene', () => {  
-  it('should render correctly', () => {
+describe(`Analyze Scene`, () => {  
+  it(`should render correctly`, () => {
     setup();        
   });  
-  it('should display different containers based on state.tabValue', () =>{
+  it(`should display different containers based on state.tabValue`, () =>{
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.handleTabValueChange(null,2);
@@ -36,7 +36,7 @@ describe('Analyze Scene', () => {
     instance.handleTabValueChange(null,3);
     expect(wrapper.state().tabValue).toEqual(3);
   });
-  it('should call this.props.history.push() on this.back()', () => {
+  it(`should call this.props.history.push() on this.back()`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.history.push).toHaveBeenCalledTimes(0);

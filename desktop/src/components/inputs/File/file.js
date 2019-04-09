@@ -42,8 +42,8 @@ export class File extends Component {
             </Button>
           </label>
         </div>
-        {helper === 'normal' && <FormHelperText error={true}>
-          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '}
+        {helper === `normal` && <FormHelperText error={true}>
+          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
         </FormHelperText>}
       </FormControl>
     );
@@ -51,18 +51,18 @@ export class File extends Component {
 }
 
 File.defaultProps = {
-  margin: 'normal',
+  margin: `normal`,
   fullWidth: false,
-  helper: 'normal'
+  helper: `normal`
 };
 
 File.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   onChange: PropTypes.func,
-  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
+  margin: PropTypes.oneOf([`normal`, `dense`, `none`]),
   fullWidth: PropTypes.bool,
-  helper: PropTypes.oneOf(['normal', 'none'])
+  helper: PropTypes.oneOf([`normal`, `none`])
 };
 
 export default withStyles(styles)(File);

@@ -34,30 +34,30 @@ const setup = overRides => {
 };
 
 
-describe('Employee Detail Container', () => {  
+describe(`Employee Detail Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly if status === INIT', () => {
+  it(`should render correctly if status === INIT`, () => {
     setup();
   });
-  it('should render correctly if status === EDITING', () => {
+  it(`should render correctly if status === EDITING`, () => {
     setup({ status: analyzeStatus.EDITING });       
   });  
-  it('should render correctly if status === ADDING', () => {
+  it(`should render correctly if status === ADDING`, () => {
     setup({ status: analyzeStatus.ADDING });
   });
-  it('should call removeEmployee on this.removeEmployee', () => {
+  it(`should call removeEmployee on this.removeEmployee`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.removeEmployee).toHaveBeenCalledTimes(0);
     instance.removeEmployee();
     expect(props.removeEmployee).toHaveBeenCalledTimes(1);
   });
-  it('should test the onSubmit calls updateEmployee and onResolve it should resetForm and  setStatus to {success: true} ', () => {
-    const values = { val: 'asdf',isEmployed: 0, isWorking: 0 };
+  it(`should test the onSubmit calls updateEmployee and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+    const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
     const wrapper = setup({ status: analyzeStatus.EDITING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.updateEmployee).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
@@ -69,10 +69,10 @@ describe('Employee Detail Container', () => {
       expect(props.updateEmployee).toHaveBeenCalledWith(values);
     });
   });
-  it('should test the onSubmit calls updateEmployee and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}', () => {
-    const values = { val: 'asdf',isEmployed: 0, isWorking: 0 };
+  it(`should test the onSubmit calls updateEmployee and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
+    const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
     const wrapper = setup({ status: analyzeStatus.EDITING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
 
     expect(props.updateEmployee).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);      
@@ -87,10 +87,10 @@ describe('Employee Detail Container', () => {
     });
   });
 
-  it('should test the onSubmit calls createEmployee and onResolve it should resetForm and  setStatus to {success: true} ', () => {
-    const values = { val: 'asdf',isEmployed: 0, isWorking: 0 };
+  it(`should test the onSubmit calls createEmployee and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+    const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
     const wrapper = setup({ status: analyzeStatus.ADDING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.createEmployee).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
@@ -99,10 +99,10 @@ describe('Employee Detail Container', () => {
     expect(props.createEmployee).toHaveBeenCalledTimes(1);    
     expect(props.createEmployee).toHaveBeenCalledWith(values);
   });
-  it('should test the onSubmit calls createEmployee and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}', () => {
-    const values = { val: 'asdf',isEmployed: 0, isWorking: 0 };
+  it(`should test the onSubmit calls createEmployee and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
+    const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
     const wrapper = setup({ status: analyzeStatus.ADDING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
         
     expect(props.createEmployee).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);      

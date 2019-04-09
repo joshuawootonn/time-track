@@ -18,10 +18,10 @@ export const updateSubcategory = subcategory => {
     dispatch({ type: subcategoryActionTypes.UPDATE_SUBCATEGORY_REQUEST });
     try {
       await dispatch(genericActions.put(domains.SUBCATEGORY,subcategory));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Updated`));
       return dispatch({ type: subcategoryActionTypes.UPDATE_SUBCATEGORY_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Update Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Update Failed`));
       return dispatch({ type: subcategoryActionTypes.UPDATE_SUBCATEGORY_FAILURE });
     }
   };
@@ -32,10 +32,10 @@ export const createSubcategory = subcategory => {
     dispatch({ type: subcategoryActionTypes.CREATE_SUBCATEGORY_REQUEST });
     try {
       await dispatch(genericActions.post(domains.SUBCATEGORY,subcategory));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Created`));
       return dispatch({ type: subcategoryActionTypes.CREATE_SUBCATEGORY_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Creation Failed`));
       return dispatch({ type: subcategoryActionTypes.CREATE_SUBCATEGORY_FAILURE });
     }
   };
@@ -47,10 +47,10 @@ export const removeSubcategory = id => {
       await dispatch(analyzeActions.deleteSelected(domains.SUBCATEGORY));
       await dispatch(genericActions.delet(domains.SUBCATEGORY,id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Deleted'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Deleted`));
       return dispatch({ type: subcategoryActionTypes.REMOVE_SUBCATEGORY_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Subcategory Deletion Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Subcategory Deletion Failed`));
       return dispatch({ type: subcategoryActionTypes.REMOVE_SUBCATEGORY_FAILURE });
     }
   };

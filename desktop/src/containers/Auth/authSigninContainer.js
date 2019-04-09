@@ -12,17 +12,17 @@ import * as IPCConstants from 'constants/ipc';
 import AuthSiginForm from 'components/forms/AuthSignin';
 import { userSelectors } from 'store/selectors';
 
-const electron = window.require('electron');
+const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
 export class AuthSignin extends Component {  
   render() {
-    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
     const hasValidCred = cred.ip && cred.username && cred.password;
     
     return (
       <Formik
-        initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: '', username: '', password: '' }}
+        initialValues={hasValidCred ? { ip: cred.ip, username: cred.username, password: cred.password } : { ip: ``, username: ``, password: `` }}
         validationSchema={authValidation}
         onSubmit={(values, formikFunctions) => {
           const { history,login } = this.props;

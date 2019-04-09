@@ -8,11 +8,11 @@ const props =  {
   classes: {},
   crews: [{},{}],
   authorities: [{},{}],
-  type: 'edit',
+  type: `edit`,
   removeEmployee: jest.fn(),
   editCrews: jest.fn(),
   editAuthorities: jest.fn(),
-  label: 'label',
+  label: `label`,
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
@@ -28,22 +28,22 @@ const setupHOC = overRides => {
   return shallow(<EmployeeHOC {...props} {...overRides}/>);
 };
 
-describe('Employee Component', () => {
+describe(`Employee Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();  
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should call resetForm on employee-reset-button', () => {
+  it(`should call resetForm on employee-reset-button`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#employee-reset-button').first().simulate('click');
+    wrapper.find(`#employee-reset-button`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });
 });

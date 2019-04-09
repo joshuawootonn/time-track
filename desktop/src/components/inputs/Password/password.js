@@ -13,14 +13,14 @@ export const Password = ({ field, form, id, label, helper,margin }) => (
     InputLabelProps={{ shrink: true }}
     fullWidth
     margin={margin}
-    FormHelperTextProps={helper ==='none' ? { style:{ display:'none' },error: true } : { error: true  }}
-    helperText={getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '} 
+    FormHelperTextProps={helper ===`none` ? { style:{ display:`none` },error: true } : { error: true  }}
+    helperText={getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `} 
   />
 );
 
 Password.defaultProps = {  
-  helper: 'normal',
-  margin: 'normal'
+  helper: `normal`,
+  margin: `normal`
 };
 
 Password.propTypes = {
@@ -28,7 +28,7 @@ Password.propTypes = {
   form: PropTypes.object.isRequired,
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
-  helper: PropTypes.oneOf(['none','normal'])
+  helper: PropTypes.oneOf([`none`,`normal`])
 };
 
 export default Password;

@@ -2,8 +2,8 @@ export default theme => ({
 
   //table
   headerCell: {
-    background: 'white',
-    position: 'sticky',
+    background: `white`,
+    position: `sticky`,
     top: 0,
     marginRight: 0,
     flex: 1
@@ -14,16 +14,16 @@ export default theme => ({
   },
   // header cell table
   flexContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    boxSizing: 'border-box',
+    display: `flex`,
+    alignItems: `center`,
+    boxSizing: `border-box`,
     flex: 1,    
     marginRight: 0,
-    textTransform: 'none'
+    textTransform: `none`
   },
   //table 
   tableRow: {
-    cursor: 'pointer',
+    cursor: `pointer`,
     '&:hover': {
       backgroundColor: theme.palette.grey[200]
     } 
@@ -36,6 +36,6 @@ export default theme => ({
   tableCell: {
     flex: 1,
     marginRight: 0,
-    fontSize: '.8rem'
+    fontSize: `.8rem`
   }
 });

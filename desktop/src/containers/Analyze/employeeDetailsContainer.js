@@ -33,11 +33,11 @@ export class EmployeeDetail extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            firstName: '',
-            lastName: '',
+            firstName: ``,
+            lastName: ``,
             authorityId: 1,
             crewId: 1,
-            pin: '',
+            pin: ``,
             isEmployed: true,
             isWorking: false
           }}

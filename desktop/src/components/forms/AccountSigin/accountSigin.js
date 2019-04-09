@@ -13,10 +13,10 @@ const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 export class AccountSigin extends Component {
   appendPin = newChar => {
     if (this.props.values.pin.length >= 6) return;
-    this.props.setFieldValue('pin', this.props.values.pin + newChar, false);
+    this.props.setFieldValue(`pin`, this.props.values.pin + newChar, false);
   };
   resetPin = () => {
-    this.props.setFieldValue('pin', '', false);
+    this.props.setFieldValue(`pin`, ``, false);
   };
 
   render() {

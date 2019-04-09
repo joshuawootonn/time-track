@@ -8,15 +8,15 @@ const props =  {
   fullPage: false,
   fullHeight: false,
   fullWidth: false,
-  variant: 'linear'
+  variant: `linear`
 };
 
 const setup = overRides => {  
   return mount(<Progress {...props} {...overRides}/>);    
 };
 
-describe('Progress Component', () => {  
-  it('should render correctly', () => {
+describe(`Progress Component`, () => {  
+  it(`should render correctly`, () => {
     setup();        
   });  
 });

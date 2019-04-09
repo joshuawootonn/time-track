@@ -3,8 +3,8 @@ import AccountSigninScene from 'scenes/Account/accountSignin';
 export default [
   {
     exact: true,
-    path: '/',
+    path: `/`,
     component: AccountSigninScene,
-    name: 'Signin'
+    name: `Signin`
   }
 ];

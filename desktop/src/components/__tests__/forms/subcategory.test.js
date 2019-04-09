@@ -7,9 +7,9 @@ import SubcategoryHOC from 'components/forms/Subcategory';
 const props =  {  
   classes: {},
   isSubmitting: true, 
-  type: 'edit',
+  type: `edit`,
   initialValues: {},
-  label: 'label',
+  label: `label`,
   removeSubcategory: jest.fn(),
   categories: [{ id: 1 }],
   setFieldValue: jest.fn(),
@@ -25,22 +25,22 @@ const setupHOC = overRides => {
   return shallow(<SubcategoryHOC {...props} {...overRides}/>);
 };
 
-describe('Subcategory Component', () => {
+describe(`Subcategory Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });  
-  it('should resetForm when #subcategory-reset-button is clicked', () => {
+  it(`should resetForm when #subcategory-reset-button is clicked`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#subcategory-reset-button').first().simulate('click');
+    wrapper.find(`#subcategory-reset-button`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });  
 });

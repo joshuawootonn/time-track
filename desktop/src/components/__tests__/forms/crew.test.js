@@ -8,13 +8,13 @@ import CrewHOC from 'components/forms/Crew';
 
 const props =  {  
   classes: {},
-  label: 'label',
+  label: `label`,
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
   errors: {},
   removeCrew:jest.fn(),
-  type: 'add'
+  type: `add`
 };
 
 
@@ -26,21 +26,21 @@ const setupHOC = overRides => {
   return mount(<Formik render={formikFunctions => <CrewHOC {...props}  {...formikFunctions} {...overRides}/>}></Formik>);    
 };
 
-describe('Crew Component', () => {  
-  it('should render correctly', () => {
+describe(`Crew Component`, () => {  
+  it(`should render correctly`, () => {
     setup();   
   });
-  it('should render correctly with edit type', () => {
-    setup({ type: 'edit' });   
+  it(`should render correctly with edit type`, () => {
+    setup({ type: `edit` });   
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should call resetForm on crew-reset-button', () => {
+  it(`should call resetForm on crew-reset-button`, () => {
     const resetForm = jest.fn();
     const wrapper = mount(<Formik render={formikFunctions => <Crew {...props}  {...formikFunctions} resetForm={resetForm} />}></Formik>);
     expect(resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#crew-reset-button').first().simulate('click');
+    wrapper.find(`#crew-reset-button`).first().simulate(`click`);
     expect(resetForm).toHaveBeenCalledTimes(1);
   });  
 });

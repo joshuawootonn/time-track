@@ -9,14 +9,14 @@ const props =  {
     errors: {}
   },
   field: {
-    name: 'name'
+    name: `name`
   },
-  label: 'label',
+  label: `label`,
   labelProps: {},
   formControlProps: {},
-  margin: 'normal',
+  margin: `normal`,
   classes: {},
-  helper: 'normal',
+  helper: `normal`,
   fullWidth: true
 };
 
@@ -28,14 +28,14 @@ const setupHOC = overRides => {
   return mount(<TextFieldHOC {...props} {...overRides}/>);
 };
 
-describe('TextField Input', () => {
-  it('should render correctly', () => {
+describe(`TextField Input`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   }); 
-  it('should render no helper text when helper="none"', () => {
-    setup({ helper: 'none' });        
+  it(`should render no helper text when helper="none"`, () => {
+    setup({ helper: `none` });        
   });
 });

@@ -29,20 +29,20 @@ const setup = overRides => {
 };
 
 
-describe('Authority Detail Container', () => {  
+describe(`Authority Detail Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly if status === EDITING', () => {
+  it(`should render correctly if status === EDITING`, () => {
     setup();       
   });
-  it('should render correctly if status === INIT', () => {
+  it(`should render correctly if status === INIT`, () => {
     setup({ status: analyzeStatus.INIT });
   });
-  it('should test the onSubmit calls updateAuthority and onResolve it should resetForm and  setStatus to {success: true} ', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls updateAuthority and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+    const values = { val: `asdf` };
     const wrapper = setup();
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.updateAuthority).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
@@ -54,10 +54,10 @@ describe('Authority Detail Container', () => {
       expect(props.updateAuthority).toHaveBeenCalledWith(values);
     });     
   });
-  it('should test the onSubmit calls updateAuthority and onReject it should setStatus to {success: false} and setSubmitting to false', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls updateAuthority and onReject it should setStatus to {success: false} and setSubmitting to false`, () => {
+    const values = { val: `asdf` };
     const wrapper = setup();
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.updateAuthority).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(0);

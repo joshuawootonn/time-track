@@ -21,10 +21,10 @@ export const createProject = project => {
         await dispatch(genericActions.post(domains.PROJECTTASK,projectTask));
       }       
       await dispatch(analyzeActions.select(domains.PROJECT,response.data.id));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Created`));
       return dispatch({ type: projectActionTypes.CREATE_PROJECT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Creation Failed`));
       return dispatch({ type: projectActionTypes.CREATE_PROJECT_FAILURE });
     }
   };
@@ -54,10 +54,10 @@ export const updateProject = project => {
           await dispatch(genericActions.post(domains.PROJECTTASK, projectTask)); 
         }              
       }
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Updated`));
       return dispatch({ type: projectActionTypes.UPDATE_PROJECT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Update Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Update Failed`));
       return dispatch({ type: projectActionTypes.UPDATE_PROJECT_FAILURE });
     }
   };
@@ -70,10 +70,10 @@ export const removeProject = id => {
       await dispatch(analyzeActions.deleteSelected(domains.PROJECT));
       await dispatch(genericActions.delet(domains.PROJECT,id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Deleted'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Deleted`));
       return dispatch({ type: projectActionTypes.REMOVE_PROJECT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Project Deletion Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Project Deletion Failed`));
       return dispatch({ type: projectActionTypes.REMOVE_PROJECT_FAILURE });
     }
   };

@@ -33,7 +33,7 @@ export class TaskDetail extends Component {
         <Formik 
           enableReinitialize
           initialValues={{
-            name: '',
+            name: ``,
             categoryId: -1,
             subcategoryId: -1,
             isActive: true

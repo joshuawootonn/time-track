@@ -1,7 +1,7 @@
 import { normalizeEmbeddedData } from 'helpers/store';
 
-describe('Store Helper', () => {  
-  it('normalizeEmbeddedData should produce result arrays for embedded data', () => {
+describe(`Store Helper`, () => {  
+  it(`normalizeEmbeddedData should produce result arrays for embedded data`, () => {
     
     const paramData = {
       entities: {        

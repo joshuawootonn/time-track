@@ -1,18 +1,18 @@
 const styles = () => ({
   hero: {
-    height: '100vh',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    height: `100vh`,
+    width: `100%`,
+    display: `flex`,
+    flexDirection: `column`,
+    justifyContent: `center`,
+    alignItems: `center`
   },
   heroContent: {
-    display: 'flex',
-    flexDirection: 'column'
+    display: `flex`,
+    flexDirection: `column`
   },
-  error: { marginTop: '16px' },
-  button: { marginTop: '16px' }
+  error: { marginTop: `16px` },
+  button: { marginTop: `16px` }
 });
 
 export default styles;

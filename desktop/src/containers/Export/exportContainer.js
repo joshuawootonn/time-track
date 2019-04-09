@@ -13,23 +13,23 @@ import { exportActions } from 'store/actions';
 
 export class ExportContainer extends Component {
   cancel = () => {
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   };
   render() {
     return (
       <Formik
         initialValues={{
           exportCategory: 0,
-          start: moment().startOf('isoWeek').subtract(1,'day').format('YYYY-MM-DD'),
+          start: moment().startOf(`isoWeek`).subtract(1,`day`).format(`YYYY-MM-DD`),
           timeLength: 0,
           timeLengthType: 0,
-          fileLocation: ''
+          fileLocation: ``
         }}
         onSubmit={values => {
           const { exportToExcel, history } = this.props;
           const { exportCategory, start, fileLocation } = values;
           return exportToExcel(exportCategory, start, fileLocation)
-            .then(() => history.push('/'));
+            .then(() => history.push(`/`));
         }}
         validationSchema={exportValidation}
         render={formikProps => {

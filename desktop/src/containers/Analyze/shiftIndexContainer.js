@@ -29,7 +29,7 @@ export class ShiftIndex extends Component {
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (   
-      <div style={{ height: 'calc(100% - 64px)' }}>        
+      <div style={{ height: `calc(100% - 64px)` }}>        
         <AnalyzeToolbar 
           selectLabel={this.selectLabel}
           label="Shifts"
@@ -59,7 +59,7 @@ ShiftIndex.propTypes = {
 /* istanbul ignore next */
 const mapStateToProps = state => {
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(400, 'days').format('MM-DD-YY HH:mm:ss'), endTime: moment().add(14,'days').format('MM-DD-YY HH:mm:ss') }),
+    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(400, `days`).format(`MM-DD-YY HH:mm:ss`), endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };
@@ -75,50 +75,50 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
-    id: 'firstName', 
-    dataKey: 'employee',
+    id: `firstName`, 
+    dataKey: `employee`,
     width: 150, 
     height: 56,
-    padding: 'dense',
-    label: 'First Name',
+    padding: `dense`,
+    label: `First Name`,
     type: TableDataTypes.OBJECT,
-    keys: ['firstName']
+    keys: [`firstName`]
   },
   {
-    id: 'lastName', 
-    dataKey: 'employee',   
+    id: `lastName`, 
+    dataKey: `employee`,   
     width: 150,   
     height: 56,
-    padding: 'dense',
-    label: 'Last Name',
+    padding: `dense`,
+    label: `Last Name`,
     type: TableDataTypes.OBJECT,
-    keys: ['lastName']
+    keys: [`lastName`]
   },
   {
-    id: 'clockInDate',  
-    dataKey: 'clockInDate',  
+    id: `clockInDate`,  
+    dataKey: `clockInDate`,  
     width: 200,   
     height: 56,
-    padding: 'dense',
-    label: 'Clock In',
+    padding: `dense`,
+    label: `Clock In`,
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'clockOutDate', 
-    dataKey: 'clockOutDate', 
+    id: `clockOutDate`, 
+    dataKey: `clockOutDate`, 
     width: 200,  
     height: 56,  
-    padding: 'dense',
-    label: 'Clock Out',
+    padding: `dense`,
+    label: `Clock Out`,
     type: TableDataTypes.DATETIME
   },
   {
-    id: 'length',    
-    dataKey: 'length',  
+    id: `length`,    
+    dataKey: `length`,  
     width: 120, 
     height: 56,
-    padding: 'dense',
-    label: 'Length',
+    padding: `dense`,
+    label: `Length`,
     type: TableDataTypes.LENGTH
   }
 ];

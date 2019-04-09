@@ -8,10 +8,10 @@ export const createActivity = activity => {
     dispatch({ type: activityActionTypes.CREATE_ACTIVITY_REQUEST });
     try {
       await dispatch(genericActions.post(domains.ACTIVITY,activity));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Activity Created`));
       return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Activity Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Activity Creation Failed`));
       return dispatch({ type: activityActionTypes.CREATE_ACTIVITY_FAILURE });
     }
   };

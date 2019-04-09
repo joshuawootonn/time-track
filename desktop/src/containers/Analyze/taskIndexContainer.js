@@ -20,7 +20,7 @@ export class TaskIndex extends Component {
 
   render() {
     const { tasks, selected } = this.props;
-    console.log('task analyze render');
+    // console.log('task analyze render');
     if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (
@@ -64,38 +64,38 @@ export default connect( mapStateToProps, mapDispatchToProps)(TaskIndex);
 
 const rows = [
   {
-    id: 'name',    
-    padding: 'dense',
-    label: 'Name',
+    id: `name`,    
+    padding: `dense`,
+    label: `Name`,
     type: TableDataTypes.STRING
   }, 
   {
-    id: 'category',    
-    padding: 'dense',
-    label: 'Category',
+    id: `category`,    
+    padding: `dense`,
+    label: `Category`,
     type: TableDataTypes.OBJECT,
-    keys: ['type']
+    keys: [`type`]
   },
   {
-    id: 'subcategory',    
-    padding: 'dense',
-    label: 'Subcategory',
+    id: `subcategory`,    
+    padding: `dense`,
+    label: `Subcategory`,
     type: TableDataTypes.OBJECT,
-    keys: ['type']
+    keys: [`type`]
   },
  
   {
-    id: 'dimension',    
-    padding: 'dense',
-    label: 'Dimension',
+    id: `dimension`,    
+    padding: `dense`,
+    label: `Dimension`,
     type: TableDataTypes.OBJECT,
-    keys: ['type']
+    keys: [`type`]
   }, 
   {
-    id: 'isActive',   
-    align: 'right', 
-    padding: 'dense',
-    label: 'Active',
+    id: `isActive`,   
+    align: `right`, 
+    padding: `dense`,
+    label: `Active`,
     type: TableDataTypes.BOOLEAN
   }
 ];

@@ -34,7 +34,7 @@ export class SubcategoryDetail extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            type: '',
+            type: ``,
             categoryId: -1,
             dimensionId: 1
           }}

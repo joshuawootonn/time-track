@@ -10,7 +10,7 @@ export class SnackContainer extends Component {
   render() {
     const { message, type, onClose } = this.props;
 
-    const position = { vertical: 'bottom', horizontal: 'right' };
+    const position = { vertical: `bottom`, horizontal: `right` };
 
     let icon;
     switch (type) {

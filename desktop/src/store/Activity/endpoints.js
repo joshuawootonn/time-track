@@ -1,4 +1,4 @@
 import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
-const DOMAIN = 'activities';
+const DOMAIN = `activities`;
 
 export default generateCRUDEndpoints(DOMAIN);

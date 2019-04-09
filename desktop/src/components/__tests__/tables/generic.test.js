@@ -11,12 +11,12 @@ import GenericToolbarHOC,  { GenericToolbar } from 'components/tables/Generic/to
 
 const props =  {  
   classes: {},
-  label: 'label',
+  label: `label`,
   edit: jest.fn(),
   add: jest.fn(),
   remove: jest.fn(),
-  headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label' }],
-  tableData: [{ id: 1, qwer: 'asdf' }]
+  headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label` }],
+  tableData: [{ id: 1, qwer: `asdf` }]
 };
 
 const setup = overRides => {  
@@ -27,57 +27,57 @@ const setupHOC = overRides => {
   return mount(<GenericTableHOC {...props} {...overRides}/>);
 };
 
-describe('Generic Table Component', () => {
+describe(`Generic Table Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should render correctly with number based type', () => {   
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
+  it(`should render correctly with number based type`, () => {   
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.NUMBER }], tableData: [{ id: 1, qwer: 12 }] });
   });
-  it('should render correctly with boolean based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: 'true' }] });
+  it(`should render correctly with boolean based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.BOOLEAN }], tableData: [{ id: 1, qwer: `true` }] });
   });
-  it('should render correctly with string based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: 'true' }] });
+  it(`should render correctly with string based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.STRING }], tableData: [{ id: 1, qwer: `true` }] });
   });
-  it('should render correctly with object based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.OBJECT,keys: ['name'] }], tableData: [{ id: 1, qwer: { name: 'asdf' } }]  });   
+  it(`should render correctly with object based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.OBJECT,keys: [`name`] }], tableData: [{ id: 1, qwer: { name: `asdf` } }]  });   
   });
-  it('should render correctly with date based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.DATE }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
+  it(`should render correctly with date based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.DATE }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
   });
-  it('should render correctly with datetime based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.DATETIME }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
+  it(`should render correctly with datetime based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.DATETIME }], tableData: [{ id: 1, qwer: moment().toISOString() }]  });    
   });
-  it('should render correctly with length based type', () => {
-    setup({ headerData: [{ id: 'qwer', numeric: true, padding: 'dense', label: 'label',type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
+  it(`should render correctly with length based type`, () => {
+    setup({ headerData: [{ id: `qwer`, numeric: true, padding: `dense`, label: `label`,type: TableDataTypes.LENGTH }], tableData: [{ id: 1, qwer: 50 }]  });
   });
 });
 
-describe('Generic Head Component', () => {
-  it('should render correctly', () => {
-    const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: 'dense', label: 'label' }] };
+describe(`Generic Head Component`, () => {
+  it(`should render correctly`, () => {
+    const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: `dense`, label: `label` }] };
     mount(<table><GenericHead {...props} /></table>);
   });
-  it('should render correctly withStyles', () => {
-    const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: 'dense', label: 'label' }] };
+  it(`should render correctly withStyles`, () => {
+    const props = { rowCount: 5, headerData: [{ id: 1, numeric: true, padding: `dense`, label: `label` }] };
     mount(<table><GenericHeadHOC {...props} /></table>);
   });
 });
 
-describe('Generic Toolbar Component', () => {
-  it('should render correctly', () => {
-    const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: 'label' };
+describe(`Generic Toolbar Component`, () => {
+  it(`should render correctly`, () => {
+    const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: `label` };
     mount(<GenericToolbar {...props} />);    
   });
-  it('should render correctly withStyles', () => {
-    const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: 'label' };
+  it(`should render correctly withStyles`, () => {
+    const props = { classes: {},add: jest.fn(),edit: jest.fn(), remove: jest.fn(),label: `label` };
     mount(<GenericToolbarHOC {...props} />);
   });
 });

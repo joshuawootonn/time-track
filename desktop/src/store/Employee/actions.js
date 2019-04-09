@@ -19,11 +19,11 @@ export const updateEmployee = employee => {
     dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_REQUEST });
     try {
       const response = await dispatch(genericActions.put(domains.EMPLOYEE,employee));
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Updated'));
+      dispatch(snackActions.openSnack(status.SUCCESS, `Employee Updated`));
       dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_SUCCESS });   
       return response;   
     } catch (e) {
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Update Failed'));
+      dispatch(snackActions.openSnack(status.SUCCESS, `Employee Update Failed`));
       dispatch({ type: employeeActionTypes.UPDATE_EMPLOYEE_FAILURE });      
     }
   };
@@ -34,10 +34,10 @@ export const createEmployee = employee => {
     dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_REQUEST });
     try {
       await dispatch(genericActions.post(domains.EMPLOYEE,employee));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Employee Created`));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Employee Creation Failed`));
       return dispatch({ type: employeeActionTypes.CREATE_EMPLOYEE_FAILURE });
     }
   };
@@ -49,10 +49,10 @@ export const removeEmployee = id => {
       await dispatch(analyzeActions.deleteSelected(domains.EMPLOYEE));
       await dispatch(genericActions.delet(domains.EMPLOYEE,id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deleted'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Employee Deleted`));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_SUCCESS });      
     } catch (e) {      
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Employee Deletion Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Employee Deletion Failed`));
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_FAILURE });
     }
   };
@@ -78,10 +78,10 @@ export const clockIn = employee => {
       };
       await dispatch(genericActions.post(domains.SHIFT,clockInObject));
       await dispatch(setIsWorking(employee,true));
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in success!'));
+      dispatch(snackActions.openSnack(status.SUCCESS, `Clock in success!`));
       return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_SUCCESS });
     } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, 'Clock in failed!'));
+      dispatch(snackActions.openSnack(status.FAILURE, `Clock in failed!`));
       return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE, payload: e });
     }
   };
@@ -110,10 +110,10 @@ export const clockOut = (employee, shift, activities, lunch) => {
 
       await dispatch(genericActions.put(domains.SHIFT,clockOutObject));
       await dispatch(setIsWorking(employee,false));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock out success!'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Clock out success!`));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
     } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, 'Clock out failed!'));
+      dispatch(snackActions.openSnack(status.FAILURE, `Clock out failed!`));
       return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE, payload: e });
     }
   };
@@ -129,7 +129,7 @@ export const login = pin => {
       // Check that the employee isEmployed
       if (!employeeObject.isEmployed){
         dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE });  
-        return Promise.reject({ message: 'Not currently employed!' });    
+        return Promise.reject({ message: `Not currently employed!` });    
       }
 
       const payload = normalize({ employees: [response.data] }, schemas.employeeArray);
@@ -140,7 +140,7 @@ export const login = pin => {
       });
     } catch (e) {
       dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_FAILURE, payload: e });  
-      return Promise.reject({ message: 'Network Error!' });    
+      return Promise.reject({ message: `Network Error!` });    
     }
   };
 };

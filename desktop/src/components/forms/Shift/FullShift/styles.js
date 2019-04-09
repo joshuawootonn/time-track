@@ -1,36 +1,36 @@
 const styles = () => ({
   gridContainer: {
-    width: '100% !important',
+    width: `100% !important`,
     margin: 0
   },
   row: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    display: `flex`,
+    flexDirection: `row`,
+    alignItems: `center`,
+    justifyContent: `space-between`
   },
   bodyRow: {
-    padding: '12px 0'
+    padding: `12px 0`
   },
   footerRow: {
-    padding: '12px 0',
-    height:'68px'
+    padding: `12px 0`,
+    height:`68px`
   },
   body: {
-    padding: '0 12px !important'
+    padding: `0 12px !important`
   },
   field:{
-    margin: '0 8px'
+    margin: `0 8px`
   },
   button: {
-    marginLeft: '8px'
+    marginLeft: `8px`
   },
   verticalCenter: {
-    display: 'flex',
-    alignItems: 'center'
+    display: `flex`,
+    alignItems: `center`
   },    
   lunchBox: {
-    width: '150px'
+    width: `150px`
   }
 });
 

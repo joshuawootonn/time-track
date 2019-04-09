@@ -15,8 +15,8 @@ const setup = overRides => {
   return mount(<Hero {...props} {...overRides}/>);    
 };
 
-describe('Hero Component', () => {  
-  it('should render correctly', () => {
+describe(`Hero Component`, () => {  
+  it(`should render correctly`, () => {
     setup();        
   });  
 });

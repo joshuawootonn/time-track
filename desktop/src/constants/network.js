@@ -1,10 +1,10 @@
 import * as IPCConstants from 'constants/ipc';
 
-const electron = window.require('electron');
+const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
 export const HOST = () => {
-  const settings = ipcRenderer.sendSync(IPCConstants.GET_CRED, '');
+  const settings = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
   return `http://${settings.ip}:4000/api`;
 };
 

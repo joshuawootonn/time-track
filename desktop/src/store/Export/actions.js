@@ -12,24 +12,24 @@ import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
 import store from 'store';
-const electron = window.require('electron');
+const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
 export const exportToExcel = (exportCategory, start, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {     
-      const startMoment = new moment(start).format('MM-DD-YY HH:mm:ss');
-      const endMoment = new moment(start).add(7,'days').format('MM-DD-YY HH:mm:ss');
+      const startMoment = new moment(start).format(`MM-DD-YY HH:mm:ss`);
+      const endMoment = new moment(start).add(7,`days`).format(`MM-DD-YY HH:mm:ss`);
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
       
       ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Export Success!'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Export Success!`));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
     } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, 'Export failed!'));
+      dispatch(snackActions.openSnack(status.FAILURE, `Export failed!`));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_FAILURE, payload: e });
     }
   };
@@ -116,10 +116,10 @@ const formatData = (startTime, endTime) => {
     });
     // add all summary rows
     for (let key in individualProjectTotals) {
-      summaryData.push([projects[key].name, '', '', '', '', minutesToString(individualProjectTotals[key].reg), minutesToString(individualProjectTotals[key].ot), minutesToString(individualProjectTotals[key].total)]);
+      summaryData.push([projects[key].name, ``, ``, ``, ``, minutesToString(individualProjectTotals[key].reg), minutesToString(individualProjectTotals[key].ot), minutesToString(individualProjectTotals[key].total)]);
     }
     // add the total summary row
-    summaryData.push(['Total', '', '', '', '', minutesToString(allProjectTotals.reg), minutesToString(allProjectTotals.ot), minutesToString(allProjectTotals.total)]);
+    summaryData.push([`Total`, ``, ``, ``, ``, minutesToString(allProjectTotals.reg), minutesToString(allProjectTotals.ot), minutesToString(allProjectTotals.total)]);
 
 
     // Details 
@@ -136,19 +136,14 @@ const formatData = (startTime, endTime) => {
           overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
           regularActivityLength = (2400 - totalTimeForWeek);
         }
-        if(shift.id === 13437){
-
-          console.log(regularActivityLength,overtimeActivityLength);
-          console.log(minutesToString(regularActivityLength),minutesToString(overtimeActivityLength));
-        }
-
+        
 
         totalTimeForWeek += activity.length;
         if (i === 0) {
           detailData.push([
-            moment(shift.clockInDate,'YYYY-MM-DDThh:mm:ss:SSS').format('MM/DD/YYYY'), moment(shift.clockInDate,'YYYY-MM-DDThh:mm:ss:SSS').format('h:mm a'), moment(shift.clockOutDate,'YYYY-MM-DDThh:mm:ss:SSS').format('h:mm a'), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
+            moment(shift.clockInDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`MM/DD/YYYY`), moment(shift.clockInDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`h:mm a`), moment(shift.clockOutDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`h:mm a`), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         } else {
-          detailData.push(['','','','',projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
+          detailData.push([``,``,``,``,projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
         }
       });
     });
@@ -167,13 +162,13 @@ const formatData = (startTime, endTime) => {
       exportData.push({
         key: `${employee.firstName} ${employee.lastName}`,
         header: [
-          ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
+          [`AACI - Time Sheet`], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(endTime).format(`YYYY/MM/DD`)}`]
         ],
         summary: [
-          [''], [''], ['Summary','', '', '', ''], ['Project', '', '', '', '', 'Reg', 'OT', 'Total'], ...summaryData
+          [``], [``], [`Summary`,``, ``, ``, ``], [`Project`, ``, ``, ``, ``, `Reg`, `OT`, `Total`], ...summaryData
         ],
         details: [
-          [''], [''], ['Details'], ['Date', 'Clock In', 'Clock Out', 'Lunch', 'Project', 'Task', 'Reg', 'OT'], ...detailData
+          [``], [``], [`Details`], [`Date`, `Clock In`, `Clock Out`, `Lunch`, `Project`, `Task`, `Reg`, `OT`], ...detailData
         ],
         sheetStyles
       });
@@ -181,10 +176,10 @@ const formatData = (startTime, endTime) => {
       exportData.push({
         key: `${employee.firstName} ${employee.lastName}`,
         header: [
-          ['AACI - Time Sheet'], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format('YYYY/MM/DD')} - ${moment(endTime).format('YYYY/MM/DD')}`]
+          [`AACI - Time Sheet`], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(endTime).format(`YYYY/MM/DD`)}`]
         ],
         summary: [
-          [''], [''], ['No Shifts found for given period.']
+          [``], [``], [`No Shifts found for given period.`]
         ],
         details: [         
         ],

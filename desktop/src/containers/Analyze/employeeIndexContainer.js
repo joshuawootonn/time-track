@@ -25,7 +25,7 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected } = this.props;
-    console.log('employee analyze render');
+    console.log(`employee analyze render`);
 
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;
@@ -71,43 +71,43 @@ export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
 
 const rows = [
   {
-    id: 'firstName',    
-    padding: 'dense',
-    label: 'First Name',
+    id: `firstName`,    
+    padding: `dense`,
+    label: `First Name`,
     type: TableDataTypes.STRING
   },
   {
-    id: 'lastName',    
-    padding: 'dense',
-    label: 'Last Name',
+    id: `lastName`,    
+    padding: `dense`,
+    label: `Last Name`,
     type: TableDataTypes.STRING
   },
   {
-    id: 'authority',    
-    padding: 'dense',
-    label: 'Authority',
+    id: `authority`,    
+    padding: `dense`,
+    label: `Authority`,
     type: TableDataTypes.OBJECT,
-    keys: ['type']
+    keys: [`type`]
   },
   {
-    id: 'crew',    
-    padding: 'dense',
-    label: 'Crew',
+    id: `crew`,    
+    padding: `dense`,
+    label: `Crew`,
     type: TableDataTypes.OBJECT,
-    keys: ['name']
+    keys: [`name`]
   },
   {
-    id: 'isEmployed',
-    align: 'right',
-    padding: 'dense',
-    label: 'Currently Employed',
+    id: `isEmployed`,
+    align: `right`,
+    padding: `dense`,
+    label: `Currently Employed`,
     type: TableDataTypes.BOOLEAN
   },
   {
-    id: 'isWorking',
-    align: 'right',
-    padding: 'dense',
-    label: 'Currently Working',
+    id: `isWorking`,
+    align: `right`,
+    padding: `dense`,
+    label: `Currently Working`,
     type: TableDataTypes.BOOLEAN
   }
 ];

@@ -25,49 +25,49 @@ export class ClockOut extends Component {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   };
   cancel = () => {
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   };
 
   render() {
-    const { currentShift, projects, projectTasks } = this.props;
+    const { currentShift, projects, projectTasks,lastWeeksShifts } = this.props;   
 
     const isLoading = !currentShift;
     if (isLoading) {
       return <Progress variant="circular" fullPage />;
     }
 
-    const currentMoment = moment();
+    const currentMoment = moment().add(`minutes`,3);
     const clockInMoment = moment.utc(currentShift.clockInDate).local();
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 
 
     const clockOutObject = {
-      in: clockInMoment.format('h:mm a'),
-      out: currentMoment.format('h:mm a'),
-      date: clockInMoment.format('MMM D'),
-      length: `${minutesToString(minutesRoudedTime(shiftDuration.asMinutes()))}`,
-      lengthInMinutes: Math.floor(shiftDuration.asMinutes())
+      in: clockInMoment.format(`h:mm a`),
+      out: currentMoment.format(`h:mm a`),
+      date: clockInMoment.format(`MMM D`)
     };
-
-
+  
     return (
       <Formik
         initialValues={{
-          lunch: 0,
+          lunch: 30,
           activities: [
             {
               projectId: -1,
               projectTaskId: -1,
               length: 0,
-              description: ''
+              description: ``
             }
           ]
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history, clockOut } = this.props;
-          return clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
-            history.push('/'),
-          );
+          return clockOut(currentEmployee, currentShift, values.activities, values.lunch)
+            .then(() =>
+              history.push(`/`),
+            ).catch(e => 
+              console.log(e)
+            );
         }}
         validationSchema={clockoutValidation}
         render={formikProps => {
@@ -75,14 +75,33 @@ export class ClockOut extends Component {
           const { errors,values } = formikProps;
           // Time left is the duraction - lunch - all the activity times
           let timeLeft = Math.floor(shiftDuration.asMinutes()) - values.lunch;
+          
+          let generalError;
+          values.activities.forEach(activity => {
+            const { projectTaskId } = activity;
+            const { projectTaskObjects } = this.props;
+            if(projectTaskId !== -1 && projectTaskObjects
+              && projectTaskObjects[projectTaskId] 
+              && /Other/.test(projectTaskObjects[projectTaskId].task.name)){
+              generalError = `Add description to Other activity.`;
+            }
+          });
           values.activities.forEach(activity => {
             timeLeft -= activity.length;
           });
+
+          let weekHourTotal = shiftDuration.asMinutes() - values.lunch;
+          lastWeeksShifts.forEach(shift => {
+            if(shift.length){
+              weekHourTotal += (shift.length - shift.lunch);
+            }
+          });
+
+          const length = minutesToString(minutesRoudedTime(shiftDuration.asMinutes() - values.lunch));
           
-          let generalError;
-          if (errors.activities && typeof errors.activities === 'string'){
+          if (errors.activities && typeof errors.activities === `string`){
             generalError = errors.activities;
-          }else if (errors.lunch && typeof errors.lunch === 'string'){
+          }else if (errors.lunch && typeof errors.lunch === `string`){
             generalError = errors.lunch;
           }
         
@@ -94,6 +113,8 @@ export class ClockOut extends Component {
               projects={projects}
               generalError={generalError}
               timeLeft={timeLeft}
+              weekHourTotal={weekHourTotal}
+              length={length}
               projectTasks={projectTasks}
               {...formikProps}
             />
@@ -112,9 +133,11 @@ ClockOut.propTypes = {
 const mapStateToProps = state => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
+    lastWeeksShifts: shiftSelectors.getLastWeeksShiftsForCurrentEmployee(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjects(state),
-    projectTasks: projectTaskSelectors.getAllProjectTasks(state)
+    projects: projectSelectors.getActiveProjects(state),
+    projectTasks: projectTaskSelectors.getAllProjectTasks(state),
+    projectTaskObjects: projectTaskSelectors.getAllProjectTasksObjects(state)
   };
 };
 

@@ -20,48 +20,48 @@ import SubcategoryDetailContainer from 'containers/Analyze/subcategoryDetailCont
 /* istanbul ignore next */
 const styles = theme => ({
   modal: {
-    width: '90%',
-    maxWidth: '1200px',
-    height: '80vh',
-    maxHeight: '90%'
+    width: `90%`,
+    maxWidth: `1200px`,
+    height: `80vh`,
+    maxHeight: `90%`
   },
   listWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center'
+    display: `flex`,
+    flexDirection: `row`,
+    justifyContent: `center`
   },
   container: {
-    height: '100%'
+    height: `100%`
   },
   tab: {
-    height: '100%',
-    display: 'none'
+    height: `100%`,
+    display: `none`
   },
   index: {
-    minWidth: '260px'
+    minWidth: `260px`
   },
   detail: {
-    minWidth: '400px'
+    minWidth: `400px`
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4
   },
   visible: {
-    display: 'flex'
+    display: `flex`
   }
 });
 
 const settings = [{
-  label: 'Authority',
+  label: `Authority`,
   icon: Person
 },{
-  label: 'Crew',
+  label: `Crew`,
   icon: Group
 },{
-  label: 'Category',
+  label: `Category`,
   icon: Category
 },{
-  label: 'Subcategory',
+  label: `Subcategory`,
   icon: Apps
 }];
 

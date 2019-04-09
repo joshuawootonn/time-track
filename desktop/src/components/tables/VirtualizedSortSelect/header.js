@@ -11,8 +11,8 @@ const Header  = props => {
   //console.log('table: header')
   
   const direction = {
-    [SortDirection.ASC]: 'asc',
-    [SortDirection.DESC]: 'desc'
+    [SortDirection.ASC]: `asc`,
+    [SortDirection.DESC]: `desc`
   };   
   
   return (
@@ -20,7 +20,7 @@ const Header  = props => {
       className={classNames(classes.tableCell, classes.flexContainer)}
       variant="head"
       style={{ height: headerHeight, flex: 1 }}
-      align={columns[columnIndex].numeric || false ? 'right' : 'left'}        
+      align={columns[columnIndex].numeric || false ? `right` : `left`}        
     >
       <TableSortLabel
         // here I compare the unique id with sortBy

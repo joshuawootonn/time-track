@@ -16,7 +16,7 @@ export class Crew extends Component {
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Typography variant="h6">{label}</Typography>
-            {type === 'edit' && (
+            {type === `edit` && (
               <Tooltip title="Delete">
                 <IconButton onClick={removeCrew} aria-label="Delete">
                   <Delete />

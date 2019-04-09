@@ -1,7 +1,7 @@
 import { HOST } from 'constants/network';
 import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
 import axios from 'axios';
-const DOMAIN = 'shifts';
+const DOMAIN = `shifts`;
 
 // http://localhost:4000/api/employees/findone?filter[where][pin]=565656
 

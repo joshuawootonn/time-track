@@ -13,11 +13,11 @@ const setup = overRides => {
   return shallow(<Settings {...props} {...overRides}/>);
 };
 
-describe('Settings Scene', () => {  
-  it('should render correctly', () => {
+describe(`Settings Scene`, () => {  
+  it(`should render correctly`, () => {
     setup();        
   });  
-  it('should display different containers based on state.currentMenu', () =>{
+  it(`should display different containers based on state.currentMenu`, () =>{
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(wrapper.state().currentMenu).toEqual(0);

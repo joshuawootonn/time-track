@@ -17,15 +17,15 @@ const setup = overRides => {
 };
 
 
-describe('Private Route', () => {
-  it('should render without error', () => {
+describe(`Private Route`, () => {
+  it(`should render without error`, () => {
     const wrapper = setup();
-    const Render = wrapper.prop('render');
+    const Render = wrapper.prop(`render`);
     shallow(<Render />);
   });
-  it('should redirect if user.state != status.SUCCESS', () => {
+  it(`should redirect if user.state != status.SUCCESS`, () => {
     const wrapper = setup({ user: { status: status.FAILURE } });
-    const Render = wrapper.prop('render');
+    const Render = wrapper.prop(`render`);
     shallow(<Render />);    
   });
 });

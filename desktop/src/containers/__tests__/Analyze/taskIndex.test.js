@@ -6,7 +6,7 @@ import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
 import Progress from 'components/helpers/Progress';
 
-const tasks = [{ 'id':1,'isActive':1,'name':'7" Sidewalk','subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':'Sidewalk','dimensionId':1 },'category':{ 'id':2,'type':'PCC' },'dimension':{ 'id':1,'type':'SF' } },{ 'id':2,'isActive':1,'name':'6" Sidewalk','subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':'Sidewalk','dimensionId':1 },'category':{ 'id':2,'type':'PCC' },'dimension':{ 'id':1,'type':'SF' } }];
+const tasks = [{ 'id':1,'isActive':1,'name':`7" Sidewalk`,'subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':`Sidewalk`,'dimensionId':1 },'category':{ 'id':2,'type':`PCC` },'dimension':{ 'id':1,'type':`SF` } },{ 'id':2,'isActive':1,'name':`6" Sidewalk`,'subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':`Sidewalk`,'dimensionId':1 },'category':{ 'id':2,'type':`PCC` },'dimension':{ 'id':1,'type':`SF` } }];
 const props =  {  
   selected: tasks[0],
   select: jest.fn(),
@@ -21,24 +21,24 @@ const setup = overRides => {
 };
 
 
-describe('Task Index Container', () => {  
+describe(`Task Index Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();       
   });
-  it('should render loader if projects falsey', () => {
+  it(`should render loader if projects falsey`, () => {
     const wrapper = setup({ tasks: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
-  it('should generate a proper label on this.selectLabel', () => {
+  it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     const value = instance.selectLabel(props.selected);
-    expect(value).toEqual('7" Sidewalk selected');
+    expect(value).toEqual(`7" Sidewalk selected`);
   });
-  it('should call props.select on this.select', () => {
+  it(`should call props.select on this.select`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.select).toHaveBeenCalledTimes(0);
@@ -46,7 +46,7 @@ describe('Task Index Container', () => {
     expect(props.select).toHaveBeenCalledTimes(1);
     expect(props.select).toHaveBeenCalledWith(domain.TASK,{ id: 1 });
   });
-  it('should call props.setStatus on this.add', () => {
+  it(`should call props.setStatus on this.add`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.setStatus).toHaveBeenCalledTimes(0);
