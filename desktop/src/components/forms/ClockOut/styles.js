@@ -59,6 +59,13 @@ const styles = theme => {
     },
     lunchBox: {
       width: '150px'
+    },
+    keyboardGrid: {
+      position: 'relative'
+    },
+    keyboard: {
+      width: '100%',
+      position: 'absolute'
     }
   };
 };

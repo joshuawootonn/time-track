@@ -21,12 +21,24 @@ export class Clockout extends Component{
   state = {
     isKeyboardVisisble: false,
     keyboardValue: '',
-    currentTextField: null
+    currentTextField: null,
+    layoutName: 'default'
+
   }
+  handleShift = () => {
+    let layoutName = this.state.layoutName;
+
+    this.setState({
+      layoutName: layoutName === 'default' ? 'shift' : 'default'
+    });
+  };
   onChange = input => {
     if(this.state.currentTextField !== null){
       this.props.setFieldValue(this.state.currentTextField,input);
     }
+  }
+  onKeyPress = button => {
+    if (button === '{shift}' || button === '{lock}') this.handleShift();
   }
   onDescriptionFocus = (input, asdf) => {
     this.setState({ isKeyboardVisisble: true, currentTextField: asdf });
@@ -37,6 +49,7 @@ export class Clockout extends Component{
   render() {
     const { classes, isSubmitting, handleSubmit, shift, values, length, 
       projects, projectTasks, cancel, errors, timeLeft, weekHourTotal, generalError } = this.props;
+    const { layoutName } = this.state;
     
     return (
       <div className={classes.hero}>
@@ -217,19 +230,42 @@ export class Clockout extends Component{
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={24} style={this.state.isKeyboardVisisble ? {} : { display: 'none' }}>
-              <Keyboard 
-                ref={r => (this.keyboardRef = r)}
-                onChange={this.onChange}
-                preventMouseDownDefault={true}
-              />
+            <Grid container spacing={24} className={classes.keyboardGrid} >
+              <div
+                className={classes.keyboard}
+                style={this.state.isKeyboardVisisble ? {  } : { display: 'none' }}
+              >
+                <Keyboard                   
+                  ref={r => (this.keyboardRef = r)}
+                  onChange={this.onChange}
+                  onKeyPress={this.onKeyPress}
+                  preventMouseDownDefault={true}
+
+                  layoutName={layoutName}
+                  layout={{
+                    default: [
+                      '` 1 2 3 4 5 6 7 8 9 0 {bksp}',
+                      'q w e r t y u i o p [ ] \\',
+                      'a s d f g h j k l ; \'',
+                      '{shift} z x c v b n m , . /',
+                      '{space}'
+                    ],
+                    shift: [
+                      '~ ! @ # $ % ^ & * ( ) {bksp}',
+                      'Q W E R T Y U I O P { } |',
+                      'A S D F G H J K L : " ',
+                      '{shift} Z X C V B N M < > ?',
+                      '{space}'
+                    ]
+                  }}
+                />
+              </div>
             </Grid>
           </form>
         </div>
       </div>
     );
-  }
-  
+  }  
 }
 
 Clockout.propTypes = {
@@ -245,7 +281,7 @@ Clockout.propTypes = {
   errors: PropTypes.object,
   timeLeft: PropTypes.number,
   weekHourTotal: PropTypes.number,
-  length: PropTypes.number,
+  length: PropTypes.string,
   generalError: PropTypes.string
 };
 
