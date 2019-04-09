@@ -33,19 +33,19 @@ export class Clockout extends Component{
     console.log('ONKeyPress: ',button);
   }
   on = (input, asdf) => {
-    console.log('on',input,asdf);
+    // console.log('on',input,asdf);
     this.setState({ isKeyboardVisisble: true, currentTextField: asdf });
     //this.keyboardRef.keyboard.setInput(input);
   }
   off = () => {
-    console.log('off');
+    // console.log('off');
     this.setState({ isKeyboardVisisble: false,currentTextField: null });
     //this.keyboardRef.keyboard.clearInput();
   }
   render() {
     const { classes, isSubmitting, handleSubmit, shift, values, 
       projects, projectTasks, cancel, errors,timeLeft,generalError,setFieldValue } = this.props;
-    console.log('is set field value defined', setFieldValue);
+    
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
@@ -199,7 +199,7 @@ export class Clockout extends Component{
                             <Button
                               type="submit"
                               color="primary"
-                              disabled={isSubmitting || Object.keys(errors).length !== 0 || minutesRoudedTime(timeLeft) !== 0}
+                              disabled={isSubmitting || Object.keys(errors).length !== 0 || minutesRoudedTime(timeLeft) !== 0 || !!generalError}
                               variant="contained"
                               className={classes.button}
                             >

@@ -36,7 +36,7 @@ export class ClockOut extends Component {
       return <Progress variant="circular" fullPage />;
     }
 
-    const currentMoment = moment();
+    const currentMoment = moment().add('minutes',3);
     const clockInMoment = moment.utc(currentShift.clockInDate).local();
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 
@@ -75,11 +75,18 @@ export class ClockOut extends Component {
           const { errors,values } = formikProps;
           // Time left is the duraction - lunch - all the activity times
           let timeLeft = Math.floor(shiftDuration.asMinutes()) - values.lunch;
+          
+          let generalError;
+          values.activities.forEach(activity => {
+            const selectedActivity = this.props.projectTaskObjects[activity.projectTaskId];
+            if(selectedActivity && /Other/.test(selectedActivity.task.name)){
+              generalError = 'Add description to Other activity.';
+            }
+          });
           values.activities.forEach(activity => {
             timeLeft -= activity.length;
           });
           
-          let generalError;
           if (errors.activities && typeof errors.activities === 'string'){
             generalError = errors.activities;
           }else if (errors.lunch && typeof errors.lunch === 'string'){
@@ -114,7 +121,8 @@ const mapStateToProps = state => {
     currentShift: shiftSelectors.getCurrentShift(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
     projects: projectSelectors.getAllProjects(state),
-    projectTasks: projectTaskSelectors.getAllProjectTasks(state)
+    projectTasks: projectTaskSelectors.getAllProjectTasks(state),
+    projectTaskObjects: projectTaskSelectors.getAllProjectTasksObjects(state)
   };
 };
 
