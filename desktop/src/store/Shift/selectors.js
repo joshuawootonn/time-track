@@ -33,7 +33,8 @@ export const getLastWeeksShiftsForCurrentEmployee = createSelector(
     return results
       .map(shiftId => {      
         return {
-          ...shifts[shiftId]
+          ...shifts[shiftId],
+          length: (shifts[shiftId].length && shifts[shiftId].lunch) ? shifts[shiftId].length - shifts[shiftId].lunch : shifts[shiftId].length
         };
       })
       .filter(shift => {
@@ -70,7 +71,8 @@ export const getShiftsInRange = createSelector(
     return results.slice(-200)
       .map(shiftId => {      
         return {
-          ...shifts[shiftId],
+          ...shifts[shiftId],          
+          length: (shifts[shiftId].length && shifts[shiftId].lunch) ? shifts[shiftId].length - shifts[shiftId].lunch : shifts[shiftId].length,
           employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
           activities: shifts[shiftId] && shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
             return activities[activityId];
