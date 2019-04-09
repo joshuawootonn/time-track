@@ -28,7 +28,7 @@ export class SortSelectHead extends React.Component {
             }else {
               sortedColumn = orderBy === row.id;
             }
-            const key = row.keys ? row.id + row.keys.join('') : row.id;
+            const key = row.keys ? row.id + row.keys.join(``) : row.id;
             return (
               <TableCell
                 className={classes.headerCell}
@@ -39,7 +39,7 @@ export class SortSelectHead extends React.Component {
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
+                  placement={row.align === `right` ? `bottom-end` : `bottom-start`}
                   enterDelay={300}
                 >
                   <TableSortLabel

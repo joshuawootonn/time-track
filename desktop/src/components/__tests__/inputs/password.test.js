@@ -9,14 +9,14 @@ const props =  {
     errors: {}
   },
   field: {
-    name: 'name'
+    name: `name`
   },
-  label: 'label',
+  label: `label`,
   labelProps: {},
   formControlProps: {},
-  margin: 'normal',
+  margin: `normal`,
   classes: {},
-  helper: 'normal',
+  helper: `normal`,
   fullWidth: true
 };
 
@@ -28,11 +28,11 @@ const setupHOC = overRides => {
   return mount(<PasswordHOC {...props} {...overRides}/>);
 };
 
-describe('Password Input', () => {
-  it('should render correctly', () => {
+describe(`Password Input`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   }); 
 });

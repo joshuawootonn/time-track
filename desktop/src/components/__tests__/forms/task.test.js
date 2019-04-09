@@ -6,16 +6,16 @@ import TaskHOC from 'components/forms/Task';
 
 const props =  {  
   classes: {},
-  label: 'label',
+  label: `label`,
   removeTask: jest.fn(),
-  type: 'edit',
+  type: `edit`,
   categories: [{ id: 0 },{ id: 1 },{ id: 2 }],
   subcategories: [{ id: 0 },{ id: 1 },{ id: 2 }],
   resetForm: jest.fn(),
   initialValues: {},
   isSubmitting: true,
   values: {
-    pin: '123'
+    pin: `123`
   },
   editCategories: jest.fn(),
   errors: {}
@@ -29,19 +29,19 @@ const setupHOC = overRides => {
   return shallow(<TaskHOC {...props} {...overRides}/>);
 };
 
-describe('Task Component', () => {
-  it('should render correctly', () => {
+describe(`Task Component`, () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should resetForm when #task-reset-button is clicked', () => {
+  it(`should resetForm when #task-reset-button is clicked`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#task-reset-button').first().simulate('click');
+    wrapper.find(`#task-reset-button`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });  
 });

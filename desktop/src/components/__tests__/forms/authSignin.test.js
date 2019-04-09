@@ -18,14 +18,14 @@ const setupHOC = overRides => {
   return shallow(<AuthSigninHOC {...props} {...overRides}/>);
 };
 
-describe('Auth Signin Component', () => {
+describe(`Auth Signin Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();  
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
 });

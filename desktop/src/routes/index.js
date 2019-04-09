@@ -8,23 +8,23 @@ import adminRoutes from 'routes/Admin';
 const routes = [
   {
     component: RouteMapper,
-    path: '/',
-    name: 'Signin',
+    path: `/`,
+    name: `Signin`,
     routes: accountRoutes
   }, {
     component: RouteMapper,
-    path: '/employee',
-    name: 'Employee',
+    path: `/employee`,
+    name: `Employee`,
     routes: employeeRoutes
   }, {
     component: RouteMapper,
-    path: '/manager',
-    name: 'Manager',
+    path: `/manager`,
+    name: `Manager`,
     routes: managerRoutes
   }, {
     component: RouteMapper,
-    path: '/admin',
-    name: 'Admin',
+    path: `/admin`,
+    name: `Admin`,
     routes: adminRoutes
   }
 ];

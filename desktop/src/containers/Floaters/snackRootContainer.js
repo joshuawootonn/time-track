@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import SnackContainer from 'containers/Floaters/snackContainer';
 import { snackActions } from 'store/actions';
 
-const electron = window.require('electron');
+const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
 export class SnackRoot extends Component {
@@ -16,7 +16,7 @@ export class SnackRoot extends Component {
     };
   }
   componentDidMount() {   
-    ipcRenderer.on('message' , function(event , message){ 
+    ipcRenderer.on(`message` , function(event , message){ 
       this.setState({ notification: message });
       setTimeout(this.setState({ notification: null }),2000);
     });

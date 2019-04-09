@@ -30,30 +30,30 @@ const setup = overRides => {
 };
 
 
-describe('Category Detail Container', () => {  
+describe(`Category Detail Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly if status === EDITING', () => {
+  it(`should render correctly if status === EDITING`, () => {
     setup();       
   });
-  it('should render correctly if status === INIT', () => {
+  it(`should render correctly if status === INIT`, () => {
     setup({ status: analyzeStatus.INIT });
   });
-  it('should render correctly if status === ADDING', () => {
+  it(`should render correctly if status === ADDING`, () => {
     setup({ status: analyzeStatus.ADDING });
   });
-  it('should call removeCategory on this removeCategory', () => {
+  it(`should call removeCategory on this removeCategory`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.removeCategory).toHaveBeenCalledTimes(0);
     instance.removeCategory();
     expect(props.removeCategory).toHaveBeenCalledTimes(1);
   });
-  it('should test the onSubmit calls updateCategory and onResolve it should resetForm and  setStatus to {success: true} ', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls updateCategory and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+    const values = { val: `asdf` };
     const wrapper = setup();
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.updateCategory).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
@@ -65,10 +65,10 @@ describe('Category Detail Container', () => {
       expect(props.updateCategory).toHaveBeenCalledWith(values);
     });
   });
-  it('should test the onSubmit calls updateCategory and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls updateCategory and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
+    const values = { val: `asdf` };
     const wrapper = setup();
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
 
     expect(props.updateCategory).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);      
@@ -83,10 +83,10 @@ describe('Category Detail Container', () => {
     });
   });
 
-  it('should test the onSubmit calls createCategory and onResolve it should resetForm and  setStatus to {success: true} ', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls createCategory and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+    const values = { val: `asdf` };
     const wrapper = setup({ status: analyzeStatus.ADDING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.createCategory).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
@@ -95,10 +95,10 @@ describe('Category Detail Container', () => {
     expect(props.createCategory).toHaveBeenCalledTimes(1);    
     expect(props.createCategory).toHaveBeenCalledWith(values);
   });
-  it('should test the onSubmit calls createCategory and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}', () => {
-    const values = { val: 'asdf' };
+  it(`should test the onSubmit calls createCategory and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
+    const values = { val: `asdf` };
     const wrapper = setup({ status: analyzeStatus.ADDING });
-    const onSubmit = wrapper.find(Formik).first().prop('onSubmit');
+    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
         
     expect(props.createCategory).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);      

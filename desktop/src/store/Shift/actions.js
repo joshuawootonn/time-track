@@ -67,10 +67,10 @@ export const createShift = shift => {
       await dispatch(genericActions.get(domains.SHIFT,response.data.id));
       // Select said object for analyze
       await dispatch(analyzeActions.select(domains.SHIFT,response.data.id));    
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Created`));
       return dispatch({ type: shiftActionTypes.CREATE_SHIFT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Creation Failed`));
       return dispatch({ type: shiftActionTypes.CREATE_SHIFT_FAILURE });
     }
   };
@@ -94,10 +94,10 @@ export const createHalfShift = shift => {
       const employee = getState().entities.employees[shift.employeeId];
       await dispatch(employeeActions.setIsWorking(employee,true));
 
-      dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in created!'));
+      dispatch(snackActions.openSnack(status.SUCCESS, `Clock in created!`));
       return dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_SUCCESS });
     } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, 'Clock in creation failed!'));
+      dispatch(snackActions.openSnack(status.FAILURE, `Clock in creation failed!`));
       return dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_FAILURE, payload: e });
     }
   };
@@ -137,10 +137,10 @@ export const updateShift = shift => {
       }
      
       await dispatch(genericActions.get(domains.SHIFT,response.data.id));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Updated`));
       return dispatch({ type: shiftActionTypes.UPDATE_SHIFT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Update Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Update Failed`));
       return dispatch({ type: shiftActionTypes.UPDATE_SHIFT_FAILURE });
     }
   };
@@ -162,10 +162,10 @@ export const updateHalfShift = shift => {
      
       await dispatch(genericActions.get(domains.SHIFT,response.data.id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Clock in Updated`));
       return dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Clock in update failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Clock in update failed`));
       return dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_FAILURE });
     }
   };
@@ -185,10 +185,10 @@ export const removeShift = id => {
       await endpoint.deleteRelatedActivities(id);
       await dispatch(genericActions.delet(domains.SHIFT,id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Deleted'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Deleted`));
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Shift Deletion Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Deletion Failed`));
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_FAILURE });
     }
   };

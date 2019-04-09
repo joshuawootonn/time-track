@@ -19,20 +19,20 @@ const setup = overRides => {
 };
 
 
-describe('Crew Index Container', () => {  
+describe(`Crew Index Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();       
   });
-  it('should generate a proper label on this.selectLabel', () => {
+  it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
-    const value = instance.selectLabel({ name: 'Josh' });
-    expect(value).toEqual('Josh selected');
+    const value = instance.selectLabel({ name: `Josh` });
+    expect(value).toEqual(`Josh selected`);
   });
-  it('should call props.select on this.select', () => {
+  it(`should call props.select on this.select`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.select).toHaveBeenCalledTimes(0);

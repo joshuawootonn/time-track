@@ -84,8 +84,8 @@ export class HalfShift extends Component {
   }
 }
 
-export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = 'analyze_shift_half_shift_reset_button';
-export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_half_shift_submit_button';
+export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
+export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
 
 HalfShift.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -33,9 +33,9 @@ export class ProjectDetail extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            name: '',
+            name: ``,
             isActive: true,
-            date: moment().startOf('day').format('YYYY-MM-DD'),
+            date: moment().startOf(`day`).format(`YYYY-MM-DD`),
             projectTasks: []
           }}
           validationSchema={projectValidation}
@@ -44,7 +44,7 @@ export class ProjectDetail extends Component {
             return createProject({
               name: values.name,
               isActive: values.isActive ? 1 : 0,
-              date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
+              date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
               projectTasks: values.projectTasks                   
             }).then(
               () => {
@@ -81,7 +81,7 @@ export class ProjectDetail extends Component {
           initialValues={{
             ...selected,
             isActive: selected.isActive ? true : false,
-            date: moment.utc(selected.date).local().startOf('day').format('YYYY-MM-DD'),
+            date: moment.utc(selected.date).local().startOf(`day`).format(`YYYY-MM-DD`),
             projectTasks: selected.projectTasks.map(projectTask => {
               return {
                 ...projectTask,
@@ -98,7 +98,7 @@ export class ProjectDetail extends Component {
               id: values.id,
               name: values.name,
               isActive: values.isActive ? 1 : 0,
-              date: moment(values.date).format('MM-DD-YY HH:mm:ss'),
+              date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
               projectTasks: values.projectTasks
             }).then(
               () => {

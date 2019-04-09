@@ -1,16 +1,16 @@
 import { schema } from 'normalizr';
 
-export const crewSchema = new schema.Entity('crews');
-export const authoritySchema = new schema.Entity('authorities');
-export const employeeSchema = new schema.Entity('employees');
-export const shiftSchema = new schema.Entity('shifts');
-export const activitySchema = new schema.Entity('activities');
-export const project_taskSchema = new schema.Entity('project_tasks');
-export const projectSchema = new schema.Entity('projects');
-export const taskSchema = new schema.Entity('tasks');
-export const subcategorySchema = new schema.Entity('subcategories');
-export const categorySchema = new schema.Entity('categories');
-export const dimensionSchema = new schema.Entity('dimensions');
+export const crewSchema = new schema.Entity(`crews`);
+export const authoritySchema = new schema.Entity(`authorities`);
+export const employeeSchema = new schema.Entity(`employees`);
+export const shiftSchema = new schema.Entity(`shifts`);
+export const activitySchema = new schema.Entity(`activities`);
+export const project_taskSchema = new schema.Entity(`project_tasks`);
+export const projectSchema = new schema.Entity(`projects`);
+export const taskSchema = new schema.Entity(`tasks`);
+export const subcategorySchema = new schema.Entity(`subcategories`);
+export const categorySchema = new schema.Entity(`categories`);
+export const dimensionSchema = new schema.Entity(`dimensions`);
 
 crewSchema.define({ employees: [employeeSchema] });
 

@@ -1,9 +1,9 @@
 import 'jest-enzyme';
-const Enzyme = require('enzyme');
+const Enzyme = require(`enzyme`);
 
 import * as IPCConstants from 'constants/ipc';
 
-const Adapter = require('enzyme-adapter-react-16');
+const Adapter = require(`enzyme-adapter-react-16`);
 // This sets up the adapter to be used by Enzyme
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -13,7 +13,7 @@ global.window = {
   require: jest.fn()
 };
 
-const originalConsoleError = console.error;
+//const originalConsoleError = console.error;
 
 console.error = message => {
   if (/(Failed prop type)/.test(message)) {
@@ -41,7 +41,7 @@ global.window.require = function () {
       },
       sendSync: function(key) {
         if(key === IPCConstants.GET_CRED){
-          return { username: 'josh', password: '5656' };
+          return { username: `josh`, password: `5656` };
         }else if (key === IPCConstants.CREATE_EXPORT){
           return {};
         }

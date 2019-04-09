@@ -10,14 +10,14 @@ const props =  {
     setFieldValue: jest.fn()
   },
   field: {
-    name: 'name'
+    name: `name`
   },
-  label: 'label',
+  label: `label`,
   labelProps: {},
   formControlProps: {},
-  margin: 'normal',
+  margin: `normal`,
   classes: {},
-  helper: 'normal',
+  helper: `normal`,
   fullWidth: true
 };
 
@@ -29,20 +29,20 @@ const setupHOC = overRides => {
   return mount(<FileHOC {...props} {...overRides}/>);
 };
 
-describe('File Input', () => {
-  it('should render correctly', () => {
+describe(`File Input`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   });
-  it('should call setFieldValue on this.fileChange', () => {
+  it(`should call setFieldValue on this.fileChange`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(0);
-    instance.fileChange({ target:{ files:[{ path:'path' }] } });
+    instance.fileChange({ target:{ files:[{ path:`path` }] } });
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(1);
-    expect(props.form.setFieldValue).toHaveBeenCalledWith('name','path');
+    expect(props.form.setFieldValue).toHaveBeenCalledWith(`name`,`path`);
   });
  
 });

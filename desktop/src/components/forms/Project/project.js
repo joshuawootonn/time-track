@@ -158,7 +158,7 @@ export class Project extends Component {
                     <Button
                       color="primary"
                       variant="contained"
-                      id={'add-projectTask'}
+                      id={`add-projectTask`}
                       onClick={() =>
                         arrayHelpers.push({
                           categoryId: -1,
@@ -199,7 +199,7 @@ export class Project extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={'project-reset-button'}
+                id={`project-reset-button`}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"

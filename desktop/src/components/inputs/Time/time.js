@@ -84,29 +84,29 @@ export class Time extends Component {
             })}
           </Select>
         </div>
-        {helper === 'normal' && <FormHelperText className={cx(classes.helper)} error={true}>
-          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '}
+        {helper === `normal` && <FormHelperText className={cx(classes.helper)} error={true}>
+          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
         </FormHelperText>}
       </FormControl>
     );
   }
 }
 Time.defaultProps = {
-  margin: 'normal',
+  margin: `normal`,
   fullWidth: false,
-  label1: 'Hours',
-  label2: 'Minutes',
-  helper: 'normal'
+  label1: `Hours`,
+  label2: `Minutes`,
+  helper: `normal`
 };
 
 Time.propTypes = {
-  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
+  margin: PropTypes.oneOf([`normal`, `dense`, `none`]),
   fullWidth: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   className: PropTypes.string,
-  helper: PropTypes.oneOf(['normal', 'none']),
+  helper: PropTypes.oneOf([`normal`, `none`]),
   label1: PropTypes.string,
   label2: PropTypes.string
 };

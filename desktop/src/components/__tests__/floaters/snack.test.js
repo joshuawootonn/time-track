@@ -8,9 +8,9 @@ import SnackHOC from 'components/floaters/Snack';
 const props = {
   onClose: jest.fn(),
   position: {},
-  type: 'type',
+  type: `type`,
   icon: <Close />,
-  message: 'message',
+  message: `message`,
   classes: {}
 };
 
@@ -22,11 +22,11 @@ const setupHOC = () => {
   return shallow(<SnackHOC {...props} />);
 };
 
-describe('Snack Components', () => {
-  it('should render correctly', () => {
+describe(`Snack Components`, () => {
+  it(`should render correctly`, () => {
     setup();    
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
 });

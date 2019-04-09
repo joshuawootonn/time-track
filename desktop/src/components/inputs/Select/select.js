@@ -35,14 +35,14 @@ export class Select extends Component {
               items.map((item, i) => {
                 return (
                   <MenuItem {...itemProps} key={i} id={item.id} value={item.id}>
-                    {item.name || item.type || item.firstName + ' ' + item.lastName}
+                    {item.name || item.type || item.firstName + ` ` + item.lastName}
                   </MenuItem>
                 );
               })}
           {children}
         </SelectInput>
-        {helper === 'normal' && <FormHelperText error={true}>
-          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ' '}
+        {helper === `normal` && <FormHelperText error={true}>
+          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
         </FormHelperText>}
       </FormControl>
     );
@@ -50,16 +50,16 @@ export class Select extends Component {
 }
 
 Select.defaultProps = {
-  margin: 'normal',
+  margin: `normal`,
   fullWidth: false,
-  helper: 'normal'
+  helper: `normal`
 };
 
 Select.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   onChange: PropTypes.func,
-  margin: PropTypes.oneOf(['normal', 'dense', 'none']),
+  margin: PropTypes.oneOf([`normal`, `dense`, `none`]),
   fullWidth: PropTypes.bool,
   items: PropTypes.array,
   children: PropTypes.array,
@@ -67,7 +67,7 @@ Select.propTypes = {
   labelProps: PropTypes.object,
   selectProps: PropTypes.object,
   itemProps: PropTypes.object,
-  helper: PropTypes.oneOf(['normal', 'none']),
+  helper: PropTypes.oneOf([`normal`, `none`]),
   onchange: PropTypes.func
 };
 

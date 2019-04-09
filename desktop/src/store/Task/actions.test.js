@@ -11,86 +11,86 @@ const store = mockStore();
 let mock;
 const data = { response: true };
 
-describe('Task Actions', () => {
+describe(`Task Actions`, () => {
   beforeEach(() => {
     store.clearActions();    
     mock = new MockAdapter(axios);
   });
   // GET ALL 
-  test('getAllTasks should dispatch 2 actions on success', async () => {
+  test(`getAllTasks should dispatch 2 actions on success`, async () => {
     const expectedActionTypes = [
-      'get_tasks_request', 'get_tasks_success'
+      `get_tasks_request`, `get_tasks_success`
     ];
     mock.onGet(/tasks/).reply(200,data);
     await compareActionTypes(expectedActionTypes,store,taskActions.getAllTasks());
   });
   // UPDATE
-  test('updateTask dispatch 6 actions on success', async () => {
+  test(`updateTask dispatch 6 actions on success`, async () => {
     const expectedActionTypes = [
-      'update_task_request',
-      'put_task_request',
-      'put_task_success',
-      'show_snack',
-      'update_task_success'
+      `update_task_request`,
+      `put_task_request`,
+      `put_task_success`,
+      `show_snack`,
+      `update_task_success`
     ];
     mock.onPut(/tasks/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,taskActions.updateTask({ id: 1 }));
   });
-  test('updateTask should dispatch 4 actions on failure', async () => {
+  test(`updateTask should dispatch 4 actions on failure`, async () => {
     const expectedActionTypes = [
-      'update_task_request',
-      'put_task_request',
-      'put_task_failure',
-      'show_snack',
-      'update_task_failure'
+      `update_task_request`,
+      `put_task_request`,
+      `put_task_failure`,
+      `show_snack`,
+      `update_task_failure`
     ];
     mock.onPut(/tasks/).reply(400, data); 
     await compareActionTypes(expectedActionTypes,store,taskActions.updateTask({ id: 1 }));
   });
   // CREATE
-  test('createTask dispatch 6 actions on success', async () => {
+  test(`createTask dispatch 6 actions on success`, async () => {
     const expectedActionTypes = [
-      'create_task_request',
-      'post_task_request',
-      'post_task_success',
-      'show_snack',
-      'create_task_success'
+      `create_task_request`,
+      `post_task_request`,
+      `post_task_success`,
+      `show_snack`,
+      `create_task_success`
     ];
     mock.onPost(/tasks/).reply(200, data);  
     await compareActionTypes(expectedActionTypes,store,taskActions.createTask({ id: 1 }));
   });
-  test('createTask should dispatch 4 actions on failure', async () => {
+  test(`createTask should dispatch 4 actions on failure`, async () => {
     const expectedActionTypes = [
-      'create_task_request',
-      'post_task_request',
-      'post_task_failure',
-      'show_snack',
-      'create_task_failure'
+      `create_task_request`,
+      `post_task_request`,
+      `post_task_failure`,
+      `show_snack`,
+      `create_task_failure`
     ];
     mock.onPost(/tasks/).reply(400, data); 
     await compareActionTypes(expectedActionTypes,store,taskActions.createTask({ id: 1 }));
   });
   // REMOVE
-  test('removeTask should dispatch 6 actions on success', async () => {
+  test(`removeTask should dispatch 6 actions on success`, async () => {
     const expectedActionTypes = [
-      'remove_task_request',
-      'delete_selected',
-      'delete_task_request',
-      'delete_task_success',
-      'show_snack',
-      'remove_task_success'
+      `remove_task_request`,
+      `delete_selected`,
+      `delete_task_request`,
+      `delete_task_success`,
+      `show_snack`,
+      `remove_task_success`
     ];
     mock.onDelete(/tasks/).reply(200, data); 
     await compareActionTypes(expectedActionTypes,store,taskActions.removeTask(1));
   });
-  test('removeTask should dispatch 6 actions on failure', async () => {
+  test(`removeTask should dispatch 6 actions on failure`, async () => {
     const expectedActionTypes = [
-      'remove_task_request',
-      'delete_selected',
-      'delete_task_request',
-      'delete_task_failure',
-      'show_snack',
-      'remove_task_failure'
+      `remove_task_request`,
+      `delete_selected`,
+      `delete_task_request`,
+      `delete_task_failure`,
+      `show_snack`,
+      `remove_task_failure`
     ];
     mock.onDelete(/tasks/).reply(400, data); 
     await compareActionTypes(expectedActionTypes,store,taskActions.removeTask(1));

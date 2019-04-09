@@ -24,9 +24,9 @@ export const FormHeader = props => {
                 <Button
                   key={i}
                   id={`${ANALYZE_SHIFT_EXTENT_BUTTON_ID}_${i}`}
-                  variant={extentOption.type === extent ? 'contained' : 'outlined'}
+                  variant={extentOption.type === extent ? `contained` : `outlined`}
                   onClick={() => updateExtent(type,extentOption.type)}
-                  style={{ marginRight: '10px' }}
+                  style={{ marginRight: `10px` }}
                 >
                   {extentOption.label}
                 </Button>
@@ -46,13 +46,13 @@ export const FormHeader = props => {
   );
 };
 
-export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = 'analyze_shift_extent_button';
+export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = `analyze_shift_extent_button`;
 
 FormHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   remove: PropTypes.func,
   label: PropTypes.string,
-  type: PropTypes.oneOf(['adding','editing']),
+  type: PropTypes.oneOf([`adding`,`editing`]),
   extent: PropTypes.oneOf([formConstants.HALF_SHIFT,formConstants.FULL_SHIFT]),
   extentOptions: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.oneOf([formConstants.HALF_SHIFT,formConstants.FULL_SHIFT]),

@@ -12,7 +12,7 @@ const props = {
   clockOut: jest.fn(),
   export: jest.fn(),
   analyze: jest.fn(),
-  type: 'type'
+  type: `type`
 };
 
 const setup = overRides => {  
@@ -23,17 +23,17 @@ const setupHOC = overRides => {
   return shallow(<AccountActionHOC {...props} {...overRides}/>);
 };
 
-describe('Account Action Component', () => {
-  it('should render correctly', () => {
+describe(`Account Action Component`, () => {
+  it(`should render correctly`, () => {
     setup();   
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should render correctly when isWorking is false', () => {
+  it(`should render correctly when isWorking is false`, () => {
     setup({ isWorking: 1 });
   });
-  it('should render correctly when type === authorityConstants.ADMIN', () => {
-    setup({ type: 'admin' });
+  it(`should render correctly when type === authorityConstants.ADMIN`, () => {
+    setup({ type: `admin` });
   });
 });

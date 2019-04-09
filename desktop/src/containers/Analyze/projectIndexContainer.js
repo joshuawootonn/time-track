@@ -21,7 +21,7 @@ export class ProjectIndex extends Component {
   render () {
     const { projects,selected } = this.props;
 
-    console.log('project analyze render');
+    console.log(`project analyze render`);
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
@@ -67,22 +67,22 @@ export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
 const rows = [
   {
-    id: 'name',    
-    padding: 'dense',
-    label: 'Name',
+    id: `name`,    
+    padding: `dense`,
+    label: `Name`,
     type: TableDataTypes.STRING
   }, 
   {
-    id: 'date',    
-    padding: 'dense',
-    label: 'Date',
+    id: `date`,    
+    padding: `dense`,
+    label: `Date`,
     type: TableDataTypes.DATE
   }, 
   {
-    id: 'isActive',   
-    align: 'right', 
-    padding: 'dense',
-    label: 'Active',
+    id: `isActive`,   
+    align: `right`, 
+    padding: `dense`,
+    label: `Active`,
     type: TableDataTypes.BOOLEAN
   }   
 ];

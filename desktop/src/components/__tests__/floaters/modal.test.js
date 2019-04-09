@@ -19,11 +19,11 @@ const setupHOC = () => {
   return shallow(<ModalHOC {...props} />);
 };
 
-describe('Modal Component', () => {
-  it('should render correctly', () => {
+describe(`Modal Component`, () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
 });

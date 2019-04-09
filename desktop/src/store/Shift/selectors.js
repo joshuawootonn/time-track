@@ -41,7 +41,7 @@ export const getLastWeeksShiftsForCurrentEmployee = createSelector(
         return shift.employeeId === employee.current.id;
       })
       .filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
-        return moment(shift.clockInDate).isBetween(moment().startOf('week'),moment().endOf('week'));
+        return moment(shift.clockInDate).isBetween(moment().startOf(`week`),moment().endOf(`week`));
       })
       .map(shift => {      
         return {
@@ -79,7 +79,7 @@ export const getShiftsInRange = createSelector(
           })
         };
       }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
-        return moment(shift.clockInDate).isBetween(moment(start,'MM-DD-YY HH:mm:ss'),moment(end,'MM-DD-YY HH:mm:ss'));
+        return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
       });     
   }
 );

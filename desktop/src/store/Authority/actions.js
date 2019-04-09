@@ -18,10 +18,10 @@ export const updateAuthority = authority => {
     dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_REQUEST });
     try {
       await dispatch(genericActions.put(domains.AUTHORITY,authority));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Authority Updated`));
       return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Authority Update Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Authority Update Failed`));
       return dispatch({ type: authorityActionTypes.UPDATE_AUTHORITY_FAILURE });
     }
   };

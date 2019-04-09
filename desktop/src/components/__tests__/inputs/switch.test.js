@@ -12,8 +12,8 @@ const props =  {
   field: {
     value: true
   },
-  className: 'class',
-  label: 'label',
+  className: `class`,
+  label: `label`,
   disabled: true
 };
 
@@ -25,11 +25,11 @@ const setupHOC = overRides => {
   return mount(<SwitchHOC {...props} {...overRides}/>);
 };
 
-describe('Switch Input', () => {
-  it('should render correctly', () => {
+describe(`Switch Input`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   }); 
 });

@@ -1,26 +1,26 @@
 const styles = () => ({
   hero: {
-    height: '100vh',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    height: `100vh`,
+    width: `100%`,
+    display: `flex`,
+    flexDirection: `column`,
+    justifyContent: `center`,
+    alignItems: `center`
   },
   heroContent: {
-    display: 'flex',
-    flexDirection: 'row'
+    display: `flex`,
+    flexDirection: `row`
   },
   button: {
-    height: '100px',
-    width: '100px'
+    height: `100px`,
+    width: `100px`
   },
   buttonIcon: {
-    height: '70px',
-    width: '70px'
+    height: `70px`,
+    width: `70px`
   },
   toolTip: {
-    fontSize: '15px !important'
+    fontSize: `15px !important`
   }
 });
 

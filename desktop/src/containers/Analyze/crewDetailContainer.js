@@ -66,7 +66,7 @@ export class CrewDetail extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            name: ''
+            name: ``
           }}   
           validationSchema={crewValidation}
           onSubmit={(values,formikFunctions) => {

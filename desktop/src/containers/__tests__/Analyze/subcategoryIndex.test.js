@@ -7,7 +7,7 @@ import { analyzeStatus } from 'constants/analyze';
 
 
 const props =  {  
-  selected: { id: 1,type: 'Subcategory' },
+  selected: { id: 1,type: `Subcategory` },
   select: jest.fn(),
   subcategories:[{ id: 1 },{ id: 2 }],
   setStatus: jest.fn(),
@@ -20,20 +20,20 @@ const setup = overRides => {
 };
 
 
-describe('Subcategory Index Container', () => {  
+describe(`Subcategory Index Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();       
   });
-  it('should generate a proper label on this.selectLabel', () => {
+  it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     const value = instance.selectLabel(props.selected);
-    expect(value).toEqual('Subcategory selected');
+    expect(value).toEqual(`Subcategory selected`);
   });
-  it('should call props.select on this.select', () => {
+  it(`should call props.select on this.select`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.select).toHaveBeenCalledTimes(0);
@@ -41,7 +41,7 @@ describe('Subcategory Index Container', () => {
     expect(props.select).toHaveBeenCalledTimes(1);
     expect(props.select).toHaveBeenCalledWith(domain.SUBCATEGORY,{ id: 1 });
   });
-  it('should call props.setStatus on this.add', () => {
+  it(`should call props.setStatus on this.add`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.setStatus).toHaveBeenCalledTimes(0);

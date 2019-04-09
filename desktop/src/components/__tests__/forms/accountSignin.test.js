@@ -8,7 +8,7 @@ const props =  {
   classes: {},
   isSubmitting: true,
   values: {
-    pin: '123'
+    pin: `123`
   },
   setFieldValue: jest.fn(),
   errors: {}
@@ -22,47 +22,47 @@ const setupHOC = overRides => {
   return shallow(<AccountSiginHOC {...props} {...overRides}/>);
 };
 
-describe('Account Signin Component', () => {
+describe(`Account Signin Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();  
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();
   });
-  it('should call setFieldValue in resetPin', () => {
+  it(`should call setFieldValue in resetPin`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.setFieldValue).toHaveBeenCalledTimes(0);
     instance.resetPin();
     expect(props.setFieldValue).toHaveBeenCalledTimes(1);
   });
-  it('should call setFieldValue in appendPin', () => {
+  it(`should call setFieldValue in appendPin`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.setFieldValue).toHaveBeenCalledTimes(0);
-    instance.appendPin('1');
+    instance.appendPin(`1`);
     expect(props.setFieldValue).toHaveBeenCalledTimes(1);
   });
-  it('should not appendPin if pin.length > 6', () => {
-    const wrapper = setup({ values: { pin: '111111' } });    
+  it(`should not appendPin if pin.length > 6`, () => {
+    const wrapper = setup({ values: { pin: `111111` } });    
     const instance = wrapper.instance();
     expect(props.setFieldValue).toHaveBeenCalledTimes(0);
-    instance.appendPin('1');
+    instance.appendPin(`1`);
     expect(props.setFieldValue).toHaveBeenCalledTimes(0);
-    expect(instance.props.values.pin).toEqual('111111');
+    expect(instance.props.values.pin).toEqual(`111111`);
   });
-  it('should appendPin(1) when #button-1 is clicked', () => {
+  it(`should appendPin(1) when #button-1 is clicked`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.appendPin = jest.fn();
     expect(instance.appendPin).toHaveBeenCalledTimes(0);
-    wrapper.find('#button-1').first().simulate('click');
+    wrapper.find(`#button-1`).first().simulate(`click`);
     expect(instance.appendPin).toHaveBeenCalledTimes(1);
   });
-  it('should disable to submit button if errors is not empty', () => {
-    setup({ errors: { asdf: 'asdf' } });
+  it(`should disable to submit button if errors is not empty`, () => {
+    setup({ errors: { asdf: `asdf` } });
   });
 });

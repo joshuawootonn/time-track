@@ -9,14 +9,14 @@ import HalfShiftHOC from 'components/forms/Shift/HalfShift';
 import { EMPLOYEE_MOCK } from 'constants/modelMocks';
 
 const INITIAL_VALUES_ADD = {
-  clockInDate: '2019-04-05T07:30',
+  clockInDate: `2019-04-05T07:30`,
   employeeId: -1
 };
 
 const INTIIAL_VALUES_EDIT = {
   id: 1,
   employeeId: 1,
-  clockInDate: '2019-04-04T18:42'
+  clockInDate: `2019-04-04T18:42`
 };
 
 const props =  {  
@@ -27,7 +27,7 @@ const props =  {
   errors: {},
   employees: EMPLOYEE_MOCK,
   timeLeft: 400,
-  generalError: ''
+  generalError: ``
 };
 
 const setup = overRides => {  
@@ -52,26 +52,26 @@ const setupHOC = overRides => {
   );
 };
 
-describe('HalfShift Component', () => {
+describe(`HalfShift Component`, () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
-  it('should mount correctly in add mode', () => {
+  it(`should mount correctly in add mode`, () => {
     setup({ initialValues: INITIAL_VALUES_ADD });        
   });
-  it('should render correctly withStyles in add mode', () => {
+  it(`should render correctly withStyles in add mode`, () => {
     setupHOC({ initialValues: INITIAL_VALUES_ADD });    
   });
-  it('should mount correctly in add mode', () => {
+  it(`should mount correctly in add mode`, () => {
     setup({ initialValues: INTIIAL_VALUES_EDIT });        
   });
-  it('should render correctly withStyles in add mode', () => {
+  it(`should render correctly withStyles in add mode`, () => {
     setupHOC({ initialValues: INTIIAL_VALUES_EDIT });    
   });
   it(`should call props.resetForm when #${ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID} is clicked`, () => {
     const wrapper = setup();
     expect(props.resetForm).not.toHaveBeenCalled();
-    wrapper.find(`#${ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}`).first().simulate('click');
+    wrapper.find(`#${ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalled();
   });  
 });

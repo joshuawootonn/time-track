@@ -20,11 +20,11 @@ import ShiftCRUDContainer from 'containers/Analyze/shiftCRUDContainer';
 
 const styles = {
   root: {
-    height: '100vh'
+    height: `100vh`
   },
   tab: {
-    height: 'calc(100% - 48px)',
-    display: 'flex'
+    height: `calc(100% - 48px)`,
+    display: `flex`
   },
   grow: {
     flexGrow: 1
@@ -47,7 +47,7 @@ export class Analyze extends Component {
     this.props.getAllEmployees();
     this.props.getAllProjects();
     this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(100, 'days').format('MM-DD-YY HH:mm:ss'), moment().add(14,'days').format('MM-DD-YY HH:mm:ss'));
+    this.props.getShiftsInRange(moment().subtract(100, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -55,7 +55,7 @@ export class Analyze extends Component {
   }
 
   back = () => {
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   }
 
   render() {

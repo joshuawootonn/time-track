@@ -41,13 +41,13 @@ export class GenericTable extends React.Component {
                           return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
                         } else if (type === TableDataTypes.OBJECT) {
                           // The reduce function here is just used to deconstruct the objects to the value that we want on the table
-                          return <TableCell padding="dense" key={id+keys.join('')} >{keys.reduce((object, currentKey) => object[currentKey],n[id])}</TableCell>;
+                          return <TableCell padding="dense" key={id+keys.join(``)} >{keys.reduce((object, currentKey) => object[currentKey],n[id])}</TableCell>;
                         } else if (type === TableDataTypes.DATE) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('MM/DD/YY')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`MM/DD/YY`)}</TableCell>;
                         } else if (type === TableDataTypes.DATETIME) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format('hh:mm a MM/DD')}</TableCell>;
+                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`hh:mm a MM/DD`)}</TableCell>;
                         } else if (type === TableDataTypes.LENGTH) {
-                          const length = moment.duration(n[id], 'minutes');
+                          const length = moment.duration(n[id], `minutes`);
                           return <TableCell padding="dense" key={id+length.hours()} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
                         }
                         return null;

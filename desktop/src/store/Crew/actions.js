@@ -18,10 +18,10 @@ export const updateCrew = crew => {
     dispatch({ type: crewActionTypes.UPDATE_CREW_REQUEST });
     try {
       await dispatch(genericActions.put(domains.CREW,crew));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Updated'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Updated`));
       return dispatch({ type: crewActionTypes.UPDATE_CREW_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Update Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Update Failed`));
       return dispatch({ type: crewActionTypes.UPDATE_CREW_FAILURE });
     }
   };
@@ -32,10 +32,10 @@ export const createCrew = crew => {
     dispatch({ type: crewActionTypes.CREATE_CREW_REQUEST });
     try {
       await dispatch(genericActions.post(domains.CREW,crew));
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Created'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Created`));
       return dispatch({ type: crewActionTypes.CREATE_CREW_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Creation Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Creation Failed`));
       return dispatch({ type: crewActionTypes.CREATE_CREW_FAILURE });
     }
   };
@@ -48,10 +48,10 @@ export const removeCrew = id => {
       await dispatch(analyzeActions.deleteSelected(domains.CREW));
       await dispatch(genericActions.delet(domains.CREW,id));
 
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Deleted'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Deleted`));
       return dispatch({ type: crewActionTypes.REMOVE_CREW_SUCCESS });      
     } catch (e) {
-      await dispatch(snackActions.openSnack(status.SUCCESS, 'Crew Deletion Failed'));
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Crew Deletion Failed`));
       return dispatch({ type: crewActionTypes.REMOVE_CREW_FAILURE });
     }
   };

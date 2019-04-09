@@ -9,20 +9,20 @@ const mockStore = configureMockStore(middlewares);
 const store = mockStore();
 
 
-describe('Analyze Actions', () => {
+describe(`Analyze Actions`, () => {
   beforeEach(() => {
     store.clearActions();    
   });
-  test('dispatch 1 action for select', () => {
-    const expectedActionTypes = ['select_domain'];
+  test(`dispatch 1 action for select`, () => {
+    const expectedActionTypes = [`select_domain`];
     compareActionTypesSync(expectedActionTypes,store,analyzeActions.select(domains.EMPLOYEE,1));
   });
-  test('dispatch 1 action for select', () => {
-    const expectedActionTypes = ['set_domain_status'];
+  test(`dispatch 1 action for select`, () => {
+    const expectedActionTypes = [`set_domain_status`];
     compareActionTypesSync(expectedActionTypes,store,analyzeActions.setStatus(domains.EMPLOYEE,1));
   });
-  test('dispatch 1 action for select', () => {
-    const expectedActionTypes = ['delete_selected'];
+  test(`dispatch 1 action for select`, () => {
+    const expectedActionTypes = [`delete_selected`];
     compareActionTypesSync(expectedActionTypes,store,analyzeActions.deleteSelected(domains.EMPLOYEE));
   });
 });

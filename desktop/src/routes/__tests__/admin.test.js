@@ -9,12 +9,12 @@ import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore();
 
-describe('Admin Routes', () => { 
-  it('should be an array with 4 element', () => {
+describe(`Admin Routes`, () => { 
+  it(`should be an array with 4 element`, () => {
     expect(Admin).toBeDefined();
     expect(Admin.length).toEqual(4);
   });
-  it('should have a valid component and path on each route', () => {
+  it(`should have a valid component and path on each route`, () => {
     const routeRegex = /^\/$|((\/)\w+)+/;
     Admin.forEach(route => {
       expect(route.path.match(routeRegex)).not.toBeNull();

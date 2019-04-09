@@ -154,7 +154,7 @@ export class FullShift extends Component {
                           projectId: Object.keys(projects)[0],
                           projectTaskId: -1,
                           length: 0,
-                          description: ''
+                          description: ``
                         })
                       }
                     >
@@ -210,11 +210,11 @@ export class FullShift extends Component {
   }
 }
 
-export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = 'analyze_shift_full_shift_reset_button';
-export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = 'analyze_shift_full_shift_submit_button';
-export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_add_activity_button';
-export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = 'analyze_shift_full_shift_remove_activity_button';
-export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = 'analyze_shift_full_shift_project_field';
+export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = `analyze_shift_full_shift_reset_button`;
+export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_full_shift_submit_button`;
+export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_add_activity_button`;
+export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_remove_activity_button`;
+export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`;
 
 FullShift.propTypes = {
   classes: PropTypes.object.isRequired,

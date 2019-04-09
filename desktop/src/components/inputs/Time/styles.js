@@ -1,14 +1,14 @@
 const styles = () => ({
   fieldWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%'
+    display: `flex`,
+    flexDirection: `column`,
+    width: `100%`
   },
   vertical: {
-    flexDirection: 'column'
+    flexDirection: `column`
   },
   horizontal: {
-    flexDirection: 'row'
+    flexDirection: `row`
   }
   // helper: {
   //   marginTop: '0px'

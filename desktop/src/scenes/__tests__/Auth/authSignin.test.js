@@ -9,8 +9,8 @@ const setup = overRides => {
   return shallow(<AuthSignin {...props} {...overRides}/>);
 };
 
-describe('Auth Signin Scene', () => {  
-  it('should render correctly', () => {
+describe(`Auth Signin Scene`, () => {  
+  it(`should render correctly`, () => {
     setup();        
   });  
 });

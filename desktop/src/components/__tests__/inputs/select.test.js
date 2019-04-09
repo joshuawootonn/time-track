@@ -10,19 +10,19 @@ const props =  {
     handleBlur: jest.fn()
   },
   field: {
-    name: 'name',
+    name: `name`,
     onChange: jest.fn(),
-    value: 'value'
+    value: `value`
   },
-  label: 'label',
+  label: `label`,
   labelProps: {},
   formControlProps: {},
-  margin: 'normal',
+  margin: `normal`,
   classes: {},
-  helper: 'normal',
+  helper: `normal`,
   fullWidth: true,
   onChange: jest.fn(),
-  items: [{ id: 0,name: 'name0' }]
+  items: [{ id: 0,name: `name0` }]
 };
 
 const setup = overRides => {  
@@ -33,29 +33,29 @@ const setupHOC = overRides => {
   return mount(<SelectHOC {...props} {...overRides}/>);
 };
 
-describe('Select Input', () => {
-  it('should render correctly', () => {
+describe(`Select Input`, () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   }); 
-  it('should call field.onChange and onChange on this.onChange', () => {
+  it(`should call field.onChange and onChange on this.onChange`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.onChange).toHaveBeenCalledTimes(0);
     expect(props.field.onChange).toHaveBeenCalledTimes(0);    
-    instance.onChange({ event: 'event' });
+    instance.onChange({ event: `event` });
     expect(props.onChange).toHaveBeenCalledTimes(1);
     expect(props.field.onChange).toHaveBeenCalledTimes(1);
-    expect(props.onChange).toHaveBeenCalledWith({ event: 'event' });
+    expect(props.onChange).toHaveBeenCalledWith({ event: `event` });
   });
-  it('should call form.handleBlur on this.onBlur', () => {
+  it(`should call form.handleBlur on this.onBlur`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.handleBlur).toHaveBeenCalledTimes(0);
-    instance.onBlur({ target:{ name: 'fake name' } });
+    instance.onBlur({ target:{ name: `fake name` } });
     expect(props.form.handleBlur).toHaveBeenCalledTimes(1);
-    expect(props.form.handleBlur).toHaveBeenCalledWith({ target:{ name: 'name' } });
+    expect(props.form.handleBlur).toHaveBeenCalledWith({ target:{ name: `name` } });
   });
 });

@@ -1,24 +1,24 @@
 // Modules to control application life and create native browser window
-const electron = require('electron');
+const electron = require(`electron`);
 const app = electron.app;
-const { autoUpdater } = require('electron-updater');
+const { autoUpdater } = require(`electron-updater`);
 const ipcMain = electron.ipcMain;
-const url = require('url');
-const path = require('path');
-const settings = require('electron-settings');
-const log = require('electron-log');
+const url = require(`url`);
+const path = require(`path`);
+const settings = require(`electron-settings`);
+const log = require(`electron-log`);
 
 
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS
-} = require('electron-devtools-installer');
-const IPCConstants = require('./constants/ipc');
+} = require(`electron-devtools-installer`);
+const IPCConstants = require(`./constants/ipc`);
 
-const SETTINGS = require('./constants/settings');
+const SETTINGS = require(`./constants/settings`);
 
-var Excel = require('exceljs');
+var Excel = require(`exceljs`);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -35,8 +35,8 @@ function createWindow() {
   const startUrl =
     process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(__dirname, '/../build/index.html'),
-      protocol: 'file:',
+      pathname: path.join(__dirname, `/../build/index.html`),
+      protocol: `file:`,
       slashes: true
     });
   mainWindow.loadURL(startUrl);
@@ -45,14 +45,14 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
+  mainWindow.on(`closed`, function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
   });
 
-  log.transports.file.level = 'debug';
+  log.transports.file.level = `debug`;
   autoUpdater.logger = log;
   autoUpdater.checkForUpdates();
 }
@@ -60,33 +60,33 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on(`ready`, createWindow);
 
-app.on('ready', function () {  
-  log.info('App ready and checking for updates.');
+app.on(`ready`, function () {  
+  log.info(`App ready and checking for updates.`);
   autoUpdater.checkForUpdatesAndNotify().then(updateCheckResult => {
     log.info(updateCheckResult);
   });
 });
 
-app.on('ready', () => {
+app.on(`ready`, () => {
   [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
     installExtension(extension)
       .then(name => console.log(`Added Extension: ${name}`))
-      .catch(err => console.log('An error occurred: ', err));
+      .catch(err => console.log(`An error occurred: `, err));
   });
 });
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function() {
+app.on(`window-all-closed`, function() {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (process.platform !== `darwin`) {
     app.quit();
   }
 });
 
-app.on('activate', function() {
+app.on(`activate`, function() {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
@@ -183,10 +183,10 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
 
   try{
     workbook.xlsx.writeFile(arg.fileLocation).then(function() {
-      event.returnValue = 'saved';
+      event.returnValue = `saved`;
     });
   } catch(e) {
-    event.returnValue = 'failed';
+    event.returnValue = `failed`;
   }
 });
 
@@ -197,24 +197,24 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
 
 const sendStatusToWindow = text => {
   if (mainWindow) {
-    mainWindow.webContents.send('message', text);
+    mainWindow.webContents.send(`message`, text);
   }
 };
 
 
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
+autoUpdater.on(`checking-for-update`, () => {
+  sendStatusToWindow(`Checking for update...`);
 });
-autoUpdater.on('update-available', info => {
-  log.info('Update available.');
+autoUpdater.on(`update-available`, info => {
+  log.info(`Update available.`);
   log.info(info);
   autoUpdater.downloadUpdate();
 });
-autoUpdater.on('update-not-available', info => {
-  log.info('Update not available.');
+autoUpdater.on(`update-not-available`, info => {
+  log.info(`Update not available.`);
   log.info(info);
 });
-autoUpdater.on('error', err => {
+autoUpdater.on(`error`, err => {
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
   log.error(err);
 });
@@ -224,8 +224,8 @@ autoUpdater.on('error', err => {
 //   );
 //   log.info(progressObj);
 // });
-autoUpdater.on('update-downloaded', info => {
-  log.info('Update downloaded; will install in 5s');
+autoUpdater.on(`update-downloaded`, info => {
+  log.info(`Update downloaded; will install in 5s`);
   log.info(info);
   setTimeout(() => autoUpdater.quitAndInstall(), 5000);
 });

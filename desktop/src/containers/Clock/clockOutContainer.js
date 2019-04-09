@@ -25,7 +25,7 @@ export class ClockOut extends Component {
     this.props.getCurrentShift(this.props.currentEmployee.id);
   };
   cancel = () => {
-    this.props.history.push('/');
+    this.props.history.push(`/`);
   };
 
   render() {
@@ -38,15 +38,15 @@ export class ClockOut extends Component {
       return <Progress variant="circular" fullPage />;
     }
 
-    const currentMoment = moment().add('minutes',3);
+    const currentMoment = moment().add(`minutes`,3);
     const clockInMoment = moment.utc(currentShift.clockInDate).local();
     const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
 
 
     const clockOutObject = {
-      in: clockInMoment.format('h:mm a'),
-      out: currentMoment.format('h:mm a'),
-      date: clockInMoment.format('MMM D')
+      in: clockInMoment.format(`h:mm a`),
+      out: currentMoment.format(`h:mm a`),
+      date: clockInMoment.format(`MMM D`)
     };
 
     
@@ -61,14 +61,14 @@ export class ClockOut extends Component {
               projectId: -1,
               projectTaskId: -1,
               length: 0,
-              description: ''
+              description: ``
             }
           ]
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history, clockOut } = this.props;
           return clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
-            history.push('/'),
+            history.push(`/`),
           );
         }}
         validationSchema={clockoutValidation}
@@ -82,7 +82,7 @@ export class ClockOut extends Component {
           values.activities.forEach(activity => {
             const selectedActivity = this.props.projectTaskObjects[activity.projectTaskId];
             if(selectedActivity && /Other/.test(selectedActivity.task.name)){
-              generalError = 'Add description to Other activity.';
+              generalError = `Add description to Other activity.`;
             }
           });
           values.activities.forEach(activity => {
@@ -97,11 +97,11 @@ export class ClockOut extends Component {
             }
           });
 
-          const length = minutesToString(minutesRoudedTime(shiftDuration.asMinutes() - values.lunch))
+          const length = minutesToString(minutesRoudedTime(shiftDuration.asMinutes() - values.lunch));
           
-          if (errors.activities && typeof errors.activities === 'string'){
+          if (errors.activities && typeof errors.activities === `string`){
             generalError = errors.activities;
-          }else if (errors.lunch && typeof errors.lunch === 'string'){
+          }else if (errors.lunch && typeof errors.lunch === `string`){
             generalError = errors.lunch;
           }
         

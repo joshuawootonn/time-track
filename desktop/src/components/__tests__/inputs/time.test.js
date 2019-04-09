@@ -10,16 +10,16 @@ const props =  {
     setFieldValue: jest.fn()
   },
   field: {
-    name: 'name',
+    name: `name`,
     value: 180
   },
-  margin: 'none',
+  margin: `none`,
   fullWidth: true,
   classes: {},
-  classeName: 'class',
-  helper: 'normal',
-  label1: 'hour',
-  label2: 'minutes'  
+  classeName: `class`,
+  helper: `normal`,
+  label1: `hour`,
+  label2: `minutes`  
 };
 
 const setup = overRides => {  
@@ -30,30 +30,30 @@ const setupHOC = overRides => {
   return mount(<TimeHOC {...props} {...overRides}/>);
 };
 
-describe('Time Input', () => {
+describe(`Time Input`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();        
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();       
   });
-  it('should call setFieldValue on this.onChangeHours', () => {
+  it(`should call setFieldValue on this.onChangeHours`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(0);
     instance.onChangeHours({ target:{ value: 20 } });
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(1);
-    expect(props.form.setFieldValue).toHaveBeenCalledWith('name', 20);
+    expect(props.form.setFieldValue).toHaveBeenCalledWith(`name`, 20);
   });
-  it('should call setFieldValue on this.onChangeMinutes', () => {
+  it(`should call setFieldValue on this.onChangeMinutes`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(0);
     instance.onChangeMinutes({ target:{ value: 20 } });
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(1);
-    expect(props.form.setFieldValue).toHaveBeenCalledWith('name', 200);
+    expect(props.form.setFieldValue).toHaveBeenCalledWith(`name`, 200);
   }); 
 });

@@ -7,12 +7,12 @@ import ProjectHOC from 'components/forms/Project';
 
 const props =  {  
   classes: {},
-  label: 'label',
-  type: 'edit',
+  label: `label`,
+  type: `edit`,
   removeProject: jest.fn(),
   categories: [{ id: 0 },{ id: 1 },{ id: 2 }],
   subcategories: [{ id: 0 },{ id: 1 },{ id: 2 }],
-  tasks: [{ id: 0,category: { id: 0,name: 'name0' }, subcategory: { id: 0,name: 'name0' } },{ id: 1,category: { id: 1,name: 'name1' }, subcategory: { id: 1,name: 'name1' } },{ id: 2,category: { id: 2,name: 'name2' }, subcategory: { id: 2,name: 'name2' } }],
+  tasks: [{ id: 0,category: { id: 0,name: `name0` }, subcategory: { id: 0,name: `name0` } },{ id: 1,category: { id: 1,name: `name1` }, subcategory: { id: 1,name: `name1` } },{ id: 2,category: { id: 2,name: `name2` }, subcategory: { id: 2,name: `name2` } }],
   isSubmitting: true,
   resetForm: jest.fn(),
   initialValues: {},
@@ -40,49 +40,49 @@ const setupHOC = overRides => {
 
 const setupWithRender = overRides => {
   const wrapper = setup();  
-  const Render = wrapper.find(FieldArray).first().prop('render');  
+  const Render = wrapper.find(FieldArray).first().prop(`render`);  
   return shallow(<Render {...renderProps} {...overRides} />);
 };
 
-describe('Project Component', () => {
+describe(`Project Component`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('should render correctly', () => {
+  it(`should render correctly`, () => {
     setup();
   });
-  it('should render correctly withStyles', () => {
+  it(`should render correctly withStyles`, () => {
     setupHOC();    
   });
-  it('should call render of projectTask fieldarray', () => {
+  it(`should call render of projectTask fieldarray`, () => {
     setupWithRender();
   });
 
-  it('should call onChange Category Field', () => {
+  it(`should call onChange Category Field`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(0);
-    wrapper.find('#category-field-1').first().simulate('change');
+    wrapper.find(`#category-field-1`).first().simulate(`change`);
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(2);
-    expect(renderProps.form.setFieldValue).toHaveBeenLastCalledWith('projectTasks.1.taskId',-1);
+    expect(renderProps.form.setFieldValue).toHaveBeenLastCalledWith(`projectTasks.1.taskId`,-1);
   });
-  it('should call onChange Category Field', () => {
+  it(`should call onChange Category Field`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(0);
-    wrapper.find('#subcategory-field-1').first().simulate('change');
+    wrapper.find(`#subcategory-field-1`).first().simulate(`change`);
     expect(renderProps.form.setFieldValue).toHaveBeenCalledTimes(1);
-    expect(renderProps.form.setFieldValue).toHaveBeenCalledWith('projectTasks.1.taskId',-1);
+    expect(renderProps.form.setFieldValue).toHaveBeenCalledWith(`projectTasks.1.taskId`,-1);
   });
-  it('should remove an projectTask when a remove-projectTask-1', () => {
+  it(`should remove an projectTask when a remove-projectTask-1`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.remove).toHaveBeenCalledTimes(0);
-    wrapper.find('#remove-projectTask-1').first().simulate('click');
+    wrapper.find(`#remove-projectTask-1`).first().simulate(`click`);
     expect(renderProps.remove).toHaveBeenCalledTimes(1);
     expect(renderProps.remove).toHaveBeenCalledWith(1);
   });
-  it('should remove an projectTask when a remove-projectTask-1', () => {
+  it(`should remove an projectTask when a remove-projectTask-1`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.push).toHaveBeenCalledTimes(0);
-    wrapper.find('#add-projectTask').first().simulate('click');
+    wrapper.find(`#add-projectTask`).first().simulate(`click`);
     expect(renderProps.push).toHaveBeenCalledTimes(1);
     expect(renderProps.push).toHaveBeenCalledWith({
       categoryId: -1,
@@ -92,10 +92,10 @@ describe('Project Component', () => {
       estimateTime: 1
     });
   });
-  it('should call resetForm on Reset button click', () => {
+  it(`should call resetForm on Reset button click`, () => {
     const wrapper = setup();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find('#project-reset-button').first().simulate('click');
+    wrapper.find(`#project-reset-button`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
     expect(props.resetForm).toHaveBeenCalledWith({});
   });

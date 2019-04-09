@@ -1,7 +1,7 @@
 import { HOST } from 'constants/network';
 import axios from 'axios';
 import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
-const DOMAIN = 'employees';
+const DOMAIN = `employees`;
 
 // CRUD
 const CRUDendpoints = generateCRUDEndpoints(DOMAIN);

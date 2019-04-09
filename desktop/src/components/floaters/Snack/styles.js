@@ -4,8 +4,8 @@ const styles = theme => ({
   icon: { fontSize: 20 },
   space: { width: 10 },
   content: {
-    display: 'flex',
-    alignItems: 'center'
+    display: `flex`,
+    alignItems: `center`
   }
 });
 
