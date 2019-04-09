@@ -43,8 +43,8 @@ export class Clockout extends Component{
     //this.keyboardRef.keyboard.clearInput();
   }
   render() {
-    const { classes, isSubmitting, handleSubmit, shift, values, 
-      projects, projectTasks, cancel, errors,timeLeft,generalError,setFieldValue } = this.props;
+    const { classes, isSubmitting, handleSubmit, shift, values, length, lengthInMinutes,
+      projects, projectTasks, cancel, errors, timeLeft, weekHourTotal, generalError } = this.props;
     
     return (
       <div className={classes.hero}>
@@ -75,7 +75,7 @@ export class Clockout extends Component{
                     <DurationIcon />
                   </SvgIcon>
                   <Typography variant="h5">
-                    Length: {shift.length}
+                    Length: {length}
                   </Typography>
                 </div>
               </Grid>
@@ -191,6 +191,9 @@ export class Clockout extends Component{
                           <Typography variant="h5" margin="none">
                             Time Left: {minutesToString(minutesRoudedTime(timeLeft))}
                           </Typography>
+                          <Typography variant="h5" margin="none">
+                            Week Total: {minutesToString(minutesRoudedTime(weekHourTotal))}
+                          </Typography>
                           <Typography variant="body1" margin="none" className={classes.error}>
                             {generalError}
                           </Typography>                      
@@ -250,6 +253,8 @@ Clockout.propTypes = {
   cancel: PropTypes.func,
   errors: PropTypes.object,
   timeLeft: PropTypes.number,
+  weekHourTotal: PropTypes.number,
+  length: PropTypes.number,
   generalError: PropTypes.string
 };
 

@@ -29,7 +29,9 @@ export class ClockOut extends Component {
   };
 
   render() {
-    const { currentShift, projects, projectTasks } = this.props;
+    const { currentShift, projects, projectTasks,lastWeeksShifts } = this.props;
+    console.log(lastWeeksShifts);
+    
 
     const isLoading = !currentShift;
     if (isLoading) {
@@ -44,11 +46,11 @@ export class ClockOut extends Component {
     const clockOutObject = {
       in: clockInMoment.format('h:mm a'),
       out: currentMoment.format('h:mm a'),
-      date: clockInMoment.format('MMM D'),
-      length: `${minutesToString(minutesRoudedTime(shiftDuration.asMinutes()))}`,
-      lengthInMinutes: Math.floor(shiftDuration.asMinutes())
+      date: clockInMoment.format('MMM D')
     };
 
+    
+    
 
     return (
       <Formik
@@ -86,6 +88,16 @@ export class ClockOut extends Component {
           values.activities.forEach(activity => {
             timeLeft -= activity.length;
           });
+
+
+          let weekHourTotal = shiftDuration.asMinutes() - values.lunch;
+          lastWeeksShifts.forEach(shift => {
+            if(shift.length){
+              weekHourTotal += (shift.length - shift.lunch);
+            }
+          });
+
+          const length = minutesToString(minutesRoudedTime(shiftDuration.asMinutes() - values.lunch))
           
           if (errors.activities && typeof errors.activities === 'string'){
             generalError = errors.activities;
@@ -101,6 +113,8 @@ export class ClockOut extends Component {
               projects={projects}
               generalError={generalError}
               timeLeft={timeLeft}
+              weekHourTotal={weekHourTotal}
+              length={length}
               projectTasks={projectTasks}
               {...formikProps}
             />
@@ -119,6 +133,7 @@ ClockOut.propTypes = {
 const mapStateToProps = state => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
+    lastWeeksShifts: shiftSelectors.getLastWeeksShiftsForCurrentEmployee(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
     projects: projectSelectors.getAllProjects(state),
     projectTasks: projectTaskSelectors.getAllProjectTasks(state),

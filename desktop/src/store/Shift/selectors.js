@@ -9,6 +9,7 @@ export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
 
 export const getShiftFromState = state => state.shift;
+export const getEmployeeFromState = state => state.employee;
 
 export const getCurrentShift = createSelector(
   getShiftsFromEntities,
@@ -18,6 +19,39 @@ export const getCurrentShift = createSelector(
     if (!results || results.length === 0) return null;
     return shifts[shift.current.id];
   },
+);
+
+export const getLastWeeksShiftsForCurrentEmployee = createSelector(
+  getShiftsFromEntities,
+  getShiftsFromResults,  
+  getActivitiesFromEntities,
+  getEmployeesFromEntities,
+  getEmployeeFromState,
+  (shifts,results,activities,employees, employee) => {
+    if (!shifts || shifts.length === 0) return [];
+
+    return results
+      .map(shiftId => {      
+        return {
+          ...shifts[shiftId]
+        };
+      })
+      .filter(shift => {
+        return shift.employeeId === employee.current.id;
+      })
+      .filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
+        return moment(shift.clockInDate).isBetween(moment().startOf('week'),moment().endOf('week'));
+      })
+      .map(shift => {      
+        return {
+          ...shift,
+          employee: shift && employees[shift.employeeId],
+          activities: shift && shift.activities && shift.activities.map(activityId => {
+            return activities[activityId];
+          })
+        };
+      }); 
+  }
 );
 
 export const getShiftsInRange = createSelector(

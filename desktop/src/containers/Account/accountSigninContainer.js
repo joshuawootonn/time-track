@@ -20,14 +20,13 @@ export class AccountSignin extends Component {
     getStaticData();
     login('565656').then(asdf => {
       const { authorityId } = asdf.data;  
-      setTimeout(() => history.push(`/${this.props.authorities[authorityId].type}`),500);
-              
+      setTimeout(() => history.push(`/${this.props.authorities[authorityId].type}`),500);              
     }, () => {
     //rip
     });    
   }
   render() {
-    console.log(HOST());
+    // console.log(HOST());
     const { login, history, getStaticData, authorities } = this.props;
     return (
       <Formik
