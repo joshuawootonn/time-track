@@ -7,7 +7,7 @@ import moment from 'moment';
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
 import ClockOutContainer from 'containers/Clock/clockOutContainer';
 
-class ClockOut extends Component {
+export class ClockOut extends Component {
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
     this.props.getAllEmployees();
