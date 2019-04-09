@@ -9,6 +9,7 @@ import { Field, FieldArray } from 'formik';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 
+import ErrorBoundary from 'components/utils/ErrorBoundary';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
@@ -19,17 +20,15 @@ import { minutesToString, minutesRoudedTime } from 'helpers/time';
 
 export class Clockout extends Component{
   state = {
-    isKeyboardVisisble: false,
-    keyboardValue: '',
+    isKeyboardVisible: false,
+    keyboardValue: ``,
     currentTextField: null,
-    layoutName: 'default'
-
+    keyboardLayout: `default`
   }
   handleShift = () => {
-    let layoutName = this.state.layoutName;
-
+    const { keyboardLayout } = this.state;
     this.setState({
-      layoutName: layoutName === 'default' ? 'shift' : 'default'
+      keyboardLayout: keyboardLayout === `default` ? `shift` : `default`
     });
   };
   onChange = input => {
@@ -38,18 +37,18 @@ export class Clockout extends Component{
     }
   }
   onKeyPress = button => {
-    if (button === '{shift}' || button === '{lock}') this.handleShift();
+    if (button === `{shift}` ) this.handleShift();
   }
   onDescriptionFocus = (input, asdf) => {
-    this.setState({ isKeyboardVisisble: true, currentTextField: asdf });
+    this.setState({ isKeyboardVisible: true, currentTextField: asdf });
   }
   onDescriptionBlur = () => {
-    this.setState({ isKeyboardVisisble: false,currentTextField: null });
+    this.setState({ isKeyboardVisible: false,currentTextField: null });
   }
   render() {
     const { classes, isSubmitting, handleSubmit, shift, values, length, 
       projects, projectTasks, cancel, errors, timeLeft, weekHourTotal, generalError } = this.props;
-    const { layoutName } = this.state;
+    const { keyboardLayout } = this.state;
     
     return (
       <div className={classes.hero}>
@@ -88,7 +87,6 @@ export class Clockout extends Component{
               <Grid item xs={12}>
                 <FieldArray
                   name="activities"
-                  id="activities"
                   render={arrayHelpers => {
                     return (
                       <div>
@@ -125,7 +123,6 @@ export class Clockout extends Component{
                                           return (
                                             <MenuItem
                                               key={i}
-                                              id="projectTaskId"
                                               value={projectTask.id}
                                             >
                                               {projectTask.task.name}
@@ -151,7 +148,7 @@ export class Clockout extends Component{
                                   <div className={classes.verticalCenter}>
                                     <IconButton
                                       type="button"
-                                      id={`remove-activity-${index}`}
+                                      id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${index}`}
                                       color="secondary"
                                       className={classes.iconButton}
                                       onClick={() => arrayHelpers.remove(index)}
@@ -167,7 +164,7 @@ export class Clockout extends Component{
                         <Grid item xs={12} className={classes.formFooter}>
                           <div className={classes.lunchBox}>
                             <Field
-                              name={'lunch'}
+                              name={`lunch`}
                               label1="Lunch"
                               label2=" "
                               fullWidth
@@ -178,13 +175,13 @@ export class Clockout extends Component{
                           <Button
                             color="primary"
                             variant="contained"
-                            id='add-activity'
+                            id={`${CLOCKOUT_FORM_ADD_ACTIVTIY}`}
                             onClick={() =>
                               arrayHelpers.push({
                                 projectId: Object.keys(projects)[0],
                                 projectTaskId: -1,
                                 length: 0,
-                                description: ''
+                                description: ``
                               })
                             }
                           >
@@ -233,32 +230,35 @@ export class Clockout extends Component{
             <Grid container spacing={24} className={classes.keyboardGrid} >
               <div
                 className={classes.keyboard}
-                style={this.state.isKeyboardVisisble ? {  } : { display: 'none' }}
+                style={this.state.isKeyboardVisible ? {  } : { display: `none` }}
               >
-                <Keyboard                   
-                  ref={r => (this.keyboardRef = r)}
-                  onChange={this.onChange}
-                  onKeyPress={this.onKeyPress}
-                  preventMouseDownDefault={true}
+                <ErrorBoundary>
+                  <Keyboard                   
+                    ref={r => (this.keyboardRef = r)}
+                    onChange={this.onChange}
+                    onKeyPress={this.onKeyPress}
+                    preventMouseDownDefault={true}
 
-                  layoutName={layoutName}
-                  layout={{
-                    default: [
-                      '` 1 2 3 4 5 6 7 8 9 0 {bksp}',
-                      'q w e r t y u i o p [ ] \\',
-                      'a s d f g h j k l ; \'',
-                      '{shift} z x c v b n m , . /',
-                      '{space}'
-                    ],
-                    shift: [
-                      '~ ! @ # $ % ^ & * ( ) {bksp}',
-                      'Q W E R T Y U I O P { } |',
-                      'A S D F G H J K L : " ',
-                      '{shift} Z X C V B N M < > ?',
-                      '{space}'
-                    ]
-                  }}
-                />
+                    keyboardLayout={keyboardLayout}
+                    layout={{
+                      default: [
+                        `\` 1 2 3 4 5 6 7 8 9 0 {bksp}`,
+                        `q w e r t y u i o p [ ] \\`,
+                        `a s d f g h j k l ; '`,
+                        `{shift} z x c v b n m , . /`,
+                        `{space}`
+                      ],
+                      shift: [
+                        `~ ! @ # $ % ^ & * ( ) {bksp}`,
+                        `Q W E R T Y U I O P { } |`,
+                        `A S D F G H J K L : " `,
+                        `{shift} Z X C V B N M < > ?`,
+                        `{space}`
+                      ]
+                    }}
+                  />
+                </ErrorBoundary>
+               
               </div>
             </Grid>
           </form>
@@ -267,6 +267,9 @@ export class Clockout extends Component{
     );
   }  
 }
+
+export const CLOCKOUT_FORM_REMOVE_ACTIVTIY = `clockout_form_remove_activity`;
+export const CLOCKOUT_FORM_ADD_ACTIVTIY = `clockout_form_add_activity`;
 
 Clockout.propTypes = {
   classes: PropTypes.object.isRequired,

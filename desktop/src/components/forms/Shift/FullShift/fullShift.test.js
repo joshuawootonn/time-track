@@ -1,8 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { FieldArray } from 'formik';
-
-import { Formik } from 'formik';
+import { FieldArray, Formik } from 'formik';
 
 import {
   FullShift,
