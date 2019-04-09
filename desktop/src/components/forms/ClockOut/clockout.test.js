@@ -6,7 +6,7 @@ import { Clockout,CLOCKOUT_FORM_ADD_ACTIVTIY,CLOCKOUT_FORM_REMOVE_ACTIVTIY } fro
 import ClockoutHOC from 'components/forms/ClockOut';
 
 
-import {  PROJECT_MOCK, PROJECT_TASK_MOCK, ACTIVITY_MOCK } from 'constants/modelMocks';
+import { PROJECT_MOCK, PROJECT_TASK_MOCK, ACTIVITY_MOCK } from 'constants/modelMocks';
 
 
 const INITIAL_VALUES = {

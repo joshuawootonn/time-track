@@ -29,6 +29,7 @@ console.warn = message => {
 
   //originalConsoleWarn(message);
 };
+console.log = jest.fn()
 //console.log = jest.fn();
 global.window.require = function () {
   return {

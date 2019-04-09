@@ -5,11 +5,11 @@ import { Formik } from 'formik';
 import { ShiftCRUD } from 'containers/Analyze/shiftCRUDContainer';
 
 import { analyzeStatus } from 'constants/analyze';
-import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, SHIFT_MOCK } from 'constants/modelMocks';
+import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, INCOMPLETE_SHIFT_MOCK } from 'constants/modelMocks';
 import * as formConstants from 'constants/formTypes';
 
 const props =  {  
-  selected:SHIFT_MOCK[0],
+  selected:INCOMPLETE_SHIFT_MOCK[0],
   projects:PROJECT_MOCK,
   projectTasks:PROJECT_TASK_MOCK,
   employees: EMPLOYEE_MOCK,

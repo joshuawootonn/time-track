@@ -65,9 +65,12 @@ export class ClockOut extends Component {
         }}
         onSubmit={values => {
           const { currentEmployee, currentShift, history, clockOut } = this.props;
-          return clockOut(currentEmployee, currentShift, values.activities, values.lunch).then(() =>
-            history.push(`/`),
-          );
+          return clockOut(currentEmployee, currentShift, values.activities, values.lunch)
+            .then(() =>
+              history.push(`/`),
+            ).catch(e => 
+              console.log(e)
+            );
         }}
         validationSchema={clockoutValidation}
         render={formikProps => {
@@ -78,15 +81,17 @@ export class ClockOut extends Component {
           
           let generalError;
           values.activities.forEach(activity => {
-            const selectedActivity = this.props.projectTaskObjects[activity.projectTaskId];
-            if(selectedActivity && /Other/.test(selectedActivity.task.name)){
+            const { projectTaskId } = activity;
+            const { projectTaskObjects } = this.props;
+            if(projectTaskId !== -1 && projectTaskObjects
+              && projectTaskObjects[projectTaskId] 
+              && /Other/.test(projectTaskObjects[projectTaskId].task.name)){
               generalError = `Add description to Other activity.`;
             }
           });
           values.activities.forEach(activity => {
             timeLeft -= activity.length;
           });
-
 
           let weekHourTotal = shiftDuration.asMinutes() - values.lunch;
           lastWeeksShifts.forEach(shift => {
