@@ -18,6 +18,23 @@ export const getAllProjects = createSelector(
   },
 );
 
+export const getActiveProjects = createSelector(
+  getProjectsFromEntities,
+  getProjectsFromResults,
+  (projects, results) => {
+    if (!results || results.length === 0) return null;
+    return results.map(projectId => {
+      return projects[projectId];
+    }).filter(project => {
+      return !!project.isActive; 
+    }).sort((a,b) => {
+      if(a.name > b.name) return 1;
+      if(a.name < b.name) return -1;
+      return 0;
+    });
+  },
+);
+
 
 export const getAllProjectObjects = createSelector(
   getAllProjects,

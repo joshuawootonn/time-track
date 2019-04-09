@@ -46,10 +46,7 @@ export class ClockOut extends Component {
       out: currentMoment.format(`h:mm a`),
       date: clockInMoment.format(`MMM D`)
     };
-
-    
-    
-
+  
     return (
       <Formik
         initialValues={{
@@ -138,7 +135,7 @@ const mapStateToProps = state => {
     currentShift: shiftSelectors.getCurrentShift(state),
     lastWeeksShifts: shiftSelectors.getLastWeeksShiftsForCurrentEmployee(state),
     currentEmployee: employeeSelectors.getCurrentEmployee(state),
-    projects: projectSelectors.getAllProjects(state),
+    projects: projectSelectors.getActiveProjects(state),
     projectTasks: projectTaskSelectors.getAllProjectTasks(state),
     projectTaskObjects: projectTaskSelectors.getAllProjectTasksObjects(state)
   };
