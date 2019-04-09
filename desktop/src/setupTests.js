@@ -20,7 +20,7 @@ console.error = message => {
     throw new Error(message);
   }
 
-  originalConsoleError(message);
+  //originalConsoleError(message);
 };
 console.warn = message => {
   if (/(Failed prop type)/.test(message)) {
