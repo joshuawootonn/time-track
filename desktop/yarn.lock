@@ -7729,6 +7729,11 @@ react-scripts@1.1.4:
   optionalDependencies:
     fsevents "^1.1.3"
 
+react-simple-keyboard@^1.21.3:
+  version "1.21.3"
+  resolved "https://registry.yarnpkg.com/react-simple-keyboard/-/react-simple-keyboard-1.21.3.tgz#062e3a1c42ccf758f25ee4d9e857baa35cfd9e82"
+  integrity sha512-z1uwuQ24de8Oii7qRAg0/pZE2mdFqvvKU0LhCnKySQJAhPLzechhYqU2gtFZZD4wGpVnDy4vUzT1tlxGifZXWg==
+
 react-test-renderer@^16.0.0-0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.7.0.tgz#1ca96c2b450ab47c36ba92cd8c03fcefc52ea01c"

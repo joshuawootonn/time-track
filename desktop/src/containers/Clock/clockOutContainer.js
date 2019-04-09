@@ -53,7 +53,7 @@ export class ClockOut extends Component {
     return (
       <Formik
         initialValues={{
-          lunch: 0,
+          lunch: 30,
           activities: [
             {
               projectId: -1,
