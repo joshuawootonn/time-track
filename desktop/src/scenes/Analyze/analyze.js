@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid, Card } from '@material-ui/core';
+import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings } from '@material-ui/icons';
 import moment from 'moment';

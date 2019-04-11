@@ -9,11 +9,8 @@ import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
-import EmployeeFilter from 'containers/Employee/employeeFilter.container';
-
 
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
 
 
 export class EmployeeIndex extends Component { 

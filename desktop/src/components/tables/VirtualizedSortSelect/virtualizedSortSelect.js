@@ -4,7 +4,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { TableCell, TableSortLabel, Checkbox } from '@material-ui/core';
+// import { TableCell, TableSortLabel, Checkbox } from '@material-ui/core';
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
