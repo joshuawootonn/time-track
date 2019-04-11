@@ -18,7 +18,15 @@ export const initialState = {
   authorityStatus: analyzeStatus.INIT,
   crewStatus: analyzeStatus.INIT,
   categoryStatus: analyzeStatus.INIT,
-  subcategoryStatus: analyzeStatus.INIT
+  subcategoryStatus: analyzeStatus.INIT,
+  employeeFilters: {},
+  projectFilters: {},
+  taskFilters: {},
+  shiftFilters: {},
+  authorityFilters: {},
+  crewFilters: {},
+  categoryFilters: {},
+  subcategoryFilters: {}
 };
 export default (state = initialState, action) => {
   if(action.domain && !state.hasOwnProperty(action.domain.singular)){
@@ -49,6 +57,11 @@ export default (state = initialState, action) => {
       ...state,
       [`${action.domain.singular}Status`]: analyzeStatus.INIT,
       [action.domain.singular]: -1
+    };
+  case analyzeActionTypes.UPDATE_FILTERS: 
+    return {
+      ...state,
+      [`${action.domain.singular}Filters`]: action.payload
     };
   default:
     return state;
