@@ -9,8 +9,8 @@ import { ArrowBack, Settings } from '@material-ui/icons';
 import moment from 'moment';
 
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
-import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
-import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
+import EmployeeDetailsContainer from 'containers/Employee/employeeCRUD.container';
+import EmployeeIndexContainer from 'containers/Employee/employeeIndex.container';
 import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';

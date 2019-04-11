@@ -11,7 +11,7 @@ import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { employeeValidation } from 'constants/formValidation';
 
-export class EmployeeDetail extends Component {  
+export class EmployeeCRUD extends Component {  
   removeEmployee = () => {
     const { selected, removeEmployee } = this.props;  
     removeEmployee(selected.id);
@@ -146,4 +146,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeDetail);
+export default connect(mapStateToProps,mapDispatchToProps)(EmployeeCRUD);

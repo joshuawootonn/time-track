@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { EmployeeDetail } from 'containers/Analyze/employeeDetailsContainer';
+import { EmployeeCRUD } from 'containers/Employee/employeeCRUDContainer';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
@@ -30,7 +30,7 @@ const formikFunctions = {
 
 
 const setup = overRides => {  
-  return mount(<EmployeeDetail {...props} {...overRides}/>);    
+  return mount(<EmployeeCRUD {...props} {...overRides}/>);    
 };
 
 
