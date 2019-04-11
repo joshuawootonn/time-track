@@ -17,6 +17,7 @@ const Header  = props => {
   
   return (
     <TableCell
+      component="div"
       className={classNames(classes.tableCell, classes.flexContainer)}
       variant="head"
       style={{ height: headerHeight, flex: 1 }}

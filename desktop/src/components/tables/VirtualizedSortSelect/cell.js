@@ -37,6 +37,7 @@ const Cell = props => {
     data = `${Math.floor(length/60)}h ${length%60}m`;
   }
   return <TableCell 
+    component="div"
     className={ classNames(classes.tableCell, classes.flexContainer)} 
     style={{ height: rowHeight }} 
     padding="dense" 

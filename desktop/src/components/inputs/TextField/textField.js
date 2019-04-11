@@ -14,7 +14,7 @@ export const TextField = ({ field, form, label, className, type, margin, helper,
     className={className}
     margin={margin}
     FormHelperTextProps={helper ===`none` ? { style:{ display:`none` },error: true } : { error: true  }} 
-    helperText={getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
+    helperText={getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
     onFocus={onFocus}
     onBlur={onBlur}
   />

@@ -42,7 +42,7 @@ export class Select extends Component {
           {children}
         </SelectInput>
         {helper === `normal` && <FormHelperText error={true}>
-          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
+          {getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
         </FormHelperText>}
       </FormControl>
     );

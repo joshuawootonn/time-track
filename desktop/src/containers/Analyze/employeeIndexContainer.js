@@ -5,11 +5,14 @@ import { bindActionCreators } from 'redux';
 
 import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
+
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
+import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
+
 
 export class EmployeeIndex extends Component { 
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
@@ -25,22 +28,28 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected } = this.props;
-    console.log(`employee analyze render`);
+    // console.log(`employee analyze render`);
 
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;
 
-    return (
-      <SortSelectTable
-        selectLabel={this.selectLabel}
-        label="Employees"
-        tableData={employees || []}
-        headerData={rows}
-        selected={selected}
-        select={this.select}
-        add={this.add}
-        initialOrderBy='lastName'
-      />
+    return (   
+      <div style={{ height: `calc(100% - 64px)` }}>        
+        <AnalyzeToolbar 
+          selectLabel={this.selectLabel}
+          label="Employees"
+          add={this.add}
+          selected={selected}
+        />
+        <VirtualizedSortSelect
+          data={employees || []}
+          columns={rows} 
+          selected={selected}
+          select={this.select}
+          initialSortBy="lastName"     
+        />
+      </div>  
+            
     );
   }
 }
@@ -71,26 +80,38 @@ export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
 
 const rows = [
   {
-    id: `firstName`,    
+    id: `firstName`,   
+    dataKey: `firstName`, 
+    width: 150, 
+    height: 56,
     padding: `dense`,
     label: `First Name`,
     type: TableDataTypes.STRING
   },
   {
-    id: `lastName`,    
+    id: `lastName`, 
+    dataKey: `lastName`,   
+    width: 150, 
+    height: 56,
     padding: `dense`,
     label: `Last Name`,
     type: TableDataTypes.STRING
   },
   {
-    id: `authority`,    
+    id: `authority_type`,
+    dataKey: `authority`, 
+    width: 150, 
+    height: 56,      
     padding: `dense`,
     label: `Authority`,
     type: TableDataTypes.OBJECT,
     keys: [`type`]
   },
   {
-    id: `crew`,    
+    id: `name`,  
+    dataKey: `crew`,  
+    width: 150, 
+    height: 56,
     padding: `dense`,
     label: `Crew`,
     type: TableDataTypes.OBJECT,
@@ -98,6 +119,9 @@ const rows = [
   },
   {
     id: `isEmployed`,
+    dataKey: `isEmployed`, 
+    width: 120, 
+    height: 56,
     align: `right`,
     padding: `dense`,
     label: `Currently Employed`,
@@ -105,6 +129,9 @@ const rows = [
   },
   {
     id: `isWorking`,
+    dataKey: `isWorking`, 
+    width: 120, 
+    height: 56,
     align: `right`,
     padding: `dense`,
     label: `Currently Working`,

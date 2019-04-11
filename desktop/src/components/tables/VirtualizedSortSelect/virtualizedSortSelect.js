@@ -4,6 +4,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import { TableCell, TableSortLabel, Checkbox } from '@material-ui/core';
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
@@ -140,7 +141,27 @@ class VirtualizedSortSelect extends React.Component {
             sort={this.handleRequestSort} 
             sortBy={sortBy} 
             sortDirection={sortDirection}         
-          >
+          > 
+            {/* <Column
+              headerRenderer={headerProps => {
+                return <div></div>;
+                return <TableCell
+                  variant="head"
+                />;}
+              }
+              cellRenderer={cellProps => {
+                console.log(cellProps);
+                return <div></div>;
+                return (<TableCell padding="checkbox">
+                  <Checkbox checked={false} />
+                </TableCell>);
+              }              
+              }
+              className={classNames(classes.flexContainer)}
+              flexGrow={1}
+              width={50}
+              dataKey={`isSelected`}
+            /> */}
             {columns.map(
               (
                 { className, id, width,...other },
