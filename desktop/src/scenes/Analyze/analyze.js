@@ -40,7 +40,7 @@ const styles = {
 export class Analyze extends Component {
 
   state = {
-    tabValue: 3
+    tabValue: 0
   }  
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift

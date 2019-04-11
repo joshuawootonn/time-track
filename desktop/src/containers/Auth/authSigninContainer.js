@@ -16,6 +16,13 @@ const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
 export class AuthSignin extends Component {  
+  componentDidMount() {
+    const { ip, username, password } = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
+    return this.props.login(ip, username, password)
+      .then(() => {     
+        this.props.history.push(routes.ROOT);              
+      });
+  }
   render() {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
     const hasValidCred = cred.ip && cred.username && cred.password;
