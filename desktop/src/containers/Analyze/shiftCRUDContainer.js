@@ -300,7 +300,7 @@ const mapStateToProps = state => {
     status: state.analyze.shiftStatus,
     projects: projectSelectors.getAllProjects(state),
     projectTasks: projectTaskSelectors.getAllProjectTasks(state),
-    employees: employeeSelectors.getAllEmployeesWithContents(state)
+    employees: employeeSelectors.getAllEmployees(state)
   };
 };
 

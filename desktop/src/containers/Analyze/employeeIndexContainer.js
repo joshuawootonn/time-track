@@ -67,8 +67,10 @@ EmployeeIndex.propTypes = {
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
+
+  const filters = { isEmployed: 1 };
   return {
-    employees: employeeSelectors.getAllEmployeesWithContents(state),
+    employees: employeeSelectors.getAllEmployeesNew(state, { filters , sorts: {} }),
     selected: employeeSelectors.getSelectedEmployee(state)
   };
 };

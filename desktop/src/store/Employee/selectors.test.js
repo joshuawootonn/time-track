@@ -34,14 +34,14 @@ describe(`Employee Selectors`, () => {
     const returnedValue = employeeSelectors.getCurrentEmployee.resultFunc({ 1: { value: `asdf` } },{ ...employeeInitialState,current:{ id: 1 } });
     expect(returnedValue).toEqual({ value:`asdf` }); 
   });
-  test(`getAllEmployeesWithContents should return null for results.size === 0`, () => {
-    let returnedValue=employeeSelectors.getAllEmployeesWithContents.resultFunc({},null,{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
+  test(`getAllEmployees should return null for results.size === 0`, () => {
+    let returnedValue=employeeSelectors.getAllEmployees.resultFunc({},null,{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
     expect(returnedValue).toBeNull();    
-    returnedValue=employeeSelectors.getAllEmployeesWithContents.resultFunc({},[],{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
+    returnedValue=employeeSelectors.getAllEmployees.resultFunc({},[],{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
     expect(returnedValue).toBeNull();
   });
-  test(`getAllEmployeesWithContents should return a mapped version of results for valid entities and results`, () => {
-    const returnedValue=employeeSelectors.getAllEmployeesWithContents.resultFunc({ 1: { val: `asdf`,authorityId: 1,crewId:1 } },[1],{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
+  test(`getAllEmployees should return a mapped version of results for valid entities and results`, () => {
+    const returnedValue=employeeSelectors.getAllEmployees.resultFunc({ 1: { val: `asdf`,authorityId: 1,crewId:1 } },[1],{ 1: { val: `asdf` } },{ 1:{ val: `asdf` } });
     expect(returnedValue).toEqual([{ val:`asdf`, authorityId: 1, authority: { val:`asdf` }, crewId: 1, crew: { val: `asdf` } }]);
   });
 });
