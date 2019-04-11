@@ -8,7 +8,7 @@ import moment from 'moment';
 import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
-import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
+import AnalyzeToolbar from 'components/tables/toolbars/AnalyzeToolbar';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';

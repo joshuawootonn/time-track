@@ -10,11 +10,13 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
+
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
-import AnalyzeToolbar from 'components/toolbars/AnalyzeToolbar';
+import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
 
 
 export class EmployeeIndex extends Component { 
+  
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
   select = object => this.props.select(domain.EMPLOYEE,object)
@@ -39,6 +41,8 @@ export class EmployeeIndex extends Component {
           selectLabel={this.selectLabel}
           label="Employees"
           add={this.add}
+          filters={{}}
+          setFilters={() => {}}
           selected={selected}
         />
         <VirtualizedSortSelect
@@ -47,7 +51,7 @@ export class EmployeeIndex extends Component {
           selected={selected}
           select={this.select}
           initialSortBy="lastName"     
-        />
+        />        
       </div>  
             
     );
