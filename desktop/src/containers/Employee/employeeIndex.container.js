@@ -9,6 +9,7 @@ import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
+import EmployeeFilter from 'containers/Employee/employeeFilter.container';
 
 
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
@@ -44,7 +45,9 @@ export class EmployeeIndex extends Component {
           filters={{}}
           setFilters={() => {}}
           selected={selected}
-        />
+        >
+          <EmployeeFilter />
+        </AnalyzeToolbar>
         <VirtualizedSortSelect
           data={employees || []}
           columns={rows} 
@@ -68,7 +71,7 @@ EmployeeIndex.propTypes = {
 /* istanbul ignore next */
 const mapStateToProps = state => {
 
-  const filters = { isEmployed: 1 };
+  const filters = state.analyze.employeeFilters;
   return {
     employees: employeeSelectors.getAllEmployeesNew(state, { filters , sorts: {} }),
     selected: employeeSelectors.getSelectedEmployee(state)

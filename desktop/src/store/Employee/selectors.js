@@ -43,14 +43,14 @@ export const getAllEmployeesNew = createSelector(
         Object.keys(filters).forEach(key => {
           if((key === `isEmployed` || key === `isActive`) && employee[key] !== filters[key]){
             decision = false;
-          }
-          if((key === `firstName` || key === `lastName`) && !(new RegExp(filters[key]).match(employee[key]))){
+          }          
+          if((key === `firstName` || key === `lastName`) && filters[key] !== `` &&  !((new RegExp(`^${filters[key]}`,`i`)).test(employee[key]))){
             decision = false;
           }
-          if(key === `crew` && !(new RegExp(filters[key]).match(employee[`crew`][`name`]))){
+          if(key === `crew` && !((new RegExp(filters[key])).match(employee[`crew`][`name`]))){
             decision = false;
           }
-          if( key === `authority` && !(new RegExp(filters[key]).match(employee[`authority`][`type`]))){
+          if( key === `authority` && !((new RegExp(filters[key])).match(employee[`authority`][`type`]))){
             decision = false;
           }          
         });

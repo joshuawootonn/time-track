@@ -59,7 +59,7 @@ export class AnalyzeToolbar extends Component {
         </Toolbar>
         {this.state.isExpanded && 
           <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 10000, width: `95%`, minHeight: `100px` }}>
-            it is alive
+            {this.props.children}
           </Card>}
       </div>
       
@@ -74,7 +74,8 @@ AnalyzeToolbar.propTypes = {
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired,
   setFilters: PropTypes.func,
-  filters: PropTypes.object
+  filters: PropTypes.object,
+  children: PropTypes.node
 };
 
 export default withStyles(styles)(AnalyzeToolbar);
