@@ -9,23 +9,27 @@ import { ArrowBack, Settings } from '@material-ui/icons';
 import moment from 'moment';
 
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
-import EmployeeDetailsContainer from 'containers/Employee/employeeCRUD.container';
-import EmployeeIndexContainer from 'containers/Employee/employeeIndex.container';
+
+import EmployeeCRUD from 'containers/Employee/employeeCRUD.container';
+import EmployeeIndex from 'containers/Employee/employeeIndex.container';
 import EmployeeFilter from 'containers/Employee/employeeFilter.container';
 import EmployeeToolbar from 'containers/Employee/employeeToolbar.container';
+
 import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';
 import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
-import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
-import ShiftCRUDContainer from 'containers/Analyze/shiftCRUDContainer';
+
+import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
+import ShiftIndex from 'containers/Shift/shiftIndex.container';
+import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 
 const styles = {
   root: {
     height: `100vh`
   },
   tab: {
-    height: `calc(100% - 48px)`,
+    height: `calc(100% - 48px)`, 
     display: `flex`
   },
   grow: {
@@ -33,16 +37,17 @@ const styles = {
   },
   tool: {
     minHeight: 0
+  },
+  gridHeight: {
+    height: `calc(100% - 64px)`,
+    position: `relative`
   }
-  // visible: {
-  //   display: 'flex'
-  // }
 };
 
 export class Analyze extends Component {
 
   state = {
-    tabValue: 0
+    tabValue: 3
   }  
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
@@ -79,13 +84,13 @@ export class Analyze extends Component {
         </AppBar>
         { tabValue === 0  && 
         <Grid container className={classes.tab } >
-          <Grid item xs={6} style={{ height: `calc(100% - 64px)`, position: `relative` }}>
+          <Grid item xs={6} className={classes.gridHeight}>
             <EmployeeToolbar />
             <EmployeeFilter />            
-            <EmployeeIndexContainer />            
+            <EmployeeIndex />            
           </Grid>
-          <Grid item xs={6}>
-            <EmployeeDetailsContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <EmployeeCRUD />
           </Grid>
         </Grid>}
         { tabValue === 1  && 
@@ -108,11 +113,12 @@ export class Analyze extends Component {
         </Grid> } 
         { tabValue === 3  && 
         <Grid container className={classes.tab} >
-          <Grid item xs={6}>
-            <ShiftIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftToolbar />
+            <ShiftIndex />
           </Grid>
-          <Grid item xs={6}>
-            <ShiftCRUDContainer /> 
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftCRUD /> 
           </Grid>
         </Grid>} 
       </div>

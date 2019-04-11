@@ -34,17 +34,15 @@ export class EmployeeIndex extends Component {
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;
 
-    return (   
-      <div >        
-        <AnalyzeToolbar 
-          selectLabel={this.selectLabel}
-          label="Employees"
-          add={this.add}
-          toggleFilter={toggleEmployeeFilter}
-          isFilterVisible={employeeFilterVisible}
-          selected={selected}
-        />        
-      </div>              
+    return (       
+      <AnalyzeToolbar 
+        selectLabel={this.selectLabel}
+        label="Employees"
+        add={this.add}
+        selected={selected}
+        toggleFilter={toggleEmployeeFilter}
+        isFilterVisible={employeeFilterVisible}
+      />                
     );
   }
 }

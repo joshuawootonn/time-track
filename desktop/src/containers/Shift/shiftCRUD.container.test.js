@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { ShiftCRUD } from 'containers/Analyze/shiftCRUDContainer';
+import { ShiftCRUD } from 'containers/Shift/shiftCRUDContainer';
 
 import { analyzeStatus } from 'constants/analyze';
 import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, INCOMPLETE_SHIFT_MOCK } from 'constants/modelMocks';
