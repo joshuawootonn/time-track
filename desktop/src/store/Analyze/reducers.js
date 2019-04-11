@@ -19,7 +19,14 @@ export const initialState = {
   crewStatus: analyzeStatus.INIT,
   categoryStatus: analyzeStatus.INIT,
   subcategoryStatus: analyzeStatus.INIT,
-  employeeFilters: {},
+  employeeFilters: {
+    firstName: ``,
+    lastName: ``,
+    pin: ``,
+    isEmployed: 1,
+    crewId: -1,
+    authorityId: -1
+  },
   projectFilters: {},
   taskFilters: {},
   shiftFilters: {},

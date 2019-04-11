@@ -15,7 +15,7 @@ import styles from './styles';
 export class Employee extends Component {
   render() { 
     const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors  } = this.props;
-   
+    console.log(crews);
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -109,7 +109,7 @@ export class Employee extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {type === `filter` ? `Apply` : `Save`}
               </Button>
               <Button
                 onClick={() => {

@@ -21,6 +21,7 @@ export class Select extends Component {
     const { field, form, label, margin,
       fullWidth, items, children, formControlProps,
       labelProps, selectProps, itemProps,helper,className } = this.props;
+      console.log(items);
     return (
       <FormControl className={className} {...formControlProps} margin={margin} fullWidth={fullWidth}>
         {label && <InputLabel {...labelProps}>{label}</InputLabel>}

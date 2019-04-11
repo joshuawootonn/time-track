@@ -16,8 +16,8 @@ export class EmployeeFilter extends Component {
   };
 
   render() {
-    const { authorities, crews,employeeFilters  } = this.props;
-    
+    const { authorities, crews, employeeFilters  } = this.props;
+    console.log(authorities ,crews);
     return (
       <Formik
         enableReinitialize
@@ -34,8 +34,8 @@ export class EmployeeFilter extends Component {
         render={formikProps => {
           return (
             <Employee
-              authorities={authorities}
-              crews={crews}
+              authorities={[{ id: -1, type: `All` }, ...authorities]}
+              crews={[{ id: -1, name: `All` }, ...crews ]}
               label="Filter"
               type="filter"
               {...formikProps}

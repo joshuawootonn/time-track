@@ -23,15 +23,16 @@ export class EmployeeIndex extends Component {
   select = object => this.props.select(domain.EMPLOYEE,object)
 
   add = () => {
-    if(this.props.selected){
-      this.props.select(domain.EMPLOYEE,this.props.selected.id);
+    const { selected, select, setStatus } = this.props;
+    if(selected && selected.id){
+      select(domain.EMPLOYEE,selected.id);
     }
-    this.props.setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);
+    setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);
   } 
   
   render() {
     const { employees, selected } = this.props;
-    // console.log(`employee analyze render`);
+    console.log(selected);
 
     // if employees is not defined or empty
     if (!employees) return <Progress variant="circular" fullPage />;

@@ -35,30 +35,30 @@ export const getAllEmployeesNew = createSelector(
         return 0;
       });
     }
-    console.log(list);
+    // console.log(list);
     // FILTER
     if(filters) {
       list = list.filter(employee => {
         let decision = true;
         Object.keys(filters).forEach(key => {
-          if((key === `isEmployed` || key === `isActive`) && employee[key] !== filters[key]){
+          if((key === `isEmployed` || key === `isWorking`) && !!employee[key] !== !!filters[key]){
             decision = false;
           }          
-          if((key === `firstName` || key === `lastName`) && filters[key] !== `` &&  !((new RegExp(`^${filters[key]}`,`i`)).test(employee[key]))){
+          if((key === `firstName` || key === `lastName` || key ===`pin`) && filters[key] !== `` && !((new RegExp(`^${filters[key]}`,`i`)).test(`${employee[key]}`))){
             decision = false;
           }
-          if(key === `crew` && !((new RegExp(filters[key])).match(employee[`crew`][`name`]))){
-            decision = false;
+          if(key === `crewId`){
+            // console.log(filters[key],employee[key], employee);
           }
-          if( key === `authority` && !((new RegExp(filters[key])).match(employee[`authority`][`type`]))){
+          if((key === `crewId` || key === `authorityId`) && filters[key] !== -1 && (filters[key] !== employee[key])){
             decision = false;
-          }          
+          }      
         });
-        console.log(`got through all filters`, decision);
+        // console.log(`got through all filters`, decision);
         return decision;
       });
     }
-    console.log(list);
+    // console.log(list);
     return list;    
   },
 );

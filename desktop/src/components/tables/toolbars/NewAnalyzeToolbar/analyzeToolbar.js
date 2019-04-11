@@ -22,7 +22,7 @@ export class AnalyzeToolbar extends Component {
   render() {
     const { selected, classes, add, filters, label,selectLabel } = this.props;
     const { isExpanded } = this.state;
-    console.log(this.state);
+    console.log(selected);
     return (
       <div style={{ position: `relative` }}>
         <Toolbar
@@ -58,7 +58,7 @@ export class AnalyzeToolbar extends Component {
           </div>}
         </Toolbar>
         {this.state.isExpanded && 
-          <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 10000, width: `95%`, minHeight: `100px` }}>
+          <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>
             {this.props.children}
           </Card>}
       </div>
