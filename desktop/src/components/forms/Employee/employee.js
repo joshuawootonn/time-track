@@ -15,7 +15,7 @@ import styles from './styles';
 export class Employee extends Component {
   render() { 
     const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors  } = this.props;
-    console.log(crews);
+    
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -123,6 +123,20 @@ export class Employee extends Component {
               >
                 Reset
               </Button>
+              {type === `filter` && 
+            <Button
+              onClick={() => {                
+                resetForm(initialValues);
+                this.props.clearFilter();
+              }}
+              id="employee-reset-button"
+              disabled={isSubmitting }
+              color="secondary"
+              variant="text"
+              className={classes.button}
+            >
+            Clear
+            </Button>}
             </div>
           </Grid>
         </Grid>
@@ -142,7 +156,8 @@ Employee.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired
+  touched: PropTypes.object.isRequired,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Employee);

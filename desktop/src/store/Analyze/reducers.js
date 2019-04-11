@@ -33,7 +33,15 @@ export const initialState = {
   authorityFilters: {},
   crewFilters: {},
   categoryFilters: {},
-  subcategoryFilters: {}
+  subcategoryFilters: {},
+  employeeFilterVisible: false,
+  projectFilterVisible: false,
+  taskFilterVisible: false,
+  shiftFilterVisible: false,
+  authorityFilterVisible: false,
+  crewFilterVisible: false,
+  categoryFilterVisible: false,
+  subcategoryFilterVisible: false
 };
 export default (state = initialState, action) => {
   if(action.domain && !state.hasOwnProperty(action.domain.singular)){
@@ -69,6 +77,16 @@ export default (state = initialState, action) => {
     return {
       ...state,
       [`${action.domain.singular}Filters`]: action.payload
+    };
+  case analyzeActionTypes.TOGGLE_FILTER:
+    return {
+      ...state,
+      [`${action.domain.singular}FilterVisible`]: !state[`${action.domain.singular}FilterVisible`]
+    };
+  case analyzeActionTypes.CLEAR_FILTER:    
+    return {
+      ...state,
+      [`${action.domain.singular}Filters`]: initialState[`${action.domain.singular}Filters`]
     };
   default:
     return state;

@@ -3,26 +3,15 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Toolbar, Typography, IconButton, Tooltip, Card } from '@material-ui/core';
+import { Toolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
 import { Add, FilterList } from '@material-ui/icons';
 
 import styles from './styles';
 
 export class AnalyzeToolbar extends Component {
-  state = {
-    isExpanded: false
-  }
-  toggleExpansion = () => {
-    this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
-  }
-  setFilters = () => {
-    this.props.setFilters();
-  }
-
   render() {
-    const { selected, classes, add, filters, label,selectLabel } = this.props;
-    const { isExpanded } = this.state;
-    console.log(selected);
+    const { selected, classes, add, filters, isFilterVisible, toggleFilter, label,selectLabel } = this.props;
+    
     return (
       <div style={{ position: `relative` }}>
         <Toolbar
@@ -42,9 +31,9 @@ export class AnalyzeToolbar extends Component {
             )}
           </div>
           <div className={classes.spacer} />
-          {filters &&<div className={classes.actions}>       
+          {toggleFilter &&<div className={classes.actions}>       
             <Tooltip title="Filter">
-              <IconButton color={isExpanded ? `secondary` : `default`} onClick={this.toggleExpansion}>
+              <IconButton color={isFilterVisible ? `secondary` : `default`} onClick={toggleFilter}>
                 <FilterList />
               </IconButton>
             </Tooltip>
@@ -56,13 +45,8 @@ export class AnalyzeToolbar extends Component {
               </IconButton>
             </Tooltip>
           </div>}
-        </Toolbar>
-        {this.state.isExpanded && 
-          <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>
-            {this.props.children}
-          </Card>}
-      </div>
-      
+        </Toolbar>        
+      </div>      
     );
   }
 }
@@ -73,9 +57,9 @@ AnalyzeToolbar.propTypes = {
   filter: PropTypes.func,
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired,
-  setFilters: PropTypes.func,
+  toggleFilter: PropTypes.func,
   filters: PropTypes.object,
-  children: PropTypes.node
+  isFilterVisible: PropTypes.bool
 };
 
 export default withStyles(styles)(AnalyzeToolbar);

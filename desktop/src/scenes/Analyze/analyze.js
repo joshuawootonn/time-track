@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
+import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid, Card } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings } from '@material-ui/icons';
 import moment from 'moment';
@@ -11,6 +11,8 @@ import moment from 'moment';
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
 import EmployeeDetailsContainer from 'containers/Employee/employeeCRUD.container';
 import EmployeeIndexContainer from 'containers/Employee/employeeIndex.container';
+import EmployeeFilter from 'containers/Employee/employeeFilter.container';
+import EmployeeToolbar from 'containers/Employee/employeeToolbar.container';
 import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';
@@ -77,8 +79,10 @@ export class Analyze extends Component {
         </AppBar>
         { tabValue === 0  && 
         <Grid container className={classes.tab } >
-          <Grid item xs={6}>
-            <EmployeeIndexContainer />
+          <Grid item xs={6} style={{ height: `calc(100% - 64px)`, position: `relative` }}>
+            <EmployeeToolbar />
+            <EmployeeFilter />            
+            <EmployeeIndexContainer />            
           </Grid>
           <Grid item xs={6}>
             <EmployeeDetailsContainer />

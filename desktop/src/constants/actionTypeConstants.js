@@ -10,7 +10,9 @@ const analyzeActionTypes = {
   SET_STATUS: `set_domain_status`,
   DELETE_SELECTED: `delete_selected`,
   EDIT_SETTINGS_MODAL: `edit_settings_modal`,
-  UPDATE_FILTERS: `update_filters`
+  UPDATE_FILTERS: `update_filters`,
+  TOGGLE_FILTER: `toggle_filter`,
+  CLEAR_FILTER: `clear_filter`
 }; 
 
 const authorityActionTypes = {

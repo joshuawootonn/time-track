@@ -32,32 +32,17 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected } = this.props;
-    console.log(selected);
-
-    // if employees is not defined or empty
+   
     if (!employees) return <Progress variant="circular" fullPage />;
 
-    return (   
-      <div style={{ height: `calc(100% - 64px)` }}>        
-        <AnalyzeToolbar 
-          selectLabel={this.selectLabel}
-          label="Employees"
-          add={this.add}
-          filters={{}}
-          setFilters={() => {}}
-          selected={selected}
-        >
-          <EmployeeFilter />
-        </AnalyzeToolbar>
-        <VirtualizedSortSelect
-          data={employees || []}
-          columns={rows} 
-          selected={selected}
-          select={this.select}
-          initialSortBy="lastName"     
-        />        
-      </div>  
-            
+    return ( 
+      <VirtualizedSortSelect
+        data={employees || []}
+        columns={rows} 
+        selected={selected}
+        select={this.select}
+        initialSortBy="lastName"     
+      />                
     );
   }
 }

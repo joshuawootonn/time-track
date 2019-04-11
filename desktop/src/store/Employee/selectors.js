@@ -17,7 +17,7 @@ export const getAllEmployeesNew = createSelector(
   (_,props) => props ? props.filters : null,
   (employees, results, crews, authorities, sorts, filters ) => {
     if (!results || results.length === 0) return null;
-    console.log(sorts,filters);
+    // console.log(sorts,filters);
     
     let list = results.map(employeeId => {
       const emp = employees[employeeId];

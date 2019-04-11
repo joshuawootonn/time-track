@@ -19,3 +19,12 @@ export const editSettingsModal = () => {
 export const updateFilter = (domain, payload) => {
   return { type: analyzeActionTypes.UPDATE_FILTERS, domain, payload };
 };
+
+export const toggleFilter = domain => {
+  return { type: analyzeActionTypes.TOGGLE_FILTER, domain };
+};
+
+export const clearFilter = domain => {
+  
+  return { type: analyzeActionTypes.CLEAR_FILTER, domain };
+};
