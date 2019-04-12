@@ -50,7 +50,6 @@ export const getAllShiftsNew = createSelector(
     }
 
 
-    // console.log(`List before filter:`, list.length);
     if(filters){
       list = list.filter(shift => {   
         let decision = true;
@@ -82,7 +81,6 @@ export const getAllShiftsNew = createSelector(
           }  
         });
         return decision;
-        //return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
       }); 
     }
 

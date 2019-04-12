@@ -18,6 +18,7 @@ import EmployeeToolbar from 'containers/Employee/employeeToolbar.container';
 import TaskCRUD from 'containers/Task/taskCRUD.container';
 import TaskIndex from 'containers/Task/taskIndex.container';
 import TaskToolbar from 'containers/Task/taskToolbar.container';
+import TaskFilter from 'containers/Task/taskFilter.container';
 
 import ProjectToolbar from 'containers/Project/projectToolbar.container';
 import ProjectFilter from 'containers/Project/projectFilter.container';
@@ -113,6 +114,7 @@ export class Analyze extends Component {
         <Grid container className={classes.tab}>          
           <Grid item xs={6} className={classes.gridHeight}>
             <TaskToolbar />
+            <TaskFilter />
             <TaskIndex />
           </Grid>
           <Grid item xs={6}>

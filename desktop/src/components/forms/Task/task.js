@@ -16,15 +16,15 @@ export class Task extends Component {
   
   render() {
     //console.log(this.props);
-    const { label,removeTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors } = this.props;
+    const { label,removeTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors, setFieldValue } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12}  className={cx(classes.headerRow,classes.row)} >
             <Typography variant="h6">{label}</Typography>
-            {type === `edit` && (
+            {[`edit`].includes(type) &&  (
               <Tooltip title="Delete">
-                <IconButton onClick={removeTask} aria-label="Delete">
+                <IconButton onClick={removeTask}>
                   <Delete />
                 </IconButton>
               </Tooltip>
@@ -55,11 +55,12 @@ export class Task extends Component {
               fullWidth
               label="Category"
               className={classes.field}
+              onChange={() => setFieldValue(`subcategoryId`, -1)}
             />
             <Field
               name="subcategoryId"
               component={Select}
-              items={subcategories.filter(subcat => {
+              items={subcategories.filter(subcat => {                
                 return subcat.categoryId === this.props.values.categoryId;
               })}
               fullWidth
@@ -83,7 +84,7 @@ export class Task extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {[`add`,`edit`].includes(type) ? `Save`: `Apply`}
               </Button>
               <Button
                 onClick={() => {
@@ -97,6 +98,21 @@ export class Task extends Component {
               >
                 Reset
               </Button>
+              {[`filter`].includes(type) &&
+                <Button
+                  onClick={() => {
+                    resetForm(initialValues);               
+                    this.props.clearFilter();
+                  }}
+                  id="task-reset-button"
+                  disabled={isSubmitting}
+                  color="secondary"
+                  variant="text"
+                  className={classes.button}
+                >
+                  Clear
+                </Button>
+              }
             </div>
           </Grid>        
         </Grid>
@@ -116,7 +132,9 @@ Task.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  values: PropTypes.object
+  values: PropTypes.object,
+  setFieldValue: PropTypes.func,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Task);

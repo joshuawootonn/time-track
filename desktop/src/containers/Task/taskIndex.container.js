@@ -46,8 +46,9 @@ TaskIndex.propTypes = {
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
+  const filters = state.analyze.taskFilters;
   return {
-    tasks: taskSelectors.getAllTasksWithContent(state),
+    tasks: taskSelectors.getAllTasksNew(state, { filters, sorts: {} }),
     selected: taskSelectors.getSelectedTask(state)
   };
 };
