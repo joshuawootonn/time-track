@@ -21,7 +21,6 @@ export class ProjectIndex extends Component {
   render () {
     const { projects,selected } = this.props;
 
-    console.log(`project analyze render`);
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
@@ -62,7 +61,8 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
-const rows = [
+// TODO: double check these widths/ that they look
+const rows = [ 
   {
     id: `name`,  
     dataKey: `name`, 

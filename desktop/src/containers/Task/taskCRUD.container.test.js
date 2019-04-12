@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { TaskDetail } from 'containers/Analyze/taskDetailContainer';
+import { TaskDetail } from 'containers/Task/taskDetailContainer';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  

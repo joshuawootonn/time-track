@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// TODO: double check that these imports are ordered well
 import { analyzeActions } from 'store/actions';
 import { taskSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -20,19 +21,17 @@ export class TaskIndex extends Component {
 
   render() {
     const { tasks, selected } = this.props;
-    // console.log('task analyze render');
+
     if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (
-      <SortSelectTable
-        selectLabel={this.selectLabel}
-        label="Tasks"
-        tableData={tasks || []}
-        headerData={rows}
+     
+      <VirtualizedSortSelect 
+        data={tasks || []}
+        columns={rows}
         selected={selected}
-        select={this.select}
-        add={this.add}
-        initialOrderBy='name'
+        select={this.select}       
+        initialSortBy='name'
       />
     );
   }
@@ -64,35 +63,50 @@ export default connect( mapStateToProps, mapDispatchToProps)(TaskIndex);
 
 const rows = [
   {
-    id: `name`,    
+    id: `name`, 
+    dataKey: `name`, 
+    width: 150, 
+    height: 56,     
     padding: `dense`,
     label: `Name`,
     type: TableDataTypes.STRING
   }, 
   {
-    id: `category`,    
+    id: `category_type`,  
+    dataKey: `category`, 
+    width: 150, 
+    height: 56,    
     padding: `dense`,
     label: `Category`,
     type: TableDataTypes.OBJECT,
     keys: [`type`]
   },
   {
-    id: `subcategory`,    
+    id: `subcategory_type`,  
+    dataKey: `subcategory`, 
+    width: 150, 
+    height: 56,    
     padding: `dense`,
     label: `Subcategory`,
     type: TableDataTypes.OBJECT,
     keys: [`type`]
   },
  
+  // { // ICEBOX: add dimension functionality
+  //   id: `dimension_type`,   
+  //   dataKey: `dimension`, 
+  //   width: 150, 
+  //   height: 56,  
+  //   padding: `dense`,
+  //   label: `Dimension`,
+  //   type: TableDataTypes.OBJECT,
+  //   keys: [`type`]
+  // }, 
   {
-    id: `dimension`,    
-    padding: `dense`,
-    label: `Dimension`,
-    type: TableDataTypes.OBJECT,
-    keys: [`type`]
-  }, 
-  {
-    id: `isActive`,   
+    id: `isActive`,  
+    dataKey: `isActive`,  // TODO: does align right look ok?
+    width: 150, 
+    height: 56,   
     align: `right`, 
     padding: `dense`,
     label: `Active`,
