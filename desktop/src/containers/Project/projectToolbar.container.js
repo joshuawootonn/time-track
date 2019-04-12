@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import Progress from 'components/helpers/Progress';
+
 import { analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
-import Progress from 'components/helpers/Progress';
+
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 

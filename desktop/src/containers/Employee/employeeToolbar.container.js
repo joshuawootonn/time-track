@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import Progress from 'components/helpers/Progress';
+import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
+
 import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
-import Progress from 'components/helpers/Progress';
+
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
-
-
 export class EmployeeIndex extends Component {   
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
-
-  select = object => this.props.select(domain.EMPLOYEE,object)
 
   add = () => {
     const { selected, select, setStatus } = this.props;
@@ -47,7 +44,7 @@ export class EmployeeIndex extends Component {
 EmployeeIndex.propTypes = {
   employees: PropTypes.array,
   selected: PropTypes.object,
-  select: PropTypes.func.isRequired,
+  select: PropTypes.func,
   setStatus: PropTypes.func.isRequired,
   toggleEmployeeFilter: PropTypes.func,
   employeeFilterVisible: PropTypes.bool

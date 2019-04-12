@@ -18,7 +18,7 @@ const Cell = props => {
 
   if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
     data = cellData;
-    alignment = `right`;
+    alignment = `left`;
   } else if (type === TableDataTypes.STRING) {
     data = cellData;
   } else if (type === TableDataTypes.OBJECT) {

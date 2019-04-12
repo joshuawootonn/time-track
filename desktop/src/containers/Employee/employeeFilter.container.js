@@ -11,14 +11,8 @@ import { analyzeActions } from 'store/actions';
 import domain from 'constants/domains';
 
 export class EmployeeFilter extends Component {  
-  
-  removeEmployee = () => {
-    const { selected, removeEmployee } = this.props;  
-    removeEmployee(selected.id);
-  };
-
   render() {
-    const { authorities, crews, employeeFilters, employeeFilterVisible, clearFilter  } = this.props;
+    const { authorities, crews, employeeFilters, employeeFilterVisible, clearFilter, updateFilter, toggleFilter  } = this.props;
     
     if(employeeFilterVisible){
       return (
@@ -26,7 +20,8 @@ export class EmployeeFilter extends Component {
           enableReinitialize
           initialValues={{  ...employeeFilters }}// TODO: migrate the toggles to radio buttons for isWorking and any other boolean values
           onSubmit={(values, formikFunctions) => {
-            this.props.updateFilter({ ...values });
+            updateFilter({ ...values });
+            toggleFilter();
             formikFunctions.resetForm();          
           }}
           render={formikProps => {
@@ -64,7 +59,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.EMPLOYEE,filters)),
-    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.EMPLOYEE))
+    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.EMPLOYEE)),
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))  
   };
 };
 

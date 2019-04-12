@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { analyzeActions } from 'store/actions';
-import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
 import Progress from 'components/helpers/Progress';
+
+import { analyzeActions } from 'store/actions';
+import { projectSelectors, projectTaskSelectors } from 'store/selectors';
+
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
@@ -61,12 +63,11 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
-// TODO: double check these widths/ that they look
 const rows = [ 
   {
     id: `name`,  
     dataKey: `name`, 
-    width: 150, 
+    width: 200, 
     height: 56,  
     padding: `dense`,
     label: `Name`,
@@ -84,9 +85,9 @@ const rows = [
   {
     id: `isActive`, 
     dataKey: `isActive`,  
-    width: 80, 
+    width: 50, 
     height: 56, 
-    align: `right`, 
+    align: `left`, 
     padding: `dense`,
     label: `Active`,
     type: TableDataTypes.BOOLEAN

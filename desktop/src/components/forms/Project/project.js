@@ -23,14 +23,7 @@ export class Project extends Component {
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-            <Typography variant="h6">{label}</Typography>
-            {/* {type === 'edit' && (
-              <Tooltip title="Delete">
-                <IconButton onClick={removeProject} aria-label="Delete">
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            )} */}
+            <Typography variant="h6">{label}</Typography>          
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -102,7 +95,7 @@ export class Project extends Component {
                               name={`projectTasks.${index}.categoryId`}
                               component={Select}
                               items={categories}
-                              id={`category-field-${index}`}
+                              id={`${PROJECT_FORM_CATEGORY_FIELD_ID}_${index}`}
                               fullWidth
                               label="Category"
                               className={classes.field}
@@ -123,7 +116,7 @@ export class Project extends Component {
                               items={subcategories.filter(subcat => {
                                 return subcat.categoryId === projectTasks.categoryId;
                               })}
-                              id={`subcategory-field-${index}`}
+                              id={`${PROJECT_FORM_SUBCATEGORY_FIELD_ID}_${index}`}
                               fullWidth
                               label="Subcategory"
                               className={classes.field}
@@ -163,7 +156,7 @@ export class Project extends Component {
                                 type="button"
                                 color="secondary"
                                 className={classes.iconButton}
-                                id={`remove-projectTask-${index}`}
+                                id={`${PROJECT_FORM_REMOVE_PROJECT_TASK_BUTTON_ID}_${index}`}
                                 onClick={() => arrayHelpers.remove(index)}
                               >
                                 <Close />
@@ -181,7 +174,7 @@ export class Project extends Component {
                       <Button
                         color="primary"
                         variant="contained"
-                        id={`add-projectTask`}
+                        id={PROJECT_FORM_ADD_PROJECT_TASK_BUTTON_ID}
                         onClick={() =>
                           arrayHelpers.push({
                             categoryId: -1,
@@ -212,6 +205,7 @@ export class Project extends Component {
             <div>
               <Button
                 type="submit"
+                id={PROJECT_FORM_SUBMIT_BUTTON_ID}
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 }
                 variant="contained"
@@ -223,7 +217,7 @@ export class Project extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={`project-reset-button`}// TODO: better id's all over this file
+                id={PROJECT_FORM_RESET_BUTTON_ID}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
@@ -237,7 +231,7 @@ export class Project extends Component {
                   resetForm(initialValues);                  
                   this.props.clearFilter();
                 }}
-                id={`project-reset-button`}
+                id={PROJECT_FORM_CLEAR_BUTTON_ID}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
@@ -253,6 +247,14 @@ export class Project extends Component {
     );
   }
 }
+
+export const PROJECT_FORM_RESET_BUTTON_ID = `project_form_reset_button`;
+export const PROJECT_FORM_CLEAR_BUTTON_ID = `project_form_clear_button`;
+export const PROJECT_FORM_SUBMIT_BUTTON_ID = `project_form_submit_button`;
+export const PROJECT_FORM_ADD_PROJECT_TASK_BUTTON_ID = `project_form_add_project_task_button`;
+export const PROJECT_FORM_REMOVE_PROJECT_TASK_BUTTON_ID = `project_form_remove_project_task_button`;
+export const PROJECT_FORM_CATEGORY_FIELD_ID = `project_form_category_field`;
+export const PROJECT_FORM_SUBCATEGORY_FIELD_ID = `project_form_subcategory_field`;
 
 Project.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import moment from 'moment';
 
 import { ProjectDetail } from 'containers/Analyze/projectDetailContainer';
+
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  

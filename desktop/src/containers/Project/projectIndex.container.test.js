@@ -2,9 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { ProjectIndex } from 'containers/Project/projectIndex.container';
+import Progress from 'components/helpers/Progress';
+
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
-import Progress from 'components/helpers/Progress';
 
 
 const props =  {  

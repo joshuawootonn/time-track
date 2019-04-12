@@ -82,12 +82,9 @@ export const getAllShiftsNew = createSelector(
         });
         return decision;
       }); 
-    }
-
-    
+    }    
     // console.log(`List after filter:`, list.length);
-    return list;
-        
+    return list;       
   }
 );
 

@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
-import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
-import { analyzeStatus } from 'constants/analyze';
-import { taskActions } from 'store/actions';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
+
+import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
+import { taskActions } from 'store/actions';
+
+import { analyzeStatus } from 'constants/analyze';
 import { taskValidation } from 'constants/formValidation';
 
 export class TaskDetail extends Component {

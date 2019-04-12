@@ -14,7 +14,7 @@ import domain from 'constants/domains';
 
 export class TaskDetail extends Component {  
   render() {
-    const { categories, subcategories, clearFilter, taskFilters, taskFilterVisible } = this.props;
+    const { categories, subcategories, clearFilter, taskFilters, taskFilterVisible, updateFilter, toggleFilter } = this.props;
     
     if(taskFilterVisible){
       return (
@@ -24,9 +24,8 @@ export class TaskDetail extends Component {
             ...taskFilters
           }}          
           onSubmit={(values,formikFunctions) => {
-            this.props.updateFilter({ // TODO: this should close the filter
-              ...values            
-            });
+            updateFilter({ ...values });
+            toggleFilter();
             formikFunctions.resetForm();  
           }}
           render={formikProps => {
@@ -66,7 +65,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.TASK,filters)),
-    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.TASK))
+    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.TASK)),
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK))  
   };
 };
 

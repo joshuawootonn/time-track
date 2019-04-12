@@ -2,10 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { EmployeeIndex } from 'containers/Employee/employeeIndex.container';
-import domain from 'constants/domains';
-import { analyzeStatus } from 'constants/analyze';
 import Progress from 'components/helpers/Progress';
 
+import domain from 'constants/domains';
+import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
   selected: { authorityId:1,crewId:1,firstName:`Joshua`,id:2,isEmployed:1,isWorking:1,lastName:`Wootonn`,pin:565656,authority:{ id:1,type:`Admin` },crew:{ id:1,name:`Crew 3` } },
@@ -19,7 +19,6 @@ const props =  {
 const setup = overRides => {  
   return mount(<EmployeeIndex {...props} {...overRides}/>);    
 };
-
 
 describe(`Employee Index Container`, () => {  
   afterEach(() => {

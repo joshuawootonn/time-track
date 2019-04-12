@@ -104,6 +104,7 @@ export class Employee extends Component {
             <div>
               <Button
                 type="submit"
+                id={EMPLOYEE_FORM_SUBMIT_BUTTON_ID}
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 }
                 variant="contained"
@@ -115,7 +116,7 @@ export class Employee extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id="employee-reset-button"
+                id={EMPLOYEE_FORM_RESET_BUTTON_ID}
                 disabled={isSubmitting }
                 color="secondary"
                 variant="text"
@@ -129,7 +130,7 @@ export class Employee extends Component {
                 resetForm(initialValues);
                 this.props.clearFilter();
               }}
-              id="employee-reset-button" // TODO: better ids here
+              id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
               disabled={isSubmitting }
               color="secondary"
               variant="text"
@@ -144,6 +145,10 @@ export class Employee extends Component {
     );
   }
 }
+
+export const EMPLOYEE_FORM_RESET_BUTTON_ID = `employee_form_reset_button`;
+export const EMPLOYEE_FORM_CLEAR_BUTTON_ID = `employee_form_clear_button`;
+export const EMPLOYEE_FORM_SUBMIT_BUTTON_ID = `employee_form_submit_button`;
 
 Employee.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -5,11 +5,13 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
-import { subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
-import { projectActions } from 'store/actions';
-import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import Project from 'components/forms/Project';
+
+import { subcategorySelectors,categorySelectors,taskSelectors, projectTaskSelectors } from 'store/selectors';
+import { projectActions } from 'store/actions';
+
+import { analyzeStatus } from 'constants/analyze';
 import { projectValidation } from 'constants/formValidation';
 
 export class ProjectDetail extends Component {

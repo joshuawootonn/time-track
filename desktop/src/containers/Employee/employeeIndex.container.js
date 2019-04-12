@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
+import Progress from 'components/helpers/Progress';
+
 import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
-import Progress from 'components/helpers/Progress';
+
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
-
-import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
-
 
 export class EmployeeIndex extends Component {  
   select = object => this.props.select(domain.EMPLOYEE,object)

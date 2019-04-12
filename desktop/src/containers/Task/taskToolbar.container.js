@@ -14,9 +14,7 @@ import domain from 'constants/domains';
 
 export class TaskToolbar extends Component {  
   selectLabel = selected =>`${selected.name} selected`;
-
-  select = object => this.props.select(domain.TASK,object)
-  // TODO: double check that all these methods are needed
+  
   add = () => {
     const { selected, select, setStatus } = this.props;
     if(selected && selected.id){
@@ -24,6 +22,7 @@ export class TaskToolbar extends Component {
     }
     setStatus(domain.TASK,analyzeStatus.ADDING);
   }
+  
   render() {
     const { tasks, selected, toggleTaskFilter, taskFilterVisible } = this.props;
     

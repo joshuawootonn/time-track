@@ -17,9 +17,6 @@ import Hero from 'components/layouts/Hero';
 import { shift as shiftValidation, halfShift as halfShiftValidation } from 'constants/formValidation';
 import { minutesRoudedTime } from 'helpers/time';
 
-
-
-
 export class ShiftCRUD extends Component {
   state = {
     [`${analyzeStatus.EDITING}Extent`]: formConstants.FULL_SHIFT,
@@ -29,10 +26,7 @@ export class ShiftCRUD extends Component {
     const { selected, removeShift } = this.props;
     removeShift(selected.id);
   };
-  /**
-   * Type: analyzeStatus
-   * Extent: HALF_SHIFT or  FULL_SHIFT
-   */
+  
   updateExtent = (type, extent) => {
     this.setState({
       [`${type}Extent`]: extent
@@ -93,9 +87,6 @@ export class ShiftCRUD extends Component {
               const shiftDuration = moment.duration(moment(new Date(), `YYYY-MM-DDTHH:mm`).diff(moment(values.clockInDate, `YYYY-MM-DDTHH:mm`)));
               let timeLeft = minutesRoudedTime(Math.floor(shiftDuration.asMinutes()));
 
-              //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
-
-              // console.log(timeLeft, values, selected);
               return (
                 <HalfShiftForm
                   label="Edit Shift"
@@ -150,7 +141,6 @@ export class ShiftCRUD extends Component {
               values.activities.forEach(activity => {
                 timeLeft -= activity.length;
               });
-              //console.log(shiftDuration,shiftDuration.asMinutes(),Math.floor(shiftDuration.asMinutes()),minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),timeLeft);           
               let generalError;
               if (errors.activities && typeof errors.activities === `string`) {
                 generalError = errors.activities;

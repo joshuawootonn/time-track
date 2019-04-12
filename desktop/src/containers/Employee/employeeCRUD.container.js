@@ -5,10 +5,12 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
 import Employee from 'components/forms/Employee';
+import Hero from 'components/layouts/Hero';
+
 import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
 import { employeeActions } from 'store/actions';
+
 import { analyzeStatus } from 'constants/analyze';
-import Hero from 'components/layouts/Hero';
 import { employeeValidation } from 'constants/formValidation';
 
 export class EmployeeCRUD extends Component {  

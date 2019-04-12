@@ -2,9 +2,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { TaskIndex } from 'containers/Task/taskIndexContainer';
+
+import Progress from 'components/helpers/Progress';
+
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
-import Progress from 'components/helpers/Progress';
 
 const tasks = [{ 'id':1,'isActive':1,'name':`7" Sidewalk`,'subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':`Sidewalk`,'dimensionId':1 },'category':{ 'id':2,'type':`PCC` },'dimension':{ 'id':1,'type':`SF` } },{ 'id':2,'isActive':1,'name':`6" Sidewalk`,'subcategoryId':1,'subcategory':{ 'categoryId':2,'id':1,'type':`Sidewalk`,'dimensionId':1 },'category':{ 'id':2,'type':`PCC` },'dimension':{ 'id':1,'type':`SF` } }];
 const props =  {  

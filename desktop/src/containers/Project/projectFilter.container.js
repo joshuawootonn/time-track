@@ -5,20 +5,16 @@ import { Formik } from 'formik';
 import moment from 'moment';
 import { Card } from '@material-ui/core';
 
+import ProjectForm from 'components/forms/Project';
+
 import { subcategorySelectors,categorySelectors,taskSelectors } from 'store/selectors';
 import { analyzeActions } from 'store/actions';
-import ProjectForm from 'components/forms/Project';
 
 import domain from 'constants/domains';
 
-export class ProjectFilter extends Component {
-
-  removeProject = () => {
-    const { selected,removeProject } = this.props;
-    removeProject(selected.id);
-  }
+export class ProjectFilter extends Component { 
   render () {
-    const { projectFilters, projectFilterVisible, clearFilter } = this.props;
+    const { projectFilters, projectFilterVisible, clearFilter, updateFilter, toggleFilter } = this.props;
     
     if(projectFilterVisible){
       return (
@@ -30,7 +26,8 @@ export class ProjectFilter extends Component {
             endTime: moment(projectFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DD`)
           }}
           onSubmit={(values,formikFunctions) => {
-            this.props.updateFilter({ // TODO: this should close the filter
+            toggleFilter();
+            updateFilter({ 
               ...values,
               startTime: moment(values.startTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`),
               endTime: moment(values.endTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`)              
@@ -71,7 +68,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.PROJECT,filters)),
-    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT))
+    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT)),
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))  
   };
 };
 
