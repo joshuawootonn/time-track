@@ -19,18 +19,14 @@ export class EmployeeFilter extends Component {
 
   render() {
     const { authorities, crews, employeeFilters, employeeFilterVisible, clearFilter  } = this.props;
-    console.log(employeeFilters);
+    
     if(employeeFilterVisible){
       return (
         <Formik
           enableReinitialize
-          initialValues={{
-            ...employeeFilters
-          }}
+          initialValues={{  ...employeeFilters }}
           onSubmit={(values, formikFunctions) => {
-            this.props.updateFilter({
-              ...values
-            });
+            this.props.updateFilter({ ...values });
             formikFunctions.resetForm();          
           }}
           render={formikProps => {

@@ -19,7 +19,8 @@ import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
 
 import ProjectToolbar from 'containers/Project/projectToolbar.container';
-import ProjectDetail from 'containers/Project/projectDetail.container';
+import ProjectFilter from 'containers/Project/projectFilter.container';
+import ProjectCRUD from 'containers/Project/projectCRUD.container';
 import ProjectIndex from 'containers/Project/projectIndex.container';
 
 import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
@@ -100,10 +101,11 @@ export class Analyze extends Component {
         <Grid container className={classes.tab} >
           <Grid item xs={6} className={classes.gridHeight}>
             <ProjectToolbar />
+            <ProjectFilter />
             <ProjectIndex />
           </Grid>
           <Grid item xs={6}>
-            <ProjectDetail />
+            <ProjectCRUD />
           </Grid>
         </Grid>}
         { tabValue === 2  && 

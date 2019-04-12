@@ -17,7 +17,7 @@ export class Project extends Component {
   render() {
 
     const { classes, label, categories, subcategories, tasks, 
-      isSubmitting, resetForm, initialValues, errors, values } = this.props;
+      isSubmitting, resetForm, initialValues, errors, values, type } = this.props;
  
     return (
       <Form>
@@ -37,20 +37,21 @@ export class Project extends Component {
               name="name"
               component={TextField}
               margin="none"
-              label="Task Name"
+              label="Project Name"
               type="search"
               className={classes.field}
               helper="normal"
             />
-            <Field
-              name="date"
-              component={TextField}
-              margin="none"
-              label="Start Date"
-              type="date"
-              className={classes.field}
-              helper="normal"
-            />
+            {[`add`,`edit`].includes(type) && (
+              <Field
+                name="date"
+                component={TextField}
+                margin="none"
+                label="Start Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />)}
             <Field
               name="isActive"
               component={Switch}
@@ -58,13 +59,35 @@ export class Project extends Component {
               className={classes.field}
             />
           </Grid>
-          <FieldArray
-            name="projectTasks"
-            render={arrayHelpers => {
+          { [`filter`].includes(type) && (
+            <Grid item xs={12} className={classes.row}>            
+              <Field
+                name="startTime"
+                component={TextField}
+                margin="none"
+                label="Start Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />
+              <Field
+                name="endTime"
+                component={TextField}
+                margin="none"
+                label="End Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />
+            </Grid>)}
+          { [`add`,`edit`].includes(type) && (
+            <FieldArray
+              name="projectTasks"
+              render={arrayHelpers => {
 
-              return (
-                <Grid item xs={12} container className={classes.body}>
-                  {values.projectTasks &&
+                return (
+                  <Grid item xs={12} container className={classes.body}>
+                    {values.projectTasks &&
                     values.projectTasks.map((projectTasks, index) => {
                       return (
                         <Grid item xs={12}
@@ -150,33 +173,34 @@ export class Project extends Component {
                         </Grid>
                       );
                     })
-                  }
-                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
-                    <div className={classes.lunchBox}>
+                    }
+                    <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
+                      <div className={classes.lunchBox}>
 
-                    </div>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      id={`add-projectTask`}
-                      onClick={() =>
-                        arrayHelpers.push({
-                          categoryId: -1,
-                          subcategoryId: -1,
-                          taskId: -1,
-                          quantity: 1,
-                          estimateTime: 1
-                        })
-                      }
-                    >
+                      </div>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        id={`add-projectTask`}
+                        onClick={() =>
+                          arrayHelpers.push({
+                            categoryId: -1,
+                            subcategoryId: -1,
+                            taskId: -1,
+                            quantity: 1,
+                            estimateTime: 1
+                          })
+                        }
+                      >
                       Add Task
-                    </Button>
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              );
-            }
-            }
-          />
+                );
+              }
+              }
+            />
+          )}
           <Grid item xs={12} className={classes.row}>
             <Typography
               color="error"
@@ -193,7 +217,7 @@ export class Project extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {[`add`,`edit`].includes(type) ? `Save`: `Apply`}
               </Button>
               <Button
                 onClick={() => {
@@ -207,6 +231,21 @@ export class Project extends Component {
               >
                 Reset
               </Button>
+              {[`filter`].includes(type) && 
+              <Button
+                onClick={() => {
+                  resetForm(initialValues);                  
+                  this.props.clearFilter();
+                }}
+                id={`project-reset-button`}
+                disabled={isSubmitting}
+                color="secondary"
+                variant="text"
+                className={classes.button}
+              >
+                Clear
+              </Button>}
+              
             </div>
           </Grid>
         </Grid>
@@ -227,7 +266,8 @@ Project.propTypes = {
   categories: PropTypes.array.isRequired,
   subcategories: PropTypes.array.isRequired,
   values: PropTypes.object.isRequired,
-  tasks: PropTypes.array.isRequired
+  tasks: PropTypes.array.isRequired,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Project);

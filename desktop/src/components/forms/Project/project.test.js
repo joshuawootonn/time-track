@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { FieldArray } from 'formik';
 
 import { Project } from 'components/forms/Project/project';
-import ProjectHOC from 'components/forms/Project';
+import ProjectHOC from 'components/forms/Project/Main';
 
 const props =  {  
   classes: {},
