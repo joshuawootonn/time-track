@@ -34,7 +34,7 @@ export class Filter extends Component {
               items={projects}
               fullWidth
               className={classes.field}
-              label="Employee"
+              label="Project"
             />                   
           </Grid>
           <Grid item xs={12} className={classes.row}>
@@ -44,7 +44,7 @@ export class Filter extends Component {
               items={crews}
               fullWidth
               className={classes.field}
-              label="Employee"
+              label="Crew"
             />
             <Field
               name='authorityId'
@@ -52,7 +52,7 @@ export class Filter extends Component {
               items={authorities}
               fullWidth
               className={classes.field}
-              label="Employee"
+              label="Authority"
             />                   
           </Grid>
           <Grid item xs={12} className={classes.row}>

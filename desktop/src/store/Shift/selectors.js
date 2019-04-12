@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
 import { getEmployeesFromEntities } from 'store/Employee/selectors';
+import { getProjectTasksFromEntities} from 'store/ProjectTask/selectors';
 import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
 import { getAnalyzeState } from 'store/Analyze/selectors';
 
@@ -27,9 +28,10 @@ export const getAllShiftsNew = createSelector(
   getShiftsFromResults,  
   getActivitiesFromEntities,
   getEmployeesFromEntities,
+  getProjectTasksFromEntities,
   (_,props) => props ? props.sorts : null,
   (_,props) => props ? props.filters : null,
-  (shifts,results,activities,employees,sorts,filters) => {
+  (shifts, results, activities, employees, projectTasks, sorts, filters) => {
     if (!results || results.length === 0) return null;
     
     let list  = results.map(shiftId => {      
@@ -67,7 +69,17 @@ export const getAllShiftsNew = createSelector(
           }   
           if( (key === `authorityId` || key === `crewId`) && filters[key] !== -1 && (filters[key] !== shift[`employee`][key])){
             decision = false;
-          }   
+          }
+          if( key === `projectId` && filters[key] !== -1){
+            let projectDecision = false;
+            
+            shift[`activities`].forEach(activity => {
+              if(projectTasks[activity.projectTaskId].projectId === filters[key]){
+                projectDecision = true;
+              }
+            });
+            decision = projectDecision; 
+          }  
         });
         return decision;
         //return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
