@@ -53,7 +53,6 @@ EmployeeIndex.propTypes = {
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
-
   const filters = state.analyze.employeeFilters;
   return {
     employees: employeeSelectors.getAllEmployeesNew(state, { filters , sorts: {} }),

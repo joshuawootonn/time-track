@@ -48,8 +48,9 @@ ShiftIndex.propTypes = {
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
+  const filters = state.analyze.shiftFilters;
   return {
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(400, `days`).format(`MM-DD-YY HH:mm:ss`), endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) }),
+    shifts: shiftSelectors.getAllShiftsNew(state, { filters , sorts: {} }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };

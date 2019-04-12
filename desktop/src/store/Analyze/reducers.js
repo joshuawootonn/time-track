@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
 import { analyzeStatus } from 'constants/analyze';
@@ -29,7 +30,12 @@ export const initialState = {
   },
   projectFilters: {},
   taskFilters: {},
-  shiftFilters: {},
+  shiftFilters: {
+    authorityId: -1,
+    crewId: -1,
+    startTime: moment().subtract(400, `days`).format(`MM-DD-YY HH:mm:ss`), 
+    endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) 
+  },
   authorityFilters: {},
   crewFilters: {},
   categoryFilters: {},

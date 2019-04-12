@@ -47,9 +47,6 @@ export const getAllEmployeesNew = createSelector(
           if((key === `firstName` || key === `lastName` || key ===`pin`) && filters[key] !== `` && !((new RegExp(`^${filters[key]}`,`i`)).test(`${employee[key]}`))){
             decision = false;
           }
-          if(key === `crewId`){
-            // console.log(filters[key],employee[key], employee);
-          }
           if((key === `crewId` || key === `authorityId`) && filters[key] !== -1 && (filters[key] !== employee[key])){
             decision = false;
           }      

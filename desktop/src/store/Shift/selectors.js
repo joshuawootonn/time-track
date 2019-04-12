@@ -21,6 +21,63 @@ export const getCurrentShift = createSelector(
   },
 );
 
+
+export const getAllShiftsNew = createSelector(
+  getShiftsFromEntities,
+  getShiftsFromResults,  
+  getActivitiesFromEntities,
+  getEmployeesFromEntities,
+  (_,props) => props ? props.sorts : null,
+  (_,props) => props ? props.filters : null,
+  (shifts,results,activities,employees,sorts,filters) => {
+    if (!results || results.length === 0) return null;
+    
+    let list  = results.map(shiftId => {      
+      return {
+        ...shifts[shiftId],          
+        length: (shifts[shiftId].length && shifts[shiftId].lunch) ? shifts[shiftId].length - shifts[shiftId].lunch : shifts[shiftId].length,
+        employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
+        activities: shifts[shiftId] && shifts[shiftId].activities && shifts[shiftId].activities.map(activityId => {
+          return activities[activityId];
+        })
+      };
+    });
+    
+    if(sorts){
+      // TODO: Add sorting to getAllShifts
+    }
+
+
+    console.log(`List before filter:`, list.length);
+    if(filters){
+      list = list.filter(shift => {   
+        let decision = true;
+        Object.keys(filters).forEach(key => {
+          if(key === `startTime` && moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
+            decision = false;
+          }
+          if(key === `endTime` && moment(shift[key]).isAfter(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
+            decision = false;
+          }
+          if( key === `employeeId` && filters[key] !== -1 && (filters[key] !== shift[key])){
+            decision = false;
+          }   
+          if( (key === `authorityId` || key === `crewId`) && filters[key] !== -1 && (filters[key] !== shift[`employee`][key])){
+            decision = false;
+          }   
+        });
+        return decision;
+        //return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
+      }); 
+    }
+
+    
+    console.log(`List after filter:`, list.length);
+    return list;
+        
+  }
+);
+
 export const getLastWeeksShiftsForCurrentEmployee = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,  
