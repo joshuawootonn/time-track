@@ -22,6 +22,7 @@ import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
 
 import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
 import ShiftIndex from 'containers/Shift/shiftIndex.container';
+import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 
 const styles = {
@@ -115,6 +116,7 @@ export class Analyze extends Component {
         <Grid container className={classes.tab} >
           <Grid item xs={6} className={classes.gridHeight}>
             <ShiftToolbar />
+            <ShiftFilter />
             <ShiftIndex />
           </Grid>
           <Grid item xs={6} className={classes.gridHeight}>

@@ -31,9 +31,11 @@ export const initialState = {
   projectFilters: {},
   taskFilters: {},
   shiftFilters: {
+    employeeId: -1,
+    projectId: -1,
     authorityId: -1,
     crewId: -1,
-    startTime: moment().subtract(400, `days`).format(`MM-DD-YY HH:mm:ss`), 
+    startTime: moment().subtract(14, `days`).format(`MM-DD-YY HH:mm:ss`), 
     endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) 
   },
   authorityFilters: {},
