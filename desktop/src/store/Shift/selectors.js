@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
 import { getEmployeesFromEntities } from 'store/Employee/selectors';
-import { getProjectTasksFromEntities} from 'store/ProjectTask/selectors';
+import { getProjectTasksFromEntities } from 'store/ProjectTask/selectors';
 import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
 import { getAnalyzeState } from 'store/Analyze/selectors';
 

@@ -16,8 +16,7 @@ import { minutesToString } from 'helpers/time';
 export class HalfShift extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
-      employees, timeLeft, generalError, values } = this.props;
-    console.log(values);    
+      employees, timeLeft, generalError } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>          

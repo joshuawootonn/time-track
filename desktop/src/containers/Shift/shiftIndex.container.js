@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import moment from 'moment';
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
+import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
-import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
-import Progress from 'components/helpers/Progress';
+
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';

@@ -10,7 +10,7 @@ import styles from './styles';
 
 export class AnalyzeToolbar extends Component {
   render() {
-    const { selected, classes, add, filters, isFilterVisible, toggleFilter, label,selectLabel } = this.props;
+    const { selected, classes, add, isFilterVisible, toggleFilter, label, selectLabel } = this.props;
     
     return (
       <div style={{ position: `relative` }}>

@@ -3,21 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
-import moment from 'moment';
 import { Card } from '@material-ui/core';
 
-import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
-import { analyzeStatus } from 'constants/analyze';
-import { analyzeActions } from 'store/actions';
-import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
-import { taskValidation } from 'constants/formValidation';
+
+import { categorySelectors,subcategorySelectors } from 'store/selectors';
+import { analyzeActions } from 'store/actions';
+
 import domain from 'constants/domains';
 
-export class TaskDetail extends Component {
-  
+export class TaskDetail extends Component {  
   render() {
-    const { categories,subcategories, clearFilter, taskFilters, taskFilterVisible } = this.props;
+    const { categories, subcategories, clearFilter, taskFilters, taskFilterVisible } = this.props;
     
     if(taskFilterVisible){
       return (

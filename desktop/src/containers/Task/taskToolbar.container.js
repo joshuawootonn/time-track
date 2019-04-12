@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
+import Progress from 'components/helpers/Progress';
+
 import { analyzeActions } from 'store/actions';
 import { taskSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
-import Progress from 'components/helpers/Progress';
-import * as TableDataTypes from 'constants/tableDataTypes';
+
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
-
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
 
 export class TaskToolbar extends Component {  
   selectLabel = selected =>`${selected.name} selected`;
@@ -23,11 +22,11 @@ export class TaskToolbar extends Component {
     if(selected && selected.id){
       select(domain.TASK,selected.id);
     }
-    setStatus(domain.TASK,analyzeStatus.ADDING)
+    setStatus(domain.TASK,analyzeStatus.ADDING);
   }
   render() {
     const { tasks, selected, toggleTaskFilter, taskFilterVisible } = this.props;
-    // console.log('task analyze render');
+    
     if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
     
     return (

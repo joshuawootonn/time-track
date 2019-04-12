@@ -24,7 +24,7 @@ export class EmployeeFilter extends Component {
       return (
         <Formik
           enableReinitialize
-          initialValues={{  ...employeeFilters }}
+          initialValues={{  ...employeeFilters }}// TODO: migrate the toggles to radio buttons for isWorking and any other boolean values
           onSubmit={(values, formikFunctions) => {
             this.props.updateFilter({ ...values });
             formikFunctions.resetForm();          
