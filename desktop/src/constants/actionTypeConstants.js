@@ -66,7 +66,8 @@ const shiftActionTypes = {
   ...createCustomAsyncActionType(`shift`,`edit`), 
   ...createCustomAsyncActionType(`shift`,`edit_half`), 
   ...createCustomAsyncActionType(`current_shift`,`get`) ,  
-  ...createCustomAsyncActionType(`shifts_in_range`,`get`) 
+  ...createCustomAsyncActionType(`shifts_in_range`,`get`),  
+  ...createCustomAsyncActionType(`shifts`,`get`) 
 };
 const snackActionTypes = {
   ...createCustomSyncActionType(`snack`,`hide`),

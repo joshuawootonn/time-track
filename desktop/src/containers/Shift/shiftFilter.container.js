@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import FilterShift from 'components/forms/Shift/Filter';
 import { authoritySelectors, crewSelectors, employeeSelectors, projectSelectors } from 'store/selectors';
-import { analyzeActions } from 'store/actions';
+import { analyzeActions, shiftActions } from 'store/actions';
 
 import domain from 'constants/domains';
 
@@ -24,12 +24,16 @@ export class ShiftFilter extends Component {
             startTime: moment(shiftFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`),
             endTime: moment(shiftFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`)
           }}
-          onSubmit={(values, formikFunctions) => {
-            this.props.updateFilter({
+          onSubmit={async (values, formikFunctions) => {
+            
+            const formattedValues ={
               ...values,
               startTime: moment(values.startTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`),
               endTime: moment(values.endTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`)
-            });
+            };
+            
+            await this.props.getShifts(formattedValues);  
+            this.props.updateFilter(formattedValues);
             formikFunctions.resetForm();          
           }}
           render={formikProps => {
@@ -70,6 +74,7 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
+    getShifts: filters => dispatch(shiftActions.getShifts(filters)),
     updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.SHIFT,filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.SHIFT))
   };

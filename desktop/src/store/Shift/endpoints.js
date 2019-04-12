@@ -31,6 +31,25 @@ export const getShiftsInRange = (startTime, endTime) => {
     `${HOST()}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
   );
 };
+
+export const getAll = options => {
+  let url = `${HOST()}/shifts?filter[include][activities]`;
+  const { startTime, endTime, employeeId } = options;
+  
+  if (startTime && endTime) {
+    url += `&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}`;
+  }
+  if (employeeId !== -1){
+    url += `&filter[where][employeeId]=${employeeId}`;
+  }
+
+
+  return axios.get(url);
+  // return axios.get(
+  //   `${HOST()}/shifts?filter[include][activities]&filter[where][and][0][clockInDate][gt]=${startTime}&filter[where][and][1][clockInDate][lt]=${endTime}` 
+  // );
+};
+
 export const deleteRelatedActivities = id => {
   return axios.delete(`${HOST()}/${DOMAIN}/${id}/activities`);
 };
