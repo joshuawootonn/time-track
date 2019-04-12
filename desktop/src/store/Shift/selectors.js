@@ -48,15 +48,18 @@ export const getAllShiftsNew = createSelector(
     }
 
 
-    console.log(`List before filter:`, list.length);
+    // console.log(`List before filter:`, list.length);
     if(filters){
       list = list.filter(shift => {   
         let decision = true;
         Object.keys(filters).forEach(key => {
-          if(key === `startTime` && moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
+          if(key === `startTime` &&  moment(shift[`clockInDate`]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
             decision = false;
           }
-          if(key === `endTime` && moment(shift[key]).isAfter(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
+          // if(key === `startTime` ){
+          //   console.log(moment(shift[`clockInDate`]), moment(filters[key],`MM-DD-YY HH:mm:ss`), moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`)))
+          // }
+          if(key === `endTime` && moment(shift[`clockInDate`]).isAfter(moment(filters[key],`MM-DD-YY HH:mm:ss`))){
             decision = false;
           }
           if( key === `employeeId` && filters[key] !== -1 && (filters[key] !== shift[key])){
@@ -72,7 +75,7 @@ export const getAllShiftsNew = createSelector(
     }
 
     
-    console.log(`List after filter:`, list.length);
+    // console.log(`List after filter:`, list.length);
     return list;
         
   }

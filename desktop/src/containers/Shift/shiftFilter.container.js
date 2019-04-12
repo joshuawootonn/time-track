@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Formik } from 'formik';
 import { Card } from '@material-ui/core';
+import moment from 'moment';
 
 import FilterShift from 'components/forms/Shift/Filter';
 import { authoritySelectors, crewSelectors, employeeSelectors, projectSelectors } from 'store/selectors';
@@ -13,17 +14,21 @@ import domain from 'constants/domains';
 export class ShiftFilter extends Component {  
   render() {
     const {  employees, projects, crews, authorities, shiftFilters, shiftFilterVisible, clearFilter  } = this.props;
-    console.log(shiftFilterVisible,shiftFilters);
+    
     if(shiftFilterVisible){
       return (
         <Formik
           enableReinitialize
           initialValues={{
-            ...shiftFilters
+            ...shiftFilters,
+            startTime: moment(shiftFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`),
+            endTime: moment(shiftFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`)
           }}
           onSubmit={(values, formikFunctions) => {
             this.props.updateFilter({
-              ...values
+              ...values,
+              startTime: moment(values.startTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`),
+              endTime: moment(values.endTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`)
             });
             formikFunctions.resetForm();          
           }}

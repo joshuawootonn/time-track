@@ -15,8 +15,7 @@ export class Filter extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
       projects, crews, authorities,
-      employees,  generalError } = this.props;
-    //  console.log(initialValues);    
+      employees,  generalError } = this.props;   
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>          
@@ -36,8 +35,7 @@ export class Filter extends Component {
               fullWidth
               className={classes.field}
               label="Employee"
-            />
-                   
+            />                   
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -55,8 +53,7 @@ export class Filter extends Component {
               fullWidth
               className={classes.field}
               label="Employee"
-            />
-                   
+            />                   
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -76,12 +73,8 @@ export class Filter extends Component {
               type="datetime-local"
               className={classes.field}
               helper="normal"
-            /> 
-                   
+            />                    
           </Grid>
-
-             
-
           <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>           
             <Typography
               color="error"
@@ -113,6 +106,18 @@ export class Filter extends Component {
               >
                 Reset
               </Button>
+              <Button
+                onClick={() => {
+                  resetForm(initialValues);
+                  this.props.clearFilter();
+                }}
+                color="secondary"
+                variant="text"
+                id={ANALYZE_SHIFT_HALF_SHIFT_CLEAR_BUTTON_ID}
+                className={classes.button}
+              >
+                Clear
+              </Button>
             </div>
           </Grid>
 
@@ -123,6 +128,7 @@ export class Filter extends Component {
 }
 
 export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
+export const ANALYZE_SHIFT_HALF_SHIFT_CLEAR_BUTTON_ID = `analyze_shift_half_shift_clear_button`;
 export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
 
 Filter.propTypes = {
@@ -135,8 +141,8 @@ Filter.propTypes = {
   projects: PropTypes.array.isRequired, 
   crews: PropTypes.array.isRequired, 
   authorities: PropTypes.array.isRequired,
-  timeLeft: PropTypes.number.isRequired,
-  generalError: PropTypes.string
+  generalError: PropTypes.string,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Filter);
