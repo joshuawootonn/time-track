@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
-import SortSelectTable from 'components/tables/SortSelect';
+import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -25,16 +25,12 @@ export class ProjectIndex extends Component {
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
-      <SortSelectTable 
-        selectLabel={this.selectLabel}
-        label="Projects"
-        tableData={projects || []}
-        headerData={rows}
+      <VirtualizedSortSelect 
+        data={projects || []}
+        columns={rows}
         selected={selected}
-        select={this.select}
-        add={this.add}
-        initialOrderBy='date'
-        initialOrder='desc'
+        select={this.select}       
+        initialSortBy='date'
       />
     );
   }
@@ -67,19 +63,28 @@ export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
 
 const rows = [
   {
-    id: `name`,    
+    id: `name`,  
+    dataKey: `name`, 
+    width: 150, 
+    height: 56,  
     padding: `dense`,
     label: `Name`,
     type: TableDataTypes.STRING
   }, 
   {
     id: `date`,    
+    dataKey: `date`, 
+    width: 80, 
+    height: 56,
     padding: `dense`,
     label: `Date`,
     type: TableDataTypes.DATE
   }, 
   {
-    id: `isActive`,   
+    id: `isActive`, 
+    dataKey: `isActive`,  
+    width: 80, 
+    height: 56, 
     align: `right`, 
     padding: `dense`,
     label: `Active`,

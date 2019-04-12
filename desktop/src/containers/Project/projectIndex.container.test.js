@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ProjectIndex } from 'containers/Analyze/projectIndexContainer';
+import { ProjectIndex } from 'containers/Project/projectIndex.container';
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
 import Progress from 'components/helpers/Progress';

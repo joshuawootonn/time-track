@@ -13,8 +13,7 @@ import domain from 'constants/domains';
 import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
 
 
-export class EmployeeIndex extends Component { 
-  
+export class EmployeeIndex extends Component {   
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
   select = object => this.props.select(domain.EMPLOYEE,object)
@@ -29,9 +28,7 @@ export class EmployeeIndex extends Component {
   
   render() {
     const { employees, selected, toggleEmployeeFilter,employeeFilterVisible } = this.props;
-    // console.log(toggleEmployeeFilter);
-
-    // if employees is not defined or empty
+ 
     if (!employees) return <Progress variant="circular" fullPage />;
 
     return (       

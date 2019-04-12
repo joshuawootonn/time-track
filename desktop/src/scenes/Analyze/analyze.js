@@ -17,8 +17,10 @@ import EmployeeToolbar from 'containers/Employee/employeeToolbar.container';
 
 import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
 import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
-import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';
-import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
+
+import ProjectToolbar from 'containers/Project/projectToolbar.container';
+import ProjectDetail from 'containers/Project/projectDetail.container';
+import ProjectIndex from 'containers/Project/projectIndex.container';
 
 import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
 import ShiftIndex from 'containers/Shift/shiftIndex.container';
@@ -48,7 +50,7 @@ const styles = {
 export class Analyze extends Component {
 
   state = {
-    tabValue: 3
+    tabValue: 1
   }  
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
@@ -96,11 +98,12 @@ export class Analyze extends Component {
         </Grid>}
         { tabValue === 1  && 
         <Grid container className={classes.tab} >
-          <Grid item xs={6}>
-            <ProjectIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ProjectToolbar />
+            <ProjectIndex />
           </Grid>
           <Grid item xs={6}>
-            <ProjectDetailContainer />
+            <ProjectDetail />
           </Grid>
         </Grid>}
         { tabValue === 2  && 

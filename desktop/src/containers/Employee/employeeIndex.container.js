@@ -7,25 +7,13 @@ import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import Progress from 'components/helpers/Progress';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 import VirtualizedSortSelect from 'components/tables/VirtualizedSortSelect';
 
 
-export class EmployeeIndex extends Component { 
-  
-  selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
-
+export class EmployeeIndex extends Component {  
   select = object => this.props.select(domain.EMPLOYEE,object)
-
-  add = () => {
-    const { selected, select, setStatus } = this.props;
-    if(selected && selected.id){
-      select(domain.EMPLOYEE,selected.id);
-    }
-    setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);
-  } 
   
   render() {
     const { employees, selected } = this.props;
