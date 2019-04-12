@@ -129,7 +129,7 @@ export class Employee extends Component {
                 resetForm(initialValues);
                 this.props.clearFilter();
               }}
-              id="employee-reset-button"
+              id="employee-reset-button" // TODO: better ids here
               disabled={isSubmitting }
               color="secondary"
               variant="text"

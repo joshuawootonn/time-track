@@ -26,14 +26,14 @@ export class ProjectFilter extends Component {
           enableReinitialize
           initialValues={{
             ...projectFilters,        
-            startTime: moment(projectFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`),
-            endTime: moment(projectFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`)
+            startTime: moment(projectFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DD`),
+            endTime: moment(projectFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DD`)
           }}
           onSubmit={(values,formikFunctions) => {
-            this.props.updateFilter({ 
+            this.props.updateFilter({ // TODO: this should close the filter
               ...values,
-              startTime: moment(values.startTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`),
-              endTime: moment(values.endTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`)
+              startTime: moment(values.startTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`),
+              endTime: moment(values.endTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`)              
             });
             formikFunctions.resetForm();  
           }}
@@ -53,10 +53,7 @@ export class ProjectFilter extends Component {
       );
     }
     return null;
-  }
-
-       
-  
+  }     
 }
 
 /* istanbul ignore next */

@@ -16,8 +16,7 @@ export const getAllEmployeesNew = createSelector(
   (_,props) => props ? props.sorts : null,
   (_,props) => props ? props.filters : null,
   (employees, results, crews, authorities, sorts, filters ) => {
-    if (!results || results.length === 0) return null;
-    // console.log(sorts,filters);
+    if (!results || results.length === 0) return null;  
     
     let list = results.map(employeeId => {
       const emp = employees[employeeId];
@@ -35,7 +34,6 @@ export const getAllEmployeesNew = createSelector(
         return 0;
       });
     }
-    // console.log(list);
     // FILTER
     if(filters) {
       list = list.filter(employee => {
@@ -51,11 +49,9 @@ export const getAllEmployeesNew = createSelector(
             decision = false;
           }      
         });
-        // console.log(`got through all filters`, decision);
         return decision;
       });
     }
-    // console.log(list);
     return list;    
   },
 );

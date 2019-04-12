@@ -45,8 +45,9 @@ ProjectIndex.propTypes ={
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
+  const filters = state.analyze.projectFilters;
   return {
-    projects: projectSelectors.getAllProjects(state),
+    projects: projectSelectors.getAllProjectsNew(state, { filters, sorts: {} }),
     selected: projectTaskSelectors.getSelectedProject(state)
   };
 };

@@ -223,7 +223,7 @@ export class Project extends Component {
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={`project-reset-button`}
+                id={`project-reset-button`}// TODO: better id's all over this file
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
