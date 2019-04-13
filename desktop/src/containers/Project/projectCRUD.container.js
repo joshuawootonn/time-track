@@ -14,7 +14,7 @@ import { projectActions } from 'store/actions';
 import { analyzeStatus } from 'constants/analyze';
 import { projectValidation } from 'constants/formValidation';
 
-export class ProjectDetail extends Component {
+export class ProjectCRUD extends Component {
 
   removeProject = () => {
     const { selected,removeProject } = this.props;
@@ -159,4 +159,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectDetail);
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectCRUD);

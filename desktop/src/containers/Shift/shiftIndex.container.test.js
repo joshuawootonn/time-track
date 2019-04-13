@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ShiftIndex } from 'containers/Analyze/shiftIndexContainer';
+import { ShiftIndex } from 'containers/Shift/shiftIndex.container';
 import Progress from 'components/helpers/Progress';
 
 import domain from 'constants/domains';

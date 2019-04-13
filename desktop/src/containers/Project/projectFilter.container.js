@@ -5,9 +5,8 @@ import { Formik } from 'formik';
 import moment from 'moment';
 import { Card } from '@material-ui/core';
 
-import ProjectForm from 'components/forms/Project';
+import Project from 'components/forms/Project';
 
-import { subcategorySelectors,categorySelectors,taskSelectors } from 'store/selectors';
 import { analyzeActions } from 'store/actions';
 
 import domain from 'constants/domains';
@@ -37,7 +36,7 @@ export class ProjectFilter extends Component {
           render={formikProps => {
             return (
               <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>                
-                <ProjectForm 
+                <Project 
                   type="filter"
                   label="Filter"
                   clearFilter={clearFilter}
@@ -57,10 +56,7 @@ export class ProjectFilter extends Component {
 const mapStateToProps = state => {
   return {
     projectFilters: state.analyze.projectFilters,
-    projectFilterVisible: state.analyze.projectFilterVisible,
-    categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state),
-    tasks: taskSelectors.getAllTasksWithContent(state)   
+    projectFilterVisible: state.analyze.projectFilterVisible
   };
 };
 

@@ -3,23 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Progress from 'components/helpers/Progress';
 import AnalyzeToolbar from 'components/tables/Toolbar';
 
 import { analyzeActions } from 'store/actions';
-import { projectSelectors, projectTaskSelectors } from 'store/selectors';
+import { projectTaskSelectors } from 'store/selectors';
 
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-
-export class ProjectIndex extends Component {
-  selectLabel = selected =>`${selected.name} selected`;
-
-  select = object => this.props.select(domain.PROJECT,object)
+export class ProjectToolbar extends Component {
+  selectLabel = selected =>`${selected.name} selected`;  
 
   add = () => {
     const { selected, select, setStatus } = this.props;
+   
     if(selected && selected.id){
       select(domain.PROJECT,selected.id);
     }
@@ -27,9 +24,7 @@ export class ProjectIndex extends Component {
   }
 
   render () {
-    const { projects, selected, toggleProjectFilter,projectFilterVisible } = this.props;
-
-    if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
+    const {  selected, toggleProjectFilter,projectFilterVisible } = this.props;
 
     return (
       <AnalyzeToolbar 
@@ -44,8 +39,7 @@ export class ProjectIndex extends Component {
   }
 }
 
-ProjectIndex.propTypes ={ 
-  projects: PropTypes.array,
+ProjectToolbar.propTypes ={ 
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object,
@@ -57,7 +51,6 @@ ProjectIndex.propTypes ={
 const mapStateToProps = state => {
   return {
     projectFilterVisible: state.analyze.projectFilterVisible,
-    projects: projectSelectors.getAllProjects(state),
     selected: projectTaskSelectors.getSelectedProject(state)
   };
 };
@@ -70,5 +63,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectToolbar);
 

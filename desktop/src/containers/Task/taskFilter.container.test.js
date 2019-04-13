@@ -1,57 +1,53 @@
 import React from 'react';
 import { mount } from 'enzyme';
+
 import { Formik } from 'formik';
 
-import { EmployeeFilter } from 'containers/Employee/employeeFilter.container';
+import { TaskFilter } from 'containers/Task/taskFilter.container';
 
-import { analyzeStatus } from 'constants/analyze';
-import { AUTHORITY_MOCK, CREW_MOCK, EMPLOYEE_MOCK } from 'constants/modelMocks';
+import { CATEGORY_MOCK, SUBCATEGORY_MOCK } from 'constants/modelMocks';
 
-const props =  {  
-  selected: EMPLOYEE_MOCK[0],
-  status: analyzeStatus.INIT,
-  authorities: AUTHORITY_MOCK,
-  crews: CREW_MOCK,
+const props =  {   
+  categories: CATEGORY_MOCK,
+  subcategories: SUBCATEGORY_MOCK,
   updateFilter: jest.fn(),
   clearFilter: jest.fn(),
   toggleFilter: jest.fn(),
-  employeeFilterVisible: true,
-  employeeFilters: {
-    crewId: -1,
-    authorityId: -1
-  }
-  
+  taskFilterVisible: true,
+  taskFilters: {
+    name: ``,
+    isActive: true,
+    categoryId: -1,
+    subcategoryId: -1
+  }  
 };
 
 const formikFunctions = {
-  resetForm: jest.fn(),
-  setStatus: jest.fn(),
-  setSubmitting: jest.fn(),
-  setErrors: jest.fn()
+  resetForm: jest.fn()
 };
 
 
 const setup = overRides => {  
-  return mount(<EmployeeFilter {...props} {...overRides}/>);    
+  return mount(<TaskFilter {...props} {...overRides}/>);    
 };
 
 
-describe(`Employee Filter Container`, () => {  
+describe(`Task Filter Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
     setup();
   }); 
-  it(`should on return something is props.employeeFilterVisible === true`, () => {
+  it(`should on return something is props.taskFilterVisible === true`, () => {
     const wrapperWhenIsVisible = setup();
     expect(wrapperWhenIsVisible.html()).not.toBeNull();
-    const wrapperWhenNotIsVisible = setup({ employeeFilterVisible: false });
+    const wrapperWhenNotIsVisible = setup({ taskFilterVisible: false });
     expect(wrapperWhenNotIsVisible.html()).toBeNull();
   });
   it(`should onSubmit call props.updateFilter, props.toggleFilter, and props.formikFunctions.resetForm `, () => {
     const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
-    const wrapper = setup({ status: analyzeStatus.EDITING });
+    const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
     expect(props.updateFilter).not.toHaveBeenCalled();

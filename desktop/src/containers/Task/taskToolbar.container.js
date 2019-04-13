@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import AnalyzeToolbar from 'components/tables/Toolbar';
-import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';
 import { taskSelectors } from 'store/selectors';
@@ -24,10 +23,8 @@ export class TaskToolbar extends Component {
   }
   
   render() {
-    const { tasks, selected, toggleTaskFilter, taskFilterVisible } = this.props;
-    
-    if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
-    
+    const {  selected, toggleTaskFilter, taskFilterVisible } = this.props;
+        
     return (
       <AnalyzeToolbar 
         selectLabel={this.selectLabel}
@@ -42,7 +39,6 @@ export class TaskToolbar extends Component {
 }
 
 TaskToolbar.propTypes = {
-  tasks: PropTypes.array,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,

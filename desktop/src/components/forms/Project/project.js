@@ -265,10 +265,10 @@ Project.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
-  subcategories: PropTypes.array.isRequired,
+  categories: PropTypes.array,
+  subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.array,
   clearFilter: PropTypes.func
 };
 

@@ -14,7 +14,7 @@ import { taskActions } from 'store/actions';
 import { analyzeStatus } from 'constants/analyze';
 import { taskValidation } from 'constants/formValidation';
 
-export class TaskDetail extends Component {
+export class TaskCRUD extends Component {
   removeTask = () => {
     const { selected,removeTask } = this.props;
     removeTask(selected.id);
@@ -145,8 +145,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-TaskDetail.propTypes = {
+TaskCRUD.propTypes = {
   status: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskDetail);
+export default connect(mapStateToProps,mapDispatchToProps)(TaskCRUD);

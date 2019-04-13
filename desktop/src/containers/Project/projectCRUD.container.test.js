@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { Formik } from 'formik';
 import moment from 'moment';
 
-import { ProjectDetail } from 'containers/Analyze/projectDetailContainer';
+import { ProjectCRUD } from 'containers/Project/projectCRUD.container';
 
 import { analyzeStatus } from 'constants/analyze';
 
@@ -27,11 +27,11 @@ const formikFunctions = {
 
 
 const setup = overRides => {  
-  return mount(<ProjectDetail {...props} {...overRides}/>);    
+  return mount(<ProjectCRUD {...props} {...overRides}/>);    
 };
 
 
-describe(`Project Detail Container`, () => {  
+describe(`Project CRUD Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });

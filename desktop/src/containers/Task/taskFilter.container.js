@@ -7,12 +7,11 @@ import { Card } from '@material-ui/core';
 
 import Task from 'components/forms/Task';
 
-import { categorySelectors,subcategorySelectors } from 'store/selectors';
 import { analyzeActions } from 'store/actions';
 
 import domain from 'constants/domains';
 
-export class TaskDetail extends Component {  
+export class TaskFilter extends Component {  
   render() {
     const { categories, subcategories, clearFilter, taskFilters, taskFilterVisible, updateFilter, toggleFilter } = this.props;
     
@@ -54,10 +53,7 @@ export class TaskDetail extends Component {
 const mapStateToProps = state => {
   return {
     taskFilters: state.analyze.taskFilters,
-    taskFilterVisible: state.analyze.taskFilterVisible,
-    status: state.analyze.taskStatus,
-    categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state)    
+    taskFilterVisible: state.analyze.taskFilterVisible 
   };
 };
 
@@ -70,8 +66,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-TaskDetail.propTypes = {
-  status: PropTypes.string.isRequired
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(TaskDetail);
+export default connect(mapStateToProps,mapDispatchToProps)(TaskFilter);

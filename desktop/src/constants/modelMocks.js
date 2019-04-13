@@ -2,25 +2,20 @@
 import moment from 'moment';
 
 export const EMPLOYEE_MOCK = [{
-  id: 0,
+  id: 1,
   firstName: `Joshua`,
   lastName: `Wootonn`
-}, {
-  id: 1,
-  firstName: `1`,
-  lastName: `1`
 }, {
   id: 2,
   firstName: `2`,
   lastName: `2`
+}, {
+  id: 3,
+  firstName: `3`,
+  lastName: `3`
 }];
 
 export const PROJECT_MOCK = [{
-  id: 0,
-  name: `0`,
-  isActive: 0,
-  date: `2017-02-13T00:02:00.000Z`
-}, {
   id: 1,
   name: `1`,
   isActive: 0,
@@ -28,6 +23,11 @@ export const PROJECT_MOCK = [{
 }, {
   id: 2,
   name: `2`,
+  isActive: 0,
+  date: `2017-02-13T00:02:00.000Z`
+}, {
+  id: 3,
+  name: `3`,
   isActive: 0,
   date: `2017-02-13T00:02:00.000Z`
 }];
@@ -75,7 +75,31 @@ export const PROJECT_TASK_MOCK = [{
   }
 }];
 
-export const PROJECT_TASK_OBJECT_MOCK = {
+export const TASK_MOCK = [
+  {
+    id: 1,
+    isActive: 0,
+    name: `1`,
+    category: { id: 0, name: `name0` },
+    subcategory: { id: 0, name: `name0` }
+  },
+  {
+    id: 2,
+    isActive: 1,
+    name: `2`,
+    category: { id: 1, name: `name1` },
+    subcategory: { id: 1, name: `name1` }
+  },
+  {
+    id: 3,
+    isActive: 2,
+    name: `3`,
+    category: { id: 2, name: `name2` },
+    subcategory: { id: 2, name: `name2` }
+  }
+];
+
+export const PROJECT_TASK_OBJECT_MOCK = [{
   0: {
     id: 0,
     estimateTime: 758,
@@ -83,9 +107,9 @@ export const PROJECT_TASK_OBJECT_MOCK = {
     quantity: 1500,
     taskId: 0,
     task: {
-      id: 0,
+      id: 1,
       isActive: 0,
-      name: `0`,
+      name: `1`,
       category: { id: 0, name: `name0` },
       subcategory: { id: 0, name: `name0` }
     }
@@ -97,9 +121,9 @@ export const PROJECT_TASK_OBJECT_MOCK = {
     quantity: 1500,
     taskId: 1,
     task: {
-      id: 1,
+      id: 2,
       isActive: 1,
-      name: `1`,
+      name: `2`,
       category: { id: 1, name: `name1` },
       subcategory: { id: 1, name: `name1` }
     }
@@ -111,14 +135,14 @@ export const PROJECT_TASK_OBJECT_MOCK = {
     quantity: 1500,
     taskId: 2,
     task: {
-      id: 2,
+      id: 3,
       isActive: 2,
-      name: `2`,
+      name: `3`,
       category: { id: 2, name: `name2` },
       subcategory: { id: 2, name: `name2` }
     }
   }
-};
+}];
 
 export const ACTIVITY_MOCK = [{
   description: ``,
@@ -274,3 +298,8 @@ export const AUTHORITY_MOCK = [
     id: 3
   }
 ];
+
+export const CATEGORY_MOCK = [{ id:1,type:`Setup` },{ id:2,type:`PCC` },{ id:3,type:`Earthwork` }];
+
+
+export const SUBCATEGORY_MOCK = [{ categoryId:2,id:1,type:`Sidewalk`,dimensionId:1 },{ categoryId:2,id:2,type:`Pavement`,dimensionId:1 }];

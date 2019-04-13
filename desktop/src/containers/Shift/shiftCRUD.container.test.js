@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { ShiftCRUD } from 'containers/Shift/shiftCRUDContainer';
+import { ShiftCRUD } from 'containers/Shift/shiftCRUD.container';
 
 import { analyzeStatus } from 'constants/analyze';
 import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, INCOMPLETE_SHIFT_MOCK } from 'constants/modelMocks';
@@ -162,28 +162,28 @@ describe(`Shift CRUD Container`, () => {
   });
   
   // HALF SHIFT - ADD
-  it(`should test the onSubmit calls createShift and onResolve it should resetForm and  setStatus to {success: true} `, () => {
+  it(`should test the onSubmit calls createHalfShift and onResolve it should resetForm and  setStatus to {success: true} `, () => {
     const values = { id: 1, name: `name`, subcategoryId: 1, isActive: 1, activities: {} };
     const wrapper = setup({ status: analyzeStatus.ADDING });
     wrapper.setState({ [`${analyzeStatus.ADDING }Extent`]: formConstants.HALF_SHIFT });  
     wrapper.update();
     const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
-    expect(props.createShift).toHaveBeenCalledTimes(0);
+    expect(props.createHalfShift).toHaveBeenCalledTimes(0);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
     onSubmit(values,formikFunctions);    
-    expect(props.createShift).toHaveBeenCalledTimes(1);    
-    expect(props.createShift).toHaveBeenCalledWith(values);
+    expect(props.createHalfShift).toHaveBeenCalledTimes(1);    
+    expect(props.createHalfShift).toHaveBeenCalledWith(values);
   });
-  it(`should test the onSubmit calls createShift and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
+  it(`should test the onSubmit calls createHalfShift and onReject it should setStatus to {success: false} and setSubmitting to false and setErrors with {submit: e}`, () => {
     const values = { id: 1, name: `name`, subcategoryId: 1, isActive: 1, activities: {} };
     const wrapper = setup({ status: analyzeStatus.ADDING });
     wrapper.setState({ [`${analyzeStatus.ADDING}Extent`]: formConstants.HALF_SHIFT });  
     wrapper.update();
     const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
         
-    expect(props.createShift).toHaveBeenCalledTimes(0);
+    expect(props.createHalfShift).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);      
     expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setErrors).toHaveBeenCalledTimes(0); 
@@ -191,8 +191,8 @@ describe(`Shift CRUD Container`, () => {
       expect(formikFunctions.setStatus).toHaveBeenCalledTimes(1);      
       expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setErrors).toHaveBeenCalledTimes(1);      
-      expect(props.createShift).toHaveBeenCalledTimes(1);
-      expect(props.createShift).toHaveBeenCalledWith(values);
+      expect(props.createHalfShift).toHaveBeenCalledTimes(1);
+      expect(props.createHalfShift).toHaveBeenCalledWith(values);
     });
   });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
 
-import { TaskDetail } from 'containers/Task/taskDetailContainer';
+import { TaskCRUD } from 'containers/Task/taskCRUD.container';
 import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
@@ -35,11 +35,11 @@ const formikFunctions = {
 
 
 const setup = overRides => {  
-  return mount(<TaskDetail {...props} {...overRides}/>);    
+  return mount(<TaskCRUD {...props} {...overRides}/>);    
 };
 
 
-describe(`Task Detail Container`, () => {  
+describe(`Task CRUD Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });

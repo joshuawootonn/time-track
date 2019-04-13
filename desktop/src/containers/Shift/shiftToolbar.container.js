@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import moment from 'moment';
-
 import AnalyzeToolbar from 'components/tables/Toolbar';
-import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
@@ -27,9 +24,7 @@ export class ShiftToolbar extends Component {
   }
 
   render() {
-    const { shifts, selected, toggleShiftFilter, shiftFilterVisible } = this.props;
-
-    if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
+    const { selected, toggleShiftFilter, shiftFilterVisible } = this.props;
     
     return (       
       <AnalyzeToolbar 
@@ -45,7 +40,6 @@ export class ShiftToolbar extends Component {
 }
 
 ShiftToolbar.propTypes = {
-  shifts: PropTypes.array,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object,
@@ -57,7 +51,6 @@ ShiftToolbar.propTypes = {
 const mapStateToProps = state => {
   return {
     shiftFilterVisible: state.analyze.shiftFilterVisible,
-    shifts: shiftSelectors.getShiftsInRange(state, { startTime: moment().subtract(400, `days`).format(`MM-DD-YY HH:mm:ss`), endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };

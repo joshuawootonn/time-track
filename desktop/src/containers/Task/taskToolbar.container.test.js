@@ -1,25 +1,25 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { EmployeeToolbar } from 'containers/Employee/employeeToolbar.container';
+import { TaskToolbar } from 'containers/Task/taskToolbar.container';
 
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
-import { EMPLOYEE_MOCK } from 'constants/modelMocks';
+import { TASK_MOCK } from 'constants/modelMocks';
 
 const props =  {  
-  selected: EMPLOYEE_MOCK[0],
+  selected: TASK_MOCK[0],
   select: jest.fn(),
   setStatus: jest.fn(),
-  toggleEmployeeFilter: jest.fn(),
-  employeeFilterVisible: true
+  toggleTaskFilter: jest.fn(),
+  taskFilterVisible: true
 };
 
 const setup = overRides => {  
-  return mount(<EmployeeToolbar {...props} {...overRides}/>);    
+  return mount(<TaskToolbar {...props} {...overRides}/>);    
 };
 
-describe(`Employee Toolbar Container`, () => {  
+describe(`Task Toolbar Container`, () => {  
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -30,7 +30,7 @@ describe(`Employee Toolbar Container`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     const value = instance.selectLabel(props.selected);
-    expect(value).toEqual(`Joshua Wootonn selected`);
+    expect(value).toEqual(`1 selected`);
   });
   it(`should call props.setStatus on this.add`, () => {
     const wrapper = setup();
@@ -38,6 +38,6 @@ describe(`Employee Toolbar Container`, () => {
     expect(props.setStatus).toHaveBeenCalledTimes(0);
     instance.add({ id: 1 });
     expect(props.setStatus).toHaveBeenCalledTimes(1);
-    expect(props.setStatus).toHaveBeenCalledWith(domain.EMPLOYEE,analyzeStatus.ADDING);
+    expect(props.setStatus).toHaveBeenCalledWith(domain.TASK,analyzeStatus.ADDING);
   });
 });
