@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
 import { analyzeStatus } from 'constants/analyze';
@@ -18,7 +19,47 @@ export const initialState = {
   authorityStatus: analyzeStatus.INIT,
   crewStatus: analyzeStatus.INIT,
   categoryStatus: analyzeStatus.INIT,
-  subcategoryStatus: analyzeStatus.INIT
+  subcategoryStatus: analyzeStatus.INIT,
+  employeeFilters: {
+    firstName: ``,
+    lastName: ``,
+    pin: ``,
+    isEmployed: 1,
+    crewId: -1,
+    authorityId: -1
+  },
+  projectFilters: {
+    name: ``,    
+    isActive: true,
+    startTime: moment().subtract(1, `years`).format(`MM-DD-YY HH:mm:ss`), 
+    endTime: moment().add(1,`years`).format(`MM-DD-YY HH:mm:ss`) 
+  },
+  taskFilters: {
+    name: ``,
+    isActive: true,
+    categoryId: -1,
+    subcategoryId: -1
+  },
+  shiftFilters: {
+    employeeId: -1,
+    projectId: -1,
+    authorityId: -1,
+    crewId: -1,
+    startTime: moment().startOf(`week`).format(`MM-DD-YY HH:mm:ss`), 
+    endTime: moment().endOf(`week`).format(`MM-DD-YY HH:mm:ss`) 
+  },
+  authorityFilters: {},
+  crewFilters: {},
+  categoryFilters: {},
+  subcategoryFilters: {},
+  employeeFilterVisible: false,
+  projectFilterVisible: false,
+  taskFilterVisible: false,
+  shiftFilterVisible: false,
+  authorityFilterVisible: false,
+  crewFilterVisible: false,
+  categoryFilterVisible: false,
+  subcategoryFilterVisible: false
 };
 export default (state = initialState, action) => {
   if(action.domain && !state.hasOwnProperty(action.domain.singular)){
@@ -49,6 +90,21 @@ export default (state = initialState, action) => {
       ...state,
       [`${action.domain.singular}Status`]: analyzeStatus.INIT,
       [action.domain.singular]: -1
+    };
+  case analyzeActionTypes.UPDATE_FILTERS: 
+    return {
+      ...state,
+      [`${action.domain.singular}Filters`]: action.payload
+    };
+  case analyzeActionTypes.TOGGLE_FILTER:
+    return {
+      ...state,
+      [`${action.domain.singular}FilterVisible`]: !state[`${action.domain.singular}FilterVisible`]
+    };
+  case analyzeActionTypes.CLEAR_FILTER:    
+    return {
+      ...state,
+      [`${action.domain.singular}Filters`]: initialState[`${action.domain.singular}Filters`]
     };
   default:
     return state;

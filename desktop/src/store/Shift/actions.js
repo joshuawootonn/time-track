@@ -37,6 +37,21 @@ export const getShiftsInRange = (startTime,endTime) => {
   };
 };
 
+export const getShifts = options => {
+  return async dispatch => {
+    dispatch({ type: shiftActionTypes.GET_SHIFTS_REQUEST });
+    try {
+      const response = await endpoint.getAll(options);
+      const payload = normalize({ shifts: response.data }, schemas.shiftArray);
+
+      return dispatch({ type: shiftActionTypes.GET_SHIFTS_SUCCESS, payload });
+    } catch (e) {
+      return dispatch({ type: shiftActionTypes.GET_SHIFTS_FAILURE, payload: e }); 
+    }
+  };
+};
+
+
 
 export const createShift = shift => {
   return async dispatch => {

@@ -3,15 +3,16 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { snackActions, employeeActions } from 'store/actions';
+import { snackActions, employeeActions, analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import * as routes from 'constants/routes';
 import AccountActionForm from 'components/forms/AccountAction';
+import domains from 'constants/domains';
 
 export class AccountAction extends Component {
   componentDidMount = () => {
     //REMOVE before deploy
-    // this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
+    // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   }
   back = () => {
     this.props.history.push(`/`);
@@ -25,6 +26,7 @@ export class AccountAction extends Component {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
   };
   analyze = () => {
+    this.props.clearFilters();
     this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
   export = () => {
@@ -53,7 +55,8 @@ AccountAction.propTypes = {
   employees: PropTypes.object.isRequired,
   employee: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  currentEmployee: PropTypes.object.isRequired
+  currentEmployee: PropTypes.object.isRequired,
+  clearFilters: PropTypes.func.isRequired
 };
 
 /* istanbul ignore next */
@@ -64,6 +67,12 @@ const mapDispatchToProps = dispatch => {
     },
     openSnack: (type, message) => {
       return dispatch(snackActions.openSnack(type, message));
+    },
+    clearFilters: () => {
+      dispatch(analyzeActions.clearFilter(domains.EMPLOYEE));
+      dispatch(analyzeActions.clearFilter(domains.PROJECT));
+      dispatch(analyzeActions.clearFilter(domains.TASK));
+      dispatch(analyzeActions.clearFilter(domains.SHIFT));
     }
   };
 };

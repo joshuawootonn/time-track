@@ -9,7 +9,10 @@ const analyzeActionTypes = {
   SELECT: `select_domain`,
   SET_STATUS: `set_domain_status`,
   DELETE_SELECTED: `delete_selected`,
-  EDIT_SETTINGS_MODAL: `edit_settings_modal`
+  EDIT_SETTINGS_MODAL: `edit_settings_modal`,
+  UPDATE_FILTERS: `update_filters`,
+  TOGGLE_FILTER: `toggle_filter`,
+  CLEAR_FILTER: `clear_filter`
 }; 
 
 const authorityActionTypes = {
@@ -63,7 +66,8 @@ const shiftActionTypes = {
   ...createCustomAsyncActionType(`shift`,`edit`), 
   ...createCustomAsyncActionType(`shift`,`edit_half`), 
   ...createCustomAsyncActionType(`current_shift`,`get`) ,  
-  ...createCustomAsyncActionType(`shifts_in_range`,`get`) 
+  ...createCustomAsyncActionType(`shifts_in_range`,`get`),  
+  ...createCustomAsyncActionType(`shifts`,`get`) 
 };
 const snackActionTypes = {
   ...createCustomSyncActionType(`snack`,`hide`),

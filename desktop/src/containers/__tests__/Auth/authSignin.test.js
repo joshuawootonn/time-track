@@ -11,9 +11,11 @@ const props =  {
   },
   login: jest.fn()
     .mockImplementationOnce(() => Promise.resolve(asdf))
+    .mockImplementationOnce(() => Promise.reject(new Error()))
     .mockImplementationOnce(() => Promise.resolve(asdf))
+    .mockImplementationOnce(() => Promise.reject(new Error()))
     .mockImplementationOnce(() => Promise.resolve(asdf))    
-    .mockImplementationOnce(() => Promise.resolve(asdf))
+    .mockImplementationOnce(() => Promise.reject(new Error()))
     .mockImplementationOnce(() => Promise.reject(new Error()))
 };
 
@@ -40,7 +42,7 @@ describe(`Auth Signin Container`, () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
-    expect(props.login).toHaveBeenCalledTimes(0);
+    expect(props.login).toHaveBeenCalledTimes(1);
     expect(formikFunctions.resetForm).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
     expect(props.history.push).toHaveBeenCalledTimes(0);
@@ -48,7 +50,7 @@ describe(`Auth Signin Container`, () => {
       expect(formikFunctions.resetForm).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setStatus).toHaveBeenCalledTimes(1);
       expect(props.login).toHaveBeenCalledTimes(2);        
-      expect(props.login).toHaveBeenCalledWith(values.username,values.password);      
+      expect(props.login).toHaveBeenCalledWith(values.ip,values.username,values.password);      
       expect(props.history.push).toHaveBeenCalledTimes(2);
     });     
   });
@@ -57,7 +59,7 @@ describe(`Auth Signin Container`, () => {
     const wrapper = setup();
     const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
     
-    expect(props.login).toHaveBeenCalledTimes(0);
+    expect(props.login).toHaveBeenCalledTimes(1);
     expect(formikFunctions.setSubmitting).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setErrors).toHaveBeenCalledTimes(0);
     expect(formikFunctions.setStatus).toHaveBeenCalledTimes(0);
@@ -66,10 +68,11 @@ describe(`Auth Signin Container`, () => {
       expect(formikFunctions.setErrors).toHaveBeenCalledTimes(1);
       expect(formikFunctions.setStatus).toHaveBeenCalledTimes(1);
       expect(props.login).toHaveBeenCalledTimes(2);        
-      expect(props.login).toHaveBeenCalledWith(values.username,values.password);      
+      expect(props.login).toHaveBeenCalledWith(values.ip,values.username,values.password);      
       expect(props.history.push).toHaveBeenCalledTimes(1);
     });     
   });
+
 
   // it('should call history.push with // on this.back', () => { 
   //   const values = '/';

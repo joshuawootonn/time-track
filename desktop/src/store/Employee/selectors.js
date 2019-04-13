@@ -8,20 +8,78 @@ export const getEmployeesFromResults = state => state.results.employees;
 export const getEmployeeFromState = state => state.employee;
 
 
+// ICEBOX: Test and migrate Employee selectors
+export const getAllEmployeesNew = createSelector(
+  getEmployeesFromEntities,
+  getEmployeesFromResults,
+  getCrewsFromEntities,
+  getAuthoritiesFromEntities,
+  (_,props) => props ? props.sorts : null,
+  (_,props) => props ? props.filters : null,
+  (employees, results, crews, authorities, sorts, filters ) => {
+    if (!results || results.length === 0) return null;  
+    
+    let list = results.map(employeeId => {
+      const emp = employees[employeeId];
+      return {
+        ...emp,
+        authority: authorities[emp.authorityId],
+        crew: crews[emp.crewId]
+      };
+    });
+    // SORT
+    if(sorts) {
+      list = list.sort((a,b) => {
+        if(a.firstName > b.firstName) return 1;
+        if(a.firstName < b.firstName) return -1;
+        return 0;
+      });
+    }
+    // FILTER
+    if(filters) {
+      list = list.filter(employee => {
+        let decision = true;
+        Object.keys(filters).forEach(key => {
+          if((key === `isEmployed` || key === `isWorking`) && !!employee[key] !== !!filters[key]){
+            decision = false;
+          }          
+          if((key === `firstName` || key === `lastName` || key ===`pin`) && filters[key] !== `` && !((new RegExp(`^${filters[key]}`,`i`)).test(`${employee[key]}`))){
+            decision = false;
+          }
+          if((key === `crewId` || key === `authorityId`) && filters[key] !== -1 && (filters[key] !== employee[key])){
+            decision = false;
+          }      
+        });
+        return decision;
+      });
+    }
+    return list;    
+  },
+);
+
 export const getAllEmployees = createSelector(
   getEmployeesFromEntities,
   getEmployeesFromResults,
-  (employees, results) => {
+  getCrewsFromEntities,
+  getAuthoritiesFromEntities,
+  (employees, results, crews, authorities ) => {
     if (!results || results.length === 0) return null;
-    return results.map(employeeId => {
-      return employees[employeeId];
+    
+    return  results.map(employeeId => {
+      const emp = employees[employeeId];
+      return {
+        ...emp,
+        authority: authorities[emp.authorityId],
+        crew: crews[emp.crewId]
+      };
     }).sort((a,b) => {
       if(a.firstName > b.firstName) return 1;
       if(a.firstName < b.firstName) return -1;
       return 0;
-    });
+    });  
   },
 );
+
 export const getSelectedEmployee = createSelector(
   getEmployeesFromEntities,
   getAnalyzeState,
@@ -42,24 +100,5 @@ export const getCurrentEmployee = createSelector(
       return {};
   },
 );
-export const getAllEmployeesWithContents = createSelector(
-  getEmployeesFromEntities,
-  getEmployeesFromResults,
-  getCrewsFromEntities,
-  getAuthoritiesFromEntities,
-  (employees, results, crews, authorities) => {
-    if (!results || results.length === 0) return null;
-    return results.map(employeeId => {
-      const emp = employees[employeeId];
-      return {
-        ...emp,
-        authority: authorities[emp.authorityId],
-        crew: crews[emp.crewId]
-      };
-    }).sort((a,b) => {
-      if(a.firstName > b.firstName) return 1;
-      if(a.firstName < b.firstName) return -1;
-      return 0;
-    });
-  },
-);
+
+

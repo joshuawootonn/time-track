@@ -16,8 +16,9 @@ export class AccountSignin extends Component {
   //REMOVE before deploy
     // const { login, history, getStaticData } = this.props;
     // getStaticData();
-    // login('565656').then(asdf => {
+    // login(`565656`).then(asdf => {
     //   const { authorityId } = asdf.data;  
+    //   console.log(this.props,authorityId);
     //   setTimeout(() => history.push(`/${this.props.authorities[authorityId].type}`),500);              
     // }, () => {
     // //rip

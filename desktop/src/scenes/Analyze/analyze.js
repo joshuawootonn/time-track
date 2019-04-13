@@ -9,21 +9,33 @@ import { ArrowBack, Settings } from '@material-ui/icons';
 import moment from 'moment';
 
 import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
-import EmployeeDetailsContainer from 'containers/Analyze/employeeDetailsContainer';
-import EmployeeIndexContainer from 'containers/Analyze/employeeIndexContainer';
-import TaskDetailContainer from 'containers/Analyze/taskDetailContainer';
-import TaskIndexContainer from 'containers/Analyze/taskIndexContainer';
-import ProjectDetailContainer from 'containers/Analyze/projectDetailContainer';
-import ProjectIndexContainer from 'containers/Analyze/projectIndexContainer';
-import ShiftIndexContainer from 'containers/Analyze/shiftIndexContainer';
-import ShiftCRUDContainer from 'containers/Analyze/shiftCRUDContainer';
+
+import EmployeeCRUD from 'containers/Employee/employeeCRUD.container';
+import EmployeeIndex from 'containers/Employee/employeeIndex.container';
+import EmployeeFilter from 'containers/Employee/employeeFilter.container';
+import EmployeeToolbar from 'containers/Employee/employeeToolbar.container';
+
+import TaskCRUD from 'containers/Task/taskCRUD.container';
+import TaskIndex from 'containers/Task/taskIndex.container';
+import TaskToolbar from 'containers/Task/taskToolbar.container';
+import TaskFilter from 'containers/Task/taskFilter.container';
+
+import ProjectToolbar from 'containers/Project/projectToolbar.container';
+import ProjectFilter from 'containers/Project/projectFilter.container';
+import ProjectCRUD from 'containers/Project/projectCRUD.container';
+import ProjectIndex from 'containers/Project/projectIndex.container';
+
+import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
+import ShiftIndex from 'containers/Shift/shiftIndex.container';
+import ShiftFilter from 'containers/Shift/shiftFilter.container';
+import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 
 const styles = {
   root: {
     height: `100vh`
   },
   tab: {
-    height: `calc(100% - 48px)`,
+    height: `calc(100% - 48px)`, 
     display: `flex`
   },
   grow: {
@@ -31,10 +43,11 @@ const styles = {
   },
   tool: {
     minHeight: 0
+  },
+  gridHeight: {
+    height: `calc(100% - 64px)`,
+    position: `relative`
   }
-  // visible: {
-  //   display: 'flex'
-  // }
 };
 
 export class Analyze extends Component {
@@ -77,38 +90,46 @@ export class Analyze extends Component {
         </AppBar>
         { tabValue === 0  && 
         <Grid container className={classes.tab } >
-          <Grid item xs={6}>
-            <EmployeeIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <EmployeeToolbar />
+            <EmployeeFilter />            
+            <EmployeeIndex />            
           </Grid>
-          <Grid item xs={6}>
-            <EmployeeDetailsContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <EmployeeCRUD />
           </Grid>
         </Grid>}
         { tabValue === 1  && 
         <Grid container className={classes.tab} >
-          <Grid item xs={6}>
-            <ProjectIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ProjectToolbar />
+            <ProjectFilter />
+            <ProjectIndex />
           </Grid>
           <Grid item xs={6}>
-            <ProjectDetailContainer />
+            <ProjectCRUD />
           </Grid>
         </Grid>}
         { tabValue === 2  && 
         <Grid container className={classes.tab}>          
-          <Grid item xs={6}>
-            <TaskIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <TaskToolbar />
+            <TaskFilter />
+            <TaskIndex />
           </Grid>
           <Grid item xs={6}>
-            <TaskDetailContainer />
+            <TaskCRUD />
           </Grid>
         </Grid> } 
         { tabValue === 3  && 
         <Grid container className={classes.tab} >
-          <Grid item xs={6}>
-            <ShiftIndexContainer />
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftToolbar />
+            <ShiftFilter />
+            <ShiftIndex />
           </Grid>
-          <Grid item xs={6}>
-            <ShiftCRUDContainer /> 
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftCRUD /> 
           </Grid>
         </Grid>} 
       </div>

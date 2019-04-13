@@ -14,8 +14,9 @@ import styles from './styles';
 
 export class Employee extends Component {
   render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors  } = this.props;
-   
+    const { classes, crews, authorities, label, isSubmitting, type, 
+      removeEmployee, resetForm, initialValues, errors, clearFilter  } = this.props;
+    
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -104,18 +105,19 @@ export class Employee extends Component {
             <div>
               <Button
                 type="submit"
+                id={EMPLOYEE_FORM_SUBMIT_BUTTON_ID}
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 }
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {[`filter`].includes(type) ? `Apply` : `Save`}
               </Button>
               <Button
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id="employee-reset-button"
+                id={EMPLOYEE_FORM_RESET_BUTTON_ID}
                 disabled={isSubmitting }
                 color="secondary"
                 variant="text"
@@ -123,6 +125,21 @@ export class Employee extends Component {
               >
                 Reset
               </Button>
+              {[`filter`].includes(type) && 
+                <Button
+                  onClick={() => {                
+                    resetForm(initialValues);
+                    clearFilter();
+                  }}
+                  id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
+                  disabled={isSubmitting }
+                  color="secondary"
+                  variant="text"
+                  className={classes.button}
+                >
+                Clear
+                </Button>
+              }
             </div>
           </Grid>
         </Grid>
@@ -130,6 +147,10 @@ export class Employee extends Component {
     );
   }
 }
+
+export const EMPLOYEE_FORM_RESET_BUTTON_ID = `employee_form_reset_button`;
+export const EMPLOYEE_FORM_CLEAR_BUTTON_ID = `employee_form_clear_button`;
+export const EMPLOYEE_FORM_SUBMIT_BUTTON_ID = `employee_form_submit_button`;
 
 Employee.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -142,7 +163,8 @@ Employee.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired
+  touched: PropTypes.object.isRequired,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Employee);

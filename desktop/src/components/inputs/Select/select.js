@@ -21,6 +21,7 @@ export class Select extends Component {
     const { field, form, label, margin,
       fullWidth, items, children, formControlProps,
       labelProps, selectProps, itemProps,helper,className } = this.props;
+      
     return (
       <FormControl className={className} {...formControlProps} margin={margin} fullWidth={fullWidth}>
         {label && <InputLabel {...labelProps}>{label}</InputLabel>}
@@ -42,7 +43,7 @@ export class Select extends Component {
           {children}
         </SelectInput>
         {helper === `normal` && <FormHelperText error={true}>
-          {getIn(form.touched, field.name) && getIn(form.errors, field.name) || ` `}
+          {getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
         </FormHelperText>}
       </FormControl>
     );

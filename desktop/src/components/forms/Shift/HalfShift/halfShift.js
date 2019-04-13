@@ -17,7 +17,6 @@ export class HalfShift extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
       employees, timeLeft, generalError } = this.props;
-    //  console.log(initialValues);    
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>          

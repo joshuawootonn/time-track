@@ -17,40 +17,34 @@ export class Project extends Component {
   render() {
 
     const { classes, label, categories, subcategories, tasks, 
-      isSubmitting, resetForm, initialValues, errors, values } = this.props;
+      isSubmitting, resetForm, initialValues, errors, values, type } = this.props;
  
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-            <Typography variant="h6">{label}</Typography>
-            {/* {type === 'edit' && (
-              <Tooltip title="Delete">
-                <IconButton onClick={removeProject} aria-label="Delete">
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            )} */}
+            <Typography variant="h6">{label}</Typography>          
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
               name="name"
               component={TextField}
               margin="none"
-              label="Task Name"
+              label="Project Name"
               type="search"
               className={classes.field}
               helper="normal"
             />
-            <Field
-              name="date"
-              component={TextField}
-              margin="none"
-              label="Start Date"
-              type="date"
-              className={classes.field}
-              helper="normal"
-            />
+            {[`add`,`edit`].includes(type) && (
+              <Field
+                name="date"
+                component={TextField}
+                margin="none"
+                label="Start Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />)}
             <Field
               name="isActive"
               component={Switch}
@@ -58,13 +52,35 @@ export class Project extends Component {
               className={classes.field}
             />
           </Grid>
-          <FieldArray
-            name="projectTasks"
-            render={arrayHelpers => {
+          { [`filter`].includes(type) && (
+            <Grid item xs={12} className={classes.row}>            
+              <Field
+                name="startTime"
+                component={TextField}
+                margin="none"
+                label="Start Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />
+              <Field
+                name="endTime"
+                component={TextField}
+                margin="none"
+                label="End Date"
+                type="date"
+                className={classes.field}
+                helper="normal"
+              />
+            </Grid>)}
+          { [`add`,`edit`].includes(type) && (
+            <FieldArray
+              name="projectTasks"
+              render={arrayHelpers => {
 
-              return (
-                <Grid item xs={12} container className={classes.body}>
-                  {values.projectTasks &&
+                return (
+                  <Grid item xs={12} container className={classes.body}>
+                    {values.projectTasks &&
                     values.projectTasks.map((projectTasks, index) => {
                       return (
                         <Grid item xs={12}
@@ -79,7 +95,7 @@ export class Project extends Component {
                               name={`projectTasks.${index}.categoryId`}
                               component={Select}
                               items={categories}
-                              id={`category-field-${index}`}
+                              id={`${PROJECT_FORM_CATEGORY_FIELD_ID}_${index}`}
                               fullWidth
                               label="Category"
                               className={classes.field}
@@ -100,7 +116,7 @@ export class Project extends Component {
                               items={subcategories.filter(subcat => {
                                 return subcat.categoryId === projectTasks.categoryId;
                               })}
-                              id={`subcategory-field-${index}`}
+                              id={`${PROJECT_FORM_SUBCATEGORY_FIELD_ID}_${index}`}
                               fullWidth
                               label="Subcategory"
                               className={classes.field}
@@ -140,7 +156,7 @@ export class Project extends Component {
                                 type="button"
                                 color="secondary"
                                 className={classes.iconButton}
-                                id={`remove-projectTask-${index}`}
+                                id={`${PROJECT_FORM_REMOVE_PROJECT_TASK_BUTTON_ID}_${index}`}
                                 onClick={() => arrayHelpers.remove(index)}
                               >
                                 <Close />
@@ -150,33 +166,34 @@ export class Project extends Component {
                         </Grid>
                       );
                     })
-                  }
-                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
-                    <div className={classes.lunchBox}>
+                    }
+                    <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
+                      <div className={classes.lunchBox}>
 
-                    </div>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      id={`add-projectTask`}
-                      onClick={() =>
-                        arrayHelpers.push({
-                          categoryId: -1,
-                          subcategoryId: -1,
-                          taskId: -1,
-                          quantity: 1,
-                          estimateTime: 1
-                        })
-                      }
-                    >
+                      </div>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        id={PROJECT_FORM_ADD_PROJECT_TASK_BUTTON_ID}
+                        onClick={() =>
+                          arrayHelpers.push({
+                            categoryId: -1,
+                            subcategoryId: -1,
+                            taskId: -1,
+                            quantity: 1,
+                            estimateTime: 1
+                          })
+                        }
+                      >
                       Add Task
-                    </Button>
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              );
-            }
-            }
-          />
+                );
+              }
+              }
+            />
+          )}
           <Grid item xs={12} className={classes.row}>
             <Typography
               color="error"
@@ -188,18 +205,19 @@ export class Project extends Component {
             <div>
               <Button
                 type="submit"
+                id={PROJECT_FORM_SUBMIT_BUTTON_ID}
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0 }
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {[`add`,`edit`].includes(type) ? `Save`: `Apply`}
               </Button>
               <Button
                 onClick={() => {
                   resetForm(initialValues);
                 }}
-                id={`project-reset-button`}
+                id={PROJECT_FORM_RESET_BUTTON_ID}
                 disabled={isSubmitting}
                 color="secondary"
                 variant="text"
@@ -207,6 +225,21 @@ export class Project extends Component {
               >
                 Reset
               </Button>
+              {[`filter`].includes(type) && 
+              <Button
+                onClick={() => {
+                  resetForm(initialValues);                  
+                  this.props.clearFilter();
+                }}
+                id={PROJECT_FORM_CLEAR_BUTTON_ID}
+                disabled={isSubmitting}
+                color="secondary"
+                variant="text"
+                className={classes.button}
+              >
+                Clear
+              </Button>}
+              
             </div>
           </Grid>
         </Grid>
@@ -214,6 +247,14 @@ export class Project extends Component {
     );
   }
 }
+
+export const PROJECT_FORM_RESET_BUTTON_ID = `project_form_reset_button`;
+export const PROJECT_FORM_CLEAR_BUTTON_ID = `project_form_clear_button`;
+export const PROJECT_FORM_SUBMIT_BUTTON_ID = `project_form_submit_button`;
+export const PROJECT_FORM_ADD_PROJECT_TASK_BUTTON_ID = `project_form_add_project_task_button`;
+export const PROJECT_FORM_REMOVE_PROJECT_TASK_BUTTON_ID = `project_form_remove_project_task_button`;
+export const PROJECT_FORM_CATEGORY_FIELD_ID = `project_form_category_field`;
+export const PROJECT_FORM_SUBCATEGORY_FIELD_ID = `project_form_subcategory_field`;
 
 Project.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -224,10 +265,11 @@ Project.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
-  subcategories: PropTypes.array.isRequired,
+  categories: PropTypes.array,
+  subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
-  tasks: PropTypes.array.isRequired
+  tasks: PropTypes.array,
+  clearFilter: PropTypes.func
 };
 
 export default withStyles(styles)(Project);
