@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Progress from 'components/helpers/Progress';
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
+import AnalyzeToolbar from 'components/tables/Toolbar';
 
 import { analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';

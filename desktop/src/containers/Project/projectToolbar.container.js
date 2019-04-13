@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Progress from 'components/helpers/Progress';
+import AnalyzeToolbar from 'components/tables/Toolbar';
 
 import { analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
@@ -11,7 +12,6 @@ import { projectSelectors, projectTaskSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
 
 export class ProjectIndex extends Component {
   selectLabel = selected =>`${selected.name} selected`;

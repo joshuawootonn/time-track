@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
+import AnalyzeToolbar from 'components/tables/Toolbar';
 import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';

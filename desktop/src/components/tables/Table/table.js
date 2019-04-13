@@ -5,7 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 // import { TableCell, TableSortLabel, Checkbox } from '@material-ui/core';
-import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
+import { AutoSizer, Column, SortDirection, Table as RVTable } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -13,8 +13,9 @@ import Cell from './cell';
 import Header from './header';
 import styles from './styles';
 
+// ICEBOX: Test Table
 
-class VirtualizedSortSelect extends React.Component {
+class Table extends React.Component {
   constructor (props, context) {
     super(props, context);
 
@@ -128,7 +129,7 @@ class VirtualizedSortSelect extends React.Component {
     return (
       <AutoSizer>
         {({ height, width }) => (
-          <Table
+          <RVTable
             className={classes.table}
             height={height}
             width={width}
@@ -191,17 +192,17 @@ class VirtualizedSortSelect extends React.Component {
                 );
               }
             )}
-          </Table>
+          </RVTable>
         )}
       </AutoSizer>
     );
   }  
 }
 
-VirtualizedSortSelect.defaultProps = {
+Table.defaultProps = {
   headerHeight: 56,
   rowHeight: 49
 };
 
-export default withStyles(styles)(VirtualizedSortSelect);
+export default withStyles(styles)(Table);
 

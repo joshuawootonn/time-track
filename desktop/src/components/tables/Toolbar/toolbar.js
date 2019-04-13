@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Toolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
+import { Toolbar as MUToolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
 import { Add, FilterList } from '@material-ui/icons';
 
 import styles from './styles';
 
-export class AnalyzeToolbar extends Component {
+// ICEBOX: Test Table
+
+export class Toolbar extends Component {
   render() {
     const { selected, classes, add, isFilterVisible, toggleFilter, label, selectLabel } = this.props;
     
     return (
       <div style={{ position: `relative` }}>
-        <Toolbar
+        <MUToolbar
           className={cx(classes.toolbarRoot, {
             [classes.highlight]: Object.keys(selected).length !== 0
           })}
@@ -45,12 +47,12 @@ export class AnalyzeToolbar extends Component {
               </IconButton>
             </Tooltip>
           </div>}
-        </Toolbar>        
+        </MUToolbar>        
       </div>      
     );
   }
 }
-AnalyzeToolbar.propTypes = {
+Toolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   add: PropTypes.func,
@@ -62,4 +64,4 @@ AnalyzeToolbar.propTypes = {
   isFilterVisible: PropTypes.bool
 };
 
-export default withStyles(styles)(AnalyzeToolbar);
+export default withStyles(styles)(Toolbar);

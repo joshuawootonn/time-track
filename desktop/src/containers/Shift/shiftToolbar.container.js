@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import moment from 'moment';
 
-import AnalyzeToolbar from 'components/tables/toolbars/NewAnalyzeToolbar';
+import AnalyzeToolbar from 'components/tables/Toolbar';
 import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';
