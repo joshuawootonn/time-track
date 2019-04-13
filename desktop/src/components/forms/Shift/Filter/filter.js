@@ -89,7 +89,7 @@ export class Filter extends Component {
                 color="primary"
                 disabled={isSubmitting || Object.keys(errors).length !== 0}
                 variant="contained"
-                id={ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID}
+                id={ANALYZE_SHIFT_FILTER_SUBMIT_BUTTON_ID}
                 className={classes.button}
               >
                 Apply
@@ -101,7 +101,7 @@ export class Filter extends Component {
                 }}
                 color="secondary"
                 variant="text"
-                id={ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID}
+                id={ANALYZE_SHIFT_FILTER_RESET_BUTTON_ID}
                 className={classes.button}
               >
                 Reset
@@ -113,7 +113,7 @@ export class Filter extends Component {
                 }}
                 color="secondary"
                 variant="text"
-                id={ANALYZE_SHIFT_HALF_SHIFT_CLEAR_BUTTON_ID}
+                id={ANALYZE_SHIFT_FILTER_CLEAR_BUTTON_ID}
                 className={classes.button}
               >
                 Clear
@@ -127,9 +127,9 @@ export class Filter extends Component {
   }
 }
 
-export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
-export const ANALYZE_SHIFT_HALF_SHIFT_CLEAR_BUTTON_ID = `analyze_shift_half_shift_clear_button`;
-export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
+export const ANALYZE_SHIFT_FILTER_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
+export const ANALYZE_SHIFT_FILTER_CLEAR_BUTTON_ID = `analyze_shift_half_shift_clear_button`;
+export const ANALYZE_SHIFT_FILTER_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
 
 Filter.propTypes = {
   classes: PropTypes.object.isRequired,

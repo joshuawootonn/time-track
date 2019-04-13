@@ -249,3 +249,28 @@ export const COMPLETE_SHIFT_MOCK = [{
   } 
 }];
 
+export const CREW_MOCK = [
+  {
+    name: `Crew 1`,
+    id: 1
+  },{
+    name: `Crew 2`,
+    id: 2
+  },{
+    name: `Crew 3`,
+    id: 3
+  }
+];
+
+export const AUTHORITY_MOCK = [
+  {
+    type: `Admin`,
+    id: 1
+  },{
+    type: `Employee`,
+    id: 2
+  },{
+    type: `Manager`,
+    id: 3
+  }
+];

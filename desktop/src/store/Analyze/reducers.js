@@ -45,8 +45,8 @@ export const initialState = {
     projectId: -1,
     authorityId: -1,
     crewId: -1,
-    startTime: moment().subtract(14, `days`).format(`MM-DD-YY HH:mm:ss`), 
-    endTime: moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`) 
+    startTime: moment().startOf(`week`).format(`MM-DD-YY HH:mm:ss`), 
+    endTime: moment().endOf(`week`).format(`MM-DD-YY HH:mm:ss`) 
   },
   authorityFilters: {},
   crewFilters: {},

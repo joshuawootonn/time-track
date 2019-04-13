@@ -14,7 +14,8 @@ import styles from './styles';
 
 export class Employee extends Component {
   render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, removeEmployee, resetForm, initialValues,errors  } = this.props;
+    const { classes, crews, authorities, label, isSubmitting, type, 
+      removeEmployee, resetForm, initialValues, errors, clearFilter  } = this.props;
     
     return (
       <Form>
@@ -110,7 +111,7 @@ export class Employee extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                {type === `filter` ? `Apply` : `Save`}
+                {[`filter`].includes(type) ? `Apply` : `Save`}
               </Button>
               <Button
                 onClick={() => {
@@ -124,20 +125,21 @@ export class Employee extends Component {
               >
                 Reset
               </Button>
-              {type === `filter` && 
-            <Button
-              onClick={() => {                
-                resetForm(initialValues);
-                this.props.clearFilter();
-              }}
-              id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
-              disabled={isSubmitting }
-              color="secondary"
-              variant="text"
-              className={classes.button}
-            >
-            Clear
-            </Button>}
+              {[`filter`].includes(type) && 
+                <Button
+                  onClick={() => {                
+                    resetForm(initialValues);
+                    clearFilter();
+                  }}
+                  id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
+                  disabled={isSubmitting }
+                  color="secondary"
+                  variant="text"
+                  className={classes.button}
+                >
+                Clear
+                </Button>
+              }
             </div>
           </Grid>
         </Grid>
