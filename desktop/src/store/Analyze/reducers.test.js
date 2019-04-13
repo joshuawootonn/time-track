@@ -42,4 +42,32 @@ describe(`Analyze Reducer`, () => {
     const resultingState = analyzeReducer(initialState,wackAction);
     expect(initialState).toBe(resultingState);    
   });
+  it(`should update the correspondinng domain's filter for UPDATE_FILTER`, () => {
+    const action = {
+      type: analyzeActionTypes.UPDATE_FILTERS,
+      domain: domains.EMPLOYEE,
+      payload: {}
+    };
+    const resultingState = analyzeReducer(initialState,action);
+    const expectedState = { ...initialState, employeeFilters: {} }; 
+    expect(expectedState).toEqual(resultingState);    
+  });
+  it(`should update the correspondinng domain's filter for CLEAR_FILTER`, () => {
+    const action = {
+      type: analyzeActionTypes.CLEAR_FILTER,
+      domain: domains.EMPLOYEE
+    };
+    const resultingState = analyzeReducer({ ...initialState, employeeFilters: {} },action);
+    const expectedState = initialState; 
+    expect(expectedState).toEqual(resultingState);    
+  });
+  it(`should update the correspondinng domain's filter for TOGGLE_FILTER`, () => {
+    const action = {
+      type: analyzeActionTypes.TOGGLE_FILTER,
+      domain: domains.EMPLOYEE
+    };
+    const resultingState = analyzeReducer({ ...initialState, employeeFilterVisible: true },action);
+    const expectedState = initialState; 
+    expect(expectedState).toEqual(resultingState);    
+  });
 });

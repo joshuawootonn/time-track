@@ -114,7 +114,7 @@ describe(`Project Component`, () => {
     expect(wrapperWithIncorrectType.find(`#${PROJECT_FORM_CLEAR_BUTTON_ID}`).length).toBe(0);
   });
   it(`should call props.resetForm and props.clearFilter on #${PROJECT_FORM_CLEAR_BUTTON_ID}`, () => {
-    const wrapper = setup({ type: `filter`});
+    const wrapper = setup({ type: `filter` });
     expect(props.resetForm).toHaveBeenCalledTimes(0);
     wrapper.find(`#${PROJECT_FORM_CLEAR_BUTTON_ID}`).first().simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);

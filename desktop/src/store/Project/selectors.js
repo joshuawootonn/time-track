@@ -4,6 +4,8 @@ import moment from 'moment';
 export const getProjectsFromEntities = state => state.entities.projects;
 export const getProjectsFromResults = state => state.results.projects;
 
+
+// ICEBOX: Test and migrate Project selectors
 export const getAllProjectsNew = createSelector(
   getProjectsFromEntities,
   getProjectsFromResults,  

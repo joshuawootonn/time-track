@@ -24,7 +24,6 @@ export const toggleFilter = domain => {
   return { type: analyzeActionTypes.TOGGLE_FILTER, domain };
 };
 
-export const clearFilter = domain => {
-  
+export const clearFilter = domain => {  
   return { type: analyzeActionTypes.CLEAR_FILTER, domain };
 };

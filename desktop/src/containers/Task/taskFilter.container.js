@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { Formik } from 'formik';
 import { Card } from '@material-ui/core';
 
 import Task from 'components/forms/Task';
 
+import { categorySelectors,subcategorySelectors } from 'store/selectors';
 import { analyzeActions } from 'store/actions';
 
 import domain from 'constants/domains';
@@ -53,7 +53,9 @@ export class TaskFilter extends Component {
 const mapStateToProps = state => {
   return {
     taskFilters: state.analyze.taskFilters,
-    taskFilterVisible: state.analyze.taskFilterVisible 
+    taskFilterVisible: state.analyze.taskFilterVisible, 
+    categories: categorySelectors.getAllCategories(state),
+    subcategories: subcategorySelectors.getAllSubcategories(state)   
   };
 };
 

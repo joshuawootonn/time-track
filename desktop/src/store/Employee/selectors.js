@@ -8,6 +8,7 @@ export const getEmployeesFromResults = state => state.results.employees;
 export const getEmployeeFromState = state => state.employee;
 
 
+// ICEBOX: Test and migrate Employee selectors
 export const getAllEmployeesNew = createSelector(
   getEmployeesFromEntities,
   getEmployeesFromResults,

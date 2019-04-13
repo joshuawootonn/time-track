@@ -17,11 +17,11 @@ const ipcRenderer = electron.ipcRenderer;
 
 export class AuthSignin extends Component {  
   componentDidMount() {
-    // const { ip, username, password } = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
-    // return this.props.login(ip, username, password)
-    //   .then(() => {     
-    //     this.props.history.push(routes.ROOT);              
-    //   });
+    const { ip, username, password } = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
+    return this.props.login(ip, username, password)
+      .then(() => {     
+        this.props.history.push(routes.ROOT);              
+      });
   }
   render() {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);

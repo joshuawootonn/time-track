@@ -23,6 +23,7 @@ export const getCurrentShift = createSelector(
 );
 
 
+// ICEBOX: Test and migrate Shift selectors
 export const getAllShiftsNew = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,  

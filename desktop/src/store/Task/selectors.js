@@ -21,6 +21,8 @@ export const getAllTasks = createSelector(
     });
   },
 );
+
+// ICEBOX: Test and migrate Task selectors
 export const getAllTasksNew = createSelector(
   getTasksFromEntities,
   getTasksFromResults,

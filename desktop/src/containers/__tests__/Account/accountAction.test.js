@@ -16,7 +16,8 @@ const props =  {
   currentEmployee: { isWorking: 1 },
   clockIn: jest.fn()
     .mockImplementationOnce(() => Promise.resolve())
-    .mockImplementationOnce(() => Promise.reject(new Error()))
+    .mockImplementationOnce(() => Promise.reject(new Error())),
+  clearFilters: jest.fn()
 };
 
 const setup = overRides => {  
@@ -66,9 +67,11 @@ describe(`Account Action Container`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.history.push).toHaveBeenCalledTimes(0);
+    expect(props.clearFilters).not.toHaveBeenCalled();
     instance.analyze();
     expect(props.history.push).toHaveBeenCalledTimes(1);  
     expect(props.history.push).toHaveBeenCalledWith(values);     
+    expect(props.clearFilters).toHaveBeenCalled();
   });
   it(`should call history.push with /type/export on this.export`, () => { 
     const values = `/${props.type}/${routes.EXPORT}`;
