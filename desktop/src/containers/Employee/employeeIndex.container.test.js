@@ -5,7 +5,6 @@ import { EmployeeIndex } from 'containers/Employee/employeeIndex.container';
 import Progress from 'components/helpers/Progress';
 
 import domain from 'constants/domains';
-import { analyzeStatus } from 'constants/analyze';
 
 const props =  {  
   selected: { authorityId:1,crewId:1,firstName:`Joshua`,id:2,isEmployed:1,isWorking:1,lastName:`Wootonn`,pin:565656,authority:{ id:1,type:`Admin` },crew:{ id:1,name:`Crew 3` } },
@@ -31,12 +30,6 @@ describe(`Employee Index Container`, () => {
     const wrapper = setup({ employees: null });
     expect(wrapper.find(Progress).length).toBeGreaterThan(0);
   });
-  it(`should generate a proper label on this.selectLabel`, () => {
-    const wrapper = setup();
-    const instance = wrapper.instance();
-    const value = instance.selectLabel(props.selected);
-    expect(value).toEqual(`Joshua Wootonn selected`);
-  });
   it(`should call props.select on this.select`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -44,13 +37,5 @@ describe(`Employee Index Container`, () => {
     instance.select({ id: 1 });
     expect(props.select).toHaveBeenCalledTimes(1);
     expect(props.select).toHaveBeenCalledWith(domain.EMPLOYEE,{ id: 1 });
-  });
-  it(`should call props.setStatus on this.add`, () => {
-    const wrapper = setup();
-    const instance = wrapper.instance();
-    expect(props.setStatus).toHaveBeenCalledTimes(0);
-    instance.add({ id: 1 });
-    expect(props.setStatus).toHaveBeenCalledTimes(1);
-    expect(props.setStatus).toHaveBeenCalledWith(domain.EMPLOYEE,analyzeStatus.ADDING);
-  });
+  });  
 });

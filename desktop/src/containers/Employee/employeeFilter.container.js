@@ -12,8 +12,9 @@ import domain from 'constants/domains';
 
 export class EmployeeFilter extends Component {  
   render() {
-    const { authorities, crews, employeeFilters, employeeFilterVisible, clearFilter, updateFilter, toggleFilter  } = this.props;
-    
+    const { authorities, crews, employeeFilters, employeeFilterVisible, 
+      clearFilter, updateFilter, toggleFilter  } = this.props;
+          
     if(employeeFilterVisible){
       return (
         <Formik

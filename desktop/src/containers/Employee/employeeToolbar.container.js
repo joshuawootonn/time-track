@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Progress from 'components/helpers/Progress';
 import AnalyzeToolbar from 'components/tables/Toolbar';
 
 import { analyzeActions } from 'store/actions';
@@ -12,7 +11,7 @@ import { employeeSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class EmployeeIndex extends Component {   
+export class EmployeeToolbar extends Component {   
   selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
 
   add = () => {
@@ -24,10 +23,8 @@ export class EmployeeIndex extends Component {
   } 
   
   render() {
-    const { employees, selected, toggleEmployeeFilter,employeeFilterVisible } = this.props;
+    const { selected, toggleEmployeeFilter,employeeFilterVisible } = this.props;
  
-    if (!employees) return <Progress variant="circular" fullPage />;
-
     return (       
       <AnalyzeToolbar 
         selectLabel={this.selectLabel}
@@ -41,8 +38,7 @@ export class EmployeeIndex extends Component {
   }
 }
 
-EmployeeIndex.propTypes = {
-  employees: PropTypes.array,
+EmployeeToolbar.propTypes = {
   selected: PropTypes.object,
   select: PropTypes.func,
   setStatus: PropTypes.func.isRequired,
@@ -52,11 +48,8 @@ EmployeeIndex.propTypes = {
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
-
-  const filters = state.analyze.employeeFilters;
   return {
     employeeFilterVisible: state.analyze.employeeFilterVisible,
-    employees: employeeSelectors.getAllEmployeesNew(state, { filters , sorts: {} }),
     selected: employeeSelectors.getSelectedEmployee(state)
   };
 };
@@ -69,4 +62,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
+export default connect(mapStateToProps,mapDispatchToProps)(EmployeeToolbar);

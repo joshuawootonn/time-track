@@ -3,8 +3,8 @@ import moment from 'moment';
 
 export const EMPLOYEE_MOCK = [{
   id: 0,
-  firstName: `0`,
-  lastName: `0`
+  firstName: `Joshua`,
+  lastName: `Wootonn`
 }, {
   id: 1,
   firstName: `1`,
