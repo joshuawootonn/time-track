@@ -11,11 +11,14 @@ const log = require("electron-log")
 const IPCConstants = {
   SET_CRED: 'set_cred',
   GET_CRED: 'get_cred',
-  CREATE_EXPORT: 'create_export'
+  CREATE_EXPORT: 'create_export',
+  TOGGLE_FULLSCREEN: `toggle_fullscreen`,
+  IS_FULLSCREEN:`is_fullscreen`
 };
 
 const SETTINGS = {
-  USER_CRED: 'user_cred'
+  USER_CRED: 'user_cred',
+  WINDOW: `window`
 };
 
 var Excel = require('exceljs');
