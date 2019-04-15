@@ -17,15 +17,15 @@ export class AccountAction extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFullscreen: true
+      isFullScreen: true
     };
   }
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
-    const isFullscreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
+    const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
     this.setState({
-      isFullscreen
+      isFullScreen
     });
   }
   back = () => {
@@ -48,7 +48,7 @@ export class AccountAction extends Component {
   };
   toggleFullscreen = () => {
     this.setState({
-      isFullscreen: ipcRenderer.sendSync(IPCConstants.TOGGLE_FULLSCREEN, ``)
+      isFullScreen: ipcRenderer.sendSync(IPCConstants.TOGGLE_FULLSCREEN, ``)
     });
   }
   render() {
@@ -63,7 +63,7 @@ export class AccountAction extends Component {
         analyze={this.analyze}
         export={this.export}
         toggleFullscreen={this.toggleFullscreen}
-        isFullscreen={this.state.isFullscreen}
+        isFullScreen={this.state.isFullScreen}
       />
     );
   }

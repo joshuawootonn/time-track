@@ -8,8 +8,6 @@ import { Field, Form } from 'formik';
 import styles from './styles';
 import Password from 'components/inputs/Password';
 
-const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
-
 export class AccountSigin extends Component {
   appendPin = newChar => {
     if (this.props.values.pin.length >= 6) return;
@@ -21,7 +19,7 @@ export class AccountSigin extends Component {
 
   render() {
     const { classes, isSubmitting, errors } = this.props;
-    console.log(`render`);
+    
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>

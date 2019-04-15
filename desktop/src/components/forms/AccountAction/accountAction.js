@@ -9,7 +9,7 @@ import styles from './styles';
 import * as authorityConstants from 'constants/authority';
 
 export const AccountAction = props => {
-  const { classes, isWorking, clockIn, clockOut, analyze, back, type, toggleFullscreen, isFullscreen } = props;
+  const { classes, isWorking, clockIn, clockOut, analyze, back, type, toggleFullscreen, isFullScreen } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -36,7 +36,7 @@ export const AccountAction = props => {
         {(type === authorityConstants.MANAGER || type === authorityConstants.ADMIN) && 
           <Tooltip open={true} title="FullScreen" classes={{ tooltip: classes.toolTip }} placement="bottom">
             <IconButton onClick={toggleFullscreen} className={classes.button}>
-              {isFullscreen ? <FullscreenExit className={classes.buttonIcon} /> : <Fullscreen className={classes.buttonIcon} /> }
+              {isFullScreen ? <FullscreenExit className={classes.buttonIcon} /> : <Fullscreen className={classes.buttonIcon} /> }
             </IconButton>
           </Tooltip>
         }
@@ -67,7 +67,7 @@ AccountAction.propTypes = {
   analyze: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
-  isFullscreen: PropTypes.bool.isRequired
+  isFullScreen: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(AccountAction);

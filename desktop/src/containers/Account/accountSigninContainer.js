@@ -40,8 +40,8 @@ export class AccountSignin extends Component {
               history.push(`/${authorities[authorityId].type}`);
               getStaticData();              
             },
-            e => {              
-              if(e.message){
+            e => {            
+              if(!e.response || (e.response && e.response.status !== 404)){
                 formikFunctions.setErrors({ submit: `Network Error: 4s` });
                 setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 3s` }),1000);
                 setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 2s` }),2000);
