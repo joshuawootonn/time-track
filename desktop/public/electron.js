@@ -27,7 +27,8 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new electron.BrowserWindow({
     width: 1000,
-    height: 800
+    height: 800,
+    fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`)
   });
  
   // and load the index.html of the app.
@@ -79,6 +80,23 @@ app.on('activate', function() {
     createWindow();
   }
 });
+
+/**
+ * Full Screen stuff
+ */
+ipcMain.on(IPCConstants.TOGGLE_FULLSCREEN, (event, arg) => {
+  var isFullScreen = mainWindow.isFullScreen();
+  mainWindow.setFullScreen(!isFullScreen);
+
+   settings.set(`${SETTINGS.WINDOW}`, {
+    isFullScreen: !isFullScreen
+  });  
+  event.returnValue = !isFullScreen;
+});
+ipcMain.on(IPCConstants.IS_FULLSCREEN, (event, arg) => {
+  event.returnValue = mainWindow.isFullScreen();
+});
+
 
 /**
  * Export stuff

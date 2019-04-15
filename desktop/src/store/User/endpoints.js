@@ -7,6 +7,6 @@ export const login = (ip, username, password) => {
     password
   }, 
   {
-    timeout: 2000
+    timeout: 5000
   });
 };

@@ -10,7 +10,7 @@ const CRUDendpoints = generateCRUDEndpoints(DOMAIN);
 const getEmployeeByPin = pin => {
   return axios.get(`${HOST()}/${DOMAIN}/findone?filter[where][pin]=${pin}`,
     {
-      timeout: 2000
+      timeout: 5000
     });
 };
 
