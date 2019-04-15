@@ -6,7 +6,7 @@
     "url": "http://www.joshuawootonn.com"
   },
   "description": "Time Managment & Analytics",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -54,7 +54,7 @@
     "lint": "eslint --fix .",
     "build": "react-scripts build",
     "pack": "npm run build && build --linux --win",
-    "dist": "npm run build && build --linux --win -p always",
+    "dist": "npm run build && build --linux  --ia32 --x64 --win -p always",
     "postinstall": "install-app-deps"
   },
   "build": {
