@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid,Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import { Field, Form } from 'formik';
 
 import styles from './styles';
@@ -21,29 +21,115 @@ export class AccountSigin extends Component {
 
   render() {
     const { classes, isSubmitting, errors } = this.props;
-    
+    console.log(`render`);
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
           <Form>
             <Grid container spacing={24}>
               <Grid item xs={12}>
-                <Field component={Password} name="pin" label="Pin" helper="normal"/>
+                <Field component={Password} name="pin" label="Pin" helper="normal" />
+              </Grid>              
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(7)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${7}`}
+                >
+                  {7}
+                </Button>
               </Grid>
-              {numbers.map((num, i) => {
-                return (
-                  <Grid key={i} item xs={4}>
-                    <Button
-                      onClick={() => this.appendPin(num)}
-                      variant="contained"
-                      className={classes.button}
-                      id={`button-${num}`}
-                    >
-                      {num}
-                    </Button>
-                  </Grid>
-                );
-              })}
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(8)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${8}`}
+                >
+                  {8}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(9)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${9}`}
+                >
+                  {9}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(4)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${4}`}
+                >
+                  {4}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(5)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${5}`}
+                >
+                  {5}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(6)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${6}`}
+                >
+                  {6}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(3)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${3}`}
+                >
+                  {3}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(2)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${2}`}
+                >
+                  {2}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(1)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${1}`}
+                >
+                  {1}
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  onClick={() => this.appendPin(0)}
+                  variant="contained"
+                  className={classes.button}
+                  id={`button-${0}`}
+                >
+                  {0}
+                </Button>
+              </Grid>
               <Grid item xs={4}>
                 <Button
                   onClick={this.resetPin}
@@ -69,7 +155,7 @@ export class AccountSigin extends Component {
                 <Typography className={classes.centerText} color="error" >
                   {errors.submit}
                 </Typography>
-              </Grid>              
+              </Grid>
             </Grid>
           </Form>
         </div>
