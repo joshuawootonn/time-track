@@ -40,11 +40,19 @@ export class AccountSignin extends Component {
               history.push(`/${authorities[authorityId].type}`);
               getStaticData();              
             },
-            e => {
-              formikFunctions.resetForm();
-              formikFunctions.setStatus({ success: false });
-              formikFunctions.setSubmitting(false);              
-              formikFunctions.setErrors({ submit: e.message || `Invalid pin!` });
+            e => {            
+              if(!e.response || (e.response && e.response.status !== 404)){
+                formikFunctions.setErrors({ submit: `Network Error: 4s` });
+                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 3s` }),1000);
+                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 2s` }),2000);
+                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 1s` }),3000);
+                setTimeout(() => this.props.history.push(`/auth`),4000);
+              }else{
+                formikFunctions.resetForm();
+                formikFunctions.setStatus({ success: false });
+                formikFunctions.setSubmitting(false);              
+                formikFunctions.setErrors({ submit: `Invalid pin!` });
+              }
             }
           );          
         }}

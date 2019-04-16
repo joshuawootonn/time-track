@@ -27,7 +27,8 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new electron.BrowserWindow({
     width: 1000,
-    height: 800
+    height: 800,
+    fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`)
   });
  
   // and load the index.html of the app.
@@ -92,6 +93,19 @@ app.on(`activate`, function() {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on(IPCConstants.TOGGLE_FULLSCREEN, (event, arg) => {
+  var isFullScreen = mainWindow.isFullScreen();
+  mainWindow.setFullScreen(!isFullScreen);
+  
+  settings.set(`${SETTINGS.WINDOW}`, {
+    isFullScreen: !isFullScreen
+  });  
+  event.returnValue = !isFullScreen;
+});
+ipcMain.on(IPCConstants.IS_FULLSCREEN, (event, arg) => {
+  event.returnValue = mainWindow.isFullScreen();
 });
 
 // In this file you can include the rest of your app's specific main process

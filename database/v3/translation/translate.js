@@ -106,7 +106,21 @@ async function main() {
       }else{
         console.log(`Shift with id: ${oldShift.id} was not inserted on line: ${103} due to not being a valid employee`)
       }
-    }   
+    } else if (hashOfUsedShiftIds[oldShift.shiftid] !== 1 && oldShift.timeout === null){
+      const inTimeString = oldShift.timein.split(':')
+      const inDatetimeMoment = moment.utc(oldShift.datein).add(parseInt(inTimeString[0]),'hours').add(parseInt(inTimeString[1]),'minutes');
+
+      const inDatetime = inDatetimeMoment.format("YYYY-MM-DD HH:mm:ss");
+
+      const [employeeRows] = await newConnection.execute(`SELECT * FROM ${constants.NEW_EMPLOYEE_TABLE} WHERE id='${oldShift.employeeid}'`)
+      if(employeeRows && employeeRows.length > 0){
+        await newConnection.execute(`INSERT INTO ${constants.NEW_SHIFT_TABLE} (id,clock_in_date, employee_id) 
+        VALUES (${oldShift.shiftid}, '${inDatetime}', ${oldShift.employeeid} )`)
+        hashOfUsedShiftIds[oldShift.shiftid] = 1;
+      }else{
+        console.log(`Shift with id: ${oldShift.id} was not inserted on line: ${103} due to not being a valid employee`)
+      }
+    }
   }
   console.log('Shift migration complete')
 

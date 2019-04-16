@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Card } from '@material-ui/core';
 import moment from 'moment';
 
-import FilterShift from 'components/forms/Shift/Filter';
+import Shift from 'components/forms/Shift/Filter';
 
 import { authoritySelectors, crewSelectors, employeeSelectors, projectSelectors } from 'store/selectors';
 import { analyzeActions, shiftActions } from 'store/actions';
@@ -39,7 +39,7 @@ export class ShiftFilter extends Component {
           render={formikProps => {
             return (            
               <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>
-                <FilterShift
+                <Shift
                   employees={[{ id: -1, type: `All` },...employees]}
                   authorities={[{ id: -1, type: `All` }, ...authorities]}
                   crews={[{ id: -1, name: `All` }, ...crews ]}

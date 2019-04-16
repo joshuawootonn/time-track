@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton, Tooltip } from '@material-ui/core';
-import { ShowChart, Check, Close, ArrowBack, Storage } from '@material-ui/icons';
+import { ShowChart, Storage, Check, Close, ArrowBack, Fullscreen, FullscreenExit } from '@material-ui/icons';
 
 import styles from './styles';
 import * as authorityConstants from 'constants/authority';
 
 export const AccountAction = props => {
-  const { classes, isWorking, clockIn, clockOut, analyze, back,type } = props;
+  const { classes, isWorking, clockIn, clockOut, analyze, back, type, toggleFullscreen, isFullScreen } = props;
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -30,6 +30,13 @@ export const AccountAction = props => {
           <Tooltip open={true} title="Export" classes={{ tooltip: classes.toolTip }} placement="bottom">
             <IconButton onClick={props.export} className={classes.button}>
               <Storage className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        }
+        {(type === authorityConstants.MANAGER || type === authorityConstants.ADMIN) && 
+          <Tooltip open={true} title="FullScreen" classes={{ tooltip: classes.toolTip }} placement="bottom">
+            <IconButton onClick={toggleFullscreen} className={classes.button}>
+              {isFullScreen ? <FullscreenExit className={classes.buttonIcon} /> : <Fullscreen className={classes.buttonIcon} /> }
             </IconButton>
           </Tooltip>
         }
@@ -58,7 +65,9 @@ AccountAction.propTypes = {
   clockOut: PropTypes.func.isRequired,
   export: PropTypes.func.isRequired,
   analyze: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  toggleFullscreen: PropTypes.func.isRequired,
+  isFullScreen: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(AccountAction);

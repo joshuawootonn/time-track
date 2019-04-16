@@ -14,11 +14,14 @@ import styles from './styles';
 export class Filter extends Component {
   render() {
     const { classes, isSubmitting, resetForm, initialValues, errors, 
-      projects, crews, authorities,
+      projects, crews, authorities, label,
       employees,  generalError } = this.props;   
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>          
+        <Grid container spacing={24} className={classes.gridContainer}> 
+          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
+            <Typography variant="h6">{label}</Typography>          
+          </Grid>         
           <Grid item xs={12} className={classes.row}>
             <Field
               name='employeeId'
@@ -142,7 +145,8 @@ Filter.propTypes = {
   crews: PropTypes.array.isRequired, 
   authorities: PropTypes.array.isRequired,
   generalError: PropTypes.string,
-  clearFilter: PropTypes.func
+  clearFilter: PropTypes.func,
+  label: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Filter);

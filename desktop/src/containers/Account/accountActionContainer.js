@@ -8,11 +8,25 @@ import { employeeSelectors } from 'store/selectors';
 import * as routes from 'constants/routes';
 import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
+import IPCConstants from 'constants/ipc';
+
+const electron = window.require(`electron`);
+const ipcRenderer = electron.ipcRenderer;
 
 export class AccountAction extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFullScreen: true
+    };
+  }
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
+    this.setState({
+      isFullScreen
+    });
   }
   back = () => {
     this.props.history.push(`/`);
@@ -32,6 +46,11 @@ export class AccountAction extends Component {
   export = () => {
     this.props.history.push(`/${this.props.type}/${routes.EXPORT}`);
   };
+  toggleFullscreen = () => {
+    this.setState({
+      isFullScreen: ipcRenderer.sendSync(IPCConstants.TOGGLE_FULLSCREEN, ``)
+    });
+  }
   render() {
     const { type, currentEmployee } = this.props;
     return (
@@ -43,6 +62,8 @@ export class AccountAction extends Component {
         clockOut={this.clockOut}
         analyze={this.analyze}
         export={this.export}
+        toggleFullscreen={this.toggleFullscreen}
+        isFullScreen={this.state.isFullScreen}
       />
     );
   }
@@ -87,4 +108,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AccountAction));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountAction));
