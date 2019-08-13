@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid } from '@material-ui/core';
+import { AppBar, Tabs, Tab, IconButton,Toolbar,Grid, Tooltip } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack, Settings, Storage } from '@material-ui/icons';
 import moment from 'moment';
@@ -84,9 +84,15 @@ export class Analyze extends Component {
               <Tab label="Tasks" />
               <Tab label="Shifts" />
             </Tabs>
-            <IconButton color="inherit" onClick={this.props.openExport}><Storage/></IconButton>
-            <IconButton color="inherit" onClick={this.props.openSettings}><Settings /></IconButton>
-            <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
+            <Tooltip title="Export" placement="bottom">
+              <IconButton color="inherit" onClick={this.props.openExport}><Storage/></IconButton>
+            </Tooltip>
+            <Tooltip title="Settings" placement="bottom">
+              <IconButton color="inherit" onClick={this.props.openSettings}><Settings /></IconButton>
+            </Tooltip>
+            <Tooltip title="Go Back" placement="bottom">
+              <IconButton color="inherit" onClick={this.back}><ArrowBack /></IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
         { tabValue === 0  && 
