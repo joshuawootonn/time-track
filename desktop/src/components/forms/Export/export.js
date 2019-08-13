@@ -18,65 +18,63 @@ export class Export extends Component {
     const { classes, cancel, isSubmitting, errors,values } = this.props;    
   
     return (
-      <div className={classes.hero}>
-        <Form className={classes.heroContent}>
-          <Grid container spacing={24}>
-            <Grid item xs={12} className={classes.title}>
-              <Typography variant="h3">Export</Typography>
-            </Grid>            
-            <Grid item xs={12} className={classes.row}>
-              <Field
-                name="exportCategory"
-                component={Select}
-                items={exportConstants.exportCategory}
-                fullWidth
-                margin="none"
-                label="Export By"
-                helper="normal"
-              />
-              <Field
-                name="start"
-                component={TextField}              
-                margin="none"
-                label="From"
-                type="date"
-                helper="normal"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="fileLocation"
-                component={File}
-                label="File"
-                fullWidth
-                margin="none"
-                type="file"
-              />
-            </Grid>
-            <Grid item xs={12} className={classes.row}>
-              <Typography variant="body1" className={classes.error}>{errors[Object.keys(errors)[0]]}</Typography>
-              <div>
-                <Button
-                  type="submit"
-                  color="primary"
-                  disabled={isSubmitting || Object.keys(errors).length !== 0 || values.fileLocation.length === 0 }
-                  variant="contained"
-                >
-                  Export
-                </Button>
-                <Button
-                  onClick={cancel}
-                  color="secondary"
-                  variant="text"
-                  className={classes.spaceAround}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </Grid>
+      <Form className={classes.heroContent}>
+        <Grid container spacing={24}>
+          <Grid item xs={12} className={classes.title}>
+            <Typography variant="h3">Export</Typography>
+          </Grid>            
+          <Grid item xs={12} className={classes.row}>
+            <Field
+              name="exportCategory"
+              component={Select}
+              items={exportConstants.exportCategory}
+              fullWidth
+              margin="none"
+              label="Export By"
+              helper="normal"
+            />
+            <Field
+              name="start"
+              component={TextField}              
+              margin="none"
+              label="From"
+              type="date"
+              helper="normal"
+            />
           </Grid>
-        </Form>
-      </div>
+          <Grid item xs={12}>
+            <Field
+              name="fileLocation"
+              component={File}
+              label="File"
+              fullWidth
+              margin="none"
+              type="file"
+            />
+          </Grid>
+          <Grid item xs={12} className={classes.row}>
+            <Typography variant="body1" className={classes.error}>{errors[Object.keys(errors)[0]]}</Typography>
+            <div>
+              <Button
+                type="submit"
+                color="primary"
+                disabled={isSubmitting || Object.keys(errors).length !== 0 || values.fileLocation.length === 0 }
+                variant="contained"
+              >
+                  Export
+              </Button>
+              <Button
+                onClick={cancel}
+                color="secondary"
+                variant="text"
+                className={classes.spaceAround}
+              >
+                  Cancel
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+      </Form>
     );
   }
 }

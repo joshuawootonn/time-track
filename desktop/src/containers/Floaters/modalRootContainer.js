@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SettingsModalScene from 'scenes/Analyze/settings';
+import ExportModalScene from 'scenes/Analyze/export';
 
 import { modalActions } from 'store/actions';
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
 
 
 const MODAL_COMPONENTS = {
-  [analyzeActionTypes.EDIT_SETTINGS_MODAL] : SettingsModalScene
+  [analyzeActionTypes.EDIT_SETTINGS_MODAL] : SettingsModalScene,
+  [analyzeActionTypes.EXPORT_DATA_MODAL] : ExportModalScene
 };
 
 export class ModalRoot extends Component {

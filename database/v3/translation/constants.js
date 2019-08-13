@@ -24,5 +24,5 @@ module.exports.NEW_DATABASE = 'newdatabase'
 module.exports.OLD_DATABASE = 'aacidatabase'
 
 module.exports.USER = 'root'
-module.exports.PASS = '5656'
+module.exports.PASS = 'root'
 module.exports.HOST = 'localhost'
