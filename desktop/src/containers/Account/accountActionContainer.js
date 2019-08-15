@@ -21,8 +21,8 @@ export class AccountAction extends Component {
     };
   }
   componentDidMount = () => {
-    //REMOVE before deploy
-    // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
+    // TODO: REMOVE BEFORE DEPLOY
+    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
     const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
     this.setState({
       isFullScreen

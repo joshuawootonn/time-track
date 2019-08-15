@@ -30,6 +30,8 @@ import ShiftIndex from 'containers/Shift/shiftIndex.container';
 import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 
+import ActivityIndex from 'containers/Activity/activityIndex.container';
+
 const styles = {
   root: {
     height: `100vh`
@@ -60,7 +62,7 @@ export class Analyze extends Component {
     this.props.getAllEmployees();
     this.props.getAllProjects();
     this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(100, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
+    this.props.getShiftsInRange(moment().subtract(300, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
   }
 
   handleTabValueChange = (e, tabValue) => {
@@ -83,6 +85,7 @@ export class Analyze extends Component {
               <Tab label="Projects" />              
               <Tab label="Tasks" />
               <Tab label="Shifts" />
+              <Tab label="Activities" />
             </Tabs>
             <Tooltip title="Export" placement="bottom">
               <IconButton color="inherit" onClick={this.props.openExport}><Storage/></IconButton>
@@ -134,6 +137,17 @@ export class Analyze extends Component {
             <ShiftToolbar />
             <ShiftFilter />
             <ShiftIndex />
+          </Grid>
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftCRUD /> 
+          </Grid>
+        </Grid>} 
+        { tabValue === 4  && 
+        <Grid container className={classes.tab} >
+          <Grid item xs={6} className={classes.gridHeight}>
+            <ShiftToolbar />
+            <ShiftFilter />
+            <ActivityIndex />
           </Grid>
           <Grid item xs={6} className={classes.gridHeight}>
             <ShiftCRUD /> 
