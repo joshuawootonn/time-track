@@ -64,15 +64,12 @@ export const getAllActivities = createSelector(
           if( key === `employeeId` && filters[key] !== -1 && (filters[key] !== activity.shift[key])){
             decision = false;
           }   
-          if( (key === `authorityId` || key === `crewId`) && filters[key] !== -1 && (filters[key] !== activity.shift[`employee`][key])){
+          if( (key === `authorityId` || key === `crewId`) && filters[key] !== -1 && (filters[key] !== activity[`employee`][key])){
             decision = false;
           }
-          // if( key === `projectId` && filters[key] !== -1){
-          //   if(activity.project.id !== filters[key])
-          //   {
-          //     decision = false;
-          //   }            
-          // }  
+          if( key === `projectId` && filters[key] !== -1 && (filters[key] !== activity.project.id)){
+            decision = false;           
+          }  
         });
         return decision;
       }); 

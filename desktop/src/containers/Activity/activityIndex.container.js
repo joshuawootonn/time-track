@@ -27,7 +27,7 @@ export class ShiftIndex extends Component {
   add = () => this.props.setStatus(domain.SHIFT, analyzeStatus.ADDING);
 
   render() {
-    const { shifts, selected,activities } = this.props;
+    const { selected,activities } = this.props;
     if (!activities) return <Progress variant="circular" fullWidth fullHeight />;
 
     
@@ -117,21 +117,23 @@ const rows = [
   },
   {
     id: `clockInDate`,
-    dataKey: `clockInDate`,
+    dataKey: `shift`,
     width: 200,
     height: 56,
     padding: `dense`,
     label: `Clock In`,
-    type: TableDataTypes.DATETIME
+    type: TableDataTypes.OBJECT,
+    keys: [`clockInDate`]
   },
   {
     id: `clockOutDate`,
-    dataKey: `clockOutDate`,
+    dataKey: `shift`,
     width: 200,
     height: 56,
     padding: `dense`,
     label: `Clock Out`,
-    type: TableDataTypes.DATETIME
+    type: TableDataTypes.OBJECT,
+    keys: [`clockOutDate`]
   },
   {
     id: `length`,
@@ -139,7 +141,17 @@ const rows = [
     width: 120,
     height: 56,
     padding: `dense`,
-    label: `Length`,
+    label: `Activity Length`,
     type: TableDataTypes.LENGTH
+  },  
+  {
+    id: `length`,
+    dataKey: `shift`,
+    width: 120,
+    height: 56,
+    padding: `dense`,
+    label: `Shift Length`,
+    type: TableDataTypes.OBJECT,
+    keys: [`length`]
   }
 ];
