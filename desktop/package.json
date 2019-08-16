@@ -14,6 +14,10 @@
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "^3.2.0",
     "@material-ui/icons": "^3.0.1",
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.7.2",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.8.5",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
@@ -54,8 +58,8 @@
     "lint": "eslint --fix .",
     "build": "react-scripts build",
     "pack": "npm run build && build --linux --win",
-    "dist": "npm run build && build --linux  --ia32 --x64 --win -p always",    
-    "dist-test": "npm run build && build --ia32 --x64 --win -p always",    
+    "dist": "npm run build && build --linux  --ia32 --x64 --win -p always",
+    "dist-test": "npm run build && build --ia32 --x64 --win -p always",
     "postinstall": "install-app-deps"
   },
   "build": {
@@ -85,6 +89,8 @@
     }
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
     "axios-mock-adapter": "^1.15.0",
     "babel-eslint": "^8.2.5",
     "coveralls": "^3.0.2",
@@ -94,13 +100,15 @@
     "electron-packager": "^13.1.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "eslint": "^5.5.0",
+    "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.11.1",
     "jest-enzyme": "^7.0.1",
     "jsdom": "^13.0.0",
     "moxios": "^0.4.0",
+    "prettier": "^1.18.2",
     "react-testing-library": "^5.3.1",
-    "redux-mock-store": "^1.5.3"
+    "redux-mock-store": "^1.5.3",
+    "typescript": "^3.5.3"
   },
   "jest": {
     "collectCoverageFrom": [

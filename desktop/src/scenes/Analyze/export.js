@@ -44,10 +44,10 @@ const styles = theme => ({
 export class Export extends Component {
   render() {
     const { classes, open, toggleModal } = this.props;
-    
+
     return (
       <Modal className={classes.modal} open={open} toggle={toggleModal}>
-        <ExportContainer toggleModal={toggleModal}/>
+        <ExportContainer toggleModal={toggleModal} />
       </Modal>
     );
   }
@@ -60,4 +60,4 @@ Export.propTypes = {
 };
 
 
-export default withStyles(styles)( Export);
+export default withStyles(styles)(Export);

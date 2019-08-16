@@ -7,5 +7,5 @@ import reducer from 'store/reducers';
 const middleware = [thunk];
 export default createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware(...middleware))
 );
