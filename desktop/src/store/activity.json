@@ -1,0 +1,12 @@
+{
+  "include": [{
+    "shift": {"employee": ["authority", "crew"]}
+    },{
+    "projectTask":  ["task", "project"]
+    }],
+  
+  
+  "limit": 100
+}
+
+{"include":[{"relation":"shift","scope":{"include":{"relation":"employee","scope":{"include":["authority","crew"]}}}},{"projectTask":["task","project"]}],"limit":100}

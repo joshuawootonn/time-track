@@ -30,7 +30,7 @@ import ShiftIndex from 'containers/Shift/shiftIndex.container';
 import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 
-import ActivityIndex from 'containers/Activity/activityIndex.container';
+import ActivityIndex from 'containers/Activity/activityIndexContainer.tsx';
 
 const styles = {
   root: {
