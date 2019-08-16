@@ -20,7 +20,7 @@ module.exports.NEW_USER_TABLE = 'User'
 module.exports.NEW_ROLE_TABLE = 'Role'
 module.exports.NEW_ROLE_MAPPING_TABLE = 'RoleMapping'
 
-module.exports.NEW_DATABASE = 'timetrack'
+module.exports.NEW_DATABASE = 'aacidatabasev2'
 module.exports.OLD_DATABASE = 'aacidatabase'
 
 module.exports.USER = 'aaci'
