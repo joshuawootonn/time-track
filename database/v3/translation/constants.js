@@ -20,9 +20,9 @@ module.exports.NEW_USER_TABLE = 'User'
 module.exports.NEW_ROLE_TABLE = 'Role'
 module.exports.NEW_ROLE_MAPPING_TABLE = 'RoleMapping'
 
-module.exports.NEW_DATABASE = 'newdatabase'
+module.exports.NEW_DATABASE = 'timetrack'
 module.exports.OLD_DATABASE = 'aacidatabase'
 
-module.exports.USER = 'root'
-module.exports.PASS = 'root'
+module.exports.USER = 'aaci'
+module.exports.PASS = 'aaci1234'
 module.exports.HOST = 'localhost'
