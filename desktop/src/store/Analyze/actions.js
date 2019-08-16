@@ -16,6 +16,10 @@ export const editSettingsModal = () => {
   return modalActions.openModal(analyzeActionTypes.EDIT_SETTINGS_MODAL, null);
 };
 
+export const exportDataModal = () => {
+  return modalActions.openModal(analyzeActionTypes.EXPORT_DATA_MODAL, null);
+};
+
 export const updateFilter = (domain, payload) => {
   return { type: analyzeActionTypes.UPDATE_FILTERS, domain, payload };
 };

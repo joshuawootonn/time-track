@@ -1,11 +1,4 @@
-const styles = theme => ({
-  hero: {
-    height: `100vh`,
-    display: `flex`,
-    flexDirection: `column`,
-    justifyContent: `center`,
-    alignItems: `center`
-  },
+const styles = theme => ({ 
   textField: { width: `100%` },
   heroContent: {
     width: `100%`,
