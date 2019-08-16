@@ -59,16 +59,26 @@ function createWindow() {
   
   log.transports.file.level = "debug"
   autoUpdater.logger = log
-  autoUpdater.checkForUpdatesAndNotify();
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+
 app.on('ready', createWindow);
+
+var updateTimer;
+app.on(`ready`, function () {  
+  app.setAppUserModelId("com.electron.timetrack")
+  log.info(`App ready and checking for updates.`);
+  autoUpdater.checkForUpdatesAndNotify().then();
+
+  updateTimer = setInterval(() => {     
+    log.info(`Checking for updates again`);
+    autoUpdater.checkForUpdatesAndNotify().then();
+  }, 1000 * 10 * 60);
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
+  clearInterval(updateTimer)
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
@@ -197,43 +207,4 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     event.returnValue = 'failed';
   }
 });
-
-// /**
-//  * Auto Update
-//  */
-
-// const sendStatusToWindow = text => {
-//   if (mainWindow) {
-//     ipcMain.emit('message', text);
-//   }
-// };
-
-
-// autoUpdater.on('checking-for-update', () => {
-//   sendStatusToWindow('Checking for update...');
-// });
-// autoUpdater.on('update-available', info => {
-//   log.info('Update available.');
-//   log.info(info);
-//   //autoUpdater.downloadUpdate()
-// });
-// autoUpdater.on('update-not-available', info => {
-//   log.info('Update not available.');
-//   log.info(info);
-// });
-// autoUpdater.on('error', err => {
-//   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
-//   log.error(err);
-// });
-// // autoUpdater.on('download-progress', progressObj => {
-// //   sendStatusToWindow(
-// //     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
-// //   );
-// //   log.info(progressObj);
-// // });
-// autoUpdater.on('update-downloaded', info => {
-//   log.info('Update downloaded; will install in 2s');
-//   log.info(info);
-//   setTimeout(() => autoUpdater.quitAndInstall(), 2000);
-// });
 

@@ -5,8 +5,9 @@
     "email": "joshuawootonn@gmail.com",
     "url": "http://www.joshuawootonn.com"
   },
+  "repository": "joshuawootonn/time-track",
   "description": "Time Managment & Analytics",
-  "version": "3.0.13",
+  "version": "3.0.19",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -41,6 +42,7 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
+    "update-electron-app": "^1.5.0",
     "yup": "^0.25.1"
   },
   "homepage": "./",
@@ -53,9 +55,9 @@
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint --fix .",
     "build": "react-scripts build",
-    "pack": "npm run build && build --linux --win",
-    "dist": "npm run build && build --linux  --ia32 --x64 --win -p always",    
-    "dist-test": "npm run build && build --ia32 --x64 --win -p always",    
+    "pack": "npm run build && build --x64 --win",
+    "dist": "npm run build && build --x64 --win -p always",
+    "dist-test": "npm run build && build --ia32 --x64 --win -p always",
     "postinstall": "install-app-deps"
   },
   "build": {
