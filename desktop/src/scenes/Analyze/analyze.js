@@ -60,7 +60,7 @@ export class Analyze extends Component {
     this.props.getAllEmployees();
     this.props.getAllProjects();
     this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(100, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
+    this.props.getShiftsInRange(moment().subtract(200, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
   }
 
   handleTabValueChange = (e, tabValue) => {
