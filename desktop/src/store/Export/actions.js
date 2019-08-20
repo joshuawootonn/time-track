@@ -24,7 +24,7 @@ export const exportToExcel = (exportCategory, start, fileLocation) => {
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
-      
+      console.log(exportData);
       ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
       await dispatch(snackActions.openSnack(status.SUCCESS, `Export Success!`));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
@@ -54,11 +54,20 @@ const formatData = (startTime, endTime) => {
   const employees = employeeSelectors.getAllEmployees(store.getState())
     .filter((employee) => employee.isEmployed)
     // sort so that employees get added in order
-    .sort((a,b)=> a.lastName + a.firstName > b.lastName + b.firstName);
+    .sort((a,b)=> {
+      var nameA= (a.lastName + a.firstName).toLowerCase(), nameB=(b.lastName + b.firstName).toLowerCase();
+      if (nameA < nameB) //sort string ascending
+       return -1;
+      if (nameA > nameB)
+       return 1;
+      return 0; 
+    });
   // array of shifts w/ embedded activities
   const shifts = shiftSelectors
-    .getShiftsInRange(store.getState(), { startTime, endTime })
+    .getShiftsInRangeForExport(store.getState(), { startTime, endTime })
     .sort((a,b)=> a.clockInDate > b.clockInDate);
+
+  console.log(shifts);
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
