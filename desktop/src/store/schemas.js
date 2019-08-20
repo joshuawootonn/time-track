@@ -16,7 +16,6 @@ crewSchema.define({ employees: [employeeSchema] });
 
 authoritySchema.define({ employees: [employeeSchema] });
 
-
 employeeSchema.define({
   authority: authoritySchema,
   crew: crewSchema,
@@ -39,7 +38,6 @@ project_taskSchema.define({
   task: taskSchema
 });
 
-
 projectSchema.define({ project_tasks: [project_taskSchema] });
 
 taskSchema.define({
@@ -47,7 +45,6 @@ taskSchema.define({
   subcategory: subcategorySchema,
   dimension: dimensionSchema
 });
-
 
 subcategorySchema.define({
   tasks: [taskSchema],

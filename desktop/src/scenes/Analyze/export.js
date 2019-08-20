@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from 'components/floaters/Modal';
 import ExportContainer from 'containers/Analyze/exportContainer';
 
-
-
 /* istanbul ignore next */
 const styles = theme => ({
   modal: {
@@ -44,10 +42,10 @@ const styles = theme => ({
 export class Export extends Component {
   render() {
     const { classes, open, toggleModal } = this.props;
-    
+
     return (
       <Modal className={classes.modal} open={open} toggle={toggleModal}>
-        <ExportContainer toggleModal={toggleModal}/>
+        <ExportContainer toggleModal={toggleModal} />
       </Modal>
     );
   }
@@ -59,5 +57,4 @@ Export.propTypes = {
   toggleModal: PropTypes.func.isRequired
 };
 
-
-export default withStyles(styles)( Export);
+export default withStyles(styles)(Export);

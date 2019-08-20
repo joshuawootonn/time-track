@@ -7,30 +7,34 @@ import { Typography } from '@material-ui/core';
 import Employee from 'components/forms/Employee';
 import Hero from 'components/layouts/Hero';
 
-import { authoritySelectors, crewSelectors,employeeSelectors } from 'store/selectors';
+import {
+  authoritySelectors,
+  crewSelectors,
+  employeeSelectors
+} from 'store/selectors';
 import { employeeActions } from 'store/actions';
 
 import { analyzeStatus } from 'constants/analyze';
 import { employeeValidation } from 'constants/formValidation';
 
-export class EmployeeCRUD extends Component {  
+export class EmployeeCRUD extends Component {
   removeEmployee = () => {
-    const { selected, removeEmployee } = this.props;  
+    const { selected, removeEmployee } = this.props;
     removeEmployee(selected.id);
   };
 
   render() {
-    const { authorities, crews, selected,status } = this.props;
+    const { authorities, crews, selected, status } = this.props;
 
-    if(status === analyzeStatus.INIT){
+    if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Employee.. </Typography>
         </Hero>
       );
     }
-            
-    if(status === analyzeStatus.ADDING ){
+
+    if (status === analyzeStatus.ADDING) {
       return (
         <Formik
           enableReinitialize
@@ -75,9 +79,9 @@ export class EmployeeCRUD extends Component {
           }}
         />
       );
-    } 
-      
-    if(status === analyzeStatus.EDITING){
+    }
+
+    if (status === analyzeStatus.EDITING) {
       return (
         <Formik
           enableReinitialize
@@ -85,9 +89,9 @@ export class EmployeeCRUD extends Component {
             ...selected,
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false
-          }}          
+          }}
           validationSchema={employeeValidation}
-          onSubmit={(values,formikFunctions) => {
+          onSubmit={(values, formikFunctions) => {
             const { updateEmployee } = this.props;
             return updateEmployee({
               ...values,
@@ -119,7 +123,7 @@ export class EmployeeCRUD extends Component {
           }}
         />
       );
-    } 
+    }
   }
 }
 
@@ -129,7 +133,7 @@ const mapStateToProps = state => {
     crews: crewSelectors.getAllCrews(state),
     authorities: authoritySelectors.getAllAuthorities(state),
     selected: employeeSelectors.getSelectedEmployee(state),
-    status: state.analyze.employeeStatus    
+    status: state.analyze.employeeStatus
   };
 };
 
@@ -148,4 +152,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeCRUD);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeCRUD);

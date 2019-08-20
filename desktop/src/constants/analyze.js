@@ -2,7 +2,7 @@ export const analyzeStatus = {
   INIT: `initial`,
   ADDING: `adding`,
   EDITING: `editing`
-}; 
+};
 
 export const analyzeDomain = {
   EMPLOYEE: `employee`,

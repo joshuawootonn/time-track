@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Category } from 'components/forms/Category/category';
 import CategoryHOC from 'components/forms/Category';
 
-const props =  {  
+const props = {
   classes: {},
   isSubmitting: true,
   initialValues: {},
@@ -15,20 +15,20 @@ const props =  {
   errors: {}
 };
 
-const setup = overRides => {  
-  return shallow(<Category {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<Category {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return shallow(<CategoryHOC {...props} {...overRides}/>);
+  return shallow(<CategoryHOC {...props} {...overRides} />);
 };
 
-describe(`Category Component`, () => {  
+describe(`Category Component`, () => {
   it(`should render correctly`, () => {
-    setup();  
+    setup();
   });
   it(`should render correctly withStyles`, () => {
-    setupHOC();    
+    setupHOC();
   });
   it(`should render a delete button when type===edit`, () => {
     setup({ type: `edit` });
@@ -38,7 +38,10 @@ describe(`Category Component`, () => {
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find(`#category-reset-button`).first().simulate(`click`);
+    wrapper
+      .find(`#category-reset-button`)
+      .first()
+      .simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
   });
 });

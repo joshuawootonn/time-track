@@ -11,45 +11,69 @@ import { analyzeActions } from 'store/actions';
 
 import domain from 'constants/domains';
 
-export class ProjectFilter extends Component { 
-  render () {
-    const { projectFilters, projectFilterVisible, clearFilter, updateFilter, toggleFilter } = this.props;
-    
-    if(projectFilterVisible){
+export class ProjectFilter extends Component {
+  render() {
+    const {
+      projectFilters,
+      projectFilterVisible,
+      clearFilter,
+      updateFilter,
+      toggleFilter
+    } = this.props;
+
+    if (projectFilterVisible) {
       return (
         <Formik
           enableReinitialize
           initialValues={{
-            ...projectFilters,        
-            startTime: moment(projectFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DD`),
-            endTime: moment(projectFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DD`)
+            ...projectFilters,
+            startTime: moment(
+              projectFilters.startTime,
+              `MM-DD-YY HH:mm:ss`
+            ).format(`YYYY-MM-DD`),
+            endTime: moment(projectFilters.endTime, `MM-DD-YY HH:mm:ss`).format(
+              `YYYY-MM-DD`
+            )
           }}
-          onSubmit={(values,formikFunctions) => {
+          onSubmit={(values, formikFunctions) => {
             toggleFilter();
-            updateFilter({ 
+            updateFilter({
               ...values,
-              startTime: moment(values.startTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`),
-              endTime: moment(values.endTime,`YYYY-MM-DD`).format(`MM-DD-YY HH:mm:ss`)              
+              startTime: moment(values.startTime, `YYYY-MM-DD`).format(
+                `MM-DD-YY HH:mm:ss`
+              ),
+              endTime: moment(values.endTime, `YYYY-MM-DD`).format(
+                `MM-DD-YY HH:mm:ss`
+              )
             });
-            formikFunctions.resetForm();  
+            formikFunctions.resetForm();
           }}
           render={formikProps => {
             return (
-              <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>                
-                <Project 
+              <Card
+                style={{
+                  position: `absolute`,
+                  top: `70px`,
+                  left: `2.5%`,
+                  zIndex: 900,
+                  width: `95%`,
+                  minHeight: `100px`
+                }}
+              >
+                <Project
                   type="filter"
                   label="Filter"
                   clearFilter={clearFilter}
-                  {...formikProps}              
+                  {...formikProps}
                 />
-              </Card>  
+              </Card>
             );
-          }} 
-        /> 
+          }}
+        />
       );
     }
     return null;
-  }     
+  }
 }
 
 /* istanbul ignore next */
@@ -63,10 +87,14 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.PROJECT,filters)),
+    updateFilter: filters =>
+      dispatch(analyzeActions.updateFilter(domain.PROJECT, filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))  
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectFilter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectFilter);

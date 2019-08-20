@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore();
 
-describe(`Admin Routes`, () => { 
+describe(`Admin Routes`, () => {
   it(`should be an array with 4 element`, () => {
     expect(Admin).toBeDefined();
     expect(Admin.length).toEqual(4);

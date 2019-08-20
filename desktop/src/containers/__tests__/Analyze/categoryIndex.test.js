@@ -5,27 +5,24 @@ import { CategoryIndex } from 'containers/Analyze/categoryIndexContainer';
 import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
 
-
-const props =  {  
+const props = {
   selected: {},
   select: jest.fn(),
-  categories: [{ id: 1 },{ id: 2 }],
+  categories: [{ id: 1 }, { id: 2 }],
   setStatus: jest.fn(),
-  getAllCategories: jest.fn()
-    .mockImplementationOnce(() => Promise.resolve())
+  getAllCategories: jest.fn().mockImplementationOnce(() => Promise.resolve())
 };
 
-const setup = overRides => {  
-  return mount(<CategoryIndex {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<CategoryIndex {...props} {...overRides} />);
 };
 
-
-describe(`Category Index Container`, () => {  
+describe(`Category Index Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();       
+    setup();
   });
   it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
@@ -39,7 +36,7 @@ describe(`Category Index Container`, () => {
     expect(props.select).toHaveBeenCalledTimes(0);
     instance.select({ id: 1 });
     expect(props.select).toHaveBeenCalledTimes(1);
-    expect(props.select).toHaveBeenCalledWith(domain.CATEGORY,{ id: 1 });
+    expect(props.select).toHaveBeenCalledWith(domain.CATEGORY, { id: 1 });
   });
   it(`should call props.setStatus on this.add`, () => {
     const wrapper = setup();
@@ -47,6 +44,9 @@ describe(`Category Index Container`, () => {
     expect(props.setStatus).toHaveBeenCalledTimes(0);
     instance.add({ id: 1 });
     expect(props.setStatus).toHaveBeenCalledTimes(1);
-    expect(props.setStatus).toHaveBeenCalledWith(domain.CATEGORY,analyzeStatus.ADDING);
+    expect(props.setStatus).toHaveBeenCalledWith(
+      domain.CATEGORY,
+      analyzeStatus.ADDING
+    );
   });
 });

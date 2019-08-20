@@ -4,8 +4,8 @@ import { mount } from 'enzyme';
 import { TextField } from 'components/inputs/TextField/textField';
 import TextFieldHOC from 'components/inputs/TextField';
 
-const props =  {  
-  form:{
+const props = {
+  form: {
     errors: {}
   },
   field: {
@@ -20,22 +20,22 @@ const props =  {
   fullWidth: true
 };
 
-const setup = overRides => {  
-  return mount(<TextField {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<TextField {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return mount(<TextFieldHOC {...props} {...overRides}/>);
+  return mount(<TextFieldHOC {...props} {...overRides} />);
 };
 
 describe(`TextField Input`, () => {
   it(`should render correctly`, () => {
-    setup();        
+    setup();
   });
   it(`should render correctly withStyles`, () => {
-    setupHOC();       
-  }); 
+    setupHOC();
+  });
   it(`should render no helper text when helper="none"`, () => {
-    setup({ helper: `none` });        
+    setup({ helper: `none` });
   });
 });

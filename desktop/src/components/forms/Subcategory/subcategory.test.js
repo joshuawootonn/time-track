@@ -4,9 +4,9 @@ import { shallow } from 'enzyme';
 import { Subcategory } from 'components/forms/Subcategory/subcategory';
 import SubcategoryHOC from 'components/forms/Subcategory';
 
-const props =  {  
+const props = {
   classes: {},
-  isSubmitting: true, 
+  isSubmitting: true,
   type: `edit`,
   initialValues: {},
   label: `label`,
@@ -17,12 +17,12 @@ const props =  {
   errors: {}
 };
 
-const setup = overRides => {  
-  return shallow(<Subcategory {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<Subcategory {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return shallow(<SubcategoryHOC {...props} {...overRides}/>);
+  return shallow(<SubcategoryHOC {...props} {...overRides} />);
 };
 
 describe(`Subcategory Component`, () => {
@@ -34,13 +34,16 @@ describe(`Subcategory Component`, () => {
   });
   it(`should render correctly withStyles`, () => {
     setupHOC();
-  });  
+  });
   it(`should resetForm when #subcategory-reset-button is clicked`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     instance.resetForm = jest.fn();
     expect(props.resetForm).toHaveBeenCalledTimes(0);
-    wrapper.find(`#subcategory-reset-button`).first().simulate(`click`);
+    wrapper
+      .find(`#subcategory-reset-button`)
+      .first()
+      .simulate(`click`);
     expect(props.resetForm).toHaveBeenCalledTimes(1);
-  });  
+  });
 });

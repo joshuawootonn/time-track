@@ -13,15 +13,20 @@ const data = { response: true };
 
 describe(`Dimension Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
     mock = new MockAdapter(axios);
   });
-  // GET ALL 
+  // GET ALL
   test(`getAllDimensions should dispatch 2 actions for success`, async () => {
     const expectedActionTypes = [
-      `get_dimensions_request`, `get_dimensions_success`
+      `get_dimensions_request`,
+      `get_dimensions_success`
     ];
-    mock.onGet(/dimensions/).reply(200,data);
-    await compareActionTypes(expectedActionTypes,store,dimensionActions.getAllDimensions());
+    mock.onGet(/dimensions/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      dimensionActions.getAllDimensions()
+    );
   });
 });

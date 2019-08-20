@@ -26,15 +26,17 @@ export const Snack = props => {
         }
         action={
           <div>
-            {onClose &&  <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              className={classes.close}
-              onClick={onClose}
-            >
-              <Close className={classes.icon} />
-            </IconButton>}
+            {onClose && (
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                className={classes.close}
+                onClick={onClose}
+              >
+                <Close className={classes.icon} />
+              </IconButton>
+            )}
           </div>
         }
       />

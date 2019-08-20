@@ -14,8 +14,8 @@ const props = {
   classes: {}
 };
 
-const setup = () => {  
-  return shallow(<Snack {...props} />);    
+const setup = () => {
+  return shallow(<Snack {...props} />);
 };
 
 const setupHOC = () => {
@@ -24,7 +24,7 @@ const setupHOC = () => {
 
 describe(`Snack Components`, () => {
   it(`should render correctly`, () => {
-    setup();    
+    setup();
   });
   it(`should render correctly withStyles`, () => {
     setupHOC();

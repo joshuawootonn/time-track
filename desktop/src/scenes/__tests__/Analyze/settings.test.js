@@ -3,21 +3,21 @@ import { shallow } from 'enzyme';
 
 import { Settings } from 'scenes/Analyze/settings';
 
-const props =  {
+const props = {
   classes: {},
   open: true,
   toggleModal: jest.fn()
 };
 
-const setup = overRides => {  
-  return shallow(<Settings {...props} {...overRides}/>);
+const setup = overRides => {
+  return shallow(<Settings {...props} {...overRides} />);
 };
 
-describe(`Settings Scene`, () => {  
+describe(`Settings Scene`, () => {
   it(`should render correctly`, () => {
-    setup();        
-  });  
-  it(`should display different containers based on state.currentMenu`, () =>{
+    setup();
+  });
+  it(`should display different containers based on state.currentMenu`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(wrapper.state().currentMenu).toEqual(0);
@@ -27,5 +27,5 @@ describe(`Settings Scene`, () => {
     expect(wrapper.state().currentMenu).toEqual(0);
     instance.menuSelect(3)();
     expect(wrapper.state().currentMenu).toEqual(3);
-  });  
+  });
 });

@@ -31,19 +31,19 @@ console.warn = message => {
 };
 // console.log = jest.fn();
 //console.log = jest.fn();
-global.window.require = function () {
+global.window.require = function() {
   return {
     ipcRenderer: {
-      send: function () {
+      send: function() {
         // Fake sending message to ipcMain
       },
-      on: function (string, fun) {
+      on: function(string, fun) {
         fun(null, string);
       },
       sendSync: function(key) {
-        if(key === IPCConstants.GET_CRED){
+        if (key === IPCConstants.GET_CRED) {
           return { username: `josh`, password: `5656` };
-        }else if (key === IPCConstants.CREATE_EXPORT){
+        } else if (key === IPCConstants.CREATE_EXPORT) {
           return {};
         }
       }

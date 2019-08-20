@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { categoryActions,analyzeActions } from 'store/actions';
+import { categoryActions, analyzeActions } from 'store/actions';
 import { categorySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -13,16 +13,16 @@ import domain from 'constants/domains';
 export class CategoryIndex extends Component {
   componentDidMount = () => {
     this.props.getAllCategories();
-  }
+  };
 
-  selectLabel = selected => `${selected.type} selected`
+  selectLabel = selected => `${selected.type} selected`;
 
-  select = object => this.props.select(domain.CATEGORY,object)
+  select = object => this.props.select(domain.CATEGORY, object);
 
-  add = () => this.props.setStatus(domain.CATEGORY,analyzeStatus.ADDING)
-  
-  render () {
-    const { categories,selected } = this.props;    
+  add = () => this.props.setStatus(domain.CATEGORY, analyzeStatus.ADDING);
+
+  render() {
+    const { categories, selected } = this.props;
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
@@ -30,9 +30,9 @@ export class CategoryIndex extends Component {
         tableData={categories}
         headerData={rows}
         selected={selected}
-        select={this.select}        
+        select={this.select}
         add={this.add}
-        initialOrderBy='type'
+        initialOrderBy="type"
       />
     );
   }
@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch => {
     getAllCategories: () => {
       return dispatch(categoryActions.getAllCategories());
     },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
@@ -61,10 +61,13 @@ CategoryIndex.propTypes = {
   categories: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired,
-  setStatus:PropTypes.func.isRequired
+  setStatus: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(CategoryIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryIndex);
 
 const rows = [
   {

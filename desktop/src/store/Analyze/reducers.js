@@ -29,10 +29,14 @@ export const initialState = {
     authorityId: -1
   },
   projectFilters: {
-    name: ``,    
+    name: ``,
     isActive: true,
-    startTime: moment().subtract(1, `years`).format(`MM-DD-YY HH:mm:ss`), 
-    endTime: moment().add(1,`years`).format(`MM-DD-YY HH:mm:ss`) 
+    startTime: moment()
+      .subtract(1, `years`)
+      .format(`MM-DD-YY HH:mm:ss`),
+    endTime: moment()
+      .add(1, `years`)
+      .format(`MM-DD-YY HH:mm:ss`)
   },
   taskFilters: {
     name: ``,
@@ -45,8 +49,12 @@ export const initialState = {
     projectId: -1,
     authorityId: -1,
     crewId: -1,
-    startTime: moment().startOf(`week`).format(`MM-DD-YY HH:mm:ss`), 
-    endTime: moment().endOf(`week`).format(`MM-DD-YY HH:mm:ss`) 
+    startTime: moment()
+      .startOf(`week`)
+      .format(`MM-DD-YY HH:mm:ss`),
+    endTime: moment()
+      .endOf(`week`)
+      .format(`MM-DD-YY HH:mm:ss`)
   },
   authorityFilters: {},
   crewFilters: {},
@@ -62,51 +70,58 @@ export const initialState = {
   subcategoryFilterVisible: false
 };
 export default (state = initialState, action) => {
-  if(action.domain && !state.hasOwnProperty(action.domain.singular)){
+  if (action.domain && !state.hasOwnProperty(action.domain.singular)) {
     return state;
   }
   switch (action.type) {
-  case analyzeActionTypes.SELECT:
-    if ( state[action.domain.singular] !== -1 && state[action.domain.singular] === action.payload) {
+    case analyzeActionTypes.SELECT:
+      if (
+        state[action.domain.singular] !== -1 &&
+        state[action.domain.singular] === action.payload
+      ) {
+        return {
+          ...state,
+          [action.domain.singular]: -1,
+          [`${action.domain.singular}Status`]: analyzeStatus.INIT
+        };
+      } else {
+        return {
+          ...state,
+          [action.domain.singular]: action.payload,
+          [`${action.domain.singular}Status`]: analyzeStatus.EDITING
+        };
+      }
+    case analyzeActionTypes.SET_STATUS:
       return {
         ...state,
-        [action.domain.singular]: -1,
-        [`${action.domain.singular}Status`]: analyzeStatus.INIT
+        [`${action.domain.singular}Status`]: action.payload
       };
-    } else  {
+    case analyzeActionTypes.DELETE_SELECTED:
       return {
         ...state,
-        [action.domain.singular]: action.payload,
-        [`${action.domain.singular}Status`]: analyzeStatus.EDITING
+        [`${action.domain.singular}Status`]: analyzeStatus.INIT,
+        [action.domain.singular]: -1
       };
-    }
-  case analyzeActionTypes.SET_STATUS:
-    return {
-      ...state,
-      [`${action.domain.singular}Status`]: action.payload
-    };
-  case analyzeActionTypes.DELETE_SELECTED: 
-    return {
-      ...state,
-      [`${action.domain.singular}Status`]: analyzeStatus.INIT,
-      [action.domain.singular]: -1
-    };
-  case analyzeActionTypes.UPDATE_FILTERS: 
-    return {
-      ...state,
-      [`${action.domain.singular}Filters`]: action.payload
-    };
-  case analyzeActionTypes.TOGGLE_FILTER:
-    return {
-      ...state,
-      [`${action.domain.singular}FilterVisible`]: !state[`${action.domain.singular}FilterVisible`]
-    };
-  case analyzeActionTypes.CLEAR_FILTER:    
-    return {
-      ...state,
-      [`${action.domain.singular}Filters`]: initialState[`${action.domain.singular}Filters`]
-    };
-  default:
-    return state;
+    case analyzeActionTypes.UPDATE_FILTERS:
+      return {
+        ...state,
+        [`${action.domain.singular}Filters`]: action.payload
+      };
+    case analyzeActionTypes.TOGGLE_FILTER:
+      return {
+        ...state,
+        [`${action.domain.singular}FilterVisible`]: !state[
+          `${action.domain.singular}FilterVisible`
+        ]
+      };
+    case analyzeActionTypes.CLEAR_FILTER:
+      return {
+        ...state,
+        [`${action.domain.singular}Filters`]: initialState[
+          `${action.domain.singular}Filters`
+        ]
+      };
+    default:
+      return state;
   }
 };

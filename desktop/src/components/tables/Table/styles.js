@@ -1,5 +1,4 @@
 export default theme => ({
-
   //table
   headerCell: {
     background: `white`,
@@ -17,20 +16,20 @@ export default theme => ({
     display: `flex`,
     alignItems: `center`,
     boxSizing: `border-box`,
-    flex: 1,    
+    flex: 1,
     marginRight: 0,
     textTransform: `none`
   },
-  //table 
+  //table
   tableRow: {
     cursor: `pointer`,
     '&:hover': {
       backgroundColor: theme.palette.grey[200]
-    } 
+    }
   },
-  tableRowHover: {    
+  tableRowHover: {
     marginRight: 0,
-    flex: 1    
+    flex: 1
   },
   // header cell
   tableCell: {

@@ -73,7 +73,7 @@ export const halfShift = Yup.object().shape({
   employeeId: Yup.number()
     .positive(`Employee selection required`)
     .required(`Employee selection required`),
-  clockInDate: Yup.date().required(`Invalid clock in date`)  
+  clockInDate: Yup.date().required(`Invalid clock in date`)
 });
 
 export const exportValidation = Yup.object().shape({
@@ -129,25 +129,23 @@ export const projectValidation = Yup.object().shape({
     .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), `Name format is invalid`),
   date: Yup.date().required(`Invalid date`),
   isActive: Yup.boolean(),
-  projectTasks: Yup.array()
-    .of(
-      Yup.object().shape({
-        categoryId: Yup.number()
-          .min(1, `Selection required`)
-          .required(`Selection required`),
-        subcategoryId: Yup.number()
-          .positive(`Selection required`)
-          .required(`Selection required`),
-        taskId: Yup.number()
-          .positive(`Selection required`)
-          .required(`Selection required`),
-        estimateTime: Yup.number()
-          .positive(`Postive numbers only`)
-          .required(`Postive numbers only`),
-        quantity: Yup.number()
-          .positive(`Postive numbers only`)
-          .required(`Postive numbers only`)
-      })
-    )
+  projectTasks: Yup.array().of(
+    Yup.object().shape({
+      categoryId: Yup.number()
+        .min(1, `Selection required`)
+        .required(`Selection required`),
+      subcategoryId: Yup.number()
+        .positive(`Selection required`)
+        .required(`Selection required`),
+      taskId: Yup.number()
+        .positive(`Selection required`)
+        .required(`Selection required`),
+      estimateTime: Yup.number()
+        .positive(`Postive numbers only`)
+        .required(`Postive numbers only`),
+      quantity: Yup.number()
+        .positive(`Postive numbers only`)
+        .required(`Postive numbers only`)
+    })
+  )
 });
-

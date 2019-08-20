@@ -14,15 +14,15 @@ export class SnackContainer extends Component {
 
     let icon;
     switch (type) {
-    case status.SUCCESS:
-      icon = <Check />;
-      break;
-    case status.FAILURE:
-      icon = <Error />;
-      break;
-    default:
-      icon = null;
-      break;
+      case status.SUCCESS:
+        icon = <Check />;
+        break;
+      case status.FAILURE:
+        icon = <Error />;
+        break;
+      default:
+        icon = null;
+        break;
     }
 
     return (

@@ -7,7 +7,7 @@ import { EmployeeFilter } from 'containers/Employee/employeeFilter.container';
 import { analyzeStatus } from 'constants/analyze';
 import { AUTHORITY_MOCK, CREW_MOCK, EMPLOYEE_MOCK } from 'constants/modelMocks';
 
-const props =  {  
+const props = {
   selected: EMPLOYEE_MOCK[0],
   status: analyzeStatus.INIT,
   authorities: AUTHORITY_MOCK,
@@ -20,7 +20,6 @@ const props =  {
     crewId: -1,
     authorityId: -1
   }
-  
 };
 
 const formikFunctions = {
@@ -30,19 +29,17 @@ const formikFunctions = {
   setErrors: jest.fn()
 };
 
-
-const setup = overRides => {  
-  return mount(<EmployeeFilter {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<EmployeeFilter {...props} {...overRides} />);
 };
 
-
-describe(`Employee Filter Container`, () => {  
+describe(`Employee Filter Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
     setup();
-  }); 
+  });
   it(`should on return something is props.employeeFilterVisible === true`, () => {
     const wrapperWhenIsVisible = setup();
     expect(wrapperWhenIsVisible.html()).not.toBeNull();
@@ -50,16 +47,19 @@ describe(`Employee Filter Container`, () => {
     expect(wrapperWhenNotIsVisible.html()).toBeNull();
   });
   it(`should onSubmit call props.updateFilter, props.toggleFilter, and props.formikFunctions.resetForm `, () => {
-    const values = { val: `asdf`,isEmployed: 0, isWorking: 0 };
+    const values = { val: `asdf`, isEmployed: 0, isWorking: 0 };
     const wrapper = setup({ status: analyzeStatus.EDITING });
-    const onSubmit = wrapper.find(Formik).first().prop(`onSubmit`);
-    
+    const onSubmit = wrapper
+      .find(Formik)
+      .first()
+      .prop(`onSubmit`);
+
     expect(props.updateFilter).not.toHaveBeenCalled();
     expect(props.toggleFilter).not.toHaveBeenCalled();
     expect(formikFunctions.resetForm).not.toHaveBeenCalled();
-    onSubmit(values,formikFunctions);
-    expect(props.toggleFilter).toHaveBeenCalled();      
-    expect(formikFunctions.resetForm).toHaveBeenCalled();      
-    expect(props.updateFilter).toHaveBeenCalled();  
-  });  
+    onSubmit(values, formikFunctions);
+    expect(props.toggleFilter).toHaveBeenCalled();
+    expect(formikFunctions.resetForm).toHaveBeenCalled();
+    expect(props.updateFilter).toHaveBeenCalled();
+  });
 });

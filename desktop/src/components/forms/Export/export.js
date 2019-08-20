@@ -15,18 +15,18 @@ import * as exportConstants from 'constants/export';
 
 export class Export extends Component {
   render() {
-    const { classes, cancel, isSubmitting, errors,values } = this.props;    
-  
+    const { classes, cancel, isSubmitting, errors, values } = this.props;
+
     return (
       <Form className={classes.heroContent}>
         <Grid container spacing={24}>
           <Grid item xs={12} className={classes.title}>
             <Typography variant="h3">Export</Typography>
-          </Grid>            
-          <Grid item xs={12} className={classes.row}>            
+          </Grid>
+          <Grid item xs={12} className={classes.row}>
             <Field
               name="start"
-              component={TextField}              
+              component={TextField}
               margin="none"
               label="From"
               type="date"
@@ -34,7 +34,7 @@ export class Export extends Component {
             />
             <Field
               name="end"
-              component={TextField}              
+              component={TextField}
               margin="none"
               label="To"
               type="date"
@@ -52,15 +52,21 @@ export class Export extends Component {
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <Typography variant="body1" className={classes.error}>{errors[Object.keys(errors)[0]]}</Typography>
+            <Typography variant="body1" className={classes.error}>
+              {errors[Object.keys(errors)[0]]}
+            </Typography>
             <div>
               <Button
                 type="submit"
                 color="primary"
-                disabled={isSubmitting || Object.keys(errors).length !== 0 || values.fileLocation.length === 0 }
+                disabled={
+                  isSubmitting ||
+                  Object.keys(errors).length !== 0 ||
+                  values.fileLocation.length === 0
+                }
                 variant="contained"
               >
-                  Export
+                Export
               </Button>
               <Button
                 onClick={cancel}
@@ -68,7 +74,7 @@ export class Export extends Component {
                 variant="text"
                 className={classes.spaceAround}
               >
-                  Cancel
+                Cancel
               </Button>
             </div>
           </Grid>

@@ -12,7 +12,7 @@ let mock;
 const data = { response: true };
 describe(`Activity Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
     mock = new MockAdapter(axios);
   });
   // CREATE
@@ -24,8 +24,12 @@ describe(`Activity Actions`, () => {
       `show_snack`,
       `create_activity_success`
     ];
-    mock.onPost(/activities/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,activityActions.createActivity({ id: 1 }));
+    mock.onPost(/activities/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      activityActions.createActivity({ id: 1 })
+    );
   });
   test(`dispatch 5 actions for createActivity`, async () => {
     const expectedActionTypes = [
@@ -35,7 +39,11 @@ describe(`Activity Actions`, () => {
       `show_snack`,
       `create_activity_failure`
     ];
-    mock.onPost(/activitiess/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,activityActions.createActivity({ id: 1 }));
+    mock.onPost(/activitiess/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      activityActions.createActivity({ id: 1 })
+    );
   });
 });

@@ -10,15 +10,17 @@ export const payloadCustomizer = (objValue, srcValue) => {
 export default (state = {}, action) => {
   const { payload, deleted } = action;
   if (payload && payload.entities) {
-    return _.mergeWith({}, state, payload.entities,payloadCustomizer);
+    return _.mergeWith({}, state, payload.entities, payloadCustomizer);
   } else if (deleted && deleted.entities) {
-    let temp = {};
+    const temp = {};
     // Loops through entity types
     Object.keys(state).forEach(entityType => {
       // Potential entity types that need to be deleted
       const itemsToDelete = deleted.entities[entityType];
       // If there are such deletions omit them otherwise carry on
-      temp[entityType] = itemsToDelete ? _.omit(state[entityType], itemsToDelete) : state[entityType];
+      temp[entityType] = itemsToDelete
+        ? _.omit(state[entityType], itemsToDelete)
+        : state[entityType];
     });
     return temp;
   }

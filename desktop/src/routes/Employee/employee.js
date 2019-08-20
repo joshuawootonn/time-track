@@ -9,7 +9,8 @@ export default [
     exact: true,
     name: `Employee Actions`,
     type: routes.EMPLOYEE
-  }, {
+  },
+  {
     path: `/${routes.EMPLOYEE}/${routes.CLOCKOUT}`,
     component: clockOutScene,
     exact: true,

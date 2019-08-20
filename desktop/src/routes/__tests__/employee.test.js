@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Employee from 'routes/Employee';
 
-describe(`Employee Routes`, () => { 
+describe(`Employee Routes`, () => {
   it(`should be an array with 2 element`, () => {
     expect(Employee).toBeDefined();
     expect(Employee.length).toEqual(2);

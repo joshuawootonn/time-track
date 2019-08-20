@@ -15,20 +15,16 @@ export const Hero = props => {
     [classes.fullWidth]: !fullPage && fullWidth
   });
 
-
   const innerClasses = cx({
     [classes.fullPageInner]: fullPage,
     [classes.fullHeight]: !fullPage && fullHeight,
     [classes.fullWidth]: !fullPage && fullWidth,
-    [classes.flex] : true
+    [classes.flex]: true
   });
-
 
   return (
     <div className={wrapperClasses}>
-      <div className={innerClasses}>
-        {children}
-      </div>
+      <div className={innerClasses}>{children}</div>
     </div>
   );
 };
@@ -46,6 +42,5 @@ Hero.propTypes = {
   fullPage: PropTypes.bool,
   classes: PropTypes.object.isRequired
 };
-
 
 export default withStyles(styles)(Hero);

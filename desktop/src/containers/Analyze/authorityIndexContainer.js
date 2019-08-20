@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { authorityActions,analyzeActions } from 'store/actions';
+import { authorityActions, analyzeActions } from 'store/actions';
 import { authoritySelectors } from 'store/selectors';
 import SortSelectTable from 'components/tables/SortSelect';
 import * as TableDataTypes from 'constants/tableDataTypes';
@@ -12,14 +12,14 @@ import domain from 'constants/domains';
 export class AuthorityIndex extends Component {
   componentDidMount = () => {
     this.props.getAllAuthorities();
-  }
-  
-  selectLabel = selected => `${selected.type} selected`
+  };
 
-  select = object => this.props.select(domain.AUTHORITY,object)
+  selectLabel = selected => `${selected.type} selected`;
 
-  render () {
-    const { authorities,selected } = this.props;
+  select = object => this.props.select(domain.AUTHORITY, object);
+
+  render() {
+    const { authorities, selected } = this.props;
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
@@ -28,7 +28,7 @@ export class AuthorityIndex extends Component {
         headerData={rows}
         selected={selected}
         select={this.select}
-        initialOrderBy='type'
+        initialOrderBy="type"
       />
     );
   }
@@ -55,11 +55,14 @@ const mapDispatchToProps = dispatch => {
     getAllAuthorities: () => {
       return dispatch(authorityActions.getAllAuthorities());
     },
-    ...bindActionCreators({ ...analyzeActions }, dispatch) 
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(AuthorityIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthorityIndex);
 
 const rows = [
   {

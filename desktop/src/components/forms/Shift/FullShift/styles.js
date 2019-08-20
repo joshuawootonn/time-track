@@ -14,12 +14,12 @@ const styles = () => ({
   },
   footerRow: {
     padding: `12px 0`,
-    height:`68px`
+    height: `68px`
   },
   body: {
     padding: `0 12px !important`
   },
-  field:{
+  field: {
     margin: `0 8px`
   },
   button: {
@@ -28,7 +28,7 @@ const styles = () => ({
   verticalCenter: {
     display: `flex`,
     alignItems: `center`
-  },    
+  },
   lunchBox: {
     width: `150px`
   }

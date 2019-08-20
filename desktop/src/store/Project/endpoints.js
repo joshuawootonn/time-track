@@ -9,7 +9,9 @@ const getProjectTasksByProjectId = project => {
   return axios.get(`${HOST()}/${DOMAIN}/${project.id}/projecttasks`);
 };
 export const getWithProjectTasks = project => {
-  return axios.get(`${HOST()}/${DOMAIN}/${project.id}/?filter[include]=projectTasks`);
+  return axios.get(
+    `${HOST()}/${DOMAIN}/${project.id}/?filter[include]=projectTasks`
+  );
 };
 
 export default {

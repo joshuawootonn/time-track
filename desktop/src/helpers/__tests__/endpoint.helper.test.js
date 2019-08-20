@@ -17,7 +17,7 @@ describe(`Endpoint Helpers`, () => {
     expect(generatedEndpoints.post).toBeDefined();
     expect(generatedEndpoints.delet).toBeDefined();
   });
-  
+
   it(`generateCRUDEndpoints method should return functions that all return promises`, () => {
     const generatedEnpoints = generateCRUDEndpoints(`asdf`);
     axios.get.mockImplementation(() => Promise.resolve({ data: true }));

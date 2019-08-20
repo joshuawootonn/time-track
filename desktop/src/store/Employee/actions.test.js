@@ -9,7 +9,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore();
 let mock;
-const data = { 
+const data = {
   authorityId: 1,
   crewId: 1,
   firstName: `Jay`,
@@ -22,16 +22,21 @@ const data = {
 
 describe(`Employee Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
     mock = new MockAdapter(axios);
   });
-  // GET ALL 
+  // GET ALL
   test(`should dispatch 2 actions for getAllEmployees`, async () => {
     const expectedActionTypes = [
-      `get_employees_request`, `get_employees_success`
+      `get_employees_request`,
+      `get_employees_success`
     ];
-    mock.onGet(/employees/).reply(200,data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.getAllEmployees());
+    mock.onGet(/employees/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.getAllEmployees()
+    );
   });
 
   // UPDATE
@@ -43,8 +48,12 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `update_employee_success`
     ];
-    mock.onPut(/employees/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,employeeActions.updateEmployee({ id: 1 }));
+    mock.onPut(/employees/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.updateEmployee({ id: 1 })
+    );
   });
   test(`should dispatch 4 actions for updateEmployee`, async () => {
     const expectedActionTypes = [
@@ -54,8 +63,12 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `update_employee_failure`
     ];
-    mock.onPut(/employees/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.updateEmployee({ id: 1 }));
+    mock.onPut(/employees/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.updateEmployee({ id: 1 })
+    );
   });
   // CREATE
   test(`should dispatch 4 actions for createEmployee`, async () => {
@@ -66,8 +79,12 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `create_employee_success`
     ];
-    mock.onPost(/employees/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,employeeActions.createEmployee({ id: 1 }));
+    mock.onPost(/employees/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.createEmployee({ id: 1 })
+    );
   });
   test(`should dispatch 4 actions for createEmployee`, async () => {
     const expectedActionTypes = [
@@ -77,8 +94,12 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `create_employee_failure`
     ];
-    mock.onPost(/employees/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.createEmployee({ id: 1 }));
+    mock.onPost(/employees/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.createEmployee({ id: 1 })
+    );
   });
   // REMOVE
   test(`should dispatch 4 actions for removeEmployee`, async () => {
@@ -90,8 +111,12 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `remove_employee_success`
     ];
-    mock.onDelete(/employees/).reply(200, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.removeEmployee(1));
+    mock.onDelete(/employees/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.removeEmployee(1)
+    );
   });
   test(`should dispatch 4 actions for removeEmployee`, async () => {
     const expectedActionTypes = [
@@ -102,22 +127,30 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `remove_employee_failure`
     ];
-    mock.onDelete(/employees/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.removeEmployee(1));
+    mock.onDelete(/employees/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.removeEmployee(1)
+    );
   });
   // TOGGLE IS WORKING
-  test(`should dispatch 4 actions for setIsWorking`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 4 actions for setIsWorking`, async () => {
+    const expectedActionTypes = [
       `put_employee_request`,
       `put_employee_success`
     ];
-    
-    mock.onPut(/employees/).reply(200, data); 
-    await compareActionTypes(expectedActionTypes,store,employeeActions.setIsWorking({ id: 1 },false));
-  });  
-  // CLOCK IN 
-  test(`should dispatch 7 actions for clockIn on success`,async () => {
-    const expectedActionTypes = [      
+
+    mock.onPut(/employees/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.setIsWorking({ id: 1 }, false)
+    );
+  });
+  // CLOCK IN
+  test(`should dispatch 7 actions for clockIn on success`, async () => {
+    const expectedActionTypes = [
       `clockin_employee_request`,
       `post_shift_request`,
       `post_shift_success`,
@@ -126,25 +159,33 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `clockin_employee_success`
     ];
-    
+
     const data = { response: true };
     mock.onPut(/employees/).reply(200, data);
-    mock.onPost(/shifts/).reply(200, data);    
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockIn({ id: 1 }));
+    mock.onPost(/shifts/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockIn({ id: 1 })
+    );
   });
   test(`should dispatch 5 actions for clockIn on shift post failure`, async () => {
     const expectedActionTypes = [
-      `clockin_employee_request`,      
+      `clockin_employee_request`,
       `post_shift_request`,
       `post_shift_failure`,
       `show_snack`,
       `clockin_employee_failure`
     ];
-    mock.onPost(/shifts/).reply(404);    
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockIn({ id: 1 }));
+    mock.onPost(/shifts/).reply(404);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockIn({ id: 1 })
+    );
   });
-  test(`should dispatch 7 actions for clockIn on employee put failure`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 7 actions for clockIn on employee put failure`, async () => {
+    const expectedActionTypes = [
       `clockin_employee_request`,
       `post_shift_request`,
       `post_shift_success`,
@@ -152,16 +193,20 @@ describe(`Employee Actions`, () => {
       `put_employee_failure`,
       `show_snack`,
       `clockin_employee_failure`
-    ];   
-    
-    mock.onPost(/shifts/).reply(200, data);    
+    ];
+
+    mock.onPost(/shifts/).reply(200, data);
     mock.onPut(/employees/).reply(404, data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockIn({ id: 1 }));
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockIn({ id: 1 })
+    );
   });
 
   // CLOCK OUT
-  test(`should dispatch 7 actions for clockOut on success`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 7 actions for clockOut on success`, async () => {
+    const expectedActionTypes = [
       `clockout_employee_request`,
       `put_shift_request`,
       `put_shift_success`,
@@ -170,14 +215,18 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `clockout_employee_success`
     ];
-    
+
     const data = { response: true };
     mock.onPut(/employees/).reply(200, data);
-    mock.onPut(/shifts/).reply(200, data);    
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockOut({ id: 1 },{},[],30));
+    mock.onPut(/shifts/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockOut({ id: 1 }, {}, [], 30)
+    );
   });
-  test(`should dispatch 9 actions for clockOut on success with one activity`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 9 actions for clockOut on success with one activity`, async () => {
+    const expectedActionTypes = [
       `clockout_employee_request`,
       `post_activity_request`,
       `put_shift_request`,
@@ -188,35 +237,45 @@ describe(`Employee Actions`, () => {
       `show_snack`,
       `clockout_employee_success`
     ];
-    
-    const data = { response: {
-      authorityId: 1,
-      crewId: 1,
-      firstName: `Jay`,
-      id: 10,
-      isEmployed: 1,
-      isWorking: 1,
-      lastName: `Simon`,
-      pin: 121212
-    } };
+
+    const data = {
+      response: {
+        authorityId: 1,
+        crewId: 1,
+        firstName: `Jay`,
+        id: 10,
+        isEmployed: 1,
+        isWorking: 1,
+        lastName: `Simon`,
+        pin: 121212
+      }
+    };
     mock.onPut(/employees/).reply(200, data);
-    mock.onPut(/shifts/).reply(200, data);    
-    mock.onPost(/activit/).reply(200,data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockOut({ id: 1 },{},[{ id: 1 }],30));
+    mock.onPut(/shifts/).reply(200, data);
+    mock.onPost(/activit/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockOut({ id: 1 }, {}, [{ id: 1 }], 30)
+    );
   });
   test(`should dispatch 5 actions for clockOut on shift put failure`, async () => {
     const expectedActionTypes = [
-      `clockout_employee_request`,      
+      `clockout_employee_request`,
       `put_shift_request`,
       `put_shift_failure`,
       `show_snack`,
       `clockout_employee_failure`
     ];
-    mock.onPut(/shifts/).reply(404);    
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockOut({ id: 1 },{},[],30));
+    mock.onPut(/shifts/).reply(404);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockOut({ id: 1 }, {}, [], 30)
+    );
   });
-  test(`should dispatch 7 actions for clockOut on employee put failure`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 7 actions for clockOut on employee put failure`, async () => {
+    const expectedActionTypes = [
       `clockout_employee_request`,
       `put_shift_request`,
       `put_shift_success`,
@@ -224,29 +283,41 @@ describe(`Employee Actions`, () => {
       `put_employee_failure`,
       `show_snack`,
       `clockout_employee_failure`
-    ];   
-    
-    mock.onPut(/shifts/).reply(200, data);    
+    ];
+
+    mock.onPut(/shifts/).reply(200, data);
     mock.onPut(/employees/).reply(404, data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.clockOut({ id: 1 },{},[],30));
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.clockOut({ id: 1 }, {}, [], 30)
+    );
   });
-  
+
   // LOGIN
-  test(`should dispatch 2 actions for login`,async () => {
-    const expectedActionTypes = [      
+  test(`should dispatch 2 actions for login`, async () => {
+    const expectedActionTypes = [
       `login_employee_request`,
       `login_employee_success`
     ];
     mock.onAny(/employees/).reply(200, data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.login(111111));
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.login(111111)
+    );
   });
-  test(`should not login an employee that !isEmployed`,async () => {
-    const expectedActionTypes = [      
+  test(`should not login an employee that !isEmployed`, async () => {
+    const expectedActionTypes = [
       `login_employee_request`,
       `login_employee_failure`
     ];
     mock.onAny(/employees/).reply(200, { ...data, isEmployed: 0 });
-    await compareActionTypes(expectedActionTypes,store,employeeActions.login(111111));
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.login(111111)
+    );
   });
   test(`should dispatch 2 actions for login`, async () => {
     const expectedActionTypes = [
@@ -254,7 +325,10 @@ describe(`Employee Actions`, () => {
       `login_employee_failure`
     ];
     mock.onAny(/employees/).reply(400, data);
-    await compareActionTypes(expectedActionTypes,store,employeeActions.login(111111));
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      employeeActions.login(111111)
+    );
   });
 });
-

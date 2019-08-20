@@ -10,13 +10,15 @@ export default [
     exact: true,
     name: `Manager Actions`,
     type: routes.MANAGER
-  }, {
+  },
+  {
     path: `/${routes.MANAGER}/${routes.CLOCKOUT}`,
     component: clockOutScene,
     exact: true,
     name: `Manager Clockout`,
     type: routes.MANAGER
-  }, {
+  },
+  {
     path: `/${routes.MANAGER}/${routes.EXPORT}`,
     component: exportScene,
     exact: true,

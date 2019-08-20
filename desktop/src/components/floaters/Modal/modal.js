@@ -9,11 +9,13 @@ import style from './styles';
 
 export class Modal extends Component {
   render() {
-    const { classes,className } = this.props;
+    const { classes, className } = this.props;
 
     return (
       <MUModal open={this.props.open} onClose={this.props.toggle}>
-        <div className={cx(className,classes.paper)}>{this.props.children}</div>
+        <div className={cx(className, classes.paper)}>
+          {this.props.children}
+        </div>
       </MUModal>
     );
   }

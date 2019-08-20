@@ -13,28 +13,28 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class ShiftIndex extends Component { 
-  
-  selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
+export class ShiftIndex extends Component {
+  selectLabel = selected =>
+    `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
 
-  select = object => {    
-    this.props.select(domain.SHIFT,object);
-  }
+  select = object => {
+    this.props.select(domain.SHIFT, object);
+  };
 
-  add = () => this.props.setStatus(domain.SHIFT,analyzeStatus.ADDING)
+  add = () => this.props.setStatus(domain.SHIFT, analyzeStatus.ADDING);
 
   render() {
     const { shifts, selected } = this.props;
     if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
-    
-    return ( 
+
+    return (
       <VirtualizedSortSelect
         data={shifts || []}
-        columns={rows} 
+        columns={rows}
         selected={selected}
         select={this.select}
-        initialSortBy="clockInDate"     
-      /> 
+        initialSortBy="clockInDate"
+      />
     );
   }
 }
@@ -50,25 +50,28 @@ ShiftIndex.propTypes = {
 const mapStateToProps = state => {
   const filters = state.analyze.shiftFilters;
   return {
-    shifts: shiftSelectors.getAllShiftsNew(state, { filters , sorts: {} }),
+    shifts: shiftSelectors.getAllShiftsNew(state, { filters, sorts: {} }),
     selected: shiftSelectors.getSelectedShift(state)
   };
 };
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
-  return {    
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+  return {
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShiftIndex);
 
 const rows = [
   {
-    id: `firstName`, 
+    id: `firstName`,
     dataKey: `employee`,
-    width: 150, 
+    width: 150,
     height: 56,
     padding: `dense`,
     label: `First Name`,
@@ -76,9 +79,9 @@ const rows = [
     keys: [`firstName`]
   },
   {
-    id: `lastName`, 
-    dataKey: `employee`,   
-    width: 150,   
+    id: `lastName`,
+    dataKey: `employee`,
+    width: 150,
     height: 56,
     padding: `dense`,
     label: `Last Name`,
@@ -86,27 +89,27 @@ const rows = [
     keys: [`lastName`]
   },
   {
-    id: `clockInDate`,  
-    dataKey: `clockInDate`,  
-    width: 200,   
+    id: `clockInDate`,
+    dataKey: `clockInDate`,
+    width: 200,
     height: 56,
     padding: `dense`,
     label: `Clock In`,
     type: TableDataTypes.DATETIME
   },
   {
-    id: `clockOutDate`, 
-    dataKey: `clockOutDate`, 
-    width: 200,  
-    height: 56,  
+    id: `clockOutDate`,
+    dataKey: `clockOutDate`,
+    width: 200,
+    height: 56,
     padding: `dense`,
     label: `Clock Out`,
     type: TableDataTypes.DATETIME
   },
   {
-    id: `length`,    
-    dataKey: `length`,  
-    width: 120, 
+    id: `length`,
+    dataKey: `length`,
+    width: 120,
     height: 56,
     padding: `dense`,
     label: `Length`,

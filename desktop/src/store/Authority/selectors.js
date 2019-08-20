@@ -12,16 +12,14 @@ export const getAllAuthorities = createSelector(
     return results.map(authorityId => {
       return authorities[authorityId];
     });
-  },
+  }
 );
 
 export const getSelectedAuthority = createSelector(
   getAuthoritiesFromEntities,
   getAnalyzeState,
   (authorities, analyze) => {
-    if(analyze.authority === -1) 
-      return {};
-    else 
-      return authorities[analyze.authority];
+    if (analyze.authority === -1) return {};
+    else return authorities[analyze.authority];
   }
 );

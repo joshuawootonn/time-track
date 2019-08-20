@@ -9,7 +9,7 @@ import { Add } from '@material-ui/icons';
 import styles from './styles';
 
 export const SortSelectToolbar = props => {
-  const { selected, classes, add,label,selectLabel } = props;
+  const { selected, classes, add, label, selectLabel } = props;
   return (
     <Toolbar
       className={cx(classes.toolbarRoot, {
@@ -18,7 +18,7 @@ export const SortSelectToolbar = props => {
     >
       <div className={classes.title}>
         {Object.keys(selected).length !== 0 ? (
-          <Typography color="inherit" variant="h6" >
+          <Typography color="inherit" variant="h6">
             {selectLabel(selected)}
           </Typography>
         ) : (
@@ -28,13 +28,15 @@ export const SortSelectToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
-      {add &&<div className={classes.actions}>       
-        <Tooltip title="Add">
-          <IconButton aria-label="Add" onClick={add}>
-            <Add />
-          </IconButton>
-        </Tooltip>
-      </div>}
+      {add && (
+        <div className={classes.actions}>
+          <Tooltip title="Add">
+            <IconButton aria-label="Add" onClick={add}>
+              <Add />
+            </IconButton>
+          </Tooltip>
+        </div>
+      )}
     </Toolbar>
   );
 };

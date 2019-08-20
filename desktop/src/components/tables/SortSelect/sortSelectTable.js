@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { TableCell, TableRow, Checkbox, TableBody, Table } from '@material-ui/core';
+import {
+  TableCell,
+  TableRow,
+  Checkbox,
+  TableBody,
+  Table
+} from '@material-ui/core';
 import moment from 'moment';
 
 import EnhancedTableHead from './head';
@@ -18,8 +24,14 @@ export class SortSelectTable extends React.Component {
 
   desc = (a, b, orderBy, type, keys) => {
     if (type === TableDataTypes.OBJECT) {
-      const aVal = keys.reduce((object, currentKey) => object[currentKey], a[orderBy]);
-      const bVal = keys.reduce((object, currentKey) => object[currentKey], b[orderBy]);
+      const aVal = keys.reduce(
+        (object, currentKey) => object[currentKey],
+        a[orderBy]
+      );
+      const bVal = keys.reduce(
+        (object, currentKey) => object[currentKey],
+        b[orderBy]
+      );
       if (bVal < aVal) {
         return -1;
       }
@@ -44,7 +56,7 @@ export class SortSelectTable extends React.Component {
       return 1;
     }
     return 0;
-  }
+  };
 
   stableSort = (array, cmp) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
@@ -54,13 +66,20 @@ export class SortSelectTable extends React.Component {
       return a[1] - b[1];
     });
     return stabilizedThis.map(el => el[0]);
-  }
+  };
 
   getSorting = (order, orderBy, type, keys) => {
-    return order === `desc` ? (a, b) => this.desc(a, b, orderBy, type, keys) : (a, b) => -this.desc(a, b, orderBy, type, keys);
-  }
+    return order === `desc`
+      ? (a, b) => this.desc(a, b, orderBy, type, keys)
+      : (a, b) => -this.desc(a, b, orderBy, type, keys);
+  };
 
-  handleRequestSort = (event, property, type = TableDataTypes.STRING, keys = []) => {
+  handleRequestSort = (
+    event,
+    property,
+    type = TableDataTypes.STRING,
+    keys = []
+  ) => {
     const orderBy = property;
 
     let order = `desc`;
@@ -73,19 +92,36 @@ export class SortSelectTable extends React.Component {
 
   handleClick = (event, id) => {
     const { tableData, select } = this.props;
-    select(tableData.find(ele => { return ele.id === id; }).id);
+    select(
+      tableData.find(ele => {
+        return ele.id === id;
+      }).id
+    );
   };
 
   isSelected = id => {
     return this.props.selected.id === id;
-  }
+  };
 
   render() {
-    const { classes, tableData, headerData, selected, add, label, selectLabel } = this.props;
+    const {
+      classes,
+      tableData,
+      headerData,
+      selected,
+      add,
+      label,
+      selectLabel
+    } = this.props;
     const { order, orderBy, type, keys } = this.state;
     return (
-      <div className={classes.root} >
-        <EnhancedTableToolbar selected={selected} add={add} label={label} selectLabel={selectLabel} />
+      <div className={classes.root}>
+        <EnhancedTableToolbar
+          selected={selected}
+          add={add}
+          label={label}
+          selectLabel={selectLabel}
+        />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -99,55 +135,90 @@ export class SortSelectTable extends React.Component {
               rowCount={tableData.length}
             />
             <TableBody>
-              {this.stableSort(tableData, this.getSorting(order, orderBy, type, keys))
-                .map((n, i) => {
-                  const isSelected = this.isSelected(n.id);
-                  return (
-                    <TableRow
-                      hover
-                      id={`row-${i}`}
-                      onClick={event => this.handleClick(event, n.id)}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
-                      key={n.id}
-                      selected={isSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
-                      {headerData.map(ele => {
-                        const { type, id, keys } = ele;
-                        if (type === TableDataTypes.NUMBER || type === TableDataTypes.BOOLEAN) {
-                          return <TableCell padding="dense" key={id} align="right" >{n[id]}</TableCell>;
-                        } else if (type === TableDataTypes.STRING) {
-                          return <TableCell padding="dense" key={id} >{n[id]}</TableCell>;
-                        } else if (type === TableDataTypes.OBJECT) {
-                          // The reduce function here is just used to deconstruct the objects to the value that we want on the table
-                          return <TableCell padding="dense" key={id + keys.join(``)} >{
-                            keys.reduce((object, currentKey) => {
+              {this.stableSort(
+                tableData,
+                this.getSorting(order, orderBy, type, keys)
+              ).map((n, i) => {
+                const isSelected = this.isSelected(n.id);
+                return (
+                  <TableRow
+                    hover
+                    id={`row-${i}`}
+                    onClick={event => this.handleClick(event, n.id)}
+                    role="checkbox"
+                    aria-checked={isSelected}
+                    tabIndex={-1}
+                    key={n.id}
+                    selected={isSelected}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox checked={isSelected} />
+                    </TableCell>
+                    {headerData.map(ele => {
+                      const { type, id, keys } = ele;
+                      if (
+                        type === TableDataTypes.NUMBER ||
+                        type === TableDataTypes.BOOLEAN
+                      ) {
+                        return (
+                          <TableCell padding="dense" key={id} align="right">
+                            {n[id]}
+                          </TableCell>
+                        );
+                      } else if (type === TableDataTypes.STRING) {
+                        return (
+                          <TableCell padding="dense" key={id}>
+                            {n[id]}
+                          </TableCell>
+                        );
+                      } else if (type === TableDataTypes.OBJECT) {
+                        // The reduce function here is just used to deconstruct the objects to the value that we want on the table
+                        return (
+                          <TableCell padding="dense" key={id + keys.join(``)}>
+                            {keys.reduce((object, currentKey) => {
                               // this just checks if the object is defined. it prevents error that would occur if you got the wrong id on a item for some reason.
-                              return object === undefined ? null : object[currentKey];
-                            }, n[id])
-                          }</TableCell>;
-                        } else if (type === TableDataTypes.DATE) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`MM/DD/YY`)}</TableCell>;
-                        } else if (type === TableDataTypes.DATETIME) {
-                          return <TableCell padding="dense" key={id} >{moment.utc(n[id]).local().format(`hh:mm a MM/DD`)}</TableCell>;
-                        } else if (type === TableDataTypes.LENGTH) {
-                          const length = moment.duration(n[id], `minutes`);
-                          return <TableCell padding="dense" key={id} >{`${length.hours()}h ${length.minutes()}m`}</TableCell>;
-                        }
-                        return null;
-                      })}
-                    </TableRow>
-                  );
-                })}
+                              return object === undefined
+                                ? null
+                                : object[currentKey];
+                            }, n[id])}
+                          </TableCell>
+                        );
+                      } else if (type === TableDataTypes.DATE) {
+                        return (
+                          <TableCell padding="dense" key={id}>
+                            {moment
+                              .utc(n[id])
+                              .local()
+                              .format(`MM/DD/YY`)}
+                          </TableCell>
+                        );
+                      } else if (type === TableDataTypes.DATETIME) {
+                        return (
+                          <TableCell padding="dense" key={id}>
+                            {moment
+                              .utc(n[id])
+                              .local()
+                              .format(`hh:mm a MM/DD`)}
+                          </TableCell>
+                        );
+                      } else if (type === TableDataTypes.LENGTH) {
+                        const length = moment.duration(n[id], `minutes`);
+                        return (
+                          <TableCell
+                            padding="dense"
+                            key={id}
+                          >{`${length.hours()}h ${length.minutes()}m`}</TableCell>
+                        );
+                      }
+                      return null;
+                    })}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>
       </div>
-
     );
   }
 }

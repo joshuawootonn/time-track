@@ -12,7 +12,7 @@ export default {
   headerRow: {
     minHeight: `72px`
   },
-  field:{
+  field: {
     margin: `auto 8px`
   },
   switchBox: {

@@ -13,13 +13,13 @@ import domain from 'constants/domains';
 export class SubcategoryIndex extends Component {
   componentDidMount = () => {
     this.props.getAllSubcategories();
-  }
-  
-  selectLabel = selected =>`${selected.type} selected`;
+  };
 
-  select = object => this.props.select(domain.SUBCATEGORY,object)
+  selectLabel = selected => `${selected.type} selected`;
 
-  add = () => this.props.setStatus(domain.SUBCATEGORY,analyzeStatus.ADDING)
+  select = object => this.props.select(domain.SUBCATEGORY, object);
+
+  add = () => this.props.setStatus(domain.SUBCATEGORY, analyzeStatus.ADDING);
 
   render() {
     const { subcategories, selected } = this.props;
@@ -33,7 +33,7 @@ export class SubcategoryIndex extends Component {
         selected={selected}
         select={this.select}
         add={this.add}
-        initialOrderBy='type'
+        initialOrderBy="type"
       />
     );
   }
@@ -61,11 +61,14 @@ const mapDispatchToProps = dispatch => {
     getAllSubcategories: () => {
       return dispatch(subcategoryActions.getAllSubcategories());
     },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubcategoryIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubcategoryIndex);
 
 const rows = [
   {

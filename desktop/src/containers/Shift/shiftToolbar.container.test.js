@@ -7,7 +7,7 @@ import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
 import { COMPLETE_SHIFT_MOCK } from 'constants/modelMocks';
 
-const props =  {  
+const props = {
   selected: COMPLETE_SHIFT_MOCK[0],
   select: jest.fn(),
   setStatus: jest.fn(),
@@ -15,17 +15,17 @@ const props =  {
   shiftFilterVisible: true
 };
 
-const setup = overRides => {  
-  return mount(<ShiftToolbar {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<ShiftToolbar {...props} {...overRides} />);
 };
 
-describe(`Shift Toolbar Container`, () => {  
+describe(`Shift Toolbar Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();       
-  }); 
+    setup();
+  });
   it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -38,6 +38,9 @@ describe(`Shift Toolbar Container`, () => {
     expect(props.setStatus).toHaveBeenCalledTimes(0);
     instance.add({ id: 1 });
     expect(props.setStatus).toHaveBeenCalledTimes(1);
-    expect(props.setStatus).toHaveBeenCalledWith(domain.SHIFT,analyzeStatus.ADDING);
+    expect(props.setStatus).toHaveBeenCalledWith(
+      domain.SHIFT,
+      analyzeStatus.ADDING
+    );
   });
 });

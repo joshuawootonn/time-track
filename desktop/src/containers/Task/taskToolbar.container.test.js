@@ -7,7 +7,7 @@ import domain from 'constants/domains';
 import { analyzeStatus } from 'constants/analyze';
 import { TASK_MOCK } from 'constants/modelMocks';
 
-const props =  {  
+const props = {
   selected: TASK_MOCK[0],
   select: jest.fn(),
   setStatus: jest.fn(),
@@ -15,17 +15,17 @@ const props =  {
   taskFilterVisible: true
 };
 
-const setup = overRides => {  
-  return mount(<TaskToolbar {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<TaskToolbar {...props} {...overRides} />);
 };
 
-describe(`Task Toolbar Container`, () => {  
+describe(`Task Toolbar Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();       
-  }); 
+    setup();
+  });
   it(`should generate a proper label on this.selectLabel`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
@@ -38,6 +38,9 @@ describe(`Task Toolbar Container`, () => {
     expect(props.setStatus).toHaveBeenCalledTimes(0);
     instance.add({ id: 1 });
     expect(props.setStatus).toHaveBeenCalledTimes(1);
-    expect(props.setStatus).toHaveBeenCalledWith(domain.TASK,analyzeStatus.ADDING);
+    expect(props.setStatus).toHaveBeenCalledWith(
+      domain.TASK,
+      analyzeStatus.ADDING
+    );
   });
 });

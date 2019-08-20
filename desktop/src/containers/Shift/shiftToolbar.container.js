@@ -11,30 +11,30 @@ import { shiftSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class ShiftToolbar extends Component { 
-  
-  selectLabel = selected =>`${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
+export class ShiftToolbar extends Component {
+  selectLabel = selected =>
+    `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
 
   add = () => {
     const { selected, select, setStatus } = this.props;
-    if(selected && selected.id){
-      select(domain.SHIFT,selected.id);
+    if (selected && selected.id) {
+      select(domain.SHIFT, selected.id);
     }
-    setStatus(domain.SHIFT,analyzeStatus.ADDING);
-  }
+    setStatus(domain.SHIFT, analyzeStatus.ADDING);
+  };
 
   render() {
     const { selected, toggleShiftFilter, shiftFilterVisible } = this.props;
-    
-    return (       
-      <AnalyzeToolbar 
+
+    return (
+      <AnalyzeToolbar
         selectLabel={this.selectLabel}
         label="Shifts"
         add={this.add}
         selected={selected}
         toggleFilter={toggleShiftFilter}
         isFilterVisible={shiftFilterVisible}
-      /> 
+      />
     );
   }
 }
@@ -57,10 +57,13 @@ const mapStateToProps = state => {
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
-  return {    
+  return {
     ...bindActionCreators({ ...analyzeActions }, dispatch),
-    toggleShiftFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT)) 
+    toggleShiftFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftToolbar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShiftToolbar);

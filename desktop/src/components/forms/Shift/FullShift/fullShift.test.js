@@ -4,14 +4,19 @@ import { FieldArray, Formik } from 'formik';
 
 import {
   FullShift,
-  ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID,  
+  ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID,
   ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID,
   ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID,
   ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID
 } from 'components/forms/Shift/FullShift/fullShift';
 import FullShiftHOC from 'components/forms/Shift/FullShift';
 
-import { EMPLOYEE_MOCK, PROJECT_MOCK, PROJECT_TASK_MOCK, ACTIVITY_MOCK } from 'constants/modelMocks';
+import {
+  EMPLOYEE_MOCK,
+  PROJECT_MOCK,
+  PROJECT_TASK_MOCK,
+  ACTIVITY_MOCK
+} from 'constants/modelMocks';
 
 const INITIAL_VALUES_ADD = {
   lunch: 30,
@@ -35,9 +40,7 @@ const INTIIAL_VALUES_EDIT = {
   id: 13539,
   length: 232,
   lunch: null,
-  activities: [
-    ACTIVITY_MOCK
-  ],
+  activities: [ACTIVITY_MOCK],
   employee: {
     authorityId: 2,
     crewId: 1,
@@ -98,10 +101,12 @@ const setupHOC = overRides => {
 
 const setupWithRender = overRides => {
   const wrapper = setup();
-  const Render = wrapper.find(FieldArray).first().prop(`render`);
+  const Render = wrapper
+    .find(FieldArray)
+    .first()
+    .prop(`render`);
   return shallow(<Render {...renderProps} {...overRides} />);
 };
-
 
 describe(`FullShift Component`, () => {
   afterEach(() => {
@@ -122,7 +127,10 @@ describe(`FullShift Component`, () => {
   it(`should call props.resetForm when #${ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID} is clicked`, () => {
     const wrapper = setup();
     expect(props.resetForm).not.toHaveBeenCalled();
-    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID}`).first().simulate(`click`);
+    wrapper
+      .find(`#${ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID}`)
+      .first()
+      .simulate(`click`);
     expect(props.resetForm).toHaveBeenCalled();
   });
   it(`it should call render of activities fieldArray`, () => {
@@ -131,21 +139,32 @@ describe(`FullShift Component`, () => {
   it(`should remove an activity when #${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_0 is clicked`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.remove).not.toHaveBeenCalled();
-    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_0`).first().simulate(`click`);
+    wrapper
+      .find(`#${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_0`)
+      .first()
+      .simulate(`click`);
     expect(renderProps.remove).toHaveBeenCalled();
   });
   it(`should add an activity when #${ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID} is clicked`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.push).not.toHaveBeenCalled();
-    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}`).first().simulate(`click`);
+    wrapper
+      .find(`#${ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}`)
+      .first()
+      .simulate(`click`);
     expect(renderProps.push).toHaveBeenCalled();
   });
   it(`should renderProps.form.setFieldValue when project formik.Field changes`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.form.setFieldValue).not.toHaveBeenCalled();
-    wrapper.find(`#${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_0`).first().prop(`onChange`)();
+    wrapper
+      .find(`#${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_0`)
+      .first()
+      .prop(`onChange`)();
     expect(renderProps.form.setFieldValue).toHaveBeenCalled();
-    expect(renderProps.form.setFieldValue).toHaveBeenCalledWith(`activities.0.projectTaskId`,-1);
-    
+    expect(renderProps.form.setFieldValue).toHaveBeenCalledWith(
+      `activities.0.projectTaskId`,
+      -1
+    );
   });
 });

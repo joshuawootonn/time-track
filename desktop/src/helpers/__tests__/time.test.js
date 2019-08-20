@@ -1,6 +1,10 @@
-import { minutesRoudedTime,minutesToString,currentRoundedTime } from 'helpers/time';
+import {
+  minutesRoudedTime,
+  minutesToString,
+  currentRoundedTime
+} from 'helpers/time';
 
-describe(`Time Helper`, () => {  
+describe(`Time Helper`, () => {
   it(`should return current time in moment object form for currentRoundedTime`, () => {
     expect(typeof currentRoundedTime()).toBe(`object`);
   });
@@ -13,7 +17,7 @@ describe(`Time Helper`, () => {
     expect(minutesToString(4)).toEqual(`0:04`);
     expect(minutesToString(90)).toEqual(`1:30`);
     expect(minutesToString(0)).toEqual(`0:00`);
-    expect(minutesToString(-10)).toEqual(`-0:10`);    
+    expect(minutesToString(-10)).toEqual(`-0:10`);
     expect(minutesToString(-90)).toEqual(`-1:30`);
     expect(minutesToString()).toEqual(`0:00`);
   });

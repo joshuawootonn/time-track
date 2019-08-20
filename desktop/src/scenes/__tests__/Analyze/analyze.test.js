@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { Analyze } from 'scenes/Analyze/analyze';
 
-const props =  {
+const props = {
   classes: {},
   history: {
     goBack: jest.fn(),
@@ -13,27 +13,25 @@ const props =  {
   getAllEmployees: jest.fn(),
   getAllProjects: jest.fn(),
   getAllTasks: jest.fn(),
-  getShiftsInRange:jest.fn()  
+  getShiftsInRange: jest.fn()
 };
 
-const setup = overRides => {  
-  return shallow(<Analyze {...props} {...overRides}/>);
+const setup = overRides => {
+  return shallow(<Analyze {...props} {...overRides} />);
 };
 
-
-
-describe(`Analyze Scene`, () => {  
+describe(`Analyze Scene`, () => {
   it(`should render correctly`, () => {
-    setup();        
-  });  
-  it(`should display different containers based on state.tabValue`, () =>{
+    setup();
+  });
+  it(`should display different containers based on state.tabValue`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
-    instance.handleTabValueChange(null,2);
+    instance.handleTabValueChange(null, 2);
     expect(wrapper.state().tabValue).toEqual(2);
-    instance.handleTabValueChange(null,0);
+    instance.handleTabValueChange(null, 0);
     expect(wrapper.state().tabValue).toEqual(0);
-    instance.handleTabValueChange(null,3);
+    instance.handleTabValueChange(null, 3);
     expect(wrapper.state().tabValue).toEqual(3);
   });
   it(`should call this.props.history.push() on this.back()`, () => {

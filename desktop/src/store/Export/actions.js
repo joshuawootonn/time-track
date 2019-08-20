@@ -1,36 +1,52 @@
 import moment from 'moment';
 
 import { exportActionTypes } from 'constants/actionTypeConstants';
-import { employeeActions, projectActions, projectTaskActions, taskActions, shiftActions } from 'store/actions';
+import {
+  employeeActions,
+  projectActions,
+  projectTaskActions,
+  taskActions,
+  shiftActions
+} from 'store/actions';
 
-import { employeeSelectors, shiftSelectors, projectTaskSelectors, projectSelectors } from 'store/selectors';
+import {
+  employeeSelectors,
+  shiftSelectors,
+  projectTaskSelectors,
+  projectSelectors
+} from 'store/selectors';
 import { minutesToString } from 'helpers/time';
-
 
 import * as IPCConstants from 'constants/ipc';
 import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
 import store from 'store';
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+const { ipcRenderer } = window.require('electron');
 
 export const exportToExcel = (start, end, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
-    try {     
+    try {
       const startMoment = new moment(start).format(`MM-DD-YY HH:mm:ss`);
       const endMoment = new moment(end).format(`MM-DD-YY HH:mm:ss`);
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
       console.log(exportData);
-      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, { fileLocation, data: exportData });
+      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, {
+        fileLocation,
+        data: exportData
+      });
       await dispatch(snackActions.openSnack(status.SUCCESS, `Export Success!`));
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS });
     } catch (e) {
       dispatch(snackActions.openSnack(status.FAILURE, `Export failed!`));
-      return dispatch({ type: exportActionTypes.EXPORT_EXCEL_FAILURE, payload: e });
+      return dispatch({
+        type: exportActionTypes.EXPORT_EXCEL_FAILURE,
+        payload: e
+      });
     }
   };
 };
@@ -40,7 +56,11 @@ export const getData = (startTime, endTime) => {
   return async dispatch => {
     try {
       await Promise.all([
-        dispatch(employeeActions.getAllEmployees()), dispatch(projectActions.getAllProjects()), dispatch(projectTaskActions.getAllProjectTasks()), dispatch(taskActions.getAllTasks()), dispatch(shiftActions.getShiftsInRange(startTime, endTime))
+        dispatch(employeeActions.getAllEmployees()),
+        dispatch(projectActions.getAllProjects()),
+        dispatch(projectTaskActions.getAllProjectTasks()),
+        dispatch(taskActions.getAllTasks()),
+        dispatch(shiftActions.getShiftsInRange(startTime, endTime))
       ]);
     } catch (e) {
       //console.log(e);
@@ -51,55 +71,65 @@ export const getData = (startTime, endTime) => {
 const formatData = (startTime, endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
-  const employees = employeeSelectors.getAllEmployees(store.getState())
-    .filter((employee) => employee.isEmployed)
+  const employees = employeeSelectors
+    .getAllEmployees(store.getState())
+    .filter(employee => employee.isEmployed)
     // sort so that employees get added in order
-    .sort((a,b)=> {
-      var nameA= (a.lastName + a.firstName).toLowerCase(), nameB=(b.lastName + b.firstName).toLowerCase();
-      if (nameA < nameB) //sort string ascending
-       return -1;
-      if (nameA > nameB)
-       return 1;
-      return 0; 
+    .sort((a, b) => {
+      const nameA = (a.lastName + a.firstName).toLowerCase(),
+        nameB = (b.lastName + b.firstName).toLowerCase();
+      if (nameA < nameB)
+        //sort string ascending
+        return -1;
+      if (nameA > nameB) return 1;
+      return 0;
     });
   // array of shifts w/ embedded activities
   const shifts = shiftSelectors
     .getShiftsInRangeForExport(store.getState(), { startTime, endTime })
-    .sort((a,b)=> {
-      if (moment(a.clockInDate).isBefore(moment(b.clockInDate))) //sort string ascending
+    .sort((a, b) => {
+      if (moment(a.clockInDate).isBefore(moment(b.clockInDate)))
+        //sort string ascending
         return -1;
-      if (moment(a.clockInDate).isAfter(moment(b.clockInDate))) //sort string ascending
+      if (moment(a.clockInDate).isAfter(moment(b.clockInDate)))
+        //sort string ascending
         return 1;
-      return 0
+      return 0;
     });
 
   // object of project tasks indexed by id with task and project attached
-  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
+  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(
+    store.getState()
+  );
   const projects = projectSelectors.getAllProjectObjects(store.getState());
 
-  let exportData = [];
+  const exportData = [];
   employees.forEach(employee => {
-    const detailData = [], summaryData = [];
+    const detailData = [],
+      summaryData = [];
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
     const hasShifts = shiftsOfEmployees.length > 0 ? true : false;
-          
 
     const individualProjectTotals = {};
     const allProjectTotals = { total: 0, reg: 0, ot: 0 };
 
-    // Summary 
+    // Summary
     let totalTimeForWeek = 0;
     shiftsOfEmployees.forEach(shift => {
       shift.activities.forEach(activity => {
+        // Adding individual activity times
+        const currentProjectId =
+          projectTasks[activity.projectTaskId].project.id;
 
-        // Adding individual activity times 
-        let currentProjectId = projectTasks[activity.projectTaskId].project.id;
-
-        // if project hasn't been added to total 
+        // if project hasn't been added to total
         if (!individualProjectTotals[currentProjectId]) {
-          individualProjectTotals[currentProjectId] = { total: 0, reg: 0, ot: 0 };
+          individualProjectTotals[currentProjectId] = {
+            total: 0,
+            reg: 0,
+            ot: 0
+          };
         }
 
         if (totalTimeForWeek >= 2400) {
@@ -107,36 +137,50 @@ const formatData = (startTime, endTime) => {
           allProjectTotals.ot += activity.length;
           individualProjectTotals[currentProjectId].total += activity.length;
           individualProjectTotals[currentProjectId].ot += activity.length;
-
         } else if (totalTimeForWeek + activity.length >= 2400) {
-
           allProjectTotals.total += activity.length;
-          allProjectTotals.reg += (2400 - totalTimeForWeek);
-          allProjectTotals.ot += (totalTimeForWeek + activity.length - 2400);
+          allProjectTotals.reg += 2400 - totalTimeForWeek;
+          allProjectTotals.ot += totalTimeForWeek + activity.length - 2400;
           individualProjectTotals[currentProjectId].total += activity.length;
-          individualProjectTotals[currentProjectId].reg += (2400 - totalTimeForWeek);
-          individualProjectTotals[currentProjectId].ot += (totalTimeForWeek + activity.length - 2400);
-
+          individualProjectTotals[currentProjectId].reg +=
+            2400 - totalTimeForWeek;
+          individualProjectTotals[currentProjectId].ot +=
+            totalTimeForWeek + activity.length - 2400;
         } else {
-
           allProjectTotals.total += activity.length;
           allProjectTotals.reg += activity.length;
           individualProjectTotals[currentProjectId].total += activity.length;
           individualProjectTotals[currentProjectId].reg += activity.length;
-
         }
         totalTimeForWeek += activity.length;
       });
     });
     // add all summary rows
-    for (let key in individualProjectTotals) {
-      summaryData.push([projects[key].name, ``, ``, ``, ``, minutesToString(individualProjectTotals[key].reg), minutesToString(individualProjectTotals[key].ot), minutesToString(individualProjectTotals[key].total)]);
+    for (const key in individualProjectTotals) {
+      summaryData.push([
+        projects[key].name,
+        ``,
+        ``,
+        ``,
+        ``,
+        minutesToString(individualProjectTotals[key].reg),
+        minutesToString(individualProjectTotals[key].ot),
+        minutesToString(individualProjectTotals[key].total)
+      ]);
     }
     // add the total summary row
-    summaryData.push([`Total`, ``, ``, ``, ``, minutesToString(allProjectTotals.reg), minutesToString(allProjectTotals.ot), minutesToString(allProjectTotals.total)]);
+    summaryData.push([
+      `Total`,
+      ``,
+      ``,
+      ``,
+      ``,
+      minutesToString(allProjectTotals.reg),
+      minutesToString(allProjectTotals.ot),
+      minutesToString(allProjectTotals.total)
+    ]);
 
-
-    // Details 
+    // Details
     totalTimeForWeek = 0;
     shiftsOfEmployees.forEach(shift => {
       shift.activities.forEach((activity, i) => {
@@ -145,23 +189,44 @@ const formatData = (startTime, endTime) => {
         if (totalTimeForWeek + activity.length <= 2400) {
           regularActivityLength = activity.length;
         } else if (totalTimeForWeek > 2400) {
-          overtimeActivityLength= activity.length;          
+          overtimeActivityLength = activity.length;
         } else {
-          overtimeActivityLength = (totalTimeForWeek + activity.length - 2400);
-          regularActivityLength = (2400 - totalTimeForWeek);
+          overtimeActivityLength = totalTimeForWeek + activity.length - 2400;
+          regularActivityLength = 2400 - totalTimeForWeek;
         }
-        
 
         totalTimeForWeek += activity.length;
         if (i === 0) {
           detailData.push([
-            moment(shift.clockInDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`MM/DD/YYYY`), moment(shift.clockInDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`h:mm a`), moment(shift.clockOutDate,`YYYY-MM-DDThh:mm:ss:SSS`).format(`h:mm a`), minutesToString(shift.lunch), projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
+            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
+              `MM/DD/YYYY`
+            ),
+            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
+              `h:mm a`
+            ),
+            moment(shift.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
+              `h:mm a`
+            ),
+            minutesToString(shift.lunch),
+            projectTasks[activity.projectTaskId].project.name,
+            projectTasks[activity.projectTaskId].task.name,
+            minutesToString(regularActivityLength),
+            minutesToString(overtimeActivityLength)
+          ]);
         } else {
-          detailData.push([``,``,``,``,projectTasks[activity.projectTaskId].project.name, projectTasks[activity.projectTaskId].task.name, minutesToString(regularActivityLength), minutesToString(overtimeActivityLength)]);
+          detailData.push([
+            ``,
+            ``,
+            ``,
+            ``,
+            projectTasks[activity.projectTaskId].project.name,
+            projectTasks[activity.projectTaskId].task.name,
+            minutesToString(regularActivityLength),
+            minutesToString(overtimeActivityLength)
+          ]);
         }
       });
     });
-
 
     // Style
     const spacerRows = Object.keys(individualProjectTotals).length;
@@ -172,17 +237,40 @@ const formatData = (startTime, endTime) => {
       spacerRows
     };
 
-    if(hasShifts){
+    if (hasShifts) {
       exportData.push({
         key: `${employee.firstName} ${employee.lastName}`,
         header: [
-          [`AACI - Time Sheet`], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(endTime).format(`YYYY/MM/DD`)}`]
+          [`AACI - Time Sheet`],
+          [`Employee: ${employee.firstName} ${employee.lastName}`],
+          [
+            `Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(
+              endTime
+            ).format(`YYYY/MM/DD`)}`
+          ]
         ],
         summary: [
-          [``], [``], [`Summary`,``, ``, ``, ``], [`Project`, ``, ``, ``, ``, `Reg`, `OT`, `Total`], ...summaryData
+          [``],
+          [``],
+          [`Summary`, ``, ``, ``, ``],
+          [`Project`, ``, ``, ``, ``, `Reg`, `OT`, `Total`],
+          ...summaryData
         ],
         details: [
-          [``], [``], [`Details`], [`Date`, `Clock In`, `Clock Out`, `Lunch`, `Project`, `Task`, `Reg`, `OT`], ...detailData
+          [``],
+          [``],
+          [`Details`],
+          [
+            `Date`,
+            `Clock In`,
+            `Clock Out`,
+            `Lunch`,
+            `Project`,
+            `Task`,
+            `Reg`,
+            `OT`
+          ],
+          ...detailData
         ],
         sheetStyles
       });
@@ -190,17 +278,19 @@ const formatData = (startTime, endTime) => {
       exportData.push({
         key: `${employee.firstName} ${employee.lastName}`,
         header: [
-          [`AACI - Time Sheet`], [`Employee: ${employee.firstName} ${employee.lastName}`], [`Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(endTime).format(`YYYY/MM/DD`)}`]
+          [`AACI - Time Sheet`],
+          [`Employee: ${employee.firstName} ${employee.lastName}`],
+          [
+            `Period: ${moment(startTime).format(`YYYY/MM/DD`)} - ${moment(
+              endTime
+            ).format(`YYYY/MM/DD`)}`
+          ]
         ],
-        summary: [
-          [``], [``], [`No Shifts found for given period.`]
-        ],
-        details: [         
-        ],
+        summary: [[``], [``], [`No Shifts found for given period.`]],
+        details: [],
         sheetStyles
       });
     }
-   
   });
   return exportData;
 };

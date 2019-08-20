@@ -1,28 +1,27 @@
 import { normalizeEmbeddedData } from 'helpers/store';
 
-describe(`Store Helper`, () => {  
+describe(`Store Helper`, () => {
   it(`normalizeEmbeddedData should produce result arrays for embedded data`, () => {
-    
     const paramData = {
-      entities: {        
+      entities: {
         thing: {
           1: {},
           2: {}
         }
       },
       result: {
-        thing: [1]        
+        thing: [1]
       }
     };
     const returnData = {
-      entities: {        
+      entities: {
         thing: {
           1: {},
           2: {}
         }
       },
       result: {
-        thing: [1,2]        
+        thing: [1, 2]
       }
     };
     expect(normalizeEmbeddedData(paramData)).toEqual(returnData);

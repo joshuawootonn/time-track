@@ -12,16 +12,14 @@ export const getAllCrews = createSelector(
     return results.map(crewId => {
       return crews[crewId];
     });
-  },
+  }
 );
 
 export const getSelectedCrew = createSelector(
   getCrewsFromEntities,
   getAnalyzeState,
   (crews, analyze) => {
-    if(analyze.crew === -1) 
-      return {};
-    else 
-      return crews[analyze.crew];
+    if (analyze.crew === -1) return {};
+    else return crews[analyze.crew];
   }
 );

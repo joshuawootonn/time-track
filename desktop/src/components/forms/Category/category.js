@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button,Tooltip,IconButton } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Button,
+  Tooltip,
+  IconButton
+} from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { Form, Field } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,7 +16,16 @@ import styles from './styles';
 
 export class Category extends Component {
   render() {
-    const { classes, errors, initialValues, resetForm, isSubmitting, label,type,removeCategory } = this.props;
+    const {
+      classes,
+      errors,
+      initialValues,
+      resetForm,
+      isSubmitting,
+      label,
+      type,
+      removeCategory
+    } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
@@ -83,6 +98,5 @@ Category.propTypes = {
   removeCategory: PropTypes.func,
   type: PropTypes.string.isRequired
 };
-
 
 export default withStyles(styles)(Category);

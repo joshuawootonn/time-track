@@ -3,8 +3,20 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid, Typography, IconButton, MenuItem, SvgIcon } from '@material-ui/core';
-import { AccessTime as TimeIcon, Timer as DurationIcon, Today as DateIcon, Close } from '@material-ui/icons';
+import {
+  Button,
+  Grid,
+  Typography,
+  IconButton,
+  MenuItem,
+  SvgIcon
+} from '@material-ui/core';
+import {
+  AccessTime as TimeIcon,
+  Timer as DurationIcon,
+  Today as DateIcon,
+  Close
+} from '@material-ui/icons';
 import { Field, FieldArray } from 'formik';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
@@ -18,13 +30,13 @@ import styles from './styles';
 
 import { minutesToString, minutesRoudedTime } from 'helpers/time';
 
-export class Clockout extends Component{
+export class Clockout extends Component {
   state = {
     isKeyboardVisible: false,
     keyboardValue: ``,
     currentTextField: null,
     keyboardLayout: `default`
-  }
+  };
   handleShift = () => {
     const { keyboardLayout } = this.state;
     this.setState({
@@ -32,24 +44,37 @@ export class Clockout extends Component{
     });
   };
   onChange = input => {
-    if(this.state.currentTextField !== null){
-      this.props.setFieldValue(this.state.currentTextField,input);
+    if (this.state.currentTextField !== null) {
+      this.props.setFieldValue(this.state.currentTextField, input);
     }
-  }
+  };
   onKeyPress = button => {
-    if (button === `{shift}` ) this.handleShift();
-  }
+    if (button === `{shift}`) this.handleShift();
+  };
   onDescriptionFocus = (input, asdf) => {
     this.setState({ isKeyboardVisible: true, currentTextField: asdf });
-  }
+  };
   onDescriptionBlur = () => {
-    this.setState({ isKeyboardVisible: false,currentTextField: null });
-  }
+    this.setState({ isKeyboardVisible: false, currentTextField: null });
+  };
   render() {
-    const { classes, isSubmitting, handleSubmit, shift, values, length, 
-      projects, projectTasks, cancel, errors, timeLeft, weekHourTotal, generalError } = this.props;
+    const {
+      classes,
+      isSubmitting,
+      handleSubmit,
+      shift,
+      values,
+      length,
+      projects,
+      projectTasks,
+      cancel,
+      errors,
+      timeLeft,
+      weekHourTotal,
+      generalError
+    } = this.props;
     const { keyboardLayout } = this.state;
-    
+
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
@@ -57,14 +82,14 @@ export class Clockout extends Component{
             <Grid container spacing={24}>
               <Grid item xs={12} className={classes.formHeader}>
                 <Typography variant="h3">Clock Out</Typography>
-  
+
                 <div className={classes.formHeader}>
                   <SvgIcon className={classes.formHeaderIcon} color="action">
                     <DateIcon />
                   </SvgIcon>
                   <Typography variant="h5">{shift.date}</Typography>
                 </div>
-  
+
                 <div className={classes.formHeader}>
                   <SvgIcon className={classes.formHeaderIcon} color="action">
                     <TimeIcon />
@@ -73,17 +98,15 @@ export class Clockout extends Component{
                     {shift.in} - {shift.out}
                   </Typography>
                 </div>
-  
+
                 <div className={classes.formHeader}>
                   <SvgIcon className={classes.formHeaderIcon} color="action">
                     <DurationIcon />
                   </SvgIcon>
-                  <Typography variant="h5">
-                    Length: {length}
-                  </Typography>
+                  <Typography variant="h5">Length: {length}</Typography>
                 </div>
               </Grid>
-  
+
               <Grid item xs={12}>
                 <FieldArray
                   name="activities"
@@ -97,7 +120,7 @@ export class Clockout extends Component{
                                 key={index}
                                 className={cx(
                                   classes.card,
-                                  classes.verticalCenterBox,
+                                  classes.verticalCenterBox
                                 )}
                               >
                                 <div className={classes.formBody}>
@@ -114,22 +137,24 @@ export class Clockout extends Component{
                                     fullWidth
                                     label="Task"
                                   >
-                                    {
-                                      projectTasks // This code iterates the projectTask 
-                                        .filter(projectTask => {
-                                          return activity.projectId === projectTask.projectId; // filters based on project selected
-                                        })
-                                        .map((projectTask, i) => { // maps those elements
-                                          return (
-                                            <MenuItem
-                                              key={i}
-                                              value={projectTask.id}
-                                            >
-                                              {projectTask.task.name}
-                                            </MenuItem>
-                                          );
-                                        })
-                                    }
+                                    {projectTasks // This code iterates the projectTask
+                                      .filter(projectTask => {
+                                        return (
+                                          activity.projectId ===
+                                          projectTask.projectId
+                                        ); // filters based on project selected
+                                      })
+                                      .map((projectTask, i) => {
+                                        // maps those elements
+                                        return (
+                                          <MenuItem
+                                            key={i}
+                                            value={projectTask.id}
+                                          >
+                                            {projectTask.task.name}
+                                          </MenuItem>
+                                        );
+                                      })}
                                   </Field>
                                   <Field
                                     name={`activities.${index}.length`}
@@ -141,10 +166,13 @@ export class Clockout extends Component{
                                     label="Description"
                                     component={TextField}
                                     onFocus={e => {
-                                      this.onDescriptionFocus(e,`activities.${index}.description`);                                      
+                                      this.onDescriptionFocus(
+                                        e,
+                                        `activities.${index}.description`
+                                      );
                                     }}
                                     onBlur={this.onDescriptionBlur}
-                                  /> 
+                                  />
                                   <div className={classes.verticalCenter}>
                                     <IconButton
                                       type="button"
@@ -160,7 +188,7 @@ export class Clockout extends Component{
                               </div>
                             );
                           })}
-  
+
                         <Grid item xs={12} className={classes.formFooter}>
                           <div className={classes.lunchBox}>
                             <Field
@@ -188,29 +216,40 @@ export class Clockout extends Component{
                             Add Activity
                           </Button>
                         </Grid>
-  
+
                         <Grid item xs={12} className={classes.formFooter}>
                           <Typography variant="h5" margin="none">
-                            Time Left: {minutesToString(minutesRoudedTime(timeLeft))}
+                            Time Left:{' '}
+                            {minutesToString(minutesRoudedTime(timeLeft))}
                           </Typography>
                           <Typography variant="h5" margin="none">
-                            Week Total: {minutesToString(minutesRoudedTime(weekHourTotal))}
+                            Week Total:{' '}
+                            {minutesToString(minutesRoudedTime(weekHourTotal))}
                           </Typography>
-                          <Typography variant="body1" margin="none" className={classes.error}>
+                          <Typography
+                            variant="body1"
+                            margin="none"
+                            className={classes.error}
+                          >
                             {generalError}
-                          </Typography>                      
-  
+                          </Typography>
+
                           <div>
                             <Button
                               type="submit"
                               color="primary"
-                              disabled={isSubmitting || Object.keys(errors).length !== 0 || minutesRoudedTime(timeLeft) !== 0 || !!generalError}
+                              disabled={
+                                isSubmitting ||
+                                Object.keys(errors).length !== 0 ||
+                                minutesRoudedTime(timeLeft) !== 0 ||
+                                !!generalError
+                              }
                               variant="contained"
                               className={classes.button}
                             >
                               Clock Out
                             </Button>
-  
+
                             <Button
                               onClick={cancel}
                               color="secondary"
@@ -227,18 +266,17 @@ export class Clockout extends Component{
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={24} className={classes.keyboardGrid} >
+            <Grid container spacing={24} className={classes.keyboardGrid}>
               <div
                 className={classes.keyboard}
-                style={this.state.isKeyboardVisible ? {  } : { display: `none` }}
+                style={this.state.isKeyboardVisible ? {} : { display: `none` }}
               >
                 <ErrorBoundary>
-                  <Keyboard                   
+                  <Keyboard
                     ref={r => (this.keyboardRef = r)}
                     onChange={this.onChange}
                     onKeyPress={this.onKeyPress}
                     preventMouseDownDefault={true}
-
                     keyboardLayout={keyboardLayout}
                     layout={{
                       default: [
@@ -258,14 +296,13 @@ export class Clockout extends Component{
                     }}
                   />
                 </ErrorBoundary>
-               
               </div>
             </Grid>
           </form>
         </div>
       </div>
     );
-  }  
+  }
 }
 
 export const CLOCKOUT_FORM_REMOVE_ACTIVTIY = `clockout_form_remove_activity`;

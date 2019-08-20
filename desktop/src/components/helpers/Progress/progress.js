@@ -16,14 +16,12 @@ export const Progress = props => {
     [classes.fullWidth]: !fullPage && fullWidth
   });
 
-
   const innerClasses = cx({
     [classes.fullPageInner]: fullPage,
     [classes.fullHeight]: !fullPage && fullHeight,
     [classes.fullWidth]: !fullPage && fullWidth,
-    [classes.flex] : true
+    [classes.flex]: true
   });
-
 
   return (
     <div className={wrapperClasses}>
@@ -49,6 +47,5 @@ Progress.propTypes = {
   variant: PropTypes.oneOf([`circular`, `linear`]),
   classes: PropTypes.object.isRequired
 };
-
 
 export default withStyles(styles)(Progress);

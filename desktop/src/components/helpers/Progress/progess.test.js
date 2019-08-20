@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Progress from 'components/helpers/Progress';
 
-const props =  {  
+const props = {
   classes: {},
   fullPage: false,
   fullHeight: false,
@@ -11,12 +11,12 @@ const props =  {
   variant: `linear`
 };
 
-const setup = overRides => {  
-  return mount(<Progress {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<Progress {...props} {...overRides} />);
 };
 
-describe(`Progress Component`, () => {  
+describe(`Progress Component`, () => {
   it(`should render correctly`, () => {
-    setup();        
-  });  
+    setup();
+  });
 });

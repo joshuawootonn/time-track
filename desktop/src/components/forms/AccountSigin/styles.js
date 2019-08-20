@@ -7,9 +7,12 @@ const styles = () => ({
     alignItems: `center`
   },
   textField: { width: `100%` },
-  heroContent: { width: `300px` },
+  heroContent: { width: `450px` },
+  password: {
+    fontSize: '40px !important'
+  },
   error: { marginTop: `16px` },
-  button: { width: `100%` },
+  button: { width: `100%`, height: '60px' },
   centerText: { textAlign: `center` }
 });
 

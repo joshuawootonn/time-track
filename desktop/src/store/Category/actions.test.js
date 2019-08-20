@@ -2,7 +2,10 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import axios from 'axios';
 import { categoryActions } from 'store/actions';
-import { compareActionTypes,compareActionTypesSync } from 'helpers/test.helper';
+import {
+  compareActionTypes,
+  compareActionTypesSync
+} from 'helpers/test.helper';
 import MockAdapter from 'axios-mock-adapter';
 
 const middlewares = [thunk];
@@ -13,20 +16,29 @@ const data = { response: true };
 
 describe(`Category Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
     mock = new MockAdapter(axios);
   });
-  // GET ALL 
+  // GET ALL
   test(`dispatch 2 actions for getAllCategories`, async () => {
     const expectedActionTypes = [
-      `get_categories_request`, `get_categories_success`
+      `get_categories_request`,
+      `get_categories_success`
     ];
-    mock.onGet(/categories/).reply(200,data);
-    await compareActionTypes(expectedActionTypes,store,categoryActions.getAllCategories());
+    mock.onGet(/categories/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.getAllCategories()
+    );
   });
   test(`dispatch 1 action for editCategoriesModal`, () => {
     const expectedActionTypes = [`show_modal`];
-    compareActionTypesSync(expectedActionTypes,store,categoryActions.editCategoriesModal());
+    compareActionTypesSync(
+      expectedActionTypes,
+      store,
+      categoryActions.editCategoriesModal()
+    );
   });
   // UPDATE
   test(`dispatch 4 actions for updateCategory`, async () => {
@@ -37,8 +49,12 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `update_category_success`
     ];
-    mock.onPut(/categories/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,categoryActions.updateCategory({ id: 1 }));
+    mock.onPut(/categories/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.updateCategory({ id: 1 })
+    );
   });
   test(`dispatch 4 actions for updateCategory`, async () => {
     const expectedActionTypes = [
@@ -48,8 +64,12 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `update_category_failure`
     ];
-    mock.onPut(/categories/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,categoryActions.updateCategory({ id: 1 }));
+    mock.onPut(/categories/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.updateCategory({ id: 1 })
+    );
   });
   // CREATE
   test(`dispatch 5 actions for createCategory`, async () => {
@@ -60,8 +80,12 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `create_category_success`
     ];
-    mock.onPost(/categories/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,categoryActions.createCategory({ id: 1 }));
+    mock.onPost(/categories/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.createCategory({ id: 1 })
+    );
   });
   test(`dispatch 5 actions for createCategory`, async () => {
     const expectedActionTypes = [
@@ -71,8 +95,12 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `create_category_failure`
     ];
-    mock.onPost(/categories/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,categoryActions.createCategory({ id: 1 }));
+    mock.onPost(/categories/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.createCategory({ id: 1 })
+    );
   });
   // REMOVE
   test(`dispatch 6 actions for removeCategory`, async () => {
@@ -84,8 +112,12 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `remove_category_success`
     ];
-    mock.onDelete(/categories/).reply(200, data); 
-    await compareActionTypes(expectedActionTypes,store,categoryActions.removeCategory(1));
+    mock.onDelete(/categories/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.removeCategory(1)
+    );
   });
   test(`dispatch 6 actions for removeCategory`, async () => {
     const expectedActionTypes = [
@@ -96,7 +128,11 @@ describe(`Category Actions`, () => {
       `show_snack`,
       `remove_category_failure`
     ];
-    mock.onDelete(/categories/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,categoryActions.removeCategory(1));
+    mock.onDelete(/categories/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      categoryActions.removeCategory(1)
+    );
   });
 });
