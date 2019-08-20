@@ -58,7 +58,7 @@
   "scripts": {
     "start": "nf start -p 3000",
     "electron": "electron .",
-    "electron-start": "node src/electron-wait-react",
+    "electron-start": "node src/electron-wait-react.js",
     "react-start": "cross-env BROWSER=none react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint --fix .",

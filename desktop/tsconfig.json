@@ -14,7 +14,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "preserve",
     "baseUrl": "./src/",
@@ -23,11 +23,11 @@
     "sourceMap": true,
   },  
   "include": [
-    "src/**/*.ts", "src/**/*.tsx"
+    "src/**/*.ts", "src/**/*.tsx", "src/**/*.js"
   ],
   "exclude": [
     "node_modules",
     "src/electron-starter.js",
-    "src/electron-wait-react.js"
+    "src/electron-wait-react.ts"
   ]
 }
