@@ -6,20 +6,15 @@ const ipcMain = electron.ipcMain;
 const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
-const log = require("electron-log")
-const isDev = require("electron-is-dev");
-const {
-  default: installExtension,
-  REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS
-} = require(`electron-devtools-installer`);
+const log = require('electron-log');
+const isDev = require('electron-is-dev');
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
   GET_CRED: 'get_cred',
   CREATE_EXPORT: 'create_export',
   TOGGLE_FULLSCREEN: `toggle_fullscreen`,
-  IS_FULLSCREEN:`is_fullscreen`
+  IS_FULLSCREEN: `is_fullscreen`
 };
 
 const SETTINGS = {
@@ -42,11 +37,12 @@ function createWindow() {
     },
     fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`)
   });
- 
+
   // and load the index.html of the app.
   // load the index.html of the app.
-  const startUrl = isDev ? "http://localhost:3000"
-  : `file://${path.join(__dirname, "../build/index.html")}`;
+  const startUrl = isDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`;
   mainWindow.loadURL(startUrl);
 
   // Open the DevTools.
@@ -60,38 +56,42 @@ function createWindow() {
     mainWindow = null;
   });
 
-  
-  log.transports.file.level = "debug"
-  autoUpdater.logger = log
+  log.transports.file.level = 'debug';
+  autoUpdater.logger = log;
 }
-
 
 app.on('ready', createWindow);
 
 var updateTimer;
-app.on(`ready`, function () {  
-  app.setAppUserModelId("com.electron.timetrack")
+app.on(`ready`, function() {
+  app.setAppUserModelId('com.electron.timetrack');
   log.info(`App ready and checking for updates.`);
   autoUpdater.checkForUpdatesAndNotify().then();
 
-  updateTimer = setInterval(() => {     
+  updateTimer = setInterval(() => {
     log.info(`Checking for updates again`);
     autoUpdater.checkForUpdatesAndNotify().then();
   }, 1000 * 10 * 60);
 });
 
-
 app.on(`ready`, () => {
-  isDev && [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
-    installExtension(extension)
-      .then(name => console.log(`Added Extension: ${name}`))
-      .catch(err => console.log(`An error occurred: `, err));
-  });
+  if (isDev) {
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS,
+      REDUX_DEVTOOLS
+    } = require(`electron-devtools-installer`);
+    [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
+      installExtension(extension)
+        .then(name => console.log(`Added Extension: ${name}`))
+        .catch(err => console.log(`An error occurred: `, err));
+    });
+  }
 });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
-  clearInterval(updateTimer)
+  clearInterval(updateTimer);
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
@@ -114,15 +114,14 @@ ipcMain.on(IPCConstants.TOGGLE_FULLSCREEN, (event, arg) => {
   var isFullScreen = mainWindow.isFullScreen();
   mainWindow.setFullScreen(!isFullScreen);
 
-   settings.set(`${SETTINGS.WINDOW}`, {
+  settings.set(`${SETTINGS.WINDOW}`, {
     isFullScreen: !isFullScreen
-  });  
+  });
   event.returnValue = !isFullScreen;
 });
 ipcMain.on(IPCConstants.IS_FULLSCREEN, (event, arg) => {
   event.returnValue = mainWindow.isFullScreen();
 });
-
 
 /**
  * Export stuff
@@ -159,38 +158,36 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     });
 
     workSheetData.header.forEach(headerData => {
-      worksheet.addRow(headerData);      
+      worksheet.addRow(headerData);
     });
 
     workSheetData.summary.forEach(summaryData => {
-      worksheet.addRow(summaryData);      
+      worksheet.addRow(summaryData);
     });
-    
+
     workSheetData.details.forEach(detailData => {
       worksheet.addRow(detailData);
     });
 
-    workSheetData.sheetStyles[1].forEach(ele=> {
-      worksheet.getRow(ele).font = {  size: 20, bold: true };
+    workSheetData.sheetStyles[1].forEach(ele => {
+      worksheet.getRow(ele).font = { size: 20, bold: true };
     });
 
-    workSheetData.sheetStyles[2].forEach(ele=> {
-      worksheet.getRow(ele).font = {  size:15, bold: true };
+    workSheetData.sheetStyles[2].forEach(ele => {
+      worksheet.getRow(ele).font = { size: 15, bold: true };
     });
 
-    workSheetData.sheetStyles[3].forEach(ele=> {
-      worksheet.getRow(ele).font = {  size: 13, bold: true };
+    workSheetData.sheetStyles[3].forEach(ele => {
+      worksheet.getRow(ele).font = { size: 13, bold: true };
     });
     worksheet.columns.forEach(column => {
       let maxWidth = 5;
-      column.eachCell({ includeEmpty: false },(cell, rowNumber) => {
-        if(cell.text.length > maxWidth)
-          maxWidth = cell.text.length;
+      column.eachCell({ includeEmpty: false }, (cell, rowNumber) => {
+        if (cell.text.length > maxWidth) maxWidth = cell.text.length;
       });
-      column.width = maxWidth+2;
+      column.width = maxWidth + 2;
     });
   });
-
 
   // // add column headers
   // worksheet.columns = [
@@ -211,13 +208,11 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
   // worksheet.getCell('A6').value = '1989';
   // worksheet.getCell('B6').value = 2014;
 
-
-  try{
+  try {
     workbook.xlsx.writeFile(arg.fileLocation).then(function() {
       event.returnValue = 'saved';
     });
-  } catch(e) {
+  } catch (e) {
     event.returnValue = 'failed';
   }
 });
-
