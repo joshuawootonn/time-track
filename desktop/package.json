@@ -56,7 +56,7 @@
     "lint": "eslint --fix .",
     "build": "react-scripts build",
     "pack": "npm run build && build  --ia32 --x64 --win",
-    "dist": "npm run build && build --ia32 --x64 --win always",
+    "dist": "npm run build && build --ia32 --x64 --win -p always",
     "dist-test": "npm run build && build --ia32 --x64 --win -p always",
     "postinstall": "install-app-deps"
   },
