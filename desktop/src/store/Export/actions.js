@@ -52,6 +52,7 @@ const formatData = (startTime, endTime) => {
   // TODO: different formatting routines for the export category
   // array of employees
   const employees = employeeSelectors.getAllEmployees(store.getState())
+    .filter((employee) => employee.isEmployed)
     // sort so that employees get added in order
     .sort((a,b)=> a.lastName + a.firstName > b.lastName + b.firstName);
   // array of shifts w/ embedded activities
