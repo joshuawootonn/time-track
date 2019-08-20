@@ -171,7 +171,7 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
     worksheet.columns.forEach(column => {
       let maxWidth = 5;
       column.eachCell({ includeEmpty: false },(cell, rowNumber) => {
-        if(rowNumber> workSheetData.sheetStyles.spacerRows + 9 && cell.text.length > maxWidth)
+        if(cell.text.length > maxWidth)
           maxWidth = cell.text.length;
       });
       column.width = maxWidth+2;
