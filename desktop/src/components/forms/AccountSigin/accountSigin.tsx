@@ -29,7 +29,7 @@ export class AccountSigin extends Component<Props> {
   renderButtonGridElement = (num: number) => {
     const { classes } = this.props;
     return (
-      <Grid item xs={4}>
+      <Grid item xs={4} key={num}>
         <Button
           onClick={() => this.appendPin(num)}
           variant="contained"
