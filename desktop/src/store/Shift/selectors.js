@@ -147,7 +147,7 @@ export const getShiftsInRange = createSelector(
           })
         };
       }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
-        console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
+        //console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
         return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
       });     
   }
@@ -178,7 +178,7 @@ export const getShiftsInRangeForExport = createSelector(
           })
         };
       }).filter(shift => {    // remove any shift that is not within the bounds of correct clockInDate
-        console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
+        //console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
         return moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`));
       });     
   }

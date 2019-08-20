@@ -15,12 +15,12 @@ import store from 'store';
 const electron = window.require(`electron`);
 const ipcRenderer = electron.ipcRenderer;
 
-export const exportToExcel = (exportCategory, start, fileLocation) => {
+export const exportToExcel = (start, end, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
     try {     
       const startMoment = new moment(start).format(`MM-DD-YY HH:mm:ss`);
-      const endMoment = new moment(start).add(7,`days`).format(`MM-DD-YY HH:mm:ss`);
+      const endMoment = new moment(end).format(`MM-DD-YY HH:mm:ss`);
 
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
@@ -65,14 +65,18 @@ const formatData = (startTime, endTime) => {
   // array of shifts w/ embedded activities
   const shifts = shiftSelectors
     .getShiftsInRangeForExport(store.getState(), { startTime, endTime })
-    .sort((a,b)=> a.clockInDate > b.clockInDate);
+    .sort((a,b)=> {
+      if (moment(a.clockInDate).isBefore(moment(b.clockInDate))) //sort string ascending
+        return -1;
+      if (moment(a.clockInDate).isAfter(moment(b.clockInDate))) //sort string ascending
+        return 1;
+      return 0
+    });
 
-  console.log(shifts);
   // object of project tasks indexed by id with task and project attached
   const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(store.getState());
   const projects = projectSelectors.getAllProjectObjects(store.getState());
 
-  //(employees,shifts,projects,projectTasks)
   let exportData = [];
   employees.forEach(employee => {
     const detailData = [], summaryData = [];

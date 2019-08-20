@@ -23,21 +23,20 @@ export class Export extends Component {
           <Grid item xs={12} className={classes.title}>
             <Typography variant="h3">Export</Typography>
           </Grid>            
-          <Grid item xs={12} className={classes.row}>
-            <Field
-              name="exportCategory"
-              component={Select}
-              items={exportConstants.exportCategory}
-              fullWidth
-              margin="none"
-              label="Export By"
-              helper="normal"
-            />
+          <Grid item xs={12} className={classes.row}>            
             <Field
               name="start"
               component={TextField}              
               margin="none"
               label="From"
+              type="date"
+              helper="normal"
+            />
+            <Field
+              name="end"
+              component={TextField}              
+              margin="none"
+              label="To"
               type="date"
               helper="normal"
             />
