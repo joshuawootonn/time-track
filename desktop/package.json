@@ -84,6 +84,7 @@
     "react-build": "react-scripts build",
     "react-test": "react-scripts test --env=jsdom",
     "electron-build": "electron-builder",
+    "lint": "eslint --fix .",
     "pack": "yarn build && yarn electron-build  --ia32 --x64 --win",
     "dist": "yarn build && yarn electron-build --ia32 --x64 --win -p always",
     "dist-test": "yarn build && yarn electron-build --ia32 --x64 --win -p always",

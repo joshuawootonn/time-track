@@ -15,14 +15,22 @@ import { minutesToString } from 'helpers/time';
 
 export class HalfShift extends Component {
   render() {
-    const { classes, isSubmitting, resetForm, initialValues, errors, 
-      employees, timeLeft, generalError } = this.props;
+    const {
+      classes,
+      isSubmitting,
+      resetForm,
+      initialValues,
+      errors,
+      employees,
+      timeLeft,
+      generalError
+    } = this.props;
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>          
+        <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Field
-              name='employeeId'
+              name="employeeId"
               component={Select}
               items={employees}
               fullWidth
@@ -37,10 +45,10 @@ export class HalfShift extends Component {
               type="datetime-local"
               className={classes.field}
               helper="normal"
-            />            
+            />
           </Grid>
 
-          <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>
+          <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
             <Typography variant="h5" margin="none">
               Current Shift Length: {minutesToString(timeLeft)}
             </Typography>
@@ -76,7 +84,6 @@ export class HalfShift extends Component {
               </Button>
             </div>
           </Grid>
-
         </Grid>
       </Form>
     );

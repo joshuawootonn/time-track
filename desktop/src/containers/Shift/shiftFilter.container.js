@@ -7,56 +7,90 @@ import moment from 'moment';
 
 import Shift from 'components/forms/Shift/Filter';
 
-import { authoritySelectors, crewSelectors, employeeSelectors, projectSelectors } from 'store/selectors';
+import {
+  authoritySelectors,
+  crewSelectors,
+  employeeSelectors,
+  projectSelectors
+} from 'store/selectors';
 import { analyzeActions, shiftActions } from 'store/actions';
 
 import domain from 'constants/domains';
 
-export class ShiftFilter extends Component {  
+export class ShiftFilter extends Component {
   render() {
-    const {  employees, projects, crews, authorities, shiftFilters, shiftFilterVisible, clearFilter, getShifts, updateFilter, toggleFilter  } = this.props;
-    
-    if(shiftFilterVisible){
+    const {
+      employees,
+      projects,
+      crews,
+      authorities,
+      shiftFilters,
+      shiftFilterVisible,
+      clearFilter,
+      getShifts,
+      updateFilter,
+      toggleFilter
+    } = this.props;
+
+    if (shiftFilterVisible) {
       return (
         <Formik
           enableReinitialize
           initialValues={{
             ...shiftFilters,
-            startTime: moment(shiftFilters.startTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`),
-            endTime: moment(shiftFilters.endTime,`MM-DD-YY HH:mm:ss`).format(`YYYY-MM-DDTHH:mm`)
+            startTime: moment(
+              shiftFilters.startTime,
+              `MM-DD-YY HH:mm:ss`
+            ).format(`YYYY-MM-DDTHH:mm`),
+            endTime: moment(shiftFilters.endTime, `MM-DD-YY HH:mm:ss`).format(
+              `YYYY-MM-DDTHH:mm`
+            )
           }}
-          onSubmit={async (values, formikFunctions) => {            
-            const formattedValues ={
+          onSubmit={async (values, formikFunctions) => {
+            const formattedValues = {
               ...values,
-              startTime: moment(values.startTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`),
-              endTime: moment(values.endTime,`YYYY-MM-DDTHH:mm`).format(`MM-DD-YY HH:mm:ss`)
-            };            
-            await getShifts(formattedValues);  
+              startTime: moment(values.startTime, `YYYY-MM-DDTHH:mm`).format(
+                `MM-DD-YY HH:mm:ss`
+              ),
+              endTime: moment(values.endTime, `YYYY-MM-DDTHH:mm`).format(
+                `MM-DD-YY HH:mm:ss`
+              )
+            };
+            await getShifts(formattedValues);
             toggleFilter();
             updateFilter(formattedValues);
-            formikFunctions.resetForm();          
+            formikFunctions.resetForm();
           }}
           render={formikProps => {
-            return (            
-              <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>
+            return (
+              <Card
+                style={{
+                  position: `absolute`,
+                  top: `70px`,
+                  left: `2.5%`,
+                  zIndex: 900,
+                  width: `95%`,
+                  minHeight: `100px`
+                }}
+              >
                 <Shift
-                  employees={[{ id: -1, type: `All` },...employees]}
+                  employees={[{ id: -1, type: `All` }, ...employees]}
                   authorities={[{ id: -1, type: `All` }, ...authorities]}
-                  crews={[{ id: -1, name: `All` }, ...crews ]}
+                  crews={[{ id: -1, name: `All` }, ...crews]}
                   projects={[{ id: -1, name: `All` }, ...projects]}
                   label="Filter"
                   type="filter"
                   clearFilter={clearFilter}
                   {...formikProps}
                 />
-              </Card>          
+              </Card>
             );
           }}
         />
       );
     }
     return null;
-  }   
+  }
 }
 
 /* istanbul ignore next */
@@ -75,10 +109,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getShifts: filters => dispatch(shiftActions.getShifts(filters)),
-    updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.SHIFT,filters)),
+    updateFilter: filters =>
+      dispatch(analyzeActions.updateFilter(domain.SHIFT, filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.SHIFT)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT))  
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT))
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ShiftFilter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShiftFilter);

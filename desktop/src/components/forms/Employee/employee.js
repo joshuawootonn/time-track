@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {  Grid,  Typography,  Button,  Tooltip,  IconButton } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Button,
+  Tooltip,
+  IconButton
+} from '@material-ui/core';
 import cx from 'classnames';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
@@ -13,14 +19,25 @@ import Switch from 'components/inputs/Switch';
 import styles from './styles';
 
 export class Employee extends Component {
-  render() { 
-    const { classes, crews, authorities, label, isSubmitting, type, 
-      removeEmployee, resetForm, initialValues, errors, clearFilter  } = this.props;
-    
+  render() {
+    const {
+      classes,
+      crews,
+      authorities,
+      label,
+      isSubmitting,
+      type,
+      removeEmployee,
+      resetForm,
+      initialValues,
+      errors,
+      clearFilter
+    } = this.props;
+
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12} className={cx(classes.headerRow,classes.row)}>
+          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
             {type === `edit` && (
               <Tooltip title="Delete">
@@ -58,7 +75,7 @@ export class Employee extends Component {
               fullWidth
               label="Authority"
               className={classes.field}
-            />            
+            />
             <Field
               name="crewId"
               component={Select}
@@ -66,10 +83,10 @@ export class Employee extends Component {
               fullWidth
               label="Crew"
               className={classes.field}
-            />            
+            />
           </Grid>
           <Grid item xs={12} className={classes.row}>
-            <div className={cx(classes.field,classes.switchBox)}>
+            <div className={cx(classes.field, classes.switchBox)}>
               <Field
                 name="isEmployed"
                 component={Switch}
@@ -107,7 +124,7 @@ export class Employee extends Component {
                 type="submit"
                 id={EMPLOYEE_FORM_SUBMIT_BUTTON_ID}
                 color="primary"
-                disabled={isSubmitting || Object.keys(errors).length !== 0 }
+                disabled={isSubmitting || Object.keys(errors).length !== 0}
                 variant="contained"
                 className={classes.button}
               >
@@ -118,28 +135,28 @@ export class Employee extends Component {
                   resetForm(initialValues);
                 }}
                 id={EMPLOYEE_FORM_RESET_BUTTON_ID}
-                disabled={isSubmitting }
+                disabled={isSubmitting}
                 color="secondary"
                 variant="text"
                 className={classes.button}
               >
                 Reset
               </Button>
-              {[`filter`].includes(type) && 
+              {[`filter`].includes(type) && (
                 <Button
-                  onClick={() => {                
+                  onClick={() => {
                     resetForm(initialValues);
                     clearFilter();
                   }}
                   id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
-                  disabled={isSubmitting }
+                  disabled={isSubmitting}
                   color="secondary"
                   variant="text"
                   className={classes.button}
                 >
-                Clear
+                  Clear
                 </Button>
-              }
+              )}
             </div>
           </Grid>
         </Grid>

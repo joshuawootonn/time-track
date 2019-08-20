@@ -12,33 +12,40 @@ import styles from './styles';
 
 export class Time extends Component {
   onChangeHours = e => {
-    const { field,form } = this.props;
+    const { field, form } = this.props;
     const hoursValue = Math.floor(field.value / 60) * 60;
-    form.setFieldValue(
-      field.name,
-      field.value + e.target.value - hoursValue,
-    );
-  }
+    form.setFieldValue(field.name, field.value + e.target.value - hoursValue);
+  };
   onChangeMinutes = e => {
-    const { field,form } = this.props;
+    const { field, form } = this.props;
     const minutesValue = Math.floor(field.value % 60);
     //console.log(minutesValue);
-    form.setFieldValue(
-      field.name,
-      field.value + e.target.value - minutesValue,
-    );
-  }
+    form.setFieldValue(field.name, field.value + e.target.value - minutesValue);
+  };
   render() {
     const { value } = this.props.field;
-    const { classes, field, form, margin, fullWidth, label1, label2, helper,className } = this.props;
+    const {
+      classes,
+      field,
+      form,
+      margin,
+      fullWidth,
+      label1,
+      label2,
+      helper,
+      className
+    } = this.props;
 
     const minutesValue = Math.floor(value % 60);
     const hoursValue = Math.floor(value / 60) * 60;
 
     //console.log(value, minutesValue, hoursValue);
     return (
-      <FormControl fullWidth={fullWidth}  className={cx(classes.fieldWrapper,classes.vertical)}>
-        <div className={cx(classes.fieldWrapper,classes.horizontal)} >
+      <FormControl
+        fullWidth={fullWidth}
+        className={cx(classes.fieldWrapper, classes.vertical)}
+      >
+        <div className={cx(classes.fieldWrapper, classes.horizontal)}>
           <Select
             field={field}
             form={form}
@@ -84,9 +91,13 @@ export class Time extends Component {
             })}
           </Select>
         </div>
-        {helper === `normal` && <FormHelperText className={cx(classes.helper)} error={true}>
-          {getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
-        </FormHelperText>}
+        {helper === `normal` && (
+          <FormHelperText className={cx(classes.helper)} error={true}>
+            {getIn(form.touched, field.name)
+              ? getIn(form.errors, field.name)
+              : ` `}
+          </FormHelperText>
+        )}
       </FormControl>
     );
   }
@@ -112,5 +123,3 @@ Time.propTypes = {
 };
 
 export default withStyles(styles)(Time);
-
-

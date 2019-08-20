@@ -1,4 +1,4 @@
-export const createCRUDActionTypes = (domain,pluralDomain = domain + `s`) => {
+export const createCRUDActionTypes = (domain, pluralDomain = domain + `s`) => {
   return {
     [`GET_${domain.toUpperCase()}_REQUEST`]: `get_${domain.toLowerCase()}_request`,
     [`GET_${domain.toUpperCase()}_SUCCESS`]: `get_${domain.toLowerCase()}_success`,
@@ -27,7 +27,7 @@ export const createCRUDActionTypes = (domain,pluralDomain = domain + `s`) => {
   };
 };
 
-export const createCustomAsyncActionType = (domain,type) => {
+export const createCustomAsyncActionType = (domain, type) => {
   return {
     [`${type.toUpperCase()}_${domain.toUpperCase()}_REQUEST`]: `${type.toLowerCase()}_${domain.toLowerCase()}_request`,
     [`${type.toUpperCase()}_${domain.toUpperCase()}_SUCCESS`]: `${type.toLowerCase()}_${domain.toLowerCase()}_success`,
@@ -35,9 +35,9 @@ export const createCustomAsyncActionType = (domain,type) => {
   };
 };
 
-export const createCustomSyncActionType = (domain,type) => {
+export const createCustomSyncActionType = (domain, type) => {
   return {
-    [`${type.toUpperCase()}_${domain.toUpperCase()}`]: `${type.toLowerCase()}_${domain.toLowerCase()}`    
+    [`${type.toUpperCase()}_${domain.toUpperCase()}`]: `${type.toLowerCase()}_${domain.toLowerCase()}`
   };
 };
 

@@ -9,7 +9,14 @@ import styles from './styles';
 
 export class Authority extends Component {
   render() {
-    const { classes, errors, initialValues, resetForm, isSubmitting, label } = this.props;
+    const {
+      classes,
+      errors,
+      initialValues,
+      resetForm,
+      isSubmitting,
+      label
+    } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>

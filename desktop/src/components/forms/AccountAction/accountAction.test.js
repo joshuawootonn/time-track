@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { AccountAction } from 'components/forms/AccountAction/accountAction';
 import AccountActionHOC from 'components/forms/AccountAction';
 
-const props = {  
+const props = {
   classes: {},
   back: jest.fn(),
   clockIn: jest.fn(),
@@ -15,17 +15,17 @@ const props = {
   type: `type`
 };
 
-const setup = overRides => {  
-  return shallow(<AccountAction {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<AccountAction {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return shallow(<AccountActionHOC {...props} {...overRides}/>);
+  return shallow(<AccountActionHOC {...props} {...overRides} />);
 };
 
 describe(`Account Action Component`, () => {
   it(`should render correctly`, () => {
-    setup();   
+    setup();
   });
   it(`should render correctly withStyles`, () => {
     setupHOC();

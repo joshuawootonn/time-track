@@ -8,7 +8,11 @@ import { Typography } from '@material-ui/core';
 import Hero from 'components/layouts/Hero';
 import Task from 'components/forms/Task';
 
-import { taskSelectors,categorySelectors,subcategorySelectors } from 'store/selectors';
+import {
+  taskSelectors,
+  categorySelectors,
+  subcategorySelectors
+} from 'store/selectors';
 import { taskActions } from 'store/actions';
 
 import { analyzeStatus } from 'constants/analyze';
@@ -16,13 +20,13 @@ import { taskValidation } from 'constants/formValidation';
 
 export class TaskCRUD extends Component {
   removeTask = () => {
-    const { selected,removeTask } = this.props;
+    const { selected, removeTask } = this.props;
     removeTask(selected.id);
-  }
+  };
   render() {
-    const { status,categories,subcategories,selected } = this.props;
-    
-    if(status === analyzeStatus.INIT){
+    const { status, categories, subcategories, selected } = this.props;
+
+    if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Task.. </Typography>
@@ -30,9 +34,9 @@ export class TaskCRUD extends Component {
       );
     }
 
-    if(status === analyzeStatus.ADDING){
+    if (status === analyzeStatus.ADDING) {
       return (
-        <Formik 
+        <Formik
           enableReinitialize
           initialValues={{
             name: ``,
@@ -41,7 +45,7 @@ export class TaskCRUD extends Component {
             isActive: true
           }}
           validationSchema={taskValidation}
-          onSubmit={(values,formikFunctions) => {
+          onSubmit={(values, formikFunctions) => {
             const { createTask } = this.props;
             return createTask({
               name: values.name,
@@ -61,7 +65,7 @@ export class TaskCRUD extends Component {
           }}
           render={formikProps => {
             return (
-              <Task 
+              <Task
                 categories={categories}
                 subcategories={subcategories}
                 label="Add"
@@ -74,17 +78,17 @@ export class TaskCRUD extends Component {
       );
     }
 
-    if(status === analyzeStatus.EDITING){
+    if (status === analyzeStatus.EDITING) {
       return (
-        <Formik 
+        <Formik
           enableReinitialize
           initialValues={{
             ...selected,
             isActive: selected.isActive ? true : false
-          }}          
+          }}
           validationSchema={taskValidation}
-          onSubmit={(values,formikFunctions) => {
-            const { updateTask } = this.props;            
+          onSubmit={(values, formikFunctions) => {
+            const { updateTask } = this.props;
             return updateTask({
               id: values.id,
               name: values.name,
@@ -104,10 +108,10 @@ export class TaskCRUD extends Component {
           }}
           render={formikProps => {
             return (
-              <Task 
+              <Task
                 removeTask={this.removeTask}
                 categories={categories}
-                subcategories={subcategories}                
+                subcategories={subcategories}
                 label="Edit"
                 type="edit"
                 {...formikProps}
@@ -126,7 +130,7 @@ const mapStateToProps = state => {
     selected: taskSelectors.getSelectedTask(state),
     status: state.analyze.taskStatus,
     categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state)    
+    subcategories: subcategorySelectors.getAllSubcategories(state)
   };
 };
 
@@ -141,7 +145,7 @@ const mapDispatchToProps = dispatch => {
     },
     removeTask: id => {
       return dispatch(taskActions.removeTask(id));
-    }  
+    }
   };
 };
 
@@ -149,4 +153,7 @@ TaskCRUD.propTypes = {
   status: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskCRUD);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TaskCRUD);

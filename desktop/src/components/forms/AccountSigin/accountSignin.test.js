@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { AccountSigin } from 'components/forms/AccountSigin/accountSigin';
 import AccountSiginHOC from 'components/forms/AccountSigin';
 
-const props =  {  
+const props = {
   classes: {},
   isSubmitting: true,
   values: {
@@ -14,12 +14,12 @@ const props =  {
   errors: {}
 };
 
-const setup = overRides => {  
-  return shallow(<AccountSigin {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<AccountSigin {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return shallow(<AccountSiginHOC {...props} {...overRides}/>);
+  return shallow(<AccountSiginHOC {...props} {...overRides} />);
 };
 
 describe(`Account Signin Component`, () => {
@@ -27,7 +27,7 @@ describe(`Account Signin Component`, () => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();  
+    setup();
   });
   it(`should render correctly withStyles`, () => {
     setupHOC();
@@ -47,7 +47,7 @@ describe(`Account Signin Component`, () => {
     expect(props.setFieldValue).toHaveBeenCalledTimes(1);
   });
   it(`should not appendPin if pin.length > 6`, () => {
-    const wrapper = setup({ values: { pin: `111111` } });    
+    const wrapper = setup({ values: { pin: `111111` } });
     const instance = wrapper.instance();
     expect(props.setFieldValue).toHaveBeenCalledTimes(0);
     instance.appendPin(`1`);
@@ -59,7 +59,10 @@ describe(`Account Signin Component`, () => {
     const instance = wrapper.instance();
     instance.appendPin = jest.fn();
     expect(instance.appendPin).toHaveBeenCalledTimes(0);
-    wrapper.find(`#button-1`).first().simulate(`click`);
+    wrapper
+      .find(`#button-1`)
+      .first()
+      .simulate(`click`);
     expect(instance.appendPin).toHaveBeenCalledTimes(1);
   });
   it(`should disable to submit button if errors is not empty`, () => {

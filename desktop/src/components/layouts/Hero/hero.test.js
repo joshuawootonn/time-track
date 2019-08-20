@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Hero from 'components/layouts/Hero';
 
-const props =  {  
+const props = {
   classes: {},
   fullPage: false,
   fullHeight: false,
@@ -11,12 +11,12 @@ const props =  {
   children: <div>child</div>
 };
 
-const setup = overRides => {  
-  return mount(<Hero {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<Hero {...props} {...overRides} />);
 };
 
-describe(`Hero Component`, () => {  
+describe(`Hero Component`, () => {
   it(`should render correctly`, () => {
-    setup();        
-  });  
+    setup();
+  });
 });

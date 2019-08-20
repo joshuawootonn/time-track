@@ -4,23 +4,23 @@ import { shallow } from 'enzyme';
 import { SnackContainer } from 'containers/Floaters/snackContainer';
 import * as status from 'constants/status';
 
-const props =  {  
+const props = {
   message: `message`,
   type: status.SUCCESS,
   onClose: jest.fn()
 };
 
-const setup = overRides => {  
-  return shallow(<SnackContainer {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<SnackContainer {...props} {...overRides} />);
 };
 
-describe(`Snack Container`, () => {  
+describe(`Snack Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();       
-  });  
+    setup();
+  });
   it(`should render correctly for failure status`, () => {
     setup({ type: status.FAILURE });
   });

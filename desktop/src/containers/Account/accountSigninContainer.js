@@ -11,19 +11,18 @@ import AccountSigin from 'components/forms/AccountSigin';
 import { authoritySelectors } from 'store/selectors';
 
 export class AccountSignin extends Component {
-
   componentDidMount = () => {
-  //REMOVE before deploy
+    //REMOVE before deploy
     // const { login, history, getStaticData } = this.props;
     // getStaticData();
     // login(`565656`).then(asdf => {
-    //   const { authorityId } = asdf.data;  
+    //   const { authorityId } = asdf.data;
     //   console.log(this.props,authorityId);
-    //   setTimeout(() => history.push(`/${this.props.authorities[authorityId].type}`),500);              
+    //   setTimeout(() => history.push(`/${this.props.authorities[authorityId].type}`),500);
     // }, () => {
     // //rip
-    // });    
-  }
+    // });
+  };
   render() {
     // console.log(HOST());
     const { login, history, getStaticData, authorities } = this.props;
@@ -31,30 +30,42 @@ export class AccountSignin extends Component {
       <Formik
         initialValues={{ pin: `` }}
         validationSchema={accountValidation}
-        onSubmit={(values,formikFunctions) => {
+        onSubmit={(values, formikFunctions) => {
           return login(values.pin).then(
             response => {
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });
               const { authorityId } = response.data;
               history.push(`/${authorities[authorityId].type}`);
-              getStaticData();              
+              getStaticData();
             },
-            e => {            
-              if(!e.response || (e.response && e.response.status !== 404)){
+            e => {
+              if (!e.response || (e.response && e.response.status !== 404)) {
                 formikFunctions.setErrors({ submit: `Network Error: 4s` });
-                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 3s` }),1000);
-                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 2s` }),2000);
-                setTimeout(() => formikFunctions.setErrors({ submit: `Network Error: 1s` }),3000);
-                setTimeout(() => this.props.history.push(`/auth`),4000);
-              }else{
+                setTimeout(
+                  () =>
+                    formikFunctions.setErrors({ submit: `Network Error: 3s` }),
+                  1000
+                );
+                setTimeout(
+                  () =>
+                    formikFunctions.setErrors({ submit: `Network Error: 2s` }),
+                  2000
+                );
+                setTimeout(
+                  () =>
+                    formikFunctions.setErrors({ submit: `Network Error: 1s` }),
+                  3000
+                );
+                setTimeout(() => this.props.history.push(`/auth`), 4000);
+              } else {
                 formikFunctions.resetForm();
                 formikFunctions.setStatus({ success: false });
-                formikFunctions.setSubmitting(false);              
+                formikFunctions.setSubmitting(false);
                 formikFunctions.setErrors({ submit: `Invalid pin!` });
               }
             }
-          );          
+          );
         }}
         render={formProps => <AccountSigin {...formProps} />}
       />
@@ -86,4 +97,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AccountSignin));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AccountSignin)
+);

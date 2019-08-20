@@ -2,17 +2,18 @@ import { analyzeActionTypes } from 'constants/actionTypeConstants';
 import { modalActions } from 'store/actions';
 
 export const select = (domain, payload) => {
-  return { type: analyzeActionTypes.SELECT, domain, payload };};
+  return { type: analyzeActionTypes.SELECT, domain, payload };
+};
 
 export const setStatus = (domain, payload) => {
   return { type: analyzeActionTypes.SET_STATUS, domain, payload };
 };
 
 export const deleteSelected = domain => {
-  return { type: analyzeActionTypes.DELETE_SELECTED,domain };
+  return { type: analyzeActionTypes.DELETE_SELECTED, domain };
 };
 
-export const editSettingsModal = () => {  
+export const editSettingsModal = () => {
   return modalActions.openModal(analyzeActionTypes.EDIT_SETTINGS_MODAL, null);
 };
 
@@ -28,6 +29,6 @@ export const toggleFilter = domain => {
   return { type: analyzeActionTypes.TOGGLE_FILTER, domain };
 };
 
-export const clearFilter = domain => {  
+export const clearFilter = domain => {
   return { type: analyzeActionTypes.CLEAR_FILTER, domain };
 };

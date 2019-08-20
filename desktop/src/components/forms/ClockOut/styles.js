@@ -23,12 +23,12 @@ const styles = theme => {
       justifyContent: `flex-end`
     },
     button: { marginLeft: `10px` },
-  
+
     verticalCenter: {
       display: `flex`,
       alignItems: `center`
     },
-  
+
     formHeader: {
       display: `flex`,
       flexDirection: `row`,
@@ -40,7 +40,7 @@ const styles = theme => {
       fontSize: `32px`,
       margin: `0 10px`
     },
-  
+
     formBody: {
       display: `flex`,
       flexDirection: `row`,
@@ -49,13 +49,13 @@ const styles = theme => {
     formElement: {
       marginRight: theme.spacing.unit
     },
-  
+
     formFooter: {
       display: `flex`,
       flexDirection: `row`,
       alignItems: `center`,
       justifyContent: `space-between`,
-      height:`68px`
+      height: `68px`
     },
     lunchBox: {
       width: `150px`

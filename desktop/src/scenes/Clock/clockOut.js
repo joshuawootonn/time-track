@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 
 import moment from 'moment';
 
-import { employeeActions,projectActions,taskActions,shiftActions, analyzeActions } from 'store/actions';
+import {
+  employeeActions,
+  projectActions,
+  taskActions,
+  shiftActions,
+  analyzeActions
+} from 'store/actions';
 import ClockOutContainer from 'containers/Clock/clockOutContainer';
 
 export class ClockOut extends Component {
@@ -13,8 +19,15 @@ export class ClockOut extends Component {
     this.props.getAllEmployees();
     this.props.getAllProjects();
     this.props.getAllTasks();
-    this.props.getShiftsInRange(moment().subtract(100, `days`).format(`MM-DD-YY HH:mm:ss`), moment().add(14,`days`).format(`MM-DD-YY HH:mm:ss`));
-  }
+    this.props.getShiftsInRange(
+      moment()
+        .subtract(100, `days`)
+        .format(`MM-DD-YY HH:mm:ss`),
+      moment()
+        .add(14, `days`)
+        .format(`MM-DD-YY HH:mm:ss`)
+    );
+  };
   render() {
     return <ClockOutContainer type={this.props.type} />;
   }
@@ -30,7 +43,7 @@ ClockOut.propTypes = {
 
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
-  return {      
+  return {
     openSettings: () => {
       return dispatch(analyzeActions.editSettingsModal());
     },
@@ -45,8 +58,11 @@ const mapDispatchToProps = dispatch => {
     },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end));
-    }  
+    }
   };
 };
 
-export default connect(null,mapDispatchToProps)(ClockOut);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ClockOut);

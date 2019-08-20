@@ -19,15 +19,20 @@ export class AccountSigin extends Component {
 
   render() {
     const { classes, isSubmitting, errors } = this.props;
-    
+
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
           <Form>
             <Grid container spacing={24}>
               <Grid item xs={12}>
-                <Field component={Password} name="pin" label="Pin" helper="normal" />
-              </Grid>              
+                <Field
+                  component={Password}
+                  name="pin"
+                  label="Pin"
+                  helper="normal"
+                />
+              </Grid>
               <Grid item xs={4}>
                 <Button
                   onClick={() => this.appendPin(7)}
@@ -150,7 +155,7 @@ export class AccountSigin extends Component {
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Typography className={classes.centerText} color="error" >
+                <Typography className={classes.centerText} color="error">
                   {errors.submit}
                 </Typography>
               </Grid>

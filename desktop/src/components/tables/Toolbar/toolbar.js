@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Toolbar as MUToolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
+import {
+  Toolbar as MUToolbar,
+  Typography,
+  IconButton,
+  Tooltip
+} from '@material-ui/core';
 import { Add, FilterList } from '@material-ui/icons';
 
 import styles from './styles';
@@ -12,8 +17,16 @@ import styles from './styles';
 
 export class Toolbar extends Component {
   render() {
-    const { selected, classes, add, isFilterVisible, toggleFilter, label, selectLabel } = this.props;
-    
+    const {
+      selected,
+      classes,
+      add,
+      isFilterVisible,
+      toggleFilter,
+      label,
+      selectLabel
+    } = this.props;
+
     return (
       <div style={{ position: `relative` }}>
         <MUToolbar
@@ -23,7 +36,7 @@ export class Toolbar extends Component {
         >
           <div className={classes.title}>
             {Object.keys(selected).length !== 0 ? (
-              <Typography color="inherit" variant="h6" >
+              <Typography color="inherit" variant="h6">
                 {selectLabel(selected)}
               </Typography>
             ) : (
@@ -33,22 +46,29 @@ export class Toolbar extends Component {
             )}
           </div>
           <div className={classes.spacer} />
-          {toggleFilter &&<div className={classes.actions}>       
-            <Tooltip title="Filter">
-              <IconButton color={isFilterVisible ? `secondary` : `default`} onClick={toggleFilter}>
-                <FilterList />
-              </IconButton>
-            </Tooltip>
-          </div>}
-          {add &&<div className={classes.actions}>       
-            <Tooltip title="Add">
-              <IconButton onClick={add}>
-                <Add />
-              </IconButton>
-            </Tooltip>
-          </div>}
-        </MUToolbar>        
-      </div>      
+          {toggleFilter && (
+            <div className={classes.actions}>
+              <Tooltip title="Filter">
+                <IconButton
+                  color={isFilterVisible ? `secondary` : `default`}
+                  onClick={toggleFilter}
+                >
+                  <FilterList />
+                </IconButton>
+              </Tooltip>
+            </div>
+          )}
+          {add && (
+            <div className={classes.actions}>
+              <Tooltip title="Add">
+                <IconButton onClick={add}>
+                  <Add />
+                </IconButton>
+              </Tooltip>
+            </div>
+          )}
+        </MUToolbar>
+      </div>
     );
   }
 }

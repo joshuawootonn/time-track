@@ -10,40 +10,56 @@ import { analyzeActions } from 'store/actions';
 
 import domain from 'constants/domains';
 
-export class EmployeeFilter extends Component {  
+export class EmployeeFilter extends Component {
   render() {
-    const { authorities, crews, employeeFilters, employeeFilterVisible, 
-      clearFilter, updateFilter, toggleFilter  } = this.props;
-          
-    if(employeeFilterVisible){
+    const {
+      authorities,
+      crews,
+      employeeFilters,
+      employeeFilterVisible,
+      clearFilter,
+      updateFilter,
+      toggleFilter
+    } = this.props;
+
+    if (employeeFilterVisible) {
       return (
         <Formik
           enableReinitialize
-          initialValues={{  ...employeeFilters }}// TODO: migrate the toggles to radio buttons for isWorking and any other boolean values
+          initialValues={{ ...employeeFilters }} // TODO: migrate the toggles to radio buttons for isWorking and any other boolean values
           onSubmit={(values, formikFunctions) => {
             updateFilter({ ...values });
             toggleFilter();
-            formikFunctions.resetForm();          
+            formikFunctions.resetForm();
           }}
           render={formikProps => {
-            return (            
-              <Card style={{ position: `absolute`, top: `70px`, left: `2.5%`, zIndex: 900, width: `95%`, minHeight: `100px` }}>
+            return (
+              <Card
+                style={{
+                  position: `absolute`,
+                  top: `70px`,
+                  left: `2.5%`,
+                  zIndex: 900,
+                  width: `95%`,
+                  minHeight: `100px`
+                }}
+              >
                 <Employee
                   authorities={[{ id: -1, type: `All` }, ...authorities]}
-                  crews={[{ id: -1, name: `All` }, ...crews ]}
+                  crews={[{ id: -1, name: `All` }, ...crews]}
                   label="Filter"
                   type="filter"
                   clearFilter={clearFilter}
                   {...formikProps}
                 />
-              </Card>          
+              </Card>
             );
           }}
         />
       );
     }
     return null;
-  }   
+  }
 }
 
 /* istanbul ignore next */
@@ -59,10 +75,14 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    updateFilter: filters => dispatch(analyzeActions.updateFilter(domain.EMPLOYEE,filters)),
+    updateFilter: filters =>
+      dispatch(analyzeActions.updateFilter(domain.EMPLOYEE, filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.EMPLOYEE)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))  
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeFilter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeFilter);

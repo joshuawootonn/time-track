@@ -11,22 +11,22 @@ import { taskSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class TaskToolbar extends Component {  
-  selectLabel = selected =>`${selected.name} selected`;
-  
+export class TaskToolbar extends Component {
+  selectLabel = selected => `${selected.name} selected`;
+
   add = () => {
     const { selected, select, setStatus } = this.props;
-    if(selected && selected.id){
-      select(domain.TASK,selected.id);
+    if (selected && selected.id) {
+      select(domain.TASK, selected.id);
     }
-    setStatus(domain.TASK,analyzeStatus.ADDING);
-  }
-  
+    setStatus(domain.TASK, analyzeStatus.ADDING);
+  };
+
   render() {
-    const {  selected, toggleTaskFilter, taskFilterVisible } = this.props;
-        
+    const { selected, toggleTaskFilter, taskFilterVisible } = this.props;
+
     return (
-      <AnalyzeToolbar 
+      <AnalyzeToolbar
         selectLabel={this.selectLabel}
         label="Task"
         add={this.add}
@@ -58,9 +58,12 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch),  
-    toggleTaskFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK)) 
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+    toggleTaskFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK))
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(TaskToolbar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TaskToolbar);

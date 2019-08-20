@@ -10,16 +10,24 @@ const mockStore = configureMockStore(middlewares);
 const store = mockStore();
 describe(`Snack Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
   });
   // SHOW
   test(`openSnack should dispatch the show_snack action`, async () => {
-    const expectedActionTypes = [ `show_snack` ];
-    await compareActionTypesSync(expectedActionTypes,store,snackActions.openSnack(status.SUCCESS,`asdf`));
+    const expectedActionTypes = [`show_snack`];
+    await compareActionTypesSync(
+      expectedActionTypes,
+      store,
+      snackActions.openSnack(status.SUCCESS, `asdf`)
+    );
   });
   // HIDE
-  test(`closeSnack should dispatch the hide_snack action`, async () => {    
-    const expectedActionTypes = [ `hide_snack` ];
-    await compareActionTypesSync(expectedActionTypes,store,snackActions.closeSnack());
+  test(`closeSnack should dispatch the hide_snack action`, async () => {
+    const expectedActionTypes = [`hide_snack`];
+    await compareActionTypesSync(
+      expectedActionTypes,
+      store,
+      snackActions.closeSnack()
+    );
   });
 });

@@ -12,22 +12,22 @@ import { employeeSelectors } from 'store/selectors';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
 
-export class EmployeeIndex extends Component {  
-  select = object => this.props.select(domain.EMPLOYEE,object)
-  
+export class EmployeeIndex extends Component {
+  select = object => this.props.select(domain.EMPLOYEE, object);
+
   render() {
     const { employees, selected } = this.props;
-   
+
     if (!employees) return <Progress variant="circular" fullPage />;
 
-    return ( 
+    return (
       <VirtualizedSortSelect
         data={employees || []}
-        columns={rows} 
+        columns={rows}
         selected={selected}
         select={this.select}
-        initialSortBy="lastName"     
-      />                
+        initialSortBy="lastName"
+      />
     );
   }
 }
@@ -43,7 +43,10 @@ EmployeeIndex.propTypes = {
 const mapStateToProps = state => {
   const filters = state.analyze.employeeFilters;
   return {
-    employees: employeeSelectors.getAllEmployeesNew(state, { filters , sorts: {} }),
+    employees: employeeSelectors.getAllEmployeesNew(state, {
+      filters,
+      sorts: {}
+    }),
     selected: employeeSelectors.getSelectedEmployee(state)
   };
 };
@@ -51,26 +54,29 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeIndex);
 
 const rows = [
   {
-    id: `firstName`,   
-    dataKey: `firstName`, 
-    width: 150, 
+    id: `firstName`,
+    dataKey: `firstName`,
+    width: 150,
     height: 56,
     padding: `dense`,
     label: `First Name`,
     type: TableDataTypes.STRING
   },
   {
-    id: `lastName`, 
-    dataKey: `lastName`,   
-    width: 150, 
+    id: `lastName`,
+    dataKey: `lastName`,
+    width: 150,
     height: 56,
     padding: `dense`,
     label: `Last Name`,
@@ -78,18 +84,18 @@ const rows = [
   },
   {
     id: `authority_type`,
-    dataKey: `authority`, 
-    width: 150, 
-    height: 56,      
+    dataKey: `authority`,
+    width: 150,
+    height: 56,
     padding: `dense`,
     label: `Authority`,
     type: TableDataTypes.OBJECT,
     keys: [`type`]
   },
   {
-    id: `name`,  
-    dataKey: `crew`,  
-    width: 150, 
+    id: `name`,
+    dataKey: `crew`,
+    width: 150,
     height: 56,
     padding: `dense`,
     label: `Crew`,
@@ -98,8 +104,8 @@ const rows = [
   },
   {
     id: `isEmployed`,
-    dataKey: `isEmployed`, 
-    width: 120, 
+    dataKey: `isEmployed`,
+    width: 120,
     height: 56,
     align: `right`,
     padding: `dense`,
@@ -108,8 +114,8 @@ const rows = [
   },
   {
     id: `isWorking`,
-    dataKey: `isWorking`, 
-    width: 120, 
+    dataKey: `isWorking`,
+    width: 120,
     height: 56,
     align: `right`,
     padding: `dense`,

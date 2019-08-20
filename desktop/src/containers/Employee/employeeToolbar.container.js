@@ -11,29 +11,34 @@ import { employeeSelectors } from 'store/selectors';
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
-export class EmployeeToolbar extends Component {   
-  selectLabel = selected => `${selected.firstName} ${selected.lastName} selected`;
+export class EmployeeToolbar extends Component {
+  selectLabel = selected =>
+    `${selected.firstName} ${selected.lastName} selected`;
 
   add = () => {
     const { selected, select, setStatus } = this.props;
-    if(selected && selected.id){
-      select(domain.EMPLOYEE,selected.id);
+    if (selected && selected.id) {
+      select(domain.EMPLOYEE, selected.id);
     }
-    setStatus(domain.EMPLOYEE,analyzeStatus.ADDING);
-  } 
-  
+    setStatus(domain.EMPLOYEE, analyzeStatus.ADDING);
+  };
+
   render() {
-    const { selected, toggleEmployeeFilter,employeeFilterVisible } = this.props;
- 
-    return (       
-      <AnalyzeToolbar 
+    const {
+      selected,
+      toggleEmployeeFilter,
+      employeeFilterVisible
+    } = this.props;
+
+    return (
+      <AnalyzeToolbar
         selectLabel={this.selectLabel}
         label="Employees"
         add={this.add}
         selected={selected}
         toggleFilter={toggleEmployeeFilter}
         isFilterVisible={employeeFilterVisible}
-      />                
+      />
     );
   }
 }
@@ -57,9 +62,13 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch),    
-    toggleEmployeeFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))  
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+    toggleEmployeeFilter: () =>
+      dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeToolbar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmployeeToolbar);

@@ -11,7 +11,7 @@ const styles = () => ({
   },
   headerRow: {
     minHeight: `72px`
-  } 
+  }
 });
 
 export default styles;

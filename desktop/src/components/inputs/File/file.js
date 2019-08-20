@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Button, InputLabel, FormControl, Input,FormHelperText } from '@material-ui/core';
+import {
+  Button,
+  InputLabel,
+  FormControl,
+  Input,
+  FormHelperText
+} from '@material-ui/core';
 import { getIn } from 'formik';
 
 import styles from './styles';
@@ -13,12 +19,24 @@ export class File extends Component {
     form.setFieldValue(field.name, e.target.files[0].path);
   };
   render() {
-    const { form, label, labelProps, formControlProps, margin, classes, field,helper,fullWidth } = this.props;
+    const {
+      form,
+      label,
+      labelProps,
+      formControlProps,
+      margin,
+      classes,
+      field,
+      helper,
+      fullWidth
+    } = this.props;
     return (
       <FormControl {...formControlProps} fullWidth={fullWidth} margin={margin}>
         <div className={classes.row}>
           {label !== undefined ? (
-            <InputLabel shrink {...labelProps}>{label}</InputLabel>
+            <InputLabel shrink {...labelProps}>
+              {label}
+            </InputLabel>
           ) : null}
           <Input fullWidth={fullWidth} {...field} />
           <input
@@ -42,9 +60,13 @@ export class File extends Component {
             </Button>
           </label>
         </div>
-        {helper === `normal` && <FormHelperText error={true}>
-          {getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
-        </FormHelperText>}
+        {helper === `normal` && (
+          <FormHelperText error={true}>
+            {getIn(form.touched, field.name)
+              ? getIn(form.errors, field.name)
+              : ` `}
+          </FormHelperText>
+        )}
       </FormControl>
     );
   }

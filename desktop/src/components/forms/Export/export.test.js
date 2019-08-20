@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Export } from 'components/forms/Export/export';
 import ExportHOC from 'components/forms/Export';
 
-const props =  {  
+const props = {
   classes: {},
   isSubmitting: true,
   values: {
@@ -14,12 +14,12 @@ const props =  {
   errors: {}
 };
 
-const setup = overRides => {  
-  return shallow(<Export {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<Export {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return shallow(<ExportHOC {...props} {...overRides}/>);
+  return shallow(<ExportHOC {...props} {...overRides} />);
 };
 
 describe(`Export Component`, () => {

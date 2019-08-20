@@ -13,16 +13,18 @@ const data = { response: true };
 
 describe(`Task Actions`, () => {
   beforeEach(() => {
-    store.clearActions();    
+    store.clearActions();
     mock = new MockAdapter(axios);
   });
-  // GET ALL 
+  // GET ALL
   test(`getAllTasks should dispatch 2 actions on success`, async () => {
-    const expectedActionTypes = [
-      `get_tasks_request`, `get_tasks_success`
-    ];
-    mock.onGet(/tasks/).reply(200,data);
-    await compareActionTypes(expectedActionTypes,store,taskActions.getAllTasks());
+    const expectedActionTypes = [`get_tasks_request`, `get_tasks_success`];
+    mock.onGet(/tasks/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.getAllTasks()
+    );
   });
   // UPDATE
   test(`updateTask dispatch 6 actions on success`, async () => {
@@ -33,8 +35,12 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `update_task_success`
     ];
-    mock.onPut(/tasks/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,taskActions.updateTask({ id: 1 }));
+    mock.onPut(/tasks/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.updateTask({ id: 1 })
+    );
   });
   test(`updateTask should dispatch 4 actions on failure`, async () => {
     const expectedActionTypes = [
@@ -44,8 +50,12 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `update_task_failure`
     ];
-    mock.onPut(/tasks/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,taskActions.updateTask({ id: 1 }));
+    mock.onPut(/tasks/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.updateTask({ id: 1 })
+    );
   });
   // CREATE
   test(`createTask dispatch 6 actions on success`, async () => {
@@ -56,8 +66,12 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `create_task_success`
     ];
-    mock.onPost(/tasks/).reply(200, data);  
-    await compareActionTypes(expectedActionTypes,store,taskActions.createTask({ id: 1 }));
+    mock.onPost(/tasks/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.createTask({ id: 1 })
+    );
   });
   test(`createTask should dispatch 4 actions on failure`, async () => {
     const expectedActionTypes = [
@@ -67,8 +81,12 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `create_task_failure`
     ];
-    mock.onPost(/tasks/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,taskActions.createTask({ id: 1 }));
+    mock.onPost(/tasks/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.createTask({ id: 1 })
+    );
   });
   // REMOVE
   test(`removeTask should dispatch 6 actions on success`, async () => {
@@ -80,8 +98,12 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `remove_task_success`
     ];
-    mock.onDelete(/tasks/).reply(200, data); 
-    await compareActionTypes(expectedActionTypes,store,taskActions.removeTask(1));
+    mock.onDelete(/tasks/).reply(200, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.removeTask(1)
+    );
   });
   test(`removeTask should dispatch 6 actions on failure`, async () => {
     const expectedActionTypes = [
@@ -92,9 +114,11 @@ describe(`Task Actions`, () => {
       `show_snack`,
       `remove_task_failure`
     ];
-    mock.onDelete(/tasks/).reply(400, data); 
-    await compareActionTypes(expectedActionTypes,store,taskActions.removeTask(1));
+    mock.onDelete(/tasks/).reply(400, data);
+    await compareActionTypes(
+      expectedActionTypes,
+      store,
+      taskActions.removeTask(1)
+    );
   });
- 
 });
-

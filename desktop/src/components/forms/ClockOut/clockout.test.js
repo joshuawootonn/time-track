@@ -2,12 +2,18 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { FieldArray, Formik } from 'formik';
 
-import { Clockout,CLOCKOUT_FORM_ADD_ACTIVTIY,CLOCKOUT_FORM_REMOVE_ACTIVTIY } from 'components/forms/ClockOut/clockOut';
+import {
+  Clockout,
+  CLOCKOUT_FORM_ADD_ACTIVTIY,
+  CLOCKOUT_FORM_REMOVE_ACTIVTIY
+} from 'components/forms/ClockOut/clockOut';
 import ClockoutHOC from 'components/forms/ClockOut';
 
-
-import { PROJECT_MOCK, PROJECT_TASK_MOCK, ACTIVITY_MOCK } from 'constants/modelMocks';
-
+import {
+  PROJECT_MOCK,
+  PROJECT_TASK_MOCK,
+  ACTIVITY_MOCK
+} from 'constants/modelMocks';
 
 const INITIAL_VALUES = {
   lunch: 30,
@@ -20,7 +26,7 @@ const INITIAL_VALUES = {
     }
   ]
 };
-const props =  {  
+const props = {
   classes: {},
   label: `label`,
   isSubmitting: false,
@@ -39,21 +45,20 @@ const props =  {
   generalError: `general error`,
   errors: {}
 };
-const renderProps = { 
+const renderProps = {
   remove: jest.fn(),
   push: jest.fn()
 };
 
-
-
-const setup = overRides => {  
+const setup = overRides => {
   return mount(
     <Formik
       initialValues={INITIAL_VALUES}
       render={formikProps => (
-        <Clockout {...formikProps} {...props} {...overRides}/>)}
+        <Clockout {...formikProps} {...props} {...overRides} />
+      )}
     />
-  );    
+  );
 };
 
 const setupHOC = overRides => {
@@ -61,15 +66,19 @@ const setupHOC = overRides => {
     <Formik
       initialValues={INITIAL_VALUES}
       render={formikProps => (
-        <ClockoutHOC {...formikProps} {...props} {...overRides}/>)}
+        <ClockoutHOC {...formikProps} {...props} {...overRides} />
+      )}
     />
   );
 };
 
 const setupWithRender = overRides => {
-  const wrapper = setup();  
-  const Render = wrapper.find(FieldArray).first().prop(`render`);  
-  return shallow(<Render {...renderProps} {...overRides}/>);
+  const wrapper = setup();
+  const Render = wrapper
+    .find(FieldArray)
+    .first()
+    .prop(`render`);
+  return shallow(<Render {...renderProps} {...overRides} />);
 };
 
 describe(`Clockout Component`, () => {
@@ -77,7 +86,7 @@ describe(`Clockout Component`, () => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();   
+    setup();
   });
   it(`should render correctly withStyles`, () => {
     setupHOC();
@@ -86,18 +95,23 @@ describe(`Clockout Component`, () => {
     setupWithRender();
   });
 
-
   it(`should remove an activity when a #${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_{1} is clicked`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.remove).toHaveBeenCalledTimes(0);
-    wrapper.find(`#${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_0`).first().simulate(`click`);
+    wrapper
+      .find(`#${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_0`)
+      .first()
+      .simulate(`click`);
     expect(renderProps.remove).toHaveBeenCalledTimes(1);
     expect(renderProps.remove).toHaveBeenCalledWith(0);
   });
   it(`should remove an activity when a #${CLOCKOUT_FORM_ADD_ACTIVTIY} is clicked`, () => {
     const wrapper = setupWithRender();
     expect(renderProps.push).toHaveBeenCalledTimes(0);
-    wrapper.find(`#${CLOCKOUT_FORM_ADD_ACTIVTIY}`).first().simulate(`click`);
+    wrapper
+      .find(`#${CLOCKOUT_FORM_ADD_ACTIVTIY}`)
+      .first()
+      .simulate(`click`);
     expect(renderProps.push).toHaveBeenCalledTimes(1);
   });
 
@@ -122,7 +136,7 @@ describe(`Clockout Component`, () => {
     const wrapper = setup().find(Clockout);
     expect(wrapper.state(`keyboardLayout`)).toBe(`default`);
     wrapper.instance().onKeyPress(`{shift}`);
-    expect(wrapper.state(`keyboardLayout`)).toBe(`shift`);    
+    expect(wrapper.state(`keyboardLayout`)).toBe(`shift`);
     wrapper.instance().onKeyPress(`{shift}`);
     expect(wrapper.state(`keyboardLayout`)).toBe(`default`);
     wrapper.instance().onKeyPress(`{shifdst}`);
@@ -132,10 +146,10 @@ describe(`Clockout Component`, () => {
     const wrapper = setup().find(Clockout);
     expect(wrapper.state(`isKeyboardVisible`)).toBe(false);
     expect(wrapper.state(`currentTextField`)).toBeNull();
-    wrapper.instance().onDescriptionFocus();    
+    wrapper.instance().onDescriptionFocus();
     expect(wrapper.state(`isKeyboardVisible`)).toBe(true);
-    expect(wrapper.state(`currentTextField`)).not.toBeNull();    
-    wrapper.instance().onDescriptionBlur();    
+    expect(wrapper.state(`currentTextField`)).not.toBeNull();
+    wrapper.instance().onDescriptionBlur();
     expect(wrapper.state(`isKeyboardVisible`)).toBe(false);
     expect(wrapper.state(`currentTextField`)).toBeNull();
   });

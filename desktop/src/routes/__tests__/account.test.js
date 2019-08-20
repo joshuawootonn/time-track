@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Account from 'routes/Account';
 
-describe(`Account Routes`, () => { 
+describe(`Account Routes`, () => {
   it(`should be an array with 1 element`, () => {
     expect(Account).toBeDefined();
     expect(Account.length).toEqual(1);

@@ -8,25 +8,28 @@ import ExportModalScene from 'scenes/Analyze/export';
 import { modalActions } from 'store/actions';
 import { analyzeActionTypes } from 'constants/actionTypeConstants';
 
-
 const MODAL_COMPONENTS = {
-  [analyzeActionTypes.EDIT_SETTINGS_MODAL] : SettingsModalScene,
-  [analyzeActionTypes.EXPORT_DATA_MODAL] : ExportModalScene
+  [analyzeActionTypes.EDIT_SETTINGS_MODAL]: SettingsModalScene,
+  [analyzeActionTypes.EXPORT_DATA_MODAL]: ExportModalScene
 };
 
 export class ModalRoot extends Component {
   toggleModal = () => {
     this.props.closeModal();
-  }
+  };
   render() {
     const { modalType, modalProps } = this.props;
     if (!modalType) {
       return null; // after React v15 you can return null here
     }
     const SpecificModal = MODAL_COMPONENTS[modalType];
-    return(
-      <SpecificModal open={true}  toggleModal={this.toggleModal} data={modalProps} />  
-    );    
+    return (
+      <SpecificModal
+        open={true}
+        toggleModal={this.toggleModal}
+        data={modalProps}
+      />
+    );
   }
 }
 
@@ -37,8 +40,11 @@ ModalRoot.propTypes = {
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => {  
-  return state.modal;  
+const mapStateToProps = state => {
+  return state.modal;
 };
 
-export default connect( mapStateToProps ,modalActions)(ModalRoot);
+export default connect(
+  mapStateToProps,
+  modalActions
+)(ModalRoot);

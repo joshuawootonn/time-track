@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App,{ AuthedRoutes } from 'app';
+import App, { AuthedRoutes } from 'app';
 
 const props = {};
 
-const setup = () => {  
-  return shallow(<AuthedRoutes {...props} />);    
+const setup = () => {
+  return shallow(<AuthedRoutes {...props} />);
 };
 
 const setupHOC = () => {
@@ -15,9 +15,9 @@ const setupHOC = () => {
 
 describe(`App`, () => {
   it(`should render correctly`, () => {
-    setup();        
+    setup();
   });
   it(`should render correctly withRouter`, () => {
-    setupHOC();    
+    setupHOC();
   });
 });

@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 import { Field, Form } from 'formik';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid,Tooltip,IconButton, Typography, Button } from '@material-ui/core';
+import {
+  Grid,
+  Tooltip,
+  IconButton,
+  Typography,
+  Button
+} from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
 import styles from './styles';
@@ -12,15 +18,27 @@ import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 
-export class Task extends Component {  
+export class Task extends Component {
   render() {
-    const { label,removeTask,type,classes,categories, subcategories,isSubmitting,resetForm,initialValues,errors, setFieldValue } = this.props;
+    const {
+      label,
+      removeTask,
+      type,
+      classes,
+      categories,
+      subcategories,
+      isSubmitting,
+      resetForm,
+      initialValues,
+      errors,
+      setFieldValue
+    } = this.props;
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
-          <Grid item xs={12}  className={cx(classes.headerRow,classes.row)} >
+          <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
-            {[`edit`].includes(type) &&  (
+            {[`edit`].includes(type) && (
               <Tooltip title="Delete">
                 <IconButton onClick={removeTask}>
                   <Delete />
@@ -28,7 +46,7 @@ export class Task extends Component {
               </Tooltip>
             )}
           </Grid>
-          <Grid item xs={12}  className={classes.row}>
+          <Grid item xs={12} className={classes.row}>
             <Field
               name="name"
               component={TextField}
@@ -52,21 +70,21 @@ export class Task extends Component {
               items={categories}
               fullWidth
               label="Category"
-              className={classes.field}              
+              className={classes.field}
               id={`${TASK_FORM_CATEGORY_FIELD_ID}`}
               onChange={() => setFieldValue(`subcategoryId`, -1)}
             />
             <Field
               name="subcategoryId"
               component={Select}
-              items={subcategories.filter(subcat => {                
+              items={subcategories.filter(subcat => {
                 return subcat.categoryId === this.props.values.categoryId;
               })}
               fullWidth
               label="Subcategory"
               className={classes.field}
-            />            
-          </Grid>          
+            />
+          </Grid>
           <Grid item xs={12} className={classes.row}>
             <Typography
               color="error"
@@ -84,7 +102,7 @@ export class Task extends Component {
                 variant="contained"
                 className={classes.button}
               >
-                {[`add`,`edit`].includes(type) ? `Save`: `Apply`}
+                {[`add`, `edit`].includes(type) ? `Save` : `Apply`}
               </Button>
               <Button
                 onClick={() => {
@@ -98,10 +116,10 @@ export class Task extends Component {
               >
                 Reset
               </Button>
-              {[`filter`].includes(type) &&
+              {[`filter`].includes(type) && (
                 <Button
                   onClick={() => {
-                    resetForm(initialValues);               
+                    resetForm(initialValues);
                     this.props.clearFilter();
                   }}
                   id={`${TASK_FORM_CLEAR_BUTTON_ID}`}
@@ -112,9 +130,9 @@ export class Task extends Component {
                 >
                   Clear
                 </Button>
-              }
+              )}
             </div>
-          </Grid>        
+          </Grid>
         </Grid>
       </Form>
     );

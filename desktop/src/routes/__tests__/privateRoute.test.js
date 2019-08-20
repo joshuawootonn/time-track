@@ -12,10 +12,9 @@ const props = {
   },
   location: {}
 };
-const setup = overRides => {  
-  return shallow(<PrivateRoute {...props} {...overRides}/>);
+const setup = overRides => {
+  return shallow(<PrivateRoute {...props} {...overRides} />);
 };
-
 
 describe(`Private Route`, () => {
   it(`should render without error`, () => {
@@ -26,6 +25,6 @@ describe(`Private Route`, () => {
   it(`should redirect if user.state != status.SUCCESS`, () => {
     const wrapper = setup({ user: { status: status.FAILURE } });
     const Render = wrapper.prop(`render`);
-    shallow(<Render />);    
+    shallow(<Render />);
   });
 });

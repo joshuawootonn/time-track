@@ -5,31 +5,30 @@ import { Formik } from 'formik';
 import { Typography } from '@material-ui/core';
 
 import Subcategory from 'components/forms/Subcategory';
-import { subcategorySelectors,categorySelectors } from 'store/selectors';
-import {  subcategoryActions } from 'store/actions';
+import { subcategorySelectors, categorySelectors } from 'store/selectors';
+import { subcategoryActions } from 'store/actions';
 import { analyzeStatus } from 'constants/analyze';
 import Hero from 'components/layouts/Hero';
 import { subcategoryValidation } from 'constants/formValidation';
 
 export class SubcategoryDetail extends Component {
-  
   removeSubcategory = () => {
-    const { selected, removeSubcategory } = this.props;  
+    const { selected, removeSubcategory } = this.props;
     removeSubcategory(selected.id);
   };
 
   render() {
-    const { selected,status,categories } = this.props;
+    const { selected, status, categories } = this.props;
 
-    if(status === analyzeStatus.INIT){
+    if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Subcategory.. </Typography>
         </Hero>
       );
     }
-            
-    if(status === analyzeStatus.ADDING ){
+
+    if (status === analyzeStatus.ADDING) {
       return (
         <Formik
           enableReinitialize
@@ -40,7 +39,7 @@ export class SubcategoryDetail extends Component {
           }}
           validationSchema={subcategoryValidation}
           onSubmit={(values, formikFunctions) => {
-            const { createSubcategory } = this.props;            
+            const { createSubcategory } = this.props;
             return createSubcategory({
               ...values,
               category: undefined,
@@ -48,7 +47,7 @@ export class SubcategoryDetail extends Component {
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });               
+                formikFunctions.setStatus({ success: true });
               },
               e => {
                 formikFunctions.setStatus({ success: false });
@@ -69,17 +68,17 @@ export class SubcategoryDetail extends Component {
           }}
         />
       );
-    } 
-      
-    if(status === analyzeStatus.EDITING){
+    }
+
+    if (status === analyzeStatus.EDITING) {
       return (
         <Formik
           enableReinitialize
           initialValues={{
             ...selected
-          }}          
+          }}
           validationSchema={subcategoryValidation}
-          onSubmit={(values,formikFunctions) => {
+          onSubmit={(values, formikFunctions) => {
             const { updateSubcategory } = this.props;
             return updateSubcategory({
               ...values,
@@ -88,7 +87,7 @@ export class SubcategoryDetail extends Component {
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });                
+                formikFunctions.setStatus({ success: true });
               },
               e => {
                 formikFunctions.setStatus({ success: false });
@@ -110,7 +109,7 @@ export class SubcategoryDetail extends Component {
           }}
         />
       );
-    } 
+    }
   }
 }
 
@@ -120,7 +119,7 @@ const mapStateToProps = state => {
     categories: categorySelectors.getAllCategories(state),
     subcategories: subcategorySelectors.getAllSubcategories(state),
     selected: subcategorySelectors.getSelectedSubcategory(state),
-    status: state.analyze.subcategoryStatus    
+    status: state.analyze.subcategoryStatus
   };
 };
 
@@ -139,4 +138,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(SubcategoryDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubcategoryDetail);

@@ -4,7 +4,17 @@ import PropTypes from 'prop-types';
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
 
-export const TextField = ({ field, form, label, className, type, margin, helper, onFocus, onBlur }) => (
+export const TextField = ({
+  field,
+  form,
+  label,
+  className,
+  type,
+  margin,
+  helper,
+  onFocus,
+  onBlur
+}) => (
   <MUTextField
     {...field}
     label={label}
@@ -13,8 +23,14 @@ export const TextField = ({ field, form, label, className, type, margin, helper,
     fullWidth
     className={className}
     margin={margin}
-    FormHelperTextProps={helper ===`none` ? { style:{ display:`none` },error: true } : { error: true  }} 
-    helperText={getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
+    FormHelperTextProps={
+      helper === `none`
+        ? { style: { display: `none` }, error: true }
+        : { error: true }
+    }
+    helperText={
+      getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `
+    }
     onFocus={onFocus}
     onBlur={onBlur}
   />
@@ -34,7 +50,7 @@ TextField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
   margin: PropTypes.string,
-  helper: PropTypes.oneOf([`none`,`normal`]),
+  helper: PropTypes.oneOf([`none`, `normal`]),
   onFocus: PropTypes.func,
   onBlur: PropTypes.func
 };

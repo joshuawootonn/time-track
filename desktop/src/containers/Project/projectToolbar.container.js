@@ -12,22 +12,22 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ProjectToolbar extends Component {
-  selectLabel = selected =>`${selected.name} selected`;  
+  selectLabel = selected => `${selected.name} selected`;
 
   add = () => {
     const { selected, select, setStatus } = this.props;
-   
-    if(selected && selected.id){
-      select(domain.PROJECT,selected.id);
-    }
-    setStatus(domain.PROJECT,analyzeStatus.ADDING);
-  }
 
-  render () {
-    const {  selected, toggleProjectFilter,projectFilterVisible } = this.props;
+    if (selected && selected.id) {
+      select(domain.PROJECT, selected.id);
+    }
+    setStatus(domain.PROJECT, analyzeStatus.ADDING);
+  };
+
+  render() {
+    const { selected, toggleProjectFilter, projectFilterVisible } = this.props;
 
     return (
-      <AnalyzeToolbar 
+      <AnalyzeToolbar
         selectLabel={this.selectLabel}
         label="Projects"
         add={this.add}
@@ -39,7 +39,7 @@ export class ProjectToolbar extends Component {
   }
 }
 
-ProjectToolbar.propTypes ={ 
+ProjectToolbar.propTypes = {
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object,
@@ -59,9 +59,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({ ...analyzeActions }, dispatch),
-    toggleProjectFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT)) 
+    toggleProjectFilter: () =>
+      dispatch(analyzeActions.toggleFilter(domain.PROJECT))
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectToolbar);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectToolbar);

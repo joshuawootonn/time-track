@@ -13,18 +13,28 @@ import styles from './styles';
 
 export class Filter extends Component {
   render() {
-    const { classes, isSubmitting, resetForm, initialValues, errors, 
-      projects, crews, authorities, label,
-      employees,  generalError } = this.props;   
+    const {
+      classes,
+      isSubmitting,
+      resetForm,
+      initialValues,
+      errors,
+      projects,
+      crews,
+      authorities,
+      label,
+      employees,
+      generalError
+    } = this.props;
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}> 
+        <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-            <Typography variant="h6">{label}</Typography>          
-          </Grid>         
+            <Typography variant="h6">{label}</Typography>
+          </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
-              name='employeeId'
+              name="employeeId"
               component={Select}
               items={employees}
               fullWidth
@@ -32,17 +42,17 @@ export class Filter extends Component {
               label="Employee"
             />
             <Field
-              name='projectId'
+              name="projectId"
               component={Select}
               items={projects}
               fullWidth
               className={classes.field}
               label="Project"
-            />                   
+            />
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
-              name='crewId'
+              name="crewId"
               component={Select}
               items={crews}
               fullWidth
@@ -50,13 +60,13 @@ export class Filter extends Component {
               label="Crew"
             />
             <Field
-              name='authorityId'
+              name="authorityId"
               component={Select}
               items={authorities}
               fullWidth
               className={classes.field}
               label="Authority"
-            />                   
+            />
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -67,7 +77,7 @@ export class Filter extends Component {
               type="datetime-local"
               className={classes.field}
               helper="normal"
-            /> 
+            />
             <Field
               name="endTime"
               component={TextField}
@@ -76,9 +86,9 @@ export class Filter extends Component {
               type="datetime-local"
               className={classes.field}
               helper="normal"
-            />                    
+            />
           </Grid>
-          <Grid item xs={12} className={cx(classes.row,classes.footerRow)}>           
+          <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
             <Typography
               color="error"
               variant="button"
@@ -123,7 +133,6 @@ export class Filter extends Component {
               </Button>
             </div>
           </Grid>
-
         </Grid>
       </Form>
     );
@@ -141,8 +150,8 @@ Filter.propTypes = {
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   employees: PropTypes.array.isRequired,
-  projects: PropTypes.array.isRequired, 
-  crews: PropTypes.array.isRequired, 
+  projects: PropTypes.array.isRequired,
+  crews: PropTypes.array.isRequired,
   authorities: PropTypes.array.isRequired,
   generalError: PropTypes.string,
   clearFilter: PropTypes.func,

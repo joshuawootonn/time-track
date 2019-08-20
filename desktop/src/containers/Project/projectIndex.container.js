@@ -14,30 +14,30 @@ import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ProjectIndex extends Component {
-  selectLabel = selected =>`${selected.name} selected`;
+  selectLabel = selected => `${selected.name} selected`;
 
-  select = object => this.props.select(domain.PROJECT,object)
+  select = object => this.props.select(domain.PROJECT, object);
 
-  add = () => this.props.setStatus(domain.PROJECT,analyzeStatus.ADDING)
+  add = () => this.props.setStatus(domain.PROJECT, analyzeStatus.ADDING);
 
-  render () {
-    const { projects,selected } = this.props;
+  render() {
+    const { projects, selected } = this.props;
 
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
-      <VirtualizedSortSelect 
+      <VirtualizedSortSelect
         data={projects || []}
         columns={rows}
         selected={selected}
-        select={this.select}       
-        initialSortBy='date'
+        select={this.select}
+        initialSortBy="date"
       />
     );
   }
 }
 
-ProjectIndex.propTypes ={ 
+ProjectIndex.propTypes = {
   projects: PropTypes.array,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
@@ -56,40 +56,42 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)   
+    ...bindActionCreators({ ...analyzeActions }, dispatch)
   };
 };
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectIndex);
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProjectIndex);
-
-const rows = [ 
+const rows = [
   {
-    id: `name`,  
-    dataKey: `name`, 
-    width: 200, 
-    height: 56,  
+    id: `name`,
+    dataKey: `name`,
+    width: 200,
+    height: 56,
     padding: `dense`,
     label: `Name`,
     type: TableDataTypes.STRING
-  }, 
+  },
   {
-    id: `date`,    
-    dataKey: `date`, 
-    width: 80, 
+    id: `date`,
+    dataKey: `date`,
+    width: 80,
     height: 56,
     padding: `dense`,
     label: `Date`,
     type: TableDataTypes.DATE
-  }, 
+  },
   {
-    id: `isActive`, 
-    dataKey: `isActive`,  
-    width: 50, 
-    height: 56, 
-    align: `left`, 
+    id: `isActive`,
+    dataKey: `isActive`,
+    width: 50,
+    height: 56,
+    align: `left`,
     padding: `dense`,
     label: `Active`,
     type: TableDataTypes.BOOLEAN
-  }   
+  }
 ];

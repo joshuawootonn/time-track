@@ -11,8 +11,8 @@ const props = {
   classes: {}
 };
 
-const setup = () => {  
-  return shallow(<Modal {...props} />);    
+const setup = () => {
+  return shallow(<Modal {...props} />);
 };
 
 const setupHOC = () => {

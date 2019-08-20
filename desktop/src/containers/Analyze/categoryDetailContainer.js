@@ -12,24 +12,23 @@ import Hero from 'components/layouts/Hero';
 import { categoryValidation } from 'constants/formValidation';
 
 export class CategoryDetail extends Component {
-  
   removeCategory = () => {
-    const { selected, removeCategory } = this.props;  
+    const { selected, removeCategory } = this.props;
     removeCategory(selected.id);
   };
 
   render() {
-    const { selected,status } = this.props;
+    const { selected, status } = this.props;
 
-    if(status === analyzeStatus.INIT){
+    if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Category.. </Typography>
         </Hero>
       );
     }
-            
-    if(status === analyzeStatus.ADDING ){
+
+    if (status === analyzeStatus.ADDING) {
       return (
         <Formik
           enableReinitialize
@@ -38,13 +37,13 @@ export class CategoryDetail extends Component {
           }}
           validationSchema={categoryValidation}
           onSubmit={(values, formikFunctions) => {
-            const { createCategory } = this.props;           
+            const { createCategory } = this.props;
             return createCategory({
               ...values
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });               
+                formikFunctions.setStatus({ success: true });
               },
               e => {
                 formikFunctions.setStatus({ success: false });
@@ -54,34 +53,28 @@ export class CategoryDetail extends Component {
             );
           }}
           render={formikProps => {
-            return (
-              <Category
-                label="Add"
-                type="add"
-                {...formikProps}
-              />
-            );
+            return <Category label="Add" type="add" {...formikProps} />;
           }}
         />
       );
-    } 
-      
-    if(status === analyzeStatus.EDITING){
+    }
+
+    if (status === analyzeStatus.EDITING) {
       return (
         <Formik
           enableReinitialize
           initialValues={{
             ...selected
-          }}          
+          }}
           validationSchema={categoryValidation}
-          onSubmit={(values,formikFunctions) => {
+          onSubmit={(values, formikFunctions) => {
             const { updateCategory } = this.props;
             return updateCategory({
               ...values
             }).then(
               () => {
                 formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });                
+                formikFunctions.setStatus({ success: true });
               },
               e => {
                 formikFunctions.setStatus({ success: false });
@@ -102,7 +95,7 @@ export class CategoryDetail extends Component {
           }}
         />
       );
-    } 
+    }
   }
 }
 
@@ -111,7 +104,7 @@ const mapStateToProps = state => {
   return {
     categories: categorySelectors.getAllCategories(state),
     selected: categorySelectors.getSelectedCategory(state),
-    status: state.analyze.categoryStatus    
+    status: state.analyze.categoryStatus
   };
 };
 
@@ -130,4 +123,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(CategoryDetail);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryDetail);

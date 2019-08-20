@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, IconButton, MenuItem } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Button,
+  IconButton,
+  MenuItem
+} from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
@@ -16,15 +22,26 @@ import { minutesToString } from 'helpers/time';
 
 export class FullShift extends Component {
   render() {
-    const { classes, isSubmitting, resetForm, initialValues, errors, values,
-      projects, projectTasks, employees, timeLeft, generalError } = this.props;
-    
+    const {
+      classes,
+      isSubmitting,
+      resetForm,
+      initialValues,
+      errors,
+      values,
+      projects,
+      projectTasks,
+      employees,
+      timeLeft,
+      generalError
+    } = this.props;
+
     return (
       <Form>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Field
-              name='employeeId'
+              name="employeeId"
               component={Select}
               items={employees}
               fullWidth
@@ -51,7 +68,6 @@ export class FullShift extends Component {
             />
           </Grid>
 
-
           <FieldArray
             name="activities"
             render={arrayHelpers => {
@@ -60,7 +76,9 @@ export class FullShift extends Component {
                   {values.activities &&
                     values.activities.map((activity, index) => {
                       return (
-                        <Grid item xs={12}
+                        <Grid
+                          item
+                          xs={12}
                           key={index}
                           className={cx(classes.card)}
                         >
@@ -76,7 +94,7 @@ export class FullShift extends Component {
                               onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `activities.${index}.projectTaskId`,
-                                  -1,
+                                  -1
                                 );
                               }}
                             />
@@ -87,23 +105,24 @@ export class FullShift extends Component {
                               label="Task"
                               className={classes.field}
                             >
-                              {
-                                projectTasks // This code iterates the projectTask 
-                                  .filter(projectTask => {
-                                    return activity.projectId === projectTask.projectId; // filters based on project selected
-                                  })
-                                  .map((projectTask, i) => { // maps those elements
-                                    return (
-                                      <MenuItem
-                                        key={i}
-                                        id="projectTaskId"
-                                        value={projectTask.id}
-                                      >
-                                        {projectTask.task.name}
-                                      </MenuItem>
-                                    );
-                                  })
-                              }
+                              {projectTasks // This code iterates the projectTask
+                                .filter(projectTask => {
+                                  return (
+                                    activity.projectId === projectTask.projectId
+                                  ); // filters based on project selected
+                                })
+                                .map((projectTask, i) => {
+                                  // maps those elements
+                                  return (
+                                    <MenuItem
+                                      key={i}
+                                      id="projectTaskId"
+                                      value={projectTask.id}
+                                    >
+                                      {projectTask.task.name}
+                                    </MenuItem>
+                                  );
+                                })}
                             </Field>
                             <Field
                               name={`activities.${index}.length`}
@@ -131,12 +150,15 @@ export class FullShift extends Component {
                           </div>
                         </Grid>
                       );
-                    })
-                  }
-                  <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
+                    })}
+                  <Grid
+                    item
+                    xs={12}
+                    className={cx(classes.row, classes.footerRow)}
+                  >
                     <div className={classes.lunchBox}>
                       <Field
-                        name='lunch'
+                        name="lunch"
                         label1="Lunch"
                         label2=" "
                         fullWidth
@@ -163,8 +185,7 @@ export class FullShift extends Component {
                   </Grid>
                 </Grid>
               );
-            }
-            }
+            }}
           />
 
           <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
@@ -182,7 +203,11 @@ export class FullShift extends Component {
               <Button
                 type="submit"
                 color="primary"
-                disabled={isSubmitting || Object.keys(errors).length !== 0 || timeLeft !== 0}
+                disabled={
+                  isSubmitting ||
+                  Object.keys(errors).length !== 0 ||
+                  timeLeft !== 0
+                }
                 variant="contained"
                 id={ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID}
                 className={classes.button}
@@ -203,7 +228,6 @@ export class FullShift extends Component {
               </Button>
             </div>
           </Grid>
-
         </Grid>
       </Form>
     );

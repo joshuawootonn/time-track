@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore();
 
-describe(`Index Route`, () => { 
+describe(`Index Route`, () => {
   it(`should be an array with 4 element`, () => {
     expect(Index).toBeDefined();
     expect(Index.length).toEqual(4);
@@ -18,9 +18,11 @@ describe(`Index Route`, () => {
     const routeRegex = /^\/$|((\/)\w+)+/;
     Index.forEach(route => {
       expect(route.path.match(routeRegex)).not.toBeNull();
-      shallow(<Provider store={store}>
-        <route.component routes={route.routes} type={route.type}/>
-      </Provider>);
+      shallow(
+        <Provider store={store}>
+          <route.component routes={route.routes} type={route.type} />
+        </Provider>
+      );
       route.routes.forEach(subroute => {
         expect(subroute.path.match(routeRegex)).not.toBeNull();
         shallow(

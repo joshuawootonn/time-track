@@ -10,10 +10,7 @@ import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
 import IPCConstants from 'constants/ipc';
 
-
-
-const {ipcRenderer} = window.require('electron');
-
+const { ipcRenderer } = window.require('electron');
 
 export class AccountAction extends Component {
   constructor(props) {
@@ -29,7 +26,7 @@ export class AccountAction extends Component {
     this.setState({
       isFullScreen
     });
-  }
+  };
   back = () => {
     this.props.history.push(`/`);
   };
@@ -52,7 +49,7 @@ export class AccountAction extends Component {
     this.setState({
       isFullScreen: ipcRenderer.sendSync(IPCConstants.TOGGLE_FULLSCREEN, ``)
     });
-  }
+  };
   render() {
     const { type, currentEmployee } = this.props;
     return (
@@ -110,4 +107,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountAction));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AccountAction)
+);

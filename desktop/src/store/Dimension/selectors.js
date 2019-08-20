@@ -11,5 +11,5 @@ export const getAllDimensions = createSelector(
     return results.map(dimensionId => {
       return dimensions[dimensionId];
     });
-  },
+  }
 );

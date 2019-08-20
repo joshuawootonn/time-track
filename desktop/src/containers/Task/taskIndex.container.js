@@ -16,9 +16,9 @@ import domain from 'constants/domains';
 export class TaskIndex extends Component {
   selectLabel = selected => `${selected.name} selected`;
 
-  select = object => this.props.select(domain.TASK, object)
+  select = object => this.props.select(domain.TASK, object);
 
-  add = () => this.props.setStatus(domain.TASK, analyzeStatus.ADDING)
+  add = () => this.props.setStatus(domain.TASK, analyzeStatus.ADDING);
 
   render() {
     const { tasks, selected } = this.props;
@@ -26,13 +26,12 @@ export class TaskIndex extends Component {
     if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
 
     return (
-
       <VirtualizedSortSelect
         data={tasks || []}
         columns={rows}
         selected={selected}
         select={this.select}
-        initialSortBy='name'
+        initialSortBy="name"
       />
     );
   }
@@ -61,7 +60,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TaskIndex);
 
 const rows = [
   {
@@ -95,18 +97,18 @@ const rows = [
   },
 
   // { // ICEBOX: add dimension functionality
-  //   id: `dimension_type`,   
-  //   dataKey: `dimension`, 
-  //   width: 150, 
-  //   height: 56,  
+  //   id: `dimension_type`,
+  //   dataKey: `dimension`,
+  //   width: 150,
+  //   height: 56,
   //   padding: `dense`,
   //   label: `Dimension`,
   //   type: TableDataTypes.OBJECT,
   //   keys: [`type`]
-  // }, 
+  // },
   {
     id: `isActive`,
-    dataKey: `isActive`, 
+    dataKey: `isActive`,
     width: 50,
     height: 56,
     align: `left`,

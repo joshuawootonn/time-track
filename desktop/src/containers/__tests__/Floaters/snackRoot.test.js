@@ -3,24 +3,24 @@ import { shallow } from 'enzyme';
 
 import { SnackRoot } from 'containers/Floaters/snackRootContainer';
 
-const props =  {  
+const props = {
   snackType: `asdf`,
   snackMessage: `asdf`
 };
 
-const setup = overRides => {  
-  return shallow(<SnackRoot {...props} {...overRides}/>);    
+const setup = overRides => {
+  return shallow(<SnackRoot {...props} {...overRides} />);
 };
 
-describe(`Snack Root Container`, () => {  
+describe(`Snack Root Container`, () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();       
-  });  
+    setup();
+  });
   it(`should return null when snack message is null`, () => {
-    const wrapper =  setup({ snackMessage: null });
+    const wrapper = setup({ snackMessage: null });
     const instance = wrapper.instance();
     expect(instance.render()).toBeNull();
   });

@@ -17,8 +17,18 @@ export const AuthSignin = props => {
       <Form className={classes.heroContent}>
         <Typography variant="h6">Select Network</Typography>
         <Field component={TextField} name="ip" label="IP" helper="none" />
-        <Field component={TextField} name="username" label="Network" helper="none"/>
-        <Field component={Password} name="password" label="Password" helper="none" />
+        <Field
+          component={TextField}
+          name="username"
+          label="Network"
+          helper="none"
+        />
+        <Field
+          component={Password}
+          name="password"
+          label="Password"
+          helper="none"
+        />
         <Button
           className={classes.button}
           type="submit"
@@ -30,9 +40,7 @@ export const AuthSignin = props => {
         </Button>
       </Form>
       <div className={classes.error}>
-        <Typography color="error">
-          {errors.submit}
-        </Typography>
+        <Typography color="error">{errors.submit}</Typography>
       </div>
     </div>
   );

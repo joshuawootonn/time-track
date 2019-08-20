@@ -4,8 +4,8 @@ import { mount } from 'enzyme';
 import { Time } from 'components/inputs/Time/time';
 import TimeHOC from 'components/inputs/Time';
 
-const props =  {  
-  form:{
+const props = {
+  form: {
     errors: {},
     setFieldValue: jest.fn()
   },
@@ -19,15 +19,15 @@ const props =  {
   classeName: `class`,
   helper: `normal`,
   label1: `hour`,
-  label2: `minutes`  
+  label2: `minutes`
 };
 
-const setup = overRides => {  
-  return mount(<Time {...props} {...overRides}/>);    
+const setup = overRides => {
+  return mount(<Time {...props} {...overRides} />);
 };
 
 const setupHOC = overRides => {
-  return mount(<TimeHOC {...props} {...overRides}/>);
+  return mount(<TimeHOC {...props} {...overRides} />);
 };
 
 describe(`Time Input`, () => {
@@ -35,16 +35,16 @@ describe(`Time Input`, () => {
     jest.clearAllMocks();
   });
   it(`should render correctly`, () => {
-    setup();        
+    setup();
   });
   it(`should render correctly withStyles`, () => {
-    setupHOC();       
+    setupHOC();
   });
   it(`should call setFieldValue on this.onChangeHours`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(0);
-    instance.onChangeHours({ target:{ value: 20 } });
+    instance.onChangeHours({ target: { value: 20 } });
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(1);
     expect(props.form.setFieldValue).toHaveBeenCalledWith(`name`, 20);
   });
@@ -52,8 +52,8 @@ describe(`Time Input`, () => {
     const wrapper = setup();
     const instance = wrapper.instance();
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(0);
-    instance.onChangeMinutes({ target:{ value: 20 } });
+    instance.onChangeMinutes({ target: { value: 20 } });
     expect(props.form.setFieldValue).toHaveBeenCalledTimes(1);
     expect(props.form.setFieldValue).toHaveBeenCalledWith(`name`, 200);
-  }); 
+  });
 });
