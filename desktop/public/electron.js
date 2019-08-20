@@ -7,6 +7,12 @@ const url = require('url');
 const path = require('path');
 const settings = require('electron-settings');
 const log = require("electron-log")
+const isDev = require("electron-is-dev");
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS
+} = require(`electron-devtools-installer`);
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
@@ -31,18 +37,16 @@ function createWindow() {
   mainWindow = new electron.BrowserWindow({
     width: 1000,
     height: 800,
+    webPreferences: {
+      nodeIntegration: true
+    },
     fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`)
   });
  
   // and load the index.html of the app.
   // load the index.html of the app.
-  const startUrl =
-    process.env.ELECTRON_START_URL ||
-    url.format({
-      pathname: path.join(__dirname, '/../build/index.html'),
-      protocol: 'file:',
-      slashes: true
-    });
+  const startUrl = isDev ? "http://localhost:3000"
+  : `file://${path.join(__dirname, "../build/index.html")}`;
   mainWindow.loadURL(startUrl);
 
   // Open the DevTools.
@@ -74,6 +78,15 @@ app.on(`ready`, function () {
     log.info(`Checking for updates again`);
     autoUpdater.checkForUpdatesAndNotify().then();
   }, 1000 * 10 * 60);
+});
+
+
+app.on(`ready`, () => {
+  isDev && [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
+    installExtension(extension)
+      .then(name => console.log(`Added Extension: ${name}`))
+      .catch(err => console.log(`An error occurred: `, err));
+  });
 });
 
 // Quit when all windows are closed.

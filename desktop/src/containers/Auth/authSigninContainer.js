@@ -12,8 +12,8 @@ import * as IPCConstants from 'constants/ipc';
 import AuthSiginForm from 'components/forms/AuthSignin';
 import { userSelectors } from 'store/selectors';
 
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+const {ipcRenderer} = window.require('electron');
 
 export class AuthSignin extends Component {  
   componentDidMount() {

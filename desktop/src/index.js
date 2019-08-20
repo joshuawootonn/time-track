@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'app';
+import App from './app.js';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
@@ -8,8 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
 
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+const { ipcRenderer } = window.require('electron');
 
 export const theme = createMuiTheme({
   typography: {
@@ -22,7 +21,9 @@ export const theme = createMuiTheme({
   }
 });
 
-ipcRenderer.on(`message` , function(event , message){ console.log(message); });
+ipcRenderer.on(`message`, function(event, message) {
+  console.log(message);
+});
 
 console.log(theme);
 ReactDOM.render(
@@ -31,5 +32,5 @@ ReactDOM.render(
       <App />
     </MuiThemeProvider>
   </Provider>,
-  document.getElementById(`root`),
+  document.getElementById(`root`)
 );

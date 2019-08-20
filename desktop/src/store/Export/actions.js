@@ -12,8 +12,10 @@ import { snackActions } from 'store/actions';
 import * as status from 'constants/status';
 
 import store from 'store';
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+
+const {ipcRenderer} = window.require('electron');
+
 
 export const exportToExcel = (start, end, fileLocation) => {
   return async dispatch => {

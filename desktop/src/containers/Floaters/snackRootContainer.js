@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import SnackContainer from 'containers/Floaters/snackContainer';
 import { snackActions } from 'store/actions';
 
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+
+const {ipcRenderer} = window.require('electron');
+
 
 export class SnackRoot extends Component {
   constructor(props) {
@@ -25,10 +27,10 @@ export class SnackRoot extends Component {
     const { snackType, snackMessage } = this.props;
     const { notification } = this.state;
     if(notification){
-      <SnackContainer
+      return (<SnackContainer
         message={notification}
         type='initial'
-      />;
+      />);
     }
     if (!snackType || !snackMessage) {
       return null;

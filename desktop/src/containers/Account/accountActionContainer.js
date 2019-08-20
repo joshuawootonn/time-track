@@ -10,8 +10,10 @@ import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
 import IPCConstants from 'constants/ipc';
 
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+
+const {ipcRenderer} = window.require('electron');
+
 
 export class AccountAction extends Component {
   constructor(props) {

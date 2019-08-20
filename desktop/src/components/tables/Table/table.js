@@ -74,7 +74,7 @@ class Table extends React.Component {
     stabilizedThis.sort((a, b) => {
       
       let order = this.compareOrder(a[0], b[0], sortBy, type, sortKeys, sortKey);
-      sortDirection === SortDirection.DESC ? order = order * -1 : order;      
+      order = sortDirection === SortDirection.DESC ? order * -1 : order;      
       if (order !== 0) return order;
       return a[1] - b[1]; 
     });

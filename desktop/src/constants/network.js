@@ -1,7 +1,7 @@
 import * as IPCConstants from 'constants/ipc';
 
-const electron = window.require(`electron`);
-const ipcRenderer = electron.ipcRenderer;
+
+const {ipcRenderer} = window.require('electron');
 
 export const HOST = () => {
   const settings = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
