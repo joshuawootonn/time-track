@@ -54,7 +54,12 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [],
+  "acls": [{
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "$unauthenticated",
+    "permission": "DENY"
+  }],
   "methods": {},
   "idInjection": false
 }
