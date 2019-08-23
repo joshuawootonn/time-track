@@ -12,12 +12,15 @@ const isDev = require('electron-is-dev');
 const IPCConstants = {
   SET_CRED: 'set_cred',
   GET_CRED: 'get_cred',
+  SET_ACCESS_TOKEN: 'set_access_token',
+  GET_ACCESS_TOKEN: 'get_access_token',
   CREATE_EXPORT: 'create_export',
   TOGGLE_FULLSCREEN: `toggle_fullscreen`,
   IS_FULLSCREEN: `is_fullscreen`
 };
 
 const SETTINGS = {
+  ACCESS_TOKEN: 'access_token',
   USER_CRED: 'user_cred',
   WINDOW: `window`
 };
@@ -107,6 +110,25 @@ app.on('activate', function() {
   }
 });
 
+
+/**
+ * Access Token stuff
+ */
+
+ipcMain.on(IPCConstants.SET_ACCESS_TOKEN, (event, arg) => {
+  settings.set(SETTINGS.ACCESS_TOKEN, arg);
+  log.info('access token received', arg,settings.get(SETTINGS.ACCESS_TOKEN));
+  event.returnValue = arg;
+
+});
+
+ipcMain.on(IPCConstants.GET_ACCESS_TOKEN, event => {
+  const accessToken = settings.get(SETTINGS.ACCESS_TOKEN);
+  event.returnValue = accessToken;
+});
+
+
+
 /**
  * Full Screen stuff
  */
@@ -137,8 +159,11 @@ ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
 });
 
 ipcMain.on(IPCConstants.GET_CRED, event => {
+  if(isDev) {
+
+  }
   const cred = {
-    ip: settings.get(`${SETTINGS.USER_CRED}.ip`),
+    ip:isDev ? 'http://localhost:4000' : settings.get(`${SETTINGS.USER_CRED}.ip`),
     username: settings.get(`${SETTINGS.USER_CRED}.username`),
     password: settings.get(`${SETTINGS.USER_CRED}.password`)
   };

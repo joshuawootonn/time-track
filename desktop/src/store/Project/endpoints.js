@@ -1,17 +1,14 @@
-import { HOST } from 'constants/network';
 import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
-import axios from 'axios';
+import axios from 'helpers/axios';
 const DOMAIN = `projects`;
 
 const CRUDendpoints = generateCRUDEndpoints(DOMAIN);
 
 const getProjectTasksByProjectId = project => {
-  return axios.get(`${HOST()}/${DOMAIN}/${project.id}/projecttasks`);
+  return axios.get(`/${DOMAIN}/${project.id}/projecttasks`);
 };
 export const getWithProjectTasks = project => {
-  return axios.get(
-    `${HOST()}/${DOMAIN}/${project.id}/?filter[include]=projectTasks`
-  );
+  return axios.get(`/${DOMAIN}/${project.id}/?filter[include]=projectTasks`);
 };
 
 export default {

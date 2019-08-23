@@ -13,12 +13,14 @@ export const getStaticData = () => {
   return async dispatch => {
     dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
     try {
-      await dispatch(categoryActions.getAllCategories());
-      await dispatch(dimensionActions.getAllDimensions());
-      await dispatch(subcategoryActions.getAllSubcategories());
-      await dispatch(projectTaskActions.getAllProjectTasks());
-      await dispatch(projectActions.getAllProjects());
-      await dispatch(taskActions.getAllTasks());
+      await Promise.all([
+        dispatch(categoryActions.getAllCategories()),
+        dispatch(dimensionActions.getAllDimensions()),
+        dispatch(subcategoryActions.getAllSubcategories()),
+        dispatch(projectTaskActions.getAllProjectTasks()),
+        dispatch(projectActions.getAllProjects()),
+        dispatch(taskActions.getAllTasks())
+      ]);
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
     } catch (e) {
       dispatch({ type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e });
