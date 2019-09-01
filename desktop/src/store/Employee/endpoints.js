@@ -1,5 +1,4 @@
-import { HOST } from 'constants/network';
-import axios from 'axios';
+import axios from 'helpers/axios';
 import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
 const DOMAIN = `employees`;
 
@@ -8,7 +7,7 @@ const CRUDendpoints = generateCRUDEndpoints(DOMAIN);
 
 // EXTRA
 const getEmployeeByPin = pin => {
-  return axios.get(`${HOST()}/${DOMAIN}/findone?filter[where][pin]=${pin}`, {
+  return axios.get(`/${DOMAIN}/findone?filter[where][pin]=${pin}`, {
     timeout: 5000
   });
 };
