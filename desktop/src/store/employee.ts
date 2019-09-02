@@ -1,6 +1,4 @@
 import {
-  ActivityState,
-  Activity,
   BaseEmployee,
   BaseActivity,
   BaseShift
@@ -78,6 +76,9 @@ export const clockOut = (
         shift: shiftRequest,
         activities: activities
       });
+      await dispatch(
+        snackActions.openSnack(status.SUCCESS, `Clock out success!`) as any
+      );
       dispatch({ type: 'ClockOutEmployeeSuccess' });
     } catch (e) {
       dispatch({ type: 'ClockOutEmployeeFailure', error: e });

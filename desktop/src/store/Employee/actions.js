@@ -1,5 +1,4 @@
 import { normalize } from 'normalizr';
-import moment from 'moment';
 
 import { employeeActionTypes } from 'constants/actionTypeConstants';
 import { snackActions, genericActions, analyzeActions } from 'store/actions';
@@ -66,75 +65,6 @@ export const removeEmployee = id => {
         snackActions.openSnack(status.SUCCESS, `Employee Deletion Failed`)
       );
       return dispatch({ type: employeeActionTypes.REMOVE_EMPLOYEE_FAILURE });
-    }
-  };
-};
-
-export const setIsWorking = (employee, isWorking) => {
-  return async dispatch => {
-    return await dispatch(
-      genericActions.put(domains.EMPLOYEE, {
-        ...employee,
-        isWorking: isWorking
-      })
-    );
-  };
-};
-
-export const clockIn = employee => {
-  return async dispatch => {
-    dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_REQUEST });
-    try {
-      const clockInObject = {
-        employeeId: employee.id
-      };
-      await dispatch(genericActions.post(domains.SHIFT, clockInObject));
-      await dispatch(setIsWorking(employee, true));
-      dispatch(snackActions.openSnack(status.SUCCESS, `Clock in success!`));
-      return dispatch({ type: employeeActionTypes.CLOCKIN_EMPLOYEE_SUCCESS });
-    } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, `Clock in failed!`));
-      return dispatch({
-        type: employeeActionTypes.CLOCKIN_EMPLOYEE_FAILURE,
-        payload: e
-      });
-    }
-  };
-};
-
-export const clockOut = (employee, shift, activities, lunch) => {
-  return async dispatch => {
-    dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_REQUEST });
-    try {
-      const currentMoment = moment();
-      const clockInMoment = moment(shift.clockInDate);
-      const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
-      const minutes = shiftDuration.asMinutes();
-
-      const clockOutObject = {
-        ...shift,
-        lunch: lunch,
-        clockOutDate: currentMoment.toString(),
-        length: minutes
-      };
-      await activities.forEach(activity => {
-        // activity.projectId = undefined;
-        activity.shiftId = shift.id;
-        dispatch(genericActions.post(domains.ACTIVITY, activity));
-      });
-
-      await dispatch(genericActions.put(domains.SHIFT, clockOutObject));
-      await dispatch(setIsWorking(employee, false));
-      await dispatch(
-        snackActions.openSnack(status.SUCCESS, `Clock out success!`)
-      );
-      return dispatch({ type: employeeActionTypes.CLOCKOUT_EMPLOYEE_SUCCESS });
-    } catch (e) {
-      dispatch(snackActions.openSnack(status.FAILURE, `Clock out failed!`));
-      return dispatch({
-        type: employeeActionTypes.CLOCKOUT_EMPLOYEE_FAILURE,
-        payload: e
-      });
     }
   };
 };
