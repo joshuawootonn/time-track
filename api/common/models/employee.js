@@ -1,7 +1,4 @@
 var loopback = require("loopback");
-const moment = require("moment");
-var models = require("../../server/model-config.json");
-var app = loopback();
 
 var baseError = {
   name: "Error",
@@ -91,34 +88,6 @@ module.exports = Employee => {
     cb(null, `${employee.firstName} ${employee.lastName} is clocked out`);
   };
 
-  var ds = loopback.createDataSource("memory");
-
-  var ClockOutShiftRequestModel = {
-    id: Number,
-    clockInDate: String,
-    clockOutDate: String,
-    length: Number,
-    lunch: Number,
-    employeeId: Number
-  };
-
-  var ClockOutActivityRequestModel = {
-    id: Number,
-    length: Number,
-    description: String,
-    shiftId: Number,
-    projectTaskId: Number
-  };
-
-  var ClockOutShiftRequest = ds.define(
-    "ClockOutShiftRequest",
-    ClockOutShiftRequestModel
-  );
-  var ClockOutActivityRequest = ds.define(
-    "ClockOutActivityRequest",
-    ClockOutActivityRequestModel
-  );
-
   Employee.remoteMethod("clockin", {
     accepts: { arg: "employeeId", type: "number" },
     returns: { arg: "msg", type: "string" }
@@ -126,8 +95,8 @@ module.exports = Employee => {
   Employee.remoteMethod("clockout", {
     accepts: [
       { arg: "employeeId", type: "number" },
-      { arg: "shift", type: "ClockOutShiftRequest" },
-      { arg: "activities", type: "ClockOutActivityRequest" }
+      { arg: "shift", type: "any" },
+      { arg: "activities", type: "any" }
     ],
     returns: { arg: "msg", type: "string" }
   });
