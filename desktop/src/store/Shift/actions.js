@@ -236,22 +236,17 @@ export const removeShift = id => {
     try {
       await dispatch(analyzeActions.deleteSelected(domains.SHIFT));
       const shift = getState().entities.shifts[id];
-      console.log('1', shift);
       // This clocks the employee out if you are deleting a shift in progress
       if (shift && !shift.clockOutDate) {
         const employee = getState().entities.employees[shift.employeeId];
 
-        console.log('2', employee);
         dispatch(employeeActions.setIsWorking(employee, false));
       }
-      console.log('3');
       await endpoint.deleteRelatedActivities(id);
       await dispatch(genericActions.delet(domains.SHIFT, id));
 
-      console.log('4');
       await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Deleted`));
 
-      console.log('5');
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_SUCCESS });
     } catch (e) {
       await dispatch(
