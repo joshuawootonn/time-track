@@ -69,6 +69,17 @@ export const removeEmployee = id => {
   };
 };
 
+export const setIsWorking = (employee, isWorking) => {
+  return async dispatch => {
+    return await dispatch(
+      genericActions.put(domains.EMPLOYEE, {
+        ...employee,
+        isWorking: isWorking
+      })
+    );
+  };
+};
+
 export const login = pin => {
   return async dispatch => {
     dispatch({ type: employeeActionTypes.LOGIN_EMPLOYEE_REQUEST });

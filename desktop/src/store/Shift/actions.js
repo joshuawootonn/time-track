@@ -231,6 +231,7 @@ export const updateHalfShift = shift => {
 
 export const removeShift = id => {
   return async (dispatch, getState) => {
+    console.log('here we are');
     dispatch({ type: shiftActionTypes.REMOVE_SHIFT_REQUEST });
     try {
       await dispatch(analyzeActions.deleteSelected(domains.SHIFT));
@@ -238,18 +239,20 @@ export const removeShift = id => {
       // This clocks the employee out if you are deleting a shift in progress
       if (shift && !shift.clockOutDate) {
         const employee = getState().entities.employees[shift.employeeId];
+
         dispatch(employeeActions.setIsWorking(employee, false));
       }
       await endpoint.deleteRelatedActivities(id);
       await dispatch(genericActions.delet(domains.SHIFT, id));
 
       await dispatch(snackActions.openSnack(status.SUCCESS, `Shift Deleted`));
+
       return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_SUCCESS });
     } catch (e) {
       await dispatch(
         snackActions.openSnack(status.SUCCESS, `Shift Deletion Failed`)
       );
-      return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_FAILURE });
+      return dispatch({ type: shiftActionTypes.REMOVE_SHIFT_FAILURE, e });
     }
   };
 };

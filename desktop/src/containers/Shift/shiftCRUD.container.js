@@ -32,6 +32,7 @@ export class ShiftCRUD extends Component {
   };
   removeShift = () => {
     const { selected, removeShift } = this.props;
+    console.log(selected, removeShift);
     removeShift(selected.id);
   };
 
