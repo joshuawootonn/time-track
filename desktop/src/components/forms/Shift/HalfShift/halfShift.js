@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
+import NativeSelect from 'components/inputs/NativeSelect';
 
 import styles from './styles';
 
@@ -31,11 +32,12 @@ export class HalfShift extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="employeeId"
-              component={Select}
+              component={NativeSelect}
               items={employees}
               fullWidth
               className={classes.field}
               label="Employee"
+              native
             />
             <Field
               name="clockInDate"

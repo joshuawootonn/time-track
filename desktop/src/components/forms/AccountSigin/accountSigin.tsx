@@ -44,8 +44,6 @@ export class AccountSigin extends Component<Props> {
 
   render() {
     const { classes, isSubmitting, errors } = this.props;
-
-
     const numOrder: number[] = [7,8,9,4,5,6,1,2,3,0];
 
     return (

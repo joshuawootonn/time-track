@@ -47,6 +47,7 @@ export class FullShift extends Component {
               fullWidth
               className={classes.field}
               label="Employee"
+              native
             />
             <Field
               name="clockInDate"
@@ -91,6 +92,7 @@ export class FullShift extends Component {
                               label="Project"
                               id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
                               className={classes.field}
+                              native
                               onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `activities.${index}.projectTaskId`,
@@ -104,6 +106,7 @@ export class FullShift extends Component {
                               fullWidth
                               label="Task"
                               className={classes.field}
+                              native
                             >
                               {projectTasks // This code iterates the projectTask
                                 .filter(projectTask => {
