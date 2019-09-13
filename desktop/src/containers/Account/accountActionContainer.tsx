@@ -9,7 +9,7 @@ import * as routes from 'constants/routes';
 import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
 import IPCConstants from 'constants/ipc';
-import { BaseEmployee } from 'store/types';
+import { BaseEmployee, Store } from 'store/types';
 import { AUTH_LEVELS } from 'constants/routes';
 
 //@ts-ignore
@@ -18,7 +18,12 @@ const { ipcRenderer } = window.require('electron');
 interface Props extends RouteComponentProps {
   clockIn: (employee: BaseEmployee) => Promise<any>;
   employees: BaseEmployee[];
-  employee: any;
+  employee: {
+    current: {
+      id?: number;
+      status: string;
+    }
+  };
   type: AUTH_LEVELS;
   currentEmployee: BaseEmployee;
   clearFilters: () => void;
@@ -51,7 +56,7 @@ export class AccountAction extends Component<Props, State> {
   clockIn = () => {
     const { isLoading } = this.state;
     const { employees, employee, history } = this.props;
-    if (isLoading) {
+    if (isLoading || !employee.current.id) {
       return;
     }
     const employeeToClockin = employees[employee.current.id];
@@ -111,14 +116,12 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 
 /* istanbul ignore next */
-const mapStateToProps = (state: any) => {
-  return {
-    employee: state.employee,
-    entities: state.entities,
-    employees: employeeSelectors.getEmployeesFromEntities(state),
-    currentEmployee: employeeSelectors.getCurrentEmployee(state)
-  };
-};
+const mapStateToProps = (state: Store) => ({
+  employee: state.employee,
+  entities: state.entities,
+  employees: employeeSelectors.getEmployeesFromEntities(state),
+  currentEmployee: employeeSelectors.getCurrentEmployee(state)
+});
 
 export default connect(
   mapStateToProps,

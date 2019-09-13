@@ -112,3 +112,28 @@ export interface BaseActivity{
   projectTaskId: number;
   shiftId: number;
 }
+
+export interface Store {
+  entities: any;
+  results: any;
+  user: {
+    status: string;
+    id: number;
+    access: string;
+  },
+  snack: {
+    snackType?: string;
+    snameMessage?: string;
+  },
+  employee: {
+    current: {
+      id?: number;
+      status: string;
+    }
+  },
+  analyze: any;
+  model: {
+    modalType?:string;
+    modelProps: any;
+  }
+}
