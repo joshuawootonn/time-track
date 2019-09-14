@@ -1,2 +1,2 @@
-import TypeableSelect from './typeableSelect';
+import TypeableSelect from './aaa';
 export default TypeableSelect;
