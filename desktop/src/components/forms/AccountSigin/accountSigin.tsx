@@ -44,13 +44,13 @@ export class AccountSigin extends Component<Props> {
 
   render() {
     const { classes, isSubmitting, errors } = this.props;
-    const numOrder: number[] = [7,8,9,4,5,6,1,2,3,0];
+    const numOrder: number[] = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
 
     return (
       <div className={classes.hero}>
         <div className={classes.heroContent}>
           <Form>
-            <Grid container spacing={24}>
+            <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Field
                   component={Password}
@@ -59,7 +59,7 @@ export class AccountSigin extends Component<Props> {
                   helper="normal"
                 />
               </Grid>
-              {numOrder.map((num: number) => this.renderButtonGridElement(num))}              
+              {numOrder.map((num: number) => this.renderButtonGridElement(num))}
               <Grid item xs={4}>
                 <Button
                   onClick={this.resetPin}
@@ -93,6 +93,5 @@ export class AccountSigin extends Component<Props> {
     );
   }
 }
-
 
 export default withStyles(styles as any)(AccountSigin);

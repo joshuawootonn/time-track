@@ -30,7 +30,7 @@ export class Project extends Component {
 
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
           </Grid>

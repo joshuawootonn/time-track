@@ -5,12 +5,14 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
+  withStyles
 } from '@material-ui/core';
 
+import cx from 'classnames';
+
 import { getIn } from 'formik';
-import { Autocomplete } from "material-ui-formik-components/Autocomplete";
-
-
+import { Autocomplete } from 'material-ui-formik-components/Autocomplete';
+import { transformItemsToOptions } from 'helpers/input.helper';
 
 type Item =
   | { name: string }
@@ -36,6 +38,45 @@ interface Props {
   classes: any;
 }
 
+
+const styles = () => ({
+  aaa: {
+    backgroundColor: '#eee',
+    height: '100%'
+    // '> div': {
+    //   height: '100%',
+    //   '> div': {
+    //     height: '100%',
+    //     '> div': {
+    //       height: '100%',
+    //       '> div': {
+    //         height: '100%',
+    //         '> div': {
+    //           height: '100%',
+    //           padding: '16px 0 7px 0'
+    //         }
+    //       }
+    //     }
+    //   },
+  },
+  fieldWrapper: {
+    display: `flex`,
+    flexDirection: `column`,
+    width: `100%`
+  },
+  vertical: {
+    flexDirection: `column`
+  },
+  horizontal: {
+    flexDirection: `row`
+  }
+  // helper: {
+  //   marginTop: '0px'
+  // }
+});
+
+
+
 export const SelectField: React.SFC<Props & FieldProps> = props => {
   const {
     field,
@@ -54,36 +95,29 @@ export const SelectField: React.SFC<Props & FieldProps> = props => {
     classes
   } = props;
 
-  const transformItemsToOptions = (items: any[]): any[] => {
-    if (!items || items.length === 0) {
-      return [];
-    }
-    return items.map(item => {
-      if (item.name) {
-        return { label: item.name, value: item.name };
-      }
-      if (item.type) {
-        return { label: item.type, value: item.type };
-      }
-      if (
-        item.firstName ||
-        (item.firstName === '' && item.lastName) ||
-        item.lastName === ''
-      ) {
-        return {
-          label: item.firstName + ` ` + item.lastName,
-          value: item.firstName + ` ` + item.lastName
-        };
-      }
-    });
-  };
   const options = transformItemsToOptions(items);
 
   console.log(items, options);
 
   return (
-    <Autocomplete field={field as any} form={form} options={options} />
+    <FormControl
+      {...formControlProps}
+      margin="none"
+      fullWidth={fullWidth}
+      className={cx(classes.fieldWrapper, classes.vertical)}
+    >
+      {label && <InputLabel shrink={true} {...labelProps}>{label}</InputLabel>}
+      <Autocomplete
+        fullWidth={fullWidth}
+        field={field as any}
+        form={form}
+        options={options}
+      />  
+      <FormHelperText error={true}>
+        {getIn(form.touched, field.name) ? getIn(form.errors, field.name) : ` `}
+      </FormHelperText>
+    </FormControl>
   );
 };
 
-export default SelectField;
+export default withStyles(styles as any)(SelectField);

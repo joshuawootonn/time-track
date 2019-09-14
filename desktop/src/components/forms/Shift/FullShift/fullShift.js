@@ -38,7 +38,7 @@ export class FullShift extends Component {
 
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Field
               name="employeeId"

@@ -13,7 +13,6 @@ import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
 import TypeableSelect from 'components/inputs/TypeableSelect';
-
 export class HalfShift extends Component {
   render() {
     const {
@@ -28,7 +27,7 @@ export class HalfShift extends Component {
     } = this.props;
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Field
               name="employeeId"
