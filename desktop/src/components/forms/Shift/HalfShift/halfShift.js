@@ -12,6 +12,7 @@ import Select from 'components/inputs/Select';
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
+import TypeableSelect from 'components/inputs/TypeableSelect';
 
 export class HalfShift extends Component {
   render() {
@@ -31,7 +32,7 @@ export class HalfShift extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="employeeId"
-              component={Select}
+              component={TypeableSelect}
               items={employees}
               fullWidth
               className={classes.field}

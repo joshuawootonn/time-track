@@ -37,8 +37,7 @@ export class Select extends Component {
       selectProps,
       itemProps,
       helper,
-      className,
-      native
+      className
     } = this.props;
 
     return (
@@ -55,7 +54,6 @@ export class Select extends Component {
           {...selectProps}
           onBlur={this.onBlur}
           fullWidth={fullWidth}
-          native={native}
         >
           {items &&
             items.map((item, i) => {
