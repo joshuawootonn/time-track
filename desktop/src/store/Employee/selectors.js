@@ -92,6 +92,34 @@ export const getAllEmployees = createSelector(
   }
 );
 
+export const getActiveEmployees = createSelector(
+  getEmployeesFromEntities,
+  getEmployeesFromResults,
+  getCrewsFromEntities,
+  getAuthoritiesFromEntities,
+  (employees, results, crews, authorities) => {
+    if (!results || results.length === 0) return null;
+
+    return results
+      .map(employeeId => {
+        const emp = employees[employeeId];
+        return {
+          ...emp,
+          authority: authorities[emp.authorityId],
+          crew: crews[emp.crewId]
+        };
+      })
+      .filter(employee => {
+        return !!employee.isEmployed;
+      })
+      .sort((a, b) => {
+        if (a.firstName > b.firstName) return 1;
+        if (a.firstName < b.firstName) return -1;
+        return 0;
+      });
+  }
+);
+
 export const getSelectedEmployee = createSelector(
   getEmployeesFromEntities,
   getAnalyzeState,
