@@ -86,6 +86,7 @@ class Table extends React.Component {
         (object, currentKey) => object[currentKey],
         b[sortKey]
       );
+      console.log(aVal, bVal);
       if (bVal < aVal) {
         return -1;
       }
@@ -94,7 +95,12 @@ class Table extends React.Component {
       }
       return 0;
     }
-
+    if (!b[sortBy]) {
+      return -1;
+    }
+    if (!a[sortBy]) {
+      return 1;
+    }
     if (b[sortBy] < a[sortBy]) {
       return -1;
     }
