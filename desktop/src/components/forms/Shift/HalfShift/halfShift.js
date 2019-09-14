@@ -7,12 +7,11 @@ import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select';
+import TypeableSelect from 'components/inputs/TypeableSelect';
 
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
-import TypeableSelect from 'components/inputs/TypeableSelect';
 export class HalfShift extends Component {
   render() {
     const {

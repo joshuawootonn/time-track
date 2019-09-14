@@ -4,10 +4,10 @@ export const transformItemsToOptions = items => {
   }
   return items.map(item => {
     if (item.name) {
-      return { label: item.name, value: item.name };
+      return { label: item.name, value: item.name, id: item.id };
     }
     if (item.type) {
-      return { label: item.type, value: item.type };
+      return { label: item.type, value: item.type, id: item.id };
     }
     if (
       item.firstName ||
@@ -16,7 +16,8 @@ export const transformItemsToOptions = items => {
     ) {
       return {
         label: item.firstName + ` ` + item.lastName,
-        value: item.firstName + ` ` + item.lastName
+        value: item.firstName + ` ` + item.lastName,
+        id: item.id
       };
     }
   });

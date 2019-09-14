@@ -15,6 +15,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
+import TypeableSelect from 'components/inputs/TypeableSelect';
 
 import styles from './styles';
 
@@ -42,7 +43,7 @@ export class FullShift extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="employeeId"
-              component={Select}
+              component={TypeableSelect}
               items={employees}
               fullWidth
               className={classes.field}
@@ -85,7 +86,7 @@ export class FullShift extends Component {
                           <div className={cx(classes.row, classes.bodyRow)}>
                             <Field
                               name={`activities.${index}.projectId`}
-                              component={Select}
+                              component={TypeableSelect}
                               items={projects}
                               fullWidth
                               label="Project"
@@ -100,7 +101,7 @@ export class FullShift extends Component {
                             />
                             <Field
                               name={`activities.${index}.projectTaskId`}
-                              component={Select}
+                              component={TypeableSelect}
                               fullWidth
                               label="Task"
                               className={classes.field}

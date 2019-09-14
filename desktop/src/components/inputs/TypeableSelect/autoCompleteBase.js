@@ -229,7 +229,12 @@ class Autocomplete extends React.PureComponent {
 
     return (
       <div className={classes.root}>
-        <FormControl error={hasError} required={required} {...other}>
+        <FormControl
+          error={hasError}
+          required={required}
+          {...other}
+          margin="none"
+        >
           <Select
             classes={classes}
             styles={selectStyles}
@@ -244,11 +249,13 @@ class Autocomplete extends React.PureComponent {
             }}
             options={options}
             components={components}
-            onChange={value => setFieldValue(field.name, value)}
-            value={values[field.name]}
+            onChange={value => setFieldValue(field.name, value.id)}
+            value={values[field.id]}
             isMulti={isMultiple}
           />
-          {hasError && <FormHelperText>{errorText}</FormHelperText>}
+          <FormHelperText error={true}>
+            {errorText ? errorText : ` `}
+          </FormHelperText>
         </FormControl>
       </div>
     );
