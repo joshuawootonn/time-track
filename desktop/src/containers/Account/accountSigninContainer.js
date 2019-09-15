@@ -18,7 +18,7 @@ export class AccountSignin extends Component {
     login(`565656`).then(
       asdf => {
         const { authorityId } = asdf.data;
-        console.log(this.props, authorityId);
+        // console.log(this.props, authorityId);
         setTimeout(
           () => history.push(`/${this.props.authorities[authorityId].type}`),
           500

@@ -6,7 +6,8 @@ import {
   Typography,
   Button,
   Tooltip,
-  IconButton
+  IconButton,
+  Paper
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button } from '@material-ui/core';
+import { Grid, Typography, Button, Paper } from '@material-ui/core';
 import cx from 'classnames';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,6 +12,7 @@ import TypeableSelect from 'components/inputs/TypeableSelect';
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
+import { mapEmployeeItemsToOptions } from 'helpers/input.helper';
 export class HalfShift extends Component {
   render() {
     const {
@@ -31,7 +32,7 @@ export class HalfShift extends Component {
             <Field
               name="employeeId"
               component={TypeableSelect}
-              items={employees}
+              items={mapEmployeeItemsToOptions(employees)}
               fullWidth
               className={classes.field}
               label="Employee"

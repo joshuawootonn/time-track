@@ -85,21 +85,23 @@ inputComponent.propTypes = {
   inputRef: PropTypes.func
 };
 
-const Control = ({ selectProps, innerRef, children, innerProps }) => (
-  <TextField
-    fullWidth
-    InputProps={{
-      inputComponent,
-      inputProps: {
-        className: selectProps.classes.input,
-        inputRef: innerRef,
-        children,
-        ...innerProps
-      }
-    }}
-    {...selectProps.textFieldProps}
-  />
-);
+const Control = ({ selectProps, innerRef, children, innerProps }) => {
+  return (
+    <TextField
+      fullWidth
+      InputProps={{
+        inputComponent,
+        inputProps: {
+          className: selectProps.classes.input,
+          inputRef: innerRef,
+          children,
+          ...innerProps
+        }
+      }}
+      {...selectProps.textFieldProps}
+    />
+  );
+};
 Control.propTypes = {
   innerRef: PropTypes.func,
   selectProps: PropTypes.object,
@@ -107,19 +109,21 @@ Control.propTypes = {
   children: PropTypes.node
 };
 
-const Option = ({ innerRef, isFocused, isSelected, innerProps, children }) => (
-  <MenuItem
-    buttonRef={innerRef}
-    selected={isFocused}
-    component="div"
-    style={{
-      fontWeight: isSelected ? 500 : 400
-    }}
-    {...innerProps}
-  >
-    {children}
-  </MenuItem>
-);
+const Option = ({ innerRef, isFocused, isSelected, innerProps, children }) => {
+  return (
+    <MenuItem
+      buttonRef={innerRef}
+      selected={isFocused}
+      component="div"
+      style={{
+        fontWeight: isSelected ? 500 : 400
+      }}
+      {...innerProps}
+    >
+      {children}
+    </MenuItem>
+  );
+};
 Option.propTypes = {
   innerRef: PropTypes.func,
   isSelected: PropTypes.bool,
@@ -227,6 +231,30 @@ class Autocomplete extends React.PureComponent {
       })
     };
 
+    const aaa = (obj, key) => {
+      const keys = key.split('.');
+
+      return parseInt(
+        keys.reduce(
+          (accumulator, currentValue) => accumulator[currentValue],
+          obj
+        )
+      );
+    };
+    // console.log(
+    //   'field: ',
+    //   field,
+    //   'values: ',
+    //   values,
+    //   'options: ',
+    //   options,
+    //   'value in input: ',
+    //   options && options.length > 0
+    //     ? options.find(value => value.id === aaa(values, field.name))
+    //     : null,
+    //   'VALUE in state: ',
+    //   values[field.name]
+    // );
     return (
       <div className={classes.root}>
         <FormControl
@@ -250,7 +278,11 @@ class Autocomplete extends React.PureComponent {
             options={options}
             components={components}
             onChange={value => setFieldValue(field.name, value.id)}
-            value={values[field.id]}
+            value={
+              options && options.length > 0
+                ? options.find(value => value.id === aaa(values, field.name))
+                : null
+            }
             isMulti={isMultiple}
           />
           <FormHelperText error={true}>

@@ -1,28 +1,13 @@
 import { FieldProps } from 'formik';
 import React from 'react';
-import Select from 'react-select';
-import {
-  FormControl,
-  InputLabel,
-  FormHelperText,
-  withStyles
-} from '@material-ui/core';
+import { FormControl} from '@material-ui/core';
 
-import cx from 'classnames';
-
-import { getIn } from 'formik';
 import  Autocomplete  from './autoCompleteBase';
-import { transformItemsToOptions } from 'helpers/input.helper';
 
 type Item =
   | { name: string }
   | { type: string }
   | { firstName: string; lastName: string };
-
-type OptionType = {
-  value: string;
-  label: string;
-};
 
 interface Props {
   items: Item[];
@@ -38,7 +23,6 @@ interface Props {
   classes: any;
 }
 
-
 export const SelectField: React.SFC<Props & FieldProps> = props => {
   const {
     field,
@@ -49,10 +33,6 @@ export const SelectField: React.SFC<Props & FieldProps> = props => {
     formControlProps,
     className,
   } = props;
-
-  const options = transformItemsToOptions(items);
-
-  console.log(items, options);
 
   return (
     <FormControl
@@ -66,7 +46,7 @@ export const SelectField: React.SFC<Props & FieldProps> = props => {
         label={label}
         field={field as any}
         form={form}
-        options={options}
+        options={items}
       />  
     </FormControl>
   );

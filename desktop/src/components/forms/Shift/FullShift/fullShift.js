@@ -6,7 +6,9 @@ import {
   Typography,
   Button,
   IconButton,
-  MenuItem
+  MenuItem,
+  Tooltip,
+  Paper
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import cx from 'classnames';
@@ -20,6 +22,11 @@ import TypeableSelect from 'components/inputs/TypeableSelect';
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
+import {
+  mapEmployeeItemsToOptions,
+  mapProjectItemsToOptions,
+  mapProjectTaskItemsToOptions
+} from 'helpers/input.helper';
 
 export class FullShift extends Component {
   render() {
@@ -36,7 +43,6 @@ export class FullShift extends Component {
       timeLeft,
       generalError
     } = this.props;
-
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -44,7 +50,7 @@ export class FullShift extends Component {
             <Field
               name="employeeId"
               component={TypeableSelect}
-              items={employees}
+              items={mapEmployeeItemsToOptions(employees)}
               fullWidth
               className={classes.field}
               label="Employee"
@@ -77,79 +83,94 @@ export class FullShift extends Component {
                   {values.activities &&
                     values.activities.map((activity, index) => {
                       return (
-                        <Grid
-                          item
-                          xs={12}
-                          key={index}
-                          className={cx(classes.card)}
-                        >
-                          <div className={cx(classes.row, classes.bodyRow)}>
-                            <Field
-                              name={`activities.${index}.projectId`}
-                              component={TypeableSelect}
-                              items={projects}
-                              fullWidth
-                              label="Project"
-                              id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
-                              className={classes.field}
-                              onChange={() => {
-                                arrayHelpers.form.setFieldValue(
-                                  `activities.${index}.projectTaskId`,
-                                  -1
-                                );
-                              }}
-                            />
-                            <Field
-                              name={`activities.${index}.projectTaskId`}
-                              component={TypeableSelect}
-                              fullWidth
-                              label="Task"
-                              className={classes.field}
-                            >
-                              {projectTasks // This code iterates the projectTask
-                                .filter(projectTask => {
-                                  return (
-                                    activity.projectId === projectTask.projectId
-                                  ); // filters based on project selected
-                                })
-                                .map((projectTask, i) => {
-                                  // maps those elements
-                                  return (
-                                    <MenuItem
-                                      key={i}
-                                      id="projectTaskId"
-                                      value={projectTask.id}
-                                    >
-                                      {projectTask.task.name}
-                                    </MenuItem>
-                                  );
-                                })}
-                            </Field>
-                            <Field
-                              name={`activities.${index}.length`}
-                              component={Time}
-                              fullWidth
-                              className={classes.field}
-                            />
-                            <Field
-                              name={`activities.${index}.description`}
-                              label="Description"
-                              component={TextField}
-                              className={classes.field}
-                            />
-                            <div className={classes.verticalCenter}>
-                              <IconButton
-                                type="button"
-                                id={`${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_${index}`}
-                                color="secondary"
-                                className={classes.iconButton}
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                <Close />
-                              </IconButton>
+                        <>
+                          <Grid
+                            item
+                            xs={12}
+                            key={index}
+                            className={cx(classes.card)}
+                          >
+                            <div className={cx(classes.row, classes.headerRow)}>
+                              <Typography varient="h2">
+                                Activity {index + 1}
+                              </Typography>
+                              <div className={classes.verticalCenter}>
+                                <Tooltip title="Remove Activitiy">
+                                  <IconButton
+                                    type="button"
+                                    id={`${ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID}_${index}`}
+                                    color="secondary"
+                                    className={classes.iconButton}
+                                    onClick={() => arrayHelpers.remove(index)}
+                                  >
+                                    <Close />
+                                  </IconButton>
+                                </Tooltip>
+                              </div>
                             </div>
-                          </div>
-                        </Grid>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={12}
+                            key={index}
+                            className={cx(classes.card)}
+                          >
+                            <div className={cx(classes.row, classes.bodyRow)}>
+                              <Field
+                                name={`activities.${index}.projectId`}
+                                component={TypeableSelect}
+                                items={mapProjectItemsToOptions(projects)}
+                                fullWidth
+                                label="Project"
+                                id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
+                                className={classes.field}
+                                onChange={() => {
+                                  arrayHelpers.form.setFieldValue(
+                                    `activities.${index}.projectTaskId`,
+                                    -1
+                                  );
+                                }}
+                              />
+                              <Field
+                                name={`activities.${index}.projectTaskId`}
+                                component={TypeableSelect}
+                                fullWidth
+                                label="Task"
+                                className={classes.field}
+                                items={mapProjectTaskItemsToOptions(
+                                  projectTasks // This code iterates the projectTask
+                                    .filter(projectTask => {
+                                      return (
+                                        activity.projectId ===
+                                        projectTask.projectId
+                                      ); // filters based on project selected
+                                    })
+                                )}
+                              />
+                            </div>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={12}
+                            key={index}
+                            className={cx(classes.card)}
+                          >
+                            <div className={cx(classes.row, classes.bodyRow)}>
+                              <Field
+                                name={`activities.${index}.length`}
+                                component={Time}
+                                fullWidth
+                                className={classes.field}
+                              />
+                              <Field
+                                name={`activities.${index}.description`}
+                                label="Description"
+                                component={TextField}
+                                className={classes.field}
+                              />
+                            </div>
+                          </Grid>
+                        </>
                       );
                     })}
                   <Grid
