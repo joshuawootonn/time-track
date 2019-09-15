@@ -33,7 +33,7 @@ export const SelectField: React.SFC<Props & FieldProps> = props => {
     formControlProps,
     className,
   } = props;
-
+  console.log(field.name, field.value);
   return (
     <FormControl
       {...formControlProps}

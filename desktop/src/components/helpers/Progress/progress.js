@@ -30,9 +30,13 @@ export const Progress = props => {
   return (
     <div className={wrapperClasses}>
       <div className={innerClasses}>
+        {message && (
+          <Typography variant="h6" className={classes.typography}>
+            {message}
+          </Typography>
+        )}
         {variant === `linear` ? <LinearProgress /> : null}
-        {variant === `circular` ? <CircularProgress /> : null}
-        {message && <Typography variant="h6">{message}</Typography>}
+        {variant === `circular` ? <CircularProgress size={32} /> : null}
       </div>
     </div>
   );

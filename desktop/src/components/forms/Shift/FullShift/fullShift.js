@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   IconButton,
-  MenuItem,
   Tooltip,
   Paper
 } from '@material-ui/core';
@@ -15,7 +14,6 @@ import cx from 'classnames';
 import { Field, Form, FieldArray } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select';
 import Time from 'components/inputs/Time';
 import TypeableSelect from 'components/inputs/TypeableSelect';
 
@@ -83,13 +81,8 @@ export class FullShift extends Component {
                   {values.activities &&
                     values.activities.map((activity, index) => {
                       return (
-                        <>
-                          <Grid
-                            item
-                            xs={12}
-                            key={index}
-                            className={cx(classes.card)}
-                          >
+                        <div key={index} className={classes.gridContainer}>
+                          <Grid item xs={12} className={cx(classes.card)}>
                             <div className={cx(classes.row, classes.headerRow)}>
                               <Typography varient="h2">
                                 Activity {index + 1}
@@ -109,12 +102,7 @@ export class FullShift extends Component {
                               </div>
                             </div>
                           </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            key={index}
-                            className={cx(classes.card)}
-                          >
+                          <Grid item xs={12} className={cx(classes.card)}>
                             <div className={cx(classes.row, classes.bodyRow)}>
                               <Field
                                 name={`activities.${index}.projectId`}
@@ -149,12 +137,7 @@ export class FullShift extends Component {
                               />
                             </div>
                           </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            key={index}
-                            className={cx(classes.card)}
-                          >
+                          <Grid item xs={12} className={cx(classes.card)}>
                             <div className={cx(classes.row, classes.bodyRow)}>
                               <Field
                                 name={`activities.${index}.length`}
@@ -170,7 +153,7 @@ export class FullShift extends Component {
                               />
                             </div>
                           </Grid>
-                        </>
+                        </div>
                       );
                     })}
                   <Grid

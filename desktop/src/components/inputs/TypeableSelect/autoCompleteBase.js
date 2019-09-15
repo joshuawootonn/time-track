@@ -255,6 +255,11 @@ class Autocomplete extends React.PureComponent {
     //   'VALUE in state: ',
     //   values[field.name]
     // );
+    console.log(
+      options && options.length > 0
+        ? options.find(value => value.id === aaa(values, field.name))
+        : null
+    );
     return (
       <div className={classes.root}>
         <FormControl

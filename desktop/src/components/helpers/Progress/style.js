@@ -14,6 +14,9 @@ const styles = () => ({
     justifyContent: `center`,
     alignItems: `center`,
     flexDirection: 'column'
+  },
+  typography: {
+    marginBottom: '16px'
   }
 });
 
