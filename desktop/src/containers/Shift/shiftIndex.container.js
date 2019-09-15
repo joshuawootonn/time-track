@@ -25,7 +25,15 @@ export class ShiftIndex extends Component {
 
   render() {
     const { shifts, selected } = this.props;
-    if (!shifts) return <Progress variant="circular" fullWidth fullHeight />;
+    if (!shifts)
+      return (
+        <Progress
+          variant="circular"
+          fullWidth
+          fullHeight
+          message="Loading shifts.."
+        />
+      );
 
     return (
       <VirtualizedSortSelect

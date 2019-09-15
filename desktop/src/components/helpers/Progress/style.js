@@ -12,7 +12,8 @@ const styles = () => ({
   flex: {
     display: `flex`,
     justifyContent: `center`,
-    alignItems: `center`
+    alignItems: `center`,
+    flexDirection: 'column'
   }
 });
 

@@ -10,6 +10,7 @@ import HalfShiftForm from 'components/forms/Shift/HalfShift';
 import FormHeader from 'components/forms/Shift/FormHeader';
 import * as formConstants from 'constants/formTypes';
 
+import Progress from 'components/helpers/Progress';
 import {
   shiftSelectors,
   projectSelectors,
@@ -28,7 +29,9 @@ import { minutesRoudedTime } from 'helpers/time';
 export class ShiftCRUD extends Component {
   state = {
     [`${analyzeStatus.EDITING}Extent`]: formConstants.FULL_SHIFT,
-    [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT
+    [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT,
+    isLoading: false,
+    loadingMessage: ''
   };
   removeShift = () => {
     const { selected, removeShift } = this.props;
@@ -40,6 +43,9 @@ export class ShiftCRUD extends Component {
     this.setState({
       [`${type}Extent`]: extent
     });
+  };
+  updateLoading = (isLoading, loadingMessage) => {
+    this.setState({ isLoading, loadingMessage });
   };
 
   render() {
@@ -56,6 +62,16 @@ export class ShiftCRUD extends Component {
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Shift.. </Typography>
         </Hero>
+      );
+    }
+    if (this.state.isLoading) {
+      return (
+        <Progress
+          variant="circular"
+          fullWidth
+          fullHeight
+          message={this.state.loadingMessage}
+        />
       );
     }
     // console.log('selected shift', selected);
@@ -92,16 +108,18 @@ export class ShiftCRUD extends Component {
               validationSchema={halfShiftValidation}
               onSubmit={(values, formikFunctions) => {
                 const { updateHalfShift } = this.props;
-
+                this.updateLoading(true, 'Updating clock in..');
                 return updateHalfShift(values).then(
                   () => {
                     formikFunctions.resetForm();
                     formikFunctions.setStatus({ success: true });
+                    this.updateLoading(false, '');
                   },
                   e => {
                     formikFunctions.setStatus({ success: false });
                     formikFunctions.setSubmitting(false);
                     formikFunctions.setErrors({ submit: e });
+                    this.updateLoading(false, '');
                   }
                 );
               }}
@@ -164,13 +182,15 @@ export class ShiftCRUD extends Component {
               validationSchema={shiftValidation}
               onSubmit={(values, formikFunctions) => {
                 const { updateShift } = this.props;
-
+                this.updateLoading(true, 'Updating shift..');
                 return updateShift(values).then(
                   () => {
+                    this.updateLoading(false, '');
                     formikFunctions.resetForm();
                     formikFunctions.setStatus({ success: true });
                   },
                   e => {
+                    this.updateLoading(false, '');
                     formikFunctions.setStatus({ success: false });
                     formikFunctions.setSubmitting(false);
                     formikFunctions.setErrors({ submit: e });
@@ -245,12 +265,15 @@ export class ShiftCRUD extends Component {
               validationSchema={halfShiftValidation}
               onSubmit={(values, formikFunctions) => {
                 const { createHalfShift } = this.props;
+                this.updateLoading(true, 'Creating clock in..');
                 return createHalfShift(values).then(
                   () => {
+                    this.updateLoading(false, '');
                     formikFunctions.resetForm();
                     formikFunctions.setStatus({ success: true });
                   },
                   e => {
+                    this.updateLoading(false, '');
                     formikFunctions.setStatus({ success: false });
                     formikFunctions.setSubmitting(false);
                     formikFunctions.setErrors({ submit: e });
@@ -304,12 +327,15 @@ export class ShiftCRUD extends Component {
               validationSchema={shiftValidation}
               onSubmit={(values, formikFunctions) => {
                 const { createShift } = this.props;
+                this.updateLoading(true, 'Creating shift..');
                 return createShift(values).then(
                   () => {
                     formikFunctions.resetForm();
                     formikFunctions.setStatus({ success: true });
+                    this.updateLoading(false, '');
                   },
                   e => {
+                    this.updateLoading(false, '');
                     formikFunctions.setStatus({ success: false });
                     formikFunctions.setSubmitting(false);
                     formikFunctions.setErrors({ submit: e });
