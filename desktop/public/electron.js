@@ -158,12 +158,9 @@ ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   event.returnValue = arg;
 });
 
-ipcMain.on(IPCConstants.GET_CRED, event => {
-  if(isDev) {
-
-  }
+ipcMain.on(IPCConstants.GET_CRED, event => {  
   const cred = {
-    ip:isDev ? 'http://localhost:4000' : settings.get(`${SETTINGS.USER_CRED}.ip`),
+    ip: settings.get(`${SETTINGS.USER_CRED}.ip`),
     username: settings.get(`${SETTINGS.USER_CRED}.username`),
     password: settings.get(`${SETTINGS.USER_CRED}.password`)
   };

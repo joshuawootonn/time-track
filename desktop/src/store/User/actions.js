@@ -3,6 +3,7 @@ import { userActionTypes } from 'constants/actionTypeConstants';
 import { authorityActions, crewActions } from 'store/actions';
 import * as IPCConstants from 'constants/ipc';
 import * as endpoint from './endpoints';
+import { updateAxiosInstanceWithNewURL } from 'helpers/axios';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -17,7 +18,10 @@ export const login = (ip, username, password) => {
         username,
         password
       });
-      ipcRenderer.sendSyncf(IPCConstants.SET_ACCESS_TOKEN, response.data.id);
+
+      ipcRenderer.sendSync(IPCConstants.SET_ACCESS_TOKEN, response.data.id);
+
+      updateAxiosInstanceWithNewURL();
 
       await dispatch(authorityActions.getAllAuthorities());
       await dispatch(crewActions.getAllCrews());

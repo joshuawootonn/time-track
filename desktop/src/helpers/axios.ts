@@ -1,4 +1,3 @@
-
 import axios, { AxiosRequestConfig } from 'axios';
 import { HOST } from 'constants/network';
 import * as IPCConstants from 'constants/ipc';
@@ -7,53 +6,28 @@ import * as IPCConstants from 'constants/ipc';
 //@ts-ignore
 const { ipcRenderer } = window.require('electron');
 
-let instance = axios.create({
-  baseURL: HOST(),
+const instance = axios.create({
+  baseURL: HOST()
 });
 
+export const updateAxiosInstanceWithNewURL = () => {
+  instance.defaults.baseURL = HOST();
+};
 
 instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const accessToken = ipcRenderer.sendSync(IPCConstants.GET_ACCESS_TOKEN, ``); 
-    
+  const accessToken = ipcRenderer.sendSync(IPCConstants.GET_ACCESS_TOKEN, ``);
+
   //TODO: FIX THIS IGNORE
   //@ts-ignore
-  if(config.url.includes("?")){
+  if (config.url.includes('?')) {
     //@ts-ignore
-    config.url = config.baseURL + config.url + `&access_token=${accessToken}`
-  } else{ 
+    config.url = config.baseURL + config.url + `&access_token=${accessToken}`;
+  } else {
     //@ts-ignore
-    config.url = config.baseURL + config.url + `?access_token=${accessToken}`
+    config.url = config.baseURL + config.url + `?access_token=${accessToken}`;
   }
-  
- 
+
   return config;
 });
-
-export const newInstance = () => {
-  let instance = axios.create({
-    baseURL: HOST(),
-  });
-  
-  
-  instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
-    const accessToken = ipcRenderer.sendSync(IPCConstants.GET_ACCESS_TOKEN, ``); 
-    
-    
-    //TODO: FIX THIS IGNORE
-    //@ts-ignore
-    if(config.url.includes("?")){
-      //@ts-ignore
-      config.url = config.baseURL + config.url + `&access_token=${accessToken}`
-    } else{ 
-      //@ts-ignore
-      config.url = config.baseURL + config.url + `?access_token=${accessToken}`
-    }
-    
-   
-    return config;
-  });
-  return instance;  
-}
-
 
 export default instance;
