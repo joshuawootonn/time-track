@@ -39,11 +39,6 @@ export class AuthSignin extends Component {
         onSubmit={(values, formikFunctions) => {
           const { history, login } = this.props;
           const { ip, username, password } = values;
-          ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-            ip,
-            username,
-            password
-          });
           return login(ip, username, password).then(
             () => {
               formikFunctions.resetForm();

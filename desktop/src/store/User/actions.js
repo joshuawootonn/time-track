@@ -11,10 +11,14 @@ export const login = (ip, username, password) => {
     dispatch({ type: userActionTypes.LOGIN_USER_REQUEST });
     try {
       const response = await endpoint.login(ip, username, password);
-      console.log(response.data.id);
-      console.log(
-        ipcRenderer.sendSync(IPCConstants.SET_ACCESS_TOKEN, response.data.id)
-      );
+
+      ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+        ip,
+        username,
+        password
+      });
+      ipcRenderer.sendSyncf(IPCConstants.SET_ACCESS_TOKEN, response.data.id);
+
       await dispatch(authorityActions.getAllAuthorities());
       await dispatch(crewActions.getAllCrews());
       return dispatch({

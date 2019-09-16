@@ -169,7 +169,7 @@ export class Analyze extends Component {
               <ShiftIndex />
             </Grid>
             <Grid item xs={6} className={classes.gridHeight}>
-              {/* <ShiftCRUD /> */}
+              <ShiftCRUD />
             </Grid>
           </Grid>
         )}
