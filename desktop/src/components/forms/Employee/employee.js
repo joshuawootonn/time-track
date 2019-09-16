@@ -14,9 +14,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 import styles from './styles';
+
+import TypeableSelect from 'components/inputs/TypeableSelect';
 
 export class Employee extends Component {
   render() {
@@ -70,16 +71,18 @@ export class Employee extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="authorityId"
-              component={Select}
+              component={TypeableSelect}
               items={authorities}
+              type="type"
               fullWidth
               label="Authority"
               className={classes.field}
             />
             <Field
               name="crewId"
-              component={Select}
+              component={TypeableSelect}
               items={crews}
+              type="name"
               fullWidth
               label="Crew"
               className={classes.field}

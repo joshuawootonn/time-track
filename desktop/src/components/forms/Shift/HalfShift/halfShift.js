@@ -12,7 +12,6 @@ import TypeableSelect from 'components/inputs/TypeableSelect';
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
-import { mapEmployeeItemsToOptions } from 'helpers/input.helper';
 export class HalfShift extends Component {
   render() {
     const {
@@ -32,7 +31,8 @@ export class HalfShift extends Component {
             <Field
               name="employeeId"
               component={TypeableSelect}
-              items={mapEmployeeItemsToOptions(employees)}
+              items={employees}
+              type="employee"
               fullWidth
               className={classes.field}
               label="Employee"

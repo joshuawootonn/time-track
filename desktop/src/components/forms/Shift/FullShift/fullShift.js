@@ -20,11 +20,6 @@ import TypeableSelect from 'components/inputs/TypeableSelect';
 import styles from './styles';
 
 import { minutesToString } from 'helpers/time';
-import {
-  mapEmployeeItemsToOptions,
-  mapProjectItemsToOptions,
-  mapProjectTaskItemsToOptions
-} from 'helpers/input.helper';
 
 export class FullShift extends Component {
   render() {
@@ -48,7 +43,8 @@ export class FullShift extends Component {
             <Field
               name="employeeId"
               component={TypeableSelect}
-              items={mapEmployeeItemsToOptions(employees)}
+              items={employees}
+              type="employee"
               fullWidth
               className={classes.field}
               label="Employee"
@@ -107,7 +103,8 @@ export class FullShift extends Component {
                               <Field
                                 name={`activities.${index}.projectId`}
                                 component={TypeableSelect}
-                                items={mapProjectItemsToOptions(projects)}
+                                items={projects}
+                                type="name"
                                 fullWidth
                                 label="Project"
                                 id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
@@ -125,15 +122,14 @@ export class FullShift extends Component {
                                 fullWidth
                                 label="Task"
                                 className={classes.field}
-                                items={mapProjectTaskItemsToOptions(
-                                  projectTasks // This code iterates the projectTask
-                                    .filter(projectTask => {
-                                      return (
-                                        activity.projectId ===
-                                        projectTask.projectId
-                                      ); // filters based on project selected
-                                    })
-                                )}
+                                type="task"
+                                items={projectTasks // This code iterates the projectTask
+                                  .filter(projectTask => {
+                                    return (
+                                      activity.projectId ===
+                                      projectTask.projectId
+                                    ); // filters based on project selected
+                                  })}
                               />
                             </div>
                           </Grid>

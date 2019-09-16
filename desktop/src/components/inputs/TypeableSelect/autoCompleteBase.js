@@ -209,6 +209,82 @@ const components = {
 };
 
 class Autocomplete extends React.PureComponent {
+  mapItemsToOptions = items => {
+    if (!items || items.length === 0) {
+      return [];
+    }
+    const { type } = this.props;
+    let options = [];
+    switch (type) {
+      case 'name':
+        options = items.map(item => {
+          return {
+            label: item.name,
+            value: item.name,
+            id: item.id,
+            data: { ...item }
+          };
+        });
+        break;
+
+      case 'type':
+        options = items.map(item => {
+          return {
+            label: item.type,
+            value: item.type,
+            id: item.id,
+            data: { ...item }
+          };
+        });
+        break;
+
+      case 'employee':
+        options = items.map(item => {
+          return {
+            label: item.firstName + ` ` + item.lastName,
+            value: item.firstName + ` ` + item.lastName,
+            id: item.id,
+            data: { ...item }
+          };
+        });
+        break;
+
+      case 'task':
+        options = items.map(item => {
+          return {
+            label: item.task.name,
+            value: item.task.name,
+            id: item.id,
+            data: { ...item }
+          };
+        });
+        break;
+      default:
+        break;
+    }
+    return options;
+  };
+
+  getValueFromOptions = options => {
+    const {
+      form: { values },
+      field
+    } = this.props;
+    const getFieldValue = (obj, key) => {
+      const keys = key.split('.');
+
+      return parseInt(
+        keys.reduce(
+          (accumulator, currentValue) => accumulator[currentValue],
+          obj
+        )
+      );
+    };
+    return options && options.length > 0
+      ? options.find(value => value.id === getFieldValue(values, field.name))
+      : undefined;
+  };
+
   render() {
     const {
       required,
@@ -217,8 +293,11 @@ class Autocomplete extends React.PureComponent {
       label,
       field,
       form: { dirty, touched, errors, values, setFieldValue },
-      options,
+      items,
       isMultiple,
+      fullWidth,
+      className,
+      formControlProps,
       ...other
     } = this.props;
     const errorText = errors[field.name];
@@ -231,70 +310,40 @@ class Autocomplete extends React.PureComponent {
       })
     };
 
-    const aaa = (obj, key) => {
-      const keys = key.split('.');
+    const options = this.mapItemsToOptions(items);
 
-      return parseInt(
-        keys.reduce(
-          (accumulator, currentValue) => accumulator[currentValue],
-          obj
-        )
-      );
-    };
-    // console.log(
-    //   'field: ',
-    //   field,
-    //   'values: ',
-    //   values,
-    //   'options: ',
-    //   options,
-    //   'value in input: ',
-    //   options && options.length > 0
-    //     ? options.find(value => value.id === aaa(values, field.name))
-    //     : null,
-    //   'VALUE in state: ',
-    //   values[field.name]
-    // );
-    console.log(
-      options && options.length > 0
-        ? options.find(value => value.id === aaa(values, field.name))
-        : null
-    );
     return (
-      <div className={classes.root}>
-        <FormControl
-          error={hasError}
+      <FormControl
+        fullWidth={fullWidth}
+        className={className}
+        {...formControlProps}
+        error={hasError}
+        required={required}
+        {...other}
+        margin="none"
+      >
+        <Select
+          classes={classes}
+          styles={selectStyles}
           required={required}
-          {...other}
-          margin="none"
-        >
-          <Select
-            classes={classes}
-            styles={selectStyles}
-            required={required}
-            textFieldProps={{
-              required,
-              label,
-              error: hasError,
-              InputLabelProps: {
-                shrink: true
-              }
-            }}
-            options={options}
-            components={components}
-            onChange={value => setFieldValue(field.name, value.id)}
-            value={
-              options && options.length > 0
-                ? options.find(value => value.id === aaa(values, field.name))
-                : null
+          textFieldProps={{
+            required,
+            label,
+            error: hasError,
+            InputLabelProps: {
+              shrink: true
             }
-            isMulti={isMultiple}
-          />
-          <FormHelperText error={true}>
-            {errorText ? errorText : ` `}
-          </FormHelperText>
-        </FormControl>
-      </div>
+          }}
+          options={options}
+          components={components}
+          onChange={value => setFieldValue(field.name, value.id)}
+          value={this.getValueFromOptions(options)}
+          isMulti={isMultiple}
+        />
+        <FormHelperText error={true}>
+          {errorText ? errorText : ` `}
+        </FormHelperText>
+      </FormControl>
     );
   }
 }
