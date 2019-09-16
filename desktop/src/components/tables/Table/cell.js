@@ -65,7 +65,7 @@ const Cell = props => {
       component="div"
       className={classNames(classes.tableCell, classes.flexContainer)}
       style={{ height: rowHeight }}
-      padding="dense"
+      padding="default"
       key={key}
       align={alignment}
     >

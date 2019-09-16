@@ -358,13 +358,8 @@ Autocomplete.propTypes = {
     errors: PropTypes.object,
     setFieldValue: PropTypes.func
   }).isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired
-    })
-  ).isRequired,
+  items: PropTypes.array.isRequired,
+  type: PropTypes.oneOf(['type', 'name', 'task', 'employee']).isRequired,
   required: PropTypes.bool,
   fullWidth: PropTypes.bool,
   margin: PropTypes.oneOf(['none', 'dense', 'normal']),
