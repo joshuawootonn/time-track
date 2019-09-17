@@ -24,6 +24,9 @@ export class AuthSignin extends Component {
       this.props.history.push(routes.ROOT);
     });
   }
+  cleanIp = ip => {
+    return ip.replace(/\/+$/, '');
+  };
   render() {
     const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
     const hasValidCred = cred.ip && cred.username && cred.password;
@@ -39,12 +42,8 @@ export class AuthSignin extends Component {
         onSubmit={(values, formikFunctions) => {
           const { history, login } = this.props;
           const { ip, username, password } = values;
-          ipcRenderer.sendSync(IPCConstants.SET_CRED, {
-            ip,
-            username,
-            password
-          });
-          return login(ip, username, password).then(
+          const cleanIp = this.cleanIp(ip);
+          return login(cleanIp, username, password).then(
             () => {
               formikFunctions.resetForm();
               formikFunctions.setStatus({ success: true });

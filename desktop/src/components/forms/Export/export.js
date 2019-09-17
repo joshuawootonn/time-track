@@ -19,7 +19,7 @@ export class Export extends Component {
 
     return (
       <Form className={classes.heroContent}>
-        <Grid container spacing={24}>
+        <Grid container spacing={3}>
           <Grid item xs={12} className={classes.title}>
             <Typography variant="h3">Export</Typography>
           </Grid>

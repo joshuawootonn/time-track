@@ -9,8 +9,9 @@ import { Close } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
 import Switch from 'components/inputs/Switch';
-import Select from 'components/inputs/Select';
 import styles from './styles';
+
+import TypeableSelect from 'components/inputs/TypeableSelect';
 
 export class Project extends Component {
   render() {
@@ -30,7 +31,7 @@ export class Project extends Component {
 
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
           </Grid>
@@ -105,7 +106,8 @@ export class Project extends Component {
                             <div className={cx(classes.row, classes.bodyRow)}>
                               <Field
                                 name={`projectTasks.${index}.categoryId`}
-                                component={Select}
+                                component={TypeableSelect}
+                                type="type"
                                 items={categories}
                                 id={`${PROJECT_FORM_CATEGORY_FIELD_ID}_${index}`}
                                 fullWidth
@@ -124,13 +126,14 @@ export class Project extends Component {
                               />
                               <Field
                                 name={`projectTasks.${index}.subcategoryId`}
-                                component={Select}
+                                component={TypeableSelect}
                                 items={subcategories.filter(subcat => {
                                   return (
                                     subcat.categoryId ===
                                     projectTasks.categoryId
                                   );
                                 })}
+                                type="type"
                                 id={`${PROJECT_FORM_SUBCATEGORY_FIELD_ID}_${index}`}
                                 fullWidth
                                 label="Subcategory"
@@ -144,7 +147,8 @@ export class Project extends Component {
                               />
                               <Field
                                 name={`projectTasks.${index}.taskId`}
-                                component={Select}
+                                component={TypeableSelect}
+                                type="name"
                                 items={tasks.filter(globalTask => {
                                   return (
                                     globalTask.subcategory.id ===

@@ -18,6 +18,8 @@ import TextField from 'components/inputs/TextField';
 import Select from 'components/inputs/Select';
 import Switch from 'components/inputs/Switch';
 
+import TypeableSelect from 'components/inputs/TypeableSelect';
+
 export class Task extends Component {
   render() {
     const {
@@ -35,7 +37,7 @@ export class Task extends Component {
     } = this.props;
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">{label}</Typography>
             {[`edit`].includes(type) && (
@@ -66,8 +68,9 @@ export class Task extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="categoryId"
-              component={Select}
+              component={TypeableSelect}
               items={categories}
+              type="type"
               fullWidth
               label="Category"
               className={classes.field}
@@ -76,10 +79,11 @@ export class Task extends Component {
             />
             <Field
               name="subcategoryId"
-              component={Select}
+              component={TypeableSelect}
               items={subcategories.filter(subcat => {
                 return subcat.categoryId === this.props.values.categoryId;
               })}
+              type="type"
               fullWidth
               label="Subcategory"
               className={classes.field}

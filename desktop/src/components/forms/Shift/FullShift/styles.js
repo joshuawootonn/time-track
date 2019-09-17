@@ -12,6 +12,9 @@ const styles = () => ({
   bodyRow: {
     padding: `12px 0`
   },
+  headerRow: {
+    padding: `0 0 12px 0`
+  },
   footerRow: {
     padding: `12px 0`,
     height: `68px`

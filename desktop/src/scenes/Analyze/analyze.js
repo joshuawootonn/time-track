@@ -139,12 +139,12 @@ export class Analyze extends Component {
         )}
         {tabValue === 1 && (
           <Grid container className={classes.tab}>
-            <Grid item xs={6} className={classes.gridHeight}>
+            <Grid item xs={4} className={classes.gridHeight}>
               <ProjectToolbar />
               <ProjectFilter />
               <ProjectIndex />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
               <ProjectCRUD />
             </Grid>
           </Grid>

@@ -6,7 +6,8 @@ import {
   Typography,
   Button,
   Tooltip,
-  IconButton
+  IconButton,
+  Paper
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Delete } from '@material-ui/icons';
@@ -28,7 +29,7 @@ export const FormHeader = props => {
     updateExtent
   } = props;
   return (
-    <Grid container spacing={24} className={classes.gridContainer}>
+    <Grid container spacing={3} className={classes.gridContainer}>
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
         <Typography variant="h6">{label}</Typography>
         <div>

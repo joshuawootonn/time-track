@@ -79,7 +79,7 @@ export class Clockout extends Component {
       <div className={classes.hero}>
         <div className={classes.heroContent}>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={24}>
+            <Grid container spacing={3}>
               <Grid item xs={12} className={classes.formHeader}>
                 <Typography variant="h3">Clock Out</Typography>
 
@@ -266,7 +266,7 @@ export class Clockout extends Component {
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={24} className={classes.keyboardGrid}>
+            <Grid container spacing={3} className={classes.keyboardGrid}>
               <div
                 className={classes.keyboard}
                 style={this.state.isKeyboardVisible ? {} : { display: `none` }}

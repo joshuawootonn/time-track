@@ -12,7 +12,7 @@ import { Delete } from '@material-ui/icons';
 import { Field, Form } from 'formik';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from 'components/inputs/TextField';
-import Select from 'components/inputs/Select';
+import TypeableSelect from 'components/inputs/TypeableSelect';
 import styles from './styles';
 
 export class Subcategory extends Component {
@@ -30,7 +30,7 @@ export class Subcategory extends Component {
     } = this.props;
     return (
       <Form>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={classes.row}>
             <Typography variant="h6">{label}</Typography>
             {type === `edit` && (
@@ -44,7 +44,8 @@ export class Subcategory extends Component {
           <Grid item xs={12} className={classes.row}>
             <Field
               name="categoryId"
-              component={Select}
+              component={TypeableSelect}
+              type="type"
               items={categories}
               fullWidth
               label="Authority"

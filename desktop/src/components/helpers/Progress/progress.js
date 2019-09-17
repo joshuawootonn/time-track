@@ -1,14 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { LinearProgress, CircularProgress } from '@material-ui/core';
+import {
+  LinearProgress,
+  CircularProgress,
+  Typography
+} from '@material-ui/core';
 
 import styles from './style';
 
 export const Progress = props => {
-  const { classes, fullPage, fullHeight, fullWidth, variant } = props;
+  const { classes, fullPage, fullHeight, fullWidth, variant, message } = props;
 
   const wrapperClasses = cx({
     [classes.fullPageWrapper]: fullPage,
@@ -26,8 +30,13 @@ export const Progress = props => {
   return (
     <div className={wrapperClasses}>
       <div className={innerClasses}>
+        {message && (
+          <Typography variant="h6" className={classes.typography}>
+            {message}
+          </Typography>
+        )}
         {variant === `linear` ? <LinearProgress /> : null}
-        {variant === `circular` ? <CircularProgress /> : null}
+        {variant === `circular` ? <CircularProgress size={32} /> : null}
       </div>
     </div>
   );
@@ -41,6 +50,7 @@ Progress.defaultProps = {
 };
 
 Progress.propTypes = {
+  message: string,
   fullWidth: PropTypes.bool,
   fullHeight: PropTypes.bool,
   fullPage: PropTypes.bool,
