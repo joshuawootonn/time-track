@@ -9,6 +9,7 @@ const settings = require('electron-settings');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 
+
 const IPCConstants = {
   SET_CRED: 'set_cred',
   GET_CRED: 'get_cred',
@@ -28,6 +29,9 @@ const SETTINGS = {
 var Excel = require('exceljs');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+
+
+
 let mainWindow;
 
 function createWindow() {
