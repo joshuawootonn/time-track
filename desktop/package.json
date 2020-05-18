@@ -88,7 +88,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "electron-start": "electron .",
+    "electron-start": "electron ./public/electron.js",
     "build": "react-scripts build",
     "react-test": "react-scripts test --env=jsdom",
     "electron-build": "electron-builder",
