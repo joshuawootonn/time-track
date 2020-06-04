@@ -2,8 +2,10 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 import { getActivitiesFromEntities } from 'store/Activity/selectors';
 import { getEmployeesFromEntities } from 'store/Employee/selectors';
-import { getProjectTasksFromEntities } from 'store/ProjectTask/selectors';
-import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
+import {
+  getAllProjectTasksObjects,
+  getProjectTasksFromEntities
+} from 'store/ProjectTask/selectors';
 import { getAnalyzeState } from 'store/Analyze/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
@@ -56,57 +58,51 @@ export const getAllShiftsNew = createSelector(
     }
 
     if (filters) {
-      list = list.filter(shift => {
-        let decision = true;
-        Object.keys(filters).forEach(key => {
-          if (
-            key === `startTime` &&
-            moment(shift[`clockInDate`]).isBefore(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
-            )
-          ) {
-            decision = false;
-          }
-          // if(key === `startTime` ){
-          //   console.log(moment(shift[`clockInDate`]), moment(filters[key],`MM-DD-YY HH:mm:ss`), moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`)))
-          // }
-          if (
-            key === `endTime` &&
-            moment(shift[`clockInDate`]).isAfter(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
-            )
-          ) {
-            decision = false;
-          }
-          if (
-            key === `employeeId` &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[key]
-          ) {
-            decision = false;
-          }
-          if (
-            (key === `authorityId` || key === `crewId`) &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[`employee`][key]
-          ) {
-            decision = false;
-          }
-          if (key === `projectId` && filters[key] !== -1) {
-            let projectDecision = false;
+      const startTimeMoment = moment(filters['startTime'], `MM-DD-YY HH:mm:ss`);
+      const endTimeMoment = moment(filters['endTime'], `MM-DD-YY HH:mm:ss`);
+      list = list.filter(
+        shift =>
+          !Object.keys(filters).some(filterByKey => {
+            const isFilteredByStartTime =
+              filterByKey === `startTime` &&
+              moment(shift[`clockInDate`]).isBefore(startTimeMoment);
 
-            shift[`activities`].forEach(activity => {
-              if (
-                projectTasks[activity.projectTaskId].projectId === filters[key]
-              ) {
-                projectDecision = true;
-              }
-            });
-            decision = projectDecision;
-          }
-        });
-        return decision;
-      });
+            // if(key === `startTime` ){
+            //   console.log(moment(shift[`clockInDate`]), moment(filters[key],`MM-DD-YY HH:mm:ss`), moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`)))
+            // }
+
+            const isFilteredByEndTime =
+              filterByKey === `endTime` &&
+              moment(shift[`clockInDate`]).isAfter(endTimeMoment);
+
+            const isFilteredByEmployeeId =
+              filterByKey === `employeeId` &&
+              filters[filterByKey] !== -1 &&
+              filters[filterByKey] !== shift[filterByKey];
+
+            const isFilteredByAuthorityOrCrew =
+              (filterByKey === `authorityId` || filterByKey === `crewId`) &&
+              filters[filterByKey] !== -1 &&
+              filters[filterByKey] !== shift[`employee`][filterByKey];
+
+            const isFilteredByProjectId =
+              filterByKey === `projectId` &&
+              filters[filterByKey] !== -1 &&
+              !shift[`activities`].some(
+                activity =>
+                  projectTasks[activity.projectTaskId].projectId ===
+                  filters[filterByKey]
+              );
+
+            return (
+              isFilteredByStartTime ||
+              isFilteredByEndTime ||
+              isFilteredByEmployeeId ||
+              isFilteredByAuthorityOrCrew ||
+              isFilteredByProjectId
+            );
+          })
+      );
     }
     // console.log(`List after filter:`, list.length);
     return list;
