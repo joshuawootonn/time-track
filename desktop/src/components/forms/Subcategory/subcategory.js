@@ -48,7 +48,7 @@ export class Subcategory extends Component {
               type="type"
               items={categories}
               fullWidth
-              label="Authority"
+              label="Category"
               className={classes.field}
             />
           </Grid>
