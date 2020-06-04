@@ -112,7 +112,7 @@ export class ClockOut extends Component {
           let weekHourTotal = shiftDuration.asMinutes() - values.lunch;
           lastWeeksShifts.forEach(shift => {
             if (shift.length) {
-              weekHourTotal += shift.length - shift.lunch;
+              weekHourTotal += shift.length;
             }
           });
 
