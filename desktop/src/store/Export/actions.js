@@ -110,7 +110,7 @@ const formatData = (startTime, endTime) => {
     const shiftsOfEmployees = shifts.filter(shift => {
       return employee.id === shift.employeeId;
     });
-    const hasShifts = shiftsOfEmployees.length > 0 ? true : false;
+    const hasShifts = shiftsOfEmployees.length > 0;
 
     const individualProjectTotals = {};
     const allProjectTotals = { total: 0, reg: 0, ot: 0 };
@@ -198,15 +198,18 @@ const formatData = (startTime, endTime) => {
         totalTimeForWeek += activity.length;
         if (i === 0) {
           detailData.push([
-            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `MM/DD/YYYY`
-            ),
-            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `h:mm a`
-            ),
-            moment(shift.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `h:mm a`
-            ),
+            moment
+              .utc(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`)
+              .local()
+              .format(`MM/DD/YYYY`),
+            moment
+              .utc(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`)
+              .local()
+              .format(`h:mm a`),
+            moment
+              .utc(shift.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
+              .local()
+              .format(`h:mm a`),
             minutesToString(shift.lunch),
             projectTasks[activity.projectTaskId].project.name,
             projectTasks[activity.projectTaskId].task.name,
