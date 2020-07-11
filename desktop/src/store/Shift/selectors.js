@@ -74,67 +74,59 @@ export const getAllShiftsNew = createSelector(
 
     if (filters) {
       list = list.filter(shift => {
-        let decision = true;
-        Object.keys(filters).forEach(key => {
-          if (
-            key === `startTime` &&
-            moment(shift[`clockInDate`]).isBefore(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
+        if (
+          filters.employeeId !== -1 &&
+          filters.employeeId !== shift.employeeId
+        ) {
+          return false;
+        }
+        if (
+          filters.crewId !== -1 &&
+          filters.crewId !== shift[`employee`].crewId
+        ) {
+          return false;
+        }
+        if (filters.projectId !== -1) {
+          let projectDecision = false;
+          shift[`activities`].forEach(activity => {
+            if (
+              projectTasks[activity.projectTaskId].projectId ===
+              filters.projectId
             )
-          ) {
-            decision = false;
+              projectDecision = true;
+          });
+          if (!projectDecision) {
+            return false;
           }
-          // if(key === `startTime` ){
-          //   console.log(moment(shift[`clockInDate`]), moment(filters[key],`MM-DD-YY HH:mm:ss`), moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`)))
-          // }
-          if (
-            key === `endTime` &&
-            moment(shift[`clockInDate`]).isAfter(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
-            )
-          ) {
-            decision = false;
+        }
+        if (filters.taskId !== -1) {
+          let taskDecision = false;
+          shift[`activities`].forEach(activity => {
+            if (
+              projectTasks[activity.projectTaskId].taskId === filters.taskId
+            ) {
+              taskDecision = true;
+            }
+          });
+          if (!taskDecision) {
+            return false;
           }
-          if (
-            key === `employeeId` &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[key]
-          ) {
-            decision = false;
-          }
-          if (
-            (key === `authorityId` || key === `crewId`) &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[`employee`][key]
-          ) {
-            decision = false;
-          }
-          if (key === `projectId` && filters[key] !== -1) {
-            let projectDecision = false;
-
-            shift[`activities`].forEach(activity => {
-              if (
-                projectTasks[activity.projectTaskId].projectId === filters[key]
-              ) {
-                projectDecision = true;
-              }
-            });
-            decision = projectDecision;
-          }
-          if (key === `taskId` && filters[key] !== -1) {
-            let taskDecision = false;
-
-            shift[`activities`].forEach(activity => {
-              if (
-                projectTasks[activity.projectTaskId].taskId === filters[key]
-              ) {
-                taskDecision = true;
-              }
-            });
-            decision = taskDecision;
-          }
-        });
-        return decision;
+        }
+        if (
+          moment(shift[`clockInDate`]).isBefore(
+            moment(filters.startTime, `MM-DD-YY HH:mm:ss`)
+          )
+        ) {
+          return false;
+        }
+        if (
+          moment(shift[`clockInDate`]).isAfter(
+            moment(filters.endTime, `MM-DD-YY HH:mm:ss`)
+          )
+        ) {
+          return false;
+        }
+        return true;
       });
     }
     // console.log(`List after filter:`, list.length);

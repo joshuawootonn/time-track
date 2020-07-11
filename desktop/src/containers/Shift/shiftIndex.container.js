@@ -90,8 +90,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `First Name`,
-    type: TableDataTypes.OBJECT,
-    keys: [`firstName`]
+    type: TableDataTypes.FIRSTNAME
   },
   {
     id: `lastName`,
@@ -110,8 +109,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Crew`,
-    type: TableDataTypes.CREW,
-    keys: [`crew`, 'name']
+    type: TableDataTypes.CREW
   },
   {
     id: `projects`,

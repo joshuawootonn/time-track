@@ -47,7 +47,7 @@ export class Toolbar extends Component {
             )}
           </div>
           {children}
-          <div>
+          <div className={classes.buttonBox}>
             {toggleFilter && (
               <div className={classes.actions}>
                 <Tooltip title="Filter">

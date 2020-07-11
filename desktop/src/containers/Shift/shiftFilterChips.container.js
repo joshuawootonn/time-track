@@ -7,6 +7,7 @@ import domain from 'constants/domains';
 import { getAllProjectObjects } from 'store/Project/selectors';
 import { getAllTaskObjects } from 'store/Task/selectors';
 import { getAllCrewObjects } from 'store/Crew/selectors';
+import { getAllEmployeeObjects } from 'store/Employee/selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +37,7 @@ const ShiftFilterChips = () => {
   const filters = useSelector(state => state.analyze.shiftFilters);
   const projectObject = useSelector(state => getAllProjectObjects(state));
   const crewObject = useSelector(state => getAllCrewObjects(state));
+  const employeeObject = useSelector(state => getAllEmployeeObjects(state));
   const taskObject = useSelector(state => getAllTaskObjects(state));
   const dispatch = useDispatch();
 
@@ -49,6 +51,14 @@ const ShiftFilterChips = () => {
 
   return (
     <ul className={classes.root}>
+      {filters.employeeId !== -1 && (
+        <FilterChip
+          label={`${employeeObject[filters.employeeId].firstName} ${
+            employeeObject[filters.employeeId].lastName
+          }`}
+          onDelete={() => onDelete('employeeId')}
+        />
+      )}
       {filters.crewId !== -1 && (
         <FilterChip
           label={crewObject[filters.crewId].name}

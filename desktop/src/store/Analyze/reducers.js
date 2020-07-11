@@ -48,7 +48,6 @@ export const initialState = {
     employeeId: -1,
     projectId: -1,
     taskId: -1,
-    authorityId: -1,
     crewId: -1,
     startTime: moment()
       .startOf(`week`)

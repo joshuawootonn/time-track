@@ -5,6 +5,8 @@ export const OBJECT = `object`;
 export const DATE = `date`;
 export const DATETIME = `datetime`;
 export const LENGTH = `length`;
+
 export const CREW = `crew`;
 export const PROJECTS = `projects`;
 export const TASKS = `tasks`;
+export const FIRSTNAME = 'firstName';

@@ -6,6 +6,7 @@ import Link from '@material-ui/core/Link';
 
 import { css } from 'styled-components/macro';
 import Tooltip from '@material-ui/core/Tooltip';
+import { sortBy, sortedUniqBy } from 'lodash';
 
 const styles = {
   root: css`
@@ -16,6 +17,9 @@ const styles = {
 };
 
 const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
+  const projects = rowData.activities.map(
+    activity => activity.projectTask.project
+  );
   return (
     <TableCell
       component="div"
@@ -24,23 +28,19 @@ const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
       style={{ height: rowHeight }}
       padding="default"
     >
-      {uniqBy(rowData.activities, 'projectTask.project.id').map(
-        (activity, i) => {
-          const numberOption = activity.projectTask.project.name.match(/\d+/);
+      {sortedUniqBy(sortBy(projects, [project => project.name]), 'id').map(
+        (project, i) => {
+          const numberOption = project.name.match(/\d+/);
           return (
             numberOption && (
-              <Tooltip
-                interactive
-                key={i}
-                title={activity.projectTask.project.name}
-              >
+              <Tooltip interactive key={i} title={project.name}>
                 <Link
                   component="button"
                   size="small"
                   onClick={e => {
                     e.stopPropagation();
                     updateFilter({
-                      projectId: activity.projectTask.project.id
+                      projectId: project.id
                     });
                   }}
                 >

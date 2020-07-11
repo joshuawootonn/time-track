@@ -15,8 +15,22 @@ const styles = {
   `
 };
 
+const taskLengthSet = {
+  3: 10,
+  4: 9,
+  5: 7,
+  6: 7,
+  7: 6
+};
+
 const TaskCell = ({ rowData, classes, rowHeight, updateFilter }) => {
   const tasks = rowData.activities.map(activity => activity.projectTask.task);
+  const sortedUniqueTasks = sortedUniqBy(
+    sortBy(tasks, [task => task.name]),
+    'id'
+  );
+  const cutOffOption = taskLengthSet[sortedUniqueTasks.length];
+  const cutOff = cutOffOption ? cutOffOption : 100;
   return (
     <TableCell
       component="div"
@@ -25,9 +39,9 @@ const TaskCell = ({ rowData, classes, rowHeight, updateFilter }) => {
       style={{ height: rowHeight }}
       padding="default"
     >
-      {sortedUniqBy(sortBy(tasks, [task => task.name]), 'id').map((task, i) => {
+      {sortedUniqueTasks.map((task, i) => {
         const shortName =
-          task.name.length >= 8 ? task.name.substr(0, 8) : task.name;
+          task.name.length >= cutOff ? task.name.substr(0, cutOff) : task.name;
         return (
           <Tooltip interactive key={i} title={task.name}>
             <Link

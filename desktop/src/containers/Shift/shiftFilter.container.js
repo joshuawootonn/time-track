@@ -8,10 +8,10 @@ import moment from 'moment';
 import Shift from 'components/forms/Shift/Filter';
 
 import {
-  authoritySelectors,
   crewSelectors,
   employeeSelectors,
-  projectSelectors
+  projectSelectors,
+  taskSelectors
 } from 'store/selectors';
 import { analyzeActions, shiftActions } from 'store/actions';
 
@@ -23,7 +23,7 @@ export class ShiftFilter extends Component {
       employees,
       projects,
       crews,
-      authorities,
+      tasks,
       shiftFilters,
       shiftFilterVisible,
       clearFilter,
@@ -75,9 +75,9 @@ export class ShiftFilter extends Component {
               >
                 <Shift
                   employees={[{ id: -1, type: `All` }, ...employees]}
-                  authorities={[{ id: -1, type: `All` }, ...authorities]}
                   crews={[{ id: -1, name: `All` }, ...crews]}
                   projects={[{ id: -1, name: `All` }, ...projects]}
+                  tasks={[{ id: -1, type: `All` }, ...tasks]}
                   label="Filter"
                   type="filter"
                   clearFilter={clearFilter}
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
     employees: employeeSelectors.getAllEmployees(state),
     projects: projectSelectors.getActiveProjects(state),
     crews: crewSelectors.getAllCrews(state),
-    authorities: authoritySelectors.getAllAuthorities(state)
+    tasks: taskSelectors.getAllTasks(state)
   };
 };
 
@@ -116,7 +116,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShiftFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftFilter);
