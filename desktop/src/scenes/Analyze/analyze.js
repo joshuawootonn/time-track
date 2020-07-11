@@ -163,12 +163,12 @@ export class Analyze extends Component {
         )}
         {tabValue === 3 && (
           <Grid container className={classes.tab}>
-            <Grid item xs={6} className={classes.gridHeight}>
+            <Grid item xs={7} className={classes.gridHeight}>
               <ShiftToolbar />
               <ShiftFilter />
               <ShiftIndex />
             </Grid>
-            <Grid item xs={6} className={classes.gridHeight}>
+            <Grid item xs={5} className={classes.gridHeight}>
               <ShiftCRUD />
             </Grid>
           </Grid>

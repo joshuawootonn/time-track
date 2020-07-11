@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import AnalyzeToolbar from 'components/tables/Toolbar';
-
 import { analyzeActions } from 'store/actions';
 import { shiftSelectors } from 'store/selectors';
 
 import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
+import ShiftFilterChips from 'containers/Shift/shiftFilterChips.container';
 
 export class ShiftToolbar extends Component {
   selectLabel = selected =>
@@ -34,18 +32,12 @@ export class ShiftToolbar extends Component {
         selected={selected}
         toggleFilter={toggleShiftFilter}
         isFilterVisible={shiftFilterVisible}
-      />
+      >
+        <ShiftFilterChips />
+      </AnalyzeToolbar>
     );
   }
 }
-
-ShiftToolbar.propTypes = {
-  select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object,
-  toggleShiftFilter: PropTypes.func,
-  shiftFilterVisible: PropTypes.bool
-};
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
@@ -63,7 +55,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShiftToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftToolbar);

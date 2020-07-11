@@ -5,6 +5,7 @@ import { getEmployeesFromEntities } from 'store/Employee/selectors';
 import { getProjectTasksFromEntities } from 'store/ProjectTask/selectors';
 import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
 import { getAnalyzeState } from 'store/Analyze/selectors';
+import { getAllCrewObjects, getCrewsFromEntities } from 'store/Crew/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
@@ -28,10 +29,20 @@ export const getAllShiftsNew = createSelector(
   getShiftsFromResults,
   getActivitiesFromEntities,
   getEmployeesFromEntities,
-  getProjectTasksFromEntities,
+  getAllProjectTasksObjects,
+  getAllCrewObjects,
   (_, props) => (props ? props.sorts : null),
   (_, props) => (props ? props.filters : null),
-  (shifts, results, activities, employees, projectTasks, sorts, filters) => {
+  (
+    shifts,
+    results,
+    activities,
+    employees,
+    projectTasks,
+    crews,
+    sorts,
+    filters
+  ) => {
     if (!results || results.length === 0) return null;
 
     let list = results.map(shiftId => {
@@ -41,12 +52,18 @@ export const getAllShiftsNew = createSelector(
           shifts[shiftId].length && shifts[shiftId].lunch
             ? shifts[shiftId].length - shifts[shiftId].lunch
             : shifts[shiftId].length,
-        employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
+        employee: shifts[shiftId] && {
+          ...employees[shifts[shiftId].employeeId],
+          crew: crews[employees[shifts[shiftId].employeeId].crewId]
+        },
         activities:
           shifts[shiftId] &&
           shifts[shiftId].activities &&
           shifts[shiftId].activities.map(activityId => {
-            return activities[activityId];
+            return {
+              ...activities[activityId],
+              projectTask: projectTasks[activities[activityId].projectTaskId]
+            };
           })
       };
     });
@@ -103,6 +120,18 @@ export const getAllShiftsNew = createSelector(
               }
             });
             decision = projectDecision;
+          }
+          if (key === `taskId` && filters[key] !== -1) {
+            let taskDecision = false;
+
+            shift[`activities`].forEach(activity => {
+              if (
+                projectTasks[activity.projectTaskId].taskId === filters[key]
+              ) {
+                taskDecision = true;
+              }
+            });
+            decision = taskDecision;
           }
         });
         return decision;

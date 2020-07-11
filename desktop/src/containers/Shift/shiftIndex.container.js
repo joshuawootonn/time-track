@@ -7,7 +7,7 @@ import VirtualizedSortSelect from 'components/tables/Table';
 import Progress from 'components/helpers/Progress';
 
 import { analyzeActions } from 'store/actions';
-import { shiftSelectors } from 'store/selectors';
+import { crewSelectors, shiftSelectors } from 'store/selectors';
 
 import * as TableDataTypes from 'constants/tableDataTypes';
 import { analyzeStatus } from 'constants/analyze';
@@ -22,6 +22,9 @@ export class ShiftIndex extends Component {
   };
 
   add = () => this.props.setStatus(domain.SHIFT, analyzeStatus.ADDING);
+
+  updateFilter = partial =>
+    this.props.updateFilter({ ...this.props.shiftFilters, ...partial });
 
   render() {
     const { shifts, selected } = this.props;
@@ -39,6 +42,7 @@ export class ShiftIndex extends Component {
       <VirtualizedSortSelect
         data={shifts || []}
         columns={rows}
+        updateFilter={this.updateFilter}
         selected={selected}
         select={this.select}
         initialSortBy="clockInDate"
@@ -51,13 +55,17 @@ ShiftIndex.propTypes = {
   shifts: PropTypes.array,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object
+  updateFilter: PropTypes.func.isRequired,
+  selected: PropTypes.object,
+  shiftFilters: PropTypes.object
 };
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
   const filters = state.analyze.shiftFilters;
   return {
+    shiftFilters: state.analyze.shiftFilters,
+    crewObject: crewSelectors.getAllCrewObjects(state),
     shifts: shiftSelectors.getAllShiftsNew(state, { filters, sorts: {} }),
     selected: shiftSelectors.getSelectedShift(state)
   };
@@ -66,20 +74,19 @@ const mapStateToProps = state => {
 /* istanbul ignore next */
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+    updateFilter: filters =>
+      dispatch(analyzeActions.updateFilter(domain.SHIFT, filters))
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShiftIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 
 const rows = [
   {
     id: `firstName`,
     dataKey: `employee`,
-    width: 150,
+    width: 55,
     height: 56,
     padding: `dense`,
     label: `First Name`,
@@ -89,7 +96,7 @@ const rows = [
   {
     id: `lastName`,
     dataKey: `employee`,
-    width: 150,
+    width: 55,
     height: 56,
     padding: `dense`,
     label: `Last Name`,
@@ -97,9 +104,35 @@ const rows = [
     keys: [`lastName`]
   },
   {
+    id: `crew`,
+    dataKey: `employee`,
+    width: 100,
+    height: 56,
+    padding: `dense`,
+    label: `Crew`,
+    type: TableDataTypes.CREW,
+    keys: [`crew`, 'name']
+  },
+  {
+    id: `projects`,
+    width: 170,
+    height: 56,
+    padding: `dense`,
+    label: `Projects`,
+    type: TableDataTypes.PROJECTS
+  },
+  {
+    id: `tasks`,
+    width: 250,
+    height: 56,
+    padding: `dense`,
+    label: `Tasks`,
+    type: TableDataTypes.TASKS
+  },
+  {
     id: `clockInDate`,
     dataKey: `clockInDate`,
-    width: 200,
+    width: 100,
     height: 56,
     padding: `dense`,
     label: `Clock In`,
@@ -108,7 +141,7 @@ const rows = [
   {
     id: `clockOutDate`,
     dataKey: `clockOutDate`,
-    width: 200,
+    width: 100,
     height: 56,
     padding: `dense`,
     label: `Clock Out`,
@@ -117,7 +150,7 @@ const rows = [
   {
     id: `length`,
     dataKey: `length`,
-    width: 120,
+    width: 60,
     height: 56,
     padding: `dense`,
     label: `Length`,

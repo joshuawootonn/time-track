@@ -23,3 +23,16 @@ export const getSelectedCrew = createSelector(
     else return crews[analyze.crew];
   }
 );
+
+export const getAllCrewObjects = createSelector(
+  getAllCrews,
+  crews => {
+    if (!crews) return null;
+    return Object.assign(
+      {},
+      ...crews.map(crew => ({
+        [crew.id]: crew
+      }))
+    );
+  }
+);

@@ -24,7 +24,8 @@ export class Toolbar extends Component {
       isFilterVisible,
       toggleFilter,
       label,
-      selectLabel
+      selectLabel,
+      children
     } = this.props;
 
     return (
@@ -45,28 +46,30 @@ export class Toolbar extends Component {
               </Typography>
             )}
           </div>
-          <div className={classes.spacer} />
-          {toggleFilter && (
-            <div className={classes.actions}>
-              <Tooltip title="Filter">
-                <IconButton
-                  color={isFilterVisible ? `secondary` : `default`}
-                  onClick={toggleFilter}
-                >
-                  <FilterList />
-                </IconButton>
-              </Tooltip>
-            </div>
-          )}
-          {add && (
-            <div className={classes.actions}>
-              <Tooltip title="Add">
-                <IconButton onClick={add}>
-                  <Add />
-                </IconButton>
-              </Tooltip>
-            </div>
-          )}
+          {children}
+          <div>
+            {toggleFilter && (
+              <div className={classes.actions}>
+                <Tooltip title="Filter">
+                  <IconButton
+                    color={isFilterVisible ? `secondary` : `default`}
+                    onClick={toggleFilter}
+                  >
+                    <FilterList />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            )}
+            {add && (
+              <div className={classes.actions}>
+                <Tooltip title="Add">
+                  <IconButton onClick={add}>
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            )}
+          </div>
         </MUToolbar>
       </div>
     );
@@ -80,7 +83,6 @@ Toolbar.propTypes = {
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired,
   toggleFilter: PropTypes.func,
-  filters: PropTypes.object,
   isFilterVisible: PropTypes.bool
 };
 

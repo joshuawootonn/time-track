@@ -101,15 +101,12 @@ export const getActiveProjects = createSelector(
   }
 );
 
-export const getAllProjectObjects = createSelector(
-  getAllProjects,
-  projects => {
-    // if the task array is empty
-    if (!projects) return null;
-    // reduce the task array to a object with id as they key
-    return Object.assign(
-      {},
-      ...projects.map(object => ({ [object.id]: object }))
-    );
-  }
-);
+export const getAllProjectObjects = createSelector(getAllProjects, projects => {
+  // if the task array is empty
+  if (!projects) return null;
+  // reduce the task array to a object with id as they key
+  return Object.assign(
+    {},
+    ...projects.map(object => ({ [object.id]: object }))
+  );
+});

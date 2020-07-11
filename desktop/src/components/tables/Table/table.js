@@ -17,6 +17,10 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import Cell from './cell';
 import Header from './header';
 import styles from './styles';
+import CrewCell from 'components/tables/Table/cells/crewCell';
+import Project from 'components/forms/Project/project';
+import ProjectCell from 'components/tables/Table/cells/projectCell';
+import TaskCell from 'components/tables/Table/cells/taskCell';
 
 // ICEBOX: Test Table
 
@@ -156,15 +160,21 @@ class Table extends React.Component {
   };
 
   cellRenderer = cellProps => {
-    const { classes, columns, rowHeight } = this.props;
-    return (
-      <Cell
-        {...cellProps}
-        classes={classes}
-        rowHeight={rowHeight}
-        columns={columns}
-      />
-    );
+    const { type } = this.props.columns[cellProps.columnIndex];
+
+    const props = {
+      updateFilter: this.props.updateFilter,
+      ...cellProps,
+      ...this.props
+    };
+
+    if (type === TableDataTypes.CREW) return <CrewCell {...props} />;
+
+    if (type === TableDataTypes.PROJECTS) return <ProjectCell {...props} />;
+
+    if (type === TableDataTypes.TASKS) return <TaskCell {...props} />;
+
+    return <Cell {...props} />;
   };
 
   headerRenderer = headerProps => {
