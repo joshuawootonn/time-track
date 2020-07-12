@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import VirtualizedSortSelect from 'components/tables/Table';
 import Progress from 'components/helpers/Progress';
-
 import { analyzeActions } from 'store/actions';
-import { crewSelectors, shiftSelectors } from 'store/selectors';
-
+import { shiftSelectors } from 'store/selectors';
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ShiftIndex extends Component {
@@ -21,13 +16,12 @@ export class ShiftIndex extends Component {
     this.props.select(domain.SHIFT, object);
   };
 
-  add = () => this.props.setStatus(domain.SHIFT, analyzeStatus.ADDING);
-
   updateFilter = partial =>
     this.props.updateFilter({ ...this.props.shiftFilters, ...partial });
 
   render() {
-    const { shifts, selected } = this.props;
+    const { shifts } = this.props;
+
     if (!shifts)
       return (
         <Progress
@@ -43,7 +37,6 @@ export class ShiftIndex extends Component {
         data={shifts || []}
         columns={rows}
         updateFilter={this.updateFilter}
-        selected={selected}
         select={this.select}
         initialSortBy="clockInDate"
       />
@@ -54,31 +47,22 @@ export class ShiftIndex extends Component {
 ShiftIndex.propTypes = {
   shifts: PropTypes.array,
   select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
   updateFilter: PropTypes.func.isRequired,
-  selected: PropTypes.object,
   shiftFilters: PropTypes.object
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  const filters = state.analyze.shiftFilters;
-  return {
-    shiftFilters: state.analyze.shiftFilters,
-    crewObject: crewSelectors.getAllCrewObjects(state),
-    shifts: shiftSelectors.getAllShiftsNew(state, { filters, sorts: {} }),
-    selected: shiftSelectors.getSelectedShift(state)
-  };
-};
+const mapStateToProps = state => ({
+  shiftFilters: shiftSelectors.getShiftFilters(state),
+  shifts: shiftSelectors.getAllShiftsNew(state)
+});
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
-  return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch),
-    updateFilter: filters =>
-      dispatch(analyzeActions.updateFilter(domain.SHIFT, filters))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  select: (domain, payload) => dispatch(analyzeActions.select(domain, payload)),
+  updateFilter: filters =>
+    dispatch(analyzeActions.updateFilter(domain.SHIFT, filters))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
 

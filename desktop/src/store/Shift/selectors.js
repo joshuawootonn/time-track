@@ -23,6 +23,11 @@ export const getCurrentShift = createSelector(
   }
 );
 
+export const getShiftFilters = createSelector(
+  state => state.analyze.shiftFilters,
+  filters => filters
+);
+
 // ICEBOX: Test and migrate Shift selectors
 export const getAllShiftsNew = createSelector(
   getShiftsFromEntities,
@@ -31,18 +36,8 @@ export const getAllShiftsNew = createSelector(
   getEmployeesFromEntities,
   getAllProjectTasksObjects,
   getAllCrewObjects,
-  (_, props) => (props ? props.sorts : null),
-  (_, props) => (props ? props.filters : null),
-  (
-    shifts,
-    results,
-    activities,
-    employees,
-    projectTasks,
-    crews,
-    sorts,
-    filters
-  ) => {
+  getShiftFilters,
+  (shifts, results, activities, employees, projectTasks, crews, filters) => {
     if (!results || results.length === 0) return null;
 
     let list = results.map(shiftId => {
@@ -67,10 +62,6 @@ export const getAllShiftsNew = createSelector(
           })
       };
     });
-
-    if (sorts) {
-      // TODO: Add sorting to getAllShifts
-    }
 
     if (filters) {
       list = list.filter(shift => {
