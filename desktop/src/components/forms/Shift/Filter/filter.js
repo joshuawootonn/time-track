@@ -21,7 +21,7 @@ export class Filter extends Component {
       errors,
       projects,
       crews,
-      authorities,
+      tasks,
       label,
       employees,
       generalError
@@ -42,16 +42,6 @@ export class Filter extends Component {
               label="Employee"
             />
             <Field
-              name="projectId"
-              component={Select}
-              items={projects}
-              fullWidth
-              className={classes.field}
-              label="Project"
-            />
-          </Grid>
-          <Grid item xs={12} className={classes.row}>
-            <Field
               name="crewId"
               component={Select}
               items={crews}
@@ -59,13 +49,23 @@ export class Filter extends Component {
               className={classes.field}
               label="Crew"
             />
+          </Grid>
+          <Grid item xs={12} className={classes.row}>
             <Field
-              name="authorityId"
+              name="projectId"
               component={Select}
-              items={authorities}
+              items={projects}
               fullWidth
               className={classes.field}
-              label="Authority"
+              label="Project"
+            />
+            <Field
+              name="taskId"
+              component={Select}
+              items={tasks}
+              fullWidth
+              className={classes.field}
+              label="Task"
             />
           </Grid>
           <Grid item xs={12} className={classes.row}>
@@ -152,7 +152,7 @@ Filter.propTypes = {
   employees: PropTypes.array.isRequired,
   projects: PropTypes.array.isRequired,
   crews: PropTypes.array.isRequired,
-  authorities: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
   generalError: PropTypes.string,
   clearFilter: PropTypes.func,
   label: PropTypes.string.isRequired

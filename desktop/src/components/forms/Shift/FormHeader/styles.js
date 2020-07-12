@@ -10,7 +10,7 @@ const styles = () => ({
     justifyContent: `space-between`
   },
   headerRow: {
-    minHeight: `72px`
+    height: `72px`
   }
 });
 

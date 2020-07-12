@@ -22,7 +22,7 @@ interface Props extends RouteComponentProps {
     current: {
       id?: number;
       status: string;
-    }
+    };
   };
   type: AUTH_LEVELS;
   currentEmployee: BaseEmployee;
@@ -45,10 +45,10 @@ export class AccountAction extends Component<Props, State> {
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
-    const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
-    this.setState({
-      isFullScreen
-    });
+    // const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
+    // this.setState({
+    //   isFullScreen
+    // });
   };
   back = () => {
     this.props.history.push(`/`);

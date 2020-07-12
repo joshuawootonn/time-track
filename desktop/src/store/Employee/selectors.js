@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { getAnalyzeState } from 'store/Analyze/selectors';
-import { getCrewsFromEntities } from 'store/Crew/selectors';
+import { getAllCrews, getCrewsFromEntities } from 'store/Crew/selectors';
 import { getAuthoritiesFromEntities } from 'store/Authority/selectors';
 
 export const getEmployeesFromEntities = state => state.entities.employees;
@@ -135,5 +135,18 @@ export const getCurrentEmployee = createSelector(
     if (employee.current && employee.current.id)
       return employees[employee.current.id];
     else return {};
+  }
+);
+
+export const getAllEmployeeObjects = createSelector(
+  getAllEmployees,
+  employees => {
+    if (!employees) return null;
+    return Object.assign(
+      {},
+      ...employees.map(employee => ({
+        [employee.id]: employee
+      }))
+    );
   }
 );

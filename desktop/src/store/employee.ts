@@ -1,8 +1,4 @@
-import {
-  BaseEmployee,
-  BaseActivity,
-  BaseShift
-} from './types';
+import { BaseEmployee, BaseActivity, BaseShift } from './types';
 import { snackActions } from 'store/actions';
 import { AxiosError } from 'axios';
 import { Action, Dispatch } from 'redux';
@@ -11,23 +7,19 @@ import axios from 'helpers/axios';
 import moment from 'moment';
 import * as status from 'constants/status';
 
-export interface ClockInEmployeeRequest
-  extends Action<'ClockInEmployeeRequest'> {}
+export type ClockInEmployeeRequest = Action<'ClockInEmployeeRequest'>;
 export interface ClockInEmployeeFailure
   extends Action<'ClockInEmployeeFailure'> {
   error: AxiosError;
 }
-export interface ClockInEmployeeSuccess
-  extends Action<'ClockInEmployeeSuccess'> {}
+export type ClockInEmployeeSuccess = Action<'ClockInEmployeeSuccess'>;
 
-export interface ClockOutEmployeeRequest
-  extends Action<'ClockOutEmployeeRequest'> {}
+export type ClockOutEmployeeRequest = Action<'ClockOutEmployeeRequest'>;
 export interface ClockOutEmployeeFailure
   extends Action<'ClockOutEmployeeFailure'> {
   error: AxiosError;
 }
-export interface ClockOutEmployeeSuccess
-  extends Action<'ClockOutEmployeeSuccess'> {}
+export type ClockOutEmployeeSuccess = Action<'ClockOutEmployeeSuccess'>;
 
 export type EmployeeActions =
   | ClockInEmployeeRequest
@@ -47,7 +39,9 @@ export const clockIn = (
       await axios.post('/employees/clockin', {
         employeeId: employee.id
       });
-      dispatch(snackActions.openSnack(status.SUCCESS, `Clock in success!`) as any);
+      dispatch(
+        snackActions.openSnack(status.SUCCESS, `Clock in success!`) as any
+      );
       dispatch({ type: 'ClockInEmployeeSuccess' });
     } catch (e) {
       dispatch({ type: 'ClockInEmployeeFailure', error: e });
@@ -67,7 +61,9 @@ export const clockOut = (
     try {
       const shiftRequest = {
         lunch: lunch,
-        length: moment.duration(moment().diff(moment(shift.clockInDate))).asMinutes()
+        length: moment
+          .duration(moment().diff(moment(shift.clockInDate)))
+          .asMinutes()
       };
 
       console.log(employee, shift, shiftRequest, activities, lunch);
@@ -86,4 +82,3 @@ export const clockOut = (
     }
   };
 };
-

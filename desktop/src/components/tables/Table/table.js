@@ -17,6 +17,18 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import Cell from './cell';
 import Header from './header';
 import styles from './styles';
+import CrewCell from 'components/tables/Table/cells/crewCell';
+
+import ProjectCell from 'components/tables/Table/cells/projectCell';
+import TaskCell from 'components/tables/Table/cells/taskCell';
+import FirstNameCell from 'components/tables/Table/cells/firstNameCell';
+
+const CellSet = {
+  [TableDataTypes.FIRSTNAME]: FirstNameCell,
+  [TableDataTypes.CREW]: CrewCell,
+  [TableDataTypes.PROJECTS]: ProjectCell,
+  [TableDataTypes.TASKS]: TaskCell
+};
 
 // ICEBOX: Test Table
 
@@ -86,7 +98,6 @@ class Table extends React.Component {
         (object, currentKey) => object[currentKey],
         b[sortKey]
       );
-      console.log(aVal, bVal);
       if (bVal < aVal) {
         return -1;
       }
@@ -94,6 +105,12 @@ class Table extends React.Component {
         return 1;
       }
       return 0;
+    }
+    if (type === TableDataTypes.FIRSTNAME) {
+      return b.employee.firstName < a.employee.firstName ? -1 : 1;
+    }
+    if (type === TableDataTypes.CREW) {
+      return b.employee.crew.name < a.employee.crew.name ? -1 : 1;
     }
     if (!b[sortBy]) {
       return -1;
@@ -130,6 +147,7 @@ class Table extends React.Component {
 
   handleRequestSort = value => {
     let { sortBy, sortDirection } = value;
+
     if (
       this.state.sortBy === sortBy &&
       this.state.sortDirection === SortDirection.DESC
@@ -156,15 +174,17 @@ class Table extends React.Component {
   };
 
   cellRenderer = cellProps => {
-    const { classes, columns, rowHeight } = this.props;
-    return (
-      <Cell
-        {...cellProps}
-        classes={classes}
-        rowHeight={rowHeight}
-        columns={columns}
-      />
-    );
+    const { type } = this.props.columns[cellProps.columnIndex];
+
+    const props = {
+      updateFilter: this.props.updateFilter,
+      ...cellProps,
+      ...this.props
+    };
+
+    const CellComponent = CellSet[type];
+
+    return CellComponent ? <CellComponent {...props} /> : <Cell {...props} />;
   };
 
   headerRenderer = headerProps => {
@@ -206,26 +226,6 @@ class Table extends React.Component {
             sortBy={sortBy}
             sortDirection={sortDirection}
           >
-            {/* <Column
-              headerRenderer={headerProps => {
-                return <div></div>;
-                return <TableCell
-                  variant="head"
-                />;}
-              }
-              cellRenderer={cellProps => {
-                console.log(cellProps);
-                return <div></div>;
-                return (<TableCell padding="checkbox">
-                  <Checkbox checked={false} />
-                </TableCell>);
-              }              
-              }
-              className={classNames(classes.flexContainer)}
-              flexGrow={1}
-              width={50}
-              dataKey={`isSelected`}
-            /> */}
             {columns.map(({ className, id, width, ...other }, index) => {
               return (
                 <Column

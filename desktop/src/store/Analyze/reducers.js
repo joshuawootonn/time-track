@@ -47,7 +47,7 @@ export const initialState = {
   shiftFilters: {
     employeeId: -1,
     projectId: -1,
-    authorityId: -1,
+    taskId: -1,
     crewId: -1,
     startTime: moment()
       .startOf(`week`)

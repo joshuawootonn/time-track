@@ -104,8 +104,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AccountSignin)
+  connect(mapStateToProps, mapDispatchToProps)(AccountSignin)
 );

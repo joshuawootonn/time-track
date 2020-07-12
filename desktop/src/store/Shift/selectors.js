@@ -5,12 +5,18 @@ import { getEmployeesFromEntities } from 'store/Employee/selectors';
 import { getProjectTasksFromEntities } from 'store/ProjectTask/selectors';
 import { getAllProjectTasksObjects } from 'store/ProjectTask/selectors';
 import { getAnalyzeState } from 'store/Analyze/selectors';
+import { getAllCrewObjects, getCrewsFromEntities } from 'store/Crew/selectors';
 
 export const getShiftsFromEntities = state => state.entities.shifts;
 export const getShiftsFromResults = state => state.results.shifts;
 
 export const getShiftFromState = state => state.shift;
 export const getEmployeeFromState = state => state.employee;
+
+export const isShiftFilterVisible = createSelector(
+  state => state.analyze.shiftFilterVisible,
+  filters => filters
+);
 
 export const getCurrentShift = createSelector(
   getShiftsFromEntities,
@@ -22,16 +28,21 @@ export const getCurrentShift = createSelector(
   }
 );
 
+export const getShiftFilters = createSelector(
+  state => state.analyze.shiftFilters,
+  filters => filters
+);
+
 // ICEBOX: Test and migrate Shift selectors
 export const getAllShiftsNew = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,
   getActivitiesFromEntities,
   getEmployeesFromEntities,
-  getProjectTasksFromEntities,
-  (_, props) => (props ? props.sorts : null),
-  (_, props) => (props ? props.filters : null),
-  (shifts, results, activities, employees, projectTasks, sorts, filters) => {
+  getAllProjectTasksObjects,
+  getAllCrewObjects,
+  getShiftFilters,
+  (shifts, results, activities, employees, projectTasks, crews, filters) => {
     if (!results || results.length === 0) return null;
 
     let list = results.map(shiftId => {
@@ -41,71 +52,77 @@ export const getAllShiftsNew = createSelector(
           shifts[shiftId].length && shifts[shiftId].lunch
             ? shifts[shiftId].length - shifts[shiftId].lunch
             : shifts[shiftId].length,
-        employee: shifts[shiftId] && employees[shifts[shiftId].employeeId],
+        employee: shifts[shiftId] && {
+          ...employees[shifts[shiftId].employeeId],
+          crew: crews[employees[shifts[shiftId].employeeId].crewId]
+        },
         activities:
           shifts[shiftId] &&
           shifts[shiftId].activities &&
           shifts[shiftId].activities.map(activityId => {
-            return activities[activityId];
+            return {
+              ...activities[activityId],
+              projectTask: projectTasks[activities[activityId].projectTaskId]
+            };
           })
       };
     });
 
-    if (sorts) {
-      // TODO: Add sorting to getAllShifts
-    }
-
     if (filters) {
       list = list.filter(shift => {
-        let decision = true;
-        Object.keys(filters).forEach(key => {
-          if (
-            key === `startTime` &&
-            moment(shift[`clockInDate`]).isBefore(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
+        if (
+          filters.employeeId !== -1 &&
+          filters.employeeId !== shift.employeeId
+        ) {
+          return false;
+        }
+        if (
+          filters.crewId !== -1 &&
+          filters.crewId !== shift[`employee`].crewId
+        ) {
+          return false;
+        }
+        if (filters.projectId !== -1) {
+          let projectDecision = false;
+          shift[`activities`].forEach(activity => {
+            if (
+              projectTasks[activity.projectTaskId].projectId ===
+              filters.projectId
             )
-          ) {
-            decision = false;
+              projectDecision = true;
+          });
+          if (!projectDecision) {
+            return false;
           }
-          // if(key === `startTime` ){
-          //   console.log(moment(shift[`clockInDate`]), moment(filters[key],`MM-DD-YY HH:mm:ss`), moment(shift[key]).isBefore(moment(filters[key],`MM-DD-YY HH:mm:ss`)))
-          // }
-          if (
-            key === `endTime` &&
-            moment(shift[`clockInDate`]).isAfter(
-              moment(filters[key], `MM-DD-YY HH:mm:ss`)
-            )
-          ) {
-            decision = false;
+        }
+        if (filters.taskId !== -1) {
+          let taskDecision = false;
+          shift[`activities`].forEach(activity => {
+            if (
+              projectTasks[activity.projectTaskId].taskId === filters.taskId
+            ) {
+              taskDecision = true;
+            }
+          });
+          if (!taskDecision) {
+            return false;
           }
-          if (
-            key === `employeeId` &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[key]
-          ) {
-            decision = false;
-          }
-          if (
-            (key === `authorityId` || key === `crewId`) &&
-            filters[key] !== -1 &&
-            filters[key] !== shift[`employee`][key]
-          ) {
-            decision = false;
-          }
-          if (key === `projectId` && filters[key] !== -1) {
-            let projectDecision = false;
-
-            shift[`activities`].forEach(activity => {
-              if (
-                projectTasks[activity.projectTaskId].projectId === filters[key]
-              ) {
-                projectDecision = true;
-              }
-            });
-            decision = projectDecision;
-          }
-        });
-        return decision;
+        }
+        if (
+          moment(shift[`clockInDate`]).isBefore(
+            moment(filters.startTime, `MM-DD-YY HH:mm:ss`)
+          )
+        ) {
+          return false;
+        }
+        if (
+          moment(shift[`clockInDate`]).isAfter(
+            moment(filters.endTime, `MM-DD-YY HH:mm:ss`)
+          )
+        ) {
+          return false;
+        }
+        return true;
       });
     }
     // console.log(`List after filter:`, list.length);
