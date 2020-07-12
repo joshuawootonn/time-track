@@ -40,19 +40,17 @@ export class ShiftToolbar extends Component {
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  return {
-    shiftFilterVisible: state.analyze.shiftFilterVisible,
-    selected: shiftSelectors.getSelectedShift(state)
-  };
-};
+const mapStateToProps = state => ({
+  shiftFilterVisible: shiftSelectors.isShiftFilterVisible(state),
+  selected: shiftSelectors.getSelectedShift(state)
+});
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
-  return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch),
-    toggleShiftFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  select: (domain, payload) => dispatch(analyzeActions.select(domain, payload)),
+  setStatus: (domain, payload) =>
+    dispatch(analyzeActions.setStatus(domain, payload)),
+  toggleShiftFilter: () => dispatch(analyzeActions.toggleFilter(domain.SHIFT))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShiftToolbar);

@@ -13,6 +13,11 @@ export const getShiftsFromResults = state => state.results.shifts;
 export const getShiftFromState = state => state.shift;
 export const getEmployeeFromState = state => state.employee;
 
+export const isShiftFilterVisible = createSelector(
+  state => state.analyze.shiftFilterVisible,
+  filters => filters
+);
+
 export const getCurrentShift = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,
