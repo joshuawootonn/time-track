@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import VirtualizedSortSelect from 'components/tables/Table';
 import Progress from 'components/helpers/Progress';
-
 import { analyzeActions } from 'store/actions';
 import { projectSelectors, projectTaskSelectors } from 'store/selectors';
-
 import * as TableDataTypes from 'constants/tableDataTypes';
-import { analyzeStatus } from 'constants/analyze';
 import domain from 'constants/domains';
 
 export class ProjectIndex extends Component {
-  selectLabel = selected => `${selected.name} selected`;
-
   select = object => this.props.select(domain.PROJECT, object);
-
-  add = () => this.props.setStatus(domain.PROJECT, analyzeStatus.ADDING);
 
   render() {
     const { projects, selected } = this.props;
 
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
+
+    console.log('ping');
 
     return (
       <VirtualizedSortSelect
@@ -39,31 +32,20 @@ export class ProjectIndex extends Component {
 
 ProjectIndex.propTypes = {
   projects: PropTypes.array,
-  select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object
+  select: PropTypes.func.isRequired
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  const filters = state.analyze.projectFilters;
-  return {
-    projects: projectSelectors.getAllProjectsNew(state, { filters, sorts: {} }),
-    selected: projectTaskSelectors.getSelectedProject(state)
-  };
-};
+const mapStateToProps = state => ({
+  projects: projectSelectors.getAllProjectsNew(state)
+});
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
-  return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  select: (domain, payload) => dispatch(analyzeActions.select(domain, payload))
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectIndex);
 
 const rows = [
   {

@@ -35,7 +35,7 @@ import TaskToolbar from 'containers/Task/taskToolbar.container';
 import TaskFilter from 'containers/Task/taskFilter.container';
 
 import ProjectToolbar from 'containers/Project/projectToolbar.container';
-import ProjectFilter from 'containers/Project/projectFilter.container';
+import ProjectFilterContainer from 'containers/Project/projectFilter.container';
 import ProjectCRUD from 'containers/Project/projectCRUD.container';
 import ProjectIndex from 'containers/Project/projectIndex.container';
 
@@ -65,8 +65,9 @@ const styles = {
 };
 
 export class Analyze extends Component {
+  //REMOVE
   state = {
-    tabValue: 3
+    tabValue: 1
   };
   componentDidMount = () => {
     // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
@@ -75,7 +76,7 @@ export class Analyze extends Component {
     this.props.getAllTasks();
     this.props.getShiftsInRange(
       moment()
-        .subtract(200, `days`)
+        .subtract(365, `days`)
         .format(`MM-DD-YY HH:mm:ss`),
       moment()
         .add(14, `days`)
@@ -141,7 +142,7 @@ export class Analyze extends Component {
           <Grid container className={classes.tab}>
             <Grid item xs={4} className={classes.gridHeight}>
               <ProjectToolbar />
-              <ProjectFilter />
+              <ProjectFilterContainer />
               <ProjectIndex />
             </Grid>
             <Grid item xs={8}>

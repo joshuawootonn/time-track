@@ -9,9 +9,6 @@ import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
 
 export class ShiftIndex extends Component {
-  selectLabel = selected =>
-    `${selected.employee.firstName} ${selected.employee.lastName}'s shift selected`;
-
   select = object => {
     this.props.select(domain.SHIFT, object);
   };
