@@ -13,14 +13,15 @@ export const TextField = ({
   margin,
   helper,
   onFocus,
-  onBlur
+  onBlur,
+  fullWidth
 }) => (
   <MUTextField
     {...field}
     label={label}
     type={type}
     InputLabelProps={{ shrink: true }}
-    fullWidth
+    fullWidth={fullWidth || true}
     className={className}
     margin={margin}
     FormHelperTextProps={

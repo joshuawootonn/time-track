@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography, Button, IconButton } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Button,
+  IconButton,
+  TextField as MUTextField,
+  InputLabel
+} from '@material-ui/core';
 import cx from 'classnames';
-import { Field, Form, FieldArray } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
+import { Field, Form, FieldArray, getIn } from 'formik';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
 
 import TextField from 'components/inputs/TextField';
@@ -12,13 +19,76 @@ import Switch from 'components/inputs/Switch';
 import styles from './styles';
 
 import TypeableSelect from 'components/inputs/TypeableSelect';
+import { minutesToString } from 'helpers/time';
+
+const useStyles = makeStyles(theme => ({
+  displayElement: {
+    margin: `auto 8px`
+  }
+}));
+
+const DisplayElement = ({ label, value }) => {
+  const classes = useStyles();
+  return (
+    <MUTextField
+      fullWidth
+      label={label}
+      value={value}
+      InputProps={{ disabled: true }}
+      FormHelperTextProps={{ error: true }}
+      helperText={` `}
+      className={classes.displayElement}
+    />
+  );
+};
+
+const EstimatedTimeOverQuantity = ({
+  projectTask: { estimateTime, quantity }
+}) => (
+  <DisplayElement
+    label="Estimated Time / Unit"
+    value={
+      quantity === 0 ? 0 : Math.round(100 * (estimateTime / quantity)) / 100
+    }
+  />
+);
+
+const ActualTime = ({ projectTask: { actualTime } }) => (
+  <DisplayElement label="Actual Time" value={minutesToString(actualTime)} />
+);
+
+const ActualTimeOverQuantity = ({ projectTask: { actualTime, quantity } }) => (
+  <DisplayElement
+    label="Actual Time / Unit"
+    value={quantity === 0 ? 0 : Math.round(100 * (actualTime / quantity)) / 100}
+  />
+);
+
+const ActualTimeOverEstimateTime = ({
+  projectTask: { estimateTime, actualTime }
+}) => (
+  <DisplayElement
+    label="Time Used"
+    value={`${Math.round(100 * (actualTime / 60 / estimateTime))} %`}
+  />
+);
+const TotalEstimateTime = ({ estimateTime }) => (
+  <DisplayElement label="Total Estimated Time" value={estimateTime} />
+);
+const TotalActualTime = ({ actualTime }) => (
+  <DisplayElement label="Total Time" value={minutesToString(actualTime)} />
+);
+const TotalPercentage = ({ estimateTime, actualTime }) => (
+  <DisplayElement
+    label="Percent Complete"
+    value={`${Math.round(100 * (actualTime / 60 / estimateTime))} %`}
+  />
+);
 
 export class ProjectEdit extends Component {
   render() {
     const {
       classes,
-      categories,
-      subcategories,
       tasks,
       isSubmitting,
       resetForm,
@@ -26,6 +96,14 @@ export class ProjectEdit extends Component {
       errors,
       values
     } = this.props;
+
+    const { totalActualTime, totalEstimateTime } = values.projectTasks.reduce(
+      ({ totalActualTime, totalEstimateTime }, projectTask) => ({
+        totalActualTime: totalActualTime + projectTask.actualTime,
+        totalEstimateTime: totalEstimateTime + projectTask.estimateTime
+      }),
+      { totalActualTime: 0, totalEstimateTime: 0 }
+    );
 
     return (
       <Form>
@@ -37,6 +115,7 @@ export class ProjectEdit extends Component {
             <Field
               name="name"
               component={TextField}
+              fullWidth={false}
               margin="none"
               label="Project Name"
               type="search"
@@ -60,77 +139,49 @@ export class ProjectEdit extends Component {
               className={classes.field}
             />
           </Grid>
+          <Grid item xs={12} container className={classes.body}>
+            <Grid item xs={12}>
+              <div className={cx(classes.row, classes.totalRow)}>
+                <span className={classes.spacer} />
+                <span className={classes.spacer} />
+                <TotalEstimateTime estimateTime={totalEstimateTime} />
 
+                <span className={classes.spacer} />
+                <TotalActualTime actualTime={totalActualTime} />
+
+                <span className={classes.spacer} />
+                <TotalPercentage
+                  actualTime={totalActualTime}
+                  estimateTime={totalEstimateTime}
+                />
+              </div>
+            </Grid>
+          </Grid>
           <FieldArray
             name="projectTasks"
             render={arrayHelpers => {
               return (
                 <Grid item xs={12} container className={classes.body}>
                   {values.projectTasks &&
-                    values.projectTasks.map((projectTasks, index) => {
+                    values.projectTasks.map((projectTask, index) => {
+                      console.log(projectTask);
                       return (
-                        <Grid
-                          item
-                          xs={12}
-                          key={index}
-                          className={cx(
-                            classes.card,
-                            classes.verticalCenterBox
-                          )}
-                        >
-                          <div className={cx(classes.row, classes.bodyRow)}>
-                            <Field
-                              name={`projectTasks.${index}.categoryId`}
-                              component={TypeableSelect}
-                              type="type"
-                              items={categories}
-                              fullWidth
-                              label="Category"
-                              className={classes.field}
-                              onChange={() => {
-                                arrayHelpers.form.setFieldValue(
-                                  `projectTasks.${index}.subcategoryId`,
-                                  -1
-                                );
-                                arrayHelpers.form.setFieldValue(
-                                  `projectTasks.${index}.taskId`,
-                                  -1
-                                );
-                              }}
-                            />
-                            <Field
-                              name={`projectTasks.${index}.subcategoryId`}
-                              component={TypeableSelect}
-                              items={subcategories.filter(subcat => {
-                                return (
-                                  subcat.categoryId === projectTasks.categoryId
-                                );
-                              })}
-                              type="type"
-                              fullWidth
-                              label="Subcategory"
-                              className={classes.field}
-                              onChange={() => {
-                                arrayHelpers.form.setFieldValue(
-                                  `projectTasks.${index}.taskId`,
-                                  -1
-                                );
-                              }}
-                            />
+                        <Grid item xs={12} key={index}>
+                          <div className={cx(classes.row)}>
                             <Field
                               name={`projectTasks.${index}.taskId`}
                               component={TypeableSelect}
                               type="name"
-                              items={tasks.filter(globalTask => {
-                                return (
-                                  globalTask.subcategory.id ===
-                                    projectTasks.subcategoryId &&
-                                  globalTask.category.id ===
-                                    projectTasks.categoryId
-                                );
-                              })}
+                              items={tasks}
                               fullWidth
                               label="Task"
+                              className={classes.taskField}
+                            />
+                            <Field
+                              name={`projectTasks.${index}.quantity`}
+                              component={TextField}
+                              fullWidth
+                              label="Quantity"
                               className={classes.field}
                             />
                             <Field
@@ -140,13 +191,15 @@ export class ProjectEdit extends Component {
                               label="Estimated Time"
                               className={classes.field}
                             />
-                            <Field
-                              name={`projectTasks.${index}.quantity`}
-                              component={TextField}
-                              fullWidth
-                              label="Quantity"
-                              className={classes.field}
+                            <EstimatedTimeOverQuantity
+                              projectTask={projectTask}
                             />
+                            <ActualTime projectTask={projectTask} />
+                            <ActualTimeOverQuantity projectTask={projectTask} />
+                            <ActualTimeOverEstimateTime
+                              projectTask={projectTask}
+                            />
+
                             <div className={classes.verticalCenter}>
                               <IconButton
                                 type="button"
@@ -226,6 +279,7 @@ export class ProjectEdit extends Component {
 
 ProjectEdit.propTypes = {
   classes: PropTypes.object.isRequired,
+  projectTaskObject: PropTypes.object.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   removeProject: PropTypes.func,
   resetForm: PropTypes.func.isRequired,
