@@ -9,31 +9,41 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { projectActions } from 'store/actions';
 import axios from 'helpers/axios';
-import { select } from 'store/Analyze/actions';
+import Progress from 'components/helpers/Progress';
 
-const ProjectEditContainer = ({
-  selected,
-  categories,
-  subcategories,
-  tasks
-}) => {
+const ProjectEditContainer = ({ selected, tasks }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  const [projectTaskObject, setProjectTaskObject] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newSelected, setNewSelected] = useState({});
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(`/projects/${selected.id}/projectTasks?filter[include][activities]`)
       .then(({ data }) => {
-        setProjectTaskObject(
-          Object.assign(
-            {},
-            ...data.map(projectTask => ({
-              [projectTask.id]: projectTask
-            }))
-          )
+        const projectTaskObject = Object.assign(
+          {},
+          ...data.map(projectTask => ({
+            [projectTask.id]: projectTask
+          }))
         );
+
+        setNewSelected({
+          ...selected,
+          projectTasks: selected.projectTasks
+            .filter(projectTask => projectTaskObject[projectTask.id])
+            .map(projectTask => ({
+              ...projectTask,
+              activities: projectTaskObject[projectTask.id].activities,
+              actualTime: projectTaskObject[projectTask.id].activities
+                .map(activity => activity.length)
+                .reduce((total, length) => total + length, 0),
+              subcategoryId: projectTask.task.subcategoryId,
+              categoryId: projectTask.task.category.id
+            }))
+        });
+
         setIsLoading(false);
       });
   }, [selected]);
@@ -44,24 +54,20 @@ const ProjectEditContainer = ({
   const updateProject = project =>
     dispatch(projectActions.updateProject(project));
 
+  if (isSubmitting) {
+    return (
+      <Progress
+        message={'Updating project'}
+        variant="circular"
+        fullWidth
+        fullHeight
+      />
+    );
+  }
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Progress variant="circular" fullWidth fullHeight />;
   }
 
-  const newSelected = {
-    ...selected,
-    projectTasks: selected.projectTasks
-      .filter(projectTask => projectTaskObject[projectTask.id])
-      .map(projectTask => ({
-        ...projectTask,
-        activities: projectTaskObject[projectTask.id].activities,
-        actualTime: projectTaskObject[projectTask.id].activities
-          .map(activity => activity.length)
-          .reduce((total, length) => total + length, 0),
-        subcategoryId: projectTask.task.subcategoryId,
-        categoryId: projectTask.task.category.id
-      }))
-  };
   return (
     <Formik
       enableReinitialize
@@ -77,6 +83,7 @@ const ProjectEditContainer = ({
       }}
       validationSchema={projectEditValidation}
       onSubmit={(values, formikFunctions) => {
+        setIsSubmitting(true);
         return updateProject({
           id: values.id,
           name: values.name,
@@ -87,11 +94,13 @@ const ProjectEditContainer = ({
           () => {
             formikFunctions.resetForm();
             formikFunctions.setStatus({ success: true });
+            setIsSubmitting(false);
           },
           e => {
             formikFunctions.setStatus({ success: false });
             formikFunctions.setSubmitting(false);
             formikFunctions.setErrors({ submit: e });
+            setIsSubmitting(false);
           }
         );
       }}

@@ -9,6 +9,10 @@ const styles = () => ({
     alignItems: `center`,
     justifyContent: `space-between`
   },
+  scroll: {
+    overflow: 'auto',
+    maxHeight: 'calc(100vh - 428px)'
+  },
   totalRow: {
     paddingRight: '48px'
   },
@@ -20,12 +24,11 @@ const styles = () => ({
   },
   spacer: {
     width: '100%',
-
     margin: `auto 8px`
   },
   taskField: {
     margin: `auto 8px`,
-    flexGrow: 8
+    width: '250%'
   },
   switchBox: {
     width: `100%`,

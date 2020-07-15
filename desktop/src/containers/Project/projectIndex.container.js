@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import VirtualizedSortSelect from 'components/tables/Table';
 import Progress from 'components/helpers/Progress';
 import { analyzeActions } from 'store/actions';
-import { projectSelectors, projectTaskSelectors } from 'store/selectors';
+import { projectSelectors } from 'store/selectors';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
 
@@ -15,8 +15,6 @@ export class ProjectIndex extends Component {
     const { projects, selected } = this.props;
 
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
-
-    console.log('ping');
 
     return (
       <VirtualizedSortSelect

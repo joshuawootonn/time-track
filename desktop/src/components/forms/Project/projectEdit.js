@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import {
   Grid,
   Typography,
@@ -73,15 +72,19 @@ const ActualTimeOverEstimateTime = ({
   />
 );
 const TotalEstimateTime = ({ estimateTime }) => (
-  <DisplayElement label="Total Estimated Time" value={estimateTime} />
+  <DisplayElement label="Total Estimate" value={estimateTime} />
 );
 const TotalActualTime = ({ actualTime }) => (
   <DisplayElement label="Total Time" value={minutesToString(actualTime)} />
 );
 const TotalPercentage = ({ estimateTime, actualTime }) => (
   <DisplayElement
-    label="Percent Complete"
-    value={`${Math.round(100 * (actualTime / 60 / estimateTime))} %`}
+    label="% Complete"
+    value={
+      estimateTime && actualTime
+        ? `${Math.round(100 * (actualTime / 60 / estimateTime))} %`
+        : '0 %'
+    }
   />
 );
 
@@ -98,10 +101,14 @@ export class ProjectEdit extends Component {
     } = this.props;
 
     const { totalActualTime, totalEstimateTime } = values.projectTasks.reduce(
-      ({ totalActualTime, totalEstimateTime }, projectTask) => ({
-        totalActualTime: totalActualTime + projectTask.actualTime,
-        totalEstimateTime: totalEstimateTime + projectTask.estimateTime
-      }),
+      ({ totalActualTime, totalEstimateTime }, projectTask) => {
+        const estimatedTimeOption = parseInt(projectTask.estimateTime);
+        return {
+          totalActualTime: totalActualTime + projectTask.actualTime,
+          totalEstimateTime:
+            totalEstimateTime + (estimatedTimeOption ? estimatedTimeOption : 0)
+        };
+      },
       { totalActualTime: 0, totalEstimateTime: 0 }
     );
 
@@ -142,7 +149,7 @@ export class ProjectEdit extends Component {
           <Grid item xs={12} container className={classes.body}>
             <Grid item xs={12}>
               <div className={cx(classes.row, classes.totalRow)}>
-                <span className={classes.spacer} />
+                <span className={classes.taskField} />
                 <span className={classes.spacer} />
                 <TotalEstimateTime estimateTime={totalEstimateTime} />
 
@@ -159,86 +166,87 @@ export class ProjectEdit extends Component {
           </Grid>
           <FieldArray
             name="projectTasks"
-            render={arrayHelpers => {
-              return (
-                <Grid item xs={12} container className={classes.body}>
+            render={arrayHelpers => (
+              <>
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  className={cx(classes.body, classes.scroll)}
+                >
                   {values.projectTasks &&
-                    values.projectTasks.map((projectTask, index) => {
-                      console.log(projectTask);
-                      return (
-                        <Grid item xs={12} key={index}>
-                          <div className={cx(classes.row)}>
-                            <Field
-                              name={`projectTasks.${index}.taskId`}
-                              component={TypeableSelect}
-                              type="name"
-                              items={tasks}
-                              fullWidth
-                              label="Task"
-                              className={classes.taskField}
-                            />
-                            <Field
-                              name={`projectTasks.${index}.quantity`}
-                              component={TextField}
-                              fullWidth
-                              label="Quantity"
-                              className={classes.field}
-                            />
-                            <Field
-                              name={`projectTasks.${index}.estimateTime`}
-                              component={TextField}
-                              fullWidth
-                              label="Estimated Time"
-                              className={classes.field}
-                            />
-                            <EstimatedTimeOverQuantity
-                              projectTask={projectTask}
-                            />
-                            <ActualTime projectTask={projectTask} />
-                            <ActualTimeOverQuantity projectTask={projectTask} />
-                            <ActualTimeOverEstimateTime
-                              projectTask={projectTask}
-                            />
-
-                            <div className={classes.verticalCenter}>
-                              <IconButton
-                                type="button"
-                                color="secondary"
-                                className={classes.iconButton}
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                <Close />
-                              </IconButton>
-                            </div>
+                    values.projectTasks.map((projectTask, index) => (
+                      <Grid item xs={12} key={index}>
+                        <div className={cx(classes.row)}>
+                          <Field
+                            name={`projectTasks.${index}.taskId`}
+                            component={TypeableSelect}
+                            type="name"
+                            items={tasks}
+                            fullWidth
+                            label="Task"
+                            className={classes.taskField}
+                          />
+                          <Field
+                            name={`projectTasks.${index}.quantity`}
+                            component={TextField}
+                            fullWidth
+                            label="Quantity"
+                            className={classes.field}
+                          />
+                          <Field
+                            name={`projectTasks.${index}.estimateTime`}
+                            component={TextField}
+                            fullWidth
+                            label="Estimated Time"
+                            className={classes.field}
+                          />
+                          <EstimatedTimeOverQuantity
+                            projectTask={projectTask}
+                          />
+                          <ActualTime projectTask={projectTask} />
+                          <ActualTimeOverQuantity projectTask={projectTask} />
+                          <ActualTimeOverEstimateTime
+                            projectTask={projectTask}
+                          />
+                          <div className={classes.verticalCenter}>
+                            <IconButton
+                              type="button"
+                              color="secondary"
+                              className={classes.iconButton}
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              <Close />
+                            </IconButton>
                           </div>
-                        </Grid>
-                      );
-                    })}
-                  <Grid
-                    item
-                    xs={12}
-                    className={cx(classes.row, classes.footerRow)}
-                  >
-                    <div className={classes.lunchBox}></div>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      onClick={() =>
-                        arrayHelpers.push({
-                          categoryId: -1,
-                          subcategoryId: -1,
-                          taskId: -1,
-                          quantity: 1,
-                          estimateTime: 1
-                        })
-                      }
-                    >
-                      Add Task
-                    </Button>
-                  </Grid>
+                        </div>
+                      </Grid>
+                    ))}
                 </Grid>
-              );
-            }}
+                <Grid
+                  item
+                  xs={12}
+                  className={cx(classes.row, classes.footerRow)}
+                >
+                  <div className={classes.lunchBox}></div>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() =>
+                      arrayHelpers.push({
+                        categoryId: -1,
+                        subcategoryId: -1,
+                        taskId: -1,
+                        quantity: 1,
+                        estimateTime: 1
+                      })
+                    }
+                  >
+                    Add Task
+                  </Button>
+                </Grid>
+              </>
+            )}
           />
           <Grid item xs={12} className={classes.row}>
             <Typography
