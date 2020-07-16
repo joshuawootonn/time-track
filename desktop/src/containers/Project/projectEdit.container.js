@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import {
-  projectEditValidation,
-  projectValidation
-} from 'constants/formValidation';
+import { projectEditValidation } from 'constants/formValidation';
 import ProjectEdit from 'components/forms/Project/projectEdit';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';

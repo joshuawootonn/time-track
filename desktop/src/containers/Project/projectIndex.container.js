@@ -16,6 +16,8 @@ export class ProjectIndex extends Component {
 
     if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
 
+    console.log(projects);
+
     return (
       <VirtualizedSortSelect
         data={projects || []}
