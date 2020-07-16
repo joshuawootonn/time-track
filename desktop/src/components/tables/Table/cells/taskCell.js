@@ -24,7 +24,9 @@ const taskLengthSet = {
 };
 
 const TaskCell = ({ rowData, classes, rowHeight, updateFilter }) => {
-  const tasks = rowData.activities.map(activity => activity.projectTask.task);
+  const tasks = rowData.activities
+    ? rowData.activities.map(activity => activity.projectTask.task)
+    : [];
   const sortedUniqueTasks = sortedUniqBy(
     sortBy(tasks, [task => task.name]),
     'id'
