@@ -17,9 +17,9 @@ const styles = {
 };
 
 const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
-  const projects = rowData.activities.map(
-    activity => activity.projectTask.project
-  );
+  const projects = rowData.activities
+    ? rowData.activities.map(activity => activity.projectTask.project)
+    : [];
   return (
     <TableCell
       component="div"
