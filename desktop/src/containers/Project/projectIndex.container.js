@@ -31,7 +31,7 @@ const ProjectIndex = () => {
       });
   }, [startTime, endTime, projects]);
 
-  if (!projectSummaries || projectSummaries.length === 0)
+  if (!projectSummaries || projectSummaries.length === 0 || isLoading)
     return <Progress variant="circular" fullWidth fullHeight />;
 
   return (
@@ -99,7 +99,7 @@ const rows = [
     width: 60,
     height: 56,
     padding: `dense`,
-    label: `Time Spent`,
+    label: `Percent Complete`,
     type: TableDataTypes.PROJECT_COMPLETION
   }
 ];

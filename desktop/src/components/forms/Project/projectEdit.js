@@ -45,7 +45,7 @@ const EstimatedTimeOverQuantity = ({
   projectTask: { estimateTime, quantity }
 }) => (
   <DisplayElement
-    label="Estimated Time / Unit"
+    label="Estimated / Quantity"
     value={
       quantity === 0 ? 0 : Math.round(100 * (estimateTime / quantity)) / 100
     }
@@ -58,7 +58,7 @@ const ActualTime = ({ projectTask: { actualTime } }) => (
 
 const ActualTimeOverQuantity = ({ projectTask: { actualTime, quantity } }) => (
   <DisplayElement
-    label="Actual Time / Unit"
+    label="Actual / Quantity"
     value={quantity === 0 ? 0 : Math.round(100 * (actualTime / quantity)) / 100}
   />
 );
@@ -75,11 +75,11 @@ const TotalEstimateTime = ({ estimateTime }) => (
   <DisplayElement label="Total Estimate" value={estimateTime} />
 );
 const TotalActualTime = ({ actualTime }) => (
-  <DisplayElement label="Total Time" value={minutesToString(actualTime)} />
+  <DisplayElement label="Total Actual" value={minutesToString(actualTime)} />
 );
 const TotalPercentage = ({ estimateTime, actualTime }) => (
   <DisplayElement
-    label="% Complete"
+    label="Percent Complete"
     value={
       estimateTime && actualTime
         ? `${Math.round(100 * (actualTime / 60 / estimateTime))} %`
