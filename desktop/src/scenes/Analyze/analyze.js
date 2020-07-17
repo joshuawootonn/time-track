@@ -43,6 +43,7 @@ import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
 import ShiftIndex from 'containers/Shift/shiftIndex.container';
 import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
+import Progress from 'components/helpers/Progress';
 
 const styles = {
   root: {
@@ -67,21 +68,25 @@ const styles = {
 export class Analyze extends Component {
   //REMOVE
   state = {
-    tabValue: 1
+    tabValue: 3,
+    isLoading: true
   };
-  componentDidMount = () => {
-    // Fetching here to ensure that all employees have been fetched before we try and display their name for their shift
-    this.props.getAllEmployees();
-    this.props.getAllProjects();
-    this.props.getAllTasks();
-    this.props.getShiftsInRange(
-      moment()
-        .subtract(365, `days`)
-        .format(`MM-DD-YY HH:mm:ss`),
-      moment()
-        .add(14, `days`)
-        .format(`MM-DD-YY HH:mm:ss`)
-    );
+  componentDidMount = async () => {
+    Promise.all([
+      this.props.getAllEmployees(),
+      this.props.getAllProjects(),
+      this.props.getAllTasks(),
+      this.props.getShiftsInRange(
+        moment()
+          .subtract(365, `days`)
+          .format(`MM-DD-YY HH:mm:ss`),
+        moment()
+          .add(14, `days`)
+          .format(`MM-DD-YY HH:mm:ss`)
+      )
+    ]).then(() => {
+      this.setState({ ...this.state, isLoading: false });
+    });
   };
 
   handleTabValueChange = (e, tabValue) => {
@@ -95,6 +100,14 @@ export class Analyze extends Component {
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
+
+    if (this.state.isLoading)
+      return (
+        <div className={classes.root}>
+          <Progress variant="circular" fullWidth fullHeight />
+        </div>
+      );
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -140,12 +153,12 @@ export class Analyze extends Component {
         )}
         {tabValue === 1 && (
           <Grid container className={classes.tab}>
-            <Grid item xs={4} className={classes.gridHeight}>
+            <Grid item xs={5} className={classes.gridHeight}>
               <ProjectToolbar />
               <ProjectFilterContainer />
               <ProjectIndex />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <ProjectCRUD />
             </Grid>
           </Grid>

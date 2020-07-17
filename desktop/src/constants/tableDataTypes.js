@@ -10,3 +10,4 @@ export const CREW = `crew`;
 export const PROJECTS = `projects`;
 export const TASKS = `tasks`;
 export const FIRSTNAME = 'firstName';
+export const PROJECT_COMPLETION = 'projectCompletion';

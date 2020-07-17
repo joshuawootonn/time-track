@@ -10,8 +10,8 @@ const styles = () => ({
     justifyContent: `space-between`
   },
   scroll: {
-    overflow: 'auto',
-    maxHeight: 'calc(100vh - 428px)'
+    // overflow: 'auto',
+    // maxHeight: 'calc(100vh - 428px)'
   },
   totalRow: {
     paddingRight: '48px'

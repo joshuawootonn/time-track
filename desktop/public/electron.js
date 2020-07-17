@@ -39,8 +39,11 @@ function createWindow() {
       nodeIntegration: true
     },
     fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`),
-    autoHideMenuBar: true,
+    show: false
   });
+
+  mainWindow.setMenu(null);
+  mainWindow.show();
 
   // and load the index.html of the app.
   // load the index.html of the app.

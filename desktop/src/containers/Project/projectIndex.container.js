@@ -1,51 +1,50 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VirtualizedSortSelect from 'components/tables/Table';
 import Progress from 'components/helpers/Progress';
 import { analyzeActions } from 'store/actions';
-import { projectSelectors } from 'store/selectors';
 import * as TableDataTypes from 'constants/tableDataTypes';
 import domain from 'constants/domains';
+import { getAllProjectsNew, getProjectFilters } from 'store/Project/selectors';
+import axios from 'helpers/axios';
 
-export class ProjectIndex extends Component {
-  select = object => this.props.select(domain.PROJECT, object);
+const ProjectIndex = () => {
+  const dispatch = useDispatch();
+  const projects = useSelector(state => getAllProjectsNew(state));
+  const { startTime, endTime, isActive } = useSelector(state =>
+    getProjectFilters(state)
+  );
+  const [isLoading, setIsLoading] = useState(true);
+  const [projectSummaries, setProjectSummaries] = useState([]);
 
-  render() {
-    const { projects, selected } = this.props;
+  const select = object =>
+    dispatch(analyzeActions.select(domain.PROJECT, object));
 
-    if (!projects) return <Progress variant="circular" fullWidth fullHeight />;
+  useEffect(() => {
+    axios
+      .get(
+        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isActive=${isActive}`
+      )
+      .then(({ data: { projects } }) => {
+        setProjectSummaries(projects);
+        setIsLoading(false);
+      });
+  }, [startTime, endTime, projects]);
 
-    console.log(projects);
+  if (!projectSummaries || projectSummaries.length === 0)
+    return <Progress variant="circular" fullWidth fullHeight />;
 
-    return (
-      <VirtualizedSortSelect
-        data={projects || []}
-        columns={rows}
-        selected={selected}
-        select={this.select}
-        initialSortBy="date"
-      />
-    );
-  }
-}
-
-ProjectIndex.propTypes = {
-  projects: PropTypes.array,
-  select: PropTypes.func.isRequired
+  return (
+    <VirtualizedSortSelect
+      data={projectSummaries || []}
+      columns={rows}
+      select={select}
+      initialSortBy="date"
+    />
+  );
 };
 
-/* istanbul ignore next */
-const mapStateToProps = state => ({
-  projects: projectSelectors.getAllProjectsNew(state)
-});
-
-/* istanbul ignore next */
-const mapDispatchToProps = dispatch => ({
-  select: (domain, payload) => dispatch(analyzeActions.select(domain, payload))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectIndex);
+export default ProjectIndex;
 
 const rows = [
   {
@@ -69,11 +68,38 @@ const rows = [
   {
     id: `isActive`,
     dataKey: `isActive`,
-    width: 50,
+    width: 30,
     height: 56,
     align: `left`,
     padding: `dense`,
     label: `Active`,
     type: TableDataTypes.BOOLEAN
+  },
+  {
+    id: `totalEstimate`,
+    dataKey: `totalEstimate`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Estimated Time`,
+    type: TableDataTypes.LENGTH
+  },
+  {
+    id: `totalActual`,
+    dataKey: `totalActual`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Time Spent`,
+    type: TableDataTypes.LENGTH
+  },
+  {
+    id: `projectCompletion`,
+    dataKey: `projectCompletion`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Time Spent`,
+    type: TableDataTypes.PROJECT_COMPLETION
   }
 ];
