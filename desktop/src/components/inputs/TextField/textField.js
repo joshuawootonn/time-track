@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
+import debounce from 'lodash/debounce';
 
 export const TextField = ({
   field,

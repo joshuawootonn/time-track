@@ -90,7 +90,7 @@ const rows = [
     width: 60,
     height: 56,
     padding: `dense`,
-    label: `Time Spent`,
+    label: `Actual Time`,
     type: TableDataTypes.LENGTH
   },
   {

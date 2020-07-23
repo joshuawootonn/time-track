@@ -5,11 +5,10 @@ import {
   Typography,
   Button,
   IconButton,
-  TextField as MUTextField,
-  InputLabel
+  TextField as MUTextField
 } from '@material-ui/core';
 import cx from 'classnames';
-import { Field, Form, FieldArray, getIn } from 'formik';
+import { Field, Form, FieldArray } from 'formik';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Close } from '@material-ui/icons';
 
@@ -19,6 +18,7 @@ import styles from './styles';
 
 import TypeableSelect from 'components/inputs/TypeableSelect';
 import { minutesToString } from 'helpers/time';
+import { act } from 'react-dom/test-utils';
 
 const useStyles = makeStyles(theme => ({
   displayElement: {
@@ -59,7 +59,7 @@ const ActualTime = ({ projectTask: { actualTime } }) => (
 const ActualTimeOverQuantity = ({ projectTask: { actualTime, quantity } }) => (
   <DisplayElement
     label="Actual / Quantity"
-    value={quantity === 0 ? 0 : Math.round(100 * (actualTime / quantity)) / 100}
+    value={!quantity ? 0 : Math.round(100 * (actualTime / quantity)) / 100}
   />
 );
 
@@ -67,7 +67,7 @@ const ActualTimeOverEstimateTime = ({
   projectTask: { estimateTime, actualTime }
 }) => (
   <DisplayElement
-    label="Time Used"
+    label="Percent Complete"
     value={`${Math.round(100 * (actualTime / 60 / estimateTime))} %`}
   />
 );
