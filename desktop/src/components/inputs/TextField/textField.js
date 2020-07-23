@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TextField as MUTextField } from '@material-ui/core';
 import { getIn } from 'formik';
+import debounce from 'lodash/debounce';
 
 export const TextField = ({
   field,
@@ -13,14 +14,15 @@ export const TextField = ({
   margin,
   helper,
   onFocus,
-  onBlur
+  onBlur,
+  fullWidth
 }) => (
   <MUTextField
     {...field}
     label={label}
     type={type}
     InputLabelProps={{ shrink: true }}
-    fullWidth
+    fullWidth={fullWidth || true}
     className={className}
     margin={margin}
     FormHelperTextProps={

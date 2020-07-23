@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Formik } from 'formik';
 import moment from 'moment';
 import { Card } from '@material-ui/core';
-
-import Project from 'components/forms/Project';
-
 import { analyzeActions } from 'store/actions';
-
 import domain from 'constants/domains';
+import ProjectFilter from 'components/forms/Project/projectFilter';
 
-export class ProjectFilter extends Component {
+export class ProjectFilterContainer extends Component {
   render() {
     const {
       projectFilters,
@@ -60,12 +56,7 @@ export class ProjectFilter extends Component {
                   minHeight: `100px`
                 }}
               >
-                <Project
-                  type="filter"
-                  label="Filter"
-                  clearFilter={clearFilter}
-                  {...formikProps}
-                />
+                <ProjectFilter clearFilter={clearFilter} {...formikProps} />
               </Card>
             );
           }}
@@ -77,24 +68,20 @@ export class ProjectFilter extends Component {
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  return {
-    projectFilters: state.analyze.projectFilters,
-    projectFilterVisible: state.analyze.projectFilterVisible
-  };
-};
+const mapStateToProps = state => ({
+  projectFilters: state.analyze.projectFilters,
+  projectFilterVisible: state.analyze.projectFilterVisible
+});
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
-  return {
-    updateFilter: filters =>
-      dispatch(analyzeActions.updateFilter(domain.PROJECT, filters)),
-    clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  updateFilter: filters =>
+    dispatch(analyzeActions.updateFilter(domain.PROJECT, filters)),
+  clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT)),
+  toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))
+});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProjectFilter);
+)(ProjectFilterContainer);

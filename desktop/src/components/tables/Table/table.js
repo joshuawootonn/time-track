@@ -22,12 +22,14 @@ import CrewCell from 'components/tables/Table/cells/crewCell';
 import ProjectCell from 'components/tables/Table/cells/projectCell';
 import TaskCell from 'components/tables/Table/cells/taskCell';
 import FirstNameCell from 'components/tables/Table/cells/firstNameCell';
+import ProjectCompletionCell from 'components/tables/Table/cells/projectCompletionCell';
 
 const CellSet = {
   [TableDataTypes.FIRSTNAME]: FirstNameCell,
   [TableDataTypes.CREW]: CrewCell,
   [TableDataTypes.PROJECTS]: ProjectCell,
-  [TableDataTypes.TASKS]: TaskCell
+  [TableDataTypes.TASKS]: TaskCell,
+  [TableDataTypes.PROJECT_COMPLETION]: ProjectCompletionCell
 };
 
 // ICEBOX: Test Table

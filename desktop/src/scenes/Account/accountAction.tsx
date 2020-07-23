@@ -4,11 +4,11 @@ import AccountActionContainer from 'containers/Account/accountActionContainer';
 import { AUTH_LEVELS } from 'constants/routes';
 
 interface AccountActionProps {
-  type: AUTH_LEVELS
+  type: AUTH_LEVELS;
 }
 
-const AccountAction: FC<AccountActionProps> = (props) =>  {
+const AccountAction: FC<AccountActionProps> = props => {
   return <AccountActionContainer type={props.type} />;
-}
+};
 
-export default AccountAction
+export default AccountAction;

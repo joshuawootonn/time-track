@@ -89,7 +89,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskFilter);
