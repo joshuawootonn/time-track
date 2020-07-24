@@ -97,7 +97,8 @@ export class ProjectEdit extends Component {
       resetForm,
       initialValues,
       errors,
-      values
+      values,
+      goToShifts
     } = this.props;
 
     const { totalActualTime, totalEstimateTime } = values.projectTasks.reduce(
@@ -117,6 +118,8 @@ export class ProjectEdit extends Component {
         <Grid container spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
             <Typography variant="h6">Edit</Typography>
+
+            <Button onClick={goToShifts}>Recent Shifts</Button>
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
@@ -297,7 +300,8 @@ ProjectEdit.propTypes = {
   subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
   tasks: PropTypes.array,
-  clearFilter: PropTypes.func
+  clearFilter: PropTypes.func,
+  goToShifts: PropTypes.func
 };
 
 export default withStyles(styles)(ProjectEdit);

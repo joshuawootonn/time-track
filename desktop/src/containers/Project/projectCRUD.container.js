@@ -14,7 +14,15 @@ import ProjectAddContainer from 'containers/Project/projectAdd.container';
 
 export class ProjectCRUD extends Component {
   render() {
-    const { selected, status, categories, subcategories, tasks } = this.props;
+    const {
+      selected,
+      status,
+      categories,
+      subcategories,
+      tasks,
+      goToTab
+    } = this.props;
+
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
@@ -40,6 +48,7 @@ export class ProjectCRUD extends Component {
           tasks={tasks}
           categories={categories}
           subcategories={subcategories}
+          goToTab={goToTab}
         />
       );
     }

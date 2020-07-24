@@ -97,6 +97,10 @@ export class Analyze extends Component {
     this.props.history.push(`/`);
   };
 
+  goToTab = number => {
+    this.setState({ ...this.state, tabValue: number });
+  };
+
   render() {
     const { tabValue } = this.state;
     const { classes } = this.props;
@@ -159,7 +163,7 @@ export class Analyze extends Component {
               <ProjectIndex />
             </Grid>
             <Grid item xs={7}>
-              <ProjectCRUD />
+              <ProjectCRUD goToTab={this.goToTab} />
             </Grid>
           </Grid>
         )}
