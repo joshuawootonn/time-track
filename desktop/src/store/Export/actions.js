@@ -198,15 +198,18 @@ const formatData = (startTime, endTime) => {
         totalTimeForWeek += activity.length;
         if (i === 0) {
           detailData.push([
-            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `MM/DD/YYYY`
-            ),
-            moment(shift.clockInDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `h:mm a`
-            ),
-            moment(shift.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`).format(
-              `h:mm a`
-            ),
+            moment
+              .utc(shift.clockInDate)
+              .local()
+              .format(`MM/DD/YYYY`),
+            moment
+              .utc(shift.clockInDate)
+              .local()
+              .format(`h:mm a`),
+            moment
+              .utc(shift.clockOutDate)
+              .local()
+              .format(`h:mm a`),
             minutesToString(shift.lunch),
             projectTasks[activity.projectTaskId].project.name,
             projectTasks[activity.projectTaskId].task.name,
