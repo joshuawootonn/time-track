@@ -32,7 +32,7 @@ export const initialState = {
     name: ``,
     isActive: true,
     startTime: moment()
-      .subtract(1, `years`)
+      .subtract(5, `years`)
       .format(`MM-DD-YY HH:mm:ss`),
     endTime: moment()
       .add(1, `years`)
