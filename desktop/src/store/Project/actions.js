@@ -39,7 +39,11 @@ export const updateProject = project => {
     dispatch({ type: projectActionTypes.UPDATE_PROJECT_REQUEST });
     try {
       const response = await dispatch(
-        genericActions.put(domains.PROJECT, project)
+        // was getting a 413 (to much data) before I was doing this.
+        genericActions.put(domains.PROJECT, {
+          ...project,
+          projectTasks: undefined
+        })
       );
       const { data: projectInDb } = await endpoints.getWithProjectTasks(
         project

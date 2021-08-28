@@ -8,17 +8,21 @@ import moment from 'moment';
 import * as status from 'constants/status';
 
 export type ClockInEmployeeRequest = Action<'ClockInEmployeeRequest'>;
+
 export interface ClockInEmployeeFailure
   extends Action<'ClockInEmployeeFailure'> {
   error: AxiosError;
 }
+
 export type ClockInEmployeeSuccess = Action<'ClockInEmployeeSuccess'>;
 
 export type ClockOutEmployeeRequest = Action<'ClockOutEmployeeRequest'>;
+
 export interface ClockOutEmployeeFailure
   extends Action<'ClockOutEmployeeFailure'> {
   error: AxiosError;
 }
+
 export type ClockOutEmployeeSuccess = Action<'ClockOutEmployeeSuccess'>;
 
 export type EmployeeActions =
@@ -54,19 +58,18 @@ export const clockOut = (
   employee: BaseEmployee,
   shift: BaseShift,
   activities: BaseActivity[],
-  lunch: number
+  lunch: number,
+  length: number,
+  clockOutDate: string
 ): ThunkAction<void, BaseEmployee, null, ClockInEmployeeSuccess> => {
   return async (dispatch: Dispatch<EmployeeActions>) => {
     dispatch({ type: 'ClockOutEmployeeRequest' });
     try {
       const shiftRequest = {
-        lunch: lunch,
-        length: moment
-          .duration(moment().diff(moment(shift.clockInDate)))
-          .asMinutes()
+        lunch,
+        length,
+        clockOutDate
       };
-
-      console.log(employee, shift, shiftRequest, activities, lunch);
       await axios.post('/employees/clockout', {
         employeeId: employee.id,
         shift: shiftRequest,
