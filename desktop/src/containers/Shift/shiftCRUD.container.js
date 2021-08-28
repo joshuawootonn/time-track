@@ -200,8 +200,8 @@ export class ShiftCRUD extends Component {
               render={formikProps => {
                 const { values, errors } = formikProps;
                 const shiftDuration = moment.duration(
-                  moment(values.clockOutDate, `YYYY-MM-DDTHH:mm`).diff(
-                    moment(values.clockInDate, `YYYY-MM-DDTHH:mm`)
+                  moment(values.clockOutDate).diff(
+                    moment(values.clockInDate)
                   )
                 );
                 let timeLeft =

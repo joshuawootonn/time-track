@@ -220,7 +220,7 @@ export class Clockout extends Component {
                         <Grid item xs={12} className={classes.formFooter}>
                           <Typography variant="h5" margin="none">
                             Time Left:{' '}
-                            {minutesToString(minutesRoudedTime(timeLeft))}
+                            {minutesToString(timeLeft)}
                           </Typography>
                           <Typography variant="h5" margin="none">
                             Week Total:{' '}
@@ -241,7 +241,7 @@ export class Clockout extends Component {
                               disabled={
                                 isSubmitting ||
                                 Object.keys(errors).length !== 0 ||
-                                minutesRoudedTime(timeLeft) !== 0 ||
+                                timeLeft !== 0 ||
                                 !!generalError
                               }
                               variant="contained"

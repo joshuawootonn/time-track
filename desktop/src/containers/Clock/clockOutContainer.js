@@ -23,7 +23,10 @@ import { minutesRoudedTime } from 'helpers/time';
 export class ClockOut extends Component {
   constructor(props) {
     super(props);
-    this.state = { activities: [] };
+    this.state = {
+      activities: [],
+      currentMoment: moment().add(`minutes`, 3)
+    };
   }
 
   componentDidMount = () => {
@@ -46,13 +49,14 @@ export class ClockOut extends Component {
       return <Progress variant="circular" fullPage />;
     }
 
-    const currentMoment = moment().add(`minutes`, 3);
     const clockInMoment = moment.utc(currentShift.clockInDate).local();
-    const shiftDuration = moment.duration(currentMoment.diff(clockInMoment));
+    const shiftDuration = moment.duration(
+      this.state.currentMoment.diff(clockInMoment)
+    );
 
     const clockOutObject = {
       in: clockInMoment.format(`h:mm a`),
-      out: currentMoment.format(`h:mm a`),
+      out: this.state.currentMoment.format(`h:mm a`),
       date: clockInMoment.format(`MMM D`)
     };
 
@@ -76,11 +80,17 @@ export class ClockOut extends Component {
             history,
             clockOut
           } = this.props;
+          const clockInMoment = moment.utc(currentShift.clockInDate).local();
+          const shiftDuration = moment.duration(
+            this.state.currentMoment.diff(clockInMoment)
+          );
           return clockOut(
             currentEmployee,
             currentShift,
             values.activities,
-            values.lunch
+            values.lunch,
+            minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),
+            this.state.currentMoment.utc().format()
           )
             .then(() => history.push(`/`))
             .catch(e => console.log(e));
@@ -89,9 +99,6 @@ export class ClockOut extends Component {
         render={formikProps => {
           //console.log(formikProps.values);
           const { errors, values } = formikProps;
-          // Time left is the duraction - lunch - all the activity times
-          let timeLeft = Math.floor(shiftDuration.asMinutes()) - values.lunch;
-
           let generalError;
           values.activities.forEach(activity => {
             const { projectTaskId } = activity;
@@ -105,6 +112,11 @@ export class ClockOut extends Component {
               generalError = `Add description to Other activity.`;
             }
           });
+
+          // Time left is the duraction - lunch - all the activity times
+          let timeLeft =
+            minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) -
+            values.lunch;
           values.activities.forEach(activity => {
             timeLeft -= activity.length;
           });
@@ -167,17 +179,20 @@ const mapDispatchToProps = dispatch => {
     getCurrentShift: employeeId => {
       return dispatch(shiftActions.getCurrentShift(employeeId));
     },
-    clockOut: (employee, shift, activities, lunch) => {
-      return dispatch(
-        employeeActions.clockOut(employee, shift, activities, lunch)
-      );
-    }
+    clockOut: (employee, shift, activities, lunch, length, clockOutDate) =>
+      dispatch(
+        employeeActions.clockOut(
+          employee,
+          shift,
+          activities,
+          lunch,
+          length,
+          clockOutDate
+        )
+      )
   };
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ClockOut)
+  connect(mapStateToProps, mapDispatchToProps)(ClockOut)
 );

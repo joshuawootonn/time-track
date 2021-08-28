@@ -52,8 +52,6 @@ module.exports = Employee => {
         message: "employeeId is a required body value"
       });
     }
-
-    console.log(employeeId, shift, activities);
     const lastShift = await Shift.findOne({
       order: "id DESC",
       where: { employeeId: employeeId }
@@ -67,18 +65,23 @@ module.exports = Employee => {
     } else if (!employee.isWorking) {
       return cb({ ...baseError, message: "Employee is not Working" });
     }
-    activities.forEach( async activity => {
+
+
+    for (const activity of activities) {
       const a = await Activity.create({
         ...activity,
         shiftId: lastShift.id
       })
       console.log('Created activity: ', a);
-    });
+    }
 
     // check that employee !isWorking and doesn't have an open shift
     const s = await lastShift.updateAttributes({
       ...lastShift,
-      clockOutDate: new Date().toUTCString(),
+      // this used to be generated on the server but this has the edge case of the employee clocking out
+      // to quickly and maybe not getting their 3 minutes. no it is passed on the shift instead
+      // the primary case of this ternary can be the only case in the next release
+      clockOutDate: shift.clockOutDate ? shift.clockOutDate : new Date().toUTCString(),
       length: shift.length,
       lunch: shift.lunch,
     });
