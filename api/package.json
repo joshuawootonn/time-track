@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@loopback/testlab": "^0.10.11",
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "babel-eslint": "^8.2.5",
     "chalk": "^2.4.1",
     "eslint": "^5.1.0",
