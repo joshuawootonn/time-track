@@ -29,7 +29,12 @@ export class Toolbar extends Component {
     } = this.props;
 
     return (
-      <div style={{ position: `relative` }}>
+      <div
+        style={{
+          position: `relative`,
+          borderBottom: '1px solid rgba(224, 224, 224, 1)'
+        }}
+      >
         <MUToolbar
           className={cx(classes.toolbarRoot, {
             [classes.highlight]: Object.keys(selected).length !== 0

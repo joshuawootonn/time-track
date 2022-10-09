@@ -43,6 +43,7 @@ import ShiftToolbar from 'containers/Shift/shiftToolbar.container';
 import ShiftIndex from 'containers/Shift/shiftIndex.container';
 import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
+import ShiftTotal from 'containers/Shift/shiftTotal.container';
 import Progress from 'components/helpers/Progress';
 
 const styles = {
@@ -60,8 +61,11 @@ const styles = {
     minHeight: 0
   },
   gridHeight: {
-    height: `calc(100% - 64px)`,
-    position: `relative`
+    height: `auto`,
+    position: `relative`,
+    display: 'flex',
+    flexDirection: 'column',
+    borderRight: '1px solid rgba(224, 224, 224, 1)'
   }
 };
 
@@ -114,7 +118,7 @@ export class Analyze extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" elevation={0}>
           <Toolbar className={classes.tool}>
             <Tabs
               value={tabValue}
@@ -148,7 +152,13 @@ export class Analyze extends Component {
             <Grid item xs={6} className={classes.gridHeight}>
               <EmployeeToolbar />
               <EmployeeFilter />
-              <EmployeeIndex />
+              <div
+                style={{
+                  flex: '1 1 auto'
+                }}
+              >
+                <EmployeeIndex />
+              </div>
             </Grid>
             <Grid item xs={6} className={classes.gridHeight}>
               <EmployeeCRUD />
@@ -160,7 +170,13 @@ export class Analyze extends Component {
             <Grid item xs={5} className={classes.gridHeight}>
               <ProjectToolbar />
               <ProjectFilterContainer />
-              <ProjectIndex />
+              <div
+                style={{
+                  flex: '1 1 auto'
+                }}
+              >
+                <ProjectIndex />
+              </div>
             </Grid>
             <Grid item xs={7}>
               <ProjectCRUD goToTab={this.goToTab} />
@@ -172,7 +188,13 @@ export class Analyze extends Component {
             <Grid item xs={6} className={classes.gridHeight}>
               <TaskToolbar />
               <TaskFilter />
-              <TaskIndex />
+              <div
+                style={{
+                  flex: '1 1 auto'
+                }}
+              >
+                <TaskIndex />
+              </div>
             </Grid>
             <Grid item xs={6}>
               <TaskCRUD />
@@ -184,7 +206,14 @@ export class Analyze extends Component {
             <Grid item xs={7} className={classes.gridHeight}>
               <ShiftToolbar />
               <ShiftFilter />
-              <ShiftIndex />
+              <div
+                style={{
+                  flex: '1 1 auto'
+                }}
+              >
+                <ShiftIndex />
+              </div>
+              <ShiftTotal />
             </Grid>
             <Grid item xs={5} className={classes.gridHeight}>
               <ShiftCRUD />

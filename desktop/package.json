@@ -7,7 +7,7 @@
   },
   "repository": "joshuawootonn/time-track",
   "description": "Time Managment & Analytics",
-  "version": "3.0.35",
+  "version": "3.0.36",
   "url": "http://www.joshuawootonn.com",
   "license": "MIT",
   "private": false,
@@ -23,6 +23,36 @@
         "deb"
       ],
       "icon": "build/favicon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": true,
+      "extendInfo": {
+        "NSAppleEventsUsageDescription": "Let me use Apple Events.",
+        "NSCameraUsageDescription": "Let me use the camera.",
+        "NSScreenCaptureDescription": "Let me take screenshots."
+      }
+    },
+    "dmg": {
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 255,
+          "y": 85,
+          "type": "file"
+        },
+        {
+          "x": 253,
+          "y": 325,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
     },
     "publish": [
       {
@@ -86,10 +116,11 @@
     "react-test": "react-scripts test --env=jsdom",
     "electron-build": "electron-builder",
     "lint": "eslint --fix .",
-    "pack": "yarn react-build && yarn electron-build  --ia32 --x64 --win",
-    "dist": "yarn react-build && yarn electron-build --ia32 --x64 --win -p always",
-    "dist-test": "yarn react-build && yarn electron-build --ia32 --x64 --win -p always",
-    "start": "wait-on http://localhost:3000 && electron ."
+    "pack-win": "yarn react-build && yarn electron-build --x64 --win",
+    "pack-mac": "yarn react-build && yarn electron-build --x64 --mac",
+    "dist-win": "yarn react-build && yarn electron-build  --x64 --win -p always",
+    "dist-mac": "yarn react-build && yarn electron-build  --x64 --mac -p always",
+    "start": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
