@@ -23,25 +23,42 @@ module.exports = Project => {
       });
     }
 
-    if (isActive === undefined || typeof isActive !== 'boolean') {
+    if (isActive === undefined || typeof isActive !== "boolean") {
       return cb({
         ...baseError,
-        message: "isActive is required in the queryString as 0 (false) or 1 (true)"
+        message:
+          "isActive is required in the queryString as 0 (false) or 1 (true)"
       });
     }
 
-    const projects = await Project.find({include: {projectTasks: 'activities'}, where: {and: [{date: {gt: startTime}}, {date: {lt: endTime}}, {isActive}]}});
+    const projects = await Project.find({
+      include: { projectTasks: "activities" },
+      where: {
+        and: [
+          { date: { gt: startTime } },
+          { date: { lt: endTime } },
+          { isActive }
+        ]
+      }
+    });
 
     const newProjects = projects.map(project => {
       // console.log(project, project.projectTasks)
-      const {totalEstimate, totalActual} = project.projectTasks().reduce(({totalEstimate, totalActual}, currentProjectTask) => {
-        return {
-          totalEstimate: totalEstimate + currentProjectTask.estimateTime * 60,
-          totalActual: totalActual + currentProjectTask.activities().reduce((total, currentActivity) => {
-              return total + currentActivity.length;
-            },0)
-        }
-      }, {totalActual: 0, totalEstimate: 0} )
+      const { totalEstimate, totalActual } = project.projectTasks().reduce(
+        ({ totalEstimate, totalActual }, currentProjectTask) => {
+          return {
+            totalEstimate: totalEstimate + currentProjectTask.estimateTime * 60,
+            totalActual:
+              totalActual +
+              currentProjectTask
+                .activities()
+                .reduce((total, currentActivity) => {
+                  return total + currentActivity.length;
+                }, 0)
+          };
+        },
+        { totalActual: 0, totalEstimate: 0 }
+      );
       return {
         date: project.date,
         id: project.id,
@@ -49,18 +66,22 @@ module.exports = Project => {
         name: project.name,
         totalEstimate,
         totalActual
-      }
-    })
+      };
+    });
     // console.log(newProjects);
-    cb(null, newProjects);
+    return cb(null, newProjects);
   };
 
   Project.remoteMethod("summary", {
     http: {
-      path: '/summary',
-      verb: 'get',
+      path: "/summary",
+      verb: "get"
     },
-    accepts: [{ arg: "startTime", type: "date" },{ arg: "endTime", type: "date" },{ arg: "isActive", type: "boolean" }],
+    accepts: [
+      { arg: "startTime", type: "date" },
+      { arg: "endTime", type: "date" },
+      { arg: "isActive", type: "boolean" }
+    ],
     returns: { arg: "projects", type: "string" }
   });
 };
