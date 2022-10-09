@@ -8,8 +8,6 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
 
-const { ipcRenderer } = window.require('electron');
-
 export const theme = createMuiTheme({
   typography: {
     useNextVariants: true
@@ -21,7 +19,7 @@ export const theme = createMuiTheme({
   }
 });
 
-ipcRenderer.on(`message`, function(event, message) {
+window.electronAPI.message(function(event, message) {
   console.log(message);
 });
 

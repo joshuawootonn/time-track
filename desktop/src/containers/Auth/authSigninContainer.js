@@ -8,18 +8,12 @@ import { Formik } from 'formik';
 import { auth as authValidation } from 'constants/formValidation';
 import { userActions } from 'store/actions';
 import * as routes from 'constants/routes';
-import * as IPCConstants from 'constants/ipc';
 import AuthSiginForm from 'components/forms/AuthSignin';
 import { userSelectors } from 'store/selectors';
 
-const { ipcRenderer } = window.require('electron');
-
 export class AuthSignin extends Component {
   componentDidMount() {
-    const { ip, username, password } = ipcRenderer.sendSync(
-      IPCConstants.GET_CRED,
-      ``
-    );
+    const { ip, username, password } = window.electronAPI.get_cred('');
     return this.props.login(ip, username, password).then(() => {
       this.props.history.push(routes.ROOT);
     });
@@ -28,7 +22,7 @@ export class AuthSignin extends Component {
     return ip.replace(/\/+$/, '');
   };
   render() {
-    const cred = ipcRenderer.sendSync(IPCConstants.GET_CRED, ``);
+    const cred = window.electronAPI.get_cred('');
     const hasValidCred = cred.ip && cred.username && cred.password;
 
     return (
@@ -84,8 +78,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AuthSignin)
+  connect(mapStateToProps, mapDispatchToProps)(AuthSignin)
 );

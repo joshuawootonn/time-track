@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { snackActions, employeeActions, analyzeActions } from 'store/actions';
+import { employeeActions, analyzeActions } from 'store/actions';
 import { employeeSelectors } from 'store/selectors';
 import * as routes from 'constants/routes';
 import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
-import IPCConstants from 'constants/ipc';
 import { BaseEmployee, Store } from 'store/types';
 import { AUTH_LEVELS } from 'constants/routes';
-
-//@ts-ignore
-const { ipcRenderer } = window.require('electron');
 
 interface Props extends RouteComponentProps {
   clockIn: (employee: BaseEmployee) => Promise<any>;
@@ -45,7 +40,7 @@ export class AccountAction extends Component<Props, State> {
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
-    const isFullScreen = ipcRenderer.sendSync(IPCConstants.IS_FULLSCREEN, ``);
+    const isFullScreen = window.electronAPI.is_fullscreen();
     this.setState({
       isFullScreen
     });
@@ -79,7 +74,7 @@ export class AccountAction extends Component<Props, State> {
   };
   toggleFullscreen = () => {
     this.setState({
-      isFullScreen: ipcRenderer.sendSync(IPCConstants.TOGGLE_FULLSCREEN, ``)
+      isFullScreen: window.electronAPI.toggle_fullscreen()
     });
   };
   render() {

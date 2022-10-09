@@ -1,11 +1,8 @@
 import { userActionTypes } from 'constants/actionTypeConstants';
 
 import { authorityActions, crewActions } from 'store/actions';
-import * as IPCConstants from 'constants/ipc';
 import * as endpoint from './endpoints';
 import { updateAxiosInstanceWithNewURL } from 'helpers/axios';
-
-const { ipcRenderer } = window.require('electron');
 
 export const login = (ip, username, password) => {
   return async dispatch => {
@@ -13,14 +10,12 @@ export const login = (ip, username, password) => {
     try {
       const response = await endpoint.login(ip, username, password);
 
-      ipcRenderer.sendSync(IPCConstants.SET_CRED, {
+      window.electronAPI.set_cred({
         ip,
         username,
         password
       });
-
-      ipcRenderer.sendSync(IPCConstants.SET_ACCESS_TOKEN, response.data.id);
-
+      window.electronAPI.set_access_token(response.data.id);
       updateAxiosInstanceWithNewURL();
 
       await dispatch(authorityActions.getAllAuthorities());
@@ -31,6 +26,7 @@ export const login = (ip, username, password) => {
       });
     } catch (e) {
       dispatch({ type: userActionTypes.LOGIN_USER_FAILURE, payload: e });
+      console.error(e);
       return Promise.reject({ message: `Could not connect!` });
     }
   };

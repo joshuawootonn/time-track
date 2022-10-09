@@ -23,8 +23,6 @@ import * as status from 'constants/status';
 
 import store from 'store';
 
-const { ipcRenderer } = window.require('electron');
-
 export const exportToExcel = (start, end, fileLocation) => {
   return async dispatch => {
     dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST });
@@ -35,7 +33,7 @@ export const exportToExcel = (start, end, fileLocation) => {
       await dispatch(getData(startMoment, endMoment));
       const exportData = formatData(startMoment, endMoment);
       console.log(exportData);
-      ipcRenderer.sendSync(IPCConstants.CREATE_EXPORT, {
+      window.electronAPI.create_export({
         fileLocation,
         data: exportData
       });

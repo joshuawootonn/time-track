@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import SnackContainer from 'containers/Floaters/snackContainer';
 import { snackActions } from 'store/actions';
 
-const { ipcRenderer } = window.require('electron');
-
 export class SnackRoot extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +13,7 @@ export class SnackRoot extends Component {
     };
   }
   componentDidMount() {
-    ipcRenderer.on(`message`, function(event, message) {
+    window.electronAPI.message(function(event, message) {
       this.setState({ notification: message });
       setTimeout(this.setState({ notification: null }), 2000);
     });
@@ -51,7 +49,4 @@ const mapStateToProps = state => {
   return state.snack;
 };
 
-export default connect(
-  mapStateToProps,
-  snackActions
-)(SnackRoot);
+export default connect(mapStateToProps, snackActions)(SnackRoot);

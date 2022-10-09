@@ -36,7 +36,9 @@ function createWindow() {
     width: 1000,
     height: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      // eslint-disable-next-line no-undef
+      preload: path.join(__dirname, 'preload.js')
     },
     fullscreen: settings.get(`${SETTINGS.WINDOW}.isFullScreen`),
     show: false
