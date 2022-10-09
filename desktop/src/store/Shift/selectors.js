@@ -82,32 +82,40 @@ export const getAllShiftsNew = createSelector(
         ) {
           return false;
         }
-        if (filters.projectId !== -1) {
-          let projectDecision = false;
-          shift[`activities`].forEach(activity => {
+
+        if (filters.projectId !== -1 || filters.taskId !== -1) {
+          const matches = shift.activities.reduce((acc, curr) => {
             if (
-              projectTasks[activity.projectTaskId].projectId ===
-              filters.projectId
-            )
-              projectDecision = true;
-          });
-          if (!projectDecision) {
-            return false;
-          }
-        }
-        if (filters.taskId !== -1) {
-          let taskDecision = false;
-          shift[`activities`].forEach(activity => {
-            if (
-              projectTasks[activity.projectTaskId].taskId === filters.taskId
+              filters.projectId !== -1 &&
+              filters.taskId !== -1 &&
+              projectTasks[curr.projectTaskId].projectId ===
+                filters.projectId &&
+              projectTasks[curr.projectTaskId].taskId === filters.taskId
             ) {
-              taskDecision = true;
+              return true;
             }
-          });
-          if (!taskDecision) {
+            if (
+              filters.taskId === -1 &&
+              filters.projectId !== -1 &&
+              projectTasks[curr.projectTaskId].projectId === filters.projectId
+            ) {
+              return true;
+            }
+            if (
+              filters.projectId === -1 &&
+              filters.taskId !== -1 &&
+              projectTasks[curr.projectTaskId].taskId === filters.taskId
+            ) {
+              return true;
+            }
+            return acc;
+          }, false);
+
+          if (!matches) {
             return false;
           }
         }
+
         if (
           moment(shift[`clockInDate`]).isBefore(
             moment(filters.startTime, `MM-DD-YY HH:mm:ss`)
