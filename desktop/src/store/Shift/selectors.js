@@ -143,38 +143,39 @@ export const getShiftTotals = createSelector(
   getAllProjectTasksObjects,
   getShiftFilters,
   (shifts, projectTasks, filters) => {
-    return shifts.reduce((acc, curr) => {
-      return (
-        acc +
-        curr[`activities`].reduce((acc, curr) => {
-          if (filters.projectId === -1 && filters.taskId === -1) {
-            return acc + curr.length;
-          }
-          if (
-            filters.projectId !== -1 &&
-            filters.taskId !== -1 &&
-            projectTasks[curr.projectTaskId].projectId === filters.projectId &&
-            projectTasks[curr.projectTaskId].taskId === filters.taskId
-          ) {
-            return acc + curr.length;
-          }
-          if (
-            filters.taskId === -1 &&
-            filters.projectId !== -1 &&
-            projectTasks[curr.projectTaskId].projectId === filters.projectId
-          ) {
-            return acc + curr.length;
-          }
-          if (
-            filters.projectId === -1 &&
-            filters.taskId !== -1 &&
-            projectTasks[curr.projectTaskId].taskId === filters.taskId
-          ) {
-            return acc + curr.length;
-          }
-          return acc;
-        }, 0)
-      );
+    return shifts.reduce((acc, currentShift) => {
+      const activityTotal = currentShift[`activities`]
+        ? currentShift[`activities`].reduce((acc, curr) => {
+            if (filters.projectId === -1 && filters.taskId === -1) {
+              return acc + curr.length;
+            }
+            if (
+              filters.projectId !== -1 &&
+              filters.taskId !== -1 &&
+              projectTasks[curr.projectTaskId].projectId ===
+                filters.projectId &&
+              projectTasks[curr.projectTaskId].taskId === filters.taskId
+            ) {
+              return acc + curr.length;
+            }
+            if (
+              filters.taskId === -1 &&
+              filters.projectId !== -1 &&
+              projectTasks[curr.projectTaskId].projectId === filters.projectId
+            ) {
+              return acc + curr.length;
+            }
+            if (
+              filters.projectId === -1 &&
+              filters.taskId !== -1 &&
+              projectTasks[curr.projectTaskId].taskId === filters.taskId
+            ) {
+              return acc + curr.length;
+            }
+            return acc;
+          }, 0)
+        : 0;
+      return acc + activityTotal;
     }, 0);
   }
 );
