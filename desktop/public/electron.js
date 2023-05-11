@@ -116,24 +116,20 @@ app.on('activate', function() {
   }
 });
 
-
 /**
  * Access Token stuff
  */
 
 ipcMain.on(IPCConstants.SET_ACCESS_TOKEN, (event, arg) => {
   settings.set(SETTINGS.ACCESS_TOKEN, arg);
-  log.info('access token received', arg,settings.get(SETTINGS.ACCESS_TOKEN));
+  log.info('access token received', arg, settings.get(SETTINGS.ACCESS_TOKEN));
   event.returnValue = arg;
-
 });
 
 ipcMain.on(IPCConstants.GET_ACCESS_TOKEN, event => {
   const accessToken = settings.get(SETTINGS.ACCESS_TOKEN);
   event.returnValue = accessToken;
 });
-
-
 
 /**
  * Full Screen stuff
@@ -164,7 +160,7 @@ ipcMain.on(IPCConstants.SET_CRED, (event, arg) => {
   event.returnValue = arg;
 });
 
-ipcMain.on(IPCConstants.GET_CRED, event => {  
+ipcMain.on(IPCConstants.GET_CRED, event => {
   const cred = {
     ip: settings.get(`${SETTINGS.USER_CRED}.ip`),
     username: settings.get(`${SETTINGS.USER_CRED}.username`),
