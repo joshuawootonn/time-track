@@ -4,6 +4,7 @@ import accountRoutes from 'routes/Account';
 import employeeRoutes from 'routes/Employee';
 import managerRoutes from 'routes/Manager';
 import adminRoutes from 'routes/Admin';
+import foremanRoutes from './Foreman/foreman';
 
 const routes = [
   {
@@ -29,6 +30,12 @@ const routes = [
     path: `/admin`,
     name: `Admin`,
     routes: adminRoutes
+  },
+  {
+    component: RouteMapper,
+    path: `/foreman`,
+    name: `Foreman`,
+    routes: foremanRoutes
   }
 ];
 
