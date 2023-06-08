@@ -10,3 +10,4 @@ export const FOREMAN = 'foreman';
 export const CLOCKOUT = `clockout`;
 export const EXPORT = `export`;
 export const ANALYZE = `analyze`;
+export const CREW = 'crew';
