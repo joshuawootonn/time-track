@@ -10,7 +10,8 @@ import {
   Close,
   ArrowBack,
   Fullscreen,
-  FullscreenExit
+  FullscreenExit,
+  Group
 } from '@material-ui/icons';
 
 import styles from './styles';
@@ -23,6 +24,7 @@ export const AccountAction = props => {
     clockIn,
     clockOut,
     analyze,
+    crew,
     back,
     type,
     toggleFullscreen,
@@ -87,10 +89,23 @@ export const AccountAction = props => {
               </IconButton>
             </Tooltip>
           )}
-        {type === authorityConstants.ADMIN && (
+        {type === authorityConstants.FOREMAN && (
           <Tooltip
             open={true}
-            title="Analysis"
+            title="Crew"
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={crew} className={classes.button}>
+              <Group className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
+        {(type === authorityConstants.ADMIN ||
+          type === authorityConstants.FOREMAN) && (
+          <Tooltip
+            open={true}
+            title={type === authorityConstants.ADMIN ? 'Analysis' : 'Projects'}
             classes={{ tooltip: classes.toolTip }}
             placement="bottom"
           >
@@ -122,6 +137,7 @@ AccountAction.propTypes = {
   clockOut: PropTypes.func.isRequired,
   export: PropTypes.func.isRequired,
   analyze: PropTypes.func.isRequired,
+  crew: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
   isFullScreen: PropTypes.bool.isRequired,
