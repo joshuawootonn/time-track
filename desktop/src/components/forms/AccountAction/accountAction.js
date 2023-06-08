@@ -89,7 +89,7 @@ export const AccountAction = props => {
               </IconButton>
             </Tooltip>
           )}
-          {type === authorityConstants.FOREMAN && (
+        {type === authorityConstants.FOREMAN && (
           <Tooltip
             open={true}
             title="Crew"
