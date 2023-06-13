@@ -45,6 +45,7 @@ import ShiftFilter from 'containers/Shift/shiftFilter.container';
 import ShiftCRUD from 'containers/Shift/shiftCRUD.container';
 import ShiftTotal from 'containers/Shift/shiftTotal.container';
 import Progress from 'components/helpers/Progress';
+import isElectron from 'helpers/IsElectron';
 
 const styles = {
   root: {
@@ -73,7 +74,8 @@ export class Analyze extends Component {
   //REMOVE
   state = {
     tabValue: 3,
-    isLoading: true
+    isLoading: true,
+    isElectron: isElectron()
   };
   componentDidMount = async () => {
     Promise.all([
@@ -130,11 +132,13 @@ export class Analyze extends Component {
               <Tab label="Tasks" />
               <Tab label="Shifts" />
             </Tabs>
-            <Tooltip title="Export" placement="bottom">
-              <IconButton color="inherit" onClick={this.props.openExport}>
-                <Storage />
-              </IconButton>
-            </Tooltip>
+            {this.state.isElectron && (
+              <Tooltip title="Export" placement="bottom">
+                <IconButton color="inherit" onClick={this.props.openExport}>
+                  <Storage />
+                </IconButton>
+              </Tooltip>
+            )}
             <Tooltip title="Settings" placement="bottom">
               <IconButton color="inherit" onClick={this.props.openSettings}>
                 <Settings />

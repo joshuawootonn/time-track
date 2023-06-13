@@ -26,7 +26,8 @@ export const AccountAction = props => {
     back,
     type,
     toggleFullscreen,
-    isFullScreen
+    isFullScreen,
+    isElectron
   } = props;
   return (
     <div className={classes.hero}>
@@ -54,36 +55,38 @@ export const AccountAction = props => {
             </IconButton>
           </Tooltip>
         )}
-        {(type === authorityConstants.MANAGER ||
-          type === authorityConstants.ADMIN) && (
-          <Tooltip
-            open={true}
-            title="Export"
-            classes={{ tooltip: classes.toolTip }}
-            placement="bottom"
-          >
-            <IconButton onClick={props.export} className={classes.button}>
-              <Storage className={classes.buttonIcon} />
-            </IconButton>
-          </Tooltip>
-        )}
-        {(type === authorityConstants.MANAGER ||
-          type === authorityConstants.ADMIN) && (
-          <Tooltip
-            open={true}
-            title="FullScreen"
-            classes={{ tooltip: classes.toolTip }}
-            placement="bottom"
-          >
-            <IconButton onClick={toggleFullscreen} className={classes.button}>
-              {isFullScreen ? (
-                <FullscreenExit className={classes.buttonIcon} />
-              ) : (
-                <Fullscreen className={classes.buttonIcon} />
-              )}
-            </IconButton>
-          </Tooltip>
-        )}
+        {(isElectron)  &&
+          (type === authorityConstants.MANAGER ||
+            type === authorityConstants.ADMIN) && (
+            <Tooltip
+              open={true}
+              title="Export"
+              classes={{ tooltip: classes.toolTip }}
+              placement="bottom"
+            >
+              <IconButton onClick={props.export} className={classes.button}>
+                <Storage className={classes.buttonIcon} />
+              </IconButton>
+            </Tooltip>
+          )}
+        {(isElectron) &&
+          (type === authorityConstants.MANAGER ||
+            type === authorityConstants.ADMIN) && (
+            <Tooltip
+              open={true}
+              title="FullScreen"
+              classes={{ tooltip: classes.toolTip }}
+              placement="bottom"
+            >
+              <IconButton onClick={toggleFullscreen} className={classes.button}>
+                {isFullScreen ? (
+                  <FullscreenExit className={classes.buttonIcon} />
+                ) : (
+                  <Fullscreen className={classes.buttonIcon} />
+                )}
+              </IconButton>
+            </Tooltip>
+          )}
         {type === authorityConstants.ADMIN && (
           <Tooltip
             open={true}
@@ -121,7 +124,8 @@ AccountAction.propTypes = {
   analyze: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
-  isFullScreen: PropTypes.bool.isRequired
+  isFullScreen: PropTypes.bool.isRequired,
+  isElectron: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(AccountAction);

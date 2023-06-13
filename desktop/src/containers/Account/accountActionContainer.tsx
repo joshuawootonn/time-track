@@ -9,6 +9,7 @@ import AccountActionForm from 'components/forms/AccountAction';
 import domains from 'constants/domains';
 import { BaseEmployee, Store } from 'store/types';
 import { AUTH_LEVELS } from 'constants/routes';
+import isElectron from 'helpers/IsElectron';
 
 interface Props extends RouteComponentProps {
   clockIn: (employee: BaseEmployee) => Promise<any>;
@@ -27,6 +28,7 @@ interface Props extends RouteComponentProps {
 interface State {
   isFullScreen: boolean;
   isLoading: boolean;
+  isElectron: boolean;
 }
 
 export class AccountAction extends Component<Props, State> {
@@ -34,16 +36,20 @@ export class AccountAction extends Component<Props, State> {
     super(props);
     this.state = {
       isLoading: false,
-      isFullScreen: true
+      isFullScreen: true,
+      isElectron: isElectron()
     };
   }
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
-    const isFullScreen = window.electronAPI.is_fullscreen();
-    this.setState({
-      isFullScreen
-    });
+
+    if (this.state.isElectron) {
+      const isFullScreen = window.electronAPI.is_fullscreen();
+      this.setState({
+        isFullScreen
+      });
+    }
   };
   back = () => {
     this.props.history.push(`/`);
@@ -90,6 +96,7 @@ export class AccountAction extends Component<Props, State> {
         export={this.export}
         toggleFullscreen={this.toggleFullscreen}
         isFullScreen={this.state.isFullScreen}
+        isElectron={this.state.isElectron}
       />
     );
   }
