@@ -19,11 +19,6 @@ export const theme = createMuiTheme({
   }
 });
 
-window.electronAPI.message(function(event, message) {
-  console.log(message);
-});
-
-console.log(theme);
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>

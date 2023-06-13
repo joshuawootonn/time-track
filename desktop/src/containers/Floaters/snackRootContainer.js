@@ -4,19 +4,23 @@ import PropTypes from 'prop-types';
 
 import SnackContainer from 'containers/Floaters/snackContainer';
 import { snackActions } from 'store/actions';
+import isElectron from 'helpers/IsElectron';
 
 export class SnackRoot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notification: null
+      notification: null,
+      isElectron: isElectron()
     };
   }
   componentDidMount() {
-    window.electronAPI.message(function(event, message) {
-      this.setState({ notification: message });
-      setTimeout(this.setState({ notification: null }), 2000);
-    });
+    if (this.state.isElectron) {
+      window.electronAPI.message(function(event, message) {
+        this.setState({ notification: message });
+        setTimeout(this.setState({ notification: null }), 2000);
+      });
+    }
   }
   render() {
     const { snackType, snackMessage } = this.props;

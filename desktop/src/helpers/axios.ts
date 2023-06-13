@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { HOST } from 'constants/network';
+import { getAccessToken } from 'constants/storage';
+
 const instance = axios.create({
   baseURL: HOST()
 });
@@ -9,7 +11,7 @@ export const updateAxiosInstanceWithNewURL = () => {
 };
 
 instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const accessToken = window.electronAPI.get_access_token();
+  const accessToken = getAccessToken();
   //@ts-ignore
   if (config.url.includes('?')) {
     //@ts-ignore
