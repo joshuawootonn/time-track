@@ -10,11 +10,12 @@ import { userActions } from 'store/actions';
 import * as routes from 'constants/routes';
 import AuthSiginForm from 'components/forms/AuthSignin';
 import { userSelectors } from 'store/selectors';
+import { getCred } from 'constants/storage';
 
 export class AuthSignin extends Component {
   componentDidMount() {
-    const { ip, username, password } = window.electronAPI.get_cred('');
-    return this.props.login(ip, username, password).then(() => {
+    const cred = getCred();
+    return this.props.login(cred.ip, cred.username, cred.password).then(() => {
       this.props.history.push(routes.ROOT);
     });
   }
@@ -22,7 +23,7 @@ export class AuthSignin extends Component {
     return ip.replace(/\/+$/, '');
   };
   render() {
-    const cred = window.electronAPI.get_cred('');
+    const cred = getCred();
     const hasValidCred = cred.ip && cred.username && cred.password;
 
     return (
