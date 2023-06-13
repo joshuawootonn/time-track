@@ -8,7 +8,7 @@ export const IS_FULLSCREEN = `is_fullscreen`;
 export const SET_ACCESS_TOKEN = 'set_access_token';
 export const GET_ACCESS_TOKEN = 'get_access_token';
 
-type Cred = {
+export type Cred = {
   ip: string;
   username: string;
   password: string;
