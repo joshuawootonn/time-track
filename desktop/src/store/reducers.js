@@ -8,6 +8,7 @@ import employee from './Employee/reducers';
 import shift from './Shift/reducers';
 import analyze from './Analyze/reducers';
 import modal from './Modal/reducers';
+import foreman from './Foreman/reducers';
 
 const rootReducer = combineReducers({
   entities,
@@ -17,6 +18,8 @@ const rootReducer = combineReducers({
   employee,
   shift,
   analyze,
-  modal
+  modal,
+  foreman
 });
+
 export default rootReducer;

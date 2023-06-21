@@ -19,6 +19,10 @@ const analyzeActionTypes = {
   EXPORT_DATA_MODAL: `export_data_modal`
 };
 
+const foremanActionTypes = {
+  UPDATE_FILTERS: `foreman:update_filters`
+};
+
 const authorityActionTypes = {
   ...createCRUDActionTypes(`authority`, `authorities`),
   EDIT_AUTHORITIES_MODAL: `edit_authorities_modal`
@@ -95,6 +99,7 @@ const userActionTypes = {
 
 export {
   activityActionTypes,
+  foremanActionTypes,
   analyzeActionTypes,
   authorityActionTypes,
   categoryActionTypes,

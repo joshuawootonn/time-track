@@ -90,6 +90,15 @@ export const getActiveProjects = createSelector(
   }
 );
 
+export const getProjectForemanView = createSelector(
+  getProjectsFromEntities,
+  projects => {
+    console.log({ projects });
+
+    return null;
+  }
+);
+
 export const getAllProjectObjects = createSelector(getAllProjects, projects => {
   // if the task array is empty
   if (!projects) return null;

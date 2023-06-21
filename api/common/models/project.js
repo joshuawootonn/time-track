@@ -32,7 +32,7 @@ module.exports = Project => {
     }
 
     const projects = await Project.find({
-      include: { projectTasks: "activities" },
+      include: { projectTasks: { activities: "shifts" } },
       where: {
         and: [
           { date: { gt: startTime } },

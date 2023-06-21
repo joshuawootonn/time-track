@@ -6,12 +6,12 @@ import { AppBar, IconButton, Toolbar, Tooltip, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ArrowBack } from '@material-ui/icons';
 
-import TypeableSelect from 'components/inputs/TypeableSelect';
+import Typeahead from 'components/inputs/TypeableSelect/autoComplete';
 import PropTypes from 'prop-types';
 
 import { Field, Form, Formik } from 'formik';
 
-import { projectActions } from 'store/actions';
+import { foremanActions, projectActions } from 'store/actions';
 import { projectSelectors } from 'store/selectors';
 
 const styles = {
@@ -38,37 +38,64 @@ const styles = {
 };
 
 export class Project extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedProject: undefined
+    };
+  }
+
   back = () => {
     this.props.history.push(`/`);
   };
 
   render() {
-    const { classes, projects } = this.props;
+    const { classes, projects, updateFilter, selectedProjectId } = this.props;
+
+    console.log({ updateFilter, selectedProjectId });
     return (
       <div className={classes.root}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.tool}>
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              spacing={1}
-            >
+            <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item xs={10}>
-                <Formik>
-                  <Form>
-                    <Field
-                      name="Project select"
-                      component={TypeableSelect}
-                      type="name"
-                      items={projects}
-                      fullWidth
-                      label="Project"
-                      id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}`}
-                      className={classes.field}
-                    />
-                  </Form>
-                </Formik>
+                {/* <Formik
+                  initialValues={{ selectedProject: -1 }}
+                  render={formikProps => {
+                    console.log({ formikProps });
+                    return (
+                      <Form>
+                        <Field
+                          component={TypeableSelect}
+                          type="name"
+                          items={projects}
+                          fullWidth
+                          label="Project"
+                          className={classes.field}
+                          name={'selectedProject'}
+                        />
+                      </Form>
+                    );
+                  }}
+                ></Formik> */}
+                <Typeahead
+                  value={this.state.selectedProject}
+                  onChange={selectedProject => {
+                    updateFilter(selectedProject.id);
+
+                    console.log({ selectedProject });
+                    return this.setState({ selectedProject });
+                  }}
+                  options={projects.map(item => {
+                    return {
+                      label: item.name,
+                      value: item.name,
+                      id: item.id,
+                      data: { ...item }
+                    };
+                  })}
+                />
               </Grid>
               <Grid item xs={1}>
                 <Tooltip title="Go Back" placement="bottom">
@@ -80,6 +107,8 @@ export class Project extends Component {
             </Grid>
           </Toolbar>
         </AppBar>
+
+        <div>{JSON.stringify(this.state.selectedProject)}</div>
         {/* <button onClick={console.log(this.props.getAllProjects())} /> */}
         {/* <Form name="hi">
           <Field
@@ -109,13 +138,16 @@ export class Project extends Component {
 export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`;
 
 Project.prototypes = {
-  getAllProjects: PropTypes.func.isRequired,
+  getAllProjects: PropTypes.func.isRequired
 };
 
 /* istanbul ignore next */
 const mapStateToProps = state => {
   return {
+    // selectedProject: projectSelectors.(state)
     projects: projectSelectors.getActiveProjects(state),
+    selectedProjectId: state.foreman.projectId,
+    selectedProject: projectSelectors.getProjectForemanView(state)
   };
 };
 
@@ -125,9 +157,11 @@ const mapDispatchToProps = dispatch => {
     getAllProjects: () => {
       return dispatch(projectActions.getAllProjects());
     },
+    updateFilter: projectId => {
+      return dispatch(foremanActions.updateFilter(projectId));
+    }
   };
 };
-
 
 export default connect(
   mapStateToProps,
