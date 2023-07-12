@@ -7,13 +7,14 @@ import { components } from './components';
 //todo remove styles that are not used
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    maxWidth: '500px'
   },
   input: {
     display: 'flex',
     padding: 0,
     height: '2.2em',
-    width: '500px',
+    width: '100%',
     color: 'white'
   },
   valueContainer: {
@@ -48,7 +49,7 @@ const styles = theme => ({
     marginTop: theme.spacing(1),
     position: 'absolute',
     zIndex: 1,
-    width: '500px',
+    width: '100%',
     left: 0,
     right: 0
   },

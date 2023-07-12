@@ -1,36 +1,32 @@
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useEffect, useState, Component } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getProjectForemanView } from 'store/Project/selectors';
-import { foremanActions } from 'store/actions';
-import domain from 'constants/domains';
 import axios from 'helpers/axios';
 import { Grid, Typography } from '@material-ui/core';
-import { Widgets } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   container: {
-    border: '1px solid red',
-    height: '100vh',
+    height: `calc(100vh - 48px)`,
     width: '100vw',
     display: 'flex',
-    flexDirection: 'column',
-    // flex: '1'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   insideContainer: {
-    display: 'flex',
-    border: '1px solid blue',
+    display: 'flex'
   },
   gridItem: {
     border: '1px solid #ccc',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     width: '500px',
+  
     display: 'flex',
     padding: '8px',
     borderRadius: '4px',
     marginBottom: '8px',
     flexShrink: '1'
-  },
+  }
 });
 
 const ProjectSummary = selectedProjectId => {
@@ -59,13 +55,15 @@ const ProjectSummary = selectedProjectId => {
     return (
       <div className={classes.container}>
         <div className={classes.insideContainer}>
-          <Grid container direction="column" alignItems="center" style={{ border: '1px solid black' }}>
+          <Grid container direction="column" alignItems="center">
             <div className={classes.gridItem} style={{ marginTop: '8px' }}>
-              <Grid item md={6} xs={8} style={{flex:'1 1 auto'}}>
+              <Grid item md={6} xs={8} style={{ flex: '1 1 auto' }}>
                 <Typography>Total Estimate:</Typography>
               </Grid>
-              <Grid item style={{flex:'1 1 auto'}}>
-                <Typography>{projectSummary.totalEstimate.toLocaleString()}</Typography>
+              <Grid item style={{ flex: '1 1 auto' }}>
+                <Typography>
+                  {projectSummary.totalEstimate.toLocaleString()}
+                </Typography>
               </Grid>
             </div>
             <div className={classes.gridItem}>
@@ -73,7 +71,15 @@ const ProjectSummary = selectedProjectId => {
                 <Typography noWrap="true">Total Actual:</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography noWrap="true">{projectSummary.totalActual.toLocaleString()} / {(projectSummary.totalActual / projectSummary.totalEstimate).toLocaleString(undefined, { style: 'percent', maximumFractionDigits: 1 })}</Typography>
+                <Typography noWrap="true">
+                  {projectSummary.totalActual.toLocaleString()} /{' '}
+                  {(
+                    projectSummary.totalActual / projectSummary.totalEstimate
+                  ).toLocaleString(undefined, {
+                    style: 'percent',
+                    maximumFractionDigits: 1
+                  })}
+                </Typography>
               </Grid>
             </div>
             <div className={classes.gridItem}>

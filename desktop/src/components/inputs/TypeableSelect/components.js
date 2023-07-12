@@ -30,9 +30,7 @@ inputComponent.propTypes = {
 
 const MyTextField = withStyles({
   root: {
-    '& label.Mui-focused': {
-      color: 'lawngreen'
-    },
+    width: '100%',
     '& .MuiInput-underline:before': {
       borderBottomColor: 'hsl(0,0%,80%)'
     },
