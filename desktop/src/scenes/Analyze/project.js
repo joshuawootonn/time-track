@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -12,11 +12,13 @@ import PropTypes from 'prop-types';
 import { Field, Form, Formik } from 'formik';
 
 import { foremanActions, projectActions } from 'store/actions';
-import { projectSelectors } from 'store/selectors';
+import { projectSelectors, projectTaskSelectors } from 'store/selectors';
+import ProjectSummary from 'containers/ForemanProject/projectSummary.container';
 
 const styles = {
   root: {
-    height: `100vh`
+    height: `100vh`,
+    width: `100vw`
   },
   tab: {
     height: `calc(100% - 48px)`,
@@ -51,16 +53,20 @@ export class Project extends Component {
   };
 
   render() {
-    const { classes, projects, updateFilter, selectedProjectId } = this.props;
+    const {
+      classes,
+      projects,
+      updateFilter,
+      selectedProjectId,
+      selected
+    } = this.props;
 
     console.log({ updateFilter, selectedProjectId });
     return (
       <div className={classes.root}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.tool}>
-            <Grid container direction="row" alignItems="center" spacing={1}>
-              <Grid item xs={10}>
-                {/* <Formik
+            {/* <Formik
                   initialValues={{ selectedProject: -1 }}
                   render={formikProps => {
                     console.log({ formikProps });
@@ -79,57 +85,35 @@ export class Project extends Component {
                     );
                   }}
                 ></Formik> */}
-                <Typeahead
-                  value={this.state.selectedProject}
-                  onChange={selectedProject => {
-                    updateFilter(selectedProject.id);
-
-                    console.log({ selectedProject });
-                    return this.setState({ selectedProject });
-                  }}
-                  options={projects.map(item => {
-                    return {
-                      label: item.name,
-                      value: item.name,
-                      id: item.id,
-                      data: { ...item }
-                    };
-                  })}
-                />
-              </Grid>
-              <Grid item xs={1}>
-                <Tooltip title="Go Back" placement="bottom">
-                  <IconButton color="inherit" onClick={this.back}>
-                    <ArrowBack />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            </Grid>
+            <div style={{ flex: '1' }}>
+              <Typeahead
+                value={this.state.selectedProject}
+                onChange={selectedProject => {
+                  updateFilter(selectedProject.id);
+                  console.log({ selected });
+                  console.log({ selectedProject });
+                  return this.setState({ selectedProject });
+                }}
+                options={projects.map(item => {
+                  return {
+                    label: item.name,
+                    value: item.name,
+                    id: item.id,
+                    data: { ...item }
+                  };
+                })}
+              />
+            </div>
+            <Tooltip title="Go Back" placement="bottom">
+              <IconButton color="inherit" onClick={this.back}>
+                <ArrowBack />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
-
-        <div>{JSON.stringify(this.state.selectedProject)}</div>
-        {/* <button onClick={console.log(this.props.getAllProjects())} /> */}
-        {/* <Form name="hi">
-          <Field
-            name="hi"
-            component={TypeableSelect}
-            type="name"
-            items={this.props.getAllProjects}
-            fullWidth
-            label="Project"
-            className={classes.field}
-          />
-        </Form> */}
-        {/* <div>
-          <Formik
-            render={formikProps => {
-              return (
-                <Field name="firstName" placeholder="Jane" {...formikProps} />
-              );
-            }}
-          />
-        </div> */}
+        <div>
+          <ProjectSummary selectedProject={this.props.selectedProjectId} />
+        </div>
       </div>
     );
   }
@@ -147,7 +131,8 @@ const mapStateToProps = state => {
     // selectedProject: projectSelectors.(state)
     projects: projectSelectors.getActiveProjects(state),
     selectedProjectId: state.foreman.projectId,
-    selectedProject: projectSelectors.getProjectForemanView(state)
+    // selectedProject: projectSelectors.getProjectForemanView(state)
+    selected: projectTaskSelectors.getSelectedProject(state)
   };
 };
 

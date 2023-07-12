@@ -3,9 +3,9 @@ module.exports = {
     host: "127.0.0.1",
     port: 3306,
     database: "timetrackprod",
-    password: "5656",
+    password: "077859",
     name: "db",
-    user: "dev",
+    user: "root",
     connector: "mysql"
   }
 };
