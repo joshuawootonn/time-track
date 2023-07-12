@@ -12,7 +12,9 @@ const styles = theme => ({
   input: {
     display: 'flex',
     padding: 0,
-    height: 'auto'
+    height: '2.2em',
+    width: '500px',
+    color: 'white'
   },
   valueContainer: {
     display: 'flex',
@@ -46,6 +48,7 @@ const styles = theme => ({
     marginTop: theme.spacing(1),
     position: 'absolute',
     zIndex: 1,
+    width: '500px',
     left: 0,
     right: 0
   },
@@ -56,6 +59,7 @@ const styles = theme => ({
 
 function Typeahead(props) {
   const { required, classes } = props;
+
   return (
     <Select
       classes={classes}

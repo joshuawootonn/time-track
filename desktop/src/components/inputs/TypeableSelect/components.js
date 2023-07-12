@@ -3,72 +3,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  input: {
-    display: 'flex',
-    padding: 0,
-    height: 'auto'
-  },
-  valueContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flex: 1,
-    alignItems: 'center'
-  },
-  chip: {
-    margin: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
-  },
-  chipFocused: {
-    backgroundColor: emphasize(
-      theme.palette.type === 'light'
-        ? theme.palette.grey[300]
-        : theme.palette.grey[700],
-      0.08
-    )
-  },
-  noOptionsMessage: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
-  },
-  singleValue: {
-    fontSize: 16
-  },
-  placeholder: {
-    position: 'absolute',
-    left: 2,
-    fontSize: 16
-  },
-  menu: {
-    marginTop: theme.spacing(1),
-    position: 'absolute',
-    zIndex: 1,
-    left: 0,
-    right: 0
-  },
-  divider: {
-    height: theme.spacing(2)
-  }
-});
 
 const NoOptionsMessage = ({ selectProps, innerProps, children }) => (
-  <Typography
-    color="textSecondary"
-    className={selectProps.classes.noOptionsMessage}
-    {...innerProps}
-  >
+  <Typography className={selectProps.classes.noOptionsMessage} {...innerProps}>
     {children}
   </Typography>
 );
@@ -85,10 +28,27 @@ inputComponent.propTypes = {
   inputRef: PropTypes.func
 };
 
+const MyTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'lawngreen'
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'hsl(0,0%,80%)'
+    },
+    '&:hover .MuiInput-underline:before': {
+      borderBottomColor: 'hsl(0,0%,90%)'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white'
+    }
+  }
+})(TextField);
+
 const Control = ({ selectProps, innerRef, children, innerProps }) => {
   return (
-    <TextField
-      fullWidth
+    <MyTextField
+      props
       InputProps={{
         inputComponent,
         inputProps: {
@@ -133,11 +93,7 @@ Option.propTypes = {
 };
 
 const Placeholder = ({ selectProps, innerProps, children }) => (
-  <Typography
-    color="textSecondary"
-    className={selectProps.classes.placeholder}
-    {...innerProps}
-  >
+  <Typography className={selectProps.classes.placeholder} {...innerProps}>
     {children}
   </Typography>
 );
