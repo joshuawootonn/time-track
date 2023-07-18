@@ -100,7 +100,9 @@
     "react-router-dom": "^5.2.0",
     "react-select": "^3.0.4",
     "react-simple-keyboard": "^1.21.3",
-    "react-virtualized": "^9.22.5",
+    "react-virtualized": "9.22.3",
+    "react-virtualized-auto-sizer": "^1.0.20",
+    "react-window": "^1.8.9",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
@@ -167,5 +169,8 @@
       "!src/registerServiceWorker.js",
       "!src/**/styles.js"
     ]
+  },
+  "resolutions": {
+    "react-virtualized": "git+https://git@github.com/remorses/react-virtualized-fixed-import.git#9.22.3"
   }
 }

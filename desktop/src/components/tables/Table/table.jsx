@@ -4,13 +4,12 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-// import { TableCell, TableSortLabel, Checkbox } from '@material-ui/core';
-// import {
-//   AutoSizer,
-//   Column,
-//   SortDirection,
-//   Table as RVTable
-// } from 'react-virtualized';
+import {
+  AutoSizer,
+  Column,
+  SortDirection,
+  Table as RVTable
+} from 'react-virtualized';
 import 'react-virtualized/styles.css';
 
 import * as TableDataTypes from '~/constants/tableDataTypes';
@@ -131,31 +130,31 @@ class Table extends React.Component {
 
   sort = (array, sortDirection, sortBy, type, sortKeys, sortKey) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
-    // stabilizedThis.sort((a, b) => {
-    //   let order = this.compareOrder(
-    //     a[0],
-    //     b[0],
-    //     sortBy,
-    //     type,
-    //     sortKeys,
-    //     sortKey
-    //   );
-    //   order = sortDirection === SortDirection.DESC ? order * -1 : order;
-    //   if (order !== 0) return order;
-    //   return a[1] - b[1];
-    // });
+    stabilizedThis.sort((a, b) => {
+      let order = this.compareOrder(
+        a[0],
+        b[0],
+        sortBy,
+        type,
+        sortKeys,
+        sortKey
+      );
+      order = sortDirection === SortDirection.DESC ? order * -1 : order;
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
     return stabilizedThis.map(el => el[0]);
   };
 
   handleRequestSort = value => {
     let { sortBy, sortDirection } = value;
 
-    // if (
-    //   this.state.sortBy === sortBy &&
-    //   this.state.sortDirection === SortDirection.DESC
-    // ) {
-    //   sortDirection = SortDirection.ASC;
-    // }
+    if (
+      this.state.sortBy === sortBy &&
+      this.state.sortDirection === SortDirection.DESC
+    ) {
+      sortDirection = SortDirection.ASC;
+    }
     const { keys, type, dataKey } = this.props.columns.find(
       column => column.id === sortBy
     );
@@ -211,51 +210,50 @@ class Table extends React.Component {
     const { sortBy, sortDirection, data } = this.state;
     const { ...tableProps } = this.props;
     // console.log('table: virtualized',data.length);
-    return null;
-    // return (
-    //   <AutoSizer>
-    //     {({ height, width }) => (
-    //       <RVTable
-    //         className={classes.table}
-    //         height={height}
-    //         width={width}
-    //         {...tableProps}
-    //         rowCount={data.length}
-    //         onRowClick={this.handleClick}
-    //         rowGetter={({ index }) => data[index]}
-    //         rowClassName={classNames(classes.tableRow, classes.flexContainer)}
-    //         headerClassName={classes.headerCell}
-    //         sort={this.handleRequestSort}
-    //         sortBy={sortBy}
-    //         sortDirection={sortDirection}
-    //       >
-    //         {columns.map(({ className, id, width, ...other }, index) => {
-    //           return (
-    //             <Column
-    //               key={id}
-    //               width={width}
-    //               headerRenderer={headerProps =>
-    //                 this.headerRenderer({
-    //                   ...headerProps,
-    //                   columnIndex: index,
-    //                   ...other
-    //                 })
-    //               }
-    //               flexGrow={1}
-    //               className={classNames(classes.flexContainer, className)}
-    //               cellRenderer={cellProps =>
-    //                 this.cellRenderer({
-    //                   ...cellProps
-    //                 })
-    //               }
-    //               dataKey={id}
-    //             />
-    //           );
-    //         })}
-    //       </RVTable>
-    //     )}
-    //   </AutoSizer>
-    // );
+    return (
+      <AutoSizer>
+        {({ height, width }) => (
+          <RVTable
+            className={classes.table}
+            height={height}
+            width={width}
+            {...tableProps}
+            rowCount={data.length}
+            onRowClick={this.handleClick}
+            rowGetter={({ index }) => data[index]}
+            rowClassName={classNames(classes.tableRow, classes.flexContainer)}
+            headerClassName={classes.headerCell}
+            sort={this.handleRequestSort}
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+          >
+            {columns.map(({ className, id, width, ...other }, index) => {
+              return (
+                <Column
+                  key={id}
+                  width={width}
+                  headerRenderer={headerProps =>
+                    this.headerRenderer({
+                      ...headerProps,
+                      columnIndex: index,
+                      ...other
+                    })
+                  }
+                  flexGrow={1}
+                  className={classNames(classes.flexContainer, className)}
+                  cellRenderer={cellProps =>
+                    this.cellRenderer({
+                      ...cellProps
+                    })
+                  }
+                  dataKey={id}
+                />
+              );
+            })}
+          </RVTable>
+        )}
+      </AutoSizer>
+    );
   }
 }
 
