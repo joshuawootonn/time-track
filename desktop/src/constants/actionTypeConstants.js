@@ -2,7 +2,7 @@ import {
   createCustomAsyncActionType,
   createCustomSyncActionType,
   createCRUDActionTypes
-} from 'helpers/actionTypes';
+} from '~/helpers/actionTypes';
 
 const activityActionTypes = {
   ...createCRUDActionTypes(`activity`, `activities`)

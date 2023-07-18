@@ -1,5 +1,5 @@
-import axios from 'helpers/axios';
-import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
+import axios from '~/helpers/axios';
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper';
 const DOMAIN = `employees`;
 
 // CRUD

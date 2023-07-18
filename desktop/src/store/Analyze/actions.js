@@ -1,5 +1,5 @@
-import { analyzeActionTypes } from 'constants/actionTypeConstants';
-import { modalActions } from 'store/actions';
+import { analyzeActionTypes } from '~/constants/actionTypeConstants';
+import { modalActions } from '~/store/actions';
 
 export const select = (domain, payload) => {
   return { type: analyzeActionTypes.SELECT, domain, payload };

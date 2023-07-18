@@ -1,4 +1,4 @@
-import ActionTypeHelpers from 'helpers/actionTypes';
+import ActionTypeHelpers from '~/helpers/actionTypes';
 
 const keyCount = obj => {
   return Object.keys(obj).length;

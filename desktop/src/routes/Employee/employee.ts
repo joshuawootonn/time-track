@@ -1,8 +1,7 @@
-import accountActionScene from 'scenes/Account/accountAction';
-import clockOutScene from 'scenes/Clock/clockOut';
-import {EMPLOYEE, CLOCKOUT} from 'constants/routes';
-import { RouteDetails } from 'routes/route.types';
-
+import accountActionScene from '~/scenes/Account/accountAction';
+import clockOutScene from '~/scenes/Clock/clockOut';
+import { EMPLOYEE, CLOCKOUT } from '~/constants/routes';
+import { RouteDetails } from '~/routes/route.types';
 
 const employeeRoutes: RouteDetails[] = [
   {
@@ -20,6 +19,5 @@ const employeeRoutes: RouteDetails[] = [
     type: EMPLOYEE
   }
 ];
-
 
 export default employeeRoutes;

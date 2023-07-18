@@ -1,4 +1,4 @@
-import { snackActionTypes } from 'constants/actionTypeConstants';
+import { snackActionTypes } from '~/constants/actionTypeConstants';
 
 export const initialState = {
   snackType: null,

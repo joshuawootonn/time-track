@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { HOST } from 'constants/network';
-import { getAccessToken } from 'constants/storage';
+import { HOST } from '~/constants/network';
+import { getAccessToken } from '~/constants/storage';
 
 const instance = axios.create({
   baseURL: HOST()

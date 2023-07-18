@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { employeeActions, analyzeActions } from 'store/actions';
-import { employeeSelectors } from 'store/selectors';
-import * as routes from 'constants/routes';
-import AccountActionForm from 'components/forms/AccountAction';
-import domains from 'constants/domains';
-import { BaseEmployee, Store } from 'store/types';
-import { AUTH_LEVELS } from 'constants/routes';
-import isElectron from 'helpers/IsElectron';
+import { employeeActions, analyzeActions } from '~/store/actions';
+import { employeeSelectors } from '~/store/selectors';
+import * as routes from '~/constants/routes';
+import AccountActionForm from '~/components/forms/AccountAction';
+import domains from '~/constants/domains';
+import { BaseEmployee, Store } from '~/store/types';
+import { AUTH_LEVELS } from '~/constants/routes';
+import isElectron from '~/helpers/IsElectron';
 
 interface Props extends RouteComponentProps {
   clockIn: (employee: BaseEmployee) => Promise<any>;

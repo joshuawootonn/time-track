@@ -1,7 +1,7 @@
-import { authorityActionTypes } from 'constants/actionTypeConstants';
-import { modalActions, genericActions, snackActions } from 'store/actions';
-import domains from 'constants/domains';
-import * as status from 'constants/status';
+import { authorityActionTypes } from '~/constants/actionTypeConstants';
+import { modalActions, genericActions, snackActions } from '~/store/actions';
+import domains from '~/constants/domains';
+import * as status from '~/constants/status';
 
 export const getAllAuthorities = () => {
   return async dispatch => {

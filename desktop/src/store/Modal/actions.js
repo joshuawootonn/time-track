@@ -1,4 +1,4 @@
-import { modalActionTypes } from 'constants/actionTypeConstants';
+import { modalActionTypes } from '~/constants/actionTypeConstants';
 
 export const openModal = (type, props) => {
   return {

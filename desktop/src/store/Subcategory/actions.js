@@ -1,12 +1,12 @@
-import { subcategoryActionTypes } from 'constants/actionTypeConstants';
+import { subcategoryActionTypes } from '~/constants/actionTypeConstants';
 import {
   modalActions,
   genericActions,
   snackActions,
   analyzeActions
-} from 'store/actions';
-import * as status from 'constants/status';
-import domains from 'constants/domains';
+} from '~/store/actions';
+import * as status from '~/constants/status';
+import domains from '~/constants/domains';
 
 export const getAllSubcategories = () => {
   return async dispatch => {

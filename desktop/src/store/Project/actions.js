@@ -1,9 +1,9 @@
-import { projectActionTypes } from 'constants/actionTypeConstants';
+import { projectActionTypes } from '~/constants/actionTypeConstants';
 
 import endpoints from './endpoints';
-import { snackActions, analyzeActions, genericActions } from 'store/actions';
-import * as status from 'constants/status';
-import domains from 'constants/domains';
+import { snackActions, analyzeActions, genericActions } from '~/store/actions';
+import * as status from '~/constants/status';
+import domains from '~/constants/domains';
 
 export const getAllProjects = () => {
   return async dispatch => {

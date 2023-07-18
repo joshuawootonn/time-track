@@ -1,4 +1,4 @@
-import axios from 'helpers/axios';
+import axios from '~/helpers/axios';
 
 export const generateCRUDEndpoints = domain => {
   return {

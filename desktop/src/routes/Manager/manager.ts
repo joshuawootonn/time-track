@@ -1,8 +1,8 @@
-import accountActionScene from 'scenes/Account/accountAction';
-import clockOutScene from 'scenes/Clock/clockOut';
-import exportScene from 'scenes/Export/export';
-import {MANAGER, CLOCKOUT, EXPORT} from 'constants/routes';
-import { RouteDetails } from 'routes/route.types';
+import accountActionScene from '~/scenes/Account/accountAction';
+import clockOutScene from '~/scenes/Clock/clockOut';
+import exportScene from '~/scenes/Export/export';
+import { MANAGER, CLOCKOUT, EXPORT } from '~/constants/routes';
+import { RouteDetails } from '~/routes/route.types';
 
 const managerRoutes: RouteDetails[] = [
   {

@@ -2,7 +2,7 @@ import {
   minutesRoudedTime,
   minutesToString,
   currentRoundedTime
-} from 'helpers/time';
+} from '~/helpers/time';
 
 describe(`Time Helper`, () => {
   it(`should return current time in moment object form for currentRoundedTime`, () => {

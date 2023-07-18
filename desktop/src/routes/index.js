@@ -1,9 +1,9 @@
 import RouteMapper from './routeMapper';
 
-import accountRoutes from 'routes/Account';
-import employeeRoutes from 'routes/Employee';
-import managerRoutes from 'routes/Manager';
-import adminRoutes from 'routes/Admin';
+import accountRoutes from '~/routes/Account';
+import employeeRoutes from '~/routes/Employee';
+import managerRoutes from '~/routes/Manager';
+import adminRoutes from '~/routes/Admin';
 import foremanRoutes from './Foreman/foreman';
 
 const routes = [

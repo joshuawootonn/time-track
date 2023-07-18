@@ -1,8 +1,8 @@
-import accountActionScene from 'scenes/Account/accountAction';
-import clockOutScene from 'scenes/Clock/clockOut';
-import projectScene from 'scenes/Analyze/project';
-import { FOREMAN, CLOCKOUT, ANALYZE, CREW } from 'constants/routes';
-import { RouteDetails } from 'routes/route.types';
+import accountActionScene from '~/scenes/Account/accountAction';
+import clockOutScene from '~/scenes/Clock/clockOut';
+import projectScene from '~/scenes/Analyze/project';
+import { FOREMAN, CLOCKOUT, ANALYZE, CREW } from '~/constants/routes';
+import { RouteDetails } from '~/routes/route.types';
 
 const foremanRoutes: RouteDetails[] = [
   {

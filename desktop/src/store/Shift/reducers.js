@@ -1,5 +1,5 @@
-import { shiftActionTypes } from 'constants/actionTypeConstants';
-import * as status from 'constants/status';
+import { shiftActionTypes } from '~/constants/actionTypeConstants';
+import * as status from '~/constants/status';
 
 export const initialState = {
   current: {

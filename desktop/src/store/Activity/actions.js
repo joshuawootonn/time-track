@@ -1,7 +1,7 @@
-import { activityActionTypes } from 'constants/actionTypeConstants';
-import { snackActions, genericActions } from 'store/actions';
-import domains from 'constants/domains';
-import * as status from 'constants/status';
+import { activityActionTypes } from '~/constants/actionTypeConstants';
+import { snackActions, genericActions } from '~/store/actions';
+import domains from '~/constants/domains';
+import * as status from '~/constants/status';
 
 export const createActivity = activity => {
   return async dispatch => {

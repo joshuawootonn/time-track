@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getAnalyzeState } from 'store/Analyze/selectors';
+import { getAnalyzeState } from '~/store/Analyze/selectors';
 
 export const getSubcategoriesFromEntities = state =>
   state.entities.subcategories;

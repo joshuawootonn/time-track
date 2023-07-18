@@ -1,9 +1,9 @@
-import { userActionTypes } from 'constants/actionTypeConstants';
+import { userActionTypes } from '~/constants/actionTypeConstants';
 
-import { authorityActions, crewActions } from 'store/actions';
+import { authorityActions, crewActions } from '~/store/actions';
 import * as endpoint from './endpoints';
-import { updateAxiosInstanceWithNewURL } from 'helpers/axios';
-import { setAccessToken, setCred } from 'constants/storage';
+import { updateAxiosInstanceWithNewURL } from '~/helpers/axios';
+import { setAccessToken, setCred } from '~/constants/storage';
 
 export const login = (ip, username, password) => {
   return async dispatch => {

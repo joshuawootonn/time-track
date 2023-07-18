@@ -1,8 +1,8 @@
-import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper';
 
 import * as axios from 'axios';
 
-import { keyCount } from 'helpers/test.helper';
+import { keyCount } from '~/helpers/test.helper';
 
 jest.mock(`axios`);
 describe(`Endpoint Helpers`, () => {

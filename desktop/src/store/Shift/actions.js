@@ -1,18 +1,18 @@
 import moment from 'moment';
 
-import { shiftActionTypes } from 'constants/actionTypeConstants';
+import { shiftActionTypes } from '~/constants/actionTypeConstants';
 
 import {
   snackActions,
   analyzeActions,
   genericActions,
   employeeActions
-} from 'store/actions';
+} from '~/store/actions';
 import * as endpoint from './endpoints';
 import { normalize } from 'normalizr';
-import * as status from 'constants/status';
-import * as schemas from 'store/schemas';
-import domains from 'constants/domains';
+import * as status from '~/constants/status';
+import * as schemas from '~/store/schemas';
+import domains from '~/constants/domains';
 
 export const getCurrentShift = employeeId => {
   return async dispatch => {

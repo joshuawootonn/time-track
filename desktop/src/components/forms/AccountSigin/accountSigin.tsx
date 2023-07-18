@@ -5,7 +5,7 @@ import { Button, Grid, Typography } from '@material-ui/core';
 import { Field, Form } from 'formik';
 
 import styles from './styles';
-import Password from 'components/inputs/Password';
+import Password from '~/components/inputs/Password';
 
 export interface Props {
   classes: any;

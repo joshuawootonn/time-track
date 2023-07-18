@@ -1,12 +1,12 @@
-import { crewActionTypes } from 'constants/actionTypeConstants';
+import { crewActionTypes } from '~/constants/actionTypeConstants';
 import {
   modalActions,
   genericActions,
   snackActions,
   analyzeActions
-} from 'store/actions';
-import domains from 'constants/domains';
-import * as status from 'constants/status';
+} from '~/store/actions';
+import domains from '~/constants/domains';
+import * as status from '~/constants/status';
 
 export const getAllCrews = () => {
   return async dispatch => {

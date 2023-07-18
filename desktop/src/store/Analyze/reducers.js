@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-import { analyzeActionTypes } from 'constants/actionTypeConstants';
-import { analyzeStatus } from 'constants/analyze';
+import { analyzeActionTypes } from '~/constants/actionTypeConstants';
+import { analyzeStatus } from '~/constants/analyze';
 
 export const initialState = {
   employee: -1,

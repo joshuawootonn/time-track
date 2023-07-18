@@ -1,5 +1,5 @@
-import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
-import axios from 'helpers/axios';
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper';
+import axios from '~/helpers/axios';
 const DOMAIN = `projects`;
 
 const CRUDendpoints = generateCRUDEndpoints(DOMAIN);

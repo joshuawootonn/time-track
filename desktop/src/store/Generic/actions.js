@@ -1,6 +1,6 @@
 import { normalize } from 'normalizr';
-import * as endpoints from 'store/endpoints';
-import * as schemas from 'store/schemas';
+import * as endpoints from '~/store/endpoints';
+import * as schemas from '~/store/schemas';
 
 export const get = (domain, id) => {
   const get = endpoints[`${domain.singular}Endpoints`].default.get(id);

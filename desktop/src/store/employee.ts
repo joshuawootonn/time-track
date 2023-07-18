@@ -1,11 +1,11 @@
 import { BaseEmployee, BaseActivity, BaseShift } from './types';
-import { snackActions } from 'store/actions';
+import { snackActions } from '~/store/actions';
 import { AxiosError } from 'axios';
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import axios from 'helpers/axios';
+import axios from '~/helpers/axios';
 import moment from 'moment';
-import * as status from 'constants/status';
+import * as status from '~/constants/status';
 
 export type ClockInEmployeeRequest = Action<'ClockInEmployeeRequest'>;
 

@@ -1,5 +1,5 @@
-import { userActionTypes } from 'constants/actionTypeConstants';
-import * as status from 'constants/status';
+import { userActionTypes } from '~/constants/actionTypeConstants';
+import * as status from '~/constants/status';
 export const initialState = { status: status.INIT };
 
 export default (state = initialState, action) => {

@@ -1,11 +1,11 @@
 import { normalize } from 'normalizr';
 
-import { employeeActionTypes } from 'constants/actionTypeConstants';
-import { snackActions, genericActions, analyzeActions } from 'store/actions';
+import { employeeActionTypes } from '~/constants/actionTypeConstants';
+import { snackActions, genericActions, analyzeActions } from '~/store/actions';
 import endpoints from './endpoints';
-import * as schemas from 'store/schemas';
-import * as status from 'constants/status';
-import domains from 'constants/domains';
+import * as schemas from '~/store/schemas';
+import * as status from '~/constants/status';
+import domains from '~/constants/domains';
 
 export const getAllEmployees = () => {
   return dispatch => {

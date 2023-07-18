@@ -1,4 +1,4 @@
-import { staticActionTypes } from 'constants/actionTypeConstants';
+import { staticActionTypes } from '~/constants/actionTypeConstants';
 
 import {
   projectActions,
@@ -7,7 +7,7 @@ import {
   categoryActions,
   dimensionActions,
   subcategoryActions
-} from 'store/actions';
+} from '~/store/actions';
 
 export const getStaticData = () => {
   return async dispatch => {
