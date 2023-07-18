@@ -17,6 +17,7 @@ import * as subcategoryActions from './Subcategory/actions'
 import * as dimensionActions from './Dimension/actions'
 import * as modalActions from './Modal/actions'
 import * as genericActions from './Generic/actions'
+import * as foremanActions from './Foreman/actions'
 
 const employeeActions = {
   ...employeeActionsJS,
@@ -30,6 +31,7 @@ export {
   snackActions,
   employeeActions,
   authorityActions,
+  foremanActions,
   crewActions,
   projectActions,
   projectTaskActions,

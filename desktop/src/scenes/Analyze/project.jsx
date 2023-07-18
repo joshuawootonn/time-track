@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { AppBar, IconButton, Toolbar, Tooltip, Grid } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { ArrowBack } from '@material-ui/icons'
 
-import TypeableSelect from '~/components/inputs/TypeableSelect'
+import Typeahead from '~/components/inputs/TypeableSelect/autoComplete'
+import PropTypes from 'prop-types'
 
 import { Field, Form, Formik } from 'formik'
+
+import { foremanActions, projectActions } from '~/store/actions'
+import { projectSelectors, projectTaskSelectors } from '~/store/selectors'
+import ProjectSummary from '~/containers/ForemanProject/projectSummary.container'
 
 const styles = {
   root: {
@@ -34,46 +40,115 @@ const styles = {
 }
 
 export class Project extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selectedProject: undefined,
+    }
+  }
+
   back = () => {
     this.props.history.push(`/`)
   }
 
   render() {
-    const { classes, projects } = this.props
+    const {
+      classes,
+      projects,
+      updateFilter,
+      selectedProjectId,
+      selected,
+    } = this.props
+
+    console.log({ updateFilter, selectedProjectId })
     return (
       <div className={classes.root}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.tool}>
-            <Grid container direction="row" alignItems="center" spacing={1}>
-              <Grid item xs={10}>
-                <Formik>
-                  <Form>
-                    <Field
-                      name="Project select"
-                      component={TypeableSelect}
-                      type="name"
-                      items={projects}
-                      fullWidth
-                      label="Project"
-                      className={classes.field}
-                    />
-                  </Form>
-                </Formik>
-              </Grid>
-              <Grid item xs={1}>
-                <Tooltip title="Go Back" placement="bottom">
-                  <IconButton color="inherit" onClick={this.back}>
-                    <ArrowBack />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            </Grid>
+            {/* <Formik
+                  initialValues={{ selectedProject: -1 }}
+                  render={formikProps => {
+                    console.log({ formikProps });
+                    return (
+                      <Form>
+                        <Field
+                          component={TypeableSelect}
+                          type="name"
+                          items={projects}
+                          fullWidth
+                          label="Project"
+                          className={classes.field}
+                          name={'selectedProject'}
+                        />
+                      </Form>
+                    );
+                  }}
+                ></Formik> */}
+            <div style={{ flex: '1' }}>
+              <Typeahead
+                value={this.state.selectedProject}
+                onChange={(selectedProject) => {
+                  updateFilter(selectedProject.id)
+                  console.log({ selected })
+                  console.log({ selectedProject })
+                  return this.setState({ selectedProject })
+                }}
+                options={projects.map((item) => {
+                  return {
+                    label: item.name,
+                    value: item.name,
+                    id: item.id,
+                    data: { ...item },
+                  }
+                })}
+              />
+            </div>
+            <Tooltip title="Go Back" placement="bottom">
+              <IconButton color="inherit" onClick={this.back}>
+                <ArrowBack />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
-        <p>hello world</p>
+        <div>
+          <ProjectSummary selectedProject={this.props.selectedProjectId} />
+        </div>
       </div>
     )
   }
 }
 
-export default withRouter(withStyles(styles)(Project))
+export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`
+
+Project.prototypes = {
+  getAllProjects: PropTypes.func.isRequired,
+}
+
+/* istanbul ignore next */
+const mapStateToProps = (state) => {
+  return {
+    // selectedProject: projectSelectors.(state)
+    projects: projectSelectors.getActiveProjects(state),
+    selectedProjectId: state.foreman.projectId,
+    // selectedProject: projectSelectors.getProjectForemanView(state)
+    selected: projectTaskSelectors.getSelectedProject(state),
+  }
+}
+
+/* istanbul ignore next */
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllProjects: () => {
+      return dispatch(projectActions.getAllProjects())
+    },
+    updateFilter: (projectId) => {
+      return dispatch(foremanActions.updateFilter(projectId))
+    },
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(withStyles(styles)(Project)))

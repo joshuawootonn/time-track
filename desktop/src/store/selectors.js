@@ -11,12 +11,14 @@ import * as subcategorySelectors from './Subcategory/selectors'
 import * as dimensionSelectors from './Dimension/selectors'
 import * as analyzeSelectors from './Analyze/selectors'
 import * as userSelectors from './User/selectors'
+import * as foremanSelectors from './Foreman/selectors'
 
 export {
   employeeSelectors,
   shiftSelectors,
   projectSelectors,
   projectTaskSelectors,
+  foremanSelectors,
   taskSelectors,
   activitySelectors,
   authoritySelectors,

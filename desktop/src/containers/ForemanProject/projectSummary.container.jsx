@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getProjectForemanView } from '~/store/Project/selectors'
+// import { getProjectForemanView } from '~/store/Project/selectors'
 import axios from '~/helpers/axios'
 import { Grid, Typography } from '@material-ui/core'
 
@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     height: `calc(100vh - 48px)`,
     width: '100vw',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
 const ProjectSummary = (selectedProjectId) => {
   // const dispatch = useDispatch();
 
-  const projects = useSelector((state) => getProjectForemanView(state))
+  // const projects = useSelector((state) => (state))
   const [projectSummaries, setProjectSummaries] = useState([])
   const classes = useStyles()
 
@@ -45,7 +46,7 @@ const ProjectSummary = (selectedProjectId) => {
       .then(({ data: { projects } }) => {
         setProjectSummaries(projects)
       })
-  }, [projects])
+  }, [])
 
   const projectSummary = projectSummaries.find(
     (summary) => summary.id == selectedProjectId.selectedProject,
@@ -55,7 +56,7 @@ const ProjectSummary = (selectedProjectId) => {
     return (
       <div className={classes.container}>
         <div className={classes.insideContainer}>
-          {/* <Grid container direction="column" alignItems="center">
+          <Grid container direction="column" alignItems="center">
             <div className={classes.gridItem} style={{ marginTop: '8px' }}>
               <Grid item md={6} xs={8} style={{ flex: '1 1 auto' }}>
                 <Typography>Total Estimate:</Typography>
@@ -106,13 +107,13 @@ const ProjectSummary = (selectedProjectId) => {
                 <Typography>{projectSummary.hoursWorkedYesterday}</Typography>
               </Grid>
             </div>
-          </Grid> */}
-          <div className="grid w-80 grid-cols-1 md:grid-cols-2 bg-slate-200 p-4 rounded-md">
-            <label className="text-lg font-bold">Total Estimate:</label>
-            <div className="text-lg">
-              {projectSummary.totalEstimate.toLocaleString()}
-            </div>
-          </div>
+          </Grid>
+        </div>
+        <div className="grid grid-cols-[minmax(0,2fr),minmax(0,1fr)] w-96 bg-slate-50 p-4 rounded-md">
+          <Typography>Hours Worked Yesterday:</Typography>
+          <Typography className="justify-self-end">
+            {projectSummary.hoursWorkedYesterday}
+          </Typography>
         </div>
       </div>
     )
