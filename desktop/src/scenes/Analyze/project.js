@@ -11,7 +11,8 @@ import { Field, Form, Formik } from 'formik';
 
 const styles = {
   root: {
-    height: `100vh`
+    height: `100vh`,
+    width: `100vw`
   },
   tab: {
     height: `calc(100% - 48px)`,
