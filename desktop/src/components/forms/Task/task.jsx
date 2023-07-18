@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Field, Form } from 'formik';
-import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { Field, Form } from 'formik'
+import cx from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
 import {
   Grid,
   Tooltip,
   IconButton,
   Typography,
-  Button
-} from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+  Button,
+} from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
 
-import styles from './styles';
-import TextField from '~/components/inputs/TextField';
-import Select from '~/components/inputs/Select';
-import Switch from '~/components/inputs/Switch';
+import styles from './styles'
+import TextField from '~/components/inputs/TextField'
+import Select from '~/components/inputs/Select'
+import Switch from '~/components/inputs/Switch'
 
-import TypeableSelect from '~/components/inputs/TypeableSelect';
+import TypeableSelect from '~/components/inputs/TypeableSelect'
 
 export class Task extends Component {
   render() {
@@ -33,8 +33,8 @@ export class Task extends Component {
       resetForm,
       initialValues,
       errors,
-      setFieldValue
-    } = this.props;
+      setFieldValue,
+    } = this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -80,8 +80,8 @@ export class Task extends Component {
             <Field
               name="subcategoryId"
               component={TypeableSelect}
-              items={subcategories.filter(subcat => {
-                return subcat.categoryId === this.props.values.categoryId;
+              items={subcategories.filter((subcat) => {
+                return subcat.categoryId === this.props.values.categoryId
               })}
               type="type"
               fullWidth
@@ -110,7 +110,7 @@ export class Task extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 id={`${TASK_FORM_RESET_BUTTON_ID}`}
                 disabled={isSubmitting}
@@ -123,8 +123,8 @@ export class Task extends Component {
               {[`filter`].includes(type) && (
                 <Button
                   onClick={() => {
-                    resetForm(initialValues);
-                    this.props.clearFilter();
+                    resetForm(initialValues)
+                    this.props.clearFilter()
                   }}
                   id={`${TASK_FORM_CLEAR_BUTTON_ID}`}
                   disabled={isSubmitting}
@@ -139,14 +139,14 @@ export class Task extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
-export const TASK_FORM_RESET_BUTTON_ID = `task_form_reset_button`;
-export const TASK_FORM_CLEAR_BUTTON_ID = `task_form_clear_button`;
-export const TASK_FORM_SUBMIT_BUTTON_ID = `task_form_submit_button`;
-export const TASK_FORM_CATEGORY_FIELD_ID = `task_form_category_field_button`;
+export const TASK_FORM_RESET_BUTTON_ID = `task_form_reset_button`
+export const TASK_FORM_CLEAR_BUTTON_ID = `task_form_clear_button`
+export const TASK_FORM_SUBMIT_BUTTON_ID = `task_form_submit_button`
+export const TASK_FORM_CATEGORY_FIELD_ID = `task_form_category_field_button`
 
 Task.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -161,7 +161,7 @@ Task.propTypes = {
   errors: PropTypes.object.isRequired,
   values: PropTypes.object,
   setFieldValue: PropTypes.func,
-  clearFilter: PropTypes.func
-};
+  clearFilter: PropTypes.func,
+}
 
-export default withStyles(styles)(Task);
+export default withStyles(styles)(Task)

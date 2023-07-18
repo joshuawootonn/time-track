@@ -1,15 +1,15 @@
-export default theme => ({
+export default (theme) => ({
   //table
   headerCell: {
     background: `white`,
     position: `sticky`,
     top: 0,
     marginRight: 0,
-    flex: 1
+    flex: 1,
   },
   // table
   table: {
-    fontFamily: theme.typography.fontFamily
+    fontFamily: theme.typography.fontFamily,
   },
   // header cell table
   flexContainer: {
@@ -18,23 +18,23 @@ export default theme => ({
     boxSizing: `border-box`,
     flex: 1,
     marginRight: 0,
-    textTransform: `none`
+    textTransform: `none`,
   },
   //table
   tableRow: {
     cursor: `pointer`,
     '&:hover': {
-      backgroundColor: theme.palette.grey[200]
-    }
+      backgroundColor: theme.palette.grey[200],
+    },
   },
   tableRowHover: {
     marginRight: 0,
-    flex: 1
+    flex: 1,
   },
   // header cell
   tableCell: {
     flex: 1,
     marginRight: 0,
-    fontSize: `.8rem`
-  }
-});
+    fontSize: `.8rem`,
+  },
+})

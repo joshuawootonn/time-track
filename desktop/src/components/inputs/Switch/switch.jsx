@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Switch as MUSwitch, FormControlLabel } from '@material-ui/core';
+import { Switch as MUSwitch, FormControlLabel } from '@material-ui/core'
 
 export const Switch = ({ field, className, label, disabled }) => {
   //console.log(field)
@@ -19,14 +19,14 @@ export const Switch = ({ field, className, label, disabled }) => {
       }
       label={label}
     />
-  );
-};
+  )
+}
 
 Switch.propTypes = {
   field: PropTypes.object.isRequired,
   className: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  disabled: PropTypes.bool
-};
+  disabled: PropTypes.bool,
+}
 
-export default Switch;
+export default Switch

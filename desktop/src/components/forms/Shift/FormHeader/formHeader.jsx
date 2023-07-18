@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
@@ -7,27 +7,20 @@ import {
   Button,
   Tooltip,
   IconButton,
-  Paper
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { Delete } from '@material-ui/icons';
-import cx from 'classnames';
+  Paper,
+} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { Delete } from '@material-ui/icons'
+import cx from 'classnames'
 
-import styles from './styles';
-import * as formConstants from '../../../../constants/formTypes';
+import styles from './styles'
+import * as formConstants from '../../../../constants/formTypes'
 
-import { analyzeStatus } from '~/constants/analyze';
+import { analyzeStatus } from '~/constants/analyze'
 
-export const FormHeader = props => {
-  const {
-    classes,
-    remove,
-    label,
-    type,
-    extent,
-    extentOptions,
-    updateExtent
-  } = props;
+export const FormHeader = (props) => {
+  const { classes, remove, label, type, extent, extentOptions, updateExtent } =
+    props
   return (
     <Grid container spacing={3} className={classes.gridContainer}>
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
@@ -48,7 +41,7 @@ export const FormHeader = props => {
                 >
                   {extentOption.label}
                 </Button>
-              );
+              )
             })}
         </div>
         {type === analyzeStatus.EDITING && (
@@ -60,10 +53,10 @@ export const FormHeader = props => {
         )}
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = `analyze_shift_extent_button`;
+export const ANALYZE_SHIFT_EXTENT_BUTTON_ID = `analyze_shift_extent_button`
 
 FormHeader.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -75,12 +68,12 @@ FormHeader.propTypes = {
     PropTypes.shape({
       type: PropTypes.oneOf([
         formConstants.HALF_SHIFT,
-        formConstants.FULL_SHIFT
+        formConstants.FULL_SHIFT,
       ]),
-      label: PropTypes.string
-    })
+      label: PropTypes.string,
+    }),
   ),
-  updateExtent: PropTypes.func
-};
+  updateExtent: PropTypes.func,
+}
 
-export default withStyles(styles)(FormHeader);
+export default withStyles(styles)(FormHeader)

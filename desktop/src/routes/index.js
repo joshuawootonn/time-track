@@ -1,42 +1,42 @@
-import RouteMapper from './routeMapper';
+import RouteMapper from './routeMapper'
 
-import accountRoutes from '~/routes/Account';
-import employeeRoutes from '~/routes/Employee';
-import managerRoutes from '~/routes/Manager';
-import adminRoutes from '~/routes/Admin';
-import foremanRoutes from './Foreman/foreman';
+import accountRoutes from '~/routes/Account'
+import employeeRoutes from '~/routes/Employee'
+import managerRoutes from '~/routes/Manager'
+import adminRoutes from '~/routes/Admin'
+import foremanRoutes from './Foreman/foreman'
 
 const routes = [
   {
     component: RouteMapper,
     path: `/`,
     name: `Signin`,
-    routes: accountRoutes
+    routes: accountRoutes,
   },
   {
     component: RouteMapper,
     path: `/employee`,
     name: `Employee`,
-    routes: employeeRoutes
+    routes: employeeRoutes,
   },
   {
     component: RouteMapper,
     path: `/manager`,
     name: `Manager`,
-    routes: managerRoutes
+    routes: managerRoutes,
   },
   {
     component: RouteMapper,
     path: `/admin`,
     name: `Admin`,
-    routes: adminRoutes
+    routes: adminRoutes,
   },
   {
     component: RouteMapper,
     path: `/foreman`,
     name: `Foreman`,
-    routes: foremanRoutes
-  }
-];
+    routes: foremanRoutes,
+  },
+]
 
-export default routes;
+export default routes

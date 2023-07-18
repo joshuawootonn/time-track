@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import VirtualizedSortSelect from '~/components/tables/Table';
-import Progress from '~/components/helpers/Progress';
+import VirtualizedSortSelect from '~/components/tables/Table'
+import Progress from '~/components/helpers/Progress'
 
-import { analyzeActions } from '~/store/actions';
-import { employeeSelectors } from '~/store/selectors';
+import { analyzeActions } from '~/store/actions'
+import { employeeSelectors } from '~/store/selectors'
 
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import domain from '~/constants/domains';
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import domain from '~/constants/domains'
 
 export class EmployeeIndex extends Component {
-  select = object => this.props.select(domain.EMPLOYEE, object);
+  select = (object) => this.props.select(domain.EMPLOYEE, object)
 
   render() {
-    const { employees, selected } = this.props;
+    const { employees, selected } = this.props
 
-    if (!employees) return <Progress variant="circular" fullPage />;
+    if (!employees) return <Progress variant="circular" fullPage />
 
     return (
       <VirtualizedSortSelect
@@ -28,7 +28,7 @@ export class EmployeeIndex extends Component {
         select={this.select}
         initialSortBy="lastName"
       />
-    );
+    )
   }
 }
 
@@ -36,29 +36,29 @@ EmployeeIndex.propTypes = {
   employees: PropTypes.array,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired
-};
+  setStatus: PropTypes.func.isRequired,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  const filters = state.analyze.employeeFilters;
+const mapStateToProps = (state) => {
+  const filters = state.analyze.employeeFilters
   return {
     employees: employeeSelectors.getAllEmployeesNew(state, {
       filters,
-      sorts: {}
+      sorts: {},
     }),
-    selected: employeeSelectors.getSelectedEmployee(state)
-  };
-};
+    selected: employeeSelectors.getSelectedEmployee(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
-  };
-};
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeIndex)
 
 const rows = [
   {
@@ -68,7 +68,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `First Name`,
-    type: TableDataTypes.STRING
+    type: TableDataTypes.STRING,
   },
   {
     id: `lastName`,
@@ -77,7 +77,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Last Name`,
-    type: TableDataTypes.STRING
+    type: TableDataTypes.STRING,
   },
   {
     id: `authority_type`,
@@ -87,7 +87,7 @@ const rows = [
     padding: `dense`,
     label: `Authority`,
     type: TableDataTypes.OBJECT,
-    keys: [`type`]
+    keys: [`type`],
   },
   {
     id: `name`,
@@ -97,7 +97,7 @@ const rows = [
     padding: `dense`,
     label: `Crew`,
     type: TableDataTypes.OBJECT,
-    keys: [`name`]
+    keys: [`name`],
   },
   {
     id: `isEmployed`,
@@ -107,7 +107,7 @@ const rows = [
     align: `right`,
     padding: `dense`,
     label: `Currently Employed`,
-    type: TableDataTypes.BOOLEAN
+    type: TableDataTypes.BOOLEAN,
   },
   {
     id: `isWorking`,
@@ -117,6 +117,6 @@ const rows = [
     align: `right`,
     padding: `dense`,
     label: `Currently Working`,
-    type: TableDataTypes.BOOLEAN
-  }
-];
+    type: TableDataTypes.BOOLEAN,
+  },
+]

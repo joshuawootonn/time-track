@@ -1,2 +1,2 @@
-import File from './file';
-export default File;
+import File from './file'
+export default File

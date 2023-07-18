@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import { analyzeActions, crewActions } from '~/store/actions';
-import { crewSelectors } from '~/store/selectors';
-import SortSelectTable from '~/components/tables/SortSelect';
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import { analyzeStatus } from '~/constants/analyze';
-import domain from '~/constants/domains';
+import { analyzeActions, crewActions } from '~/store/actions'
+import { crewSelectors } from '~/store/selectors'
+import SortSelectTable from '~/components/tables/SortSelect'
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import { analyzeStatus } from '~/constants/analyze'
+import domain from '~/constants/domains'
 
 export class CrewIndex extends Component {
   componentDidMount = () => {
-    this.props.getAllCrews();
-  };
+    this.props.getAllCrews()
+  }
 
-  selectLabel = selected => `${selected.name} selected`;
+  selectLabel = (selected) => `${selected.name} selected`
 
-  select = object => this.props.select(domain.CREW, object);
+  select = (object) => this.props.select(domain.CREW, object)
 
-  add = () => this.props.setStatus(domain.CREW, analyzeStatus.ADDING);
+  add = () => this.props.setStatus(domain.CREW, analyzeStatus.ADDING)
 
   render() {
-    const { crews, selected } = this.props;
+    const { crews, selected } = this.props
     return (
       <SortSelectTable
         selectLabel={this.selectLabel}
@@ -34,7 +34,7 @@ export class CrewIndex extends Component {
         add={this.add}
         initialOrderBy="name"
       />
-    );
+    )
   }
 }
 
@@ -43,34 +43,34 @@ CrewIndex.propTypes = {
   crews: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   selected: PropTypes.object.isRequired,
-  setStatus: PropTypes.func.isRequired
-};
+  setStatus: PropTypes.func.isRequired,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     crews: crewSelectors.getAllCrews(state),
-    selected: crewSelectors.getSelectedCrew(state)
-  };
-};
+    selected: crewSelectors.getSelectedCrew(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getAllCrews: () => {
-      return dispatch(crewActions.getAllCrews());
+      return dispatch(crewActions.getAllCrews())
     },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
-  };
-};
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CrewIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(CrewIndex)
 
 const rows = [
   {
     id: `name`,
     padding: `dense`,
     label: `Name`,
-    type: TableDataTypes.STRING
-  }
-];
+    type: TableDataTypes.STRING,
+  },
+]

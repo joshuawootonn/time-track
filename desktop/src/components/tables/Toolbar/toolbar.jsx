@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import cx from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
 import {
   Toolbar as MUToolbar,
   Typography,
   IconButton,
-  Tooltip
-} from '@material-ui/core';
-import { Add, FilterList } from '@material-ui/icons';
+  Tooltip,
+} from '@material-ui/core'
+import { Add, FilterList } from '@material-ui/icons'
 
-import styles from './styles';
+import styles from './styles'
 
 // ICEBOX: Test Table
 
@@ -25,19 +25,19 @@ export class Toolbar extends Component {
       toggleFilter,
       label,
       selectLabel,
-      children
-    } = this.props;
+      children,
+    } = this.props
 
     return (
       <div
         style={{
           position: `relative`,
-          borderBottom: '1px solid rgba(224, 224, 224, 1)'
+          borderBottom: '1px solid rgba(224, 224, 224, 1)',
         }}
       >
         <MUToolbar
           className={cx(classes.toolbarRoot, {
-            [classes.highlight]: Object.keys(selected).length !== 0
+            [classes.highlight]: Object.keys(selected).length !== 0,
           })}
         >
           <div className={classes.title}>
@@ -77,7 +77,7 @@ export class Toolbar extends Component {
           </div>
         </MUToolbar>
       </div>
-    );
+    )
   }
 }
 Toolbar.propTypes = {
@@ -88,7 +88,7 @@ Toolbar.propTypes = {
   label: PropTypes.string.isRequired,
   selectLabel: PropTypes.func.isRequired,
   toggleFilter: PropTypes.func,
-  isFilterVisible: PropTypes.bool
-};
+  isFilterVisible: PropTypes.bool,
+}
 
-export default withStyles(styles)(Toolbar);
+export default withStyles(styles)(Toolbar)

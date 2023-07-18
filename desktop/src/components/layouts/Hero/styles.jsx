@@ -1,19 +1,19 @@
 const styles = () => ({
   fullWidth: {
-    width: `100%`
+    width: `100%`,
   },
   fullHeight: {
-    height: `100%`
+    height: `100%`,
   },
   fullPageWrapper: {
     height: `100vh`,
-    width: `100vw`
+    width: `100vw`,
   },
   flex: {
     display: `flex`,
     justifyContent: `center`,
-    alignItems: `center`
-  }
-});
+    alignItems: `center`,
+  },
+})
 
-export default styles;
+export default styles

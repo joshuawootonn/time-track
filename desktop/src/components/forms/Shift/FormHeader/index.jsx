@@ -1,2 +1,2 @@
-import FormHeader from './formHeader';
-export default FormHeader;
+import FormHeader from './formHeader'
+export default FormHeader

@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Grid, Typography, Button } from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Button } from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
 
-import TextField from '~/components/inputs/TextField';
-import Switch from '~/components/inputs/Switch';
-import styles from './styles';
+import TextField from '~/components/inputs/TextField'
+import Switch from '~/components/inputs/Switch'
+import styles from './styles'
 
 export class ProjectFilter extends Component {
   render() {
-    const {
-      classes,
-      isSubmitting,
-      resetForm,
-      initialValues,
-      errors
-    } = this.props;
+    const { classes, isSubmitting, resetForm, initialValues, errors } =
+      this.props
 
     return (
       <Form>
@@ -85,7 +80,7 @@ export class ProjectFilter extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 disabled={isSubmitting}
                 color="secondary"
@@ -97,8 +92,8 @@ export class ProjectFilter extends Component {
 
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
-                  this.props.clearFilter();
+                  resetForm(initialValues)
+                  this.props.clearFilter()
                 }}
                 disabled={isSubmitting}
                 color="secondary"
@@ -111,7 +106,7 @@ export class ProjectFilter extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -124,7 +119,7 @@ ProjectFilter.propTypes = {
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  clearFilter: PropTypes.func
-};
+  clearFilter: PropTypes.func,
+}
 
-export default withStyles(styles)(ProjectFilter);
+export default withStyles(styles)(ProjectFilter)

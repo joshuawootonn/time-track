@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles'
+import { IconButton, Tooltip } from '@material-ui/core'
 import {
   ShowChart,
   Storage,
@@ -11,13 +11,13 @@ import {
   ArrowBack,
   Fullscreen,
   FullscreenExit,
-  Group
-} from '@material-ui/icons';
+  Group,
+} from '@material-ui/icons'
 
-import styles from './styles';
-import * as authorityConstants from '~/constants/authority';
+import styles from './styles'
+import * as authorityConstants from '~/constants/authority'
 
-export const AccountAction = props => {
+export const AccountAction = (props) => {
   const {
     classes,
     isWorking,
@@ -29,8 +29,8 @@ export const AccountAction = props => {
     type,
     toggleFullscreen,
     isFullScreen,
-    isElectron
-  } = props;
+    isElectron,
+  } = props
   return (
     <div className={classes.hero}>
       <div className={classes.heroContent}>
@@ -126,8 +126,8 @@ export const AccountAction = props => {
         </Tooltip>
       </div>
     </div>
-  );
-};
+  )
+}
 
 AccountAction.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -141,7 +141,7 @@ AccountAction.propTypes = {
   type: PropTypes.string.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
   isFullScreen: PropTypes.bool.isRequired,
-  isElectron: PropTypes.bool.isRequired
-};
+  isElectron: PropTypes.bool.isRequired,
+}
 
-export default withStyles(styles)(AccountAction);
+export default withStyles(styles)(AccountAction)

@@ -1,2 +1,2 @@
-import AccountAction from './accountAction';
-export default AccountAction;
+import AccountAction from './accountAction'
+export default AccountAction

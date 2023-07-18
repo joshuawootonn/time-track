@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles';
-import ExportContainer from '~/containers/Export/exportContainer';
+import { withStyles } from '@material-ui/core/styles'
+import ExportContainer from '~/containers/Export/exportContainer'
 
 const styles = () => ({
   hero: {
@@ -10,22 +10,22 @@ const styles = () => ({
     display: `flex`,
     flexDirection: `column`,
     justifyContent: `center`,
-    alignItems: `center`
-  }
-});
+    alignItems: `center`,
+  },
+})
 
 class Export extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div className={classes.hero}>
         <ExportContainer />
       </div>
-    );
+    )
   }
 }
 
 Export.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-export default withStyles(styles)(Export);
+  classes: PropTypes.object.isRequired,
+}
+export default withStyles(styles)(Export)

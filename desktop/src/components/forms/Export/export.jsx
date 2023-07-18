@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles';
-import { Grid, Button, Typography } from '@material-ui/core';
-import { Field, Form } from 'formik';
+import { withStyles } from '@material-ui/core/styles'
+import { Grid, Button, Typography } from '@material-ui/core'
+import { Field, Form } from 'formik'
 
-import styles from './styles';
+import styles from './styles'
 
-import TextField from '~/components/inputs/TextField';
-import File from '~/components/inputs/File';
-import Select from '~/components/inputs/Select';
+import TextField from '~/components/inputs/TextField'
+import File from '~/components/inputs/File'
+import Select from '~/components/inputs/Select'
 
-import * as exportConstants from '~/constants/export';
+import * as exportConstants from '~/constants/export'
 
 export class Export extends Component {
   render() {
-    const { classes, cancel, isSubmitting, errors, values } = this.props;
+    const { classes, cancel, isSubmitting, errors, values } = this.props
 
     return (
       <Form className={classes.heroContent}>
@@ -80,7 +80,7 @@ export class Export extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -89,6 +89,6 @@ Export.propTypes = {
   classes: PropTypes.object.isRequired,
   cancel: PropTypes.func,
   isSubmitting: PropTypes.bool.isRequired,
-  errors: PropTypes.object
-};
-export default withStyles(styles)(Export);
+  errors: PropTypes.object,
+}
+export default withStyles(styles)(Export)

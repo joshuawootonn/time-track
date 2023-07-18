@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getProjectForemanView } from '~/store/Project/selectors';
-import axios from '~/helpers/axios';
-import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { getProjectForemanView } from '~/store/Project/selectors'
+import axios from '~/helpers/axios'
+import { Grid, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {
@@ -11,10 +11,10 @@ const useStyles = makeStyles({
     width: '100vw',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   insideContainer: {
-    display: 'flex'
+    display: 'flex',
   },
   gridItem: {
     border: '1px solid #ccc',
@@ -25,16 +25,16 @@ const useStyles = makeStyles({
     padding: '8px',
     borderRadius: '4px',
     marginBottom: '8px',
-    flexShrink: '1'
-  }
-});
+    flexShrink: '1',
+  },
+})
 
-const ProjectSummary = selectedProjectId => {
+const ProjectSummary = (selectedProjectId) => {
   // const dispatch = useDispatch();
 
-  const projects = useSelector(state => getProjectForemanView(state));
-  const [projectSummaries, setProjectSummaries] = useState([]);
-  const classes = useStyles();
+  const projects = useSelector((state) => getProjectForemanView(state))
+  const [projectSummaries, setProjectSummaries] = useState([])
+  const classes = useStyles()
 
   // const select = object =>
   //   dispatch(foremanActions.select(domain.PROJECT, object));
@@ -43,19 +43,19 @@ const ProjectSummary = selectedProjectId => {
     axios
       .get('/projects/foremansummary?isActive=true')
       .then(({ data: { projects } }) => {
-        setProjectSummaries(projects);
-      });
-  }, [projects]);
+        setProjectSummaries(projects)
+      })
+  }, [projects])
 
   const projectSummary = projectSummaries.find(
-    summary => summary.id == selectedProjectId.selectedProject
-  );
+    (summary) => summary.id == selectedProjectId.selectedProject,
+  )
 
   if (projectSummary) {
     return (
       <div className={classes.container}>
         <div className={classes.insideContainer}>
-          <Grid container direction="column" alignItems="center">
+          {/* <Grid container direction="column" alignItems="center">
             <div className={classes.gridItem} style={{ marginTop: '8px' }}>
               <Grid item md={6} xs={8} style={{ flex: '1 1 auto' }}>
                 <Typography>Total Estimate:</Typography>
@@ -77,7 +77,7 @@ const ProjectSummary = selectedProjectId => {
                     projectSummary.totalActual / projectSummary.totalEstimate
                   ).toLocaleString(undefined, {
                     style: 'percent',
-                    maximumFractionDigits: 1
+                    maximumFractionDigits: 1,
                   })}
                 </Typography>
               </Grid>
@@ -106,13 +106,19 @@ const ProjectSummary = selectedProjectId => {
                 <Typography>{projectSummary.hoursWorkedYesterday}</Typography>
               </Grid>
             </div>
-          </Grid>
+          </Grid> */}
+          <div className="grid w-80 grid-cols-1 md:grid-cols-2 bg-slate-200 p-4 rounded-md">
+            <label className="text-lg font-bold">Total Estimate:</label>
+            <div className="text-lg">
+              {projectSummary.totalEstimate.toLocaleString()}
+            </div>
+          </div>
         </div>
       </div>
-    );
+    )
   } else {
-    return <div>{JSON.stringify(projectSummary)} </div>;
+    return <div>{JSON.stringify(projectSummary)} </div>
   }
-};
+}
 
-export default ProjectSummary;
+export default ProjectSummary

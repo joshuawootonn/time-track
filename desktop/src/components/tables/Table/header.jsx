@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { TableCell, TableSortLabel } from '@material-ui/core';
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { TableCell, TableSortLabel } from '@material-ui/core'
 // import { SortDirection } from 'react-virtualized';
-import * as TableDataTypes from '~/constants/tableDataTypes';
+import * as TableDataTypes from '~/constants/tableDataTypes'
 
-const Header = props => {
+const Header = (props) => {
   const {
     label,
     columnIndex,
@@ -15,24 +15,24 @@ const Header = props => {
     headerHeight,
     columns,
     classes,
-    type
-  } = props;
+    type,
+  } = props
   const direction = {
     // [SortDirection.ASC]: `asc`,
     // [SortDirection.DESC]: `desc`
-  };
+  }
 
   const isSortable =
-    type !== TableDataTypes.PROJECTS && type !== TableDataTypes.TASKS;
+    type !== TableDataTypes.PROJECTS && type !== TableDataTypes.TASKS
 
   return (
     <TableCell
       component="div"
       className={classNames(classes.tableCell, classes.flexContainer)}
       variant={isSortable ? 'head' : 'body'}
-      onClick={e => {
+      onClick={(e) => {
         //noop
-        isSortable || e.stopPropagation();
+        isSortable || e.stopPropagation()
       }}
       style={{ height: headerHeight, flex: 1 }}
       align={columns[columnIndex].numeric || false ? `right` : `left`}
@@ -48,8 +48,8 @@ const Header = props => {
         label
       )}
     </TableCell>
-  );
-};
+  )
+}
 
 Header.propTypes = {
   dataKey: PropTypes.string,
@@ -60,7 +60,7 @@ Header.propTypes = {
   sort: PropTypes.any,
   sortBy: PropTypes.any,
   sortDirection: PropTypes.any,
-  headerHeight: PropTypes.number
-};
+  headerHeight: PropTypes.number,
+}
 
-export default Header;
+export default Header

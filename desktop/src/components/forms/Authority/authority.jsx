@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Grid, Typography, Button } from '@material-ui/core';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '~/components/inputs/TextField';
-import styles from './styles';
+import { Grid, Typography, Button } from '@material-ui/core'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '~/components/inputs/TextField'
+import styles from './styles'
 
 export class Authority extends Component {
   render() {
-    const {
-      classes,
-      errors,
-      initialValues,
-      resetForm,
-      isSubmitting,
-      label
-    } = this.props;
+    const { classes, errors, initialValues, resetForm, isSubmitting, label } =
+      this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -54,7 +48,7 @@ export class Authority extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 id="authority-reset-button"
                 disabled={isSubmitting}
@@ -68,7 +62,7 @@ export class Authority extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -78,7 +72,7 @@ Authority.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-};
+  errors: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles)(Authority);
+export default withStyles(styles)(Authority)

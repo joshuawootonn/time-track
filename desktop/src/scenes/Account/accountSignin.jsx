@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import AccountSigninContainer from '~/containers/Account/accountSigninContainer';
+import AccountSigninContainer from '~/containers/Account/accountSigninContainer'
 
 class AccountSignin extends Component {
   render() {
-    return <AccountSigninContainer />;
+    return <AccountSigninContainer />
   }
 }
 
-export default AccountSignin;
+export default AccountSignin

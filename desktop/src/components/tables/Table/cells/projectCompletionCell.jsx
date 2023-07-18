@@ -1,6 +1,6 @@
-import React from 'react';
-import { TableCell } from '@material-ui/core';
-import classNames from 'classnames';
+import React from 'react'
+import { TableCell } from '@material-ui/core'
+import classNames from 'classnames'
 
 const ProjectCompletionCell = ({ rowData, classes, rowHeight }) => (
   <TableCell
@@ -14,6 +14,6 @@ const ProjectCompletionCell = ({ rowData, classes, rowHeight }) => (
       : Math.round(100 * (rowData.totalActual / rowData.totalEstimate))}{' '}
     %
   </TableCell>
-);
+)
 
-export default ProjectCompletionCell;
+export default ProjectCompletionCell

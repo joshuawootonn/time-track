@@ -1,2 +1,2 @@
-import AuthSigin from './authSignin';
-export default AuthSigin;
+import AuthSigin from './authSignin'
+export default AuthSigin

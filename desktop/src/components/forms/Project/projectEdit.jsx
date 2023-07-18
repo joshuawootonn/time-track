@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Grid,
   Typography,
   Button,
   IconButton,
-  TextField as MUTextField
-} from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form, FieldArray } from 'formik';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Close } from '@material-ui/icons';
+  TextField as MUTextField,
+} from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form, FieldArray } from 'formik'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import { Close } from '@material-ui/icons'
 
-import TextField from '~/components/inputs/TextField';
-import Switch from '~/components/inputs/Switch';
-import styles from './styles';
+import TextField from '~/components/inputs/TextField'
+import Switch from '~/components/inputs/Switch'
+import styles from './styles'
 
-import TypeableSelect from '~/components/inputs/TypeableSelect';
-import { minutesToString } from '~/helpers/time';
-import { act } from 'react-dom/test-utils';
+import TypeableSelect from '~/components/inputs/TypeableSelect'
+import { minutesToString } from '~/helpers/time'
+import { act } from 'react-dom/test-utils'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   displayElement: {
-    margin: `auto 8px`
-  }
-}));
+    margin: `auto 8px`,
+  },
+}))
 
 const DisplayElement = ({ label, value }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <MUTextField
       fullWidth
@@ -38,11 +38,11 @@ const DisplayElement = ({ label, value }) => {
       helperText={` `}
       className={classes.displayElement}
     />
-  );
-};
+  )
+}
 
 const EstimatedTimeOverQuantity = ({
-  projectTask: { estimateTime, quantity }
+  projectTask: { estimateTime, quantity },
 }) => (
   <DisplayElement
     label="Estimated / Quantity"
@@ -50,33 +50,33 @@ const EstimatedTimeOverQuantity = ({
       quantity === 0 ? 0 : Math.round(100 * (estimateTime / quantity)) / 100
     }
   />
-);
+)
 
 const ActualTime = ({ projectTask: { actualTime } }) => (
   <DisplayElement label="Actual Time" value={minutesToString(actualTime)} />
-);
+)
 
 const ActualTimeOverQuantity = ({ projectTask: { actualTime, quantity } }) => (
   <DisplayElement
     label="Actual / Quantity"
     value={!quantity ? 0 : Math.round(100 * (actualTime / quantity)) / 100}
   />
-);
+)
 
 const ActualTimeOverEstimateTime = ({
-  projectTask: { estimateTime, actualTime }
+  projectTask: { estimateTime, actualTime },
 }) => (
   <DisplayElement
     label="Percent Complete"
     value={`${Math.round(100 * (actualTime / 60 / estimateTime))} %`}
   />
-);
+)
 const TotalEstimateTime = ({ estimateTime }) => (
   <DisplayElement label="Total Estimate" value={estimateTime} />
-);
+)
 const TotalActualTime = ({ actualTime }) => (
   <DisplayElement label="Total Actual" value={minutesToString(actualTime)} />
-);
+)
 const TotalPercentage = ({ estimateTime, actualTime }) => (
   <DisplayElement
     label="Percent Complete"
@@ -86,7 +86,7 @@ const TotalPercentage = ({ estimateTime, actualTime }) => (
         : '0 %'
     }
   />
-);
+)
 
 export class ProjectEdit extends Component {
   render() {
@@ -98,20 +98,20 @@ export class ProjectEdit extends Component {
       initialValues,
       errors,
       values,
-      goToShifts
-    } = this.props;
+      goToShifts,
+    } = this.props
 
     const { totalActualTime, totalEstimateTime } = values.projectTasks.reduce(
       ({ totalActualTime, totalEstimateTime }, projectTask) => {
-        const estimatedTimeOption = parseInt(projectTask.estimateTime);
+        const estimatedTimeOption = parseInt(projectTask.estimateTime)
         return {
           totalActualTime: totalActualTime + projectTask.actualTime,
           totalEstimateTime:
-            totalEstimateTime + (estimatedTimeOption ? estimatedTimeOption : 0)
-        };
+            totalEstimateTime + (estimatedTimeOption ? estimatedTimeOption : 0),
+        }
       },
-      { totalActualTime: 0, totalEstimateTime: 0 }
-    );
+      { totalActualTime: 0, totalEstimateTime: 0 },
+    )
 
     return (
       <Form>
@@ -169,7 +169,7 @@ export class ProjectEdit extends Component {
           </Grid>
           <FieldArray
             name="projectTasks"
-            render={arrayHelpers => (
+            render={(arrayHelpers) => (
               <>
                 <Grid
                   item
@@ -241,7 +241,7 @@ export class ProjectEdit extends Component {
                         subcategoryId: -1,
                         taskId: -1,
                         quantity: 1,
-                        estimateTime: 1
+                        estimateTime: 1,
                       })
                     }
                   >
@@ -271,7 +271,7 @@ export class ProjectEdit extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 disabled={isSubmitting}
                 color="secondary"
@@ -284,7 +284,7 @@ export class ProjectEdit extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -301,7 +301,7 @@ ProjectEdit.propTypes = {
   values: PropTypes.object.isRequired,
   tasks: PropTypes.array,
   clearFilter: PropTypes.func,
-  goToShifts: PropTypes.func
-};
+  goToShifts: PropTypes.func,
+}
 
-export default withStyles(styles)(ProjectEdit);
+export default withStyles(styles)(ProjectEdit)

@@ -1,2 +1,2 @@
-import Subcategory from './subcategory';
-export default Subcategory;
+import Subcategory from './subcategory'
+export default Subcategory

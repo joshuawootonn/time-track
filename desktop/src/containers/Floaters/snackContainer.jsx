@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Check, Error } from '@material-ui/icons';
+import { Check, Error } from '@material-ui/icons'
 
-import * as status from '~/constants/status';
-import Snack from '~/components/floaters/Snack';
+import * as status from '~/constants/status'
+import Snack from '~/components/floaters/Snack'
 
 export class SnackContainer extends Component {
   render() {
-    const { message, type, onClose } = this.props;
+    const { message, type, onClose } = this.props
 
-    const position = { vertical: `bottom`, horizontal: `right` };
+    const position = { vertical: `bottom`, horizontal: `right` }
 
-    let icon;
+    let icon
     switch (type) {
       case status.SUCCESS:
-        icon = <Check />;
-        break;
+        icon = <Check />
+        break
       case status.FAILURE:
-        icon = <Error />;
-        break;
+        icon = <Error />
+        break
       default:
-        icon = null;
-        break;
+        icon = null
+        break
     }
 
     return (
@@ -33,14 +33,14 @@ export class SnackContainer extends Component {
         icon={icon}
         message={message}
       />
-    );
+    )
   }
 }
 
 SnackContainer.propTypes = {
   message: PropTypes.string,
   type: PropTypes.string,
-  onClose: PropTypes.func
-};
+  onClose: PropTypes.func,
+}
 
-export default SnackContainer;
+export default SnackContainer

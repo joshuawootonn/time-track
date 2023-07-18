@@ -1,2 +1,2 @@
-import Time from './time';
-export default Time;
+import Time from './time'
+export default Time

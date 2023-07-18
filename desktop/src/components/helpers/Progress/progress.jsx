@@ -1,31 +1,27 @@
-import React from 'react';
-import PropTypes, { string } from 'prop-types';
+import React from 'react'
+import PropTypes, { string } from 'prop-types'
 
-import cx from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import {
-  LinearProgress,
-  CircularProgress,
-  Typography
-} from '@material-ui/core';
+import cx from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
+import { LinearProgress, CircularProgress, Typography } from '@material-ui/core'
 
-import styles from './style';
+import styles from './style'
 
-export const Progress = props => {
-  const { classes, fullPage, fullHeight, fullWidth, variant, message } = props;
+export const Progress = (props) => {
+  const { classes, fullPage, fullHeight, fullWidth, variant, message } = props
 
   const wrapperClasses = cx({
     [classes.fullPageWrapper]: fullPage,
     [classes.fullHeight]: !fullPage && fullHeight,
-    [classes.fullWidth]: !fullPage && fullWidth
-  });
+    [classes.fullWidth]: !fullPage && fullWidth,
+  })
 
   const innerClasses = cx({
     [classes.fullPageInner]: fullPage,
     [classes.fullHeight]: !fullPage && fullHeight,
     [classes.fullWidth]: !fullPage && fullWidth,
-    [classes.flex]: true
-  });
+    [classes.flex]: true,
+  })
 
   return (
     <div className={wrapperClasses}>
@@ -39,15 +35,15 @@ export const Progress = props => {
         {variant === `circular` ? <CircularProgress size={32} /> : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
 Progress.defaultProps = {
   fullWidth: false,
   fullHeight: false,
   fullPage: false,
-  variant: `circular`
-};
+  variant: `circular`,
+}
 
 Progress.propTypes = {
   message: string,
@@ -55,7 +51,7 @@ Progress.propTypes = {
   fullHeight: PropTypes.bool,
   fullPage: PropTypes.bool,
   variant: PropTypes.oneOf([`circular`, `linear`]),
-  classes: PropTypes.object.isRequired
-};
+  classes: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles)(Progress);
+export default withStyles(styles)(Progress)

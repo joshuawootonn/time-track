@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
   Typography,
   Button,
   Tooltip,
-  IconButton
-} from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '~/components/inputs/TextField';
-import TypeableSelect from '~/components/inputs/TypeableSelect';
-import styles from './styles';
+  IconButton,
+} from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '~/components/inputs/TextField'
+import TypeableSelect from '~/components/inputs/TypeableSelect'
+import styles from './styles'
 
 export class Subcategory extends Component {
   render() {
@@ -26,8 +26,8 @@ export class Subcategory extends Component {
       label,
       type,
       removeSubcategory,
-      categories
-    } = this.props;
+      categories,
+    } = this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -83,7 +83,7 @@ export class Subcategory extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 id="subcategory-reset-button"
                 disabled={isSubmitting}
@@ -97,7 +97,7 @@ export class Subcategory extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -110,7 +110,7 @@ Subcategory.propTypes = {
   errors: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
-  removeSubcategory: PropTypes.func
-};
+  removeSubcategory: PropTypes.func,
+}
 
-export default withStyles(styles)(Subcategory);
+export default withStyles(styles)(Subcategory)

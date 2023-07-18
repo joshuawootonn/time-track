@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import VirtualizedSortSelect from '~/components/tables/Table';
-import Progress from '~/components/helpers/Progress';
+import VirtualizedSortSelect from '~/components/tables/Table'
+import Progress from '~/components/helpers/Progress'
 
-import { analyzeActions } from '~/store/actions';
-import { taskSelectors } from '~/store/selectors';
+import { analyzeActions } from '~/store/actions'
+import { taskSelectors } from '~/store/selectors'
 
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import { analyzeStatus } from '~/constants/analyze';
-import domain from '~/constants/domains';
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import { analyzeStatus } from '~/constants/analyze'
+import domain from '~/constants/domains'
 
 export class TaskIndex extends Component {
-  selectLabel = selected => `${selected.name} selected`;
+  selectLabel = (selected) => `${selected.name} selected`
 
-  select = object => this.props.select(domain.TASK, object);
+  select = (object) => this.props.select(domain.TASK, object)
 
-  add = () => this.props.setStatus(domain.TASK, analyzeStatus.ADDING);
+  add = () => this.props.setStatus(domain.TASK, analyzeStatus.ADDING)
 
   render() {
-    const { tasks, selected } = this.props;
+    const { tasks, selected } = this.props
 
-    if (!tasks) return <Progress variant="circular" fullWidth fullHeight />;
+    if (!tasks) return <Progress variant="circular" fullWidth fullHeight />
 
     return (
       <VirtualizedSortSelect
@@ -33,7 +33,7 @@ export class TaskIndex extends Component {
         select={this.select}
         initialSortBy="name"
       />
-    );
+    )
   }
 }
 
@@ -41,26 +41,26 @@ TaskIndex.propTypes = {
   tasks: PropTypes.array,
   selected: PropTypes.object,
   select: PropTypes.func.isRequired,
-  setStatus: PropTypes.func.isRequired
-};
+  setStatus: PropTypes.func.isRequired,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
-  const filters = state.analyze.taskFilters;
+const mapStateToProps = (state) => {
+  const filters = state.analyze.taskFilters
   return {
     tasks: taskSelectors.getAllTasksNew(state, { filters, sorts: {} }),
-    selected: taskSelectors.getSelectedTask(state)
-  };
-};
+    selected: taskSelectors.getSelectedTask(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
-  };
-};
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)
 
 const rows = [
   {
@@ -70,7 +70,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Name`,
-    type: TableDataTypes.STRING
+    type: TableDataTypes.STRING,
   },
   {
     id: `category_type`,
@@ -80,7 +80,7 @@ const rows = [
     padding: `dense`,
     label: `Category`,
     type: TableDataTypes.OBJECT,
-    keys: [`type`]
+    keys: [`type`],
   },
   {
     id: `subcategory_type`,
@@ -90,7 +90,7 @@ const rows = [
     padding: `dense`,
     label: `Subcategory`,
     type: TableDataTypes.OBJECT,
-    keys: [`type`]
+    keys: [`type`],
   },
 
   // { // ICEBOX: add dimension functionality
@@ -111,6 +111,6 @@ const rows = [
     align: `left`,
     padding: `dense`,
     label: `Active`,
-    type: TableDataTypes.BOOLEAN
-  }
-];
+    type: TableDataTypes.BOOLEAN,
+  },
+]

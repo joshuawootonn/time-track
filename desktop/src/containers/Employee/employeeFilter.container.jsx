@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { Formik } from 'formik';
-import { Card } from '@material-ui/core';
+import { Formik } from 'formik'
+import { Card } from '@material-ui/core'
 
-import Employee from '~/components/forms/Employee';
-import { authoritySelectors, crewSelectors } from '~/store/selectors';
-import { analyzeActions } from '~/store/actions';
+import Employee from '~/components/forms/Employee'
+import { authoritySelectors, crewSelectors } from '~/store/selectors'
+import { analyzeActions } from '~/store/actions'
 
-import domain from '~/constants/domains';
+import domain from '~/constants/domains'
 
 export class EmployeeFilter extends Component {
   render() {
@@ -19,8 +19,8 @@ export class EmployeeFilter extends Component {
       employeeFilterVisible,
       clearFilter,
       updateFilter,
-      toggleFilter
-    } = this.props;
+      toggleFilter,
+    } = this.props
 
     if (employeeFilterVisible) {
       return (
@@ -28,11 +28,11 @@ export class EmployeeFilter extends Component {
           enableReinitialize
           initialValues={{ ...employeeFilters }} // TODO: migrate the toggles to radio buttons for isWorking and any other boolean values
           onSubmit={(values, formikFunctions) => {
-            updateFilter({ ...values });
-            toggleFilter();
-            formikFunctions.resetForm();
+            updateFilter({ ...values })
+            toggleFilter()
+            formikFunctions.resetForm()
           }}
-          render={formikProps => {
+          render={(formikProps) => {
             return (
               <Card
                 style={{
@@ -41,7 +41,7 @@ export class EmployeeFilter extends Component {
                   left: `2.5%`,
                   zIndex: 900,
                   width: `95%`,
-                  minHeight: `100px`
+                  minHeight: `100px`,
                 }}
               >
                 <Employee
@@ -53,33 +53,33 @@ export class EmployeeFilter extends Component {
                   {...formikProps}
                 />
               </Card>
-            );
+            )
           }}
         />
-      );
+      )
     }
-    return null;
+    return null
   }
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     employeeFilters: state.analyze.employeeFilters,
     employeeFilterVisible: state.analyze.employeeFilterVisible,
     crews: crewSelectors.getAllCrews(state),
-    authorities: authoritySelectors.getAllAuthorities(state)
-  };
-};
+    authorities: authoritySelectors.getAllAuthorities(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    updateFilter: filters =>
+    updateFilter: (filters) =>
       dispatch(analyzeActions.updateFilter(domain.EMPLOYEE, filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.EMPLOYEE)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE))
-  };
-};
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.EMPLOYEE)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeFilter)

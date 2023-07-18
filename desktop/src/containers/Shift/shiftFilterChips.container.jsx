@@ -1,53 +1,53 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import { analyzeActions } from '~/store/actions';
-import domain from '~/constants/domains';
-import { getAllProjectObjects } from '~/store/Project/selectors';
-import { getAllTaskObjects } from '~/store/Task/selectors';
-import { getAllCrewObjects } from '~/store/Crew/selectors';
-import { getAllEmployeeObjects } from '~/store/Employee/selectors';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import Chip from '@material-ui/core/Chip'
+import { analyzeActions } from '~/store/actions'
+import domain from '~/constants/domains'
+import { getAllProjectObjects } from '~/store/Project/selectors'
+import { getAllTaskObjects } from '~/store/Task/selectors'
+import { getAllCrewObjects } from '~/store/Crew/selectors'
+import { getAllEmployeeObjects } from '~/store/Employee/selectors'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
     listStyle: 'none',
     padding: theme.spacing(0.5),
-    margin: 0
+    margin: 0,
   },
   chip: {
-    margin: theme.spacing(0.5)
-  }
-}));
+    margin: theme.spacing(0.5),
+  },
+}))
 
 const FilterChip = ({ label, onDelete }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <li>
       <Chip label={label} onDelete={onDelete} className={classes.chip} />
     </li>
-  );
-};
+  )
+}
 
 const ShiftFilterChips = () => {
-  const classes = useStyles();
-  const filters = useSelector(state => state.analyze.shiftFilters);
-  const projectObject = useSelector(state => getAllProjectObjects(state));
-  const crewObject = useSelector(state => getAllCrewObjects(state));
-  const employeeObject = useSelector(state => getAllEmployeeObjects(state));
-  const taskObject = useSelector(state => getAllTaskObjects(state));
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const filters = useSelector((state) => state.analyze.shiftFilters)
+  const projectObject = useSelector((state) => getAllProjectObjects(state))
+  const crewObject = useSelector((state) => getAllCrewObjects(state))
+  const employeeObject = useSelector((state) => getAllEmployeeObjects(state))
+  const taskObject = useSelector((state) => getAllTaskObjects(state))
+  const dispatch = useDispatch()
 
-  const onDelete = keyToReset =>
+  const onDelete = (keyToReset) =>
     dispatch(
       analyzeActions.updateFilter(domain.SHIFT, {
         ...filters,
-        [keyToReset]: -1
-      })
-    );
+        [keyToReset]: -1,
+      }),
+    )
 
   return (
     <ul className={classes.root}>
@@ -78,7 +78,7 @@ const ShiftFilterChips = () => {
         />
       )}
     </ul>
-  );
-};
+  )
+}
 
-export default ShiftFilterChips;
+export default ShiftFilterChips

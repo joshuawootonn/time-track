@@ -1,15 +1,15 @@
-import axios from 'axios';
-const DOMAIN = `users`;
+import axios from 'axios'
+const DOMAIN = `users`
 
 export const login = (ip, username, password) => {
   return axios.post(
     `${ip}/api/${DOMAIN}/login/`,
     {
       username,
-      password
+      password,
     },
     {
-      timeout: 5000
-    }
-  );
-};
+      timeout: 5000,
+    },
+  )
+}

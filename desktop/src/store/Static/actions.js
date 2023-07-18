@@ -1,4 +1,4 @@
-import { staticActionTypes } from '~/constants/actionTypeConstants';
+import { staticActionTypes } from '~/constants/actionTypeConstants'
 
 import {
   projectActions,
@@ -6,12 +6,12 @@ import {
   taskActions,
   categoryActions,
   dimensionActions,
-  subcategoryActions
-} from '~/store/actions';
+  subcategoryActions,
+} from '~/store/actions'
 
 export const getStaticData = () => {
-  return async dispatch => {
-    dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST });
+  return async (dispatch) => {
+    dispatch({ type: staticActionTypes.GET_STATIC_DATA_REQUEST })
     try {
       await Promise.all([
         dispatch(categoryActions.getAllCategories()),
@@ -19,12 +19,12 @@ export const getStaticData = () => {
         dispatch(subcategoryActions.getAllSubcategories()),
         dispatch(projectTaskActions.getAllProjectTasks()),
         dispatch(projectActions.getAllProjects()),
-        dispatch(taskActions.getAllTasks())
-      ]);
-      return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS });
+        dispatch(taskActions.getAllTasks()),
+      ])
+      return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS })
     } catch (e) {
-      dispatch({ type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e });
-      throw e;
+      dispatch({ type: staticActionTypes.GET_STATIC_DATA_FAILURE, payload: e })
+      throw e
     }
-  };
-};
+  }
+}

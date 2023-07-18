@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import {
   Button,
   InputLabel,
   FormControl,
   Input,
-  FormHelperText
-} from '@material-ui/core';
-import { getIn } from 'formik';
+  FormHelperText,
+} from '@material-ui/core'
+import { getIn } from 'formik'
 
-import styles from './styles';
+import styles from './styles'
 
 export class File extends Component {
-  fileChange = e => {
-    const { form, field } = this.props;
-    form.setFieldValue(field.name, e.target.files[0].path);
-  };
+  fileChange = (e) => {
+    const { form, field } = this.props
+    form.setFieldValue(field.name, e.target.files[0].path)
+  }
   render() {
     const {
       form,
@@ -28,8 +28,8 @@ export class File extends Component {
       classes,
       field,
       helper,
-      fullWidth
-    } = this.props;
+      fullWidth,
+    } = this.props
     return (
       <FormControl {...formControlProps} fullWidth={fullWidth} margin={margin}>
         <div className={classes.row}>
@@ -68,15 +68,15 @@ export class File extends Component {
           </FormHelperText>
         )}
       </FormControl>
-    );
+    )
   }
 }
 
 File.defaultProps = {
   margin: `normal`,
   fullWidth: false,
-  helper: `normal`
-};
+  helper: `normal`,
+}
 
 File.propTypes = {
   field: PropTypes.object.isRequired,
@@ -84,7 +84,7 @@ File.propTypes = {
   onChange: PropTypes.func,
   margin: PropTypes.oneOf([`normal`, `dense`, `none`]),
   fullWidth: PropTypes.bool,
-  helper: PropTypes.oneOf([`normal`, `none`])
-};
+  helper: PropTypes.oneOf([`normal`, `none`]),
+}
 
-export default withStyles(styles)(File);
+export default withStyles(styles)(File)

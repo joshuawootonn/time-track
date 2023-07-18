@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { Formik } from 'formik';
-import { Typography } from '@material-ui/core';
+import { Formik } from 'formik'
+import { Typography } from '@material-ui/core'
 
-import Hero from '~/components/layouts/Hero';
-import Task from '~/components/forms/Task';
+import Hero from '~/components/layouts/Hero'
+import Task from '~/components/forms/Task'
 
 import {
   taskSelectors,
   categorySelectors,
-  subcategorySelectors
-} from '~/store/selectors';
-import { taskActions } from '~/store/actions';
+  subcategorySelectors,
+} from '~/store/selectors'
+import { taskActions } from '~/store/actions'
 
-import { analyzeStatus } from '~/constants/analyze';
-import { taskValidation } from '~/constants/formValidation';
+import { analyzeStatus } from '~/constants/analyze'
+import { taskValidation } from '~/constants/formValidation'
 
 export class TaskCRUD extends Component {
   removeTask = () => {
-    const { selected, removeTask } = this.props;
-    removeTask(selected.id);
-  };
+    const { selected, removeTask } = this.props
+    removeTask(selected.id)
+  }
   render() {
-    const { status, categories, subcategories, selected } = this.props;
+    const { status, categories, subcategories, selected } = this.props
 
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
           <Typography variant="h6">Select a Task.. </Typography>
         </Hero>
-      );
+      )
     }
 
     if (status === analyzeStatus.ADDING) {
@@ -42,28 +42,28 @@ export class TaskCRUD extends Component {
             name: ``,
             categoryId: -1,
             subcategoryId: -1,
-            isActive: true
+            isActive: true,
           }}
           validationSchema={taskValidation}
           onSubmit={(values, formikFunctions) => {
-            const { createTask } = this.props;
+            const { createTask } = this.props
             return createTask({
               name: values.name,
               subcategoryId: values.subcategoryId,
-              isActive: values.isActive ? 1 : 0
+              isActive: values.isActive ? 1 : 0,
             }).then(
               () => {
-                formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
+                formikFunctions.resetForm()
+                formikFunctions.setStatus({ success: true })
               },
-              e => {
-                formikFunctions.setStatus({ success: false });
-                formikFunctions.setSubmitting(false);
-                formikFunctions.setErrors({ submit: e });
-              }
-            );
+              (e) => {
+                formikFunctions.setStatus({ success: false })
+                formikFunctions.setSubmitting(false)
+                formikFunctions.setErrors({ submit: e })
+              },
+            )
           }}
-          render={formikProps => {
+          render={(formikProps) => {
             return (
               <Task
                 categories={categories}
@@ -72,10 +72,10 @@ export class TaskCRUD extends Component {
                 type="add"
                 {...formikProps}
               />
-            );
+            )
           }}
         />
-      );
+      )
     }
 
     if (status === analyzeStatus.EDITING) {
@@ -84,29 +84,29 @@ export class TaskCRUD extends Component {
           enableReinitialize
           initialValues={{
             ...selected,
-            isActive: selected.isActive ? true : false
+            isActive: selected.isActive ? true : false,
           }}
           validationSchema={taskValidation}
           onSubmit={(values, formikFunctions) => {
-            const { updateTask } = this.props;
+            const { updateTask } = this.props
             return updateTask({
               id: values.id,
               name: values.name,
               subcategoryId: values.subcategoryId,
-              isActive: values.isActive ? 1 : 0
+              isActive: values.isActive ? 1 : 0,
             }).then(
               () => {
-                formikFunctions.resetForm();
-                formikFunctions.setStatus({ success: true });
+                formikFunctions.resetForm()
+                formikFunctions.setStatus({ success: true })
               },
-              e => {
-                formikFunctions.setStatus({ success: false });
-                formikFunctions.setSubmitting(false);
-                formikFunctions.setErrors({ submit: e });
-              }
-            );
+              (e) => {
+                formikFunctions.setStatus({ success: false })
+                formikFunctions.setSubmitting(false)
+                formikFunctions.setErrors({ submit: e })
+              },
+            )
           }}
-          render={formikProps => {
+          render={(formikProps) => {
             return (
               <Task
                 removeTask={this.removeTask}
@@ -116,41 +116,41 @@ export class TaskCRUD extends Component {
                 type="edit"
                 {...formikProps}
               />
-            );
+            )
           }}
         />
-      );
+      )
     }
   }
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     selected: taskSelectors.getSelectedTask(state),
     status: state.analyze.taskStatus,
     categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state)
-  };
-};
+    subcategories: subcategorySelectors.getAllSubcategories(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createTask: task => {
-      return dispatch(taskActions.createTask(task));
+    createTask: (task) => {
+      return dispatch(taskActions.createTask(task))
     },
-    updateTask: task => {
-      return dispatch(taskActions.updateTask(task));
+    updateTask: (task) => {
+      return dispatch(taskActions.updateTask(task))
     },
-    removeTask: id => {
-      return dispatch(taskActions.removeTask(id));
-    }
-  };
-};
+    removeTask: (id) => {
+      return dispatch(taskActions.removeTask(id))
+    },
+  }
+}
 
 TaskCRUD.propTypes = {
-  status: PropTypes.string.isRequired
-};
+  status: PropTypes.string.isRequired,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskCRUD);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskCRUD)

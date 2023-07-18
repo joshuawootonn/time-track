@@ -1,2 +1,2 @@
-import Crew from './crew';
-export default Crew;
+import Crew from './crew'
+export default Crew

@@ -1,9 +1,9 @@
-import { getCred } from './storage';
+import { getCred } from './storage'
 
 export const HOST = (): string => {
-  const cred = getCred();
+  const cred = getCred()
 
-  if (cred == null) return '';
+  if (cred == null) return ''
 
-  return `${cred.ip}/api`;
-};
+  return `${cred.ip}/api`
+}

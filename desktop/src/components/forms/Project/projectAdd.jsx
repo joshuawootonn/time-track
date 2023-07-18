@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Grid, Typography, Button, IconButton } from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form, FieldArray } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import { Close } from '@material-ui/icons';
+import { Grid, Typography, Button, IconButton } from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form, FieldArray } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import { Close } from '@material-ui/icons'
 
-import TextField from '~/components/inputs/TextField';
-import Switch from '~/components/inputs/Switch';
-import styles from './styles';
+import TextField from '~/components/inputs/TextField'
+import Switch from '~/components/inputs/Switch'
+import styles from './styles'
 
-import TypeableSelect from '~/components/inputs/TypeableSelect';
+import TypeableSelect from '~/components/inputs/TypeableSelect'
 
 export class ProjectAdd extends Component {
   render() {
@@ -24,8 +24,8 @@ export class ProjectAdd extends Component {
       resetForm,
       initialValues,
       errors,
-      values
-    } = this.props;
+      values,
+    } = this.props
 
     return (
       <Form>
@@ -63,7 +63,7 @@ export class ProjectAdd extends Component {
 
           <FieldArray
             name="projectTasks"
-            render={arrayHelpers => {
+            render={(arrayHelpers) => {
               return (
                 <Grid item xs={12} container className={classes.body}>
                   {values.projectTasks &&
@@ -75,7 +75,7 @@ export class ProjectAdd extends Component {
                           key={index}
                           className={cx(
                             classes.card,
-                            classes.verticalCenterBox
+                            classes.verticalCenterBox,
                           )}
                         >
                           <div className={cx(classes.row, classes.bodyRow)}>
@@ -90,21 +90,21 @@ export class ProjectAdd extends Component {
                               onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `projectTasks.${index}.subcategoryId`,
-                                  -1
-                                );
+                                  -1,
+                                )
                                 arrayHelpers.form.setFieldValue(
                                   `projectTasks.${index}.taskId`,
-                                  -1
-                                );
+                                  -1,
+                                )
                               }}
                             />
                             <Field
                               name={`projectTasks.${index}.subcategoryId`}
                               component={TypeableSelect}
-                              items={subcategories.filter(subcat => {
+                              items={subcategories.filter((subcat) => {
                                 return (
                                   subcat.categoryId === projectTasks.categoryId
-                                );
+                                )
                               })}
                               type="type"
                               fullWidth
@@ -113,21 +113,21 @@ export class ProjectAdd extends Component {
                               onChange={() => {
                                 arrayHelpers.form.setFieldValue(
                                   `projectTasks.${index}.taskId`,
-                                  -1
-                                );
+                                  -1,
+                                )
                               }}
                             />
                             <Field
                               name={`projectTasks.${index}.taskId`}
                               component={TypeableSelect}
                               type="name"
-                              items={tasks.filter(globalTask => {
+                              items={tasks.filter((globalTask) => {
                                 return (
                                   globalTask.subcategory.id ===
                                     projectTasks.subcategoryId &&
                                   globalTask.category.id ===
                                     projectTasks.categoryId
-                                );
+                                )
                               })}
                               fullWidth
                               label="Task"
@@ -159,7 +159,7 @@ export class ProjectAdd extends Component {
                             </div>
                           </div>
                         </Grid>
-                      );
+                      )
                     })}
                   <Grid
                     item
@@ -176,7 +176,7 @@ export class ProjectAdd extends Component {
                           subcategoryId: -1,
                           taskId: -1,
                           quantity: 1,
-                          estimateTime: 1
+                          estimateTime: 1,
                         })
                       }
                     >
@@ -184,7 +184,7 @@ export class ProjectAdd extends Component {
                     </Button>
                   </Grid>
                 </Grid>
-              );
+              )
             }}
           />
           <Grid item xs={12} className={classes.row}>
@@ -207,7 +207,7 @@ export class ProjectAdd extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 disabled={isSubmitting}
                 color="secondary"
@@ -220,7 +220,7 @@ export class ProjectAdd extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -234,7 +234,7 @@ ProjectAdd.propTypes = {
   categories: PropTypes.array,
   subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
-  tasks: PropTypes.array
-};
+  tasks: PropTypes.array,
+}
 
-export default withStyles(styles)(ProjectAdd);
+export default withStyles(styles)(ProjectAdd)

@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
   Typography,
   Button,
   Tooltip,
-  IconButton
-} from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import { Delete } from '@material-ui/icons';
+  IconButton,
+} from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import { Delete } from '@material-ui/icons'
 
-import TextField from '~/components/inputs/TextField';
-import Switch from '~/components/inputs/Switch';
-import styles from './styles';
+import TextField from '~/components/inputs/TextField'
+import Switch from '~/components/inputs/Switch'
+import styles from './styles'
 
-import TypeableSelect from '~/components/inputs/TypeableSelect';
+import TypeableSelect from '~/components/inputs/TypeableSelect'
 
 export class Employee extends Component {
   render() {
@@ -32,8 +32,8 @@ export class Employee extends Component {
       resetForm,
       initialValues,
       errors,
-      clearFilter
-    } = this.props;
+      clearFilter,
+    } = this.props
 
     return (
       <Form>
@@ -135,7 +135,7 @@ export class Employee extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 id={EMPLOYEE_FORM_RESET_BUTTON_ID}
                 disabled={isSubmitting}
@@ -148,8 +148,8 @@ export class Employee extends Component {
               {[`filter`].includes(type) && (
                 <Button
                   onClick={() => {
-                    resetForm(initialValues);
-                    clearFilter();
+                    resetForm(initialValues)
+                    clearFilter()
                   }}
                   id={EMPLOYEE_FORM_CLEAR_BUTTON_ID}
                   disabled={isSubmitting}
@@ -164,13 +164,13 @@ export class Employee extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
-export const EMPLOYEE_FORM_RESET_BUTTON_ID = `employee_form_reset_button`;
-export const EMPLOYEE_FORM_CLEAR_BUTTON_ID = `employee_form_clear_button`;
-export const EMPLOYEE_FORM_SUBMIT_BUTTON_ID = `employee_form_submit_button`;
+export const EMPLOYEE_FORM_RESET_BUTTON_ID = `employee_form_reset_button`
+export const EMPLOYEE_FORM_CLEAR_BUTTON_ID = `employee_form_clear_button`
+export const EMPLOYEE_FORM_SUBMIT_BUTTON_ID = `employee_form_submit_button`
 
 Employee.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -184,7 +184,7 @@ Employee.propTypes = {
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
-  clearFilter: PropTypes.func
-};
+  clearFilter: PropTypes.func,
+}
 
-export default withStyles(styles)(Employee);
+export default withStyles(styles)(Employee)

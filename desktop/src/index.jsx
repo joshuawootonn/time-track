@@ -1,23 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './app';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './app'
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Provider } from 'react-redux';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { Provider } from 'react-redux'
 
-import store from './store';
-import './index.css';
+import store from './store'
+import './index.css'
 
 export const theme = createMuiTheme({
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
   },
   palette: {
     primary: { main: `#344955` },
     secondary: { main: `#faab1a` },
-    action: { main: `#17262a` }
-  }
-});
+    action: { main: `#17262a` },
+  },
+})
 
 ReactDOM.render(
   <Provider store={store}>
@@ -25,5 +25,5 @@ ReactDOM.render(
       <App />
     </MuiThemeProvider>
   </Provider>,
-  document.getElementById(`root`)
-);
+  document.getElementById(`root`),
+)

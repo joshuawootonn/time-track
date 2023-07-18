@@ -1,17 +1,17 @@
 const styles = () => ({
   gridContainer: {
     width: `100% !important`,
-    margin: 0
+    margin: 0,
   },
   row: {
     display: `flex`,
     flexDirection: `row`,
     alignItems: `center`,
-    justifyContent: `space-between`
+    justifyContent: `space-between`,
   },
   headerRow: {
-    height: `72px`
-  }
-});
+    height: `72px`,
+  },
+})
 
-export default styles;
+export default styles

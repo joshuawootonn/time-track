@@ -1,1 +1,1 @@
-export const getAnalyzeState = state => state.analyze;
+export const getAnalyzeState = (state) => state.analyze

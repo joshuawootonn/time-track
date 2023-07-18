@@ -1,43 +1,43 @@
-import moment from 'moment';
+import moment from 'moment'
 
 export const EMPLOYEE_MOCK = [
   {
     id: 1,
     firstName: `Joshua`,
-    lastName: `Wootonn`
+    lastName: `Wootonn`,
   },
   {
     id: 2,
     firstName: `2`,
-    lastName: `2`
+    lastName: `2`,
   },
   {
     id: 3,
     firstName: `3`,
-    lastName: `3`
-  }
-];
+    lastName: `3`,
+  },
+]
 
 export const PROJECT_MOCK = [
   {
     id: 1,
     name: `1`,
     isActive: 0,
-    date: `2017-02-13T00:02:00.000Z`
+    date: `2017-02-13T00:02:00.000Z`,
   },
   {
     id: 2,
     name: `2`,
     isActive: 0,
-    date: `2017-02-13T00:02:00.000Z`
+    date: `2017-02-13T00:02:00.000Z`,
   },
   {
     id: 3,
     name: `3`,
     isActive: 0,
-    date: `2017-02-13T00:02:00.000Z`
-  }
-];
+    date: `2017-02-13T00:02:00.000Z`,
+  },
+]
 
 export const PROJECT_TASK_MOCK = [
   {
@@ -51,8 +51,8 @@ export const PROJECT_TASK_MOCK = [
       isActive: 0,
       name: `0`,
       category: { id: 0, name: `name0` },
-      subcategory: { id: 0, name: `name0` }
-    }
+      subcategory: { id: 0, name: `name0` },
+    },
   },
   {
     id: 1,
@@ -65,8 +65,8 @@ export const PROJECT_TASK_MOCK = [
       isActive: 1,
       name: `1`,
       category: { id: 1, name: `name1` },
-      subcategory: { id: 1, name: `name1` }
-    }
+      subcategory: { id: 1, name: `name1` },
+    },
   },
   {
     id: 2,
@@ -79,10 +79,10 @@ export const PROJECT_TASK_MOCK = [
       isActive: 2,
       name: `2`,
       category: { id: 2, name: `name2` },
-      subcategory: { id: 2, name: `name2` }
-    }
-  }
-];
+      subcategory: { id: 2, name: `name2` },
+    },
+  },
+]
 
 export const TASK_MOCK = [
   {
@@ -90,23 +90,23 @@ export const TASK_MOCK = [
     isActive: 0,
     name: `1`,
     category: { id: 0, name: `name0` },
-    subcategory: { id: 0, name: `name0` }
+    subcategory: { id: 0, name: `name0` },
   },
   {
     id: 2,
     isActive: 1,
     name: `2`,
     category: { id: 1, name: `name1` },
-    subcategory: { id: 1, name: `name1` }
+    subcategory: { id: 1, name: `name1` },
   },
   {
     id: 3,
     isActive: 2,
     name: `3`,
     category: { id: 2, name: `name2` },
-    subcategory: { id: 2, name: `name2` }
-  }
-];
+    subcategory: { id: 2, name: `name2` },
+  },
+]
 
 export const PROJECT_TASK_OBJECT_MOCK = [
   {
@@ -121,8 +121,8 @@ export const PROJECT_TASK_OBJECT_MOCK = [
         isActive: 0,
         name: `1`,
         category: { id: 0, name: `name0` },
-        subcategory: { id: 0, name: `name0` }
-      }
+        subcategory: { id: 0, name: `name0` },
+      },
     },
     1: {
       id: 1,
@@ -135,8 +135,8 @@ export const PROJECT_TASK_OBJECT_MOCK = [
         isActive: 1,
         name: `2`,
         category: { id: 1, name: `name1` },
-        subcategory: { id: 1, name: `name1` }
-      }
+        subcategory: { id: 1, name: `name1` },
+      },
     },
     2: {
       id: 2,
@@ -149,11 +149,11 @@ export const PROJECT_TASK_OBJECT_MOCK = [
         isActive: 2,
         name: `3`,
         category: { id: 2, name: `name2` },
-        subcategory: { id: 2, name: `name2` }
-      }
-    }
-  }
-];
+        subcategory: { id: 2, name: `name2` },
+      },
+    },
+  },
+]
 
 export const ACTIVITY_MOCK = [
   {
@@ -177,27 +177,27 @@ export const ACTIVITY_MOCK = [
           categoryId: 1,
           id: 1,
           type: `Subcategory Name`,
-          dimensionId: 1
+          dimensionId: 1,
         },
         category: {
           id: 1,
-          type: `Category Name`
+          type: `Category Name`,
         },
         dimension: {
           id: 1,
-          type: `Dimension Name`
-        }
+          type: `Dimension Name`,
+        },
       },
       project: {
         date: `2017-02-13T00:02:00.000Z`,
         id: 1,
         isActive: 0,
-        name: `1722: Musc. Co. Fruitland Whitetopping`
-      }
+        name: `1722: Musc. Co. Fruitland Whitetopping`,
+      },
     },
-    projectId: 1
-  }
-];
+    projectId: 1,
+  },
+]
 
 export const INCOMPLETE_SHIFT_MOCK = [
   {
@@ -216,10 +216,10 @@ export const INCOMPLETE_SHIFT_MOCK = [
       isEmployed: 1,
       isWorking: 1,
       lastName: `Wootonn`,
-      pin: 565656
-    }
-  }
-];
+      pin: 565656,
+    },
+  },
+]
 
 export const COMPLETE_SHIFT_MOCK = [
   {
@@ -244,7 +244,7 @@ export const COMPLETE_SHIFT_MOCK = [
         length: 240,
         projectTaskId: 1,
         shiftId: 1,
-        projectId: 1
+        projectId: 1,
       },
       {
         description: ``,
@@ -252,8 +252,8 @@ export const COMPLETE_SHIFT_MOCK = [
         length: 240,
         projectTaskId: 1,
         shiftId: 1,
-        projectId: 1
-      }
+        projectId: 1,
+      },
     ],
     employee: {
       authorityId: 1,
@@ -263,8 +263,8 @@ export const COMPLETE_SHIFT_MOCK = [
       isEmployed: 1,
       isWorking: 1,
       lastName: `Wootonn`,
-      pin: 565656
-    }
+      pin: 565656,
+    },
   },
   {
     clockInDate: moment()
@@ -288,7 +288,7 @@ export const COMPLETE_SHIFT_MOCK = [
         length: 225,
         projectTaskId: 1,
         shiftId: 1,
-        projectId: 1
+        projectId: 1,
       },
       {
         description: ``,
@@ -296,8 +296,8 @@ export const COMPLETE_SHIFT_MOCK = [
         length: 240,
         projectTaskId: 1,
         shiftId: 1,
-        projectId: 1
-      }
+        projectId: 1,
+      },
     ],
     employee: {
       authorityId: 1,
@@ -307,48 +307,48 @@ export const COMPLETE_SHIFT_MOCK = [
       isEmployed: 1,
       isWorking: 1,
       lastName: `Wootonn`,
-      pin: 565656
-    }
-  }
-];
+      pin: 565656,
+    },
+  },
+]
 
 export const CREW_MOCK = [
   {
     name: `Crew 1`,
-    id: 1
+    id: 1,
   },
   {
     name: `Crew 2`,
-    id: 2
+    id: 2,
   },
   {
     name: `Crew 3`,
-    id: 3
-  }
-];
+    id: 3,
+  },
+]
 
 export const AUTHORITY_MOCK = [
   {
     type: `Admin`,
-    id: 1
+    id: 1,
   },
   {
     type: `Employee`,
-    id: 2
+    id: 2,
   },
   {
     type: `Manager`,
-    id: 3
-  }
-];
+    id: 3,
+  },
+]
 
 export const CATEGORY_MOCK = [
   { id: 1, type: `Setup` },
   { id: 2, type: `PCC` },
-  { id: 3, type: `Earthwork` }
-];
+  { id: 3, type: `Earthwork` },
+]
 
 export const SUBCATEGORY_MOCK = [
   { categoryId: 2, id: 1, type: `Sidewalk`, dimensionId: 1 },
-  { categoryId: 2, id: 2, type: `Pavement`, dimensionId: 1 }
-];
+  { categoryId: 2, id: 2, type: `Pavement`, dimensionId: 1 },
+]

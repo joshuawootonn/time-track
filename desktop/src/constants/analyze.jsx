@@ -1,8 +1,8 @@
 export const analyzeStatus = {
   INIT: `initial`,
   ADDING: `adding`,
-  EDITING: `editing`
-};
+  EDITING: `editing`,
+}
 
 export const analyzeDomain = {
   EMPLOYEE: `employee`,
@@ -12,5 +12,5 @@ export const analyzeDomain = {
   AUTHORITY: `authority`,
   CREW: `crew`,
   CATEGORY: `category`,
-  SUBCATEGORY: `subcategory`
-};
+  SUBCATEGORY: `subcategory`,
+}

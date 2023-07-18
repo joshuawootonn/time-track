@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Typography, Button } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { Field, Form } from 'formik';
+import { Typography, Button } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { Field, Form } from 'formik'
 
-import TextField from '~/components/inputs/TextField';
-import Password from '~/components/inputs/Password';
-import styles from './styles';
+import TextField from '~/components/inputs/TextField'
+import Password from '~/components/inputs/Password'
+import styles from './styles'
 
-export const AuthSignin = props => {
-  const { classes, isSubmitting, errors } = props;
+export const AuthSignin = (props) => {
+  const { classes, isSubmitting, errors } = props
 
   return (
     <div className={classes.hero}>
@@ -43,14 +43,14 @@ export const AuthSignin = props => {
         <Typography color="error">{errors.submit}</Typography>
       </div>
     </div>
-  );
-};
+  )
+}
 
 AuthSignin.propTypes = {
   classes: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   onSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool
-};
+  isSubmitting: PropTypes.bool,
+}
 
-export default withStyles(styles)(AuthSignin);
+export default withStyles(styles)(AuthSignin)

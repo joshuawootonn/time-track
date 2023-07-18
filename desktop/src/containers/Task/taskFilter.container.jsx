@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { Formik } from 'formik';
-import { Card } from '@material-ui/core';
+import { Formik } from 'formik'
+import { Card } from '@material-ui/core'
 
-import Task from '~/components/forms/Task';
+import Task from '~/components/forms/Task'
 
-import { categorySelectors, subcategorySelectors } from '~/store/selectors';
-import { analyzeActions } from '~/store/actions';
+import { categorySelectors, subcategorySelectors } from '~/store/selectors'
+import { analyzeActions } from '~/store/actions'
 
-import domain from '~/constants/domains';
+import domain from '~/constants/domains'
 
 export class TaskFilter extends Component {
   render() {
@@ -20,22 +20,22 @@ export class TaskFilter extends Component {
       taskFilters,
       taskFilterVisible,
       updateFilter,
-      toggleFilter
-    } = this.props;
+      toggleFilter,
+    } = this.props
 
     if (taskFilterVisible) {
       return (
         <Formik
           enableReinitialize
           initialValues={{
-            ...taskFilters
+            ...taskFilters,
           }}
           onSubmit={(values, formikFunctions) => {
-            updateFilter({ ...values });
-            toggleFilter();
-            formikFunctions.resetForm();
+            updateFilter({ ...values })
+            toggleFilter()
+            formikFunctions.resetForm()
           }}
-          render={formikProps => {
+          render={(formikProps) => {
             return (
               <Card
                 style={{
@@ -44,7 +44,7 @@ export class TaskFilter extends Component {
                   left: `2.5%`,
                   zIndex: 900,
                   width: `95%`,
-                  minHeight: `100px`
+                  minHeight: `100px`,
                 }}
               >
                 <Task
@@ -52,7 +52,7 @@ export class TaskFilter extends Component {
                   categories={[{ id: -1, type: `All` }, ...categories]}
                   subcategories={[
                     { id: -1, type: `All`, categoryId: -1 },
-                    ...subcategories
+                    ...subcategories,
                   ]}
                   label="Filter"
                   type="filter"
@@ -60,33 +60,33 @@ export class TaskFilter extends Component {
                   {...formikProps}
                 />
               </Card>
-            );
+            )
           }}
         />
-      );
+      )
     }
-    return null;
+    return null
   }
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     taskFilters: state.analyze.taskFilters,
     taskFilterVisible: state.analyze.taskFilterVisible,
     categories: categorySelectors.getAllCategories(state),
-    subcategories: subcategorySelectors.getAllSubcategories(state)
-  };
-};
+    subcategories: subcategorySelectors.getAllSubcategories(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    updateFilter: filters =>
+    updateFilter: (filters) =>
       dispatch(analyzeActions.updateFilter(domain.TASK, filters)),
     clearFilter: () => dispatch(analyzeActions.clearFilter(domain.TASK)),
-    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK))
-  };
-};
+    toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskFilter)

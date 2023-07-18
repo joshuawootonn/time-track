@@ -1,41 +1,41 @@
 /* eslint-disable no-console */
 
-import React from 'react';
+import React from 'react'
 
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
 import {
   AutoSizer,
   Column,
   SortDirection,
-  Table as RVTable
-} from 'react-virtualized';
-import 'react-virtualized/styles.css';
+  Table as RVTable,
+} from 'react-virtualized'
+import 'react-virtualized/styles.css'
 
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import Cell from './cell';
-import Header from './header';
-import styles from './styles';
-import CrewCell from '~/components/tables/Table/cells/crewCell';
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import Cell from './cell'
+import Header from './header'
+import styles from './styles'
+import CrewCell from '~/components/tables/Table/cells/crewCell'
 
-import ProjectCell from '~/components/tables/Table/cells/projectCell';
-import TaskCell from '~/components/tables/Table/cells/taskCell';
-import FirstNameCell from '~/components/tables/Table/cells/firstNameCell';
-import ProjectCompletionCell from '~/components/tables/Table/cells/projectCompletionCell';
+import ProjectCell from '~/components/tables/Table/cells/projectCell'
+import TaskCell from '~/components/tables/Table/cells/taskCell'
+import FirstNameCell from '~/components/tables/Table/cells/firstNameCell'
+import ProjectCompletionCell from '~/components/tables/Table/cells/projectCompletionCell'
 
 const CellSet = {
   [TableDataTypes.FIRSTNAME]: FirstNameCell,
   [TableDataTypes.CREW]: CrewCell,
   [TableDataTypes.PROJECTS]: ProjectCell,
   [TableDataTypes.TASKS]: TaskCell,
-  [TableDataTypes.PROJECT_COMPLETION]: ProjectCompletionCell
-};
+  [TableDataTypes.PROJECT_COMPLETION]: ProjectCompletionCell,
+}
 
 // ICEBOX: Test Table
 
 class Table extends React.Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
     this.state = {
       data: props.data,
@@ -43,13 +43,13 @@ class Table extends React.Component {
       sortBy: props.initialSortBy || null,
       sortKey: props.initialSortKey || null,
       type: TableDataTypes.STRING,
-      sortKeys: props.initialSortKeys || null
-    };
+      sortKeys: props.initialSortKeys || null,
+    }
   }
 
   UNSAFE_componentWillUpdate(nextProps, nextState) {
-    const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state;
-    const { sortDirection, sortBy, type, sortKeys, sortKey } = nextState;
+    const { sortBy: prevSortBy, sortDirection: prevSortDirection } = this.state
+    const { sortDirection, sortBy, type, sortKeys, sortKey } = nextState
 
     if (
       nextProps.data.length !== this.props.data.length ||
@@ -62,9 +62,9 @@ class Table extends React.Component {
           sortBy,
           type,
           sortKeys,
-          sortKey
-        )
-      });
+          sortKey,
+        ),
+      })
     }
     // if the sort order has actually changed
     if (sortBy !== prevSortBy || sortDirection !== prevSortDirection) {
@@ -77,87 +77,80 @@ class Table extends React.Component {
           sortBy,
           type,
           sortKeys,
-          sortKey
-        )
-      });
+          sortKey,
+        ),
+      })
     }
   }
   componentDidMount() {
-    const { sortDirection, sortBy, type, sortKeys, sortKey, data } = this.state;
+    const { sortDirection, sortBy, type, sortKeys, sortKey, data } = this.state
     this.setState({
-      data: this.sort(data, sortDirection, sortBy, type, sortKeys, sortKey)
-    });
+      data: this.sort(data, sortDirection, sortBy, type, sortKeys, sortKey),
+    })
   }
 
   compareOrder = (a, b, sortBy, type, sortKeys, sortKey) => {
     if (type === TableDataTypes.OBJECT) {
       const aVal = sortKeys.reduce(
         (object, currentKey) => object[currentKey],
-        a[sortKey]
-      );
+        a[sortKey],
+      )
       const bVal = sortKeys.reduce(
         (object, currentKey) => object[currentKey],
-        b[sortKey]
-      );
+        b[sortKey],
+      )
       if (bVal < aVal) {
-        return -1;
+        return -1
       }
       if (bVal > aVal) {
-        return 1;
+        return 1
       }
-      return 0;
+      return 0
     }
     if (type === TableDataTypes.FIRSTNAME) {
-      return b.employee.firstName < a.employee.firstName ? -1 : 1;
+      return b.employee.firstName < a.employee.firstName ? -1 : 1
     }
     if (type === TableDataTypes.CREW) {
-      return b.employee.crew.name < a.employee.crew.name ? -1 : 1;
+      return b.employee.crew.name < a.employee.crew.name ? -1 : 1
     }
     if (!b[sortBy]) {
-      return -1;
+      return -1
     }
     if (!a[sortBy]) {
-      return 1;
+      return 1
     }
     if (b[sortBy] < a[sortBy]) {
-      return -1;
+      return -1
     }
     if (b[sortBy] > a[sortBy]) {
-      return 1;
+      return 1
     }
-    return 0;
-  };
+    return 0
+  }
 
   sort = (array, sortDirection, sortBy, type, sortKeys, sortKey) => {
-    const stabilizedThis = array.map((el, index) => [el, index]);
+    const stabilizedThis = array.map((el, index) => [el, index])
     stabilizedThis.sort((a, b) => {
-      let order = this.compareOrder(
-        a[0],
-        b[0],
-        sortBy,
-        type,
-        sortKeys,
-        sortKey
-      );
-      order = sortDirection === SortDirection.DESC ? order * -1 : order;
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map(el => el[0]);
-  };
+      let order = this.compareOrder(a[0], b[0], sortBy, type, sortKeys, sortKey)
+      order = sortDirection === SortDirection.DESC ? order * -1 : order
+      if (order !== 0) return order
+      return a[1] - b[1]
+    })
+    return stabilizedThis.map((el) => el[0])
+  }
 
-  handleRequestSort = value => {
-    let { sortBy, sortDirection } = value;
+  handleRequestSort = (value) => {
+    let { sortBy, sortDirection } = value
 
     if (
       this.state.sortBy === sortBy &&
       this.state.sortDirection === SortDirection.DESC
     ) {
-      sortDirection = SortDirection.ASC;
+      sortDirection = SortDirection.ASC
     }
     const { keys, type, dataKey } = this.props.columns.find(
-      column => column.id === sortBy
-    );
+      (column) => column.id === sortBy,
+    )
 
     // set state with the new sorting values
     // these values will be evaluated in componentWillUpdate to see if the component should actually sort
@@ -166,31 +159,31 @@ class Table extends React.Component {
       sortBy,
       type,
       sortKeys: keys,
-      sortKey: dataKey
-    });
-  };
+      sortKey: dataKey,
+    })
+  }
 
-  handleClick = event => {
-    this.props.select(event.rowData.id);
-  };
+  handleClick = (event) => {
+    this.props.select(event.rowData.id)
+  }
 
-  cellRenderer = cellProps => {
-    const { type } = this.props.columns[cellProps.columnIndex];
+  cellRenderer = (cellProps) => {
+    const { type } = this.props.columns[cellProps.columnIndex]
 
     const props = {
       updateFilter: this.props.updateFilter,
       ...cellProps,
-      ...this.props
-    };
+      ...this.props,
+    }
 
-    const CellComponent = CellSet[type];
+    const CellComponent = CellSet[type]
 
-    return CellComponent ? <CellComponent {...props} /> : <Cell {...props} />;
-  };
+    return CellComponent ? <CellComponent {...props} /> : <Cell {...props} />
+  }
 
-  headerRenderer = headerProps => {
-    const { classes, columns, headerHeight } = this.props;
-    const { sortBy, sortDirection, sortKeys } = this.state;
+  headerRenderer = (headerProps) => {
+    const { classes, columns, headerHeight } = this.props
+    const { sortBy, sortDirection, sortKeys } = this.state
 
     return (
       <Header
@@ -202,13 +195,13 @@ class Table extends React.Component {
         sortDirection={sortDirection}
         sortKeys={sortKeys}
       />
-    );
-  };
+    )
+  }
 
   render() {
-    const { columns, classes } = this.props;
-    const { sortBy, sortDirection, data } = this.state;
-    const { ...tableProps } = this.props;
+    const { columns, classes } = this.props
+    const { sortBy, sortDirection, data } = this.state
+    const { ...tableProps } = this.props
     // console.log('table: virtualized',data.length);
     return (
       <AutoSizer>
@@ -232,34 +225,34 @@ class Table extends React.Component {
                 <Column
                   key={id}
                   width={width}
-                  headerRenderer={headerProps =>
+                  headerRenderer={(headerProps) =>
                     this.headerRenderer({
                       ...headerProps,
                       columnIndex: index,
-                      ...other
+                      ...other,
                     })
                   }
                   flexGrow={1}
                   className={classNames(classes.flexContainer, className)}
-                  cellRenderer={cellProps =>
+                  cellRenderer={(cellProps) =>
                     this.cellRenderer({
-                      ...cellProps
+                      ...cellProps,
                     })
                   }
                   dataKey={id}
                 />
-              );
+              )
             })}
           </RVTable>
         )}
       </AutoSizer>
-    );
+    )
   }
 }
 
 Table.defaultProps = {
   headerHeight: 56,
-  rowHeight: 49
-};
+  rowHeight: 49,
+}
 
-export default withStyles(styles)(Table);
+export default withStyles(styles)(Table)

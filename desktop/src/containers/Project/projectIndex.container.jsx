@@ -1,41 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import VirtualizedSortSelect from '~/components/tables/Table';
-import Progress from '~/components/helpers/Progress';
-import { analyzeActions } from '~/store/actions';
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import domain from '~/constants/domains';
-import {
-  getAllProjectsNew,
-  getProjectFilters
-} from '~/store/Project/selectors';
-import axios from '~/helpers/axios';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import VirtualizedSortSelect from '~/components/tables/Table'
+import Progress from '~/components/helpers/Progress'
+import { analyzeActions } from '~/store/actions'
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import domain from '~/constants/domains'
+import { getAllProjectsNew, getProjectFilters } from '~/store/Project/selectors'
+import axios from '~/helpers/axios'
 
 const ProjectIndex = () => {
-  const dispatch = useDispatch();
-  const projects = useSelector(state => getAllProjectsNew(state));
-  const { startTime, endTime, isActive } = useSelector(state =>
-    getProjectFilters(state)
-  );
-  const [isLoading, setIsLoading] = useState(true);
-  const [projectSummaries, setProjectSummaries] = useState([]);
+  const dispatch = useDispatch()
+  const projects = useSelector((state) => getAllProjectsNew(state))
+  const { startTime, endTime, isActive } = useSelector((state) =>
+    getProjectFilters(state),
+  )
+  const [isLoading, setIsLoading] = useState(true)
+  const [projectSummaries, setProjectSummaries] = useState([])
 
-  const select = object =>
-    dispatch(analyzeActions.select(domain.PROJECT, object));
+  const select = (object) =>
+    dispatch(analyzeActions.select(domain.PROJECT, object))
 
   useEffect(() => {
     axios
       .get(
-        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isActive=${isActive}`
+        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isActive=${isActive}`,
       )
       .then(({ data: { projects } }) => {
-        setProjectSummaries(projects);
-        setIsLoading(false);
-      });
-  }, [startTime, endTime, projects]);
+        setProjectSummaries(projects)
+        setIsLoading(false)
+      })
+  }, [startTime, endTime, projects])
 
   if (!projectSummaries || projectSummaries.length === 0 || isLoading)
-    return <Progress variant="circular" fullWidth fullHeight />;
+    return <Progress variant="circular" fullWidth fullHeight />
 
   return (
     <VirtualizedSortSelect
@@ -44,10 +41,10 @@ const ProjectIndex = () => {
       select={select}
       initialSortBy="date"
     />
-  );
-};
+  )
+}
 
-export default ProjectIndex;
+export default ProjectIndex
 
 const rows = [
   {
@@ -57,7 +54,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Name`,
-    type: TableDataTypes.STRING
+    type: TableDataTypes.STRING,
   },
   {
     id: `date`,
@@ -66,7 +63,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Date`,
-    type: TableDataTypes.DATE
+    type: TableDataTypes.DATE,
   },
   {
     id: `isActive`,
@@ -76,7 +73,7 @@ const rows = [
     align: `left`,
     padding: `dense`,
     label: `Active`,
-    type: TableDataTypes.BOOLEAN
+    type: TableDataTypes.BOOLEAN,
   },
   {
     id: `totalEstimate`,
@@ -85,7 +82,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Estimated Time`,
-    type: TableDataTypes.LENGTH
+    type: TableDataTypes.LENGTH,
   },
   {
     id: `totalActual`,
@@ -94,7 +91,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Actual Time`,
-    type: TableDataTypes.LENGTH
+    type: TableDataTypes.LENGTH,
   },
   {
     id: `projectCompletion`,
@@ -103,6 +100,6 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Percent Complete`,
-    type: TableDataTypes.PROJECT_COMPLETION
-  }
-];
+    type: TableDataTypes.PROJECT_COMPLETION,
+  },
+]

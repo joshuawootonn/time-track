@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Select as SelectInput,
   FormControl,
   InputLabel,
   MenuItem,
-  FormHelperText
-} from '@material-ui/core';
-import { getIn } from 'formik';
+  FormHelperText,
+} from '@material-ui/core'
+import { getIn } from 'formik'
 
 export class Select extends Component {
-  onChange = e => {
-    const { field, onChange } = this.props;
-    field.onChange(e);
-    onChange && onChange(e);
-  };
+  onChange = (e) => {
+    const { field, onChange } = this.props
+    field.onChange(e)
+    onChange && onChange(e)
+  }
   // Fix for handleblur I was getting on deselect
   // https://github.com/jaredpalmer/formik/issues/640
-  onBlur = e => {
-    const { field, form } = this.props;
-    e.target.name = field.name;
-    form.handleBlur(e);
-  };
+  onBlur = (e) => {
+    const { field, form } = this.props
+    e.target.name = field.name
+    form.handleBlur(e)
+  }
   render() {
     const {
       field,
@@ -37,8 +37,8 @@ export class Select extends Component {
       selectProps,
       itemProps,
       helper,
-      className
-    } = this.props;
+      className,
+    } = this.props
 
     return (
       <FormControl
@@ -63,7 +63,7 @@ export class Select extends Component {
                     item.type ||
                     item.firstName + ` ` + item.lastName}
                 </MenuItem>
-              );
+              )
             })}
           {children}
         </SelectInput>
@@ -75,15 +75,15 @@ export class Select extends Component {
           </FormHelperText>
         )}
       </FormControl>
-    );
+    )
   }
 }
 
 Select.defaultProps = {
   margin: `normal`,
   fullWidth: false,
-  helper: `normal`
-};
+  helper: `normal`,
+}
 
 Select.propTypes = {
   field: PropTypes.object.isRequired,
@@ -98,7 +98,7 @@ Select.propTypes = {
   selectProps: PropTypes.object,
   itemProps: PropTypes.object,
   helper: PropTypes.oneOf([`normal`, `none`]),
-  onchange: PropTypes.func
-};
+  onchange: PropTypes.func,
+}
 
-export default Select;
+export default Select

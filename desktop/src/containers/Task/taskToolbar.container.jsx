@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import AnalyzeToolbar from '~/components/tables/Toolbar';
+import AnalyzeToolbar from '~/components/tables/Toolbar'
 
-import { analyzeActions } from '~/store/actions';
-import { taskSelectors } from '~/store/selectors';
+import { analyzeActions } from '~/store/actions'
+import { taskSelectors } from '~/store/selectors'
 
-import { analyzeStatus } from '~/constants/analyze';
-import domain from '~/constants/domains';
+import { analyzeStatus } from '~/constants/analyze'
+import domain from '~/constants/domains'
 
 export class TaskToolbar extends Component {
-  selectLabel = selected => `${selected.name} selected`;
+  selectLabel = (selected) => `${selected.name} selected`
 
   add = () => {
-    const { selected, select, setStatus } = this.props;
+    const { selected, select, setStatus } = this.props
     if (selected && selected.id) {
-      select(domain.TASK, selected.id);
+      select(domain.TASK, selected.id)
     }
-    setStatus(domain.TASK, analyzeStatus.ADDING);
-  };
+    setStatus(domain.TASK, analyzeStatus.ADDING)
+  }
 
   render() {
-    const { selected, toggleTaskFilter, taskFilterVisible } = this.props;
+    const { selected, toggleTaskFilter, taskFilterVisible } = this.props
 
     return (
       <AnalyzeToolbar
@@ -34,7 +34,7 @@ export class TaskToolbar extends Component {
         toggleFilter={toggleTaskFilter}
         isFilterVisible={taskFilterVisible}
       />
-    );
+    )
   }
 }
 
@@ -43,24 +43,24 @@ TaskToolbar.propTypes = {
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
   toggleTaskFilter: PropTypes.func,
-  taskFilterVisible: PropTypes.bool
-};
+  taskFilterVisible: PropTypes.bool,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     taskFilterVisible: state.analyze.taskFilterVisible,
     tasks: taskSelectors.getAllTasksWithContent(state),
-    selected: taskSelectors.getSelectedTask(state)
-  };
-};
+    selected: taskSelectors.getSelectedTask(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     ...bindActionCreators({ ...analyzeActions }, dispatch),
-    toggleTaskFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK))
-  };
-};
+    toggleTaskFilter: () => dispatch(analyzeActions.toggleFilter(domain.TASK)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskToolbar)

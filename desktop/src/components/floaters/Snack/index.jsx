@@ -1,2 +1,2 @@
-import Snack from './snack';
-export default Snack;
+import Snack from './snack'
+export default Snack

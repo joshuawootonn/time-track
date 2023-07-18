@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import {
   TableCell,
   TableHead,
   TableRow,
   TableSortLabel,
-  Tooltip
-} from '@material-ui/core';
+  Tooltip,
+} from '@material-ui/core'
 
-import styles from './styles';
-import * as TableDataTypes from '~/constants/tableDataTypes';
+import styles from './styles'
+import * as TableDataTypes from '~/constants/tableDataTypes'
 
 export class SortSelectHead extends React.Component {
-  createSortHandler = (property, type, keys) => event => {
-    this.props.onRequestSort(event, property, type, keys);
-  };
+  createSortHandler = (property, type, keys) => (event) => {
+    this.props.onRequestSort(event, property, type, keys)
+  }
 
   render() {
-    const { order, orderBy, headerData, keys, type, classes } = this.props;
+    const { order, orderBy, headerData, keys, type, classes } = this.props
 
     return (
       <TableHead>
@@ -27,15 +27,15 @@ export class SortSelectHead extends React.Component {
           <TableCell className={classes.headerCell}>
             <div></div>
           </TableCell>
-          {headerData.map(row => {
-            let sortedColumn;
+          {headerData.map((row) => {
+            let sortedColumn
             if (type === TableDataTypes.OBJECT) {
               sortedColumn =
-                orderBy === row.id && keys === row.keys && type === row.type;
+                orderBy === row.id && keys === row.keys && type === row.type
             } else {
-              sortedColumn = orderBy === row.id;
+              sortedColumn = orderBy === row.id
             }
-            const key = row.keys ? row.id + row.keys.join(``) : row.id;
+            const key = row.keys ? row.id + row.keys.join(``) : row.id
             return (
               <TableCell
                 className={classes.headerCell}
@@ -60,11 +60,11 @@ export class SortSelectHead extends React.Component {
                   </TableSortLabel>
                 </Tooltip>
               </TableCell>
-            );
+            )
           }, this)}
         </TableRow>
       </TableHead>
-    );
+    )
   }
 }
 
@@ -77,7 +77,7 @@ SortSelectHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
   headerData: PropTypes.array.isRequired,
   keys: PropTypes.array,
-  type: PropTypes.string
-};
+  type: PropTypes.string,
+}
 
-export default withStyles(styles)(SortSelectHead);
+export default withStyles(styles)(SortSelectHead)

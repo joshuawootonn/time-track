@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import { analyzeActions, subcategoryActions } from '~/store/actions';
-import { subcategorySelectors } from '~/store/selectors';
-import SortSelectTable from '~/components/tables/SortSelect';
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import { analyzeStatus } from '~/constants/analyze';
-import domain from '~/constants/domains';
+import { analyzeActions, subcategoryActions } from '~/store/actions'
+import { subcategorySelectors } from '~/store/selectors'
+import SortSelectTable from '~/components/tables/SortSelect'
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import { analyzeStatus } from '~/constants/analyze'
+import domain from '~/constants/domains'
 
 export class SubcategoryIndex extends Component {
   componentDidMount = () => {
-    this.props.getAllSubcategories();
-  };
+    this.props.getAllSubcategories()
+  }
 
-  selectLabel = selected => `${selected.type} selected`;
+  selectLabel = (selected) => `${selected.type} selected`
 
-  select = object => this.props.select(domain.SUBCATEGORY, object);
+  select = (object) => this.props.select(domain.SUBCATEGORY, object)
 
-  add = () => this.props.setStatus(domain.SUBCATEGORY, analyzeStatus.ADDING);
+  add = () => this.props.setStatus(domain.SUBCATEGORY, analyzeStatus.ADDING)
 
   render() {
-    const { subcategories, selected } = this.props;
+    const { subcategories, selected } = this.props
 
     return (
       <SortSelectTable
@@ -35,7 +35,7 @@ export class SubcategoryIndex extends Component {
         add={this.add}
         initialOrderBy="type"
       />
-    );
+    )
   }
 }
 
@@ -44,34 +44,34 @@ SubcategoryIndex.propTypes = {
   subcategories: PropTypes.array.isRequired,
   select: PropTypes.func.isRequired,
   setStatus: PropTypes.func.isRequired,
-  selected: PropTypes.object.isRequired
-};
+  selected: PropTypes.object.isRequired,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     subcategories: subcategorySelectors.getAllSubcategories(state),
-    selected: subcategorySelectors.getSelectedSubcategory(state)
-  };
-};
+    selected: subcategorySelectors.getSelectedSubcategory(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getAllSubcategories: () => {
-      return dispatch(subcategoryActions.getAllSubcategories());
+      return dispatch(subcategoryActions.getAllSubcategories())
     },
-    ...bindActionCreators({ ...analyzeActions }, dispatch)
-  };
-};
+    ...bindActionCreators({ ...analyzeActions }, dispatch),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubcategoryIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(SubcategoryIndex)
 
 const rows = [
   {
     id: `type`,
     padding: `dense`,
     label: `Type`,
-    type: TableDataTypes.STRING
-  }
-];
+    type: TableDataTypes.STRING,
+  },
+]

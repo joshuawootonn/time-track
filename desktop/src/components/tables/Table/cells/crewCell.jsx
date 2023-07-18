@@ -1,7 +1,7 @@
-import React from 'react';
-import { TableCell } from '@material-ui/core';
-import classNames from 'classnames';
-import Link from '@material-ui/core/Link';
+import React from 'react'
+import { TableCell } from '@material-ui/core'
+import classNames from 'classnames'
+import Link from '@material-ui/core/Link'
 
 const CrewCell = ({ rowData, classes, rowHeight, updateFilter }) => (
   <TableCell
@@ -13,16 +13,16 @@ const CrewCell = ({ rowData, classes, rowHeight, updateFilter }) => (
     <Link
       component="button"
       size="small"
-      onClick={e => {
-        e.stopPropagation();
+      onClick={(e) => {
+        e.stopPropagation()
         updateFilter({
-          crewId: rowData.employee.crew.id
-        });
+          crewId: rowData.employee.crew.id,
+        })
       }}
     >
       {rowData.employee.crew.name}
     </Link>
   </TableCell>
-);
+)
 
-export default CrewCell;
+export default CrewCell

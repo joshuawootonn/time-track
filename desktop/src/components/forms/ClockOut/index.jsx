@@ -1,2 +1,2 @@
-import ClockOut from './clockOut';
-export default ClockOut;
+import ClockOut from './clockOut'
+export default ClockOut

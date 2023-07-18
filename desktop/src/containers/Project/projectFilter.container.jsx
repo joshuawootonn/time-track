@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Formik } from 'formik';
-import moment from 'moment';
-import { Card } from '@material-ui/core';
-import { analyzeActions } from '~/store/actions';
-import domain from '~/constants/domains';
-import ProjectFilter from '~/components/forms/Project/projectFilter';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Formik } from 'formik'
+import moment from 'moment'
+import { Card } from '@material-ui/core'
+import { analyzeActions } from '~/store/actions'
+import domain from '~/constants/domains'
+import ProjectFilter from '~/components/forms/Project/projectFilter'
 
 export class ProjectFilterContainer extends Component {
   render() {
@@ -14,8 +14,8 @@ export class ProjectFilterContainer extends Component {
       projectFilterVisible,
       clearFilter,
       updateFilter,
-      toggleFilter
-    } = this.props;
+      toggleFilter,
+    } = this.props
 
     if (projectFilterVisible) {
       return (
@@ -25,26 +25,26 @@ export class ProjectFilterContainer extends Component {
             ...projectFilters,
             startTime: moment(
               projectFilters.startTime,
-              `MM-DD-YY HH:mm:ss`
+              `MM-DD-YY HH:mm:ss`,
             ).format(`YYYY-MM-DD`),
             endTime: moment(projectFilters.endTime, `MM-DD-YY HH:mm:ss`).format(
-              `YYYY-MM-DD`
-            )
+              `YYYY-MM-DD`,
+            ),
           }}
           onSubmit={(values, formikFunctions) => {
-            toggleFilter();
+            toggleFilter()
             updateFilter({
               ...values,
               startTime: moment(values.startTime, `YYYY-MM-DD`).format(
-                `MM-DD-YY HH:mm:ss`
+                `MM-DD-YY HH:mm:ss`,
               ),
               endTime: moment(values.endTime, `YYYY-MM-DD`).format(
-                `MM-DD-YY HH:mm:ss`
-              )
-            });
-            formikFunctions.resetForm();
+                `MM-DD-YY HH:mm:ss`,
+              ),
+            })
+            formikFunctions.resetForm()
           }}
-          render={formikProps => {
+          render={(formikProps) => {
             return (
               <Card
                 style={{
@@ -53,35 +53,35 @@ export class ProjectFilterContainer extends Component {
                   left: `2.5%`,
                   zIndex: 900,
                   width: `95%`,
-                  minHeight: `100px`
+                  minHeight: `100px`,
                 }}
               >
                 <ProjectFilter clearFilter={clearFilter} {...formikProps} />
               </Card>
-            );
+            )
           }}
         />
-      );
+      )
     }
-    return null;
+    return null
   }
 }
 
 /* istanbul ignore next */
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   projectFilters: state.analyze.projectFilters,
-  projectFilterVisible: state.analyze.projectFilterVisible
-});
+  projectFilterVisible: state.analyze.projectFilterVisible,
+})
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => ({
-  updateFilter: filters =>
+const mapDispatchToProps = (dispatch) => ({
+  updateFilter: (filters) =>
     dispatch(analyzeActions.updateFilter(domain.PROJECT, filters)),
   clearFilter: () => dispatch(analyzeActions.clearFilter(domain.PROJECT)),
-  toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT))
-});
+  toggleFilter: () => dispatch(analyzeActions.toggleFilter(domain.PROJECT)),
+})
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(ProjectFilterContainer);
+  mapDispatchToProps,
+)(ProjectFilterContainer)

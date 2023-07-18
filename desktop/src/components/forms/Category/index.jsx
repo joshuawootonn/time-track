@@ -1,2 +1,2 @@
-import Category from './category';
-export default Category;
+import Category from './category'
+export default Category

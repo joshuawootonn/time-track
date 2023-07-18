@@ -1,2 +1,2 @@
-import ShiftEdit from './halfShift';
-export default ShiftEdit;
+import ShiftEdit from './halfShift'
+export default ShiftEdit

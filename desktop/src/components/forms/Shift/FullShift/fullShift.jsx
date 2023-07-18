@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
   Typography,
   Button,
   IconButton,
-  Tooltip
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
-import cx from 'classnames';
-import { Field, Form, FieldArray } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '~/components/inputs/TextField';
-import Time from '~/components/inputs/Time';
-import TypeableSelect from '~/components/inputs/TypeableSelect';
+  Tooltip,
+} from '@material-ui/core'
+import { Close } from '@material-ui/icons'
+import cx from 'classnames'
+import { Field, Form, FieldArray } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '~/components/inputs/TextField'
+import Time from '~/components/inputs/Time'
+import TypeableSelect from '~/components/inputs/TypeableSelect'
 // import { css } from 'styled-components/macro';
 
-import styles from './styles';
-import { minutesToString } from '~/helpers/time';
+import styles from './styles'
+import { minutesToString } from '~/helpers/time'
 
 const styles2 = {
-  root: ''
+  root: '',
   // root: css`
   //   height: calc(100vh - 120px);
   //   overflow-y: auto;
   // `
-};
+}
 
 export class FullShift extends Component {
   render() {
@@ -41,8 +41,8 @@ export class FullShift extends Component {
       projectTasks,
       employees,
       timeLeft,
-      generalError
-    } = this.props;
+      generalError,
+    } = this.props
     return (
       <div css={styles2.root}>
         <Form>
@@ -79,7 +79,7 @@ export class FullShift extends Component {
 
             <FieldArray
               name="activities"
-              render={arrayHelpers => {
+              render={(arrayHelpers) => {
                 return (
                   <Grid item xs={12} container className={classes.body}>
                     {values.activities &&
@@ -122,8 +122,8 @@ export class FullShift extends Component {
                                   onChange={() => {
                                     arrayHelpers.form.setFieldValue(
                                       `activities.${index}.projectTaskId`,
-                                      -1
-                                    );
+                                      -1,
+                                    )
                                   }}
                                 />
                                 <Field
@@ -134,11 +134,11 @@ export class FullShift extends Component {
                                   className={classes.field}
                                   type="task"
                                   items={projectTasks // This code iterates the projectTask
-                                    .filter(projectTask => {
+                                    .filter((projectTask) => {
                                       return (
                                         activity.projectId ===
                                         projectTask.projectId
-                                      ); // filters based on project selected
+                                      ) // filters based on project selected
                                     })}
                                 />
                               </div>
@@ -160,7 +160,7 @@ export class FullShift extends Component {
                               </div>
                             </Grid>
                           </div>
-                        );
+                        )
                       })}
                     <Grid
                       item
@@ -187,7 +187,7 @@ export class FullShift extends Component {
                             projectId: Object.keys(projects)[0],
                             projectTaskId: -1,
                             length: 0,
-                            description: ``
+                            description: ``,
                           })
                         }
                       >
@@ -195,7 +195,7 @@ export class FullShift extends Component {
                       </Button>
                     </Grid>
                   </Grid>
-                );
+                )
               }}
             />
 
@@ -228,7 +228,7 @@ export class FullShift extends Component {
 
                 <Button
                   onClick={() => {
-                    resetForm(initialValues);
+                    resetForm(initialValues)
                   }}
                   color="secondary"
                   variant="text"
@@ -242,15 +242,15 @@ export class FullShift extends Component {
           </Grid>
         </Form>
       </div>
-    );
+    )
   }
 }
 
-export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = `analyze_shift_full_shift_reset_button`;
-export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_full_shift_submit_button`;
-export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_add_activity_button`;
-export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_remove_activity_button`;
-export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`;
+export const ANALYZE_SHIFT_FULL_SHIFT_RESET_BUTTON_ID = `analyze_shift_full_shift_reset_button`
+export const ANALYZE_SHIFT_FULL_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_full_shift_submit_button`
+export const ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_add_activity_button`
+export const ANALYZE_SHIFT_FULL_SHIFT_REMOVE_ACTIVITY_BUTTON_ID = `analyze_shift_full_shift_remove_activity_button`
+export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`
 
 FullShift.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -263,7 +263,7 @@ FullShift.propTypes = {
   employees: PropTypes.array.isRequired,
   timeLeft: PropTypes.number.isRequired,
   generalError: PropTypes.string,
-  values: PropTypes.object.isRequired
-};
+  values: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles)(FullShift);
+export default withStyles(styles)(FullShift)

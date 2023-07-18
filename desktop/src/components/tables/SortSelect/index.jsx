@@ -1,2 +1,2 @@
-import SortSelect from './sortSelectTable';
-export default SortSelect;
+import SortSelect from './sortSelectTable'
+export default SortSelect

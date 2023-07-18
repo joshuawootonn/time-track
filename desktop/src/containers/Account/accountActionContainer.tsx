@@ -1,94 +1,94 @@
-import React, { Component } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import { employeeActions, analyzeActions } from '~/store/actions';
-import { employeeSelectors } from '~/store/selectors';
-import * as routes from '~/constants/routes';
-import AccountActionForm from '~/components/forms/AccountAction';
-import domains from '~/constants/domains';
-import { BaseEmployee, Store } from '~/store/types';
-import { AUTH_LEVELS } from '~/constants/routes';
-import isElectron from '~/helpers/IsElectron';
+import { employeeActions, analyzeActions } from '~/store/actions'
+import { employeeSelectors } from '~/store/selectors'
+import * as routes from '~/constants/routes'
+import AccountActionForm from '~/components/forms/AccountAction'
+import domains from '~/constants/domains'
+import { BaseEmployee, Store } from '~/store/types'
+import { AUTH_LEVELS } from '~/constants/routes'
+import isElectron from '~/helpers/IsElectron'
 
 interface Props extends RouteComponentProps {
-  clockIn: (employee: BaseEmployee) => Promise<any>;
-  employees: BaseEmployee[];
+  clockIn: (employee: BaseEmployee) => Promise<any>
+  employees: BaseEmployee[]
   employee: {
     current: {
-      id?: number;
-      status: string;
-    };
-  };
-  type: AUTH_LEVELS;
-  currentEmployee: BaseEmployee;
-  clearFilters: () => void;
+      id?: number
+      status: string
+    }
+  }
+  type: AUTH_LEVELS
+  currentEmployee: BaseEmployee
+  clearFilters: () => void
 }
 
 interface State {
-  isFullScreen: boolean;
-  isLoading: boolean;
-  isElectron: boolean;
+  isFullScreen: boolean
+  isLoading: boolean
+  isElectron: boolean
 }
 
 export class AccountAction extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
     this.state = {
       isLoading: false,
       isFullScreen: true,
-      isElectron: isElectron()
-    };
+      isElectron: isElectron(),
+    }
   }
   componentDidMount = () => {
     //REMOVE before deploy
     // this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
 
     if (this.state.isElectron) {
-      const isFullScreen = window.electronAPI.is_fullscreen();
+      const isFullScreen = window.electronAPI.is_fullscreen()
       this.setState({
-        isFullScreen
-      });
+        isFullScreen,
+      })
     }
-  };
+  }
   back = () => {
-    this.props.history.push(`/`);
-  };
+    this.props.history.push(`/`)
+  }
   clockIn = () => {
-    const { isLoading } = this.state;
-    const { employees, employee, history } = this.props;
+    const { isLoading } = this.state
+    const { employees, employee, history } = this.props
     if (isLoading || !employee.current.id) {
-      return;
+      return
     }
-    const employeeToClockin = employees[employee.current.id];
+    const employeeToClockin = employees[employee.current.id]
 
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true })
     return this.props.clockIn(employeeToClockin).then(() => {
-      history.push(`/`);
-      this.setState({ isLoading: false });
-    });
-  };
+      history.push(`/`)
+      this.setState({ isLoading: false })
+    })
+  }
   clockOut = () => {
-    this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`);
-  };
+    this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`)
+  }
   analyze = () => {
-    this.props.clearFilters();
-    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
-  };
+    this.props.clearFilters()
+    this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`)
+  }
   crew = () => {
-    this.props.clearFilters();
-    this.props.history.push(`/${this.props.type}/${routes.CREW}`);
-  };
+    this.props.clearFilters()
+    this.props.history.push(`/${this.props.type}/${routes.CREW}`)
+  }
   export = () => {
-    this.props.history.push(`/${this.props.type}/${routes.EXPORT}`);
-  };
+    this.props.history.push(`/${this.props.type}/${routes.EXPORT}`)
+  }
   toggleFullscreen = () => {
     this.setState({
-      isFullScreen: window.electronAPI.toggle_fullscreen()
-    });
-  };
+      isFullScreen: window.electronAPI.toggle_fullscreen(),
+    })
+  }
   render() {
-    const { type, currentEmployee } = this.props;
+    const { type, currentEmployee } = this.props
     return (
       <AccountActionForm
         isWorking={currentEmployee.isWorking}
@@ -103,7 +103,7 @@ export class AccountAction extends Component<Props, State> {
         isFullScreen={this.state.isFullScreen}
         isElectron={this.state.isElectron}
       />
-    );
+    )
   }
 }
 
@@ -111,26 +111,26 @@ export class AccountAction extends Component<Props, State> {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     clockIn: (employee: BaseEmployee) => {
-      return dispatch(employeeActions.clockIn(employee));
+      return dispatch(employeeActions.clockIn(employee))
     },
     clearFilters: () => {
-      dispatch(analyzeActions.clearFilter(domains.EMPLOYEE));
-      dispatch(analyzeActions.clearFilter(domains.PROJECT));
-      dispatch(analyzeActions.clearFilter(domains.TASK));
-      dispatch(analyzeActions.clearFilter(domains.SHIFT));
-    }
-  };
-};
+      dispatch(analyzeActions.clearFilter(domains.EMPLOYEE))
+      dispatch(analyzeActions.clearFilter(domains.PROJECT))
+      dispatch(analyzeActions.clearFilter(domains.TASK))
+      dispatch(analyzeActions.clearFilter(domains.SHIFT))
+    },
+  }
+}
 
 /* istanbul ignore next */
 const mapStateToProps = (state: Store) => ({
   employee: state.employee,
   entities: state.entities,
   employees: employeeSelectors.getEmployeesFromEntities(state),
-  currentEmployee: employeeSelectors.getCurrentEmployee(state)
-});
+  currentEmployee: employeeSelectors.getCurrentEmployee(state),
+})
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(withRouter(AccountAction));
+  mapDispatchToProps,
+)(withRouter(AccountAction))

@@ -1,4 +1,4 @@
-import { generateCRUDEndpoints } from '~/helpers/endpoint.helper';
-const DOMAIN = `projecttasks`;
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper'
+const DOMAIN = `projecttasks`
 
-export default generateCRUDEndpoints(DOMAIN);
+export default generateCRUDEndpoints(DOMAIN)

@@ -23,26 +23,26 @@ export const createCRUDActionTypes = (domain, pluralDomain = domain + `s`) => {
     [`UPDATE_${domain.toUpperCase()}_FAILURE`]: `update_${domain.toLowerCase()}_failure`,
     [`REMOVE_${domain.toUpperCase()}_REQUEST`]: `remove_${domain.toLowerCase()}_request`,
     [`REMOVE_${domain.toUpperCase()}_SUCCESS`]: `remove_${domain.toLowerCase()}_success`,
-    [`REMOVE_${domain.toUpperCase()}_FAILURE`]: `remove_${domain.toLowerCase()}_failure`
-  };
-};
+    [`REMOVE_${domain.toUpperCase()}_FAILURE`]: `remove_${domain.toLowerCase()}_failure`,
+  }
+}
 
 export const createCustomAsyncActionType = (domain, type) => {
   return {
     [`${type.toUpperCase()}_${domain.toUpperCase()}_REQUEST`]: `${type.toLowerCase()}_${domain.toLowerCase()}_request`,
     [`${type.toUpperCase()}_${domain.toUpperCase()}_SUCCESS`]: `${type.toLowerCase()}_${domain.toLowerCase()}_success`,
-    [`${type.toUpperCase()}_${domain.toUpperCase()}_FAILURE`]: `${type.toLowerCase()}_${domain.toLowerCase()}_failure`
-  };
-};
+    [`${type.toUpperCase()}_${domain.toUpperCase()}_FAILURE`]: `${type.toLowerCase()}_${domain.toLowerCase()}_failure`,
+  }
+}
 
 export const createCustomSyncActionType = (domain, type) => {
   return {
-    [`${type.toUpperCase()}_${domain.toUpperCase()}`]: `${type.toLowerCase()}_${domain.toLowerCase()}`
-  };
-};
+    [`${type.toUpperCase()}_${domain.toUpperCase()}`]: `${type.toLowerCase()}_${domain.toLowerCase()}`,
+  }
+}
 
 export default {
   createCustomAsyncActionType,
   createCustomSyncActionType,
-  createCRUDActionTypes
-};
+  createCRUDActionTypes,
+}

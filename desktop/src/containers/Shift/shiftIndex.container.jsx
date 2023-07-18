@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import VirtualizedSortSelect from '~/components/tables/Table';
-import Progress from '~/components/helpers/Progress';
-import { analyzeActions } from '~/store/actions';
-import { shiftSelectors } from '~/store/selectors';
-import * as TableDataTypes from '~/constants/tableDataTypes';
-import domain from '~/constants/domains';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import VirtualizedSortSelect from '~/components/tables/Table'
+import Progress from '~/components/helpers/Progress'
+import { analyzeActions } from '~/store/actions'
+import { shiftSelectors } from '~/store/selectors'
+import * as TableDataTypes from '~/constants/tableDataTypes'
+import domain from '~/constants/domains'
 
 export class ShiftIndex extends Component {
-  select = object => {
-    this.props.select(domain.SHIFT, object);
-  };
+  select = (object) => {
+    this.props.select(domain.SHIFT, object)
+  }
 
-  updateFilter = partial =>
-    this.props.updateFilter({ ...this.props.shiftFilters, ...partial });
+  updateFilter = (partial) =>
+    this.props.updateFilter({ ...this.props.shiftFilters, ...partial })
 
   render() {
-    const { shifts } = this.props;
+    const { shifts } = this.props
 
     if (!shifts)
       return (
@@ -27,7 +27,7 @@ export class ShiftIndex extends Component {
           fullHeight
           message="Loading shifts.."
         />
-      );
+      )
 
     return (
       <VirtualizedSortSelect
@@ -37,7 +37,7 @@ export class ShiftIndex extends Component {
         select={this.select}
         initialSortBy="clockInDate"
       />
-    );
+    )
   }
 }
 
@@ -45,23 +45,23 @@ ShiftIndex.propTypes = {
   shifts: PropTypes.array,
   select: PropTypes.func.isRequired,
   updateFilter: PropTypes.func.isRequired,
-  shiftFilters: PropTypes.object
-};
+  shiftFilters: PropTypes.object,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   shiftFilters: shiftSelectors.getShiftFilters(state),
-  shifts: shiftSelectors.getAllShiftsNew(state)
-});
+  shifts: shiftSelectors.getAllShiftsNew(state),
+})
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   select: (domain, payload) => dispatch(analyzeActions.select(domain, payload)),
-  updateFilter: filters =>
-    dispatch(analyzeActions.updateFilter(domain.SHIFT, filters))
-});
+  updateFilter: (filters) =>
+    dispatch(analyzeActions.updateFilter(domain.SHIFT, filters)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex)
 
 const rows = [
   {
@@ -71,7 +71,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `First Name`,
-    type: TableDataTypes.FIRSTNAME
+    type: TableDataTypes.FIRSTNAME,
   },
   {
     id: `lastName`,
@@ -81,7 +81,7 @@ const rows = [
     padding: `dense`,
     label: `Last Name`,
     type: TableDataTypes.OBJECT,
-    keys: [`lastName`]
+    keys: [`lastName`],
   },
   {
     id: `crew`,
@@ -90,7 +90,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Crew`,
-    type: TableDataTypes.CREW
+    type: TableDataTypes.CREW,
   },
   {
     id: `projects`,
@@ -98,7 +98,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Projects`,
-    type: TableDataTypes.PROJECTS
+    type: TableDataTypes.PROJECTS,
   },
   {
     id: `tasks`,
@@ -106,7 +106,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Tasks`,
-    type: TableDataTypes.TASKS
+    type: TableDataTypes.TASKS,
   },
   {
     id: `clockInDate`,
@@ -115,7 +115,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Clock In`,
-    type: TableDataTypes.DATETIME
+    type: TableDataTypes.DATETIME,
   },
   {
     id: `clockOutDate`,
@@ -124,7 +124,7 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Clock Out`,
-    type: TableDataTypes.DATETIME
+    type: TableDataTypes.DATETIME,
   },
   {
     id: `length`,
@@ -133,6 +133,6 @@ const rows = [
     height: 56,
     padding: `dense`,
     label: `Length`,
-    type: TableDataTypes.LENGTH
-  }
-];
+    type: TableDataTypes.LENGTH,
+  },
+]

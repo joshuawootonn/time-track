@@ -1,57 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import { projectEditValidation } from '~/constants/formValidation';
-import ProjectEdit from '~/components/forms/Project/projectEdit';
-import { Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { analyzeActions, projectActions } from '~/store/actions';
-import axios from '~/helpers/axios';
-import Progress from '~/components/helpers/Progress';
-import domain from '~/constants/domains';
+import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+import { projectEditValidation } from '~/constants/formValidation'
+import ProjectEdit from '~/components/forms/Project/projectEdit'
+import { Formik } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { analyzeActions, projectActions } from '~/store/actions'
+import axios from '~/helpers/axios'
+import Progress from '~/components/helpers/Progress'
+import domain from '~/constants/domains'
 
 const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [newSelected, setNewSelected] = useState({});
-  const shiftFilters = useSelector(state => state.analyze.shiftFilters);
+  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [newSelected, setNewSelected] = useState({})
+  const shiftFilters = useSelector((state) => state.analyze.shiftFilters)
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoading(true)
     axios
       .get(`/projects/${selected.id}/projectTasks?filter[include][activities]`)
       .then(({ data }) => {
         const projectTaskObject = Object.assign(
           {},
-          ...data.map(projectTask => ({
-            [projectTask.id]: projectTask
-          }))
-        );
+          ...data.map((projectTask) => ({
+            [projectTask.id]: projectTask,
+          })),
+        )
 
         setNewSelected({
           ...selected,
           projectTasks: selected.projectTasks
-            .filter(projectTask => projectTaskObject[projectTask.id])
-            .map(projectTask => ({
+            .filter((projectTask) => projectTaskObject[projectTask.id])
+            .map((projectTask) => ({
               ...projectTask,
               activities: projectTaskObject[projectTask.id].activities,
               actualTime: projectTaskObject[projectTask.id].activities
-                .map(activity => activity.length)
+                .map((activity) => activity.length)
                 .reduce((total, length) => total + length, 0),
               subcategoryId: projectTask.task.subcategoryId,
-              categoryId: projectTask.task.category.id
-            }))
-        });
+              categoryId: projectTask.task.category.id,
+            })),
+        })
 
-        setIsLoading(false);
-      });
-  }, [selected]);
+        setIsLoading(false)
+      })
+  }, [selected])
 
   const removeProject = () =>
-    dispatch(projectActions.removeProject(selected.id));
+    dispatch(projectActions.removeProject(selected.id))
 
-  const updateProject = project =>
-    dispatch(projectActions.updateProject(project));
+  const updateProject = (project) =>
+    dispatch(projectActions.updateProject(project))
 
   const onGoToShifts = () => {
     dispatch(
@@ -62,14 +62,11 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
           .utc()
           .subtract(2, 'months')
           .format(`MM-DD-YY HH:mm:ss`),
-        endTime: moment
-          .utc()
-          .add(1, 'day')
-          .format(`MM-DD-YY HH:mm:ss`)
-      })
-    );
-    goToTab(3);
-  };
+        endTime: moment.utc().add(1, 'day').format(`MM-DD-YY HH:mm:ss`),
+      }),
+    )
+    goToTab(3)
+  }
 
   if (isSubmitting) {
     return (
@@ -79,10 +76,10 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
         fullWidth
         fullHeight
       />
-    );
+    )
   }
   if (isLoading) {
-    return <Progress variant="circular" fullWidth fullHeight />;
+    return <Progress variant="circular" fullWidth fullHeight />
   }
 
   return (
@@ -96,32 +93,32 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
           .local()
           .startOf(`day`)
           .format(`YYYY-MM-DD`),
-        projectTasks: newSelected.projectTasks
+        projectTasks: newSelected.projectTasks,
       }}
       validationSchema={projectEditValidation}
       onSubmit={(values, formikFunctions) => {
-        setIsSubmitting(true);
+        setIsSubmitting(true)
         return updateProject({
           id: values.id,
           name: values.name,
           isActive: values.isActive ? 1 : 0,
           date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
-          projectTasks: values.projectTasks
+          projectTasks: values.projectTasks,
         }).then(
           () => {
-            formikFunctions.resetForm();
-            formikFunctions.setStatus({ success: true });
-            setIsSubmitting(false);
+            formikFunctions.resetForm()
+            formikFunctions.setStatus({ success: true })
+            setIsSubmitting(false)
           },
-          e => {
-            formikFunctions.setStatus({ success: false });
-            formikFunctions.setSubmitting(false);
-            formikFunctions.setErrors({ submit: e });
-            setIsSubmitting(false);
-          }
-        );
+          (e) => {
+            formikFunctions.setStatus({ success: false })
+            formikFunctions.setSubmitting(false)
+            formikFunctions.setErrors({ submit: e })
+            setIsSubmitting(false)
+          },
+        )
       }}
-      render={formikProps => (
+      render={(formikProps) => (
         <ProjectEdit
           tasks={tasks}
           removeProject={removeProject}
@@ -130,7 +127,7 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
         />
       )}
     />
-  );
-};
+  )
+}
 
-export default ProjectEditContainer;
+export default ProjectEditContainer

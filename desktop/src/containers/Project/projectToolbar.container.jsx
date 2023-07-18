@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import AnalyzeToolbar from '~/components/tables/Toolbar';
+import AnalyzeToolbar from '~/components/tables/Toolbar'
 
-import { analyzeActions } from '~/store/actions';
-import { projectTaskSelectors } from '~/store/selectors';
+import { analyzeActions } from '~/store/actions'
+import { projectTaskSelectors } from '~/store/selectors'
 
-import { analyzeStatus } from '~/constants/analyze';
-import domain from '~/constants/domains';
+import { analyzeStatus } from '~/constants/analyze'
+import domain from '~/constants/domains'
 
 export class ProjectToolbar extends Component {
-  selectLabel = selected => `${selected.name} selected`;
+  selectLabel = (selected) => `${selected.name} selected`
 
   add = () => {
-    const { selected, select, setStatus } = this.props;
+    const { selected, select, setStatus } = this.props
 
     if (selected && selected.id) {
-      select(domain.PROJECT, selected.id);
+      select(domain.PROJECT, selected.id)
     }
-    setStatus(domain.PROJECT, analyzeStatus.ADDING);
-  };
+    setStatus(domain.PROJECT, analyzeStatus.ADDING)
+  }
 
   render() {
-    const { selected, toggleProjectFilter, projectFilterVisible } = this.props;
+    const { selected, toggleProjectFilter, projectFilterVisible } = this.props
 
     return (
       <AnalyzeToolbar
@@ -35,7 +35,7 @@ export class ProjectToolbar extends Component {
         toggleFilter={toggleProjectFilter}
         isFilterVisible={projectFilterVisible}
       />
-    );
+    )
   }
 }
 
@@ -44,24 +44,24 @@ ProjectToolbar.propTypes = {
   setStatus: PropTypes.func.isRequired,
   selected: PropTypes.object,
   toggleProjectFilter: PropTypes.func,
-  projectFilterVisible: PropTypes.bool
-};
+  projectFilterVisible: PropTypes.bool,
+}
 
 /* istanbul ignore next */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     projectFilterVisible: state.analyze.projectFilterVisible,
-    selected: projectTaskSelectors.getSelectedProject(state)
-  };
-};
+    selected: projectTaskSelectors.getSelectedProject(state),
+  }
+}
 
 /* istanbul ignore next */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     ...bindActionCreators({ ...analyzeActions }, dispatch),
     toggleProjectFilter: () =>
-      dispatch(analyzeActions.toggleFilter(domain.PROJECT))
-  };
-};
+      dispatch(analyzeActions.toggleFilter(domain.PROJECT)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectToolbar)

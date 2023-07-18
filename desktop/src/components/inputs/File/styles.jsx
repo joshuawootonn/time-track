@@ -5,22 +5,22 @@ const styles = () => ({
     opacity: `0`,
     overflow: `hidden`,
     position: `absolute`,
-    zIndex: `-1`
+    zIndex: `-1`,
   },
   row: {
     display: `flex`,
     flexDirection: `row`,
     width: `100%`,
-    justifyContent: `space-between`
+    justifyContent: `space-between`,
   },
   buttonAlign: {
     display: `flex`,
-    alignItems: `flex-end`
+    alignItems: `flex-end`,
   },
   button: {
     marginLeft: `10px`,
-    whiteSpace: `nowrap`
-  }
-});
+    whiteSpace: `nowrap`,
+  },
+})
 
-export default styles;
+export default styles

@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Grid, Typography, Button, Paper } from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Button, Paper } from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
 
-import TextField from '~/components/inputs/TextField';
-import TypeableSelect from '~/components/inputs/TypeableSelect';
+import TextField from '~/components/inputs/TextField'
+import TypeableSelect from '~/components/inputs/TypeableSelect'
 
-import styles from './styles';
+import styles from './styles'
 
-import { minutesToString } from '~/helpers/time';
+import { minutesToString } from '~/helpers/time'
 export class HalfShift extends Component {
   render() {
     const {
@@ -22,8 +22,8 @@ export class HalfShift extends Component {
       errors,
       employees,
       timeLeft,
-      generalError
-    } = this.props;
+      generalError,
+    } = this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -73,7 +73,7 @@ export class HalfShift extends Component {
 
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 color="secondary"
                 variant="text"
@@ -86,12 +86,12 @@ export class HalfShift extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
-export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
-export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
+export const ANALYZE_SHIFT_HALF_SHIFT_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`
+export const ANALYZE_SHIFT_HALF_SHIFT_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`
 
 HalfShift.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -101,7 +101,7 @@ HalfShift.propTypes = {
   errors: PropTypes.object.isRequired,
   employees: PropTypes.array.isRequired,
   timeLeft: PropTypes.number.isRequired,
-  generalError: PropTypes.string
-};
+  generalError: PropTypes.string,
+}
 
-export default withStyles(styles)(HalfShift);
+export default withStyles(styles)(HalfShift)

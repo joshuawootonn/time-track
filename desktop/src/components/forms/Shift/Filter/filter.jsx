@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Grid, Typography, Button } from '@material-ui/core';
-import cx from 'classnames';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Button } from '@material-ui/core'
+import cx from 'classnames'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
 
-import TextField from '~/components/inputs/TextField';
-import Select from '~/components/inputs/Select';
+import TextField from '~/components/inputs/TextField'
+import Select from '~/components/inputs/Select'
 
-import styles from './styles';
+import styles from './styles'
 
 export class Filter extends Component {
   render() {
@@ -24,8 +24,8 @@ export class Filter extends Component {
       tasks,
       label,
       employees,
-      generalError
-    } = this.props;
+      generalError,
+    } = this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -110,7 +110,7 @@ export class Filter extends Component {
 
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 color="secondary"
                 variant="text"
@@ -121,8 +121,8 @@ export class Filter extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
-                  this.props.clearFilter();
+                  resetForm(initialValues)
+                  this.props.clearFilter()
                 }}
                 color="secondary"
                 variant="text"
@@ -135,13 +135,13 @@ export class Filter extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
-export const ANALYZE_SHIFT_FILTER_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`;
-export const ANALYZE_SHIFT_FILTER_CLEAR_BUTTON_ID = `analyze_shift_half_shift_clear_button`;
-export const ANALYZE_SHIFT_FILTER_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`;
+export const ANALYZE_SHIFT_FILTER_RESET_BUTTON_ID = `analyze_shift_half_shift_reset_button`
+export const ANALYZE_SHIFT_FILTER_CLEAR_BUTTON_ID = `analyze_shift_half_shift_clear_button`
+export const ANALYZE_SHIFT_FILTER_SUBMIT_BUTTON_ID = `analyze_shift_half_shift_submit_button`
 
 Filter.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -155,7 +155,7 @@ Filter.propTypes = {
   tasks: PropTypes.array.isRequired,
   generalError: PropTypes.string,
   clearFilter: PropTypes.func,
-  label: PropTypes.string.isRequired
-};
+  label: PropTypes.string.isRequired,
+}
 
-export default withStyles(styles)(Filter);
+export default withStyles(styles)(Filter)

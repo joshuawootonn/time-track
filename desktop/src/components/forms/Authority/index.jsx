@@ -1,2 +1,2 @@
-import Authority from './authority';
-export default Authority;
+import Authority from './authority'
+export default Authority

@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { MenuItem, FormHelperText, FormControl } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import cx from 'classnames';
-import { getIn } from 'formik';
+import { MenuItem, FormHelperText, FormControl } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import cx from 'classnames'
+import { getIn } from 'formik'
 
-import { minutes, hours } from '~/constants/times';
-import Select from '~/components/inputs/Select';
-import styles from './styles';
+import { minutes, hours } from '~/constants/times'
+import Select from '~/components/inputs/Select'
+import styles from './styles'
 
 export class Time extends Component {
-  onChangeHours = e => {
-    const { field, form } = this.props;
-    const hoursValue = Math.floor(field.value / 60) * 60;
-    form.setFieldValue(field.name, field.value + e.target.value - hoursValue);
-  };
-  onChangeMinutes = e => {
-    const { field, form } = this.props;
-    const minutesValue = Math.floor(field.value % 60);
+  onChangeHours = (e) => {
+    const { field, form } = this.props
+    const hoursValue = Math.floor(field.value / 60) * 60
+    form.setFieldValue(field.name, field.value + e.target.value - hoursValue)
+  }
+  onChangeMinutes = (e) => {
+    const { field, form } = this.props
+    const minutesValue = Math.floor(field.value % 60)
     //console.log(minutesValue);
-    form.setFieldValue(field.name, field.value + e.target.value - minutesValue);
-  };
+    form.setFieldValue(field.name, field.value + e.target.value - minutesValue)
+  }
   render() {
-    const { value } = this.props.field;
+    const { value } = this.props.field
     const {
       classes,
       field,
@@ -33,11 +33,11 @@ export class Time extends Component {
       label1,
       label2,
       helper,
-      className
-    } = this.props;
+      className,
+    } = this.props
 
-    const minutesValue = Math.floor(value % 60);
-    const hoursValue = Math.floor(value / 60) * 60;
+    const minutesValue = Math.floor(value % 60)
+    const hoursValue = Math.floor(value / 60) * 60
 
     //console.log(value, minutesValue, hoursValue);
     return (
@@ -55,7 +55,7 @@ export class Time extends Component {
             label={label1}
             selectProps={{
               onChange: this.onChangeHours,
-              value: hoursValue
+              value: hoursValue,
             }}
             value={hoursValue}
             helper="none"
@@ -65,7 +65,7 @@ export class Time extends Component {
                 <MenuItem key={i} id={item.id} value={item.value}>
                   {item.name}
                 </MenuItem>
-              );
+              )
             })}
           </Select>
           <Select
@@ -77,7 +77,7 @@ export class Time extends Component {
             label={label2}
             selectProps={{
               onChange: this.onChangeMinutes,
-              value: minutesValue
+              value: minutesValue,
             }}
             value={minutesValue}
             helper="none"
@@ -87,7 +87,7 @@ export class Time extends Component {
                 <MenuItem key={i} id={item.id} value={item.value}>
                   {item.name}
                 </MenuItem>
-              );
+              )
             })}
           </Select>
         </div>
@@ -99,7 +99,7 @@ export class Time extends Component {
           </FormHelperText>
         )}
       </FormControl>
-    );
+    )
   }
 }
 Time.defaultProps = {
@@ -107,8 +107,8 @@ Time.defaultProps = {
   fullWidth: false,
   label1: `Hours`,
   label2: `Minutes`,
-  helper: `normal`
-};
+  helper: `normal`,
+}
 
 Time.propTypes = {
   margin: PropTypes.oneOf([`normal`, `dense`, `none`]),
@@ -119,7 +119,7 @@ Time.propTypes = {
   className: PropTypes.string,
   helper: PropTypes.oneOf([`normal`, `none`]),
   label1: PropTypes.string,
-  label2: PropTypes.string
-};
+  label2: PropTypes.string,
+}
 
-export default withStyles(styles)(Time);
+export default withStyles(styles)(Time)

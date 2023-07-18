@@ -1,4 +1,4 @@
-import { generateCRUDEndpoints } from '~/helpers/endpoint.helper';
-const DOMAIN = `authorities`;
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper'
+const DOMAIN = `authorities`
 
-export default generateCRUDEndpoints(DOMAIN);
+export default generateCRUDEndpoints(DOMAIN)

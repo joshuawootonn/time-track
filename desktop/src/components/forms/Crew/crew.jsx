@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
   Typography,
   Button,
   IconButton,
-  Tooltip
-} from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
-import { Field, Form } from 'formik';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '~/components/inputs/TextField';
-import styles from './styles';
+  Tooltip,
+} from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
+import { Field, Form } from 'formik'
+import { withStyles } from '@material-ui/core/styles'
+import TextField from '~/components/inputs/TextField'
+import styles from './styles'
 
 export class Crew extends Component {
   render() {
@@ -24,8 +24,8 @@ export class Crew extends Component {
       isSubmitting,
       label,
       type,
-      removeCrew
-    } = this.props;
+      removeCrew,
+    } = this.props
     return (
       <Form>
         <Grid container spacing={3} className={classes.gridContainer}>
@@ -70,7 +70,7 @@ export class Crew extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  resetForm(initialValues);
+                  resetForm(initialValues)
                 }}
                 id="crew-reset-button"
                 disabled={isSubmitting}
@@ -84,7 +84,7 @@ export class Crew extends Component {
           </Grid>
         </Grid>
       </Form>
-    );
+    )
   }
 }
 
@@ -96,7 +96,7 @@ Crew.propTypes = {
   initialValues: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   removeCrew: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
-};
+  type: PropTypes.string.isRequired,
+}
 
-export default withStyles(styles)(Crew);
+export default withStyles(styles)(Crew)

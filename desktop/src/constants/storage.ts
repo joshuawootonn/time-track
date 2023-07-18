@@ -1,24 +1,24 @@
-import { Cred } from './ipc';
+import { Cred } from './ipc'
 
 export const getAccessToken = (): string | null => {
-  return window.localStorage.getItem('@@timetrack:access_token');
-};
+  return window.localStorage.getItem('@@timetrack:access_token')
+}
 
 export const getCred = (): Cred => {
-  const value = window.localStorage.getItem('@@timetrack:auth');
+  const value = window.localStorage.getItem('@@timetrack:auth')
 
-  if (value) return JSON.parse(value);
+  if (value) return JSON.parse(value)
 
   return {
     ip: '',
     username: '',
-    password: ''
-  };
-};
+    password: '',
+  }
+}
 
 export const setAccessToken = (value: string) => {
-  window.localStorage.setItem('@@timetrack:access_token', value);
-};
+  window.localStorage.setItem('@@timetrack:access_token', value)
+}
 
 export const setCred = (ip: string, username: string, password: string) => {
   window.localStorage.setItem(
@@ -26,7 +26,7 @@ export const setCred = (ip: string, username: string, password: string) => {
     JSON.stringify({
       ip,
       username,
-      password
-    })
-  );
-};
+      password,
+    }),
+  )
+}
