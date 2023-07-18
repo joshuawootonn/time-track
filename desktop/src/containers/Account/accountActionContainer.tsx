@@ -75,6 +75,10 @@ export class AccountAction extends Component<Props, State> {
     this.props.clearFilters();
     this.props.history.push(`/${this.props.type}/${routes.ANALYZE}`);
   };
+  crew = () => {
+    this.props.clearFilters();
+    this.props.history.push(`/${this.props.type}/${routes.CREW}`);
+  };
   export = () => {
     this.props.history.push(`/${this.props.type}/${routes.EXPORT}`);
   };
@@ -93,6 +97,7 @@ export class AccountAction extends Component<Props, State> {
         clockIn={this.clockIn}
         clockOut={this.clockOut}
         analyze={this.analyze}
+        crew={this.crew}
         export={this.export}
         toggleFullscreen={this.toggleFullscreen}
         isFullScreen={this.state.isFullScreen}
