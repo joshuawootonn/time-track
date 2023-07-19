@@ -2,15 +2,15 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { HOST } from '~/constants/network'
 import { getAccessToken } from '~/constants/storage'
 
-const instance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: HOST(),
 })
 
 export const updateAxiosInstanceWithNewURL = () => {
-  instance.defaults.baseURL = HOST()
+  axiosInstance.defaults.baseURL = HOST()
 }
 
-instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
+axiosInstance.interceptors.request.use(async (config: AxiosRequestConfig) => {
   const accessToken = getAccessToken()
   //@ts-ignore
   if (config.url.includes('?')) {
@@ -24,4 +24,4 @@ instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
   return config
 })
 
-export default instance
+export default axiosInstance

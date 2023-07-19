@@ -1,9 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-// import { getProjectForemanView } from '~/store/Project/selectors'
-import axios from '~/helpers/axios'
+import { useEffect, useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
+import axiosInstance from '~/helpers/axios'
 
 const useStyles = makeStyles({
   container: {
@@ -41,7 +39,7 @@ const ProjectSummary = (selectedProjectId) => {
   //   dispatch(foremanActions.select(domain.PROJECT, object));
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get('/projects/foremansummary?isActive=true')
       .then(({ data: { projects } }) => {
         setProjectSummaries(projects)
