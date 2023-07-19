@@ -13,7 +13,7 @@ import { Field, Form, Formik } from 'formik'
 
 import { foremanActions, projectActions } from '~/store/actions'
 import { projectSelectors, projectTaskSelectors } from '~/store/selectors'
-import ProjectSummary from '~/containers/ForemanProject/projectSummary.container'
+import { ForemanProjectSummary } from '~/containers/ForemanProject/projectSummary.container'
 
 const styles = {
   root: {
@@ -112,7 +112,9 @@ export class Project extends Component {
           </Toolbar>
         </AppBar>
         <div>
-          <ProjectSummary selectedProject={this.props.selectedProjectId} />
+          <ForemanProjectSummary
+            selectedProject={this.props.selectedProjectId}
+          />
         </div>
       </div>
     )

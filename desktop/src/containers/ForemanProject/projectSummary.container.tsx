@@ -24,15 +24,31 @@ const useStyles = makeStyles({
     padding: '8px',
     borderRadius: '4px',
     marginBottom: '8px',
-    flexShrink: '1',
+    flexShrink: 1,
   },
 })
 
-const ProjectSummary = (selectedProjectId) => {
+type ProjectSummary = {
+  date: string
+  hoursWorkedLastWeek: number
+  hoursWorkedThisWeek: number
+  hoursWorkedYesterday: number
+  id: number
+  isActive: number
+  name: string
+  totalActual: number
+  totalEstimate: number
+}
+
+type Props = {
+  selectedProject: number
+}
+
+export const ForemanProjectSummary = (props: Props) => {
   // const dispatch = useDispatch();
 
   // const projects = useSelector((state) => (state))
-  const [projectSummaries, setProjectSummaries] = useState([])
+  const [projectSummaries, setProjectSummaries] = useState<ProjectSummary[]>([])
   const classes = useStyles()
 
   // const select = object =>
@@ -47,7 +63,7 @@ const ProjectSummary = (selectedProjectId) => {
   }, [])
 
   const projectSummary = projectSummaries.find(
-    (summary) => summary.id == selectedProjectId.selectedProject,
+    (summary) => summary.id == props.selectedProject,
   )
 
   if (projectSummary) {
@@ -67,10 +83,10 @@ const ProjectSummary = (selectedProjectId) => {
             </div>
             <div className={classes.gridItem}>
               <Grid item xs={6}>
-                <Typography noWrap="true">Total Actual:</Typography>
+                <Typography noWrap={true}>Total Actual:</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography noWrap="true">
+                <Typography noWrap={true}>
                   {projectSummary.totalActual.toLocaleString()} /{' '}
                   {(
                     projectSummary.totalActual / projectSummary.totalEstimate
@@ -119,5 +135,3 @@ const ProjectSummary = (selectedProjectId) => {
     return <div>{JSON.stringify(projectSummary)} </div>
   }
 }
-
-export default ProjectSummary
