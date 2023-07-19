@@ -1,27 +1,27 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { HOST } from 'constants/network';
-import { getAccessToken } from 'constants/storage';
+import axios, { AxiosRequestConfig } from 'axios'
+import { HOST } from '~/constants/network'
+import { getAccessToken } from '~/constants/storage'
 
-const instance = axios.create({
-  baseURL: HOST()
-});
+export const axiosInstance = axios.create({
+  baseURL: HOST(),
+})
 
 export const updateAxiosInstanceWithNewURL = () => {
-  instance.defaults.baseURL = HOST();
-};
+  axiosInstance.defaults.baseURL = HOST()
+}
 
-instance.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const accessToken = getAccessToken();
+axiosInstance.interceptors.request.use(async (config: AxiosRequestConfig) => {
+  const accessToken = getAccessToken()
   //@ts-ignore
   if (config.url.includes('?')) {
     //@ts-ignore
-    config.url = config.baseURL + config.url + `&access_token=${accessToken}`;
+    config.url = config.baseURL + config.url + `&access_token=${accessToken}`
   } else {
     //@ts-ignore
-    config.url = config.baseURL + config.url + `?access_token=${accessToken}`;
+    config.url = config.baseURL + config.url + `?access_token=${accessToken}`
   }
 
-  return config;
-});
+  return config
+})
 
-export default instance;
+export default axiosInstance

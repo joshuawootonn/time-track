@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid, Typography } from '@material-ui/core';
-import { Field, Form } from 'formik';
+import { withStyles } from '@material-ui/core/styles'
+import { Button, Grid, Typography } from '@material-ui/core'
+import { Field, Form } from 'formik'
 
-import styles from './styles';
-import Password from 'components/inputs/Password';
+import styles from './styles'
+import Password from '~/components/inputs/Password'
 
 export interface Props {
-  classes: any;
-  isSubmitting: boolean;
+  classes: any
+  isSubmitting: boolean
   values: {
-    pin: string;
-  };
-  setFieldValue: (key: string, value: any, something: boolean) => void;
-  errors: any;
+    pin: string
+  }
+  setFieldValue: (key: string, value: any, something: boolean) => void
+  errors: any
 }
 
 export class AccountSigin extends Component<Props> {
   appendPin = (newChar: number) => {
-    if (this.props.values.pin.length >= 6) return;
-    this.props.setFieldValue(`pin`, this.props.values.pin + newChar, true);
-  };
+    if (this.props.values.pin.length >= 6) return
+    this.props.setFieldValue(`pin`, this.props.values.pin + newChar, true)
+  }
   resetPin = () => {
-    this.props.setFieldValue(`pin`, ``, false);
-  };
+    this.props.setFieldValue(`pin`, ``, false)
+  }
 
   renderButtonGridElement = (num: number) => {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <Grid item xs={4} key={num}>
         <Button
@@ -39,12 +39,12 @@ export class AccountSigin extends Component<Props> {
           {num}
         </Button>
       </Grid>
-    );
-  };
+    )
+  }
 
   render() {
-    const { classes, isSubmitting, errors } = this.props;
-    const numOrder: number[] = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
+    const { classes, isSubmitting, errors } = this.props
+    const numOrder: number[] = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
 
     return (
       <div className={classes.hero}>
@@ -90,8 +90,8 @@ export class AccountSigin extends Component<Props> {
           </Form>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles as any)(AccountSigin);
+export default withStyles(styles as any)(AccountSigin)

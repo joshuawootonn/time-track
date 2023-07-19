@@ -4,27 +4,21 @@
  * Change: NODE_ENV
  */
 
-process.env.NODE_ENV = 'local';
+process.env.NODE_ENV = 'local'
 
-var app = require('../server');
-var ds = app.dataSources.db;
+var app = require('../server')
+var ds = app.dataSources.db
 
-const credentialModels = [
-  'Users',
-  'Roles',
-  'RoleMapping',
-  'ACL',
-  'AccessToken',
-];
-const entityModels = [];
+const credentialModels = ['Users', 'Roles', 'RoleMapping', 'ACL', 'AccessToken']
+const entityModels = []
 
 for (var asdf in app.models) {
   if (!credentialModels.includes(asdf)) {
-    entityModels.push(asdf);
-    console.log(asdf);
+    entityModels.push(asdf)
+    console.log(asdf)
   }
 }
 
-ds.automigrate(entityModels, function(err, result) {
-  ds.disconnect();
-});
+ds.automigrate(entityModels, function (err, result) {
+  ds.disconnect()
+})

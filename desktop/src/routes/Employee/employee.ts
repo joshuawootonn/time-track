@@ -1,8 +1,7 @@
-import accountActionScene from 'scenes/Account/accountAction';
-import clockOutScene from 'scenes/Clock/clockOut';
-import {EMPLOYEE, CLOCKOUT} from 'constants/routes';
-import { RouteDetails } from 'routes/route.types';
-
+import accountActionScene from '~/scenes/Account/accountAction'
+import clockOutScene from '~/scenes/Clock/clockOut'
+import { EMPLOYEE, CLOCKOUT } from '~/constants/routes'
+import { RouteDetails } from '~/routes/route.types'
 
 const employeeRoutes: RouteDetails[] = [
   {
@@ -10,16 +9,15 @@ const employeeRoutes: RouteDetails[] = [
     component: accountActionScene,
     exact: true,
     name: `Employee Actions`,
-    type: EMPLOYEE
+    type: EMPLOYEE,
   },
   {
     path: `/${EMPLOYEE}/${CLOCKOUT}`,
     component: clockOutScene,
     exact: true,
     name: `Employee Clockout`,
-    type: EMPLOYEE
-  }
-];
+    type: EMPLOYEE,
+  },
+]
 
-
-export default employeeRoutes;
+export default employeeRoutes

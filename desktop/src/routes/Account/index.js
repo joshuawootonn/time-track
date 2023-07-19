@@ -1,2 +1,2 @@
-import Account from './account';
-export default Account;
+import Account from './account'
+export default Account

@@ -70,15 +70,12 @@
   "main": "public/electron.js",
   "homepage": "./",
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "@material-ui/core": "^4.0.0",
+    "@material-ui/core": "4.11.0",
     "@material-ui/icons": "^3.0.1",
-    "@types/classnames": "^2.2.9",
-    "@types/jest": "24.0.18",
     "@types/lodash": "^4.14.138",
     "@types/node": "12.7.2",
-    "@types/react": "^16.9.41",
-    "@types/react-dom": "16.9.8",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-select": "^3.0.4",
@@ -92,38 +89,32 @@
     "formik": "^1.0.1",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
-    "moment-duration-format": "^2.2.2",
     "normalizr": "^3.2.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
     "react-select": "^3.0.4",
     "react-simple-keyboard": "^1.21.3",
-    "react-virtualized": "^9.21.0",
+    "react-virtualized": "9.22.3",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
-    "styled-components": "^5.1.1",
-    "typescript": "3.5.3",
-    "yup": "^0.25.1"
+    "typescript": "^5.1.6",
+    "yup": "^1.2.0"
   },
   "scripts": {
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "react-test": "react-scripts test --env=jsdom",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
     "electron-build": "electron-builder",
-    "lint": "eslint --fix .",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "pack-win": "yarn react-build && yarn electron-build --x64 --win",
     "pack-mac": "yarn react-build && yarn electron-build --x64 --mac",
     "dist-win": "yarn react-build && yarn electron-build  --x64 --win -p always",
     "dist-mac": "yarn react-build && yarn electron-build  --x64 --mac -p always",
-    "start": "electron ."
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "electron": "electron ."
   },
   "browserslist": {
     "production": [
@@ -138,33 +129,17 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
-    "axios-mock-adapter": "^1.15.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
     "electron": "^21.1.0",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.1.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
-    "eslint": "^5.5.0",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.11.1",
-    "jest-enzyme": "^7.0.1",
-    "prettier": "^1.18.2",
-    "redux-mock-store": "^1.5.3",
-    "wait-on": "^3.3.0"
+    "postcss": "^8.4.25",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.4.3"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!/node_modules/",
-      "!/src/routes",
-      "!src/index.js",
-      "!src/electron-starter.js",
-      "!src/electron-wait-react.js",
-      "!src/registerServiceWorker.js",
-      "!src/**/styles.js"
-    ]
+  "resolutions": {
+    "react-virtualized": "git+https://git@github.com/remorses/react-virtualized-fixed-import.git#9.22.3"
   }
 }

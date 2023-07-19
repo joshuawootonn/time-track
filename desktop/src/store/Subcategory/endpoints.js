@@ -1,4 +1,4 @@
-import { generateCRUDEndpoints } from 'helpers/endpoint.helper';
-const DOMAIN = `subcategories`;
+import { generateCRUDEndpoints } from '~/helpers/endpoint.helper'
+const DOMAIN = `subcategories`
 
-export default generateCRUDEndpoints(DOMAIN);
+export default generateCRUDEndpoints(DOMAIN)

@@ -1,2 +1,2 @@
-import Foreman from './foreman';
-export default Foreman;
+import Foreman from './foreman'
+export default Foreman

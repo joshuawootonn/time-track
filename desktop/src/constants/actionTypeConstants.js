@@ -1,12 +1,12 @@
 import {
   createCustomAsyncActionType,
   createCustomSyncActionType,
-  createCRUDActionTypes
-} from 'helpers/actionTypes';
+  createCRUDActionTypes,
+} from '~/helpers/actionTypes'
 
 const activityActionTypes = {
-  ...createCRUDActionTypes(`activity`, `activities`)
-};
+  ...createCRUDActionTypes(`activity`, `activities`),
+}
 
 const analyzeActionTypes = {
   SELECT: `select_domain`,
@@ -16,51 +16,55 @@ const analyzeActionTypes = {
   UPDATE_FILTERS: `update_filters`,
   TOGGLE_FILTER: `toggle_filter`,
   CLEAR_FILTER: `clear_filter`,
-  EXPORT_DATA_MODAL: `export_data_modal`
-};
+  EXPORT_DATA_MODAL: `export_data_modal`,
+}
+
+const foremanActionTypes = {
+  UPDATE_FILTERS: `foreman:update_filters`,
+}
 
 const authorityActionTypes = {
   ...createCRUDActionTypes(`authority`, `authorities`),
-  EDIT_AUTHORITIES_MODAL: `edit_authorities_modal`
-};
+  EDIT_AUTHORITIES_MODAL: `edit_authorities_modal`,
+}
 
 const categoryActionTypes = {
   ...createCRUDActionTypes(`category`, `categories`),
-  EDIT_CATEGORIES_MODAL: `edit_categories_modal`
-};
+  EDIT_CATEGORIES_MODAL: `edit_categories_modal`,
+}
 
 const crewActionTypes = {
   ...createCRUDActionTypes(`crew`, `crews`),
-  EDIT_CREWS_MODAL: `edit_crews_modal`
-};
+  EDIT_CREWS_MODAL: `edit_crews_modal`,
+}
 
 const dimensionActionTypes = {
-  ...createCRUDActionTypes(`dimension`, `dimensions`)
-};
+  ...createCRUDActionTypes(`dimension`, `dimensions`),
+}
 const employeeActionTypes = {
   ...createCRUDActionTypes(`employee`, `employees`),
   ...createCustomAsyncActionType(`employee`, `login`),
   ...createCustomAsyncActionType(`employee`, `clockin`),
   ...createCustomAsyncActionType(`employee`, `clockout`),
   ...createCustomSyncActionType(`employee_snack`, `clockin`),
-  ...createCustomSyncActionType(`employee_snack`, `clockout`)
-};
+  ...createCustomSyncActionType(`employee_snack`, `clockout`),
+}
 const exportActionTypes = {
-  ...createCustomAsyncActionType(`excel`, `export`)
-};
+  ...createCustomAsyncActionType(`excel`, `export`),
+}
 const modalActionTypes = {
   ...createCustomSyncActionType(`modal`, `hide`),
-  ...createCustomSyncActionType(`modal`, `show`)
-};
+  ...createCustomSyncActionType(`modal`, `show`),
+}
 const projectActionTypes = {
   ...createCRUDActionTypes(`project`, `projects`),
   ...createCustomAsyncActionType(`project`, `update`),
-  ...createCustomAsyncActionType(`project`, `create`)
-};
+  ...createCustomAsyncActionType(`project`, `create`),
+}
 
 const projectTaskActionTypes = {
-  ...createCRUDActionTypes(`project_task`, `project_tasks`)
-};
+  ...createCRUDActionTypes(`project_task`, `project_tasks`),
+}
 
 const shiftActionTypes = {
   ...createCRUDActionTypes(`shift`, `shifts`),
@@ -71,32 +75,33 @@ const shiftActionTypes = {
   ...createCustomAsyncActionType(`shift`, `edit_half`),
   ...createCustomAsyncActionType(`current_shift`, `get`),
   ...createCustomAsyncActionType(`shifts_in_range`, `get`),
-  ...createCustomAsyncActionType(`shifts`, `get`)
-};
+  ...createCustomAsyncActionType(`shifts`, `get`),
+}
 const snackActionTypes = {
   ...createCustomSyncActionType(`snack`, `hide`),
-  ...createCustomSyncActionType(`snack`, `show`)
-};
+  ...createCustomSyncActionType(`snack`, `show`),
+}
 
 const staticActionTypes = {
-  ...createCustomAsyncActionType(`static_data`, `get`)
-};
+  ...createCustomAsyncActionType(`static_data`, `get`),
+}
 
 const subcategoryActionTypes = {
-  ...createCRUDActionTypes(`subcategory`, `subcategories`)
-};
+  ...createCRUDActionTypes(`subcategory`, `subcategories`),
+}
 const taskActionTypes = {
-  ...createCRUDActionTypes(`task`, `tasks`)
-};
+  ...createCRUDActionTypes(`task`, `tasks`),
+}
 
 const userActionTypes = {
-  ...createCustomAsyncActionType(`user`, `login`)
-};
+  ...createCustomAsyncActionType(`user`, `login`),
+}
 
 export {
   activityActionTypes,
   analyzeActionTypes,
   authorityActionTypes,
+  foremanActionTypes,
   categoryActionTypes,
   crewActionTypes,
   dimensionActionTypes,
@@ -110,5 +115,5 @@ export {
   staticActionTypes,
   subcategoryActionTypes,
   taskActionTypes,
-  userActionTypes
-};
+  userActionTypes,
+}

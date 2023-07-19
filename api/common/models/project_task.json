@@ -1,6 +1,6 @@
 {
   "name": "ProjectTask",
-  "forceId" : "false",
+  "forceId": "false",
   "options": {
     "idInjection": false,
     "mysql": {
@@ -57,7 +57,7 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "generated" : true,
+      "generated": true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -115,12 +115,14 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [{
-    "accessType": "*",
-    "principalType": "ROLE",
-    "principalId": "$unauthenticated",
-    "permission": "DENY"
-  }],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
   "methods": {},
   "idInjection": false
 }

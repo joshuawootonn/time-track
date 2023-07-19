@@ -1,21 +1,21 @@
-import axios from 'helpers/axios';
+import axios from '~/helpers/axios'
 
-export const generateCRUDEndpoints = domain => {
+export const generateCRUDEndpoints = (domain) => {
   return {
     getAll: () => {
-      return axios.get(`/${domain}`);
+      return axios.get(`/${domain}`)
     },
-    get: id => {
-      return axios.get(`/${domain}/${id}`);
+    get: (id) => {
+      return axios.get(`/${domain}/${id}`)
     },
-    put: employee => {
-      return axios.put(`/${domain}/${employee.id}`, { ...employee });
+    put: (employee) => {
+      return axios.put(`/${domain}/${employee.id}`, { ...employee })
     },
-    post: employee => {
-      return axios.post(`/${domain}`, { ...employee });
+    post: (employee) => {
+      return axios.post(`/${domain}`, { ...employee })
     },
-    delet: id => {
-      return axios.delete(`/${domain}/${id}`);
-    }
-  };
-};
+    delet: (id) => {
+      return axios.delete(`/${domain}/${id}`)
+    },
+  }
+}

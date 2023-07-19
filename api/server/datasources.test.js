@@ -8,4 +8,4 @@ module.exports = {
     user: 'root',
     connector: 'mysql',
   },
-};
+}

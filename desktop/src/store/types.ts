@@ -1,13 +1,11 @@
-
-
 export interface ProjectTask extends BaseProjectTask {
-  task: BaseTask;
+  task: BaseTask
   project: BaseProject
-} 
+}
 
 export interface Activity extends BaseActivity {
-  shift: BaseShift;
-  projectTask: ProjectTask  
+  shift: BaseShift
+  projectTask: ProjectTask
 }
 
 export interface NoActvities {
@@ -26,114 +24,113 @@ export interface ErrorActivities {
   type: 'ErrorActivities'
 }
 
-export type CompositeActivity = { values: Activity[]; type: 'Activites'} | NoActvities | LoadingActivities | None | ErrorActivities;
-
+export type CompositeActivity =
+  | { values: Activity[]; type: 'Activites' }
+  | NoActvities
+  | LoadingActivities
+  | None
+  | ErrorActivities
 
 export interface ActivityState {
-  activites: CompositeActivity;
+  activites: CompositeActivity
 }
 
 export interface State {
   activitySection: ActivityState
 }
 
-
-
 export interface BaseProjectTask {
-  estimateTime: number;
-  id: number;
-  projectId: number;
-  quantity: number;
-  taskId: number;
+  estimateTime: number
+  id: number
+  projectId: number
+  quantity: number
+  taskId: number
 }
 
 export interface BaseProject {
-  date: string;
-  id: number;
-  isActive: number;
-  name: string;
+  date: string
+  id: number
+  isActive: number
+  name: string
 }
 
 export interface BaseTask {
-  id: number;
-  isActive: number;
-  name: string;
-  subcategoryId: number;
+  id: number
+  isActive: number
+  name: string
+  subcategoryId: number
 }
 
 export interface BaseEmployee {
-  authorityId: number;
-  crewId: number;
-  firstName: string;
-  id: number;
-  isEmployed: number;
-  isWorking: number;
-  lastName:string;
-  pin: number;
+  authorityId: number
+  crewId: number
+  firstName: string
+  id: number
+  isEmployed: number
+  isWorking: number
+  lastName: string
+  pin: number
 }
 
 export interface BaseCrew {
-  name: string;
-  id: number;
+  name: string
+  id: number
 }
 
 export interface BaseAuthority {
-  type: 'Admin' | 'Employee' | 'Manager';
-  id: number;
+  type: 'Admin' | 'Employee' | 'Manager'
+  id: number
 }
-
 
 export interface BaseCategory {
-  type: string;
-  id: number;
+  type: string
+  id: number
 }
 
-
 export interface BaseSubcategory {
-  type: string;
-  id: number;
-  categoryId: number;
+  type: string
+  id: number
+  categoryId: number
 }
 
 export interface BaseShift {
-  clockInDate: string;
-  clockOutDate: string;
-  employeeId: number;
-  id: number;
-  length: number;
-  lunch: number;
+  clockInDate: string
+  clockOutDate: string
+  employeeId: number
+  id: number
+  length: number
+  lunch: number
 }
 
-
-export interface BaseActivity{
-  description: string;
-  id: number;
-  length: number;
-  projectTaskId: number;
-  shiftId: number;
+export interface BaseActivity {
+  description: string
+  id: number
+  length: number
+  projectTaskId: number
+  shiftId: number
 }
 
 export interface Store {
-  entities: any;
-  results: any;
+  entities: any
+  results: any
   user: {
-    status: string;
-    id: number;
-    access: string;
-  },
+    status: string
+    id: number
+    access: string
+  }
   snack: {
-    snackType?: string;
-    snameMessage?: string;
-  },
+    snackType?: string
+    snameMessage?: string
+  }
   employee: {
     current: {
-      id?: number;
-      status: string;
+      id?: number
+      status: string
     }
-  },
-  analyze: any;
+  }
+  analyze: any
   model: {
-    modalType?:string;
-    modelProps: any;
+    modalType?: string
+    modelProps: any
   }
 }

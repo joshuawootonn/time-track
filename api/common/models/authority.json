@@ -25,7 +25,7 @@
       "length": null,
       "precision": 10,
       "scale": 0,
-      "generated" : true,
+      "generated": true,
       "mysql": {
         "columnName": "id",
         "dataType": "int",
@@ -50,16 +50,17 @@
         "nullable": "N"
       }
     }
-   
   },
   "validations": [],
   "relations": {},
-  "acls": [{
-    "accessType": "*",
-    "principalType": "ROLE",
-    "principalId": "$unauthenticated",
-    "permission": "DENY"
-  }],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
   "methods": {},
   "idInjection": false
 }

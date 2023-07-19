@@ -1,46 +1,46 @@
 export default {
   EMPLOYEE: {
     singular: `employee`,
-    plural: `employees`
+    plural: `employees`,
   },
   TASK: {
     singular: `task`,
-    plural: `tasks`
+    plural: `tasks`,
   },
   PROJECT: {
     singular: `project`,
-    plural: `projects`
+    plural: `projects`,
   },
   SHIFT: {
     singular: `shift`,
-    plural: `shifts`
+    plural: `shifts`,
   },
   AUTHORITY: {
     singular: `authority`,
-    plural: `authorities`
+    plural: `authorities`,
   },
   CREW: {
     singular: `crew`,
-    plural: `crews`
+    plural: `crews`,
   },
   CATEGORY: {
     singular: `category`,
-    plural: `categories`
+    plural: `categories`,
   },
   SUBCATEGORY: {
     singular: `subcategory`,
-    plural: `subcategories`
+    plural: `subcategories`,
   },
   DIMENSION: {
     singular: `dimension`,
-    plural: `dimensions`
+    plural: `dimensions`,
   },
   PROJECTTASK: {
     singular: `project_task`,
-    plural: `project_tasks`
+    plural: `project_tasks`,
   },
   ACTIVITY: {
     singular: `activity`,
-    plural: `activities`
-  }
-};
+    plural: `activities`,
+  },
+}

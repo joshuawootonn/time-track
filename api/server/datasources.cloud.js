@@ -8,4 +8,4 @@ module.exports = {
     user: process.env.SQL_USER,
     connector: 'mysql',
   },
-};
+}

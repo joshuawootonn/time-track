@@ -1,11 +1,11 @@
-import { employeeActionTypes } from 'constants/actionTypeConstants';
-import * as status from 'constants/status';
+import { employeeActionTypes } from '~/constants/actionTypeConstants'
+import * as status from '~/constants/status'
 export const initialState = {
   current: {
     id: null,
-    status: status.INIT
-  }
-};
+    status: status.INIT,
+  },
+}
 export default (state = initialState, action) => {
   switch (action.type) {
     case employeeActionTypes.LOGIN_EMPLOYEE_REQUEST:
@@ -13,27 +13,27 @@ export default (state = initialState, action) => {
         ...state,
         current: {
           id: null,
-          status: status.LOADING
-        }
-      };
+          status: status.LOADING,
+        },
+      }
     case employeeActionTypes.LOGIN_EMPLOYEE_SUCCESS:
       return {
         ...state,
         current: {
           id: action.data.id,
-          status: status.SUCCESS
-        }
-      };
+          status: status.SUCCESS,
+        },
+      }
     case employeeActionTypes.LOGIN_EMPLOYEE_FAILURE:
       return {
         ...state,
         current: {
           id: null,
-          status: status.FAILURE
+          status: status.FAILURE,
         },
-        selected: null
-      };
+        selected: null,
+      }
     default:
-      return state;
+      return state
   }
-};
+}

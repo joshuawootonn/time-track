@@ -1,31 +1,31 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 export const auth = Yup.object().shape({
   username: Yup.string().required(`Network is required`),
-  password: Yup.string().required(`Password is required`)
-});
+  password: Yup.string().required(`Password is required`),
+})
 
 export const authorityValidation = Yup.object().shape({
-  type: Yup.string().required(`Type is required`)
-});
+  type: Yup.string().required(`Type is required`),
+})
 export const crewValidation = Yup.object().shape({
-  name: Yup.string().required(`Type is required`)
-});
+  name: Yup.string().required(`Type is required`),
+})
 export const categoryValidation = Yup.object().shape({
-  type: Yup.string().required(`Type is required`)
-});
+  type: Yup.string().required(`Type is required`),
+})
 export const subcategoryValidation = Yup.object().shape({
   type: Yup.string().required(`Type is required`),
   categoryId: Yup.number()
     .positive(`Category selection required`)
-    .required(`Category selection required`)
-});
+    .required(`Category selection required`),
+})
 export const account = Yup.object().shape({
   pin: Yup.string()
     .min(6, `Pins are 6 characters`)
     .max(6, `Pins are 6 characters`)
-    .required(`Pin required`)
-});
+    .required(`Pin required`),
+})
 export const clockout = Yup.object().shape({
   activities: Yup.array()
     .of(
@@ -39,11 +39,11 @@ export const clockout = Yup.object().shape({
         projectTaskId: Yup.number()
           .positive(`Task selection required`)
           .required(`Task selection required`),
-        description: Yup.string()
-      })
+        description: Yup.string(),
+      }),
     )
-    .required(`Activity selection required`)
-});
+    .required(`Activity selection required`),
+})
 
 export const shift = Yup.object().shape({
   employeeId: Yup.number()
@@ -63,18 +63,18 @@ export const shift = Yup.object().shape({
         projectTaskId: Yup.number()
           .positive(`Task selection required`)
           .required(`Task selection required`),
-        description: Yup.string()
-      })
+        description: Yup.string(),
+      }),
     )
-    .required(`Activity selection required`)
-});
+    .required(`Activity selection required`),
+})
 
 export const halfShift = Yup.object().shape({
   employeeId: Yup.number()
     .positive(`Employee selection required`)
     .required(`Employee selection required`),
-  clockInDate: Yup.date().required(`Invalid clock in date`)
-});
+  clockInDate: Yup.date().required(`Invalid clock in date`),
+})
 
 export const exportValidation = Yup.object().shape({
   start: Yup.date().required(`Invalid start date`),
@@ -83,9 +83,9 @@ export const exportValidation = Yup.object().shape({
     .required(`File location is required`)
     .matches(
       new RegExp(/\.(xls|xlsx)$/i),
-      `File location must be an Xls or Xlsx file`
-    )
-});
+      `File location must be an Xls or Xlsx file`,
+    ),
+})
 
 export const employeeValidation = Yup.object().shape({
   firstName: Yup.string()
@@ -95,7 +95,7 @@ export const employeeValidation = Yup.object().shape({
     .required(`Last Name is required`)
     .matches(
       new RegExp(/[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?/),
-      `Last Name format is invalid`
+      `Last Name format is invalid`,
     ),
   authorityId: Yup.number()
     .positive(`Authority selection is required`)
@@ -107,8 +107,8 @@ export const employeeValidation = Yup.object().shape({
     .required(`Pin is required`)
     .matches(new RegExp(/\b(\d{6})\b/), `Pin format is invalid`),
   isEmployed: Yup.boolean(),
-  isWorking: Yup.boolean()
-});
+  isWorking: Yup.boolean(),
+})
 
 export const taskValidation = Yup.object().shape({
   name: Yup.string()
@@ -120,8 +120,8 @@ export const taskValidation = Yup.object().shape({
   subcategoryId: Yup.number()
     .positive(`Subcategory selection is required`)
     .required(`Subcategory selection is required`),
-  isActive: Yup.boolean()
-});
+  isActive: Yup.boolean(),
+})
 
 export const projectValidation = Yup.object().shape({
   name: Yup.string()
@@ -145,10 +145,10 @@ export const projectValidation = Yup.object().shape({
         .required(`Postive numbers only`),
       quantity: Yup.number()
         .positive(`Postive numbers only`)
-        .required(`Postive numbers only`)
-    })
-  )
-});
+        .required(`Postive numbers only`),
+    }),
+  ),
+})
 export const projectEditValidation = Yup.object().shape({
   name: Yup.string()
     .required(`Name is required`)
@@ -165,7 +165,7 @@ export const projectEditValidation = Yup.object().shape({
         .required(`Postive numbers only`),
       quantity: Yup.number()
         .positive(`Postive numbers only`)
-        .required(`Postive numbers only`)
-    })
-  )
-});
+        .required(`Postive numbers only`),
+    }),
+  ),
+})

@@ -10,7 +10,7 @@ module.exports.Authority = [
   {
     type: 'employee',
   },
-];
+]
 
 module.exports.Category = [
   {
@@ -22,7 +22,7 @@ module.exports.Category = [
   {
     type: 'Setup',
   },
-];
+]
 
 module.exports.Crew = [
   {
@@ -34,7 +34,7 @@ module.exports.Crew = [
   {
     name: 'Crew 3',
   },
-];
+]
 
 module.exports.Dimension = [
   {
@@ -46,7 +46,7 @@ module.exports.Dimension = [
   {
     type: 'SY',
   },
-];
+]
 
 module.exports.Employee = [
   {
@@ -67,7 +67,7 @@ module.exports.Employee = [
     authorityId: '1',
     crewId: '1',
   },
-];
+]
 module.exports.ProjectTask = [
   {
     quantity: '100',
@@ -81,11 +81,8 @@ module.exports.ProjectTask = [
     taskId: '1',
     projectId: '1',
   },
-];
-const date = new Date()
-  .toISOString()
-  .slice(0, 19)
-  .replace('T', ' ');
+]
+const date = new Date().toISOString().slice(0, 19).replace('T', ' ')
 module.exports.Project = [
   {
     name: 'Project 1',
@@ -102,7 +99,7 @@ module.exports.Project = [
     isActive: '0',
     date: `${date}`,
   },
-];
+]
 module.exports.Subcategory = [
   {
     type: 'Sidewalk',
@@ -114,7 +111,7 @@ module.exports.Subcategory = [
     categoryId: '1',
     dimensionId: '1',
   },
-];
+]
 module.exports.Task = [
   {
     name: '7" Sidewalk',
@@ -126,20 +123,14 @@ module.exports.Task = [
     isActive: '1',
     subcategoryId: '1',
   },
-];
+]
 
-let to = new Date();
-to.setHours(18);
-to = to
-  .toISOString()
-  .slice(0, 19)
-  .replace('T', ' ');
-let from = new Date();
-from.setHours(18);
-from = from
-  .toISOString()
-  .slice(0, 19)
-  .replace('T', ' ');
+let to = new Date()
+to.setHours(18)
+to = to.toISOString().slice(0, 19).replace('T', ' ')
+let from = new Date()
+from.setHours(18)
+from = from.toISOString().slice(0, 19).replace('T', ' ')
 
 module.exports.Shift = [
   {
@@ -160,7 +151,7 @@ module.exports.Shift = [
     employeeId: '2',
     length: '600',
   },
-];
+]
 
 module.exports.Activity = [
   {
@@ -181,4 +172,4 @@ module.exports.Activity = [
     projectTaskId: 1,
     shiftId: 3,
   },
-];
+]

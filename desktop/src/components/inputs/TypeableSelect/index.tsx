@@ -1,2 +1,2 @@
-import TypeableSelect from './autoCompleteBase';
-export default TypeableSelect;
+import TypeableSelect from './autoCompleteBase'
+export default TypeableSelect

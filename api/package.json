@@ -6,11 +6,11 @@
     "node": ">=4"
   },
   "scripts": {
-    "lint": "eslint --fix .",
     "start": "cross-env node .",
     "watch": "cross-env nodemon .",
     "test": "jest --runInBand  ",
     "pretest": "cross-env NODE_ENV=test",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "seed": "node ./server/scripts/seed",
     "migrate": "node ./server/scripts/autoMigrate",
     "migrateAuth": "node ./server/scripts/createAuth"
@@ -35,17 +35,11 @@
     "async": "^2.6.1",
     "babel-eslint": "^8.2.5",
     "chalk": "^2.4.1",
-    "eslint": "^5.1.0",
-    "eslint-config-last": "0.0.5",
-    "eslint-config-loopback": "^8.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-prettier": "^2.6.0",
     "jest": "^23.1.0",
     "jest-preset-loopback": "^1.0.0",
     "mocha": "^5.2.0",
     "nsp": "^2.1.0",
-    "prettier": "^1.13.5",
+    "prettier": "^2.5.1",
     "supertest": "^3.1.0"
   },
   "repository": {
