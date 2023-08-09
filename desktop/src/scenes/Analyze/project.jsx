@@ -1,15 +1,15 @@
-import React, { Component, useEffect, useState } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Select from 'react-select'
 
-import { AppBar, IconButton, Toolbar, Tooltip, Grid } from '@material-ui/core'
+import { AppBar, IconButton, Toolbar, Tooltip } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { ArrowBack } from '@material-ui/icons'
 
-import Typeahead from '~/components/inputs/TypeableSelect/autoComplete'
-import PropTypes from 'prop-types'
+import Fab from '@material-ui/core/Fab'
 
-import { Field, Form, Formik } from 'formik'
+import PropTypes from 'prop-types'
 
 import { foremanActions, projectActions } from '~/store/actions'
 import { projectSelectors, projectTaskSelectors } from '~/store/selectors'
@@ -53,68 +53,53 @@ export class Project extends Component {
   }
 
   render() {
-    const {
-      classes,
-      projects,
-      updateFilter,
-      selectedProjectId,
-      selected,
-    } = this.props
+    const { classes, projects, updateFilter, selectedProjectId, selected } =
+      this.props
 
-    console.log({ updateFilter, selectedProjectId })
     return (
-      <div className={classes.root}>
+      <div className="w-screen h-[100svh] flex flex-col space-y-4 md:space-y-0">
         <AppBar position="static" elevation={0}>
-          <Toolbar className={classes.tool}>
-            {/* <Formik
-                  initialValues={{ selectedProject: -1 }}
-                  render={formikProps => {
-                    console.log({ formikProps });
-                    return (
-                      <Form>
-                        <Field
-                          component={TypeableSelect}
-                          type="name"
-                          items={projects}
-                          fullWidth
-                          label="Project"
-                          className={classes.field}
-                          name={'selectedProject'}
-                        />
-                      </Form>
-                    );
-                  }}
-                ></Formik> */}
-            <div style={{ flex: '1' }}>
-              <Typeahead
-                value={this.state.selectedProject}
-                onChange={(selectedProject) => {
-                  updateFilter(selectedProject.id)
-                  console.log({ selected })
-                  console.log({ selectedProject })
-                  return this.setState({ selectedProject })
-                }}
-                options={projects.map((item) => {
-                  return {
-                    label: item.name,
-                    value: item.name,
-                    id: item.id,
-                    data: { ...item },
-                  }
-                })}
-              />
-            </div>
+          <Toolbar disableGutters className="min-h-0 mx-4 space-x-4">
+            <Select
+              value={this.state.selectedProject}
+              onChange={(selectedProject) => {
+                updateFilter(selectedProject.id)
+                console.log({ selected })
+                console.log({ selectedProject })
+                return this.setState({ selectedProject })
+              }}
+              options={projects.map((item) => {
+                return {
+                  label: item.name,
+                  value: item.name,
+                  id: item.id,
+                  data: { ...item },
+                }
+              })}
+              className="text-slate-900 py-4 flex-grow"
+            />
             <Tooltip title="Go Back" placement="bottom">
-              <IconButton color="inherit" onClick={this.back}>
+              <IconButton
+                className="!hidden md:!block"
+                color="inherit"
+                onClick={this.back}
+              >
                 <ArrowBack />
               </IconButton>
             </Tooltip>
           </Toolbar>
         </AppBar>
-        <div>
+        <div className="flex-grow flex justify-center items-start md:items-center">
           <ForemanProjectSummary
-            selectedProject={this.props.selectedProjectId}
+            selectedProject={
+              this.state.selectedProject ? this.state.selectedProject.id : -1
+            }
           />
+        </div>
+        <div className="fixed block md:hidden self-end bottom-4 right-4">
+          <Fab color="primary" aria-label="add" onClick={this.back}>
+            <ArrowBack />
+          </Fab>
         </div>
       </div>
     )

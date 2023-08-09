@@ -68,30 +68,20 @@ module.exports = (Project) => {
         totalActual,
       }
     })
-    // console.log(newProjects);
     return cb(null, newProjects)
   }
 
   // Used for getting all the data for the Project tab of foreman view
-  Project.foremansummary = async (isActive, cb) => {
+  Project['foreman-summary'] = async (isActive, cb) => {
     var app = require('../../server/server')
 
-    var twoMondaysAgo = new Date(Date.now())
-    twoMondaysAgo.setMilliseconds(0)
-    twoMondaysAgo.setSeconds(0)
-    twoMondaysAgo.setMinutes(0)
-    twoMondaysAgo.setHours(0)
-    var today = new Date(twoMondaysAgo.valueOf())
-    twoMondaysAgo.setDate(twoMondaysAgo.getDate() - twoMondaysAgo.getDay())
-    twoMondaysAgo.setDate(twoMondaysAgo.getDate() - 6)
-    console.log('two mondays ago: ' + twoMondaysAgo)
-
-    // if (!startTime) {
-    //   return cb({
-    //     ...baseError,
-    //     message: "startTime is required in the queryString as UTC date"
-    //   });
-    // }
+    var today = new Date(Date.now())
+    today.setMilliseconds(0)
+    today.setSeconds(0)
+    today.setMinutes(0)
+    today.setHours(0)
+    var twoSundaysAgo = new Date(today.valueOf())
+    twoSundaysAgo.setDate(twoSundaysAgo.getDate() - twoSundaysAgo.getDay() - 7)
 
     if (isActive === undefined || typeof isActive !== 'boolean') {
       return cb({
@@ -116,7 +106,7 @@ module.exports = (Project) => {
     var shifts = await app.models.Shift.find({
       where: {
         and: [
-          { clockInDate: { gt: twoMondaysAgo } },
+          { clockInDate: { gt: twoSundaysAgo } },
           { clockInDate: { lt: today } },
         ],
       },
@@ -124,9 +114,6 @@ module.exports = (Project) => {
         relation: 'activities',
       },
     })
-
-    // console.log(projects);
-    // console.log(shifts);
 
     var newProjects = projects.map((project) => {
       // console.log(project, project.projectTasks)
@@ -164,27 +151,17 @@ module.exports = (Project) => {
       }
     })
 
-    // console.log('startime: '+ startTime);
-
-    // startTime.setMilliseconds(0);
-    // startTime.setSeconds(0);
-    // startTime.setMinutes(0);
-    // startTime.setHours(0);
-
-    // var twoMondaysAgo = new Date(startTime.valueOf());
-
-    const startOfThisWeek = new Date(twoMondaysAgo.valueOf() + 6048e5)
-    console.log('start of this week: ' + startOfThisWeek)
+    const startOfThisWeek = new Date(twoSundaysAgo.valueOf() + 6048e5)
+    // console.log('start of this week: ' + startOfThisWeek)
 
     var startOfYesterday = new Date(Date.now() - 864e5)
     startOfYesterday.setMilliseconds(0)
     startOfYesterday.setSeconds(0)
     startOfYesterday.setMinutes(0)
     startOfYesterday.setHours(0)
-    console.log('start of yesterday: ' + startOfYesterday)
+    // console.log('start of yesterday: ' + startOfYesterday)
 
     shifts.map((shift) => {
-      // console.log(shift.activities());
       if (shift.clockInDate >= startOfThisWeek) {
         if (shift.clockInDate >= startOfYesterday) {
           shift.activities().map((activity) => {
@@ -229,9 +206,9 @@ module.exports = (Project) => {
     returns: { arg: 'projects', type: 'string' },
   })
 
-  Project.remoteMethod('foremansummary', {
+  Project.remoteMethod('foreman-summary', {
     http: {
-      path: '/foremansummary',
+      path: '/foreman-summary',
       verb: 'get',
     },
     accepts: [
