@@ -1,32 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { useEffect, useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import axiosInstance from '~/helpers/axios'
-
-const useStyles = makeStyles({
-  container: {
-    height: `calc(100vh - 48px)`,
-    width: '100vw',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  insideContainer: {
-    display: 'flex',
-  },
-  gridItem: {
-    border: '1px solid #ccc',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    width: '500px',
-
-    display: 'flex',
-    padding: '8px',
-    borderRadius: '4px',
-    marginBottom: '8px',
-    flexShrink: 1,
-  },
-})
+import useSWR from 'swr'
+import Progress from '~/components/helpers/Progress'
 
 type ProjectSummary = {
   date: string
@@ -44,94 +19,88 @@ type Props = {
   selectedProject: number
 }
 
+interface APICall {
+  projects: ProjectSummary[]
+}
+
+const fetcher = (url: string) => axiosInstance.get(url).then((res) => res.data)
+
 export const ForemanProjectSummary = (props: Props) => {
-  // const dispatch = useDispatch();
-
-  // const projects = useSelector((state) => (state))
-  const [projectSummaries, setProjectSummaries] = useState<ProjectSummary[]>([])
-  const classes = useStyles()
-
-  // const select = object =>
-  //   dispatch(foremanActions.select(domain.PROJECT, object));
-
-  useEffect(() => {
-    axiosInstance
-      .get('/projects/foremansummary?isActive=true')
-      .then(({ data: { projects } }) => {
-        setProjectSummaries(projects)
-      })
-  }, [])
-
-  const projectSummary = projectSummaries.find(
-    (summary) => summary.id == props.selectedProject,
+  const { data, error, isLoading } = useSWR<APICall>(
+    '/projects/foreman-summary?isActive=true',
+    fetcher,
   )
 
-  if (projectSummary) {
+  if (error) {
     return (
-      <div className={classes.container}>
-        <div className={classes.insideContainer}>
-          <Grid container direction="column" alignItems="center">
-            <div className={classes.gridItem} style={{ marginTop: '8px' }}>
-              <Grid item md={6} xs={8} style={{ flex: '1 1 auto' }}>
-                <Typography>Total Estimate:</Typography>
-              </Grid>
-              <Grid item style={{ flex: '1 1 auto' }}>
-                <Typography>
-                  {projectSummary.totalEstimate.toLocaleString()}
-                </Typography>
-              </Grid>
-            </div>
-            <div className={classes.gridItem}>
-              <Grid item xs={6}>
-                <Typography noWrap={true}>Total Actual:</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography noWrap={true}>
-                  {projectSummary.totalActual.toLocaleString()} /{' '}
-                  {(
-                    projectSummary.totalActual / projectSummary.totalEstimate
-                  ).toLocaleString(undefined, {
-                    style: 'percent',
-                    maximumFractionDigits: 1,
-                  })}
-                </Typography>
-              </Grid>
-            </div>
-            <div className={classes.gridItem}>
-              <Grid item xs={6}>
-                <Typography>Hours Worked Last Week:</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography>{projectSummary.hoursWorkedLastWeek}</Typography>
-              </Grid>
-            </div>
-            <div className={classes.gridItem}>
-              <Grid item xs={6}>
-                <Typography>Hourse Worked This Week:</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography>{projectSummary.hoursWorkedThisWeek}</Typography>
-              </Grid>
-            </div>
-            <div className={classes.gridItem}>
-              <Grid item xs={6}>
-                <Typography>Hours Worked Yesterday:</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography>{projectSummary.hoursWorkedYesterday}</Typography>
-              </Grid>
-            </div>
-          </Grid>
-        </div>
-        <div className="grid grid-cols-[minmax(0,2fr),minmax(0,1fr)] w-96 bg-slate-50 p-4 rounded-md">
-          <Typography>Hours Worked Yesterday:</Typography>
-          <Typography className="justify-self-end">
-            {projectSummary.hoursWorkedYesterday}
-          </Typography>
-        </div>
+      <div className="flex flex-col h-full w-full justify-center items-center mb-10">
+        <Typography className="text-center" variant="body1">
+          An error occurred.
+          <br /> Reach out to support for help.
+        </Typography>
       </div>
     )
-  } else {
-    return <div>{JSON.stringify(projectSummary)} </div>
   }
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col h-full w-full justify-center items-center mb-10">
+        <Progress variant="circular" fullWidth fullHeight />
+      </div>
+    )
+  }
+
+  if (data == null || props.selectedProject == -1) {
+    return null
+  }
+
+  const projectSummary = data.projects.find(
+    (summary: ProjectSummary) => summary.id == props.selectedProject,
+  )
+
+  if (projectSummary == null) {
+    return null
+  }
+
+  return (
+    <div className="flex flex-col px-4 gap-2 w-full sm:w-96 justify-items-center mb-10">
+      {/* todo (width) */}
+      <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
+        <Typography>Total Estimate:</Typography>
+        <Typography>
+          {projectSummary.totalEstimate.toLocaleString()}
+        </Typography>
+      </div>
+      <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
+        <Typography>Total Actual:</Typography>
+        <Typography>
+          {projectSummary.totalActual.toLocaleString()} /{' '}
+          {(
+            projectSummary.totalActual / projectSummary.totalEstimate
+          ).toLocaleString(undefined, {
+            style: 'percent',
+            maximumFractionDigits: 0,
+          })}
+        </Typography>
+      </div>
+      <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
+        <Typography>Hours Worked Last Week:</Typography>
+        <Typography>
+          {projectSummary.hoursWorkedLastWeek}
+        </Typography>
+      </div>
+      <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
+        <Typography>Hourse Worked This Week:</Typography>
+        <Typography>
+          {projectSummary.hoursWorkedThisWeek}
+        </Typography>
+      </div>
+      <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
+        <Typography>Hours Worked Yesterday:</Typography>
+        <Typography>
+          {projectSummary.hoursWorkedYesterday}
+        </Typography>
+      </div>
+    </div>
+  )
 }

@@ -89,7 +89,8 @@ export const AccountAction = (props) => {
               </IconButton>
             </Tooltip>
           )}
-        {type === authorityConstants.FOREMAN && (
+        {/* CREW FEATRUE THAT IS NOT DEVELOPED YET */}
+        {/* {type === authorityConstants.FOREMAN && (
           <Tooltip
             open={true}
             title="Crew"
@@ -100,7 +101,7 @@ export const AccountAction = (props) => {
               <Group className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
-        )}
+        )} */}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
           <Tooltip
