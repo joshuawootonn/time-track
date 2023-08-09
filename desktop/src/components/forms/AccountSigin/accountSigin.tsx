@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
-import { withStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography } from '@material-ui/core'
 import { Field, Form } from 'formik'
 
-import styles from './styles'
 import Password from '~/components/inputs/Password'
 
 export interface Props {
@@ -27,13 +25,12 @@ export class AccountSigin extends Component<Props> {
   }
 
   renderButtonGridElement = (num: number) => {
-    const { classes } = this.props
     return (
       <Grid item xs={4} key={num}>
         <Button
           onClick={() => this.appendPin(num)}
           variant="contained"
-          className={classes.button}
+          className="w-full h-[60px]"
           id={`button-${num}`}
         >
           {num}
@@ -43,13 +40,13 @@ export class AccountSigin extends Component<Props> {
   }
 
   render() {
-    const { classes, isSubmitting, errors } = this.props
+    const { isSubmitting, errors } = this.props
     const numOrder: number[] = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
 
     return (
-      <div className={classes.hero}>
-        <div className={classes.heroContent}>
-          <Form>
+      <div className="h-screen flex flex-col justify-center items-center">
+        <div className="w-full px-4 sm:w-112">
+          <Form className="">
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Field
@@ -65,7 +62,7 @@ export class AccountSigin extends Component<Props> {
                   onClick={this.resetPin}
                   color="secondary"
                   variant="contained"
-                  className={classes.button}
+                  className="w-full h-full"
                 >
                   Clear
                 </Button>
@@ -76,13 +73,13 @@ export class AccountSigin extends Component<Props> {
                   color="primary"
                   disabled={isSubmitting || Object.keys(errors).length !== 0}
                   variant="contained"
-                  className={classes.button}
+                  className="w-full h-full"
                 >
                   Enter
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Typography className={classes.centerText} color="error">
+                <Typography className="text-center" color="error">
                   {errors.submit}
                 </Typography>
               </Grid>
@@ -94,4 +91,4 @@ export class AccountSigin extends Component<Props> {
   }
 }
 
-export default withStyles(styles as any)(AccountSigin)
+export default AccountSigin
