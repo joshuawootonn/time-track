@@ -17,10 +17,7 @@ const styles = () => ({
   },
   footerRow: {
     padding: `12px 0`,
-    height: `68px`,
-  },
-  body: {
-    padding: `0 12px !important`,
+    height: `64px`,
   },
   field: {
     margin: `0 8px`,

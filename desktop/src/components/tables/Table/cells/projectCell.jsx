@@ -1,21 +1,9 @@
-import React from 'react'
 import { TableCell } from '@material-ui/core'
 import classNames from 'classnames'
-import uniqBy from 'lodash/uniqBy'
 import Link from '@material-ui/core/Link'
 
-// import { css } from 'styled-components/macro';
 import Tooltip from '@material-ui/core/Tooltip'
 import { sortBy, sortedUniqBy } from 'lodash'
-
-const styles = {
-  root: '',
-  // root: css`
-  //   button:not(:last-child) {
-  //     margin-right: 8px;
-  //   }
-  // `
-}
 
 const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
   const projects = rowData.activities
@@ -24,8 +12,11 @@ const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
   return (
     <TableCell
       component="div"
-      className={classNames(classes.tableCell, classes.flexContainer)}
-      css={styles.root}
+      className={classNames(
+        classes.tableCell,
+        classes.flexContainer,
+        'space-x-2',
+      )}
       style={{ height: rowHeight }}
       padding="default"
     >

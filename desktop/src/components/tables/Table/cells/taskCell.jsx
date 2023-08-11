@@ -1,20 +1,8 @@
-/* eslint-disable react/prop-types */
-import React from 'react'
 import { TableCell } from '@material-ui/core'
 import classNames from 'classnames'
 import Tooltip from '@material-ui/core/Tooltip'
 import Link from '@material-ui/core/Link'
 import { sortBy, sortedUniqBy } from 'lodash'
-// import { css } from 'styled-components/macro';
-
-const styles = {
-  root: '',
-  // root: css`
-  //   button:not(:last-child) {
-  //     margin-right: 8px;
-  //   }
-  // `
-}
 
 const taskLengthSet = {
   3: 10,
@@ -37,8 +25,11 @@ const TaskCell = ({ rowData, classes, rowHeight, updateFilter }) => {
   return (
     <TableCell
       component="div"
-      className={classNames(classes.tableCell, classes.flexContainer)}
-      css={styles.root}
+      className={classNames(
+        classes.tableCell,
+        classes.flexContainer,
+        'space-x-2',
+      )}
       style={{ height: rowHeight }}
       padding="default"
     >
