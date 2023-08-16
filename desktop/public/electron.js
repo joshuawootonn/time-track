@@ -65,6 +65,10 @@ function createWindow() {
     mainWindow = null;
   });
 
+  mainWindow.webContents.on('did-fail-load', () => {
+    mainWindow.loadURL(startUrl)
+  })
+
   log.transports.file.level = 'debug';
   autoUpdater.logger = log;
 }
