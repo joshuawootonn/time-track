@@ -10,7 +10,7 @@ export const getCred = (): Cred => {
   if (value) return JSON.parse(value)
 
   return {
-    ip: '',
+    ip: 'https://aaconcreteinc.xyz',
     username: '',
     password: '',
   }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Component } from 'react'
+import { Route, Switch, HashRouter } from 'react-router-dom'
 
 import PrivateRoute from '~/routes/privateRoute'
 import AuthSigninScene from '~/scenes/Auth/authSignin'
@@ -23,12 +23,12 @@ export const AuthedRoutes = () => (
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route path="/auth" component={AuthSigninScene} />
           <PrivateRoute path="/" component={AuthedRoutes} />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 }
