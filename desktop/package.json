@@ -12,6 +12,9 @@
   "license": "MIT",
   "private": false,
   "build": {
+    "files": [
+      "build/**"
+    ],
     "appId": "com.electron.timetrack",
     "win": {
       "target": "nsis",
@@ -63,11 +66,11 @@
       }
     ],
     "directories": {
-      "buildResources": "public",
+      "buildResources": "build",
       "output": "release"
     }
   },
-  "main": "public/electron.js",
+  "main": "./build/electron.js",
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "4.11.0",

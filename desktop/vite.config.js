@@ -9,6 +9,8 @@ export default defineConfig(() => {
         '~': path.resolve(__dirname, './src'),
       },
     },
+    // This is important for how assets are referenced in the electron packaged version
+    base: './',
     build: {
       outDir: 'build',
     },
