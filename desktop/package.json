@@ -110,14 +110,15 @@
   },
   "scripts": {
     "start": "vite",
+    "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "electron-build": "electron-builder",
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
-    "pack-win": "yarn react-build && yarn electron-build --x64 --win",
-    "pack-mac": "yarn react-build && yarn electron-build --x64 --mac",
-    "dist-win": "yarn react-build && yarn electron-build  --x64 --win -p always",
-    "dist-mac": "yarn react-build && yarn electron-build  --x64 --mac -p always",
+    "pack-win": "yarn build && yarn electron-build --x64 --win",
+    "pack-mac": "yarn build && yarn electron-build --x64 --mac",
+    "dist-win": "yarn build && yarn electron-build  --x64 --win -p always",
+    "dist-mac": "yarn build && yarn electron-build  --x64 --mac -p always",
     "electron": "electron ."
   },
   "browserslist": {

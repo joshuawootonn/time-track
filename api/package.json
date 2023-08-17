@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "cross-env node .",
+    "dev": "cross-env nodemon .",
     "watch": "cross-env nodemon .",
     "test": "jest --runInBand  ",
     "pretest": "cross-env NODE_ENV=test",
