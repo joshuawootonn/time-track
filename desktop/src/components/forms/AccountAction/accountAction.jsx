@@ -32,8 +32,8 @@ export const AccountAction = (props) => {
     isElectron,
   } = props
   return (
-    <div className={classes.hero}>
-      <div className={classes.heroContent}>
+    <div className="h-screen w-full flex flex-col justify-center items-center">
+      <div className="flex flex-row flex-wrap justify-center">
         {isWorking ? (
           <Tooltip
             open={true}

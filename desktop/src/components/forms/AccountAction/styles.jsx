@@ -14,6 +14,7 @@ const styles = () => ({
   button: {
     height: `100px`,
     width: `100px`,
+    marginBottom: `80px`,
   },
   buttonIcon: {
     height: `70px`,
