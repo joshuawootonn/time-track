@@ -5,9 +5,9 @@ import Progress from '~/components/helpers/Progress'
 
 type ProjectSummary = {
   date: string
-  hoursWorkedLastWeek: number
-  hoursWorkedThisWeek: number
-  hoursWorkedYesterday: number
+  minutesWorkedLastWeek: number
+  minutesWorkedThisWeek: number
+  minutesWorkedYesterday: number
   id: number
   isActive: number
   name: string
@@ -68,13 +68,13 @@ export const ForemanProjectSummary = (props: Props) => {
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Total Estimate:</Typography>
         <Typography>
-          {projectSummary.totalEstimate.toLocaleString()}
+          {Math.floor(projectSummary.totalEstimate / 60).toLocaleString()}
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Total Actual:</Typography>
         <Typography>
-          {projectSummary.totalActual.toLocaleString()} /{' '}
+          {Math.floor(projectSummary.totalActual / 60).toLocaleString()} /{' '}
           {(
             projectSummary.totalActual / projectSummary.totalEstimate
           ).toLocaleString(undefined, {
@@ -86,19 +86,19 @@ export const ForemanProjectSummary = (props: Props) => {
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hours Worked Last Week:</Typography>
         <Typography>
-          {projectSummary.hoursWorkedLastWeek}
+          {Math.round(projectSummary.minutesWorkedLastWeek / 60)}
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hourse Worked This Week:</Typography>
         <Typography>
-          {projectSummary.hoursWorkedThisWeek}
+          {Math.round(projectSummary.minutesWorkedThisWeek / 60)}
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hours Worked Yesterday:</Typography>
         <Typography>
-          {projectSummary.hoursWorkedYesterday}
+          {Math.round(projectSummary.minutesWorkedYesterday / 60)}
         </Typography>
       </div>
     </div>
