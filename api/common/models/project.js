@@ -118,9 +118,9 @@ module.exports = (Project) => {
     var newProjects = projects.map((project) => {
       // console.log(project, project.projectTasks)
       var projectTaskIds = []
-      var hoursWorkedLastWeek = 0
-      var hoursWorkedThisWeek = 0
-      var hoursWorkedYesterday = 0
+      var minutesWorkedLastWeek = 0
+      var minutesWorkedThisWeek = 0
+      var minutesWorkedYesterday = 0
       const { totalEstimate, totalActual } = project.projectTasks().reduce(
         ({ totalEstimate, totalActual }, currentProjectTask) => {
           projectTaskIds.push(currentProjectTask.id)
@@ -145,9 +145,9 @@ module.exports = (Project) => {
         projectTaskIds,
         totalEstimate,
         totalActual,
-        hoursWorkedLastWeek,
-        hoursWorkedThisWeek,
-        hoursWorkedYesterday,
+        minutesWorkedLastWeek,
+        minutesWorkedThisWeek,
+        minutesWorkedYesterday,
       }
     })
 
@@ -167,26 +167,26 @@ module.exports = (Project) => {
           shift.activities().map((activity) => {
             newProjects.find((newProject) =>
               newProject.projectTaskIds.includes(activity.projectTaskId),
-            ).hoursWorkedYesterday += activity.length / 60 // convert activity.length to hours
+            ).minutesWorkedYesterday += activity.length
           })
         } else {
           shift.activities().map((activity) => {
             newProjects.find((newProject) =>
               newProject.projectTaskIds.includes(activity.projectTaskId),
-            ).hoursWorkedThisWeek += activity.length / 60 // convert activity.length to hours
+            ).minutesWorkedThisWeek += activity.length
           })
         }
       } else {
         shift.activities().map((activity) => {
           newProjects.find((newProject) =>
             newProject.projectTaskIds.includes(activity.projectTaskId),
-          ).hoursWorkedLastWeek += activity.length / 60 // convert activity.length to hours
+          ).minutesWorkedLastWeek += activity.length
         })
       }
     })
 
     newProjects.forEach((project) => {
-      project.hoursWorkedThisWeek += project.hoursWorkedYesterday
+      project.minutesWorkedThisWeek += project.minutesWorkedYesterday
       delete project.projectTaskIds
     })
 
