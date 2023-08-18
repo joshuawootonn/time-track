@@ -90,7 +90,7 @@ export const ForemanProjectSummary = (props: Props) => {
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
-        <Typography>Hourse Worked This Week:</Typography>
+        <Typography>Hours Worked This Week:</Typography>
         <Typography>
           {Math.round(projectSummary.minutesWorkedThisWeek / 60)}
         </Typography>
