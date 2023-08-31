@@ -86,19 +86,19 @@ export const ForemanProjectSummary = (props: Props) => {
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hours Worked Last Week:</Typography>
         <Typography>
-          {Math.round(projectSummary.minutesWorkedLastWeek / 60)}
+          {Math.floor(projectSummary.minutesWorkedLastWeek / 60)}:{String(projectSummary.minutesWorkedLastWeek%60).padStart(2,'0')}
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hours Worked This Week:</Typography>
         <Typography>
-          {Math.round(projectSummary.minutesWorkedThisWeek / 60)}
+          {Math.floor(projectSummary.minutesWorkedThisWeek / 60)}:{String(projectSummary.minutesWorkedThisWeek%60).padStart(2,'0')}
         </Typography>
       </div>
       <div className="flex flex-row flex-grow justify-between bg-slate-50 border border-slate-100 p-4 rounded-md">
         <Typography>Hours Worked Yesterday:</Typography>
         <Typography>
-          {Math.round(projectSummary.minutesWorkedYesterday / 60)}
+          {Math.floor(projectSummary.minutesWorkedYesterday / 60)}:{String(projectSummary.minutesWorkedYesterday%60).padStart(2,'0')}
         </Typography>
       </div>
     </div>
