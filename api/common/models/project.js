@@ -145,11 +145,13 @@ module.exports = (Project) => {
         projectTaskIds,
         totalEstimate,
         totalActual,
-        minutesWorkedLastWeek,
-        minutesWorkedThisWeek,
-        minutesWorkedYesterday,
+        minutesWorkedLastWeek: minutesWorkedLastWeek,
+        minutesWorkedThisWeek: minutesWorkedThisWeek,
+        minutesWorkedYesterday: minutesWorkedYesterday,
       }
     })
+    console.log('newProjects1')
+    console.log(newProjects)
 
     const startOfThisWeek = new Date(twoSundaysAgo.valueOf() + 6048e5)
     // console.log('start of this week: ' + startOfThisWeek)
@@ -189,6 +191,8 @@ module.exports = (Project) => {
       project.minutesWorkedThisWeek += project.minutesWorkedYesterday
       delete project.projectTaskIds
     })
+    console.log('newProjects2')
+    console.log(newProjects)
 
     return cb(null, newProjects)
   }
