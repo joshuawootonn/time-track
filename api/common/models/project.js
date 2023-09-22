@@ -43,7 +43,6 @@ module.exports = (Project) => {
     })
 
     const newProjects = projects.map((project) => {
-      // console.log(project, project.projectTasks)
       const { totalEstimate, totalActual } = project.projectTasks().reduce(
         ({ totalEstimate, totalActual }, currentProjectTask) => {
           return {
@@ -116,7 +115,6 @@ module.exports = (Project) => {
     })
 
     var newProjects = projects.map((project) => {
-      // console.log(project, project.projectTasks)
       var projectTaskIds = []
       var minutesWorkedLastWeek = 0
       var minutesWorkedThisWeek = 0
@@ -145,42 +143,51 @@ module.exports = (Project) => {
         projectTaskIds,
         totalEstimate,
         totalActual,
-        minutesWorkedLastWeek,
-        minutesWorkedThisWeek,
-        minutesWorkedYesterday,
+        minutesWorkedLastWeek: minutesWorkedLastWeek,
+        minutesWorkedThisWeek: minutesWorkedThisWeek,
+        minutesWorkedYesterday: minutesWorkedYesterday,
       }
     })
 
     const startOfThisWeek = new Date(twoSundaysAgo.valueOf() + 6048e5)
-    // console.log('start of this week: ' + startOfThisWeek)
 
-    var startOfYesterday = new Date(Date.now() - 864e5)
-    startOfYesterday.setMilliseconds(0)
-    startOfYesterday.setSeconds(0)
-    startOfYesterday.setMinutes(0)
-    startOfYesterday.setHours(0)
-    // console.log('start of yesterday: ' + startOfYesterday)
+    var startOfYesterday = new Date(today.valueOf() - 864e5)
 
     shifts.map((shift) => {
       if (shift.clockInDate >= startOfThisWeek) {
         if (shift.clockInDate >= startOfYesterday) {
           shift.activities().map((activity) => {
-            newProjects.find((newProject) =>
-              newProject.projectTaskIds.includes(activity.projectTaskId),
-            ).minutesWorkedYesterday += activity.length
+            try {
+              newProjects.find((newProject) =>
+                newProject.projectTaskIds.includes(activity.projectTaskId),
+              ).minutesWorkedYesterday += activity.length
+            } catch (error) {
+              console.log('activity not found:')
+              console.log(activity)
+            }
           })
         } else {
           shift.activities().map((activity) => {
-            newProjects.find((newProject) =>
-              newProject.projectTaskIds.includes(activity.projectTaskId),
-            ).minutesWorkedThisWeek += activity.length
+            try {
+              newProjects.find((newProject) =>
+                newProject.projectTaskIds.includes(activity.projectTaskId),
+              ).minutesWorkedThisWeek += activity.length
+            } catch (error) {
+              console.log('activity not found:')
+              console.log(activity)
+            }
           })
         }
       } else {
         shift.activities().map((activity) => {
-          newProjects.find((newProject) =>
-            newProject.projectTaskIds.includes(activity.projectTaskId),
-          ).minutesWorkedLastWeek += activity.length
+          try {
+            newProjects.find((newProject) =>
+              newProject.projectTaskIds.includes(activity.projectTaskId),
+            ).minutesWorkedLastWeek += activity.length
+          } catch (error) {
+            console.log('activity not found:')
+            console.log(activity);
+          }
         })
       }
     })
@@ -189,6 +196,12 @@ module.exports = (Project) => {
       project.minutesWorkedThisWeek += project.minutesWorkedYesterday
       delete project.projectTaskIds
     })
+
+    // for debugging hours being categorized incorrectly
+    // console.log('two sundays ago: '+twoSundaysAgo)
+    // console.log('start of this week: ' +startOfThisWeek)
+    // console.log('start of yesterday: '+startOfYesterday)
+    // console.log('today: '+today)
 
     return cb(null, newProjects)
   }
