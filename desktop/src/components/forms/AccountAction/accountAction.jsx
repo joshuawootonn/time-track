@@ -11,7 +11,7 @@ import {
   ArrowBack,
   Fullscreen,
   FullscreenExit,
-  Group,
+  BarChart,
 } from '@material-ui/icons'
 
 import styles from './styles'
@@ -25,6 +25,7 @@ export const AccountAction = (props) => {
     clockOut,
     analyze,
     crew,
+    project,
     back,
     type,
     toggleFullscreen,
@@ -102,16 +103,28 @@ export const AccountAction = (props) => {
             </IconButton>
           </Tooltip>
         )} */}
-        {(type === authorityConstants.ADMIN ||
-          type === authorityConstants.FOREMAN) && (
+        {(type === authorityConstants.ADMIN) && (
           <Tooltip
             open={true}
-            title={type === authorityConstants.ADMIN ? 'Analysis' : 'Projects'}
+            title={'Analysis'}
             classes={{ tooltip: classes.toolTip }}
             placement="bottom"
           >
             <IconButton onClick={analyze} className={classes.button}>
               <ShowChart className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
+        {(type === authorityConstants.ADMIN ||
+          type === authorityConstants.FOREMAN) && (
+          <Tooltip
+            open={true}
+            title={'Projects'}
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={project} className={classes.button}>
+              <BarChart className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
         )}
@@ -139,6 +152,7 @@ AccountAction.propTypes = {
   export: PropTypes.func.isRequired,
   analyze: PropTypes.func.isRequired,
   crew: PropTypes.func.isRequired,
+  project: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   toggleFullscreen: PropTypes.func.isRequired,
   isFullScreen: PropTypes.bool.isRequired,
