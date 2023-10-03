@@ -82,6 +82,10 @@ export class AccountAction extends Component<Props, State> {
   export = () => {
     this.props.history.push(`/${this.props.type}/${routes.EXPORT}`)
   }
+  project = () => {
+    this.props.clearFilters()
+    this.props.history.push(`/${this.props.type}/${routes.PROJECTSUMMARY}`)
+  }
   toggleFullscreen = () => {
     this.setState({
       isFullScreen: window.electronAPI.toggle_fullscreen(),
@@ -99,6 +103,7 @@ export class AccountAction extends Component<Props, State> {
         analyze={this.analyze}
         crew={this.crew}
         export={this.export}
+        project={this.project}
         toggleFullscreen={this.toggleFullscreen}
         isFullScreen={this.state.isFullScreen}
         isElectron={this.state.isElectron}
