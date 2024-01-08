@@ -138,6 +138,54 @@ export const getAllShiftsNew = createSelector(
   },
 )
 
+export const getAllShiftsInLastMonth = createSelector(
+  getShiftsFromEntities,
+  getShiftsFromResults,
+  getActivitiesFromEntities,
+  getEmployeesFromEntities,
+  getAllProjectTasksObjects,
+  getAllCrewObjects,
+  (shifts, results, activities, employees, projectTasks, crews) => {
+    if (!results || results.length === 0) return null
+
+    let list = results.map((shiftId) => {
+      return {
+        ...shifts[shiftId],
+        length:
+          shifts[shiftId].length && shifts[shiftId].lunch
+            ? shifts[shiftId].length - shifts[shiftId].lunch
+            : shifts[shiftId].length,
+        employee: shifts[shiftId] && {
+          ...employees[shifts[shiftId].employeeId],
+          crew: crews[employees[shifts[shiftId].employeeId].crewId],
+        },
+        activities:
+          shifts[shiftId] &&
+          shifts[shiftId].activities &&
+          shifts[shiftId].activities.map((activityId) => {
+            return {
+              ...activities[activityId],
+              projectTask: projectTasks[activities[activityId].projectTaskId],
+            }
+          }),
+      }
+    })
+
+    list = list.filter((shift) => {
+      if (
+        moment(shift[`clockInDate`]).isBefore(
+          moment().subtract(31, `days`).format(`MM-DD-YY HH:mm:ss`),
+        )
+      ) {
+        return false
+      }
+      return true
+    })
+
+    return list
+  },
+)
+
 export const getShiftTotals = createSelector(
   getAllShiftsNew,
   getAllProjectTasksObjects,

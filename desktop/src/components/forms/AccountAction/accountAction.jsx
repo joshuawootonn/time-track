@@ -12,6 +12,7 @@ import {
   Fullscreen,
   FullscreenExit,
   BarChart,
+  Group,
 } from '@material-ui/icons'
 
 import styles from './styles'
@@ -91,7 +92,8 @@ export const AccountAction = (props) => {
             </Tooltip>
           )}
         {/* CREW FEATRUE THAT IS NOT DEVELOPED YET */}
-        {/* {type === authorityConstants.FOREMAN && (
+        {(type === authorityConstants.ADMIN ||
+          type === authorityConstants.FOREMAN) && (
           <Tooltip
             open={true}
             title="Crew"
@@ -102,7 +104,7 @@ export const AccountAction = (props) => {
               <Group className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
-        )} */}
+        )}
         {(type === authorityConstants.ADMIN) && (
           <Tooltip
             open={true}
