@@ -96,7 +96,7 @@ export class Analyze extends Component {
   }
 
   back = () => {
-    this.props.history.push(`/`)
+    window.history.back()
   }
 
   goToTab = (number) => {
