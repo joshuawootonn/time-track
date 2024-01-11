@@ -13,7 +13,7 @@ import { exportActions } from '~/store/actions'
 
 export class ExportContainer extends Component {
   cancel = () => {
-    this.props.history.push(`/`)
+    window.history.back()
   }
   startOfDay = (start) => {
     return moment(start, `YYYY-MM-DD`).startOf('day')
