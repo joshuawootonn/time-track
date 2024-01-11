@@ -49,7 +49,7 @@ export class Project extends Component {
   }
 
   back = () => {
-    this.props.history.push(`/`)
+    this.props.history.goBack()
   }
 
   render() {
