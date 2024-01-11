@@ -1,7 +1,12 @@
 import { Component } from 'react'
 import moment from 'moment';
 
-export class Day extends Component {
+interface DayProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export class Day extends Component<DayProps> {
 
   render() {
     const { value, onChange } = this.props;

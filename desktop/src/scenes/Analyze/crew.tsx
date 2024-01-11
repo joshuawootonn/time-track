@@ -22,7 +22,19 @@ import { crewSelectors, employeeSelectors } from '~/store/selectors'
 
 import moment from 'moment'
 
-export class Crew extends Component {
+interface CrewProps {
+  getAllEmployees: () => Promise<void>,
+  getAllProjects: () => Promise<void>,
+  getAllTasks: () => Promise<void>,
+  getShiftsInRange: (start: string, end: string) => Promise<void>,
+}
+
+interface CrewState {
+  day: string,
+  isLoading: boolean,
+}
+
+export class Crew extends Component<CrewProps, CrewState> {
   constructor(props) {
     super(props)
     const yesterday = new Date()
@@ -87,7 +99,6 @@ export class Crew extends Component {
               value={this.state.selectedCrew}
               onChange={(selectedCrew) => {
                 this.props.updateFilter(selectedCrew.id)
-                console.log({ selectedCrew })
                 return this.setState({ selectedCrew })
               }}
               options={crews.map((item) => {
@@ -140,7 +151,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllCrews: () => dispatch(crewActions.getAllCrews()),
-    updateFilter: (id) => dispatch(foremanActions.updateFilter(id)),
+    updateFilter: (id: number) => dispatch(foremanActions.updateFilter(id)),
     getAllEmployees: () => {
       return dispatch(employeeActions.getAllEmployees())
     },
@@ -150,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllTasks: () => {
       return dispatch(taskActions.getAllTasks())
     },
-    getShiftsInRange: (start, end) => {
+    getShiftsInRange: (start: string, end: string) => {
       return dispatch(shiftActions.getShiftsInRange(start, end))
     },
   }
