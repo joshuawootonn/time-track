@@ -4,10 +4,29 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { ArrowForward } from '@material-ui/icons'
 
-export class CrewMemberShiftCard extends Component {
+interface Crew {
+  id: number,
+  name: string,
+  label: string,
+  value: string,
+}
+
+interface Shift {
+  clockInDate: string,
+  clockOutDate: string,
+  id: number,
+  length: number,
+}
+
+interface CrewMemberShiftCardProps {
+  shifts: Shift[]
+  day: string
+  selectedCrew: Crew
+}
+
+export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
   render() {
     const { shifts, day, selectedCrew } = this.props
-
     return (
       <div className="flex flex-col items-center gap-4 m-4 ">
         {Object.values(shifts)
