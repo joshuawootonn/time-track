@@ -1,6 +1,7 @@
 import accountActionScene from '~/scenes/Account/accountAction'
 import clockOutScene from '~/scenes/Clock/clockOut'
 import projectScene from '~/scenes/Analyze/project'
+import crewScene from '~/scenes/Analyze/crew'
 import { FOREMAN, CLOCKOUT, ANALYZE, CREW, PROJECTSUMMARY } from '~/constants/routes'
 import { RouteDetails } from '~/routes/route.types'
 
@@ -28,7 +29,7 @@ const foremanRoutes: RouteDetails[] = [
   },
   {
     path: `/${FOREMAN}/${CREW}`,
-    component: projectScene,
+    component: crewScene,
     exact: true,
     name: 'Foreman Crew',
     type: FOREMAN,

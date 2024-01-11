@@ -3,7 +3,8 @@ import clockOutScene from '~/scenes/Clock/clockOut'
 import exportScene from '~/scenes/Export/export'
 import analyzeScene from '~/scenes/Analyze/analyze'
 import projectScene from '~/scenes/Analyze/project'
-import { ADMIN, CLOCKOUT, EXPORT, ANALYZE, PROJECTSUMMARY } from '~/constants/routes'
+import crewScene from '~/scenes/Analyze/crew'
+import { ADMIN, CLOCKOUT, EXPORT, ANALYZE, PROJECTSUMMARY, CREW } from '~/constants/routes'
 import { RouteDetails } from '~/routes/route.types'
 
 const adminRoutes: RouteDetails[] = [
@@ -40,6 +41,13 @@ const adminRoutes: RouteDetails[] = [
     component: projectScene,
     exact: true,
     name: `Admin Project Summary`,
+    type: ADMIN,
+  },
+  {
+    path: `/${ADMIN}/${CREW}`,
+    component: crewScene,
+    exact: true,
+    name: `Admin Crew`,
     type: ADMIN,
   },
 ]
