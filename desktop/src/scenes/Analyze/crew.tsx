@@ -23,15 +23,15 @@ import { crewSelectors, employeeSelectors } from '~/store/selectors'
 import moment from 'moment'
 
 interface CrewProps {
-  getAllEmployees: () => Promise<void>,
-  getAllProjects: () => Promise<void>,
-  getAllTasks: () => Promise<void>,
-  getShiftsInRange: (start: string, end: string) => Promise<void>,
+  getAllEmployees: () => Promise<void>
+  getAllProjects: () => Promise<void>
+  getAllTasks: () => Promise<void>
+  getShiftsInRange: (start: string, end: string) => Promise<void>
 }
 
 interface CrewState {
-  day: string,
-  isLoading: boolean,
+  day: string
+  isLoading: boolean
 }
 
 export class Crew extends Component<CrewProps, CrewState> {

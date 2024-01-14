@@ -5,17 +5,17 @@ import moment from 'moment'
 import { ArrowForward } from '@material-ui/icons'
 
 interface Crew {
-  id: number,
-  name: string,
-  label: string,
-  value: string,
+  id: number
+  name: string
+  label: string
+  value: string
 }
 
 interface Shift {
-  clockInDate: string,
-  clockOutDate: string,
-  id: number,
-  length: number,
+  clockInDate: string
+  clockOutDate: string
+  id: number
+  length: number
 }
 
 interface CrewMemberShiftCardProps {
@@ -27,19 +27,19 @@ interface CrewMemberShiftCardProps {
 export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
   render() {
     const { shifts, day, selectedCrew } = this.props
+    const filteredShifts = Object.values(shifts).filter((shift) => {
+      const shiftDay = moment
+        .utc(shift.clockInDate)
+        .local()
+        .format('YYYY-MM-DD')
+      return shiftDay === day && shift.employee.crew.name === selectedCrew.name
+    })
     return (
       <div className="flex flex-col items-center gap-4 m-4 ">
-        {Object.values(shifts)
-          .filter((shift) => {
-            const shiftDay = moment
-              .utc(shift.clockInDate)
-              .local()
-              .format('YYYY-MM-DD')
-            return (
-              shiftDay === day && shift.employee.crew.name === selectedCrew.name
-            )
-          })
-          .map((shift) => (
+        {filteredShifts.length === 0 ? (
+          <div>No shifts to show</div>
+        ) : (
+          filteredShifts.map((shift) => (
             <div
               key={shift.id}
               className="md:max-w-[900px] w-full flex flex-col flex-auto bg-slate-50 border border-slate-100 rounded-md p-4 md:p-8"
@@ -122,7 +122,8 @@ export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
                 )}
               </div>
             </div>
-          ))}
+          ))
+        )}
       </div>
     )
   }
