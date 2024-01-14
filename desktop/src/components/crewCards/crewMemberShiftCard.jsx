@@ -3,13 +3,41 @@ import { shiftSelectors } from '~/store/selectors'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { ArrowForward } from '@material-ui/icons'
+import { Button } from '@material-ui/core'
+import ShiftCRUDmodal from '~/containers/Shift/shiftCRUDmodal'
+import domain from '~/constants/domains'
+import { analyzeActions } from '~/store/actions'
 
 export class CrewMemberShiftCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isModalOpen: false,
+    }
+  }
+
+  // select = (object) => {
+  //   this.props.select(domain.SHIFT, object)
+  // }
+
+  handleEditButtonClick = async (shift) => {
+    console.log('handleEditButtonClick')
+    console.log(shift)
+    Promise.all([this.props.select(domain.SHIFT, shift)]).then(() => {
+      this.setState({ isModalOpen: true })
+    })
+  }
+
+  closeModal = () => {
+    this.setState({ isModalOpen: false })
+  }
+
   render() {
     const { shifts, day, selectedCrew } = this.props
 
     return (
       <div className="flex flex-col items-center gap-4 m-4 ">
+        {this.state.isModalOpen && <ShiftCRUDmodal onClose={this.closeModal} />}
         {Object.values(shifts)
           .filter((shift) => {
             const shiftDay = moment
@@ -25,8 +53,16 @@ export class CrewMemberShiftCard extends Component {
               key={shift.id}
               className="md:max-w-[900px] w-full flex flex-col flex-auto bg-slate-50 border border-slate-100 rounded-md p-4 md:p-8"
             >
-              <div className="text-xl font-bold">
-                {shift.employee.firstName + ' ' + shift.employee.lastName}
+              <div className="text-xl font-bold flex flex-row justify-between">
+                <div>
+                  {shift.employee.firstName + ' ' + shift.employee.lastName}
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={() => this.handleEditButtonClick(shift.id)}
+                >
+                  Edit
+                </Button>
               </div>
               <div className="py-2 w-full">
                 {Object.values(shift.activities).map((activity, index) => (
@@ -113,6 +149,8 @@ const mapStateToProps = (state) => ({
   shifts: shiftSelectors.getAllShiftsInLastMonth(state),
 })
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+  select: (domain, payload) => dispatch(analyzeActions.select(domain, payload)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CrewMemberShiftCard)

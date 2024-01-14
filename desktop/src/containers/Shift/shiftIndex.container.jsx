@@ -10,6 +10,8 @@ import domain from '~/constants/domains'
 
 export class ShiftIndex extends Component {
   select = (object) => {
+    console.log('ShiftIndex select')
+    console.log(object)
     this.props.select(domain.SHIFT, object)
   }
 
