@@ -39,7 +39,7 @@ const styles = {
   },
 }
 
-export class Project extends Component {
+export class ProjectScene extends Component {
   constructor(props) {
     super(props)
 
@@ -53,8 +53,7 @@ export class Project extends Component {
   }
 
   render() {
-    const { classes, projects, updateFilter, selectedProjectId, selected } =
-      this.props
+    const { projects, updateFilter, selected } = this.props
 
     return (
       <div className="w-screen h-[100svh] flex flex-col space-y-4 md:space-y-0">
@@ -108,7 +107,7 @@ export class Project extends Component {
 
 export const ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID = `analyze_shift_full_shift_project_field`
 
-Project.prototypes = {
+ProjectScene.prototypes = {
   getAllProjects: PropTypes.func.isRequired,
 }
 
@@ -138,4 +137,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withRouter(withStyles(styles)(Project)))
+)(withRouter(withStyles(styles)(ProjectScene)))
