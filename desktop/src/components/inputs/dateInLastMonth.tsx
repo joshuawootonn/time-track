@@ -15,7 +15,7 @@ export function DateInLastMonth({ className, value, onChange }: DayProps) {
     <input
       className={classNames(
         className,
-        'text-black min-w-fit h-[36px] md:h-[38px] border border-gray-800 rounded w-full',
+        'text-black min-w-fit h-[36px] md:h-[38px] border border-gray-800 rounded',
       )}
       type="date"
       min={oneMonthAgo}
