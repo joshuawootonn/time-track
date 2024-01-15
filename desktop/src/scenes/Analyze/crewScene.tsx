@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { AppBar, Toolbar, Tooltip, IconButton, Fab } from '@material-ui/core'
@@ -6,7 +6,6 @@ import { ArrowBack } from '@material-ui/icons'
 
 import Select from 'react-select'
 
-import Day from '~/components/inputs/Day'
 import CrewMemberShiftCard from '~/components/crewCards/crewMemberShiftCard'
 import Progress from '~/components/helpers/Progress'
 
@@ -21,29 +20,57 @@ import { crewActions } from '~/store/actions'
 import { crewSelectors, employeeSelectors } from '~/store/selectors'
 
 import moment from 'moment'
+import { Crew, Employee } from '~/types'
+import { DateInLastMonth } from '~/components/inputs'
 
-interface CrewProps {
+type CrewProps = {
   getAllEmployees: () => Promise<void>
   getAllProjects: () => Promise<void>
   getAllTasks: () => Promise<void>
   getShiftsInRange: (start: string, end: string) => Promise<void>
+  crews: Crew[]
+  currentEmployee: Employee
+  updateFilter: (id: number) => void
 }
 
-interface CrewState {
+type SelectableData = {
+  name: string
+}
+
+type SelectValue<T extends SelectableData> = T & {
+  data: T
+  label: string
+  value: string
+}
+
+function toSelectValue<T extends SelectableData>(data: T) {
+  return {
+    ...data,
+    value: data.name,
+    label: data.name,
+    data,
+  }
+}
+
+type CrewState = {
   day: string
   isLoading: boolean
+  selectedCrew: SelectValue<Crew> | null
 }
 
-export class Crew extends Component<CrewProps, CrewState> {
-  constructor(props) {
+export class CrewScene extends Component<CrewProps, CrewState> {
+  constructor(props: CrewProps) {
     super(props)
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
+
+    const crew = props.crews.find(
+      (crew) => crew.id === props.currentEmployee.crewId,
+    )
+
     this.state = {
-      day: moment.utc(yesterday).local().format('YYYY-MM-DD'),
+      day: moment.utc(moment().subtract(1, 'day')).local().format('YYYY-MM-DD'),
       isLoading: true,
+      selectedCrew: crew ? toSelectValue(crew) : null,
     }
-    this.setDay = this.setDay.bind(this)
   }
 
   componentDidMount = async () => {
@@ -60,64 +87,43 @@ export class Crew extends Component<CrewProps, CrewState> {
     })
   }
 
-  setDay = (day) => {
-    this.setState({ day })
-  }
-
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.currentEmployee !== this.props.currentEmployee) {
-      var employeecrew = this.props.crews.find(
-        (crew) => crew.id === this.props.currentEmployee.crewId,
-      )
-      this.state.selectedCrew = {
-        label: employeecrew.name,
-        value: employeecrew.name,
-        id: employeecrew.id,
-        data: {},
-        name: employeecrew.name,
-      }
-    }
-  }
-
   back = () => {
     window.history.back()
   }
+
   render() {
-    if (this.state.isLoading)
+    if (this.state.isLoading) {
       return (
-        <div>
+        <div className="flex flex-col w-screen h-[100svh] justify-center items-center ">
           <Progress variant="circular" fullWidth fullHeight />
         </div>
       )
+    }
+
     const { crews } = this.props
     return (
-      <div className="w-screen h-full flex flex-col space-y-4 md:space-y-0">
+      <div className="w-screen h-[100svh] flex flex-col space-y-4 md:space-y-0">
         <AppBar position="static" elevation={0}>
           <Toolbar disableGutters className="min-h-0 mx-4 space-x-4">
-            <Day value={this.state.day} onChange={this.setDay} />
+            <DateInLastMonth
+              className={'w-1/4'}
+              value={this.state.day}
+              onChange={(day) => this.setState({ day })}
+            />
             <Select
               value={this.state.selectedCrew}
               onChange={(selectedCrew) => {
+                if (selectedCrew == null) return
+
                 this.props.updateFilter(selectedCrew.id)
                 return this.setState({ selectedCrew })
               }}
-              options={crews.map((item) => {
-                return {
-                  label: item.name,
-                  value: item.name,
-                  id: item.id,
-                  data: { ...item },
-                  name: item.name,
-                }
-              })}
+              options={crews.map((item) => toSelectValue(item))}
               className="text-slate-900 py-4 flex-grow"
             />
             <Tooltip title="Go Back" placement="bottom">
               <div className="hidden md:block">
-                <IconButton
-                  color="inherit"
-                  onClick={this.back}
-                >
+                <IconButton color="inherit" onClick={this.back}>
                   <ArrowBack />
                 </IconButton>
               </div>
@@ -125,10 +131,14 @@ export class Crew extends Component<CrewProps, CrewState> {
           </Toolbar>
         </AppBar>
         <div>
-          <CrewMemberShiftCard
-            day={this.state.day}
-            selectedCrew={this.state.selectedCrew}
-          />
+          {this.state.selectedCrew ? (
+            <CrewMemberShiftCard
+              day={this.state.day}
+              selectedCrew={this.state.selectedCrew}
+            />
+          ) : (
+            <div>No crew selected</div>
+          )}
         </div>
         <div className="fixed block md:hidden self-end bottom-4 right-4">
           <Fab color="primary" aria-label="add" onClick={this.back}>
@@ -140,7 +150,7 @@ export class Crew extends Component<CrewProps, CrewState> {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     crews: crewSelectors.getAllCrews(state),
     selected: crewSelectors.getSelectedCrew(state),
@@ -148,7 +158,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     getAllCrews: () => dispatch(crewActions.getAllCrews()),
     updateFilter: (id: number) => dispatch(foremanActions.updateFilter(id)),
@@ -167,4 +177,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Crew)
+export default connect(mapStateToProps, mapDispatchToProps)(CrewScene)

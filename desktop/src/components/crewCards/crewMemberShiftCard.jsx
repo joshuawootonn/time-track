@@ -4,27 +4,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { ArrowForward } from '@material-ui/icons'
 
-interface Crew {
-  id: number
-  name: string
-  label: string
-  value: string
-}
-
-interface Shift {
-  clockInDate: string
-  clockOutDate: string
-  id: number
-  length: number
-}
-
-interface CrewMemberShiftCardProps {
-  shifts: Shift[]
-  day: string
-  selectedCrew: Crew
-}
-
-export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
+export class CrewMemberShiftCard extends Component {
   render() {
     const { shifts, day, selectedCrew } = this.props
     const filteredShifts = Object.values(shifts).filter((shift) => {
@@ -37,7 +17,7 @@ export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
     return (
       <div className="flex flex-col items-center gap-4 m-4 ">
         {filteredShifts.length === 0 ? (
-          <div>No shifts to show</div>
+          <div>No Shifts found for selected date and crew</div>
         ) : (
           filteredShifts.map((shift) => (
             <div
@@ -78,13 +58,14 @@ export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
                 <div className="flex flex-row flex-wrap w-full">
                   <div className="md:flex-1 basis-full flex flex-col md:pt-2 "></div>
                   <div className="flex-1 flex justify-between ">
-                    {shift.lunch && (
+                    {shift.lunch != null && (
                       <>
                         <div className="flex flex-col justify-end text-gray-700">
                           Lunch
                         </div>
                         <div className="flex flex-col justify-end text-gray-700">
-                          {shift.lunch}m
+                          {Math.floor(shift.lunch / 60)}h{' '}
+                          {String(shift.lunch % 60)}m
                         </div>
                       </>
                     )}
@@ -97,17 +78,8 @@ export class CrewMemberShiftCard extends Component<CrewMemberShiftCardProps> {
                 {shift.clockOutDate ? (
                   <>
                     {moment.utc(shift.clockOutDate).local().format('h:mm a')} (
-                    {Math.round(
-                      moment
-                        .duration(
-                          moment
-                            .utc(shift.clockOutDate)
-                            .local()
-                            .diff(moment.utc(shift.clockInDate).local()),
-                        )
-                        .asHours(),
-                    )}{' '}
-                    hours)
+                    {Math.floor(shift.length / 60)}h {String(shift.length % 60)}
+                    m)
                   </>
                 ) : (
                   <>

@@ -2,9 +2,16 @@ import accountActionScene from '~/scenes/Account/accountAction'
 import clockOutScene from '~/scenes/Clock/clockOut'
 import exportScene from '~/scenes/Export/export'
 import analyzeScene from '~/scenes/Analyze/analyze'
-import projectScene from '~/scenes/Analyze/project'
-import crewScene from '~/scenes/Analyze/crew'
-import { ADMIN, CLOCKOUT, EXPORT, ANALYZE, PROJECTSUMMARY, CREW } from '~/constants/routes'
+import projectScene from '~/scenes/Analyze/projectScene'
+import crewScene from '~/scenes/Analyze/crewScene'
+import {
+  ADMIN,
+  CLOCKOUT,
+  EXPORT,
+  ANALYZE,
+  PROJECTSUMMARY,
+  CREW,
+} from '~/constants/routes'
 import { RouteDetails } from '~/routes/route.types'
 
 const adminRoutes: RouteDetails[] = [
