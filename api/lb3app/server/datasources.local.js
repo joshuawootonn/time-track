@@ -5,7 +5,7 @@ module.exports = {
     database: 'timetrackprod',
     password: '5656',
     name: 'db',
-    user: 'dev',
+    user: 'test',
     connector: 'mysql',
   },
 }
