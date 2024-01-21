@@ -7,28 +7,28 @@ var baseError = {
 }
 
 module.exports = (Project) => {
-  Project.summary = async (startTime, endTime, isActive, cb) => {
+  Project.summary = async (startTime, endTime, isActive) => {
     var app = require('../../server/server')
 
     if (!startTime) {
-      return cb({
+      return {
         ...baseError,
         message: 'startTime is required in the queryString as UTC date',
-      })
+      }
     }
     if (!endTime) {
-      return cb({
+      return {
         ...baseError,
         message: 'endTime is required in the queryString as UTC date',
-      })
+      }
     }
 
     if (isActive === undefined || typeof isActive !== 'boolean') {
-      return cb({
+      return {
         ...baseError,
         message:
           'isActive is required in the queryString as 0 (false) or 1 (true)',
-      })
+      }
     }
 
     const projects = await Project.find({
@@ -67,11 +67,11 @@ module.exports = (Project) => {
         totalActual,
       }
     })
-    return cb(null, newProjects)
+    return newProjects
   }
 
   // Used for getting all the data for the Project tab of foreman view
-  Project['foreman-summary'] = async (isActive, cb) => {
+  Project['foreman-summary'] = async (isActive) => {
     var app = require('../../server/server')
 
     var today = new Date(Date.now())
@@ -83,11 +83,11 @@ module.exports = (Project) => {
     twoSundaysAgo.setDate(twoSundaysAgo.getDate() - twoSundaysAgo.getDay() - 7)
 
     if (isActive === undefined || typeof isActive !== 'boolean') {
-      return cb({
+      return {
         ...baseError,
         message:
           'isActive is required in the queryString as 0 (false) or 1 (true)',
-      })
+      }
     }
 
     const projects = await Project.find({
@@ -186,7 +186,7 @@ module.exports = (Project) => {
             ).minutesWorkedLastWeek += activity.length
           } catch (error) {
             console.log('activity not found:')
-            console.log(activity);
+            console.log(activity)
           }
         })
       }
@@ -203,7 +203,7 @@ module.exports = (Project) => {
     // console.log('start of yesterday: '+startOfYesterday)
     // console.log('today: '+today)
 
-    return cb(null, newProjects)
+    return newProjects
   }
 
   Project.remoteMethod('summary', {
