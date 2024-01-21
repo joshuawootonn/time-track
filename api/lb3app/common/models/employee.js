@@ -7,14 +7,14 @@ var baseError = {
 }
 
 module.exports = (Employee) => {
-  Employee.clockin = async (employeeId, cb) => {
+  Employee.clockin = async (employeeId) => {
     var app = require('../../server/server')
     const Shift = app.models.Shift
     if (!employeeId) {
-      return cb({
+      return {
         ...baseError,
         message: 'employeeId is a required body value',
-      })
+      }
     }
 
     const lastShift = await Shift.findOne({
@@ -24,11 +24,11 @@ module.exports = (Employee) => {
     const employee = await Employee.findOne({ where: { id: employeeId } })
 
     if (lastShift && !lastShift.clockOutDate) {
-      return cb({ ...baseError, message: 'Employee already has open shift' })
+      return { ...baseError, message: 'Employee already has open shift' }
     } else if (!employee) {
-      return cb({ ...baseError, message: "Employee doesn't exist" })
+      return { ...baseError, message: "Employee doesn't exist" }
     } else if (employee.isWorking) {
-      return cb({ ...baseError, message: 'Employee is Working' })
+      return { ...baseError, message: 'Employee is Working' }
     }
 
     // check that employee !isWorking and doesn't have an open shift
@@ -39,18 +39,20 @@ module.exports = (Employee) => {
     console.log(employee, s)
     await employee.updateAttribute('isWorking', true)
 
-    cb(null, `${employee.firstName} ${employee.lastName} is clocked in`)
+    return {
+      message: `${employee.firstName} ${employee.lastName} is clocked in`,
+    }
   }
 
-  Employee.clockout = async (employeeId, shift, activities, cb) => {
+  Employee.clockout = async (employeeId, shift, activities) => {
     var app = require('../../server/server')
     const Shift = app.models.Shift
     const Activity = app.models.Activity
     if (!employeeId) {
-      return cb({
+      return {
         ...baseError,
         message: 'employeeId is a required body value',
-      })
+      }
     }
     const lastShift = await Shift.findOne({
       order: 'id DESC',
@@ -59,11 +61,11 @@ module.exports = (Employee) => {
     const employee = await Employee.findOne({ where: { id: employeeId } })
 
     if (lastShift && lastShift.clockOutDate) {
-      return cb({ ...baseError, message: 'Employee has no open shift' })
+      return { ...baseError, message: 'Employee has no open shift' }
     } else if (!employee) {
-      return cb({ ...baseError, message: "Employee doesn't exist" })
+      return { ...baseError, message: "Employee doesn't exist" }
     } else if (!employee.isWorking) {
-      return cb({ ...baseError, message: 'Employee is not Working' })
+      return { ...baseError, message: 'Employee is not Working' }
     }
 
     for (const activity of activities) {
@@ -89,7 +91,10 @@ module.exports = (Employee) => {
     console.log('Updated shift: ', s)
     const e = await employee.updateAttribute('isWorking', false)
     console.log('Updated employee: ', e)
-    cb(null, `${employee.firstName} ${employee.lastName} is clocked out`)
+
+    return {
+      message: `${employee.firstName} ${employee.lastName} is clocked out`,
+    }
   }
 
   Employee.remoteMethod('clockin', {
