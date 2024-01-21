@@ -1,38 +1,38 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import { BootMixin } from '@loopback/boot'
+import { ApplicationConfig } from '@loopback/core'
 import {
   RestExplorerBindings,
   RestExplorerComponent,
-} from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
-import {ServiceMixin} from '@loopback/service-proxy';
-import path from 'path';
-import {MySequence} from './sequence';
-import {Lb3AppBooterComponent} from '@loopback/booter-lb3app';
+} from '@loopback/rest-explorer'
+import { RepositoryMixin } from '@loopback/repository'
+import { RestApplication } from '@loopback/rest'
+import { ServiceMixin } from '@loopback/service-proxy'
+import path from 'path'
+import { MySequence } from './sequence'
+import { Lb3AppBooterComponent } from '@loopback/booter-lb3app'
 
-export {ApplicationConfig};
+export { ApplicationConfig }
 
 export class ApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    super(options);
+    super(options)
 
     // Set up the custom sequence
-    this.sequence(MySequence);
+    this.sequence(MySequence)
 
     // Set up default home page
-    this.static('/', path.join(__dirname, '../public'));
+    this.static('/', path.join(__dirname, '../public'))
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
       path: '/explorer',
-    });
-    this.component(RestExplorerComponent);
+    })
+    this.component(RestExplorerComponent)
     this.component(Lb3AppBooterComponent)
 
-    this.projectRoot = __dirname;
+    this.projectRoot = __dirname
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
       controllers: {
@@ -41,6 +41,6 @@ export class ApiApplication extends BootMixin(
         extensions: ['.controller.js'],
         nested: true,
       },
-    };
+    }
   }
 }
