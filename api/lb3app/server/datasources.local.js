@@ -1,11 +1,11 @@
 module.exports = {
   db: {
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 3306,
-    database: 'timetrackprod',
-    password: '5656',
+    database: 'timetrackdev',
+    password: 'dev',
     name: 'db',
-    user: 'test',
+    user: 'dev',
     connector: 'mysql',
   },
 }
