@@ -1,0 +1,35 @@
+name: Code Quality checks for desktop
+on:
+  pull_request:
+    branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: Install dependencies with pnpm
+        run: pnpm install -D
+        working-directory: "./desktop"
+      - name: Check that yarn lock is up to date
+        run: yarn install
+        working-directory: "./desktop"
+      - name: Git diff with exit code
+        run: git diff --exit-code
+        working-directory: "./desktop"
