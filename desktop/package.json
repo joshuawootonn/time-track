@@ -115,10 +115,10 @@
     "serve": "vite preview",
     "electron-build": "electron-builder",
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
-    "pack-win": "yarn build && yarn electron-build --x64 --win",
-    "pack-mac": "yarn build && yarn electron-build --x64 --mac",
-    "dist-win": "yarn build && yarn electron-build  --x64 --win -p always",
-    "dist-mac": "yarn build && yarn electron-build  --x64 --mac -p always",
+    "pack-win": "pnpm build && pnpm electron-build --x64 --win",
+    "pack-mac": "pnpm build && pnpm electron-build --x64 --mac",
+    "dist-win": "pnpm build && pnpm electron-build  --x64 --win -p always",
+    "dist-mac": "pnpm build && pnpm electron-build  --x64 --mac -p always",
     "electron": "electron ."
   },
   "browserslist": {
