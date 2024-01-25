@@ -1,11 +1,11 @@
+console.log(
+  'Loopback 3 loaded with connection string: ',
+  process.env.SQL_CONNECTION_STRING,
+)
 module.exports = {
   db: {
-    host: 'localhost',
-    port: 3306,
-    database: 'timetrackdev',
-    password: 'dev',
+    url: process.env.SQL_CONNECTION_STRING,
     name: 'db',
-    user: 'dev',
     connector: 'mysql',
   },
 }
