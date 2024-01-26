@@ -1,4 +1,5 @@
-import { Entity, model, property } from '@loopback/repository'
+import { Entity, hasOne, model, property } from '@loopback/repository'
+import { UserCredentials } from './user-credentials.model'
 
 @model({
   settings: {
@@ -48,9 +49,11 @@ export class User extends Entity {
   @property({
     type: 'string',
   })
-  verificationToken?: string;
+  verificationToken?: string
 
   // Define well-known properties here
+  @hasOne(() => UserCredentials, { keyTo: 'user_id' })
+  userCredentials: UserCredentials;
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

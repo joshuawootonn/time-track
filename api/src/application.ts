@@ -10,6 +10,8 @@ import { ServiceMixin } from '@loopback/service-proxy'
 import path from 'path'
 import { MySequence } from './sequence'
 import { Lb3AppBooterComponent } from '@loopback/booter-lb3app'
+import { JWTAuthenticationComponent } from './jwt-authentication'
+import { AuthenticationComponent } from '@loopback/authentication'
 
 export { ApplicationConfig }
 
@@ -31,6 +33,8 @@ export class ApiApplication extends BootMixin(
     })
     this.component(RestExplorerComponent)
     this.component(Lb3AppBooterComponent)
+    this.component(AuthenticationComponent)
+    this.component(JWTAuthenticationComponent)
 
     this.projectRoot = __dirname
     // Customize @loopback/boot Booter Conventions here

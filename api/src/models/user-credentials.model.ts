@@ -1,12 +1,10 @@
 import { Entity, model, property } from '@loopback/repository'
 
-@model({ settings: { strict: false } })
+@model({ name: 'user_credentials', settings: { strict: false } })
 export class UserCredentials extends Entity {
   @property({
     type: 'number',
     id: true,
-    generated: false,
-    required: true,
   })
   id: number
 
@@ -20,7 +18,7 @@ export class UserCredentials extends Entity {
     type: 'number',
     required: true,
   })
-  userId: number;
+  user_id: number;
 
   // Define well-known properties here
 

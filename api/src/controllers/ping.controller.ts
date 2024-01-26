@@ -6,6 +6,7 @@ import {
   response,
   ResponseObject,
 } from '@loopback/rest'
+import { authenticate } from '@loopback/authentication'
 
 /**
  * OpenAPI response for ping()
@@ -43,6 +44,7 @@ export class PingController {
   // Map to `GET /ping`
   @get('/ping')
   @response(200, PING_RESPONSE)
+  @authenticate('jwt')
   ping(): object {
     // Reply with a greeting, the current time, the url, and request headers
     return {
