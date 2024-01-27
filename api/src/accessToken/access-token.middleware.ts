@@ -30,6 +30,9 @@ const accessTokenSchema = z.object({
 
 export const accessTokenMiddleware: Handler = asyncHandler(
   async (req, res, next) => {
+    if (['/api/users/login/', '/api/users/signup/'].includes(req.path))
+      return next()
+
     const input = await accessTokenSchema.safeParseAsync(req)
     if (!input.success) {
       return res.status(401).send({
