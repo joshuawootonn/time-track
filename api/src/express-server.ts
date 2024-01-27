@@ -10,6 +10,7 @@ import express from 'express'
 import cors from 'cors'
 import compression from 'compression'
 import helmet from 'helmet'
+import { accessTokenMiddleware } from './accessToken/access-token.middleware'
 
 export class ExpressServer {
   public readonly app: express.Application
@@ -20,12 +21,15 @@ export class ExpressServer {
     this.app = express()
     this.lbApp = new ApiApplication(options)
 
-    // Middleware migrated from LoopBack 3
     this.app.use(compression())
     this.app.use(cors())
     this.app.use(helmet())
 
-    this.app.use('/api', this.lbApp.requestHandler)
+    this.app.use(accessTokenMiddleware)
+
+    this.app.get('/api/crew-summary', function (_req: Request, res: Response) {
+      res.send('crew summary')
+    })
 
     this.app.get('/', function (_req: Request, res: Response) {
       res.sendFile(path.resolve('public/index.html'))
@@ -33,6 +37,8 @@ export class ExpressServer {
     this.app.get('/health', function (_req: Request, res: Response) {
       res.send('good')
     })
+
+    this.app.use('/api', this.lbApp.requestHandler)
 
     this.app.use(express.static('public'))
   }
