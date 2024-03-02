@@ -30,8 +30,22 @@ const accessTokenSchema = z.object({
 
 export const accessTokenMiddleware: Handler = asyncHandler(
   async (req, res, next) => {
-    if (['/api/users/login/', '/api/users/signup/'].includes(req.path))
+    console.log(req.path)
+
+    if (
+      ['/api/users/login/', '/api/Users/login', '/api/users/signup/'].includes(
+        req.path,
+      )
+    ) {
+      // running app pings /api/users/login/, explorer pings '/api/Users/login'
+      console.log('skipping auth check in login')
       return next()
+    }
+
+    if (req.path.includes('/api/explorer')) {
+      console.log('skipping auth check in explorer')
+      return next()
+    }
 
     const input = await accessTokenSchema.safeParseAsync(req)
     if (!input.success) {

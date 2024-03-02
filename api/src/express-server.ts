@@ -25,6 +25,11 @@ export class ExpressServer {
     this.app.use(cors())
     this.app.use(helmet())
 
+    this.app.use((req, res, next) => {
+      res.setHeader('Content-Security-Policy', "script-src 'self' 'unsafe-inline'");
+      next();
+    });
+
     this.app.use(accessTokenMiddleware)
 
     this.app.get('/api/crew-summary', function (_req: Request, res: Response) {
