@@ -12,6 +12,7 @@ import cx from 'classnames'
 import { Field, Form } from 'formik'
 import { withStyles } from '@material-ui/core/styles'
 import { Delete } from '@material-ui/icons'
+import { Autorenew } from '@material-ui/icons'
 
 import TextField from '~/components/inputs/TextField'
 import Switch from '~/components/inputs/Switch'
@@ -113,6 +114,18 @@ export class Employee extends Component {
               className={classes.field}
               helper="normal"
             />
+            <Button
+              type="button"
+              onClick={() => {
+                this.props.setFieldValue(
+                  'pin',
+                  100000 + Math.floor(Math.random() * 900000),
+                )
+              }}
+            >
+              <Autorenew/>
+            </Button>
+            
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Typography
