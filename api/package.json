@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch --onSuccess \"pnpm run start\"",
+    "dev:debug": "tsup --watch --onSuccess \"DEBUG=loopback pnpm run start\"",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "format:ci": "prettier --check \"./**/*.{js,jsx,ts,tsx,json}\"",
     "lint": "npm run eslint && npm run prettier:check",
