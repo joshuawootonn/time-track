@@ -114,7 +114,7 @@ export class Employee extends Component {
               className={classes.field}
               helper="normal"
             />
-            <Button
+            <IconButton
               type="button"
               onClick={() => {
                 this.props.setFieldValue(
@@ -124,7 +124,7 @@ export class Employee extends Component {
               }}
             >
               <Autorenew/>
-            </Button>
+            </IconButton>
             
           </Grid>
           <Grid item xs={12} className={classes.row}>
