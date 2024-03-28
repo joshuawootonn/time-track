@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import { Formik } from 'formik'
 
+import Progress from '~/components/helpers/Progress';
 import { auth as authValidation } from '~/constants/formValidation'
 import { userActions } from '~/store/actions'
 import * as routes from '~/constants/routes'
@@ -12,51 +12,53 @@ import AuthSiginForm from '~/components/forms/AuthSignin'
 import { userSelectors } from '~/store/selectors'
 import { getCred } from '~/constants/storage'
 
-export class AuthSignin extends Component {
-  componentDidMount() {
-    const cred = getCred()
-    return this.props.login(cred.ip, cred.username, cred.password).then(() => {
-      this.props.history.push(routes.ROOT)
-    })
-  }
-  cleanIp = (ip) => {
-    return ip.replace(/\/+$/, '')
-  }
-  render() {
-    const cred = getCred()
-    const hasValidCred = cred.ip && cred.username && cred.password
+function cleanIp(ip) {
+  return ip.replace(/\/+$/, '')
+}
 
-    return (
-      <Formik
-        initialValues={
-          hasValidCred
-            ? { ip: cred.ip, username: cred.username, password: cred.password }
-            : { ip: ``, username: ``, password: `` }
-        }
-        validationSchema={authValidation}
-        onSubmit={(values, formikFunctions) => {
-          const { history, login } = this.props
-          const { ip, username, password } = values
-          const cleanIp = this.cleanIp(ip)
-          return login(cleanIp, username, password).then(
-            () => {
-              formikFunctions.resetForm()
-              formikFunctions.setStatus({ success: true })
-              history.push(routes.ROOT)
-            },
-            (error) => {
-              formikFunctions.setErrors({ submit: error.message })
-              formikFunctions.setStatus({ success: false })
-              formikFunctions.setSubmitting(false)
-            },
-          )
-        }}
-        render={(formProps) => {
-          return <AuthSiginForm {...formProps} />
-        }}
-      />
-    )
-  }
+export function AuthSignin({ login, history }) {
+  const cred = getCred()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    login(cred.ip, cred.username, cred.password)
+      .then(() => { history.push(routes.ROOT) })
+      .finally(() => { setIsLoading(false) })
+  }, [])
+
+  return (isLoading ? (
+    <div className="h-screen">
+      <Progress variant="circular" fullWidth fullHeight />
+    </div>
+  ) : (
+    <Formik
+      initialValues={
+        cred.ip && cred.username && cred.password
+          ? { ip: cred.ip, username: cred.username, password: cred.password }
+          : { ip: ``, username: ``, password: `` }
+      }
+      validationSchema={authValidation}
+      onSubmit={(values, formikFunctions) => {
+        const { ip, username, password } = values
+        const cleanedIp = cleanIp(ip)
+        return login(cleanedIp, username, password).then(
+          () => {
+            formikFunctions.resetForm()
+            formikFunctions.setStatus({ success: true })
+            history.push(routes.ROOT)
+          },
+          (error) => {
+            formikFunctions.setErrors({ submit: error.message })
+            formikFunctions.setStatus({ success: false })
+            formikFunctions.setSubmitting(false)
+          },
+        )
+      }}
+      render={(formProps) => {
+        return <AuthSiginForm {...formProps} />
+      }}
+    />)
+  )
 }
 
 AuthSignin.propTypes = {
