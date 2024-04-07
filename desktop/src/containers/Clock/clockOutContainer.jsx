@@ -20,6 +20,18 @@ import {
 } from '~/store/selectors'
 import { minutesRoudedTime } from '~/helpers/time'
 
+function isActivityCompleted(activity, projectTaskObjects) {
+  const { projectTaskId, description } = activity
+
+  const isOtherTask =
+    projectTaskId !== -1 &&
+    projectTaskObjects &&
+    projectTaskObjects[projectTaskId] &&
+    /Other/.test(projectTaskObjects[projectTaskId].task.name)
+
+  return isOtherTask ? description.length > 0 : true
+}
+
 export class ClockOut extends Component {
   constructor(props) {
     super(props)
@@ -91,18 +103,13 @@ export class ClockOut extends Component {
           //console.log(formikProps.values);
           const { errors, values } = formikProps
           let generalError
-          values.activities.forEach((activity) => {
-            const { projectTaskId } = activity
-            const { projectTaskObjects } = this.props
-            if (
-              projectTaskId !== -1 &&
-              projectTaskObjects &&
-              projectTaskObjects[projectTaskId] &&
-              /Other/.test(projectTaskObjects[projectTaskId].task.name)
-            ) {
-              generalError = `Add description to Other activity.`
-            }
-          })
+          const areAllOtherTasksDescribed = values.activities.every((activity) =>
+            isActivityCompleted(activity, this.props.projectTaskObjects),
+          )
+          if (!areAllOtherTasksDescribed) {
+              generalError = "Add description to Other activity"
+          }
+          
 
           // Time left is the duraction - lunch - all the activity times
           let timeLeft =
