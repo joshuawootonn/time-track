@@ -130,6 +130,7 @@ export class Clockout extends Component {
                                     items={projects}
                                     fullWidth
                                     label="Project"
+                                    onChange={() => arrayHelpers.form.setFieldValue(`activities.${index}.projectTaskId`, -1)}
                                   />
                                   <Field
                                     name={`activities.${index}.projectTaskId`}
