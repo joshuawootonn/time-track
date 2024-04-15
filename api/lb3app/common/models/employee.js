@@ -54,18 +54,23 @@ module.exports = (Employee) => {
         message: 'employeeId is a required body value',
       }
     }
-    const lastShift = await Shift.findOne({
-      order: 'id DESC',
-      where: { employeeId: employeeId },
-    })
-    const employee = await Employee.findOne({ where: { id: employeeId } })
+    const lastShift = await Shift.findOne({ where: { id: shift.id ?? '' } })
+    const employee = await Employee.findOne({ where: { id: employeeId ?? '' } })
 
-    if (lastShift && lastShift.clockOutDate) {
-      return { ...baseError, message: 'Employee has no open shift' }
-    } else if (!employee) {
-      return { ...baseError, message: "Employee doesn't exist" }
-    } else if (!employee.isWorking) {
-      return { ...baseError, message: 'Employee is not Working' }
+    if (lastShift == null) {
+      return { ...baseError, message: `Shift ${shift.id} doesn't exist (employee ID: ${employeeId})` }
+    }
+
+    if (lastShift.clockOutDate) {
+      return { ...baseError, message: `Shift ${shift.id} is not open (employee ID: ${employeeId})` }
+    }
+    
+    if (employee == null) {
+      return { ...baseError, message: `Employee ${employeeId} doesn't exist` }
+    }
+    
+    if (!employee.isWorking) {
+      return { ...baseError, message: `Employee ${employeeId} is not Working` }
     }
 
     for (const activity of activities) {

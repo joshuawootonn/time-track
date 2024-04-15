@@ -47,7 +47,7 @@ export const clockIn = (
         snackActions.openSnack(status.SUCCESS, `Clock in success!`) as any,
       )
       dispatch({ type: 'ClockInEmployeeSuccess' })
-    } catch (e) {
+    } catch (e: any) {
       dispatch({ type: 'ClockInEmployeeFailure', error: e })
       throw e
     }
@@ -66,6 +66,7 @@ export const clockOut = (
     dispatch({ type: 'ClockOutEmployeeRequest' })
     try {
       const shiftRequest = {
+        id: shift.id,
         lunch,
         length,
         clockOutDate,
@@ -79,7 +80,7 @@ export const clockOut = (
         snackActions.openSnack(status.SUCCESS, `Clock out success!`) as any,
       )
       dispatch({ type: 'ClockOutEmployeeSuccess' })
-    } catch (e) {
+    } catch (e: any) {
       dispatch({ type: 'ClockOutEmployeeFailure', error: e })
       throw e
     }

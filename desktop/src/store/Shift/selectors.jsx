@@ -21,10 +21,15 @@ export const isShiftFilterVisible = createSelector(
 export const getCurrentShift = createSelector(
   getShiftsFromEntities,
   getShiftsFromResults,
-  getShiftFromState,
-  (shifts, results, shift) => {
+  getEmployeeFromState,
+  (shifts, results, employee) => {
+
     if (!results || results.length === 0) return null
-    return shifts[shift.current.id]
+
+    let employeesHalfShifts = Object.values(shifts).filter(s => s.employeeId === employee.current.id && s.clockOutDate === null);
+    let mostRecentHalfShift = employeesHalfShifts.sort((a,b) => { return ( new Date (b.clockInDate) - new Date (a.clockInDate) ) })[0];
+    
+    return mostRecentHalfShift;
   },
 )
 
