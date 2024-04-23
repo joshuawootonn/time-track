@@ -118,8 +118,10 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "pack-win": "pnpm build && pnpm electron-build --x64 --win",
     "pack-mac": "pnpm build && pnpm electron-build --x64 --mac",
+    "pack-linux": "pnpm build && pnpm electron-build --x64 --linux",
     "dist-win": "pnpm build && pnpm electron-build  --x64 --win -p always",
     "dist-mac": "pnpm build && pnpm electron-build  --x64 --mac -p always",
+    "dist-linux": "pnpm build && pnpm electron-build  --x64 --linux -p always",
     "electron": "electron ."
   },
   "browserslist": {
