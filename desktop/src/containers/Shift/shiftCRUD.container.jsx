@@ -136,6 +136,7 @@ export class ShiftCRUD extends Component {
 
                 return (
                   <HalfShiftForm
+                    formStatus={status}
                     label="Edit Shift"
                     type="edit"
                     employees={employees}
@@ -286,6 +287,7 @@ export class ShiftCRUD extends Component {
                 )
                 return (
                   <HalfShiftForm
+                    formStatus={status}
                     label="Add Shift"
                     type="add"
                     employees={employees}
