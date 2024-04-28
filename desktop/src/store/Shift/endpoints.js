@@ -20,9 +20,9 @@ export const put = (shift) => {
   })
 }
 
-export const getCurrentShift = (employeeId) => {
+export const getHalfShiftOrNull = (employeeId) => {
   return axios.get(
-    `/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=id DESC`,
+    `/employees/${employeeId}/shifts?filter[limit]=1&filter[order]=clock_out_date`
   )
 }
 
