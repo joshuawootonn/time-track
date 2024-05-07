@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { IconButton, Tooltip } from '@material-ui/core'
 import {
-  ShowChart,
   Storage,
   Check,
   Close,
   ArrowBack,
   Fullscreen,
   FullscreenExit,
-  BarChart,
   Group,
+  Business,
+  Security
 } from '@material-ui/icons'
 
 import styles from './styles'
@@ -105,18 +105,6 @@ export const AccountAction = (props) => {
             </IconButton>
           </Tooltip>
         )}
-        {(type === authorityConstants.ADMIN) && (
-          <Tooltip
-            open={true}
-            title={'Analysis'}
-            classes={{ tooltip: classes.toolTip }}
-            placement="bottom"
-          >
-            <IconButton onClick={analyze} className={classes.button}>
-              <ShowChart className={classes.buttonIcon} />
-            </IconButton>
-          </Tooltip>
-        )}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
           <Tooltip
@@ -126,7 +114,19 @@ export const AccountAction = (props) => {
             placement="bottom"
           >
             <IconButton onClick={project} className={classes.button}>
-              <BarChart className={classes.buttonIcon} />
+              <Business className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
+        {(type === authorityConstants.ADMIN) && (
+          <Tooltip
+            open={true}
+            title={'Admin'}
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={analyze} className={classes.button}>
+              <Security className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
         )}
