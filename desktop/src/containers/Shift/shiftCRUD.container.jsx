@@ -88,7 +88,7 @@ export class ShiftCRUD extends Component {
               isComplete
                 ? [{ type: formConstants.FULL_SHIFT, label: `Full Shift` }]
                 : [
-                    { type: formConstants.HALF_SHIFT, label: `Half Shift` },
+                    { type: formConstants.HALF_SHIFT, label: `Start Shift` },
                     { type: formConstants.FULL_SHIFT, label: `Full Shift` },
                   ]
             }
@@ -243,7 +243,7 @@ export class ShiftCRUD extends Component {
             type={status}
             extent={addingExtent}
             extentOptions={[
-              { type: formConstants.HALF_SHIFT, label: `Half Shift` },
+              { type: formConstants.HALF_SHIFT, label: `Start Shift` },
               { type: formConstants.FULL_SHIFT, label: `Full Shift` },
             ]}
             updateExtent={this.updateExtent}
