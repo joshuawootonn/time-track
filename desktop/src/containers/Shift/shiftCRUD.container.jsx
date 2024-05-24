@@ -24,7 +24,7 @@ import {
   shift as shiftValidation,
   halfShift as halfShiftValidation,
 } from '~/constants/formValidation'
-import { minutesRoudedTime } from '~/helpers/time'
+import { getShiftDuration } from '~/helpers/shiftDuration'
 
 export class ShiftCRUD extends Component {
   state = {
@@ -56,7 +56,6 @@ export class ShiftCRUD extends Component {
       status === analyzeStatus.EDITING &&
       selected &&
       selected.clockOutDate !== null
-    // console.log(isComplete);
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
@@ -74,7 +73,6 @@ export class ShiftCRUD extends Component {
         />
       )
     }
-    // console.log('selected shift', selected);
 
     if (status === analyzeStatus.EDITING) {
       return (
@@ -88,9 +86,9 @@ export class ShiftCRUD extends Component {
               isComplete
                 ? [{ type: formConstants.FULL_SHIFT, label: `Full Shift` }]
                 : [
-                    { type: formConstants.HALF_SHIFT, label: `Start Shift` },
-                    { type: formConstants.FULL_SHIFT, label: `Full Shift` },
-                  ]
+                  { type: formConstants.HALF_SHIFT, label: `Start Shift` },
+                  { type: formConstants.FULL_SHIFT, label: `Full Shift` },
+                ]
             }
             updateExtent={this.updateExtent}
           />
@@ -124,15 +122,11 @@ export class ShiftCRUD extends Component {
                 )
               }}
               render={(formikProps) => {
+
                 const { values } = formikProps
-                const shiftDuration = moment.duration(
-                  moment(new Date(), `YYYY-MM-DDTHH:mm`).diff(
-                    moment(values.clockInDate, `YYYY-MM-DDTHH:mm`),
-                  ),
-                )
-                const timeLeft = minutesRoudedTime(
-                  Math.floor(shiftDuration.asMinutes()),
-                )
+
+                const clockOutMoment = moment(new Date(), 'YYYY-MM-DDTHH:mm:ss')
+                const { lengthRounded } = getShiftDuration(moment(values.clockInDate), clockOutMoment)
 
                 return (
                   <HalfShiftForm
@@ -142,7 +136,7 @@ export class ShiftCRUD extends Component {
                     employees={employees}
                     projects={projects}
                     projectTasks={projectTasks}
-                    timeLeft={timeLeft}
+                    timeLeft={lengthRounded}
                     generalError={``}
                     removeShift={this.removeShift}
                     {...formikProps}
@@ -160,21 +154,21 @@ export class ShiftCRUD extends Component {
                 clockInDate: moment
                   .utc(selected.clockInDate)
                   .local()
-                  .format(`YYYY-MM-DDTHH:mm`),
+                  .format(`YYYY-MM-DDTHH:mm:ss`),
                 clockOutDate: selected.clockOutDate
                   ? moment
-                      .utc(selected.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
-                      .local()
-                      .format(`YYYY-MM-DDTHH:mm`)
-                  : moment.utc().local().format(`YYYY-MM-DDTHH:mm`),
+                    .utc(selected.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
+                    .local()
+                    .format(`YYYY-MM-DDTHH:mm:ss`)
+                  : moment.utc().local().format(`YYYY-MM-DDTHH:mm:ss`),
                 lunch: selected.lunch,
                 activities: selected.activities
                   ? selected.activities.map((activity) => {
-                      return {
-                        ...activity,
-                        projectId: activity.projectTask.projectId,
-                      }
-                    })
+                    return {
+                      ...activity,
+                      projectId: activity.projectTask.projectId,
+                    }
+                  })
                   : [],
               }}
               validationSchema={shiftValidation}
@@ -197,11 +191,10 @@ export class ShiftCRUD extends Component {
               }}
               render={(formikProps) => {
                 const { values, errors } = formikProps
-                const shiftDuration = moment.duration(
-                  moment(values.clockOutDate).diff(moment(values.clockInDate)),
-                )
+                const { lengthRounded } = getShiftDuration(moment(values.clockInDate), moment(values.clockOutDate))
+
                 let timeLeft =
-                  minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) -
+                  lengthRounded -
                   values.lunch
                 values.activities.forEach((activity) => {
                   timeLeft -= activity.length
@@ -277,14 +270,9 @@ export class ShiftCRUD extends Component {
                 )
               }}
               render={(formikProps) => {
-                const shiftDuration = moment.duration(
-                  moment(new Date()).diff(
-                    moment(formikProps.values.clockInDate),
-                  ),
-                )
-                const timeLeft = minutesRoudedTime(
-                  Math.floor(shiftDuration.asMinutes()),
-                )
+                const clockOutMoment = moment(new Date(), 'YYYY-MM-DDTHH:mm:ss')
+                const { lengthRounded } = getShiftDuration(moment(formikProps.values.clockInDate), clockOutMoment)
+
                 return (
                   <HalfShiftForm
                     formStatus={status}
@@ -293,7 +281,7 @@ export class ShiftCRUD extends Component {
                     employees={employees}
                     projects={projects}
                     projectTasks={projectTasks}
-                    timeLeft={timeLeft}
+                    timeLeft={lengthRounded}
                     generalError={``}
                     {...formikProps}
                   />
@@ -309,8 +297,8 @@ export class ShiftCRUD extends Component {
                 clockInDate: moment()
                   .startOf(`day`)
                   .add(`minutes`, 450)
-                  .format(`YYYY-MM-DDTHH:mm`),
-                clockOutDate: moment().format(`YYYY-MM-DDTHH:mm`),
+                  .format(`YYYY-MM-DDTHH:mm:ss`),
+                clockOutDate: moment().format(`YYYY-MM-DDTHH:mm:ss`),
                 employeeId: -1,
                 activities: [
                   {
@@ -322,6 +310,7 @@ export class ShiftCRUD extends Component {
                 ],
               }}
               validationSchema={shiftValidation}
+
               onSubmit={(values, formikFunctions) => {
                 const { createShift } = this.props
                 this.updateLoading(true, 'Creating shift..')
@@ -339,13 +328,13 @@ export class ShiftCRUD extends Component {
                   },
                 )
               }}
+
               render={(formikProps) => {
                 const { values, errors } = formikProps
-                const shiftDuration = moment.duration(
-                  moment(values.clockOutDate).diff(moment(values.clockInDate)),
-                )
+                const { lengthRounded } = getShiftDuration(moment(values.clockInDate), moment(values.clockOutDate))
+
                 let timeLeft =
-                  minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) -
+                  lengthRounded -
                   values.lunch
                 values.activities.forEach((activity) => {
                   timeLeft -= activity.length
