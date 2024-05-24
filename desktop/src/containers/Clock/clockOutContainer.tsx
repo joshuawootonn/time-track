@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import moment from 'moment'
 import { Formik } from 'formik'
@@ -19,8 +18,9 @@ import {
   projectTaskSelectors,
 } from '~/store/selectors'
 import { minutesRoudedTime } from '~/helpers/time'
+import { getShiftDuration } from '~/helpers/shiftDuration'
 
-function isActivityCompleted(activity, projectTaskObjects) {
+function isActivityCompleted(activity: any, projectTaskObjects: any) {
   const { projectTaskId, description } = activity
 
   const isOtherTask =
@@ -32,8 +32,17 @@ function isActivityCompleted(activity, projectTaskObjects) {
   return isOtherTask ? description.length > 0 : true
 }
 
-export class ClockOut extends Component {
-  constructor(props) {
+type ClockOutProps = {
+  currentEmployee: any,
+}
+
+type ClockOutState = {
+  activities: any[]
+  currentMoment: moment.Moment
+}
+
+export class ClockOut extends Component<ClockOutProps, ClockOutState> {
+  constructor(props: any) {
     super(props)
     this.state = {
       activities: [],
@@ -42,13 +51,16 @@ export class ClockOut extends Component {
   }
 
   componentDidMount = () => {
+    // @ts-ignore
     this.props.getCurrentShift(this.props.currentEmployee.id)
   }
   cancel = () => {
+    // @ts-ignore
     this.props.history.push(`/`)
   }
 
   render() {
+    // @ts-ignore
     const { currentShift, projects, projectTasks, lastWeeksShifts } = this.props
 
     const isLoading = !currentShift
@@ -56,15 +68,12 @@ export class ClockOut extends Component {
       return <Progress variant="circular" fullPage />
     }
 
-    const clockInMoment = moment.utc(currentShift.clockInDate).local()
-    const shiftDuration = moment.duration(
-      this.state.currentMoment.diff(clockInMoment),
-    )
+    const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), this.state.currentMoment)
 
     const clockOutObject = {
-      in: clockInMoment.format(`h:mm a`),
-      out: this.state.currentMoment.format(`h:mm a`),
-      date: clockInMoment.format(`MMM D`),
+      in: clockIn.format(`h:mm:ss a`),
+      out: this.state.currentMoment.format(`h:mm:ss a`),
+      date: clockIn.format(`MMM D`),
     }
 
     return (
@@ -81,46 +90,45 @@ export class ClockOut extends Component {
           ],
         }}
         onSubmit={(values) => {
+          // @ts-ignore
           const { currentEmployee, currentShift, history, clockOut } =
             this.props
-          const clockInMoment = moment.utc(currentShift.clockInDate).local()
-          const shiftDuration = moment.duration(
-            this.state.currentMoment.diff(clockInMoment),
-          )
+
+          const clockOutMoment = this.state.currentMoment
+          const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), clockOutMoment)
+
           return clockOut(
             currentEmployee,
             currentShift,
             values.activities,
             values.lunch,
-            minutesRoudedTime(Math.floor(shiftDuration.asMinutes())),
-            this.state.currentMoment.utc().format(),
+            lengthRounded,
+            clockOutMoment.utc().format(),
           )
             .then(() => history.push(`/`))
-            .catch((e) => console.log(e))
+            .catch((e: any) => console.log(e))
         }}
         validationSchema={clockoutValidation}
         render={(formikProps) => {
-          //console.log(formikProps.values);
           const { errors, values } = formikProps
           let generalError
           const areAllOtherTasksDescribed = values.activities.every((activity) =>
+            // @ts-ignore
             isActivityCompleted(activity, this.props.projectTaskObjects),
           )
           if (!areAllOtherTasksDescribed) {
-              generalError = "Add description to Other activity"
+            generalError = "Add description to Other activity"
           }
-          
 
-          // Time left is the duraction - lunch - all the activity times
           let timeLeft =
-            minutesRoudedTime(Math.floor(shiftDuration.asMinutes())) -
+            lengthRounded -
             values.lunch
           values.activities.forEach((activity) => {
             timeLeft -= activity.length
           })
 
           let weekHourTotal = shiftDuration.asMinutes() - values.lunch
-          lastWeeksShifts.forEach((shift) => {
+          lastWeeksShifts.forEach((shift: any) => {
             if (shift.length) {
               weekHourTotal += shift.length - shift.lunch
             }
@@ -155,12 +163,8 @@ export class ClockOut extends Component {
   }
 }
 
-ClockOut.propTypes = {
-  currentEmployee: PropTypes.object.isRequired,
-}
-
 /* istanbul ignore next */
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     currentShift: shiftSelectors.getCurrentShift(state),
     lastWeeksShifts: shiftSelectors.getLastWeeksShiftsForCurrentEmployee(state),
@@ -172,12 +176,12 @@ const mapStateToProps = (state) => {
 }
 
 /* istanbul ignore next */
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    getCurrentShift: (employeeId) => {
+    getCurrentShift: (employeeId: any) => {
       return dispatch(shiftActions.getCurrentShift(employeeId))
     },
-    clockOut: (employee, shift, activities, lunch, length, clockOutDate) =>
+    clockOut: (employee: any, shift: any, activities: any, lunch: any, length: any, clockOutDate: any) =>
       dispatch(
         employeeActions.clockOut(
           employee,

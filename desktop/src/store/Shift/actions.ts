@@ -13,9 +13,29 @@ import { normalize } from 'normalizr'
 import * as status from '~/constants/status'
 import * as schemas from '~/store/schemas'
 import domains from '~/constants/domains'
+import { getShiftDuration } from '~/helpers/shiftDuration'
+import clockOut from '~/components/forms/ClockOut/clockOut'
 
-export const getCurrentShift = (employeeId) => {
-  return async (dispatch) => {
+type Activity = {
+  shiftId: number
+  projectId: number
+  projectTaskId: number
+  length: number
+  description: string
+  id: undefined
+}
+
+type Shift = {
+  id: number
+  clockOutDate: string
+  clockInDate: string
+  employeeId: number
+  lunch: number
+  activities: Activity[]
+}
+
+export const getCurrentShift = (employeeId: any) => {
+  return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.GET_CURRENT_SHIFT_REQUEST })
     try {
       const response = await endpoint.getHalfShiftOrNull(employeeId)
@@ -35,8 +55,8 @@ export const getCurrentShift = (employeeId) => {
   }
 }
 
-export const getShiftsInRange = (startTime, endTime) => {
-  return async (dispatch) => {
+export const getShiftsInRange = (startTime: any, endTime: any) => {
+  return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.GET_SHIFTS_IN_RANGE_REQUEST })
     try {
       const response = await endpoint.getShiftsInRange(startTime, endTime)
@@ -55,8 +75,8 @@ export const getShiftsInRange = (startTime, endTime) => {
   }
 }
 
-export const getShifts = (options) => {
-  return async (dispatch) => {
+export const getShifts = (options: any) => {
+  return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.GET_SHIFTS_REQUEST })
     try {
       const response = await endpoint.getAll(options)
@@ -72,17 +92,18 @@ export const getShifts = (options) => {
   }
 }
 
-export const createShift = (shift) => {
-  return async (dispatch) => {
+export const createShift = (shift: Shift) => {
+  return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.CREATE_SHIFT_REQUEST })
+
     try {
-      const clockInMoment = moment(shift.clockInDate)
       const clockOutMoment = moment(shift.clockOutDate)
-      const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment))
+      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(moment(shift.clockInDate), clockOutMoment)
+
       // Parse form output to create the object that the api understands
       const shiftObject = {
         employeeId: shift.employeeId,
-        length: shiftDuration.asMinutes(),
+        length: lengthRounded,
         lunch: shift.lunch,
         clockInDate: clockInMoment.toString(),
         clockOutDate: clockOutMoment.toString(),
@@ -113,16 +134,14 @@ export const createShift = (shift) => {
   }
 }
 
-export const createHalfShift = (shift) => {
-  return async (dispatch, getState) => {
+export const createHalfShift = (shift: Shift) => {
+  return async (dispatch: any, getState: any) => {
     dispatch({ type: shiftActionTypes.CREATE_HALF_SHIFT_REQUEST })
     try {
       const shiftObject = {
         employeeId: shift.employeeId,
         clockInDate: moment(shift.clockInDate).utc().toString(),
       }
-
-      // console.log('create half shift action: ',shiftObject);
 
       // create the half shift
       const response = await dispatch(
@@ -147,13 +166,12 @@ export const createHalfShift = (shift) => {
   }
 }
 
-export const updateShift = (shift) => {
-  return async (dispatch, getState) => {
+export const updateShift = (shift: Shift) => {
+  return async (dispatch: any, getState: any) => {
     dispatch({ type: shiftActionTypes.UPDATE_SHIFT_REQUEST })
     try {
-      const clockInMoment = moment(shift.clockInDate)
       const clockOutMoment = moment(shift.clockOutDate)
-      const shiftDuration = moment.duration(clockOutMoment.diff(clockInMoment))
+      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(moment(shift.clockInDate), clockOutMoment)
 
       // employee to not working
       const oldShift = getState().entities.shifts[shift.id]
@@ -165,12 +183,12 @@ export const updateShift = (shift) => {
       const shiftObject = {
         id: shift.id,
         employeeId: shift.employeeId,
-        length: shiftDuration.asMinutes(),
+        length: lengthRounded,
         lunch: shift.lunch,
         clockInDate: clockInMoment.toString(),
         clockOutDate: clockOutMoment.toString(),
       }
-      // console.log(shiftObject);
+
       const response = await dispatch(
         genericActions.put(domains.SHIFT, shiftObject),
       )
@@ -194,8 +212,8 @@ export const updateShift = (shift) => {
   }
 }
 
-export const updateHalfShift = (shift) => {
-  return async (dispatch) => {
+export const updateHalfShift = (shift: Shift) => {
+  return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.EDIT_HALF_SHIFT_REQUEST })
     try {
       const shiftObject = {
@@ -203,8 +221,6 @@ export const updateHalfShift = (shift) => {
         employeeId: shift.employeeId,
         clockInDate: moment(shift.clockInDate).utc().toString(),
       }
-
-      // console.log('update half shift action: ',shiftObject);
 
       const response = await dispatch(
         genericActions.put(domains.SHIFT, shiftObject),
@@ -223,8 +239,8 @@ export const updateHalfShift = (shift) => {
   }
 }
 
-export const removeShift = (id) => {
-  return async (dispatch, getState) => {
+export const removeShift = (id: string) => {
+  return async (dispatch: any, getState: any) => {
     console.log('here we are')
     dispatch({ type: shiftActionTypes.REMOVE_SHIFT_REQUEST })
     try {
