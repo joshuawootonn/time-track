@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import {
   AppBar,
@@ -14,7 +15,7 @@ import {
   Drawer
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { ArrowBack, Settings, Menu, Storage } from '@material-ui/icons'
+import { ArrowBack, Settings, Menu, Storage, AssignmentReturned, BorderBottom } from '@material-ui/icons'
 import moment from 'moment'
 import { withMediaQuery } from '~/helpers/withMediaQuery'
 
@@ -67,13 +68,23 @@ const styles = (theme) => ({
     justifyContent: 'space-between'
   },
   gridHeight: {
-    height: `auto`,
     position: `relative`,
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid rgba(224, 224, 224, 1)',
+    borderBottom: '1px solid rgba(224, 224, 224, 1)'
   },
+  tabMobile: {
+    height: `calc(200%)`,
+  }
 })
+
+const TabIndex = {
+  Employees: 0,
+  Projects: 1,
+  Tasks: 2,
+  Shifts: 3
+}
 
 export class Analyze extends Component {
   //REMOVE
@@ -197,9 +208,9 @@ export class Analyze extends Component {
           </Toolbar>
         </AppBar>
 
-        {tabValue === 0 && (
-          <Grid container className={classes.tab}>
-            <Grid item xs={6} className={classes.gridHeight}>
+        {(tabValue === TabIndex.Employees) && (
+          <Grid container className={isDesktop ? classes.tab : classes.tabMobile} >
+            <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
               <EmployeeToolbar />
               <EmployeeFilter />
               <div
@@ -210,14 +221,15 @@ export class Analyze extends Component {
                 <EmployeeIndex />
               </div>
             </Grid>
-            <Grid item xs={6} className={classes.gridHeight}>
+            <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
               <EmployeeCRUD />
             </Grid>
           </Grid>
         )}
-        {tabValue === 1 && (
-          <Grid container className={classes.tab}>
-            <Grid item xs={5} className={classes.gridHeight}>
+
+        {(tabValue === TabIndex.Projects) && (
+          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+            <Grid item xs={isDesktop ? 5 : 12} className={classes.gridHeight}>
               <ProjectToolbar />
               <ProjectFilterContainer />
               <div
@@ -228,14 +240,15 @@ export class Analyze extends Component {
                 <ProjectIndex />
               </div>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={isDesktop ? 7 : 12}>
               <ProjectCRUD goToTab={this.goToTab} />
             </Grid>
           </Grid>
         )}
-        {tabValue === 2 && (
-          <Grid container className={classes.tab}>
-            <Grid item xs={6} className={classes.gridHeight}>
+
+        {(tabValue === TabIndex.Tasks) && (
+          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+            <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
               <TaskToolbar />
               <TaskFilter />
               <div
@@ -246,14 +259,15 @@ export class Analyze extends Component {
                 <TaskIndex />
               </div>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={isDesktop ? 6 : 12}>
               <TaskCRUD />
             </Grid>
           </Grid>
         )}
-        {tabValue === 3 && (
-          <Grid container className={classes.tab}>
-            <Grid item xs={7} className={classes.gridHeight}>
+
+        {(tabValue === TabIndex.Shifts) && (
+          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+            <Grid item xs={isDesktop ? 7 : 12} className={classes.gridHeight}>
               <ShiftToolbar />
               <ShiftFilter />
               <div
@@ -265,7 +279,7 @@ export class Analyze extends Component {
               </div>
               <ShiftTotal />
             </Grid>
-            <Grid item xs={5} className={classes.gridHeight}>
+            <Grid item xs={isDesktop ? 5 : 12} className={classes.gridHeight}>
               <ShiftCRUD />
             </Grid>
           </Grid>
