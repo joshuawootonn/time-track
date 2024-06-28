@@ -17,7 +17,7 @@ export class AuthorityDetail extends Component {
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select a Authority.. </Typography>
+          <Typography variant="h6">Select an Authority.. </Typography>
         </Hero>
       )
     }

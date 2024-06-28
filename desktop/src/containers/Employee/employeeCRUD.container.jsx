@@ -29,7 +29,7 @@ export class EmployeeCRUD extends Component {
     if (status === analyzeStatus.INIT) {
       return (
         <Hero fullWidth fullHeight>
-          <Typography variant="h6">Select a Employee.. </Typography>
+          <Typography variant="h6">Select an Employee.. </Typography>
         </Hero>
       )
     }
