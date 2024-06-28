@@ -24,7 +24,14 @@ export default (theme) => ({
   tableRow: {
     cursor: `pointer`,
     '&:hover': {
-      backgroundColor: theme.palette.grey[200],
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+  tableRowSelected: {
+    cursor: `pointer`,
+    backgroundColor: theme.palette.action.selected,
+    '&:hover': {
+      backgroundColor: theme.palette.action.hover
     },
   },
   tableRowHover: {

@@ -44,6 +44,7 @@ class Table extends React.Component {
       sortKey: props.initialSortKey || null,
       type: TableDataTypes.STRING,
       sortKeys: props.initialSortKeys || null,
+      selectedIndex: -1
     }
   }
 
@@ -165,6 +166,7 @@ class Table extends React.Component {
 
   handleClick = (event) => {
     this.props.select(event.rowData.id)
+    this.setState({ ...this.state, selectedIndex: event.index })
   }
 
   cellRenderer = (cellProps) => {
@@ -200,7 +202,7 @@ class Table extends React.Component {
 
   render() {
     const { columns, classes } = this.props
-    const { sortBy, sortDirection, data } = this.state
+    const { sortBy, sortDirection, data, selectedIndex } = this.state
     const { ...tableProps } = this.props
     // console.log('table: virtualized',data.length);
     return (
@@ -214,7 +216,10 @@ class Table extends React.Component {
             rowCount={data.length}
             onRowClick={this.handleClick}
             rowGetter={({ index }) => data[index]}
-            rowClassName={classNames(classes.tableRow, classes.flexContainer)}
+            rowClassName={({ index }) => {
+              const rowClass = index === selectedIndex ? classes.tableRowSelected : classes.tableRow
+              return classNames(rowClass, classes.flexContainer)
+            }}
             headerClassName={classes.headerCell}
             sort={this.handleRequestSort}
             sortBy={sortBy}
