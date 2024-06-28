@@ -94,30 +94,30 @@ export const AccountAction = (props) => {
         {/* CREW FEATRUE THAT IS NOT DEVELOPED YET */}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
-          <Tooltip
-            open={true}
-            title="Crew"
-            classes={{ tooltip: classes.toolTip }}
-            placement="bottom"
-          >
-            <IconButton onClick={crew} className={classes.button}>
-              <Group className={classes.buttonIcon} />
-            </IconButton>
-          </Tooltip>
-        )}
+            <Tooltip
+              open={true}
+              title="Crew"
+              classes={{ tooltip: classes.toolTip }}
+              placement="bottom"
+            >
+              <IconButton onClick={crew} className={classes.button}>
+                <Group className={classes.buttonIcon} />
+              </IconButton>
+            </Tooltip>
+          )}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
-          <Tooltip
-            open={true}
-            title={'Projects'}
-            classes={{ tooltip: classes.toolTip }}
-            placement="bottom"
-          >
-            <IconButton onClick={project} className={classes.button}>
-              <Business className={classes.buttonIcon} />
-            </IconButton>
-          </Tooltip>
-        )}
+            <Tooltip
+              open={true}
+              title={'Projects'}
+              classes={{ tooltip: classes.toolTip }}
+              placement="bottom"
+            >
+              <IconButton onClick={project} className={classes.button}>
+                <Business className={classes.buttonIcon} />
+              </IconButton>
+            </Tooltip>
+          )}
         {(type === authorityConstants.ADMIN) && (
           <Tooltip
             open={true}

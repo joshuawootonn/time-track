@@ -11,10 +11,12 @@ import {
   Toolbar,
   Grid,
   Tooltip,
+  Drawer
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { ArrowBack, Settings, Storage } from '@material-ui/icons'
+import { ArrowBack, Settings, Menu, AssignmentReturned } from '@material-ui/icons'
 import moment from 'moment'
+import { withMediaQuery } from '~/helpers/withMediaQuery'
 
 import {
   employeeActions,
@@ -47,7 +49,7 @@ import ShiftTotal from '~/containers/Shift/shiftTotal.container'
 import Progress from '~/components/helpers/Progress'
 import isElectron from '~/helpers/IsElectron'
 
-const styles = {
+const styles = (theme) => ({
   root: {
     height: `100vh`,
   },
@@ -55,11 +57,14 @@ const styles = {
     height: `calc(100% - 48px)`,
     display: `flex`,
   },
-  grow: {
+  tabs: {
     flexGrow: 1,
+    backgroundColor: theme.palette.primary.main,
+    color: 'white'
   },
   tool: {
     minHeight: 0,
+    justifyContent: 'space-between'
   },
   gridHeight: {
     height: `auto`,
@@ -68,7 +73,7 @@ const styles = {
     flexDirection: 'column',
     borderRight: '1px solid rgba(224, 224, 224, 1)',
   },
-}
+})
 
 export class Analyze extends Component {
   //REMOVE
@@ -76,6 +81,7 @@ export class Analyze extends Component {
     tabValue: 3,
     isLoading: true,
     isElectron: isElectron(),
+    isMenuOpened: false
   }
   componentDidMount = async () => {
     Promise.all([
@@ -92,7 +98,7 @@ export class Analyze extends Component {
   }
 
   handleTabValueChange = (e, tabValue) => {
-    this.setState({ tabValue })
+    this.setState({ ...this.state, tabValue, isMenuOpened: false })
   }
 
   back = () => {
@@ -103,9 +109,20 @@ export class Analyze extends Component {
     this.setState({ ...this.state, tabValue: number })
   }
 
+  toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    this.setState({ ...this.state, isMenuOpened: open });
+  }
+
   render() {
     const { tabValue } = this.state
-    const { classes } = this.props
+    const { classes, isDesktop = false } = this.props
 
     if (this.state.isLoading)
       return (
@@ -116,37 +133,70 @@ export class Analyze extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" elevation={0}>
+        <AppBar position="static" elevation={0} className={classes.desktop} style={{
+        }}>
+
           <Toolbar className={classes.tool}>
-            <Tabs
-              value={tabValue}
-              onChange={this.handleTabValueChange}
-              className={classes.grow}
-            >
-              <Tab label="Employees" />
-              <Tab label="Projects" />
-              <Tab label="Tasks" />
-              <Tab label="Shifts" />
-            </Tabs>
-            {this.state.isElectron && (
-              <Tooltip title="Export" placement="bottom">
-                <IconButton color="inherit" onClick={this.props.openExport}>
-                  <Storage />
+            <div className='leftSide'>
+              {isDesktop ? (
+                <Tabs
+                  value={tabValue}
+                  onChange={this.handleTabValueChange}
+                  className={classes.tabs}
+                >
+                  <Tab label="Employees" />
+                  <Tab label="Projects" />
+                  <Tab label="Tasks" />
+                  <Tab label="Shifts" />
+                </Tabs>
+              ) : (
+                <>
+                  <Tooltip title="Menu" placement="bottom">
+                    <IconButton color="inherit" onClick={this.toggleDrawer(true)}>
+                      <Menu />
+                    </IconButton>
+                  </Tooltip>
+                  <Drawer anchor='left' open={this.state.isMenuOpened} onClose={this.toggleDrawer(false)}>
+                    <Tabs
+                      value={tabValue}
+                      orientation="vertical"
+                      variant="scrollable"
+                      onChange={this.handleTabValueChange}
+                      className={classes.tabs}
+                    >
+                      <Tab label="Employees" />
+                      <Tab label="Projects" />
+                      <Tab label="Tasks" />
+                      <Tab label="Shifts" />
+                    </Tabs>
+                  </Drawer>
+                </>
+              )}
+            </div>
+
+            <div className='rightSide'>
+              {this.state.isElectron && (
+                <Tooltip title="Export" placement="bottom">
+                  <IconButton color="inherit" onClick={this.props.openExport}>
+                    <AssignmentReturned />
+                  </IconButton>
+                </Tooltip>
+              )}
+              <Tooltip title="Settings" placement="bottom">
+                <IconButton color="inherit" onClick={this.props.openSettings}>
+                  <Settings />
                 </IconButton>
               </Tooltip>
-            )}
-            <Tooltip title="Settings" placement="bottom">
-              <IconButton color="inherit" onClick={this.props.openSettings}>
-                <Settings />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Go Back" placement="bottom">
-              <IconButton color="inherit" onClick={this.back}>
-                <ArrowBack />
-              </IconButton>
-            </Tooltip>
+              <Tooltip title="Go Back" placement="bottom">
+                <IconButton color="inherit" onClick={this.back}>
+                  <ArrowBack />
+                </IconButton>
+              </Tooltip>
+            </div>
+
           </Toolbar>
         </AppBar>
+
         {tabValue === 0 && (
           <Grid container className={classes.tab}>
             <Grid item xs={6} className={classes.gridHeight}>
@@ -263,4 +313,8 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   null,
   mapDispatchToProps,
-)(withRouter(withStyles(styles)(Analyze)))
+)(withRouter(withStyles(styles)(withMediaQuery([
+  ['isDesktop', `(min-width: 800px)`, {
+    defaultMatches: true
+  }]
+])(Analyze))))

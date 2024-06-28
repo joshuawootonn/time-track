@@ -28,7 +28,7 @@ export class TaskToolbar extends Component {
     return (
       <AnalyzeToolbar
         selectLabel={this.selectLabel}
-        label="Task"
+        label="Tasks"
         add={this.add}
         selected={selected}
         toggleFilter={toggleTaskFilter}
