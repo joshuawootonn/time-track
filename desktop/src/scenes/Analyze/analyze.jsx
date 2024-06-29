@@ -14,7 +14,7 @@ import {
   Drawer
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { ArrowBack, Settings, Menu, AssignmentReturned } from '@material-ui/icons'
+import { ArrowBack, Settings, Menu, Storage } from '@material-ui/icons'
 import moment from 'moment'
 import { withMediaQuery } from '~/helpers/withMediaQuery'
 
@@ -178,7 +178,7 @@ export class Analyze extends Component {
               {this.state.isElectron && (
                 <Tooltip title="Export" placement="bottom">
                   <IconButton color="inherit" onClick={this.props.openExport}>
-                    <AssignmentReturned />
+                    <Storage />
                   </IconButton>
                 </Tooltip>
               )}
