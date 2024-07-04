@@ -7,6 +7,7 @@ import { analyzeActions } from '~/store/actions'
 import { shiftSelectors } from '~/store/selectors'
 import * as TableDataTypes from '~/constants/tableDataTypes'
 import domain from '~/constants/domains'
+import { withMediaQuery } from '~/helpers/withMediaQuery'
 
 export class ShiftIndex extends Component {
   select = (object) => {
@@ -17,7 +18,7 @@ export class ShiftIndex extends Component {
     this.props.updateFilter({ ...this.props.shiftFilters, ...partial })
 
   render() {
-    const { shifts } = this.props
+    const { shifts, isDesktop = false } = this.props
 
     if (!shifts)
       return (
@@ -32,7 +33,7 @@ export class ShiftIndex extends Component {
     return (
       <VirtualizedSortSelect
         data={shifts || []}
-        columns={rows}
+        columns={isDesktop ? rows : mobileRows}
         updateFilter={this.updateFilter}
         select={this.select}
         initialSortBy="clockInDate"
@@ -61,7 +62,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(analyzeActions.updateFilter(domain.SHIFT, filters)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShiftIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(withMediaQuery([
+  ['isDesktop', `(min-width: 800px)`, {
+    defaultMatches: true
+  }]
+])(ShiftIndex))
 
 const rows = [
   {
@@ -136,3 +141,46 @@ const rows = [
     type: TableDataTypes.LENGTH,
   },
 ]
+
+const mobileRows = [
+  {
+    id: `firstName`,
+    dataKey: `employee`,
+    width: 55,
+    height: 56,
+    padding: `dense`,
+    label: `First Name`,
+    type: TableDataTypes.FIRSTNAME,
+  },
+  {
+    id: `lastName`,
+    dataKey: `employee`,
+    width: 55,
+    height: 56,
+    padding: `dense`,
+    label: `Last Name`,
+    type: TableDataTypes.OBJECT,
+    keys: [`lastName`],
+  },
+  {
+    id: `clockInDate`,
+    dataKey: `clockInDate`,
+    width: 100,
+    height: 56,
+    padding: `dense`,
+    label: `Clock In`,
+    type: TableDataTypes.DATETIME,
+  },
+  {
+    id: `clockOutDate`,
+    dataKey: `clockOutDate`,
+    width: 100,
+    height: 56,
+    padding: `dense`,
+    label: `Clock Out`,
+    type: TableDataTypes.DATETIME,
+  }
+]
+
+
+
