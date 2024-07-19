@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -41,126 +41,122 @@ type ClockOutState = {
   currentMoment: moment.Moment
 }
 
-export class ClockOut extends Component<ClockOutProps, ClockOutState> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      activities: [],
-      currentMoment: moment().add(`minutes`, 3),
-    }
+export function ClockOut(props: ClockOutProps) {
+  const [state, setState] = useState<ClockOutState>({
+    activities: [],
+    currentMoment: moment().add(`minutes`, 3)
+  })
+
+  useEffect(() => {
+    // @ts-ignore
+    props.getCurrentShift(props.currentEmployee.id)
+  }, [])
+
+  const cancel = () => {
+    // @ts-ignore
+    props.history.push(`/`)
   }
 
-  componentDidMount = () => {
-    // @ts-ignore
-    this.props.getCurrentShift(this.props.currentEmployee.id)
+
+  // @ts-ignore
+  const { currentShift, projects, projectTasks, lastWeeksShifts } = props
+
+  const isLoading = !currentShift
+  if (isLoading) {
+    return <Progress variant="circular" fullPage />
   }
-  cancel = () => {
-    // @ts-ignore
-    this.props.history.push(`/`)
+
+  const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), state.currentMoment)
+
+  const clockOutObject = {
+    in: clockIn.format(`h:mm:ss a`),
+    out: state.currentMoment.format(`h:mm:ss a`),
+    date: clockIn.format(`MMM D`),
   }
 
-  render() {
-    // @ts-ignore
-    const { currentShift, projects, projectTasks, lastWeeksShifts } = this.props
+  return (
+    <Formik
+      initialValues={{
+        lunch: 30,
+        activities: [
+          {
+            projectId: -1,
+            projectTaskId: -1,
+            length: 0,
+            description: ``,
+          },
+        ],
+      }}
+      onSubmit={(values) => {
+        // @ts-ignore
+        const { currentEmployee, currentShift, history, clockOut } = props
 
-    const isLoading = !currentShift
-    if (isLoading) {
-      return <Progress variant="circular" fullPage />
-    }
+        const clockOutMoment = state.currentMoment
+        const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), clockOutMoment)
 
-    const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), this.state.currentMoment)
-
-    const clockOutObject = {
-      in: clockIn.format(`h:mm:ss a`),
-      out: this.state.currentMoment.format(`h:mm:ss a`),
-      date: clockIn.format(`MMM D`),
-    }
-
-    return (
-      <Formik
-        initialValues={{
-          lunch: 30,
-          activities: [
-            {
-              projectId: -1,
-              projectTaskId: -1,
-              length: 0,
-              description: ``,
-            },
-          ],
-        }}
-        onSubmit={(values) => {
+        return clockOut(
+          currentEmployee,
+          currentShift,
+          values.activities,
+          values.lunch,
+          lengthRounded,
+          clockOutMoment.utc().format(),
+        )
+          .then(() => history.push(`/`))
+          .catch((e: any) => console.log(e))
+      }}
+      validationSchema={clockoutValidation}
+      render={(formikProps) => {
+        const { errors, values } = formikProps
+        let generalError
+        const areAllOtherTasksDescribed = values.activities.every((activity) =>
           // @ts-ignore
-          const { currentEmployee, currentShift, history, clockOut } =
-            this.props
+          isActivityCompleted(activity, props.projectTaskObjects),
+        )
+        if (!areAllOtherTasksDescribed) {
+          generalError = "Add description to Other activity"
+        }
 
-          const clockOutMoment = this.state.currentMoment
-          const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), clockOutMoment)
+        let timeLeft =
+          lengthRounded -
+          values.lunch
+        values.activities.forEach((activity) => {
+          timeLeft -= activity.length
+        })
 
-          return clockOut(
-            currentEmployee,
-            currentShift,
-            values.activities,
-            values.lunch,
-            lengthRounded,
-            clockOutMoment.utc().format(),
-          )
-            .then(() => history.push(`/`))
-            .catch((e: any) => console.log(e))
-        }}
-        validationSchema={clockoutValidation}
-        render={(formikProps) => {
-          const { errors, values } = formikProps
-          let generalError
-          const areAllOtherTasksDescribed = values.activities.every((activity) =>
-            // @ts-ignore
-            isActivityCompleted(activity, this.props.projectTaskObjects),
-          )
-          if (!areAllOtherTasksDescribed) {
-            generalError = "Add description to Other activity"
+        let weekHourTotal = shiftDuration.asMinutes() - values.lunch
+        lastWeeksShifts.forEach((shift: any) => {
+          if (shift.length) {
+            weekHourTotal += shift.length - shift.lunch
           }
+        })
 
-          let timeLeft =
-            lengthRounded -
-            values.lunch
-          values.activities.forEach((activity) => {
-            timeLeft -= activity.length
-          })
+        const length = minutesToString(
+          minutesRoudedTime(shiftDuration.asMinutes() - values.lunch),
+        )
 
-          let weekHourTotal = shiftDuration.asMinutes() - values.lunch
-          lastWeeksShifts.forEach((shift: any) => {
-            if (shift.length) {
-              weekHourTotal += shift.length - shift.lunch
-            }
-          })
+        if (errors.activities && typeof errors.activities === `string`) {
+          generalError = errors.activities
+        } else if (errors.lunch && typeof errors.lunch === `string`) {
+          generalError = errors.lunch
+        }
 
-          const length = minutesToString(
-            minutesRoudedTime(shiftDuration.asMinutes() - values.lunch),
-          )
-
-          if (errors.activities && typeof errors.activities === `string`) {
-            generalError = errors.activities
-          } else if (errors.lunch && typeof errors.lunch === `string`) {
-            generalError = errors.lunch
-          }
-
-          return (
-            <ClockOutForm
-              cancel={this.cancel}
-              shift={clockOutObject}
-              projects={projects}
-              generalError={generalError}
-              timeLeft={timeLeft}
-              weekHourTotal={weekHourTotal}
-              length={length}
-              projectTasks={projectTasks}
-              {...formikProps}
-            />
-          )
-        }}
-      />
-    )
-  }
+        return (
+          <ClockOutForm
+            cancel={cancel}
+            shift={clockOutObject}
+            projects={projects}
+            generalError={generalError}
+            timeLeft={timeLeft}
+            weekHourTotal={weekHourTotal}
+            length={length}
+            projectTasks={projectTasks}
+            {...formikProps}
+          />
+        )
+      }}
+    />
+  )
 }
 
 /* istanbul ignore next */
