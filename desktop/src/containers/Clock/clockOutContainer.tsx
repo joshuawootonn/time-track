@@ -19,6 +19,7 @@ import {
 } from '~/store/selectors'
 import { minutesRoudedTime } from '~/helpers/time'
 import { getShiftDuration } from '~/helpers/shiftDuration'
+import axios from '~/helpers/axios'
 
 function isActivityCompleted(activity: any, projectTaskObjects: any) {
   const { projectTaskId, description } = activity
@@ -36,20 +37,22 @@ type ClockOutProps = {
   currentEmployee: any,
 }
 
-type ClockOutState = {
-  activities: any[]
-  currentMoment: moment.Moment
-}
-
 export function ClockOut(props: ClockOutProps) {
-  const [state, setState] = useState<ClockOutState>({
-    activities: [],
-    currentMoment: moment().add(`minutes`, 3)
-  })
+  const [currentMoment, setCurrentMoment] = useState<moment.Moment | null>(null)
 
   useEffect(() => {
     // @ts-ignore
     props.getCurrentShift(props.currentEmployee.id)
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get('/now')
+      .then((response: any) => {
+        const { now } = response.data
+        const clockOut = moment(now).add(`minutes`, 3)
+        setCurrentMoment(clockOut)
+      })
   }, [])
 
   const cancel = () => {
@@ -57,20 +60,19 @@ export function ClockOut(props: ClockOutProps) {
     props.history.push(`/`)
   }
 
-
   // @ts-ignore
   const { currentShift, projects, projectTasks, lastWeeksShifts } = props
 
-  const isLoading = !currentShift
+  const isLoading = currentShift == null || currentMoment == null
   if (isLoading) {
     return <Progress variant="circular" fullPage />
   }
 
-  const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), state.currentMoment)
+  const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), currentMoment)
 
   const clockOutObject = {
     in: clockIn.format(`h:mm:ss a`),
-    out: state.currentMoment.format(`h:mm:ss a`),
+    out: currentMoment.format(`h:mm:ss a`),
     date: clockIn.format(`MMM D`),
   }
 
@@ -90,9 +92,7 @@ export function ClockOut(props: ClockOutProps) {
       onSubmit={(values) => {
         // @ts-ignore
         const { currentEmployee, currentShift, history, clockOut } = props
-
-        const clockOutMoment = state.currentMoment
-        const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), clockOutMoment)
+        const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), currentMoment)
 
         return clockOut(
           currentEmployee,
@@ -100,7 +100,7 @@ export function ClockOut(props: ClockOutProps) {
           values.activities,
           values.lunch,
           lengthRounded,
-          clockOutMoment.utc().format(),
+          currentMoment.utc().format(),
         )
           .then(() => history.push(`/`))
           .catch((e: any) => console.log(e))
@@ -120,6 +120,7 @@ export function ClockOut(props: ClockOutProps) {
         let timeLeft =
           lengthRounded -
           values.lunch
+
         values.activities.forEach((activity) => {
           timeLeft -= activity.length
         })
