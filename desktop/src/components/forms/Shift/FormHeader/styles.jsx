@@ -12,6 +12,14 @@ const styles = () => ({
   headerRow: {
     height: `72px`,
   },
+  label: {
+    minWidth: '100px'
+  },
+  '@media (max-width: 500px)': {
+    buttons: {
+      display: 'flex'
+    }
+  },
 })
 
 export default styles

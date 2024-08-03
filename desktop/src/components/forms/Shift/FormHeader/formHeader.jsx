@@ -24,8 +24,8 @@ export const FormHeader = (props) => {
   return (
     <Grid container spacing={3} className={classes.gridContainer}>
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-        <Typography variant="h6">{label}</Typography>
-        <div>
+        <Typography variant="h6" className={classes.label}>{label}</Typography>
+        <div className={classes.buttons}>
           {extentOptions &&
             extentOptions.length > 0 &&
             extentOptions.map((extentOption, i) => {
@@ -37,7 +37,7 @@ export const FormHeader = (props) => {
                     extentOption.type === extent ? `contained` : `outlined`
                   }
                   onClick={() => updateExtent(type, extentOption.type)}
-                  style={{ marginRight: `10px` }}
+                  style={{ marginRight: `10px`, width: '80px' }}
                 >
                   {extentOption.label}
                 </Button>

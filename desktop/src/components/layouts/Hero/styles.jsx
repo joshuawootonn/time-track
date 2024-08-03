@@ -14,6 +14,12 @@ const styles = () => ({
     justifyContent: `center`,
     alignItems: `center`,
   },
+  '@media (max-width: 800px)': {
+    flex: {
+      alignItems: 'flex-start',
+      marginTop: '20px'
+    }
+  }
 })
 
 export default styles
