@@ -68,15 +68,13 @@ const styles = (theme) => ({
     justifyContent: 'space-between'
   },
   gridHeight: {
+    minHeight: '65vh',
     position: `relative`,
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid rgba(224, 224, 224, 1)',
-    borderBottom: '1px solid rgba(224, 224, 224, 1)'
+    borderBottom: '3px solid rgba(224, 224, 224, 1)'
   },
-  tabMobile: {
-    height: `calc(200%)`,
-  }
 })
 
 const TabIndex = {

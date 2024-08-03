@@ -82,8 +82,8 @@ export function HalfShift(props) {
           />
         </Grid>
 
-        <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
-          <Typography variant="h5" margin="none">
+        <Grid item xs={12} className={cx(classes.main, classes.row, classes.footerRow)}>
+          <Typography variant="h5" className={classes.currentShiftLength}>
             Current Shift Length: {timeRemaining !== null ? timeRemaining : ''}
           </Typography>
           <Typography

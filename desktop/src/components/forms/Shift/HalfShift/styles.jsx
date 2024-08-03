@@ -22,6 +22,23 @@ const styles = () => ({
   button: {
     marginLeft: `8px`,
   },
+  '@media (max-width: 800px)': {
+    main: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    currentShiftLength: {
+      marginBottom: '10px'
+    }
+  },
+  '@media (max-width: 600px)': {
+    row: {
+      flexDirection: 'column'
+    },
+    field: {
+      marginBottom: '10px'
+    }
+  }
 })
 
 export default styles

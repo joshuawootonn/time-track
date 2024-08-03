@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { MenuItem, FormHelperText, FormControl } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import cx from 'classnames'
-import { getIn } from 'formik'
 
 import { minutes, hours } from '~/constants/times'
 import Select from '~/components/inputs/Select'
+import { getHelperText } from '~/components/utils/getHelperText'
 import styles from './styles'
 
 export class Time extends Component {
@@ -19,7 +19,6 @@ export class Time extends Component {
   onChangeMinutes = (e) => {
     const { field, form } = this.props
     const minutesValue = Math.floor(field.value % 60)
-    //console.log(minutesValue);
     form.setFieldValue(field.name, field.value + e.target.value - minutesValue)
   }
   render() {
@@ -39,7 +38,6 @@ export class Time extends Component {
     const minutesValue = Math.floor(value % 60)
     const hoursValue = Math.floor(value / 60) * 60
 
-    //console.log(value, minutesValue, hoursValue);
     return (
       <FormControl
         fullWidth={fullWidth}
@@ -49,7 +47,7 @@ export class Time extends Component {
           <Select
             field={field}
             form={form}
-            className={className}
+            className={cx(className, classes.hours)}
             margin={margin}
             fullWidth={fullWidth}
             label={label1}
@@ -93,9 +91,7 @@ export class Time extends Component {
         </div>
         {helper === `normal` && (
           <FormHelperText className={cx(classes.helper)} error={true}>
-            {getIn(form.touched, field.name)
-              ? getIn(form.errors, field.name)
-              : ` `}
+            {getHelperText(form, field.name)}
           </FormHelperText>
         )}
       </FormControl>
