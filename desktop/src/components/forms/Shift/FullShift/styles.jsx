@@ -32,6 +32,25 @@ const styles = () => ({
   lunchBox: {
     width: `150px`,
   },
+  '@media (max-width: 500px)': {
+    row: {
+      display: 'block'
+    },
+    field: {
+      margin: '0 0px'
+    },
+    headerRow: {
+      display: 'flex',
+      alignItems: `center`,
+      justifyContent: `space-between`,
+    },
+    lunchBox: {
+      width: `50%`,
+    },
+    footerRow: {
+      display: 'flex'
+    }
+  }
 })
 
 export default styles

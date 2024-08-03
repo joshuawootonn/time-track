@@ -24,20 +24,20 @@ export const FormHeader = (props) => {
   return (
     <Grid container spacing={3} className={classes.gridContainer}>
       <Grid item xs={12} className={cx(classes.headerRow, classes.row)}>
-        <Typography variant="h6">{label}</Typography>
-        <div>
+        <Typography variant="h6" className={classes.label}>{label}</Typography>
+        <div className={classes.buttons}>
           {extentOptions &&
             extentOptions.length > 0 &&
             extentOptions.map((extentOption, i) => {
               return (
                 <Button
+                  className={classes.special}
                   key={i}
                   id={`${ANALYZE_SHIFT_EXTENT_BUTTON_ID}_${i}`}
                   variant={
                     extentOption.type === extent ? `contained` : `outlined`
                   }
                   onClick={() => updateExtent(type, extentOption.type)}
-                  style={{ marginRight: `10px` }}
                 >
                   {extentOption.label}
                 </Button>
