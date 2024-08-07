@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { Typography } from '@material-ui/core'
@@ -25,7 +25,6 @@ import {
   halfShift as halfShiftValidation,
 } from '~/constants/formValidation'
 import { getShiftDuration } from '~/helpers/shiftDuration'
-import axios from '~/helpers/axios'
 
 export function ShiftCRUD(props: any) {
 
@@ -38,18 +37,6 @@ export function ShiftCRUD(props: any) {
 
   const { selected, status, projects, projectTasks, employees } = props
   const { editingExtent, addingExtent } = state
-
-  const [currentMoment, setCurrentMoment] = useState<any | null>(null)
-
-  useEffect(() => {
-    axios
-      .get('/now')
-      .then((response: any) => {
-        const { now } = response.data
-        const clockOut = moment(now).utc().local().format(`YYYY-MM-DDTHH:mm:ss`)
-        setCurrentMoment(clockOut)
-      })
-  }, [selected, editingExtent, addingExtent])
 
   const removeShift = () => {
     const { selected, removeShift } = props
@@ -143,6 +130,12 @@ export function ShiftCRUD(props: any) {
               )
             }}
             render={(formikProps) => {
+
+              const { values } = formikProps
+
+              const clockOutMoment = moment(new Date(), 'YYYY-MM-DDTHH:mm:ss')
+              const { lengthRounded } = getShiftDuration(moment(values.clockInDate), clockOutMoment)
+
               return (
                 <HalfShiftForm
                   formStatus={status}
@@ -152,6 +145,7 @@ export function ShiftCRUD(props: any) {
                   employees={employees}
                   projects={projects}
                   projectTasks={projectTasks}
+                  timeLeft={lengthRounded}
                   generalError={``}
                   removeShift={removeShift}
                   {...formikProps}
@@ -175,7 +169,7 @@ export function ShiftCRUD(props: any) {
                   .utc(selected.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
                   .local()
                   .format(`YYYY-MM-DDTHH:mm:ss`)
-                : currentMoment,
+                : moment.utc().local().format(`YYYY-MM-DDTHH:mm:ss`),
               lunch: selected.lunch,
               activities: selected.activities
                 ? selected.activities.map((activity: any) => {
@@ -320,7 +314,7 @@ export function ShiftCRUD(props: any) {
                 .startOf(`day`)
                 .add(`minutes`, 450)
                 .format(`YYYY-MM-DDTHH:mm:ss`),
-              clockOutDate: currentMoment,
+              clockOutDate: moment().format(`YYYY-MM-DDTHH:mm:ss`),
               employeeId: -1,
               activities: [
                 {
