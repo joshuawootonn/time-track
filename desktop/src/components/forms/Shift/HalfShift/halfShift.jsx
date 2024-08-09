@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Grid, Typography, Button, Paper } from '@material-ui/core'
 import cx from 'classnames'
 import { Field, Form } from 'formik'
 import { withStyles } from '@material-ui/core/styles'
+import moment from 'moment'
 
 import TextField from '~/components/inputs/TextField'
 import TypeableSelect from '~/components/inputs/TypeableSelect'
@@ -13,8 +15,14 @@ import styles from './styles'
 import { minutesToString } from '~/helpers/time'
 import { analyzeStatus } from '~/constants/analyze'
 import { getHalfShiftOrNull } from '~/store/Shift/endpoints'
+import { getShiftDuration } from '~/helpers/shiftDuration'
+import axios from '~/helpers/axios'
+
 
 export function HalfShift(props) {
+
+  const [timeRemaining, setTimeRemaining] = useState(null)
+
   const {
     formStatus,
     classes,
@@ -23,10 +31,20 @@ export function HalfShift(props) {
     initialValues,
     errors,
     employees,
-    timeLeft,
     generalError,
     values,
   } = props
+
+  useEffect(() => {
+    axios
+      .get('/now')
+      .then((response) => {
+        const { now } = response.data
+        const clockOut = moment(now)
+        const { lengthRounded } = getShiftDuration(moment(values.clockInDate), clockOut)
+        setTimeRemaining(minutesToString(lengthRounded))
+      })
+  }, [values])
 
   async function validateEmployeeHalfShift(employeeId) {
     if (employeeId === -1 || formStatus !== analyzeStatus.ADDING) {
@@ -66,7 +84,7 @@ export function HalfShift(props) {
 
         <Grid item xs={12} className={cx(classes.row, classes.footerRow)}>
           <Typography variant="h5" margin="none">
-            Current Shift Length: {minutesToString(timeLeft)}
+            Current Shift Length: {timeRemaining !== null ? timeRemaining : ''}
           </Typography>
           <Typography
             color="error"
