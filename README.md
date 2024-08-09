@@ -30,6 +30,16 @@ Coming soon! This is in the works
 1. Switch to the `desktop` folder.
 
 1. Delete all `node_modules` folder. This step is needed for `yarn` to run correctly after `pnpm` or `npm` was used.
+    ```sh
+    rm -rf node_modules
+    ```
+
+1. Run `yarn` to install `node_modules` back:
+   ```sh
+   yarn
+   ```
+
+1. Update version in `desktop/package.json` (do not commit yet)
 
 1. Build the electron app using the following commands.
 
