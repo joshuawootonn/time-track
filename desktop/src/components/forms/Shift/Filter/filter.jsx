@@ -74,7 +74,7 @@ export class Filter extends Component {
               component={TextField}
               margin="none"
               label="Start Date"
-              type="datetime-local"
+              type="date"
               className={classes.field}
               helper="normal"
             />
@@ -83,7 +83,7 @@ export class Filter extends Component {
               component={TextField}
               margin="none"
               label="End Date"
-              type="datetime-local"
+              type="date"
               className={classes.field}
               helper="normal"
             />
