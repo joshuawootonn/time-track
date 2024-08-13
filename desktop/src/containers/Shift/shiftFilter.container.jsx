@@ -41,18 +41,18 @@ export class ShiftFilter extends Component {
             startTime: moment(
               shiftFilters.startTime,
               `MM-DD-YY HH:mm:ss`,
-            ).format(`YYYY-MM-DDTHH:mm`),
+            ).format(`YYYY-MM-DD`),
             endTime: moment(shiftFilters.endTime, `MM-DD-YY HH:mm:ss`).format(
-              `YYYY-MM-DDTHH:mm`,
+              `YYYY-MM-DD`,
             ),
           }}
           onSubmit={async (values, formikFunctions) => {
             const formattedValues = {
               ...values,
-              startTime: moment(values.startTime, `YYYY-MM-DDTHH:mm`).format(
+              startTime: moment(values.startTime, `YYYY-MM-DD`).format(
                 `MM-DD-YY HH:mm:ss`,
               ),
-              endTime: moment(values.endTime, `YYYY-MM-DDTHH:mm`).format(
+              endTime: moment(values.endTime, `YYYY-MM-DD`).format(
                 `MM-DD-YY HH:mm:ss`,
               ),
             }
