@@ -39,7 +39,7 @@ export function ShiftCRUD(props: any) {
   const { selected, status, projects, projectTasks, employees } = props
   const { editingExtent, addingExtent } = state
 
-  const [currentMoment, setCurrentMoment] = useState<any | null>(null)
+  const [currentMoment, setCurrentMoment] = useState<string | null>(null)
 
   useEffect(() => {
     axios
@@ -53,7 +53,6 @@ export function ShiftCRUD(props: any) {
 
   const removeShift = () => {
     const { selected, removeShift } = props
-    console.log(selected, removeShift)
     removeShift(selected.id)
   }
 
@@ -76,6 +75,13 @@ export function ShiftCRUD(props: any) {
     status === analyzeStatus.EDITING &&
     selected &&
     selected.clockOutDate !== null
+
+  useEffect(() => {
+    if (isComplete && (editingExtent !== formConstants.FULL_SHIFT)) {
+      updateExtent(analyzeStatus.EDITING, formConstants.FULL_SHIFT)
+    }
+  }, [isComplete, editingExtent])
+
   if (status === analyzeStatus.INIT) {
     return (
       <Hero fullWidth fullHeight>
@@ -101,6 +107,7 @@ export function ShiftCRUD(props: any) {
           label="Edit Shift"
           remove={removeShift}
           type={status}
+          // @ts-expect-error: types
           extent={isComplete ? formConstants.FULL_SHIFT : editingExtent}
           extentOptions={
             isComplete
@@ -251,6 +258,7 @@ export function ShiftCRUD(props: any) {
         <FormHeader
           label="Add Shift"
           type={status}
+          // @ts-expect-error: types
           extent={addingExtent}
           extentOptions={[
             { type: formConstants.HALF_SHIFT, label: `Start Shift` },
