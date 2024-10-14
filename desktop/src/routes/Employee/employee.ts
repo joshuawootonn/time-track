@@ -1,6 +1,7 @@
 import accountActionScene from '~/scenes/Account/accountAction'
 import clockOutScene from '~/scenes/Clock/clockOut'
-import { EMPLOYEE, CLOCKOUT } from '~/constants/routes'
+import clockIn from '~/scenes/Clock/clockIn'
+import { EMPLOYEE, CLOCKOUT, CLOCKIN } from '~/constants/routes'
 import { RouteDetails } from '~/routes/route.types'
 
 const employeeRoutes: RouteDetails[] = [
@@ -16,6 +17,13 @@ const employeeRoutes: RouteDetails[] = [
     component: clockOutScene,
     exact: true,
     name: `Employee Clockout`,
+    type: EMPLOYEE,
+  },
+  {
+    path: `/${EMPLOYEE}/${CLOCKIN}`,
+    component: clockIn,
+    exact: true,
+    name: `Employee Clockin`,
     type: EMPLOYEE,
   },
 ]

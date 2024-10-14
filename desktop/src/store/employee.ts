@@ -33,13 +33,20 @@ export type EmployeeActions =
   | ClockOutEmployeeSuccess
 
 export const clockIn = (
-  employee: BaseEmployee,
-): ThunkAction<void, BaseEmployee, null, ClockInEmployeeSuccess> => {
+  employeeId: number,
+  time?: string,
+): ThunkAction<
+  void,
+  { employeeId: number; time?: string },
+  null,
+  ClockInEmployeeSuccess
+> => {
   return async (dispatch: Dispatch<EmployeeActions>) => {
     dispatch({ type: 'ClockInEmployeeRequest' })
     try {
       const response = await axios.post('/employees/clockin', {
-        employeeId: employee.id,
+        employeeId,
+        time,
       })
 
       const {
