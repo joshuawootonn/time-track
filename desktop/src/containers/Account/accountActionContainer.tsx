@@ -65,8 +65,9 @@ export class AccountAction extends Component<Props, State> {
     this.setState({ isLoading: true })
     return this.props.clockIn(employeeToClockin).then(() => {
       history.push(`/`)
+    }).finally(() => 
       this.setState({ isLoading: false })
-    })
+    )
   }
   clockOut = () => {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`)
