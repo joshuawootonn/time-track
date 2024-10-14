@@ -1,14 +1,16 @@
-var loopback = require('loopback')
+const loopback = require('loopback')
 
-var baseError = {
+const baseError = {
   name: 'Error',
   status: 400,
   message: 'Message',
 }
 
 module.exports = (Employee) => {
-  Employee.clockin = async (employeeId) => {
-    var app = require('../../server/server')
+  Employee.clockin = async (employeeId, time) => {
+    const app = require('../../server/server')
+    const helpers = require('./helpers')
+
     const Shift = app.models.Shift
     if (!employeeId) {
       return {
@@ -32,11 +34,11 @@ module.exports = (Employee) => {
     }
 
     // check that employee !isWorking and doesn't have an open shift
-    const s = await Shift.create({
-      clockInDate: new Date().toUTCString(),
+    const shift = await Shift.create({
+      clockInDate: helpers.calculateEffectiveClockInTime(time).toUTCString(),
       employeeId: employeeId,
     })
-    console.log(employee, s)
+    console.log(employee, shift)
     await employee.updateAttribute('isWorking', true)
 
     return {
@@ -45,7 +47,7 @@ module.exports = (Employee) => {
   }
 
   Employee.clockout = async (employeeId, shift, activities) => {
-    var app = require('../../server/server')
+    const app = require('../../server/server')
     const Shift = app.models.Shift
     const Activity = app.models.Activity
     if (!employeeId) {
@@ -58,17 +60,23 @@ module.exports = (Employee) => {
     const employee = await Employee.findOne({ where: { id: employeeId ?? '' } })
 
     if (lastShift == null) {
-      return { ...baseError, message: `Shift ${shift.id} doesn't exist (employee ID: ${employeeId})` }
+      return {
+        ...baseError,
+        message: `Shift ${shift.id} doesn't exist (employee ID: ${employeeId})`,
+      }
     }
 
     if (lastShift.clockOutDate) {
-      return { ...baseError, message: `Shift ${shift.id} is not open (employee ID: ${employeeId})` }
+      return {
+        ...baseError,
+        message: `Shift ${shift.id} is not open (employee ID: ${employeeId})`,
+      }
     }
-    
+
     if (employee == null) {
       return { ...baseError, message: `Employee ${employeeId} doesn't exist` }
     }
-    
+
     if (!employee.isWorking) {
       return { ...baseError, message: `Employee ${employeeId} is not Working` }
     }
@@ -103,7 +111,10 @@ module.exports = (Employee) => {
   }
 
   Employee.remoteMethod('clockin', {
-    accepts: { arg: 'employeeId', type: 'number' },
+    accepts: [
+      { arg: 'employeeId', type: 'number' },
+      { arg: 'time', type: 'string' },
+    ],
     returns: { arg: 'msg', type: 'string' },
   })
   Employee.remoteMethod('clockout', {
