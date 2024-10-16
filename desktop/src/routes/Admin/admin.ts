@@ -4,8 +4,10 @@ import exportScene from '~/scenes/Export/export'
 import analyzeScene from '~/scenes/Analyze/analyze'
 import projectScene from '~/scenes/Analyze/projectScene'
 import crewScene from '~/scenes/Analyze/crewScene'
+import clockIn from '~/scenes/Clock/clockIn'
 import {
   ADMIN,
+  CLOCKIN,
   CLOCKOUT,
   EXPORT,
   ANALYZE,
@@ -20,6 +22,13 @@ const adminRoutes: RouteDetails[] = [
     component: accountActionScene,
     exact: true,
     name: `Admin Actions`,
+    type: ADMIN,
+  },
+  {
+    path: `/${ADMIN}/${CLOCKIN}`,
+    component: clockIn,
+    exact: true,
+    name: `Admin Clockin`,
     type: ADMIN,
   },
   {
