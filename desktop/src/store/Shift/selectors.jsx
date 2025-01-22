@@ -23,13 +23,16 @@ export const getCurrentShift = createSelector(
   getShiftsFromResults,
   getEmployeeFromState,
   (shifts, results, employee) => {
-
     if (!results || results.length === 0) return null
 
-    let employeesHalfShifts = Object.values(shifts).filter(s => s.employeeId === employee.current.id && s.clockOutDate === null);
-    let mostRecentHalfShift = employeesHalfShifts.sort((a,b) => { return ( new Date (b.clockInDate) - new Date (a.clockInDate) ) })[0];
-    
-    return mostRecentHalfShift;
+    let employeesHalfShifts = Object.values(shifts).filter(
+      (s) => s.employeeId === employee.current.id && s.clockOutDate === null,
+    )
+    let mostRecentHalfShift = employeesHalfShifts.sort((a, b) => {
+      return new Date(b.clockInDate) - new Date(a.clockInDate)
+    })[0]
+
+    return mostRecentHalfShift
   },
 )
 
@@ -328,7 +331,7 @@ export const getShiftsInRangeForExport = createSelector(
   (_, props) => props.startTime,
   (_, props) => props.endTime,
   (shifts, results, activities, employees, start, end) => {
-    if (!results || results.length === 0) return null
+    if (!results || results.length === 0) return []
     //console.log('shift selectors',start, end)
     // map the shift Ids to array of shift objects
     // while mapping activity ids to array of activities
