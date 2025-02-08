@@ -123,9 +123,18 @@ export class Employee extends Component {
                 )
               }}
             >
-              <Autorenew/>
+              <Autorenew />
             </IconButton>
-            
+
+            <Field
+              name="eeNumber"
+              component={TextField}
+              margin="none"
+              label="EE Number"
+              type="search"
+              className={classes.field}
+              helper="normal"
+            />
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Typography

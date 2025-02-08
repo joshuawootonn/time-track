@@ -155,6 +155,21 @@
         "dataScale": 0,
         "nullable": "N"
       }
+    },
+    "eeNumber": {
+      "type": "String",
+      "required": true,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "ee_number",
+        "dataType": "varchar",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
     }
   },
   "validations": [],

@@ -44,6 +44,7 @@ export class EmployeeCRUD extends Component {
             authorityId: 1,
             crewId: 1,
             pin: ``,
+            eeNumber: ``, // affects the state of the add/edit form in EE Number slot
             isEmployed: true,
             isWorking: false,
           }}
