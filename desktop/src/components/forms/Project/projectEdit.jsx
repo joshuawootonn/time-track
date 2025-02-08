@@ -123,6 +123,16 @@ export class ProjectEdit extends Component {
           </Grid>
           <Grid item xs={12} className={classes.row}>
             <Field
+              name="jobNumber"
+              component={TextField}
+              margin="none"
+              label="Job #"
+              type="search"
+              className={classes.field}
+              helper="normal"
+            />
+
+            <Field
               name="name"
               component={TextField}
               fullWidth={false}

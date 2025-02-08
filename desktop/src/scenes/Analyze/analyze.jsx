@@ -12,10 +12,17 @@ import {
   Toolbar,
   Grid,
   Tooltip,
-  Drawer
+  Drawer,
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { ArrowBack, Settings, Menu, Storage, AssignmentReturned, BorderBottom } from '@material-ui/icons'
+import {
+  ArrowBack,
+  Settings,
+  Menu,
+  Storage,
+  AssignmentReturned,
+  BorderBottom,
+} from '@material-ui/icons'
 import moment from 'moment'
 import { withMediaQuery } from '~/helpers/withMediaQuery'
 
@@ -61,11 +68,11 @@ const styles = (theme) => ({
   tabs: {
     flexGrow: 1,
     backgroundColor: theme.palette.primary.main,
-    color: 'white'
+    color: 'white',
   },
   tool: {
     minHeight: 0,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   gridHeight: {
     minHeight: '65vh',
@@ -73,7 +80,7 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid rgba(224, 224, 224, 1)',
-    borderBottom: '3px solid rgba(224, 224, 224, 1)'
+    borderBottom: '3px solid rgba(224, 224, 224, 1)',
   },
 })
 
@@ -81,7 +88,7 @@ const TabIndex = {
   Employees: 0,
   Projects: 1,
   Tasks: 2,
-  Shifts: 3
+  Shifts: 3,
 }
 
 export class Analyze extends Component {
@@ -90,7 +97,7 @@ export class Analyze extends Component {
     tabValue: 3,
     isLoading: true,
     isElectron: isElectron(),
-    isMenuOpened: false
+    isMenuOpened: false,
   }
   componentDidMount = async () => {
     Promise.all([
@@ -120,13 +127,13 @@ export class Analyze extends Component {
 
   toggleDrawer = (open) => (event) => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
-      return;
+      return
     }
 
-    this.setState({ ...this.state, isMenuOpened: open });
+    this.setState({ ...this.state, isMenuOpened: open })
   }
 
   render() {
@@ -142,11 +149,14 @@ export class Analyze extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" elevation={0} className={classes.desktop} style={{
-        }}>
-
+        <AppBar
+          position="static"
+          elevation={0}
+          className={classes.desktop}
+          style={{}}
+        >
           <Toolbar className={classes.tool}>
-            <div className='leftSide'>
+            <div className="leftSide">
               {isDesktop ? (
                 <Tabs
                   value={tabValue}
@@ -161,11 +171,18 @@ export class Analyze extends Component {
               ) : (
                 <>
                   <Tooltip title="Menu" placement="bottom">
-                    <IconButton color="inherit" onClick={this.toggleDrawer(true)}>
+                    <IconButton
+                      color="inherit"
+                      onClick={this.toggleDrawer(true)}
+                    >
                       <Menu />
                     </IconButton>
                   </Tooltip>
-                  <Drawer anchor='left' open={this.state.isMenuOpened} onClose={this.toggleDrawer(false)}>
+                  <Drawer
+                    anchor="left"
+                    open={this.state.isMenuOpened}
+                    onClose={this.toggleDrawer(false)}
+                  >
                     <Tabs
                       value={tabValue}
                       orientation="vertical"
@@ -183,7 +200,7 @@ export class Analyze extends Component {
               )}
             </div>
 
-            <div className='rightSide'>
+            <div className="rightSide">
               {this.state.isElectron && (
                 <Tooltip title="Export" placement="bottom">
                   <IconButton color="inherit" onClick={this.props.openExport}>
@@ -202,12 +219,14 @@ export class Analyze extends Component {
                 </IconButton>
               </Tooltip>
             </div>
-
           </Toolbar>
         </AppBar>
 
-        {(tabValue === TabIndex.Employees) && (
-          <Grid container className={isDesktop ? classes.tab : classes.tabMobile} >
+        {tabValue === TabIndex.Employees && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
             <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
               <EmployeeToolbar />
               <EmployeeFilter />
@@ -225,8 +244,11 @@ export class Analyze extends Component {
           </Grid>
         )}
 
-        {(tabValue === TabIndex.Projects) && (
-          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+        {tabValue === TabIndex.Projects && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
             <Grid item xs={isDesktop ? 5 : 12} className={classes.gridHeight}>
               <ProjectToolbar />
               <ProjectFilterContainer />
@@ -244,8 +266,11 @@ export class Analyze extends Component {
           </Grid>
         )}
 
-        {(tabValue === TabIndex.Tasks) && (
-          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+        {tabValue === TabIndex.Tasks && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
             <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
               <TaskToolbar />
               <TaskFilter />
@@ -263,8 +288,11 @@ export class Analyze extends Component {
           </Grid>
         )}
 
-        {(tabValue === TabIndex.Shifts) && (
-          <Grid container className={isDesktop ? classes.tab : classes.tabMobile}>
+        {tabValue === TabIndex.Shifts && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
             <Grid item xs={isDesktop ? 7 : 12} className={classes.gridHeight}>
               <ShiftToolbar />
               <ShiftFilter />
@@ -325,8 +353,18 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   null,
   mapDispatchToProps,
-)(withRouter(withStyles(styles)(withMediaQuery([
-  ['isDesktop', `(min-width: 800px)`, {
-    defaultMatches: true
-  }]
-])(Analyze))))
+)(
+  withRouter(
+    withStyles(styles)(
+      withMediaQuery([
+        [
+          'isDesktop',
+          `(min-width: 800px)`,
+          {
+            defaultMatches: true,
+          },
+        ],
+      ])(Analyze),
+    ),
+  ),
+)

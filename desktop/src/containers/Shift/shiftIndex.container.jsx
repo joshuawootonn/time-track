@@ -62,11 +62,20 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(analyzeActions.updateFilter(domain.SHIFT, filters)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMediaQuery([
-  ['isDesktop', `(min-width: 800px)`, {
-    defaultMatches: true
-  }]
-])(ShiftIndex))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(
+  withMediaQuery([
+    [
+      'isDesktop',
+      `(min-width: 800px)`,
+      {
+        defaultMatches: true,
+      },
+    ],
+  ])(ShiftIndex),
+)
 
 const rows = [
   {
@@ -179,8 +188,5 @@ const mobileRows = [
     padding: `dense`,
     label: `Clock Out`,
     type: TableDataTypes.DATETIME,
-  }
+  },
 ]
-
-
-

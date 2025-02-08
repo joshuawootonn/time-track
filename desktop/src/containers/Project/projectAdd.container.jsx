@@ -17,6 +17,7 @@ const ProjectAddContainer = ({ categories, subcategories, tasks }) => {
       enableReinitialize
       initialValues={{
         name: ``,
+        jobNumber: ``,
         isActive: true,
         date: moment().startOf(`day`).format(`YYYY-MM-DD`),
         projectTasks: [],
@@ -25,6 +26,7 @@ const ProjectAddContainer = ({ categories, subcategories, tasks }) => {
       onSubmit={(values, formikFunctions) => {
         return createProject({
           name: values.name,
+          jobNumber: values.jobNumber,
           isActive: values.isActive ? 1 : 0,
           date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
           projectTasks: values.projectTasks,
