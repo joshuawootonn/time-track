@@ -141,7 +141,6 @@ export const getAllShiftsNew = createSelector(
         return true
       })
     }
-    // console.log(`List after filter:`, list.length);
     return list
   },
 )
@@ -289,10 +288,8 @@ export const getShiftsInRange = createSelector(
   (_, props) => props.endTime,
   (shifts, results, activities, employees, start, end) => {
     if (!results || results.length === 0) return null
-    //console.log('shift selectors',start, end)
     // map the shift Ids to array of shift objects
     // while mapping activity ids to array of activities
-    //console.log(results);
     return results
       .slice(-200)
       .map((shiftId) => {
@@ -313,7 +310,6 @@ export const getShiftsInRange = createSelector(
       })
       .filter((shift) => {
         // remove any shift that is not within the bounds of correct clockInDate
-        //console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
         return moment(shift.clockInDate).isBetween(
           moment(start, `MM-DD-YY HH:mm:ss`),
           moment(end, `MM-DD-YY HH:mm:ss`),
@@ -332,10 +328,8 @@ export const getShiftsInRangeForExport = createSelector(
   (_, props) => props.endTime,
   (shifts, results, activities, employees, start, end) => {
     if (!results || results.length === 0) return []
-    //console.log('shift selectors',start, end)
     // map the shift Ids to array of shift objects
     // while mapping activity ids to array of activities
-    //console.log(results);
     return results
       .map((shiftId) => {
         return {
@@ -355,7 +349,6 @@ export const getShiftsInRangeForExport = createSelector(
       })
       .filter((shift) => {
         // remove any shift that is not within the bounds of correct clockInDate
-        //console.log(shift, start, end, moment(shift.clockInDate).isBetween(moment(start,`MM-DD-YY HH:mm:ss`),moment(end,`MM-DD-YY HH:mm:ss`)))
         return moment
           .utc(shift.clockInDate)
           .local()

@@ -44,7 +44,7 @@ class Table extends React.Component {
       sortKey: props.initialSortKey || null,
       type: TableDataTypes.STRING,
       sortKeys: props.initialSortKeys || null,
-      selectedIndex: -1
+      selectedIndex: -1,
     }
   }
 
@@ -204,7 +204,6 @@ class Table extends React.Component {
     const { columns, classes } = this.props
     const { sortBy, sortDirection, data, selectedIndex } = this.state
     const { ...tableProps } = this.props
-    // console.log('table: virtualized',data.length);
     return (
       <AutoSizer>
         {({ height, width }) => (
@@ -217,7 +216,10 @@ class Table extends React.Component {
             onRowClick={this.handleClick}
             rowGetter={({ index }) => data[index]}
             rowClassName={({ index }) => {
-              const rowClass = index === selectedIndex ? classes.tableRowSelected : classes.tableRow
+              const rowClass =
+                index === selectedIndex
+                  ? classes.tableRowSelected
+                  : classes.tableRow
               return classNames(rowClass, classes.flexContainer)
             }}
             headerClassName={classes.headerCell}

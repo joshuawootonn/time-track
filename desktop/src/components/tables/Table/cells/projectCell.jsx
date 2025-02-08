@@ -22,7 +22,7 @@ const ProjectCell = ({ rowData, classes, rowHeight, updateFilter }) => {
     >
       {sortedUniqBy(sortBy(projects, [(project) => project.name]), 'id').map(
         (project, i) => {
-          const numberOption = project.name.match(/\d+/)
+          const numberOption = project.name.match(/\d+/) /// this is where the 2309 of project is made!
           return (
             numberOption && (
               <Tooltip interactive key={i} title={project.name}>

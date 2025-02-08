@@ -48,7 +48,6 @@ export const getAllProjectsNew = createSelector(
         return true
       })
     }
-
     return list
   },
 )

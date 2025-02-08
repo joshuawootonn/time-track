@@ -100,6 +100,7 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
         setIsSubmitting(true)
         return updateProject({
           id: values.id,
+          jobNumber: values.jobNumber,
           name: values.name,
           isActive: values.isActive ? 1 : 0,
           date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
