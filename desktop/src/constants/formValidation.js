@@ -105,7 +105,10 @@ export const employeeValidation = Yup.object().shape({
     .required(`Crew selection is required`),
   pin: Yup.string()
     .required(`Pin is required`)
-    .matches(new RegExp(/\b(\d{6})\b/), `Pin format is invalid`),
+    .matches(new RegExp(/\b(\d{6})\b/), `Pin format is invalid`), // in which case do these error pop up?????
+  eeNumber: Yup.string()
+    .required('EE number is required')
+    .matches(new RegExp(/\b(\d{6})\b/), `EE number format is invalid`), // edit this later when I know the EE format
   isEmployed: Yup.boolean(),
   isWorking: Yup.boolean(),
 })

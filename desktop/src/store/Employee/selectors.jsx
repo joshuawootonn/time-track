@@ -46,7 +46,10 @@ export const getAllEmployeesNew = createSelector(
             decision = false
           }
           if (
-            (key === `firstName` || key === `lastName` || key === `pin`) &&
+            (key === `firstName` ||
+              key === `lastName` ||
+              key === `pin` ||
+              key === `eeNumber`) &&
             filters[key] !== `` &&
             !new RegExp(`^${filters[key]}`, `i`).test(`${employee[key]}`)
           ) {
