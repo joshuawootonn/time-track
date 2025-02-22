@@ -42,7 +42,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "projectTasks": {
+      "type": "hasMany",
+      "model": "ProjectTask",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "*",
