@@ -7,6 +7,7 @@ export const analyzeStatus = {
 export const analyzeDomain = {
   EMPLOYEE: `employee`,
   TASK: `task`,
+  TRADE: `trade`,
   PROJECT: `project`,
   SHIFT: `shift`,
   AUTHORITY: `authority`,

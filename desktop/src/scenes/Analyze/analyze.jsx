@@ -32,6 +32,7 @@ import {
   taskActions,
   shiftActions,
   analyzeActions,
+  tradeActions,
 } from '~/store/actions'
 
 import EmployeeCRUD from '~/containers/Employee/employeeCRUD.container'
@@ -43,6 +44,11 @@ import TaskCRUD from '~/containers/Task/taskCRUD.container'
 import TaskIndex from '~/containers/Task/taskIndex.container'
 import TaskToolbar from '~/containers/Task/taskToolbar.container'
 import TaskFilter from '~/containers/Task/taskFilter.container'
+
+import TradeIndex from '~/containers/Trade/tradeIndex.container'
+import TradeToolbar from '~/containers/Trade/tradeToolbar.container'
+import TradeCRUD from '~/containers/Trade/tradeCRUD.container'
+import TradeFilter from '~/containers/Trade/tradeFilter.container'
 
 import ProjectToolbar from '~/containers/Project/projectToolbar.container'
 import ProjectFilterContainer from '~/containers/Project/projectFilter.container'
@@ -88,13 +94,14 @@ const TabIndex = {
   Employees: 0,
   Projects: 1,
   Tasks: 2,
-  Shifts: 3,
+  Trades: 3,
+  Shifts: 4,
 }
 
 export class Analyze extends Component {
   //REMOVE
   state = {
-    tabValue: 3,
+    tabValue: 1,
     isLoading: true,
     isElectron: isElectron(),
     isMenuOpened: false,
@@ -104,6 +111,7 @@ export class Analyze extends Component {
       this.props.getAllEmployees(),
       this.props.getAllProjects(),
       this.props.getAllTasks(),
+      this.props.getAllTrades(),
       this.props.getShiftsInRange(
         moment().subtract(365, `days`).format(`MM-DD-YY HH:mm:ss`),
         moment().add(14, `days`).format(`MM-DD-YY HH:mm:ss`),
@@ -166,6 +174,7 @@ export class Analyze extends Component {
                   <Tab label="Employees" />
                   <Tab label="Projects" />
                   <Tab label="Tasks" />
+                  <Tab label="Trades" />
                   <Tab label="Shifts" />
                 </Tabs>
               ) : (
@@ -193,6 +202,7 @@ export class Analyze extends Component {
                       <Tab label="Employees" />
                       <Tab label="Projects" />
                       <Tab label="Tasks" />
+                      <Tab label="Trades" />
                       <Tab label="Shifts" />
                     </Tabs>
                   </Drawer>
@@ -288,6 +298,28 @@ export class Analyze extends Component {
           </Grid>
         )}
 
+        {tabValue === TabIndex.Trades && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
+            <Grid item xs={isDesktop ? 6 : 12} className={classes.gridHeight}>
+              <TradeToolbar />
+              <TradeFilter />
+              <div
+                style={{
+                  flex: '1 1 auto',
+                }}
+              >
+                <TradeIndex />
+              </div>
+            </Grid>
+            <Grid item xs={isDesktop ? 6 : 12}>
+              <TradeCRUD />
+            </Grid>
+          </Grid>
+        )}
+
         {tabValue === TabIndex.Shifts && (
           <Grid
             container
@@ -324,6 +356,7 @@ Analyze.propTypes = {
   getAllEmployees: PropTypes.func.isRequired,
   getAllProjects: PropTypes.func.isRequired,
   getAllTasks: PropTypes.func.isRequired,
+  getAllTrades: PropTypes.func.isRequired,
 }
 
 /* istanbul ignore next */
@@ -343,6 +376,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getAllTasks: () => {
       return dispatch(taskActions.getAllTasks())
+    },
+    getAllTrades: () => {
+      return dispatch(tradeActions.getAllTrades())
     },
     getShiftsInRange: (start, end) => {
       return dispatch(shiftActions.getShiftsInRange(start, end))

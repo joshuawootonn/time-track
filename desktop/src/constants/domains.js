@@ -7,6 +7,10 @@ export default {
     singular: `task`,
     plural: `tasks`,
   },
+  TRADE: {
+    singular: `trade`,
+    plural: `trades`,
+  },
   PROJECT: {
     singular: `project`,
     plural: `projects`,

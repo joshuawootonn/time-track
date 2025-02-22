@@ -93,6 +93,10 @@ const taskActionTypes = {
   ...createCRUDActionTypes(`task`, `tasks`),
 }
 
+const tradeActionTypes = {
+  ...createCRUDActionTypes(`trade`, `trades`),
+}
+
 const userActionTypes = {
   ...createCustomAsyncActionType(`user`, `login`),
 }
@@ -116,4 +120,5 @@ export {
   subcategoryActionTypes,
   taskActionTypes,
   userActionTypes,
+  tradeActionTypes,
 }
