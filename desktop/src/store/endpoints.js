@@ -10,6 +10,7 @@ import * as activityEndpoints from './Activity/endpoints'
 import * as categoryEndpoints from './Category/endpoints'
 import * as subcategoryEndpoints from './Subcategory/endpoints'
 import * as dimensionEndpoints from './Dimension/endpoints'
+import * as tradeEndpoints from './Trade/endpoints'
 export {
   userEndpoints,
   shiftEndpoints,
@@ -23,4 +24,5 @@ export {
   categoryEndpoints,
   subcategoryEndpoints,
   dimensionEndpoints,
+  tradeEndpoints,
 }

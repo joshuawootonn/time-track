@@ -123,6 +123,7 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(analyzeActions.clearFilter(domains.PROJECT))
       dispatch(analyzeActions.clearFilter(domains.TASK))
       dispatch(analyzeActions.clearFilter(domains.SHIFT))
+      dispatch(analyzeActions.clearFilter(domains.TRADE))
     },
   }
 }

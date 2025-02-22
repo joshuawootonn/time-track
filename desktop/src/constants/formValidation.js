@@ -126,6 +126,12 @@ export const taskValidation = Yup.object().shape({
   isActive: Yup.boolean(),
 })
 
+export const tradeValidation = Yup.object().shape({
+  name: Yup.string()
+    .required(`Name is required`)
+    .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), `Name format is invalid`),
+})
+
 export const projectValidation = Yup.object().shape({
   jobNumber: Yup.string().nullable(),
   //   .required(`Job # is required`)

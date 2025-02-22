@@ -8,6 +8,7 @@ import * as crewActions from './Crew/actions'
 import * as projectActions from './Project/actions'
 import * as projectTaskActions from './ProjectTask/actions'
 import * as taskActions from './Task/actions'
+import * as tradeActions from './Trade/actions'
 import * as activityActions from './Activity/actions'
 import * as staticActions from './Static/actions'
 import * as exportActions from './Export/actions'
@@ -45,4 +46,5 @@ export {
   dimensionActions,
   modalActions,
   genericActions,
+  tradeActions,
 }

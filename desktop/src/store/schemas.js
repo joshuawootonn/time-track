@@ -11,6 +11,7 @@ export const taskSchema = new schema.Entity(`tasks`)
 export const subcategorySchema = new schema.Entity(`subcategories`)
 export const categorySchema = new schema.Entity(`categories`)
 export const dimensionSchema = new schema.Entity(`dimensions`)
+export const tradeSchema = new schema.Entity(`trades`)
 
 crewSchema.define({ employees: [employeeSchema] })
 
@@ -46,6 +47,10 @@ taskSchema.define({
   dimension: dimensionSchema,
 })
 
+tradeSchema.define({
+  project_tasks: [project_taskSchema],
+})
+
 subcategorySchema.define({
   tasks: [taskSchema],
   category: categorySchema,
@@ -66,6 +71,7 @@ export const shiftArray = { shifts: [shiftSchema] }
 export const activityArray = { activities: [activitySchema] }
 export const projectArray = { projects: [projectSchema] }
 export const taskArray = { tasks: [taskSchema] }
+export const tradeArray = { trades: [tradeSchema] }
 export const subcategoryArray = { subcategories: [subcategorySchema] }
 export const categoryArray = { categories: [categorySchema] }
 export const dimensionArray = { dimensions: [dimensionSchema] }

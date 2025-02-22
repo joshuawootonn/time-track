@@ -7,6 +7,7 @@ import {
   categoryActions,
   dimensionActions,
   subcategoryActions,
+  tradeActions,
 } from '~/store/actions'
 
 export const getStaticData = () => {
@@ -20,6 +21,7 @@ export const getStaticData = () => {
         dispatch(projectTaskActions.getAllProjectTasks()),
         dispatch(projectActions.getAllProjects()),
         dispatch(taskActions.getAllTasks()),
+        dispatch(tradeActions.getAllTrades()),
       ])
       return dispatch({ type: staticActionTypes.GET_STATIC_DATA_SUCCESS })
     } catch (e) {
