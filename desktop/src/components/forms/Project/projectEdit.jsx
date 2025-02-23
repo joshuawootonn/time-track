@@ -93,6 +93,7 @@ export class ProjectEdit extends Component {
     const {
       classes,
       tasks,
+      trades,
       isSubmitting,
       resetForm,
       initialValues,
@@ -201,6 +202,15 @@ export class ProjectEdit extends Component {
                             className={classes.taskField}
                           />
                           <Field
+                            name={`projectTasks.${index}.tradeId`}
+                            component={TypeableSelect}
+                            type="name"
+                            items={trades}
+                            fullWidth
+                            label="Trade"
+                            className={classes.tradeField}
+                          />
+                          <Field
                             name={`projectTasks.${index}.quantity`}
                             component={TextField}
                             fullWidth
@@ -250,6 +260,7 @@ export class ProjectEdit extends Component {
                         categoryId: -1,
                         subcategoryId: -1,
                         taskId: -1,
+                        tradeId: -1,
                         quantity: 1,
                         estimateTime: 1,
                       })
@@ -310,6 +321,7 @@ ProjectEdit.propTypes = {
   subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
   tasks: PropTypes.array,
+  trades: PropTypes.array,
   clearFilter: PropTypes.func,
   goToShifts: PropTypes.func,
 }

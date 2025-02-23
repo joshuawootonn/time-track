@@ -9,7 +9,7 @@ import axios from '~/helpers/axios'
 import Progress from '~/components/helpers/Progress'
 import domain from '~/constants/domains'
 
-const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
+const ProjectEditContainer = ({ selected, tasks, trades, goToTab }) => {
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -65,7 +65,7 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
         endTime: moment.utc().add(1, 'day').format(`MM-DD-YY HH:mm:ss`),
       }),
     )
-    goToTab(3)
+    goToTab(4)
   }
 
   if (isSubmitting) {
@@ -122,6 +122,7 @@ const ProjectEditContainer = ({ selected, tasks, goToTab }) => {
       render={(formikProps) => (
         <ProjectEdit
           tasks={tasks}
+          trades={trades}
           removeProject={removeProject}
           goToShifts={onGoToShifts}
           {...formikProps}

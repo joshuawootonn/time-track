@@ -6,6 +6,7 @@ import {
   subcategorySelectors,
   categorySelectors,
   taskSelectors,
+  tradeSelectors,
   projectTaskSelectors,
 } from '~/store/selectors'
 import { analyzeStatus } from '~/constants/analyze'
@@ -14,8 +15,15 @@ import ProjectAddContainer from '~/containers/Project/projectAdd.container'
 
 export class ProjectCRUD extends Component {
   render() {
-    const { selected, status, categories, subcategories, tasks, goToTab } =
-      this.props
+    const {
+      selected,
+      status,
+      categories,
+      subcategories,
+      trades,
+      tasks,
+      goToTab,
+    } = this.props
 
     if (status === analyzeStatus.INIT) {
       return (
@@ -29,8 +37,9 @@ export class ProjectCRUD extends Component {
       return (
         <ProjectAddContainer
           tasks={tasks}
-          categories={categories}
-          subcategories={subcategories}
+          trades={trades}
+          //categories={categories}
+          //subcategories={subcategories}
         />
       )
     }
@@ -40,8 +49,9 @@ export class ProjectCRUD extends Component {
         <ProjectEditContainer
           selected={selected}
           tasks={tasks}
-          categories={categories}
-          subcategories={subcategories}
+          trades={trades}
+          //categories={categories}
+          //subcategories={subcategories}
           goToTab={goToTab}
         />
       )
@@ -53,9 +63,10 @@ export class ProjectCRUD extends Component {
 const mapStateToProps = (state) => ({
   selected: projectTaskSelectors.getSelectedProject(state),
   status: state.analyze.projectStatus,
-  categories: categorySelectors.getAllCategories(state),
-  subcategories: subcategorySelectors.getAllSubcategories(state),
+  //categories: categorySelectors.getAllCategories(state),
+  //subcategories: subcategorySelectors.getAllSubcategories(state),
   tasks: taskSelectors.getAllTasksWithContent(state),
+  trades: tradeSelectors.getAllTradesWithContent(state),
 })
 
 /* istanbul ignore next */

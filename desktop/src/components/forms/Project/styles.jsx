@@ -30,6 +30,10 @@ const styles = () => ({
     margin: `auto 8px`,
     width: '250%',
   },
+  tradeField: {
+    margin: `auto 8px`,
+    width: '250%',
+  },
   switchBox: {
     width: `100%`,
     display: `flex`,

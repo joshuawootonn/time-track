@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { projectActions } from '~/store/actions'
 import ProjectAdd from '~/components/forms/Project/projectAdd'
 
-const ProjectAddContainer = ({ categories, subcategories, tasks }) => {
+const ProjectAddContainer = ({ categories, subcategories, tasks, trades }) => {
   const dispatch = useDispatch()
 
   const createProject = (project) =>
@@ -48,6 +48,7 @@ const ProjectAddContainer = ({ categories, subcategories, tasks }) => {
             categories={categories}
             subcategories={subcategories}
             tasks={tasks}
+            trades={trades}
             {...formikProps}
           />
         )

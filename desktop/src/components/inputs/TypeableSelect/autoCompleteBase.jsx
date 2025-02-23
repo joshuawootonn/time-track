@@ -335,7 +335,7 @@ class Autocomplete extends React.PureComponent {
             },
           }}
           options={options}
-          maxMenuHeight='180px'
+          maxMenuHeight="180px"
           components={components}
           onChange={(value) => setFieldValue(field.name, value.id)}
           value={this.getValueFromOptions(options)}
