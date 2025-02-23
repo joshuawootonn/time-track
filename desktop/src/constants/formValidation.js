@@ -143,15 +143,18 @@ export const projectValidation = Yup.object().shape({
   isActive: Yup.boolean(),
   projectTasks: Yup.array().of(
     Yup.object().shape({
-      categoryId: Yup.number()
-        .min(1, `Selection required`)
-        .required(`Selection required`),
-      subcategoryId: Yup.number()
-        .positive(`Selection required`)
-        .required(`Selection required`),
+      // categoryId: Yup.number()
+      //   .min(1, `Selection required`)
+      //   .required(`Selection required`),
+      // subcategoryId: Yup.number()
+      //   .positive(`Selection required`)
+      //   .required(`Selection required`),
       taskId: Yup.number()
         .positive(`Selection required`)
         .required(`Selection required`),
+      // tradeId: Yup.number()
+      //   .positive(`Selection required`)
+      //   .required(`Selection required`),
       estimateTime: Yup.number()
         .positive(`Postive numbers only`)
         .required(`Postive numbers only`),
@@ -175,6 +178,9 @@ export const projectEditValidation = Yup.object().shape({
       taskId: Yup.number()
         .positive(`Selection required`)
         .required(`Selection required`),
+      // tradeId: Yup.number()
+      //   .positive(`Selection required`)
+      //   .required(`Selection required`),
       estimateTime: Yup.number()
         .positive(`Postive numbers only`)
         .required(`Postive numbers only`),

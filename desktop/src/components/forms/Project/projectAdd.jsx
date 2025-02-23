@@ -20,6 +20,7 @@ export class ProjectAdd extends Component {
       categories,
       subcategories,
       tasks,
+      trades,
       isSubmitting,
       resetForm,
       initialValues,
@@ -88,7 +89,7 @@ export class ProjectAdd extends Component {
                           )}
                         >
                           <div className={cx(classes.row, classes.bodyRow)}>
-                            <Field
+                            {/* <Field
                               name={`projectTasks.${index}.categoryId`}
                               component={TypeableSelect}
                               type="type"
@@ -125,21 +126,32 @@ export class ProjectAdd extends Component {
                                   -1,
                                 )
                               }}
-                            />
+                            /> */}
+
                             <Field
                               name={`projectTasks.${index}.taskId`}
                               component={TypeableSelect}
                               type="name"
-                              items={tasks.filter((globalTask) => {
-                                return (
-                                  globalTask.subcategory.id ===
-                                    projectTasks.subcategoryId &&
-                                  globalTask.category.id ===
-                                    projectTasks.categoryId
-                                )
-                              })}
+                              items={tasks}
+                              // items={tasks.filter((globalTask) => {
+                              //   return (
+                              //     globalTask.subcategory.id ===
+                              //       projectTasks.subcategoryId &&
+                              //     globalTask.category.id ===
+                              //       projectTasks.categoryId
+                              //   )
+                              // })}
                               fullWidth
                               label="Task"
+                              className={classes.field}
+                            />
+                            <Field
+                              name={`projectTasks.${index}.tradeId`}
+                              component={TypeableSelect}
+                              type="name"
+                              items={trades}
+                              fullWidth
+                              label="Trade"
                               className={classes.field}
                             />
                             <Field
@@ -184,6 +196,7 @@ export class ProjectAdd extends Component {
                           categoryId: -1,
                           subcategoryId: -1,
                           taskId: -1,
+                          tradeId: -1,
                           quantity: 1,
                           estimateTime: 1,
                         })
@@ -244,6 +257,7 @@ ProjectAdd.propTypes = {
   subcategories: PropTypes.array,
   values: PropTypes.object.isRequired,
   tasks: PropTypes.array,
+  trades: PropTypes.array,
 }
 
 export default withStyles(styles)(ProjectAdd)
