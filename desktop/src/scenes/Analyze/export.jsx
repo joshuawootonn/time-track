@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
 import Modal from '~/components/floaters/Modal'
-import ExportContainerCSV from '~/containers/Export/exportContainerCSV'
+import ExportContainer from '~/containers/Export/exportContainer'
 
 /* istanbul ignore next */
 const styles = (theme) => ({
   modal: {
     width: `90%`,
     maxWidth: `500px`,
-    height: `300px`,
+    height: `430px`,
     maxHeight: `90%`,
   },
   listWrapper: {
@@ -45,7 +45,7 @@ export class Export extends Component {
 
     return (
       <Modal className={classes.modal} open={open} toggle={toggleModal}>
-        <ExportContainerCSV toggleModal={toggleModal} />
+        <ExportContainer onSubmit={toggleModal} onCancel={toggleModal} />
       </Modal>
     )
   }
