@@ -153,6 +153,7 @@ export class ProjectAdd extends Component {
                               fullWidth
                               label="Trade"
                               className={classes.field}
+                              isClearable={true}
                             />
                             <Field
                               name={`projectTasks.${index}.estimateTime`}
@@ -196,7 +197,7 @@ export class ProjectAdd extends Component {
                           categoryId: -1,
                           subcategoryId: -1,
                           taskId: -1,
-                          tradeId: -1,
+                          tradeId: null,
                           quantity: 1,
                           estimateTime: 1,
                         })

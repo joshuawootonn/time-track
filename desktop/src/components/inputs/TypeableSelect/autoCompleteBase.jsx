@@ -298,6 +298,7 @@ class Autocomplete extends React.PureComponent {
       fullWidth,
       className,
       formControlProps,
+      isClearable,
       ...other
     } = this.props
     const errorText = errors[field.name]
@@ -326,6 +327,7 @@ class Autocomplete extends React.PureComponent {
           classes={classes}
           styles={selectStyles}
           required={required}
+          isClearable={isClearable}
           textFieldProps={{
             required,
             label,
@@ -337,7 +339,7 @@ class Autocomplete extends React.PureComponent {
           options={options}
           maxMenuHeight="180px"
           components={components}
-          onChange={(value) => setFieldValue(field.name, value.id)}
+          onChange={(value) => setFieldValue(field.name, value?.id ?? null)}
           value={this.getValueFromOptions(options)}
           isMulti={isMultiple}
         />
@@ -365,6 +367,7 @@ Autocomplete.propTypes = {
   fullWidth: PropTypes.bool,
   margin: PropTypes.oneOf(['none', 'dense', 'normal']),
   isMultiple: PropTypes.bool,
+  isClearable: PropTypes.bool,
 }
 
 Autocomplete.defaultProps = {

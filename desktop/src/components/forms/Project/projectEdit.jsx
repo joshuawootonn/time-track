@@ -209,6 +209,7 @@ export class ProjectEdit extends Component {
                             fullWidth
                             label="Trade"
                             className={classes.tradeField}
+                            isClearable={true}
                           />
                           <Field
                             name={`projectTasks.${index}.quantity`}
@@ -260,7 +261,7 @@ export class ProjectEdit extends Component {
                         categoryId: -1,
                         subcategoryId: -1,
                         taskId: -1,
-                        tradeId: -1,
+                        tradeId: null,
                         quantity: 1,
                         estimateTime: 1,
                       })
