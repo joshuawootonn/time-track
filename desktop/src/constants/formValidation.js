@@ -82,8 +82,8 @@ export const exportValidation = Yup.object().shape({
   fileLocation: Yup.string()
     .required(`File location is required`)
     .matches(
-      new RegExp(/\.(xls|xlsx)$/i),
-      `File location must be an Xls or Xlsx file`,
+      new RegExp(/\.(xls|xlsx|csv)$/i),
+      `File location must be an Xls, Xlsx, or Csv file`,
     ),
 })
 
@@ -105,10 +105,10 @@ export const employeeValidation = Yup.object().shape({
     .required(`Crew selection is required`),
   pin: Yup.string()
     .required(`Pin is required`)
-    .matches(new RegExp(/\b(\d{6})\b/), `Pin format is invalid`), // in which case do these error pop up?????
-  eeNumber: Yup.string()
-    .required('EE number is required')
-    .matches(new RegExp(/\b(\d{6})\b/), `EE number format is invalid`), // edit this later when I know the EE format
+    .matches(new RegExp(/\b(\d{6})\b/), `Pin format is invalid`),
+  eeNumber: Yup.string().nullable(),
+  // .required('EE number is required')
+  // .matches(new RegExp(/\b(\d{6})\b/), `EE number format is invalid`), // to be edited once format is known
   isEmployed: Yup.boolean(),
   isWorking: Yup.boolean(),
 })
@@ -127,9 +127,8 @@ export const taskValidation = Yup.object().shape({
 })
 
 export const tradeValidation = Yup.object().shape({
-  name: Yup.string()
-    .required(`Name is required`)
-    .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), `Name format is invalid`),
+  name: Yup.string().required(`Name is required`),
+  // .matches(new RegExp(/[a-zA-Z-_0-9]{4,}/), `Name format is invalid`),  // to be edited once format is known
 })
 
 export const projectValidation = Yup.object().shape({
@@ -152,7 +151,7 @@ export const projectValidation = Yup.object().shape({
       taskId: Yup.number()
         .positive(`Selection required`)
         .required(`Selection required`),
-      // tradeId: Yup.number()
+      tradeId: Yup.number().nullable(),
       //   .positive(`Selection required`)
       //   .required(`Selection required`),
       estimateTime: Yup.number()
@@ -178,9 +177,9 @@ export const projectEditValidation = Yup.object().shape({
       taskId: Yup.number()
         .positive(`Selection required`)
         .required(`Selection required`),
-      // tradeId: Yup.number()
+      tradeId: Yup.number().nullable(),
       //   .positive(`Selection required`)
-      //   .required(`Selection required`),
+      //   .required(`Selection required`), // to be edited once format is known
       estimateTime: Yup.number()
         .positive(`Postive numbers only`)
         .required(`Postive numbers only`),
