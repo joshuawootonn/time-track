@@ -158,7 +158,7 @@
     },
     "eeNumber": {
       "type": "String",
-      "required": true,
+      "required": false,
       "length": 45,
       "precision": null,
       "scale": null,
@@ -168,7 +168,7 @@
         "dataLength": 45,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "N"
+        "nullable": "Y"
       }
     }
   },
