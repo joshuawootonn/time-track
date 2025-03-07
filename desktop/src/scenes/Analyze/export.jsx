@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
 import Modal from '~/components/floaters/Modal'
-import ExportContainer from '~/containers/Analyze/exportContainer'
+import ExportContainerCSV from '~/containers/Export/exportContainerCSV'
 
 /* istanbul ignore next */
 const styles = (theme) => ({
@@ -45,7 +45,7 @@ export class Export extends Component {
 
     return (
       <Modal className={classes.modal} open={open} toggle={toggleModal}>
-        <ExportContainer toggleModal={toggleModal} />
+        <ExportContainerCSV toggleModal={toggleModal} />
       </Modal>
     )
   }

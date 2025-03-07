@@ -13,6 +13,12 @@ export function minutesToString(minutes: number | null): string {
   return `${isNegative ? `-` : ``}${hoursString}:${minutesString}`
 }
 
+export function minutesToDecimals(minutes: number | null): number {
+  if (minutes === 0 || !minutes) return 0
+
+  return minutes / 60
+}
+
 export function currentRoundedTime(): moment.Moment {
   return moment()
     .minute(Math.round(moment().minute() / 15) * 15)
@@ -21,8 +27,8 @@ export function currentRoundedTime(): moment.Moment {
 
 /**
  * makes sure minutes are rounded to 15 min increments
- * @param minutes 
- * @returns 
+ * @param minutes
+ * @returns
  */
 export function minutesRoudedTime(minutes: number): number {
   return Math.round(minutes / 15) * 15

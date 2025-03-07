@@ -1,6 +1,7 @@
 export const SET_CRED = `set_cred`
 export const GET_CRED = `get_cred`
 export const CREATE_EXPORT = `create_export`
+export const CREATE_CSV_EXPORT = `create_csv_export`
 
 export const TOGGLE_FULLSCREEN = `toggle_fullscreen`
 export const IS_FULLSCREEN = `is_fullscreen`
@@ -20,6 +21,7 @@ declare global {
       set_cred: (cred: Cred) => Cred
       get_cred: () => Cred
       create_export: () => string
+      create_csv_export: () => string
       toggle_fullscreen: () => boolean
       is_fullscreen: () => boolean
       set_access_token: (token: string) => void
