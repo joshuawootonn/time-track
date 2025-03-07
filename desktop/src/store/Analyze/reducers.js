@@ -29,6 +29,7 @@ export const initialState = {
     isEmployed: 1,
     crewId: -1,
     authorityId: -1,
+    eeNumber: ``,
   },
   projectFilters: {
     name: ``,

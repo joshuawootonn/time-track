@@ -8,6 +8,7 @@ const path = require('path')
 const settings = require('electron-settings')
 const log = require('electron-log')
 const isDev = require('electron-is-dev')
+const fs = require('fs')
 
 const IPCConstants = {
   SET_CRED: 'set_cred',
@@ -15,6 +16,7 @@ const IPCConstants = {
   SET_ACCESS_TOKEN: 'set_access_token',
   GET_ACCESS_TOKEN: 'get_access_token',
   CREATE_EXPORT: 'create_export',
+  CREATE_CSV_EXPORT: 'create_csv_export',
   TOGGLE_FULLSCREEN: `toggle_fullscreen`,
   IS_FULLSCREEN: `is_fullscreen`,
 }
@@ -179,8 +181,6 @@ ipcMain.on(IPCConstants.GET_CRED, (event) => {
 })
 
 ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
-  //console.log('we out here', arg);
-
   const { data } = arg
 
   var workbook = new Excel.Workbook()
@@ -246,6 +246,18 @@ ipcMain.on(IPCConstants.CREATE_EXPORT, (event, arg) => {
       event.returnValue = 'saved'
     })
   } catch (e) {
+    event.returnValue = 'failed'
+  }
+})
+
+ipcMain.on(IPCConstants.CREATE_CSV_EXPORT, (event, arg) => {
+  const { data } = arg
+
+  try {
+    fs.writeFileSync(arg.fileLocation, data, { flag: 'w+' })
+    event.returnValue = 'saved'
+  } catch (e) {
+    console.log(e)
     event.returnValue = 'failed'
   }
 })

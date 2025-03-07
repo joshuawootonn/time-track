@@ -15,13 +15,14 @@ import {
   projectTaskSelectors,
   projectSelectors,
 } from '~/store/selectors'
-import { minutesToString } from '~/helpers/time'
+import { minutesToDecimals, minutesToString } from '~/helpers/time'
 
 import * as IPCConstants from '~/constants/ipc'
 import { snackActions } from '~/store/actions'
 import * as status from '~/constants/status'
 
 import store from '~/store'
+import { ReorderSharp } from '@material-ui/icons'
 
 export const exportToExcel = (start, end, fileLocation) => {
   return async (dispatch) => {
@@ -32,7 +33,6 @@ export const exportToExcel = (start, end, fileLocation) => {
 
       await dispatch(getData(startMoment, endMoment))
       const exportData = formatData(startMoment, endMoment)
-      console.log(exportData)
       window.electronAPI.create_export({
         fileLocation,
         data: exportData,
@@ -40,6 +40,32 @@ export const exportToExcel = (start, end, fileLocation) => {
       await dispatch(snackActions.openSnack(status.SUCCESS, `Export Success!`))
       return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS })
     } catch (e) {
+      dispatch(snackActions.openSnack(status.FAILURE, `Export failed!`))
+      return dispatch({
+        type: exportActionTypes.EXPORT_EXCEL_FAILURE,
+        payload: e,
+      })
+    }
+  }
+}
+
+export const exportToCSV = (start, end, fileLocation) => {
+  return async (dispatch) => {
+    dispatch({ type: exportActionTypes.EXPORT_EXCEL_REQUEST })
+    try {
+      const startMoment = new moment(start).format(`MM-DD-YY HH:mm:ss`)
+      const endMoment = new moment(end).format(`MM-DD-YY HH:mm:ss`)
+
+      await dispatch(getData(startMoment, endMoment))
+      const exportData = formatDataCSV(startMoment, endMoment) //array of objects
+      window.electronAPI.create_csv_export({
+        fileLocation,
+        data: exportData,
+      })
+      await dispatch(snackActions.openSnack(status.SUCCESS, `Export Success!`))
+      return dispatch({ type: exportActionTypes.EXPORT_EXCEL_SUCCESS })
+    } catch (e) {
+      console.log('error', e)
       dispatch(snackActions.openSnack(status.FAILURE, `Export failed!`))
       return dispatch({
         type: exportActionTypes.EXPORT_EXCEL_FAILURE,
@@ -61,7 +87,7 @@ export const getData = (startTime, endTime) => {
         dispatch(shiftActions.getShiftsInRange(startTime, endTime)),
       ])
     } catch (e) {
-      //console.log(e);
+      console.log(e)
     }
   }
 }
@@ -283,5 +309,150 @@ const formatData = (startTime, endTime) => {
       })
     }
   })
+  return exportData
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+const formatDataCSV = (startTime, endTime) => {
+  // TODO: different formatting routines for the export category
+  // array of employees
+  const employees = employeeSelectors
+    .getAllEmployees(store.getState())
+    .filter((employee) => employee.isEmployed)
+    // sort so that employees get added in order
+    .sort((a, b) => {
+      const nameA = (a.lastName + a.firstName).toLowerCase(),
+        nameB = (b.lastName + b.firstName).toLowerCase()
+      if (nameA < nameB)
+        //sort string ascending
+        return -1
+      if (nameA > nameB) return 1
+      return 0
+    })
+
+  // array of shifts w/ embedded activities
+  const shifts = shiftSelectors
+    .getShiftsInRangeForExport(store.getState(), { startTime, endTime })
+    .sort((a, b) => {
+      if (moment(a.clockInDate).isBefore(moment(b.clockInDate)))
+        //sort string ascending
+        return -1
+      if (moment(a.clockInDate).isAfter(moment(b.clockInDate)))
+        //sort string ascending
+        return 1
+      return 0
+    })
+
+  // object of project tasks indexed by id with task and project attached
+  const projectTasks = projectTaskSelectors.getAllProjectTasksObjects(
+    store.getState(),
+  )
+
+  let exportData = `EE Number,Job #,Date,Hours,Earn Code,Trade\n`
+
+  employees.forEach((employee) => {
+    const rows = []
+
+    const shiftsOfEmployees = shifts.filter((shift) => {
+      return employee.id === shift.employeeId
+    })
+    const hasShifts = shiftsOfEmployees.length > 0 ? true : false
+
+    const individualProjectTotals = {}
+    const allProjectTotals = { total: 0, reg: 0, ot: 0 }
+
+    let totalTimeForWeek = 0
+    shiftsOfEmployees.forEach((shift) => {
+      shift.activities.forEach((activity) => {
+        // Adding individual activity times
+        const currentProjectId = projectTasks[activity.projectTaskId].project.id
+
+        // if project hasn't been added to total
+        if (!individualProjectTotals[currentProjectId]) {
+          individualProjectTotals[currentProjectId] = {
+            total: 0,
+            reg: 0,
+            ot: 0,
+          }
+        }
+
+        if (totalTimeForWeek >= 2400) {
+          allProjectTotals.total += activity.length
+          allProjectTotals.ot += activity.length
+          individualProjectTotals[currentProjectId].total += activity.length
+          individualProjectTotals[currentProjectId].ot += activity.length
+        } else if (totalTimeForWeek + activity.length >= 2400) {
+          allProjectTotals.total += activity.length
+          allProjectTotals.reg += 2400 - totalTimeForWeek
+          allProjectTotals.ot += totalTimeForWeek + activity.length - 2400
+          individualProjectTotals[currentProjectId].total += activity.length
+          individualProjectTotals[currentProjectId].reg +=
+            2400 - totalTimeForWeek
+          individualProjectTotals[currentProjectId].ot +=
+            totalTimeForWeek + activity.length - 2400
+        } else {
+          allProjectTotals.total += activity.length
+          allProjectTotals.reg += activity.length
+          individualProjectTotals[currentProjectId].total += activity.length
+          individualProjectTotals[currentProjectId].reg += activity.length
+        }
+        totalTimeForWeek += activity.length
+      })
+    })
+
+    totalTimeForWeek = 0
+    shiftsOfEmployees.forEach((shift) => {
+      shift.activities.forEach((activity, i) => {
+        let overtimeActivityLength, regularActivityLength
+
+        if (totalTimeForWeek + activity.length <= 2400) {
+          regularActivityLength = activity.length
+        } else if (totalTimeForWeek > 2400) {
+          overtimeActivityLength = activity.length
+        } else {
+          overtimeActivityLength = totalTimeForWeek + activity.length - 2400
+          regularActivityLength = 2400 - totalTimeForWeek
+        }
+
+        totalTimeForWeek += activity.length
+
+        if (minutesToDecimals(regularActivityLength) > 0) {
+          // REG hours
+          rows.push(
+            [
+              `${employee.eeNumber ?? ''}`,
+              `${projectTasks[activity.projectTaskId].project.jobNumber ?? ''}`,
+              `${moment.utc(shift.clockInDate).local().format(`MM/DD/YYYY`)}`,
+              `${minutesToDecimals(regularActivityLength)}`,
+              'REG',
+              `${projectTasks[activity.projectTaskId].tradeId ?? ''}`,
+            ].join(','),
+          )
+        }
+
+        if (minutesToDecimals(overtimeActivityLength) > 0) {
+          // OT hours
+          rows.push(
+            [
+              `${employee.eeNumber ?? ''}`,
+              `${projectTasks[activity.projectTaskId].project.jobNumber ?? ''}`,
+              `${moment.utc(shift.clockInDate).local().format(`MM/DD/YYYY`)}`,
+              `${minutesToDecimals(overtimeActivityLength)}`,
+              'OT',
+              `${projectTasks[activity.projectTaskId].tradeId ?? ''}`,
+            ].join(','),
+          )
+        }
+      })
+    })
+
+    if (hasShifts) {
+      exportData += rows.join('\n')
+      exportData += '\n'
+    }
+  })
+
+  // console.log('exportData', exportData)
   return exportData
 }
