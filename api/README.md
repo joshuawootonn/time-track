@@ -74,4 +74,45 @@ npm test
 Please check out [LoopBack 4 documentation](https://loopback.io/doc/en/lb4/) to
 understand how you can continue to add features to this application.
 
-[![LoopBack](https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png)](http://loopback.io/)
+[![LoopBack](<https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
+
+# Releasing new API version
+
+## 1. Prepare a PR
+
+Preferably the PR should be separated from the client (App/Electron) changes, and backward compatible with the previous version of the client.
+
+## 2. Deploy the PR
+
+### 2.1. Merge the PR in GitHub
+
+### 2.2. Connect to DigitalOcean droplet
+
+Open `time-track-drop-prod` droplet, and click `Console`
+
+### 2.3. Pull `master` branch and rebuild the API
+
+```sh
+cd ~/time-track
+git pull
+pnpm i
+cd api
+pnpm build
+```
+
+### 2.4. Restart PM2 instance
+
+> [!TIP]
+> To inspect currently running instances, run:
+>
+> ```sh
+> pm2 ls
+> ```
+
+```sh
+pm2 restart all
+```
+
+## 3. Check the App and API
+
+It is important to check if the update did not break the client apps (App and Electron app).
