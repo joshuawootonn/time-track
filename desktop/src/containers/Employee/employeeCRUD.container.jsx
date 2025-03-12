@@ -55,6 +55,7 @@ export class EmployeeCRUD extends Component {
               ...values,
               isEmployed: values.isEmployed ? 1 : 0,
               isWorking: values.isWorking ? 1 : 0,
+              eeNumber: values.eeNumber ?? '',
             }).then(
               () => {
                 formikFunctions.resetForm()
@@ -90,6 +91,7 @@ export class EmployeeCRUD extends Component {
             ...selected,
             isEmployed: selected.isEmployed ? true : false,
             isWorking: selected.isWorking ? true : false,
+            eeNumber: selected.eeNumber ?? '',
           }}
           validationSchema={employeeValidation}
           onSubmit={(values, formikFunctions) => {
