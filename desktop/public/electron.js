@@ -56,13 +56,14 @@ function createWindow() {
     : `file://${path.join(__dirname, '../build/index.html')}`
   mainWindow.loadURL(startUrl)
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-
   if (isDev) {
     // Open the DevTools.
     mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.setTitle(`Time Track v${app.getVersion()}`)
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
