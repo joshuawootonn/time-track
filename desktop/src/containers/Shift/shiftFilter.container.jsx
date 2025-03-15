@@ -49,12 +49,8 @@ export class ShiftFilter extends Component {
           onSubmit={async (values, formikFunctions) => {
             const formattedValues = {
               ...values,
-              startTime: moment(values.startTime, `YYYY-MM-DD`).format(
-                `MM-DD-YY HH:mm:ss`,
-              ),
-              endTime: moment(values.endTime, `YYYY-MM-DD`).format(
-                `MM-DD-YY HH:mm:ss`,
-              ),
+              startTime: moment(values.startTime, `YYYY-MM-DD`).startOf('day'),
+              endTime: moment(values.endTime, `YYYY-MM-DD`).endOf('day'),
             }
             await getShifts(formattedValues)
             toggleFilter()
