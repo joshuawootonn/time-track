@@ -101,7 +101,7 @@ const TabIndex = {
 export class Analyze extends Component {
   //REMOVE
   state = {
-    tabValue: 1,
+    tabValue: 4,
     isLoading: true,
     isElectron: isElectron(),
     isMenuOpened: false,
