@@ -114,17 +114,19 @@ export class Employee extends Component {
               className={classes.field}
               helper="normal"
             />
-            <IconButton
-              type="button"
-              onClick={() => {
-                this.props.setFieldValue(
-                  'pin',
-                  100000 + Math.floor(Math.random() * 900000),
-                )
-              }}
-            >
-              <Autorenew />
-            </IconButton>
+            {![`filter`].includes(type) && (
+              <IconButton
+                type="button"
+                onClick={() => {
+                  this.props.setFieldValue(
+                    'pin',
+                    100000 + Math.floor(Math.random() * 900000),
+                  )
+                }}
+              >
+                <Autorenew />
+              </IconButton>
+            )}
 
             <Field
               name="eeNumber"
