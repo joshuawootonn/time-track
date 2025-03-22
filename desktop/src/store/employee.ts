@@ -1,6 +1,5 @@
 import { BaseEmployee, BaseActivity, BaseShift } from './types'
 import { snackActions } from '~/store/actions'
-import { AxiosError } from 'axios'
 import { Action, Dispatch } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import axios from '~/helpers/axios'
@@ -11,7 +10,7 @@ export type ClockInEmployeeRequest = Action<'ClockInEmployeeRequest'>
 
 export interface ClockInEmployeeFailure
   extends Action<'ClockInEmployeeFailure'> {
-  error: AxiosError
+  error: string
 }
 
 export type ClockInEmployeeSuccess = Action<'ClockInEmployeeSuccess'>
@@ -20,7 +19,7 @@ export type ClockOutEmployeeRequest = Action<'ClockOutEmployeeRequest'>
 
 export interface ClockOutEmployeeFailure
   extends Action<'ClockOutEmployeeFailure'> {
-  error: AxiosError
+  error: string
 }
 
 export type ClockOutEmployeeSuccess = Action<'ClockOutEmployeeSuccess'>
@@ -34,21 +33,39 @@ export type EmployeeActions =
   | ClockOutEmployeeSuccess
 
 export const clockIn = (
-  employee: BaseEmployee,
-): ThunkAction<void, BaseEmployee, null, ClockInEmployeeSuccess> => {
+  employeeId: number,
+  time?: string,
+): ThunkAction<
+  void,
+  { employeeId: number; time?: string },
+  null,
+  ClockInEmployeeSuccess
+> => {
   return async (dispatch: Dispatch<EmployeeActions>) => {
     dispatch({ type: 'ClockInEmployeeRequest' })
     try {
-      console.log(employee.id)
-      await axios.post('/employees/clockin', {
-        employeeId: employee.id,
+      const response = await axios.post('/employees/clockin', {
+        employeeId,
+        time,
       })
+
+      const {
+        msg: { name, message },
+      } = response.data
+
+      if (name === 'Error') {
+        throw new Error(message)
+      }
+
       dispatch(
         snackActions.openSnack(status.SUCCESS, `Clock in success!`) as any,
       )
       dispatch({ type: 'ClockInEmployeeSuccess' })
     } catch (e: any) {
-      dispatch({ type: 'ClockInEmployeeFailure', error: e })
+      const error = e.message ?? 'Unexpected error'
+      
+      dispatch(snackActions.openSnack( status.FAILURE, error ) as any)
+      dispatch({ type: 'ClockInEmployeeFailure', error })
       throw e
     }
   }
@@ -81,7 +98,7 @@ export const clockOut = (
       )
       dispatch({ type: 'ClockOutEmployeeSuccess' })
     } catch (e: any) {
-      dispatch({ type: 'ClockOutEmployeeFailure', error: e })
+      dispatch({ type: 'ClockOutEmployeeFailure', error: e.message ?? 'Unexpected error' })
       throw e
     }
   }
