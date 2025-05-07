@@ -119,4 +119,13 @@ const rows = [
     label: `Currently Working`,
     type: TableDataTypes.BOOLEAN,
   },
+  {
+    id: `eeNumber`,
+    dataKey: `eeNumber`,
+    width: 120,
+    height: 56,
+    padding: `dense`,
+    label: `EE Number`,
+    type: TableDataTypes.STRING,
+  },
 ]
