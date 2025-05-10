@@ -55,18 +55,7 @@ export class AccountAction extends Component<Props, State> {
     this.props.history.push(`/`)
   }
   clockIn = () => {
-    const { isLoading } = this.state
-    const { employees, employee, history } = this.props
-    if (isLoading || !employee.current.id) {
-      return
-    }
-    const employeeToClockin = employees[employee.current.id]
-
-    this.setState({ isLoading: true })
-    return this.props.clockIn(employeeToClockin).then(() => {
-      history.push(`/`)
-      this.setState({ isLoading: false })
-    })
+    this.props.history.push(`/${this.props.type}/${routes.CLOCKIN}`)
   }
   clockOut = () => {
     this.props.history.push(`/${this.props.type}/${routes.CLOCKOUT}`)
@@ -116,7 +105,7 @@ export class AccountAction extends Component<Props, State> {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     clockIn: (employee: BaseEmployee) => {
-      return dispatch(employeeActions.clockIn(employee))
+      return dispatch(employeeActions.clockIn(employee.id))
     },
     clearFilters: () => {
       dispatch(analyzeActions.clearFilter(domains.EMPLOYEE))
