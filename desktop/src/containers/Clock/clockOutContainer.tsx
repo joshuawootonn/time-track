@@ -21,20 +21,20 @@ import { minutesRoudedTime } from '~/helpers/time'
 import { getShiftDuration } from '~/helpers/shiftDuration'
 import axios from '~/helpers/axios'
 
-function isActivityCompleted(activity: any, projectTaskObjects: any) {
-  const { projectTaskId, description } = activity
+// function isActivityCompleted(activity: any, projectTaskObjects: any) {
+//   const { projectTaskId, description } = activity
 
-  const isOtherTask =
-    projectTaskId !== -1 &&
-    projectTaskObjects &&
-    projectTaskObjects[projectTaskId] &&
-    /Other/.test(projectTaskObjects[projectTaskId].task.name)
+//   const isOtherTask =
+//     projectTaskId !== -1 &&
+//     projectTaskObjects &&
+//     projectTaskObjects[projectTaskId] &&
+//     /Other/.test(projectTaskObjects[projectTaskId].task.name)
 
-  return isOtherTask ? description.length > 0 : true
-}
+//   return isOtherTask ? description.length > 0 : true
+// }
 
 type ClockOutProps = {
-  currentEmployee: any,
+  currentEmployee: any
 }
 
 export function ClockOut(props: ClockOutProps) {
@@ -46,13 +46,11 @@ export function ClockOut(props: ClockOutProps) {
   }, [])
 
   useEffect(() => {
-    axios
-      .get('/now')
-      .then((response: any) => {
-        const { now } = response.data
-        const clockOut = moment(now).add(`minutes`, 3)
-        setCurrentMoment(clockOut)
-      })
+    axios.get('/now').then((response: any) => {
+      const { now } = response.data
+      const clockOut = moment(now).add(`minutes`, 3)
+      setCurrentMoment(clockOut)
+    })
   }, [])
 
   const cancel = () => {
@@ -68,7 +66,11 @@ export function ClockOut(props: ClockOutProps) {
     return <Progress variant="circular" fullPage />
   }
 
-  const { lengthRounded, duration: shiftDuration, clockIn } = getShiftDuration(moment(currentShift.clockInDate), currentMoment)
+  const {
+    lengthRounded,
+    duration: shiftDuration,
+    clockIn,
+  } = getShiftDuration(moment(currentShift.clockInDate), currentMoment)
 
   const clockOutObject = {
     in: clockIn.format(`h:mm:ss a`),
@@ -92,7 +94,10 @@ export function ClockOut(props: ClockOutProps) {
       onSubmit={(values) => {
         // @ts-ignore
         const { currentEmployee, currentShift, history, clockOut } = props
-        const { lengthRounded } = getShiftDuration(moment(currentShift.clockInDate), currentMoment)
+        const { lengthRounded } = getShiftDuration(
+          moment(currentShift.clockInDate),
+          currentMoment,
+        )
 
         return clockOut(
           currentEmployee,
@@ -109,17 +114,15 @@ export function ClockOut(props: ClockOutProps) {
       render={(formikProps) => {
         const { errors, values } = formikProps
         let generalError
-        const areAllOtherTasksDescribed = values.activities.every((activity) =>
-          // @ts-ignore
-          isActivityCompleted(activity, props.projectTaskObjects),
-        )
-        if (!areAllOtherTasksDescribed) {
-          generalError = "Add description to Other activity"
-        }
+        // const areAllOtherTasksDescribed = values.activities.every((activity) =>
+        //   // @ts-ignore
+        //   isActivityCompleted(activity, props.projectTaskObjects),
+        // )
+        // if (!areAllOtherTasksDescribed) {
+        //   generalError = "Add description to Other activity"
+        // }
 
-        let timeLeft =
-          lengthRounded -
-          values.lunch
+        let timeLeft = lengthRounded - values.lunch
 
         values.activities.forEach((activity) => {
           timeLeft -= activity.length
@@ -178,7 +181,14 @@ const mapDispatchToProps = (dispatch: any) => {
     getCurrentShift: (employeeId: any) => {
       return dispatch(shiftActions.getCurrentShift(employeeId))
     },
-    clockOut: (employee: any, shift: any, activities: any, lunch: any, length: any, clockOutDate: any) =>
+    clockOut: (
+      employee: any,
+      shift: any,
+      activities: any,
+      lunch: any,
+      length: any,
+      clockOutDate: any,
+    ) =>
       dispatch(
         employeeActions.clockOut(
           employee,

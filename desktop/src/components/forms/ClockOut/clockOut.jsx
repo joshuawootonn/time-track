@@ -80,9 +80,14 @@ export class Clockout extends Component {
         <div className={classes.heroContent}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={12} className={classes.formHeader}>
+              {/* <Grid
+                item
+                xs={12}
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
                 <Typography variant="h3">Clock Out</Typography>
-
+              </Grid> */}
+              <Grid item xs={12} className={classes.formHeader}>
                 <div className={classes.formHeader}>
                   <SvgIcon className={classes.formHeaderIcon} color="action">
                     <DateIcon />
@@ -90,7 +95,7 @@ export class Clockout extends Component {
                   <Typography variant="h5">{shift.date}</Typography>
                 </div>
 
-                <div className={classes.formHeader}>
+                <div className={classes.formHeaderMiddle}>
                   <SvgIcon className={classes.formHeaderIcon} color="action">
                     <TimeIcon />
                   </SvgIcon>
@@ -124,57 +129,39 @@ export class Clockout extends Component {
                                 )}
                               >
                                 <div className={classes.formBody}>
-                                  <Field
-                                    name={`activities.${index}.projectId`}
-                                    component={Select}
-                                    items={projects}
-                                    fullWidth
-                                    label="Project"
-                                    onChange={() => arrayHelpers.form.setFieldValue(`activities.${index}.projectTaskId`, -1)}
-                                  />
-                                  <Field
-                                    name={`activities.${index}.projectTaskId`}
-                                    component={Select}
-                                    fullWidth
-                                    label="Task"
-                                  >
-                                    {projectTasks // This code iterates the projectTask
-                                      .filter((projectTask) => {
-                                        return (
-                                          activity.projectId ===
-                                          projectTask.projectId
-                                        ) // filters based on project selected
-                                      })
-                                      .map((projectTask, i) => {
-                                        // maps those elements
-                                        return (
-                                          <MenuItem
-                                            key={i}
-                                            value={projectTask.id}
-                                          >
-                                            {projectTask.task.name}
-                                          </MenuItem>
+                                  <Grid item xs={12} className={classes.addJob}>
+                                    <Button
+                                      className={classes.clockOutRegularButtons}
+                                      color="primary"
+                                      variant="contained"
+                                      //size="large"
+                                      id={`${CLOCKOUT_FORM_ADD_ACTIVTIY}`}
+                                      onClick={() =>
+                                        arrayHelpers.push({
+                                          projectId: Object.keys(projects)[0],
+                                          projectTaskId: -1,
+                                          length: 0,
+                                          description: ``,
+                                        })
+                                      }
+                                    >
+                                      Add Job
+                                    </Button>
+                                  </Grid>
+                                  <div className={classes.projectField}>
+                                    <Field
+                                      name={`activities.${index}.projectId`}
+                                      component={Select}
+                                      items={projects}
+                                      fullWidth
+                                      label="Project"
+                                      onChange={() =>
+                                        arrayHelpers.form.setFieldValue(
+                                          `activities.${index}.projectTaskId`,
+                                          -1,
                                         )
-                                      })}
-                                  </Field>
-                                  <Field
-                                    name={`activities.${index}.length`}
-                                    component={Time}
-                                    fullWidth
-                                  />
-                                  <Field
-                                    name={`activities.${index}.description`}
-                                    label="Description"
-                                    component={TextField}
-                                    onFocus={(e) => {
-                                      this.onDescriptionFocus(
-                                        e,
-                                        `activities.${index}.description`,
-                                      )
-                                    }}
-                                    onBlur={this.onDescriptionBlur}
-                                  />
-                                  <div className={classes.verticalCenter}>
+                                      }
+                                    />
                                     <IconButton
                                       type="button"
                                       id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${index}`}
@@ -184,13 +171,71 @@ export class Clockout extends Component {
                                     >
                                       <Close />
                                     </IconButton>
+                                    <Button
+                                      color="primary"
+                                      variant="contained"
+                                      className={classes.clockOutSmallButtons}
+                                      id={`${CLOCKOUT_FORM_ADD_ACTIVTIY}`}
+                                      // onClick={() =>
+                                      //   arrayHelpers.push({
+                                      //     projectId: Object.keys(projects)[0],
+                                      //     projectTaskId: -1,
+                                      //     length: 0,
+                                      //     description: ``,
+                                      //   })
+                                      // }
+                                    >
+                                      Add Task
+                                    </Button>
+                                  </div>
+
+                                  <div className={classes.taskField}>
+                                    <Field
+                                      name={`activities.${index}.projectTaskId`}
+                                      component={Select}
+                                      fullWidth
+                                      label="Task"
+                                    >
+                                      {projectTasks // This code iterates the projectTask
+                                        .filter((projectTask) => {
+                                          return (
+                                            activity.projectId ===
+                                            projectTask.projectId
+                                          ) // filters based on project selected
+                                        })
+                                        .map((projectTask, i) => {
+                                          // maps those elements
+                                          return (
+                                            <MenuItem
+                                              key={i}
+                                              value={projectTask.id}
+                                            >
+                                              {projectTask.task.name}
+                                            </MenuItem>
+                                          )
+                                        })}
+                                    </Field>
+                                    <Field
+                                      name={`activities.${index}.length`}
+                                      component={Time}
+                                      fullWidth
+                                    />
+                                    <IconButton
+                                      type="button"
+                                      // id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${index}`}
+                                      color="secondary"
+                                      className={classes.iconButton}
+                                      // onClick={() => arrayHelpers.remove(index)}
+                                    >
+                                      <Close />
+                                    </IconButton>
                                   </div>
                                 </div>
                               </div>
                             )
                           })}
 
-                        <Grid item xs={12} className={classes.formFooter}>
+                        <Grid item xs={12} className={classes.lunch}>
                           <div className={classes.lunchBox}>
                             <Field
                               name={`lunch`}
@@ -201,43 +246,33 @@ export class Clockout extends Component {
                               component={Time}
                             />
                           </div>
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            id={`${CLOCKOUT_FORM_ADD_ACTIVTIY}`}
-                            onClick={() =>
-                              arrayHelpers.push({
-                                projectId: Object.keys(projects)[0],
-                                projectTaskId: -1,
-                                length: 0,
-                                description: ``,
-                              })
-                            }
-                          >
-                            Add Activity
-                          </Button>
                         </Grid>
 
                         <Grid item xs={12} className={classes.formFooter}>
-                          <Typography variant="h5" margin="none">
-                            Time Left: {minutesToString(timeLeft)}
-                          </Typography>
-                          <Typography variant="h5" margin="none">
-                            Week Total:{' '}
-                            {minutesToString(minutesRoudedTime(weekHourTotal))}
-                          </Typography>
-                          <Typography
-                            variant="body1"
-                            margin="none"
-                            className={classes.error}
-                          >
-                            {generalError}
-                          </Typography>
+                          <div className={classes.formFooterTop}>
+                            <Typography variant="h5" margin="none">
+                              Time Left: {minutesToString(timeLeft)}
+                            </Typography>
+                            <Typography variant="h5" margin="none">
+                              Week Total:{' '}
+                              {minutesToString(
+                                minutesRoudedTime(weekHourTotal),
+                              )}
+                            </Typography>
+                            <Typography
+                              variant="body1"
+                              margin="none"
+                              className={classes.error}
+                            >
+                              {generalError}
+                            </Typography>
+                          </div>
 
-                          <div>
+                          <div className={classes.formFooterBottom}>
                             <Button
                               type="submit"
                               color="primary"
+                              className={classes.clockOutLargeButtons}
                               disabled={
                                 isSubmitting ||
                                 Object.keys(errors).length !== 0 ||
@@ -245,7 +280,6 @@ export class Clockout extends Component {
                                 !!generalError
                               }
                               variant="contained"
-                              className={classes.button}
                             >
                               Clock Out
                             </Button>
@@ -254,7 +288,7 @@ export class Clockout extends Component {
                               onClick={cancel}
                               color="secondary"
                               variant="text"
-                              className={classes.button}
+                              className={classes.clockOutRegularButtons}
                             >
                               Cancel
                             </Button>
