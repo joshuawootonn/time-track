@@ -22,43 +22,60 @@ const styles = (theme) => {
       alignItems: `flex-end`,
       justifyContent: `flex-end`,
     },
-    button: { marginLeft: `10px` },
-
     verticalCenter: {
       display: `flex`,
       alignItems: `center`,
     },
-
     formHeader: {
+      position: 'relatve',
       display: `flex`,
-      flexDirection: `row`,
       alignItems: `center`,
       justifyContent: `space-between`,
-      marginRight: theme.spacing.unit,
+    },
+    formHeaderMiddle: {
+      display: `flex`,
+      flexDirection: 'row',
+      position: 'absolute',
+      left: '50%',
+      transform: 'translateX(-50%)',
     },
     formHeaderIcon: {
       fontSize: `32px`,
-      margin: `0 10px`,
+      margin: `0 5px`,
     },
-
+    addJob: { display: 'flex', justifyContent: 'center' },
+    projectField: {
+      display: `flex`,
+      alignItems: 'center',
+    },
+    taskField: {
+      display: 'flex',
+    },
     formBody: {
       display: `flex`,
-      flexDirection: `row`,
-      justifyContent: `space-between`,
+      flexDirection: `column`,
     },
     formElement: {
       marginRight: theme.spacing.unit,
     },
-
-    formFooter: {
-      display: `flex`,
-      flexDirection: `row`,
-      alignItems: `center`,
-      justifyContent: `space-between`,
-      height: `68px`,
+    lunch: {
+      display: 'flex',
     },
     lunchBox: {
       width: `150px`,
+    },
+    formFooter: {
+      display: `flex`,
+      flexDirection: `column`,
+      alignItems: `center`,
+    },
+    formFooterTop: {
+      display: 'flex',
+      margin: '20px',
+    },
+    formFooterBottom: {
+      display: 'flex',
+      flexDirection: ' column',
     },
     keyboardGrid: {
       position: `relative`,
@@ -66,6 +83,18 @@ const styles = (theme) => {
     keyboard: {
       width: `100%`,
       position: `absolute`,
+    },
+    clockOutSmallButtons: {
+      padding: '5px',
+      fontSize: '12px',
+    },
+    clockOutRegularButtons: {
+      padding: '20px',
+      fontSize: '18px',
+    },
+    clockOutLargeButtons: {
+      padding: '40px',
+      fontSize: '26px',
     },
   }
 }
