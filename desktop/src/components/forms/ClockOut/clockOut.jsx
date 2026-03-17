@@ -254,6 +254,9 @@ export class Clockout extends Component {
                               fullWidth
                               margin="none"
                               component={Time}
+                              className={classes.taskField}
+                              menuItemClassName={classes.taskDropdown}
+                              errorTextStyles={classes.errorText}
                             />
                           </div>
                         </Grid>

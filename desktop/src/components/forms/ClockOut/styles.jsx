@@ -102,7 +102,7 @@ const styles = (theme) => {
       display: 'flex',
     },
     lunchBox: {
-      width: `150px`,
+      width: `200px`,
     },
     bottomText: {
       margin: '20px',
