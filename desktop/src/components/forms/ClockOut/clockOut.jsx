@@ -194,10 +194,13 @@ export class Clockout extends Component {
 
                                   <div className={classes.taskLine}>
                                     <Field
+                                      className={classes.taskField}
                                       name={`activities.${index}.projectTaskId`}
                                       component={Select}
                                       fullWidth
                                       label="Task"
+                                      menuItemClassName={classes.taskDropdown}
+                                      errorTextStyles={classes.errorText}
                                     >
                                       {projectTasks // This code iterates the projectTask
                                         .filter((projectTask) => {
@@ -212,6 +215,7 @@ export class Clockout extends Component {
                                             <MenuItem
                                               key={i}
                                               value={projectTask.id}
+                                              className={classes.taskDropdown}
                                             >
                                               {projectTask.task.name}
                                             </MenuItem>
@@ -222,6 +226,9 @@ export class Clockout extends Component {
                                       name={`activities.${index}.length`}
                                       component={Time}
                                       fullWidth
+                                      className={classes.taskField}
+                                      //menuItemClassName={classes.taskDropdown}
+                                      //errorTextStyles={classes.errorText}
                                     />
                                     <IconButton
                                       type="button"

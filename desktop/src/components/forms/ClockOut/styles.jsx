@@ -73,6 +73,23 @@ const styles = (theme) => {
     },
     taskLine: {
       display: 'flex',
+      marginLeft: '100px',
+    },
+    taskField: {
+      '& .MuiInputBase-input': {
+        fontSize: '20px',
+        margin: '10px',
+      },
+      '& .MuiInputLabel-root': {
+        fontSize: '25px',
+      },
+      '& .MuiSelect-select': {
+        fontSize: '30px',
+        lineHeight: '1.5',
+      },
+    },
+    taskDropdown: {
+      fontSize: '20px',
     },
     formBody: {
       display: `flex`,
