@@ -227,8 +227,8 @@ export class Clockout extends Component {
                                       component={Time}
                                       fullWidth
                                       className={classes.taskField}
-                                      //menuItemClassName={classes.taskDropdown}
-                                      //errorTextStyles={classes.errorText}
+                                      menuItemClassName={classes.taskDropdown}
+                                      errorTextStyles={classes.errorText}
                                     />
                                     <IconButton
                                       type="button"
