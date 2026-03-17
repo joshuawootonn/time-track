@@ -134,7 +134,6 @@ export class Clockout extends Component {
                                       className={classes.clockOutRegularButtons}
                                       color="primary"
                                       variant="contained"
-                                      //size="large"
                                       id={`${CLOCKOUT_FORM_ADD_ACTIVTIY}`}
                                       onClick={() =>
                                         arrayHelpers.push({
@@ -148,13 +147,17 @@ export class Clockout extends Component {
                                       Add Job
                                     </Button>
                                   </Grid>
-                                  <div className={classes.projectField}>
+                                  <div className={classes.projectLine}>
                                     <Field
+                                      className={classes.projectField}
                                       name={`activities.${index}.projectId`}
                                       component={Select}
                                       items={projects}
                                       fullWidth
                                       label="Project"
+                                      menuItemClassName={
+                                        classes.projectDropdown
+                                      }
                                       onChange={() =>
                                         arrayHelpers.form.setFieldValue(
                                           `activities.${index}.projectTaskId`,
@@ -166,10 +169,9 @@ export class Clockout extends Component {
                                       type="button"
                                       id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${index}`}
                                       color="secondary"
-                                      className={classes.iconButton}
                                       onClick={() => arrayHelpers.remove(index)}
                                     >
-                                      <Close />
+                                      <Close className={classes.deleteButton} />
                                     </IconButton>
                                     <Button
                                       color="primary"
@@ -189,7 +191,7 @@ export class Clockout extends Component {
                                     </Button>
                                   </div>
 
-                                  <div className={classes.taskField}>
+                                  <div className={classes.taskLine}>
                                     <Field
                                       name={`activities.${index}.projectTaskId`}
                                       component={Select}
@@ -250,10 +252,16 @@ export class Clockout extends Component {
 
                         <Grid item xs={12} className={classes.formFooter}>
                           <div className={classes.formFooterTop}>
-                            <Typography variant="h5" margin="none">
+                            <Typography
+                              variant="h5"
+                              className={classes.bottomText}
+                            >
                               Time Left: {minutesToString(timeLeft)}
                             </Typography>
-                            <Typography variant="h5" margin="none">
+                            <Typography
+                              variant="h5"
+                              className={classes.bottomText}
+                            >
                               Week Total:{' '}
                               {minutesToString(
                                 minutesRoudedTime(weekHourTotal),

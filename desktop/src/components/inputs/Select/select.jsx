@@ -38,6 +38,7 @@ export class Select extends Component {
       itemProps,
       helper,
       className,
+      menuItemClassName,
     } = this.props
 
     return (
@@ -58,7 +59,13 @@ export class Select extends Component {
           {items &&
             items.map((item, i) => {
               return (
-                <MenuItem {...itemProps} key={i} id={item.id} value={item.id}>
+                <MenuItem
+                  {...itemProps}
+                  key={i}
+                  id={item.id}
+                  value={item.id}
+                  className={menuItemClassName}
+                >
                   {item.name ||
                     item.type ||
                     item.firstName + ` ` + item.lastName}
