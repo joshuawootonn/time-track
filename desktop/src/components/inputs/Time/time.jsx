@@ -33,6 +33,8 @@ export class Time extends Component {
       label2,
       helper,
       className,
+      menuItemClassName,
+      errorTextStyles,
     } = this.props
 
     const minutesValue = Math.floor(value % 60)
@@ -60,7 +62,12 @@ export class Time extends Component {
           >
             {hours.map((item, i) => {
               return (
-                <MenuItem key={i} id={item.id} value={item.value}>
+                <MenuItem
+                  key={i}
+                  id={item.id}
+                  value={item.value}
+                  className={menuItemClassName}
+                >
                   {item.name}
                 </MenuItem>
               )
@@ -82,7 +89,12 @@ export class Time extends Component {
           >
             {minutes.map((item, i) => {
               return (
-                <MenuItem key={i} id={item.id} value={item.value}>
+                <MenuItem
+                  key={i}
+                  id={item.id}
+                  value={item.value}
+                  className={menuItemClassName}
+                >
                   {item.name}
                 </MenuItem>
               )
@@ -90,7 +102,10 @@ export class Time extends Component {
           </Select>
         </div>
         {helper === `normal` && (
-          <FormHelperText className={cx(classes.helper)} error={true}>
+          <FormHelperText
+            className={cx(classes.helper, errorTextStyles)}
+            error={true}
+          >
             {getHelperText(form, field.name)}
           </FormHelperText>
         )}
