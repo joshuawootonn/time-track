@@ -158,6 +158,7 @@ export class Clockout extends Component {
                                       menuItemClassName={
                                         classes.projectDropdown
                                       }
+                                      errorTextStyles={classes.errorText}
                                       onChange={() =>
                                         arrayHelpers.form.setFieldValue(
                                           `activities.${index}.projectTaskId`,

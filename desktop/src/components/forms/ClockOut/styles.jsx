@@ -61,12 +61,15 @@ const styles = (theme) => {
         fontSize: '30px',
       },
       '& .MuiSelect-select': {
-        fontSize: '30px', // selected text
+        fontSize: '30px',
         lineHeight: '1.5',
       },
     },
     projectDropdown: {
       fontSize: '30px',
+    },
+    errorText: {
+      fontSize: '20px',
     },
     taskLine: {
       display: 'flex',

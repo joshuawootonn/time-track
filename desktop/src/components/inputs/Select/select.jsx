@@ -39,6 +39,7 @@ export class Select extends Component {
       helper,
       className,
       menuItemClassName,
+      errorTextStyles,
     } = this.props
 
     return (
@@ -75,7 +76,7 @@ export class Select extends Component {
           {children}
         </SelectInput>
         {helper === `normal` && (
-          <FormHelperText error={true}>
+          <FormHelperText error={true} className={errorTextStyles}>
             {getIn(form.touched, field.name)
               ? getIn(form.errors, field.name)
               : ` `}
