@@ -15,6 +15,10 @@ const styles = (theme) => {
     error: {
       color: theme.palette.error.main,
     },
+    deleteButton: {
+      width: '50px',
+      height: '50px',
+    },
     spaceBetween: {
       justifyContent: `space-between`,
     },
@@ -44,11 +48,27 @@ const styles = (theme) => {
       margin: `0 5px`,
     },
     addJob: { display: 'flex', justifyContent: 'center' },
-    projectField: {
+    projectLine: {
       display: `flex`,
       alignItems: 'center',
     },
-    taskField: {
+    projectField: {
+      '& .MuiInputBase-input': {
+        fontSize: '30px',
+        margin: '10px',
+      },
+      '& .MuiInputLabel-root': {
+        fontSize: '30px',
+      },
+      '& .MuiSelect-select': {
+        fontSize: '30px', // selected text
+        lineHeight: '1.5',
+      },
+    },
+    projectDropdown: {
+      fontSize: '30px',
+    },
+    taskLine: {
       display: 'flex',
     },
     formBody: {
@@ -63,6 +83,9 @@ const styles = (theme) => {
     },
     lunchBox: {
       width: `150px`,
+    },
+    bottomText: {
+      margin: '20px',
     },
     formFooter: {
       display: `flex`,
