@@ -1,11 +1,12 @@
 const styles = (theme) => {
   return {
     hero: {
-      height: `100vh`,
+      //height: `100vh`,
       display: `flex`,
       flexDirection: `column`,
       justifyContent: `center`,
       alignItems: `center`,
+      margin: '20px',
     },
     textField: { width: `100%` },
     heroContent: {
