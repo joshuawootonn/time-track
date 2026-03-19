@@ -34,6 +34,7 @@ export function Clockout(props) {
   const [keyboardValue] = useState(``)
   const [currentTextField, setCurrentTextField] = useState(null)
   const [keyboardLayout, setKeyboardLayout] = useState(`default`)
+  const [activeJobIndex, setActiveJobIndex] = useState(0)
   const keyboardRef = useRef(null)
 
   const handleShift = () => {
@@ -112,9 +113,17 @@ export function Clockout(props) {
                                 classes.card,
                                 classes.verticalCenterBox,
                               )}
+                              onClick={() => setActiveJobIndex(index)}
+                              style={{
+                                cursor: 'pointer',
+                                outline:
+                                  index === activeJobIndex
+                                    ? '2px solid #1976d2'
+                                    : '2px solid transparent',
+                                borderRadius: '4px',
+                              }}
                             >
                               <div className={classes.formBody}>
-                                
                                 <div className={classes.projectLine}>
                                   <Field
                                     className={classes.projectField}
@@ -239,14 +248,16 @@ export function Clockout(props) {
                             variant="contained"
                             className={classes.clockOutSmallButtons}
                             id="clockout_add_job"
-                            onClick={() =>
+                            onClick={() => {
+                              const newIndex = values.activities.length
                               arrayHelpers.push({
                                 projectId: Object.keys(projects)[0],
                                 projectTaskId: -1,
                                 length: 0,
                                 description: ``,
                               })
-                            }
+                              setActiveJobIndex(newIndex)
+                            }}
                           >
                             Add Job
                           </Button>
@@ -257,7 +268,8 @@ export function Clockout(props) {
                             className={classes.clockOutSmallButtons}
                             id="clockout_add_task"
                             onClick={() => {
-                              const lastIndex = (values.activities || []).length - 1
+                              const lastIndex =
+                                (values.activities || []).length - 1
                               const projectId =
                                 lastIndex >= 0
                                   ? values.activities[lastIndex].projectId
