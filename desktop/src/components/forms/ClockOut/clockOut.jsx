@@ -100,103 +100,115 @@ export function Clockout(props) {
             <Grid item xs={12}>
               <FieldArray
                 name="activities"
-                render={(arrayHelpers) => {
+                render={(jobHelpers) => {
                   return (
                     <div>
                       {values.activities &&
-                        values.activities.map((activity, index) => {
-                          console.log(activity)
+                        values.activities.map((job, jobIndex) => {
                           return (
                             <div
-                              key={index}
+                              key={jobIndex}
                               className={cx(
                                 classes.card,
                                 classes.verticalCenterBox,
                               )}
-                              onClick={() => setActiveJobIndex(index)}
+                              onClick={() => setActiveJobIndex(jobIndex)}
                               style={{
                                 cursor: 'pointer',
                                 outline:
-                                  index === activeJobIndex
+                                  jobIndex === activeJobIndex
                                     ? '2px solid #1976d2'
                                     : '2px solid transparent',
                                 borderRadius: '4px',
                               }}
                             >
                               <div className={classes.formBody}>
+                                {/* Project row */}
                                 <div className={classes.projectLine}>
                                   <Field
                                     className={classes.projectField}
-                                    name={`activities.${index}.projectId`}
+                                    name={`activities.${jobIndex}.projectId`}
                                     component={Select}
                                     items={projects}
                                     fullWidth
                                     label="Project"
                                     menuItemClassName={classes.projectDropdown}
                                     errorTextStyles={classes.errorText}
-                                    onChange={() =>
-                                      arrayHelpers.form.setFieldValue(
-                                        `activities.${index}.projectTaskId`,
-                                        -1,
-                                      )
-                                    }
                                   />
                                   <IconButton
                                     type="button"
-                                    id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${index}`}
+                                    id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${jobIndex}`}
                                     color="secondary"
-                                    onClick={() => arrayHelpers.remove(index)}
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      jobHelpers.remove(jobIndex)
+                                      setActiveJobIndex(
+                                        Math.max(0, activeJobIndex - 1),
+                                      )
+                                    }}
                                   >
                                     <Close className={classes.deleteButton} />
                                   </IconButton>
                                 </div>
 
-                                <div className={classes.taskLine}>
-                                  <Field
-                                    className={classes.taskField}
-                                    name={`activities.${index}.projectTaskId`}
-                                    component={Select}
-                                    fullWidth
-                                    label="Task"
-                                    menuItemClassName={classes.taskDropdown}
-                                    errorTextStyles={classes.errorText}
-                                  >
-                                    {projectTasks // This code iterates the projectTask
-                                      .filter((projectTask) => {
-                                        return (
-                                          activity.projectId ===
-                                          projectTask.projectId
-                                        ) // filters based on project selected
-                                      })
-                                      .map((projectTask, i) => {
-                                        // maps those elements
-                                        return (
-                                          <MenuItem
-                                            key={i}
-                                            value={projectTask.id}
-                                            className={classes.taskDropdown}
-                                          >
-                                            {projectTask.task.name}
-                                          </MenuItem>
-                                        )
-                                      })}
-                                  </Field>
-                                  <Field
-                                    name={`activities.${index}.length`}
-                                    component={Time}
-                                    fullWidth
-                                    className={classes.taskField}
-                                    menuItemClassName={classes.taskDropdown}
-                                    errorTextStyles={classes.errorText}
-                                  />
-                                  <IconButton
-                                    type="button"
-                                    color="secondary"
-                                    className={classes.iconButton}
-                                  >
-                                    <Close />
-                                  </IconButton>
-                                </div>
+                                {/* Task rows inside this job */}
+                                {job.tasks &&
+                                  job.tasks.map((task, taskIndex) => (
+                                    <div
+                                      key={taskIndex}
+                                      className={classes.taskLine}
+                                    >
+                                      <Field
+                                        className={classes.taskField}
+                                        name={`activities.${jobIndex}.tasks.${taskIndex}.projectTaskId`}
+                                        component={Select}
+                                        fullWidth
+                                        label="Task"
+                                        menuItemClassName={classes.taskDropdown}
+                                        errorTextStyles={classes.errorText}
+                                      >
+                                        {projectTasks
+                                          .filter(
+                                            (pt) =>
+                                              job.projectId === pt.projectId,
+                                          )
+                                          .map((pt, i) => (
+                                            <MenuItem
+                                              key={i}
+                                              value={pt.id}
+                                              className={classes.taskDropdown}
+                                            >
+                                              {pt.task.name}
+                                            </MenuItem>
+                                          ))}
+                                      </Field>
+                                      <Field
+                                        name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
+                                        component={Time}
+                                        fullWidth
+                                        className={classes.taskField}
+                                        menuItemClassName={classes.taskDropdown}
+                                        errorTextStyles={classes.errorText}
+                                      />
+                                      <IconButton
+                                        type="button"
+                                        color="secondary"
+                                        className={classes.iconButton}
+                                        onClick={(e) => {
+                                          e.stopPropagation()
+                                          const newTasks = job.tasks.filter(
+                                            (_, i) => i !== taskIndex,
+                                          )
+                                          jobHelpers.form.setFieldValue(
+                                            `activities.${jobIndex}.tasks`,
+                                            newTasks,
+                                          )
+                                        }}
+                                      >
+                                        <Close />
+                                      </IconButton>
+                                    </div>
+                                  ))}
                               </div>
                             </div>
                           )
@@ -250,11 +262,15 @@ export function Clockout(props) {
                             id="clockout_add_job"
                             onClick={() => {
                               const newIndex = values.activities.length
-                              arrayHelpers.push({
+                              jobHelpers.push({
                                 projectId: Object.keys(projects)[0],
-                                projectTaskId: -1,
-                                length: 0,
-                                description: ``,
+                                tasks: [
+                                  {
+                                    projectTaskId: -1,
+                                    length: 0,
+                                    description: ``,
+                                  },
+                                ],
                               })
                               setActiveJobIndex(newIndex)
                             }}
@@ -268,18 +284,21 @@ export function Clockout(props) {
                             className={classes.clockOutSmallButtons}
                             id="clockout_add_task"
                             onClick={() => {
-                              const lastIndex =
-                                (values.activities || []).length - 1
-                              const projectId =
-                                lastIndex >= 0
-                                  ? values.activities[lastIndex].projectId
-                                  : Object.keys(projects)[0]
-                              arrayHelpers.push({
-                                projectId,
-                                projectTaskId: -1,
-                                length: 0,
-                                description: ``,
-                              })
+                              const activeJob =
+                                values.activities[activeJobIndex]
+                              if (!activeJob) return
+                              const newTasks = [
+                                ...activeJob.tasks,
+                                {
+                                  projectTaskId: -1,
+                                  length: 0,
+                                  description: ``,
+                                },
+                              ]
+                              jobHelpers.form.setFieldValue(
+                                `activities.${activeJobIndex}.tasks`,
+                                newTasks,
+                              )
                             }}
                           >
                             Add Task

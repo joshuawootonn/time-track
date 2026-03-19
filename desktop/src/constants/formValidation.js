@@ -30,16 +30,23 @@ export const clockout = Yup.object().shape({
   activities: Yup.array()
     .of(
       Yup.object().shape({
-        length: Yup.number()
-          .min(1, `Time must be specified`)
-          .required(`Time selection required`),
         projectId: Yup.number()
           .positive(`Project selection required`)
           .required(`Project selection required`),
-        projectTaskId: Yup.number()
-          .positive(`Task selection required`)
+        tasks: Yup.array()
+          .of(
+            Yup.object().shape({
+              length: Yup.number()
+                .min(1, `Time must be specified`)
+                .required(`Time selection required`),
+              projectTaskId: Yup.number()
+                .positive(`Task selection required`)
+                .required(`Task selection required`),
+              description: Yup.string(),
+            }),
+          )
+          .min(1, `At least one task is required`)
           .required(`Task selection required`),
-        description: Yup.string(),
       }),
     )
     .required(`Activity selection required`),
