@@ -85,9 +85,7 @@ export function ClockOut(props: ClockOutProps) {
         activities: [
           {
             projectId: -1,
-            projectTaskId: -1,
-            length: 0,
-            description: ``,
+            tasks: [{ projectTaskId: -1, length: 0, description: `` }],
           },
         ],
       }}
@@ -99,10 +97,19 @@ export function ClockOut(props: ClockOutProps) {
           currentMoment,
         )
 
+        const flatActivities = values.activities.flatMap((job: any) =>
+          job.tasks.map((task: any) => ({
+            projectId: job.projectId,
+            projectTaskId: task.projectTaskId,
+            length: task.length,
+            description: task.description,
+          })),
+        )
+
         return clockOut(
           currentEmployee,
           currentShift,
-          values.activities,
+          flatActivities,
           values.lunch,
           lengthRounded,
           currentMoment.utc().format(),
@@ -124,8 +131,10 @@ export function ClockOut(props: ClockOutProps) {
 
         let timeLeft = lengthRounded - values.lunch
 
-        values.activities.forEach((activity) => {
-          timeLeft -= activity.length
+        values.activities.forEach((job: any) => {
+          job.tasks.forEach((task: any) => {
+            timeLeft -= task.length
+          })
         })
 
         let weekHourTotal = shiftDuration.asMinutes() - values.lunch
