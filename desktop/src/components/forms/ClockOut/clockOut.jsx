@@ -72,28 +72,30 @@ export function Clockout(props) {
       <div className={classes.heroContent}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3}>
-            <Grid item xs={12} className={classes.formHeader}>
-              <div className={classes.formHeader}>
-                <SvgIcon className={classes.formHeaderIcon} color="action">
-                  <DateIcon />
-                </SvgIcon>
-                <Typography variant="h5">{shift.date}</Typography>
-              </div>
+            <Grid item xs={12} className={classes.formHeaderBar}>
+              <div className={classes.formHeaderContent}>
+                <div className={classes.formHeaderSection}>
+                  <SvgIcon className={classes.formHeaderIcon} color="action">
+                    <DateIcon />
+                  </SvgIcon>
+                  <Typography variant="h5">{shift.date}</Typography>
+                </div>
 
-              <div className={classes.formHeaderMiddle}>
-                <SvgIcon className={classes.formHeaderIcon} color="action">
-                  <TimeIcon />
-                </SvgIcon>
-                <Typography variant="h5">
-                  {shift.in} - {shift.out}
-                </Typography>
-              </div>
+                <div className={classes.formHeaderMiddle}>
+                  <SvgIcon className={classes.formHeaderIcon} color="action">
+                    <TimeIcon />
+                  </SvgIcon>
+                  <Typography variant="h5">
+                    {shift.in} - {shift.out}
+                  </Typography>
+                </div>
 
-              <div className={classes.formHeader}>
-                <SvgIcon className={classes.formHeaderIcon} color="action">
-                  <DurationIcon />
-                </SvgIcon>
-                <Typography variant="h5">Length: {length}</Typography>
+                <div className={classes.formHeaderSection}>
+                  <SvgIcon className={classes.formHeaderIcon} color="action">
+                    <DurationIcon />
+                  </SvgIcon>
+                  <Typography variant="h5">Length: {length}</Typography>
+                </div>
               </div>
             </Grid>
 
@@ -214,24 +216,30 @@ export function Clockout(props) {
                           )
                         })}
 
-                      <Grid item xs={12} className={classes.lunch}>
-                        <div className={classes.lunchBox}>
-                          <Field
-                            name={`lunch`}
-                            label1="Lunch"
-                            label2=" "
-                            fullWidth
-                            margin="none"
-                            component={Time}
-                            className={classes.taskField}
-                            menuItemClassName={classes.taskDropdown}
-                            errorTextStyles={classes.errorText}
-                          />
-                        </div>
-                      </Grid>
-
                       <Grid item xs={12} className={classes.formFooter}>
-                        <div className={classes.formFooterTop}>
+                        <div className={classes.formFooterRow}>
+                          <Button
+                            onClick={cancel}
+                            color="secondary"
+                            variant="text"
+                            className={classes.clockOutRegularButtons}
+                          >
+                            Cancel
+                          </Button>
+
+                          <div className={classes.lunchBox}>
+                            <Field
+                              name={`lunch`}
+                              label1="Lunch"
+                              label2=" "
+                              fullWidth
+                              margin="none"
+                              component={Time}
+                              className={classes.taskField}
+                              menuItemClassName={classes.taskDropdown}
+                              errorTextStyles={classes.errorText}
+                            />
+                          </div>
                           <Typography
                             variant="h5"
                             className={classes.bottomText}
@@ -252,9 +260,7 @@ export function Clockout(props) {
                           >
                             {generalError}
                           </Typography>
-                        </div>
 
-                        <div className={classes.formFooterBottom}>
                           <Button
                             color="primary"
                             variant="contained"
@@ -317,15 +323,6 @@ export function Clockout(props) {
                             variant="contained"
                           >
                             Clock Out
-                          </Button>
-
-                          <Button
-                            onClick={cancel}
-                            color="secondary"
-                            variant="text"
-                            className={classes.clockOutRegularButtons}
-                          >
-                            Cancel
                           </Button>
                         </div>
                       </Grid>
