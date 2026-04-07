@@ -7,6 +7,8 @@ const styles = (theme) => {
       justifyContent: `center`,
       alignItems: `center`,
       margin: '20px',
+      paddingTop: '110px',
+      paddingBottom: '140px',
     },
     textField: { width: `100%` },
     heroContent: {
@@ -31,11 +33,29 @@ const styles = (theme) => {
       display: `flex`,
       alignItems: `center`,
     },
-    formHeader: {
-      position: 'relatve',
+    formHeaderBar: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      zIndex: 1001,
+      boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+      padding: '10px 16px',
+    },
+    formHeaderContent: {
+      width: '100%',
+      maxWidth: '1000px',
+      position: 'relative',
       display: `flex`,
       alignItems: `center`,
       justifyContent: `space-between`,
+    },
+    formHeaderSection: {
+      display: `flex`,
+      alignItems: `center`,
     },
     formHeaderMiddle: {
       display: `flex`,
@@ -104,22 +124,34 @@ const styles = (theme) => {
     },
     lunchBox: {
       width: `200px`,
+      flex: '0 0 200px',
     },
     bottomText: {
-      margin: '20px',
+      margin: 0,
+      whiteSpace: 'nowrap',
     },
     formFooter: {
+      position: 'fixed',
+      bottom: 0,
+      left: 0,
+      right: 0,
       display: `flex`,
       flexDirection: `column`,
       alignItems: `center`,
+      backgroundColor: '#fff',
+      zIndex: 1000,
+      boxShadow: '0 -2px 8px rgba(0,0,0,0.2)',
+      padding: '10px 16px',
     },
-    formFooterTop: {
+    formFooterRow: {
       display: 'flex',
-      margin: '20px',
-    },
-    formFooterBottom: {
-      display: 'flex',
-      flexDirection: ' column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '10px',
+      flexWrap: 'nowrap',
+      width: '100%',
+      overflowX: 'auto',
+      padding: '8px 0',
     },
     keyboardGrid: {
       position: `relative`,
@@ -131,14 +163,20 @@ const styles = (theme) => {
     clockOutSmallButtons: {
       padding: '5px',
       fontSize: '12px',
+      whiteSpace: 'nowrap',
+      flexShrink: 0,
     },
     clockOutRegularButtons: {
       padding: '20px',
       fontSize: '18px',
+      whiteSpace: 'nowrap',
+      flexShrink: 0,
     },
     clockOutLargeButtons: {
       padding: '40px',
       fontSize: '26px',
+      whiteSpace: 'nowrap',
+      flexShrink: 0,
     },
   }
 }
