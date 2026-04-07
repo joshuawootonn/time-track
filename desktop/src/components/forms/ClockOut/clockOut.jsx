@@ -119,9 +119,13 @@ export function Clockout(props) {
                                 cursor: 'pointer',
                                 outline:
                                   jobIndex === activeJobIndex
-                                    ? '2px solid #1976d2'
+                                    ? `2px solid #faab1a`
                                     : '2px solid transparent',
                                 borderRadius: '4px',
+                                backgroundColor:
+                                  jobIndex === activeJobIndex
+                                    ? `rgba(250, 171, 26, 0.1)`
+                                    : 'transparent',
                               }}
                             >
                               <div className={classes.formBody}>
@@ -166,7 +170,7 @@ export function Clockout(props) {
                                         component={Select}
                                         fullWidth
                                         label="Task"
-                                        menuItemClassName={classes.taskDropdown}
+                                        menuItemClassName={classes.taskMenuItem}
                                         errorTextStyles={classes.errorText}
                                       >
                                         {projectTasks
@@ -178,7 +182,7 @@ export function Clockout(props) {
                                             <MenuItem
                                               key={i}
                                               value={pt.id}
-                                              className={classes.taskDropdown}
+                                              className={classes.taskMenuItem}
                                             >
                                               {pt.task.name}
                                             </MenuItem>
@@ -189,7 +193,7 @@ export function Clockout(props) {
                                         component={Time}
                                         fullWidth
                                         className={classes.taskField}
-                                        menuItemClassName={classes.taskDropdown}
+                                        menuItemClassName={classes.taskMenuItem}
                                         errorTextStyles={classes.errorText}
                                       />
                                       <IconButton
@@ -244,7 +248,7 @@ export function Clockout(props) {
                                 classes.taskField,
                                 classes.lunchTimeField,
                               )}
-                              menuItemClassName={classes.taskDropdown}
+                              menuItemClassName={classes.taskMenuItem}
                               errorTextStyles={classes.errorText}
                             />
                           </div>
