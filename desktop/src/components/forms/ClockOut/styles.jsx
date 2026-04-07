@@ -1,5 +1,3 @@
-import { BorderBottom, BorderRight } from '@material-ui/icons'
-
 const styles = (theme) => {
   return {
     hero: {
@@ -9,8 +7,8 @@ const styles = (theme) => {
       justifyContent: `center`,
       alignItems: `center`,
       margin: '20px',
-      paddingTop: '110px',
-      paddingBottom: '140px',
+      paddingTop: '70px',
+      paddingBottom: '220px',
     },
     textField: { width: `100%` },
     heroContent: {
@@ -124,9 +122,13 @@ const styles = (theme) => {
     taskDropdown: {
       fontSize: '20px',
     },
+    taskMenuItem: {
+      fontSize: '30px',
+    },
     formBody: {
       display: `flex`,
       flexDirection: `column`,
+      margin: '20px',
     },
     formElement: {
       marginRight: theme.spacing.unit,
