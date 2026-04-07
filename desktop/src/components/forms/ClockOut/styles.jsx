@@ -1,3 +1,5 @@
+import { BorderBottom, BorderRight } from '@material-ui/icons'
+
 const styles = (theme) => {
   return {
     hero: {
@@ -109,6 +111,16 @@ const styles = (theme) => {
         lineHeight: '1.5',
       },
     },
+    lunchTimeField: {
+      '& .MuiInputLabel-root': {
+        width: '100%',
+        textAlign: 'center',
+        left: 0,
+      },
+      '& .MuiInputLabel-shrink': {
+        transformOrigin: 'center top',
+      },
+    },
     taskDropdown: {
       fontSize: '20px',
     },
@@ -121,14 +133,21 @@ const styles = (theme) => {
     },
     lunch: {
       display: 'flex',
+      justifyContent: 'center',
     },
     lunchBox: {
-      width: `200px`,
-      flex: '0 0 200px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
     },
-    bottomText: {
-      margin: 0,
-      whiteSpace: 'nowrap',
+    lunchLabel: {
+      textAlign: 'left',
+      fontSize: '30px',
+      marginBottom: theme.spacing.unit,
+    },
+    statsBox: {
+      display: 'flex',
+      flexDirection: 'column',
     },
     formFooter: {
       position: 'fixed',
@@ -145,13 +164,24 @@ const styles = (theme) => {
     },
     formFooterRow: {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'stretch',
       justifyContent: 'center',
-      gap: '10px',
       flexWrap: 'nowrap',
       width: '100%',
       overflowX: 'auto',
       padding: '8px 0',
+      '& > div': {
+        display: 'flex',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        padding: '0 10px',
+        flex: '1 1 0',
+        minWidth: 0,
+      },
+      '& > div + div': {
+        borderLeft: `1px solid ${theme.palette.divider}`,
+      },
     },
     keyboardGrid: {
       position: `relative`,

@@ -218,112 +218,125 @@ export function Clockout(props) {
 
                       <Grid item xs={12} className={classes.formFooter}>
                         <div className={classes.formFooterRow}>
-                          <Button
-                            onClick={cancel}
-                            color="secondary"
-                            variant="text"
-                            className={classes.clockOutRegularButtons}
-                          >
-                            Cancel
-                          </Button>
+                          <div>
+                            <Button
+                              onClick={cancel}
+                              color="secondary"
+                              variant="text"
+                              className={classes.clockOutLargeButtons}
+                            >
+                              Cancel
+                            </Button>
+                          </div>
 
                           <div className={classes.lunchBox}>
+                            <Typography className={classes.lunchLabel}>
+                              Lunch
+                            </Typography>
                             <Field
                               name={`lunch`}
-                              label1="Lunch"
-                              label2=" "
+                              label1="hrs"
+                              label2="mins"
                               fullWidth
                               margin="none"
                               component={Time}
-                              className={classes.taskField}
+                              className={cx(
+                                classes.taskField,
+                                classes.lunchTimeField,
+                              )}
                               menuItemClassName={classes.taskDropdown}
                               errorTextStyles={classes.errorText}
                             />
                           </div>
-                          <Typography
-                            variant="h5"
-                            className={classes.bottomText}
-                          >
-                            Time Left: {minutesToString(timeLeft)}
-                          </Typography>
-                          <Typography
-                            variant="h5"
-                            className={classes.bottomText}
-                          >
-                            Week Total:{' '}
-                            {minutesToString(minutesRoudedTime(weekHourTotal))}
-                          </Typography>
-                          <Typography
-                            variant="body1"
-                            margin="none"
-                            className={classes.error}
-                          >
-                            {generalError}
-                          </Typography>
 
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            className={classes.clockOutSmallButtons}
-                            id="clockout_add_job"
-                            onClick={() => {
-                              const newIndex = values.activities.length
-                              jobHelpers.push({
-                                projectId: Object.keys(projects)[0],
-                                tasks: [
+                          <div>
+                            <Button
+                              color="primary"
+                              variant="contained"
+                              className={classes.clockOutRegularButtons}
+                              id="clockout_add_job"
+                              onClick={() => {
+                                const newIndex = values.activities.length
+                                jobHelpers.push({
+                                  projectId: Object.keys(projects)[0],
+                                  tasks: [
+                                    {
+                                      projectTaskId: -1,
+                                      length: 0,
+                                      description: ``,
+                                    },
+                                  ],
+                                })
+                                setActiveJobIndex(newIndex)
+                              }}
+                            >
+                              Add Job
+                            </Button>
+                          </div>
+
+                          <div>
+                            <Button
+                              color="primary"
+                              variant="contained"
+                              className={classes.clockOutRegularButtons}
+                              id="clockout_add_task"
+                              onClick={() => {
+                                const activeJob =
+                                  values.activities[activeJobIndex]
+                                if (!activeJob) return
+                                const newTasks = [
+                                  ...activeJob.tasks,
                                   {
                                     projectTaskId: -1,
                                     length: 0,
                                     description: ``,
                                   },
-                                ],
-                              })
-                              setActiveJobIndex(newIndex)
-                            }}
-                          >
-                            Add Job
-                          </Button>
+                                ]
+                                jobHelpers.form.setFieldValue(
+                                  `activities.${activeJobIndex}.tasks`,
+                                  newTasks,
+                                )
+                              }}
+                            >
+                              Add Task
+                            </Button>
+                          </div>
 
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            className={classes.clockOutSmallButtons}
-                            id="clockout_add_task"
-                            onClick={() => {
-                              const activeJob =
-                                values.activities[activeJobIndex]
-                              if (!activeJob) return
-                              const newTasks = [
-                                ...activeJob.tasks,
-                                {
-                                  projectTaskId: -1,
-                                  length: 0,
-                                  description: ``,
-                                },
-                              ]
-                              jobHelpers.form.setFieldValue(
-                                `activities.${activeJobIndex}.tasks`,
-                                newTasks,
-                              )
-                            }}
-                          >
-                            Add Task
-                          </Button>
+                          <div className={classes.statsBox}>
+                            <Typography variant="h5">
+                              Time Left: {minutesToString(timeLeft)}
+                            </Typography>
+                            <Typography variant="h5">
+                              Week Total:{' '}
+                              {minutesToString(
+                                minutesRoudedTime(weekHourTotal),
+                              )}
+                            </Typography>
+                            <Typography
+                              variant="body1"
+                              margin="none"
+                              className={classes.error}
+                            >
+                              {generalError}
+                            </Typography>
+                          </div>
 
-                          <Button
-                            type="submit"
-                            color="primary"
-                            className={classes.clockOutLargeButtons}
-                            disabled={
-                              isSubmitting ||
-                              Object.keys(errors).length !== 0 ||
-                              timeLeft !== 0 ||
-                              !!generalError
-                            }
-                            variant="contained"
-                          >
-                            Clock Out
-                          </Button>
+                          <div>
+                            <Button
+                              type="submit"
+                              color="primary"
+                              className={classes.clockOutLargeButtons}
+                              disabled={
+                                isSubmitting ||
+                                Object.keys(errors).length !== 0 ||
+                                timeLeft !== 0 ||
+                                !!generalError
+                              }
+                              variant="contained"
+                            >
+                              Clock Out
+                            </Button>
+                          </div>
                         </div>
                       </Grid>
                     </div>
