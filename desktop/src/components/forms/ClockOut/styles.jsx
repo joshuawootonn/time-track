@@ -205,7 +205,7 @@ const styles = (theme) => {
       flexShrink: 0,
     },
     clockOutLargeButtons: {
-      padding: '40px',
+      padding: '20px',
       fontSize: '26px',
       whiteSpace: 'nowrap',
       flexShrink: 0,
