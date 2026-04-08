@@ -140,12 +140,14 @@ const styles = (theme) => {
     lunchBox: {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'flex-start',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     lunchLabel: {
-      textAlign: 'left',
-      fontSize: '30px',
-      marginBottom: theme.spacing.unit,
+      textAlign: 'center',
+      fontSize: '20px',
+      marginBottom: 0,
+      marginRight: theme.spacing.unit * 2,
     },
     statsBox: {
       display: 'flex',

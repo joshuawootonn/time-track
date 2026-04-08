@@ -241,6 +241,7 @@ export function Clockout(props) {
                               name={`lunch`}
                               label1="hrs"
                               label2="mins"
+                              helper="none"
                               fullWidth
                               margin="none"
                               component={Time}
@@ -249,7 +250,7 @@ export function Clockout(props) {
                                 classes.lunchTimeField,
                               )}
                               menuItemClassName={classes.taskMenuItem}
-                              errorTextStyles={classes.errorText}
+                              // errorTextStyles={classes.errorText}
                             />
                           </div>
 
