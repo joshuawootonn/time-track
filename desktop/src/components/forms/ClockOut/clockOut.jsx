@@ -284,6 +284,10 @@ export function Clockout(props) {
                               variant="contained"
                               className={classes.clockOutRegularButtons}
                               id="clockout_add_task"
+                              disabled={
+                                !values.activities ||
+                                values.activities.length === 0
+                              }
                               onClick={() => {
                                 const activeJob =
                                   values.activities[activeJobIndex]
