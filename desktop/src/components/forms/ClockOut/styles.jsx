@@ -211,7 +211,8 @@ const styles = (theme) => {
       flexShrink: 0,
     },
     clockOutRegularButtons: {
-      padding: '20px',
+      minWidth: '180px',
+      padding: '15px',
       fontSize: '18px',
       whiteSpace: 'nowrap',
       flexShrink: 0,

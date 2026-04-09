@@ -279,7 +279,7 @@ export function Clockout(props) {
                                 setActiveJobIndex(newIndex)
                               }}
                             >
-                              Add Job
+                              Add Project
                             </Button>
                           </div>
 
