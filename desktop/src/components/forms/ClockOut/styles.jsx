@@ -109,6 +109,9 @@ const styles = (theme) => {
         lineHeight: '1.5',
       },
     },
+    taskSelectField: {
+      marginRight: '16px',
+    },
     lunchTimeField: {
       '& .MuiInputLabel-root': {
         width: '100%',

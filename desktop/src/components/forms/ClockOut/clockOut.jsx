@@ -165,7 +165,10 @@ export function Clockout(props) {
                                       className={classes.taskLine}
                                     >
                                       <Field
-                                        className={classes.taskField}
+                                        className={cx(
+                                          classes.taskField,
+                                          classes.taskSelectField,
+                                        )}
                                         name={`activities.${jobIndex}.tasks.${taskIndex}.projectTaskId`}
                                         component={Select}
                                         fullWidth

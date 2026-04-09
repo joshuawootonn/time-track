@@ -18,7 +18,7 @@ const styles = () => ({
     alignItems: 'center',
     width: '100%',
     '& + &': {
-      marginLeft: '10px',
+      marginLeft: '16px',
     },
   },
   suffix: {
