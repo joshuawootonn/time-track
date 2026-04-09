@@ -99,7 +99,7 @@ const styles = (theme) => {
     taskField: {
       '& .MuiInputBase-input': {
         fontSize: '20px',
-        margin: '10px',
+        //margin: '10px',
       },
       '& .MuiInputLabel-root': {
         fontSize: '25px',

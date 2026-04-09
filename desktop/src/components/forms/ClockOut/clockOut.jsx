@@ -239,10 +239,12 @@ export function Clockout(props) {
                             </Typography>
                             <Field
                               name={`lunch`}
-                              label1="hrs"
-                              label2="mins"
+                              label1=""
+                              label2=""
+                              suffix1="h"
+                              suffix2="m"
+                              compact
                               helper="none"
-                              fullWidth
                               margin="none"
                               component={Time}
                               className={cx(
@@ -250,7 +252,6 @@ export function Clockout(props) {
                                 classes.lunchTimeField,
                               )}
                               menuItemClassName={classes.taskMenuItem}
-                              // errorTextStyles={classes.errorText}
                             />
                           </div>
 

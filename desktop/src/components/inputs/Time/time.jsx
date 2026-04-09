@@ -35,6 +35,9 @@ export class Time extends Component {
       className,
       menuItemClassName,
       errorTextStyles,
+      suffix1,
+      suffix2,
+      compact,
     } = this.props
 
     const minutesValue = Math.floor(value % 60)
@@ -43,63 +46,89 @@ export class Time extends Component {
     return (
       <FormControl
         fullWidth={fullWidth}
-        className={cx(classes.fieldWrapper, classes.vertical)}
+        className={cx(
+          classes.fieldWrapper,
+          classes.vertical,
+          compact && classes.autoWidth,
+        )}
       >
-        <div className={cx(classes.fieldWrapper, classes.horizontal)}>
-          <Select
-            field={field}
-            form={form}
-            className={cx(className, classes.hours)}
-            margin={margin}
-            fullWidth={fullWidth}
-            label={label1}
-            selectProps={{
-              onChange: this.onChangeHours,
-              value: hoursValue,
-            }}
-            value={hoursValue}
-            helper="none"
+        <div
+          className={cx(
+            classes.fieldWrapper,
+            classes.horizontal,
+            compact && classes.autoWidth,
+          )}
+        >
+          <div
+            className={cx(
+              classes.selectWithSuffix,
+              compact && classes.autoWidth,
+            )}
           >
-            {hours.map((item, i) => {
-              return (
-                <MenuItem
-                  key={i}
-                  id={item.id}
-                  value={item.value}
-                  className={menuItemClassName}
-                >
-                  {item.name}
-                </MenuItem>
-              )
-            })}
-          </Select>
-          <Select
-            field={field}
-            form={form}
-            className={className}
-            margin={margin}
-            fullWidth={fullWidth}
-            label={label2}
-            selectProps={{
-              onChange: this.onChangeMinutes,
-              value: minutesValue,
-            }}
-            value={minutesValue}
-            helper="none"
+            <Select
+              field={field}
+              form={form}
+              className={cx(className, classes.hours)}
+              margin={margin}
+              fullWidth={fullWidth}
+              label={label1}
+              selectProps={{
+                onChange: this.onChangeHours,
+                value: hoursValue,
+              }}
+              value={hoursValue}
+              helper="none"
+            >
+              {hours.map((item, i) => {
+                return (
+                  <MenuItem
+                    key={i}
+                    id={item.id}
+                    value={item.value}
+                    className={menuItemClassName}
+                  >
+                    {item.name}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+            {suffix1 && <span className={classes.suffix}>{suffix1}</span>}
+          </div>
+          <div
+            className={cx(
+              classes.selectWithSuffix,
+              compact && classes.autoWidth,
+            )}
           >
-            {minutes.map((item, i) => {
-              return (
-                <MenuItem
-                  key={i}
-                  id={item.id}
-                  value={item.value}
-                  className={menuItemClassName}
-                >
-                  {item.name}
-                </MenuItem>
-              )
-            })}
-          </Select>
+            <Select
+              field={field}
+              form={form}
+              className={className}
+              margin={margin}
+              fullWidth={fullWidth}
+              label={label2}
+              selectProps={{
+                onChange: this.onChangeMinutes,
+                value: minutesValue,
+              }}
+              value={minutesValue}
+              helper="none"
+            >
+              {minutes.map((item, i) => {
+                return (
+                  <MenuItem
+                    key={i}
+                    id={item.id}
+                    value={item.value}
+                    className={menuItemClassName}
+                  >
+                    {item.name}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+            {suffix2 && <span className={classes.suffix}>{suffix2}</span>}
+          </div>
         </div>
         {helper === `normal` && (
           <FormHelperText
@@ -119,6 +148,9 @@ Time.defaultProps = {
   label1: `Hours`,
   label2: `Minutes`,
   helper: `normal`,
+  suffix1: ``,
+  suffix2: ``,
+  compact: false,
 }
 
 Time.propTypes = {
@@ -131,6 +163,9 @@ Time.propTypes = {
   helper: PropTypes.oneOf([`normal`, `none`]),
   label1: PropTypes.string,
   label2: PropTypes.string,
+  suffix1: PropTypes.string,
+  suffix2: PropTypes.string,
+  compact: PropTypes.bool,
 }
 
 export default withStyles(styles)(Time)
