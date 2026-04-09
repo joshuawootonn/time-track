@@ -22,6 +22,13 @@ const styles = (theme) => {
       width: '50px',
       height: '50px',
     },
+    iconButton: {
+      width: '48px',
+      height: '48px',
+      padding: '12px',
+      borderRadius: '50%',
+      flex: '0 0 auto',
+    },
     spaceBetween: {
       justifyContent: `space-between`,
     },
