@@ -22,6 +22,7 @@ import ProjectCell from '~/components/tables/Table/cells/projectCell'
 import TaskCell from '~/components/tables/Table/cells/taskCell'
 import FirstNameCell from '~/components/tables/Table/cells/firstNameCell'
 import ProjectCompletionCell from '~/components/tables/Table/cells/projectCompletionCell'
+import SwitchCell from '~/components/tables/Table/cells/switchCell'
 
 const CellSet = {
   [TableDataTypes.FIRSTNAME]: FirstNameCell,
@@ -29,6 +30,7 @@ const CellSet = {
   [TableDataTypes.PROJECTS]: ProjectCell,
   [TableDataTypes.TASKS]: TaskCell,
   [TableDataTypes.PROJECT_COMPLETION]: ProjectCompletionCell,
+  [TableDataTypes.SWITCH]: SwitchCell,
 }
 
 // ICEBOX: Test Table

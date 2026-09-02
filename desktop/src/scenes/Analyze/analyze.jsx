@@ -13,6 +13,7 @@ import {
   Grid,
   Tooltip,
   Drawer,
+  Switch,
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import {
@@ -54,6 +55,7 @@ import ProjectToolbar from '~/containers/Project/projectToolbar.container'
 import ProjectFilterContainer from '~/containers/Project/projectFilter.container'
 import ProjectCRUD from '~/containers/Project/projectCRUD.container'
 import ProjectIndex from '~/containers/Project/projectIndex.container'
+import CurrentProjectIndex from '~/containers/Project/activeProjectIndex.container'
 
 import ShiftToolbar from '~/containers/Shift/shiftToolbar.container'
 import ShiftIndex from '~/containers/Shift/shiftIndex.container'
@@ -93,15 +95,16 @@ const styles = (theme) => ({
 const TabIndex = {
   Employees: 0,
   Projects: 1,
-  Tasks: 2,
-  Trades: 3,
-  Shifts: 4,
+  CurrentProjects: 2,
+  Tasks: 3,
+  Trades: 4,
+  Shifts: 5,
 }
 
 export class Analyze extends Component {
   //REMOVE
   state = {
-    tabValue: 4,
+    tabValue: 5,
     isLoading: true,
     isElectron: isElectron(),
     isMenuOpened: false,
@@ -172,7 +175,8 @@ export class Analyze extends Component {
                   className={classes.tabs}
                 >
                   <Tab label="Employees" />
-                  <Tab label="Projects" />
+                  <Tab label="All Projects" />
+                  <Tab label="Current Projects" />
                   <Tab label="Tasks" />
                   <Tab label="Trades" />
                   <Tab label="Shifts" />
@@ -200,7 +204,8 @@ export class Analyze extends Component {
                       className={classes.tabs}
                     >
                       <Tab label="Employees" />
-                      <Tab label="Projects" />
+                      <Tab label="All Projects" />
+                      <Tab label="Current Projects" />
                       <Tab label="Tasks" />
                       <Tab label="Trades" />
                       <Tab label="Shifts" />
@@ -273,6 +278,28 @@ export class Analyze extends Component {
             <Grid item xs={isDesktop ? 7 : 12}>
               <ProjectCRUD goToTab={this.goToTab} />
             </Grid>
+          </Grid>
+        )}
+
+        {tabValue === TabIndex.CurrentProjects && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
+            <Grid item xs={isDesktop ? 5 : 12} className={classes.gridHeight}>
+              {/* <ProjectToolbar />
+              <ProjectFilterContainer /> */}
+              <div
+                style={{
+                  flex: '1 1 auto',
+                }}
+              >
+                <CurrentProjectIndex />
+              </div>
+            </Grid>
+            {/* <Grid item xs={isDesktop ? 7 : 12}>
+              <ProjectCRUD goToTab={this.goToTab} />
+            </Grid> */}
           </Grid>
         )}
 
