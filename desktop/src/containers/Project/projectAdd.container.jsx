@@ -21,6 +21,7 @@ const ProjectAddContainer = ({ categories, subcategories, tasks, trades }) => {
         isActive: true,
         date: moment().startOf(`day`).format(`YYYY-MM-DD`),
         projectTasks: [],
+        isArchived: false,
       }}
       validationSchema={projectValidation}
       onSubmit={(values, formikFunctions) => {
@@ -30,6 +31,7 @@ const ProjectAddContainer = ({ categories, subcategories, tasks, trades }) => {
           isActive: values.isActive ? 1 : 0,
           date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
           projectTasks: values.projectTasks,
+          isArchived: 0,
         }).then(
           () => {
             formikFunctions.resetForm()
