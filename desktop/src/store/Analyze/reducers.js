@@ -33,7 +33,7 @@ export const initialState = {
   },
   projectFilters: {
     name: ``,
-    isActive: true,
+    isCurrent: true,
     startTime: moment().subtract(5, `years`).format(`MM-DD-YY HH:mm:ss`),
     endTime: moment().add(1, `years`).format(`MM-DD-YY HH:mm:ss`),
   },

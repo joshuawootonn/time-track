@@ -32,9 +32,9 @@ export class ProjectFilter extends Component {
               helper="normal"
             />
             <Field
-              name="isActive"
+              name="isCurrent"
               component={Switch}
-              label="Active"
+              label="Current"
               className={classes.field}
             />
           </Grid>

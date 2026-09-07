@@ -42,7 +42,9 @@ export const getAllProjectsNew = createSelector(
         ) {
           return false
         }
-        if (!!project.isActive !== !!filters.isActive) {
+        const projectIsCurrent = !project.isArchived
+        const filterWantsCurrent = filters.isCurrent === true
+        if (projectIsCurrent !== filterWantsCurrent) {
           return false
         }
         return true
