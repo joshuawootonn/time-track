@@ -11,7 +11,7 @@ import axios from '~/helpers/axios'
 const ProjectIndex = () => {
   const dispatch = useDispatch()
   const projects = useSelector((state) => getAllProjectsNew(state))
-  const { startTime, endTime, isActive } = useSelector((state) =>
+  const { startTime, endTime, isCurrent } = useSelector((state) =>
     getProjectFilters(state),
   )
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +23,7 @@ const ProjectIndex = () => {
   useEffect(() => {
     axios
       .get(
-        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isActive=${isActive}`,
+        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isArchived=${!isCurrent}`,
       )
       .then(({ data: { projects } }) => {
         setProjectSummaries(projects)
@@ -64,16 +64,6 @@ const rows = [
     padding: `dense`,
     label: `Date`,
     type: TableDataTypes.DATE,
-  },
-  {
-    id: `isActive`,
-    dataKey: `isActive`,
-    width: 30,
-    height: 56,
-    align: `left`,
-    padding: `dense`,
-    label: `Active`,
-    type: TableDataTypes.BOOLEAN,
   },
   {
     id: `totalEstimate`,

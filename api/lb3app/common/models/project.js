@@ -7,7 +7,7 @@ var baseError = {
 }
 
 module.exports = (Project) => {
-  Project.summary = async (startTime, endTime, isActive) => {
+  Project.summary = async (startTime, endTime, isActive, isArchived) => {
     var app = require('../../server/server')
 
     if (!startTime) {
@@ -23,11 +23,15 @@ module.exports = (Project) => {
       }
     }
 
-    if (isActive === undefined || typeof isActive !== 'boolean') {
+    const isActiveSet = isActive !== undefined && typeof isActive === 'boolean'
+    const isArchivedSet =
+      isArchived !== undefined && typeof isArchived === 'boolean'
+
+    if (!isActiveSet && !isArchivedSet) {
       return {
         ...baseError,
         message:
-          'isActive is required in the queryString as 0 (false) or 1 (true)',
+          'isActive or isArchived is required in the queryString as 0 (false) or 1 (true)',
       }
     }
 
@@ -37,7 +41,7 @@ module.exports = (Project) => {
         and: [
           { date: { gt: startTime } },
           { date: { lt: endTime } },
-          { isActive },
+          isActiveSet ? { isActive } : { isArchived },
         ],
       },
     })
@@ -62,6 +66,7 @@ module.exports = (Project) => {
         date: project.date,
         id: project.id,
         isActive: project.isActive,
+        isArchived: project.isArchived,
         name: project.name,
         totalEstimate,
         totalActual,
@@ -139,6 +144,7 @@ module.exports = (Project) => {
         date: project.date,
         id: project.id,
         isActive: project.isActive,
+        isArchived: project.isArchived,
         name: project.name,
         projectTaskIds,
         totalEstimate,
@@ -215,6 +221,7 @@ module.exports = (Project) => {
       { arg: 'startTime', type: 'date' },
       { arg: 'endTime', type: 'date' },
       { arg: 'isActive', type: 'boolean' },
+      { arg: 'isArchived', type: 'boolean' },
     ],
     returns: { arg: 'projects', type: 'string' },
   })
