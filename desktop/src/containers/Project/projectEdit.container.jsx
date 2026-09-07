@@ -94,17 +94,23 @@ const ProjectEditContainer = ({ selected, tasks, trades, goToTab }) => {
           .startOf(`day`)
           .format(`YYYY-MM-DD`),
         projectTasks: newSelected.projectTasks,
+        isArchived: selected.isArchived ? true : false,
       }}
       validationSchema={projectEditValidation}
       onSubmit={(values, formikFunctions) => {
         setIsSubmitting(true)
+        const isCurrentlyArchived = values.isArchived === true
+        const isCurrentlyActive =
+          !isCurrentlyArchived && values.isActive === true
+
         return updateProject({
           id: values.id,
           jobNumber: values.jobNumber,
           name: values.name,
-          isActive: values.isActive ? 1 : 0,
+          isActive: isCurrentlyActive ? 1 : 0,
           date: moment(values.date).format(`MM-DD-YY HH:mm:ss`),
           projectTasks: values.projectTasks,
+          isArchived: isCurrentlyArchived ? 1 : 0,
         }).then(
           () => {
             formikFunctions.resetForm()
