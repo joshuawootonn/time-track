@@ -100,6 +100,7 @@ export class ProjectEdit extends Component {
       errors,
       values,
       goToShifts,
+      setFieldValue,
     } = this.props
 
     const { totalActualTime, totalEstimateTime } = values.projectTasks.reduce(
@@ -153,11 +154,32 @@ export class ProjectEdit extends Component {
               className={classes.field}
               helper="normal"
             />
-            <Field
-              name="isActive"
-              component={Switch}
+            <Switch
+              field={{
+                name: 'current',
+                value: !values.isArchived,
+                onChange: (e) => {
+                  // not checked means archived
+                  const isArchived = !e.target.checked
+
+                  setFieldValue('isArchived', isArchived)
+                  if (isArchived) {
+                    setFieldValue('isActive', false) // archiving forces Active off
+                  }
+                },
+              }}
+              label="Current"
+              className={classes.field}
+            />
+            <Switch
+              field={{
+                name: 'isActive',
+                value: values.isArchived ? false : values.isActive, // display OFF whenever archived, not just stored state
+                onChange: (e) => setFieldValue('isActive', e.target.checked),
+              }}
               label="Active"
               className={classes.field}
+              disabled={values.isArchived}
             />
           </Grid>
           <Grid item xs={12} container className={classes.body}>
