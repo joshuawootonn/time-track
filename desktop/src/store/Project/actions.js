@@ -82,6 +82,12 @@ export const updateProject = (project) => {
   }
 }
 
+export const toggleProjectActive = (id, isActive) => {
+  return async (dispatch) => {
+    return dispatch(genericActions.patch(domains.PROJECT, { id, isActive }))
+  }
+}
+
 export const removeProject = (id) => {
   return async (dispatch) => {
     dispatch({ type: projectActionTypes.REMOVE_PROJECT_REQUEST })

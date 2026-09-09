@@ -11,6 +11,9 @@ export const generateCRUDEndpoints = (domain) => {
     put: (employee) => {
       return axios.put(`/${domain}/${employee.id}`, { ...employee })
     },
+    patch: (employee) => {
+      return axios.patch(`/${domain}/${employee.id}`, { ...employee })
+    },
     post: (employee) => {
       return axios.post(`/${domain}`, { ...employee })
     },

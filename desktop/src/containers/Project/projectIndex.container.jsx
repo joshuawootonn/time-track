@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import VirtualizedSortSelect from '~/components/tables/Table'
 import Progress from '~/components/helpers/Progress'
 import { analyzeActions } from '~/store/actions'
-import * as TableDataTypes from '~/constants/tableDataTypes'
 import domain from '~/constants/domains'
 import { getAllProjectsNew, getProjectFilters } from '~/store/Project/selectors'
 import axios from '~/helpers/axios'
 
-const ProjectIndex = () => {
+const ProjectIndex = ({ columns, forceCurrent }) => {
   const dispatch = useDispatch()
   const projects = useSelector((state) => getAllProjectsNew(state))
   const { startTime, endTime, isCurrent } = useSelector((state) =>
@@ -20,24 +19,25 @@ const ProjectIndex = () => {
   const select = (object) =>
     dispatch(analyzeActions.select(domain.PROJECT, object))
 
-  useEffect(() => {
-    axios
-      .get(
-        `/projects/summary?startTime=${startTime}&endTime=${endTime}&isArchived=${!isCurrent}`,
-      )
-      .then(({ data: { projects } }) => {
-        setProjectSummaries(projects)
-        setIsLoading(false)
-      })
-  }, [startTime, endTime, projects])
+  const query = forceCurrent
+    ? `/projects/summary?isArchived=false`
+    : `/projects/summary?startTime=${startTime}&endTime=${endTime}&isArchived=${!isCurrent}`
 
-  if (!projectSummaries || projectSummaries.length === 0 || isLoading)
+  useEffect(() => {
+    axios.get(query).then(({ data: { projects } }) => {
+      setProjectSummaries(projects)
+      setIsLoading(false)
+    })
+  }, [query, projects])
+
+  if (!projectSummaries || projectSummaries.length === 0 || isLoading) {
     return <Progress variant="circular" fullWidth fullHeight />
+  }
 
   return (
     <VirtualizedSortSelect
       data={projectSummaries || []}
-      columns={rows}
+      columns={columns}
       select={select}
       initialSortBy="date"
     />
@@ -45,51 +45,3 @@ const ProjectIndex = () => {
 }
 
 export default ProjectIndex
-
-const rows = [
-  {
-    id: `name`,
-    dataKey: `name`,
-    width: 200,
-    height: 56,
-    padding: `dense`,
-    label: `Name`,
-    type: TableDataTypes.STRING,
-  },
-  {
-    id: `date`,
-    dataKey: `date`,
-    width: 80,
-    height: 56,
-    padding: `dense`,
-    label: `Date`,
-    type: TableDataTypes.DATE,
-  },
-  {
-    id: `totalEstimate`,
-    dataKey: `totalEstimate`,
-    width: 60,
-    height: 56,
-    padding: `dense`,
-    label: `Estimated Time`,
-    type: TableDataTypes.LENGTH,
-  },
-  {
-    id: `totalActual`,
-    dataKey: `totalActual`,
-    width: 60,
-    height: 56,
-    padding: `dense`,
-    label: `Actual Time`,
-    type: TableDataTypes.LENGTH,
-  },
-  {
-    id: `projectCompletion`,
-    dataKey: `projectCompletion`,
-    width: 60,
-    height: 56,
-    padding: `dense`,
-    label: `Percent Complete`,
-    type: TableDataTypes.PROJECT_COMPLETION,
-  },
-]

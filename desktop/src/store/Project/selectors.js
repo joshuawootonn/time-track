@@ -81,7 +81,7 @@ export const getActiveProjects = createSelector(
         return projects[projectId]
       })
       .filter((project) => {
-        return !!project.isActive
+        return !!project.isActive && !project.isArchived
       })
       .sort((a, b) => {
         if (a.name > b.name) return 1
