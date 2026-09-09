@@ -11,3 +11,4 @@ export const PROJECTS = `projects`
 export const TASKS = `tasks`
 export const FIRSTNAME = 'firstName'
 export const PROJECT_COMPLETION = 'projectCompletion'
+export const PROJECT_ACTIVE = 'projectActive'

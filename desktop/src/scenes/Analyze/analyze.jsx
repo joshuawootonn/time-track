@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import {
   AppBar,
@@ -25,6 +24,7 @@ import {
 } from '@material-ui/icons'
 import moment from 'moment'
 import { withMediaQuery } from '~/helpers/withMediaQuery'
+import * as TableDataTypes from '~/constants/tableDataTypes'
 
 import {
   employeeActions,
@@ -93,15 +93,86 @@ const styles = (theme) => ({
 const TabIndex = {
   Employees: 0,
   Projects: 1,
-  Tasks: 2,
-  Trades: 3,
-  Shifts: 4,
+  CurrentProjects: 2,
+  Tasks: 3,
+  Trades: 4,
+  Shifts: 5,
 }
+
+const columnsAllProjects = [
+  {
+    id: `name`,
+    dataKey: `name`,
+    width: 200,
+    height: 56,
+    padding: `dense`,
+    label: `Name`,
+    type: TableDataTypes.STRING,
+  },
+  {
+    id: `date`,
+    dataKey: `date`,
+    width: 80,
+    height: 56,
+    padding: `dense`,
+    label: `Date`,
+    type: TableDataTypes.DATE,
+  },
+  {
+    id: `totalEstimate`,
+    dataKey: `totalEstimate`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Estimated Time`,
+    type: TableDataTypes.LENGTH,
+  },
+  {
+    id: `totalActual`,
+    dataKey: `totalActual`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Actual Time`,
+    type: TableDataTypes.LENGTH,
+  },
+  {
+    id: `projectCompletion`,
+    dataKey: `projectCompletion`,
+    width: 60,
+    height: 56,
+    padding: `dense`,
+    label: `Percent Complete`,
+    type: TableDataTypes.PROJECT_COMPLETION,
+  },
+]
+
+const columnsCurrentProjects = [
+  {
+    id: `name`,
+    dataKey: `name`,
+    width: 200,
+    height: 56,
+    padding: `dense`,
+    label: `Name`,
+    type: TableDataTypes.STRING,
+  },
+  {
+    id: `isActive`,
+    dataKey: `isActive`,
+    width: 120,
+    flexGrow: 0,
+    height: 56,
+    padding: `dense`,
+    label: `Active`,
+    type: TableDataTypes.PROJECT_ACTIVE,
+  },
+]
 
 export class Analyze extends Component {
   //REMOVE
   state = {
-    tabValue: 4,
+    tabValue: 5,
     isLoading: true,
     isElectron: isElectron(),
     isMenuOpened: false,
@@ -172,7 +243,8 @@ export class Analyze extends Component {
                   className={classes.tabs}
                 >
                   <Tab label="Employees" />
-                  <Tab label="Projects" />
+                  <Tab label="All Projects" />
+                  <Tab label="Current Projects" />
                   <Tab label="Tasks" />
                   <Tab label="Trades" />
                   <Tab label="Shifts" />
@@ -200,7 +272,8 @@ export class Analyze extends Component {
                       className={classes.tabs}
                     >
                       <Tab label="Employees" />
-                      <Tab label="Projects" />
+                      <Tab label="All Projects" />
+                      <Tab label="Current Projects" />
                       <Tab label="Tasks" />
                       <Tab label="Trades" />
                       <Tab label="Shifts" />
@@ -267,11 +340,25 @@ export class Analyze extends Component {
                   flex: '1 1 auto',
                 }}
               >
-                <ProjectIndex />
+                <ProjectIndex columns={columnsAllProjects} />
               </div>
             </Grid>
             <Grid item xs={isDesktop ? 7 : 12}>
               <ProjectCRUD goToTab={this.goToTab} />
+            </Grid>
+          </Grid>
+        )}
+
+        {tabValue === TabIndex.CurrentProjects && (
+          <Grid
+            container
+            className={isDesktop ? classes.tab : classes.tabMobile}
+          >
+            <Grid item xs={isDesktop ? 5 : 12} className={classes.gridHeight}>
+              <ProjectIndex
+                columns={columnsCurrentProjects}
+                forceCurrent={true}
+              />
             </Grid>
           </Grid>
         )}

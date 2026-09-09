@@ -68,6 +68,29 @@ export const put = (domain, object) => {
     )
   }
 }
+export const patch = (domain, object) => {
+  const patch = endpoints[`${domain.singular}Endpoints`].default.patch(object)
+  return async (dispatch) => {
+    dispatch({ type: `patch_${domain.singular}_request` })
+    return patch.then(
+      (response) => {
+        const payload = normalize(
+          { [domain.plural]: [response.data] },
+          schemas[`${domain.singular}Array`],
+        )
+        return dispatch({
+          type: `patch_${domain.singular}_success`,
+          payload,
+          data: response.data,
+        })
+      },
+      (e) => {
+        dispatch({ type: `patch_${domain.singular}_failure`, e })
+        return Promise.reject(e)
+      },
+    )
+  }
+}
 export const post = (domain, object) => {
   const post = endpoints[`${domain.singular}Endpoints`].default.post(object)
   return (dispatch) => {

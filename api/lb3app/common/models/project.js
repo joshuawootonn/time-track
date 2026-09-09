@@ -10,22 +10,26 @@ module.exports = (Project) => {
   Project.summary = async (startTime, endTime, isActive, isArchived) => {
     var app = require('../../server/server')
 
-    if (!startTime) {
+    const isActiveSet = isActive !== undefined && typeof isActive === 'boolean'
+    const isArchivedSet =
+      isArchived !== undefined && typeof isArchived === 'boolean'
+
+    const isStartTimeSet = startTime !== undefined
+    const isEndTimeSet = endTime !== undefined
+
+    if (isActiveSet && !isStartTimeSet) {
       return {
         ...baseError,
         message: 'startTime is required in the queryString as UTC date',
       }
     }
-    if (!endTime) {
+
+    if (isActiveSet && !isEndTimeSet) {
       return {
         ...baseError,
         message: 'endTime is required in the queryString as UTC date',
       }
     }
-
-    const isActiveSet = isActive !== undefined && typeof isActive === 'boolean'
-    const isArchivedSet =
-      isArchived !== undefined && typeof isArchived === 'boolean'
 
     if (!isActiveSet && !isArchivedSet) {
       return {
@@ -35,15 +39,34 @@ module.exports = (Project) => {
       }
     }
 
+    const conditions = []
+
+    if (isActiveSet) {
+      conditions.push({ isActive })
+    }
+
+    if (isArchivedSet) {
+      conditions.push({ isArchived })
+    }
+
+    if (isStartTimeSet) {
+      conditions.push({ date: { gt: startTime } })
+    }
+
+    if (isEndTimeSet) {
+      conditions.push({ date: { lt: endTime } })
+    }
+
+    if (conditions.length === 0) {
+      return {
+        ...baseError,
+        message: 'At least one filter is required',
+      }
+    }
+
     const projects = await Project.find({
       include: { projectTasks: 'activities' },
-      where: {
-        and: [
-          { date: { gt: startTime } },
-          { date: { lt: endTime } },
-          isActiveSet ? { isActive } : { isArchived },
-        ],
-      },
+      where: { and: conditions },
     })
 
     const newProjects = projects.map((project) => {

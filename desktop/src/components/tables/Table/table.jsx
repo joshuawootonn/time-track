@@ -22,6 +22,7 @@ import ProjectCell from '~/components/tables/Table/cells/projectCell'
 import TaskCell from '~/components/tables/Table/cells/taskCell'
 import FirstNameCell from '~/components/tables/Table/cells/firstNameCell'
 import ProjectCompletionCell from '~/components/tables/Table/cells/projectCompletionCell'
+import ProjectActiveCell from './cells/projectActiveCell'
 
 const CellSet = {
   [TableDataTypes.FIRSTNAME]: FirstNameCell,
@@ -29,6 +30,7 @@ const CellSet = {
   [TableDataTypes.PROJECTS]: ProjectCell,
   [TableDataTypes.TASKS]: TaskCell,
   [TableDataTypes.PROJECT_COMPLETION]: ProjectCompletionCell,
+  [TableDataTypes.PROJECT_ACTIVE]: ProjectActiveCell,
 }
 
 // ICEBOX: Test Table
@@ -227,29 +229,31 @@ class Table extends React.Component {
             sortBy={sortBy}
             sortDirection={sortDirection}
           >
-            {columns.map(({ className, id, width, ...other }, index) => {
-              return (
-                <Column
-                  key={id}
-                  width={width}
-                  headerRenderer={(headerProps) =>
-                    this.headerRenderer({
-                      ...headerProps,
-                      columnIndex: index,
-                      ...other,
-                    })
-                  }
-                  flexGrow={1}
-                  className={classNames(classes.flexContainer, className)}
-                  cellRenderer={(cellProps) =>
-                    this.cellRenderer({
-                      ...cellProps,
-                    })
-                  }
-                  dataKey={id}
-                />
-              )
-            })}
+            {columns.map(
+              ({ className, id, width, flexGrow, ...other }, index) => {
+                return (
+                  <Column
+                    key={id}
+                    width={width}
+                    headerRenderer={(headerProps) =>
+                      this.headerRenderer({
+                        ...headerProps,
+                        columnIndex: index,
+                        ...other,
+                      })
+                    }
+                    flexGrow={flexGrow !== undefined ? flexGrow : 1}
+                    className={classNames(classes.flexContainer, className)}
+                    cellRenderer={(cellProps) =>
+                      this.cellRenderer({
+                        ...cellProps,
+                      })
+                    }
+                    dataKey={id}
+                  />
+                )
+              },
+            )}
           </RVTable>
         )}
       </AutoSizer>
