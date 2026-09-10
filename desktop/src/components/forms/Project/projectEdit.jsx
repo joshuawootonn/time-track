@@ -77,6 +77,26 @@ const TotalEstimateTime = ({ estimateTime }) => (
 const TotalActualTime = ({ actualTime }) => (
   <DisplayElement label="Total Actual" value={minutesToString(actualTime)} />
 )
+const getPendingStatusChangeMessage = (initialValues, values) => {
+  const initialArchived = initialValues.isArchived
+  const currentArchived = values.isArchived
+  const initialActive = initialArchived ? false : initialValues.isActive
+  const currentActive = currentArchived ? false : values.isActive
+
+  const changes = []
+  if (currentArchived !== initialArchived) {
+    changes.push(currentArchived ? `be archived` : `become current`)
+  }
+  if (currentActive !== initialActive) {
+    changes.push(currentActive ? `be marked active` : `be marked inactive`)
+  }
+
+  if (changes.length === 0) {
+    return null
+  }
+  return `Upon saving, this project will ${changes.join(` and `)}.`
+}
+
 const TotalPercentage = ({ estimateTime, actualTime }) => (
   <DisplayElement
     label="Percent Complete"
@@ -113,6 +133,11 @@ export class ProjectEdit extends Component {
         }
       },
       { totalActualTime: 0, totalEstimateTime: 0 },
+    )
+
+    const pendingStatusChangeMessage = getPendingStatusChangeMessage(
+      initialValues,
+      values,
     )
 
     return (
@@ -304,6 +329,15 @@ export class ProjectEdit extends Component {
               {errors.submit}
             </Typography>
             <div>
+              {pendingStatusChangeMessage && (
+                <Typography
+                  variant="body2"
+                  component="span"
+                  className={classes.pendingChangeNotice}
+                >
+                  {pendingStatusChangeMessage}
+                </Typography>
+              )}
               <Button
                 type="submit"
                 color="primary"
