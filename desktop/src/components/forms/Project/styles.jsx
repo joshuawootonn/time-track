@@ -43,6 +43,10 @@ const styles = () => ({
   button: {
     marginLeft: `8px`,
   },
+  pendingChangeNotice: {
+    color: `#e69100`,
+    marginRight: `8px`,
+  },
 })
 
 export default styles
