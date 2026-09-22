@@ -8,14 +8,14 @@ export const generateCRUDEndpoints = (domain) => {
     get: (id) => {
       return axios.get(`/${domain}/${id}`)
     },
-    put: (employee) => {
-      return axios.put(`/${domain}/${employee.id}`, { ...employee })
+    put: (object) => {
+      return axios.put(`/${domain}/${object.id}`, { ...object })
     },
-    patch: (employee) => {
-      return axios.patch(`/${domain}/${employee.id}`, { ...employee })
+    patch: (object) => {
+      return axios.patch(`/${domain}/${object.id}`, { ...object })
     },
-    post: (employee) => {
-      return axios.post(`/${domain}`, { ...employee })
+    post: (data) => {
+      return axios.post(`/${domain}`, { ...data })
     },
     delet: (id) => {
       return axios.delete(`/${domain}/${id}`)
