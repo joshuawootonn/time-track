@@ -5,6 +5,9 @@
     "email": "joshuawootonn@gmail.com",
     "url": "http://www.joshuawootonn.com"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "repository": "joshuawootonn/time-track",
   "description": "Time Managment & Analytics",
   "version": "3.0.50",
