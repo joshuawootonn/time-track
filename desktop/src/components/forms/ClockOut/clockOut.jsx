@@ -164,7 +164,7 @@ export function Clockout(props) {
                                       key={taskIndex}
                                       className={classes.taskLine}
                                     >
-                                      <Field
+                                      {/* <Field
                                         className={cx(
                                           classes.taskField,
                                           classes.taskSelectField,
@@ -190,7 +190,7 @@ export function Clockout(props) {
                                               {pt.task.name}
                                             </MenuItem>
                                           ))}
-                                      </Field>
+                                      </Field> */}
                                       <Field
                                         name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
                                         component={Time}
