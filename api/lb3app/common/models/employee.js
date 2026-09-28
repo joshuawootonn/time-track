@@ -46,10 +46,17 @@ module.exports = (Employee) => {
     }
   }
 
+  // {
+  //   "projectId": 11,
+  //   "length": 615,
+  // }
+
   Employee.clockout = async (employeeId, shift, activities) => {
     const app = require('../../server/server')
     const Shift = app.models.Shift
     const Activity = app.models.Activity
+    const Task = app.models.Task
+    const ProjectTask = app.models.ProjectTask
     if (!employeeId) {
       return {
         ...baseError,
@@ -81,9 +88,31 @@ module.exports = (Employee) => {
       return { ...baseError, message: `Employee ${employeeId} is not Working` }
     }
 
+    const generalTask = await Task.findOne({ where: { name: 'General' } })
+
+    // if there is no Task named "General" in DB, automatic task insert is impossible
+    if (!generalTask) {
+      return { ...baseError, message: "Task 'General' doesn't exist" }
+    }
+
     for (const activity of activities) {
+      // use the project's 'General' project task, create it if it doesn't exist
+      let projectTask = await ProjectTask.findOne({
+        where: { projectId: activity.projectId, taskId: generalTask.id },
+      })
+
+      if (!projectTask) {
+        projectTask = await ProjectTask.create({
+          projectId: activity.projectId,
+          taskId: generalTask.id,
+        })
+      }
+
       const a = await Activity.create({
-        ...activity,
+        projectId: activity.projectId,
+        projectTaskId: projectTask.id,
+        length: activity.length,
+        description: activity.description,
         shiftId: lastShift.id,
       })
       console.log('Created activity: ', a)
