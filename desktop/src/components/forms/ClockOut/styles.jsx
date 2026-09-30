@@ -81,6 +81,7 @@ const styles = (theme) => {
       alignItems: 'center',
     },
     projectField: {
+      marginRight: '16px',
       '& .MuiInputBase-input': {
         fontSize: '30px',
         margin: '10px',
@@ -106,14 +107,16 @@ const styles = (theme) => {
     taskField: {
       '& .MuiInputBase-input': {
         fontSize: '20px',
-        //margin: '10px',
+        margin: '8px',
       },
       '& .MuiInputLabel-root': {
-        fontSize: '25px',
+        fontSize: '30px',
       },
       '& .MuiSelect-select': {
         fontSize: '30px',
         lineHeight: '1.5',
+        // Reserve room for two digits so the field doesn't resize between 5 and 30
+        minWidth: '2ch',
       },
     },
     taskSelectField: {

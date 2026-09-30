@@ -77,9 +77,9 @@ export class Select extends Component {
         </SelectInput>
         {helper === `normal` && (
           <FormHelperText error={true} className={errorTextStyles}>
-            {getIn(form.touched, field.name)
-              ? getIn(form.errors, field.name)
-              : ` `}
+            {(getIn(form.touched, field.name) &&
+              getIn(form.errors, field.name)) ||
+              ` `}
           </FormHelperText>
         )}
       </FormControl>

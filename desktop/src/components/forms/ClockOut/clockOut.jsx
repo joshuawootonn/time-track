@@ -141,6 +141,25 @@ export function Clockout(props) {
                                     menuItemClassName={classes.projectDropdown}
                                     errorTextStyles={classes.errorText}
                                   />
+                                  {job.tasks &&
+                                    job.tasks.map((task, taskIndex) => (
+                                      <div
+                                        key={taskIndex}
+                                        className={classes.projectLine}
+                                        //className={classes.taskLine}
+                                      >
+                                        <Field
+                                          name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
+                                          component={Time}
+                                          fullWidth
+                                          className={classes.taskField}
+                                          menuItemClassName={
+                                            classes.taskMenuItem
+                                          }
+                                          errorTextStyles={classes.errorText}
+                                        />
+                                      </div>
+                                    ))}
                                   <IconButton
                                     type="button"
                                     id={`${CLOCKOUT_FORM_REMOVE_ACTIVTIY}_${jobIndex}`}
@@ -158,13 +177,13 @@ export function Clockout(props) {
                                 </div>
 
                                 {/* Task rows inside this job */}
-                                {job.tasks &&
+                                {/* {job.tasks &&
                                   job.tasks.map((task, taskIndex) => (
                                     <div
                                       key={taskIndex}
                                       className={classes.taskLine}
                                     >
-                                      {/* <Field
+                                      <Field
                                         className={cx(
                                           classes.taskField,
                                           classes.taskSelectField,
@@ -190,7 +209,7 @@ export function Clockout(props) {
                                               {pt.task.name}
                                             </MenuItem>
                                           ))}
-                                      </Field> */}
+                                      </Field>
                                       <Field
                                         name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
                                         component={Time}
@@ -217,7 +236,7 @@ export function Clockout(props) {
                                         <Close />
                                       </IconButton>
                                     </div>
-                                  ))}
+                                  ))} */}
                               </div>
                             </div>
                           )
@@ -283,7 +302,7 @@ export function Clockout(props) {
                             </Button>
                           </div>
 
-                          <div>
+                          {/* <div>
                             <Button
                               color="primary"
                               variant="contained"
@@ -313,7 +332,7 @@ export function Clockout(props) {
                             >
                               Add Task
                             </Button>
-                          </div>
+                          </div> */}
 
                           <div className={classes.statsBox}>
                             <Typography variant="h5">
