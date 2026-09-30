@@ -66,9 +66,9 @@ export const shift = Yup.object().shape({
         projectId: Yup.number()
           .positive(`Project selection required`)
           .required(`Project selection required`),
-        projectTaskId: Yup.number()
-          .positive(`Task selection required`)
-          .required(`Task selection required`),
+        // projectTaskId: Yup.number()
+        //   .positive(`Task selection required`)
+        //   .required(`Task selection required`),
         description: Yup.string(),
       }),
     )
