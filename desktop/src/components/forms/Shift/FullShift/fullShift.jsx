@@ -122,6 +122,12 @@ export class FullShift extends Component {
                                 }}
                               />
                               <Field
+                                name={`activities.${index}.length`}
+                                component={Time}
+                                fullWidth
+                                className={classes.field}
+                              />
+                              {/* <Field
                                 name={`activities.${index}.projectTaskId`}
                                 component={TypeableSelect}
                                 fullWidth
@@ -135,23 +141,17 @@ export class FullShift extends Component {
                                       projectTask.projectId
                                     ) // filters based on project selected
                                   })}
-                              />
+                              /> */}
                             </div>
                           </Grid>
                           <Grid item xs={12} className={cx(classes.card)}>
                             <div className={cx(classes.row, classes.bodyRow)}>
-                              <Field
-                                name={`activities.${index}.length`}
-                                component={Time}
-                                fullWidth
-                                className={classes.field}
-                              />
-                              <Field
+                              {/* <Field
                                 name={`activities.${index}.description`}
                                 label="Description"
                                 component={TextField}
                                 className={classes.field}
-                              />
+                              /> */}
                             </div>
                           </Grid>
                         </div>
