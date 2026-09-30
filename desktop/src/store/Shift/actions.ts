@@ -92,13 +92,27 @@ export const getShifts = (options: any) => {
   }
 }
 
+// Activities saved without a task get their project's 'General' project task
+// on the server, which may have just been created there. Reload project tasks
+// so the store has it before the shift is displayed.
+const fetchAutoAssignedProjectTasks = (activities: Activity[]) => {
+  return async (dispatch: any) => {
+    if (activities.some((activity) => !(activity.projectTaskId > 0))) {
+      await dispatch(genericActions.getAll(domains.PROJECTTASK))
+    }
+  }
+}
+
 export const createShift = (shift: Shift) => {
   return async (dispatch: any) => {
     dispatch({ type: shiftActionTypes.CREATE_SHIFT_REQUEST })
 
     try {
       const clockOutMoment = moment(shift.clockOutDate)
-      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(moment(shift.clockInDate), clockOutMoment)
+      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(
+        moment(shift.clockInDate),
+        clockOutMoment,
+      )
 
       // Parse form output to create the object that the api understands
       const shiftObject = {
@@ -119,6 +133,7 @@ export const createShift = (shift: Shift) => {
         activity.shiftId = response.data.id
         await dispatch(genericActions.post(domains.ACTIVITY, activity))
       }
+      await dispatch(fetchAutoAssignedProjectTasks(shift.activities))
       // Get the new SHIFT object since post wasn't working
       await dispatch(genericActions.get(domains.SHIFT, response.data.id))
       // Select said object for analyze
@@ -171,7 +186,10 @@ export const updateShift = (shift: Shift) => {
     dispatch({ type: shiftActionTypes.UPDATE_SHIFT_REQUEST })
     try {
       const clockOutMoment = moment(shift.clockOutDate)
-      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(moment(shift.clockInDate), clockOutMoment)
+      const { lengthRounded, clockIn: clockInMoment } = getShiftDuration(
+        moment(shift.clockInDate),
+        clockOutMoment,
+      )
 
       // employee to not working
       const oldShift = getState().entities.shifts[shift.id]
@@ -199,6 +217,7 @@ export const updateShift = (shift: Shift) => {
         activity.id = undefined
         await dispatch(genericActions.post(domains.ACTIVITY, activity))
       }
+      await dispatch(fetchAutoAssignedProjectTasks(shift.activities))
 
       await dispatch(genericActions.get(domains.SHIFT, response.data.id))
       await dispatch(snackActions.openSnack(status.SUCCESS, `Shift updated`))
