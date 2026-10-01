@@ -146,7 +146,6 @@ export function Clockout(props) {
                                       <div
                                         key={taskIndex}
                                         className={classes.projectLine}
-                                        //className={classes.taskLine}
                                       >
                                         <Field
                                           name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
@@ -175,68 +174,6 @@ export function Clockout(props) {
                                     <Close className={classes.deleteButton} />
                                   </IconButton>
                                 </div>
-
-                                {/* Task rows inside this job */}
-                                {/* {job.tasks &&
-                                  job.tasks.map((task, taskIndex) => (
-                                    <div
-                                      key={taskIndex}
-                                      className={classes.taskLine}
-                                    >
-                                      <Field
-                                        className={cx(
-                                          classes.taskField,
-                                          classes.taskSelectField,
-                                        )}
-                                        name={`activities.${jobIndex}.tasks.${taskIndex}.projectTaskId`}
-                                        component={Select}
-                                        fullWidth
-                                        label="Task"
-                                        menuItemClassName={classes.taskMenuItem}
-                                        errorTextStyles={classes.errorText}
-                                      >
-                                        {projectTasks
-                                          .filter(
-                                            (pt) =>
-                                              job.projectId === pt.projectId,
-                                          )
-                                          .map((pt, i) => (
-                                            <MenuItem
-                                              key={i}
-                                              value={pt.id}
-                                              className={classes.taskMenuItem}
-                                            >
-                                              {pt.task.name}
-                                            </MenuItem>
-                                          ))}
-                                      </Field>
-                                      <Field
-                                        name={`activities.${jobIndex}.tasks.${taskIndex}.length`}
-                                        component={Time}
-                                        fullWidth
-                                        className={classes.taskField}
-                                        menuItemClassName={classes.taskMenuItem}
-                                        errorTextStyles={classes.errorText}
-                                      />
-                                      <IconButton
-                                        type="button"
-                                        color="secondary"
-                                        className={classes.iconButton}
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          const newTasks = job.tasks.filter(
-                                            (_, i) => i !== taskIndex,
-                                          )
-                                          jobHelpers.form.setFieldValue(
-                                            `activities.${jobIndex}.tasks`,
-                                            newTasks,
-                                          )
-                                        }}
-                                      >
-                                        <Close />
-                                      </IconButton>
-                                    </div>
-                                  ))} */}
                               </div>
                             </div>
                           )
@@ -301,38 +238,6 @@ export function Clockout(props) {
                               Add Project
                             </Button>
                           </div>
-
-                          {/* <div>
-                            <Button
-                              color="primary"
-                              variant="contained"
-                              className={classes.clockOutRegularButtons}
-                              id="clockout_add_task"
-                              disabled={
-                                !values.activities ||
-                                values.activities.length === 0
-                              }
-                              onClick={() => {
-                                const activeJob =
-                                  values.activities[activeJobIndex]
-                                if (!activeJob) return
-                                const newTasks = [
-                                  ...activeJob.tasks,
-                                  {
-                                    projectTaskId: -1,
-                                    length: 0,
-                                    description: ``,
-                                  },
-                                ]
-                                jobHelpers.form.setFieldValue(
-                                  `activities.${activeJobIndex}.tasks`,
-                                  newTasks,
-                                )
-                              }}
-                            >
-                              Add Task
-                            </Button>
-                          </div> */}
 
                           <div className={classes.statsBox}>
                             <Typography variant="h5">

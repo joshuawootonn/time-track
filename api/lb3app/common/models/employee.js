@@ -46,11 +46,6 @@ module.exports = (Employee) => {
     }
   }
 
-  // {
-  //   "projectId": 11,
-  //   "length": 615,
-  // }
-
   Employee.clockout = async (employeeId, shift, activities) => {
     const app = require('../../server/server')
     const Shift = app.models.Shift
@@ -89,7 +84,6 @@ module.exports = (Employee) => {
 
     const generalTask = await helpers.getGeneralTask(app)
 
-    // if there is no Task named "General" in DB, automatic task insert is impossible
     if (!generalTask) {
       return { ...baseError, message: "Task 'General' doesn't exist" }
     }
