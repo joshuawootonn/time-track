@@ -115,7 +115,6 @@ const styles = (theme) => {
       '& .MuiSelect-select': {
         fontSize: '30px',
         lineHeight: '1.5',
-        // Reserve room for two digits so the field doesn't resize between 5 and 30
         minWidth: '2ch',
       },
     },

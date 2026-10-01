@@ -114,14 +114,6 @@ const rows = [
     label: `Projects`,
     type: TableDataTypes.PROJECTS,
   },
-  // {
-  //   id: `tasks`,
-  //   width: 250,
-  //   height: 56,
-  //   padding: `dense`,
-  //   label: `Tasks`,
-  //   type: TableDataTypes.TASKS,
-  // },
   {
     id: `clockInDate`,
     dataKey: `clockInDate`,

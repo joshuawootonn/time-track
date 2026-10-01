@@ -92,9 +92,6 @@ export const getShifts = (options: any) => {
   }
 }
 
-// Activities saved without a task get their project's 'General' project task
-// on the server, which may have just been created there. Reload project tasks
-// so the store has it before the shift is displayed.
 const fetchAutoAssignedProjectTasks = (activities: Activity[]) => {
   return async (dispatch: any) => {
     if (activities.some((activity) => !(activity.projectTaskId > 0))) {

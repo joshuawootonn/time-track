@@ -127,32 +127,12 @@ export class FullShift extends Component {
                                 fullWidth
                                 className={classes.field}
                               />
-                              {/* <Field
-                                name={`activities.${index}.projectTaskId`}
-                                component={TypeableSelect}
-                                fullWidth
-                                label="Task"
-                                className={classes.field}
-                                type="task"
-                                items={projectTasks // This code iterates the projectTask
-                                  .filter((projectTask) => {
-                                    return (
-                                      activity.projectId ===
-                                      projectTask.projectId
-                                    ) // filters based on project selected
-                                  })}
-                              /> */}
                             </div>
                           </Grid>
                           <Grid item xs={12} className={cx(classes.card)}>
-                            <div className={cx(classes.row, classes.bodyRow)}>
-                              {/* <Field
-                                name={`activities.${index}.description`}
-                                label="Description"
-                                component={TextField}
-                                className={classes.field}
-                              /> */}
-                            </div>
+                            <div
+                              className={cx(classes.row, classes.bodyRow)}
+                            ></div>
                           </Grid>
                         </div>
                       )
