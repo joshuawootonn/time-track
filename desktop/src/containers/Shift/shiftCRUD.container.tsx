@@ -35,7 +35,14 @@ export function ShiftCRUD(props: any) {
     loadingMessage: '',
   })
 
-  const { selected, status, projects, projectTasks, employees } = props
+  const {
+    selected,
+    status,
+    projects,
+    allProjectObjects,
+    projectTasks,
+    employees,
+  } = props
   const { editingExtent, addingExtent } = state
 
   const [currentMoment, setCurrentMoment] = useState<any | null>(null)
@@ -203,6 +210,33 @@ export function ShiftCRUD(props: any) {
             }}
             render={(formikProps) => {
               const { values, errors } = formikProps
+
+              // active projects
+              const activeProjects = projects || []
+
+              // ids of active projects
+              const activeProjectIds = activeProjects.map((prj: any) => prj.id)
+
+              // ids of projects in this shift
+              const shiftProjectsIds = values.activities.map(
+                (act: any) => act.projectId,
+              )
+
+              // ids of inactive projects in this shift
+              const inactiveProjectIds = shiftProjectsIds.filter(
+                (id: number, index: number) =>
+                  !activeProjectIds.includes(id) &&
+                  shiftProjectsIds.indexOf(id) === index,
+              )
+
+              // inactive projects in this shift
+              const inactiveProjects = inactiveProjectIds
+                .map((id: number) => allProjectObjects?.[id])
+                .filter(Boolean)
+
+              // final list of projects for this shift
+              const allProjects = [...activeProjects, ...inactiveProjects]
+
               const { lengthRounded } = getShiftDuration(
                 moment(values.clockInDate),
                 moment(values.clockOutDate),
@@ -225,7 +259,7 @@ export function ShiftCRUD(props: any) {
                   label="Edit Shift"
                   type="edit"
                   employees={employees}
-                  projects={projects}
+                  projects={allProjects}
                   projectTasks={projectTasks}
                   timeLeft={timeLeft}
                   generalError={generalError}
@@ -393,6 +427,7 @@ const mapStateToProps = (state: any) => {
     selected: shiftSelectors.getSelectedShift(state),
     status: state.analyze.shiftStatus,
     projects: projectSelectors.getActiveProjects(state),
+    allProjectObjects: projectSelectors.getAllProjectObjects(state),
     projectTasks: projectTaskSelectors.getAllProjectTasks(state),
     employees: employeeSelectors.getActiveEmployees(state),
   }
