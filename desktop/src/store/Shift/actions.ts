@@ -210,9 +210,15 @@ export const updateShift = (shift: Shift) => {
 
       await endpoint.deleteRelatedActivities(shift.id)
       for (const activity of shift.activities) {
-        activity.shiftId = response.data.id
-        activity.id = undefined
-        await dispatch(genericActions.post(domains.ACTIVITY, activity))
+        // Only send activity columns: a stale nested `projectTask` would make
+        // LoopBack overwrite projectTaskId with the old task's id
+        const activityObject = {
+          shiftId: response.data.id,
+          projectTaskId: activity.projectTaskId,
+          length: activity.length,
+          description: activity.description,
+        }
+        await dispatch(genericActions.post(domains.ACTIVITY, activityObject))
       }
       await dispatch(fetchAutoAssignedProjectTasks(shift.activities))
 

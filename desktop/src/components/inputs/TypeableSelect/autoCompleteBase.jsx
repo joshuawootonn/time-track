@@ -280,9 +280,15 @@ class Autocomplete extends React.PureComponent {
         ),
       )
     }
-    return options && options.length > 0
-      ? options.find((value) => value.id === getFieldValue(values, field.name))
-      : undefined
+    // null (not undefined) keeps react-select controlled, so a value that is
+    // not in the options renders blank instead of the last selected option
+    return (
+      (options &&
+        options.find(
+          (value) => value.id === getFieldValue(values, field.name),
+        )) ??
+      null
+    )
   }
 
   render() {
@@ -300,6 +306,7 @@ class Autocomplete extends React.PureComponent {
       formControlProps,
       isClearable,
       menuPortalTarget,
+      onChange,
       ...other
     } = this.props
     const errorText = errors[field.name]
@@ -346,7 +353,10 @@ class Autocomplete extends React.PureComponent {
           maxMenuHeight="180px"
           menuPortalTarget={menuPortalTarget}
           components={components}
-          onChange={(value) => setFieldValue(field.name, value?.id ?? null)}
+          onChange={(value) => {
+            setFieldValue(field.name, value?.id ?? null)
+            if (onChange) onChange(value)
+          }}
           value={this.getValueFromOptions(options)}
           isMulti={isMultiple}
         />
@@ -376,6 +386,7 @@ Autocomplete.propTypes = {
   isMultiple: PropTypes.bool,
   isClearable: PropTypes.bool,
   menuPortalTarget: PropTypes.object,
+  onChange: PropTypes.func,
 }
 
 Autocomplete.defaultProps = {
