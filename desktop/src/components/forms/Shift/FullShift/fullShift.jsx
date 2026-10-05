@@ -160,7 +160,7 @@ export class FullShift extends Component {
                       id={ANALYZE_SHIFT_FULL_SHIFT_ADD_ACTIVITY_BUTTON_ID}
                       onClick={() =>
                         arrayHelpers.push({
-                          projectId: Object.keys(projects)[0],
+                          projectId: -1,
                           projectTaskId: -1,
                           length: 0,
                           description: ``,
