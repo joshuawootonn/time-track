@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
     shiftFilters: state.analyze.shiftFilters,
     shiftFilterVisible: state.analyze.shiftFilterVisible,
     employees: employeeSelectors.getAllEmployees(state),
-    projects: projectSelectors.getActiveProjects(state),
+    projects: projectSelectors.getCurrentProjects(state),
     crews: crewSelectors.getAllCrews(state),
     tasks: taskSelectors.getAllTasks(state),
   }
