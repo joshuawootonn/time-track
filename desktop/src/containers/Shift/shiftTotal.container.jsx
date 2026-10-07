@@ -1,22 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { analyzeActions } from '~/store/actions'
 import { shiftSelectors } from '~/store/selectors'
+import domain from '~/constants/domains'
 import { Typography } from '@material-ui/core'
+import Link from '@material-ui/core/Link'
+import Tooltip from '@material-ui/core/Tooltip'
 import moment from 'moment'
-import { uniq } from 'lodash'
+import { sortBy, uniqBy } from 'lodash'
 
 export class ShiftTotal extends Component {
+  updateFilter = (partial) =>
+    this.props.updateFilter({ ...this.props.shiftFilters, ...partial })
+
   render() {
     const { shiftTotal, shifts } = this.props
 
-    const projectNumbers = uniq(
-      (shifts || [])
-        .flatMap((shift) => shift.activities || [])
-        .map((activity) => activity.projectTask?.project?.name?.match(/\d+/))
-        .filter(Boolean)
-        .map((numberOption) => numberOption[0]),
-    ).sort()
+    const projects = sortBy(
+      uniqBy(
+        (shifts || [])
+          .flatMap((shift) => shift.activities || [])
+          .map((activity) => activity.projectTask?.project)
+          .filter(Boolean),
+        'id',
+      ),
+      [(project) => project.name],
+    )
 
     const length = moment.duration(shiftTotal, `minutes`).asMinutes()
     const content = `${Math.floor(length / 60)}h ${length % 60}m`
@@ -33,12 +43,24 @@ export class ShiftTotal extends Component {
         className="MuiToolbar-gutters"
       >
         <div />
-        <div className="flex">
-          {projectNumbers.map((prj) => (
-            <p key={prj} className="m-2">
-              {prj}
-            </p>
-          ))}
+        <div className="flex space-x-2">
+          {projects.map((project) => {
+            const projectNumber = project.name.match(/\d+/)?.[0]
+
+            return (
+              projectNumber && (
+                <Tooltip interactive key={project.id} title={project.name}>
+                  <Link
+                    component="button"
+                    size="small"
+                    onClick={() => this.updateFilter({ projectId: project.id })}
+                  >
+                    {projectNumber}
+                  </Link>
+                </Tooltip>
+              )
+            )
+          })}
         </div>
         <Typography variant="h6" id="tableTitle">
           Total: {content}
@@ -51,15 +73,21 @@ export class ShiftTotal extends Component {
 ShiftTotal.propTypes = {
   shiftTotal: PropTypes.any,
   shifts: PropTypes.any,
+  shiftFilters: PropTypes.object,
+  updateFilter: PropTypes.func.isRequired,
 }
 
 /* istanbul ignore next */
 const mapStateToProps = (state) => ({
   shiftTotal: shiftSelectors.getShiftTotals(state),
   shifts: shiftSelectors.getAllShiftsNew(state),
+  shiftFilters: shiftSelectors.getShiftFilters(state),
 })
 
 /* istanbul ignore next */
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+  updateFilter: (filters) =>
+    dispatch(analyzeActions.updateFilter(domain.SHIFT, filters)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShiftTotal)
