@@ -114,6 +114,7 @@ export class FullShift extends Component {
                                 label="Project"
                                 id={`${ANALYZE_SHIFT_FULL_SHIFT_PROJECT_FIELD_ID}_${index}`}
                                 className={classes.field}
+                                menuPortalTarget={document.body}
                                 onChange={() => {
                                   arrayHelpers.form.setFieldValue(
                                     `activities.${index}.projectTaskId`,
