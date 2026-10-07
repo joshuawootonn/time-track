@@ -31,6 +31,11 @@ module.exports = {
       return projectTask
     }
 
-    return ProjectTask.create({ projectId: projectId, taskId: generalTask.id })
+    return ProjectTask.create({
+      projectId: projectId,
+      taskId: generalTask.id,
+      quantity: 1,
+      estimateTime: 1,
+    })
   },
 }
