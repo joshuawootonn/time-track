@@ -28,7 +28,6 @@ import { getShiftDuration } from '~/helpers/shiftDuration'
 import axios from '~/helpers/axios'
 
 export function ShiftCRUD(props: any) {
-
   const [state, setState] = useState({
     [`${analyzeStatus.EDITING}Extent`]: formConstants.FULL_SHIFT,
     [`${analyzeStatus.ADDING}Extent`]: formConstants.FULL_SHIFT,
@@ -42,13 +41,11 @@ export function ShiftCRUD(props: any) {
   const [currentMoment, setCurrentMoment] = useState<any | null>(null)
 
   useEffect(() => {
-    axios
-      .get('/now')
-      .then((response: any) => {
-        const { now } = response.data
-        const clockOut = moment(now).utc().local().format(`YYYY-MM-DDTHH:mm:ss`)
-        setCurrentMoment(clockOut)
-      })
+    axios.get('/now').then((response: any) => {
+      const { now } = response.data
+      const clockOut = moment(now).utc().local().format(`YYYY-MM-DDTHH:mm:ss`)
+      setCurrentMoment(clockOut)
+    })
   }, [selected, editingExtent, addingExtent])
 
   const removeShift = () => {
@@ -68,7 +65,7 @@ export function ShiftCRUD(props: any) {
     setState({
       ...state,
       isLoading,
-      loadingMessage
+      loadingMessage,
     })
   }
 
@@ -106,9 +103,9 @@ export function ShiftCRUD(props: any) {
             isComplete
               ? [{ type: formConstants.FULL_SHIFT, label: `Full Shift` }]
               : [
-                { type: formConstants.HALF_SHIFT, label: `Start Shift` },
-                { type: formConstants.FULL_SHIFT, label: `Full Shift` },
-              ]
+                  { type: formConstants.HALF_SHIFT, label: `Start Shift` },
+                  { type: formConstants.FULL_SHIFT, label: `Full Shift` },
+                ]
           }
           updateExtent={updateExtent}
         />
@@ -172,18 +169,18 @@ export function ShiftCRUD(props: any) {
                 .format(`YYYY-MM-DDTHH:mm:ss`),
               clockOutDate: selected.clockOutDate
                 ? moment
-                  .utc(selected.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
-                  .local()
-                  .format(`YYYY-MM-DDTHH:mm:ss`)
+                    .utc(selected.clockOutDate, `YYYY-MM-DDThh:mm:ss:SSS`)
+                    .local()
+                    .format(`YYYY-MM-DDTHH:mm:ss`)
                 : currentMoment,
               lunch: selected.lunch,
               activities: selected.activities
                 ? selected.activities.map((activity: any) => {
-                  return {
-                    ...activity,
-                    projectId: activity.projectTask.projectId,
-                  }
-                })
+                    return {
+                      ...activity,
+                      projectId: activity.projectTask.projectId,
+                    }
+                  })
                 : [],
             }}
             validationSchema={shiftValidation}
@@ -206,20 +203,18 @@ export function ShiftCRUD(props: any) {
             }}
             render={(formikProps) => {
               const { values, errors } = formikProps
-              const { lengthRounded } = getShiftDuration(moment(values.clockInDate), moment(values.clockOutDate))
+              const { lengthRounded } = getShiftDuration(
+                moment(values.clockInDate),
+                moment(values.clockOutDate),
+              )
 
-              let timeLeft =
-                lengthRounded -
-                values.lunch
+              let timeLeft = lengthRounded - values.lunch
 
               values.activities.forEach((activity: any) => {
                 timeLeft -= activity.length
               })
               let generalError
-              if (
-                errors.activities &&
-                typeof errors.activities === `string`
-              ) {
+              if (errors.activities && typeof errors.activities === `string`) {
                 generalError = errors.activities
               } else if (errors.lunch && typeof errors.lunch === `string`) {
                 generalError = errors.lunch
@@ -288,11 +283,13 @@ export function ShiftCRUD(props: any) {
               )
             }}
             render={(formikProps) => {
-
               const { values } = formikProps
 
               const clockOutMoment = moment(new Date(), 'YYYY-MM-DDTHH:mm:ss')
-              const { lengthRounded } = getShiftDuration(moment(values.clockInDate), clockOutMoment)
+              const { lengthRounded } = getShiftDuration(
+                moment(values.clockInDate),
+                clockOutMoment,
+              )
 
               return (
                 <HalfShiftForm
@@ -332,7 +329,6 @@ export function ShiftCRUD(props: any) {
               ],
             }}
             validationSchema={shiftValidation}
-
             onSubmit={(values, formikFunctions) => {
               const { createShift } = props
               updateLoading(true, 'Creating shift..')
@@ -351,24 +347,21 @@ export function ShiftCRUD(props: any) {
                 },
               )
             }}
-
             render={(formikProps) => {
               const { values, errors } = formikProps
-              const { lengthRounded } = getShiftDuration(moment(values.clockInDate), moment(values.clockOutDate))
+              const { lengthRounded } = getShiftDuration(
+                moment(values.clockInDate),
+                moment(values.clockOutDate),
+              )
 
-              let timeLeft =
-                lengthRounded -
-                values.lunch
+              let timeLeft = lengthRounded - values.lunch
 
               values.activities.forEach((activity) => {
                 timeLeft -= activity.length
               })
 
               let generalError
-              if (
-                errors.activities &&
-                typeof errors.activities === `string`
-              ) {
+              if (errors.activities && typeof errors.activities === `string`) {
                 generalError = errors.activities
               } else if (errors.lunch && typeof errors.lunch === `string`) {
                 generalError = errors.lunch
