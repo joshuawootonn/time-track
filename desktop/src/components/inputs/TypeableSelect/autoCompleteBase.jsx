@@ -299,6 +299,7 @@ class Autocomplete extends React.PureComponent {
       className,
       formControlProps,
       isClearable,
+      menuPortalTarget,
       ...other
     } = this.props
     const errorText = errors[field.name]
@@ -308,6 +309,11 @@ class Autocomplete extends React.PureComponent {
       input: (base) => ({
         ...base,
         color: theme.palette.text.primary,
+      }),
+      // keep portaled menu above MUI modals/dialogs
+      menuPortal: (base) => ({
+        ...base,
+        zIndex: theme.zIndex.modal + 1,
       }),
     }
 
@@ -338,6 +344,7 @@ class Autocomplete extends React.PureComponent {
           }}
           options={options}
           maxMenuHeight="180px"
+          menuPortalTarget={menuPortalTarget}
           components={components}
           onChange={(value) => setFieldValue(field.name, value?.id ?? null)}
           value={this.getValueFromOptions(options)}
@@ -368,6 +375,7 @@ Autocomplete.propTypes = {
   margin: PropTypes.oneOf(['none', 'dense', 'normal']),
   isMultiple: PropTypes.bool,
   isClearable: PropTypes.bool,
+  menuPortalTarget: PropTypes.object,
 }
 
 Autocomplete.defaultProps = {
