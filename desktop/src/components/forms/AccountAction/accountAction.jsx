@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,7 +11,8 @@ import {
   FullscreenExit,
   Group,
   Business,
-  Security
+  Security,
+  VerifiedUserIcon,
 } from '@material-ui/icons'
 
 import styles from './styles'
@@ -94,31 +94,31 @@ export const AccountAction = (props) => {
         {/* CREW FEATRUE THAT IS NOT DEVELOPED YET */}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
-            <Tooltip
-              open={true}
-              title="Crew"
-              classes={{ tooltip: classes.toolTip }}
-              placement="bottom"
-            >
-              <IconButton onClick={crew} className={classes.button}>
-                <Group className={classes.buttonIcon} />
-              </IconButton>
-            </Tooltip>
-          )}
+          <Tooltip
+            open={true}
+            title="Crew"
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={crew} className={classes.button}>
+              <Group className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
         {(type === authorityConstants.ADMIN ||
           type === authorityConstants.FOREMAN) && (
-            <Tooltip
-              open={true}
-              title={'Projects'}
-              classes={{ tooltip: classes.toolTip }}
-              placement="bottom"
-            >
-              <IconButton onClick={project} className={classes.button}>
-                <Business className={classes.buttonIcon} />
-              </IconButton>
-            </Tooltip>
-          )}
-        {(type === authorityConstants.ADMIN) && (
+          <Tooltip
+            open={true}
+            title={'Projects'}
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={project} className={classes.button}>
+              <Business className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
+        {type === authorityConstants.ADMIN && (
           <Tooltip
             open={true}
             title={'Admin'}
@@ -127,6 +127,24 @@ export const AccountAction = (props) => {
           >
             <IconButton onClick={analyze} className={classes.button}>
               <Security className={classes.buttonIcon} />
+            </IconButton>
+          </Tooltip>
+        )}
+        {type === authorityConstants.FOREMAN && (
+          <Tooltip
+            open={true}
+            title={
+              <>
+                Activate
+                <br />
+                Projects
+              </>
+            }
+            classes={{ tooltip: classes.toolTip }}
+            placement="bottom"
+          >
+            <IconButton onClick={analyze} className={classes.button}>
+              <VerifiedUserIcon className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
         )}
