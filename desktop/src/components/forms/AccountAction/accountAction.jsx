@@ -12,7 +12,7 @@ import {
   Group,
   Business,
   Security,
-  VerifiedUserIcon,
+  VerifiedUser,
 } from '@material-ui/icons'
 
 import styles from './styles'
@@ -144,7 +144,7 @@ export const AccountAction = (props) => {
             placement="bottom"
           >
             <IconButton onClick={analyze} className={classes.button}>
-              <VerifiedUserIcon className={classes.buttonIcon} />
+              <VerifiedUser className={classes.buttonIcon} />
             </IconButton>
           </Tooltip>
         )}
