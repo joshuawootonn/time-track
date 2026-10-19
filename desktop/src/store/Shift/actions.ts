@@ -214,6 +214,7 @@ export const updateShift = (shift: Shift) => {
         // LoopBack overwrite projectTaskId with the old task's id
         const activityObject = {
           shiftId: response.data.id,
+          projectId: activity.projectId,
           projectTaskId: activity.projectTaskId,
           length: activity.length,
           description: activity.description,
