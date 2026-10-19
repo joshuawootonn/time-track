@@ -43,6 +43,7 @@ export const clockout = Yup.object().shape({
         ),
       }),
     )
+    .min(1, `Add a project to continue`)
     .required(`Activity selection required`),
 })
 
