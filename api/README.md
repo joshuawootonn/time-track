@@ -1,80 +1,21 @@
-# My Application
+# API
 
 I am in the process of migrating from lb3 to lb4, so forgive the mess.
 
-# api
+## PM2 setup (one-time per droplet)
 
-This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
-[initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
+The API runs under PM2 using `api/ecosystem.config.js` (process name `api`, timestamped logs, etc).
 
-## Install dependencies
-
-By default, dependencies were installed when this application was generated.
-Whenever dependencies in `package.json` are changed, run the following command:
+PM2 remembers the options it was started with, so this only needs to be done once.
+After that, `pm2 restart all` keeps the same settings.
 
 ```sh
-npm install
+cd ~/time-track/api
+pm2 ls                         # find the old hand-started process, if any
+pm2 delete <old-name>
+pm2 start ecosystem.config.js
+pm2 save                       # restore this setup after a droplet reboot
 ```
-
-To only install resolved dependencies in `package-lock.json`:
-
-```sh
-npm ci
-```
-
-## Run the application
-
-```sh
-npm start
-```
-
-You can also run `node .` to skip the build step.
-
-Open http://127.0.0.1:3000 in your browser.
-
-## Rebuild the project
-
-To incrementally build the project:
-
-```sh
-npm run build
-```
-
-To force a full build by cleaning up cached artifacts:
-
-```sh
-npm run rebuild
-```
-
-## Fix code style and formatting issues
-
-```sh
-npm run lint
-```
-
-To automatically fix such issues:
-
-```sh
-npm run lint:fix
-```
-
-## Other useful commands
-
-- `npm run migrate`: Migrate database schemas for models
-- `npm run openapi-spec`: Generate OpenAPI spec into a file
-
-## Tests
-
-```sh
-npm test
-```
-
-## What's next
-
-Please check out [LoopBack 4 documentation](https://loopback.io/doc/en/lb4/) to
-understand how you can continue to add features to this application.
-
-[![LoopBack](<https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
 
 # Releasing new API version
 
@@ -95,8 +36,8 @@ Open `time-track-drop-prod` droplet, and click `Console`
 ```sh
 cd ~/time-track
 git pull
-pnpm i
 cd api
+pnpm i
 pnpm build
 ```
 
@@ -113,6 +54,30 @@ pnpm build
 pm2 restart all
 ```
 
+> [!IMPORTANT]
+>
+> If `ecosystem.config.js` has changed, do the following to apply them during the restart:
+>
+> ```sh
+> pm2 restart ecosystem.config.js --update-env
+> pm2 save
+> ```
+
 ## 3. Check the App and API
+
+### 3.1. API logs
+
+Log files can be found here:
+
+- `~/.pm2/logs/api-out.log`
+- `~/.pm2/logs/api-error.log`
+
+To get last N messages from the log, run this:
+
+```sh
+pm2 logs api --lines 50 --nostream
+```
+
+### 3.2. App and Electron app
 
 It is important to check if the update did not break the client apps (App and Electron app).
